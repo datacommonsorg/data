@@ -36,7 +36,17 @@ sys.path.insert(
 
 sys.path.insert(1, os.path.dirname(os.path.abspath(__file__)))
 
-from config import *
+from config import df_columns
+from config import drop_df
+from config import pollutants
+from config import replace_metadata
+from config import replace_source_metadata
+from config import replacement_08_11
+from config import replacement_14
+from config import replacement_17
+from config import replacement_20
+from config import replacement_point_17
+from config import replacement_tribes
 
 FLAGS = flags.FLAGS
 default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),

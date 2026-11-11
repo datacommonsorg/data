@@ -25,9 +25,11 @@ import filecmp
 import os
 from os.path import abspath
 from os.path import dirname
+import sys
 import unittest
 
-from process import *
+from absl import flags
+from process import main
 
 _FLAGS = None
 
