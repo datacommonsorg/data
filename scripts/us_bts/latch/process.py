@@ -58,8 +58,14 @@ _DEFAULT_INPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                    'input_files')
 _DEFAULT_OUTPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                     'output_files')
-flags.DEFINE_string("input_path", _DEFAULT_INPUT_PATH,
-                    "Import Data File's List")
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string("input_path", _DEFAULT_INPUT_PATH,
+                        "Import Data File's List")
+
+
 _ROWS_PER_FILE = 4000000
 
 
@@ -531,4 +537,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)
