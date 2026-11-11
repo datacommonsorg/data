@@ -1,0 +1,21 @@
+Node: dcid:medicalCondition
+typeOf: dcid:Property
+name: "medicalCondition"
+domainIncludes: dcid:MortalityEvent,MedicalConditionIncident
+rangeIncludes: dcid:Disease,ICD10_113CausesOfDeath
+
+Node: dcid:BacillaryDysentery
+typeOf: dcid:MedicalConditionIncidentTypeEnum
+name: "Bacillary Dysentery"
+isProvisional: dcid:True
+
+Node: dcid:AlphaFetoProtein
+typeOf: dcid:MedicalConditionIncidentTypeEnum
+name: "Alpha Feto Protein"
+isProvisional: dcid:True
+
+Node: dcid:FelineHerpesVirus
+typeOf: dcid:MedicalConditionIncidentTypeEnum
+name: "Feline Herpes Virus"
+isProvisional: dcid:True
+
