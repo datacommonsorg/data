@@ -5,9 +5,8 @@ dataset. It classifies changed observation and non-observation nodes as
 `ADDED`, `DELETED`, or `MODIFIED`. Output field names refer to non-observation
 nodes as schema nodes.
 
-The inputs do not need to be produced by a particular tool. Native and BigQuery
-modes read instance MCF files, while direct and cloud modes can also read
-optimized graph TFRecord files. See
+The inputs do not need to be produced by a particular tool. Both native and
+BigQuery modes read instance MCF files. See
 [the MCF format documentation](../../docs/mcf_format.md) for the general MCF
 structure.
 
@@ -17,11 +16,9 @@ structure.
 
 - Install the repository's Python dependencies for native and BigQuery runner
   modes. From the repository root, run `./run_tests.sh -r`.
-- Direct mode requires Java and `differ-bundled-0.1-SNAPSHOT.jar` beside
-  `import_differ.py`; see `<IMPORT_REPO>/pipeline/differ/README.md`.
 - Configure Google Cloud Application Default Credentials
-  (`gcloud auth application-default login`) when using GCS input/output paths,
-  or when using `bigquery` or `cloud` runner modes.
+  (`gcloud auth application-default login`) when using GCS input/output paths
+  or the `bigquery` runner mode.
 
 Run the command from this directory:
 
@@ -30,8 +27,7 @@ python3 import_differ.py \
   --current_data=<path> \
   --previous_data=<path> \
   --output_location=<path> \
-  --file_format=<mcf/tfrecord> \
-  --runner_mode=<native/bigquery/direct/cloud> \
+  --runner_mode=<native/bigquery> \
   --project_id=<id> \
   --job_name=<name>
 ```
@@ -40,21 +36,9 @@ python3 import_differ.py \
 
 For large MCF datasets, [`bigquery_differ.py`](bigquery_differ.py) streams
 current and previous `.mcf` files in constant (O(1)) memory into temporary
-BigQuery tables, runs a SQL `FULL OUTER JOIN` diff, streams the detailed
-`nodes-*.mcf` files along with `differ_summary.json` and `differ_summary.csv`,
-and drops the temporary tables.
-
-#### 1. Local MCF files
-
-```bash
-python3 bigquery_differ.py \
-  --current_data="/path/to/current/*.mcf" \
-  --previous_data="/path/to/previous/*.mcf" \
-  --output_location="/tmp/diff_results" \
-  --project_id="datcom-import-automation-prod"
-```
-
-#### 2. GCS MCF files (or mixed local/GCS)
+BigQuery tables (which auto-expire after `--bq_table_ttl_hours`), runs a SQL
+`FULL OUTER JOIN` diff, and streams the detailed `nodes-*.mcf` files along with
+`differ_summary.json` and `differ_summary.csv`.
 
 > Quote wildcard paths so your shell does not expand `*` locally. Both inputs
 > and `--output_location` can be local paths or `gs://` URIs in any combination.
@@ -88,19 +72,16 @@ python3 import_differ.py \
 - `previous_data`: Path or wildcard for the baseline dataset. Local and GCS
   paths are supported.
 - `output_location`: Local or GCS output directory (defaults to `results`).
-- `file_format`: Input format. Native and BigQuery modes read `mcf`. Direct and
-  cloud modes support `mcf` and `tfrecord`.
-- `runner_mode`: `native` runs the in-memory Python/Pandas differ, `bigquery`
-  streams MCFs and diffs via BigQuery, `direct` runs the Java pipeline locally,
-  and `cloud` runs the pipeline in Dataflow.
-- `project_id`: Google Cloud project for a BigQuery or Dataflow runner job
-  (defaults to `GOOGLE_CLOUD_PROJECT` or `PROJECT_ID` in `bigquery` mode).
+- `runner_mode`: `native` runs the in-memory Python/Pandas differ, and
+  `bigquery` streams MCFs and diffs via BigQuery.
+- `project_id`: Google Cloud project for the BigQuery runner job (defaults to
+  `GOOGLE_CLOUD_PROJECT` or `PROJECT_ID` in `bigquery` mode).
 - `job_name`: Name/prefix used for the differ execution (temporary table prefix
-  in BigQuery mode, Dataflow job name in cloud mode).
+  in BigQuery mode).
 - `bq_dataset`: BigQuery dataset ID for temporary differ tables (default:
   `datcom_import_differ`; created automatically if missing).
-- `bq_table_ttl_hours`: Fallback expiration time in hours for temporary BigQuery
-  tables (default: `12`).
+- `bq_table_ttl_hours`: Expiration time in hours for temporary BigQuery tables
+  (default: `12`).
 - `gcs_temp_dir` (`bigquery_differ.py` only): Optional local or `gs://`
   directory for staging intermediate normalized CSVs before loading into
   BigQuery (defaults to a local temporary directory).
@@ -220,16 +201,6 @@ following files to `output_location` (local directory or `gs://` URI):
 
 Like native mode, BigQuery mode generates detailed `nodes-*.mcf` files, while
 keeping memory usage constant (O(1)) by streaming the results.
-
-## Direct and cloud runner output
-
-Direct and cloud modes invoke the Java/Beam differ. That pipeline writes raw
-`obs-diff-*.csv` and `schema-diff-*.csv` files with the comparison key, current
-value, previous value, and diff type. The Python wrapper does not convert those
-CSV files into the native runner's JSON and MCF artifacts.
-
-See `<IMPORT_REPO>/pipeline/differ/README.md` for the Java pipeline's complete
-output contract.
 
 ## Auto-refresh integration
 
