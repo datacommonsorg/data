@@ -866,7 +866,7 @@ def build_population_religion_rows(
     """Builds unscaled rows (in thousands) for isr_population_religion_1949_2021.csv."""
     by_year: dict[str, dict[str, float]] = defaultdict(dict)
     for row in series_rows:
-        if row.get('time_unit', '').strip() != 'Year':
+        if row.get('time_unit', '').strip() not in ('', 'Year'):
             continue
         sid = row.get('series_id', '').strip()
         tp = row.get('time_period', '').strip()
@@ -918,7 +918,7 @@ def build_vital_statistics_rows(
     """Builds rows for isr_livebirth_infantdeath_deaths_religion_1996_2021.csv."""
     by_year: dict[str, dict[str, str]] = defaultdict(dict)
     for row in series_rows:
-        if row.get('time_unit', '').strip() != 'Year':
+        if row.get('time_unit', '').strip() not in ('', 'Year'):
             continue
         sid = row.get('series_id', '').strip()
         col = VITAL_STATS_SERIES_COL_MAP.get(sid)
@@ -949,7 +949,7 @@ def build_cause_of_death_rows(
     """Builds rows for isr_causeofdeath_religion_1950_2020.csv."""
     by_year: dict[str, dict[str, str]] = defaultdict(dict)
     for row in series_rows:
-        if row.get('time_unit', '').strip() != 'Year':
+        if row.get('time_unit', '').strip() not in ('', 'Year'):
             continue
         cause_raw = row.get('level4', '').strip()
         group_raw = row.get('name_id', '').strip()
@@ -984,10 +984,16 @@ def fetch_cbs_series_datasets_to_csv(
 ) -> list[str]:
     """Downloads CBS Series API datasets and writes the 3 wide CSV files into output_dir."""
     pop_cols = ('total', 'jews', 'nonjews', 'Others', 'arab')
-    pop_rows = build_population_religion_rows(
-        fetch_cbs_series_path_rows(CBS_SERIES_POPULATION_PATH_ID,
-                                   session=session))
-    found_pop_cols = {c for r in pop_rows for c in pop_cols if r.get(c)}
+    pop_rows: list[dict[str, str]] = []
+    found_pop_cols: set[str] = set()
+    for _ in range(5):
+        pop_rows = build_population_religion_rows(
+            fetch_cbs_series_path_rows(CBS_SERIES_POPULATION_PATH_ID,
+                                       session=session))
+        found_pop_cols = {c for r in pop_rows for c in pop_cols if r.get(c)}
+        if pop_rows and (session is not None or
+                         found_pop_cols == set(pop_cols)):
+            break
     if not pop_rows or (session is None and found_pop_cols != set(pop_cols)):
         raise RuntimeError(
             f'Incomplete population series columns from CBS id={CBS_SERIES_POPULATION_PATH_ID}: '
@@ -1000,10 +1006,18 @@ def fetch_cbs_series_datasets_to_csv(
     )
 
     vital_cols = tuple(VITAL_STATS_SERIES_COL_MAP.values())
-    vital_rows = build_vital_statistics_rows(
-        fetch_cbs_series_path_rows(CBS_SERIES_VITAL_STATS_PATH_ID,
-                                   session=session))
-    found_vital_cols = {c for r in vital_rows for c in vital_cols if r.get(c)}
+    vital_rows: list[dict[str, str]] = []
+    found_vital_cols: set[str] = set()
+    for _ in range(5):
+        vital_rows = build_vital_statistics_rows(
+            fetch_cbs_series_path_rows(CBS_SERIES_VITAL_STATS_PATH_ID,
+                                       session=session))
+        found_vital_cols = {
+            c for r in vital_rows for c in vital_cols if r.get(c)
+        }
+        if vital_rows and (session is not None or
+                           found_vital_cols == set(vital_cols)):
+            break
     if not vital_rows or (session is None and
                           found_vital_cols != set(vital_cols)):
         raise RuntimeError(
@@ -1017,12 +1031,18 @@ def fetch_cbs_series_datasets_to_csv(
         vital_rows,
     )
 
-    cod_rows = build_cause_of_death_rows(
-        fetch_cbs_series_path_rows(CBS_SERIES_CAUSE_OF_DEATH_PATH_ID,
-                                   session=session))
-    found_cod_cols = {
-        c for r in cod_rows for c in CAUSE_OF_DEATH_COLS if r.get(c)
-    }
+    cod_rows: list[dict[str, str]] = []
+    found_cod_cols: set[str] = set()
+    for _ in range(5):
+        cod_rows = build_cause_of_death_rows(
+            fetch_cbs_series_path_rows(CBS_SERIES_CAUSE_OF_DEATH_PATH_ID,
+                                       session=session))
+        found_cod_cols = {
+            c for r in cod_rows for c in CAUSE_OF_DEATH_COLS if r.get(c)
+        }
+        if cod_rows and (session is not None or
+                         found_cod_cols == set(CAUSE_OF_DEATH_COLS)):
+            break
     if not cod_rows or (session is None and
                         found_cod_cols != set(CAUSE_OF_DEATH_COLS)):
         raise RuntimeError(
@@ -1317,6 +1337,9 @@ def download_all(output_dir: str, max_workers: int = 3) -> list[str]:
                           set(CBS_MIFKAD_2008_TABLES))
 
     downloaded_paths: list[str] = []
+    # Fetch CBS Series API CSVs sequentially first before starting XLS worker threads
+    downloaded_paths.extend(fetch_cbs_series_datasets_to_csv(output_dir))
+
     with futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
         xls_futures = {
             executor.submit(
@@ -1326,9 +1349,6 @@ def download_all(output_dir: str, max_workers: int = 3) -> list[str]:
             ):
                 xls_name for xls_name in CBS_MIFKAD_2008_TABLES
         }
-
-        # Fetch CBS Series API CSVs sequentially to avoid concurrent ASP.NET session truncation
-        downloaded_paths.extend(fetch_cbs_series_datasets_to_csv(output_dir))
 
         for future in futures.as_completed(xls_futures):
             xls_name = xls_futures[future]
