@@ -1,0 +1,13 @@
+Node: E:COVID19_JHB->E0
+typeOf: dcs:StatVarObservation
+value: C:COVID19_JHB->cases
+variableMeasured: dcid:CumulativeCount_MedicalConditionIncident_COVID_19_ConfirmedOrProbableCase
+observationAbout: C:COVID19_JHB->place
+observationDate: C:COVID19_JHB->date
+
+Node: E:COVID19_JHB->E1
+typeOf: dcs:StatVarObservation
+value: C:COVID19_JHB->deaths
+variableMeasured: dcid:CumulativeCount_MedicalConditionIncident_COVID_19_PatientDeceased
+observationAbout: C:COVID19_JHB->place
+observationDate: C:COVID19_JHB->date
