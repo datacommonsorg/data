@@ -40,6 +40,11 @@ flags.DEFINE_string(
     'Directory path to save the preprocessed input CSV files.',
 )
 flags.DEFINE_string(
+    'raw_dir',
+    os.path.join(_CODEDIR, 'raw_files'),
+    'Directory path to save the raw downloaded source files unchanged.',
+)
+flags.DEFINE_string(
     'pv_map',
     os.path.join(_CODEDIR, 'srilanka_census_pvmap.csv'),
     'Path to the property-value map CSV file used to filter valid indicators.',
@@ -50,6 +55,12 @@ HDX_BASE_URL = 'https://data.humdata.org/'
 HDX_STAGE_BASE_URL = 'https://stage.data-humdata-org.ahconu.org/'
 WORLDBANK_LKA_CSV_URL = (
     'https://api.worldbank.org/v2/en/country/LKA?downloadformat=csv')
+FRESHNESS_CHECK_INDICATORS = (
+    'AG.LND.ARBL.HA',
+    'AG.LND.AGRI.K2',
+    'AG.YLD.CREL.KG',
+)
+MIN_AGRICULTURE_FRESHNESS_YEAR = 2024
 
 POPULATION_DATASET_ID = 'cod-ps-lka'
 AGRICULTURE_DATASET_ID = (
@@ -301,6 +312,21 @@ def parse_wdi_csv(
     return records
 
 
+def write_bytes_atomic(output_path: str, content: bytes) -> None:
+    """Atomically writes raw bytes to a file."""
+    output_dir = os.path.dirname(os.path.abspath(output_path))
+    os.makedirs(output_dir, exist_ok=True)
+    fd, tmp_path = tempfile.mkstemp(dir=output_dir, prefix='.tmp_')
+    try:
+        with os.fdopen(fd, mode='wb') as f:
+            f.write(content)
+        os.replace(tmp_path, output_path)
+    except Exception:
+        if os.path.exists(tmp_path):
+            os.remove(tmp_path)
+        raise
+
+
 def write_csv_atomic(output_path: str, fieldnames: list[str],
                      rows: list[dict[str, str]]) -> None:
     """Atomically writes rows to a CSV file."""
@@ -358,8 +384,37 @@ def _download_bytes_with_retry(url: str,
     raise RuntimeError(f'Failed to download bytes from {url}')
 
 
+def _needs_worldbank_refresh(
+    rows: list[dict[str, str]],
+    min_year: int = MIN_AGRICULTURE_FRESHNESS_YEAR,
+) -> bool:
+    """Returns True if core agriculture indicators lack recent observations."""
+    if not rows:
+        return False
+    present_indicators = {r['Indicator Code'] for r in rows}
+    tracked = [
+        code for code in FRESHNESS_CHECK_INDICATORS
+        if code in present_indicators
+    ]
+    if not tracked:
+        return max((int(r['Year']) for r in rows if r['Year'].isdigit()),
+                   default=0) < min_year
+    for code in tracked:
+        max_yr = max(
+            (int(r['Year'])
+             for r in rows
+             if r['Indicator Code'] == code and r['Year'].isdigit()),
+            default=0,
+        )
+        if max_yr < min_year:
+            return True
+    return False
+
+
 def _refresh_wdi_rows_from_worldbank(
-        rows: list[dict[str, str]]) -> list[dict[str, str]]:
+    rows: list[dict[str, str]],
+    raw_dir: str | None = None,
+) -> list[dict[str, str]]:
     """Refreshes WDI rows from the World Bank API when mirror data is older."""
     indicator_codes = {r['Indicator Code'] for r in rows}
     if not indicator_codes:
@@ -372,6 +427,9 @@ def _refresh_wdi_rows_from_worldbank(
                                                  retry_secs=5)
         if not isinstance(wb_zip_bytes, bytes) or not wb_zip_bytes:
             return rows
+        if raw_dir:
+            write_bytes_atomic(os.path.join(raw_dir, 'worldbank_lka.zip'),
+                               wb_zip_bytes)
         with zipfile.ZipFile(io.BytesIO(wb_zip_bytes)) as zf:
             csv_names = [n for n in zf.namelist() if n.startswith('API_LKA_')]
             if not csv_names:
@@ -411,9 +469,17 @@ def _refresh_wdi_rows_from_worldbank(
         return rows
 
 
-def download_and_process(output_dir: str, pv_map_path: str) -> None:
+def download_and_process(
+    output_dir: str,
+    pv_map_path: str,
+    raw_dir: str | None = None,
+) -> None:
     """Downloads all Sri Lanka datasets from HDX and writes input CSVs."""
+    if raw_dir is None:
+        raw_dir = os.path.join(os.path.dirname(os.path.abspath(output_dir)),
+                               'raw_files')
     os.makedirs(output_dir, exist_ok=True)
+    os.makedirs(raw_dir, exist_ok=True)
     mapped_indicators = load_mapped_keys(pv_map_path)
     logging.info(
         'Loaded %d mapped variable keys from %s',
@@ -433,6 +499,8 @@ def download_and_process(output_dir: str, pv_map_path: str) -> None:
         raise RuntimeError('Missing URL for lka_admpop_2022_v2.xlsx')
     logging.info('Downloading 2022 population workbook from %s...', xlsx_url)
     xlsx_bytes = _download_bytes_with_retry(xlsx_url)
+    write_bytes_atomic(os.path.join(raw_dir, 'lka_admpop_2022_v2.xlsx'),
+                       xlsx_bytes)
     population_rows.extend(parse_population_xlsx(xlsx_bytes))
 
     csv_resource_names = sorted(
@@ -442,6 +510,7 @@ def download_and_process(output_dir: str, pv_map_path: str) -> None:
         csv_url = pop_resources[res_name]
         logging.info('Downloading %s from %s...', res_name, csv_url)
         csv_bytes = _download_bytes_with_retry(csv_url)
+        write_bytes_atomic(os.path.join(raw_dir, res_name), csv_bytes)
         population_rows.extend(
             parse_population_csv(csv_bytes.decode('utf-8-sig',
                                                   errors='replace')))
@@ -464,12 +533,16 @@ def download_and_process(output_dir: str, pv_map_path: str) -> None:
                 or FALLBACK_AGRICULTURE_URL)
     logging.info('Downloading agriculture dataset from %s...', agri_url)
     agri_bytes = _download_bytes_with_retry(agri_url)
+    write_bytes_atomic(
+        os.path.join(raw_dir, 'agriculture-and-rural-development_lka.csv'),
+        agri_bytes,
+    )
     agri_rows = parse_wdi_csv(
         agri_bytes.decode('utf-8-sig', errors='replace'),
         allowed_indicators=mapped_indicators,
     )
-    if 100 < len(agri_rows) < 1069:
-        agri_rows = _refresh_wdi_rows_from_worldbank(agri_rows)
+    if _needs_worldbank_refresh(agri_rows):
+        agri_rows = _refresh_wdi_rows_from_worldbank(agri_rows, raw_dir=raw_dir)
     if not agri_rows:
         raise RuntimeError('No agriculture rows extracted from HDX.')
     agri_output_path = os.path.join(output_dir, 'srilanka_agriculture.csv')
@@ -486,6 +559,7 @@ def download_and_process(output_dir: str, pv_map_path: str) -> None:
     edu_url = edu_resources.get('education_lka.csv') or FALLBACK_EDUCATION_URL
     logging.info('Downloading education dataset from %s...', edu_url)
     edu_bytes = _download_bytes_with_retry(edu_url)
+    write_bytes_atomic(os.path.join(raw_dir, 'education_lka.csv'), edu_bytes)
     edu_rows = parse_wdi_csv(
         edu_bytes.decode('utf-8-sig', errors='replace'),
         allowed_indicators=mapped_indicators,
@@ -503,7 +577,7 @@ def download_and_process(output_dir: str, pv_map_path: str) -> None:
 
 
 def main(_) -> None:
-    download_and_process(_FLAGS.output_dir, _FLAGS.pv_map)
+    download_and_process(_FLAGS.output_dir, _FLAGS.pv_map, _FLAGS.raw_dir)
 
 
 if __name__ == '__main__':

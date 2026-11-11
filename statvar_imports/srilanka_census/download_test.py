@@ -21,6 +21,7 @@ import sys
 import tempfile
 import unittest
 from unittest import mock
+import zipfile
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 if _MODULE_DIR not in sys.path:
@@ -128,6 +129,50 @@ class DownloadTest(unittest.TestCase):
         )
 
     @mock.patch('download.download_util.request_url')
+    def test_refresh_wdi_rows_from_worldbank(self, mock_request_url):
+        stale_rows = [{
+            'Country ISO3': 'LKA',
+            'Year': '2022',
+            'Indicator Code': 'AG.LND.ARBL.HA',
+            'Value': '1300000',
+        }]
+        self.assertTrue(download._needs_worldbank_refresh(stale_rows))
+
+        zip_buf = io.BytesIO()
+        with zipfile.ZipFile(zip_buf, mode='w') as zf:
+            wb_csv = (
+                'Data Source,"World Development Indicators",\n\n'
+                '"Country Name","Country Code","Indicator Name","Indicator Code","2022","2024"\n'
+                '"Sri Lanka","LKA","Arable land (hectares)","AG.LND.ARBL.HA","1300000","1350000"\n'
+            )
+            zf.writestr('API_LKA_DS2_en_csv_v2.csv', wb_csv)
+        mock_request_url.return_value = zip_buf.getvalue()
+
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            refreshed = download._refresh_wdi_rows_from_worldbank(
+                stale_rows, raw_dir=tmp_dir)
+            self.assertFalse(download._needs_worldbank_refresh(refreshed))
+            self.assertEqual(
+                refreshed,
+                [
+                    {
+                        'Country ISO3': 'LKA',
+                        'Year': '2024',
+                        'Indicator Code': 'AG.LND.ARBL.HA',
+                        'Value': '1350000',
+                    },
+                    {
+                        'Country ISO3': 'LKA',
+                        'Year': '2022',
+                        'Indicator Code': 'AG.LND.ARBL.HA',
+                        'Value': '1300000',
+                    },
+                ],
+            )
+            self.assertTrue(
+                os.path.exists(os.path.join(tmp_dir, 'worldbank_lka.zip')))
+
+    @mock.patch('download.download_util.request_url')
     def test_download_and_process_end_to_end(self, mock_request_url):
         xlsx_bytes = self._create_sample_xlsx_bytes()
         pop_csv_bytes = (
@@ -136,7 +181,7 @@ class DownloadTest(unittest.TestCase):
         wdi_csv_bytes = (
             'Country Name,Country ISO3,Year,Indicator Name,Indicator'
             ' Code,Value\n#country+name,#country+code,#date+year,#indicator+name,#indicator+code,#indicator+value+num\nSri'
-            ' Lanka,LKA,2022,Test,AG.LND.ARBL.HA,123\n').encode('utf-8')
+            ' Lanka,LKA,2024,Test,AG.LND.ARBL.HA,123\n').encode('utf-8')
 
         def side_effect(url, output='text', **_kwargs):
             if output == 'json':
@@ -156,7 +201,8 @@ class DownloadTest(unittest.TestCase):
                 f.write('AG.LND.ARBL.HA,variableMeasured,dcid:Area_LandCover\n')
 
             out_dir = os.path.join(tmp_dir, 'input_files')
-            download.download_and_process(out_dir, pv_map_path)
+            raw_dir = os.path.join(tmp_dir, 'raw_files')
+            download.download_and_process(out_dir, pv_map_path, raw_dir=raw_dir)
 
             self.assertTrue(
                 os.path.exists(os.path.join(out_dir,
@@ -166,6 +212,15 @@ class DownloadTest(unittest.TestCase):
                                             'srilanka_agriculture.csv')))
             self.assertTrue(
                 os.path.exists(os.path.join(out_dir, 'srilanka_education.csv')))
+            self.assertTrue(
+                os.path.exists(os.path.join(raw_dir,
+                                            'lka_admpop_2022_v2.xlsx')))
+            self.assertTrue(
+                os.path.exists(
+                    os.path.join(raw_dir,
+                                 'agriculture-and-rural-development_lka.csv')))
+            self.assertTrue(
+                os.path.exists(os.path.join(raw_dir, 'education_lka.csv')))
 
     def test_test_data_fixtures_cover_all_domains(self):
         test_data_dir = os.path.join(_MODULE_DIR, 'test_data')

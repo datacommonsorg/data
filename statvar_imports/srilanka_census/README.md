@@ -7,7 +7,7 @@
 * **Provenance URL:** `https://data.humdata.org/dataset/cod-ps-lka`
 * **Data Download URLs:**
   * `https://data.humdata.org/dataset/cod-ps-lka`
-  * `https://data.humdata.org/dataset/world-bank-agriculture-and-rural-development-indicators-for-sri-lanka`
+  * `https://data.humdata.org/dataset/world-bank-agriculture-and-rural-development-indicators-for-sri-lanka` (with World Bank WDI API fallback `https://api.worldbank.org/v2/en/country/LKA?downloadformat=csv` when the HDX staging mirror lags behind `2024` for core agricultural land/yield indicators)
   * `https://data.humdata.org/dataset/world-bank-education-indicators-for-sri-lanka`
 * **Release Frequency / Refresh Schedule:** Weekly check (`30 05 * * 1`, `P1Y` source release frequency)
 * **Date Range in KG:** `1960` – `2025`
@@ -19,14 +19,25 @@
 
 1. **Subnational Population Statistics (`cod-ps-lka`, `2022–2023`)**
    - **Geographic levels:** Country (`country/LKA`), 9 Provinces (`LK1`–`LK9`), and 25 Districts (`LK11`–`LK92`).
+   - **Raw files:** `raw_files/lka_admpop_2022_v2.xlsx`, `raw_files/lka_admpop_adm0_2023.csv`, `raw_files/lka_admpop_adm1_2023.csv`, `raw_files/lka_admpop_adm2_2023.csv`
    - **Extracted file:** `input_files/srilanka_population.csv`
    - **StatVars (`54`):** `Count_Person`, `Count_Person_Male`, `Count_Person_Female`, and 5-year age/gender cohorts (`Count_Person_<Age>`, `Count_Person_<Age>_Male`, `Count_Person_<Age>_Female` for `0To4Years` through `75To79Years` and `80OrMoreYears`).
-2. **World Bank Agriculture and Rural Development Indicators (`1960–2024`)**
+2. **World Bank Agriculture and Rural Development Indicators (`1960–2025`)**
    - **Geographic levels:** Country (`country/LKA`).
+   - **Raw files:** `raw_files/agriculture-and-rural-development_lka.csv` (and `raw_files/worldbank_lka.zip` when refreshed via the World Bank API freshness fallback if core indicators `AG.LND.ARBL.HA`, `AG.LND.AGRI.K2`, or `AG.YLD.CREL.KG` lack `2024+` observations in the HDX mirror).
    - **Extracted file:** `input_files/srilanka_agriculture.csv`
-   - **StatVars (`21` active + `6` historical):** Agricultural land (`Area_Farm`, `Area_Farm_AsAFractionOf_Area`, `Area_Farm_IrrigatedLand_AsAFractionOf_Area_Farm`, `Area_Farm_ArableLand`, `Area_Farm_PermanentCrops`, `Area_Forest`), crop/cereal production and yield, livestock production index, fertilizer consumption, agricultural machinery, and rural population (`Count_Person_Rural`, `Count_Person_Rural_AsAFractionOf_Count_Person`, `GrowthRate_Count_Person_Rural`).
+   - **StatVars (`21` active + `6` historical):**
+     - **Active (`21`):** Agricultural land (`Area_Farm`, `Area_Farm_AsAFractionOf_Area`, `Area_Farm_IrrigatedLand_AsAFractionOf_Area_Farm`, `Area_LandCover_ArableLand`, `Area_Farm_ArableLand_AsAFractionOf_Area`, `Area_Farm_PermanentCrops_AsAFractionOf_Area`, `Area_Forest`, `Area_Forest_AsAFractionOf_Area`), crop/cereal/food/livestock production and yield, fertilizer consumption, agricultural raw material imports/exports, employment in agriculture, and rural population (`Count_Person_Rural`, `Count_Person_Rural_AsAFractionOf_Count_Person`, `GrowthRate_Count_Person_Rural`).
+     - **Historical (`6` discontinued upstream in WDI, `182` observations preserved in `/cns/jv-d/home/datcom/v3_mcf/country/srilanka/historical/srilanka_census_output.csv`):**
+       - `Annual_Amount_Emissions_Agriculture_Methane_AsAFractionOf_Annual_Amount_Emissions_Agriculture` (`EN.ATM.METH.AG.ZS`, `39` obs)
+       - `Annual_Amount_Emissions_ClimateTraceOtherAgriculturalSoilEmissions_NitrousOxide_AsAFractionOf_Annual_Amount_Emissions_ClimateTraceOtherAgriculturalSoilEmissions` (`EN.ATM.NOXE.AG.ZS`, `39` obs)
+       - `Annual_Emissions_Methane_Agriculture` (`EN.ATM.METH.AG.KT.CE`, `30` obs)
+       - `Annual_Emissions_NitrousOxide_ClimateTrace_OtherAgriculturalSoilEmissions` (`EN.ATM.NOXE.AG.KT.CE`, `30` obs)
+       - `Annual_VehiclesRegistered_FarmInventory_Tractor` (`AG.AGR.TRAC.NO`, `22` obs)
+       - `Count_FarmInventory_Tractor_ArableLand_AsAFractionOf_Area_Farm` (`AG.LND.TRAC.ZS`, `22` obs)
 3. **World Bank Education Indicators (`1960–2025`)**
    - **Geographic levels:** Country (`country/LKA`).
+   - **Raw files:** `raw_files/education_lka.csv`
    - **Extracted file:** `input_files/srilanka_education.csv`
    - **StatVars (`486` across `115` WDI indicator series):** School enrollment, gross/net intake, progression, completion, persistence, literacy rates, pupil-teacher ratios, education expenditure, and Barro-Lee educational attainment across age/sex cohorts (`15To19Years` through `75To79Years`, `15OrMoreYears`, `25OrMoreYears`, `15To24Years`).
 
@@ -42,7 +53,7 @@ Comparison against the previous production `Srilanka_Census` import (`/cns/jv-d/
 | **Current Observations** | `13,312` | `13,130` active observations in `latest` + `182` archived in `historical` |
 | **Added Observations** | `+2,558` | 2023 subnational population across Country, 9 Provinces, and 25 Districts (`+1,995` obs) plus 2022–2025 WDI Agriculture & Education updates (`+563` obs) |
 | **Modified Observations** | `588` | Official World Bank WDI historical revisions across 1960–2021 national series |
-| **Deleted Observations** | `0` (`0.0%`) | Zero deletions (`182` observations from 6 discontinued WDI agriculture indicators are preserved in `/cns/jv-d/home/datcom/v3_mcf/country/srilanka/historical/` and `/cns/jv-d/home/datcom/v3_resolved_mcf/country/srilanka/historical/`) |
+| **Deleted Observations** | `0` (`0.0%`) | Zero deletions (`182` observations from 6 discontinued WDI agriculture indicators — `EN.ATM.METH.AG.ZS` [39], `EN.ATM.NOXE.AG.ZS` [39], `EN.ATM.METH.AG.KT.CE` [30], `EN.ATM.NOXE.AG.KT.CE` [30], `AG.AGR.TRAC.NO` [22], and `AG.LND.TRAC.ZS` [22] — are preserved in `/cns/jv-d/home/datcom/v3_mcf/country/srilanka/historical/` and `/cns/jv-d/home/datcom/v3_resolved_mcf/country/srilanka/historical/`) |
 | **Schema Diffs** | `0` | All `567` StatVars (`561` active + `6` historical) resolve to existing definitions in `gs://unresolved_mcf/scripts/statvar/stat_vars.mcf` |
 
 ---
@@ -59,9 +70,10 @@ Comparison against the previous production `Srilanka_Census` import (`/cns/jv-d/
 
 ## 5. How to Run
 
-1. **Download and preprocess the source data into `input_files/*.csv`:**
+1. **Download raw files into `raw_files/*` and preprocess the source data into `input_files/*.csv`:**
    ```bash
    python3 statvar_imports/srilanka_census/download.py \
+     --raw_dir=statvar_imports/srilanka_census/raw_files \
      --output_dir=statvar_imports/srilanka_census/input_files \
      --pv_map=statvar_imports/srilanka_census/srilanka_census_pvmap.csv
    ```
