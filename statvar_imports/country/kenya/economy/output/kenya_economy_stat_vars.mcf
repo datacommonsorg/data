@@ -1,0 +1,29 @@
+# Auto generated using command: "stat_var_processor.py --input_data=/usr/local/google/home/sumakaranam/data/statvar_imports/country/kenya/economy/input/kenya_economy_data.csv --pv_map=/usr/local/google/home/sumakaranam/data/statvar_imports/country/kenya/economy/kenya_economy_pvmap.csv --places_resolved_csv=/usr/local/google/home/sumakaranam/data/statvar_imports/country/kenya/economy/kenya_economy_place_resolver.csv --config=/usr/local/google/home/sumakaranam/data/statvar_imports/country/kenya/economy/kenya_economy_metadata.csv --output_path=/usr/local/google/home/sumakaranam/data/statvar_imports/country/kenya/economy/output/kenya_economy" on 2024-07-14 14:27:13.631116
+
+Node: dcid:Amount_EconomicActivity_GrossValueAdded_AsAFractionOf__measurementQualifier_National
+typeOf: dcid:StatisticalVariable
+name: "County Contribution to Gross Value Added (GVA) (%)"
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+measurementDenominator: ,dcid:measurementQualifier=National
+activitySource: dcid:GrossValueAdded
+
+Node: dcid:Nominal_Amount_EconomicActivity_GrossCountryProduct
+typeOf: dcid:StatisticalVariable
+name: "Gross County Product (GCP) in Current Prices"
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+activitySource: dcid:GrossCountryProduct
+
+Node: dcid:RealValue_Amount_EconomicActivity_GrossCountryProduct
+typeOf: dcid:StatisticalVariable
+name: "Gross County Product (GCP) in Constant Prices"
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:amount
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+activitySource: dcid:GrossCountryProduct
+
