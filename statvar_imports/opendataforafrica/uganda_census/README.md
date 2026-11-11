@@ -4,8 +4,8 @@
 
 - **Source**: [Uganda Open Data for Africa](https://uganda.opendataforafrica.org/)
 - **Publisher**: Uganda Bureau of Statistics (UBOS)
-- **Import Type**: `Automated` (Weekly cron schedule)
-- **Schedule**: Weekly (`0 5 * * 1`)
+- **Import Type**: `Semi-Automated` (`GCPCloudRunSemiAutomaticRefresh`)
+- **Release Frequency**: Annual (`P1Y`)
 - **Coverage**: Demographics, Health, Education, Census populations (1969 – 2016)
 - **Entity Resolution**:
   - National level: `country/UGA`
@@ -61,8 +61,8 @@ During scheduled import runs, the automated pipeline executes:
 2. **Transform (`stat_var_processor.py`)**: Runs each of the 4 table configurations, resolving place DCIDs and generating TMCF, CSV, and StatVar MCF outputs.
 3. **Validation**: Validates data freshness, record deletion thresholds, and schema lint rules.
 
-### 4.3 Refresh Schedule
-The automated pipeline executes on a weekly schedule (`0 5 * * 1` - at 05:00 UTC every Monday) via Cloud Batch / GCP Cloud Run.
+### 4.3 Semi-Automated Refresh Cadence
+Because upstream SDMX XML downloads from `uganda.opendataforafrica.org` require browser export due to Cloudflare Turnstile bot protection (`GCPCloudRunSemiAutomaticRefresh`), refreshes are triggered on-demand via Cloud Batch / GCP Cloud Run after staging refreshed CSV files to GCS (source release frequency: `P1Y`).
 
 ## 5. Running the Data Processor
 
@@ -141,4 +141,4 @@ Deleted records check (`check_deleted_records_percent`) and zero lint errors are
 Because the legacy 2023 manual import (`/cns/jv-d/home/datcom/v3_mcf/country/uganda/nodes.mcf-00000-of-00001`) was stored as a single monolithic MCF file rather than per-table subdirectories (`input0`–`input3`), the automated executor's per-input differ compares against the previous multi-input run. Direct observation-level comparison against the 2023 production MCF (`9,528` observations across `97` StatVars) vs. the 2026 automated refresh (`10,332` observations across `101` StatVars) confirms:
 - **Retained identical observations**: `9,351` / `9,528` (`98.14%`).
 - **Added StatVars & observations (`+981` obs, `+4` StatVars)**: Added 4 previously unmapped 2014 district census StatVars in `qiubrhc` (`Count_Person_Female`, `Count_Person_Male`, `Count_Person_ResidesInGroupQuarters`, `Count_Person_ResidesInHousehold`) plus updated district coverage (`country/UGA_ConflictAreas` and corrected district resolutions).
-- **Place DCID corrections (`177` obs, `1.86%`)**: Migrated `93` observations from `wikidataId/Q2318123` (Sembabule town) to `wikidataId/Q1364817` (Sembabule District, `AdministrativeArea1`) and `84` observations from `wikidataId/Q4987159` (Buliisa sub-county) to `wikidataId/Q1375868` (Buliisa District, `AdministrativeArea1`).
+- **Place DCID corrections (`177` obs, `1.86%`)**: Migrated `93` observations from `wikidataId/Q2318123` (Luweero town) to `wikidataId/Q1364817` (Luweero District, `AdministrativeArea1`) and `84` observations from `wikidataId/Q4987159` (Bukwo town/sub-county) to `wikidataId/Q1375868` (Bukwo District, `AdministrativeArea1`).
