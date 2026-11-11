@@ -561,12 +561,16 @@ NAICS_CODES = {
         'OtherFoundationStructureAndBuildingExteriorContractors',
     '238190':
         'OtherFoundationStructureAndBuildingExteriorContractors_NAICS238190',
+    '238192':
+        'OtherNonresidentialExteriorContractors',
     '2382':
         'BuildingEquipmentContractors',
     '23821':
         'ElectricalContractorsAndOtherWiringInstallationContractors',
     '238210':
         'ElectricalContractorsAndOtherWiringInstallationContractors_NAICS238210',
+    '238212':
+        'NonresidentialElectricalContractors',
     '23822':
         'PlumbingHeatingAndAirConditioningContractors',
     '238220':
@@ -575,12 +579,16 @@ NAICS_CODES = {
         'OtherBuildingEquipmentContractors',
     '238290':
         'OtherBuildingEquipmentContractors_NAICS238290',
+    '238292':
+        'OtherNonresidentialEquipmentContractors',
     '2383':
         'BuildingFinishingContractors',
     '23831':
         'DrywallAndInsulationContractors',
     '238310':
         'DrywallAndInsulationContractors_NAICS238310',
+    '238312':
+        'NonresidentialDrywallContractors',
     '23832':
         'PaintingAndWallCoveringContractors',
     '238320':
@@ -601,16 +609,24 @@ NAICS_CODES = {
         'OtherBuildingFinishingContractors',
     '238390':
         'OtherBuildingFinishingContractors_NAICS238390',
+    '238392':
+        'OtherNonresidentialFinishingContractors',
     '2389':
         'OtherSpecialtyTradeContractors',
     '23891':
         'SitePreparationContractors',
     '238910':
         'SitePreparationContractors_NAICS238910',
+    '238911':
+        'ResidentialSitePreparationContractors',
     '23899':
         'AllOtherSpecialtyTradeContractors',
     '238990':
         'AllOtherSpecialtyTradeContractors_NAICS238990',
+    '238992':
+        'AllOtherNonresidentialTradeContractors',
+    '238991':
+        'AllOtherResidentialTradeContractors',
     '31':
         'Manufacturing',
     '31-33':
@@ -2766,7 +2782,7 @@ NAICS_CODES = {
     '457110':
         'GasolineStationsWithConvenienceStores_NAICS457110',
     '45712':
-        'OtherGasolineStations',
+        'OtherGasolineStations_NAICS45712',
     '457120':
         'OtherGasolineStations_NAICS457120',
     '4572':
