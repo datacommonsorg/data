@@ -22,16 +22,20 @@ from absl import flags
 import pandas as pd
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('atlas_file',
-                    None,
-                    'Proteinatlas.tsv file path.',
-                    short_name='f')
-flags.DEFINE_string(
-    'uniprot', 'uniprot_list.txt',
-    'File path to save the uniprot entries separated by space.')
-flags.DEFINE_string(
-    'gene_to_uniprot', 'gene_to_uniprot_list.txt',
-    'File path to save the gene name to uniprot entries mapping.')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('atlas_file',
+                        None,
+                        'Proteinatlas.tsv file path.',
+                        short_name='f')
+    flags.DEFINE_string(
+        'uniprot', 'uniprot_list.txt',
+        'File path to save the uniprot entries separated by space.')
+    flags.DEFINE_string(
+        'gene_to_uniprot', 'gene_to_uniprot_list.txt',
+        'File path to save the gene name to uniprot entries mapping.')
 
 
 def main(argv):
@@ -64,4 +68,5 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)
