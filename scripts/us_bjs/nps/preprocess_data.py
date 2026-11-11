@@ -9,7 +9,7 @@ def _define_flags() -> None:
     """Defines command-line flags for this script."""
     flags.DEFINE_string('preprocess_file',
                         'NPS_1978-2018_Data.tsv',
-                        'file path to tsv file with data to proess',
+                        'file path to tsv file with data to process',
                         short_name='p')
 
 

@@ -48,10 +48,10 @@ def _define_flags() -> None:
         'gpcc_spi_preprocessed_dir', default_output_path,
         'The directory where the output mcf will be generated in.')
     flags.DEFINE_string('start_date', DEFAULT_START_DATE,
-                        'Dash separated start date. Defaults to "1900-01-01"')
+                        'Dash separated start date. Defaults to "2011-01-01"')
     flags.DEFINE_string(
         'end_date', DEFAULT_END_DATE,
-        'Dash separated start date. Defaults to the running date.')
+        'Dash separated end date. Defaults to the running date.')
 
 
 def to_one_degree_grid_place(latlon):
