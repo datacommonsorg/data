@@ -1,0 +1,13 @@
+Node: E:phenotypes_mesh_qualifier->E1
+typeOf: dcs:MeSHDescriptor
+dcid: C:phenotypes_mesh_qualifier->dcid_mesh
+name: C:phenotypes_mesh_qualifier->Name
+medicalDictionaryForRegulatoryActivitiesId: C:phenotypes_mesh_qualifier->MedDRA
+medicalSubjectHeadingID: C:phenotypes_mesh_qualifier->MeSH
+mondoID: C:phenotypes_mesh_qualifier->MONDO
+nationalDrugFileReferenceTerminologyCode: C:phenotypes_mesh_qualifier->NDFRT
+pharmGKBID: C:phenotypes_mesh_qualifier->pharmGKBID
+snomedCT: C:phenotypes_mesh_qualifier->SnoMedCT
+synonym: C:phenotypes_mesh_qualifier->synonyms
+umlsConceptUniqueID: C:phenotypes_mesh_qualifier->UMLS
+url: C:phenotypes_mesh_qualifier->URL
