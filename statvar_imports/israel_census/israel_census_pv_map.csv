@@ -1,0 +1,134 @@
+key,property,value
+observationDate,observationDate,{Number}
+observationAbout,observationAbout,{@Data},populationType,Person,statType,measuredValue,measuredProperty,count
+isr_menemployed_age_martialstatus_2008.csv,gender,Male
+isr_totalemployed_age_martialstatus_2008.csv,employmentStatus,Employed
+isr_womenemployed_age_martialstatus_2008.csv,gender,Female
+ISR,observationAbout,country/ISR
+country/ISR,observationAbout,country/ISR
+DIST_1,observationAbout,wikidataId/Q192232
+DIST_2,observationAbout,wikidataId/Q189942
+DIST_3,observationAbout,wikidataId/Q185845
+DIST_4,observationAbout,wikidataId/Q188785
+DIST_5,observationAbout,wikidataId/Q192811
+DIST_6,observationAbout,wikidataId/Q188781
+DIST_7,observationAbout,wikidataId/Q513200
+SUBDIST_21,observationAbout,wikidataId/Q5423089
+SUBDIST_24,observationAbout,wikidataId/Q5423103
+SUBDIST_29,observationAbout,wikidataId/Q5423040
+SUBDIST_31,observationAbout,wikidataId/Q5423411
+SUBDIST_32,observationAbout,wikidataId/Q5423414
+SUBDIST_41,observationAbout,wikidataId/Q152379
+SUBDIST_42,observationAbout,wikidataId/Q46993019
+SUBDIST_43,observationAbout,wikidataId/Q5419070
+SUBDIST_44,observationAbout,wikidataId/Q46992983
+SUBDIST_61,observationAbout,wikidataId/Q5423623
+SUBDIST_62,observationAbout,wikidataId/Q5423629
+total,value,{Number}
+jews,religion,Judaism,value,{Number}
+nonjews,religion,NonJudaism,value,{Number}
+Others,religion,CBS_Israel_NonJudaismOrNonArabChristianOrNoReligion,value,{Number},measurementMethod,dcAggregate/CBSIsraelSurvey
+arab,religion,Arab,value,{Number}
+"Jews, Popululation no Religious Classification and Non-Arab Cristians - Infant Deaths",populationType,MortalityEvent,ageGroupClassification,Infant,measuredProperty,count,religion,CBS_Israel_JudaismOrNonArabChristianOrNoReligion,value,{Number}
+Arab Population - Infant Deaths,populationType,MortalityEvent,ageGroupClassification,Infant,measuredProperty,count,religion,Arab,value,{Number}
+"Jews, Popululation no Religious Classification and Non-Arab Cristians - Live-Births",medicalStatus,LiveBirth,statType,measuredValue,measuredProperty,count,religion,CBS_Israel_JudaismOrNonArabChristianOrNoReligion,value,{Number},populationType,BirthEvent
+Arab Population - Live-Births,medicalStatus,LiveBirth,statType,measuredValue,measuredProperty,count,religion,Arab,value,{Number},populationType,BirthEvent
+Arab Christians - Live-Births,medicalStatus,LiveBirth,statType,measuredValue,measuredProperty,count,religion,CBS_Israel_ArabChristian,value,{Number},populationType,BirthEvent
+"Jews, Popululation no Religious Classification and Non-Arab Cristians - Deaths",measuredProperty,count,populationType,MortalityEvent,statType,measuredValue,religion,CBS_Israel_JudaismOrNonArabChristianOrNoReligion,value,{Number}
+Arab Population - Deaths,measuredProperty,count,populationType,MortalityEvent,statType,measuredValue,religion,Arab,value,{Number}
+isc_jew_male,religion,Judaism,scalingFactor,100000,gender,Male,causeOfDeathAndDisability,CoronaryHeartDisease,populationType,MortalityEvent,measuredProperty,count,value,{Number},measurementDenominator,"-populationType,-causeOfDeathAndDisability,+populationType=Person"
+isc_jew_female,religion,Judaism,scalingFactor,100000,gender,Female,causeOfDeathAndDisability,CoronaryHeartDisease,populationType,MortalityEvent,measuredProperty,count,value,{Number},measurementDenominator,"-populationType,-causeOfDeathAndDisability,+populationType=Person"
+mal_jew_male,religion,Judaism,scalingFactor,100000,gender,Male,causeOfDeathAndDisability,MalignantNeoplasms,populationType,MortalityEvent,measuredProperty,count,value,{Number},measurementDenominator,"-populationType,-causeOfDeathAndDisability,+populationType=Person"
+mal_jew_female,religion,Judaism,scalingFactor,100000,gender,Female,causeOfDeathAndDisability,MalignantNeoplasms,populationType,MortalityEvent,measuredProperty,count,value,{Number},measurementDenominator,"-populationType,-causeOfDeathAndDisability,+populationType=Person"
+cer_jew_male,religion,Judaism,scalingFactor,100000,gender,Male,causeOfDeathAndDisability,CerebrovascularDiseases,populationType,MortalityEvent,measuredProperty,count,value,{Number},measurementDenominator,"-populationType,-causeOfDeathAndDisability,+populationType=Person"
+cer_jew_female,religion,Judaism,scalingFactor,100000,gender,Female,causeOfDeathAndDisability,CerebrovascularDiseases,populationType,MortalityEvent,measuredProperty,count,value,{Number},measurementDenominator,"-populationType,-causeOfDeathAndDisability,+populationType=Person"
+ex_jew_male,religion,Judaism,scalingFactor,100000,gender,Male,causeOfDeathAndDisability,ExternalCausesOfDeath,populationType,MortalityEvent,measuredProperty,count,value,{Number},measurementDenominator,"-populationType,-causeOfDeathAndDisability,+populationType=Person"
+ex_jew_female,religion,Judaism,scalingFactor,100000,gender,Female,causeOfDeathAndDisability,ExternalCausesOfDeath,populationType,MortalityEvent,measuredProperty,count,value,{Number},measurementDenominator,"-populationType,-causeOfDeathAndDisability,+populationType=Person"
+pne_jew_male,religion,Judaism,scalingFactor,100000,gender,Male,causeOfDeathAndDisability,Pneumonia,populationType,MortalityEvent,measuredProperty,count,value,{Number},measurementDenominator,"-populationType,-causeOfDeathAndDisability,+populationType=Person"
+pne_jew_female,religion,Judaism,scalingFactor,100000,gender,Female,causeOfDeathAndDisability,Pneumonia,populationType,MortalityEvent,measuredProperty,count,value,{Number},measurementDenominator,"-populationType,-causeOfDeathAndDisability,+populationType=Person"
+infd_jew_male,religion,Judaism,scalingFactor,100000,gender,Male,causeOfDeathAndDisability,InfectiousDiseases,populationType,MortalityEvent,measuredProperty,count,value,{Number},measurementDenominator,"-populationType,-causeOfDeathAndDisability,+populationType=Person"
+infd_jew_female,religion,Judaism,scalingFactor,100000,gender,Female,causeOfDeathAndDisability,InfectiousDiseases,populationType,MortalityEvent,measuredProperty,count,value,{Number},measurementDenominator,"-populationType,-causeOfDeathAndDisability,+populationType=Person"
+isc_male,scalingFactor,100000,gender,Male,causeOfDeathAndDisability,CoronaryHeartDisease,populationType,MortalityEvent,measuredProperty,count,value,{Number},measurementDenominator,"-populationType,-causeOfDeathAndDisability,+populationType=Person"
+mal_male,scalingFactor,100000,gender,Male,causeOfDeathAndDisability,MalignantNeoplasms,populationType,MortalityEvent,measuredProperty,count,value,{Number},measurementDenominator,"-populationType,-causeOfDeathAndDisability,+populationType=Person"
+cer_male,scalingFactor,100000,gender,Male,causeOfDeath,CerebrovascularDiseases,populationType,MortalityEvent,measuredProperty,count,value,{Number},measurementDenominator,"-populationType,-causeOfDeath,+populationType=Person"
+ex_male,scalingFactor,100000,gender,Male,causeOfDeathAndDisability,ExternalCausesOfDeath,populationType,MortalityEvent,measuredProperty,count,value,{Number},measurementDenominator,"-populationType,-causeOfDeathAndDisability,+populationType=Person"
+pne_male,scalingFactor,100000,gender,Male,causeOfDeath,Pneumonia,populationType,MortalityEvent,measuredProperty,count,value,{Number},measurementDenominator,"-populationType,-causeOfDeath,+populationType=Person"
+infd_male,scalingFactor,100000,gender,Male,causeOfDeathAndDisability,InfectiousDiseases,populationType,MortalityEvent,measuredProperty,count,value,{Number},measurementDenominator,"-populationType,-causeOfDeathAndDisability,+populationType=Person"
+isc_female,scalingFactor,100000,gender,Female,causeOfDeathAndDisability,CoronaryHeartDisease,populationType,MortalityEvent,measuredProperty,count,value,{Number},measurementDenominator,"-populationType,-causeOfDeathAndDisability,+populationType=Person"
+mal_female,scalingFactor,100000,gender,Female,causeOfDeathAndDisability,MalignantNeoplasms,populationType,MortalityEvent,measuredProperty,count,value,{Number},measurementDenominator,"-populationType,-causeOfDeathAndDisability,+populationType=Person"
+cer_female,scalingFactor,100000,gender,Female,causeOfDeath,CerebrovascularDiseases,populationType,MortalityEvent,measuredProperty,count,value,{Number},measurementDenominator,"-populationType,-causeOfDeath,+populationType=Person"
+ex_female,scalingFactor,100000,gender,Female,causeOfDeathAndDisability,ExternalCausesOfDeath,populationType,MortalityEvent,measuredProperty,count,value,{Number},measurementDenominator,"-populationType,-causeOfDeathAndDisability,+populationType=Person"
+pne_female,scalingFactor,100000,gender,Female,causeOfDeath,Pneumonia,populationType,MortalityEvent,measuredProperty,count,value,{Number},measurementDenominator,"-populationType,-causeOfDeath,+populationType=Person"
+infd_female,scalingFactor,100000,gender,Female,causeOfDeathAndDisability,InfectiousDiseases,populationType,MortalityEvent,measuredProperty,count,value,{Number},measurementDenominator,"-populationType,-causeOfDeathAndDisability,+populationType=Person"
+isc_arab_male,religion,Arab,scalingFactor,100000,gender,Male,causeOfDeathAndDisability,CoronaryHeartDisease,populationType,MortalityEvent,measuredProperty,count,value,{Number},measurementDenominator,"-populationType,-causeOfDeathAndDisability,+populationType=Person"
+mal_arab_male,religion,Arab,scalingFactor,100000,gender,Male,causeOfDeathAndDisability,MalignantNeoplasms,populationType,MortalityEvent,measuredProperty,count,value,{Number},measurementDenominator,"-populationType,-causeOfDeathAndDisability,+populationType=Person"
+cer_arab_male,religion,Arab,scalingFactor,100000,gender,Male,causeOfDeathAndDisability,CerebrovascularDiseases,populationType,MortalityEvent,measuredProperty,count,value,{Number},measurementDenominator,"-populationType,-causeOfDeathAndDisability,+populationType=Person"
+ex_arab_male,religion,Arab,scalingFactor,100000,gender,Male,causeOfDeathAndDisability,ExternalCausesOfDeath,populationType,MortalityEvent,measuredProperty,count,value,{Number},measurementDenominator,"-populationType,-causeOfDeathAndDisability,+populationType=Person"
+pne_arab_male,religion,Arab,scalingFactor,100000,gender,Male,causeOfDeathAndDisability,Pneumonia,populationType,MortalityEvent,measuredProperty,count,value,{Number},measurementDenominator,"-populationType,-causeOfDeathAndDisability,+populationType=Person"
+infd_arab_male,religion,Arab,scalingFactor,100000,gender,Male,causeOfDeathAndDisability,InfectiousDiseases,populationType,MortalityEvent,measuredProperty,count,value,{Number},measurementDenominator,"-populationType,-causeOfDeathAndDisability,+populationType=Person"
+isc_arab_female,religion,Arab,scalingFactor,100000,gender,Female,causeOfDeathAndDisability,CoronaryHeartDisease,populationType,MortalityEvent,measuredProperty,count,value,{Number},measurementDenominator,"-populationType,-causeOfDeathAndDisability,+populationType=Person"
+mal_arab_female,religion,Arab,scalingFactor,100000,gender,Female,causeOfDeathAndDisability,MalignantNeoplasms,populationType,MortalityEvent,measuredProperty,count,value,{Number},measurementDenominator,"-populationType,-causeOfDeathAndDisability,+populationType=Person"
+cer_arab_female,religion,Arab,scalingFactor,100000,gender,Female,causeOfDeathAndDisability,CerebrovascularDiseases,populationType,MortalityEvent,measuredProperty,count,value,{Number},measurementDenominator,"-populationType,-causeOfDeathAndDisability,+populationType=Person"
+ex_arab_female,religion,Arab,scalingFactor,100000,gender,Female,causeOfDeathAndDisability,ExternalCausesOfDeath,populationType,MortalityEvent,measuredProperty,count,value,{Number},measurementDenominator,"-populationType,-causeOfDeathAndDisability,+populationType=Person"
+pne_arab_female,religion,Arab,scalingFactor,100000,gender,Female,causeOfDeathAndDisability,Pneumonia,populationType,MortalityEvent,measuredProperty,count,value,{Number},measurementDenominator,"-populationType,-causeOfDeathAndDisability,+populationType=Person"
+infd_arab_female,religion,Arab,scalingFactor,100000,gender,Female,causeOfDeathAndDisability,InfectiousDiseases,populationType,MortalityEvent,measuredProperty,count,value,{Number},measurementDenominator,"-populationType,-causeOfDeathAndDisability,+populationType=Person"
+Those aged 15 and over – total,age,[15 - Years],value,{Number}
+Men aged 15 and over– total,age,[15 - Years],gender,Male,value,{Number}
+Women aged 15 and over– total,age,[15 - Years],gender,Female,value,{Number}
+Those aged 5 and over – total **,age,[5 - Years],value,{Number}
+Percentage of males aged 5 and over **,age,[5 - Years],gender,Male,value,{Number},unit,Percent,scalingFactor,100,measurementDenominator,-age
+Percentage of females aged 5 and over **,age,[5 - Years],gender,Female,value,{Number},unit,Percent,scalingFactor,100,measurementDenominator,-age
+Those aged 65+ – total **,age,[65 - Years],value,{Number}
+Population – total,value,{Number}
+Males – total,gender,Male,value,{Number}
+Females – total,gender,Female,value,{Number}
+Grand totalTotal,value,{Number}
+Grand totalMales,gender,Male,value,{Number}
+Grand totalFemales,gender,Female,value,{Number}
+Urban localitiesTotal,placeOfResidenceClassification,Urban,value,{Number}
+Urban localitiesMales,dcid,Count_Person_Urban_Male,gender,Male,placeOfResidenceClassification,Urban,value,{Number}
+Urban localitiesFemales,dcid,Count_Person_Urban_Female,gender,Female,placeOfResidenceClassification,Urban,value,{Number}
+Rural localitiesTotal,placeOfResidenceClassification,Rural,value,{Number}
+Rural localitiesMales,dcid,Count_Person_Rural_Male,gender,Male,placeOfResidenceClassification,Rural,value,{Number}
+Rural localitiesFemales,dcid,Count_Person_Rural_Female,gender,Female,placeOfResidenceClassification,Rural,value,{Number}
+0-14,age,[0 14 Years]
+15-24,age,[15 24 Years]
+25-34,age,[25 34 Years]
+35-39,age,[35 39 Years]
+40-44,age,[40 44 Years]
+45-49,age,[45 49 Years]
+50-54,age,[50 54 Years]
+55-59,age,[55 59 Years]
+60-64,age,[60 64 Years]
+65-69,age,[65 69 Years]
+70-74,age,[70 74 Years]
+75-79,age,[75 79 Years]
+80-84,age,[80 84 Years]
+85+,age,[85 - Years]
+Total,value,{Number}
+Never married,maritalStatus,NeverMarried,value,{Number}
+Married,maritalStatus,MarriedAndNotSeparated,value,{Number}
+Divorced,maritalStatus,Divorced,value,{Number}
+Widowed,maritalStatus,Widowed,value,{Number}
+Married but separated,maritalStatus,Separated,value,{Number}
+סך הכל,value,{Number}
+24-15,employmentStatus,Employed,age,[15 24 Years],value,{Number}
+29-25,employmentStatus,Employed,age,[25 29 Years],value,{Number}
+34-30,employmentStatus,Employed,age,[30 34 Years],value,{Number}
+39-35,employmentStatus,Employed,age,[35 39 Years],value,{Number}
+44-40,employmentStatus,Employed,age,[40 44 Years],value,{Number}
+49-45,employmentStatus,Employed,age,[45 49 Years],value,{Number}
+54-50,employmentStatus,Employed,age,[50 54 Years],value,{Number}
+59-55,employmentStatus,Employed,age,[55 59 Years],value,{Number}
+64-60,employmentStatus,Employed,age,[60 64 Years],value,{Number}
++65,employmentStatus,Employed,age,[65 - Years],value,{Number}
+מועסקים,employment,Employed
+רווק,employmentStatus,Employed,maritalStatus,NeverMarried
+נשוי,employmentStatus,Employed,maritalStatus,MarriedAndNotSeparated
+גרוש,employmentStatus,Employed,maritalStatus,Divorced
+אלמן,employmentStatus,Employed,maritalStatus,Widowed
+אלמן_15_39,employmentStatus,Employed,maritalStatus,Widowed,age,[15 39 Years]
+רווקה,employmentStatus,Employed,maritalStatus,NeverMarried
+נשואה,employmentStatus,Employed,maritalStatus,MarriedAndNotSeparated
+גרושה,employmentStatus,Employed,maritalStatus,Divorced
+אלמנה,employmentStatus,Employed,maritalStatus,Widowed

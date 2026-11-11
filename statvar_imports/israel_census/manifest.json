@@ -1,0 +1,36 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "Israel_Census",
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
+      "provenance_url": "https://www.cbs.gov.il/",
+      "provenance_description": "Israel Population and Housing Census, Annual Locality Population, Employment by Marital Status, and Vital Statistics from the Central Bureau of Statistics of Israel (CBS).",
+      "scripts": [
+        "download_script.py",
+        "preprocess.py --input_dir=input_files --output_dir=staged_inputs",
+        "../../tools/statvar_importer/stat_var_processor.py --input_data=staged_inputs/*.csv --pv_map=israel_census_pv_map.csv --config_file=israel_census_metadata.csv --output_path=output_files/israel_census_output --output_counters=counters/israel_census_counters.csv"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "output_files/israel_census_output.tmcf",
+          "cleaned_csv": "output_files/israel_census_output.csv",
+          "node_mcf": "output_files/*.mcf"
+        }
+      ],
+      "source_files": [
+        "input_files/*",
+        "counters/*.csv",
+        "validation_config.json"
+      ],
+      "cron_schedule": "0 5 * * 1",
+      "validation_config_file": "validation_config.json",
+      "resource_limits": {
+        "cpu": 8,
+        "memory": 32,
+        "disk": 100
+      }
+    }
+  ]
+}
