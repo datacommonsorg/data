@@ -19,11 +19,17 @@ from absl import app
 from absl import flags
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('census_divisions_csv', 'census_region_geocodes.csv',
-                    'CSV file with the US census division and region codes.')
-flags.DEFINE_string(
-    'output_mcf', 'geo_CensusDivision.mcf',
-    'MCF file with the nodes for census divisions and regions.')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        'census_divisions_csv', 'census_region_geocodes.csv',
+        'CSV file with the US census division and region codes.')
+    flags.DEFINE_string(
+        'output_mcf', 'geo_CensusDivision.mcf',
+        'MCF file with the nodes for census divisions and regions.')
+
 
 _COLUMNS = [
     'Region',
@@ -150,4 +156,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)
