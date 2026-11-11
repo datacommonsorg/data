@@ -41,6 +41,7 @@ class ImportState(str, Enum):
     RETRY = "RETRY"
     SKIP = "SKIP"
     VALIDATION = "VALIDATION"
+    INACTIVE = "INACTIVE"
 
 
 class ImportStatusItem(BaseModel):
