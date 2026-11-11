@@ -1,0 +1,115 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "Egypt_Census",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://egypt.opendataforafrica.org/",
+            "provenance_description": "Egypt demographics, economy, education and health data from statistics Egypt at city and district level.",
+            "scripts": [
+                "download.sh",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/actytif.csv --pv_map=actytif_pvmap.csv --config_file=actytif_metadata.csv --places_resolved_csv=places_resolved.csv --output_path=output/actytif --output_counters=counters/actytif_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/behvqtc.csv --pv_map=behvqtc_pvmap.csv --config_file=behvqtc_metadata.csv --places_resolved_csv=places_resolved.csv --output_path=output/behvqtc --output_counters=counters/behvqtc_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/bluhqme.csv --pv_map=bluhqme_pvmap.csv --config_file=bluhqme_metadata.csv --places_resolved_csv=places_resolved.csv --output_path=output/bluhqme --output_counters=counters/bluhqme_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/cjczlcd.csv --pv_map=cjczlcd_pvmap.csv --config_file=cjczlcd_metadata.csv --output_path=output/cjczlcd --output_counters=counters/cjczlcd_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/lxoyale.csv --pv_map=lxoyale_pvmap.csv --config_file=lxoyale_metadata.csv --places_resolved_csv=places_resolved.csv --output_path=output/lxoyale --output_counters=counters/lxoyale_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/mptocre.csv --pv_map=mptocre_pvmap.csv --config_file=mptocre_metadata.csv --output_path=output/mptocre --output_counters=counters/mptocre_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/pqpump.csv --pv_map=pqpump_pvmap.csv --config_file=pqpump_metadata.csv --places_resolved_csv=places_resolved.csv --output_path=output/pqpump --output_counters=counters/pqpump_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/szfufmb.csv --pv_map=szfufmb_pvmap.csv --config_file=szfufmb_metadata.csv --output_path=output/szfufmb --output_counters=counters/szfufmb_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/txbrrac.csv --pv_map=txbrrac_pvmap.csv --config_file=txbrrac_metadata.csv --output_path=output/txbrrac --output_counters=counters/txbrrac_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/ujtdaag.csv --pv_map=ujtdaag_pvmap.csv --config_file=ujtdaag_metadata.csv --output_path=output/ujtdaag --output_counters=counters/ujtdaag_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/ulouknf.csv --pv_map=ulouknf_pvmap.csv --config_file=ulouknf_metadata.csv --output_path=output/ulouknf --output_counters=counters/ulouknf_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/viytqvf.csv --pv_map=viytqvf_pvmap.csv --config_file=viytqvf_metadata.csv --output_path=output/viytqvf --output_counters=counters/viytqvf_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/wcssteb.csv --pv_map=wcssteb_pvmap.csv --config_file=wcssteb_metadata.csv --output_path=output/wcssteb --output_counters=counters/wcssteb_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/wtxyghf.csv --pv_map=wtxyghf_pvmap.csv --config_file=wtxyghf_metadata.csv --output_path=output/wtxyghf --output_counters=counters/wtxyghf_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/xovpotd.csv --pv_map=xovpotd_pvmap.csv --config_file=xovpotd_metadata.csv --output_path=output/xovpotd --output_counters=counters/xovpotd_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/zkjifzd.csv --pv_map=zkjifzd_pvmap.csv --config_file=zkjifzd_metadata.csv --output_path=output/zkjifzd --output_counters=counters/zkjifzd_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/zpdksog.csv --pv_map=zpdksog_pvmap.csv --config_file=zpdksog_metadata.csv --places_resolved_csv=places_resolved.csv --output_path=output/zpdksog --output_counters=counters/zpdksog_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output/actytif.tmcf",
+                    "cleaned_csv": "output/actytif.csv"
+                },
+                {
+                    "template_mcf": "output/behvqtc.tmcf",
+                    "cleaned_csv": "output/behvqtc.csv"
+                },
+                {
+                    "template_mcf": "output/bluhqme.tmcf",
+                    "cleaned_csv": "output/bluhqme.csv"
+                },
+                {
+                    "template_mcf": "output/cjczlcd.tmcf",
+                    "cleaned_csv": "output/cjczlcd.csv"
+                },
+                {
+                    "template_mcf": "output/lxoyale.tmcf",
+                    "cleaned_csv": "output/lxoyale.csv"
+                },
+                {
+                    "template_mcf": "output/mptocre.tmcf",
+                    "cleaned_csv": "output/mptocre.csv"
+                },
+                {
+                    "template_mcf": "output/pqpump.tmcf",
+                    "cleaned_csv": "output/pqpump.csv"
+                },
+                {
+                    "template_mcf": "output/szfufmb.tmcf",
+                    "cleaned_csv": "output/szfufmb.csv"
+                },
+                {
+                    "template_mcf": "output/txbrrac.tmcf",
+                    "cleaned_csv": "output/txbrrac.csv"
+                },
+                {
+                    "template_mcf": "output/ujtdaag.tmcf",
+                    "cleaned_csv": "output/ujtdaag.csv"
+                },
+                {
+                    "template_mcf": "output/ulouknf.tmcf",
+                    "cleaned_csv": "output/ulouknf.csv"
+                },
+                {
+                    "template_mcf": "output/viytqvf.tmcf",
+                    "cleaned_csv": "output/viytqvf.csv"
+                },
+                {
+                    "template_mcf": "output/wcssteb.tmcf",
+                    "cleaned_csv": "output/wcssteb.csv"
+                },
+                {
+                    "template_mcf": "output/wtxyghf.tmcf",
+                    "cleaned_csv": "output/wtxyghf.csv"
+                },
+                {
+                    "template_mcf": "output/xovpotd.tmcf",
+                    "cleaned_csv": "output/xovpotd.csv"
+                },
+                {
+                    "template_mcf": "output/zkjifzd.tmcf",
+                    "cleaned_csv": "output/zkjifzd.csv"
+                },
+                {
+                    "template_mcf": "output/zpdksog.tmcf",
+                    "cleaned_csv": "output/zpdksog.csv"
+                }
+            ],
+            "source_files": [
+                "input_files/*",
+                "counters/*",
+                "places_resolved.csv",
+                "validation_config.json"
+            ],
+            "cron_schedule": "0 5 * * 1",
+            "validation_config_file": "validation_config.json",
+            "resource_limits": {
+                "cpu": 2,
+                "memory": 4,
+                "disk": 30
+            }
+        }
+    ]
+}

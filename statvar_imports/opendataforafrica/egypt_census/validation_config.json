@@ -1,0 +1,22 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_all_statvars_freshness",
+            "description": "Verify all 1,365 active StatVars across the 17 Egypt Census tables meet their exact scoped freshness boundaries (2018 for life expectancy, 2017-12 for quarterly labor force, 2017 for census/employment/higher-ed graduates/infant mortality, 2016 for pre-university and higher-ed enrollment/teachers, 2014/2014-09/2012/2011/2005 for health facilities/fertility/socio-economic series, and 2002-2011 for hospital/ambulance/incident series).",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT StatVar, CAST(MaxDate AS VARCHAR) AS MaxDate, COUNT(*) OVER () AS total_svs FROM stats",
+                "condition": "CASE WHEN regexp_matches(StatVar, '^LifeExpectancy_Person_') THEN MaxDate >= '2018' WHEN total_svs = 12 OR StatVar IN ('Count_Person_InLaborForce', 'Count_Person_Unemployed_Female', 'Count_Person_Unemployed_Male') THEN MaxDate >= '2017-12' WHEN regexp_matches(StatVar, '^(Count_(Student|Teacher)_|dc/7hlfs8swh22v3$)') THEN MaxDate >= '2016' WHEN StatVar = 'FertilityRate_Person_Female' OR regexp_matches(StatVar, '_(HealthFacility|DoctorOccupation|NurseOccupation)$') THEN MaxDate >= '2014' WHEN regexp_matches(StatVar, '^(UnemploymentRate_Person|Count_Person_.*NonWorker$)') OR (total_svs = 20 AND regexp_matches(StatVar, '^Count_Person_(InLaborForce_|(Female_|Male_)?Worker|Workers$)')) THEN MaxDate >= '2014-09' WHEN regexp_matches(StatVar, '^(Amount_EconomicActivity_GrossDomesticProduction_|Count_Person_(Employed|Resident)$)') OR (total_svs = 20 AND StatVar = 'Count_Person_Unemployed') THEN MaxDate >= '2012' WHEN StatVar = 'Count_Person_NotACitizen' OR (total_svs = 20 AND StatVar = 'Count_Person') THEN MaxDate >= '2011' WHEN StatVar IN ('Count_Person_CommoditySector', 'Count_Person_ProductiveSocialServicesSector') THEN MaxDate >= '2005' WHEN StatVar = 'Count_MedicalConditionIncident_SportsGamesAccidents' THEN MaxDate >= '2002' WHEN StatVar IN ('Count_Incident_Other_AccidentDamage', 'Count_MedicalConditionIncident_ScorpionOrSnakeBites') THEN MaxDate >= '2004' WHEN StatVar = 'Count_CriminalIncidents' THEN MaxDate >= '2008' WHEN regexp_matches(StatVar, '^Count_(Bed_|Establishment_SocialCareFacility$|HealthEstablishment_.*Hospital)') THEN MaxDate >= '2009' WHEN StatVar IN ('Count_Death', 'Count_Incident_AccidentDamage', 'Count_Incident_TrafficAccident') OR regexp_matches(StatVar, '^Count_(Incident_.*_(TrafficAccident|AccidentDamage)|MedicalConditionIncident_(Anaesthetics|Bleeding|Dislocation|Fracture|Hernia|InsectBites|LossOfConsciousness|Others|Suffocation|Wounds))$') THEN MaxDate >= '2010' WHEN regexp_matches(StatVar, '^Count_(Establishment_(AmbulanceStation|AthleticEstablishment|YouthCenter)|Incident_|MedicalConditionIncident_)') THEN MaxDate >= '2011' ELSE MaxDate >= '2017' END AND total_svs > 0"
+            }
+        },
+        {
+            "rule_id": "check_deleted_records_percent",
+            "description": "Checks that deleted records do not exceed threshold (0.1%).",
+            "validator": "DELETED_RECORDS_PERCENT",
+            "params": {
+                "threshold": 0.1
+            }
+        }
+    ]
+}

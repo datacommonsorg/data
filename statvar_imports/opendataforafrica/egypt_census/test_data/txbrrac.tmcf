@@ -1,0 +1,9 @@
+Node: E:txbrrac->E0
+observationAbout: C:txbrrac->observationAbout
+observationDate: C:txbrrac->observationDate
+variableMeasured: C:txbrrac->variableMeasured
+value: C:txbrrac->value
+unit: C:txbrrac->unit
+scalingFactor: C:txbrrac->scalingFactor
+observationPeriod: C:txbrrac->observationPeriod
+typeOf: dcs:StatVarObservation

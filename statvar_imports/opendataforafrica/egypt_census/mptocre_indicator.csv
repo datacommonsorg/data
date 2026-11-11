@@ -1,0 +1,28 @@
+Name,RegionId,Id
+Age group,,1
+15- 19,,2
+20- 24,,3
+25- 29,,4
+30- 39,,5
+40- 49,,6
+50-59,,7
+60- 64,,8
+Total,,9
+Educational Status,,10,Illiterate
+Illiterate,,11,Read & Write
+Read & Write,,12,Less than intermediate
+Less than intermediate,,13,General/ Azhari secondary
+General/ Azhari secondary,,14,Technical Secondary
+Technical Secondary,,15,Above Intermediate
+Above Intermediate,,16,University & Higher
+University & Higher,,17,Geograghical  regions
+Total,,18,Urban governorates
+Geograghical Regions,,19,Urban Lower Egypt
+Urban governorates,,20,Rural Lower Egypt
+Urban lower Egypt,,21,Urban Upper Egypt
+Rural lower Egypt,,22,Rural Upper  Egypt
+Urban upper Egypt,,23,Urban Frontier governorates
+Rural upper  Egypt,,24,Rural frontier governorates
+Urban frontier governorates,,25
+Rural frontier governorates,,26
+Total,,27

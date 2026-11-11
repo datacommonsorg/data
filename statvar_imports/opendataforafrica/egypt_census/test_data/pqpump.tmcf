@@ -1,0 +1,9 @@
+Node: E:pqpump->E0
+observationAbout: C:pqpump->observationAbout
+observationDate: C:pqpump->observationDate
+variableMeasured: C:pqpump->variableMeasured
+value: C:pqpump->value
+unit: C:pqpump->unit
+scalingFactor: C:pqpump->scalingFactor
+observationPeriod: C:pqpump->observationPeriod
+typeOf: dcs:StatVarObservation

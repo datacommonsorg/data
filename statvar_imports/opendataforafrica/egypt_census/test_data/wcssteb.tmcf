@@ -1,0 +1,9 @@
+Node: E:wcssteb->E0
+observationAbout: C:wcssteb->observationAbout
+observationDate: C:wcssteb->observationDate
+variableMeasured: C:wcssteb->variableMeasured
+value: C:wcssteb->value
+unit: C:wcssteb->unit
+scalingFactor: C:wcssteb->scalingFactor
+observationPeriod: C:wcssteb->observationPeriod
+typeOf: dcs:StatVarObservation

@@ -1,0 +1,15 @@
+Name,RegionId,Id,No. of Residents,,KN.N1
+No. of Residents,,KN.N1,Total No. of Residents,,KN.N6
+Total,,KN.N6,Total No. of  Females Residents,,KN.N7
+Females,,KN.N7,Total No. of  Males Residents,,KN.N8
+Males,,KN.N8,No. of Public Housing,,KN.N2
+No. of Public Housing,,KN.N2,No. of Households,,KN.N4
+No. of Households,,KN.N4,No. of Persons in Households,,KN.N3
+No. of Persons in Households,,KN.N3,Total no of person in household,,KN.N9
+Total,,KN.N9,Total Females in household,,KN.N10
+Females,,KN.N10,Total Males in Household,,KN.N11
+Males,,KN.N11,Total Population,,KN.N5
+Total Population,,KN.N5,Total population,,KN.N12
+Total,,KN.N12,total population Females,,KN.N13
+Females,,KN.N13,total population Males,,KN.N14
+Males,,KN.N14
