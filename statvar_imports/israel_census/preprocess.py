@@ -392,8 +392,8 @@ def read_raw_cbs_series_csv(csv_path: str) -> list[dict[str, str]]:
     with open(csv_path, 'r', encoding='utf-8-sig', errors='replace') as fp:
         for row in csv.DictReader(fp):
             rows.append({
-                'series_id':
-                    (row.get('id') or row.get('series_id') or '').strip(),
+                'series_id': (row.get('id') or row.get('series_id') or
+                              '').strip(),
                 'time_unit': (row.get('time_name') or row.get('time_unit') or
                               '').strip(),
                 'level4': (row.get('path_level4_name') or row.get('level4') or

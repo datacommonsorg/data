@@ -64,9 +64,15 @@ CBS_SERIES_MIN_ANNUAL_ROWS: dict[str, dict[str, int]] = {
         '3762': 28,
     },
     CBS_SERIES_CAUSE_OF_DEATH_PATH_ID: {
-        **{str(sid): 70 for sid in range(70001, 70013)},
-        **{str(sid): 50 for sid in range(70015, 70027)},
-        **{str(sid): 24 for sid in range(70136, 70148)},
+        **{
+            str(sid): 70 for sid in range(70001, 70013)
+        },
+        **{
+            str(sid): 50 for sid in range(70015, 70027)
+        },
+        **{
+            str(sid): 24 for sid in range(70136, 70148)
+        },
     },
 }
 
@@ -177,8 +183,8 @@ def fetch_cbs_series_raw_csv(
     sess = session or _get_session()
     expected_min = (min_unique_series if min_unique_series is not None else (
         _CBS_SERIES_MIN_UNIQUE_IDS.get(path_id, 1) if session is None else 1))
-    min_annual_rows = (CBS_SERIES_MIN_ANNUAL_ROWS.get(path_id, {}) if
-                       session is None and min_unique_series is None else {})
+    min_annual_rows = (CBS_SERIES_MIN_ANNUAL_ROWS.get(path_id, {})
+                       if session is None and min_unique_series is None else {})
 
     unique_sids: set[str] = set()
     annual_periods_by_sid: dict[str, set[str]] = {}
@@ -447,7 +453,8 @@ def download_all(output_dir: str, max_workers: int = 3) -> list[str]:
             )
             downloaded_paths.append(dest_path)
 
-    downloaded_paths.append(fetch_cbs_boardsgenerator_census_raw_json(output_dir))
+    downloaded_paths.append(
+        fetch_cbs_boardsgenerator_census_raw_json(output_dir))
 
     for existing_name in os.listdir(output_dir):
         existing_path = os.path.join(output_dir, existing_name)

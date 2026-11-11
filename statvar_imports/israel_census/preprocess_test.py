@@ -344,12 +344,12 @@ class PreprocessTest(unittest.TestCase):
                          index=False,
                          header=False,
                          engine='openpyxl')
-            pd.DataFrame([[
-                '0-14', '20906', '20906', '-', '-', '-', '-', '14-0'
-            ]]).to_excel(os.path.join(raw_dir, 'dem1_14.xls'),
-                         index=False,
-                         header=False,
-                         engine='openpyxl')
+            pd.DataFrame(
+                [['0-14', '20906', '20906', '-', '-', '-', '-',
+                  '14-0']]).to_excel(os.path.join(raw_dir, 'dem1_14.xls'),
+                                     index=False,
+                                     header=False,
+                                     engine='openpyxl')
             emp_rows = [[
                 'סך הכל', '14987.5', '1419.2', '1883', '2218.7', '1997.6',
                 '1672', '1565.9', '1408.5', '1343', '884.5', '595.1', 'TOTAL'
