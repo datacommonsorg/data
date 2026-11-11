@@ -22,6 +22,7 @@
       "source_files": [
         "input_files/*.xls",
         "input_files/*.csv",
+        "input_files/*.json",
         "counters/*.csv",
         "validation_config.json"
       ],

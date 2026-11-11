@@ -8,7 +8,7 @@
 - **Data Availability:** `1949` to `2024+` (annual time-series) and `2008` (Population and Housing Census)
 - **Release Frequency:** `P1Y` (Annual)
 
-This directory contains the automated import pipeline for the **Israel Central Bureau of Statistics (CBS)** Census, employment by marital status, vital statistics, and cause-of-death mortality datasets. `download_script.py` downloads the 6 API-based CSV datasets and the 5 raw `.xls` Mifkad tables into `input_files/`, `preprocess.py` converts only the 5 `.xls` files into `.csv` tables and copies the 6 existing `.csv` files untouched into `staged_inputs/*.csv`, and `stat_var_processor.py` processes all 11 CSVs using `israel_census_pv_map.csv` (which applies `#Multiply,1000`, `#Multiply,100`, place mapping, and StatVar mapping).
+This directory contains the automated import pipeline for the **Israel Central Bureau of Statistics (CBS)** Census, employment by marital status, vital statistics, and cause-of-death mortality datasets. `download_script.py` downloads the raw unmodified CBS Series API CSV responses (`cbs_series_*.csv`), raw 2008 Census regional JSON payloads (`cbs_yishuv_census_2008.json`), and the 5 raw `.xls` Mifkad tables into `input_files/`. `preprocess.py` transforms all raw files in `input_files/` into the 11 unscaled CSV tables in `staged_inputs/*.csv`, and `stat_var_processor.py` processes all 11 CSVs using `israel_census_pv_map.csv` (which applies `#Multiply,1000`, `#Multiply,100`, place mapping, and StatVar mapping).
 
 ## Geographic & Statistical Coverage
 - **Geographic Levels & Place Resolution (19 Places)**:
@@ -26,25 +26,27 @@ This directory contains the automated import pipeline for the **Israel Central B
 
 ## Important Files
 - `manifest.json`: Import specification, script execution order, `source_files`, `import_inputs`, and weekly cron schedule (`0 5 * * 1`).
-- `download_script.py`: Downloads the 6 CBS CSV datasets and 5 raw Mifkad `.xls` tables into `input_files/`.
-- `preprocess.py`: Converts only the 5 `.xls` tables in `input_files/` into `.csv` tables and copies the 6 existing `.csv` files untouched into `staged_inputs/*.csv`.
+- `download_script.py`: Downloads the raw CBS Series CSV responses (`cbs_series_*.csv`), raw 2008 Census regional JSON (`cbs_yishuv_census_2008.json`), and 5 raw Mifkad `.xls` tables into `input_files/`.
+- `preprocess.py`: Transforms the raw `.csv`, `.json`, and `.xls` files in `input_files/` into the 11 staged CSV tables in `staged_inputs/*.csv`.
 - `israel_census_pv_map.csv`: Unified Property-Value mapping file (including `#Multiply,1000`, `#Multiply,100`, place resolution, and StatVar mappings) for all 11 CSV datasets and 304 StatVars.
 - `israel_census_metadata.csv`: Configuration parameters for `stat_var_processor.py`.
 - `validation_config.json`: Validation rules (`MAX_DATE_CONSISTENT` and `SQL_VALIDATOR`) for `tools/import_validation/runner.py`.
 - `download_script_test.py` & `preprocess_test.py`: Hermetic unit tests for downloading and preprocessing.
-- `test_data/`: Sample test fixtures (`sample_input.csv`, `sample_output.csv`, and `sample_output.tmcf`).
+- `test_data/`: Sample test fixtures (`sample_raw_input.csv` matching `input_files/cbs_series_2_1_1_1.csv`, `sample_input.csv` matching `staged_inputs/isr_population_religion_1949_2021.csv`, `sample_output.csv`, and `sample_output.tmcf`).
 
 ## Pipeline Architecture & Data Processing Notes
 1. **`download_script.py`**:
-   - Downloads the 6 CSV files and 5 `.xls` files directly from `https://apis.cbs.gov.il/series/data/path` and `https://boardsgenerator.cbs.gov.il/` into `input_files/`:
-     - `isr_population_religion_1949_2021.csv` (`id=2,1,1,1`): Computes `Others` (`Count_Person_CBSIsraelNonJudaismOrNonArabChristianOrNoReligion`) as `Jews and Others (3703) - Jews (3701)` and skips incomplete/anomalous provisional years where `Total (3700) < Jews and Others (3703) + Arab (3704) - 1.0`.
-     - `isr_livebirth_infantdeath_deaths_religion_1996_2021.csv` (`id=2,3,1`): Preserves the `1996`–`2008` historical Arab Christian live-birth counts (`_CBS_ARAB_CHRISTIAN_LIVE_BIRTHS_FALLBACK`) when the API series `3755` starts in `2009`.
-     - `isr_causeofdeath_religion_1950_2020.csv` (`id=4,2,1`): Preserves the 36 official `2019` CBS mortality rates (`_CBS_2019_CAUSE_OF_DEATH_FALLBACK`) omitted by the `id=4,2,1` API feed between `2018` and `2020`.
-     - `isr_agebracket_gender_aa1_2008.csv`, `isr_subdistrict_age_gender_2008.csv`, `isr_subdistrict_population_gender_2008.csv` (`YishuvHandler.ashx?mode=GetCensusData`).
-     - `dem1_2.xls`, `dem1_14.xls`, `lab4_14.xls`, `lab4_14_1.xls`, `lab4_14_2.xls`.
+   - Downloads the raw unmodified source payloads from `https://apis.cbs.gov.il/series/data/path` and `https://boardsgenerator.cbs.gov.il/` into `input_files/`:
+     - `cbs_series_2_1_1_1.csv`, `cbs_series_2_3_1.csv`, `cbs_series_4_2_1.csv` (raw CBS Time-Series DataBank CSV exports).
+     - `cbs_yishuv_census_2008.json` (raw 2008 Census regional `GetCensusData` JSON payloads for all 19 regions).
+     - `dem1_2.xls`, `dem1_14.xls`, `lab4_14.xls`, `lab4_14_1.xls`, `lab4_14_2.xls` (raw 2008 Census Mifkad spreadsheets).
 2. **`preprocess.py`**:
-   - Converts only the 5 `.xls` files in `input_files/` into `.csv` tables in `staged_inputs/` (`isr_urban_rural_gender_aa1_2008.csv`, `isr_age_maritalstatus_2008.csv`, `isr_menemployed_age_martialstatus_2008.csv`, `isr_totalemployed_age_martialstatus_2008.csv`, `isr_womenemployed_age_martialstatus_2008.csv`) and copies the 6 `.csv` files from `input_files/` directly into `staged_inputs/` without modifying them.
-   - Suppresses the national `2008` `Grand totalTotal` cell in `dem1_2.xls` and the `(All ages, Total)` cell in `dem1_14.xls` so they do not conflict with the authoritative `2008` national `Count_Person` observation from `isr_population_religion_1949_2021.csv`.
+   - Transforms the raw payloads in `input_files/` into all 11 unscaled CSV tables in `staged_inputs/`:
+     - `isr_population_religion_1949_2021.csv` (from `cbs_series_2_1_1_1.csv`): Computes `Others` (`Count_Person_CBSIsraelNonJudaismOrNonArabChristianOrNoReligion`) as `Jews and Others (3703) - Jews (3701)` and skips incomplete/anomalous provisional years where `Total (3700) < Jews and Others (3703) + Arab (3704) - 1.0`.
+     - `isr_livebirth_infantdeath_deaths_religion_1996_2021.csv` (from `cbs_series_2_3_1.csv`): Preserves the `1996`–`2008` historical Arab Christian live-birth counts (`_CBS_ARAB_CHRISTIAN_LIVE_BIRTHS_FALLBACK`) when the API series `3755` starts in `2009`.
+     - `isr_causeofdeath_religion_1950_2020.csv` (from `cbs_series_4_2_1.csv`): Preserves the 36 official `2019` CBS mortality rates (`_CBS_2019_CAUSE_OF_DEATH_FALLBACK`) omitted by the `id=4,2,1` API feed between `2018` and `2020`.
+     - `isr_agebracket_gender_aa1_2008.csv`, `isr_subdistrict_age_gender_2008.csv`, `isr_subdistrict_population_gender_2008.csv` (from `cbs_yishuv_census_2008.json`).
+     - `isr_urban_rural_gender_aa1_2008.csv`, `isr_age_maritalstatus_2008.csv`, `isr_menemployed_age_martialstatus_2008.csv`, `isr_totalemployed_age_martialstatus_2008.csv`, `isr_womenemployed_age_martialstatus_2008.csv` (from `dem1_2.xls`, `dem1_14.xls`, `lab4_14.xls`, `lab4_14_1.xls`, `lab4_14_2.xls`). Suppresses the national `2008` `Grand totalTotal` cell in `dem1_2.xls` and the `(All ages, Total)` cell in `dem1_14.xls` so they do not conflict with the authoritative `2008` national `Count_Person` observation from `isr_population_religion_1949_2021.csv`.
 3. **`stat_var_processor.py`**:
    - Invoked from `manifest.json` in a single process over `staged_inputs/*.csv` using `israel_census_pv_map.csv` and `israel_census_metadata.csv` to generate `output_files/israel_census_output.{csv,tmcf,mcf}` and `counters/israel_census_counters.csv`.
 
@@ -55,10 +57,10 @@ This directory contains the automated import pipeline for the **Israel Central B
 ## How to Run Locally
 
 ```bash
-# 1. Download the 6 CSV files and 5 .xls files into input_files/
+# 1. Download the raw CBS Series CSVs, 2008 Census JSON, and 5 .xls files into input_files/
 python3 download_script.py
 
-# 2. Convert the 5 .xls files to CSVs and copy the 6 .csv files into staged_inputs/
+# 2. Transform all raw files in input_files/ into the 11 CSV tables in staged_inputs/
 python3 preprocess.py --input_dir=input_files --output_dir=staged_inputs
 
 # 3. Run stat_var_processor.py directly in a single process
@@ -66,6 +68,7 @@ python3 ../../tools/statvar_importer/stat_var_processor.py \
     --input_data="staged_inputs/*.csv" \
     --pv_map=israel_census_pv_map.csv \
     --config_file=israel_census_metadata.csv \
+    --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
     --output_path=output_files/israel_census_output \
     --output_counters=counters/israel_census_counters.csv
 
@@ -88,4 +91,4 @@ python3 -m unittest discover -s . -p "*_test.py" -v
 ```
 
 ## Refresh Procedure
-The import is configured for automated weekly refresh (`0 5 * * 1` in `manifest.json`). On each run, `download_script.py` fetches the latest annual observations from `apis.cbs.gov.il` and the 2008 Census tables from `boardsgenerator.cbs.gov.il`, `preprocess.py` converts the 5 `.xls` files to CSVs and stages all 11 CSVs in `staged_inputs/*.csv`, `stat_var_processor.py` generates `output_files/israel_census_output.{csv,tmcf}`, and `validation_config.json` verifies date consistency and value bounds.
+The import is configured for automated weekly refresh (`0 5 * * 1` in `manifest.json`). On each run, `download_script.py` fetches the latest raw annual series from `apis.cbs.gov.il` and the 2008 Census payloads from `boardsgenerator.cbs.gov.il` into `input_files/`, `preprocess.py` transforms all raw inputs into the 11 CSV tables in `staged_inputs/*.csv`, `stat_var_processor.py` generates `output_files/israel_census_output.{csv,tmcf}`, and `validation_config.json` verifies date consistency and value bounds.

@@ -11,18 +11,196 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Converts the 5 CBS Mifkad .xls files in input_files/ into CSVs and copies existing CSVs to staged_inputs/."""
+"""Transforms raw CBS Series CSVs, 2008 Census JSON, and Mifkad .xls files in input_files/ into the 11 staged CSV tables in staged_inputs/."""
 
 import argparse
 from collections import defaultdict
 import csv
+import json
 import math
 import os
-import shutil
+import tempfile
+from typing import Any
 
 from absl import logging
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+
+VITAL_STATS_SERIES_COL_MAP = {
+    '3729': (
+        'Jews, Popululation no Religious Classification and Non-Arab Cristians - Infant Deaths'
+    ),
+    '3747': 'Arab Population - Infant Deaths',
+    '3751': (
+        'Jews, Popululation no Religious Classification and Non-Arab Cristians - Live-Births'
+    ),
+    '3752': 'Arab Population - Live-Births',
+    '3755': 'Arab Christians - Live-Births',
+    '3759': (
+        'Jews, Popululation no Religious Classification and Non-Arab Cristians - Deaths'
+    ),
+    '3762': 'Arab Population - Deaths',
+}
+
+_CBS_ARAB_CHRISTIAN_LIVE_BIRTHS_FALLBACK = {
+    '1996': '2279',
+    '1997': '2271',
+    '1998': '2335',
+    '1999': '2273',
+    '2000': '2333',
+    '2001': '2295',
+    '2002': '2115',
+    '2003': '2186',
+    '2004': '2025',
+    '2005': '2031',
+    '2006': '2016',
+    '2007': '2032',
+    '2008': '2042',
+}
+
+CAUSE_OF_DEATH_PREFIX_MAP = {
+    'Ischaemic Heart Diseases': 'isc',
+    'Malignant Neoplasm': 'mal',
+    'Cerebrovascular Diseases': 'cer',
+    'External Causes': 'ex',
+    'Pneumonia': 'pne',
+    'Infectious Diseases': 'infd',
+}
+
+CAUSE_GROUP_SUFFIX_MAP = {
+    'Total Population, Males': '_male',
+    'Total Population| Males': '_male',
+    'Total Population, Females': '_female',
+    'Total Population| Females': '_female',
+    'Jewish  and Others, Males': '_jew_male',
+    'Jewish  and Others| Males': '_jew_male',
+    'Jewish and Others, Males': '_jew_male',
+    'Jewish and Others| Males': '_jew_male',
+    'Jewish  and Others, Females': '_jew_female',
+    'Jewish  and Others| Females': '_jew_female',
+    'Jewish and Others, Females': '_jew_female',
+    'Jewish and Others| Females': '_jew_female',
+    'Arab Males': '_arab_male',
+    'Arab Females': '_arab_female',
+}
+
+CAUSE_OF_DEATH_COLS = (
+    'isc_jew_male',
+    'isc_jew_female',
+    'mal_jew_male',
+    'mal_jew_female',
+    'cer_jew_male',
+    'cer_jew_female',
+    'ex_jew_male',
+    'ex_jew_female',
+    'pne_jew_male',
+    'pne_jew_female',
+    'infd_jew_male',
+    'infd_jew_female',
+    'isc_male',
+    'mal_male',
+    'cer_male',
+    'ex_male',
+    'pne_male',
+    'infd_male',
+    'isc_female',
+    'mal_female',
+    'cer_female',
+    'ex_female',
+    'pne_female',
+    'infd_female',
+    'isc_arab_male',
+    'mal_arab_male',
+    'cer_arab_male',
+    'ex_arab_male',
+    'pne_arab_male',
+    'infd_arab_male',
+    'isc_arab_female',
+    'mal_arab_female',
+    'cer_arab_female',
+    'ex_arab_female',
+    'pne_arab_female',
+    'infd_arab_female',
+)
+
+# CBS Series API (id=4,2,1) omits 2019-01 across all 36 cause-of-death series;
+# preserve the 36 official 2019 CBS mortality rates when 2018 and 2020 are present.
+_CBS_2019_CAUSE_OF_DEATH_FALLBACK = {
+    'isc_jew_male': '25.2',
+    'mal_jew_male': '83.8',
+    'cer_jew_male': '12.7',
+    'ex_jew_male': '21',
+    'pne_jew_male': '8.8',
+    'infd_jew_male': '15.7',
+    'isc_jew_female': '11.8',
+    'mal_jew_female': '72.1',
+    'cer_jew_female': '9.2',
+    'ex_jew_female': '7.1',
+    'pne_jew_female': '5.7',
+    'infd_jew_female': '10.8',
+    'isc_male': '27.4',
+    'mal_male': '88.4',
+    'cer_male': '13.7',
+    'ex_male': '24.1',
+    'pne_male': '9.1',
+    'infd_male': '16',
+    'isc_female': '12.2',
+    'mal_female': '71.8',
+    'cer_female': '10',
+    'ex_female': '7.6',
+    'pne_female': '6',
+    'infd_female': '11.1',
+    'isc_arab_male': '41',
+    'mal_arab_male': '102.5',
+    'cer_arab_male': '22.7',
+    'ex_arab_male': '32.7',
+    'pne_arab_male': '11.2',
+    'infd_arab_male': '15.5',
+    'isc_arab_female': '17.4',
+    'mal_arab_female': '61.2',
+    'cer_arab_female': '16.3',
+    'ex_arab_female': '8.5',
+    'pne_arab_female': '9.5',
+    'infd_arab_female': '15.5',
+}
+
+CENSUS_2008_REGION_CODE_MAP = {
+    '999': 'ISR',
+    '1': 'DIST_1',
+    '2': 'DIST_2',
+    '3': 'DIST_3',
+    '4': 'DIST_4',
+    '5': 'DIST_5',
+    '6': 'DIST_6',
+    '7': 'DIST_7',
+    '21': 'SUBDIST_21',
+    '24': 'SUBDIST_24',
+    '29': 'SUBDIST_29',
+    '31': 'SUBDIST_31',
+    '32': 'SUBDIST_32',
+    '41': 'SUBDIST_41',
+    '42': 'SUBDIST_42',
+    '43': 'SUBDIST_43',
+    '44': 'SUBDIST_44',
+    '61': 'SUBDIST_61',
+    '62': 'SUBDIST_62',
+}
+
+CENSUS_2008_AGE_SUBJECT_COL_MAP = {
+    '218': 'Those aged 15 and over – total',
+    '219': 'Men aged 15 and over– total',
+    '220': 'Women aged 15 and over– total',
+    '221': 'Those aged 5 and over – total **',
+    '222': 'Percentage of males aged 5 and over **',
+    '223': 'Percentage of females aged 5 and over **',
+    '224': 'Those aged 65+ – total **',
+}
+
+CENSUS_2008_POP_SUBJECT_COL_MAP = {
+    '18': 'Population – total',
+    '19': 'Males – total',
+    '20': 'Females – total',
+}
 
 MIFKAD_2008_AGE_ROWS_1_14 = {
     'Total': '',
@@ -147,6 +325,323 @@ def _format_number(val: float) -> str:
     return f'{rounded:.4f}'.rstrip('0').rstrip('.')
 
 
+def _write_rows_atomically(
+    dest_path: str,
+    fieldnames: list[str] | tuple[str, ...],
+    rows: list[dict[str, Any]],
+) -> None:
+    """Atomically writes a list of dictionaries to a CSV file."""
+    os.makedirs(os.path.dirname(os.path.abspath(dest_path)), exist_ok=True)
+    fd, tmp_path = tempfile.mkstemp(
+        dir=os.path.dirname(os.path.abspath(dest_path)),
+        prefix='.tmp_cbs_',
+        suffix='.csv',
+    )
+    try:
+        with os.fdopen(fd, 'w', encoding='utf-8', newline='') as fp:
+            writer = csv.DictWriter(
+                fp,
+                fieldnames=list(fieldnames),
+                extrasaction='ignore',
+                lineterminator='\n',
+            )
+            writer.writeheader()
+            for rec in rows:
+                clean_row = {
+                    k: ('' if rec.get(k) is None else str(rec.get(k)).strip())
+                    for k in fieldnames
+                }
+                writer.writerow(clean_row)
+        os.replace(tmp_path, dest_path)
+    except Exception:
+        if os.path.exists(tmp_path):
+            os.remove(tmp_path)
+        raise
+
+
+def _write_table_atomically(
+    dest_path: str,
+    headers: list[str] | tuple[str, ...],
+    rows: list[list[str]],
+) -> None:
+    """Atomically writes a header row and list of row lists to a CSV file."""
+    os.makedirs(os.path.dirname(os.path.abspath(dest_path)), exist_ok=True)
+    fd, tmp_path = tempfile.mkstemp(
+        dir=os.path.dirname(os.path.abspath(dest_path)),
+        prefix='.tmp_cbs_',
+        suffix='.csv',
+    )
+    try:
+        with os.fdopen(fd, 'w', encoding='utf-8', newline='') as fp:
+            writer = csv.writer(fp, lineterminator='\n')
+            writer.writerow(headers)
+            for row in rows:
+                writer.writerow(row)
+        os.replace(tmp_path, dest_path)
+    except Exception:
+        if os.path.exists(tmp_path):
+            os.remove(tmp_path)
+        raise
+
+
+def read_raw_cbs_series_csv(csv_path: str) -> list[dict[str, str]]:
+    """Reads a raw CBS Series API CSV file into normalized row dictionaries."""
+    if not os.path.exists(csv_path):
+        raise FileNotFoundError(f'Missing raw CBS Series CSV file: {csv_path}')
+    rows: list[dict[str, str]] = []
+    with open(csv_path, 'r', encoding='utf-8-sig', errors='replace') as fp:
+        for row in csv.DictReader(fp):
+            rows.append({
+                'series_id':
+                    (row.get('id') or row.get('series_id') or '').strip(),
+                'time_unit': (row.get('time_name') or row.get('time_unit') or
+                              '').strip(),
+                'level4': (row.get('path_level4_name') or row.get('level4') or
+                           '').strip(),
+                'name_id': (row.get('path_name_id_name') or
+                            row.get('name_id') or '').strip(),
+                'time_period': (row.get('obs_time_period') or
+                                row.get('time_period') or '').strip(),
+                'value': (row.get('obs_value') or row.get('value') or
+                          '').strip(),
+            })
+    return rows
+
+
+def build_population_religion_rows(
+    series_rows: list[dict[str, str]],) -> list[dict[str, str]]:
+    """Builds unscaled rows (in thousands) for isr_population_religion_1949_2021.csv."""
+    by_year: dict[str, dict[str, float]] = defaultdict(dict)
+    for row in series_rows:
+        if row.get('time_unit', '').strip() not in ('', 'Year'):
+            continue
+        sid = row.get('series_id', '').strip()
+        tp = row.get('time_period', '').strip()
+        year = tp[:4]
+        val = _parse_number(row.get('value'))
+        if sid and len(year) == 4 and year.isdigit() and val is not None:
+            by_year[year][sid] = val
+
+    out_rows: list[dict[str, str]] = []
+    for year, s_map in sorted(by_year.items()):
+        val_total = s_map.get('3700')
+        val_jews = s_map.get('3701')
+        val_nonjews = s_map.get('3702')
+        val_jews_others = s_map.get('3703')
+        val_arab = s_map.get('3704')
+
+        min_expected_total = (val_jews_others or 0.0) + (val_arab or 0.0) - 1.0
+        if (val_total is not None and val_jews_others is not None and
+                val_total < min_expected_total):
+            logging.warning(
+                'Skipping anomalous CBS population row for year %s: '
+                'Total (%s) < Jews and Others (%s) + Arab (%s)',
+                year,
+                val_total,
+                val_jews_others,
+                val_arab,
+            )
+            continue
+
+        rec: dict[str, str] = {'Region': 'ISR', 'Year': year}
+        if val_total is not None:
+            rec['total'] = _format_number(val_total)
+        if val_jews is not None:
+            rec['jews'] = _format_number(val_jews)
+        if val_nonjews is not None:
+            rec['nonjews'] = _format_number(val_nonjews)
+        if (val_jews_others is not None and val_jews is not None and
+                val_jews_others >= val_jews):
+            rec['Others'] = _format_number(val_jews_others - val_jews)
+        if val_arab is not None:
+            rec['arab'] = _format_number(val_arab)
+        if len(rec) > 2:
+            out_rows.append(rec)
+    return out_rows
+
+
+def build_vital_statistics_rows(
+    series_rows: list[dict[str, str]],) -> list[dict[str, str]]:
+    """Builds rows for isr_livebirth_infantdeath_deaths_religion_1996_2021.csv."""
+    by_year: dict[str, dict[str, str]] = defaultdict(dict)
+    for row in series_rows:
+        if row.get('time_unit', '').strip() not in ('', 'Year'):
+            continue
+        sid = row.get('series_id', '').strip()
+        col = VITAL_STATS_SERIES_COL_MAP.get(sid)
+        if not col:
+            continue
+        year = row.get('time_period', '').strip()[:4]
+        val = _parse_number(row.get('value'))
+        if len(year) == 4 and year.isdigit() and val is not None:
+            by_year[year][col] = _format_number(val)
+
+    ac_col = 'Arab Christians - Live-Births'
+    if ac_col in by_year.get('2009', {}):
+        for yr, val_str in _CBS_ARAB_CHRISTIAN_LIVE_BIRTHS_FALLBACK.items():
+            if ac_col not in by_year[yr]:
+                by_year[yr][ac_col] = val_str
+
+    out_rows: list[dict[str, str]] = []
+    for year, col_map in sorted(by_year.items()):
+        if col_map:
+            rec = {'Region': 'ISR', 'Year': year}
+            rec.update(col_map)
+            out_rows.append(rec)
+    return out_rows
+
+
+def build_cause_of_death_rows(
+    series_rows: list[dict[str, str]],) -> list[dict[str, str]]:
+    """Builds rows for isr_causeofdeath_religion_1950_2020.csv."""
+    by_year: dict[str, dict[str, str]] = defaultdict(dict)
+    for row in series_rows:
+        if row.get('time_unit', '').strip() not in ('', 'Year'):
+            continue
+        cause_raw = row.get('level4', '').strip()
+        group_raw = row.get('name_id', '').strip()
+        prefix = CAUSE_OF_DEATH_PREFIX_MAP.get(cause_raw)
+        suffix = CAUSE_GROUP_SUFFIX_MAP.get(group_raw)
+        if not (prefix and suffix):
+            continue
+        col = f'{prefix}{suffix}'
+        year = row.get('time_period', '').strip()[:4]
+        val = _parse_number(row.get('value'))
+        if len(year) == 4 and year.isdigit() and val is not None:
+            by_year[year][col] = _format_number(val)
+
+    for col, val_2019 in _CBS_2019_CAUSE_OF_DEATH_FALLBACK.items():
+        if (col not in by_year.get('2019', {}) and
+                col in by_year.get('2018', {}) and
+                col in by_year.get('2020', {})):
+            by_year['2019'][col] = val_2019
+
+    out_rows: list[dict[str, str]] = []
+    for year, col_map in sorted(by_year.items()):
+        if col_map:
+            rec = {'Region': 'ISR', 'Year': year}
+            rec.update(col_map)
+            out_rows.append(rec)
+    return out_rows
+
+
+def parse_cbs_boardsgenerator_census_payload(
+    payload: dict[str, Any],
+    region_code: str,
+    data_mode: str,
+) -> list[dict[str, str]]:
+    """Extracts 2008 Census subject rows from a boardsgenerator.cbs.gov.il GetCensusData payload."""
+    rows: list[dict[str, str]] = []
+    if not isinstance(payload, dict):
+        return rows
+    for group in payload.get('Groups') or []:
+        group_id = str(group.get('Id') or '').strip()
+        group_name = str(group.get('Name') or '').strip()
+        for subj in group.get('Subjects') or []:
+            subject_id = str(subj.get('Id') or '').strip()
+            subject_name = str(subj.get('Name') or '').strip()
+            val = str(subj.get('Value') or '').strip()
+            if not subject_id or not val:
+                continue
+            rows.append({
+                'region_code': region_code,
+                'data_mode': data_mode,
+                'group_id': group_id,
+                'group_name': group_name,
+                'subject_id': subject_id,
+                'subject_name': subject_name,
+                'value': val,
+            })
+    return rows
+
+
+def _convert_yishuv_json_to_csvs(json_path: str, output_dir: str) -> None:
+    """Converts cbs_yishuv_census_2008.json into the 3 regional 2008 Census CSVs."""
+    if not os.path.exists(json_path):
+        raise FileNotFoundError(
+            f'Missing raw 2008 Census JSON file: {json_path}')
+    with open(json_path, 'r', encoding='utf-8') as fp:
+        records = json.load(fp)
+
+    all_rows: list[dict[str, str]] = []
+    for item in records:
+        all_rows.extend(
+            parse_cbs_boardsgenerator_census_payload(
+                item.get('payload') or {},
+                str(item.get('region_code') or ''),
+                str(item.get('data_mode') or ''),
+            ))
+
+    machoz_age: dict[str, dict[str, str]] = defaultdict(dict)
+    nafa_age: dict[str, dict[str, str]] = defaultdict(dict)
+    nafa_pop: dict[str, dict[str, str]] = defaultdict(dict)
+
+    for row in all_rows:
+        data_mode = row.get('data_mode', '').strip()
+        region_code = row.get('region_code', '').strip()
+        reg_key = CENSUS_2008_REGION_CODE_MAP.get(region_code, '')
+        subject_id = row.get('subject_id', '').strip()
+        raw_val = _parse_number(row.get('value'))
+        if not (data_mode and reg_key and subject_id and raw_val is not None):
+            continue
+
+        if subject_id in CENSUS_2008_AGE_SUBJECT_COL_MAP:
+            col = CENSUS_2008_AGE_SUBJECT_COL_MAP[subject_id]
+            target = machoz_age if data_mode == 'Machoz' else nafa_age
+            target[reg_key][col] = _format_number(raw_val)
+
+        if data_mode == 'Nafa' and subject_id in CENSUS_2008_POP_SUBJECT_COL_MAP:
+            col = CENSUS_2008_POP_SUBJECT_COL_MAP[subject_id]
+            nafa_pop[reg_key][col] = _format_number(raw_val)
+
+    age_fields = (
+        'Region',
+        'Year',
+        'Those aged 15 and over – total',
+        'Men aged 15 and over– total',
+        'Women aged 15 and over– total',
+        'Those aged 5 and over – total **',
+        'Percentage of males aged 5 and over **',
+        'Percentage of females aged 5 and over **',
+        'Those aged 65+ – total **',
+    )
+    pop_fields = (
+        'Region',
+        'Year',
+        'Population – total',
+        'Males – total',
+        'Females – total',
+    )
+
+    _write_rows_atomically(
+        os.path.join(output_dir, 'isr_agebracket_gender_aa1_2008.csv'),
+        age_fields,
+        [{
+            'Region': reg,
+            'Year': '2008',
+            **cols
+        } for reg, cols in sorted(machoz_age.items())],
+    )
+    _write_rows_atomically(
+        os.path.join(output_dir, 'isr_subdistrict_age_gender_2008.csv'),
+        age_fields,
+        [{
+            'Region': reg,
+            'Year': '2008',
+            **cols
+        } for reg, cols in sorted(nafa_age.items())],
+    )
+    _write_rows_atomically(
+        os.path.join(output_dir, 'isr_subdistrict_population_gender_2008.csv'),
+        pop_fields,
+        [{
+            'Region': reg,
+            'Year': '2008',
+            **cols
+        } for reg, cols in sorted(nafa_pop.items())],
+    )
+
+
 def _read_mifkad_table_rows(fpath: str) -> list[list[str]]:
     """Reads rows from a raw CBS Mifkad table (.xls/.xlsx binary or .csv text)."""
     if not os.path.exists(fpath):
@@ -189,12 +684,10 @@ def _convert_dem1_2_xls_to_csv(xls_path: str, dest_path: str) -> None:
     if not rows_by_reg:
         raise RuntimeError(f'No data rows extracted from {xls_path}')
 
-    os.makedirs(os.path.dirname(os.path.abspath(dest_path)), exist_ok=True)
-    with open(dest_path, 'w', encoding='utf-8', newline='') as fp:
-        writer = csv.writer(fp, lineterminator='\n')
-        writer.writerow(headers)
-        for reg in sorted(rows_by_reg):
-            writer.writerow([reg, '2008'] + rows_by_reg[reg])
+    table_rows = [
+        [reg, '2008'] + rows_by_reg[reg] for reg in sorted(rows_by_reg)
+    ]
+    _write_table_atomically(dest_path, headers, table_rows)
 
 
 def _convert_dem1_14_xls_to_csv(xls_path: str, dest_path: str) -> None:
@@ -244,16 +737,12 @@ def _convert_dem1_14_xls_to_csv(xls_path: str, dest_path: str) -> None:
         raise RuntimeError(f'No data rows extracted from {xls_path}')
 
     headers = ['Year', 'Region', 'Age group'] + [m[1] for m in marital_cols]
-    os.makedirs(os.path.dirname(os.path.abspath(dest_path)), exist_ok=True)
-    with open(dest_path, 'w', encoding='utf-8', newline='') as fp:
-        writer = csv.writer(fp, lineterminator='\n')
-        writer.writerow(headers)
-        for age_suf, age_label in age_order:
-            vals = [
-                cell_map.get((age_suf, m_suf), '') for m_suf, _ in marital_cols
-            ]
-            if any(vals):
-                writer.writerow(['2008', 'ISR', age_label] + vals)
+    table_rows: list[list[str]] = []
+    for age_suf, age_label in age_order:
+        vals = [cell_map.get((age_suf, m_suf), '') for m_suf, _ in marital_cols]
+        if any(vals):
+            table_rows.append(['2008', 'ISR', age_label] + vals)
+    _write_table_atomically(dest_path, headers, table_rows)
 
 
 def _convert_emp_xls_to_csv(
@@ -307,45 +796,75 @@ def _convert_emp_xls_to_csv(
         raise RuntimeError(f'No data rows extracted from {xls_path}')
 
     headers = ['Year', 'Region', 'code'] + [a[1] for a in age_cols]
-    os.makedirs(os.path.dirname(os.path.abspath(dest_path)), exist_ok=True)
-    with open(dest_path, 'w', encoding='utf-8', newline='') as fp:
-        writer = csv.writer(fp, lineterminator='\n')
-        writer.writerow(headers)
-        for m_suf, m_label in marital_rows:
-            vals = [cell_map.get((m_suf, a_suf), '') for a_suf, _ in age_cols]
-            if gender_suf and m_suf == '' and vals and vals[0]:
-                base_val = vals[0]
-                vals[0] = ''
-                row_vals = [''] * len(age_cols)
-                row_vals[0] = base_val
-                writer.writerow(['2008', 'ISR', 'מועסקים'] + row_vals)
-            if any(vals):
-                writer.writerow(['2008', 'ISR', m_label] + vals)
-        if gender_suf == '' and widowed_15_39:
-            vals = [''] * len(age_cols)
-            vals[0] = widowed_15_39
-            writer.writerow(['2008', 'ISR', 'אלמן_15_39'] + vals)
+    table_rows: list[list[str]] = []
+    for m_suf, m_label in marital_rows:
+        vals = [cell_map.get((m_suf, a_suf), '') for a_suf, _ in age_cols]
+        if gender_suf and m_suf == '' and vals and vals[0]:
+            base_val = vals[0]
+            vals[0] = ''
+            row_vals = [''] * len(age_cols)
+            row_vals[0] = base_val
+            table_rows.append(['2008', 'ISR', 'מועסקים'] + row_vals)
+        if any(vals):
+            table_rows.append(['2008', 'ISR', m_label] + vals)
+    if gender_suf == '' and widowed_15_39:
+        vals = [''] * len(age_cols)
+        vals[0] = widowed_15_39
+        table_rows.append(['2008', 'ISR', 'אלמן_15_39'] + vals)
+    _write_table_atomically(dest_path, headers, table_rows)
 
 
 def build_input_tables(raw_dir: str, output_dir: str) -> list[str]:
-    """Converts the 5 .xls files in raw_dir into CSVs and copies existing CSV files into output_dir."""
+    """Transforms all raw CBS files in raw_dir into the 11 staged CSV tables in output_dir."""
     if not os.path.isdir(raw_dir):
         raise FileNotFoundError(f'Input directory does not exist: {raw_dir}')
     os.makedirs(output_dir, exist_ok=True)
 
-    # 1. Convert only the 5 Mifkad .xls tables into .csv tables in output_dir
-    dem1_2_path = os.path.join(raw_dir, 'dem1_2.xls')
-    if os.path.exists(dem1_2_path):
-        _convert_dem1_2_xls_to_csv(
-            dem1_2_path,
-            os.path.join(output_dir, 'isr_urban_rural_gender_aa1_2008.csv'),
-        )
-    dem1_14_path = os.path.join(raw_dir, 'dem1_14.xls')
-    if os.path.exists(dem1_14_path):
-        _convert_dem1_14_xls_to_csv(
-            dem1_14_path,
-            os.path.join(output_dir, 'isr_age_maritalstatus_2008.csv'),
-        )
+    # 1. Transform raw CBS Series API CSVs into the 3 time-series CSV tables
+    pop_raw_path = os.path.join(raw_dir, 'cbs_series_2_1_1_1.csv')
+    pop_cols = ('total', 'jews', 'nonjews', 'Others', 'arab')
+    pop_rows = build_population_religion_rows(
+        read_raw_cbs_series_csv(pop_raw_path))
+    _write_rows_atomically(
+        os.path.join(output_dir, 'isr_population_religion_1949_2021.csv'),
+        ('Region', 'Year') + pop_cols,
+        pop_rows,
+    )
+
+    vital_raw_path = os.path.join(raw_dir, 'cbs_series_2_3_1.csv')
+    vital_cols = tuple(VITAL_STATS_SERIES_COL_MAP.values())
+    vital_rows = build_vital_statistics_rows(
+        read_raw_cbs_series_csv(vital_raw_path))
+    _write_rows_atomically(
+        os.path.join(output_dir,
+                     'isr_livebirth_infantdeath_deaths_religion_1996_2021.csv'),
+        ('Region', 'Year') + vital_cols,
+        vital_rows,
+    )
+
+    cod_raw_path = os.path.join(raw_dir, 'cbs_series_4_2_1.csv')
+    cod_rows = build_cause_of_death_rows(read_raw_cbs_series_csv(cod_raw_path))
+    _write_rows_atomically(
+        os.path.join(output_dir, 'isr_causeofdeath_religion_1950_2020.csv'),
+        ('Region', 'Year') + CAUSE_OF_DEATH_COLS,
+        cod_rows,
+    )
+
+    # 2. Transform raw 2008 Census regional JSON into the 3 regional CSV tables
+    _convert_yishuv_json_to_csvs(
+        os.path.join(raw_dir, 'cbs_yishuv_census_2008.json'),
+        output_dir,
+    )
+
+    # 3. Convert the 5 Mifkad .xls tables into .csv tables in output_dir
+    _convert_dem1_2_xls_to_csv(
+        os.path.join(raw_dir, 'dem1_2.xls'),
+        os.path.join(output_dir, 'isr_urban_rural_gender_aa1_2008.csv'),
+    )
+    _convert_dem1_14_xls_to_csv(
+        os.path.join(raw_dir, 'dem1_14.xls'),
+        os.path.join(output_dir, 'isr_age_maritalstatus_2008.csv'),
+    )
     emp_tables = (
         ('lab4_14.xls', 'isr_menemployed_age_martialstatus_2008.csv', '_Male',
          False),
@@ -355,24 +874,12 @@ def build_input_tables(raw_dir: str, output_dir: str) -> list[str]:
          '_Female', True),
     )
     for xls_name, csv_name, gender_suf, is_female in emp_tables:
-        xls_path = os.path.join(raw_dir, xls_name)
-        if os.path.exists(xls_path):
-            _convert_emp_xls_to_csv(
-                xls_path,
-                os.path.join(output_dir, csv_name),
-                gender_suf=gender_suf,
-                is_female=is_female,
-            )
-
-    # 2. Copy all .csv files from raw_dir into output_dir without processing them
-    for fname in sorted(os.listdir(raw_dir)):
-        if not fname.endswith('.csv'):
-            continue
-        src_csv = os.path.join(raw_dir, fname)
-        dst_csv = os.path.join(output_dir, fname)
-        if os.path.isfile(src_csv) and os.path.abspath(
-                src_csv) != os.path.abspath(dst_csv):
-            shutil.copy2(src_csv, dst_csv)
+        _convert_emp_xls_to_csv(
+            os.path.join(raw_dir, xls_name),
+            os.path.join(output_dir, csv_name),
+            gender_suf=gender_suf,
+            is_female=is_female,
+        )
 
     expected_set = set(EXPECTED_INPUT_TABLE_FILENAMES)
     for existing_name in os.listdir(output_dir):
@@ -386,8 +893,11 @@ def build_input_tables(raw_dir: str, output_dir: str) -> list[str]:
         for fname in EXPECTED_INPUT_TABLE_FILENAMES
         if os.path.exists(os.path.join(output_dir, fname))
     ]
-    if not staged_paths:
-        raise RuntimeError(f'No staged CSV files generated in {output_dir}')
+    missing_tables = expected_set - {os.path.basename(p) for p in staged_paths}
+    if missing_tables:
+        raise RuntimeError(
+            f'Missing expected staged CSV files in {output_dir}: {sorted(missing_tables)}'
+        )
     for staged_path in staged_paths:
         with open(staged_path, 'r', encoding='utf-8') as fp:
             row_count = sum(1 for _ in csv.reader(fp))
@@ -401,12 +911,13 @@ def main(argv: list[str] | None = None) -> None:
     logging.set_verbosity(logging.INFO)
     parser = argparse.ArgumentParser(
         description=
-        'Converts .xls files in input_files/ to CSVs and copies .csv files into staged_inputs/.'
+        'Transforms raw CBS files in input_files/ into the 11 staged CSVs in staged_inputs/.'
     )
     parser.add_argument(
         '--input_dir',
         default=os.path.join(_SCRIPT_DIR, 'input_files'),
-        help='Directory containing raw downloaded CBS .xls and .csv files.',
+        help=
+        'Directory containing raw downloaded CBS .csv, .json, and .xls files.',
     )
     parser.add_argument(
         '--output_dir',
