@@ -21,16 +21,16 @@ The import's processing scripts must already have been run, so the files
 listed in `import_inputs` (for example, `output/data.csv`) exist.
 
 Usage:
-  python3 tools/scripts/run_manifest_import.py \
+  python3 tools/scripts/gen_mcf_for_import.py \
       --manifest=scripts/us_bls/cpi/manifest.json \
       --import_name=BLS_CPI
 
   # Print the resolved files and commands without running them:
-  python3 tools/scripts/run_manifest_import.py --manifest=... \
+  python3 tools/scripts/gen_mcf_for_import.py --manifest=... \
       --import_name=... --dry_run
 
   # Pass extra flags to the import tool after `--`:
-  python3 tools/scripts/run_manifest_import.py --manifest=... \
+  python3 tools/scripts/gen_mcf_for_import.py --manifest=... \
       --import_name=... -- -n=4 --existence-checks=false
 
 Output for input i is written to `<output_dir>/input<i>/genmcf` (or
@@ -142,7 +142,7 @@ def _build_commands(
         for unmatched in _get_unmatched_glob_patterns(import_input,
                                                       absolute_import_dir):
             print(
-                f'[run_manifest_import] [WARN] input{index}: no files match '
+                f'[gen_mcf_for_import] [WARN] input{index}: no files match '
                 f'{unmatched}. The import tool will run without them.',
                 file=sys.stderr)
         output_path = os.path.join(os.path.abspath(output_dir), f'input{index}',
@@ -185,13 +185,13 @@ def main(argv: Sequence[str]) -> int:
         commands = _build_commands(args.manifest, args.import_name, args.mode,
                                    args.output_dir, args.tool_args)
     except (_ManifestImportError, OSError, json.JSONDecodeError) as e:
-        print(f'[run_manifest_import] [ERROR] {e}', file=sys.stderr)
+        print(f'[gen_mcf_for_import] [ERROR] {e}', file=sys.stderr)
         return 1
 
     # Run from the import directory, like the import executor.
     cwd = os.path.dirname(os.path.abspath(args.manifest))
     for index, command in enumerate(commands):
-        print(f'[run_manifest_import] input{index}: {shlex.join(command)}',
+        print(f'[gen_mcf_for_import] input{index}: {shlex.join(command)}',
               file=sys.stderr)
         if args.dry_run:
             continue
@@ -199,13 +199,13 @@ def main(argv: Sequence[str]) -> int:
             result = subprocess.run(command, cwd=cwd, check=False)
         except OSError as e:
             print(
-                f'[run_manifest_import] [ERROR] Failed to run the import tool '
+                f'[gen_mcf_for_import] [ERROR] Failed to run the import tool '
                 f'for input{index}: {e}',
                 file=sys.stderr)
             return 1
         if result.returncode != 0:
             print(
-                f'[run_manifest_import] [ERROR] Import tool failed for '
+                f'[gen_mcf_for_import] [ERROR] Import tool failed for '
                 f'input{index} with exit code {result.returncode}.',
                 file=sys.stderr)
             return result.returncode

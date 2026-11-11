@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Tests for run_manifest_import."""
+"""Tests for gen_mcf_for_import."""
 
 import contextlib
 import io
@@ -24,16 +24,16 @@ from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-import run_manifest_import  # pylint: disable=wrong-import-position
+import gen_mcf_for_import  # pylint: disable=wrong-import-position
 
 
-class RunManifestImportTest(unittest.TestCase):
+class GenMcfForImportTest(unittest.TestCase):
 
     def setUp(self):
         self._tmp = tempfile.TemporaryDirectory()
         self.import_dir = self._tmp.name
         self.manifest = os.path.join(self.import_dir, 'manifest.json')
-        patcher = mock.patch.object(run_manifest_import.subprocess, 'run')
+        patcher = mock.patch.object(gen_mcf_for_import.subprocess, 'run')
         self.mock_run = patcher.start()
         self.mock_run.return_value = mock.Mock(returncode=0)
         self.addCleanup(patcher.stop)
@@ -66,7 +66,7 @@ class RunManifestImportTest(unittest.TestCase):
     def _run_cli(self, *extra_args, import_name='MyImport'):
         stderr = io.StringIO()
         with contextlib.redirect_stderr(stderr):
-            exit_code = run_manifest_import.main([
+            exit_code = gen_mcf_for_import.main([
                 f'--manifest={self.manifest}',
                 f'--import_name={import_name}',
                 *extra_args,
