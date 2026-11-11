@@ -43,7 +43,7 @@ def _define_flags() -> None:
     """Defines command-line flags for this script."""
     flags.DEFINE_string(
         'option', 'all',
-        'Specify how to run the process, colmap -- generates column map, process -- runs processing, all -- runs colmap first and then proessing'
+        'Specify how to run the process, colmap -- generates column map, process -- runs processing, all -- runs colmap first and then processing'
     )
     flags.DEFINE_string(
         'table_prefix', None,
