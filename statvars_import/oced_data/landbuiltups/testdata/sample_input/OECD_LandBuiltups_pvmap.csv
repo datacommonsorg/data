@@ -1,0 +1,7 @@
+key,p1,v1,p2,v2,p3,v3
+Places,observationAbout,{Data},populationType,LandCover,measuredProperty,landArea
+Square kilometers (000's),unit,SquareKilometer,#Multiply,1000,,
+Percentage,measurementDenominator,landArea,unit,Percent,,
+Year,observationDate,{Number},,,,
+Value,value,{Number},,,,
+Area built-up before,landCoverType,BuiltUp,,,,
