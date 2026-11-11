@@ -1,0 +1,23 @@
+Node: dcid:schoolManagement
+typeOf: dcs:Property
+name: "schoolManagement"
+domainIncludes: dcid:ClassRoom,dcid:Student
+rangeIncludes: dcid:EstablishmentOwnershipEnum
+
+Node: dcid:schoolGradeLevel
+typeOf: dcs:Property
+name: "schoolGradeLevel"
+domainIncludes: dcid:ClassRoom,dcid:Student
+rangeIncludes: dcid:SchoolGradeLevelEnum
+
+Node: dcid:MeasurementDenominatorEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "MeasurementDenominatorEnum"
+isProvisional: dcs:True
+
+Node: -populationType
+typeOf: dcid:MeasurementDenominatorEnum
+name: "-population Type"
+isProvisional: dcs:True
+

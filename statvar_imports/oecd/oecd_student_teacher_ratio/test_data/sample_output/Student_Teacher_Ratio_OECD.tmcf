@@ -1,0 +1,7 @@
+Node: E:Student_Teacher_Ratio_OECD->E0
+observationAbout: C:Student_Teacher_Ratio_OECD->observationAbout
+observationDate: C:Student_Teacher_Ratio_OECD->observationDate
+value: C:Student_Teacher_Ratio_OECD->value
+variableMeasured: C:Student_Teacher_Ratio_OECD->variableMeasured
+typeOf: dcs:StatVarObservation
+#input: /usr/local/google/home/swethakumari/DC_26_july/data/statvar_imports/oecd/oecd_student_teacher_ratio/test_data/sample_input/Student_Teacher_Ratio_OECD_test_data.csv:20:10
