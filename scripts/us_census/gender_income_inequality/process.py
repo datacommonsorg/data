@@ -20,8 +20,11 @@ import pandas as pd
 
 _FLAGS = flags.FLAGS
 
-flags.DEFINE_string("out_file", "gender_income_inequality.csv",
-                    "CSV output file name.")
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string("out_file", "gender_income_inequality.csv",
+                        "CSV output file name.")
 
 
 def calculate_gender_income_inequality() -> pd.DataFrame:
@@ -90,4 +93,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

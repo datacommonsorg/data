@@ -45,13 +45,19 @@ from statvar_dcid_generator import get_statvar_dcid
 _FLAGS = flags.FLAGS
 default_input_path = os.path.join(_CODEDIR, "input_files")
 
-flags.DEFINE_string("input_path", default_input_path,
-                    "Path to input Excel file or directory containing files")
-flags.DEFINE_string("output_path", None,
-                    "Directory path where output files need to be written")
-flags.DEFINE_list(
-    "input_years", None, "Optional list of years to process (e.g. 2016,2017). "
-    "Defaults to all available numeric sheets in the workbook.")
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        "input_path", default_input_path,
+        "Path to input Excel file or directory containing files")
+    flags.DEFINE_string("output_path", None,
+                        "Directory path where output files need to be written")
+    flags.DEFINE_list(
+        "input_years", None,
+        "Optional list of years to process (e.g. 2016,2017). "
+        "Defaults to all available numeric sheets in the workbook.")
+
 
 # Canonical 42 base Statistical Variable names in workbook column order
 UNIQUE_STATVARS = list(dict.fromkeys(statvar_col.values()))
@@ -599,4 +605,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

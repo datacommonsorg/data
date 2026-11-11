@@ -16,7 +16,7 @@ import os
 import sys
 import unittest
 
-from import_data import *
+from import_data import EurostatGDPImporter
 
 MODULE_DIR = os.path.dirname(__file__)
 sys.path.insert(0, MODULE_DIR)

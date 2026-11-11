@@ -39,16 +39,20 @@ _DEFAULT_CONFIG_PATH = (
     'gs://unresolved_mcf/india_ndap/niti_india_population_projection/download_config.json'
 )
 
-flags.DEFINE_string(
-    'download_config_path',
-    _DEFAULT_CONFIG_PATH,
-    'GCS or local path to download_config.json.',
-)
-flags.DEFINE_string(
-    'config_file_path',
-    None,
-    'Optional alias for --download_config_path.',
-)
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        'download_config_path',
+        _DEFAULT_CONFIG_PATH,
+        'GCS or local path to download_config.json.',
+    )
+    flags.DEFINE_string(
+        'config_file_path',
+        None,
+        'Optional alias for --download_config_path.',
+    )
+
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 
@@ -587,4 +591,5 @@ def main(_) -> None:
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

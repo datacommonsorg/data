@@ -25,7 +25,14 @@ import zipfile
 from absl import app
 from absl import flags
 
-from .common_util import *
+from .common_util import columns_from_CSVreader
+from .common_util import find_missing_tokens
+from .common_util import get_spec_dict_from_path
+from .common_util import get_spec_token_list
+from .common_util import get_tokens_list_from_column_list
+from .common_util import ignored_columns
+from .common_util import remove_columns_to_be_ignored
+from .common_util import token_in_list_ignore_case
 
 FLAGS = flags.FLAGS
 
@@ -255,15 +262,14 @@ def find_multiple_population(column_name_list: list,
     if 'populationType' in spec_dict:
         for column_name in column_name_list:
             temp_flag = False
+            cur_population = None
             for token in column_name.split(delimiter):
                 if token in spec_dict['populationType']:
                     if temp_flag:
                         if cur_population != spec_dict['populationType'][token]:
                             ret_list.append(column_name)
                     else:
-                        # Read on a later iteration of the token loop above.
-                        population_types = spec_dict['populationType']
-                        cur_population = population_types[token]  # noqa: F841
+                        cur_population = spec_dict['populationType'][token]
                     temp_flag = True
     return ret_list
 

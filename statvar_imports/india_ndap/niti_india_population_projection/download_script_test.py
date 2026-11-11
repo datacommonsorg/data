@@ -38,7 +38,6 @@ class DownloadScriptTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        download_script._FLAGS.mark_as_parsed()
         absl_logging.set_verbosity(absl_logging.INFO)
 
     def _assert_no_secret_in_exception(self, exc: BaseException,

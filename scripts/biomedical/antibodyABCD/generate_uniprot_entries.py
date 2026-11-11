@@ -21,13 +21,17 @@ from absl import app
 from absl import flags
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('database',
-                    'ABCD_v8.txt',
-                    'ABCD_v8.txt file path.',
-                    short_name='f')
-flags.DEFINE_string(
-    'uniprot', 'uniprot_list.txt',
-    'File path to save the uniprot entries separated by space.')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('database',
+                        'ABCD_v8.txt',
+                        'ABCD_v8.txt file path.',
+                        short_name='f')
+    flags.DEFINE_string(
+        'uniprot', 'uniprot_list.txt',
+        'File path to save the uniprot entries separated by space.')
 
 
 def main(argv):
@@ -58,4 +62,5 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)
