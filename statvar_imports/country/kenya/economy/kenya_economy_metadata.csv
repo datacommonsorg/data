@@ -1,0 +1,12 @@
+parameter,value
+url,https://kenya.opendataforafrica.org/
+description,kenya Economy
+#place_type,Country
+#places_within,
+start_date,2013
+end_date,2020
+release_frequency,1 Y
+process,
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,#input"
+header_rows,1
+places_resolved_csv,https://docs.google.com/spreadsheets/d/1K9bnpVM7nZkxqAJ0PiPw4XF_6O5eSMMbcvcdctdvOvA/edit?resourcekey=0-CiVqFbQZk_zRk0DAie6Uww#gid=778482273
