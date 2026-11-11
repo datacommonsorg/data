@@ -15,19 +15,12 @@
 
 from enum import Enum
 import os
-import subprocess
 import sys
-import time
 
 from absl import app
 from absl import flags
 from absl import logging
 import pandas as pd
-
-try:
-    from googleapiclient.discovery import build
-except ImportError:
-    build = None
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 _DATA_DIR = os.path.dirname(os.path.dirname(_SCRIPT_DIR))
@@ -36,8 +29,6 @@ sys.path.append(os.path.join(_DATA_DIR, 'tools', 'statvar_importer'))
 
 import differ_utils
 from mcf_file_util import normalize_value
-
-_DATAFLOW_TEMPLATE_URL = 'gs://datcom-templates/templates/flex/differ.json'
 
 _GROUPBY_KEYS = [
     'variableMeasured', 'observationAbout', 'observationDate',
@@ -71,12 +62,10 @@ flags.DEFINE_string(
   (wildcard on local/GCS supported).')
 flags.DEFINE_string('output_location', 'results', \
   'Path (local/GCS) to the output data folder.')
-flags.DEFINE_string('file_format', 'mcf',
-                    'Format of the input data (mcf,tfrecord)')
-flags.DEFINE_string('runner_mode', 'native',
-                    'Runner mode (native/direct/cloud/bigquery)')
+flags.DEFINE_string('file_format', 'mcf', 'Format of the input data (mcf)')
+flags.DEFINE_string('runner_mode', 'native', 'Runner mode (native/bigquery)')
 flags.DEFINE_string('job_name', 'differ', 'Name of the differ job.')
-flags.DEFINE_string('project_id', '', 'GCP project id for the dataflow/bq job.')
+flags.DEFINE_string('project_id', '', 'GCP project id for the bq job.')
 if 'bq_dataset' not in _FLAGS:
     flags.DEFINE_string('bq_dataset', 'datcom_import_differ',
                         'BigQuery dataset ID for temporary differ tables.')
@@ -100,12 +89,11 @@ class ImportDiffer:
 
   Usage:
   $ python import_differ.py --current_data=<path> --previous_data=<path> --output_location=<path> \
-    --file_format=<mcf/tfrecord> --runner_mode=<native/direct/cloud> --project_id=<id> --job_name=<name> 
+    --runner_mode=<native/bigquery> --project_id=<id> --job_name=<name> 
 
   Runner Modes:
   - native: Runs the differ using native Python (Pandas) locally.
-  - direct: Runs the differ using the Apache Beam DirectRunner (Java jar) locally.
-  - cloud: Runs the differ as a Dataflow job in GCP.
+  - bigquery: Runs the streaming low-memory differ using BigQuery.
 
   Summary output generated is of the form below showing 
   counts of differences for each variable.  
@@ -321,86 +309,6 @@ class ImportDiffer:
                 all_nodes.append(node)
         return all_nodes
 
-    def run_dataflow_job(self, project: str, job: str, current_data: str,
-                         previous_data: str, file_format: str,
-                         output_location: str) -> str:
-        logging.info('Launching differ dataflow job {self.job_name}')
-        parameters = {
-            'currentData': current_data,
-            'previousData': previous_data,
-            'outputLocation': output_location,
-        }
-        if file_format == 'tfrecord':
-            logging.info('Using tfrecord file format')
-            parameters['useOptimizedGraphFormat'] = 'true'
-        else:
-            logging.info('Using mcf file format')
-
-        template = _DATAFLOW_TEMPLATE_URL
-        dataflow = build("dataflow", "v1b3")
-        request = (dataflow.projects().locations().flexTemplates().launch(
-            projectId=project,
-            location='us-central1',
-            body={
-                "launchParameter": {
-                    "jobName": job,
-                    "containerSpecGcsPath": template,
-                    "parameters": parameters,
-                },
-            },
-        ))
-        response = request.execute()
-        job_id = response['job']['id']
-        url = f'https://pantheon.corp.google.com/dataflow/jobs/{job_id}?project={project}'
-        logging.info('Dataflow job url: %s', url)
-        status = 'JOB_STATE_UNKNOWN'
-        dataflow = build("dataflow", "v1b3")
-        request = (dataflow.projects().locations().jobs().list(
-            projectId=project, location='us-central1', name=job_id))
-        while (status != 'JOB_STATE_DONE' and status != 'JOB_STATE_FAILED' and
-               status != 'JOB_STATE_CANCELLED'):
-            logging.info(
-                f'Waiting for job {self.job_name} to complete. Status:{status}')
-            time.sleep(60)
-            response = request.execute()
-            status = response['jobs'][0]['currentState']
-
-        logging.info(
-            f'Finished differ dataflow job {self.job_name} with status {status}.'
-        )
-        return status
-
-    def run_direct_job(self, current_data: str, previous_data: str,
-                       file_format: str, output_location: str) -> str:
-        logging.info(f'Launching differ direct job {self.job_name}')
-        jar_path = os.path.join(_SCRIPT_DIR, 'differ-bundled-0.1-SNAPSHOT.jar')
-        if not os.path.exists(jar_path):
-            logging.error(f'Dataflow jar not found: {jar_path}')
-            return 'JOB_STATE_FAILED'
-
-        cmd = [
-            'java', '-jar', jar_path, f'--currentData={current_data}',
-            f'--previousData={previous_data}',
-            f'--outputLocation={output_location}', '--runner=DirectRunner'
-        ]
-        if file_format == 'tfrecord':
-            logging.info('Using tfrecord file format')
-            cmd.append('--useOptimizedGraphFormat=true')
-        else:
-            logging.info('Using mcf file format')
-
-        logging.info(f"Running command: {' '.join(cmd)}")
-        result = subprocess.run(cmd, capture_output=True, text=True)
-        if result.returncode != 0:
-            logging.error(
-                f"Direct job failed with return code {result.returncode}")
-            logging.error(f"Stdout: {result.stdout}")
-            logging.error(f"Stderr: {result.stderr}")
-            return 'JOB_STATE_FAILED'
-
-        logging.info(f'Finished differ direct job {self.job_name}.')
-        return 'JOB_STATE_DONE'
-
     def run_differ(self):
         os.makedirs(self.output_path, exist_ok=True)
         tmp_path = os.path.join(self.output_path, self.job_name)
@@ -408,25 +316,7 @@ class ImportDiffer:
 
         logging.info('Processing input data to generate diff...')
         differ_summary = {}
-        if self.runner_mode == 'cloud':
-            # Runs dataflow job in GCP.
-            logging.info("Invoking dataflow mode for differ")
-            status = self.run_dataflow_job(self.project_id, self.job_name,
-                                           self.current_data,
-                                           self.previous_data, self.file_format,
-                                           self.output_path)
-            if status == 'JOB_STATE_FAILED':
-                raise RuntimeError(f'Dataflow job {self.job_name} failed.')
-        elif self.runner_mode == 'direct':
-            # Runs dataflow jar directly.
-            logging.info("Invoking direct mode for differ")
-            status = self.run_direct_job(self.current_data, self.previous_data,
-                                         self.file_format, self.output_path)
-            if status == 'JOB_STATE_FAILED':
-                raise RuntimeError(f'Direct job {self.job_name} failed.')
-
-            return
-        elif self.runner_mode == 'bigquery':
+        if self.runner_mode == 'bigquery':
             import bigquery_differ
             logging.info("Invoking BigQuery mode for differ")
             return bigquery_differ.run_bigquery_differ(
