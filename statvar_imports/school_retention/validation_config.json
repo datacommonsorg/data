@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "check_max_date_consistent",
+      "description": "Ensures all active NotJuvenileJusticeFacility StatVars share the same latest observation date (MaxDate).",
+      "validator": "MAX_DATE_CONSISTENT",
+      "scope": {
+        "variables": {
+          "regex": [
+            "^.*NotJuvenileJusticeFacility.*$"
+          ]
+        }
+      },
+      "params": {}
+    },
+    {
+      "rule_id": "check_max_date_freshness_all_inputs",
+      "description": "Verifies that every StatVar meets its expected latest observation date (2012 for pre-2014 non-JJ StatVars, >= 2024 for all NotJuvenileJusticeFacility StatVars and high-school JuvenileJusticeFacility grade-indicator StatVars, >= 2014/2016 for demographic JuvenileJusticeFacility StatVars, and >= 2024 for overall JuvenileJusticeFacility MaxDate).",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT StatVar, MinDate, MaxDate, CASE WHEN StatVar NOT LIKE '%JuvenileJusticeFacility%' THEN CAST(MaxDate AS INTEGER) >= 2012 WHEN StatVar LIKE '%NotJuvenileJusticeFacility%' THEN CAST(MaxDate AS INTEGER) >= 2024 WHEN StatVar IN ('Count_Student_JuvenileJusticeFacility_SchoolGrade9_StudentRetained', 'Count_Student_JuvenileJusticeFacility_SchoolGrade10_StudentRetained', 'Count_Student_JuvenileJusticeFacility_SchoolGrade11_StudentRetained', 'Count_Student_JuvenileJusticeFacility_SchoolGrade12_StudentRetained') THEN CAST(MaxDate AS INTEGER) >= 2024 WHEN CAST(MinDate AS INTEGER) = 2014 THEN CAST(MaxDate AS INTEGER) >= 2014 WHEN CAST(MinDate AS INTEGER) = 2016 THEN CAST(MaxDate AS INTEGER) >= 2016 WHEN CAST(MinDate AS INTEGER) >= 2018 THEN CAST(MaxDate AS INTEGER) >= 2024 ELSE FALSE END AS is_fresh FROM stats UNION ALL SELECT 'JJ_FRESHNESS_SUMMARY' AS StatVar, COALESCE(CAST(MIN(CAST(MinDate AS INTEGER)) AS VARCHAR), '') AS MinDate, COALESCE(CAST(MAX(CAST(MaxDate AS INTEGER)) AS VARCHAR), '') AS MaxDate, COALESCE(MAX(CAST(MaxDate AS INTEGER)), 0) >= 2024 AS is_fresh FROM stats WHERE StatVar LIKE '%JuvenileJusticeFacility%' AND StatVar NOT LIKE '%NotJuvenileJusticeFacility%'",
+        "condition": "is_fresh = TRUE"
+      }
+    }
+  ]
+}

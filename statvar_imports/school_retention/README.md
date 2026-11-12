@@ -16,40 +16,53 @@
 
 ## US_UrbanSchool_Retention Import
 
-This data provides an overview of student retention rates, categorized by gender, race/ethnicity, disability status, and language fluency, specifically for School Grades 1 to 12.
+This data provides an overview of student retention counts and indicators, categorized by gender, race/ethnicity, disability status, and language fluency, for Kindergarten and School Grades 1 to 12.
 
 -----
-- source: https://ocrdata.ed.gov/data
+- source: https://civilrightsdata.ed.gov/data
 
 - type of place: School
 
 - statvars: Education
 
-- years: 2010 - 2022
+- years: 2010 - 2024
 
 ### ⚙️ Workflow
 
-The workflow for this data import involves two main steps: downloading the necessary files and then processing them.
+The workflow for this data import involves two main steps: downloading/preprocessing the source files and then running the StatVar processor.
 
-#### Step 1: Download the Source Data
+#### Step 1: Download and Preprocess the Source Data
 
-To acquire the necessary data files, execute the download script `download_script.py`.
+Execute `download_script.py` from the `statvar_imports/school_retention/` directory:
+```bash
+python3 download_script.py
+```
 
-# This script performs the following:
-
-- Downloads the original source files into raw_input_files/ (keeping them unmodified).
-
-- Transforms the data (cleaning IDs, standardizing formats) and saves the results to input_files/ with the prefix transformed_.
-
-- Uploads the transformed files to GCS.
+This script performs the following:
+- Downloads the CRDC archive files for published survey years and extracts matching school-level retention files into `raw_input_files/`.
+- Standardizes 12-character `NCESID` values (`LEAID` + `SCHID` or `COMBOKEY`), normalizes the juvenile justice indicator (`JJ` / `SCH_JUST`), filters out unmapped columns and negative CRDC reserve codes, and writes clean `.csv` files into `input_files/transformed_*.csv`.
 
 #### Step 2: Process the Data
 
-Once the data is downloaded run the `stat_var_processor.py` script to process the files and generate the final output artifacts (CSV, TMCF, MCF).
-
-The script is located in the `data/tools/statvar_importer/` directory. Run the following command
+Run `stat_var_processor.py` to generate the final output artifacts (`output/retention_output.csv`, `output/retention_output.tmcf`, and `output/retention_output_stat_vars.mcf`):
 ```bash
-    python3 stat_var_processor.py --input_data=../../statvar_imports/school_retention/input_files/* --pv_map=../../statvar_imports/school_retention/retention_pvmap.csv --config_file=../../statvar_imports/school_retention/retention_metadata.csv --output_path=../../statvar_imports/school_retention/output/retention_output
+python3 ../../tools/statvar_importer/stat_var_processor.py \
+  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+  --input_data=input_files/*.csv \
+  --pv_map=retention_pvmap.csv \
+  --config_file=retention_metadata.csv \
+  --output_path=output/retention_output \
+  --output_counters=counters/retention_counters.csv \
+  --recon_property=variableMeasured \
+  --log_level=-2 \
+  --log_every_n=1000
+```
+
+#### Step 3: Run Unit Tests
+
+From the `data/` repository root:
+```bash
+./run_tests.sh -p statvar_imports/school_retention
 ```
 
 ### Autorefresh type
@@ -58,11 +71,11 @@ This import uses a fully automated refresh process.
 
 -----
 
-
 ### Automation
 
-This import pipeline is configured to run automatically on a monthly schedule.
+This import pipeline is configured to run automatically on a weekly schedule.
 
-- Cron Expression: 30 07 27 * *
+- Cron Expression: `30 9 * * 2`
 
-Schedule: The script runs at 7:30 AM on the 27th day of every month.
+Schedule: Weekly on Tuesday at 09:30 UTC.
+
