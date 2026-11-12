@@ -15,27 +15,18 @@
 """Consolidates the 162 legacy CDCDiabetes CSVs (2004-2021) into 1 baseline CSV."""
 
 import csv
+import glob
 import math
 import os
 import re
 import subprocess
 import tempfile
+
 from absl import app
 from absl import flags
 from absl import logging
 
 FLAGS = flags.FLAGS
-
-flags.DEFINE_string(
-    'cns_dir',
-    '/cns/jv-d/home/datcom/v3_mcf/cdc/diabetes/20240112',
-    'Legacy CNS directory (or gs:// prefix) containing the 162 2004-2021 CSVs.',
-)
-flags.DEFINE_string(
-    'output_dir',
-    'historical',
-    'Output directory for the consolidated historical baseline CSV and TMCF.',
-)
 
 OUTPUT_COLUMNS = [
     'observationAbout',
@@ -66,20 +57,30 @@ SUPPRESSED_TOKENS = frozenset({
 
 
 def list_source_csvs(source_dir: str) -> list[str]:
-    """Lists all DiabetesAtlasCountyData_*.csv files in CNS or GCS."""
+    """Lists all DiabetesAtlasCountyData_*.csv files in CNS, GCS, or local."""
     source_dir = source_dir.rstrip('/')
     if source_dir.startswith('gs://'):
         cmd = ['gsutil', 'ls', f'{source_dir}/DiabetesAtlasCountyData_*.csv']
-    else:
+        result = subprocess.run(cmd, capture_output=True, text=True, check=True)
+        files = []
+        for line in result.stdout.splitlines():
+            line = line.strip()
+            if line.endswith('.csv') and DIABETES_FILE_RE.match(
+                    os.path.basename(line)):
+                files.append(line)
+        return sorted(files)
+    if source_dir.startswith('/cns/'):
         cmd = ['fileutil', 'ls', f'{source_dir}/DiabetesAtlasCountyData_*.csv']
-    result = subprocess.run(cmd, capture_output=True, text=True, check=True)
-    files = []
-    for line in result.stdout.splitlines():
-        line = line.strip()
-        if line.endswith('.csv') and DIABETES_FILE_RE.match(
-                os.path.basename(line)):
-            files.append(line)
-    return sorted(files)
+        result = subprocess.run(cmd, capture_output=True, text=True, check=True)
+        files = []
+        for line in result.stdout.splitlines():
+            line = line.strip()
+            if line.endswith('.csv') and DIABETES_FILE_RE.match(
+                    os.path.basename(line)):
+                files.append(line)
+        return sorted(files)
+    pattern = os.path.join(source_dir, 'DiabetesAtlasCountyData_*.csv')
+    return sorted(glob.glob(pattern))
 
 
 def normalize_dcid(val: str) -> str:
@@ -149,7 +150,8 @@ def consolidate_files(
                         row.get('observationAbout') or row.get('location') or
                         ''))
                 obs_date = str(
-                    row.get('observationDate') or row.get('year') or '').strip()
+                    row.get('observationDate') or row.get('year') or
+                    '').strip()
                 var_measured = normalize_dcid(
                     str(row.get('variableMeasured') or ''))
                 val = str(row.get('value') or '').strip()
@@ -212,11 +214,21 @@ def main(_):
     with tempfile.TemporaryDirectory() as tmp_dir:
         consolidate_files(
             source_csvs,
-            os.path.join(
-                FLAGS.output_dir, 'cdc_diabetes_historical_2004_2021.csv'),
+            os.path.join(FLAGS.output_dir,
+                         'cdc_diabetes_historical_2004_2021.csv'),
             tmp_dir,
         )
 
 
 if __name__ == '__main__':
+    flags.DEFINE_string(
+        'cns_dir',
+        '/cns/jv-d/home/datcom/v3_mcf/cdc/diabetes/20240112',
+        'Legacy CNS directory (or gs:// prefix) containing the 162 2004-2021 CSVs.',
+    )
+    flags.DEFINE_string(
+        'output_dir',
+        'historical',
+        'Output directory for the consolidated historical baseline CSV and TMCF.',
+    )
     app.run(main)

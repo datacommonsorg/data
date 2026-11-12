@@ -224,6 +224,16 @@ def discover_init_app_data_url(session: requests.Session) -> str:
                                        bundle_resp.text)
                 if init_match:
                     return f'{USDSS_BASE_URL}/diabetes/{init_match.group(1)}'
+                logging.warning('InitAppData pattern not found in bundle JS.')
+            else:
+                logging.warning(
+                    'Failed to fetch bundle JS from %s: %s',
+                    bundle_url,
+                    bundle_resp.status_code,
+                )
+        else:
+            logging.warning(
+                'surveillance_entry JS bundle match not found in referer HTML.')
     except requests.RequestException as exc:
         logging.warning(
             'Falling back to default InitAppData URL after discovery warning: %s',
@@ -350,8 +360,8 @@ def fetch_usdss_metrics(
                                         timeout=60)
                     resp.raise_for_status()
                     data = resp.json()
-                    map_data = (data.get('MapData', [])
-                                if isinstance(data, dict) else [])
+                    map_data = (data.get('MapData', []) if isinstance(
+                        data, dict) else [])
                     if not map_data:
                         raise RuntimeError(
                             'Empty MapData from CDC USDSS API for '
