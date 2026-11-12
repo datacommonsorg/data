@@ -25,6 +25,7 @@ from absl import flags
 from app import configs
 from app.executor import import_executor
 from app.executor import import_target
+from app.executor import manifest_utils
 from app.executor import scheduler_job_manager
 from app.executor import validation
 from app.service import email_notifier
@@ -68,12 +69,13 @@ def _get_import_spec(repo_dir: str, absolute_import_path: str,
             f'Manifest for import could not be found. Import: {absolute_import_path}. Looking for {manifest_filename} at path: {manifest_fp}'
         )
 
-    manifest = import_executor.parse_manifest(manifest_fp)
+    manifest = manifest_utils.parse_manifest(manifest_fp)
     validation.is_manifest_valid(manifest, repo_dir, path)
 
-    for spec in manifest['import_specifications']:
-        if absolute_import_path.endswith(':' + spec['import_name']):
-            return spec
+    import_name = absolute_import_path.split(':')[-1]
+    spec = manifest_utils.get_import_spec(manifest, import_name)
+    if spec:
+        return spec
 
     # If we are here, the the import name was not found in the manifest.
     raise Exception(
