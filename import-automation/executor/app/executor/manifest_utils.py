@@ -36,7 +36,7 @@ def parse_manifest(path: str) -> dict:
         Same exceptions as open and json.load if the file does not exist or
         contains malformed json.
     """
-    with open(path) as file:
+    with open(path, encoding='utf-8') as file:
         return json.load(file)
 
 
