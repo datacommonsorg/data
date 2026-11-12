@@ -1,0 +1,34 @@
+# Auto generated using command: "/Users/hareeshms/Work/Projects/Datacommons/Coutries/Australia/repo/data/scripts/statvar/stat_var_processor.py --input_data=/Users/hareeshms/Work/Projects/Datacommons/Coutries/Australia/input_CSV/FinalUpload/intermediate_files/aus_employment_int.csv --pv_map=/Users/hareeshms/Work/Projects/Datacommons/Coutries/Australia/input_CSV/FinalUpload/intermediate_files/aus_employment_map.py --config=/Users/hareeshms/Work/Projects/Datacommons/Coutries/Australia/input_CSV/FinalUpload/intermediate_files/aus_config.conf --output_path=/Users/hareeshms/Work/Projects/Datacommons/Coutries/Australia/input_CSV/FinalUpload/output_files/aus_employment --existing_statvar_mcf=/Users/hareeshms/Work/Projects/Datacommons/Coutries/Australia/repo/data/scripts/statvar/stat_vars.mcf" on 2023-05-08 12:41:11.162541
+
+Node: dcid:Count_Person_Employed_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+employment: dcid:Employed
+gender: dcid:Female
+
+Node: dcid:Count_Person_Employed_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+employment: dcid:Employed
+gender: dcid:Male
+
+Node: dcid:Count_Person_Unemployed_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+employment: dcid:Unemployed
+gender: dcid:Female
+
+Node: dcid:Count_Person_Unemployed_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+employment: dcid:Unemployed
+gender: dcid:Male
+
