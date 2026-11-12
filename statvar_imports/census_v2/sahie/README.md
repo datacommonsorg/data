@@ -25,7 +25,7 @@ The import process is divided into two main stages: downloading the raw data and
 * **Transformation pipeline**:
   1. `download_script.py` downloads and unzips the annual data releases for all available years from 2018 to the current year into `raw_files/`, and writes the header-cleaned CSV files to the `input_files/` directory.
   2. After the download is complete, the `stat_var_processor.py` tool is run on all cleaned CSV files.
-  3. The processor uses the `census_sahie_metadata.csv` and `census_sahie_pv_map.csv` files to generate the final `census_sahie.csv`, `census_sahie.tmcf`, `census_sahie_stat_vars.mcf`, and `census_sahie_counters.txt` files, placing them in the `output_files/` directory.
+  3. The processor uses the `census_sahie_metadata.csv` and `census_sahie_pv_map.csv` files to generate the final `census_sahie.csv`, `census_sahie.tmcf`, `census_sahie_stat_vars.mcf`, and `census_sahie_counters.csv` files, placing them in the `output_files/` directory.
 
 * **Data Quality Checks**:
   * Linting is performed on the generated output files using the DataCommons import tool.
@@ -73,7 +73,7 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
   --pv_map='census_sahie_pv_map.csv' \
   --config_file='census_sahie_metadata.csv' \
   --output_path='output_files/census_sahie' \
-  --output_counters='output_files/census_sahie_counters.txt' \
+  --output_counters='output_files/census_sahie_counters.csv' \
   --existing_statvar_mcf='gs://unresolved_mcf/scripts/statvar/stat_vars.mcf'
 ```
 
