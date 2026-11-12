@@ -85,6 +85,20 @@ class LintFileTest(unittest.TestCase):
         self.assertEqual(len(errors), 1)
         self.assertTrue(errors[0].startswith('not valid UTF-8'), errors[0])
 
+    def test_huge_integer_fails_without_crashing(self):
+        # json.loads raises a plain ValueError for ints over 4300 digits.
+        path = self._write('huge.json', '[' + '1' * 5000 + ']')
+        errors = json_lint.lint_file(path)
+        self.assertEqual(len(errors), 1)
+        self.assertIn('4300', errors[0])
+
+    def test_unreadable_file_fails_without_crashing(self):
+        path = os.path.join(self._tmp_dir.name, 'broken_link.json')
+        os.symlink(os.path.join(self._tmp_dir.name, 'missing'), path)
+        errors = json_lint.lint_file(path)
+        self.assertEqual(len(errors), 1)
+        self.assertTrue(errors[0].startswith('cannot read file: '), errors[0])
+
 
 class FindJsonFilesTest(unittest.TestCase):
 
@@ -158,6 +172,24 @@ class MainTest(unittest.TestCase):
         self.assertIn(
             'Checked 2 JSON files, 1 failed, 2 skipped '
             '(1 in EXCLUDED_FILES, 1 Git LFS pointers).', stdout.getvalue())
+
+    def test_missing_path_fails(self):
+        with tempfile.TemporaryDirectory() as root:
+            missing = os.path.join(root, 'does_not_exist.json')
+            stderr = io.StringIO()
+            with contextlib.redirect_stdout(io.StringIO()), \
+                    contextlib.redirect_stderr(stderr):
+                exit_code = json_lint.main(['json_lint.py', root, missing])
+
+        self.assertEqual(exit_code, 1)
+        self.assertIn(f'{missing}: no such file or directory',
+                      stderr.getvalue())
+
+    def test_empty_directory_passes(self):
+        with tempfile.TemporaryDirectory() as root:
+            with contextlib.redirect_stdout(io.StringIO()):
+                exit_code = json_lint.main(['json_lint.py', root])
+        self.assertEqual(exit_code, 0)
 
 
 if __name__ == '__main__':

@@ -101,8 +101,11 @@ def lint_file(path):
       A list of error messages (empty if the file is valid), or None if the
       file was skipped because it is a Git LFS pointer.
     """
-    with open(path, 'rb') as f:
-        raw = f.read()
+    try:
+        with open(path, 'rb') as f:
+            raw = f.read()
+    except OSError as e:
+        return [f'cannot read file: {e}']
 
     if raw.startswith(_LFS_POINTER_PREFIX):
         return None
@@ -118,7 +121,9 @@ def lint_file(path):
                    parse_constant=_reject_constant)
     except json.JSONDecodeError as e:
         return [f'{e.lineno}:{e.colno}: {e.msg}']
-    except (_DuplicateKeyError, _InvalidConstantError) as e:
+    except ValueError as e:
+        # Duplicate keys, NaN/Infinity, and other values json.loads rejects
+        # (e.g. integers with more than 4300 digits).
         return [str(e)]
     return []
 
@@ -160,6 +165,12 @@ def find_json_files(paths, repo_root=_REPO_ROOT):
 
 def main(argv):
     paths = argv[1:] or [_REPO_ROOT]
+    missing = [path for path in paths if not os.path.exists(path)]
+    if missing:
+        for path in missing:
+            print(f'{path}: no such file or directory', file=sys.stderr)
+        return 1
+
     num_checked = 0
     num_failed = 0
     num_excluded = 0
