@@ -51,17 +51,21 @@ from states_to_shortform import get_states
 from util.alpha2_to_dcid import USSTATE_MAP
 
 _FLAGS = flags.FLAGS
-if 'mode' not in _FLAGS:
-    flags.DEFINE_string('mode', '', 'Options: download or process')
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
 _RAW_DATA_PATH = os.path.join(_MODULE_DIR, 'raw_data')
 
 default_input_path = os.path.dirname(
     os.path.abspath(__file__)) + os.sep + "input_files"
-if 'input_path' not in _FLAGS:
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('mode', '', 'Options: download or process')
     flags.DEFINE_string("input_path", default_input_path,
                         "Import Data File's List")
+
+
 _FILES_TO_DOWNLOAD = None
 _BASELINE_YEAR = 2025
 _SESSION = None
@@ -1495,4 +1499,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

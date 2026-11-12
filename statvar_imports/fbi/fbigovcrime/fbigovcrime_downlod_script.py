@@ -29,7 +29,14 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('output_folder', 'download_folder', 'download folder name')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('output_folder', 'download_folder',
+                        'download folder name')
+
+
 COLLECTION_VALUE = ' Offenses Known to Law Enforcement '
 DOWNLOAD_BUTTON_LOCATOR = "//div[@class='col-md-auto']/a[@title='Publication Table Download Button']"
 NB_OPTION = "//nb-option[contains(text()"
@@ -303,4 +310,5 @@ def main(unused_argv):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

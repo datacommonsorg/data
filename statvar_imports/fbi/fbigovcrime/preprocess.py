@@ -24,7 +24,13 @@ from absl import logging
 import pandas as pd
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('output_folder', 'download_folder', 'download folder name')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('output_folder', 'download_folder',
+                        'download folder name')
+
 
 # --- GCS Configuration ---
 GCS_BUCKET_NAME = "unresolved_mcf"
@@ -208,4 +214,5 @@ def main(unused_argv):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

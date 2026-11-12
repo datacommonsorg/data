@@ -33,7 +33,14 @@ import pandas as pd
 CODEDIR = os.path.dirname(__file__)
 sys.path.insert(1, os.path.join(CODEDIR, '../../..'))
 
-from common.prop_conf import *
+from common.prop_conf import DF_DEFAULT_MCF_PROP
+from common.prop_conf import FORM_STATVAR
+from common.prop_conf import SV_NODE_FORMAT
+from common.prop_conf import SV_PROP_ORDER
+from common.prop_conf import TMCF_TEMPLATE
+from common.prop_conf import TMCF_TEMPLATE_PLACE_DISTRICT
+from common.prop_conf import TMCF_TEMPLATE_PLACE_PRIVATE
+from common.prop_conf import TMCF_TEMPLATE_PLACE_PUBLIC
 from common.replacement_functions import _UNREADABLE_TEXT
 from common.replacement_functions import replace_values
 

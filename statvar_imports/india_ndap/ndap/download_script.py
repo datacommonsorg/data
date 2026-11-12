@@ -25,9 +25,14 @@ from google.cloud import storage
 import numpy as np
 import pandas as pd
 
-flags.DEFINE_string('download_config_path',
-                    'gs://unresolved_mcf/india_ndap/ndap/download_config.json',
-                    'Input directory where config files downloaded.')
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        'download_config_path',
+        'gs://unresolved_mcf/india_ndap/ndap/download_config.json',
+        'Input directory where config files downloaded.')
+
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util/'))
@@ -102,4 +107,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

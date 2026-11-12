@@ -35,7 +35,12 @@ from us_eia.eia_860 import power_plant
 from us_eia.eia_860 import utility
 
 FLAGS = flags.FLAGS
-flags.DEFINE_boolean('skip_import', False, 'Skips downloading data.')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_boolean('skip_import', False, 'Skips downloading data.')
+
 
 _URL = 'https://www.eia.gov/electricity/data/eia860/xls/eia8602019.zip'
 _RAW_PATH = 'tmp_raw_data'
@@ -67,4 +72,5 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

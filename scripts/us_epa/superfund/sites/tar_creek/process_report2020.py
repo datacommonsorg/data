@@ -31,11 +31,17 @@ sys.path.append(os.path.join(_SCRIPT_PATH,
 from us_epa.util.superfund_vars import _TAR_CREEK_WELL_MAP
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('input_path', './data/tar_creek_reports/2020_TarCreek.pdf',
-                    'Path to the directory with the PDF for the pdf files.')
-flags.DEFINE_string(
-    'output_path', './data/output',
-    'Path to the directory where generated files are to be stored.')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        'input_path', './data/tar_creek_reports/2020_TarCreek.pdf',
+        'Path to the directory with the PDF for the pdf files.')
+    flags.DEFINE_string(
+        'output_path', './data/output',
+        'Path to the directory where generated files are to be stored.')
+
 
 # Curated map of strings and regex patterns to replace in the 2020 report
 _REPLACE_MAP = {
@@ -190,4 +196,5 @@ def main(_) -> None:
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

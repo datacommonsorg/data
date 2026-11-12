@@ -16,7 +16,8 @@ import os
 import sys
 import unittest
 
-from education_attainment_preprocess_gen_tmcf import *
+from education_attainment_preprocess_gen_tmcf import preprocess
+from education_attainment_preprocess_gen_tmcf import translate_wide_to_long
 
 MODULE_DIR = os.path.dirname(__file__)
 sys.path.insert(0, MODULE_DIR)

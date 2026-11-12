@@ -36,9 +36,12 @@ from util.dc_api_wrapper import get_datacommons_client
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string(
-    'output_file', 'provenances_full.json',
-    'Path to the output JSON file where the hierarchy will be saved.')
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        'output_file', 'provenances_full.json',
+        'Path to the output JSON file where the hierarchy will be saved.')
 
 
 def get_node_property(node_data, prop_name, default=None):
@@ -222,4 +225,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

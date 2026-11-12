@@ -32,12 +32,16 @@ sys.path.append(script_dir)
 import generate_provisional_nodes
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string("entity", "", "Entity type (Schema/Place).")
-flags.DEFINE_string("version", "", "Import version.")
-flags.DEFINE_string(
-    "output_dir", "",
-    "Directory to write output files (default: directory containing manifest.json)."
-)
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string("entity", "", "Entity type (Schema/Place).")
+    flags.DEFINE_string("version", "", "Import version.")
+    flags.DEFINE_string(
+        "output_dir", "",
+        "Directory to write output files (default: directory containing manifest.json)."
+    )
 
 
 def process(entity_type: str, version: str, output_dir: str = ""):
@@ -64,4 +68,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)
