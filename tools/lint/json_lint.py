@@ -95,12 +95,17 @@ def _reject_constant(name):
 
 
 def lint_file(path):
-    """Returns a list of error messages for the file (empty if valid)."""
+    """Checks a single file.
+
+    Returns:
+      A list of error messages (empty if the file is valid), or None if the
+      file was skipped because it is a Git LFS pointer.
+    """
     with open(path, 'rb') as f:
         raw = f.read()
 
     if raw.startswith(_LFS_POINTER_PREFIX):
-        return []
+        return None
 
     try:
         text = raw.decode('utf-8-sig')
@@ -118,13 +123,14 @@ def lint_file(path):
     return []
 
 
-def find_json_files(paths, repo_root=_REPO_ROOT):
-    """Yields JSON files under the given paths, skipping excluded ones.
+def is_excluded_file(path, repo_root=_REPO_ROOT):
+    """Returns whether the file is listed in EXCLUDED_FILES."""
+    rel_path = os.path.relpath(path, repo_root)
+    return rel_path.replace(os.sep, '/') in EXCLUDED_FILES
 
-    Args:
-      paths: Files or directories to search.
-      repo_root: Directory that EXCLUDED_FILES entries are relative to.
-    """
+
+def _list_json_files(paths):
+    """Yields JSON files under the given paths, skipping EXCLUDED_DIRS."""
     for path in paths:
         if os.path.isfile(path):
             candidates = [path]
@@ -136,21 +142,37 @@ def find_json_files(paths, repo_root=_REPO_ROOT):
                 candidates.extend(
                     os.path.join(dirpath, name) for name in sorted(filenames))
         for candidate in candidates:
-            if not candidate.endswith(JSON_EXTENSIONS):
-                continue
-            rel_path = os.path.relpath(candidate, repo_root)
-            if rel_path.replace(os.sep, '/') in EXCLUDED_FILES:
-                continue
-            yield candidate
+            if candidate.endswith(JSON_EXTENSIONS):
+                yield candidate
+
+
+def find_json_files(paths, repo_root=_REPO_ROOT):
+    """Yields JSON files under the given paths, skipping excluded ones.
+
+    Args:
+      paths: Files or directories to search.
+      repo_root: Directory that EXCLUDED_FILES entries are relative to.
+    """
+    for path in _list_json_files(paths):
+        if not is_excluded_file(path, repo_root):
+            yield path
 
 
 def main(argv):
     paths = argv[1:] or [_REPO_ROOT]
-    num_files = 0
+    num_checked = 0
     num_failed = 0
-    for path in find_json_files(paths):
-        num_files += 1
+    num_excluded = 0
+    num_lfs = 0
+    for path in _list_json_files(paths):
+        if is_excluded_file(path):
+            num_excluded += 1
+            continue
         errors = lint_file(path)
+        if errors is None:
+            num_lfs += 1
+            continue
+        num_checked += 1
         if errors:
             num_failed += 1
             display_path = os.path.relpath(path)
@@ -159,7 +181,9 @@ def main(argv):
             for error in errors:
                 print(f'{display_path}: {error}')
 
-    print(f'Checked {num_files} JSON files, {num_failed} failed.')
+    print(f'Checked {num_checked} JSON files, {num_failed} failed, '
+          f'{num_excluded + num_lfs} skipped ({num_excluded} in '
+          f'EXCLUDED_FILES, {num_lfs} Git LFS pointers).')
     if num_failed:
         print('ERROR: Fix the invalid JSON files listed above.',
               file=sys.stderr)
