@@ -161,6 +161,8 @@ you import modules and run tests, as below.
 *   Code must pass the [Ruff](https://docs.astral.sh/ruff/) lint checks
     configured in [ruff.toml](ruff.toml). These are enforced in CI by
     `./run_tests.sh -l`.
+*   JSON files must be valid JSON. This is also enforced by
+    `./run_tests.sh -l`; see [tools/lint](tools/lint/README.md).
 *   Code must not generate lint errors or warnings according to
     [pylint](https://www.pylint.org/) configured for the
     [Google Python Style Guide](https://google.github.io/styleguide/pyguide.html)
@@ -190,8 +192,9 @@ To run the tools via a command line (both installed after setup steps above):
 # Apply safe ruff fixes and update (--in-place) all files with yapf
 ./run_tests.sh -f
 
-# Run ruff, and produce differences between the current code and reformatted
-# code. Empty output indicates correctly formatted code.
+# Run ruff, produce differences between the current code and reformatted
+# code, and check that JSON files are valid. Empty ruff/yapf output indicates
+# correctly formatted code.
 ./run_tests.sh -l
 ```
 
