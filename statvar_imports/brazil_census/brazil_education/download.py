@@ -16,21 +16,20 @@
 Downloads educational enrollment data directly from official IBGE sources:
 1. Live IBGE SIDRA REST API:
    - Table 1972 for 2000 and 2010 (by education level and public/private school network).
-   - Tables 10057, 10058, 10059 for 2022 (student attendance across 3 age cohorts: 0-5, 6-17, 18+).
+   - Tables 10057, 10058, 10059 for 2022 (student attendance across 3 age cohorts: 0-5, 6-17, 18+ across n1/n2/n3/n6).
 2. Official IBGE Census Downloads Portal (https://ftp.ibge.gov.br/Censos/Censo_Demografico_2000/educacao/Municipios/)
    for municipal-level education workbooks.
-3. Fallback to raw input files from GCS (gs://unresolved_mcf/country/brazil/input_files/Brazil_2000_education_input/*.xls)
-   if live upstream servers are unreachable.
+3. Historical raw input files from GCS (gs://unresolved_mcf/country/brazil/input_files/Brazil_2000_education_input/*.xls
+   and Brazil_2010_education_{public,private}_input/*.xls).
 """
 
-import glob
 import io
 import json
 import os
 import sys
 import tempfile
-import zipfile
 from typing import Any, Dict, List, Optional, Tuple
+import zipfile
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 if SCRIPT_DIR not in sys.path:
@@ -47,14 +46,26 @@ SIDRA_BASE_URL = "https://apisidra.ibge.gov.br"
 TABLE_1972_API_URL = (f"{SIDRA_BASE_URL}/values/t/1972/n1/all/n2/all/n3/all"
                       f"/v/690/p/all/c11797/all/c11798/all?formato=json")
 
-# 2022 SIDRA Education tables across 3 disjoint age cohorts:
+# 2022 SIDRA Education tables across 3 disjoint age cohorts (chunked by c11798 to stay <50,000 rows across n6/all):
 # Table 10057: Pessoas de até 5 anos (v/13282)
 # Table 10058: Pessoas de 6 a 17 anos (v/13283)
 # Table 10059: Pessoas de 18 anos ou mais (v/13284)
-TABLE_2022_EDUCATION_SPECS: List[Tuple[str, str]] = [
-    ("10057", "13282"),
-    ("10058", "13283"),
-    ("10059", "13284"),
+TABLE_2022_EDUCATION_SPECS: List[Tuple[str, str, str, str]] = [
+    ("sidra_10057_n6.json", "10057", "13282", "all"),
+    (
+        "sidra_10058_p1_n6.json",
+        "10058",
+        "13283",
+        "95300,95301,107454,7905,7906",
+    ),
+    ("sidra_10058_p2_n6.json", "10058", "13283", "7907,7908,7909,95307"),
+    (
+        "sidra_10059_p1_n6.json",
+        "10059",
+        "13284",
+        "95300,7905,7906,7907,7908",
+    ),
+    ("sidra_10059_p2_n6.json", "10059", "13284", "7909,95307,7911,7912"),
 ]
 
 D4C_2022_TO_NIVEL: Dict[str, str] = {
@@ -71,26 +82,52 @@ D4C_2022_TO_NIVEL: Dict[str, str] = {
     "7912": "Pós-graduação",
 }
 
-IBGE_FTP_2000_EDUCATION_BASE = "https://ftp.ibge.gov.br/Censos/Censo_Demografico_2000/educacao/Municipios/"
+IBGE_FTP_2000_EDUCATION_BASE = (
+    "https://ftp.ibge.gov.br/Censos/Censo_Demografico_2000/educacao/Municipios/"
+)
 GCS_BUCKET_NAME = "unresolved_mcf"
 GCS_INPUT_DIR = "country/brazil/input_files/Brazil_2000_education_input"
 
 UF_CODES_2000 = [
-    "ac", "al", "am", "ap", "ba", "ce", "df", "es", "go", "ma", "mg", "ms",
-    "mt", "pa", "pb", "pe", "pi", "pr", "rj", "rn", "ro", "rr", "rs", "sc",
-    "se", "sp", "to"
+    "ac",
+    "al",
+    "am",
+    "ap",
+    "ba",
+    "ce",
+    "df",
+    "es",
+    "go",
+    "ma",
+    "mg",
+    "ms",
+    "mt",
+    "pa",
+    "pb",
+    "pe",
+    "pi",
+    "pr",
+    "rj",
+    "rn",
+    "ro",
+    "rr",
+    "rs",
+    "sc",
+    "se",
+    "sp",
+    "to",
 ]
 
 RAW_COL_TO_NIVEL = {
-    'Total Student': 'Total',
-    'Student Nursery': 'Creche',
-    'Student PreKindergarten': 'Pré-escolar',
-    'Student AdultEducation': 'Educação de Jovens e Adultos',
-    'Student PrimaryEducation': 'Fundamental',
-    'Student BRA_HighSchool': 'Médio',
-    'Student PreEntranceExam': 'Pré-vestibular',
-    'Student BachelorsDegree': 'Superior Graduação',
-    'Student MastersDegreeOrHigher': 'Pós-graduação',
+    "Total Student": "Total",
+    "Student Nursery": "Creche",
+    "Student PreKindergarten": "Pré-escolar",
+    "Student AdultEducation": "Educação de Jovens e Adultos",
+    "Student PrimaryEducation": "Fundamental",
+    "Student BRA_HighSchool": "Médio",
+    "Student PreEntranceExam": "Pré-vestibular",
+    "Student BachelorsDegree": "Superior Graduação",
+    "Student MastersDegreeOrHigher": "Pós-graduação",
 }
 
 FLAGS = flags.FLAGS
@@ -124,105 +161,117 @@ def get_robust_session() -> requests.Session:
     return session
 
 
-def fetch_sidra_data(session: requests.Session,
-                     url: str) -> List[Dict[str, Any]]:
+def _get_raw_dir(target_path: str) -> str:
+    """Returns the directory for archiving raw downloaded payloads."""
+    if os.path.abspath(target_path) == os.path.abspath(DEFAULT_OUTPUT_FILE):
+        raw_dir = os.path.join(SCRIPT_DIR, "raw_files")
+    else:
+        raw_dir = os.path.join(os.path.dirname(os.path.abspath(target_path)),
+                               "raw_files")
+    os.makedirs(raw_dir, exist_ok=True)
+    return raw_dir
+
+
+def fetch_sidra_data(
+    session: requests.Session,
+    url: str,
+    raw_file_path: Optional[str] = None,
+) -> List[Dict[str, Any]]:
     """Fetches raw JSON payload from IBGE SIDRA REST API."""
-    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
     logging.info(f"Dispatching outbound HTTP request: url={url}")
-    res = session.get(url, headers=headers, timeout=90)
+    res = session.get(url, timeout=90)
     res.raise_for_status()
     raw_json = res.json()
     if not isinstance(raw_json, list) or len(raw_json) < 2:
         raise RuntimeError(
             f"Invalid or empty response payload from SIDRA API: {url}")
+    if raw_file_path:
+        with open(raw_file_path, "w", encoding="utf-8") as f:
+            json.dump(raw_json, f, ensure_ascii=False)
     return raw_json
 
 
-def load_municipal_mapping() -> Dict[str, str]:
-    """Loads place code mapping to wikidata ID from local scratch or GCS."""
-    candidate_paths = [
-        os.path.join(SCRIPT_DIR, "..", "..", "scratch", "intermediate_files",
-                     "muncial_state_brazil_mapping.json"),
-        os.path.join("/data", "scratch", "intermediate_files",
-                     "muncial_state_brazil_mapping.json"),
-        os.path.join(SCRIPT_DIR, "..", "..", "..", "scratch",
-                     "intermediate_files", "muncial_state_brazil_mapping.json"),
-    ]
-    for p in candidate_paths:
-        if os.path.isfile(p):
-            with open(p, "r", encoding="utf-8") as f:
-                return json.load(f)
-    try:
-        from google.cloud import storage
-        client = storage.Client()
-        bucket = client.bucket(GCS_BUCKET_NAME)
-        blob = bucket.blob(
-            "country/brazil/intermediate_files/muncial_state_brazil_mapping.json"
-        )
-        return json.loads(blob.download_as_text())
-    except Exception as e:
-        logging.warning(f"Could not load municipal mapping from GCS: {e}")
-    return {}
+def load_municipal_mapping(raw_dir: Optional[str] = None) -> Dict[str, str]:
+    """Loads place code mapping to wikidata ID from GCS."""
+    from google.cloud import storage
+
+    client = storage.Client()
+    bucket = client.bucket(GCS_BUCKET_NAME)
+    blob = bucket.blob(
+        "country/brazil/intermediate_files/muncial_state_brazil_mapping.json")
+    text = blob.download_as_text()
+    if raw_dir:
+        with open(
+                os.path.join(raw_dir, "muncial_state_brazil_mapping.json"),
+                "w",
+                encoding="utf-8",
+        ) as f:
+            f.write(text)
+    mapping = json.loads(text)
+    if not mapping:
+        raise RuntimeError("Loaded empty municipal mapping from GCS.")
+    return mapping
 
 
 def parse_raw_education_xls(file_content: bytes,
                             mapping: Dict[str, str]) -> List[Dict[str, Any]]:
     """Parses raw IBGE Table 4.1.1 education XLS workbook."""
     rows: List[Dict[str, Any]] = []
-    try:
-        df = pd.read_excel(io.BytesIO(file_content))
-        if len(df) <= 6:
-            return rows
-        header_row = df.iloc[6]
-        col_map: Dict[int, str] = {}
-        code_idx = None
-        for idx, c in enumerate(header_row):
-            c_str = str(c).strip()
-            if "Código da Unidade Geográfica" in c_str:
-                code_idx = idx
-            elif c_str in RAW_COL_TO_NIVEL:
-                col_map[idx] = RAW_COL_TO_NIVEL[c_str]
+    df = pd.read_excel(io.BytesIO(file_content))
+    if len(df) <= 6:
+        raise ValueError("2000 education XLS workbook has fewer than 7 rows.")
+    header_row = df.iloc[6]
+    col_map: Dict[int, str] = {}
+    code_idx = None
+    for idx, c in enumerate(header_row):
+        c_str = str(c).strip()
+        if "Código da Unidade Geográfica" in c_str:
+            code_idx = idx
+        elif c_str in RAW_COL_TO_NIVEL:
+            col_map[idx] = RAW_COL_TO_NIVEL[c_str]
 
-        for r_idx in range(7, len(df)):
-            r = df.iloc[r_idx]
-            code = r.iloc[code_idx] if code_idx is not None else None
-            if pd.isna(code):
+    for r_idx in range(7, len(df)):
+        r = df.iloc[r_idx]
+        code = r.iloc[code_idx] if code_idx is not None else None
+        if pd.isna(code):
+            continue
+        try:
+            code_int = int(code)
+        except (ValueError, TypeError):
+            continue
+
+        place_resolved = mapping.get(str(code_int))
+        if not place_resolved:
+            continue
+
+        for c_idx, nivel in col_map.items():
+            val = r.iloc[c_idx]
+            if pd.isna(val) or str(val).strip() in ["-", "...", "..", "X", ""]:
                 continue
             try:
-                code_int = int(code)
+                val_int = int(round(float(val)))
             except (ValueError, TypeError):
                 continue
 
-            place_resolved = mapping.get(str(code_int))
-            if not place_resolved:
-                continue
-
-            for c_idx, nivel in col_map.items():
-                val = r.iloc[c_idx]
-                if pd.isna(val):
-                    continue
-                try:
-                    val_int = int(round(float(val)))
-                except (ValueError, TypeError):
-                    continue
-
-                rows.append({
-                    "Ano": 2000,
-                    "Localidade": place_resolved,
-                    "RedeEnsino": "Total",
-                    "NivelEnsino": nivel,
-                    "Estudantes": val_int,
-                })
-    except Exception as e:
-        logging.warning(f"Error parsing raw education XLS: {e}")
+            rows.append({
+                "Ano": 2000,
+                "Localidade": place_resolved,
+                "RedeEnsino": "Total",
+                "NivelEnsino": nivel,
+                "Estudantes": val_int,
+            })
+    if not rows:
+        raise ValueError("Parsed 0 rows from 2000 education XLS workbook.")
     return rows
 
 
 def fetch_from_ibge_ftp_or_input_files(
-        session: requests.Session) -> List[Dict[str, Any]]:
-    """Fetches municipal education workbooks from live IBGE FTP or raw input files."""
+    session: requests.Session,
+    raw_dir: Optional[str] = None,
+) -> List[Dict[str, Any]]:
+    """Fetches municipal education workbooks from live IBGE FTP or GCS raw input files."""
     rows: List[Dict[str, Any]] = []
-    mapping = load_municipal_mapping()
+    mapping = load_municipal_mapping(raw_dir=raw_dir)
 
     # 1. Primary: Attempt live download from official IBGE FTP portal
     try:
@@ -246,46 +295,24 @@ def fetch_from_ibge_ftp_or_input_files(
             return rows
     except Exception as e:
         logging.warning(
-            f"Live IBGE FTP download failed ({e}). Checking raw input files...")
-
-    # 2. Secondary: Try local scratch input_files
-    scratch_dir = os.path.join(SCRIPT_DIR, "..", "..", "scratch", "input_files",
-                               "Brazil_2000_education_input")
-    alt_scratch = os.path.join("/data", "scratch", "input_files",
-                               "Brazil_2000_education_input")
-    local_dir = scratch_dir if os.path.isdir(scratch_dir) else (
-        alt_scratch if os.path.isdir(alt_scratch) else None)
-
-    if local_dir and os.path.isdir(local_dir) and os.listdir(local_dir):
-        xls_files = sorted(glob.glob(os.path.join(local_dir, "*.xls")))
-        for fpath in xls_files:
-            with open(fpath, "rb") as f:
-                rows.extend(parse_raw_education_xls(f.read(), mapping))
-        if rows:
-            logging.info(
-                f"Parsed {len(rows)} rows from local raw education input files."
-            )
-            return rows
-
-    # 3. Tertiary: Try GCS raw input_files
-    try:
-        from google.cloud import storage
-        client = storage.Client()
-        bucket = client.bucket(GCS_BUCKET_NAME)
-        blobs = list(bucket.list_blobs(prefix=GCS_INPUT_DIR))
-        for b in blobs:
-            if b.name.endswith(".xls"):
-                content = b.download_as_bytes()
-                rows.extend(parse_raw_education_xls(content, mapping))
-        if rows:
-            logging.info(
-                f"Parsed {len(rows)} rows from GCS raw education input files.")
-            return rows
-    except Exception as e:
-        logging.warning(
-            f"Could not load raw education files from GCS gs://{GCS_BUCKET_NAME}/{GCS_INPUT_DIR}: {e}"
+            f"Live IBGE FTP download failed ({e}). Falling back to GCS raw input files..."
         )
 
+    # 2. Secondary: GCS raw input_files
+    from google.cloud import storage
+
+    client = storage.Client()
+    bucket = client.bucket(GCS_BUCKET_NAME)
+    blobs = list(bucket.list_blobs(prefix=GCS_INPUT_DIR))
+    for b in blobs:
+        if b.name.endswith(".xls"):
+            content = b.download_as_bytes()
+            rows.extend(parse_raw_education_xls(content, mapping))
+    if not rows:
+        raise RuntimeError(
+            f"No 2000 education rows loaded from FTP or GCS gs://{GCS_BUCKET_NAME}/{GCS_INPUT_DIR}."
+        )
+    logging.info(f"Parsed {len(rows)} rows from GCS raw education input files.")
     return rows
 
 
@@ -320,15 +347,15 @@ IBGE_STATE_CODE_TO_NAME = {
 }
 
 RAW_2010_COL_TO_NIVEL = {
-    1: 'Total',
-    2: 'Creche',
-    3: 'Pré-escolar',
-    4: 'Classe de alfabetização',
-    5: 'Educação de Jovens e Adultos',
-    6: 'Fundamental',
-    7: 'Médio',
-    8: 'Superior Graduação',
-    9: 'Pós-graduação',
+    1: "Total",
+    2: "Creche",
+    3: "Pré-escolar",
+    4: "Classe de alfabetização",
+    5: "Educação de Jovens e Adultos",
+    6: "Fundamental",
+    7: "Médio",
+    8: "Superior Graduação",
+    9: "Pós-graduação",
 }
 
 
@@ -336,160 +363,162 @@ def parse_2010_education_file(content_bytes: bytes,
                               rede: str) -> List[Dict[str, Any]]:
     """Parses a 2010 education state XLS workbook (public or private)."""
     rows = []
-    try:
-        df = pd.read_excel(io.BytesIO(content_bytes), header=None, skiprows=3)
-        header_idx = None
-        for idx in range(10):
-            val = str(df.iloc[idx, 1]).strip()
-            if "Student PublicSchool" in val or "Student PrivateSchool" in val:
-                header_idx = idx
-                break
-        if header_idx is None:
-            return rows
-        muni_start = None
-        for idx in range(header_idx + 1, len(df)):
-            val = df.iloc[idx, 0]
-            if pd.notna(val) and "munic" in str(val).lower():
-                muni_start = idx + 1
-                break
-        if muni_start is None:
-            muni_start = header_idx + 1
-        code_col = 10 if df.shape[1] > 10 else None
-        if code_col is None:
-            for col_i in range(df.shape[1]):
-                for row_i in range(header_idx + 1):
-                    if "código" in str(
-                            df.iloc[row_i, col_i]).lower() or "codigo" in str(
-                                df.iloc[row_i, col_i]).lower():
-                        code_col = col_i
-                        break
-                if code_col is not None:
+    df = pd.read_excel(io.BytesIO(content_bytes), header=None, skiprows=3)
+    header_idx = None
+    for idx in range(10):
+        val = str(df.iloc[idx, 1]).strip()
+        if "Student PublicSchool" in val or "Student PrivateSchool" in val:
+            header_idx = idx
+            break
+    if header_idx is None:
+        raise ValueError(
+            f"Could not find header row in 2010 education XLS ({rede}).")
+    muni_start = None
+    for idx in range(header_idx + 1, len(df)):
+        val = df.iloc[idx, 0]
+        if pd.notna(val) and "munic" in str(val).lower():
+            muni_start = idx + 1
+            break
+    if muni_start is None:
+        muni_start = header_idx + 1
+    code_col = 10 if df.shape[1] > 10 else None
+    if code_col is None:
+        for col_i in range(df.shape[1]):
+            for row_i in range(header_idx + 1):
+                if ("código" in str(df.iloc[row_i, col_i]).lower() or
+                        "codigo" in str(df.iloc[row_i, col_i]).lower()):
+                    code_col = col_i
                     break
-
-        for idx in range(len(df)):
-            val0 = str(df.iloc[idx, 0]).strip()
-            if val0 == "Total":
-                raw_code = str(df.iloc[idx, code_col]).strip() if (
-                    code_col is not None and code_col < df.shape[1]) else ""
-                if raw_code and raw_code.isnumeric() and len(raw_code) == 2:
-                    state_loc = IBGE_STATE_CODE_TO_NAME.get(raw_code, raw_code)
-                    for c_idx, nivel in RAW_2010_COL_TO_NIVEL.items():
-                        if nivel != "Classe de alfabetização":
-                            continue
-                        if c_idx < df.shape[1]:
-                            val = df.iloc[idx, c_idx]
-                            if pd.notna(val) and str(val).strip() not in [
-                                    "-", "...", "..", ""
-                            ]:
-                                try:
-                                    val_int = int(round(float(val)))
-                                    rows.append({
-                                        "Ano": 2010,
-                                        "Localidade": state_loc,
-                                        "RedeEnsino": rede,
-                                        "NivelEnsino": nivel,
-                                        "Estudantes": val_int,
-                                    })
-                                except (ValueError, TypeError):
-                                    pass
+            if code_col is not None:
                 break
 
-        for idx in range(muni_start, len(df)):
-            raw_code = str(df.iloc[idx, code_col]).strip() if (
-                code_col is not None and code_col < df.shape[1]) else ""
-            is_muni_code = raw_code.isnumeric() and len(raw_code) == 7
-            place = raw_code if is_muni_code else str(df.iloc[idx, 0]).strip()
-            if not place or (pd.isna(df.iloc[idx, 0]) and not is_muni_code):
+    for idx in range(len(df)):
+        val0 = str(df.iloc[idx, 0]).strip()
+        if val0 == "Total":
+            raw_code = (str(df.iloc[idx, code_col]).strip() if
+                        (code_col is not None and
+                         code_col < df.shape[1]) else "")
+            if raw_code and raw_code.isnumeric() and len(raw_code) == 2:
+                state_loc = IBGE_STATE_CODE_TO_NAME.get(raw_code, raw_code)
+                for c_idx, nivel in RAW_2010_COL_TO_NIVEL.items():
+                    if nivel != "Classe de alfabetização":
+                        continue
+                    if c_idx < df.shape[1]:
+                        val = df.iloc[idx, c_idx]
+                        if pd.notna(val) and str(val).strip() not in [
+                                "-",
+                                "...",
+                                "..",
+                                "X",
+                                "",
+                        ]:
+                            try:
+                                val_int = int(round(float(val)))
+                                rows.append({
+                                    "Ano": 2010,
+                                    "Localidade": state_loc,
+                                    "RedeEnsino": rede,
+                                    "NivelEnsino": nivel,
+                                    "Estudantes": val_int,
+                                })
+                            except (ValueError, TypeError):
+                                pass
+            break
+
+    for idx in range(muni_start, len(df)):
+        raw_code = (str(df.iloc[idx, code_col]).strip() if
+                    (code_col is not None and code_col < df.shape[1]) else "")
+        is_muni_code = raw_code.isnumeric() and len(raw_code) == 7
+        place = raw_code if is_muni_code else str(df.iloc[idx, 0]).strip()
+        if not place or (pd.isna(df.iloc[idx, 0]) and not is_muni_code):
+            continue
+        place_lower = place.lower()
+        if (place == "nan" or
+            ("fonte" in place_lower and "fonte boa" not in place_lower) or
+                "nota" in place_lower):
+            continue
+        for c_idx, nivel in RAW_2010_COL_TO_NIVEL.items():
+            if c_idx >= df.shape[1]:
                 continue
-            place_lower = place.lower()
-            if place == "nan" or ("fonte" in place_lower and "fonte boa"
-                                  not in place_lower) or "nota" in place_lower:
+            val = df.iloc[idx, c_idx]
+            if pd.isna(val) or str(val).strip() in ["-", "...", "..", "X", ""]:
                 continue
-            for c_idx, nivel in RAW_2010_COL_TO_NIVEL.items():
-                if c_idx >= df.shape[1]:
-                    continue
-                val = df.iloc[idx, c_idx]
-                if pd.isna(val) or str(val).strip() in ["-", "...", "..", ""]:
-                    continue
-                try:
-                    val_int = int(round(float(val)))
-                    rows.append({
-                        "Ano": 2010,
-                        "Localidade": place,
-                        "RedeEnsino": rede,
-                        "NivelEnsino": nivel,
-                        "Estudantes": val_int,
-                    })
-                except (ValueError, TypeError):
-                    continue
-    except Exception as e:
-        logging.warning(f"Error parsing 2010 education XLS ({rede}): {e}")
+            try:
+                val_int = int(round(float(val)))
+                rows.append({
+                    "Ano": 2010,
+                    "Localidade": place,
+                    "RedeEnsino": rede,
+                    "NivelEnsino": nivel,
+                    "Estudantes": val_int,
+                })
+            except (ValueError, TypeError):
+                continue
+    if not rows:
+        raise ValueError(f"Parsed 0 rows from 2010 education XLS ({rede}).")
     return rows
 
 
 def fetch_2010_education_files() -> List[Dict[str, Any]]:
     """Loads 2010 municipal education workbooks across all states for public and private schools."""
+    from google.cloud import storage
+
     rows = []
+    client = storage.Client()
+    bucket = client.bucket(GCS_BUCKET_NAME)
     for folder, rede in [
         ("Brazil_2010_education_public_input", "Pública"),
         ("Brazil_2010_education_private_input", "Particular"),
     ]:
-        scratch_dir = os.path.join(SCRIPT_DIR, "..", "..", "scratch",
-                                   "input_files", folder)
-        alt_scratch = os.path.join("/data", "scratch", "input_files", folder)
-        local_dir = scratch_dir if os.path.isdir(scratch_dir) else (
-            alt_scratch if os.path.isdir(alt_scratch) else None)
-
-        if local_dir and os.path.isdir(local_dir) and os.listdir(local_dir):
-            xls_files = sorted(glob.glob(os.path.join(local_dir, "*.xls")))
-            for fpath in xls_files:
-                with open(fpath, "rb") as f:
-                    rows.extend(parse_2010_education_file(f.read(), rede))
-        else:
-            try:
-                from google.cloud import storage
-                client = storage.Client()
-                bucket = client.bucket(GCS_BUCKET_NAME)
-                blobs = list(
-                    bucket.list_blobs(
-                        prefix=f"country/brazil/input_files/{folder}"))
-                for b in blobs:
-                    if b.name.endswith(".xls"):
-                        content = b.download_as_bytes()
-                        rows.extend(parse_2010_education_file(content, rede))
-            except Exception as e:
-                logging.warning(
-                    f"Could not load 2010 education files from GCS for {folder}: {e}"
-                )
+        blobs = list(
+            bucket.list_blobs(prefix=f"country/brazil/input_files/{folder}"))
+        folder_rows = []
+        for b in blobs:
+            if b.name.endswith(".xls"):
+                content = b.download_as_bytes()
+                folder_rows.extend(parse_2010_education_file(content, rede))
+        if not folder_rows:
+            raise RuntimeError(
+                f"No 2010 education rows loaded from GCS for {folder}.")
+        rows.extend(folder_rows)
     return rows
 
 
 def fetch_2022_education_sidra(
-        session: requests.Session) -> Dict[Tuple[int, str, str, str], int]:
+    session: requests.Session,
+    raw_dir: Optional[str] = None,
+) -> Dict[Tuple[int, str, str, str], int]:
     """Fetches 2022 student attendance by education level from SIDRA Tables 10057, 10058, 10059.
 
-    Sums student counts across the three disjoint age cohorts:
-    - Table 10057: Pessoas de até 5 anos (v/13282)
-    - Table 10058: Pessoas de 6 a 17 anos (v/13283)
-    - Table 10059: Pessoas de 18 anos ou mais (v/13284)
-    providing complete 2022 observations for RedeEnsino='Total'.
-    """
+  Sums student counts across the three disjoint age cohorts:
+  - Table 10057: Pessoas de até 5 anos (v/13282)
+  - Table 10058: Pessoas de 6 a 17 anos (v/13283)
+  - Table 10059: Pessoas de 18 anos ou mais (v/13284)
+  providing complete 2022 observations for RedeEnsino='Total' across all territorial levels (n1/n2/n3/n6).
+  """
     sidra_2022_acc: Dict[Tuple[int, str, str, str], int] = {}
-    for tid, vid in TABLE_2022_EDUCATION_SPECS:
-        url = f"{SIDRA_BASE_URL}/values/t/{tid}/n1/all/n2/all/n3/all/v/{vid}/p/all/c11798/all?formato=json"
-        raw_data = fetch_sidra_data(session, url)
+    for fname, tid, vid, c11798_codes in TABLE_2022_EDUCATION_SPECS:
+        url = f"{SIDRA_BASE_URL}/values/t/{tid}/n1/all/n2/all/n3/all/n6/all/v/{vid}/p/all/c11798/{c11798_codes}?formato=json"
+        raw_data = fetch_sidra_data(
+            session,
+            url,
+            raw_file_path=os.path.join(raw_dir, fname) if raw_dir else None,
+        )
         for r in raw_data[1:]:
             val_str = r.get("V")
-            if val_str in ["-", "...", "..", None, ""]:
+            if val_str in ["-", "...", "..", "X", None, ""]:
                 continue
             try:
                 val = int(round(float(val_str)))
             except (ValueError, TypeError):
                 continue
 
-            loc = str(r.get("D1N", "")).strip()
-            if loc == "Brasil":
-                loc = "Brazil"
+            if str(r.get("NC", "")).strip() == "6":
+                loc = str(r.get("D1C", "")).strip()
+            else:
+                loc = str(r.get("D1N", "")).strip()
+                if loc == "Brasil":
+                    loc = "Brazil"
 
             d4c = str(r.get("D4C", "")).strip()
             nivel = D4C_2022_TO_NIVEL.get(d4c)
@@ -508,11 +537,13 @@ def download_all_years(
 ) -> str:
     """Downloads Brazil Census education data across past, present, and future censuses."""
     target_path = output_file or DEFAULT_OUTPUT_FILE
+    raw_dir = _get_raw_dir(target_path)
     all_rows: List[Dict[str, Any]] = []
 
     try:
-        # 1. Historical & Municipal data from live IBGE FTP portal or raw input files (2000)
-        raw_input_rows = fetch_from_ibge_ftp_or_input_files(session)
+        # 1. Historical & Municipal data from live IBGE FTP portal or GCS raw input files (2000)
+        raw_input_rows = fetch_from_ibge_ftp_or_input_files(session,
+                                                            raw_dir=raw_dir)
         all_rows.extend(raw_input_rows)
 
         # 2. 2010 Municipal Education workbooks (Public and Private)
@@ -521,13 +552,17 @@ def download_all_years(
 
         # 3. Live SIDRA API (Table 1972 for 2000 and 2010)
         # Added after historical files so authoritative live SIDRA rows take precedence in drop_duplicates(keep="last").
-        raw_sidra = fetch_sidra_data(session, TABLE_1972_API_URL)
+        raw_sidra = fetch_sidra_data(
+            session,
+            TABLE_1972_API_URL,
+            raw_file_path=os.path.join(raw_dir, "sidra_1972_macro.json"),
+        )
         logging.info(
             f"Retrieved {len(raw_sidra) - 1} records from SIDRA Table 1972.")
         sidra_acc: Dict[tuple, int] = {}
         for r in raw_sidra[1:]:
             val_str = r.get("V")
-            if val_str in ["-", "...", "..", None, ""]:
+            if val_str in ["-", "...", "..", "X", None, ""]:
                 continue
             try:
                 val = int(round(float(val_str)))
@@ -553,34 +588,42 @@ def download_all_years(
             elif d5c == "95301" or (not d5c and nivel_raw == "Creche"):
                 nivel = "Creche"
             elif d5c in ("95302", "107454") or (not d5c and nivel_raw in (
-                    "Pré-escolar", "Pré-escolar ou classe de alfabetização")):
+                    "Pré-escolar",
+                    "Pré-escolar ou classe de alfabetização",
+            )):
                 nivel = "Pré-escolar"
             elif d5c == "7904" or (not d5c and
                                    nivel_raw == "Classe de alfabetização"):
                 nivel = "Classe de alfabetização"
-            elif d5c in ("95303",
-                         "7905") or (not d5c and nivel_raw
-                                     in ("Alfabetização de adultos",
-                                         "Alfabetização de jovens e adultos",
-                                         "Educação de Jovens e Adultos")):
+            elif d5c in ("95303", "7905") or (not d5c and nivel_raw in (
+                    "Alfabetização de adultos",
+                    "Alfabetização de jovens e adultos",
+                    "Educação de Jovens e Adultos",
+            )):
                 nivel = "Educação de Jovens e Adultos"
             elif d5c in ("95304", "7906") or (not d5c and nivel_raw in (
-                    "Fundamental", "Regular de ensino fundamental")):
+                    "Fundamental",
+                    "Regular de ensino fundamental",
+            )):
                 nivel = "Fundamental"
-            elif d5c in ("95305",
-                         "7908") or (not d5c and nivel_raw
-                                     in ("Médio", "Regular do ensino médio")):
+            elif d5c in ("95305", "7908") or (not d5c and nivel_raw in (
+                    "Médio",
+                    "Regular do ensino médio",
+            )):
                 nivel = "Médio"
             elif d5c == "95306" or (not d5c and nivel_raw == "Pré-vestibular"):
                 nivel = "Pré-vestibular"
-            elif d5c == "95307" or (not d5c and
-                                    nivel_raw in ("Superior de graduação",
-                                                  "Superior Graduação")):
+            elif d5c == "95307" or (not d5c and nivel_raw in (
+                    "Superior de graduação",
+                    "Superior Graduação",
+            )):
                 nivel = "Superior Graduação"
-            elif d5c in ("95308", "7911",
-                         "7912") or (not d5c and nivel_raw
-                                     in ("Mestrado ou doutorado", "Mestrado",
-                                         "Doutorado", "Pós-graduação")):
+            elif d5c in ("95308", "7911", "7912") or (not d5c and nivel_raw in (
+                    "Mestrado ou doutorado",
+                    "Mestrado",
+                    "Doutorado",
+                    "Pós-graduação",
+            )):
                 nivel = "Pós-graduação"
 
             if nivel is None:
@@ -603,7 +646,7 @@ def download_all_years(
             })
 
         # 4. Live 2022 Census Education from SIDRA Tables 10057, 10058, 10059
-        sidra_2022_acc = fetch_2022_education_sidra(session)
+        sidra_2022_acc = fetch_2022_education_sidra(session, raw_dir=raw_dir)
         for (year, loc, rede, nivel), val in sidra_2022_acc.items():
             all_rows.append({
                 "Ano": year,
@@ -658,25 +701,17 @@ def download_all_years(
 
 def main(argv: List[str]) -> None:
     if len(argv) > 1:
-        logging.error(f"Unrecognized command-line arguments: {argv[1:]}")
-        sys.exit(1)
+        raise ValueError(f"Unrecognized command-line arguments: {argv[1:]}")
 
     target_file = FLAGS.output_file or DEFAULT_OUTPUT_FILE
     session = get_robust_session()
-
-    try:
-        saved_file = download_all_years(
-            session=session,
-            output_file=target_file,
-            fallback_to_cached=FLAGS.fallback_to_cached,
-        )
-        logging.info(
-            f"Successfully generated Brazil Census education data at: {saved_file}"
-        )
-    except Exception as e:
-        logging.error(
-            f"Fatal error executing Brazil Census education download: {e}")
-        sys.exit(1)
+    saved_file = download_all_years(
+        session=session,
+        output_file=target_file,
+        fallback_to_cached=FLAGS.fallback_to_cached,
+    )
+    logging.info(
+        f"Successfully generated Brazil Census education data at: {saved_file}")
 
 
 if __name__ == "__main__":

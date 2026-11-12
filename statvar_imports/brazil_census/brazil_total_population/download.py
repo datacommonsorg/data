@@ -14,14 +14,16 @@
 """Automated download script for Brazil Census Total Population data.
 
 Downloads resident population counts directly from official IBGE sources:
-1. Live IBGE SIDRA REST API (Table 9514 for 2022+ and Table 1378 for 2010).
-2. Raw input workbooks from GCS input_files / local scratch:
+1. Live IBGE SIDRA REST API:
+   - Table 9514 (2022+ Census resident population by sex across n1/n2/n3/n6)
+   - Table 1378 (2010 Census resident population by sex across n1/n2/n3/n6)
+   - Table 6579 (2024–2026+ annual resident population estimates across n1/n2/n3/n6)
+2. Historical input workbooks from GCS input_files:
    - Brazil_2022_Muncipal_POP.xlsx (all 5,570 Brazilian municipalities)
    - POP2022_Brasil_e_UFs.xls (National & State 2022 counts)
    - POPU91*.XLS (1991 Census across all 27 Brazilian states)
 """
 
-import glob
 import io
 import json
 import os
@@ -40,13 +42,17 @@ from requests.adapters import HTTPAdapter
 from urllib3.util import Retry
 
 SIDRA_BASE_URL = "https://apisidra.ibge.gov.br"
-# Table 9514: População residente por sexo (2022+ Census)
+# Table 9514: População residente por sexo (2022+ Census across n1/n2/n3/n6)
 TABLE_9514_API_URL = (
     f"{SIDRA_BASE_URL}/values/t/9514/n1/all/n2/all/n3/all/n6/all"
     f"/v/93/p/all/c2/all/c287/100362/c286/113635?formato=json")
 # Table 1378: População residente por sexo (2010 Census)
 TABLE_1378_API_URL = (f"{SIDRA_BASE_URL}/values/t/1378/n1/all/n2/all/n3/all"
                       f"/v/93/p/all/c1/0/c2/all/c287/0/c455/0?formato=json")
+# Table 6579: EstimaPop — População residente estimada (annual post-2022 estimates across n1/n2/n3/n6)
+TABLE_6579_API_URL = (
+    f"{SIDRA_BASE_URL}/values/t/6579/n1/all/n2/all/n3/all/n6/all"
+    f"/v/9324/p/last%205?formato=json")
 
 GCS_BUCKET_NAME = "unresolved_mcf"
 GCS_POP_2022_FILE = "country/brazil/input_files/POP2022_Brasil_e_UFs.xls"
@@ -84,96 +90,114 @@ def get_robust_session() -> requests.Session:
     return session
 
 
-def fetch_sidra_data(session: requests.Session,
-                     url: str) -> List[Dict[str, Any]]:
+def _get_raw_dir(target_path: str) -> str:
+    """Returns the directory for archiving raw downloaded payloads."""
+    if os.path.abspath(target_path) == os.path.abspath(DEFAULT_OUTPUT_FILE):
+        raw_dir = os.path.join(SCRIPT_DIR, "raw_files")
+    else:
+        raw_dir = os.path.join(os.path.dirname(os.path.abspath(target_path)),
+                               "raw_files")
+    os.makedirs(raw_dir, exist_ok=True)
+    return raw_dir
+
+
+def fetch_sidra_data(
+    session: requests.Session,
+    url: str,
+    raw_file_path: Optional[str] = None,
+) -> List[Dict[str, Any]]:
     """Fetches raw JSON payload from IBGE SIDRA REST API."""
-    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
     logging.info(f"Dispatching outbound HTTP request: url={url}")
-    res = session.get(url, headers=headers, timeout=90)
+    res = session.get(url, timeout=90)
     res.raise_for_status()
     raw_json = res.json()
     if not isinstance(raw_json, list) or len(raw_json) < 2:
         raise RuntimeError(
             f"Invalid or empty response payload from SIDRA API: {url}")
+    if raw_file_path:
+        with open(raw_file_path, "w", encoding="utf-8") as f:
+            json.dump(raw_json, f, ensure_ascii=False)
     return raw_json
 
 
-def load_place_mappings() -> Tuple[Dict[str, str], Dict[str, str]]:
-    """Loads municipal mapping and 1991 place mapping."""
-    base_dirs = [
-        os.path.join(SCRIPT_DIR, "..", "..", "scratch", "intermediate_files"),
-        os.path.join("/data", "scratch", "intermediate_files"),
-        os.path.join(SCRIPT_DIR, "..", "..", "..", "scratch",
-                     "intermediate_files"),
-    ]
-    muni_map: Dict[str, str] = {}
-    map_91: Dict[str, str] = {}
-    for d in base_dirs:
-        muni_path = os.path.join(d, "muncial_state_brazil_mapping.json")
-        path_91 = os.path.join(d, "Brazil_Place_Mapping_1991.json")
-        if os.path.isfile(muni_path) and not muni_map:
-            with open(muni_path, "r", encoding="utf-8") as f:
-                muni_map = json.load(f)
-        if os.path.isfile(path_91) and not map_91:
-            with open(path_91, "r", encoding="utf-8") as f:
-                map_91 = json.load(f)
+def load_place_mappings(
+    raw_dir: Optional[str] = None,) -> Tuple[Dict[str, str], Dict[str, str]]:
+    """Loads municipal mapping and 1991 place mapping from GCS."""
+    from google.cloud import storage
+
+    client = storage.Client()
+    bucket = client.bucket(GCS_BUCKET_NAME)
+    b_muni = bucket.blob(
+        "country/brazil/intermediate_files/muncial_state_brazil_mapping.json")
+    b_91 = bucket.blob(
+        "country/brazil/intermediate_files/Brazil_Place_Mapping_1991.json")
+    muni_text = b_muni.download_as_text()
+    map_91_text = b_91.download_as_text()
+    if raw_dir:
+        with open(
+                os.path.join(raw_dir, "muncial_state_brazil_mapping.json"),
+                "w",
+                encoding="utf-8",
+        ) as f:
+            f.write(muni_text)
+        with open(
+                os.path.join(raw_dir, "Brazil_Place_Mapping_1991.json"),
+                "w",
+                encoding="utf-8",
+        ) as f:
+            f.write(map_91_text)
+    muni_map = json.loads(muni_text)
+    map_91 = json.loads(map_91_text)
     if not muni_map or not map_91:
-        try:
-            from google.cloud import storage
-            client = storage.Client()
-            bucket = client.bucket(GCS_BUCKET_NAME)
-            if not muni_map:
-                b = bucket.blob(
-                    "country/brazil/intermediate_files/muncial_state_brazil_mapping.json"
-                )
-                muni_map = json.loads(b.download_as_text())
-            if not map_91:
-                b = bucket.blob(
-                    "country/brazil/intermediate_files/Brazil_Place_Mapping_1991.json"
-                )
-                map_91 = json.loads(b.download_as_text())
-        except Exception as e:
-            logging.warning(f"Could not load place mappings from GCS: {e}")
+        raise RuntimeError("Loaded empty place mappings from GCS.")
     return muni_map, map_91
 
 
 def parse_raw_pop_xls(content_bytes: bytes) -> List[Dict[str, Any]]:
     """Parses raw IBGE POP2022_Brasil_e_UFs XLS workbook."""
     rows: List[Dict[str, Any]] = []
-    try:
-        df = pd.read_excel(io.BytesIO(content_bytes))
-        for r_idx in range(1, len(df)):
-            r = df.iloc[r_idx]
-            place_raw = str(r.iloc[0]).strip()
-            place_lower = place_raw.lower()
-            if not place_raw or pd.isna(
-                    r.iloc[0]) or ("fonte" in place_lower and "fonte boa"
-                                   not in place_lower) or "nota" in place_lower:
-                continue
-            place = place_raw.replace("Região ", "").strip()
-            if place in ("Unidades da Federação", "Grandes Regiões",
-                         "Brasil e Unidades da Federação"):
-                continue
-            if place == "Brasil":
-                place = "Brazil"
+    df = pd.read_excel(io.BytesIO(content_bytes))
+    for r_idx in range(1, len(df)):
+        r = df.iloc[r_idx]
+        place_raw = str(r.iloc[0]).strip()
+        place_lower = place_raw.lower()
+        if (not place_raw or pd.isna(r.iloc[0]) or
+            ("fonte" in place_lower and "fonte boa" not in place_lower) or
+                "nota" in place_lower):
+            continue
+        place = place_raw.replace("Região ", "").strip()
+        if place in (
+                "Unidades da Federação",
+                "Grandes Regiões",
+                "Brasil e Unidades da Federação",
+        ):
+            continue
+        if place == "Brasil":
+            place = "Brazil"
 
-            val = r.iloc[1] if len(r) > 1 and not pd.isna(r.iloc[1]) else (
-                r.iloc[2] if len(r) > 2 else None)
-            if pd.isna(val) or val is None:
-                continue
-            try:
-                val_int = int(round(float(val)))
-            except (ValueError, TypeError):
-                continue
+        val = (r.iloc[1] if len(r) > 1 and not pd.isna(r.iloc[1]) else
+               (r.iloc[2] if len(r) > 2 else None))
+        if pd.isna(val) or val is None or str(val).strip() in [
+                "-",
+                "...",
+                "..",
+                "X",
+                "",
+        ]:
+            continue
+        try:
+            val_int = int(round(float(val)))
+        except (ValueError, TypeError):
+            continue
 
-            rows.append({
-                "Ano": 2022,
-                "Localidade": place,
-                "Sexo": "Total",
-                "Populacao": val_int
-            })
-    except Exception as e:
-        logging.warning(f"Error parsing raw pop XLS: {e}")
+        rows.append({
+            "Ano": 2022,
+            "Localidade": place,
+            "Sexo": "Total",
+            "Populacao": val_int,
+        })
+    if not rows:
+        raise ValueError("Parsed 0 rows from POP2022_Brasil_e_UFs.xls.")
     return rows
 
 
@@ -181,28 +205,27 @@ def parse_raw_municipal_2022(content_bytes: bytes,
                              mapping: Dict[str, str]) -> List[Dict[str, Any]]:
     """Parses raw Brazil_2022_Muncipal_POP.xlsx workbook."""
     rows: List[Dict[str, Any]] = []
-    try:
-        df = pd.read_excel(io.BytesIO(content_bytes))
-        for _, r in df.iterrows():
-            cod_uf = str(r.get("COD. UF", "")).strip()
-            cod_muni = str(r.get("COD. MUNIC", "")).strip().zfill(5)
-            full_code = cod_uf + cod_muni
-            muni_name = str(r.get("NOME DO MUNICÍPIO", "")).strip()
-            pop_str = str(r.get("POPULAÇÃO",
-                                "")).replace(",", "").replace(".", "").strip()
-            try:
-                pop = int(pop_str)
-            except (ValueError, TypeError):
-                continue
-            place_id = mapping.get(full_code, muni_name).replace("dcid:", "")
-            rows.append({
-                "Ano": 2022,
-                "Localidade": place_id,
-                "Sexo": "Total",
-                "Populacao": pop
-            })
-    except Exception as e:
-        logging.warning(f"Error parsing raw 2022 municipal POP xlsx: {e}")
+    df = pd.read_excel(io.BytesIO(content_bytes))
+    for _, r in df.iterrows():
+        cod_uf = str(r.get("COD. UF", "")).strip()
+        cod_muni = str(r.get("COD. MUNIC", "")).strip().zfill(5)
+        full_code = cod_uf + cod_muni
+        muni_name = str(r.get("NOME DO MUNICÍPIO", "")).strip()
+        pop_str = (str(r.get("POPULAÇÃO",
+                             "")).replace(",", "").replace(".", "").strip())
+        try:
+            pop = int(pop_str)
+        except (ValueError, TypeError):
+            continue
+        place_id = mapping.get(full_code, muni_name).replace("dcid:", "")
+        rows.append({
+            "Ano": 2022,
+            "Localidade": place_id,
+            "Sexo": "Total",
+            "Populacao": pop,
+        })
+    if not rows:
+        raise ValueError("Parsed 0 rows from Brazil_2022_Muncipal_POP.xlsx.")
     return rows
 
 
@@ -210,140 +233,113 @@ def parse_raw_1991_popu(content_bytes: bytes,
                         map_91: Dict[str, str]) -> List[Dict[str, Any]]:
     """Parses raw 1991 POPU state workbook."""
     rows: List[Dict[str, Any]] = []
-    try:
-        df = pd.read_excel(io.BytesIO(content_bytes))
-        for r_idx in range(1, len(df)):
-            row = df.iloc[r_idx]
-            place_raw = str(row.iloc[0]).strip()
-            place_lower = place_raw.lower()
-            if not place_raw or pd.isna(row.iloc[0]) or (
-                    "fonte" in place_lower and
-                    "fonte boa" not in place_lower) or "nota" in place_lower:
-                continue
-            if len(row) < 3:
-                continue
+    df = pd.read_excel(io.BytesIO(content_bytes))
+    for r_idx in range(1, len(df)):
+        row = df.iloc[r_idx]
+        place_raw = str(row.iloc[0]).strip()
+        place_lower = place_raw.lower()
+        if (not place_raw or pd.isna(row.iloc[0]) or
+            ("fonte" in place_lower and "fonte boa" not in place_lower) or
+                "nota" in place_lower):
+            continue
+        if len(row) < 3:
+            continue
 
-            fem_val = row.iloc[1]
-            masc_val = row.iloc[2]
-            place_resolved = map_91.get(place_raw,
-                                        place_raw).replace("dcid:", "")
+        fem_val = row.iloc[1]
+        masc_val = row.iloc[2]
+        place_resolved = map_91.get(place_raw, place_raw).replace("dcid:", "")
 
-            f_int = None
-            m_int = None
-            try:
-                f_int = int(round(float(fem_val)))
-                rows.append({
-                    "Ano": 1991,
-                    "Localidade": place_resolved,
-                    "Sexo": "Mulheres",
-                    "Populacao": f_int
-                })
-            except (ValueError, TypeError):
-                pass
-            try:
-                m_int = int(round(float(masc_val)))
-                rows.append({
-                    "Ano": 1991,
-                    "Localidade": place_resolved,
-                    "Sexo": "Homens",
-                    "Populacao": m_int
-                })
-            except (ValueError, TypeError):
-                pass
-            if f_int is not None and m_int is not None:
-                rows.append({
-                    "Ano": 1991,
-                    "Localidade": place_resolved,
-                    "Sexo": "Total",
-                    "Populacao": f_int + m_int
-                })
-    except Exception as e:
-        logging.warning(f"Error parsing 1991 POPU XLS: {e}")
+        f_int = None
+        m_int = None
+        try:
+            f_int = int(round(float(fem_val)))
+            rows.append({
+                "Ano": 1991,
+                "Localidade": place_resolved,
+                "Sexo": "Mulheres",
+                "Populacao": f_int,
+            })
+        except (ValueError, TypeError):
+            pass
+        try:
+            m_int = int(round(float(masc_val)))
+            rows.append({
+                "Ano": 1991,
+                "Localidade": place_resolved,
+                "Sexo": "Homens",
+                "Populacao": m_int,
+            })
+        except (ValueError, TypeError):
+            pass
+        if f_int is not None and m_int is not None:
+            rows.append({
+                "Ano": 1991,
+                "Localidade": place_resolved,
+                "Sexo": "Total",
+                "Populacao": f_int + m_int,
+            })
+    if not rows:
+        raise ValueError("Parsed 0 rows from 1991 POPU workbook.")
     return rows
 
 
-def fetch_raw_input_files() -> List[Dict[str, Any]]:
-    """Reads raw input files from local scratch or GCS input_files."""
+def fetch_raw_input_files(
+        raw_dir: Optional[str] = None) -> List[Dict[str, Any]]:
+    """Reads raw input files from GCS input_files."""
+    from google.cloud import storage
+
     rows: List[Dict[str, Any]] = []
-    muni_map, map_91 = load_place_mappings()
+    muni_map, map_91 = load_place_mappings(raw_dir=raw_dir)
+    client = storage.Client()
+    bucket = client.bucket(GCS_BUCKET_NAME)
 
     # 1. 2022 Municipal POP
-    scratch_muni = os.path.join(SCRIPT_DIR, "..", "..", "scratch",
-                                "input_files", "Brazil_2022_Muncipal_POP.xlsx")
-    alt_muni = os.path.join("/data", "scratch", "input_files",
-                            "Brazil_2022_Muncipal_POP.xlsx")
-    muni_path = scratch_muni if os.path.isfile(scratch_muni) else (
-        alt_muni if os.path.isfile(alt_muni) else None)
-    if muni_path:
-        with open(muni_path, "rb") as f:
-            rows.extend(parse_raw_municipal_2022(f.read(), muni_map))
-    else:
-        try:
-            from google.cloud import storage
-            client = storage.Client()
-            bucket = client.bucket(GCS_BUCKET_NAME)
-            blob = bucket.blob(GCS_MUNI_2022_FILE)
-            content = blob.download_as_bytes()
-            rows.extend(parse_raw_municipal_2022(content, muni_map))
-        except Exception as e:
-            logging.warning(
-                f"Could not load {GCS_MUNI_2022_FILE} from GCS: {e}")
+    blob_muni = bucket.blob(GCS_MUNI_2022_FILE)
+    content_muni = blob_muni.download_as_bytes()
+    if raw_dir:
+        with open(os.path.join(raw_dir, "Brazil_2022_Muncipal_POP.xlsx"),
+                  "wb") as f:
+            f.write(content_muni)
+    rows.extend(parse_raw_municipal_2022(content_muni, muni_map))
 
     # 2. 2022 UFs POP
-    scratch_uf = os.path.join(SCRIPT_DIR, "..", "..", "scratch", "input_files",
-                              "POP2022_Brasil_e_UFs.xls")
-    alt_uf = os.path.join("/data", "scratch", "input_files",
-                          "POP2022_Brasil_e_UFs.xls")
-    uf_path = scratch_uf if os.path.isfile(scratch_uf) else (
-        alt_uf if os.path.isfile(alt_uf) else None)
-    if uf_path:
-        with open(uf_path, "rb") as f:
-            rows.extend(parse_raw_pop_xls(f.read()))
-    else:
-        try:
-            from google.cloud import storage
-            client = storage.Client()
-            bucket = client.bucket(GCS_BUCKET_NAME)
-            blob = bucket.blob(GCS_POP_2022_FILE)
-            content = blob.download_as_bytes()
-            rows.extend(parse_raw_pop_xls(content))
-        except Exception as e:
-            logging.warning(f"Could not load {GCS_POP_2022_FILE} from GCS: {e}")
+    blob_uf = bucket.blob(GCS_POP_2022_FILE)
+    content_uf = blob_uf.download_as_bytes()
+    if raw_dir:
+        with open(os.path.join(raw_dir, "POP2022_Brasil_e_UFs.xls"), "wb") as f:
+            f.write(content_uf)
+    rows.extend(parse_raw_pop_xls(content_uf))
 
     # 3. 1991 POPU state files
-    scratch_dir = os.path.join(SCRIPT_DIR, "..", "..", "scratch", "input_files")
-    alt_dir = os.path.join("/data", "scratch", "input_files")
-    input_dir = scratch_dir if os.path.isdir(scratch_dir) else (
-        alt_dir if os.path.isdir(alt_dir) else None)
-    found_1991 = False
-    if input_dir:
-        popu_files = sorted(
-            glob.glob(os.path.join(input_dir, "Brazil_1991_gender", "*.xls")) +
-            glob.glob(os.path.join(input_dir, "POPU91*.XLS")))
-        for pf in popu_files:
-            with open(pf, "rb") as f:
-                rows.extend(parse_raw_1991_popu(f.read(), map_91))
-                found_1991 = True
-    if not found_1991:
-        try:
-            from google.cloud import storage
-            client = storage.Client()
-            bucket = client.bucket(GCS_BUCKET_NAME)
-            blobs = list(
-                bucket.list_blobs(
-                    prefix="country/brazil/input_files/Brazil_1991_gender/POPU91"
-                )) + list(
-                    bucket.list_blobs(
-                        prefix="country/brazil/input_files/POPU91"))
-            for b in blobs:
-                bname = os.path.basename(b.name).upper()
-                if bname.endswith(".XLS"):
-                    content = b.download_as_bytes()
-                    rows.extend(parse_raw_1991_popu(content, map_91))
-        except Exception as e:
-            logging.warning(f"Could not load 1991 POPU files from GCS: {e}")
+    blobs = list(
+        bucket.list_blobs(
+            prefix="country/brazil/input_files/Brazil_1991_gender/POPU91")
+    ) + list(bucket.list_blobs(prefix="country/brazil/input_files/POPU91"))
+    rows_1991: List[Dict[str, Any]] = []
+    for b in blobs:
+        bname = os.path.basename(b.name).upper()
+        if bname.endswith(".XLS"):
+            content = b.download_as_bytes()
+            rows_1991.extend(parse_raw_1991_popu(content, map_91))
+    if not rows_1991:
+        raise RuntimeError("No 1991 POPU records loaded from GCS.")
+    rows.extend(rows_1991)
 
     return rows
+
+
+def _load_local_places_map() -> Dict[str, str]:
+    """Loads ../brazil_places_resolved.csv mapping 7-digit IBGE codes to DCIDs."""
+    places_csv = os.path.join(SCRIPT_DIR, "..", "brazil_places_resolved.csv")
+    mapping: Dict[str, str] = {}
+    if os.path.isfile(places_csv):
+        df = pd.read_csv(places_csv, dtype=str)
+        for _, row in df.iterrows():
+            name = str(row.get("name", "")).strip()
+            dcid = str(row.get("dcid", "")).strip().replace("dcid:", "")
+            if name and dcid:
+                mapping[name] = dcid
+    return mapping
 
 
 def download_all_years(
@@ -353,21 +349,26 @@ def download_all_years(
 ) -> str:
     """Downloads Brazil Census total population data across past, present, and future censuses."""
     target_path = output_file or DEFAULT_OUTPUT_FILE
+    raw_dir = _get_raw_dir(target_path)
     all_rows: List[Dict[str, Any]] = []
 
     try:
-        # 1. Raw input files from GCS / local scratch (including Brazil_2022_Muncipal_POP.xlsx and POPU91*.XLS)
-        raw_rows = fetch_raw_input_files()
+        # 1. Raw input files from GCS (including Brazil_2022_Muncipal_POP.xlsx and POPU91*.XLS)
+        raw_rows = fetch_raw_input_files(raw_dir=raw_dir)
         all_rows.extend(raw_rows)
-        muni_map, _ = load_place_mappings()
+        muni_map = _load_local_places_map()
 
         # 2. 2022+ Census from SIDRA API (Table 9514) — authoritative final census values override preliminary XLS
-        raw_2022 = fetch_sidra_data(session, TABLE_9514_API_URL)
+        raw_2022 = fetch_sidra_data(
+            session,
+            TABLE_9514_API_URL,
+            raw_file_path=os.path.join(raw_dir, "sidra_9514_2022_n6.json"),
+        )
         logging.info(
             f"Retrieved {len(raw_2022) - 1} records from SIDRA Table 9514.")
         for r in raw_2022[1:]:
             val_str = r.get("V")
-            if val_str in ["-", "...", "..", None, ""]:
+            if val_str in ["-", "...", "..", "X", None, ""]:
                 continue
             try:
                 val = int(round(float(val_str)))
@@ -394,16 +395,20 @@ def download_all_years(
                 "Ano": year,
                 "Localidade": loc,
                 "Sexo": sexo,
-                "Populacao": val
+                "Populacao": val,
             })
 
         # 3. 2010 Census from SIDRA API (Table 1378)
-        raw_2010 = fetch_sidra_data(session, TABLE_1378_API_URL)
+        raw_2010 = fetch_sidra_data(
+            session,
+            TABLE_1378_API_URL,
+            raw_file_path=os.path.join(raw_dir, "sidra_1378_2010_macro.json"),
+        )
         logging.info(
             f"Retrieved {len(raw_2010) - 1} records from SIDRA Table 1378.")
         for r in raw_2010[1:]:
             val_str = r.get("V")
-            if val_str in ["-", "...", "..", None, ""]:
+            if val_str in ["-", "...", "..", "X", None, ""]:
                 continue
             try:
                 val = int(round(float(val_str)))
@@ -419,7 +424,48 @@ def download_all_years(
                 "Ano": 2010,
                 "Localidade": loc,
                 "Sexo": sexo,
-                "Populacao": val
+                "Populacao": val,
+            })
+
+        # 4. Annual post-2022 population estimates from SIDRA API (Table 6579 across n1/n2/n3/n6)
+        raw_6579 = fetch_sidra_data(
+            session,
+            TABLE_6579_API_URL,
+            raw_file_path=os.path.join(raw_dir, "sidra_6579_estimates_n6.json"),
+        )
+        logging.info(
+            f"Retrieved {len(raw_6579) - 1} records from SIDRA Table 6579.")
+        for r in raw_6579[1:]:
+            val_str = r.get("V")
+            if val_str in ["-", "...", "..", "X", None, ""]:
+                continue
+            try:
+                val = int(round(float(val_str)))
+            except (ValueError, TypeError):
+                continue
+
+            year_str = str(r.get("D3N", "")).strip()
+            try:
+                year = int(year_str)
+            except ValueError:
+                continue
+            if year <= 2022:
+                continue
+
+            nc = str(r.get("NC", "")).strip()
+            d1c = str(r.get("D1C", "")).strip()
+            if nc == "6" and d1c:
+                loc = muni_map.get(d1c, d1c).replace("dcid:", "")
+            else:
+                loc = str(r.get("D1N", "")).strip()
+                if loc == "Brasil":
+                    loc = "Brazil"
+
+            all_rows.append({
+                "Ano": year,
+                "Localidade": loc,
+                "Sexo": "Total",
+                "Populacao": val,
             })
 
     except Exception as e:
@@ -468,24 +514,17 @@ def download_all_years(
 
 def main(argv: List[str]) -> None:
     if len(argv) > 1:
-        logging.error(f"Unrecognized command-line arguments: {argv[1:]}")
-        sys.exit(1)
+        raise ValueError(f"Unrecognized command-line arguments: {argv[1:]}")
 
     target_file = FLAGS.output_file or DEFAULT_OUTPUT_FILE
     session = get_robust_session()
-
-    try:
-        saved_file = download_all_years(
-            session=session,
-            output_file=target_file,
-            fallback_to_cached=FLAGS.fallback_to_cached,
-        )
-        logging.info(
-            f"Total population download completed successfully: {saved_file}")
-    except Exception as e:
-        logging.fatal(
-            f"Fatal error downloading Brazil Census total population data: {e}",
-            exc_info=True)
+    saved_file = download_all_years(
+        session=session,
+        output_file=target_file,
+        fallback_to_cached=FLAGS.fallback_to_cached,
+    )
+    logging.info(
+        f"Total population download completed successfully: {saved_file}")
 
 
 if __name__ == "__main__":

@@ -11,7 +11,7 @@ typeOf: dcid:StatisticalVariable
 populationType: dcid:Student
 measuredProperty: dcid:count
 statType: dcid:measuredValue
-enrollmentLevel: dcid:AdultEducation
+schoolGradeLevel: dcid:AdultEducation
 
 Node: dcid:Count_Student_AdultEducation_PrivateSchool
 typeOf: dcid:StatisticalVariable
@@ -126,7 +126,7 @@ typeOf: dcid:StatisticalVariable
 populationType: dcid:Student
 measuredProperty: dcid:count
 statType: dcid:measuredValue
-enrollmentLevel: dcid:PreKindergarten
+schoolGradeLevel: dcid:PreKindergarten
 
 Node: dcid:Count_Student_PreKindergarten_PrivateSchool
 typeOf: dcid:StatisticalVariable

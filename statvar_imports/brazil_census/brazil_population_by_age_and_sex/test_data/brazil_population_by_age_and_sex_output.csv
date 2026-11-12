@@ -49,3 +49,9 @@ dcid:country/BRA,2022,P1Y,6738158,dcid:Count_Person_5To9Years_Female
 dcid:country/BRA,2022,P1Y,6682215,dcid:Count_Person_10To14Years_Female
 dcid:country/BRA,2022,P1Y,7058427,dcid:Count_Person_15To19Years_Female
 dcid:country/BRA,2022,P1Y,7699157,dcid:Count_Person_20To24Years_Female
+dcid:country/BRA,2010,P1Y,2486796,dcid:Count_Person_80To89Years
+dcid:country/BRA,2010,P1Y,959099,dcid:Count_Person_80To89Years_Male
+dcid:country/BRA,2010,P1Y,1527697,dcid:Count_Person_80To89Years_Female
+dcid:country/BRA,2010,P1Y,426526,dcid:Count_Person_90To99Years
+dcid:country/BRA,2010,P1Y,140118,dcid:Count_Person_90To99Years_Male
+dcid:country/BRA,2010,P1Y,286408,dcid:Count_Person_90To99Years_Female

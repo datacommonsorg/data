@@ -14,12 +14,14 @@
 """Automated download script for Brazil Census Population by Race data.
 
 Downloads race/color demographic data from official IBGE SIDRA REST API (Table 9605)
-and, if not available in live upstream source, reads raw input files from GCS
+across national, regional, state, and municipal (n6/all) levels, and reads historical
+1940 and 2000 raw input workbooks from GCS
 (gs://unresolved_mcf/country/brazil/input_files/Brazil_1940_Race.xls and Brazil_2000_Race.xls),
 integrating them into a clean tabular CSV input file.
 """
 
 import io
+import json
 import os
 import sys
 import tempfile
@@ -36,9 +38,20 @@ from requests.adapters import HTTPAdapter
 from urllib3.util import Retry
 
 SIDRA_BASE_URL = "https://apisidra.ibge.gov.br"
-# Table 9605: População residente por cor ou raça (2010, 2022, 2030+ via p/all)
+# Table 9605: População residente por cor ou raça (2010 and 2022 across n1/n2/n3/n6, plus macro p/all)
 TABLE_9605_API_URL = (f"{SIDRA_BASE_URL}/values/t/9605/n1/all/n2/all/n3/all"
                       f"/v/93/p/all/c86/all?formato=json")
+TABLE_9605_API_URLS = [
+    (
+        "sidra_9605_2010_n6.json",
+        f"{SIDRA_BASE_URL}/values/t/9605/n1/all/n2/all/n3/all/n6/all/v/93/p/2010/c86/all?formato=json",
+    ),
+    (
+        "sidra_9605_2022_n6.json",
+        f"{SIDRA_BASE_URL}/values/t/9605/n1/all/n2/all/n3/all/n6/all/v/93/p/2022/c86/all?formato=json",
+    ),
+    ("sidra_9605_macro_all.json", TABLE_9605_API_URL),
+]
 
 GCS_BUCKET_NAME = "unresolved_mcf"
 GCS_RACE_1940_FILE = "country/brazil/input_files/Brazil_1940_Race.xls"
@@ -76,108 +89,116 @@ def get_robust_session() -> requests.Session:
     return session
 
 
-def fetch_sidra_data(session: requests.Session,
-                     url: str) -> List[Dict[str, Any]]:
+def _get_raw_dir(target_path: str) -> str:
+    """Returns the directory for archiving raw downloaded payloads."""
+    if os.path.abspath(target_path) == os.path.abspath(DEFAULT_OUTPUT_FILE):
+        raw_dir = os.path.join(SCRIPT_DIR, "raw_files")
+    else:
+        raw_dir = os.path.join(os.path.dirname(os.path.abspath(target_path)),
+                               "raw_files")
+    os.makedirs(raw_dir, exist_ok=True)
+    return raw_dir
+
+
+def fetch_sidra_data(
+    session: requests.Session,
+    url: str,
+    raw_file_path: Optional[str] = None,
+) -> List[Dict[str, Any]]:
     """Fetches raw JSON payload from IBGE SIDRA REST API."""
-    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
     logging.info(f"Dispatching outbound HTTP request: url={url}")
-    res = session.get(url, headers=headers, timeout=90)
+    res = session.get(url, timeout=90)
     res.raise_for_status()
     raw_json = res.json()
     if not isinstance(raw_json, list) or len(raw_json) < 2:
         raise RuntimeError(
             f"Invalid or empty response payload from SIDRA API: {url}")
+    if raw_file_path:
+        with open(raw_file_path, "w", encoding="utf-8") as f:
+            json.dump(raw_json, f, ensure_ascii=False)
     return raw_json
 
 
 def parse_raw_race_xls(content_bytes: bytes, year: int) -> List[Dict[str, Any]]:
     """Parses raw IBGE race XLS workbook."""
     rows: List[Dict[str, Any]] = []
-    try:
-        df = pd.read_excel(io.BytesIO(content_bytes))
-        if len(df) <= 5:
-            return rows
-        row4 = df.iloc[4].tolist()
-        row5 = df.iloc[5].tolist()
-        col_map: Dict[int, str] = {}
-        for idx, (c4, c5) in enumerate(zip(row4, row5)):
-            c_str = (str(c4) + " " + str(c5)).lower()
-            if "total" in c_str:
-                col_map[idx] = "Total"
-            elif "branca" in c_str or "white" in c_str:
-                col_map[idx] = "Branca"
-            elif "preta" in c_str or "black" in c_str:
-                col_map[idx] = "Preta"
-            elif "amarela" in c_str or "yellow" in c_str:
-                col_map[idx] = "Amarela"
-            elif "parda" in c_str or "brown" in c_str:
-                col_map[idx] = "Parda"
-            elif "indígena" in c_str or "indigenous" in c_str:
-                col_map[idx] = "Indígena"
-            elif "sem declaração" in c_str or "sem declaracao" in c_str or "sem declara" in c_str:
-                col_map[idx] = "Sem declaração"
+    df = pd.read_excel(io.BytesIO(content_bytes))
+    if len(df) <= 5:
+        raise ValueError(f"Race XLS workbook for {year} has fewer than 6 rows.")
+    row4 = df.iloc[4].tolist()
+    row5 = df.iloc[5].tolist()
+    col_map: Dict[int, str] = {}
+    for idx, (c4, c5) in enumerate(zip(row4, row5)):
+        c_str = (str(c4) + " " + str(c5)).lower()
+        if "total" in c_str:
+            col_map[idx] = "Total"
+        elif "branca" in c_str or "white" in c_str:
+            col_map[idx] = "Branca"
+        elif "preta" in c_str or "black" in c_str:
+            col_map[idx] = "Preta"
+        elif "amarela" in c_str or "yellow" in c_str:
+            col_map[idx] = "Amarela"
+        elif "parda" in c_str or "brown" in c_str:
+            col_map[idx] = "Parda"
+        elif "indígena" in c_str or "indigenous" in c_str:
+            col_map[idx] = "Indígena"
+        elif ("sem declaração" in c_str or "sem declaracao" in c_str or
+              "sem declara" in c_str):
+            col_map[idx] = "Sem declaração"
 
-        for r_idx in range(6, len(df)):
-            r = df.iloc[r_idx]
-            place = str(r.iloc[0]).strip()
-            place_lower = place.lower()
-            if not place or pd.isna(
-                    r.iloc[0]) or ("fonte" in place_lower and "fonte boa"
-                                   not in place_lower) or "nota" in place_lower:
+    for r_idx in range(6, len(df)):
+        r = df.iloc[r_idx]
+        place = str(r.iloc[0]).strip()
+        place_lower = place.lower()
+        if (not place or pd.isna(r.iloc[0]) or
+            ("fonte" in place_lower and "fonte boa" not in place_lower) or
+                "nota" in place_lower):
+            continue
+        if place == "Brasil":
+            place = "Brazil"
+
+        for c_idx, cor in col_map.items():
+            val = r.iloc[c_idx]
+            if pd.isna(val) or str(val).strip() in ["-", "...", "..", "X", ""]:
                 continue
-            if place == "Brasil":
-                place = "Brazil"
-
-            for c_idx, cor in col_map.items():
-                val = r.iloc[c_idx]
-                if pd.isna(val):
-                    continue
-                try:
-                    val_int = int(round(float(val)))
-                except (ValueError, TypeError):
-                    continue
-                rows.append({
-                    "Ano": year,
-                    "Localidade": place,
-                    "Cor": cor,
-                    "Populacao": val_int
-                })
-    except Exception as e:
-        logging.warning(f"Error parsing raw race XLS: {e}")
+            try:
+                val_int = int(round(float(val)))
+            except (ValueError, TypeError):
+                continue
+            rows.append({
+                "Ano": year,
+                "Localidade": place,
+                "Cor": cor,
+                "Populacao": val_int,
+            })
+    if not rows:
+        raise ValueError(
+            f"Parsed 0 rows from raw race XLS workbook for {year}.")
     return rows
 
 
-def fetch_raw_input_files() -> List[Dict[str, Any]]:
-    """Reads raw input files from GCS input_files or local scratch."""
+def fetch_raw_input_files(
+        raw_dir: Optional[str] = None) -> List[Dict[str, Any]]:
+    """Reads raw 1940 and 2000 race workbooks from GCS input_files."""
+    from google.cloud import storage
+
     rows: List[Dict[str, Any]] = []
     year_files = [(1940, GCS_RACE_1940_FILE), (2000, GCS_RACE_2000_FILE)]
+    client = storage.Client()
+    bucket = client.bucket(GCS_BUCKET_NAME)
 
     for year, gcs_blob in year_files:
-        basename = os.path.basename(gcs_blob)
-        scratch_file = os.path.join(SCRIPT_DIR, "..", "..", "scratch",
-                                    "input_files", basename)
-        alt_scratch = os.path.join("/data", "scratch", "input_files", basename)
-        local_path = scratch_file if os.path.isfile(scratch_file) else (
-            alt_scratch if os.path.isfile(alt_scratch) else None)
+        blob = bucket.blob(gcs_blob)
+        content = blob.download_as_bytes()
+        if raw_dir:
+            raw_path = os.path.join(raw_dir, os.path.basename(gcs_blob))
+            with open(raw_path, "wb") as f:
+                f.write(content)
+        parsed = parse_raw_race_xls(content, year)
+        rows.extend(parsed)
 
-        if local_path:
-            with open(local_path, "rb") as f:
-                r = parse_raw_race_xls(f.read(), year)
-                rows.extend(r)
-        else:
-            try:
-                from google.cloud import storage
-                client = storage.Client()
-                bucket = client.bucket(GCS_BUCKET_NAME)
-                blob = bucket.blob(gcs_blob)
-                content = blob.download_as_bytes()
-                r = parse_raw_race_xls(content, year)
-                rows.extend(r)
-            except Exception as e:
-                logging.warning(
-                    f"Could not load raw race file from GCS gs://{GCS_BUCKET_NAME}/{gcs_blob}: {e}"
-                )
-
+    if not rows:
+        raise RuntimeError("No historical race records loaded from GCS.")
     return rows
 
 
@@ -188,47 +209,56 @@ def download_all_years(
 ) -> str:
     """Downloads Brazil Census race data across past, present, and future censuses."""
     target_path = output_file or DEFAULT_OUTPUT_FILE
+    raw_dir = _get_raw_dir(target_path)
     all_rows: List[Dict[str, Any]] = []
 
     try:
         # 1. Historical data from raw input files in GCS input_files
         # Appended first so live SIDRA records take precedence in drop_duplicates(keep="last").
-        raw_rows = fetch_raw_input_files()
+        raw_rows = fetch_raw_input_files(raw_dir=raw_dir)
         all_rows.extend(raw_rows)
 
-        # 2. Primary Source: Live SIDRA API (Table 9605)
-        raw_sidra = fetch_sidra_data(session, TABLE_9605_API_URL)
-        logging.info(
-            f"Retrieved {len(raw_sidra) - 1} records from SIDRA Table 9605.")
-        for r in raw_sidra[1:]:
-            val_str = r.get("V")
-            if val_str in ["-", "...", "..", None, ""]:
-                continue
-            try:
-                val = int(round(float(val_str)))
-            except (ValueError, TypeError):
-                continue
+        # 2. Primary Source: Live SIDRA API (Table 9605 across n1/n2/n3/n6)
+        for fname, url in TABLE_9605_API_URLS:
+            raw_sidra = fetch_sidra_data(session,
+                                         url,
+                                         raw_file_path=os.path.join(
+                                             raw_dir, fname))
+            logging.info(
+                f"Retrieved {len(raw_sidra) - 1} records from SIDRA Table 9605: {url}"
+            )
+            for r in raw_sidra[1:]:
+                val_str = r.get("V")
+                if val_str in ["-", "...", "..", "X", None, ""]:
+                    continue
+                try:
+                    val = int(round(float(val_str)))
+                except (ValueError, TypeError):
+                    continue
 
-            year_str = str(r.get("D3N", "")).strip()
-            try:
-                year = int(year_str)
-            except ValueError:
-                continue
+                year_str = str(r.get("D3N", "")).strip()
+                try:
+                    year = int(year_str)
+                except ValueError:
+                    continue
 
-            loc = str(r.get("D1N", "")).strip()
-            if loc == "Brasil":
-                loc = "Brazil"
+                if str(r.get("NC", "")).strip() == "6":
+                    loc = str(r.get("D1C", "")).strip()
+                else:
+                    loc = str(r.get("D1N", "")).strip()
+                    if loc == "Brasil":
+                        loc = "Brazil"
 
-            cor_raw = str(r.get("D4N", "Total")).strip()
-            if cor_raw in ["Sem declaração", "Não declarada"]:
-                continue
+                cor_raw = str(r.get("D4N", "Total")).strip()
+                if cor_raw in ["Sem declaração", "Não declarada"]:
+                    continue
 
-            all_rows.append({
-                "Ano": year,
-                "Localidade": loc,
-                "Cor": cor_raw,
-                "Populacao": val,
-            })
+                all_rows.append({
+                    "Ano": year,
+                    "Localidade": loc,
+                    "Cor": cor_raw,
+                    "Populacao": val,
+                })
 
     except Exception as e:
         if fallback_to_cached and os.path.isfile(target_path):
@@ -275,22 +305,16 @@ def download_all_years(
 
 def main(argv: List[str]) -> None:
     if len(argv) > 1:
-        logging.error(f"Unrecognized command-line arguments: {argv[1:]}")
-        sys.exit(1)
+        raise ValueError(f"Unrecognized command-line arguments: {argv[1:]}")
 
     target_file = FLAGS.output_file or DEFAULT_OUTPUT_FILE
     session = get_robust_session()
-
-    try:
-        saved_file = download_all_years(
-            session=session,
-            output_file=target_file,
-            fallback_to_cached=FLAGS.fallback_to_cached,
-        )
-        logging.info(f"Race download completed successfully: {saved_file}")
-    except Exception as e:
-        logging.fatal(f"Fatal error downloading Brazil Census race data: {e}",
-                      exc_info=True)
+    saved_file = download_all_years(
+        session=session,
+        output_file=target_file,
+        fallback_to_cached=FLAGS.fallback_to_cached,
+    )
+    logging.info(f"Race download completed successfully: {saved_file}")
 
 
 if __name__ == "__main__":

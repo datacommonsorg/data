@@ -316,6 +316,29 @@ statType: dcid:measuredValue
 age: [80 84 Years]
 gender: dcid:Male
 
+Node: dcid:Count_Person_80To89Years
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [80 89 Years]
+
+Node: dcid:Count_Person_80To89Years_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [80 89 Years]
+gender: dcid:Female
+
+Node: dcid:Count_Person_80To89Years_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [80 89 Years]
+gender: dcid:Male
+
 Node: dcid:Count_Person_85To89Years
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Person
@@ -344,6 +367,29 @@ populationType: dcid:Person
 measuredProperty: dcid:count
 statType: dcid:measuredValue
 age: [90 94 Years]
+gender: dcid:Male
+
+Node: dcid:Count_Person_90To99Years
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [90 99 Years]
+
+Node: dcid:Count_Person_90To99Years_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [90 99 Years]
+gender: dcid:Female
+
+Node: dcid:Count_Person_90To99Years_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [90 99 Years]
 gender: dcid:Male
 
 Node: dcid:Count_Person_95To99Years

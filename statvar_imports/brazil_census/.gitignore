@@ -3,6 +3,7 @@ __pycache__/
 *.pyc
 counters/
 input_files/
+raw_files/
 *_stat_vars.mcf
 *_stat_vars_schema.mcf
 brazil_*/*.csv

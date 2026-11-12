@@ -64,113 +64,190 @@ class DownloadTest(unittest.TestCase):
         self.assertIn(503, adapter.max_retries.status_forcelist)
 
     def test_compute_broad_age_aggregations(self):
-        """Tests calculation of 0To14, 15To59, and 60OrMore broad cohorts."""
+        """Tests calculation of 0To14, 15To59, and 60OrMore broad cohorts when all sub-cohorts exist."""
         test_rows = [
             {
                 "Ano": "2022",
                 "Localidade": "Brazil",
                 "Idade": "0 a 4 anos",
                 "Sexo": "Total",
-                "Populacao": "100"
+                "Populacao": "100",
             },
             {
                 "Ano": "2022",
                 "Localidade": "Brazil",
                 "Idade": "5 a 9 anos",
                 "Sexo": "Total",
-                "Populacao": "150"
+                "Populacao": "150",
             },
             {
                 "Ano": "2022",
                 "Localidade": "Brazil",
                 "Idade": "10 a 14 anos",
                 "Sexo": "Total",
-                "Populacao": "200"
+                "Populacao": "200",
             },
             {
                 "Ano": "2022",
                 "Localidade": "Brazil",
                 "Idade": "15 a 19 anos",
                 "Sexo": "Total",
-                "Populacao": "300"
+                "Populacao": "300",
             },
             {
                 "Ano": "2022",
                 "Localidade": "Brazil",
                 "Idade": "20 a 24 anos",
                 "Sexo": "Total",
-                "Populacao": "100"
+                "Populacao": "100",
             },
             {
                 "Ano": "2022",
                 "Localidade": "Brazil",
                 "Idade": "25 a 29 anos",
                 "Sexo": "Total",
-                "Populacao": "100"
+                "Populacao": "100",
             },
             {
                 "Ano": "2022",
                 "Localidade": "Brazil",
                 "Idade": "30 a 34 anos",
                 "Sexo": "Total",
-                "Populacao": "100"
+                "Populacao": "100",
             },
             {
                 "Ano": "2022",
                 "Localidade": "Brazil",
                 "Idade": "35 a 39 anos",
                 "Sexo": "Total",
-                "Populacao": "100"
+                "Populacao": "100",
             },
             {
                 "Ano": "2022",
                 "Localidade": "Brazil",
                 "Idade": "40 a 44 anos",
                 "Sexo": "Total",
-                "Populacao": "100"
+                "Populacao": "100",
             },
             {
                 "Ano": "2022",
                 "Localidade": "Brazil",
                 "Idade": "45 a 49 anos",
                 "Sexo": "Total",
-                "Populacao": "100"
+                "Populacao": "100",
             },
             {
                 "Ano": "2022",
                 "Localidade": "Brazil",
                 "Idade": "50 a 54 anos",
                 "Sexo": "Total",
-                "Populacao": "100"
+                "Populacao": "100",
             },
             {
                 "Ano": "2022",
                 "Localidade": "Brazil",
                 "Idade": "55 a 59 anos",
                 "Sexo": "Total",
-                "Populacao": "100"
+                "Populacao": "100",
             },
             {
                 "Ano": "2022",
                 "Localidade": "Brazil",
                 "Idade": "60 a 64 anos",
                 "Sexo": "Total",
-                "Populacao": "50"
+                "Populacao": "50",
             },
             {
                 "Ano": "2022",
                 "Localidade": "Brazil",
                 "Idade": "65 a 69 anos",
                 "Sexo": "Total",
-                "Populacao": "40"
+                "Populacao": "40",
+            },
+            {
+                "Ano": "2022",
+                "Localidade": "Brazil",
+                "Idade": "70 a 74 anos",
+                "Sexo": "Total",
+                "Populacao": "30",
+            },
+            {
+                "Ano": "2022",
+                "Localidade": "Brazil",
+                "Idade": "75 a 79 anos",
+                "Sexo": "Total",
+                "Populacao": "20",
+            },
+            {
+                "Ano": "2022",
+                "Localidade": "Brazil",
+                "Idade": "80 a 84 anos",
+                "Sexo": "Total",
+                "Populacao": "15",
+            },
+            {
+                "Ano": "2022",
+                "Localidade": "Brazil",
+                "Idade": "85 a 89 anos",
+                "Sexo": "Total",
+                "Populacao": "10",
+            },
+            {
+                "Ano": "2022",
+                "Localidade": "Brazil",
+                "Idade": "90 a 94 anos",
+                "Sexo": "Total",
+                "Populacao": "5",
+            },
+            {
+                "Ano": "2022",
+                "Localidade": "Brazil",
+                "Idade": "95 a 99 anos",
+                "Sexo": "Total",
+                "Populacao": "3",
+            },
+            {
+                "Ano": "2022",
+                "Localidade": "Brazil",
+                "Idade": "100 anos ou mais",
+                "Sexo": "Total",
+                "Populacao": "2",
             },
         ]
         aggs = compute_broad_age_aggregations(test_rows, "2022")
-        self.assertTrue(len(aggs) >= 3)
+        self.assertEqual(len(aggs), 3)
         agg_map = {(r["Idade"], r["Sexo"]): int(r["Populacao"]) for r in aggs}
         self.assertEqual(agg_map.get(("De 0 a 14 anos", "Total")), 450)
         self.assertEqual(agg_map.get(("De 15 a 59 anos", "Total")), 1100)
-        self.assertEqual(agg_map.get(("De 60 anos ou mais", "Total")), 90)
+        self.assertEqual(agg_map.get(("De 60 anos ou mais", "Total")), 175)
+
+    def test_compute_broad_age_aggregations_skips_partial_cohorts(self):
+        """Tests that partial sub-cohorts do not emit undercounted broad aggregates."""
+        partial_rows = [
+            {
+                "Ano": "2022",
+                "Localidade": "Brazil",
+                "Idade": "0 a 4 anos",
+                "Sexo": "Total",
+                "Populacao": "100",
+            },
+            {
+                "Ano": "2022",
+                "Localidade": "Brazil",
+                "Idade": "60 a 64 anos",
+                "Sexo": "Total",
+                "Populacao": "50",
+            },
+            {
+                "Ano": "2022",
+                "Localidade": "Brazil",
+                "Idade": "65 a 69 anos",
+                "Sexo": "Total",
+                "Populacao": "40",
+            },
+        ]
+        aggs = compute_broad_age_aggregations(partial_rows, "2022")
+        self.assertEqual(aggs, [])
 
     def test_fetch_sidra_data_success(self):
         """Tests successful SIDRA fetch returning parsed JSON rows."""
@@ -186,7 +263,7 @@ class DownloadTest(unittest.TestCase):
                 "D3N": "2022",
                 "D4N": "Total",
                 "D5N": "Total",
-                "V": "203080756"
+                "V": "203080756",
             },
         ]
         mock_response.raise_for_status.return_value = None
@@ -226,7 +303,7 @@ class DownloadTest(unittest.TestCase):
             "Localidade": "Brazil",
             "Idade": "Total",
             "Sexo": "Total",
-            "Populacao": "41236315"
+            "Populacao": "41236315",
         }]
         session = MagicMock()
 
@@ -244,7 +321,7 @@ class DownloadTest(unittest.TestCase):
                     "D3N": year,
                     "D4N": "Total",
                     "D5N": "Total",
-                    "V": "200000"
+                    "V": "200000",
                 },
                 {
                     "NC": "1",
@@ -252,7 +329,7 @@ class DownloadTest(unittest.TestCase):
                     "D3N": year,
                     "D4N": "Total",
                     "D5N": "0 a 4 anos",
-                    "V": "1000"
+                    "V": "1000",
                 },
                 {
                     "NC": "1",
@@ -260,7 +337,7 @@ class DownloadTest(unittest.TestCase):
                     "D3N": year,
                     "D4N": "Total",
                     "D5N": "5 a 9 anos",
-                    "V": "2000"
+                    "V": "2000",
                 },
                 {
                     "NC": "1",
@@ -268,7 +345,7 @@ class DownloadTest(unittest.TestCase):
                     "D3N": year,
                     "D4N": "Total",
                     "D5N": "10 a 14 anos",
-                    "V": "3000"
+                    "V": "3000",
                 },
                 {
                     "NC": "1",
@@ -276,7 +353,7 @@ class DownloadTest(unittest.TestCase):
                     "D3N": year,
                     "D4N": "Total",
                     "D5N": "15 a 19 anos",
-                    "V": "4000"
+                    "V": "4000",
                 },
                 {
                     "NC": "1",
@@ -284,7 +361,7 @@ class DownloadTest(unittest.TestCase):
                     "D3N": year,
                     "D4N": "Total",
                     "D5N": "20 a 24 anos",
-                    "V": "5000"
+                    "V": "5000",
                 },
                 {
                     "NC": "1",
@@ -292,7 +369,7 @@ class DownloadTest(unittest.TestCase):
                     "D3N": year,
                     "D4N": "Total",
                     "D5N": "25 a 29 anos",
-                    "V": "5000"
+                    "V": "5000",
                 },
                 {
                     "NC": "1",
@@ -300,7 +377,7 @@ class DownloadTest(unittest.TestCase):
                     "D3N": year,
                     "D4N": "Total",
                     "D5N": "30 a 34 anos",
-                    "V": "5000"
+                    "V": "5000",
                 },
                 {
                     "NC": "1",
@@ -308,7 +385,7 @@ class DownloadTest(unittest.TestCase):
                     "D3N": year,
                     "D4N": "Total",
                     "D5N": "35 a 39 anos",
-                    "V": "5000"
+                    "V": "5000",
                 },
                 {
                     "NC": "1",
@@ -316,7 +393,7 @@ class DownloadTest(unittest.TestCase):
                     "D3N": year,
                     "D4N": "Total",
                     "D5N": "40 a 44 anos",
-                    "V": "5000"
+                    "V": "5000",
                 },
                 {
                     "NC": "1",
@@ -324,7 +401,7 @@ class DownloadTest(unittest.TestCase):
                     "D3N": year,
                     "D4N": "Total",
                     "D5N": "45 a 49 anos",
-                    "V": "5000"
+                    "V": "5000",
                 },
                 {
                     "NC": "1",
@@ -332,7 +409,7 @@ class DownloadTest(unittest.TestCase):
                     "D3N": year,
                     "D4N": "Total",
                     "D5N": "50 a 54 anos",
-                    "V": "5000"
+                    "V": "5000",
                 },
                 {
                     "NC": "1",
@@ -340,7 +417,7 @@ class DownloadTest(unittest.TestCase):
                     "D3N": year,
                     "D4N": "Total",
                     "D5N": "55 a 59 anos",
-                    "V": "5000"
+                    "V": "5000",
                 },
             ]
             return resp
