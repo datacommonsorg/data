@@ -1,0 +1,8 @@
+Node: E:bea_gdp_rpp->E0
+typeOf: dcs:StatVarObservation
+observationAbout: C:bea_gdp_rpp->observationAbout
+variableMeasured: C:bea_gdp_rpp->variableMeasured
+observationDate: C:bea_gdp_rpp->observationDate
+value: C:bea_gdp_rpp->value
+measurementMethod: C:bea_gdp_rpp->measurementMethod
+unit: C:bea_gdp_rpp->unit
