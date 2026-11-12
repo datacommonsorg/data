@@ -27,7 +27,6 @@
                     "cleaned_csv": "output_files/events_spi_9m_polygon/place_svobs/drought_spi_9m_polygon_place_svobs.csv"
                 },
                 {
-                    "node_mcf": "output_files/events_spi_9m_polygon/events/drought_spi_9m_polygon_events_nodes.mcf",
                     "template_mcf": "drought_spi_9m_polygon_events.tmcf",
                     "cleaned_csv": "output_files/events_spi_9m_polygon/events/drought_spi_9m_polygon_events.csv"
                 },

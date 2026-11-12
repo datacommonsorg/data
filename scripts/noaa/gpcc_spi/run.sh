@@ -81,49 +81,17 @@ for fld in "${input_folders[@]}"; do
 	echo "Done processing $output_file"
 done
 
-# Generate companion node_mcf files for events (input3) and event_svobs (input4).
+# Generate companion node_mcf file for event_svobs (input4).
 python3 -c '
 import csv
 import sys
 
 csv.field_size_limit(sys.maxsize)
 
-events_csv = "output_files/events_spi_9m_polygon/events/drought_spi_9m_polygon_events.csv"
 svobs_csv = "output_files/events_spi_9m_polygon/event_svobs/drought_spi_9m_polygon_svobs.csv"
-events_nodes_mcf = "output_files/events_spi_9m_polygon/events/drought_spi_9m_polygon_events_nodes.mcf"
 svobs_nodes_mcf = "output_files/events_spi_9m_polygon/event_svobs/drought_spi_9m_polygon_svobs_nodes.mcf"
 
-quantities = {}
-latlongs = {}
 event_dcids = set()
-
-with open(events_csv, "r", encoding="utf-8", newline="") as f:
-    reader = csv.DictReader(f, escapechar="\\", quotechar="\"")
-    for row in reader:
-        dcid = row.get("dcid", "").strip()
-        if dcid:
-            event_dcids.add(dcid)
-        area = row.get("area", "").strip().strip("\"")
-        if area.startswith("[") and area.endswith("]"):
-            parts = area[1:-1].strip().split()
-            if len(parts) == 2:
-                val, unit = parts[0], parts[1]
-                q_dcid = f"{unit}{val}"
-                if q_dcid not in quantities:
-                    quantities[q_dcid] = (val, unit)
-        loc = row.get("startLocation", "").strip().strip("\"")
-        if loc.startswith("[") and loc.endswith("]"):
-            parts = loc[1:-1].strip().split()
-            if len(parts) == 3 and parts[0] == "LatLong":
-                lat_f = float(parts[1])
-                lon_f = float(parts[2])
-                lat_i = int(round(lat_f * 100000.0))
-                lon_i = int(round(lon_f * 100000.0))
-                ll_dcid = f"latLong/{lat_i}_{lon_i}"
-                if ll_dcid not in latlongs:
-                    lat_s = f"{lat_i / 100000.0:.5f}"
-                    lon_s = f"{lon_i / 100000.0:.5f}"
-                    latlongs[ll_dcid] = (lat_s, lon_s)
 
 with open(svobs_csv, "r", encoding="utf-8", newline="") as f:
     reader = csv.DictReader(f, escapechar="\\", quotechar="\"")
@@ -131,26 +99,6 @@ with open(svobs_csv, "r", encoding="utf-8", newline="") as f:
         dcid = row.get("dcid", "").strip()
         if dcid:
             event_dcids.add(dcid)
-
-with open(events_nodes_mcf, "w", encoding="utf-8") as f:
-    for q_dcid, (val, unit) in sorted(quantities.items()):
-        f.write(
-            f"Node: dcid:{q_dcid}\n"
-            f"dcid: \"{q_dcid}\"\n"
-            f"name: \"{unit} {val}\"\n"
-            f"typeOf: dcid:Quantity\n"
-            f"unitOfMeasure: dcid:{unit}\n"
-            f"value: {val}\n\n"
-        )
-    for ll_dcid, (lat_s, lon_s) in sorted(latlongs.items()):
-        f.write(
-            f"Node: dcid:{ll_dcid}\n"
-            f"dcid: \"{ll_dcid}\"\n"
-            f"name: \"{lat_s},{lon_s}\"\n"
-            f"typeOf: dcid:GeoCoordinates\n"
-            f"latitude: \"{lat_s}\"\n"
-            f"longitude: \"{lon_s}\"\n\n"
-        )
 
 with open(svobs_nodes_mcf, "w", encoding="utf-8") as f:
     for dcid in sorted(event_dcids):
