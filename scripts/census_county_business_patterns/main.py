@@ -47,16 +47,19 @@ _OUTPUT_DIR = os.path.join(_GCS_OUTPUT_DIR, 'input_files')
 if not os.path.exists(_OUTPUT_DIR):
     os.makedirs(_OUTPUT_DIR, exist_ok=True)
 
-flags.DEFINE_string('output_dir', _OUTPUT_DIR,
-                    'Base directory to place the local output files.')
-# flags.DEFINE_string('year', '2021', 'YYYY to generate stats for.')
-flags.DEFINE_bool('test', False, 'Run in test mode.')
 
-flags.DEFINE_integer('data_start_year', os.getenv('START_YEAR', '2016'),
-                     'Process data starting from this year.')
-flags.DEFINE_integer('data_end_year', os.getenv('END_YEAR',
-                                                datetime.now().year),
-                     'Process data till current year')
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('output_dir', _OUTPUT_DIR,
+                        'Base directory to place the local output files.')
+    flags.DEFINE_bool('test', False, 'Run in test mode.')
+    flags.DEFINE_integer('data_start_year', os.getenv('START_YEAR', '2016'),
+                         'Process data starting from this year.')
+    flags.DEFINE_integer('data_end_year',
+                         os.getenv('END_YEAR',
+                                   datetime.now().year),
+                         'Process data till current year')
+
 
 FILE_TYPES_CONFIG = [
     {
@@ -175,9 +178,7 @@ def download_single_file(task):
                 )
 
 
-def download_files():
-    start_year = FLAGS.data_start_year
-    end_year = FLAGS.data_end_year
+def download_files(start_year: int, end_year: int):
     # The latest year being attempted is end_year - 2 (e.g., 2026 - 2 = 2024)
     latest_year = end_year - 2
 
@@ -259,8 +260,17 @@ def process_single_txt_file(task):
                          filename)
 
 
-def main(argv):
-    download_files()
+def run(output_dir: str, test: bool, data_start_year: int,
+        data_end_year: int) -> None:
+    """Downloads the CBP files for the year range and processes them.
+
+    Args:
+        output_dir: Base directory to place the local output files.
+        test: Whether to run in test mode.
+        data_start_year: First year to download.
+        data_end_year: Process data till this year.
+    """
+    download_files(data_start_year, data_end_year)
     try:
         txt_files = []
         for root, _, files in os.walk(_LOCAL_OUTPUT_PATH):
@@ -274,7 +284,7 @@ def main(argv):
 
         logging.info("Found %d local .txt files to process.", len(txt_files))
         num_workers = min(16, os.cpu_count() or 4, len(txt_files))
-        tasks = [(f, FLAGS.output_dir, FLAGS.test) for f in txt_files]
+        tasks = [(f, output_dir, test) for f in txt_files]
 
         logging.info("Processing files in parallel with %d worker processes...",
                      num_workers)
@@ -293,5 +303,12 @@ def main(argv):
                       e)
 
 
+def main(argv):
+    del argv  # Unused.
+    run(FLAGS.output_dir, FLAGS.test, FLAGS.data_start_year,
+        FLAGS.data_end_year)
+
+
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)
