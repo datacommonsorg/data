@@ -59,6 +59,56 @@ class PreprocessTest(unittest.TestCase):
                 'time_period': '2024-01',
                 'value': '2111.8'
             },
+            # Anomalous 2025-01 rows (both low Total and corrupted Jews=2149.5 vs Jews and Others=7730.0)
+            {
+                'series_id': '3700',
+                'time_unit': 'Year',
+                'time_period': '2025-01',
+                'value': '7766.7'
+            },
+            {
+                'series_id': '3701',
+                'time_unit': 'Year',
+                'time_period': '2025-01',
+                'value': '2149.5'
+            },
+            {
+                'series_id': '3703',
+                'time_unit': 'Year',
+                'time_period': '2025-01',
+                'value': '7730.0'
+            },
+            {
+                'series_id': '3704',
+                'time_unit': 'Year',
+                'time_period': '2025-01',
+                'value': '2130.6'
+            },
+            # Anomalous 2026-01 rows where Total is valid (9860.6) but Jews (2149.5) is corrupted vs Jews and Others (7730.0)
+            {
+                'series_id': '3700',
+                'time_unit': 'Year',
+                'time_period': '2026-01',
+                'value': '9860.6'
+            },
+            {
+                'series_id': '3701',
+                'time_unit': 'Year',
+                'time_period': '2026-01',
+                'value': '2149.5'
+            },
+            {
+                'series_id': '3703',
+                'time_unit': 'Year',
+                'time_period': '2026-01',
+                'value': '7730.0'
+            },
+            {
+                'series_id': '3704',
+                'time_unit': 'Year',
+                'time_period': '2026-01',
+                'value': '2130.6'
+            },
         ])
         self.assertEqual(len(pop_rows), 1)
         self.assertEqual(pop_rows[0]['Region'], 'ISR')

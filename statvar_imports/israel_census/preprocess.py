@@ -431,13 +431,16 @@ def build_population_religion_rows(
         val_arab = s_map.get('3704')
 
         min_expected_total = (val_jews_others or 0.0) + (val_arab or 0.0) - 1.0
-        if (val_total is not None and val_jews_others is not None and
-                val_total < min_expected_total):
+        if (val_jews_others is not None and
+            (val_total is None or val_jews is None or
+             val_total < min_expected_total or val_jews > val_jews_others or
+             (val_jews_others - val_jews) > val_jews)):
             logging.warning(
                 'Skipping anomalous CBS population row for year %s: '
-                'Total (%s) < Jews and Others (%s) + Arab (%s)',
+                'Total (%s), Jews (%s), Jews and Others (%s), Arab (%s)',
                 year,
                 val_total,
+                val_jews,
                 val_jews_others,
                 val_arab,
             )

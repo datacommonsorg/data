@@ -178,18 +178,21 @@ def fetch_cbs_series_raw_csv(
     session: requests.Session | None = None,
     page_size: int = 100,
     min_unique_series: int | None = None,
+    min_annual_rows: dict[str, int] | None = None,
 ) -> int:
     """Downloads raw CSV data from apis.cbs.gov.il/series/data/path and writes it unmodified to dest_path."""
     sess = session or _get_session()
-    expected_min = (min_unique_series if min_unique_series is not None else (
-        _CBS_SERIES_MIN_UNIQUE_IDS.get(path_id, 1) if session is None else 1))
-    min_annual_rows = (CBS_SERIES_MIN_ANNUAL_ROWS.get(path_id, {})
-                       if session is None and min_unique_series is None else {})
+    expected_min = (min_unique_series if min_unique_series is not None else
+                    _CBS_SERIES_MIN_UNIQUE_IDS.get(path_id, 1))
+    req_annual_rows = (min_annual_rows if min_annual_rows is not None else
+                       CBS_SERIES_MIN_ANNUAL_ROWS.get(path_id, {}))
 
     unique_sids: set[str] = set()
     annual_periods_by_sid: dict[str, set[str]] = {}
     header_line: bytes = b''
     raw_lines_by_key: dict[tuple[str, str, str], bytes] = {}
+    incomplete_merged: dict[str, tuple[int, int]] = {}
+    last_err: Exception | None = None
     max_attempts = 6 if session is None else 3
     for attempt in range(1, max_attempts + 1):
         if hasattr(sess, 'cookies') and hasattr(sess.cookies, 'clear'):
@@ -213,19 +216,33 @@ def fetch_cbs_series_raw_csv(
                 params,
                 attempt,
             )
-            response = sess.get(
-                CBS_SERIES_API_URL,
-                params=params,
-                timeout=(5, 30),
-            )
-            response.raise_for_status()
+            try:
+                response = sess.get(
+                    CBS_SERIES_API_URL,
+                    params=params,
+                    timeout=(5, 30),
+                )
+                response.raise_for_status()
+            except requests.RequestException as err:
+                last_err = err
+                logging.warning(
+                    'CBS Series CSV request failed for id=%s page=%d on attempt %d: %s',
+                    path_id,
+                    page,
+                    attempt,
+                    err,
+                )
+                break
             content = response.content
             if (not content or content.lstrip().startswith(
                 (b'<!DOCTYPE', b'<html')) or
                     b'obs_time_period' not in content.splitlines()[0]):
                 if page == 1:
-                    raise RuntimeError(
-                        f'Invalid or empty CSV returned from {CBS_SERIES_API_URL} for id={path_id}'
+                    logging.warning(
+                        'Invalid or empty CSV returned from %s for id=%s on attempt %d',
+                        CBS_SERIES_API_URL,
+                        path_id,
+                        attempt,
                     )
                 break
             raw_lines = content.splitlines(keepends=True)
@@ -252,8 +269,11 @@ def fetch_cbs_series_raw_csv(
                                                     raw_lines[idx])
             if not page_sids:
                 if page == 1:
-                    raise RuntimeError(
-                        f'No series rows returned from {CBS_SERIES_API_URL} for id={path_id}'
+                    logging.warning(
+                        'No series rows returned from %s for id=%s on attempt %d',
+                        CBS_SERIES_API_URL,
+                        path_id,
+                        attempt,
                     )
                 break
             attempt_sids.update(page_sids)
@@ -269,7 +289,7 @@ def fetch_cbs_series_raw_csv(
 
         incomplete_attempt = {
             sid: (len(attempt_annual_by_sid.get(sid, set())), req_cnt)
-            for sid, req_cnt in min_annual_rows.items()
+            for sid, req_cnt in req_annual_rows.items()
             if len(attempt_annual_by_sid.get(sid, set())) < req_cnt
         }
         if len(attempt_sids) >= expected_min and not incomplete_attempt:
@@ -279,7 +299,7 @@ def fetch_cbs_series_raw_csv(
 
         incomplete_merged = {
             sid: (len(annual_periods_by_sid.get(sid, set())), req_cnt)
-            for sid, req_cnt in min_annual_rows.items()
+            for sid, req_cnt in req_annual_rows.items()
             if len(annual_periods_by_sid.get(sid, set())) < req_cnt
         }
         if len(unique_sids) >= expected_min and not incomplete_merged:
@@ -298,7 +318,8 @@ def fetch_cbs_series_raw_csv(
 
     raise RuntimeError(
         f'CBS Series CSV for id={path_id} returned only {len(unique_sids)}/{expected_min} '
-        f'series after {max_attempts} attempts')
+        f'series (incomplete={incomplete_merged}) after {max_attempts} attempts'
+    ) from last_err
 
 
 def fetch_cbs_series_datasets_raw(

@@ -50,6 +50,7 @@ class DownloadScriptTest(unittest.TestCase):
                 path_id='2,1,1,1',
                 dest_path=dest_csv,
                 session=mock_session,
+                min_annual_rows={},
             )
             self.assertEqual(byte_count, len(raw_csv))
             with open(dest_csv, 'rb') as fp:
@@ -69,6 +70,7 @@ class DownloadScriptTest(unittest.TestCase):
                     dest_path=dest_csv,
                     session=mock_session,
                 )
+            self.assertEqual(mock_session.get.call_count, 3)
 
     def test_fetch_cbs_series_raw_csv_raises_on_incomplete_series_after_retries(
             self):
@@ -80,12 +82,14 @@ class DownloadScriptTest(unittest.TestCase):
 
         with tempfile.TemporaryDirectory() as tmp_dir:
             dest_csv = os.path.join(tmp_dir, 'cbs_series_2_1_1_1.csv')
-            with self.assertRaises(RuntimeError):
+            with self.assertRaisesRegex(RuntimeError,
+                                        r"incomplete=\{'3700': \(1, 2\)\}"):
                 download_script.fetch_cbs_series_raw_csv(
                     path_id='2,1,1,1',
                     dest_path=dest_csv,
                     session=mock_session,
                     min_unique_series=5,
+                    min_annual_rows={'3700': 2},
                 )
             self.assertEqual(mock_session.get.call_count, 3)
 
