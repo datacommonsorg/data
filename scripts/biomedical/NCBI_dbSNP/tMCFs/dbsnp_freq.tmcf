@@ -1,0 +1,21 @@
+Node: E:dbsnp_freq->E1
+typeOf: dcs:GeneticVariant
+dcid: C:dbsnp_freq->dcid_gv
+
+Node: E:dbsnp_freq->E2
+dcid: C:dbsnp_freq->dcid
+name: C:dbsnp_freq->name
+typeOf: dcs:GeneticVariantPopulationFrequency
+alleleFrequency: C:dbsnp_freq->alleleFrequency
+alternativeAllele: C:dbsnp_freq->alternativeAllele
+genotypeHeterozygousFrequency: C:dbsnp_freq->genotypeHeterozygousFrequency
+genotypeHomozygousAlternativeFrequency: C:dbsnp_freq->genotypeHomozygousAlternativeFrequency
+genotypeHomozygousReferenceFrequency: C:dbsnp_freq->genotypeHomozygousReferenceFrequency
+geneticVaraintID: E:dbsnp_freq->E2
+hardyWeinbergEquationPValue: C:dbsnp_freq->hardyWeinbergEquationPValue
+isGlobalPopulation: C:dbsnp_freq->isGlobalPopulation
+measuredPopulation: C:dbsnp_freq->measuredPopulation
+measuredProperty: schema:frequency
+referenceAllele: C:dbsnp_freq->referenceAllele
+rsID: C:dbsnp_freq->rsID
+sampleSize: C:dbsnp_freq->sampleSize
