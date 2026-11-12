@@ -17,11 +17,17 @@ for national 2010-2020 and it is aggregated
 from state 2010-2020 file.
 """
 
-import pandas as pd
 import os
-import logging
+import sys
+
+import pandas as pd
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
+_SCRIPTS_DIR = os.path.abspath(os.path.join(_CODEDIR, '../../../../'))
+if _SCRIPTS_DIR not in sys.path:
+    sys.path.append(_SCRIPTS_DIR)
+
+from us_census.pep.us_pep_sexrace.preprocess import load_url_or_path
 
 
 def process_national_2020_2029(url: str) -> pd.DataFrame:
@@ -38,7 +44,9 @@ def process_national_2020_2029(url: str) -> pd.DataFrame:
     """
 
     # reading input file to dataframe
-    df = pd.read_csv(url, encoding='ISO-8859-1', low_memory=False)
+    df = pd.read_csv(load_url_or_path(url),
+                     encoding='ISO-8859-1',
+                     low_memory=False)
     df.to_csv(_CODEDIR + "/../input_files/" + 'nationals_result_2020_2029.csv',
               index=False)
     # years having 1 and 2 value are not requried as estimate is for April Month

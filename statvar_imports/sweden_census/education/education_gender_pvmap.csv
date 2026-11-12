@@ -1,0 +1,7 @@
+key,p1,v1,p2,v2,p3,v3
+förgymnasial utbildning kortare än 9 år,educationalAttainment,[- 9 Grade],alternateName,{Age} {Gender} med förgymnasial utbildning kortare än 9 år.@sv,,
+"gymnasial utbildning, högst 2 år",educationalAttainment,UpperSecondaryEducation,alternateName,"{Age} {Gender} med gymnasial utbildning, högst 2 år.@sv",,
+"gymnasial utbildning, 3 år",educationalAttainment,UpperSecondaryEducation3Years,alternateName,"{Age} {Gender} med gymnasial utbildning, 3 år.@sv",,
+"eftergymnasial utbildning, mindre än 3 år",educationalAttainment,PostSecondaryEducationLessThan3Years,alternateName,"{Age} {Gender} med eftergymnasial utbildning, mindre än 3 år.@sv",,
+"eftergymnasial utbildning, 3 år eller mer",educationalAttainment,Graduate,alternateName,"{Age} {Gender} med eftergymnasial utbildning, 3 år eller mer.@sv",,
+forskarutbildning,educationalAttainment,PostGraduate,alternateName,{Age} {Gender} med forskarutbildning.@sv,,

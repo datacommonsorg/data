@@ -42,7 +42,6 @@ The output file will have the following columns:
   "CountryName": parent country name
 """
 
-import json
 import os
 import sys
 import urllib.parse
@@ -89,14 +88,12 @@ sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(_SCRIPT_DIR))),
                  'util'))
 
+from config_map import ConfigMap
+from counters import Counters
 import download_util
 import file_util
 import mcf_file_util
 import process_http_server
-
-from counters import Counters
-from config_map import ConfigMap
-from download_util import request_url
 from property_value_cache import PropertyValueCache
 
 _DEFAULT_CONFIG = {
@@ -214,7 +211,6 @@ class WikiPlaceResolver:
             lookup_names[name] = key
 
         # Get candidate wiki Ids for all names
-        wiki_ids = set()
         logging.log_every_n(
             logging.DEBUG, f'Looking up wiki ids for {len(lookup_names)} names',
             self._log_every_n)
@@ -321,7 +317,7 @@ class WikiPlaceResolver:
             return {}
         wiki_pvs = {}
         if not props:
-            props = self._config.get(f'wiki_place_property')
+            props = self._config.get('wiki_place_property')
         # Check if cache has any looked up property
         cached_entry = self._cache.get_entry(prop='wikidataId', value=wiki_id)
         if cached_entry:
@@ -364,7 +360,7 @@ class WikiPlaceResolver:
         if not api_key:
             logging.log_every_n(
                 logging.DEBUG,
-                f'custom_search_key not set in config. Unable to look for wikiId',
+                'custom_search_key not set in config. Unable to look for wikiId',
                 self._log_every_n)
             return False
         search_url = self._config.get('wiki_search_url')
@@ -385,7 +381,7 @@ class WikiPlaceResolver:
             if not wiki_json:
                 self._counters.add_counter('wiki-api-failures', 1, wiki_id)
         else:
-            self._counters.add_counter(f'wiki-api-cache-hits', 1)
+            self._counters.add_counter('wiki-api-cache-hits', 1)
         return wiki_json
 
     def _get_wiki_name(self, wiki_id: str) -> list:
@@ -415,8 +411,8 @@ class WikiPlaceResolver:
             if isinstance(prop_item, dict):
                 # Property has multiple values in different languages.
                 if langs and '*' in langs:
-                    langs = list(lang)
-                    langs.append(prop_item.keys())
+                    langs = list(langs)
+                    langs.extend(prop_item.keys())
                 for lang in langs:
                     value = prop_item.get(lang)
                     if value:

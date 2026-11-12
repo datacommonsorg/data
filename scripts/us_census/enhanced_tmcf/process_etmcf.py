@@ -1,12 +1,9 @@
 import csv
-import os
-import sys
 from dataclasses import dataclass
+import os
 from pathlib import Path
+import sys
 from typing import Dict, List, Tuple
-
-from absl import app
-from absl import flags
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO_ROOT))
@@ -109,7 +106,6 @@ def _process_var_measured_new_column(
     # Step 1: split on '&'
     query_format = source_str + "?"
     query_split = opaque_portion.split("&")
-    num_params = len(query_split)
 
     ordered_csv_column_names = []
     index = 0
@@ -243,7 +239,6 @@ def process_enhanced_tmcf(input_folder, output_folder, etmcf_filename,
     new_csv_columns: List[NewCSVColumn] = []
 
     T = ""
-    data_files = ""
     tmcf_out = os.path.join(output_folder, output_tmcf_filename + ".tmcf")
     csv_out = os.path.join(output_folder, output_csv_filename + ".csv")
 
@@ -261,7 +256,6 @@ def process_enhanced_tmcf(input_folder, output_folder, etmcf_filename,
                 T = line.split("=")[1].replace("\n", "")
                 continue
             elif line.startswith("DATAFILES="):
-                data_files = line.split("=")[1].replace("\n", "")
                 continue
             elif line == "" or line == "\n":
                 if not output_started:

@@ -16,6 +16,7 @@
 import os
 import tempfile
 import unittest
+
 from preprocess import process
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -78,8 +79,9 @@ class EPHHeatRelatedIllness(unittest.TestCase):
                     csv_out)
 
     def test_download_dynamic_page_retries_and_succeeds(self):
-        import clean_data
         from unittest import mock
+
+        import clean_data
 
         with tempfile.TemporaryDirectory() as tmp_dir:
             html_out = os.path.join(tmp_dir, 'test.html')

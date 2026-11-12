@@ -13,10 +13,7 @@
 # limitations under the License.
 """EIA Nuclear Status Dataset specific functions."""
 
-from absl import logging
 import re
-
-from . import common
 
 
 def extract_place_statvar(series_id, counters):
@@ -109,7 +106,6 @@ def generate_statvar_schema(raw_sv, rows, sv_map, counters):
     m = re.match(r"^NUC_STATUS\.([^.]+)\.(D)$", raw_sv)
     if m:
         measure = m.group(1)
-        period = m.group(2)
     else:
         counters.add_counter('error_unparsable_raw_statvar', 1)
         return None

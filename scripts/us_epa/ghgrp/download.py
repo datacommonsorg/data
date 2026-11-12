@@ -13,15 +13,16 @@
 # limitations under the License.
 """Module to download and do light processing on import data."""
 
-import io
-from absl import logging
-import os
-import ssl
-import re
-import requests
 from datetime import datetime
-import pandas as pd
+import io
+import os
+import re
+import ssl
 import zipfile
+
+from absl import logging
+import pandas as pd
+import requests
 from retry import retry
 
 # Set logging level
@@ -285,7 +286,7 @@ class Downloader:
                                     usecols=CROSSWALK_COLS_TO_KEEP,
                                     engine='openpyxl')
         except Exception:
-            logging.warning(f"Using fallback CROSSWALK_URI for 2022")
+            logging.warning("Using fallback CROSSWALK_URI for 2022")
             oris_df = pd.read_excel(self._generate_and_validate(crosswalk_url,
                                                                 yr=2022),
                                     'ORIS Crosswalk',

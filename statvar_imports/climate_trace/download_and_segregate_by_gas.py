@@ -1,11 +1,12 @@
-import requests
-import zipfile
-import pandas as pd
+from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import as_completed
 import io
-import json
-import os
 import logging
-from concurrent.futures import ThreadPoolExecutor, as_completed
+import os
+import zipfile
+
+import pandas as pd
+import requests
 
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s - %(levelname)s - %(message)s')
@@ -137,7 +138,7 @@ def download_and_segregate_by_gas():
 
             # Format emissions_quantity to avoid scientific notation
             if 'emissions_quantity' in final_df.columns:
-                logging.info(f"  -> Formatting 'emissions_quantity' column...")
+                logging.info("  -> Formatting 'emissions_quantity' column...")
                 final_df['emissions_quantity'] = final_df[
                     'emissions_quantity'].apply(
                         lambda x: format(x, '.16f').rstrip('0').rstrip('.')

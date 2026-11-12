@@ -19,12 +19,15 @@ import os
 import sys
 import tempfile
 import unittest
+
 import pandas as pd
 
 MODULE_DIR = os.path.abspath(os.path.dirname(__file__))
 sys.path.insert(0, MODULE_DIR)
 
-from process import USPrams, _parse_float, _validate_sheet_headers
+from process import USPrams
+from process import _parse_float
+from process import _validate_sheet_headers
 
 TEST_DATASET_DIR = os.path.join(MODULE_DIR, "test_data", "datasets")
 EXPECTED_FILES_DIR = os.path.join(MODULE_DIR, "test_data", "expected_files")
@@ -197,7 +200,9 @@ class TestProcess(unittest.TestCase):
         unless allow_fallback is True.
         """
         from unittest.mock import patch
-        from download import discover_excel_url, _FALLBACK_URL
+
+        from download import _FALLBACK_URL
+        from download import discover_excel_url
 
         with patch("download._get_session") as mock_session:
             mock_resp = mock_session.return_value.get.return_value

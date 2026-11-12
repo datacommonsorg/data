@@ -13,21 +13,19 @@
 # limitations under the License.
 """Script to import and clean WFIGS data.
 """
-from collections.abc import Sequence
 import datetime
+import json
+import os
+import re
+import sys
 
 from absl import app
 from absl import flags
 from absl import logging
 from google.cloud import storage
-import json
 import numpy as np
-import os
 import pandas as pd
-import pickle
-import re
 import requests
-import sys
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH))  #for mapping
@@ -40,11 +38,14 @@ pd.set_option("display.max_columns", None)
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_boolean('read_location_cache', True,
-                     'save location cache to file.')
 
-flags.DEFINE_boolean('save_location_cache', False,
-                     'save location cache to file.')
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_boolean('read_location_cache', True,
+                         'save location cache to file.')
+    flags.DEFINE_boolean('save_location_cache', False,
+                         'save location cache to file.')
+
 
 # FIRE_LOCATIONS_URL = "https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services/Fire_History_Locations_Public/FeatureServer/0/query?where=1%3D1&returnGeometry=false&outFields=InitialLatitude,InitialLongitude,InitialResponseAcres,InitialResponseDateTime,UniqueFireIdentifier,IncidentName,IncidentTypeCategory,IrwinID,FireCauseSpecific,FireCauseGeneral,FireCause,FireDiscoveryDateTime,ContainmentDateTime,ControlDateTime,IsCpxChild,CpxID,DailyAcres,POOFips,POOState,EstimatedCostToDate,TotalIncidentPersonnel,UniqueFireIdentifier&outSR=4326&orderByFields=FireDiscoveryDateTime&f=json&resultType=standard"
 # Only download data from Oct 10, 2022 to make auto refresh manageable.
@@ -119,12 +120,12 @@ def process_df(df):
     A Pandas dataframe containing process field values for various incidents.
   """
     ll2p = latlng_recon_geojson.LatLng2Places()
-    df = df[df["IncidentName"].str.contains("DO NOT USE") == False]
+    df = df[df["IncidentName"].str.contains("DO NOT USE").eq(False)]
     initial_size = df.shape[0]
     df = df.drop_duplicates()
     logging.info("Initial size: %s, without duplicates: %s" %
                  (initial_size, df.shape[0]))
-    df["POOFips"] = df["POOFips"].astype(str)
+    df["POOFips"] = df["POOFips"].fillna("").astype(str)
 
     # convert epoch time in milliseconds to datetime
     def epoch_to_datetime(date_val):
@@ -174,7 +175,7 @@ def process_df(df):
                 return location
             else:
                 return None
-        except Exception as e:
+        except Exception:
             logging.debug("Failed resolution for ({0},{1} for fire {2})".format(
                 latitude, longitude, row.UniqueFireIdentifier))
             return ''
@@ -320,4 +321,5 @@ def main(_) -> None:
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

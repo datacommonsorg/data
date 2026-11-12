@@ -16,9 +16,10 @@
 # python3 download_and_process.py
 import os
 import sys
-import pandas as pd
+
 from absl import app
 from absl import logging
+import pandas as pd
 
 _CODEDIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(1, _CODEDIR)
@@ -112,7 +113,6 @@ def process_and_modify_data_cascading(file_path):
 def main(argv):
     for config in DOWNLOAD_CONFIGS:
         url = config["url"]
-        desired_output_csv_name = config["output_csv_name"]
 
         logging.info(f"Attempting to download: {url}")
 
@@ -136,7 +136,7 @@ def main(argv):
 
         except FileNotFoundError:
             logging.fatal(
-                f"Error: Python interpreter or download script not found. Check your paths."
+                "Error: Python interpreter or download script not found. Check your paths."
             )
             sys.exit(1)
         except Exception as e:

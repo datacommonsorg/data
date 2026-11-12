@@ -6,8 +6,8 @@ full data series for the OECD's Quarterly GDP Growth dataset.
 """
 
 import logging
-import sys
 import os
+import sys
 
 # Add the project root to the Python path
 sys.path.append(

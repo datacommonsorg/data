@@ -12,21 +12,34 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from datetime import datetime
 import os
 import sys
-import numpy as np
-from absl import logging, flags, app
-# Import the required function after installing the package
-from bblocks import WorldBankData, DebtIDS
+from time import sleep
 from time import time
-from datetime import datetime
+
+from absl import app
+from absl import flags
+from absl import logging
+
+# Import the required function after installing the package
+from bblocks import DebtIDS
+import numpy as np
+import pandas as pd
 
 FLAGS = flags.FLAGS
-flags.DEFINE_integer('start_year', 1970, 'The starting year for data download.')
-flags.DEFINE_integer(
-    'end_year',
-    datetime.now().year + 6,
-    'The ending year for data download (current year + offset).')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_integer('start_year', 1970,
+                         'The starting year for data download.')
+    flags.DEFINE_integer(
+        'end_year',
+        datetime.now().year + 6,
+        'The ending year for data download (current year + offset).')
+
+
 start_time = time()
 DEFAULT_INPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   "input_files")
@@ -104,19 +117,60 @@ currency = [
 indicator_list = [interest, currency, principal, disbursed]
 indicator_listname = ["interest", "currency", "principal", "disbursed"]
 
+MAX_RETRIES = 3
+INITIAL_BACKOFF_SECONDS = 10
+YEAR_CHUNK_SIZE = 20
+
+
+def _fetch_indicator_df(ind: str, start_year: int,
+                        end_year: int) -> pd.DataFrame:
+    for attempt in range(1, MAX_RETRIES + 1):
+        try:
+            debt_id = DebtIDS()
+            debt_id.load_data(indicators=[ind],
+                              start_year=start_year,
+                              end_year=end_year)
+            return debt_id.get_data()
+        except Exception as e:
+            logging.warning("Attempt %d/%d failed for indicator %s (%d-%d): %s",
+                            attempt, MAX_RETRIES, ind, start_year, end_year, e)
+            if attempt < MAX_RETRIES:
+                sleep(INITIAL_BACKOFF_SECONDS * (2**(attempt - 1)))
+
+    logging.info("Falling back to %d-year chunks for indicator %s",
+                 YEAR_CHUNK_SIZE, ind)
+    chunk_dfs = []
+    for chunk_start in range(start_year, end_year + 1, YEAR_CHUNK_SIZE):
+        chunk_end = min(chunk_start + YEAR_CHUNK_SIZE - 1, end_year)
+        for attempt in range(1, MAX_RETRIES + 1):
+            try:
+                chunk_debt = DebtIDS()
+                chunk_debt.load_data(indicators=[ind],
+                                     start_year=chunk_start,
+                                     end_year=chunk_end)
+                chunk_dfs.append(chunk_debt.get_data())
+                break
+            except Exception as e:
+                logging.warning(
+                    "Chunk attempt %d/%d failed for indicator %s (%d-%d): %s",
+                    attempt, MAX_RETRIES, ind, chunk_start, chunk_end, e)
+                if attempt == MAX_RETRIES:
+                    raise
+                sleep(INITIAL_BACKOFF_SECONDS * (2**(attempt - 1)))
+    return pd.concat(chunk_dfs, ignore_index=True)
+
 
 def main(_):
     # Itterating each list to download the respective data.
     for idx, indicator in enumerate(indicator_list):
-        # Creating an IDS object
-        debt_id = DebtIDS()
-        # Load the indicators.
+        # Load the indicators with retry and chunking fallback.
         logging.info("Loaded data for%s", indicator)
-        debt_id.load_data(indicators=indicator,
-                          start_year=FLAGS.start_year,
-                          end_year=FLAGS.end_year)
+        dfs = [
+            _fetch_indicator_df(ind, FLAGS.start_year, FLAGS.end_year)
+            for ind in indicator
+        ]
         # Get the data as a DataFrame
-        df = debt_id.get_data()
+        df = pd.concat(dfs, ignore_index=True)
         try:
             # Extracting only the year part for data.
             df["YEARMOD"] = df["year"].dt.year
@@ -143,4 +197,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

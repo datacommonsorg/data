@@ -15,16 +15,18 @@
 Function library to make parallel requests and process the response.
 """
 
+import asyncio
 import json
 import logging
 import os
 import time
-import asyncio
-import aiohttp
 from typing import Any, Callable, Union
+
+import aiohttp
 from aiolimiter import AsyncLimiter
 
-from scripts.us_census.api_utils.status_file_utils import get_pending_or_fail_url_list, url_to_download
+from scripts.us_census.api_utils.status_file_utils import get_pending_or_fail_url_list
+from scripts.us_census.api_utils.status_file_utils import url_to_download
 
 
 async def async_save_resp_json(response: Any, filename: str):

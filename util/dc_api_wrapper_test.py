@@ -15,15 +15,15 @@
 
 import os
 import sys
-import urllib
 import unittest
 from unittest import mock
+import urllib
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
 
-import dc_api_wrapper as dc_api
 from datacommons_client.utils.error_handling import DCConnectionError
+import dc_api_wrapper as dc_api
 
 
 class TestDCAPIWrapper(unittest.TestCase):

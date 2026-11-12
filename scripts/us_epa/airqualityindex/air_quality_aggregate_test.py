@@ -16,10 +16,15 @@ Unit tests for air_quality_aggregate.py
 
 Usage: python3 -m unittest discover -v -s ../ -p "air_quality_aggregate_test.py"
 '''
-import unittest, csv, os, sys, tempfile, zipfile, io
-from absl import app
+import csv
+import io
+import os
+import sys
+import tempfile
+import unittest
+import zipfile
+
 from absl import flags
-from absl import logging
 
 _FLAGS = flags.FLAGS
 
@@ -27,18 +32,14 @@ module_dir_ = os.path.dirname(__file__)
 
 sys.path.append(module_dir_)
 
-from air_quality_aggregate import create_csv, write_csv, process
+from air_quality_aggregate import create_csv
+from air_quality_aggregate import process
+from air_quality_aggregate import write_csv
 
 MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
 class TestCriteriaGasesTest(unittest.TestCase):
-
-    @classmethod
-    def setUpClass(cls):
-        from absl import flags
-        flags.FLAGS(
-            ["air_quality_aggregate_test.py", "--output_file_path", "output"])
 
     def test_write_csv_county(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
@@ -129,8 +130,6 @@ class TestCriteriaGasesTest(unittest.TestCase):
             # Check if the output files were created
             expected_csv_path = os.path.join(MODULE_DIR, tmp_output_dir,
                                              'EPA_AQI.csv')
-            expected_tmcf_path = os.path.join(MODULE_DIR, tmp_output_dir,
-                                              'EPA_AQI.tmcf')
 
             self.assertTrue(os.path.isfile(expected_csv_path),
                             "CSV output file not created")
