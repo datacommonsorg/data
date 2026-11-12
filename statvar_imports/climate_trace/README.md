@@ -13,7 +13,10 @@ The `download_and_segregate_by_gas.py` script aggregates greenhouse gas emission
 - **CO2e_20yr** (CO2 equivalent, 20-year global warming potential)
 - **CO2e_100yr** (CO2 equivalent, 100-year global warming potential)
 
-The current data is available at the subsector level. To maintain consistency with previous sector-level records, we used pvmap to aggregate the subsector data.
+The current data is available at the subsector level. To maintain consistency with previous sector-level records and consolidated legacy imports (`ClimateTrace_GreenhouseGas` and `ClimateTrace_GHG_Emissions_OldAPI`), the pipeline performs three aggregations:
+- **Sector Aggregation (`climate_pvmap_sectors.csv`)**: Uses `stat_var_processor.py` (`#aggregate,sum`) to aggregate subsector rows into sector-level Statistical Variables (`Annual_Emissions_<Gas>_<Sector>`, `150,000` observations across 50 StatVars).
+- **Per-Gas Legacy Subsector Rollups (`append_legacy_subsector_rollups` in `download_and_segregate_by_gas.py`)**: Sums split v7 subsectors into legacy composite `shipping` (`MaritimeShipping`) and `wastewater-treatment-and-discharge` (`WastewaterTreatmentAndDischarge`) rows in `input_files/all_countries_*.csv` with `sector=''` (preventing double-counting in sector aggregation), producing `1,050,000` subsector observations across 350 StatVars (`climate_pvmap_subsectors.csv`).
+- **Consolidated Greenhouse Gas Rollups (`generate_greenhousegas_input` in `download_and_segregate_by_gas.py`)**: Pre-aggregates `co2e_100yr` country totals (`dcid:Annual_Emissions_GreenhouseGas`), sector totals (`sector_*`), subsector totals (`subsector_*`), and legacy composite subsector rollups (`LEGACY_COMPOSITE_GROUPS`) into `input_files/greenhousegas_co2e_100yr.csv`, producing `150,000` observations across 50 `Annual_Emissions_GreenhouseGas*` StatVars (`climate_pvmap_greenhousegas.csv`).
 
 ## Features
 
@@ -36,26 +39,61 @@ To use this project, simply run the main script. It will automatically generate 
 /path/to/your/venv/bin/python download_and_segregate_by_gas.py
 ```
 
-The script will create separate CSV files for each gas type in the `input_files/` directory.
+The script will create separate CSV files for each gas type (`all_countries_*.csv`, including legacy composite subsector rollups for `shipping` and `wastewater-treatment-and-discharge`) as well as `greenhousegas_co2e_100yr.csv` (consolidated country, sector, and subsector `co2e_100yr` totals) in the `input_files/` directory.
 
 ### Processing Data
 
-After downloading, you can process the generated CSV files using the `stat_var_processor.py` tool. Here's an example:
+After downloading, you can process the generated CSV files using the `stat_var_processor.py` tool.
+
+**For sectors:**
 
 ```bash
- ../../tools/statvar_importer/stat_var_processor.py \
-  --input_data=input_files/all_countries_co2.csv \
+../../tools/statvar_importer/stat_var_processor.py \
+  --input_data=input_files/all*.csv \
   --pv_map=climate_pvmap_sectors.csv \
   --config_file=common_metadata.csv \
-  --output_path=output/sectors_CO2_output \
-  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
+  --output_path=output/output_sectors \
+  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+  --output_counters=counters/sectors_counters.csv
+```
+
+**For subsectors:**
+
+```bash
+../../tools/statvar_importer/stat_var_processor.py \
+  --input_data=input_files/all*.csv \
+  --pv_map=climate_pvmap_subsectors.csv \
+  --config_file=common_metadata.csv \
+  --output_path=output/output_subsectors \
+  --statvar_dcid_remap_csv=statvar_remap.csv \
+  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+  --output_counters=counters/subsectors_counters.csv
+```
+
+**For greenhouse gas emissions (CO2e 100-year country, sector, and subsector totals):**
+
+```bash
+../../tools/statvar_importer/stat_var_processor.py \
+  --input_data=input_files/greenhousegas_co2e_100yr.csv \
+  --pv_map=climate_pvmap_greenhousegas.csv \
+  --config_file=common_metadata.csv \
+  --output_path=output/output_greenhousegas \
+  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+  --output_counters=counters/greenhousegas_counters.csv
 ```
 
 ## Project Structure
 
-*   `download_and_segregate_by_gas.py`: A single, integrated script that generates a country list, downloads zip files, and segregates data by gas type.
+*   `download_and_segregate_by_gas.py`: A single, integrated script that generates a country list, downloads zip files, segregates data by gas type, and generates consolidated greenhouse gas and legacy composite subsector rollups.
+*   `download_and_segregate_by_gas_test.py`: Unit tests for the download, segregation, and legacy rollup pipeline.
 *   `check_country.csv`: A user-maintained list of country ISO codes to ensure they are included in the download, even if not present in the API list.
+*   `climate_pvmap_sectors.csv`: Property-value map for aggregating subsector data into sector-level Statistical Variables.
+*   `climate_pvmap_subsectors.csv`: Property-value map for subsector-level Statistical Variables across all 5 gas types.
+*   `climate_pvmap_greenhousegas.csv`: Property-value map for consolidated `Annual_Emissions_GreenhouseGas*` country, sector, and subsector Statistical Variables.
 *   `common_metadata.csv`: Defines common metadata parameters for data processing.
+*   `common_output.tmcf`: Shared TMCF template for the generated CSV outputs.
 *   `statvar_remap.csv`: Contains the mapping from internal statistical variable names to Data Commons IDs.
-*   `input_files/`: Directory containing the segregated CSV files (e.g., `all_countries_co2.csv`) after running the main script.
-*   `output/`: Directory containing further processed and standardized output files (e.g., TMCF, MCF files).
+*   `manifest.json`: Import automation manifest defining the preprocessing and `stat_var_processor.py` steps.
+*   `input_files/`: Directory containing the segregated CSV files (e.g., `all_countries_co2.csv`, `greenhousegas_co2e_100yr.csv`) after running the main script.
+*   `counters/`: Directory containing operational counters generated by `stat_var_processor.py`.
+*   `output/`: Directory containing further processed and standardized output files (e.g., CSV, TMCF, MCF files).
