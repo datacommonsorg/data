@@ -33,11 +33,16 @@ import requests
 from retry import retry
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('income_output_dir', 'output',
-                    'Path to write cleaned CSVs.')
-flags.DEFINE_string('input_files', 'input', 'Path to download input CSVs.')
-flags.DEFINE_string('mode', '',
-                    'Mode: "download", "process", or both (default: both).')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('income_output_dir', 'output',
+                        'Path to write cleaned CSVs.')
+    flags.DEFINE_string('input_files', 'input', 'Path to download input CSVs.')
+    flags.DEFINE_string(
+        'mode', '', 'Mode: "download", "process", or both (default: both).')
+
 
 URL_PREFIX = 'https://www.huduser.gov/portal/datasets/il/il'
 
@@ -135,17 +140,17 @@ def process(year, matches, input_folder):
     return df
 
 
-def process_all():
-    '''Processes all years based on mode flag.'''
+def process_all(input_files: str, mode: str, income_output_dir: str):
+    '''Processes all years based on mode.'''
     with open('match_bq.csv') as f:
         reader = csv.DictReader(f)
         matches = {'dcs:' + row['fips']: 'dcs:' + row['city'] for row in reader}
 
     today = datetime.date.today()
-    input_folder = FLAGS.input_files
+    input_folder = input_files
     output_data = []
 
-    if FLAGS.mode == "" or FLAGS.mode == "download":
+    if mode == "" or mode == "download":
         logging.info("Starting download phase...")
         for year in range(2006, today.year + 1):
             url = get_url(year)
@@ -173,7 +178,7 @@ def process_all():
                         continue
                 download_file(url, filename, input_folder)
 
-    if FLAGS.mode == "" or FLAGS.mode == "process":
+    if mode == "" or mode == "process":
         logging.info("Starting processing phase...")
         for year in range(2006, today.year + 1):
             if not os.path.exists(
@@ -188,18 +193,19 @@ def process_all():
 
         if output_data:
             final_df = pd.concat(output_data, ignore_index=True)
-            os.makedirs(FLAGS.income_output_dir, exist_ok=True)
-            final_df.to_csv(os.path.join(FLAGS.income_output_dir,
+            os.makedirs(income_output_dir, exist_ok=True)
+            final_df.to_csv(os.path.join(income_output_dir,
                                          'output_all_years.csv'),
                             index=False)
             logging.info(
-                f'Merged data saved to {FLAGS.income_output_dir}/output_all_years.csv'
+                f'Merged data saved to {income_output_dir}/output_all_years.csv'
             )
 
 
 def main(argv):
-    process_all()
+    process_all(FLAGS.input_files, FLAGS.mode, FLAGS.income_output_dir)
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)
