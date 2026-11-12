@@ -28,8 +28,8 @@ This import downloads and processes Indonesia's demographic population statistic
   * `var_id=2791`: *Jumlah Penduduk Laki-Laki menurut Kabupaten/Kota dan Kelompok umur* (Male Population by Regency/City and Age Group)
   * `var_id=2792`: *Jumlah Penduduk Perempuan menurut Kabupaten Kota dan Kelompok Umur* (Female Population by Regency/City and Age Group)
 * **Generated Input Files**:
-  * `input_files/idn_population.csv` (processed with `pvmaps/idn_population_pvmap.csv`)
-  * `input_files/idn_age_gender.csv` (processed with `pvmaps/idn_age_gender_pvmap.csv`)
+  * `input_files/idn_population.csv` (processed with `idn_population_pvmap.csv`)
+  * `input_files/idn_age_gender.csv` (processed with `idn_age_gender_pvmap.csv`)
 * **StatVars (`51` active)**:
   * `dcid:Count_Person`
   * `dcid:Count_Person_Male`, `dcid:Count_Person_Female`
@@ -66,7 +66,7 @@ Comparison against the legacy CNS Demographic CSVs (`/cns/jv-d/home/datcom/v3_mc
    ```bash
    python3 tools/statvar_importer/stat_var_processor.py \
      --input_data=statvar_imports/indonesia_census/demographics/input_files/idn_population.csv \
-     --pv_map=statvar_imports/indonesia_census/demographics/pvmaps/idn_population_pvmap.csv \
+     --pv_map=statvar_imports/indonesia_census/demographics/idn_population_pvmap.csv \
      --config_file=statvar_imports/indonesia_census/demographics/idn_demographic_metadata.csv \
      --places_resolved_csv=statvar_imports/indonesia_census/demographics/idn_places_resolved.csv \
      --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
@@ -75,7 +75,7 @@ Comparison against the legacy CNS Demographic CSVs (`/cns/jv-d/home/datcom/v3_mc
 
    python3 tools/statvar_importer/stat_var_processor.py \
      --input_data=statvar_imports/indonesia_census/demographics/input_files/idn_age_gender.csv \
-     --pv_map=statvar_imports/indonesia_census/demographics/pvmaps/idn_age_gender_pvmap.csv \
+     --pv_map=statvar_imports/indonesia_census/demographics/idn_age_gender_pvmap.csv \
      --config_file=statvar_imports/indonesia_census/demographics/idn_demographic_metadata.csv \
      --places_resolved_csv=statvar_imports/indonesia_census/demographics/idn_places_resolved.csv \
      --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
