@@ -24,11 +24,16 @@ from unittest import mock
 import zipfile
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
-if _MODULE_DIR not in sys.path:
-    sys.path.insert(0, _MODULE_DIR)
+_REPO_ROOT = os.path.abspath(os.path.join(_MODULE_DIR, '../..'))
+if _REPO_ROOT not in sys.path:
+    sys.path.insert(0, _REPO_ROOT)
 
-import download  # pylint: disable=wrong-import-position
 import openpyxl  # pylint: disable=wrong-import-position
+
+try:
+    from statvar_imports.srilanka_census import download  # pylint: disable=wrong-import-position
+except ModuleNotFoundError:
+    import download  # pylint: disable=wrong-import-position
 
 
 class DownloadTest(unittest.TestCase):
@@ -128,7 +133,7 @@ class DownloadTest(unittest.TestCase):
             }],
         )
 
-    @mock.patch('download.download_util.request_url')
+    @mock.patch.object(download.download_util, 'request_url')
     def test_refresh_wdi_rows_from_worldbank(self, mock_request_url):
         stale_rows = [{
             'Country ISO3': 'LKA',
@@ -172,7 +177,7 @@ class DownloadTest(unittest.TestCase):
             self.assertTrue(
                 os.path.exists(os.path.join(tmp_dir, 'worldbank_lka.zip')))
 
-    @mock.patch('download.download_util.request_url')
+    @mock.patch.object(download.download_util, 'request_url')
     def test_download_and_process_end_to_end(self, mock_request_url):
         xlsx_bytes = self._create_sample_xlsx_bytes()
         pop_csv_bytes = (

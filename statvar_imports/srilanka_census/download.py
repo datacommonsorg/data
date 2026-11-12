@@ -34,21 +34,26 @@ import download_util
 import openpyxl
 
 _FLAGS = flags.FLAGS
-flags.DEFINE_string(
-    'output_dir',
-    os.path.join(_CODEDIR, 'input_files'),
-    'Directory path to save the preprocessed input CSV files.',
-)
-flags.DEFINE_string(
-    'raw_dir',
-    os.path.join(_CODEDIR, 'raw_files'),
-    'Directory path to save the raw downloaded source files unchanged.',
-)
-flags.DEFINE_string(
-    'pv_map',
-    os.path.join(_CODEDIR, 'srilanka_census_pvmap.csv'),
-    'Path to the property-value map CSV file used to filter valid indicators.',
-)
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        'output_dir',
+        os.path.join(_CODEDIR, 'input_files'),
+        'Directory path to save the preprocessed input CSV files.',
+    )
+    flags.DEFINE_string(
+        'raw_dir',
+        os.path.join(_CODEDIR, 'raw_files'),
+        'Directory path to save the raw downloaded source files unchanged.',
+    )
+    flags.DEFINE_string(
+        'pv_map',
+        os.path.join(_CODEDIR, 'srilanka_census_pvmap.csv'),
+        'Path to the property-value map CSV file used to filter valid indicators.',
+    )
+
 
 HDX_PACKAGE_SHOW_URL = 'https://data.humdata.org/api/3/action/package_show'
 HDX_BASE_URL = 'https://data.humdata.org/'
@@ -581,4 +586,5 @@ def main(_) -> None:
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)
