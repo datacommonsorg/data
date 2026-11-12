@@ -1,0 +1,37 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "CDCDiabetes",
+      "curator_emails": ["support@datacommons.org"],
+      "provenance_url": "https://usdss.cdc.gov/diabetes/surveillance.html",
+      "provenance_description": "County-level data and estimates regarding diabetes prevalence, obesity, and physical inactivity in the United States.",
+      "scripts": [
+        "download.py --output_dir=input_files --historical_output_dir=output_files",
+        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/cdc_diabetes.csv --pv_map=cdc_diabetes_pvmap.csv --config_file=cdc_diabetes_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/cdc_diabetes --output_counters=counters/cdc_diabetes_counters.csv"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "output_files/common_tmcf.tmcf",
+          "cleaned_csv": [
+            "output_files/cdc_diabetes_historical_2004_2021.csv",
+            "output_files/cdc_diabetes.csv"
+          ]
+        }
+      ],
+      "source_files": [
+        "input_files/cdc_diabetes.csv",
+        "cdc_diabetes_pvmap.csv",
+        "cdc_diabetes_metadata.csv",
+        "counters/cdc_diabetes_counters.csv",
+        "validation_config.json"
+      ],
+      "validation_config_file": "validation_config.json",
+      "cron_schedule": "30 05 * * 1",
+      "resource_limits": {
+        "cpu": 4,
+        "memory": 8,
+        "disk": 50
+      }
+    }
+  ]
+}
