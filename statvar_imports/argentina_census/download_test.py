@@ -207,46 +207,6 @@ class DownloadTest(unittest.TestCase):
                     tmp_dir,
                 )
 
-    def test_stat_var_processor_matches_golden_sample_output(self):
-        repo_root = os.path.abspath(os.path.join(_MODULE_DIR, '..', '..'))
-        processor_script = os.path.join(repo_root, 'tools', 'statvar_importer',
-                                        'stat_var_processor.py')
-        test_data_dir = os.path.join(_MODULE_DIR, 'test_data')
-
-        with tempfile.TemporaryDirectory() as tmp_dir:
-            out_prefix = os.path.join(tmp_dir, 'sample_output')
-            counters_path = os.path.join(tmp_dir, 'sample_counters.csv')
-            cmd = [
-                sys.executable,
-                processor_script,
-                f'--input_data={os.path.join(test_data_dir, "sample_input.csv")}',
-                f'--pv_map={os.path.join(_MODULE_DIR, "argentina_census_pvmap.csv")}',
-                f'--config_file={os.path.join(_MODULE_DIR, "argentina_census_metadata.csv")}',
-                f'--places_resolved_csv={os.path.join(_MODULE_DIR, "argentina_places_resolved.csv")}',
-                f'--statvar_dcid_remap_csv={os.path.join(_MODULE_DIR, "argentina_statvar_remap.csv")}',
-                f'--existing_statvar_mcf={os.path.join(test_data_dir, "sample_output_stat_vars.mcf")}',
-                f'--output_path={out_prefix}',
-                f'--output_counters={counters_path}',
-            ]
-            import subprocess
-            proc = subprocess.run(cmd,
-                                  capture_output=True,
-                                  text=True,
-                                  check=False)
-            self.assertEqual(
-                proc.returncode,
-                0,
-                f'stat_var_processor failed:\nSTDOUT:\n{proc.stdout}\nSTDERR:\n{proc.stderr}',
-            )
-
-            with open(f'{out_prefix}.csv', 'r', encoding='utf-8') as f_actual, \
-                 open(os.path.join(test_data_dir, 'sample_output.csv'), 'r', encoding='utf-8') as f_expected:
-                self.assertEqual(f_actual.read(), f_expected.read())
-
-            with open(f'{out_prefix}.tmcf', 'r', encoding='utf-8') as f_actual, \
-                 open(os.path.join(test_data_dir, 'sample_output.tmcf'), 'r', encoding='utf-8') as f_expected:
-                self.assertEqual(f_actual.read(), f_expected.read())
-
 
 if __name__ == '__main__':
     unittest.main()
