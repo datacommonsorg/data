@@ -302,8 +302,14 @@ def _deduplicate_facility_rows(table, rows):
                         if k.upper().endswith(
                             ('LATITUDE', 'LONGITUDE')) and val:
                             merged[k] = val
+            if not fh.v(table, merged, 'ADDRESS1'):
+                if fh.v(table, older_row, 'ADDRESS1'):
+                    for k, val in older_row.items():
+                        if k.upper().endswith(('ADDRESS1', 'ADDRESS2')) and val:
+                            merged[k] = val
             for k, val in older_row.items():
-                if k.upper().endswith(('LATITUDE', 'LONGITUDE')):
+                if k.upper().endswith(
+                    ('LATITUDE', 'LONGITUDE', 'ADDRESS1', 'ADDRESS2')):
                     continue
                 if not merged.get(k) and val:
                     merged[k] = val

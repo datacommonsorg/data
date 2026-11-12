@@ -419,7 +419,8 @@ def process_companies(input_table_path,
 
                 # Only insert the ownership relationships where the facility exists in data commons.
                 if ghg_id in facility_ids:
-                    ownershipWriter.writerow(ownership_out_row)
+                    if year:
+                        ownershipWriter.writerow(ownership_out_row)
                 else:
                     _COUNTERS_COMPANIES["facility_does_not_exist"].add(ghg_id)
 

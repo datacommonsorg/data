@@ -167,29 +167,31 @@ def download(api_root,
         os.remove(tmp_file)
     first_time = True
     try:
-        while True:
-            # Since 10K rows shouldn't consume too much memory, just use pandas.
-            url = api_root + table_name + '/ROWS/' + str(idx) + ':' + str(
-                idx + max_rows - 1) + '/csv'
-            df = _fetch_page_csv(url,
-                                 max_retries=max_retries,
-                                 retry_backoff_sec=retry_backoff_sec,
-                                 timeout=request_timeout)
-            if df is None:
-                print('Reached end of table at ' + url)
-                break
-            print('Downloaded ' + str(len(df)) + ' rows from ' + url)
-            if len(df) == 0:
-                break
-            if first_time:
-                mode = 'w'
-                header = True
-                first_time = False
-            else:
-                mode = 'a'
-                header = False
-            df.to_csv(tmp_file, mode=mode, header=header, index=False)
-            idx = idx + max_rows
+        with requests.Session() as session:
+            while True:
+                # Since 10K rows shouldn't consume too much memory, just use pandas.
+                url = api_root + table_name + '/ROWS/' + str(idx) + ':' + str(
+                    idx + max_rows - 1) + '/csv'
+                df = _fetch_page_csv(url,
+                                     max_retries=max_retries,
+                                     retry_backoff_sec=retry_backoff_sec,
+                                     timeout=request_timeout,
+                                     session=session)
+                if df is None:
+                    print('Reached end of table at ' + url)
+                    break
+                print('Downloaded ' + str(len(df)) + ' rows from ' + url)
+                if len(df) == 0:
+                    break
+                if first_time:
+                    mode = 'w'
+                    header = True
+                    first_time = False
+                else:
+                    mode = 'a'
+                    header = False
+                df.to_csv(tmp_file, mode=mode, header=header, index=False)
+                idx = idx + max_rows
         if first_time:
             raise RuntimeError(f'No rows downloaded for table {table_name}')
         os.replace(tmp_file, out_file)

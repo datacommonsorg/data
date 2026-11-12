@@ -18,7 +18,11 @@ import os
 
 _THIS_DIR = os.path.dirname(os.path.abspath(__file__))
 _TEST_SUBDIRS = (
+    'airdata',
+    'ejscreen',
     'facility',
+    'ghgrp',
+    'national_emissions_inventory',
     'parent_company',
 )
 

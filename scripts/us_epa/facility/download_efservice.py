@@ -62,7 +62,8 @@ _STORAGE_OPTIONS = {
 
 def _load_oris_crosswalk(max_retries=3,
                          retry_backoff_sec=2.0,
-                         request_timeout=60):
+                         request_timeout=60,
+                         raw_xlsx_output_dir=None):
     """Downloads the EPA GHGRP-to-ORIS power plant crosswalk Excel sheet.
 
     Tries the primary EPA URL first and falls back to the Internet Archive
@@ -83,6 +84,14 @@ def _load_oris_crosswalk(max_retries=3,
                                    dtype=str,
                                    usecols=_CROSSWALK_COLS,
                                    engine='openpyxl')
+                if raw_xlsx_output_dir:
+                    xlsx_path = os.path.join(
+                        raw_xlsx_output_dir,
+                        'ghgrp_oris_power_plant_crosswalk_12_13_21.xlsx')
+                    tmp_xlsx = xlsx_path + '.tmp'
+                    with open(tmp_xlsx, 'wb') as fp:
+                        fp.write(resp.content)
+                    os.replace(tmp_xlsx, xlsx_path)
                 print(f'Downloaded ORIS crosswalk ({len(df)} rows) from {url}')
                 return df.rename(columns={'GHGRP Facility ID': 'Facility Id'})
             except Exception as e:
@@ -117,7 +126,8 @@ def _generate_crosswalk(table_csv_path, crosswalk_csv_path):
       4. Writes the resulting table atomically via a `.tmp` file to
          `crosswalks.csv` for consumption by `process_facility.py`.
     """
-    oris_df = _load_oris_crosswalk()
+    oris_df = _load_oris_crosswalk(
+        raw_xlsx_output_dir=os.path.dirname(crosswalk_csv_path) or None)
     df = pd.read_csv(table_csv_path, dtype=str)
     # Support both lowercase (PUB_DIM_FACILITY) and uppercase (legacy views) column names.
     fac_col = 'facility_id' if 'facility_id' in df.columns else 'FACILITY_ID'

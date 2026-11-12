@@ -168,7 +168,7 @@ class ProcessTest(unittest.TestCase):
             page2 = mock.Mock(text='')
             page2.raise_for_status.return_value = None
             with mock.patch.object(
-                    fh.requests,
+                    fh.requests.Session,
                     'get',
                     side_effect=[RuntimeError('transient error'), page1,
                                  page2]):
