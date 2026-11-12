@@ -221,6 +221,7 @@ class DownloadScriptTest(unittest.TestCase):
         """Verifies try_download_url rewinds/truncates temp_file on retry."""
         import io
         from unittest import mock
+
         import requests
 
         class _FlakyRawStream:

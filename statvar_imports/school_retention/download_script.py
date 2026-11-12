@@ -24,7 +24,8 @@
    files directly as CSV in input_files/.
 """
 
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import as_completed
 from datetime import datetime
 import glob
 import os
