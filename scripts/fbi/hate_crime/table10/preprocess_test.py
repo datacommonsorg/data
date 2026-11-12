@@ -51,7 +51,9 @@ class HateCrimeTable10Test(unittest.TestCase):
             csv_file_path = os.path.join(tmp_dir, '2011.csv')
 
             read_file = pd.read_excel(xls_file_path, **test_config['args'])
-            read_file = preprocess._clean_dataframe(read_file, '2011')
+            read_file = preprocess._clean_dataframe(
+                read_file, '2011', '10',
+                os.path.join(_SCRIPT_PATH, '..', 'table_config.json'))
             read_file.insert(_YEAR_INDEX, 'Year', '2011')
             read_file.to_csv(csv_file_path, header=True, index=False)
             csv_files.append(csv_file_path)
