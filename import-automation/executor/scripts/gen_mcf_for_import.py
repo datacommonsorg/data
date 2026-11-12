@@ -21,17 +21,17 @@ The import's processing scripts must already have been run, so the files
 listed in `import_inputs` (for example, `output/data.csv`) exist.
 
 Usage:
-  python3 tools/scripts/gen_mcf_for_import.py \
+  python3 import-automation/executor/scripts/gen_mcf_for_import.py \
       --manifest=scripts/us_bls/cpi/manifest.json \
       --import_name=BLS_CPI
 
   # Print the resolved files and commands without running them:
-  python3 tools/scripts/gen_mcf_for_import.py --manifest=... \
-      --import_name=... --dry_run
+  python3 import-automation/executor/scripts/gen_mcf_for_import.py \
+      --manifest=... --import_name=... --dry_run
 
   # Pass extra flags to the import tool after `--`:
-  python3 tools/scripts/gen_mcf_for_import.py --manifest=... \
-      --import_name=... -- -n=4 --existence-checks=false
+  python3 import-automation/executor/scripts/gen_mcf_for_import.py \
+      --manifest=... --import_name=... -- -n=4 --existence-checks=false
 
 Output for input i is written to `<output_dir>/input<i>/genmcf` (or
 `input<i>/lint` in lint mode). `<output_dir>` defaults to
@@ -47,8 +47,11 @@ import subprocess
 import sys
 from typing import Dict, List, Optional, Sequence
 
-_RUN_IMPORT_TOOL_SH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                   'run_import_tool.sh')
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+_RUN_IMPORT_TOOL_SH = os.path.join(_SCRIPT_DIR, 'run_import_tool.sh')
+
+sys.path.insert(0, os.path.dirname(_SCRIPT_DIR))
+from app.executor import manifest_utils
 
 
 class _ManifestImportError(Exception):
@@ -57,47 +60,16 @@ class _ManifestImportError(Exception):
 
 def _load_import_spec(manifest_path: str, import_name: str) -> Dict:
     """Returns the import specification named `import_name` in the manifest."""
-    with open(manifest_path, 'r') as f:
-        manifest = json.load(f)
-    specs = manifest.get('import_specifications', [])
-    for spec in specs:
-        if spec.get('import_name') == import_name:
-            return spec
-    available = ', '.join(spec.get('import_name', '?') for spec in specs)
-    raise _ManifestImportError(
-        f'Import "{import_name}" not found in {manifest_path}. '
-        f'Available imports: {available or "(none)"}')
-
-
-def _get_import_input_files(import_input: Dict,
-                            absolute_import_dir: str) -> List[str]:
-    """Returns the input files for one entry of `import_inputs`.
-
-    Keep in sync with `ImportExecutor._get_import_input_files` in
-    import-automation/executor/app/executor/import_executor.py.
-    """
-    input_files = []
-    errors = []
-    # Get import files in the order template_mcf, node_mcf and cleaned_csv
-    for file_type in sorted(import_input.keys(), reverse=True):
-        pattern = import_input[file_type]
-        patterns = [pattern]
-        if isinstance(pattern, list):
-            patterns = pattern
-        for pattern in patterns:
-            if pattern:
-                files = glob.glob(os.path.join(absolute_import_dir, pattern),
-                                  recursive=True)
-                if not files and not glob.has_magic(pattern):
-                    errors.append(
-                        f'No matching files for {file_type}:{pattern}')
-                else:
-                    input_files.extend(sorted(files))
-    if errors:
+    manifest = manifest_utils.parse_manifest(manifest_path)
+    spec = manifest_utils.get_import_spec(manifest, import_name)
+    if spec is None:
+        available = ', '.join(
+            s.get('import_name', '?')
+            for s in manifest.get('import_specifications', []))
         raise _ManifestImportError(
-            f'Missing import files in {absolute_import_dir}: {errors}. '
-            'Run the import\'s processing scripts first.')
-    return input_files
+            f'Import "{import_name}" not found in {manifest_path}. '
+            f'Available imports: {available or "(none)"}')
+    return spec
 
 
 def _get_unmatched_glob_patterns(import_input: Dict,
@@ -105,8 +77,7 @@ def _get_unmatched_glob_patterns(import_input: Dict,
     """Returns `file_type:pattern` for each wildcard pattern matching no files.
 
     The import executor silently skips these, so a missing processing output
-    can go unnoticed. This is kept separate from `_get_import_input_files` so
-    that function stays identical to the import executor's.
+    can go unnoticed.
     """
     unmatched = []
     for file_type in sorted(import_input.keys(), reverse=True):
@@ -138,7 +109,12 @@ def _build_commands(
 
     commands = []
     for index, import_input in enumerate(import_inputs):
-        input_files = _get_import_input_files(import_input, absolute_import_dir)
+        try:
+            input_files = manifest_utils.get_import_input_files(
+                import_input, absolute_import_dir)
+        except manifest_utils.MissingInputFilesError as e:
+            raise _ManifestImportError(
+                f'{e}. Run the import\'s processing scripts first.') from e
         for unmatched in _get_unmatched_glob_patterns(import_input,
                                                       absolute_import_dir):
             print(
