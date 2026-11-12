@@ -30,16 +30,23 @@ sys.path.append(os.path.join(_SCRIPT_PATH, '..'))  # for utils
 import file_util
 import utils
 
-flags.DEFINE_string('config_file',
-                    os.path.join(_SCRIPT_PATH, '../table_config.json'),
-                    'Input config file')
-flags.DEFINE_string(
-    'output_dir', _SCRIPT_PATH, 'Directory path to write the cleaned CSV and'
-    'MCF. Default behaviour is to write the artifacts in the current working'
-    'directory.')
-flags.DEFINE_bool(
-    'gen_statvar_mcf', False, 'Generate MCF of StatVars. Default behaviour is'
-    'to not generate the MCF file.')
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('config_file',
+                        os.path.join(_SCRIPT_PATH, '../table_config.json'),
+                        'Input config file')
+    flags.DEFINE_string(
+        'output_dir', _SCRIPT_PATH,
+        'Directory path to write the cleaned CSV and '
+        'MCF. Default behaviour is to write the artifacts in the current working '
+        'directory.')
+    flags.DEFINE_bool(
+        'gen_statvar_mcf', False,
+        'Generate MCF of StatVars. Default behaviour is '
+        'to not generate the MCF file.')
+
+
 _FLAGS = flags.FLAGS
 
 _YEAR_INDEX = 0
@@ -104,9 +111,9 @@ def _write_output_csv(reader: csv.DictReader, writer: csv.DictWriter,
     return statvars
 
 
-def _clean_dataframe(df: pd.DataFrame, year: str, table_num):
+def _clean_dataframe(df: pd.DataFrame, year: str, table_num, config_file: str):
     """Clean the column names and offense type values in a dataframe."""
-    with file_util.FileIO(_FLAGS.config_file, 'r') as f:
+    with file_util.FileIO(config_file, 'r') as f:
         _YEARWISE_CONFIG = json.load(f)
     year_config = _YEARWISE_CONFIG['table_config'][table_num]
 
@@ -142,7 +149,8 @@ def main(argv):
             csv_file_path = os.path.join(tmp_dir, year + '.csv')
             logging.info(f"Processing : {xls_file_path}")
             read_file = pd.read_excel(xls_file_path, **config['args'])
-            read_file = _clean_dataframe(read_file, year, table_num)
+            read_file = _clean_dataframe(read_file, year, table_num,
+                                         _FLAGS.config_file)
             read_file.insert(_YEAR_INDEX, 'Year', year)
             read_file.to_csv(csv_file_path, header=True, index=False)
             csv_files.append(csv_file_path)
@@ -160,4 +168,5 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)
