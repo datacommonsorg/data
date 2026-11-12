@@ -19,8 +19,9 @@
                 }
             ],
             "source_files": [
+                "raw_files/*.csv",
                 "input_files/*.csv",
-                "counters/*.csv",
+                "output_files/census_sahie_counters.csv",
                 "validation_config.json"
             ],
             "cron_schedule": "0 11 * * 4",

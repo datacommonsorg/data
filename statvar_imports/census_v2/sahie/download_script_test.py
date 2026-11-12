@@ -16,7 +16,8 @@ import os
 import sys
 import tempfile
 import unittest
-from unittest.mock import Mock, patch
+from unittest.mock import Mock
+from unittest.mock import patch
 
 # Adjust the path to import the script under test
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
