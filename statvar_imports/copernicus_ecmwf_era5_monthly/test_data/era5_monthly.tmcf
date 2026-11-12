@@ -1,0 +1,9 @@
+Node: E:era5_monthly->E0
+observationDate: C:era5_monthly->observationDate
+observationAbout: C:era5_monthly->observationAbout
+value: C:era5_monthly->value
+unit: C:era5_monthly->unit
+variableMeasured: C:era5_monthly->variableMeasured
+typeOf: dcs:StatVarObservation
+measurementMethod: ERA5Monthly
+observationPeriod: P1M

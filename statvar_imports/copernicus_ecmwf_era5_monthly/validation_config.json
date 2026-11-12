@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "check_max_date_consistent",
+      "description": "Checks that the latest date is identical across all 7 ERA5 monthly StatVars.",
+      "validator": "MAX_DATE_CONSISTENT",
+      "params": {}
+    },
+    {
+      "rule_id": "check_max_date_freshness",
+      "description": "Checks that the latest observation date does not regress below 2020-06.",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT StatVar, MaxDate FROM stats",
+        "condition": "MaxDate >= '2020-06'"
+      }
+    },
+    {
+      "rule_id": "check_num_places_consistent",
+      "description": "Checks that the number of places is consistent across all 7 ERA5 monthly StatVars.",
+      "validator": "NUM_PLACES_CONSISTENT",
+      "params": {}
+    }
+  ]
+}
