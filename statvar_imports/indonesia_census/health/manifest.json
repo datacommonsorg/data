@@ -1,34 +1,38 @@
 {
-    "import_specifications": [
+  "import_specifications": [
+    {
+      "import_name": "Indonesia_Census_Health",
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
+      "provenance_url": "https://www.bps.go.id/",
+      "provenance_description": "Health Statistics for Indonesia across provinces and regencies/cities from Statistics Indonesia (Badan Pusat Statistik - BPS).",
+      "scripts": [
+        "download.py --output_dir=input_files --raw_output_dir=raw_files",
+        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/*.csv --pv_map=indonesia_health_pvmap.csv --config_file=indonesia_health_metadata.csv --places_resolved_csv=indonesia_health_places_resolved.csv --statvar_dcid_remap_csv=statvar_remap.csv --output_path=output_files/indonesia_health_output"
+      ],
+      "import_inputs": [
         {
-            "import_name": "Indonesia_Census_Health",
-            "curator_emails": [
-                "support@datacommons.org"
-            ],
-            "provenance_url": "https://www.bps.go.id/en/statistics-table?subject=519",
-            "provenance_description": "Badan Pusat Statistik (BPS - Statistics Indonesia) - Health Statistics (Mortality, Disease, Risk Factors, and Health Service Utilization)",
-            "scripts": [
-                "download.py --output_dir=input_files",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/*.csv --pv_map=indonesia_health_pvmap.csv --config_file=indonesia_health_metadata.csv --places_resolved_csv=indonesia_health_places_resolved.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/indonesia_health_output --output_counters=counters/indonesia_health_counters.csv"
-            ],
-            "import_inputs": [
-                {
-                    "template_mcf": "output_files/indonesia_health_output.tmcf",
-                    "cleaned_csv": "output_files/indonesia_health_output.csv",
-                    "node_mcf": "output_files/*.mcf"
-                }
-            ],
-            "source_files": [
-                "input_files/*.csv",
-                "counters/*.csv"
-            ],
-            "cron_schedule": "0 05 * * 1",
-            "validation_config_file": "validation_config.json",
-            "resource_limits": {
-                "cpu": 2,
-                "memory": 4,
-                "disk": 30
-            }
+          "template_mcf": "output_files/indonesia_health_output.tmcf",
+          "node_mcf": "output_files/*.mcf",
+          "csv": "output_files/indonesia_health_output.csv"
         }
-    ]
+      ],
+      "source_files": [
+        "raw_files/*",
+        "input_files/*",
+        "indonesia_health_pvmap.csv",
+        "indonesia_health_metadata.csv",
+        "indonesia_health_places_resolved.csv",
+        "statvar_remap.csv"
+      ],
+      "validation_config_file": "validation_config.json",
+      "cron_schedule": "0 9 1 * *",
+      "resource_limits": {
+        "cpu": 4,
+        "memory": 8,
+        "disk": 50
+      }
+    }
+  ]
 }

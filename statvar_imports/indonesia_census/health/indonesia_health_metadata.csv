@@ -1,13 +1,17 @@
 parameter,value
-url,https://www.bps.go.id/en/statistics-table?subject=519
-description,"Indonesia Census Health Statistics (Mortality, Disease, Risk Factors, and Health Service Utilization)"
-start_date,2000
-end_date,2025
-release_frequency,1 year
+dataset,indonesia
+url,https://www.bps.go.id/
+description,"Health statistics for Indonesia across provinces and regencies/cities from Badan Pusat Statistik (BPS)."
+#place_type,"Country,AdministrativeArea1,AdministrativeArea2"
+#places_within,country/IDN
+release_frequency,P1Y
 output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor"
-drop_statvars_without_svobs,0
-reconcile_nodes,
-recon_lookup_api,
-output_only_new_statvars,0
-generate_schema_mcf,0
-spell_check,0
+header_rows,2
+header_columns,1
+mapped_rows,3
+mapped_columns,1
+recon_property,"variableMeasured,measurementMethod"
+spell_allow_words,"neonatorum,batra"
+merge_Place_Columns,False
+ignore_numeric_commas,True
+generate_statvar_name,True

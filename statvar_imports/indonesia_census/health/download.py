@@ -23,16 +23,19 @@ Covers the four Health sub-domains:
      Gender & Facility Type, Unmet Need of Health Services)
 
 Uses the common Data Commons download utility (util/download_util.py) to query
-the BPS WebAPI (https://webapi.bps.go.id/v1/api) and serialize CSV files into
-input_files/.
+the BPS WebAPI (https://webapi.bps.go.id/v1/api), archives raw JSON responses in
+raw_files/, and serializes normalized CSV files into input_files/.
 """
 
 import csv
 import html
 from html.parser import HTMLParser
+import json
+import logging as std_logging
 import os
 import re
 import sys
+from typing import Any
 
 from absl import app
 from absl import flags
@@ -43,26 +46,48 @@ sys.path.insert(1, os.path.join(_CODEDIR, '../../../util/'))
 
 import download_util  # pylint: disable=wrong-import-position
 
+DEFAULT_API_KEY_GCS_PATH = 'gs://unresolved_mcf/country/indonesia/config.json'
+
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string(
-    'output_dir',
-    os.path.join(_CODEDIR, 'input_files'),
-    'Output directory for downloaded CSV files.',
-)
-flags.DEFINE_string('domain', '0000',
-                    'BPS domain code (0000 for national/provincial).')
-flags.DEFINE_string(
-    'api_key',
-    os.environ.get('BPS_API_KEY', 'dc6660972b3db647a0d48eba65fba051'),
-    'BPS WebAPI key. Can also be provided via BPS_API_KEY env variable.',
-)
-flags.DEFINE_list(
-    'datasets',
-    None,
-    'Optional comma-separated list of dataset keys to download. '
-    'Defaults to downloading all Health datasets.',
-)
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        'output_dir',
+        os.path.join(_CODEDIR, 'input_files'),
+        'Output directory for downloaded CSV files.',
+    )
+    flags.DEFINE_string(
+        'raw_output_dir',
+        '',
+        'Directory path to save raw BPS WebAPI JSON responses '
+        '(defaults to <parent of output_dir>/raw_files).',
+    )
+    flags.DEFINE_string(
+        'domain',
+        '0000',
+        'BPS domain code (0000 for national/provincial).',
+    )
+    flags.DEFINE_string(
+        'api_key',
+        os.environ.get('BPS_API_KEY', ''),
+        'BPS WebAPI key. Can also be provided via BPS_API_KEY env variable '
+        'or --api_key_gcs_path.',
+    )
+    flags.DEFINE_string(
+        'api_key_gcs_path',
+        DEFAULT_API_KEY_GCS_PATH,
+        'GCS or local JSON path containing {"bps_api_key": "..."} (or '
+        '{"api_key": "..."}) used when --api_key / BPS_API_KEY is not set.',
+    )
+    flags.DEFINE_list(
+        'datasets',
+        None,
+        'Optional comma-separated list of dataset keys to download. '
+        'Defaults to downloading all Health datasets.',
+    )
+
 
 BPS_API_BASE = 'https://webapi.bps.go.id/v1/api'
 MAX_YEARS_PER_REQUEST = 3
@@ -79,7 +104,7 @@ DYNAMIC_DATASETS = {
         'title': 'Life Expectancy Rate By Regency/City and Gender (Year)',
         'place_col': 'Province',
         'multi_turvar': True,
-        'include_title_row': True,
+        'include_title_row': False,
         'place_label_overrides': {
             'Gorontalo': 'Kab. Gorontalo',
             'D I YOGYAKARTA': 'DI YOGYAKARTA',
@@ -222,6 +247,117 @@ STATIC_DATASETS = {
 }
 
 
+def redact_api_key(text: Any, api_key: str = '') -> str:
+    """Redacts any embedded BPS WebAPI key from URLs or error messages."""
+    redacted = re.sub(r'/key/[^/\s]+/?', '/key/<REDACTED>/', str(text))
+    if api_key and api_key.strip():
+        redacted = redacted.replace(api_key.strip(), '<REDACTED>')
+    return redacted
+
+
+class _RedactApiKeyFilter(std_logging.Filter):
+    """Logging filter that redacts the BPS WebAPI key from log records."""
+
+    def __init__(self, api_key: str = ''):
+        super().__init__()
+        self._api_key = api_key
+
+    def filter(self, record: std_logging.LogRecord) -> bool:
+        if isinstance(record.msg, str):
+            record.msg = redact_api_key(record.msg, self._api_key)
+        if record.args:
+            if isinstance(record.args, tuple):
+                record.args = tuple(
+                    redact_api_key(arg, self._api_key) if isinstance(arg, str
+                                                                    ) else arg
+                    for arg in record.args)
+            elif isinstance(record.args, dict):
+                record.args = {
+                    k: (redact_api_key(v, self._api_key) if isinstance(v, str)
+                        else v) for k, v in record.args.items()
+                }
+        return True
+
+
+def _request_bps_json(url: str, api_key: str = '') -> Any:
+    """Calls download_util.request_url while redacting api_key from logs."""
+    redact_filter = _RedactApiKeyFilter(api_key)
+    loggers = [std_logging.getLogger(), logging.get_absl_logger()]
+    handlers = []
+    for lgr in loggers:
+        lgr.addFilter(redact_filter)
+        for hdlr in lgr.handlers:
+            hdlr.addFilter(redact_filter)
+            handlers.append(hdlr)
+    try:
+        return download_util.request_url(url=url, output='json')
+    finally:
+        for hdlr in handlers:
+            hdlr.removeFilter(redact_filter)
+        for lgr in loggers:
+            lgr.removeFilter(redact_filter)
+
+
+def _load_api_key_from_path(api_key_gcs_path: str) -> str:
+    """Loads the BPS WebAPI key from a JSON file in GCS or local disk."""
+    candidates = []
+    local_batch_cfg = '/tmp/gcs/statvar_imports/indonesia_census/config.json'
+    if os.path.exists(local_batch_cfg):
+        candidates.append(local_batch_cfg)
+    if api_key_gcs_path and api_key_gcs_path.strip():
+        candidates.append(api_key_gcs_path.strip())
+
+    for path in candidates:
+        try:
+            if path.startswith('gs://'):
+                from google.cloud import storage  # pylint: disable=import-outside-toplevel
+                bucket_and_blob = path[len('gs://'):].split('/', 1)
+                if len(bucket_and_blob) != 2 or not all(bucket_and_blob):
+                    continue
+                bucket_name, blob_path = bucket_and_blob
+                blob = storage.Client().bucket(bucket_name).blob(blob_path)
+                raw = blob.download_as_text(encoding='utf-8').strip()
+            elif os.path.exists(path):
+                with open(path, 'r', encoding='utf-8') as f:
+                    raw = f.read().strip()
+            else:
+                continue
+            if not raw:
+                continue
+            payload = json.loads(raw)
+            if isinstance(payload, dict):
+                val = payload.get('bps_api_key') or payload.get('api_key')
+                if isinstance(val, str) and val.strip():
+                    return val.strip()
+        except Exception as exc:  # pylint: disable=broad-except
+            logging.warning('Unable to load BPS API key from %s: %s', path, exc)
+    return ''
+
+
+def resolve_api_key(
+    api_key: str = '',
+    api_key_gcs_path: str = DEFAULT_API_KEY_GCS_PATH,
+) -> str:
+    """Resolves BPS WebAPI key from explicit arg, env var, or GCS config."""
+    key = (api_key or os.environ.get('BPS_API_KEY', '')).strip()
+    if key:
+        return key
+    fallback_key = _load_api_key_from_path(api_key_gcs_path)
+    if fallback_key:
+        return fallback_key
+    raise ValueError(
+        'BPS WebAPI key is required. Set the BPS_API_KEY environment variable, '
+        'pass --api_key, or provide --api_key_gcs_path.')
+
+
+def format_year_header(year: str) -> str:
+    """Formats a 4-digit year string as a non-numeric PVMap column header."""
+    cleaned = str(year).strip()
+    if re.fullmatch(r'\d{4}', cleaned):
+        return f'Year {cleaned}'
+    return cleaned
+
+
 class _HTMLTableGridParser(HTMLParser):
     """Parses an HTML <table> into a 2D list of strings expanding spans."""
 
@@ -302,21 +438,28 @@ def clean_label(raw_label: str) -> str:
 
 
 def normalize_numeric_cell(val: str) -> str:
-    """Normalizes Indonesian-formatted numeric cells (e.g. '1.234,56' -> '1234.56')."""
+    """Normalizes Indonesian-formatted numeric cells (e.g. '1.234,56', '2 727')."""
     cleaned = val.strip()
     if cleaned in ('-', '--', '–', '—', '...', 'n.a', 'N/A', 'NA'):
         return ''
-    # Handle Indonesian thousands separators (dots) and decimal commas:
-    # Case 1: Both dot thousands separator(s) and comma decimal (e.g. '1.234,56').
-    if re.fullmatch(r'-?\d{1,3}(?:\.\d{3})+,\d+', cleaned):
-        return cleaned.replace('.', '').replace(',', '.')
-    # Case 2: Dot thousands separator(s) on an integer (e.g. '4.969').
-    if re.fullmatch(r'-?\d{1,3}(?:\.\d{3})+', cleaned):
-        return cleaned.replace('.', '')
-    # Case 3: Comma decimal separator without thousands dots (e.g. '12,34').
+    # Handle Indonesian thousands separators (dots or spaces) and decimal commas:
+    # Case 1: Dot or space thousands separator(s) with optional comma decimal
+    # (e.g. '1.234,56', '4.969', '2 727', '2 727,5').
+    if re.fullmatch(r'-?\d{1,3}(?:[.\s]\d{3})+(?:,\d+)?', cleaned):
+        return re.sub(r'[.\s]', '', cleaned).replace(',', '.')
+    # Case 2: Comma decimal separator without thousands separators (e.g. '12,34').
     if re.fullmatch(r'-?\d+,\d+', cleaned):
         return cleaned.replace(',', '.')
     return cleaned
+
+
+def _save_raw_json(raw_output_path: str | None, payload: Any) -> None:
+    """Writes raw BPS WebAPI JSON payload to disk if raw_output_path is set."""
+    if not raw_output_path:
+        return
+    os.makedirs(os.path.dirname(raw_output_path), exist_ok=True)
+    with open(raw_output_path, 'w', encoding='utf-8') as f:
+        json.dump(payload, f, ensure_ascii=False, indent=2)
 
 
 def fetch_available_years(domain: str,
@@ -331,11 +474,11 @@ def fetch_available_years(domain: str,
     while page <= total_pages:
         url = (f'{BPS_API_BASE}/list/model/th/domain/{domain}/var/{var_id}/'
                f'lang/{lang}/page/{page}/key/{api_key}/')
-        resp = download_util.request_url(url=url, output='json')
+        resp = _request_bps_json(url=url, api_key=api_key)
         if not resp or resp.get('status') != 'OK' or 'data' not in resp:
             raise RuntimeError(
                 f'Failed to fetch available years for var {var_id} (page {page}):'
-                f' {resp}')
+                f' {redact_api_key(resp, api_key)}')
         pagination, items = resp['data']
         total_pages = int(pagination.get('pages', 1))
         years.extend(items)
@@ -351,6 +494,7 @@ def fetch_dynamic_table(
     api_key: str,
     lang: str = 'eng',
     place_label_overrides: dict | None = None,
+    raw_output_path: str | None = None,
 ) -> tuple[list[str], list[str], list[str], dict]:
     """Fetches all years of data for a BPS dynamic variable in 3-year batches.
 
@@ -360,6 +504,7 @@ def fetch_dynamic_table(
     api_key: BPS WebAPI key.
     lang: Language code ('eng' or 'ind').
     place_label_overrides: Optional mapping to rename specific vervar labels.
+    raw_output_path: Optional file path to archive the raw JSON responses.
 
   Returns:
     A tuple of (places, categories, year_labels, data_map) where:
@@ -379,6 +524,7 @@ def fetch_dynamic_table(
     year_labels = []
     years_seen = set()
     data_map = {}
+    raw_chunks = []
     overrides = place_label_overrides or {}
 
     for i in range(0, len(available_years), MAX_YEARS_PER_REQUEST):
@@ -386,15 +532,17 @@ def fetch_dynamic_table(
         th_param = ';'.join(str(item['th_id']) for item in batch)
         url = (f'{BPS_API_BASE}/list/model/data/domain/{domain}/var/{var_id}/'
                f'th/{th_param}/lang/{lang}/key/{api_key}/')
-        resp = download_util.request_url(url=url, output='json')
+        resp = _request_bps_json(url=url, api_key=api_key)
         if not resp or resp.get('status') != 'OK':
             raise RuntimeError(
-                f'Failed to fetch data for var {var_id} (th={th_param}): {resp}'
-            )
+                f'Failed to fetch data for var {var_id} (th={th_param}): '
+                f'{redact_api_key(resp, api_key)}')
+        raw_chunks.append({'th': th_param, 'response': resp})
 
         var_list = resp.get('var') or []
         if not var_list:
-            raise RuntimeError(f'Missing var metadata for var {var_id}: {resp}')
+            raise RuntimeError(f'Missing var metadata for var {var_id}: '
+                               f'{redact_api_key(resp, api_key)}')
         vid = var_list[0]['val']
         vervar_list = resp.get('vervar') or []
         turvar_list = resp.get('turvar') or [{'val': '0', 'label': ''}]
@@ -436,6 +584,15 @@ def fetch_dynamic_table(
                     elif cell_tuple not in data_map:
                         data_map[cell_tuple] = ''
 
+    _save_raw_json(
+        raw_output_path,
+        {
+            'var_id': var_id,
+            'domain': domain,
+            'available_years': available_years,
+            'chunks': raw_chunks,
+        },
+    )
     return places, categories, year_labels, data_map
 
 
@@ -451,6 +608,7 @@ def write_single_turvar_csv(
 ) -> None:
     """Writes a single-category dynamic BPS dataset to CSV."""
     cat_label = categories[0] if categories else ''
+    year_headers = [format_year_header(y) for y in years]
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     with open(output_path, 'w', newline='', encoding='utf-8') as f:
         writer = csv.writer(f)
@@ -459,7 +617,7 @@ def write_single_turvar_csv(
         else:
             title_row = [title] + [''] * len(years)
         writer.writerow(title_row)
-        writer.writerow([place_col] + years)
+        writer.writerow([place_col] + year_headers)
         for place in places:
             row = [place] + [
                 data_map.get((place, cat_label, year), '') for year in years
@@ -482,16 +640,17 @@ def write_multi_turvar_csv(
     """Writes a multi-category dynamic BPS dataset to CSV."""
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     total_data_cols = len(categories) * len(years)
+    year_headers = [format_year_header(y) for y in years]
     with open(output_path, 'w', newline='', encoding='utf-8') as f:
         writer = csv.writer(f)
         if include_title_row and title:
             writer.writerow([title] + [''] * total_data_cols)
             writer.writerow([place_col] +
                             [cat for cat in categories for _ in years])
-            writer.writerow([''] + years * len(categories))
+            writer.writerow([''] + year_headers * len(categories))
         else:
             writer.writerow([''] + [cat for cat in categories for _ in years])
-            writer.writerow([place_col] + years * len(categories))
+            writer.writerow([place_col] + year_headers * len(categories))
 
         for place in places:
             row = [place]
@@ -508,16 +667,21 @@ def write_multi_turvar_csv(
     )
 
 
-def fetch_static_table_grid(domain: str,
-                            table_id: str,
-                            api_key: str,
-                            lang: str = 'ind') -> list[list[str]]:
+def fetch_static_table_grid(
+    domain: str,
+    table_id: str,
+    api_key: str,
+    lang: str = 'ind',
+    raw_output_path: str | None = None,
+) -> list[list[str]]:
     """Fetches a BPS static table and parses its HTML table into a 2D grid."""
     url = (f'{BPS_API_BASE}/view/domain/{domain}/model/statictable/'
            f'lang/{lang}/id/{table_id}/key/{api_key}/')
-    resp = download_util.request_url(url=url, output='json')
+    resp = _request_bps_json(url=url, api_key=api_key)
     if not resp or resp.get('status') != 'OK' or 'data' not in resp:
-        raise RuntimeError(f'Failed to fetch static table {table_id}: {resp}')
+        raise RuntimeError(f'Failed to fetch static table {table_id}: '
+                           f'{redact_api_key(resp, api_key)}')
+    _save_raw_json(raw_output_path, resp)
     raw_html = html.unescape(resp['data'].get('table', ''))
     parser = _HTMLTableGridParser()
     parser.feed(raw_html)
@@ -547,7 +711,8 @@ def process_aids_static_table(grid: list[list[str]], output_path: str) -> None:
     for cell in grid[metric_idx + 1][1:]:
         # Strip trailing footnote digits such as '2008 2' -> '2008'.
         match = re.match(r'^(\d{4})', cell.strip())
-        year_row.append(match.group(1) if match else cell.strip())
+        year_val = match.group(1) if match else cell.strip()
+        year_row.append(format_year_header(year_val))
 
     data_rows = []
     for row in grid[metric_idx + 2:]:
@@ -591,7 +756,8 @@ def process_health_complaint_static_table(grid: list[list[str]],
             'Could not find the year header row in Health Complaint static table 1617'
         )
 
-    year_row = ['P R O V I N S I'] + [c.strip() for c in grid[year_idx][1:]]
+    year_row = ['P R O V I N S I'
+               ] + [format_year_header(c.strip()) for c in grid[year_idx][1:]]
     gender_row = [''] + [
         c.strip().replace('LAKI-LAKI', 'LAKILAKI')
         for c in grid[year_idx + 1][1:]
@@ -668,8 +834,20 @@ def process_outpatient_static_table(grid: list[list[str]],
             )
         gender_label = ('PENDUDUK LAKI-LAKI' if section['gender'] == 'male' else
                         'PENDUDUK PEREMPUAN')
-        year_row = ['Provinsi'] + [c.strip() for c in sec_rows[0][1:]]
-        facility_row = [gender_label] + [c.strip() for c in sec_rows[1][1:]]
+        raw_years = [c.strip() for c in sec_rows[0][1:]]
+        raw_facilities = [c.strip() for c in sec_rows[1][1:]]
+        # Exclude redundant 'Jumlah' (100.00% total) columns in 2009-2014.
+        keep_indices = [
+            idx for idx, fac in enumerate(raw_facilities)
+            if fac.lower() != 'jumlah'
+        ]
+        year_row = ['Provinsi'] + [
+            format_year_header(raw_years[idx])
+            for idx in keep_indices
+            if idx < len(raw_years)
+        ]
+        facility_row = [gender_label
+                       ] + [raw_facilities[idx] for idx in keep_indices]
         data_rows = []
         for row in sec_rows[2:]:
             place = row[0].strip()
@@ -677,7 +855,12 @@ def process_outpatient_static_table(grid: list[list[str]],
                 continue
             if place.replace(' ', '').upper() == 'INDONESIA':
                 place = 'Indonesia'
-            cleaned_vals = [normalize_numeric_cell(cell) for cell in row[1:]]
+            raw_cells = row[1:]
+            cleaned_vals = [
+                normalize_numeric_cell(raw_cells[idx] if idx <
+                                       len(raw_cells) else '')
+                for idx in keep_indices
+            ]
             if any(cleaned_vals):
                 data_rows.append([place] + cleaned_vals)
 
@@ -695,9 +878,16 @@ def download_all_health_datasets(
     domain: str,
     api_key: str,
     selected_datasets: list[str] | None = None,
+    raw_output_dir: str | None = None,
 ) -> list[str]:
     """Downloads all (or selected) Indonesia Census Health datasets to CSV."""
     os.makedirs(output_dir, exist_ok=True)
+    if raw_output_dir is None:
+        raw_output_dir = os.path.join(
+            os.path.dirname(os.path.abspath(output_dir)), 'raw_files')
+    if raw_output_dir:
+        os.makedirs(raw_output_dir, exist_ok=True)
+
     written_files = []
     selected = set(selected_datasets) if selected_datasets else None
 
@@ -710,12 +900,15 @@ def download_all_health_datasets(
             cfg['var_id'],
             cfg['category'],
         )
+        raw_json_path = (os.path.join(raw_output_dir, cfg['filename'].replace(
+            '.csv', '.json')) if raw_output_dir else None)
         places, categories, years, data_map = fetch_dynamic_table(
             domain=domain,
             var_id=cfg['var_id'],
             api_key=api_key,
             lang=cfg.get('lang', 'eng'),
             place_label_overrides=cfg.get('place_label_overrides'),
+            raw_output_path=raw_json_path,
         )
         output_path = os.path.join(output_dir, cfg['filename'])
         if cfg.get('multi_turvar'):
@@ -751,11 +944,16 @@ def download_all_health_datasets(
             cfg['table_id'],
             cfg['category'],
         )
+        raw_json_name = (cfg.get('filename',
+                                 f'{key}.csv').replace('.csv', '.json'))
+        raw_json_path = (os.path.join(raw_output_dir, raw_json_name)
+                         if raw_output_dir else None)
         grid = fetch_static_table_grid(
             domain=domain,
             table_id=cfg['table_id'],
             api_key=api_key,
             lang=cfg.get('lang', 'ind'),
+            raw_output_path=raw_json_path,
         )
         if key == 'aids_cases':
             out_path = os.path.join(output_dir, cfg['filename'])
@@ -777,18 +975,20 @@ def download_all_health_datasets(
 def main(argv):
     if len(argv) > 1:
         raise app.UsageError('Too many command-line arguments.')
-    if not FLAGS.api_key:
-        raise ValueError(
-            'BPS API key is required. Pass --api_key or set BPS_API_KEY.')
+    api_key = resolve_api_key(FLAGS.api_key, FLAGS.api_key_gcs_path)
+    raw_dir = FLAGS.raw_output_dir or os.path.join(
+        os.path.dirname(os.path.abspath(FLAGS.output_dir)), 'raw_files')
 
     files = download_all_health_datasets(
         output_dir=FLAGS.output_dir,
         domain=FLAGS.domain,
-        api_key=FLAGS.api_key,
+        api_key=api_key,
         selected_datasets=FLAGS.datasets,
+        raw_output_dir=raw_dir,
     )
     logging.info('Successfully generated %d Health CSV files.', len(files))
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)
