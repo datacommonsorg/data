@@ -16,24 +16,22 @@
 import io
 import json
 import os
+from pathlib import Path
+from re import sub
 import sys
 import time
-from pathlib import Path
 
 from absl import logging
+from datacommons_client.models.observation import ObservationDate
+from datacommons_client.models.observation import ObservationSelect
+import pandas as pd
 import requests
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO_ROOT))
 
-from datacommons_client.models.observation import ObservationDate
-from datacommons_client.models.observation import ObservationSelect
-import pandas as pd
-
-from re import sub
-
 from util.dc_api_wrapper import dc_api_get_node_property
-from util.dc_api_wrapper import dc_api_is_defined_dcid
+from util.dc_api_wrapper import dc_api_is_defined_dcid  # noqa: F401
 from util.dc_api_wrapper import dc_api_wrapper
 from util.dc_api_wrapper import get_datacommons_client
 

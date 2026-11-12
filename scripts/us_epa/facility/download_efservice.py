@@ -6,12 +6,11 @@ import pathlib
 import sys
 import time
 
-import pandas as pd
-import requests
-
 from absl import app
 from absl import flags
 from absl import logging
+import pandas as pd
+import requests
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -22,12 +21,16 @@ from scripts.us_epa.util import facilities_helper as fh
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string('epa_table_name', 'PUB_DIM_FACILITY',
-                    'Name of table to download')
-flags.DEFINE_string('epa_output_path',
-                    os.path.join(_SCRIPT_PATH, 'input_files'),
-                    'Output directory',
-                    allow_override=True)
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('epa_table_name', 'PUB_DIM_FACILITY',
+                        'Name of table to download')
+    flags.DEFINE_string('epa_output_path',
+                        os.path.join(_SCRIPT_PATH, 'input_files'),
+                        'Output directory',
+                        allow_override=True)
+
 
 _API_ROOT = 'https://data.epa.gov/efservice/'
 _MAX_ROWS = 10000
@@ -181,4 +184,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

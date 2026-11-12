@@ -12,12 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os, config
-import requests, io
-from absl import app, logging
+import io
+import os
 from pathlib import Path
-from retry import retry
+
+from absl import app
+from absl import logging
+import config
 import pandas as pd
+import requests
+from retry import retry
 
 Mexico_Census_URL = config.Mexico_Census_URL
 

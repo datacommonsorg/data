@@ -22,10 +22,14 @@ import unittest
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
 
-from pipeline import (  # pylint: disable=import-error
-    BaseStep, CompositeCallback, Pipeline, PipelineAbort, PipelineCallback,
-    PipelineRunner, RunnerConfig, Step,
-)
+from pipeline import BaseStep  # pylint: disable=import-error
+from pipeline import CompositeCallback  # pylint: disable=import-error
+from pipeline import Pipeline  # pylint: disable=import-error
+from pipeline import PipelineAbort  # pylint: disable=import-error
+from pipeline import PipelineCallback  # pylint: disable=import-error
+from pipeline import PipelineRunner  # pylint: disable=import-error
+from pipeline import RunnerConfig  # pylint: disable=import-error
+from pipeline import Step  # pylint: disable=import-error
 
 
 class _TrackingStep(BaseStep):

@@ -14,10 +14,10 @@
 """Tests for process_parent_company.py"""
 
 import os
+from pathlib import Path
 import sys
 import tempfile
 import unittest
-from pathlib import Path
 from unittest import mock
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -27,12 +27,9 @@ if str(REPO_ROOT) not in sys.path:
 from scripts.us_epa.parent_company import download_existing_facilities as defac
 from scripts.us_epa.parent_company import pre_process
 from scripts.us_epa.parent_company import process_parent_company as ppc
-from scripts.us_epa.parent_company.process_parent_company import (
-    _COUNTERS_COMPANIES,)
-from scripts.us_epa.parent_company.process_parent_company import (
-    process_companies,)
-from scripts.us_epa.parent_company.process_parent_company import (
-    process_svobs,)
+from scripts.us_epa.parent_company.process_parent_company import _COUNTERS_COMPANIES
+from scripts.us_epa.parent_company.process_parent_company import process_companies
+from scripts.us_epa.parent_company.process_parent_company import process_svobs
 from scripts.us_epa.util import facilities_helper as fh
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
@@ -434,6 +431,8 @@ class ProcessTest(unittest.TestCase):
 
     def test_main_output_modes(self):
         import shutil
+        if "input_download_path" not in ppc.FLAGS:
+            ppc._define_flags()
         ppc.FLAGS.mark_as_parsed()
         flag_names = (
             "input_download_path",

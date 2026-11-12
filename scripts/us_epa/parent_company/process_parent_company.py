@@ -13,16 +13,15 @@
 # limitations under the License.
 """A script to download, parse and process the Parent Company Info for Facilities tracked by EPA."""
 
+import csv
 import os.path
 import pathlib
 import sys
 
-import csv
-import pandas as pd
-
 from absl import app
 from absl import flags
 from absl import logging
+import pandas as pd
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -33,27 +32,32 @@ from scripts.us_epa.util import facilities_helper as fh
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string("input_download_path",
-                    os.path.join(_SCRIPT_PATH, "input_files"),
-                    "Input directory")
-flags.DEFINE_string("existing_facilities_file", "existing_facilities",
-                    "Filename for existing facilities ids")
-flags.DEFINE_string("output_base_path", os.path.join(_SCRIPT_PATH, "output"),
-                    "Output directory for processed data.")
-flags.DEFINE_string("parent_co_output_path", "table",
-                    "Output directory for company info.")
-flags.DEFINE_string("ownership_output_path", "ownership",
-                    "Output directory for ownership.")
-flags.DEFINE_string("svobs_output_path", "svobs",
-                    "Output directory for StatVarObs.")
-flags.DEFINE_enum(
-    "output_mode", "all", ["companies", "ownership", "svobs", "all"],
-    "Output mode: 'companies' to generate company table and ownership outputs, "
-    "'ownership' to generate ownership outputs without geo resolution, "
-    "'svobs' to run generate_svobs_helper(), or 'all' to run all.")
-flags.DEFINE_bool(
-    "generate_svobs", None,
-    "Whether to run generate_svobs_helper(). Overrides output_mode if set.")
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string("input_download_path",
+                        os.path.join(_SCRIPT_PATH, "input_files"),
+                        "Input directory")
+    flags.DEFINE_string("existing_facilities_file", "existing_facilities",
+                        "Filename for existing facilities ids")
+    flags.DEFINE_string("output_base_path",
+                        os.path.join(_SCRIPT_PATH, "output"),
+                        "Output directory for processed data.")
+    flags.DEFINE_string("parent_co_output_path", "table",
+                        "Output directory for company info.")
+    flags.DEFINE_string("ownership_output_path", "ownership",
+                        "Output directory for ownership.")
+    flags.DEFINE_string("svobs_output_path", "svobs",
+                        "Output directory for StatVarObs.")
+    flags.DEFINE_enum(
+        "output_mode", "all", ["companies", "ownership", "svobs", "all"],
+        "Output mode: 'companies' to generate company table and ownership outputs, "
+        "'ownership' to generate ownership outputs without geo resolution, "
+        "'svobs' to run generate_svobs_helper(), or 'all' to run all.")
+    flags.DEFINE_bool(
+        "generate_svobs", None,
+        "Whether to run generate_svobs_helper(). Overrides output_mode if set.")
+
 
 # V_PARENT_COMPANY_INFO table
 _TABLE_PREFIX = "D_GHG_B"
@@ -631,4 +635,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

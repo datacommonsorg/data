@@ -16,12 +16,9 @@ This Python Script Load the datasets, cleans it and generates
 cleaned CSV, MCF, TMCF file.
 """
 import io
-import json
 import os
-import shutil
 import sys
-import tempfile
-import time
+
 from absl import app
 from absl import flags
 from absl import logging
@@ -149,11 +146,15 @@ def load_url_or_path(url_or_path: str):
 FLAGS = flags.FLAGS
 DEFAULT_INPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   "input_data")
-if 'mode' not in FLAGS:
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
     flags.DEFINE_string('mode', '', 'Options: download or process')
-if 'input_path' not in FLAGS:
     flags.DEFINE_string("input_path", DEFAULT_INPUT_PATH,
                         "Import Data File's List")
+
+
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
 _FILES_TO_DOWNLOAD = []
 _BASELINE_YEAR = 2025
@@ -422,6 +423,12 @@ def download_files():
     output_folder = "input_data"
     logging.info("Download starts")
     try:
+        from us_census.pep.population_estimates_by_asr.county_1970_1979 import county1970
+        from us_census.pep.population_estimates_by_asr.county_1980_1989 import county1980
+        from us_census.pep.population_estimates_by_asr.county_1990_2000 import county1990
+        from us_census.pep.population_estimates_by_asr.county_2000_2010 import county2000
+        from us_census.pep.population_estimates_by_asr.county_2010_2020 import county2010
+        from us_census.pep.population_estimates_by_asr.county_2020_2029 import county2029
         from us_census.pep.population_estimates_by_asr.national_1900_1959 import national1900
         from us_census.pep.population_estimates_by_asr.national_1960_1979 import national1960
         from us_census.pep.population_estimates_by_asr.national_1980_1989 import national1980
@@ -433,12 +440,6 @@ def download_files():
         from us_census.pep.population_estimates_by_asr.state_2000_2010 import state2000
         from us_census.pep.population_estimates_by_asr.state_2010_2020 import state2010
         from us_census.pep.population_estimates_by_asr.state_2020_2029 import state2029
-        from us_census.pep.population_estimates_by_asr.county_1970_1979 import county1970
-        from us_census.pep.population_estimates_by_asr.county_1980_1989 import county1980
-        from us_census.pep.population_estimates_by_asr.county_1990_2000 import county1990
-        from us_census.pep.population_estimates_by_asr.county_2000_2010 import county2000
-        from us_census.pep.population_estimates_by_asr.county_2010_2020 import county2010
-        from us_census.pep.population_estimates_by_asr.county_2020_2029 import county2029
 
         add_future_year_urls()
         national1900(output_folder)
@@ -500,4 +501,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

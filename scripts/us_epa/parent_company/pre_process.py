@@ -13,16 +13,15 @@
 # limitations under the License.
 """A script to parse and pre-process the Parent Company Info for Facilities tracked by EPA."""
 
-import os.path
-import sys
-
 import csv
 import difflib
-import pandas as pd
+import os.path
 import re
+import sys
 
 from absl import app
 from absl import flags
+import pandas as pd
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -32,14 +31,18 @@ if REPO_ROOT not in sys.path:
 from scripts.us_epa.parent_company import static_corrections as sc
 from scripts.us_epa.util import facilities_helper as fh
 
-flags.DEFINE_string("input_download_path",
-                    os.path.join(_SCRIPT_PATH, "input_files"),
-                    "Input directory",
-                    allow_override=True)
-flags.DEFINE_string("existing_facilities_file",
-                    "existing_facilities",
-                    "Filename for existing facilities ids",
-                    allow_override=True)
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string("input_download_path",
+                        os.path.join(_SCRIPT_PATH, "input_files"),
+                        "Input directory",
+                        allow_override=True)
+    flags.DEFINE_string("existing_facilities_file",
+                        "existing_facilities",
+                        "Filename for existing facilities ids",
+                        allow_override=True)
+
 
 FLAGS = flags.FLAGS
 
@@ -311,4 +314,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

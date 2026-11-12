@@ -18,8 +18,8 @@ Script to automate the testing for US EPA Air Pollutant Emission Trends
 import os
 import sys
 import tempfile
-import unittest
 from unittest import mock
+
 import pandas as pd
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -27,9 +27,10 @@ _COMMON_PATH = os.path.abspath(os.path.join(_MODULE_DIR, '..'))
 sys.path.insert(1, _MODULE_DIR)
 sys.path.insert(1, _COMMON_PATH)
 # pylint: disable=wrong-import-position
+from common.unitest_common_methods_test import CommonTestClass
 import download
 from process import USAirPollutionEmissionTrendsNationalAndState
-from common.unitest_common_methods_test import CommonTestClass
+
 # pylint: enable=wrong-import-position
 
 

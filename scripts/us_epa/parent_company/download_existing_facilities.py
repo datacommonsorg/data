@@ -14,14 +14,13 @@
 """A simple script to download existing Facilities in Data Commons."""
 
 import os
-import sys
 from pathlib import Path
-
-import pandas as pd
+import sys
 
 from absl import app
 from absl import flags
 from absl import logging
+import pandas as pd
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 REPO_ROOT = Path(__file__).resolve().parents[3]
