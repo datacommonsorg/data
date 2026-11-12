@@ -163,7 +163,7 @@ def merge_csv_files(output_file, input_files):
 
 
 def download_and_process_data(year, d):
-    url = f"https://www.nass.usda.gov/datasets/qs.census{year}.txt.gz"
+    url = f"https://www.nass.usda.gov/sites/default/files/datasets/qs.census{year}.txt.gz"
     input_dir = "input"
     output_dir = "output"  # Define the output directory
     os.makedirs(input_dir, exist_ok=True)  # Ensure input directory exists
