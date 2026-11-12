@@ -10,6 +10,9 @@
                 "template_mcf": "",
                 "cleaned_csv": ""
             }],
+            "config_override": {
+                "disable_import_workflow": true
+            },
         "cron_schedule": "0 20 * * *"
         }
     ]
