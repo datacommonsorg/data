@@ -1,4 +1,4 @@
-# ACS 5-Year Subject Table S0506: Selected Characteristics of the Foreign-Born Population by Period of Entry into the United States — Latin America
+# ACS 5-Year Subject Table S0506: Selected Characteristics of the Foreign-Born Population by Region of Birth: Latin America
 
 ## Overview
 
@@ -78,7 +78,7 @@ java -Xmx32g -jar datacommons-import-tool-0.1-jar-with-dependencies.jar genmcf \
 
 - `S0506_spec.json`: JSON specification mapping Census column tokens, place of birth regions/countries, units, scaling denominators, and ignored tokens/columns to Data Commons schema properties.
 - `S0506_summary.json`: Summary of per-vintage column counts, row counts, StatVar counts, and observation counts (`2010`–`2024`).
-- `testdata/`: Hermetic test fixtures (`S0506_test.zip`, `S0506_cleaned.csv`, `S0506_output.mcf`, `S0506_output.tmcf`, `column_map.json`, and `S0506_summary.json`) validated by `subject_table_test.py`.
+- `testdata/`: Hermetic test fixtures (`ACSST5Y2024.S0506_data_with_overlays_1111-11-11T111111.csv`, `S0506_cleaned.csv`, `S0506_output.mcf`, `S0506_output.tmcf`, `column_map.json`, and `S0506_summary.json`) validated by `subject_table_test.py` (which packages the raw CSV fixture into a temporary `.zip` archive at run time).
 
 ## Running Tests
 

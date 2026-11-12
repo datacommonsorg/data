@@ -17,6 +17,7 @@ import os
 import sys
 import tempfile
 import unittest
+from zipfile import ZipFile
 
 import pandas as pd
 from pandas.testing import assert_frame_equal
@@ -58,9 +59,9 @@ def _get_paths(table_dir):
         if 'spec.json' in filename:
             paths['spec'] = os.path.join(table_dir, filename)
 
-    # Expects StatVar MCF, Column Map, CSV and test zip to be in testdata folder
+    # Expects StatVar MCF, Column Map, CSV and test zip (or raw overlay CSV) to be in testdata folder
     testdata_path = os.path.join(table_dir, 'testdata')
-    for filename in os.listdir(testdata_path):
+    for filename in sorted(os.listdir(testdata_path)):
         if 'cleaned.csv' in filename:
             paths['csv'] = os.path.join(testdata_path, filename)
         elif 'output.mcf' in filename:
@@ -69,6 +70,9 @@ def _get_paths(table_dir):
             paths['cmap'] = os.path.join(testdata_path, filename)
         elif filename.endswith('.zip'):
             paths['zip'] = os.path.join(testdata_path, filename)
+        elif 'data_with_overlays' in filename and filename.endswith('.csv'):
+            paths.setdefault('raw_csvs',
+                             []).append(os.path.join(testdata_path, filename))
 
     return paths
 
@@ -108,13 +112,21 @@ class TestSubjectTable(unittest.TestCase):
         for table_dir_path in self.test_dirs:
             paths = _get_paths(table_dir_path)
 
-            # Check if all required files exist
-            expected_keys = ['spec', 'csv', 'mcf', 'cmap', 'zip']
-            for file_key in expected_keys:
-                with self.subTest(table=table_dir_path, file_key=file_key):
-                    self.assertTrue(file_key in paths)
-
             with tempfile.TemporaryDirectory() as tmp_dir:
+                if 'zip' not in paths and 'raw_csvs' in paths:
+                    zip_path = os.path.join(
+                        tmp_dir, f'{os.path.basename(table_dir_path)}_test.zip')
+                    with ZipFile(zip_path, 'w') as zf:
+                        for raw_csv in paths['raw_csvs']:
+                            zf.write(raw_csv, arcname=os.path.basename(raw_csv))
+                    paths['zip'] = zip_path
+
+                # Check if all required files exist
+                expected_keys = ['spec', 'csv', 'mcf', 'cmap', 'zip']
+                for file_key in expected_keys:
+                    with self.subTest(table=table_dir_path, file_key=file_key):
+                        self.assertTrue(file_key in paths)
+
                 # generate CSV, MCF and Column Map
                 set_column_map(paths['zip'], paths['spec'], tmp_dir)
                 process_subject_tables(table_prefix='test',
