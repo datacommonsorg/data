@@ -1772,7 +1772,6 @@ def process_main(input_csv=None, output_path=None, config_file=None):
         config_file = os.path.join(_SCRIPT_PATH, 'config.json')
     output_path = os.path.expanduser(output_path)
     logging.info(f'Processing input: {input_csv}')
-    #with file_util.FileIO(input_csv, 'r') as input_f:
     print(f"Loading input file into df : {input_csv}")
     df = pd.read_csv(input_csv)
     df.columns = df.columns.str.upper()
