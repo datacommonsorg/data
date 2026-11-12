@@ -25,12 +25,12 @@ To check a list of MCF files, run the command:
 
 import os
 import re
-import requests
 import sys
 
 from absl import app
 from absl import flags
 from absl import logging
+import requests
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
@@ -55,16 +55,15 @@ flags.DEFINE_string('schema_check_config', '', 'File with config parameters.')
 
 _FLAGS = flags.FLAGS
 
-import file_util
-import process_http_server
-
+import config_flags
 from config_map import ConfigMap
 from counters import Counters
-from mcf_file_util import load_mcf_nodes, write_mcf_nodes, update_mcf_nodes
-from mcf_file_util import add_namespace, strip_namespace, add_mcf_node
-from schema_spell_checker import get_spell_checker, spell_check_nodes, get_default_spell_config
-
-import config_flags
+import file_util
+from mcf_file_util import load_mcf_nodes
+import process_http_server
+from schema_spell_checker import get_default_spell_config
+from schema_spell_checker import get_spell_checker
+from schema_spell_checker import spell_check_nodes
 
 
 # Check the URL

@@ -16,6 +16,7 @@
 import os
 import sys
 import unittest
+
 import ee
 
 # Allows the following module imports to work when running as a script

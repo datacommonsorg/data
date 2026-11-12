@@ -25,17 +25,20 @@ Description: cleaning the NCBI Taxonomy data.
 
 # import the required packages
 import copy
+import os
+from os.path import abspath
+from os.path import dirname
+from os.path import join
 import re
 import string
 import sys
-import os
-from os.path import dirname, abspath, join
-import pandas as pd
+from urllib.parse import urlparse
+
 from absl import app
 from absl import flags
 from absl import logging
 from google.cloud import storage
-from urllib.parse import urlparse
+import pandas as pd
 
 FLAGS = flags.FLAGS
 

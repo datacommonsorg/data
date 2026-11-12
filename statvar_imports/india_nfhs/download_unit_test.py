@@ -1,12 +1,14 @@
-import unittest
-import os
-import sys
 import json
-import types
-import pandas as pd
+import os
 import shutil
+import sys
 import tempfile
-from unittest.mock import patch, mock_open, MagicMock
+import types
+import unittest
+from unittest.mock import mock_open
+from unittest.mock import patch
+
+import pandas as pd
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 _REPO_ROOT = os.path.dirname(os.path.dirname(_SCRIPT_DIR))

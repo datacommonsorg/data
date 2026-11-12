@@ -12,9 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from worldbank import *
-import numpy as np
+import io
+import os
 import unittest
+
+import numpy as np
+import pandas as pd
+from worldbank import merge_historical_data
+from worldbank import process
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 OUTPUT_PATH = "test_data/output"

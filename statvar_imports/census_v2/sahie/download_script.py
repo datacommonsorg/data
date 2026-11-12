@@ -20,10 +20,9 @@ import glob
 import os
 import shutil
 import sys
+
 from absl import app
 from absl import logging
-import requests
-from retry import retry
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util/'))

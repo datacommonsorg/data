@@ -12,12 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import csv
 import os
 import sys
 import tempfile
-import csv
 import unittest
-from unittest.mock import patch, call
+from unittest.mock import call
+from unittest.mock import patch
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)

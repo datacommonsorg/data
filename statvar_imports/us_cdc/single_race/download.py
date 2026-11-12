@@ -135,49 +135,52 @@ LARGE_STATES: set[str] = {
 }
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string(
-    "states",
-    "all",
-    "Comma-separated 2-digit FIPS codes of states to download (e.g. '02,48'), or 'all'.",
-)
 _CURRENT_YEAR = datetime.date.today().year
 _DEFAULT_YEARS = f"2018-{_CURRENT_YEAR}"
 
-flags.DEFINE_string(
-    "years",
-    _DEFAULT_YEARS,
-    f"Year range (e.g. '2018-{_CURRENT_YEAR}') or comma-separated years.",
-)
-flags.DEFINE_string(
-    "output_dir",
-    DEFAULT_INPUT_DIR,
-    "Directory where downloaded CSV files will be saved.",
-)
-flags.DEFINE_float(
-    "delay",
-    5.0,
-    "Politeness delay in seconds between successive HTTP queries.",
-)
-flags.DEFINE_integer(
-    "timeout",
-    120,
-    "HTTP request timeout in seconds.",
-)
-flags.DEFINE_bool(
-    "skip_existing",
-    True,
-    "Skip downloading states that already have existing non-empty CSV files in output_dir.",
-)
-flags.DEFINE_integer(
-    "batch_size",
-    8,
-    "Number of states to process per session before automatically refreshing session.",
-)
-flags.DEFINE_float(
-    "batch_cooldown",
-    60.0,
-    "Cooldown delay in seconds between session batches to prevent rate limits.",
-)
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        "states",
+        "all",
+        "Comma-separated 2-digit FIPS codes of states to download (e.g. '02,48'), or 'all'.",
+    )
+    flags.DEFINE_string(
+        "years",
+        _DEFAULT_YEARS,
+        f"Year range (e.g. '2018-{_CURRENT_YEAR}') or comma-separated years.",
+    )
+    flags.DEFINE_string(
+        "output_dir",
+        DEFAULT_INPUT_DIR,
+        "Directory where downloaded CSV files will be saved.",
+    )
+    flags.DEFINE_float(
+        "delay",
+        5.0,
+        "Politeness delay in seconds between successive HTTP queries.",
+    )
+    flags.DEFINE_integer(
+        "timeout",
+        120,
+        "HTTP request timeout in seconds.",
+    )
+    flags.DEFINE_bool(
+        "skip_existing",
+        True,
+        "Skip downloading states that already have existing non-empty CSV files in output_dir.",
+    )
+    flags.DEFINE_integer(
+        "batch_size",
+        8,
+        "Number of states to process per session before automatically refreshing session.",
+    )
+    flags.DEFINE_float(
+        "batch_cooldown",
+        60.0,
+        "Cooldown delay in seconds between session batches to prevent rate limits.",
+    )
 
 
 def parse_year_list(year_str: str) -> List[str]:
@@ -746,4 +749,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

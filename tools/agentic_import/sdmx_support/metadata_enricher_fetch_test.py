@@ -15,16 +15,15 @@
 # limitations under the License.
 
 import json
-import os
+from pathlib import Path
 import tempfile
 import unittest
-from pathlib import Path
 from unittest import mock
 
 from jinja2 import Template
 
-from tools.agentic_import.sdmx_support.metadata_enricher_fetch import (
-    Config, EnrichmentDataFetcher)
+from tools.agentic_import.sdmx_support.metadata_enricher_fetch import Config
+from tools.agentic_import.sdmx_support.metadata_enricher_fetch import EnrichmentDataFetcher
 
 
 class EnrichmentDataFetcherTest(unittest.TestCase):
