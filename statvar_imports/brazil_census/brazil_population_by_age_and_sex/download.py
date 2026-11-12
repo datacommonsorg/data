@@ -413,12 +413,15 @@ def fetch_raw_historical_files(
     map_91 = load_1991_mapping(raw_dir=raw_dir)
     blobs = list(
         bucket.list_blobs(
-            prefix="country/brazil/input_files/Brazil_1991_gender/POPU91")
-    ) + list(bucket.list_blobs(prefix="country/brazil/input_files/POPU91"))
+            prefix="country/brazil/input_files/Brazil_1991_gender/POPU91"))
     rows_1991: List[Dict[str, str]] = []
     for b in blobs:
-        if b.name.upper().endswith(".XLS"):
+        bname = os.path.basename(b.name)
+        if bname.upper().endswith(".XLS"):
             content = b.download_as_bytes()
+            if raw_dir:
+                with open(os.path.join(raw_dir, bname), "wb") as f:
+                    f.write(content)
             rows_1991.extend(parse_raw_1991_popu_age_sex(content, map_91))
     if not rows_1991:
         raise RuntimeError("No 1991 POPU age/sex records loaded from GCS.")

@@ -313,13 +313,15 @@ def fetch_raw_input_files(
     # 3. 1991 POPU state files
     blobs = list(
         bucket.list_blobs(
-            prefix="country/brazil/input_files/Brazil_1991_gender/POPU91")
-    ) + list(bucket.list_blobs(prefix="country/brazil/input_files/POPU91"))
+            prefix="country/brazil/input_files/Brazil_1991_gender/POPU91"))
     rows_1991: List[Dict[str, Any]] = []
     for b in blobs:
-        bname = os.path.basename(b.name).upper()
-        if bname.endswith(".XLS"):
+        bname = os.path.basename(b.name)
+        if bname.upper().endswith(".XLS"):
             content = b.download_as_bytes()
+            if raw_dir:
+                with open(os.path.join(raw_dir, bname), "wb") as f:
+                    f.write(content)
             rows_1991.extend(parse_raw_1991_popu(content, map_91))
     if not rows_1991:
         raise RuntimeError("No 1991 POPU records loaded from GCS.")
