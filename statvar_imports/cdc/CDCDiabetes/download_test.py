@@ -116,7 +116,8 @@ class DownloadTest(unittest.TestCase):
             del timeout
             if url == download.USDSS_REFERER:
                 return _FakeResponse(
-                    text='<script src="scripts/surveillance_entry.abc123.app.js"></script>'
+                    text=
+                    '<script src="scripts/surveillance_entry.abc123.app.js"></script>'
                 )
             if 'surveillance_entry.abc123.app.js' in url:
                 return _FakeResponse(
@@ -138,36 +139,36 @@ class DownloadTest(unittest.TestCase):
                         ]
                     })
             if url == download.USDSS_YEARS_URL:
-                return _FakeResponse(
-                    json_data=[
-                        {
-                            'IndicatorID': 151,
-                            'YearsList': [
-                                {
-                                    'Year': 2021,
-                                    'YearID': 342
-                                },
-                                {
-                                    'Year': 2022,
-                                    'YearID': 343
-                                },
-                            ],
-                        },
-                        {
-                            'IndicatorID': 201,
-                            'YearsList': [{
+                return _FakeResponse(json_data=[
+                    {
+                        'IndicatorID':
+                            151,
+                        'YearsList': [
+                            {
+                                'Year': 2021,
+                                'YearID': 342
+                            },
+                            {
                                 'Year': 2022,
                                 'YearID': 343
-                            }],
-                        },
-                        {
-                            'IndicatorID': 202,
-                            'YearsList': [{
-                                'Year': 2022,
-                                'YearID': 343
-                            }],
-                        },
-                    ])
+                            },
+                        ],
+                    },
+                    {
+                        'IndicatorID': 201,
+                        'YearsList': [{
+                            'Year': 2022,
+                            'YearID': 343
+                        }],
+                    },
+                    {
+                        'IndicatorID': 202,
+                        'YearsList': [{
+                            'Year': 2022,
+                            'YearID': 343
+                        }],
+                    },
+                ])
             raise AssertionError(f'Unexpected GET URL: {url}')
 
         def _fake_post(url: str,
@@ -226,40 +227,38 @@ class DownloadTest(unittest.TestCase):
                     'CDC': 5501,
                     'CC': '01001'
                 }]}),
-            _FakeResponse(
-                json_data=[
-                    {
-                        'IndicatorID': 151,
-                        'YearsList': [{
-                            'Year': 2022,
-                            'YearID': 343
-                        }],
-                    },
-                    {
-                        'IndicatorID': 201,
-                        'YearsList': [{
-                            'Year': 2022,
-                            'YearID': 343
-                        }],
-                    },
-                    {
-                        'IndicatorID': 202,
-                        'YearsList': [{
-                            'Year': 2022,
-                            'YearID': 343
-                        }],
-                    },
-                ]),
+            _FakeResponse(json_data=[
+                {
+                    'IndicatorID': 151,
+                    'YearsList': [{
+                        'Year': 2022,
+                        'YearID': 343
+                    }],
+                },
+                {
+                    'IndicatorID': 201,
+                    'YearsList': [{
+                        'Year': 2022,
+                        'YearID': 343
+                    }],
+                },
+                {
+                    'IndicatorID': 202,
+                    'YearsList': [{
+                        'Year': 2022,
+                        'YearID': 343
+                    }],
+                },
+            ]),
         ]
-        session.post.return_value = _FakeResponse(
-            json_data={
-                'MapData': [{
-                    'GeoID': 5501,
-                    'Sup': 0,
-                    'Est': None,
-                    'UL': None
-                }]
-            })
+        session.post.return_value = _FakeResponse(json_data={
+            'MapData': [{
+                'GeoID': 5501,
+                'Sup': 0,
+                'Est': None,
+                'UL': None
+            }]
+        })
 
         with self.assertRaisesRegex(RuntimeError,
                                     'Zero valid published county estimates'):
@@ -311,8 +310,8 @@ class DownloadTest(unittest.TestCase):
                          'dcid:Percent_Person_20OrMoreYears_WithDiabetes,'
                          'No Data,dcid:AgeAdjustedPrevalence,P1Y\n')
 
-            out_csv = os.path.join(
-                tmp_dir, 'out', 'cdc_diabetes_historical_2004_2021.csv')
+            out_csv = os.path.join(tmp_dir, 'out',
+                                   'cdc_diabetes_historical_2004_2021.csv')
             with mock.patch.object(subprocess, 'run'):
                 consolidate_historical.consolidate_files(
                     [sample_csv],
