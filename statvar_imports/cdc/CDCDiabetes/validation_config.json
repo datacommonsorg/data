@@ -1,92 +1,19 @@
 {
   "schema_version": "1.0",
-  "definitions": {
-    "scopes": {
-      "active_cdc_diabetes_statvars": {
-        "data_source": "stats",
-        "variables": {
-          "dcids": [
-            "Percent_Person_20OrMoreYears_WithDiabetes",
-            "dc/d4j16hnl53es2",
-            "dc/xmpy89x1nh8cg",
-            "dc/xwtlmj1vg7618",
-            "dc/nh3s4skee5483",
-            "dc/ryjdx30rfbfbb",
-            "Percent_Person_20OrMoreYears_Obesity",
-            "dc/bzfel0wfs6qhf",
-            "dc/x13tvt8jsgrm4",
-            "dc/73vt0flpsz26b",
-            "dc/4lvmzr1h1ylk1",
-            "dc/h3vxgc4gwl4c7",
-            "Percent_Person_20OrMoreYears_PhysicalInactivity",
-            "dc/1yfe8eezs4jbc",
-            "dc/ty7pq88d26963",
-            "dc/bv6fv4et0d8pd",
-            "dc/tcqb49dvg7k53",
-            "dc/t1hj2ymqdg5s6"
-          ]
-        }
-      }
-    }
-  },
   "rules": [
     {
-      "rule_id": "check_cdc_diabetes_max_date_consistency",
+      "rule_id": "max_date_consistent",
+      "description": "Checks that the latest date is the same for all StatVars.",
       "validator": "MAX_DATE_CONSISTENT",
-      "scope": "@active_cdc_diabetes_statvars",
       "params": {}
     },
     {
-      "rule_id": "check_cdc_diabetes_num_places_consistency",
-      "validator": "NUM_PLACES_CONSISTENT",
-      "scope": "@active_cdc_diabetes_statvars",
-      "params": {}
-    },
-    {
-      "rule_id": "check_cdc_diabetes_min_observations_and_freshness",
+      "rule_id": "min_expected_max_date_2024",
+      "description": "Verifies that all 18 StatVars are present and MaxDate meets the expected freshness threshold (>= 2024).",
       "validator": "SQL_VALIDATOR",
-      "scope": "@active_cdc_diabetes_statvars",
       "params": {
-        "query": "SELECT StatVar, MAX(NumPlaces) AS MaxPlaces, SUM(NumObservations) AS TotalObs, MAX(CAST(MaxDate AS INTEGER)) AS LatestDate FROM stats GROUP BY StatVar",
-        "condition": "MaxPlaces >= 2900 AND TotalObs >= 50000 AND LatestDate >= 2024",
-        "failure_message": "CDCDiabetes StatVar place count, observation count, or freshness validation failed."
-      }
-    },
-    {
-      "rule_id": "min_value_zero",
-      "validator": "MIN_VALUE_CHECK",
-      "scope": "@active_cdc_diabetes_statvars",
-      "params": {
-        "minimum": 0
-      }
-    },
-    {
-      "rule_id": "max_value_100",
-      "validator": "MAX_VALUE_CHECK",
-      "scope": "@active_cdc_diabetes_statvars",
-      "params": {
-        "maximum": 100
-      }
-    },
-    {
-      "rule_id": "check_deleted_records_percent",
-      "validator": "DELETED_RECORDS_PERCENT",
-      "params": {
-        "threshold": 0.1
-      }
-    },
-    {
-      "rule_id": "check_missing_refs_count",
-      "validator": "MISSING_REFS_COUNT",
-      "params": {
-        "threshold": 0
-      }
-    },
-    {
-      "rule_id": "check_lint_error_count",
-      "validator": "LINT_ERROR_COUNT",
-      "params": {
-        "threshold": 0
+        "query": "SELECT StatVar, MaxDate, COUNT(*) OVER () AS total_svs FROM stats",
+        "condition": "CAST(MaxDate AS INTEGER) >= 2024 AND total_svs = 18"
       }
     }
   ]

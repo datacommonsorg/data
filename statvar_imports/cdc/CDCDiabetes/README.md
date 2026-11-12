@@ -14,7 +14,7 @@
 
 ---
 
-## 2. Datasets & Architecture (Option 1: `stat_var_processor.py` + Automate)
+## 2. Datasets & Architecture
 
 This import downloads and processes county-level age-adjusted prevalence and standard error estimates for adults aged 20+ years from the CDC USDSS API (`download.py` + `stat_var_processor.py`):
 
@@ -36,27 +36,42 @@ This import downloads and processes county-level age-adjusted prevalence and sta
 
 ---
 
-## 3. How to Run
+## 3. Data Diffs & Refresh Summary (`differ_summary.json`)
+
+| Metric | Count | Explanation |
+| :--- | :--- | :--- |
+| **Previous Observations** | `1,016,418` | Consolidated legacy CSVs covering `2004–2021` across `3,151` counties |
+| **Current Observations** | `1,181,088` | Automated pipeline covering `2004–2021` historical (`1,016,418`) + `2022–2024` CDC USDSS API data (`164,670`) across `3,159` counties |
+| **Added Observations** | `+164,670` | `2022–2024` county-level prevalence and standard error observations across `3,144` counties (`18` StatVars) |
+| **Modified Observations** | `0` | 100% exact value match across all `1,016,418` historical observations |
+| **Deleted Observations** | `0` (`0.0%`) | Zero deletions |
+| **Schema Diffs** | `0` | All `18` StatVars resolve to existing production Data Commons `StatisticalVariable`s |
+
+---
+
+## 4. How to Run
+
+From the repository root (`data/`):
 
 1. **Run `download.py` to copy the `2004–2021` historical baseline CSV from GCS into `output_files/` and download fresh `2022+` CDC USDSS API data into `input_files/`:**
    ```bash
-   python3 download.py \
-     --output_dir=input_files \
-     --historical_output_dir=output_files
+   python3 statvar_imports/cdc/CDCDiabetes/download.py \
+     --output_dir=statvar_imports/cdc/CDCDiabetes/input_files \
+     --historical_output_dir=statvar_imports/cdc/CDCDiabetes/output_files
    ```
 
 2. **Process the downloaded CSV using `stat_var_processor.py`:**
    ```bash
-   python3 ../../../tools/statvar_importer/stat_var_processor.py \
-     --input_data=input_files/cdc_diabetes.csv \
-     --pv_map=cdc_diabetes_pvmap.csv \
-     --config_file=cdc_diabetes_metadata.csv \
+   python3 tools/statvar_importer/stat_var_processor.py \
+     --input_data=statvar_imports/cdc/CDCDiabetes/input_files/cdc_diabetes.csv \
+     --pv_map=statvar_imports/cdc/CDCDiabetes/cdc_diabetes_pvmap.csv \
+     --config_file=statvar_imports/cdc/CDCDiabetes/cdc_diabetes_metadata.csv \
      --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
-     --output_path=output_files/cdc_diabetes \
-     --output_counters=counters/cdc_diabetes_counters.csv
+     --output_path=statvar_imports/cdc/CDCDiabetes/output_files/cdc_diabetes \
+     --output_counters=statvar_imports/cdc/CDCDiabetes/counters/cdc_diabetes_counters.csv
    ```
 
 3. **Run unit tests:**
    ```bash
-   python3 -m unittest discover -v -s . -p "*_test.py"
+   python3 -m unittest discover -v -s statvar_imports/cdc/CDCDiabetes -p "*_test.py"
    ```

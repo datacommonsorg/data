@@ -34,10 +34,17 @@ import download
 class _FakeResponse:
     """Minimal mock HTTP response for requests.Session."""
 
-    def __init__(self, json_data: Any = None, text: str = '', ok: bool = True):
+    def __init__(
+        self,
+        json_data: Any = None,
+        text: str = '',
+        ok: bool = True,
+        status_code: int = 200,
+    ):
         self._json_data = json_data
         self.text = text
         self.ok = ok
+        self.status_code = status_code
 
     def raise_for_status(self) -> None:
         if not self.ok:
@@ -72,6 +79,17 @@ class DownloadTest(unittest.TestCase):
         self.assertIsNone(download.parse_estimate_and_stderr('12.2', '9.8'))
 
     def test_parse_counties_by_geoid_filters_invalid_and_pads_fips(self):
+        self.assertEqual(download.parse_counties_by_geoid({}), {})
+        self.assertEqual(
+            download.parse_counties_by_geoid({'counties_list': None}), {})
+        self.assertEqual(download.parse_indicator_years([]), {})
+        self.assertEqual(
+            download.parse_indicator_years([{
+                'IndicatorID': 151,
+                'YearsList': None
+            }]),
+            {151: []},
+        )
         init_data = {
             'counties_list': [
                 {
@@ -107,6 +125,32 @@ class DownloadTest(unittest.TestCase):
                 5501: '01001',
                 8740: '09110',
             },
+        )
+
+    def test_discover_init_app_data_url_fallback_branches(self):
+        session = mock.MagicMock()
+        session.get.side_effect = [
+            _FakeResponse(
+                text=
+                '<script src="scripts/surveillance_entry.abc123.app.js"></script>'
+            ),
+            _FakeResponse(text='', ok=False, status_code=404),
+        ]
+        self.assertEqual(
+            download.discover_init_app_data_url(session),
+            download.USDSS_DEFAULT_INIT_APP_DATA,
+        )
+
+        session.get.side_effect = [
+            _FakeResponse(
+                text=
+                '<script src="scripts/surveillance_entry.abc123.app.js"></script>'
+            ),
+            _FakeResponse(text='no init app data here', ok=True),
+        ]
+        self.assertEqual(
+            download.discover_init_app_data_url(session),
+            download.USDSS_DEFAULT_INIT_APP_DATA,
         )
 
     def test_download_cdc_diabetes_data_writes_expected_csv(self):

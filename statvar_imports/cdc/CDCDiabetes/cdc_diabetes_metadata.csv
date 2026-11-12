@@ -1,10 +1,7 @@
 parameter,value
-url,https://usdss.cdc.gov/diabetes/surveillance.html
-description,"County-level data and estimates regarding diabetes prevalence, obesity, and physical inactivity in the United States."
-release_frequency,P1Y
 output_columns,"observationAbout,observationDate,variableMeasured,value,measurementMethod,observationPeriod"
 header_rows,1
 mapped_rows,1
 input_encoding,utf-8-sig
-drop_statvars_without_svobs,True
-generate_statvar_name,True
+generate_statvar_mcf,False
+output_precision_digits,5

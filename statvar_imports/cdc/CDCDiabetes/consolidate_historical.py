@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # Copyright 2026 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,6 +18,7 @@ import glob
 import math
 import os
 import re
+import shutil
 import subprocess
 import tempfile
 
@@ -27,6 +27,19 @@ from absl import flags
 from absl import logging
 
 FLAGS = flags.FLAGS
+
+flags.DEFINE_string(
+    'cns_dir',
+    '/cns/jv-d/home/datcom/v3_mcf/cdc/diabetes/20240112',
+    'Legacy CNS directory (or gs:// prefix) containing the 162 2004-2021 CSVs.',
+    allow_override=True,
+)
+flags.DEFINE_string(
+    'output_dir',
+    'historical',
+    'Output directory for the consolidated historical baseline CSV and TMCF.',
+    allow_override=True,
+)
 
 OUTPUT_COLUMNS = [
     'observationAbout',
@@ -125,11 +138,17 @@ def consolidate_files(
             ['gsutil', '-m', 'cp'] + source_files + [f'{local_staging_dir}/'],
             check=True,
         )
-    else:
+    elif source_files[0].startswith('/cns/'):
         subprocess.run(
             ['fileutil', 'cp', '-f'] + source_files + [f'{local_staging_dir}/'],
             check=True,
         )
+    else:
+        for src_file in source_files:
+            dst_file = os.path.join(local_staging_dir,
+                                    os.path.basename(src_file))
+            if os.path.abspath(src_file) != os.path.abspath(dst_file):
+                shutil.copy2(src_file, dst_file)
 
     deduped_rows: dict[tuple[str, str, str], dict[str, str]] = {}
     total_rows_read = 0
@@ -221,14 +240,4 @@ def main(_):
 
 
 if __name__ == '__main__':
-    flags.DEFINE_string(
-        'cns_dir',
-        '/cns/jv-d/home/datcom/v3_mcf/cdc/diabetes/20240112',
-        'Legacy CNS directory (or gs:// prefix) containing the 162 2004-2021 CSVs.',
-    )
-    flags.DEFINE_string(
-        'output_dir',
-        'historical',
-        'Output directory for the consolidated historical baseline CSV and TMCF.',
-    )
     app.run(main)

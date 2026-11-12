@@ -17,8 +17,6 @@ import csv
 import math
 import os
 import re
-import shutil
-import subprocess
 import sys
 from typing import Any
 
@@ -39,6 +37,7 @@ flags.DEFINE_string(
     'output_dir',
     os.path.join(_CODEDIR, 'input_files'),
     'Directory path to save the downloaded input CSV file.',
+    allow_override=True,
 )
 flags.DEFINE_string(
     'historical_gcs_dir',
@@ -177,11 +176,7 @@ def parse_estimate_and_stderr(raw_pct: Any,
     if not (0.0 <= pct_val <= 100.0) or ul_val < pct_val:
         return None
     std_error = (ul_val - pct_val) / 1.96
-    pct_str = format_number(pct_val)
-    stderr_str = format_number(std_error)
-    if not pct_str or not stderr_str:
-        return None
-    return pct_str, stderr_str
+    return format_number(pct_val), format_number(std_error)
 
 
 def create_http_session() -> requests.Session:
@@ -244,8 +239,10 @@ def discover_init_app_data_url(session: requests.Session) -> str:
 
 def parse_counties_by_geoid(init_data: dict[str, Any]) -> dict[int, str]:
     """Maps USDSS internal county GeoID (CDC) to 5-digit county FIPS code."""
+    if not isinstance(init_data, dict):
+        return {}
     counties_by_geoid: dict[int, str] = {}
-    for county in init_data.get('counties_list', []):
+    for county in init_data.get('counties_list') or []:
         if not isinstance(county, dict):
             continue
         geoid_raw = county.get('CDC')
@@ -266,6 +263,8 @@ def parse_indicator_years(
     start_year: int = 2022,
 ) -> dict[int, list[tuple[int, int]]]:
     """Maps IndicatorID to sorted list of (year_int, year_id) >= start_year."""
+    if not isinstance(years_list, list):
+        return {}
     indicator_years: dict[int, list[tuple[int, int]]] = {}
     for entry in years_list:
         if not isinstance(entry, dict):
@@ -275,7 +274,7 @@ def parse_indicator_years(
             continue
         ind_id = int(ind_raw)
         valid_years: list[tuple[int, int]] = []
-        for yr_obj in entry.get('YearsList', []):
+        for yr_obj in entry.get('YearsList') or []:
             if not isinstance(yr_obj, dict):
                 continue
             yr_str = str(yr_obj.get('Year') or '').strip()
@@ -360,8 +359,9 @@ def fetch_usdss_metrics(
                                         timeout=60)
                     resp.raise_for_status()
                     data = resp.json()
-                    map_data = (data.get('MapData', []) if isinstance(
-                        data, dict) else [])
+                    raw_map = (data.get('MapData')
+                               if isinstance(data, dict) else None)
+                    map_data = raw_map if isinstance(raw_map, list) else []
                     if not map_data:
                         raise RuntimeError(
                             'Empty MapData from CDC USDSS API for '
@@ -476,26 +476,7 @@ def copy_historical_files_from_gcs(
         src_gcs = f'{gcs_base}/{fname}'
         dst_local = os.path.join(historical_output_dir, fname)
         logging.info('Copying historical CSV from %s to %s', src_gcs, dst_local)
-        try:
-            file_util.file_copy(src_gcs, dst_local)
-        except Exception as exc:  # pylint: disable=broad-except
-            local_fallback = os.path.join(_CODEDIR, 'historical', fname)
-            if os.path.exists(local_fallback) and os.path.getsize(
-                    local_fallback) > 0:
-                logging.warning(
-                    'file_util.file_copy(%s) failed (%s); copying from local %s',
-                    src_gcs,
-                    exc,
-                    local_fallback,
-                )
-                shutil.copyfile(local_fallback, dst_local)
-            else:
-                logging.warning(
-                    'file_util.file_copy(%s) failed (%s); falling back to gsutil cp',
-                    src_gcs,
-                    exc,
-                )
-                subprocess.run(['gsutil', 'cp', src_gcs, dst_local], check=True)
+        file_util.file_copy(src_gcs, dst_local)
 
 
 def main(_) -> None:
