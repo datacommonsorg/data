@@ -13,12 +13,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import unittest
 import os
-import tempfile
 import shutil
-from generate_provisional_nodes import (generate_provisional_nodes,
-                                        strip_prefix, has_entity_prefix)
+import tempfile
+import unittest
+
+from generate_provisional_nodes import generate_provisional_nodes
+from generate_provisional_nodes import has_entity_prefix
+from generate_provisional_nodes import strip_prefix
 
 
 class TestGenerateProvisionalNodes(unittest.TestCase):
@@ -106,7 +108,7 @@ containedInPlace:  dcid : CountryA
         output_file = generate_provisional_nodes(self.test_dir, no_spanner=True)
 
         with open(output_file, "r") as f:
-            content = f.read()
+            f.read()
 
     def test_node_property_definition(self):
         mcf_content = """Node:

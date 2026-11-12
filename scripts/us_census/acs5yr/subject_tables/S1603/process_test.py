@@ -4,11 +4,11 @@
 # pylint: disable=missing-class-docstring
 # pylint: disable=missing-function-docstring
 
+import json
 import os
 import sys
 import tempfile
 import unittest
-import json
 
 #pylint: disable=wrong-import-position
 #pylint: disable=import-error
@@ -16,7 +16,9 @@ _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
 sys.path.insert(1, os.path.join(_CODEDIR, '..', 'common'))
 from generate_col_map import process_zip_file
+
 from .process import S1603SubjectTableDataLoader
+
 #pylint: enable=wrong-import-position
 #pylint: enable=import-error
 

@@ -23,15 +23,15 @@ Run this script from this directory:
 python3 download_bulk.py
 """
 
-import os
-import requests
 import json
+import os
 import sys
 
-from absl import logging
-from retry import retry
-from absl import flags
 from absl import app
+from absl import flags
+from absl import logging
+import requests
+from retry import retry
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _GCS_OUTPUT_DIR = os.path.join(_MODULE_DIR, 'gcs_output')
@@ -40,9 +40,14 @@ sys.path.append(os.path.join(_UTIL_DIR, '../../../util/'))
 import file_util
 
 _FLAGS = flags.FLAGS
-flags.DEFINE_string(
-    'config_path', 'gs://unresolved_mcf/cdc/cdc500places/download_config.json',
-    'Path to config file')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        'config_path',
+        'gs://unresolved_mcf/cdc/cdc500places/download_config.json',
+        'Path to config file')
 
 
 def read_config_file_from_gcs(file_path):
@@ -91,5 +96,6 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     logging.set_verbosity(2)
     app.run(main)

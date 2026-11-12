@@ -17,10 +17,17 @@ for national 2000-2009 and the file
 is processed as is.
 """
 
-import pandas as pd
 import os
+import sys
+
+import pandas as pd
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
+_SCRIPTS_DIR = os.path.abspath(os.path.join(_CODEDIR, '../../../../'))
+if _SCRIPTS_DIR not in sys.path:
+    sys.path.append(_SCRIPTS_DIR)
+
+from us_census.pep.us_pep_sexrace.preprocess import load_url_or_path
 
 
 def process_national_2000_2010(url: str) -> pd.DataFrame:
@@ -38,7 +45,12 @@ def process_national_2000_2010(url: str) -> pd.DataFrame:
     # reading the csv format input file and converting it to a dataframe
     # skipping unwanted rows from top and bottom
     # removing commas from the row values
-    df = pd.read_csv(url, skiprows=3, skipfooter=8, header=0, thousands=',')
+    df = pd.read_csv(load_url_or_path(url),
+                     skiprows=3,
+                     skipfooter=8,
+                     header=0,
+                     thousands=',',
+                     engine='python')
     df.to_csv(_CODEDIR + "/../input_files/" + "nationals_result_2000_2010.csv")
     df = df.rename(columns={'Unnamed: 0': 'SRH', 'Unnamed: 13': '2010'})
 

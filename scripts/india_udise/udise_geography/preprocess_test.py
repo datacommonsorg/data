@@ -12,11 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import filecmp
 import os
-import json
-import tempfile
 import unittest
+
 from india_udise.udise_geography.preprocess import UDISEGeography
 
 # module_dir_ is the path to where this test is running from.

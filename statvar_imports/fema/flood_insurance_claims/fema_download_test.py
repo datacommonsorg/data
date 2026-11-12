@@ -17,14 +17,17 @@ import shutil
 import sys
 import tempfile
 import unittest
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock
+from unittest.mock import patch
 
 import requests
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 if _SCRIPT_DIR not in sys.path:
     sys.path.insert(0, _SCRIPT_DIR)
-
+if 'download_util_script' in sys.modules:
+    sys.modules.setdefault('util.download_util_script',
+                           sys.modules['download_util_script'])
 import fema_download
 
 
@@ -289,8 +292,10 @@ class FemaDownloadTest(unittest.TestCase):
     @patch('fema_download.shutil.rmtree')
     @patch('fema_download.download_file')
     @patch('fema_download.get_total_records')
-    def test_download_data_bulk_missing_header_fallback(
-            self, mock_get_total_records, mock_download_file, mock_rmtree):
+    def test_download_data_bulk_missing_header_fallback(self,
+                                                        mock_get_total_records,
+                                                        mock_download_file,
+                                                        mock_rmtree):
         """Test that bulk download missing expected header falls back to pagination."""
         original_page_size = fema_download.PAGE_SIZE
         fema_download.PAGE_SIZE = 2
@@ -341,8 +346,7 @@ class FemaDownloadTest(unittest.TestCase):
     @patch('fema_download.shutil.rmtree')
     @patch('fema_download.download_file')
     @patch('fema_download.get_total_records')
-    def test_download_data_bulk_too_small_fallback(self,
-                                                   mock_get_total_records,
+    def test_download_data_bulk_too_small_fallback(self, mock_get_total_records,
                                                    mock_download_file,
                                                    mock_rmtree):
         """Test that bulk download below min_size threshold falls back to pagination."""
@@ -406,8 +410,7 @@ class FemaDownloadTest(unittest.TestCase):
                     with open(os.path.join(output_folder, "truncated.csv"),
                               'w') as f:
                         f.write(
-                            "dateOfLoss,yearOfLoss,state\n2020-05-10,2020,CA\n"
-                        )
+                            "dateOfLoss,yearOfLoss,state\n2020-05-10,2020,CA\n")
                     return True
                 if "$skip=0" in url:
                     util_out = os.path.join(output_folder,
@@ -521,7 +524,7 @@ class FemaDownloadTest(unittest.TestCase):
         with open(test_file, 'w', encoding='utf-8') as f:
             f.write("dateOfLoss,yearOfLoss,state\n")
             for i in range(99):
-                f.write(f"2020-05-10,2020,CA\n")
+                f.write("2020-05-10,2020,CA\n")
 
         # When expecting 100 records, 99 is >= 98 (98%), so it should be valid
         self.assertTrue(
@@ -549,8 +552,7 @@ class FemaDownloadTest(unittest.TestCase):
             def side_effect(url, output_folder, **kwargs):
                 if url.startswith("http://fake-bulk.com/"):
                     # Bulk file downloads but has 0 data rows (fails tolerance against expected 2)
-                    out_file = os.path.join(output_folder,
-                                            "FimaNfipClaims.csv")
+                    out_file = os.path.join(output_folder, "FimaNfipClaims.csv")
                     with open(out_file, "w", encoding="utf-8") as f:
                         f.write("dateOfLoss,yearOfLoss,state\n")
                     return True
@@ -600,12 +602,10 @@ class FemaDownloadTest(unittest.TestCase):
 
             def side_effect(url, output_folder, **kwargs):
                 if url.startswith("http://fake-bulk.com/"):
-                    out_file = os.path.join(output_folder,
-                                            "FimaNfipClaims.csv")
+                    out_file = os.path.join(output_folder, "FimaNfipClaims.csv")
                     with open(out_file, "w", encoding="utf-8") as f:
                         f.write(
-                            "dateOfLoss,yearOfLoss,state\n2020-05-10,2020,CA\n"
-                        )
+                            "dateOfLoss,yearOfLoss,state\n2020-05-10,2020,CA\n")
                     return True
                 if "$skip=0" in url:
                     util_out = os.path.join(output_folder,
@@ -731,4 +731,3 @@ class FemaDownloadTest(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-

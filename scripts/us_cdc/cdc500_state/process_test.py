@@ -19,14 +19,10 @@ import tempfile
 import unittest
 from unittest import mock
 
-from absl import flags
-from absl.testing import flagsaver
 import duckdb
 import pandas as pd
 
 from scripts.us_cdc.cdc500_state import process
-
-FLAGS = flags.FLAGS
 
 
 def _prepare_duckdb_query(sql: str) -> str:
@@ -46,12 +42,6 @@ def _prepare_duckdb_query(sql: str) -> str:
 
 class CDC500StateProcessTest(unittest.TestCase):
     """Unit tests for CDC 500 State aggregation processing."""
-
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-        if not FLAGS.is_parsed():
-            FLAGS(['test'])
 
     def test_query_constants(self):
         """Verifies key SQL clauses and excluded variables in process.QUERY."""
@@ -742,49 +732,46 @@ class CDC500StateProcessTest(unittest.TestCase):
 
     @mock.patch('scripts.us_cdc.cdc500_state.process.run_process')
     @mock.patch('google.cloud.bigquery.Client')
-    def test_main(self, mock_bq_client_cls, mock_run_process):
-        """Tests process.main flag parsing and client instantiation."""
+    def test_run_aggregation(self, mock_bq_client_cls, mock_run_process):
+        """Tests run_aggregation client instantiation and arguments."""
         mock_client_instance = mock.MagicMock()
         mock_bq_client_cls.return_value = mock_client_instance
         with tempfile.TemporaryDirectory() as tmp_dir:
-            with flagsaver.flagsaver(output_dir=tmp_dir,
-                                     project='test-project',
-                                     timeout=300):
-                process.main([])
-                expected_output_file = os.path.join(tmp_dir,
-                                                    process.OUTPUT_FILENAME)
-                mock_bq_client_cls.assert_called_once_with(
-                    project='test-project')
-                mock_run_process.assert_called_once_with(mock_client_instance,
-                                                         expected_output_file,
-                                                         timeout=300)
+            process.run_aggregation(tmp_dir,
+                                    project='test-project',
+                                    timeout=300)
+            expected_output_file = os.path.join(tmp_dir,
+                                                process.OUTPUT_FILENAME)
+            mock_bq_client_cls.assert_called_once_with(project='test-project')
+            mock_run_process.assert_called_once_with(mock_client_instance,
+                                                     expected_output_file,
+                                                     timeout=300)
 
     @mock.patch('scripts.us_cdc.cdc500_state.process.logging.fatal')
     @mock.patch('scripts.us_cdc.cdc500_state.process.run_process')
     @mock.patch('google.cloud.bigquery.Client')
-    def test_main_error_logs_fatal(self, mock_bq_client_cls, mock_run_process,
-                                   mock_logging_fatal):
-        """Tests process.main catches unhandled exceptions and logs via logging.fatal."""
+    def test_run_aggregation_error_logs_fatal(self, mock_bq_client_cls,
+                                              mock_run_process,
+                                              mock_logging_fatal):
+        """Tests run_aggregation catches unhandled exceptions and logs via logging.fatal."""
         del mock_bq_client_cls  # Unused.
         mock_run_process.side_effect = RuntimeError(
             "BigQuery query returned 0 rows.")
         with tempfile.TemporaryDirectory() as tmp_dir:
-            with flagsaver.flagsaver(output_dir=tmp_dir):
-                process.main([])
-                mock_logging_fatal.assert_called_once()
+            process.run_aggregation(tmp_dir)
+            mock_logging_fatal.assert_called_once()
 
     @mock.patch('scripts.us_cdc.cdc500_state.process.logging.fatal')
     @mock.patch('google.cloud.bigquery.Client')
-    def test_main_client_init_error_logs_fatal(self, mock_bq_client_cls,
-                                               mock_logging_fatal):
-        """Tests process.main catches client init errors and logs via logging.fatal."""
+    def test_run_aggregation_client_init_error_logs_fatal(
+            self, mock_bq_client_cls, mock_logging_fatal):
+        """Tests run_aggregation catches client init errors and logs via logging.fatal."""
         mock_bq_client_cls.side_effect = RuntimeError(
             "DefaultCredentialsError: Could not automatically determine credentials."
         )
         with tempfile.TemporaryDirectory() as tmp_dir:
-            with flagsaver.flagsaver(output_dir=tmp_dir):
-                process.main([])
-                mock_logging_fatal.assert_called_once()
+            process.run_aggregation(tmp_dir)
+            mock_logging_fatal.assert_called_once()
 
 
 if __name__ == '__main__':

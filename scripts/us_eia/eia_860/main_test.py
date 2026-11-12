@@ -22,7 +22,8 @@ import unittest
 sys.path.append(
     os.path.dirname(os.path.dirname(os.path.dirname(
         os.path.abspath(__file__)))))
-from us_eia.eia_860 import utility, power_plant
+from us_eia.eia_860 import power_plant
+from us_eia.eia_860 import utility
 
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)

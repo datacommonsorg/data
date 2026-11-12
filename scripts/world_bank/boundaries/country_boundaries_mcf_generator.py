@@ -23,7 +23,6 @@ https://geopandas.readthedocs.io/en/latest/docs/reference/api/geopandas.GeoSerie
 
 NOTE: this file generates temporary folders that are not deleted.
 """
-import glob
 import io
 import json
 import os
@@ -32,13 +31,10 @@ import sys
 import tempfile
 import zipfile
 
-import geopandas as gpd
-import numpy as np
-import pandas as pd
-import requests
-
 from absl import app
 from absl import flags
+import geopandas as gpd
+import requests
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO_ROOT))
@@ -46,17 +42,22 @@ sys.path.insert(0, str(REPO_ROOT))
 from util.dc_api_wrapper import get_datacommons_client
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string(
-    'download_dir', '',
-    'Dir to use source data from. Leave blank to download from source.')
-flags.DEFINE_string(
-    'export_dir', '',
-    'Dir to output geojson coordinate files too. If blank, a temp folder will be used.'
-)
-flags.DEFINE_string(
-    'mcf_dir', '',
-    'Dir to output generated MCF files too. If blank, a temp folder will be used.'
-)
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        'download_dir', '',
+        'Dir to use source data from. Leave blank to download from source.')
+    flags.DEFINE_string(
+        'export_dir', '',
+        'Dir to output geojson coordinate files too. If blank, a temp folder will be used.'
+    )
+    flags.DEFINE_string(
+        'mcf_dir', '',
+        'Dir to output generated MCF files too. If blank, a temp folder will be used.'
+    )
+
 
 DOWNLOAD_URI = 'https://development-data-hub-s3-public.s3.amazonaws.com/ddhfiles/779551/wb_boundaries_geojson_highres.zip'
 TMP_PATH = '/tmp/wb_boundaries_geojson_highres'
@@ -208,4 +209,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

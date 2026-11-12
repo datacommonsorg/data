@@ -1,0 +1,8 @@
+Node: E:education_age_gender_nuts1->E0
+observationAbout: C:education_age_gender_nuts1->observationAbout
+observationDate: C:education_age_gender_nuts1->observationDate
+value: C:education_age_gender_nuts1->value
+variableMeasured: C:education_age_gender_nuts1->variableMeasured
+unit: C:education_age_gender_nuts1->unit
+scalingFactor: C:education_age_gender_nuts1->scalingFactor
+typeOf: dcs:StatVarObservation

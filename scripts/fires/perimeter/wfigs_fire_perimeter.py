@@ -13,13 +13,13 @@
 # limitations under the License.
 """Script to import and clean WFIGS Perimeter data.
 """
-import requests
-import pandas as pd
 import json
-import datetime
+
 from absl import app
-from shapely import geometry
 from arcgis2geojson import arcgis2geojson
+import pandas as pd
+import requests
+from shapely import geometry
 
 _FIRE_DCID_FORMAT = "fire/irwinId/{id}"
 _PERIMETER_DCID_FORMAT = "firePerimeter/irwinId/{id}/date/{perimeter_date}"

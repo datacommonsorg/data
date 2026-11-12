@@ -31,7 +31,6 @@ To generate PV maps locally for a set of input strings, run the command:
     https://ai.google.dev/gemini-api/docs/api-key
 """
 
-import csv
 import os
 import sys
 
@@ -71,17 +70,17 @@ flags.DEFINE_string('llm_request', '',
                     'Output text file with copy prompt sent to LLM.')
 flags.DEFINE_string('llm_response', '', 'Output text file with LLM response.')
 
-import data_sampler
-import file_util
-import process_http_server
 import config_flags
-import schema_generator
-import mcf_file_util
-import property_value_mapper
-
 from config_map import ConfigMap
 from counters import Counters
-from genai_helper import GenAIHelper, read_text_file, get_genai_helper_config_from_flags
+import data_sampler
+import file_util
+from genai_helper import GenAIHelper
+from genai_helper import get_genai_helper_config_from_flags
+import mcf_file_util
+import process_http_server
+import property_value_mapper
+import schema_generator
 
 
 # Class to generate PV Maps using LLMs.
@@ -272,7 +271,7 @@ def get_sample_sv_name_pvs(nodes: dict, config: dict = None) -> str:
             # Check if statvar has any unique property or value.
             select_sv = True
             for pv in sv_pvs.split(','):
-                if not pv or not ':' in pv:
+                if not pv or ':' not in pv:
                     continue
                 prop, value = pv.split(':', 1)
                 if pv in _IGNORE_NODES:
@@ -327,7 +326,7 @@ def get_nodes_from_pv_string(sv_name_pvs: str,
         if not line:
             continue
         line = line.strip()
-        if not line or not name_pv_separator in line:
+        if not line or name_pv_separator not in line:
             continue
         key, sv_name_pvs = line.split(name_pv_separator, 1)
         node = nodes.get(key, {})

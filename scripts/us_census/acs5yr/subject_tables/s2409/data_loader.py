@@ -14,8 +14,10 @@
 """Common data processing module for ACS Subject Tables"""
 import os
 import sys
+
 import numpy as np
 import pandas as pd
+
 # TODO: Consider using logs for logging warning messages for debug at a later
 # date
 #

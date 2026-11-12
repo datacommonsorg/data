@@ -17,9 +17,6 @@ import os
 import sys
 import unittest
 
-from absl import app
-from absl import logging
-
 import schema_spell_checker
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -90,3 +87,7 @@ class SchemaSpellCheckerTest(unittest.TestCase):
         }},
                          schema_spell_checker.spell_check_nodes(
                              nodes, ConfigMap({'spell_check_text_only': True})))
+
+
+if __name__ == '__main__':
+    unittest.main()

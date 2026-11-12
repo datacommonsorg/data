@@ -17,10 +17,17 @@ for county 1970-1979 and Count_Person_Male
 and Count_person_Female are aggregated for this file.
 """
 
-import pandas as pd
 import os
+import sys
+
+import pandas as pd
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
+_SCRIPTS_DIR = os.path.abspath(os.path.join(_CODEDIR, '../../../../'))
+if _SCRIPTS_DIR not in sys.path:
+    sys.path.append(_SCRIPTS_DIR)
+
+from us_census.pep.us_pep_sexrace.preprocess import load_url_or_path
 
 
 def process_county_1970_1979(url: str) -> pd.DataFrame:
@@ -36,7 +43,7 @@ def process_county_1970_1979(url: str) -> pd.DataFrame:
         df.columns (pd.dataframe) : Column names of cleaned dataframe
     """
     # reading the csv input file
-    df = pd.read_csv(url, header=None)
+    df = pd.read_csv(load_url_or_path(url), header=None)
     df.to_csv(_CODEDIR + "/../input_files/" + "county_result_1970_1979.csv")
 
     # listing the columns to be dropped as age gaps are not required

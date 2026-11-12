@@ -1,8 +1,8 @@
-import os
-import sys
-import subprocess
-import re
 from collections import defaultdict
+import os
+import re
+import subprocess
+import sys
 
 # --- 1. Setup Data Commons Environment Paths ---
 py_script_path = os.path.expanduser('~/Desktop/data')
@@ -70,7 +70,7 @@ def run_diff(mcf1, mcf2, output_txt):
 
 def merge_mcfs(old_mcf, new_mcf, merged_mcf):
     """Merges historical and new MCFs using a pure text-block strategy to preserve prefixes."""
-    print(f"  -> Merging files (Pure Text Mode)...")
+    print("  -> Merging files (Pure Text Mode)...")
 
     def load_text_blocks(filepath):
         blocks = {}
@@ -126,7 +126,7 @@ def normalize_node_id(node_str):
 
 def add_alternate_names(diff_file, mcf_file, out_file):
     """Parses diff for deleted names and injects them as alternateName."""
-    print(f"  -> Injecting alternate names from diff...")
+    print("  -> Injecting alternate names from diff...")
     alt_names_to_add = defaultdict(set)
     current_diff_node = None
 

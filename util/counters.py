@@ -21,13 +21,12 @@ It also supports the following:
 '''
 
 import os
-import psutil
-import sys
 import time
+from typing import NamedTuple
 
 from absl import flags
 from absl import logging
-from typing import NamedTuple
+import psutil
 
 flags.DEFINE_integer('counters_print_interval', 300,
                      'Interval in seconds to print counters.')

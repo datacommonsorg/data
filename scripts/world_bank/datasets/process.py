@@ -1,10 +1,13 @@
+from collections import Counter
+import csv
 import datetime
 import os
-import csv
 import sys
+
+from absl import app
+from absl import flags
+from absl import logging
 import pandas as pd
-from absl import logging, flags, app
-from collections import Counter
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 current_year = datetime.datetime.now().year
@@ -24,16 +27,21 @@ import file_util
 MEASUREMENT_METHOD = "WorldBank_WDI_CSV"
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string(
-    "gs_path",
-    "gs://unresolved_mcf/world_bank/datasets/observations/historical_retained/",
-    "historical file path")
-flags.DEFINE_string("historical_file", "bq-results-20250423.csv",
-                    "historical file name")
-flags.DEFINE_string(
-    'historical_gcs_path',
-    'gs://unresolved_mcf/world_bank/datasets/deleted_historical_data_06_2026.csv',
-    'GCS path to the deleted historical data CSV file')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        "gs_path",
+        "gs://unresolved_mcf/world_bank/datasets/observations/historical_retained/",
+        "historical file path")
+    flags.DEFINE_string("historical_file", "bq-results-20250423.csv",
+                        "historical file name")
+    flags.DEFINE_string(
+        'historical_gcs_path',
+        'gs://unresolved_mcf/world_bank/datasets/deleted_historical_data_06_2026.csv',
+        'GCS path to the deleted historical data CSV file')
+
 
 DCID_MAP = {}
 IGNORE_DCIDS = set()
@@ -249,4 +257,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

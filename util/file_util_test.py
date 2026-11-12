@@ -19,8 +19,6 @@ import sys
 import tempfile
 import unittest
 
-from absl import logging
-
 # Allows the following module imports to work when running as a script
 _SCRIPTS_DIR = os.path.dirname(__file__)
 if _SCRIPTS_DIR not in sys.path:

@@ -13,17 +13,14 @@
 # limitations under the License.
 """Test for events_processor.py"""
 
-import math
 import os
-import s2sphere
-import shapely
 import sys
 import tempfile
 import unittest
 from unittest import mock
-import pandas as pd
 
 from absl import logging
+import pandas as pd
 
 # Allows the following module imports to work when running as a script
 _MODULE_DIR = os.path.dirname(__file__)
@@ -31,13 +28,13 @@ sys.path.append(_MODULE_DIR)
 sys.path.append(os.path.dirname(_MODULE_DIR))
 sys.path.append(os.path.dirname(os.path.dirname((_MODULE_DIR))))
 
-import utils
 import file_util
 
 _TESTDIR = os.path.join(os.path.dirname(os.path.realpath(__file__)),
                         'test_data')
 
-from process_events import process, GeoEventsProcessor
+from process_events import GeoEventsProcessor
+from process_events import process
 
 from util.config_map import ConfigMap
 
@@ -70,7 +67,7 @@ class ProcessEventsTest(unittest.TestCase):
         df_actual = pd.read_csv(actual_file)
         self.assertEqual(
             df_expected.columns.to_list(), df_actual.columns.to_list(),
-            f'Found different columns in CSV files:' +
+            'Found different columns in CSV files:' +
             f'expected:{expected_file}:{df_expected.columns.to_list()}, ' +
             f'actual:{actual_file}:{df_actual.columns.to_list()}, ')
         if ignore_columns:
@@ -83,7 +80,7 @@ class ProcessEventsTest(unittest.TestCase):
         df_actual = df_actual.sort_values(by=df_expected.columns.to_list(),
                                           ignore_index=True)
         self.assertTrue(
-            df_expected.equals(df_actual), f'Found diffs in CSV rows:' +
+            df_expected.equals(df_actual), 'Found diffs in CSV rows:' +
             f'"{actual_file}" vs "{expected_file}":')
 
     def test_process(self):
