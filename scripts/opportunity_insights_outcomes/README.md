@@ -17,7 +17,7 @@ This import migrates the legacy `google3` Borg import (`//depot/google3/datacomm
    ```bash
    python3 download.py
    ```
-2. **Resolve headers via `stat_var_processor.py` and write balanced `StatVarObservation` CSV shards (`output/output_part_*.csv`), `output/output.tmcf`, and StatVar MCFs (`output/output_stat_vars*.mcf`):**
+2. **Resolve headers via `stat_var_processor.py` and write balanced `StatVarObservation` CSV shards (`output/output_part_*.csv`), `output/output.tmcf`, and StatVar MCF (`output/output_stat_vars.mcf`):**
    ```bash
    python3 preprocess.py
    ```
@@ -75,7 +75,7 @@ Run all commands below from `data/scripts/opportunity_insights_outcomes/`:
 
 ## Directory & File Structure
 * `download.py`: Scrapes the Opportunity Insights catalog (`https://opportunityinsights.org/data/`) with canonical fallback URLs, downloads raw CSV/ZIP archives with bounded retries, and extracts them into `raw_data/`.
-* `preprocess.py`: Normalizes multi-word column headers, resolves all unique column headers via `stat_var_processor.py` (emitting `output/output_stat_vars*.mcf`), and expands all 6 datasets in parallel across CPU cores into balanced `StatVarObservation` CSV shards (`output/output_part_*.csv`) and `output/output.tmcf` with numeric values formatted to 5 decimal digits.
+* `preprocess.py`: Normalizes multi-word column headers, resolves all unique column headers via `stat_var_processor.py` (emitting `output/output_stat_vars.mcf`), and expands all 6 datasets in parallel across CPU cores into balanced `StatVarObservation` CSV shards (`output/output_part_*.csv`) and `output/output.tmcf` with numeric values formatted to 5 decimal digits.
 * `pvmap.csv`: Property-value mapping table translating normalized column tokens (`_`-delimited) into Data Commons `StatisticalVariable` and `StatVarObservation` properties.
 * `metadata.csv`: Configuration for `stat_var_processor.py` (`word_delimiter: "_"`, `output_columns: "observationAbout,observationDate,observationPeriod,variableMeasured,value,unit"`).
 * `manifest.json`: Automated import specification, script execution sequence, GCS `import_inputs` (`output/output.tmcf` and `output/output_part_*.csv`), `node_mcf` (`output/*.mcf`), monthly cron schedule (`0 8 1 * *`), and resource limits.

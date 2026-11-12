@@ -747,15 +747,12 @@ def main(_):
     output_prefix = (os.path.join(FLAGS.shard_dir, 'output')
                      if FLAGS.shard_dir else FLAGS.sv_output_prefix)
     os.makedirs(os.path.dirname(os.path.abspath(output_prefix)), exist_ok=True)
-    try:
-        prepare_parallel_shards_and_svp_inputs(
-            FLAGS.input_dir,
-            output_prefix,
-            rows_per_chunk=FLAGS.max_rows_per_shard,
-            existing_statvar_mcf=FLAGS.existing_statvar_mcf,
-        )
-    except (FileNotFoundError, ValueError, RuntimeError) as e:
-        logging.fatal('Preprocessing failed: %s', e)
+    prepare_parallel_shards_and_svp_inputs(
+        FLAGS.input_dir,
+        output_prefix,
+        rows_per_chunk=FLAGS.max_rows_per_shard,
+        existing_statvar_mcf=FLAGS.existing_statvar_mcf,
+    )
 
 
 if __name__ == '__main__':

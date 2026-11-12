@@ -225,7 +225,7 @@ def download_file(
                 )
                 time.sleep(delay)
                 delay *= 2
-    logging.fatal('Failed to download %s: %s', url, last_err)
+    raise RuntimeError(f'Failed to download {url}: {last_err}') from last_err
 
 
 def _is_valid_uncompressed_csv(file_path: str) -> bool:
@@ -257,9 +257,8 @@ def extract_csv_from_zip(zip_path: str, target_csv_path: str) -> None:
             return
         if os.path.exists(zip_path):
             os.remove(zip_path)
-        logging.fatal('Downloaded file is not a valid ZIP archive: %s',
-                      zip_path)
-        return
+        raise RuntimeError(
+            f'Downloaded file is not a valid ZIP archive: {zip_path}')
 
     try:
         with zipfile.ZipFile(zip_path, 'r') as zf:
@@ -269,8 +268,8 @@ def extract_csv_from_zip(zip_path: str, target_csv_path: str) -> None:
                 not os.path.basename(m).startswith('._') and not m.endswith('/')
             ]
             if not csv_members:
-                logging.fatal('No CSV file found inside archive: %s', zip_path)
-                return
+                raise RuntimeError(
+                    f'No CSV file found inside archive: {zip_path}')
             target_name = os.path.basename(target_csv_path).lower()
             matching = [
                 m for m in csv_members
@@ -293,7 +292,7 @@ def extract_csv_from_zip(zip_path: str, target_csv_path: str) -> None:
     except Exception as exc:  # pylint: disable=broad-except
         if os.path.exists(tmp_csv_path):
             os.remove(tmp_csv_path)
-        logging.fatal('Failed to extract %s: %s', zip_path, exc)
+        raise RuntimeError(f'Failed to extract {zip_path}: {exc}') from exc
 
 
 def download_all_sources(

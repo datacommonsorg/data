@@ -187,15 +187,14 @@ class DownloadAndPvmapTest(unittest.TestCase):
                 self.assertEqual(f.read(), 'cz,val\n100,0.5\n')
 
             with mock.patch('util.download_util_script._retry_method',
-                            return_value=None), mock.patch.object(
-                                download.logging, 'fatal') as mock_fatal:
-                download.download_file(
-                    'https://example.com/fail.csv',
-                    os.path.join(tmpdir, 'fail.csv'),
-                    max_retries=2,
-                    retry_backoff_sec=0.001,
-                )
-                mock_fatal.assert_called_once()
+                            return_value=None):
+                with self.assertRaises(RuntimeError):
+                    download.download_file(
+                        'https://example.com/fail.csv',
+                        os.path.join(tmpdir, 'fail.csv'),
+                        max_retries=2,
+                        retry_backoff_sec=0.001,
+                    )
 
     def test_skips_missing_value_placeholders(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -291,9 +290,8 @@ class DownloadAndPvmapTest(unittest.TestCase):
                 f'--input_dir={os.path.join(tmpdir, "raw")}',
                 f'--sv_output_prefix={os.path.join(tmpdir, "output", "output")}',
             ])
-            with mock.patch.object(preprocess.logging, 'fatal') as mock_fatal:
+            with self.assertRaises(FileNotFoundError):
                 preprocess.main([])
-                mock_fatal.assert_called_once()
 
     def test_extract_csv_from_zip_skips_nested_macosx(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -328,9 +326,8 @@ class DownloadAndPvmapTest(unittest.TestCase):
             bad_target = os.path.join(tmpdir, 'bad.csv')
             with open(bad_zip, 'w', encoding='utf-8') as f:
                 f.write('<html>Error</html>')
-            with mock.patch.object(download.logging, 'fatal') as mock_fatal:
+            with self.assertRaises(RuntimeError):
                 download.extract_csv_from_zip(bad_zip, bad_target)
-                mock_fatal.assert_called_once()
             self.assertFalse(os.path.exists(bad_target))
 
     def test_sharding_all_datasets(self):
