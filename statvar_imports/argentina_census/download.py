@@ -25,7 +25,8 @@ The extracted CSV files are written atomically to `input_files/` ready for
 processing by `tools/statvar_importer/stat_var_processor.py`.
 """
 
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import as_completed
 import csv
 import io
 import os
@@ -48,13 +49,18 @@ import requests_cache
 import xlrd
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string(
-    'output_dir',
-    os.path.join(os.path.dirname(os.path.abspath(__file__)), 'input_files'),
-    'Directory where extracted CSV input files will be saved.',
-)
-flags.DEFINE_integer('max_workers', 16,
-                     'Maximum number of concurrent HTTP downloads.')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        'output_dir',
+        os.path.join(os.path.dirname(os.path.abspath(__file__)), 'input_files'),
+        'Directory where extracted CSV input files will be saved.',
+    )
+    flags.DEFINE_integer('max_workers', 16,
+                         'Maximum number of concurrent HTTP downloads.')
+
 
 BASE_FTP_URL = 'https://www.indec.gob.ar/ftp'
 POBLACION_FTP_URL = f'{BASE_FTP_URL}/cuadros/poblacion'
@@ -1120,4 +1126,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

@@ -22,31 +22,16 @@ import unittest
 from unittest import mock
 import zipfile
 
-from absl import flags
 import openpyxl
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 if _MODULE_DIR not in sys.path:
     sys.path.insert(0, _MODULE_DIR)
 
-_SAVED_FLAGS = {
-    _name: flags.FLAGS[_name]
-    for _name in ('output_dir', 'max_workers')
-    if _name in flags.FLAGS
-}
-for _flag_name in _SAVED_FLAGS:
-    delattr(flags.FLAGS, _flag_name)
-
 try:
     from statvar_imports.argentina_census import download
 except ModuleNotFoundError:
     import download
-
-for _flag_name in ('output_dir', 'max_workers'):
-    if _flag_name in flags.FLAGS:
-        delattr(flags.FLAGS, _flag_name)
-for _flag_name, _flag_obj in _SAVED_FLAGS.items():
-    flags.FLAGS[_flag_name] = _flag_obj
 
 
 class DownloadTest(unittest.TestCase):
