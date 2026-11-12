@@ -313,16 +313,21 @@ def fetch_raw_input_files(
     # 3. 1991 POPU state files
     blobs = list(
         bucket.list_blobs(
-            prefix="country/brazil/input_files/Brazil_1991_gender/POPU91"))
+            prefix="country/brazil/input_files/Brazil_1991_gender/POPU91")
+    ) + list(bucket.list_blobs(prefix="country/brazil/input_files/POPU91"))
     rows_1991: List[Dict[str, Any]] = []
     for b in blobs:
         bname = os.path.basename(b.name)
         if bname.upper().endswith(".XLS"):
             content = b.download_as_bytes()
-            if raw_dir:
+            if raw_dir and "Brazil_1991_gender" in b.name:
                 with open(os.path.join(raw_dir, bname), "wb") as f:
                     f.write(content)
-            rows_1991.extend(parse_raw_1991_popu(content, map_91))
+            try:
+                rows_1991.extend(parse_raw_1991_popu(content, map_91))
+            except ValueError:
+                if "Brazil_1991_gender" in b.name:
+                    raise
     if not rows_1991:
         raise RuntimeError("No 1991 POPU records loaded from GCS.")
     rows.extend(rows_1991)
@@ -337,7 +342,7 @@ def _load_local_places_map() -> Dict[str, str]:
     if os.path.isfile(places_csv):
         df = pd.read_csv(places_csv, dtype=str)
         for _, row in df.iterrows():
-            name = str(row.get("name", "")).strip()
+            name = str(row.get("place_name", row.get("name", ""))).strip()
             dcid = str(row.get("dcid", "")).strip().replace("dcid:", "")
             if name and dcid:
                 mapping[name] = dcid

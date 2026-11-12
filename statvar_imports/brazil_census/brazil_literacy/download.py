@@ -590,7 +590,7 @@ def _load_places_resolved_map() -> Dict[str, str]:
     if os.path.isfile(places_csv):
         df = pd.read_csv(places_csv, dtype=str)
         for _, row in df.iterrows():
-            name = str(row.get("name", "")).strip()
+            name = str(row.get("place_name", row.get("name", ""))).strip()
             dcid = str(row.get("dcid", "")).strip()
             if name and dcid:
                 mapping[name] = dcid if dcid.startswith(

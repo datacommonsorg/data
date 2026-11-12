@@ -41,8 +41,7 @@ SIDRA_BASE_URL = "https://apisidra.ibge.gov.br"
 # Table 9537: População residente de 10 anos ou mais de idade por religião (2022+ across n1/n2/n3/n6)
 TABLE_9537_API_URL = (
     f"{SIDRA_BASE_URL}/values/t/9537/n1/all/n2/all/n3/all/n6/all"
-    f"/v/140/p/all/c133/95263,95267,95277,2826,2836,95275,112465/c2/0/c58/0?formato=json"
-)
+    f"/v/140/p/all/c133/all/c2/0/c58/0?formato=json")
 # Table 2094: População residente por religião (2010 all-ages across n1/n2/n3/n6)
 TABLE_2094_API_URL = (
     f"{SIDRA_BASE_URL}/values/t/2094/n1/all/n2/all/n3/all/n6/all"
