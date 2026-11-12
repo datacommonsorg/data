@@ -15,20 +15,27 @@
 gets population (age 0 to 25) data for all world bank countries, and makes a csv acording to TMCF
 '''
 
-import requests
-import pandas as pd
 from absl import app
 from absl import flags
+import pandas as pd
+import requests
+
 from util import statvar_dcid_generator
 
 FLAGS = flags.FLAGS
-flags.DEFINE_integer("age", 2, "Age to which this program is run, max value 26")
-flags.DEFINE_list("gender", ["FE", "MA"], "Gender: FE for female, MA for male")
-flags.DEFINE_string("country", "USA", "Country codes")
-#maximum the API Can display is 32767
-flags.DEFINE_integer("per_page", 32, "rows per page")
-flags.DEFINE_string("output_csv", "WorldBankHNP_Population_Tests",
-                    "Path of final csv")
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_integer("age", 2,
+                         "Age to which this program is run, max value 26")
+    flags.DEFINE_list("gender", ["FE", "MA"],
+                      "Gender: FE for female, MA for male")
+    flags.DEFINE_string("country", "USA", "Country codes")
+    #maximum the API Can display is 32767
+    flags.DEFINE_integer("per_page", 32, "rows per page")
+    flags.DEFINE_string("output_csv", "WorldBankHNP_Population_Tests",
+                        "Path of final csv")
 
 
 def get_df(serieses, per_page, country):
@@ -158,4 +165,5 @@ def process(max_age, out_file, per_page=17, country='USA'):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

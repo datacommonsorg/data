@@ -12,38 +12,45 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """A script to process FBI Hate Crime table 13 publications."""
+import csv
+import json
 import os
 import sys
 import tempfile
-import csv
-import json
-import numpy as np
-import pandas as pd
 
 from absl import app
 from absl import flags
 from absl import logging
+import numpy as np
+import pandas as pd
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '..'))  # for utils, geo_id_resolver
 sys.path.append(os.path.join(_SCRIPT_PATH, '../../../../util/'))  # state map
 
-import geo_id_resolver
-import utils
-from name_to_alpha2 import USSTATE_MAP_SPACE
 import file_util
+import geo_id_resolver
+from name_to_alpha2 import USSTATE_MAP_SPACE
+import utils
 
-flags.DEFINE_string('config_file',
-                    os.path.join(_SCRIPT_PATH, '../table_config.json'),
-                    'Input config file')
-flags.DEFINE_string(
-    'output_dir', _SCRIPT_PATH, 'Directory path to write the cleaned CSV and'
-    'MCF. Default behaviour is to write the artifacts in the current working'
-    'directory.')
-flags.DEFINE_bool(
-    'gen_statvar_mcf', False, 'Generate MCF of StatVars. Default behaviour is'
-    'to not generate the MCF file.')
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('config_file',
+                        os.path.join(_SCRIPT_PATH, '../table_config.json'),
+                        'Input config file')
+    flags.DEFINE_string(
+        'output_dir', _SCRIPT_PATH,
+        'Directory path to write the cleaned CSV and '
+        'MCF. Default behaviour is to write the artifacts in the current working '
+        'directory.')
+    flags.DEFINE_bool(
+        'gen_statvar_mcf', False,
+        'Generate MCF of StatVars. Default behaviour is '
+        'to not generate the MCF file.')
+
+
 _FLAGS = flags.FLAGS
 
 USSTATE_MAP_SPACE['U.S. Virgin Islands'] = 'VI'
@@ -247,4 +254,5 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

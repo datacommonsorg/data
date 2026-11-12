@@ -26,7 +26,8 @@ _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 if _SCRIPT_DIR not in sys.path:
     sys.path.insert(0, _SCRIPT_DIR)
 
-from preprocess import _filter_csv, preprocess
+from preprocess import _filter_csv
+from preprocess import preprocess
 
 
 class PreprocessTest(unittest.TestCase):

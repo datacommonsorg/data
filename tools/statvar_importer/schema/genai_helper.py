@@ -46,11 +46,10 @@ flags.DEFINE_string(
     'Text file where the LLM request text used is copied into.')
 flags.DEFINE_string('genai_response', '', 'Text file with the LLM response')
 
-import file_util
-import process_http_server
-
 from config_map import ConfigMap
 from counters import Counters
+import file_util
+import process_http_server
 
 
 # Class to query GenAI APIs using a given prompt.

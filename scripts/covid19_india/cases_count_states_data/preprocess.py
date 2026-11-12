@@ -13,9 +13,9 @@
 # limitations under the License.
 
 import json
-import csv
-import pandas as pd
 import urllib.request
+
+import pandas as pd
 
 # 1. All counts are at State/UT level
 # 2. Only cumulative counts are available at this point

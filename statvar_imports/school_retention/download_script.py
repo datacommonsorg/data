@@ -24,9 +24,9 @@
    files directly as CSV in input_files/.
 """
 
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import as_completed
 from datetime import datetime
-import glob
 import os
 from pathlib import Path
 import re
@@ -36,7 +36,7 @@ import zipfile
 
 from absl import app
 from absl import logging
-import numpy as np
+from google.cloud import storage
 import pandas as pd
 import requests
 from retry import retry

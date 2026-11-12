@@ -19,19 +19,26 @@ and triggers Spanner ingestion Cloud Workflows for staging and production.
 
 from __future__ import annotations
 
+from datetime import datetime
+from datetime import timezone
 import json
 import logging
 import os
 import re
 import sys
 import time
-from datetime import datetime, timezone
 from typing import Any, Callable
 
-from airflow.sdk import BaseSensorOperator, DAG, Param, Variable, task
-from airflow.exceptions import AirflowException, AirflowFailException, AirflowSkipException
+from airflow.exceptions import AirflowException
+from airflow.exceptions import AirflowFailException
+from airflow.exceptions import AirflowSkipException
 from airflow.providers.google.cloud.hooks.cloud_batch import CloudBatchHook
 from airflow.providers.google.cloud.sensors.workflows import WorkflowExecutionSensor
+from airflow.sdk import DAG
+from airflow.sdk import BaseSensorOperator
+from airflow.sdk import Param
+from airflow.sdk import Variable
+from airflow.sdk import task
 from airflow.utils.trigger_rule import TriggerRule
 
 # Enable Jinja templating for project_id on WorkflowExecutionSensor
@@ -42,12 +49,10 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 if current_dir not in sys.path:
     sys.path.insert(0, current_dir)
 
-from golden_verification import (
-    HumanApprovalSensor,
-    get_golden_test_imports,
-    is_golden_test_import,
-    verify_golden_tests,
-)
+from golden_verification import HumanApprovalSensor
+from golden_verification import get_golden_test_imports
+from golden_verification import is_golden_test_import
+from golden_verification import verify_golden_tests
 
 # -----------------------------------------------------------------------------
 # Configuration & Helpers

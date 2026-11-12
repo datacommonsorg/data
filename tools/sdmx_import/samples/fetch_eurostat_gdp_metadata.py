@@ -6,8 +6,8 @@ dataset from Eurostat using the reusable functions in the dataflow module.
 """
 
 import logging
-import sys
 import os
+import sys
 
 # Add the project root to the Python path
 sys.path.append(

@@ -18,20 +18,14 @@ To run this script as a standalone:
 python3 -m utility <IN_EXCEL_FILENAME> <OUT_CSV_FILENAME>
 """
 import csv
-import io
-import os
 import sys
 
-import pandas as pd
-import pandas.api.types as pd_types
 import numpy as np
-from typing import Callable
-
+import pandas as pd
 from us_eia.eia_860 import utils
 
 # For import util.alpha2_to_dcid
 sys.path.insert(1, '../../../util')
-import alpha2_to_dcid
 
 UTILITY_IMPORT_COLUMNS = [
     'UtilityId',

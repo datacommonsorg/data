@@ -13,14 +13,16 @@
 # limitations under the License.
 
 import os
-import unittest
 import sys
 import tempfile
+import unittest
+
 # module_dir is the path to where this test is running from.
 MODULE_DIR = os.path.dirname(__file__)
 sys.path.insert(0, MODULE_DIR)
 # pylint: disable=wrong-import-position
 from process import NCESPublicSchool
+
 # pylint: enable=wrong-import-position
 
 TEST_DATASET_DIR = os.path.join(MODULE_DIR, "test_data", "sample_input")

@@ -30,10 +30,9 @@ sys.path.append(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)))
 sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)), 'util'))
 
+from counters import Counters
 import file_util
 import utils
-
-from counters import Counters
 
 
 class StageRunner:

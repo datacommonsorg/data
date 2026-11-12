@@ -24,13 +24,13 @@
 Usage:
     $python3 pharm.py
 """
+import io
 from sys import path
 import zipfile
-import io
-import requests
-import pandas as pd
 
 import config
+import pandas as pd
+import requests
 
 path.insert(1, '../../../')
 # from Data Commons util folder

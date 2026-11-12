@@ -11,7 +11,7 @@
                 "preprocess.py"
             ],
             "source_files": [
-                "input_files/*"
+                "raw_data/*"
             ],
             "import_inputs": [
                 {
