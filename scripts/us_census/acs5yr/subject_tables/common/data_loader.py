@@ -12,11 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """Common data processing module for ACS Subject Tables"""
+import json
 import os
 import subprocess
 import sys
-import json
 from zipfile import ZipFile
+
 from absl import logging
 import numpy as np
 import pandas as pd

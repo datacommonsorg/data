@@ -15,12 +15,13 @@
 This script downloads historical minimum wage data from the U.S. Department of Labor website.
 '''
 # Import necessary libraries
-import os
 import csv
-import requests
-import pandas as pd
+import os
+
 from absl import logging
 from bs4 import BeautifulSoup
+import pandas as pd
+import requests
 from retry import retry
 
 # URL of the data source

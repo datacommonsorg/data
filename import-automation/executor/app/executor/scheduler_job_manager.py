@@ -26,65 +26,15 @@ SCHEDULES=IMPORTS=scripts/covid19_india/cases_count_states_data:covid19IndiaCase
 "
 """
 
-from dataclasses import dataclass
-import os
-import logging
 import json
-import traceback
-import tempfile
-from typing import Dict
-import cloud_run
-import cloud_batch
+import logging
 
 from app import configs
-from app.service import github_api
-from app.executor import import_target
-from app.executor import import_executor
 from app.executor import cloud_scheduler
+import cloud_batch
+import cloud_run
 
 _GKE_SERVICE_ACCOUNT_KEY: str = 'gke_service_account'
-_GKE_OAUTH_AUDIENCE_KEY: str = 'gke_oauth_audience'
-
-
-def schedule_on_commit(github: github_api.GitHubRepoAPI,
-                       config: configs.ExecutorConfig, commit_sha: str):
-    """Creates or updates all schedules associated with a commit."""
-    targets = import_target.find_targets_in_commit(commit_sha, 'SCHEDULES',
-                                                   github)
-    if not targets:
-        return import_executor.ExecutionResult(
-            'pass', [], 'No import target specified in commit message')
-    logging.info('Found targets in commit message: %s', ",".join(targets))
-    manifest_dirs = github.find_dirs_in_commit_containing_file(
-        commit_sha, config.manifest_filename)
-
-    with tempfile.TemporaryDirectory() as tmpdir:
-        repo_dir = github.download_repo(tmpdir, commit_sha,
-                                        config.repo_download_timeout)
-        logging.info('Downloaded repo with commit: %s', commit_sha)
-
-        imports_to_execute = import_target.find_imports_to_execute(
-            targets=targets,
-            manifest_dirs=manifest_dirs,
-            manifest_filename=config.manifest_filename,
-            repo_dir=repo_dir)
-
-        scheduled = []
-        for relative_dir, spec in imports_to_execute:
-            try:
-                absolute_import_name = import_target.get_absolute_import_name(
-                    relative_dir, spec['import_name'])
-                logging.info('Scheduling a data update job for %s',
-                             absolute_import_name)
-                job = create_or_update_import_schedule(absolute_import_name,
-                                                       spec, config, {}, {})
-                scheduled.append(job)
-            except Exception:
-                raise import_executor.ExecutionError(
-                    import_executor.ExecutionResult('failed', scheduled,
-                                                    traceback.format_exc()))
-        return import_executor.ExecutionResult('succeeded', scheduled,
-                                               'No issues')
 
 
 def create_or_update_import_schedule(absolute_import_name: str,
@@ -103,31 +53,7 @@ def create_or_update_import_schedule(absolute_import_name: str,
     if 'user_script_timeout' in import_spec:
         timeout = import_spec['user_script_timeout']
 
-    if config.executor_type == "GKE":
-        # Note: this is the content of what is passed to /update API
-        # inside each cronjob http calls.
-        json_encoded_job_body = json.dumps({
-            'absolute_import_name': absolute_import_name,
-            'configs': config.get_data_refresh_config()
-        }).encode('utf-8')
-        # Before proceeding, ensure that the configs read from GCS have the expected fields.
-        assert _GKE_SERVICE_ACCOUNT_KEY in scheduler_config_dict
-        assert _GKE_OAUTH_AUDIENCE_KEY in scheduler_config_dict
-        service_account_key = scheduler_config_dict[_GKE_SERVICE_ACCOUNT_KEY]
-        oauth_audience_key = scheduler_config_dict[_GKE_OAUTH_AUDIENCE_KEY]
-        req = cloud_scheduler.gke_job_request(absolute_import_name, schedule,
-                                              json_encoded_job_body,
-                                              service_account_key,
-                                              oauth_audience_key)
-    elif config.executor_type == "GAE":
-        json_encoded_job_body = json.dumps({
-            'absolute_import_name': absolute_import_name,
-            'configs': config.get_data_refresh_config()
-        }).encode('utf-8')
-        req = cloud_scheduler.appengine_job_request(absolute_import_name,
-                                                    schedule,
-                                                    json_encoded_job_body)
-    elif config.executor_type == "CLOUD_RUN":
+    if config.executor_type == "CLOUD_RUN":
         docker_image = config.importer_docker_image
         job_name = absolute_import_name.split(':')[1]
 
@@ -168,8 +94,8 @@ def create_or_update_import_schedule(absolute_import_name: str,
         logging.info(req)
     else:
         raise Exception(
-            "Invalid executor_type %s, expects one of ('GKE', 'GAE', 'CLOUD_RUN', 'CLOUD_BATCH')",
-            config.executor_type)
+            f"Invalid executor_type {config.executor_type}, expects one of ('CLOUD_RUN', 'CLOUD_BATCH')"
+        )
 
     return cloud_scheduler.create_or_update_job(config.gcp_project_id,
                                                 config.scheduler_location, req)

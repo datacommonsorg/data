@@ -66,7 +66,7 @@ if 'bq_table_ttl_hours' not in FLAGS:
         'TTL in hours for temporary BigQuery differ tables.')
 if 'run_bq_differ' not in FLAGS:
     flags.DEFINE_bool(
-        'run_bq_differ', False,
+        'run_bq_differ', True,
         'If True, run BigQuery differ instead of native Python differ.')
 
 
@@ -162,8 +162,8 @@ def run_validation_job(absolute_import_name: str,
                        bucket_name: str,
                        bq_dataset: str,
                        bq_table_ttl_hours: int = 12,
-                       run_bq_differ: bool = False) -> int:
-    """Executes differ (native Python or BigQuery) and ValidationRunner for an import version."""
+                       run_bq_differ: bool = True) -> int:
+    """Executes differ (BigQuery by default, or native Python) and ValidationRunner for an import version."""
     start_time = time.time()
     if ':' not in absolute_import_name:
         raise ValueError(
@@ -189,14 +189,25 @@ def run_validation_job(absolute_import_name: str,
             user_config.get('bq_table_ttl_hours') or env_ttl or
             bq_table_ttl_hours)
 
-    run_bq_differ = bool(run_bq_differ or
-                         user_config.get('run_bq_differ', False))
+    if 'run_bq_differ' in user_config:
+        run_bq_differ = bool(user_config['run_bq_differ'])
+    else:
+        run_bq_differ = bool(run_bq_differ)
+    invoke_import_validation = user_config.get('invoke_import_validation', True)
     invoke_differ_tool = user_config.get('invoke_differ_tool', True)
     ignore_validation_status = user_config.get('ignore_validation_status',
                                                False)
     enable_skip_status = user_config.get('enable_skip_status', True)
 
+    if not invoke_import_validation:
+        logging.info(
+            'invoke_import_validation is False for %s; skipping validation.',
+            output_dir)
+        return 0
+
     gcs_client = storage.Client(project=project_id or None)
+    if not project_id:
+        project_id = gcs_client.project or ''
 
     version = version_override
     if not version:

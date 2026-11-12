@@ -14,9 +14,9 @@
 """Tests for process.py"""
 
 import os
-import tempfile
 import shutil
 import sys
+import tempfile
 import unittest
 
 from absl import logging
@@ -28,12 +28,10 @@ sys.path.append(os.path.dirname(_MODULE_DIR))
 sys.path.append(os.path.dirname(os.path.dirname(_MODULE_DIR)))
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(_MODULE_DIR))))
 
-from util.download_util import set_test_url_download_response
-
 from process import process_fires_data
 
 from util.config_map import ConfigMap
-from util.counters import Counters
+from util.download_util import set_test_url_download_response
 
 _TESTDIR = os.path.join(_MODULE_DIR, 'test_data')
 

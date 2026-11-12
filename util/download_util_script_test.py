@@ -1,17 +1,12 @@
+import datetime
 import os
 import shutil
 import unittest
 from unittest import mock
 import zipfile
-from absl import flags
-from absl.testing import flagsaver
-import requests
-from requests.exceptions import HTTPError
-import datetime
 
 import download_util_script
-
-FLAGS = flags.FLAGS
+from requests.exceptions import HTTPError
 
 
 class DownloadFileTest(unittest.TestCase):
@@ -19,12 +14,10 @@ class DownloadFileTest(unittest.TestCase):
     def setUp(self):
         self.temp_dir = "test_output"
         os.makedirs(self.temp_dir, exist_ok=True)
-        self.saved_flag_values = flagsaver.save_flag_values()
 
     def tearDown(self):
         if os.path.exists(self.temp_dir):
             shutil.rmtree(self.temp_dir)
-        flagsaver.restore_flag_values(self.saved_flag_values)
 
     @mock.patch('requests.head')
     @mock.patch('requests.get')

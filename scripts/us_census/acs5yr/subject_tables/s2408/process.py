@@ -12,45 +12,49 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """process module to generate the csv/tmcf and csv for S2408"""
+import json
 import os
 import sys
-import json
-from zipfile import ZipFile
 
+from absl import app
+from absl import flags
 import numpy as np
 import pandas as pd
-
-from absl import app, flags
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH,
                              '../common'))  # for col_map_generator, data_loader
 
-from generate_col_map import process_zip_file
 from data_loader import SubjectTableDataLoaderBase
+from generate_col_map import process_zip_file
 from resolve_geo_id import convert_to_place_dcid
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string(
-    'option', 'all',
-    'Specify how to run the process, colmap -- generates column map, process -- runs processing, all -- runs colmap first and then proessing'
-)
-flags.DEFINE_string(
-    'table_prefix', None,
-    '[for processing]Subject Table ID as a prefix for output files, eg: S2702')
-flags.DEFINE_string('spec_path', None, 'Path to the JSON spec [mandatory]')
-flags.DEFINE_string(
-    'input_path', None,
-    'Path to input directory with (current support only for zip files)')
-flags.DEFINE_string('output_dir', './', 'Path to the output directory')
-flags.DEFINE_boolean(
-    'has_percent', False,
-    '[for processing]Specify the datasets has percentage values that needs to be convered to counts'
-)
-flags.DEFINE_boolean(
-    'debug', False,
-    '[for processing]set the flag to add additional columns to debug')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        'option', 'all',
+        'Specify how to run the process, colmap -- generates column map, process -- runs processing, all -- runs colmap first and then processing'
+    )
+    flags.DEFINE_string(
+        'table_prefix', None,
+        '[for processing]Subject Table ID as a prefix for output files, eg: S2702'
+    )
+    flags.DEFINE_string('spec_path', None, 'Path to the JSON spec [mandatory]')
+    flags.DEFINE_string(
+        'input_path', None,
+        'Path to input directory with (current support only for zip files)')
+    flags.DEFINE_string('output_dir', './', 'Path to the output directory')
+    flags.DEFINE_boolean(
+        'has_percent', False,
+        '[for processing]Specify the datasets has percentage values that needs to be convered to counts'
+    )
+    flags.DEFINE_boolean(
+        'debug', False,
+        '[for processing]set the flag to add additional columns to debug')
 
 
 def process_subject_tables(table_prefix='',
@@ -251,6 +255,7 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    _define_flags()
     flags.mark_flags_as_required(
         ['table_prefix', 'spec_path', 'input_path', 'output_dir'])
     app.run(main)

@@ -18,8 +18,8 @@ recursive JSON key searching and standardized API request handling
 required by the population data extraction scripts.
 """
 
-import requests
 from absl import logging
+import requests
 
 logging.set_verbosity(logging.INFO)
 

@@ -1,0 +1,13 @@
+observationAbout,observationDate,value,variableMeasured,unit,scalingFactor
+dcid:wikidataId/Q499425,2023,1.42,dcid:FertilityRate_Person_Male,,
+dcid:wikidataId/Q499425,2024,1.39,dcid:FertilityRate_Person_Male,,
+dcid:wikidataId/Q499425,2025,1.41,dcid:FertilityRate_Person_Male,,
+dcid:wikidataId/Q499425,2023,1.56,dcid:FertilityRate_Person_Female,,
+dcid:wikidataId/Q499425,2024,1.52,dcid:FertilityRate_Person_Female,,
+dcid:wikidataId/Q499425,2025,1.54,dcid:FertilityRate_Person_Female,,
+dcid:wikidataId/Q501526,2023,1.61,dcid:FertilityRate_Person_Male,,
+dcid:wikidataId/Q501526,2024,1.58,dcid:FertilityRate_Person_Male,,
+dcid:wikidataId/Q501526,2025,1.6,dcid:FertilityRate_Person_Male,,
+dcid:wikidataId/Q501526,2023,1.74,dcid:FertilityRate_Person_Female,,
+dcid:wikidataId/Q501526,2024,1.71,dcid:FertilityRate_Person_Female,,
+dcid:wikidataId/Q501526,2025,1.73,dcid:FertilityRate_Person_Female,,

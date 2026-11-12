@@ -9,11 +9,12 @@ repository contracts and instructions take precedence.
   manifest contract, and verify that every referenced script and input exists.
 - Ensure `manifest.json` includes `node_mcf` under `import_inputs` pointing to
   generated schema/statvar MCF files (e.g., `output/*.mcf`).
-- Verify that `source_files` patterns cover every source file the download
-  step saves, so each version keeps its source data for debugging and source
-  attribution. List other operational artifacts there too (e.g., counter
-  files from `--output_counters`, `manifest.json`, or configs); do not
-  confuse source artifacts with import inputs.
+- Verify that `source_files` patterns cover every original file downloaded from
+  the source, including non-data files like HTML and PDF, rather than
+  sanitized copies, so each version keeps its raw source data in GCS for
+  debugging and source attribution. List other operational artifacts there too
+  (e.g., counter files from `--output_counters`, `manifest.json`, or configs);
+  do not confuse source artifacts with import inputs.
 - Add `cron_schedule`, `user_script_timeout`, and `resource_limits` only when
   the import needs scheduling or an override, and validate them when present.
 - Keep curator contacts valid without prescribing one fixed email value.
@@ -21,8 +22,9 @@ repository contracts and instructions take precedence.
 ## Documentation and organization
 
 - Document the source, dataset coverage, prerequisites, working directory,
-  download and processing steps, important files, testing, and refresh
-  procedure in `README.md`.
+  download and processing steps (including any custom preprocessing or
+  validation outside `stat_var_processor` and `validation_config.json`),
+  important files, testing, and refresh procedure in the import's `README.md`.
 - Preserve downloaded source files unchanged, and write transformed data to
   separate files.
 - Use consistent, descriptive names for new import files; prefer lowercase
@@ -30,6 +32,10 @@ repository contracts and instructions take precedence.
 - Keep test inputs and expected CSV or TMCF outputs clearly paired without
   requiring one universal test-directory layout.
 - Declare new dependencies in the repository-supported dependency file.
+- [rule-binary-files] Commit text files only; keep archives of any format,
+  pickles, and other binary files out of the PR unless they are stored
+  through Git LFS. Excel and PDF files are allowed only under `test_data/`;
+  tests that need an archive build it at run time from test fixtures.
 
 ## Execution and failure handling
 
@@ -60,9 +66,18 @@ repository contracts and instructions take precedence.
   StatisticalVariables and avoid creating duplicate statvar definitions.
 - Make aggregation, filtering, outlier handling, and date-range decisions
   explicit and testable; avoid arbitrary future-year cutoffs.
+- Retain non-numeric source placeholders (such as `-`) so `stat_var_processor`
+  can drop them, or filter out those observations explicitly; convert them to `0`
+  only when the source defines them as zero.
+- Normalize or match case-insensitively when checking source strings, and
+  check only strings needed to process the data.
 
 ## Import validation
 
+- Validate data with `validation_config.json` rules on `summary_report.csv` or
+  output files rather than custom Python validation scripts; when a check
+  cannot be expressed in `validation_config.json`, require a comment in the
+  script explaining why.
 - Configure `stat_var_processor` invocations with `--output_counters` to write
   counters to a file (e.g. under `counters/`), and ensure those counter files are
   included in the manifest's `source_files` so they are copied to GCS for
@@ -131,6 +146,9 @@ Then apply these rules:
   work across retries.
 - Publish outputs atomically so partial downloads or transformations cannot
   appear successful.
+- Download fresh data from the source on each run rather than reusing cached
+  files; for large downloads, reuse a cached file only when HTTP headers (such
+  as `ETag` or `Last-Modified`) confirm the source data is unchanged.
 
 ## Tests
 

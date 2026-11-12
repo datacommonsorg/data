@@ -13,13 +13,15 @@
 # limitations under the License.
 """Script to process EPH Heat Stress data."""
 
+import copy
+import csv
+import json
 import os
 import sys
-import json
-import csv
-import copy
+
+from absl import app
+from absl import logging
 import pandas as pd
-from absl import app, logging, flags
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -28,11 +30,11 @@ _DATA_DIR = _SCRIPT_PATH.split('/data/')[0]
 sys.path.append(os.path.join(_DATA_DIR, '/data/util'))
 sys.path.append(os.path.abspath(os.path.join(_SCRIPT_PATH, '../../../util')))
 
-from statvar_dcid_generator import get_statvar_dcid
-from name_to_alpha2 import USSTATE_MAP_SPACE
 from alpha2_to_dcid import USSTATE_MAP
-from statvar_remap import STATVAR_REMAP_DICT
 from clean_data import reads_config_file
+from name_to_alpha2 import USSTATE_MAP_SPACE
+from statvar_dcid_generator import get_statvar_dcid
+from statvar_remap import STATVAR_REMAP_DICT
 
 _CONFIG = None
 _OUTPUT_COLUMNS = ('Year', 'StatVar', 'Quantity', 'Geo', 'measurementMethod')
