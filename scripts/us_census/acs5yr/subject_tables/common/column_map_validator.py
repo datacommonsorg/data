@@ -21,7 +21,8 @@ import os
 from absl import app
 from absl import flags
 
-from .common_util import *
+from .common_util import get_spec_dict_from_path
+from .common_util import remove_columns_to_be_ignored
 
 FLAGS = flags.FLAGS
 

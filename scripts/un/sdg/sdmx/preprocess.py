@@ -31,7 +31,8 @@ import os
 
 import requests
 
-from util import *
+from util import SERIES_TEMPLATE
+from util import format_description
 
 API_PREFIX = 'https://unstats.un.org/SDGAPI/v1/sdg/Series/'
 HEADERS = {

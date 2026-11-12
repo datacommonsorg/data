@@ -83,17 +83,20 @@ from us_census.pep.pep_by_srh.tmcf_generator import generate_tmcf
 
 _FLAGS = flags.FLAGS
 
-if 'mode' not in _FLAGS:
-    flags.DEFINE_string('mode', '', 'Options: download or process')
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
 output_path = '/output_files/'
 _FILES_TO_DOWNLOAD = []
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
-if 'data_directory' not in _FLAGS:
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('mode', '', 'Options: download or process')
     flags.DEFINE_string(
         "data_directory", DOWNLOAD_DIR,
         "Folder consisting of all input files required for processing")
+
 
 # Columns with single race(SR) or combination(SR CMBN) with one or more race
 # These columns are not used as part of current import
@@ -1879,4 +1882,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)
