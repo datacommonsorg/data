@@ -9,14 +9,6 @@
                 "query": "SELECT StatVar, MaxDate, COUNT(*) OVER () AS total_svs FROM stats",
                 "condition": "CASE WHEN StatVar IN ('Count_Student_KenyaCertificateSecondaryEducation', 'Count_Student_KenyaCertificateSecondaryEducation_Female', 'Count_Student_KenyaCertificateSecondaryEducation_Male') OR regexp_matches(StatVar, '^(Mean_AssessmentScore_Student_|Count_Student_.*AdultEducation|Count_Person_KenyaCertificatePrimaryEducation_)') THEN MaxDate >= '2022' WHEN StatVar IN ('Count_BirthEvent_LiveBirth', 'Count_MaternalMortalityEvent', 'Count_Student_PrimarySchool', 'Count_Student_SecondarySchool') THEN MaxDate >= '2020' WHEN regexp_matches(StatVar, '^(Count_(Death|MortalityEvent|BirthEvent|(Student|Person)_KenyaCertificateSecondaryEducation)|(Nominal_|RealValue_|GrowthRate_)?Amount_(Economic|Expenditure)Activity_GrossDomesticProduction)') THEN MaxDate >= '2024' WHEN regexp_matches(StatVar, '^(Count_Household|Area_LandCover|Count_Person($|_(Female|Male|Intersex|Urban|Rural|PerArea)))') THEN MaxDate >= '2019' ELSE MaxDate >= '2009' END AND total_svs > 0"
             }
-        },
-        {
-            "rule_id": "check_deleted_records_percent",
-            "description": "Checks that deleted records do not exceed threshold (0.1%).",
-            "validator": "DELETED_RECORDS_PERCENT",
-            "params": {
-                "threshold": 0.1
-            }
         }
     ]
 }

@@ -5,7 +5,6 @@
 - **Source**: [Kenya Open Data for Africa](https://kenya.opendataforafrica.org/)
 - **Publisher**: Kenya National Bureau of Statistics (KNBS)
 - **Import Type**: `Semi-Automated` (`GCPCloudRunSemiAutomaticRefresh` — Cloudflare anti-bot challenges on `kenya.opendataforafrica.org` require semi-automated SDMX XML downloads staged to GCS rather than `auto1w`)
-- **Schedule**: Weekly (Every Monday at 05:00 UTC)
 - **Coverage**: Demographics, Health, Education, Economy (2002 – present)
 - **Entity Resolution**:
   - National level: `country/KEN`
