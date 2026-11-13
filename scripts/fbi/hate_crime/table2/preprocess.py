@@ -12,34 +12,41 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """A script to process FBI Hate Crime table 2 publications."""
+import csv
+import json
 import os
 import sys
 import tempfile
-import csv
-import json
-import pandas as pd
 
 from absl import app
 from absl import flags
 from absl import logging
+import pandas as pd
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '..'))  # for utils
 
-import utils
 import file_util
+import utils
 
-flags.DEFINE_string('config_file',
-                    os.path.join(_SCRIPT_PATH, '../table_config.json'),
-                    'Input config file')
-flags.DEFINE_string(
-    'output_dir', _SCRIPT_PATH, 'Directory path to write the cleaned CSV and'
-    'MCF. Default behaviour is to write the artifacts in the current working'
-    'directory.')
-flags.DEFINE_bool(
-    'gen_statvar_mcf', False, 'Generate MCF of StatVars. Default behaviour is'
-    'to not generate the MCF file.')
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('config_file',
+                        os.path.join(_SCRIPT_PATH, '../table_config.json'),
+                        'Input config file')
+    flags.DEFINE_string(
+        'output_dir', _SCRIPT_PATH,
+        'Directory path to write the cleaned CSV and '
+        'MCF. Default behaviour is to write the artifacts in the current working '
+        'directory.')
+    flags.DEFINE_bool(
+        'gen_statvar_mcf', False,
+        'Generate MCF of StatVars. Default behaviour is '
+        'to not generate the MCF file.')
+
+
 _FLAGS = flags.FLAGS
 
 _YEAR_INDEX = 0
@@ -139,12 +146,12 @@ def _clean_dataframe(df: pd.DataFrame, year: str) -> pd.DataFrame:
             else:
                 df.at[idx, 'offense type'] = 'other crimes against property'
 
-    df.set_index('offense type', inplace=True)
+    df = df.set_index('offense type')
 
     if year in _YEARS_WITH_TWO_RAPE_COLUMNS:
         df.loc['rape (revised definition)'] += df.loc[
             'rape (legacy definition)']
-        df.drop(['rape (legacy definition)'], inplace=True)
+        df = df.drop(['rape (legacy definition)'])
 
     return df
 
@@ -185,4 +192,5 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

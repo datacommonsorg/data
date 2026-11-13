@@ -12,20 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from genericpath import exists
-import math
-import glob
-import xarray
 from datetime import datetime
+import glob
+import math
 import os
-import sys
 from pathlib import Path
+import sys
 from typing import Optional
-import pandas as pd
 
-from absl import flags
 from absl import app
+from absl import flags
 from absl import logging
+import pandas as pd
+import xarray
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -33,20 +32,26 @@ sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util/'))  # for recon util
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string('gpcc_spi_input_pattern', "input_files/*.nc",
-                    'Input NetCDF4 file(s).')
 default_output_path = os.path.join(
     _SCRIPT_PATH,
     "output_files",
 )
-flags.DEFINE_string('gpcc_spi_preprocessed_dir', default_output_path,
-                    'The directory where the output mcf will be generated in.')
 DEFAULT_START_DATE = '2011-01-01'
-flags.DEFINE_string('start_date', DEFAULT_START_DATE,
-                    'Dash separated start date. Defaults to "1900-01-01"')
 DEFAULT_END_DATE = datetime.today().strftime('%Y-%m-%d')
-flags.DEFINE_string('end_date', DEFAULT_END_DATE,
-                    'Dash separated start date. Defaults to the running date.')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('gpcc_spi_input_pattern', "input_files/*.nc",
+                        'Input NetCDF4 file(s).')
+    flags.DEFINE_string(
+        'gpcc_spi_preprocessed_dir', default_output_path,
+        'The directory where the output mcf will be generated in.')
+    flags.DEFINE_string('start_date', DEFAULT_START_DATE,
+                        'Dash separated start date. Defaults to "2011-01-01"')
+    flags.DEFINE_string(
+        'end_date', DEFAULT_END_DATE,
+        'Dash separated end date. Defaults to the running date.')
 
 
 def to_one_degree_grid_place(latlon):
@@ -73,7 +78,7 @@ def nc_to_df(nc_path, period, spi_col, start_date, end_date):
     # Rename the spi col from "spi_01" for example to spi.
     # This is so that data for all accumulation periods have a standard SPI column
     # for the tmcf to express.
-    df.rename(columns={spi_col: "spi"}, inplace=True)
+    df = df.rename(columns={spi_col: "spi"})
     df['variable'] = f'dcs:StandardizedPrecipitationIndex_Atmosphere_{int(period)}MonthPeriod'
 
     df['period'] = f'"[{int(period)} dcs:Monthly]"'
@@ -140,4 +145,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

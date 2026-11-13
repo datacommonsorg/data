@@ -1198,5 +1198,65 @@
             "armedForcesStatus": "dcs:Civilian",
             "typeOf": "dcs:StatisticalVariable"
         }
+    },
+    "2024": {
+        "Estimate!!Total!!Civilian noninstitutionalized population": {
+            "Node": "dcid:Count_Person_Civilian_NonInstitutionalized",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "schema:Person",
+            "institutionalization": "dcs:USC_NonInstitutionalized",
+            "armedForcesStatus": "dcs:Civilian",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Total!!Civilian noninstitutionalized population": {
+            "Node": "dcid:MarginOfError_Count_Person_Civilian_NonInstitutionalized",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:Person",
+            "institutionalization": "dcs:USC_NonInstitutionalized",
+            "armedForcesStatus": "dcs:Civilian",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Total!!Civilian noninstitutionalized population!!COVERAGE ALONE!!Private health insurance alone": {
+            "Node": "dcid:Count_Person_WithPrivateHealthInsuranceOnly",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "schema:Person",
+            "healthInsurance": "dcs:WithPrivateHealthInsuranceOnly",
+            "institutionalization": "dcs:USC_NonInstitutionalized",
+            "armedForcesStatus": "dcs:Civilian",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Total!!Civilian noninstitutionalized population!!COVERAGE ALONE!!Private health insurance alone": {
+            "Node": "dcid:MarginOfError_Count_Person_WithPrivateHealthInsuranceOnly",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "schema:Person",
+            "healthInsurance": "dcs:WithPrivateHealthInsuranceOnly",
+            "institutionalization": "dcs:USC_NonInstitutionalized",
+            "armedForcesStatus": "dcs:Civilian",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Private Coverage!!Civilian noninstitutionalized population!!COVERAGE ALONE!!Private health insurance alone": {
+            "Node": "dcid:Count_Person_WithPrivateHealthInsuranceOnly",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "healthInsurance": "dcs:WithPrivateHealthInsuranceOnly",
+            "populationType": "schema:Person",
+            "institutionalization": "dcs:USC_NonInstitutionalized",
+            "armedForcesStatus": "dcs:Civilian",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Margin of Error!!Private Coverage!!Civilian noninstitutionalized population!!COVERAGE ALONE!!Private health insurance alone": {
+            "Node": "dcid:MarginOfError_Count_Person_WithPrivateHealthInsuranceOnly",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "healthInsurance": "dcs:WithPrivateHealthInsuranceOnly",
+            "populationType": "schema:Person",
+            "institutionalization": "dcs:USC_NonInstitutionalized",
+            "armedForcesStatus": "dcs:Civilian",
+            "typeOf": "dcs:StatisticalVariable"
+        }
     }
 }

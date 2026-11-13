@@ -18,16 +18,17 @@ Please see the data readme for release schedule.
 https://www.ncei.noaa.gov/pub/data/nidis/gpcc/nidis_gpcc_readme_c20220520.txt
 """
 
-from absl import app
-from absl import flags
 import concurrent.futures
-from absl import logging
+import os
+import shutil
+import sys
+from typing import List
 import urllib
 import urllib.request
-import shutil
-from typing import List
-import os
-import sys
+
+from absl import app
+from absl import flags
+from absl import logging
 from retry import retry
 
 MODULE_DIR = os.path.dirname(__file__)
@@ -35,18 +36,24 @@ sys.path.insert(1, os.path.join(MODULE_DIR, '../../../'))
 
 FLAGS = flags.FLAGS
 default_input_path = os.path.join(MODULE_DIR, "input_files")
-flags.DEFINE_string('download_dir', default_input_path, 'Output directory.')
 
-flags.DEFINE_list('periods', None, (
-    'Comma separated list of periods. '
-    'A period is the duration in months for a particular SPI value.'
-    'Possible values are 1, 2, 3, 6, 9, 12, 24, 36, 48, 60, and 72, defaults to\
-        all.'))
 DEFAULT_PERIODS = ['1', '3', '6', '9', '36', '72']
 
-flags.DEFINE_string('distribution', 'pearson',
-                    ('Distribution fucntion used to compute the SPI.'
-                     'One of (pearson, gamma). Defaults to pearson.'))
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('download_dir', default_input_path, 'Output directory.')
+    flags.DEFINE_list(
+        'periods', None,
+        ('Comma separated list of periods. '
+         'A period is the duration in months for a particular SPI value. '
+         'Possible values are 1, 2, 3, 6, 9, 12, 24, 36, 48, 60, and 72, '
+         'defaults to all.'))
+    flags.DEFINE_string('distribution', 'pearson',
+                        ('Distribution function used to compute the SPI. '
+                         'One of (pearson, gamma). Defaults to pearson.'))
+
+
 DEFAULT_DISTRIBUTION = 'pearson'
 
 
@@ -90,4 +97,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

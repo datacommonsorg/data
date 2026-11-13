@@ -17,6 +17,7 @@ import os
 import sys
 import tempfile
 import unittest
+
 import pandas as pd
 from pandas.testing import assert_frame_equal
 
@@ -26,6 +27,7 @@ _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '.'))
 
 from common.data_loader import process_subject_tables
+
 from .process import set_column_map
 
 # These directories are excluded from testing
@@ -91,7 +93,7 @@ class TestSubjectTable(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.test_dirs = []  # A list of all directories to be tested
-        for table_dir in os.listdir(_SCRIPT_PATH):
+        for table_dir in sorted(os.listdir(_SCRIPT_PATH)):
             table_dir_path = os.path.join(_SCRIPT_PATH, table_dir)
             process_path = os.path.join(_SCRIPT_PATH, table_dir, 'process.py')
 
@@ -112,7 +114,6 @@ class TestSubjectTable(unittest.TestCase):
                 with self.subTest(table=table_dir_path, file_key=file_key):
                     self.assertTrue(file_key in paths)
 
-            # TODO: Look into speeding up this section of the code
             with tempfile.TemporaryDirectory() as tmp_dir:
                 # generate CSV, MCF and Column Map
                 set_column_map(paths['zip'], paths['spec'], tmp_dir)
@@ -142,6 +143,10 @@ class TestSubjectTable(unittest.TestCase):
                     self.assertEqual(test_cmap, expected_cmap)
 
                     # Test CSV
+                    test_csv, expected_csv = _read_files(
+                        test_csv_path, paths['csv'])
+                    self.assertEqual(test_csv.rstrip('\n'),
+                                     expected_csv.rstrip('\n'))
                     test_df, expected_df = _read_csv_files(
                         test_csv_path, paths['csv'])
                     assert_frame_equal(test_df, expected_df)

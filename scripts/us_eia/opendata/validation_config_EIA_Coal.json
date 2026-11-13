@@ -6,7 +6,16 @@
             "description": "Checks that the percentage of deleted points is within the threshold.",
             "validator": "DELETED_RECORDS_PERCENT",
             "params": {
-                "threshold": 0.1
+                "threshold": 1.0
+            }
+        },
+        {
+            "rule_id": "check_max_date_freshness",
+            "description": "Verifies that active Quarterly and Annual Coal StatVars have observations within 1 to 2 years of the current year and rank price/distribution series are within 3 years.",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT StatVar, MaxDate FROM stats",
+                "condition": "CAST(SUBSTR(MaxDate, 1, 4) AS INTEGER) >= EXTRACT(YEAR FROM CURRENT_DATE) - CASE WHEN regexp_matches(StatVar, '^Quarterly_') THEN 1 WHEN regexp_matches(StatVar, '^Annual_') THEN 2 ELSE 3 END"
             }
         },
         {

@@ -17,10 +17,17 @@ for state 1970-1979 and Count_Person_Male
 and Count_person_Female are aggregated for this file.
 """
 
-import pandas as pd
 import os
+import sys
+
+import pandas as pd
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
+_SCRIPTS_DIR = os.path.abspath(os.path.join(_CODEDIR, '../../../../'))
+if _SCRIPTS_DIR not in sys.path:
+    sys.path.append(_SCRIPTS_DIR)
+
+from us_census.pep.us_pep_sexrace.preprocess import load_url_or_path
 
 
 def process_state_1970_1979(url: str) -> pd.DataFrame:
@@ -36,15 +43,15 @@ def process_state_1970_1979(url: str) -> pd.DataFrame:
         df.columns (pd.DataFrame) : Column names of cleaned dataframe
     """
     # reading the csv input file
-    df = pd.read_csv(url, skiprows=5, header=0, thousands=',')
+    df = pd.read_csv(load_url_or_path(url), skiprows=5, header=0, thousands=',')
     df.to_csv(_CODEDIR + "/../input_files/" + "state_result_1970_1979.csv")
-    df.rename(columns={
-        'Year of Estimate': 'Year',
-        'FIPS State Code': 'geo_ID',
-        'State Name': 'LOCATION',
-        'Race/Sex Indicator': 'Age & Sex'
-    },
-              inplace=True)
+    df = df.rename(
+        columns={
+            'Year of Estimate': 'Year',
+            'FIPS State Code': 'geo_ID',
+            'State Name': 'LOCATION',
+            'Race/Sex Indicator': 'Age & Sex'
+        })
 
     # listing the columns to be dropped as age gaps are not required
     COLUMNS_TO_SUM = [
@@ -66,13 +73,13 @@ def process_state_1970_1979(url: str) -> pd.DataFrame:
 
     # providing geoId to the dataframe and making the geoId of 2 digit as state
     df['Year'] = df['Year'].astype(str) + '-' + df['geo_ID'].astype(str)
-    df.drop(columns=['geo_ID', 'LOCATION'], inplace=True)
+    df = df.drop(columns=['geo_ID', 'LOCATION'])
 
     # it groups the df as per columns provided
     # performs the provided functions on the data
     df = df.groupby(['Year', 'Age & Sex'])\
         .sum().transpose().stack(0).reset_index()
-    df.drop(columns=['level_0'], inplace=True)
+    df = df.drop(columns=['level_0'])
 
     # extracting geoid
     df['geo_ID'] = df['Year'].str.split('-', expand=True)[1]

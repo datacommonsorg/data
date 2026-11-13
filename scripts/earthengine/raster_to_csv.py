@@ -49,19 +49,15 @@ Additional processing options:
 """
 
 import csv
-import glob
 import math
-import multiprocessing
 import os
 import re
 import sys
 import time
-from typing import Union
 
 from absl import app
 from absl import flags
 from absl import logging
-from geopy import distance
 import numpy as np
 import rasterio
 import s2sphere
@@ -74,11 +70,11 @@ sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)), 'util'))
 
 import common_flags
+from config_map import ConfigMap
+from counters import CounterOptions
+from counters import Counters
 import file_util
 import utils
-
-from config_map import ConfigMap
-from counters import Counters, CounterOptions
 
 flags.DEFINE_string('input_geotiff', '', 'GeoTIFF file to process')
 flags.DEFINE_string('ignore_geotiff', '',
@@ -242,7 +238,7 @@ def get_raster_data_point(
         (lng, lat) = rasterio.transform.xy(raster.transform, x, y)
     if lat > 90 or lat < -90 or lng > 180 or lng < -180:
         logging.error(f'Invalid lat,lng [{lat},{lng}] for [{x},{y}].')
-        counter.add_counter(f'invalid-lat-lng', 1)
+        counter.add_counter('invalid-lat-lng', 1)
         return None
     data['latitude'] = lat
     data['longitude'] = lng
@@ -497,7 +493,7 @@ def add_data_point(
                     cur_data[f'#{prop}:count'] = cur_num + new_num
             except TypeError as e:
                 logging.error(
-                    f'Error {e} in aggregating: {agr}: prop: {prop}, for new'
+                    f'Error {e} in aggregating: {aggr}: prop: {prop}, for new'
                     f' {data_point} with old: {cur_data}')
 
         # Update lat/long to centroid.

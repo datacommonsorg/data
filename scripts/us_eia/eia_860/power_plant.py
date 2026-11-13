@@ -18,15 +18,12 @@ To run this script as a standalone:
 python3 -m power_plant <IN_EXCEL_FILENAME> <OUT_CSV_FILENAME>
 """
 import csv
-import io
-import os
 import sys
-
-import pandas as pd
-import pandas.api.types as pd_types
-import numpy as np
 import typing
 
+import numpy as np
+import pandas as pd
+import pandas.api.types as pd_types
 from us_eia.eia_860 import utils
 
 IMPORT_COLUMNS = [

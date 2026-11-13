@@ -12,14 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import filecmp
 import os
-import json
-import tempfile
-import unittest
 from os import path
-from india_udise.udise_school_dropout_rate.preprocess import UDISESchoolDropoutRate
+import unittest
+
 from india_udise.udise_school_dropout_rate.preprocess import ATTRIBUTE_MAPPING
+from india_udise.udise_school_dropout_rate.preprocess import UDISESchoolDropoutRate
+
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
 

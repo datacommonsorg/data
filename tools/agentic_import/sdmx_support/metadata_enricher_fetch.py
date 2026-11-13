@@ -15,11 +15,11 @@
 # limitations under the License.
 """Fetch enriched descriptions for selected SDMX items with Gemini CLI."""
 
+from dataclasses import dataclass
 import os
+from pathlib import Path
 import platform
 import sys
-from dataclasses import dataclass
-from pathlib import Path
 from typing import Optional
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -31,8 +31,8 @@ from absl import app
 from absl import flags
 from absl import logging
 
-from tools.agentic_import.common.gemini_prompt_runner import (
-    GeminiPromptRunner, GeminiRunResult)
+from tools.agentic_import.common.gemini_prompt_runner import GeminiPromptRunner
+from tools.agentic_import.common.gemini_prompt_runner import GeminiRunResult
 
 _FLAGS = flags.FLAGS
 

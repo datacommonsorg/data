@@ -6,8 +6,9 @@ calculates values for the whole sector and appends them to the data set with
 a stat-var representing the sector. The processed file is placed in the
 output_files directory.
 """
-from absl import app
 from datetime import datetime
+
+from absl import app
 import numpy as np
 import pandas as pd
 import statvar_mapping
@@ -29,7 +30,7 @@ def MergeAndProcessData(forest_df, other_data_df):
     ]
     # drop all rows with missing or zero values
     base_df["Tonnes Co2e"] = base_df["Tonnes Co2e"].replace('', np.nan)
-    base_df.dropna(subset=["Tonnes Co2e"], inplace=True)
+    base_df = base_df.dropna(subset=["Tonnes Co2e"])
     base_df = base_df[base_df["Tonnes Co2e"] != 0]
 
     base_df["year"] = base_df["start"].apply(_ExtractDate).apply(

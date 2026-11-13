@@ -15,7 +15,6 @@
 # Parent Cloud Build configuration that detects changed components in the data
 # repository and triggers the corresponding child Cloud Builds:
 #   - import-automation/executor/cloudbuild.yaml
-#   - import-automation/validator/cloudbuild.yaml
 #   - import-automation/helper/cloudbuild.yaml
 #   - import-automation/workflow/cloudbuild.yaml
 #
@@ -43,7 +42,6 @@ steps:
           echo " _FORCE_ALL=true: enabling all child builds."
           cat <<EOF > /workspace/targets.env
         BUILD_EXECUTOR=true
-        BUILD_VALIDATOR=true
         BUILD_HELPER=true
         BUILD_WORKFLOW=true
         RUN_E2E_TEST=true
@@ -55,7 +53,6 @@ steps:
           echo " _FORCE_EXECUTOR=true: enabling executor build and E2E verification."
           cat <<EOF > /workspace/targets.env
         BUILD_EXECUTOR=true
-        BUILD_VALIDATOR=false
         BUILD_HELPER=false
         BUILD_WORKFLOW=false
         RUN_E2E_TEST=true
@@ -74,11 +71,8 @@ steps:
         echo "Changed files:"
         echo "$${CHANGED}"
 
-        if echo "$${CHANGED}" | grep -qE '^(import-automation/executor/|tools/|util/|scripts/|statvar_imports/)'; then
+        if echo "$${CHANGED}" | grep -qE '^(import-automation/(executor|validator)/|tools/|util/|scripts/|statvar_imports/)'; then
           echo "BUILD_EXECUTOR=true" >> /workspace/targets.env
-        fi
-        if echo "$${CHANGED}" | grep -qE '^(import-automation/validator/|tools/(import_differ|import_validation|statvar_importer)/|util/)'; then
-          echo "BUILD_VALIDATOR=true" >> /workspace/targets.env
         fi
         if echo "$${CHANGED}" | grep -qE '^import-automation/helper/'; then
           echo "BUILD_HELPER=true" >> /workspace/targets.env
@@ -116,26 +110,7 @@ steps:
           echo "Skipping executor build (no relevant changes)."
         fi
 
-  # 2b. Build, unit-test & push dc-import-validator candidate image (parallel)
-  - id: 'build-validator'
-    name: 'gcr.io/cloud-builders/gcloud'
-    entrypoint: 'bash'
-    waitFor: ['detect-changes']
-    args:
-      - '-c'
-      - |
-        source /workspace/targets.env
-        if [ "$${BUILD_VALIDATOR}" = "true" ]; then
-          echo "Triggering child build: import-automation/validator/cloudbuild.yaml"
-          gcloud builds submit . \
-            --config=import-automation/validator/cloudbuild.yaml \
-            --project="${PROJECT_ID}" \
-            --substitutions="_TAG=${_VERSION}"
-        else
-          echo "Skipping validator build (no relevant changes)."
-        fi
-
-  # 2c. Build, unit-test & deploy datacommons-import-helper to test/staging (parallel)
+  # 2b. Build, unit-test & deploy datacommons-import-helper to test (parallel)
   - id: 'build-helper'
     name: 'gcr.io/cloud-builders/gcloud'
     entrypoint: 'bash'
@@ -154,7 +129,7 @@ steps:
           echo "Skipping import-helper build (no relevant changes)."
         fi
 
-  # 2d. Compile manifest catalog, deploy staging Cloud Workflows & sync Airflow DAGs (parallel)
+  # 2c. Compile manifest catalog, deploy test Cloud Workflows & sync Airflow DAGs (parallel)
   - id: 'build-workflow'
     name: 'gcr.io/cloud-builders/gcloud'
     entrypoint: 'bash'
@@ -176,7 +151,7 @@ steps:
   - id: 'e2e-test-workflow'
     name: 'ghcr.io/astral-sh/uv:python3.11-bookworm'
     entrypoint: 'bash'
-    waitFor: ['build-executor', 'build-validator', 'build-helper', 'build-workflow']
+    waitFor: ['build-executor', 'build-helper', 'build-workflow']
     env:
       - 'PROJECT_ID=datcom-ci'
       - 'LOCATION=us-central1'
@@ -202,7 +177,7 @@ steps:
   - id: 'e2e-test-dag'
     name: 'python:3.11-slim'
     entrypoint: 'bash'
-    waitFor: ['build-executor', 'build-validator', 'build-helper', 'build-workflow']
+    waitFor: ['build-executor', 'build-helper', 'build-workflow']
     args:
       - '-c'
       - |
@@ -221,7 +196,7 @@ steps:
           --location=us-central1 \
           --composer-env=import-automation-airflow \
           --dag-id=USFed_ConstantMaturityRates_Test \
-          --webserver-url=https://1e10aeac4ac64b84bb66e54511cf1c30-dot-us-central1.composer.googleusercontent.com \
+          --webserver-url=https://030069cf9df9415bbd743bf7e18a6a65-dot-us-central1.composer.googleusercontent.com \
           --image-uri="$${EXECUTOR_IMAGE_URI}" \
           --dry-run-ingestion
 
@@ -244,14 +219,6 @@ steps:
             --quiet
         fi
 
-        if [ "$${BUILD_VALIDATOR}" = "true" ]; then
-          echo "Promoting dc-import-validator:${_VERSION} -> :stable"
-          gcloud container images add-tag \
-            "$${AR_REPO}/dc-import-validator:${_VERSION}" \
-            "$${AR_REPO}/dc-import-validator:stable" \
-            --quiet
-        fi
-
         if [ "$${BUILD_HELPER}" = "true" ]; then
           echo "Promoting datacommons-import-helper:${_VERSION} -> :stable and deploying prod service"
           gcloud container images add-tag \
@@ -263,7 +230,7 @@ steps:
             --region="us-central1" \
             --project="datcom-import-automation-prod" \
             --no-allow-unauthenticated \
-            --set-env-vars="PROJECT_ID=datcom-import-automation-prod,LOCATION=us-central1,PROJECT_NUMBER=965988403328,BQ_DATASET_ID=import_automation,GCS_BUCKET_ID=datcom-prod-imports,INGESTION_HELPER_SERVICE=ingestion-helper-service,SPANNER_INGESTION_WORKFLOW_NAME=spanner-ingestion-workflow,IMPORT_AUTOMATION_WORKFLOW_NAME=import-automation-workflow,AIRFLOW_WEB_SERVER_URL=https://1e10aeac4ac64b84bb66e54511cf1c30-dot-us-central1.composer.googleusercontent.com"
+            --set-env-vars="PROJECT_ID=datcom-import-automation-prod,LOCATION=us-central1,PROJECT_NUMBER=965988403328,BQ_DATASET_ID=import_automation,GCS_BUCKET_ID=datcom-prod-imports,INGESTION_HELPER_SERVICE=ingestion-helper-service,SPANNER_INGESTION_WORKFLOW_NAME=spanner-ingestion-workflow,IMPORT_AUTOMATION_WORKFLOW_NAME=import-automation-workflow,AIRFLOW_WEB_SERVER_URL=https://030069cf9df9415bbd743bf7e18a6a65-dot-us-central1.composer.googleusercontent.com"
         fi
 
         if [ "$${BUILD_WORKFLOW}" = "true" ]; then

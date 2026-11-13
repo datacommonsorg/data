@@ -1,0 +1,6 @@
+"Folkmängd efter region, civilstånd, ålder, kön och år",,,,,
+,,,,,
+region,civilstånd,ålder,kön,1968,2024
+SE1 Östra Sverige,ogifta,0-4 år,män,111535,108412
+SE1 Östra Sverige,ogifta,5-14 år,kvinnor,195234,241890
+SE1 Östra Sverige,gifta,95+ år,män,42,315

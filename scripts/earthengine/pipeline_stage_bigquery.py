@@ -15,7 +15,9 @@
 """
 
 import os
+import re
 import sys
+import time
 
 from absl import logging
 from google.cloud import bigquery
@@ -28,7 +30,9 @@ sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)), 'util'))
 
 from counters import Counters
-from pipeline_stage_runner import StageRunner, register_stage_runner
+import file_util
+from pipeline_stage_runner import StageRunner
+from pipeline_stage_runner import register_stage_runner
 
 
 class BigQueryExportRunner(StageRunner):
@@ -114,7 +118,7 @@ class BigQueryExportRunner(StageRunner):
     def get_query_export_uri(self, query: str) -> str:
         '''Returns the output URI from the export query.'''
         _EXPORT_OUTPUT_REGEX = r'url *= *[\'"](?P<output>[^\'"]*)[\'"]'
-        matche = re.search(_EXPORT_OUTPUT_REGEX, query)
+        match = re.search(_EXPORT_OUTPUT_REGEX, query)
         if match:
             return match.groupdict().get('output', '')
 

@@ -13,12 +13,11 @@
 # limitations under the License.
 """Helper functions used in the superfund data processing"""
 
-import numpy as np
-import pandas as pd
 import json
-import requests
 import os
 import sys
+
+import numpy as np
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))

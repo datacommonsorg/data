@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
 Downloads PNAD Continuous (PNADc) quarterly data directly via IBGE REST API.
 Fetches data starting from Q1 2022 to the latest available period and reshapes
@@ -19,22 +18,23 @@ the output into CSV files.
 """
 
 import os
+import re
 import time
 from typing import Any, Dict, List, Optional
 
-from absl import app, flags, logging
+from absl import app
+from absl import flags
+from absl import logging
 import pandas as pd
+from panel_specs import LOCATIONS
+from panel_specs import get_panel_1_specs
+from panel_specs import get_panel_2_specs
+from panel_specs import get_panel_3_specs
+from panel_specs import get_panel_4_specs
 import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util import Retry
 
-from panel_specs import (
-    LOCATIONS,
-    get_panel_1_specs,
-    get_panel_2_specs,
-    get_panel_3_specs,
-    get_panel_4_specs,
-)
 
 # --- Robust Session Setup ---
 def get_robust_session() -> requests.Session:
@@ -43,14 +43,13 @@ def get_robust_session() -> requests.Session:
     Retries up to 10 times with exponential backoff on common server error codes (429, 500, 502, 503, 504).
     """
     session = requests.Session()
-    retries = Retry(
-        total=10,
-        backoff_factor=1,
-        status_forcelist=[429, 500, 502, 503, 504],
-        raise_on_status=False
-    )
+    retries = Retry(total=10,
+                    backoff_factor=1,
+                    status_forcelist=[429, 500, 502, 503, 504],
+                    raise_on_status=False)
     session.mount("https://", HTTPAdapter(max_retries=retries))
     return session
+
 
 # Global session instance
 SESSION = get_robust_session()
@@ -58,6 +57,7 @@ SESSION = get_robust_session()
 # --- Configuration Constants ---
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 DOWNLOAD_DIR = os.path.join(SCRIPT_DIR, "input_files")
+APISIDRA_BASE_URL = "https://apisidra.ibge.gov.br/values"
 
 # Maps panel indices (1 to 4) to their target folder names
 PANEL_FOLDER_MAP = {
@@ -71,6 +71,31 @@ PANEL_FOLDER_MAP = {
 PERIOD_START = "202201"
 
 
+def build_apisidra_series_url(
+    agg_id: int,
+    var_id: int,
+    geo_code: str,
+    period_query: str,
+    classif: Optional[str] = None,
+) -> str:
+    """Builds the IBGE SIDRA REST API URL for an aggregate series query."""
+    geo_match = re.match(r"^([Nn]\d+)\[(.+)\]$", geo_code.strip())
+    if not geo_match:
+        raise ValueError(f"Invalid geo_code format: {geo_code}")
+    level = geo_match.group(1).lower()
+    loc_id = geo_match.group(2)
+    periods_param = period_query.replace("|", ",")
+
+    url = (f"{APISIDRA_BASE_URL}/t/{agg_id}/{level}/{loc_id}"
+           f"/v/{var_id}/p/{periods_param}")
+    if classif:
+        classif_match = re.match(r"^(\d+)\[(.+)\]$", classif.strip())
+        if not classif_match:
+            raise ValueError(f"Invalid classif format: {classif}")
+        url += f"/c{classif_match.group(1)}/{classif_match.group(2)}"
+    return url
+
+
 def get_available_periods() -> List[Dict[str, Any]]:
     """Fetches available period metadata starting from Q1 2022 to the latest available period.
 
@@ -81,42 +106,70 @@ def get_available_periods() -> List[Dict[str, Any]]:
         RuntimeError: If the network request fails, returns an invalid response,
             or no periods are found starting from PERIOD_START.
     """
-    url = "https://servicodados.ibge.gov.br/api/v3/agregados/6461/periodos"
+    url = f"{APISIDRA_BASE_URL}/t/6461/n1/1/v/4096/p/all"
     headers = {"User-Agent": "Mozilla/5.0"}
-    
+
     try:
         logging.info(f"Fetching IBGE period metadata: GET {url}")
         res = SESSION.get(url, headers=headers, timeout=30)
         res.raise_for_status()
         periods_data = res.json()
-        
+
         # Verify JSON structure before filtering
         if not isinstance(periods_data, list) or not periods_data:
             err_msg = (
                 f"Invalid or empty period metadata response from IBGE API. "
-                f"URL: {url}, Response preview: {str(periods_data)[:200]}"
-            )
+                f"URL: {url}, Response preview: {str(periods_data)[:200]}")
             raise RuntimeError(err_msg)
-            
-        periods = [p for p in periods_data if isinstance(p, dict) and p.get("id", "") >= PERIOD_START]
+        first_item = periods_data[0]
+        if isinstance(first_item, dict) and "D3C" in first_item:
+            seen_ids = set()
+            periods = []
+            for row in periods_data[1:]:
+                if not isinstance(row, dict):
+                    continue
+                p_id = str(row.get("D3C", "")).strip()
+                if p_id >= PERIOD_START and p_id not in seen_ids:
+                    seen_ids.add(p_id)
+                    literal = str(row.get("D3N", "")).strip()
+                    periods.append({
+                        "id": p_id,
+                        "literals": [literal] if literal else [],
+                    })
+        elif isinstance(first_item, dict) and "id" in first_item:
+            periods = [
+                p for p in periods_data
+                if isinstance(p, dict) and p.get("id", "") >= PERIOD_START
+            ]
+        else:
+            err_msg = (
+                f"Invalid or empty period metadata response from IBGE API. "
+                f"URL: {url}, Response preview: {str(periods_data)[:200]}")
+            raise RuntimeError(err_msg)
         if not periods:
             err_msg = (
                 f"No available periods found starting from {PERIOD_START}. "
-                f"URL: {url}, Raw count: {len(periods_data)}"
-            )
+                f"URL: {url}, Raw count: {len(periods_data)}")
             raise RuntimeError(err_msg)
 
-        logging.info(f"Successfully retrieved {len(periods)} periods from {url}")
+        logging.info(
+            f"Successfully retrieved {len(periods)} periods from {url}")
         return periods
 
     except requests.exceptions.RequestException as req_err:
-        logging.error(f"Network error fetching period metadata from IBGE API. URL: {url}, Error: {req_err}")
+        logging.error(
+            f"Network error fetching period metadata from IBGE API. URL: {url}, Error: {req_err}"
+        )
         raise
     except ValueError as json_err:
-        logging.error(f"Failed to parse JSON period metadata response. URL: {url}, Error: {json_err}")
+        logging.error(
+            f"Failed to parse JSON period metadata response. URL: {url}, Error: {json_err}"
+        )
         raise
     except Exception as e:
-        logging.error(f"Unexpected error when retrieving available periods. URL: {url}, Error: {e}")
+        logging.error(
+            f"Unexpected error when retrieving available periods. URL: {url}, Error: {e}"
+        )
         raise
 
 
@@ -134,14 +187,16 @@ def format_quarter_label(period_item: Dict[str, Any]) -> str:
         for lit in period_item.get("literals", []):
             if "trimestre" in lit.lower():
                 return lit.lower().replace("  ", " ").strip()
-        
+
         # Fallback parsing based on period ID structure (YYYYQQ)
         p_id = period_item["id"]
         year = p_id[:4]
         q = int(p_id[4:])
         return f"{q}º trimestre {year}"
     except Exception as e:
-        logging.warning(f"Failed to format quarter label for {period_item}: {e}. Falling back to period id.")
+        logging.warning(
+            f"Failed to format quarter label for {period_item}: {e}. Falling back to period id."
+        )
         p_id = period_item.get("id")
         if p_id:
             return str(p_id)
@@ -150,7 +205,12 @@ def format_quarter_label(period_item: Dict[str, Any]) -> str:
         raise ValueError(err_msg)
 
 
-def fetch_aggregate_series(agg_id: int, var_id: int, geo_code: str, period_query: str, classif: Optional[str] = None) -> Dict[str, Dict[str, str]]:
+def fetch_aggregate_series(
+        agg_id: int,
+        var_id: int,
+        geo_code: str,
+        period_query: str,
+        classif: Optional[str] = None) -> Dict[str, Dict[str, str]]:
     """Helper function to query IBGE aggregate API endpoint with robust error handling.
 
     Args:
@@ -167,9 +227,8 @@ def fetch_aggregate_series(agg_id: int, var_id: int, geo_code: str, period_query
         RuntimeError: If the network request fails, returns HTTP error, or response
             contains invalid/unexpected payload structure.
     """
-    url = f"https://servicodados.ibge.gov.br/api/v3/agregados/{agg_id}/periodos/{period_query}/variaveis/{var_id}?localidades={geo_code}"
-    if classif:
-        url += f"&classificacao={classif}"
+    url = build_apisidra_series_url(agg_id, var_id, geo_code, period_query,
+                                    classif)
 
     context = f"URL: {url} (agg_id={agg_id}, var_id={var_id}, geo_code={geo_code}, period_query={period_query}, classif={classif})"
     headers = {"User-Agent": "Mozilla/5.0"}
@@ -177,43 +236,70 @@ def fetch_aggregate_series(agg_id: int, var_id: int, geo_code: str, period_query
         logging.info(f"Fetching IBGE aggregate series: GET {url}")
         r = SESSION.get(url, headers=headers, timeout=30)
         r.raise_for_status()
-            
+
         data = r.json()
 
-        # Guard check to ensure valid list structure returned from API
-        if not isinstance(data, list) or not data or "resultados" not in data[0]:
+        if not isinstance(data, list) or not data or not isinstance(
+                data[0], dict):
             err_msg = f"Invalid or empty response structure from IBGE API. Context: {context}. Response preview: {str(data)[:300]}"
             raise RuntimeError(err_msg)
 
-        result_map = {}
-        for res in data[0]["resultados"]:
-            cat_key = "Total"
-            # Extract category classification keys if present
-            if res.get("classificacoes"):
-                cats = res["classificacoes"][0].get("categoria", {})
-                if cats:
-                    cat_key = list(cats.keys())[0]
-            
-            # Map time-series dictionary to category key
-            for s in res.get("series", []):
-                serie = s.get("serie", {})
-                result_map[cat_key] = serie
+        result_map: Dict[str, Dict[str, str]] = {}
+        first_item = data[0]
 
-        logging.info(f"Successfully retrieved {len(result_map)} series from {url}")
+        if "D3C" in first_item and "V" in first_item:
+            if len(data) < 2:
+                err_msg = f"Empty data rows returned from IBGE SIDRA API. Context: {context}. Response preview: {str(data)[:300]}"
+                raise RuntimeError(err_msg)
+            for row in data[1:]:
+                if not isinstance(row, dict):
+                    continue
+                cat_key = str(row.get(
+                    "D4C", "Total")) if classif and "D4C" in row else "Total"
+                period_id = str(row.get("D3C", "")).strip()
+                if period_id:
+                    result_map.setdefault(cat_key,
+                                          {})[period_id] = str(row.get("V", ""))
+        elif "resultados" in first_item:
+            for res in first_item["resultados"]:
+                cat_key = "Total"
+                # Extract category classification keys if present
+                if res.get("classificacoes"):
+                    cats = res["classificacoes"][0].get("categoria", {})
+                    if cats:
+                        cat_key = list(cats.keys())[0]
+
+                # Map time-series dictionary to category key
+                for s in res.get("series", []):
+                    serie = s.get("serie", {})
+                    result_map[cat_key] = serie
+        else:
+            err_msg = f"Invalid or empty response structure from IBGE API. Context: {context}. Response preview: {str(data)[:300]}"
+            raise RuntimeError(err_msg)
+
+        logging.info(
+            f"Successfully retrieved {len(result_map)} series from {url}")
         return result_map
 
     except requests.exceptions.RequestException as req_err:
-        logging.error(f"Network exception downloading aggregate series from IBGE API. Context: {context}. Error: {req_err}")
+        logging.error(
+            f"Network exception downloading aggregate series from IBGE API. Context: {context}. Error: {req_err}"
+        )
         raise
     except ValueError as json_err:
-        logging.error(f"JSON decoding error for aggregate series from IBGE API. Context: {context}. Error: {json_err}")
+        logging.error(
+            f"JSON decoding error for aggregate series from IBGE API. Context: {context}. Error: {json_err}"
+        )
         raise
     except Exception as e:
-        logging.error(f"Unexpected error fetching aggregate series from IBGE API. Context: {context}. Error: {e}")
+        logging.error(
+            f"Unexpected error fetching aggregate series from IBGE API. Context: {context}. Error: {e}"
+        )
         raise
 
 
-def fetch_panel_data(place_name: str, geo_code: str, panel_index: int, periods: List[Dict[str, Any]]) -> None:
+def fetch_panel_data(place_name: str, geo_code: str, panel_index: int,
+                     periods: List[Dict[str, Any]]) -> None:
     """Fetches SIDRA data for 2022Q1 to latest period, reshapes output, and writes to CSV.
 
     Args:
@@ -277,26 +363,45 @@ def fetch_panel_data(place_name: str, geo_code: str, panel_index: int, periods: 
     # Panel 1: Employment and Unemployment / Labor Force
     # ---------------------------------------------------------
     if panel_index == 1:
-        s1 = fetch_aggregate_series(6461, 4096, geo_code, period_query).get("Total", {})
-        s2 = fetch_aggregate_series(6466, 4097, geo_code, period_query).get("Total", {})
-        s3 = fetch_aggregate_series(6467, 4098, geo_code, period_query).get("Total", {})
-        s4 = fetch_aggregate_series(6468, 4099, geo_code, period_query).get("Total", {})
+        s1 = fetch_aggregate_series(6461, 4096, geo_code,
+                                    period_query).get("Total", {})
+        s2 = fetch_aggregate_series(6466, 4097, geo_code,
+                                    period_query).get("Total", {})
+        s3 = fetch_aggregate_series(6467, 4098, geo_code,
+                                    period_query).get("Total", {})
+        s4 = fetch_aggregate_series(6468, 4099, geo_code,
+                                    period_query).get("Total", {})
 
         ind_specs = get_panel_1_specs(s1, s2, s3, s4)
         for name, serie in ind_specs:
             vals = [serie.get(pid, '') for pid in period_ids]
             rows.append([name] + vals)
 
-        rows.append(["Fonte: IBGE, Diretoria de Pesquisas, Coordenação de Trabalho e Rendimento, Pesquisa Nacional por Amostra de Domicílios Contínua"] + [''] * (num_cols - 1))
+        rows.append([
+            "Fonte: IBGE, Diretoria de Pesquisas, Coordenação de Trabalho e Rendimento, Pesquisa Nacional por Amostra de Domicílios Contínua"
+        ] + [''] * (num_cols - 1))
 
     # ---------------------------------------------------------
     # Panel 2: Population & Economic Sectors
     # ---------------------------------------------------------
     elif panel_index == 2:
-        s_pop = fetch_aggregate_series(6462, 606, geo_code, period_query).get("Total", {})
-        m_6463 = fetch_aggregate_series(6463, 1641, geo_code, period_query, classif="629[all]")
-        m_6464 = fetch_aggregate_series(6464, 4090, geo_code, period_query, classif="11913[all]")
-        m_6465 = fetch_aggregate_series(6465, 4090, geo_code, period_query, classif="888[all]")
+        s_pop = fetch_aggregate_series(6462, 606, geo_code,
+                                       period_query).get("Total", {})
+        m_6463 = fetch_aggregate_series(6463,
+                                        1641,
+                                        geo_code,
+                                        period_query,
+                                        classif="629[all]")
+        m_6464 = fetch_aggregate_series(6464,
+                                        4090,
+                                        geo_code,
+                                        period_query,
+                                        classif="11913[all]")
+        m_6465 = fetch_aggregate_series(6465,
+                                        4090,
+                                        geo_code,
+                                        period_query,
+                                        classif="888[all]")
 
         ind_specs = get_panel_2_specs(s_pop, m_6463, m_6464, m_6465)
         for name, serie in ind_specs:
@@ -307,13 +412,25 @@ def fetch_panel_data(place_name: str, geo_code: str, panel_index: int, periods: 
     # Panel 3: Average Real Income
     # ---------------------------------------------------------
     elif panel_index == 3:
-        s_all_usual = fetch_aggregate_series(6472, 5933, geo_code, period_query).get("Total", {})
-        s_all_eff = fetch_aggregate_series(6469, 5935, geo_code, period_query).get("Total", {})
-        m_6471 = fetch_aggregate_series(6471, 5932, geo_code, period_query, classif="11913[all]")
-        s_main_eff = fetch_aggregate_series(6470, 5934, geo_code, period_query).get("Total", {})
-        m_6473 = fetch_aggregate_series(6473, 5932, geo_code, period_query, classif="888[all]")
+        s_all_usual = fetch_aggregate_series(6472, 5933, geo_code,
+                                             period_query).get("Total", {})
+        s_all_eff = fetch_aggregate_series(6469, 5935, geo_code,
+                                           period_query).get("Total", {})
+        m_6471 = fetch_aggregate_series(6471,
+                                        5932,
+                                        geo_code,
+                                        period_query,
+                                        classif="11913[all]")
+        s_main_eff = fetch_aggregate_series(6470, 5934, geo_code,
+                                            period_query).get("Total", {})
+        m_6473 = fetch_aggregate_series(6473,
+                                        5932,
+                                        geo_code,
+                                        period_query,
+                                        classif="888[all]")
 
-        ind_specs = get_panel_3_specs(s_all_usual, s_all_eff, m_6471, s_main_eff, m_6473)
+        ind_specs = get_panel_3_specs(s_all_usual, s_all_eff, m_6471,
+                                      s_main_eff, m_6473)
         for name, serie in ind_specs:
             vals = [serie.get(pid, '') for pid in period_ids]
             rows.append([name] + vals)
@@ -322,17 +439,25 @@ def fetch_panel_data(place_name: str, geo_code: str, panel_index: int, periods: 
     # Panel 4: Mass Income
     # ---------------------------------------------------------
     elif panel_index == 4:
-        s_mass_usual = fetch_aggregate_series(6474, 6293, geo_code, period_query).get("Total", {})
-        s_mass_eff = fetch_aggregate_series(6475, 6295, geo_code, period_query).get("Total", {})
+        s_mass_usual = fetch_aggregate_series(6474, 6293, geo_code,
+                                              period_query).get("Total", {})
+        s_mass_eff = fetch_aggregate_series(6475, 6295, geo_code,
+                                            period_query).get("Total", {})
 
         ind_specs = get_panel_4_specs(s_mass_usual, s_mass_eff)
         for name, serie in ind_specs:
             vals = [serie.get(pid, '') for pid in period_ids]
             rows.append([name] + vals)
 
-        rows.append(["Fonte: IBGE, Diretoria de Pesquisas, Coordenação de Trabalho e Rendimento, Pesquisa Nacional por Amostra de Domicílios Contínua"] + [''] * (num_cols - 1))
-        rows.append(["Nota: 1 - O rendimento está deflacionado para o mês do meio do último trimestre de coleta divulgado."] + [''] * (num_cols - 1))
-        rows.append(["2 - O rendimento efetivo se refere ao valor recebido no mês anterior ao da coleta."] + [''] * (num_cols - 1))
+        rows.append([
+            "Fonte: IBGE, Diretoria de Pesquisas, Coordenação de Trabalho e Rendimento, Pesquisa Nacional por Amostra de Domicílios Contínua"
+        ] + [''] * (num_cols - 1))
+        rows.append([
+            "Nota: 1 - O rendimento está deflacionado para o mês do meio do último trimestre de coleta divulgado."
+        ] + [''] * (num_cols - 1))
+        rows.append([
+            "2 - O rendimento efetivo se refere ao valor recebido no mês anterior ao da coleta."
+        ] + [''] * (num_cols - 1))
 
     # Convert constructed matrix to DataFrame
     df_out = pd.DataFrame(rows)
@@ -358,17 +483,22 @@ def main(argv):
         for folder_name in PANEL_FOLDER_MAP.values():
             os.makedirs(os.path.join(DOWNLOAD_DIR, folder_name), exist_ok=True)
     except Exception as dir_err:
-        logging.fatal(f"Could not setup target download folders in '{DOWNLOAD_DIR}': {dir_err}")
+        logging.fatal(
+            f"Could not setup target download folders in '{DOWNLOAD_DIR}': {dir_err}"
+        )
         return
 
     # Retrieve period metadata
     try:
         periods = get_available_periods()
     except Exception as fetch_err:
-        logging.fatal(f"Unrecoverable error fetching period metadata: {fetch_err}")
+        logging.fatal(
+            f"Unrecoverable error fetching period metadata: {fetch_err}")
         return
 
-    logging.info(f"Fetched {len(periods)} available periods starting from {PERIOD_START}: {[p['id'] for p in periods]}")
+    logging.info(
+        f"Fetched {len(periods)} available periods starting from {PERIOD_START}: {[p['id'] for p in periods]}"
+    )
 
     # Process each location and panel step-by-step
     for place_name, geo_code in LOCATIONS.items():
@@ -377,7 +507,9 @@ def main(argv):
             try:
                 fetch_panel_data(place_name, geo_code, panel_index, periods)
             except Exception as panel_err:
-                logging.fatal(f"Unrecoverable error processing {place_name} (Panel {panel_index}): {panel_err}")
+                logging.fatal(
+                    f"Unrecoverable error processing {place_name} (Panel {panel_index}): {panel_err}"
+                )
                 return
             # Short pause to reduce load on the IBGE REST API
             time.sleep(0.1)

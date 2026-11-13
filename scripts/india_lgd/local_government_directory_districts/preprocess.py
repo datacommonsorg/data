@@ -14,12 +14,13 @@
 
 __author__ = ["Thejesh GN (i@thejeshgn.com)"]
 
-import os
-import csv
 import difflib
-import pandas as pd
-from india.geo.states import IndiaStatesMapper
+import os
+
 from india.formatters import CodeFormatter
+from india.geo.states import IndiaStatesMapper
+import pandas as pd
+
 # Some of the names don't match correctly while using
 # difflib library. This is used to force the match manually.
 
@@ -232,8 +233,8 @@ class LocalGovermentDirectoryDistrictsDataLoader:
             lambda row: self._get_district_dcid(row), axis=1)
 
     def save(self):
-        self.clean_df.sort_values(by=["LGDStateCode", "LGDDistrictCode"],
-                                  inplace=True)
+        self.clean_df = self.clean_df.sort_values(
+            by=["LGDStateCode", "LGDDistrictCode"])
         self.clean_df.to_csv(self.clean_csv, index=False, header=True)
 
 

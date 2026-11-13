@@ -13,8 +13,9 @@
 # limitations under the License.
 """Utility functions for aggregations on dictionaries and strings."""
 
-from absl import logging
 from typing import Union
+
+from absl import logging
 
 
 def aggregate_value(src: Union[str, int, float, list, set],

@@ -17,10 +17,17 @@ for national 1980-1990 and it is aggregated
 from state 1980-1990 file.
 """
 
-import pandas as pd
 import os
+import sys
+
+import pandas as pd
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
+_SCRIPTS_DIR = os.path.abspath(os.path.join(_CODEDIR, '../../../../'))
+if _SCRIPTS_DIR not in sys.path:
+    sys.path.append(_SCRIPTS_DIR)
+
+from us_census.pep.us_pep_sexrace.preprocess import load_url_or_path
 
 
 def process_national_1980_1990(url: str) -> pd.DataFrame:
@@ -46,9 +53,9 @@ def process_national_1980_1990(url: str) -> pd.DataFrame:
     _cols.extend(COLUMNS_TO_SUM)
 
     # reading the csv input file
-    df = pd.read_table(url,
+    df = pd.read_table(load_url_or_path(url),
                        index_col=False,
-                       delim_whitespace=True,
+                       sep=r'\s+',
                        engine='python',
                        names=_cols)
     #Saving input file to local
@@ -80,8 +87,7 @@ def process_national_1980_1990(url: str) -> pd.DataFrame:
     df['SR'] = df['Sex'] + ' ' + df['Race']
 
     # dropping unwanted columns
-    df.drop(columns=COLUMNS_TO_SUM, inplace=True)
-    df.drop(columns=['Info', 'Sex', 'Race'], inplace=True)
+    df = df.drop(columns=COLUMNS_TO_SUM + ['Info', 'Sex', 'Race'])
 
     # group the df as per columns provided
     df = df.groupby(['Year', 'SR']).sum().transpose().stack(0).reset_index()
@@ -92,7 +98,7 @@ def process_national_1980_1990(url: str) -> pd.DataFrame:
     df['Year'] = df['Year'].str.split('-', expand=True)[1]
 
     # dropping unwanted column
-    df.drop(columns=['level_0'], inplace=True)
+    df = df.drop(columns=['level_0'])
 
     # providing proper column names
     female_columns = [
@@ -117,7 +123,7 @@ def process_national_1980_1990(url: str) -> pd.DataFrame:
     # aggregating columns to get Count_Person_Female
     df["Count_Person_Female"] = df[female_columns].sum(axis=1)
 
-    df.drop(columns=['geo_ID'], inplace=True)
+    df = df.drop(columns=['geo_ID'])
 
     df = df.groupby(['Year']).sum().reset_index()
 
