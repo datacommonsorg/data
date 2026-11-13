@@ -173,11 +173,13 @@ class DownloadScriptTest(unittest.TestCase):
             sid='0003410380',
             select_filters={'18': {'020'}},
             exclude_filters={'1': {'999'}},
+            exclude_suffixes={'1': ('000010',)},
             pos_overrides={'1': ('row', '1')},
         )
         self.assertEqual(csv_text, '"col1","col2"\n"100","200"\n')
         self.assertEqual(mock_session.get.call_count, 2)
         self.assertEqual(mock_session.post.call_count, 4)
+        self.assertEqual(mock_session.close.call_count, 1)
 
     @mock.patch.object(download_script.time, 'sleep')
     @mock.patch.object(download_script, '_create_retry_session')
@@ -194,6 +196,29 @@ class DownloadScriptTest(unittest.TestCase):
             download_script.fetch_dbview_csv(sid='0003410380')
         self.assertEqual(mock_session.get.call_count, 4)
         self.assertEqual(mock_sleep.call_count, 3)
+        self.assertEqual(mock_session.close.call_count, 4)
+
+    @mock.patch.object(download_script.time, 'sleep')
+    @mock.patch.object(download_script, '_create_retry_session')
+    def test_fetch_dbview_csv_fails_fast_on_404(
+        self,
+        mock_create_session,
+        mock_sleep,
+    ):
+        mock_session = mock.MagicMock()
+        mock_create_session.return_value = mock_session
+        bad_resp = mock.MagicMock(status_code=404)
+        http_err = download_script.requests.HTTPError(
+            '404 Not Found',
+            response=bad_resp,
+        )
+        mock_session.get.side_effect = http_err
+
+        with self.assertRaises(RuntimeError):
+            download_script.fetch_dbview_csv(sid='0003410380')
+        self.assertEqual(mock_session.get.call_count, 1)
+        self.assertEqual(mock_sleep.call_count, 0)
+        self.assertEqual(mock_session.close.call_count, 1)
 
     @mock.patch.object(download_script.time, 'sleep')
     @mock.patch.object(download_script, '_create_retry_session')
@@ -224,6 +249,7 @@ class DownloadScriptTest(unittest.TestCase):
         with self.assertRaises(RuntimeError):
             download_script.fetch_dashboard_csv(params)
         self.assertEqual(mock_sleep.call_count, 3)
+        self.assertEqual(mock_session.close.call_count, 5)
 
 
 if __name__ == '__main__':

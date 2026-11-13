@@ -64,6 +64,9 @@ DBVIEW_CONFIGS: dict[str, dict[str, Any]] = {
         'exclude_filters': {
             '2': {'2015000010', '2020000010'}
         },
+        'exclude_suffixes': {
+            '2': ('000010',)
+        },
     },
     'jpn_aa1_gender_age_total_population.csv': {
         'sid': '0003410381',
@@ -72,6 +75,9 @@ DBVIEW_CONFIGS: dict[str, dict[str, Any]] = {
         },
         'exclude_filters': {
             '2': {'2015000010', '2020000010'}
+        },
+        'exclude_suffixes': {
+            '2': ('000010',)
         },
     },
     'jpn_aa1_aa2_age_gender_1980.csv': {
@@ -200,10 +206,19 @@ def _create_retry_session() -> requests.Session:
     return session
 
 
+def _is_non_retryable_http_error(err: Exception) -> bool:
+    """Returns True for permanent 4xx HTTP errors (excluding 408 and 429)."""
+    if not isinstance(err, requests.HTTPError) or err.response is None:
+        return False
+    status_code = err.response.status_code
+    return 400 <= status_code < 500 and status_code not in (408, 429)
+
+
 def fetch_dbview_csv(
     sid: str,
     select_filters: dict[str, set[str]] | None = None,
     exclude_filters: dict[str, set[str]] | None = None,
+    exclude_suffixes: dict[str, tuple[str, ...]] | None = None,
     pos_overrides: dict[str, tuple[str, str]] | None = None,
     timeout: int = 60,
 ) -> str:
@@ -220,6 +235,7 @@ def fetch_dbview_csv(
         sid: The e-Stat statsDataId (e.g. '0003410380').
         select_filters: Optional map of matterId -> set of allowed item codes.
         exclude_filters: Optional map of matterId -> set of excluded item codes.
+        exclude_suffixes: Optional map of matterId -> excluded code suffixes.
         pos_overrides: Optional map of matterId -> (position, positionNum).
         timeout: HTTP request timeout in seconds.
 
@@ -231,8 +247,8 @@ def fetch_dbview_csv(
     """
     last_err: Exception | None = None
     for attempt in range(4):
+        session = _create_retry_session()
         try:
-            session = _create_retry_session()
             init_url = f'{ESTAT_DBVIEW_BASE_URL}?sid={sid}'
             logging.info('GET %s (attempt %d/4)', init_url, attempt + 1)
             init_resp = session.get(init_url, timeout=timeout)
@@ -284,14 +300,19 @@ def fetch_dbview_csv(
                 allowed = (select_filters.get(m_id) if select_filters else None)
                 excluded = (exclude_filters.get(m_id)
                             if exclude_filters else None)
+                excluded_sfx = (exclude_suffixes.get(m_id)
+                                if exclude_suffixes else None)
 
                 def _is_selected(
                     item: dict[str, Any],
                     allowed_codes: set[str] | None = allowed,
                     excluded_codes: set[str] | None = excluded,
+                    suffixes: tuple[str, ...] | None = excluded_sfx,
                 ) -> bool:
                     code = str(item.get('code', ''))
                     if excluded_codes and code in excluded_codes:
+                        return False
+                    if suffixes and code.endswith(suffixes):
                         return False
                     if allowed_codes is not None:
                         return code in allowed_codes
@@ -439,7 +460,7 @@ def fetch_dbview_csv(
                 'totalCellCount': '1000',
                 'totalColSelected': '10',
                 'title': 'e-Stat',
-                'statCode': '00200521',
+                'statCode': '',
                 'startNumber': '1',
                 'totalNum': '',
                 'toNum': '',
@@ -491,6 +512,8 @@ def fetch_dbview_csv(
             return text
         except Exception as err:  # pylint: disable=broad-except
             last_err = err
+            if _is_non_retryable_http_error(err):
+                break
             if attempt < 3:
                 sleep_sec = 2.0 * (attempt + 1)
                 logging.warning(
@@ -501,6 +524,8 @@ def fetch_dbview_csv(
                     sleep_sec,
                 )
                 time.sleep(sleep_sec)
+        finally:
+            session.close()
     raise RuntimeError(
         f'Failed to download dbview CSV for sid={sid}: {last_err}'
     ) from last_err
@@ -533,8 +558,8 @@ def fetch_dashboard_csv(
     """Downloads a raw CSV table from https://dashboard.e-stat.go.jp/download/dataSearch."""
     last_err: Exception | None = None
     for attempt in range(4):
+        session = _create_retry_session()
         try:
-            session = _create_retry_session()
             params = {
                 'IndicatorCode':
                     dashboard_params['IndicatorCode'],
@@ -566,8 +591,10 @@ def fetch_dashboard_csv(
                 raise RuntimeError(
                     'Empty CSV content returned from dashboard dataSearch.')
             return csv_text
-        except Exception as err:
+        except Exception as err:  # pylint: disable=broad-except
             last_err = err
+            if _is_non_retryable_http_error(err):
+                break
             if attempt < 3:
                 sleep_sec = 2.0 * (attempt + 1)
                 logging.warning(
@@ -577,6 +604,8 @@ def fetch_dashboard_csv(
                     sleep_sec,
                 )
                 time.sleep(sleep_sec)
+        finally:
+            session.close()
     raise RuntimeError(
         f'Failed to download dashboard CSV for {dashboard_params}: {last_err}'
     ) from last_err
@@ -587,6 +616,7 @@ def download_dbview_dataset(
     sid: str | None = None,
     select_filters: dict[str, set[str]] | None = None,
     exclude_filters: dict[str, set[str]] | None = None,
+    exclude_suffixes: dict[str, tuple[str, ...]] | None = None,
     pos_overrides: dict[str, tuple[str, str]] | None = None,
     dashboard_params: dict[str, str] | None = None,
 ) -> int:
@@ -604,6 +634,7 @@ def download_dbview_dataset(
             sid=sid,
             select_filters=select_filters,
             exclude_filters=exclude_filters,
+            exclude_suffixes=exclude_suffixes,
             pos_overrides=pos_overrides,
         )
     else:
@@ -646,6 +677,7 @@ def download_all(
                     cfg.get('sid'),
                     cfg.get('select_filters'),
                     cfg.get('exclude_filters'),
+                    cfg.get('exclude_suffixes'),
                     cfg.get('pos_overrides'),
                     cfg.get('dashboard_params'),
                 ) for filename, cfg in DBVIEW_CONFIGS.items()
@@ -660,6 +692,7 @@ def download_all(
                 sid=cfg.get('sid'),
                 select_filters=cfg.get('select_filters'),
                 exclude_filters=cfg.get('exclude_filters'),
+                exclude_suffixes=cfg.get('exclude_suffixes'),
                 pos_overrides=cfg.get('pos_overrides'),
                 dashboard_params=cfg.get('dashboard_params'),
             )

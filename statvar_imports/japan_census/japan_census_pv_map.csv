@@ -1,7 +1,16 @@
 key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6
+jpn_gender_age_total_population.csv,observationAbout,00000
 "年齢（5歳階級），男女別人口及び人口性比 － 全国（大正9年～令和2年）",observationAbout,00000
 2015000010,#ignore,True,observationDate,2015
 2020000010,#ignore,True,observationDate,2020
+2025000010,#ignore,True,observationDate,2025
+2030000010,#ignore,True,observationDate,2030
+2035000010,#ignore,True,observationDate,2035
+2040000010,#ignore,True,observationDate,2040
+2045000010,#ignore,True,observationDate,2045
+2050000010,#ignore,True,observationDate,2050
+2055000010,#ignore,True,observationDate,2055
+2060000010,#ignore,True,observationDate,2060
 年齢不詳,#IgnoreRow,True
 （再掲）年齢不詳,#IgnoreRow,True
 100歳以上,#IgnoreRow,True
@@ -163,6 +172,32 @@ I9108_自殺者数【人】,populationType,MortalityEvent,measuredProperty,count
 2032年,observationDate,2032
 2033年,observationDate,2033
 2034年,observationDate,2034
+2035年,observationDate,2035
+2036年,observationDate,2036
+2037年,observationDate,2037
+2038年,observationDate,2038
+2039年,observationDate,2039
+2040年,observationDate,2040
+2041年,observationDate,2041
+2042年,observationDate,2042
+2043年,observationDate,2043
+2044年,observationDate,2044
+2045年,observationDate,2045
+2046年,observationDate,2046
+2047年,observationDate,2047
+2048年,observationDate,2048
+2049年,observationDate,2049
+2050年,observationDate,2050
+2051年,observationDate,2051
+2052年,observationDate,2052
+2053年,observationDate,2053
+2054年,observationDate,2054
+2055年,observationDate,2055
+2056年,observationDate,2056
+2057年,observationDate,2057
+2058年,observationDate,2058
+2059年,observationDate,2059
+2060年,observationDate,2060
 1920000000,observationDate,1920
 1921000000,observationDate,1921
 1922000000,observationDate,1922
@@ -278,6 +313,32 @@ I9108_自殺者数【人】,populationType,MortalityEvent,measuredProperty,count
 2032000000,observationDate,2032
 2033000000,observationDate,2033
 2034000000,observationDate,2034
+2035000000,observationDate,2035
+2036000000,observationDate,2036
+2037000000,observationDate,2037
+2038000000,observationDate,2038
+2039000000,observationDate,2039
+2040000000,observationDate,2040
+2041000000,observationDate,2041
+2042000000,observationDate,2042
+2043000000,observationDate,2043
+2044000000,observationDate,2044
+2045000000,observationDate,2045
+2046000000,observationDate,2046
+2047000000,observationDate,2047
+2048000000,observationDate,2048
+2049000000,observationDate,2049
+2050000000,observationDate,2050
+2051000000,observationDate,2051
+2052000000,observationDate,2052
+2053000000,observationDate,2053
+2054000000,observationDate,2054
+2055000000,observationDate,2055
+2056000000,observationDate,2056
+2057000000,observationDate,2057
+2058000000,observationDate,2058
+2059000000,observationDate,2059
+2060000000,observationDate,2060
 1975100000,observationDate,1975
 1976100000,observationDate,1976
 1977100000,observationDate,1977
@@ -338,6 +399,32 @@ I9108_自殺者数【人】,populationType,MortalityEvent,measuredProperty,count
 2032100000,observationDate,2032
 2033100000,observationDate,2033
 2034100000,observationDate,2034
+2035100000,observationDate,2035
+2036100000,observationDate,2036
+2037100000,observationDate,2037
+2038100000,observationDate,2038
+2039100000,observationDate,2039
+2040100000,observationDate,2040
+2041100000,observationDate,2041
+2042100000,observationDate,2042
+2043100000,observationDate,2043
+2044100000,observationDate,2044
+2045100000,observationDate,2045
+2046100000,observationDate,2046
+2047100000,observationDate,2047
+2048100000,observationDate,2048
+2049100000,observationDate,2049
+2050100000,observationDate,2050
+2051100000,observationDate,2051
+2052100000,observationDate,2052
+2053100000,observationDate,2053
+2054100000,observationDate,2054
+2055100000,observationDate,2055
+2056100000,observationDate,2056
+2057100000,observationDate,2057
+2058100000,observationDate,2058
+2059100000,observationDate,2059
+2060100000,observationDate,2060
 全国_時系列 コード,observationAbout,{Data}
 全国，都道府県，市区町村 コード,observationAbout,{Data}
 地域 コード,observationAbout,{Data}
@@ -351,3 +438,12 @@ I9108_自殺者数【人】,populationType,MortalityEvent,measuredProperty,count
 地域コード,observationAbout,{Data}
 地域（2010） コード,observationAbout,{Data}
 地域（2015） コード,observationAbout,{Data}
+地域（2020） コード,observationAbout,{Data}
+地域（2025） コード,observationAbout,{Data}
+地域（2030） コード,observationAbout,{Data}
+地域（2035） コード,observationAbout,{Data}
+地域（2040） コード,observationAbout,{Data}
+地域（2045） コード,observationAbout,{Data}
+地域（2050） コード,observationAbout,{Data}
+地域（2055） コード,observationAbout,{Data}
+地域（2060） コード,observationAbout,{Data}

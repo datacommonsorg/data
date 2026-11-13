@@ -3,5 +3,5 @@ url,https://www.e-stat.go.jp/
 output_columns,"observationAbout,observationDate,value,variableMeasured"
 mapped_rows,12
 mapped_columns,5
+# Override non-empty default resolve_api_url to keep place resolution hermetic/offline
 resolve_api_url,
-maps_api_key,
