@@ -36,6 +36,7 @@ import math
 import os
 import sys
 import tempfile
+import threading
 import time
 from typing import Dict, List, Optional, Tuple
 
@@ -137,6 +138,11 @@ flags.DEFINE_integer(
         os.cpu_count() or 4),
     'Number of parallel worker threads for baseline download.',
 )
+flags.DEFINE_integer(
+    'ee_parallelism',
+    12,
+    'Number of parallel worker threads for Earth Engine monthly fetches.',
+)
 
 # Kelvin to Celsius offset matching kelvin2celsius.sh
 KELVIN_OFFSET = 273.15
@@ -144,8 +150,18 @@ KELVIN_OFFSET = 273.15
 # Maximum number of pixels to consider while reducing each region in Earth Engine.
 REDUCE_REGION_MAX_PIXELS = int(1e9)
 
-# Represents an area (in sq m) over the world area to filter out broken geometries.
-WORLD_AREA_THRESHOLD = 5.2e14
+# Maximum valid area (in sq m) for an AA1/AA2 place; filters broken/inverted/unbounded
+# geometries (Earth land area is ~1.49e14 m^2; inverted-winding polygons evaluate to ~5.10e14 m^2).
+WORLD_AREA_THRESHOLD = 1.0e14
+
+# Page size for ee.data.computeFeatures pagination to keep per-RPC runtime well below
+# Earth Engine's 300s synchronous computeFeatures timeout.
+EE_COMPUTE_FEATURES_PAGE_SIZE = 500
+
+# Adaptive reduceRegion scale threshold: ERA5-Land native resolution is ~11.1 km (0.1 deg),
+# so regions > 100 km^2 (1e8 m^2) reduce cleanly at 10 km while smaller regions keep --reduce_region_scale.
+ADAPTIVE_SCALE_AREA_THRESHOLD = 1e8
+ADAPTIVE_LARGE_REGION_SCALE = 10000
 
 # Mapping from ECMWF/ERA5_LAND/MONTHLY_AGGR band names to canonical
 # ECMWF/ERA5/MONTHLY column names used in the PVMap and baseline CSVs.
@@ -440,20 +456,24 @@ def _default_end_year_month(today: Optional[datetime.date] = None) -> str:
     return prev_month_last_day.strftime('%Y-%m')
 
 
-def _fetch_ee_feature_collection(flattened) -> Optional[dict]:
+def _fetch_ee_feature_collection(
+    flattened,
+    page_size: int = EE_COMPUTE_FEATURES_PAGE_SIZE,
+) -> Optional[dict]:
     """Fetches all features from an `ee.FeatureCollection`, paginating if supported.
 
     `FeatureCollection.getInfo()` calls `ee.data.computeValue`, which aborts at
-    5,000 elements (`all_administrativearea2` has 5,574 features). When
+    5,000 elements (`all_administrativearea2` has 5,574+ features). When
     `ee.data.computeFeatures` is available, this paginates with `nextPageToken`
-    to retrieve all features without hitting the 5,000-element limit.
+    and explicit `pageSize` to retrieve all features without hitting element or
+    synchronous timeout limits.
     """
     if ee is not None and hasattr(ee, 'data') and hasattr(
             ee.data, 'computeFeatures'):
         features = []
         page_token = None
         while True:
-            params = {'expression': flattened}
+            params = {'expression': flattened, 'pageSize': page_size}
             if page_token:
                 params['pageToken'] = page_token
             page = ee.data.computeFeatures(params)
@@ -501,7 +521,13 @@ def _compute_ee_monthly_features(
     mean_dst = [dst for _, dst in ERA5_LAND_MEAN_BANDS]
 
     def _handle_place(place):
-        is_oversized = place.geometry().area().gt(world_area_threshold)
+        area = place.geometry().area(maxError=1000)
+        is_oversized = area.lte(0).Or(area.gt(world_area_threshold))
+        effective_scale = ee.Algorithms.If(
+            area.gt(ADAPTIVE_SCALE_AREA_THRESHOLD),
+            max(reduce_region_scale, ADAPTIVE_LARGE_REGION_SCALE),
+            reduce_region_scale,
+        )
 
         def _handle_image(image):
             result = ee.Feature(
@@ -511,10 +537,13 @@ def _compute_ee_monthly_features(
                     'date': image.date().format('YYYY-MM'),
                 },
             )
+            # Use unweighted mean so it selects the exact same pixel-center set as
+            # min/max reducers, preventing small/coastal places from getting mean
+            # values without min/max (which fails NUM_PLACES_CONSISTENT).
             for src_bands, dst_bands, reducer in [
                 (min_src, min_dst, ee.Reducer.min()),
                 (max_src, max_dst, ee.Reducer.max()),
-                (mean_src, mean_dst, ee.Reducer.mean()),
+                (mean_src, mean_dst, ee.Reducer.mean().unweighted()),
             ]:
                 aggr = ee.Algorithms.If(
                     is_oversized,
@@ -522,7 +551,7 @@ def _compute_ee_monthly_features(
                     image.select(src_bands, dst_bands).reduceRegion(
                         reducer=reducer,
                         geometry=place.geometry(),
-                        scale=reduce_region_scale,
+                        scale=effective_scale,
                         maxPixels=REDUCE_REGION_MAX_PIXELS,
                     ),
                 )
@@ -627,6 +656,64 @@ def write_ee_feature_collection_to_csv(
     return len(features)
 
 
+def _fetch_single_ee_month(
+    dataset_asset: str,
+    place_asset: str,
+    ym: str,
+    raw_path: str,
+    celsius_path: str,
+    ee_project: str,
+    reduce_region_scale: int,
+    strict: bool,
+    auth_failed_event: threading.Event,
+) -> Optional[str]:
+    """Fetches and converts one `(place_asset, ym)` pair from Earth Engine."""
+    if auth_failed_event.is_set():
+        return None
+    try:
+        logging.info(
+            'Computing Earth Engine ERA5-Land stats for asset=%s month=%s',
+            place_asset,
+            ym,
+        )
+        fc_info = _compute_ee_monthly_features_with_retry(
+            dataset_asset=dataset_asset,
+            geo_locations_asset=place_asset,
+            year_month=ym,
+            reduce_region_scale=reduce_region_scale,
+        )
+        if not fc_info or not fc_info.get('features'):
+            logging.warning(
+                'No features returned for asset=%s month=%s',
+                place_asset, ym)
+            return None
+        write_ee_feature_collection_to_csv(fc_info, raw_path)
+        convert_kelvin_to_celsius_csv(raw_path, celsius_path)
+        return celsius_path
+    except Exception as exc:
+        if strict:
+            raise
+        if _is_permission_or_auth_error(exc):
+            auth_failed_event.set()
+            logging.warning(
+                'Earth Engine permission/authentication error for project %r '
+                '(asset=%s month=%s): %s; skipping remaining Earth Engine '
+                'fetches and continuing with cached/existing files.',
+                ee_project,
+                place_asset,
+                ym,
+                exc,
+            )
+            return None
+        logging.warning(
+            'Failed fetching Earth Engine asset=%s month=%s: %s',
+            place_asset,
+            ym,
+            exc,
+        )
+        return None
+
+
 def fetch_era5_land_from_ee(
     dataset_asset: str,
     place_assets: List[str],
@@ -637,6 +724,7 @@ def fetch_era5_land_from_ee(
     ee_project: str,
     reduce_region_scale: int,
     strict: bool = False,
+    ee_parallelism: int = 12,
 ) -> List[str]:
     """Fetches `start_ym..end_ym` from Earth Engine and converts to `.celsius.csv`."""
     if not end_ym:
@@ -676,6 +764,7 @@ def fetch_era5_land_from_ee(
     os.makedirs(raw_dir, exist_ok=True)
     os.makedirs(input_dir, exist_ok=True)
     generated_celsius_files: List[str] = []
+    pending_tasks: List[Tuple[str, str, str, str]] = []
 
     for place_asset in place_assets:
         asset_name = os.path.basename(place_asset.rstrip('/'))
@@ -690,47 +779,72 @@ def fetch_era5_land_from_ee(
 
             raw_filename = f'{asset_name}_{ym}.ee.csv'
             raw_path = os.path.join(raw_dir, raw_filename)
-            try:
-                logging.info(
-                    'Computing Earth Engine ERA5-Land stats for asset=%s month=%s',
-                    place_asset,
-                    ym,
-                )
-                fc_info = _compute_ee_monthly_features_with_retry(
+            pending_tasks.append((place_asset, ym, raw_path, celsius_path))
+
+    if not pending_tasks:
+        return sorted(generated_celsius_files)
+
+    auth_failed_event = threading.Event()
+    # Execute the first pending task upfront to fail fast on permission/auth errors.
+    first_asset, first_ym, first_raw, first_celsius = pending_tasks[0]
+    first_result = _fetch_single_ee_month(
+        dataset_asset=dataset_asset,
+        place_asset=first_asset,
+        ym=first_ym,
+        raw_path=first_raw,
+        celsius_path=first_celsius,
+        ee_project=ee_project,
+        reduce_region_scale=reduce_region_scale,
+        strict=strict,
+        auth_failed_event=auth_failed_event,
+    )
+    if first_result:
+        generated_celsius_files.append(first_result)
+
+    remaining_tasks = pending_tasks[1:]
+    if remaining_tasks and not auth_failed_event.is_set():
+        workers = max(1, min(ee_parallelism, len(remaining_tasks)))
+        if workers == 1:
+            for place_asset, ym, raw_path, celsius_path in remaining_tasks:
+                res = _fetch_single_ee_month(
                     dataset_asset=dataset_asset,
-                    geo_locations_asset=place_asset,
-                    year_month=ym,
+                    place_asset=place_asset,
+                    ym=ym,
+                    raw_path=raw_path,
+                    celsius_path=celsius_path,
+                    ee_project=ee_project,
                     reduce_region_scale=reduce_region_scale,
+                    strict=strict,
+                    auth_failed_event=auth_failed_event,
                 )
-                if not fc_info or not fc_info.get('features'):
-                    logging.warning(
-                        'No features returned for asset=%s month=%s',
-                        place_asset, ym)
-                    continue
-                write_ee_feature_collection_to_csv(fc_info, raw_path)
-                convert_kelvin_to_celsius_csv(raw_path, celsius_path)
-                generated_celsius_files.append(celsius_path)
-            except Exception as exc:
-                if strict:
-                    raise
-                if _is_permission_or_auth_error(exc):
-                    logging.warning(
-                        'Earth Engine permission/authentication error for project %r '
-                        '(asset=%s month=%s): %s; skipping remaining Earth Engine '
-                        'fetches and continuing with cached/existing files.',
-                        ee_project,
+                if res:
+                    generated_celsius_files.append(res)
+                if auth_failed_event.is_set():
+                    break
+        else:
+            with ThreadPoolExecutor(max_workers=workers) as executor:
+                futures = [
+                    executor.submit(
+                        _fetch_single_ee_month,
+                        dataset_asset,
                         place_asset,
                         ym,
-                        exc,
+                        raw_path,
+                        celsius_path,
+                        ee_project,
+                        reduce_region_scale,
+                        strict,
+                        auth_failed_event,
                     )
-                    return generated_celsius_files
-                logging.warning(
-                    'Failed fetching Earth Engine asset=%s month=%s: %s',
-                    place_asset,
-                    ym,
-                    exc,
-                )
-    return generated_celsius_files
+                    for place_asset, ym, raw_path, celsius_path in
+                    remaining_tasks
+                ]
+                for future in as_completed(futures):
+                    res = future.result()
+                    if res:
+                        generated_celsius_files.append(res)
+
+    return sorted(generated_celsius_files)
 
 
 def run_pipeline(
@@ -748,6 +862,7 @@ def run_pipeline(
     skip_ee_fetch: bool,
     strict_ee: bool,
     parallelism: int,
+    ee_parallelism: int = 12,
 ) -> Tuple[List[str], List[str]]:
     """Runs baseline download into `history_dir` and EE fetch/conversion into `input_dir`.
 
@@ -779,6 +894,7 @@ def run_pipeline(
             ee_project=ee_project,
             reduce_region_scale=reduce_region_scale,
             strict=strict_ee,
+            ee_parallelism=ee_parallelism,
         )
 
     history_files = sorted(
@@ -814,6 +930,7 @@ def main(_):
         skip_ee_fetch=FLAGS.skip_ee_fetch,
         strict_ee=FLAGS.strict_ee,
         parallelism=FLAGS.parallelism,
+        ee_parallelism=FLAGS.ee_parallelism,
     )
 
 

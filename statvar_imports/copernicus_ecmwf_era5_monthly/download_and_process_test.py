@@ -405,19 +405,31 @@ class DownloadAndProcessTest(unittest.TestCase):
         mock_ee = MagicMock()
         mock_dataset = MagicMock()
         mock_dataset.first.return_value.getInfo.return_value = {'id': '202007'}
+        mock_dataset.map.side_effect = lambda img_fn: [img_fn(MagicMock())]
         mock_ee.ImageCollection.return_value.filterDate.return_value = (
             mock_dataset)
 
         mock_places = MagicMock()
         mock_places.first.return_value.getInfo.return_value = {'id': 'place1'}
         mock_flattened = MagicMock()
-        mock_places.map.return_value.flatten.return_value = mock_flattened
+        mock_mapped_places = MagicMock()
+        mock_mapped_places.flatten.return_value = mock_flattened
+
+        def places_map_side_effect(place_fn):
+            place_fn(MagicMock())
+            return mock_mapped_places
+
+        mock_places.map.side_effect = places_map_side_effect
         mock_ee.FeatureCollection.return_value = mock_places
 
         calls = {'count': 0}
 
         def compute_features_side_effect(params):
             calls['count'] += 1
+            self.assertEqual(
+                params.get('pageSize'),
+                download_and_process.EE_COMPUTE_FEATURES_PAGE_SIZE,
+            )
             if calls['count'] == 1:
                 raise RuntimeError('Transient EE 503 error')
             if 'pageToken' not in params:
@@ -470,10 +482,76 @@ class DownloadAndProcessTest(unittest.TestCase):
 
         self.assertEqual(len(generated), 1)
         self.assertEqual(calls['count'], 3)
+        mock_ee.Reducer.mean.return_value.unweighted.assert_called()
+        self.assertEqual(
+            mock_ee.Algorithms.If.call_args_list[0].args[1:],
+            (download_and_process.ADAPTIVE_LARGE_REGION_SCALE, 1000),
+        )
         with open(generated[0], mode='r', encoding='utf-8') as f:
             content = f.read()
         self.assertIn('geoId/06', content)
         self.assertIn('geoId/36', content)
+
+    def test_fetch_era5_land_from_ee_parallel_and_skips_cached(self):
+        """Verifies parallel EE fetches and skipping existing celsius CSVs."""
+        mock_ee = MagicMock()
+        raw_dir = os.path.join(self.temp_dir, 'raw_par')
+        input_dir = os.path.join(self.temp_dir, 'input_par')
+        os.makedirs(input_dir, exist_ok=True)
+        cached_file = os.path.join(input_dir,
+                                   'all_administrativearea1_2020-07.ee.celsius.csv')
+        with open(cached_file, mode='w', encoding='utf-8') as f:
+            f.write('date,dcid\n2020-07,geoId/06\n')
+
+        fetched_pairs = []
+
+        def fake_compute(dataset_asset, geo_locations_asset, year_month,
+                         reduce_region_scale):
+            del dataset_asset
+            self.assertEqual(reduce_region_scale, 1000)
+            fetched_pairs.append((os.path.basename(geo_locations_asset),
+                                  year_month))
+            return {
+                'type': 'FeatureCollection',
+                'features': [{
+                    'id': f'{year_month}_1',
+                    'properties': {
+                        'date': year_month,
+                        'dcid': 'geoId/06',
+                        'temperature_2m': 293.15,
+                    },
+                }],
+            }
+
+        with patch.object(download_and_process, 'ee', mock_ee), patch.object(
+                download_and_process,
+                '_compute_ee_monthly_features_with_retry',
+                side_effect=fake_compute):
+            generated = download_and_process.fetch_era5_land_from_ee(
+                dataset_asset='ECMWF/ERA5_LAND/MONTHLY_AGGR',
+                place_assets=[
+                    'projects/datcom-earth-engine/assets/all_administrativearea1',
+                    'projects/datcom-earth-engine/assets/all_administrativearea2',
+                ],
+                start_ym='2020-07',
+                end_ym='2020-08',
+                raw_dir=raw_dir,
+                input_dir=input_dir,
+                ee_project='datcom-earth-engine',
+                reduce_region_scale=1000,
+                strict=True,
+                ee_parallelism=3,
+            )
+
+        self.assertEqual(len(generated), 4)
+        self.assertEqual(
+            sorted(fetched_pairs),
+            [
+                ('all_administrativearea1', '2020-08'),
+                ('all_administrativearea2', '2020-07'),
+                ('all_administrativearea2', '2020-08'),
+            ],
+        )
 
     def test_fetch_era5_land_from_ee_strict_raises_on_init_failure(self):
         """Verifies strict=True propagates Earth Engine initialization failures."""
