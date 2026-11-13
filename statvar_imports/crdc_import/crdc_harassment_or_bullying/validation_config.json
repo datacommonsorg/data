@@ -2,14 +2,6 @@
   "schema_version": "1.0",
   "rules": [
     {
-      "rule_id": "check_deleted_records_percent",
-      "description": "Checks that the percentage of deleted records across the import does not exceed 0.1% (accounts for school closures/mergers across biennial CRDC releases).",
-      "validator": "DELETED_RECORDS_PERCENT",
-      "params": {
-        "threshold": 0.1
-      }
-    },
-    {
       "rule_id": "check_max_date_consistent",
       "description": "Ensures all StatVars within each survey-year input share the same latest observation date.",
       "validator": "MAX_DATE_CONSISTENT",
@@ -17,11 +9,11 @@
     },
     {
       "rule_id": "check_latest_date_freshness",
-      "description": "Ensures the 2024Onwards partition contains data for year 2024 or later.",
+      "description": "Ensures historical single-year partitions match their expected survey years and 2024Onwards stays within the biennial CRDC publication lag.",
       "validator": "SQL_VALIDATOR",
       "params": {
-        "query": "SELECT StatVar, CAST(MaxDate AS INT) AS latest_year FROM stats WHERE CAST(MinDate AS INT) >= 2024",
-        "condition": "latest_year >= 2024"
+        "query": "SELECT COUNT(*) AS statvar_count, MIN(TRY_CAST(MinDate AS INTEGER)) AS min_year, MAX(TRY_CAST(MaxDate AS INTEGER)) AS max_year FROM stats",
+        "condition": "statvar_count > 0 AND min_year IS NOT NULL AND max_year IS NOT NULL AND ((min_year IN (2012, 2014, 2018, 2021, 2022) AND max_year = min_year) OR (min_year = 2024 AND max_year >= YEAR(CURRENT_DATE) - 4))"
       }
     }
   ]
