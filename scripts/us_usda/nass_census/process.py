@@ -50,11 +50,11 @@ SKIPPED_VALUES = [
 
 def check_url_status(url):
     try:
-        response = requests.head(url)
+        response = requests.head(url, timeout=30, allow_redirects=True)
         return response.status_code == 200
     except requests.RequestException as e:
-        logging.fatal(f"Error checking URL {url}: {e}")
-        return False
+        logging.error(f"Error checking URL {url}: {e}")
+        raise
 
 
 @retry(tries=3, delay=2, backoff=2, exceptions=(requests.RequestException,))
@@ -67,7 +67,7 @@ def download_file(url, output_path):
         output_path (str): Local path to save the downloaded file.
     """
     try:
-        response = requests.get(url, stream=True)
+        response = requests.get(url, stream=True, timeout=120)
         response.raise_for_status()  # Raise HTTPError for bad responses
         with open(output_path, 'wb') as f:
             for chunk in response.iter_content(chunk_size=1024):
@@ -75,7 +75,7 @@ def download_file(url, output_path):
                     f.write(chunk)
         logging.info(f"Downloaded file: {output_path}")
     except requests.RequestException as e:
-        logging.fatal(f"Error downloading file from {url}: {e}")
+        logging.error(f"Error downloading file from {url}: {e}")
         raise
 
 
@@ -91,7 +91,8 @@ def unzip_file(input_path, output_dir):
         logging.info(f"Unzipped file to: {output_path}")
         return output_path
     except Exception as e:
-        logging.fatal(f"Error unzipping file {input_path}: {e}")
+        logging.error(f"Error unzipping file {input_path}: {e}")
+        raise
 
 
 def get_statvars(filename):
@@ -142,10 +143,12 @@ def write_csv(reader, out, d):
             writer.writerow(row)
 
         logging.info(
-            f"Output file: {out.name} has been successfully generated.")
+            f"Output file: {getattr(out, 'name', '<stream>')} has been successfully generated."
+        )
 
     except Exception as e:
-        logging.fatal(f"The write_csv method failed due to the error: {e}")
+        logging.error(f"The write_csv method failed due to the error: {e}")
+        raise
 
 
 def merge_csv_files(output_file, input_files):
@@ -187,7 +190,7 @@ def download_and_process_data(year, d):
         logging.info(f"Processed file saved to: {output_file}")
         return output_file
     else:
-        logging.fatal(f"URL not accessible: {url}")
+        logging.warning(f"URL not accessible, skipping year {year}: {url}")
         return None
 
 
@@ -199,7 +202,7 @@ def main(_):
         logging.info(f"Created missing output directory: {output_dir}")
 
     #flag 'mode' to do the operations download and process together and individually
-    d = get_statvars('statvars')
+    d = get_statvars(os.path.join(_SCRIPT_DIR, 'statvars'))
     mode = _FLAGS.mode
     if mode == 'download' or mode == '':
         files = []
@@ -208,14 +211,15 @@ def main(_):
                 file = download_and_process_data(year, d)
                 if file:
                     files.append(file)
+        if not files:
+            raise RuntimeError("No census files were downloaded or processed.")
         if mode == '':
             merge_csv_files(_FLAGS.output, files)
     elif mode == 'process':
         if not os.path.exists('input'):
-            logging.fatal(
+            raise FileNotFoundError(
                 "Input directory does not exist. Run with --mode=download first."
             )
-            return
         txt_files = [
             os.path.join('input', f)
             for f in os.listdir('input')
