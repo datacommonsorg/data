@@ -1,10 +1,11 @@
-import requests
-import zipfile
 import io
-import os
-import pandas as pd
-from absl import logging
 import json
+import os
+import zipfile
+
+from absl import logging
+import pandas as pd
+import requests
 from retry import retry
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -146,7 +147,7 @@ def main():
                 is_downloaded = item['is_downloaded']
                 if not is_downloaded:
                     logging.fatal("all files were not downloaded successfully")
-    except Exception as e:
+    except Exception:
         logging.fatal('Error while opening the config file')
 
 

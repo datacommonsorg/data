@@ -16,14 +16,17 @@ Script to automate the testing for US Tract process script.
 """
 
 import os
-import unittest
 import sys
 import tempfile
+import unittest
+
 # module_dir is the path to where this test is running from.
 _MODULE_DIR = os.path.dirname(__file__)
 sys.path.insert(0, _MODULE_DIR)
 # pylint: disable=wrong-import-position
-from process import process, _generate_tmcf
+from process import _generate_tmcf
+from process import process
+
 # pylint: enable=wrong-import-position
 
 _TEST_DATA_DIR = os.path.join(_MODULE_DIR, "test_data")

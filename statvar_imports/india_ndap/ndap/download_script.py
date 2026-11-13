@@ -16,17 +16,23 @@
 # python3 download_script.py
 import json
 import os
-import pandas as pd
-import numpy as np
 import sys
+
 from absl import app
 from absl import flags
 from absl import logging
 from google.cloud import storage
+import numpy as np
+import pandas as pd
 
-flags.DEFINE_string('download_config_path',
-                    'gs://unresolved_mcf/india_ndap/ndap/download_config.json',
-                    'Input directory where config files downloaded.')
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        'download_config_path',
+        'gs://unresolved_mcf/india_ndap/ndap/download_config.json',
+        'Input directory where config files downloaded.')
+
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util/'))
@@ -60,7 +66,7 @@ def main(_):
             keys = response_data['Data']
             try:
                 if not isinstance(keys, list):
-                    logging.fatal(f"Value for key 'Data' is not a list.")
+                    logging.fatal("Value for key 'Data' is not a list.")
             except KeyError as e:
                 logging.fatal(
                     f"Missing expected key '{e}' in the API response.")
@@ -101,4 +107,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

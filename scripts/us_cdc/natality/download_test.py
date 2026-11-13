@@ -17,7 +17,8 @@ import os
 import sys
 import tempfile
 import unittest
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock
+from unittest.mock import patch
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 if _SCRIPT_PATH not in sys.path:
@@ -35,7 +36,7 @@ class DownloadTest(unittest.TestCase):
                 mock_driver = MagicMock()
                 mock_chrome.return_value = mock_driver
 
-                driver = download.create_chrome_driver(tmp_dir, headless=True)
+                download.create_chrome_driver(tmp_dir, headless=True)
                 mock_chrome.assert_called_once()
                 call_kwargs = mock_chrome.call_args[1]
                 options = call_kwargs['options']

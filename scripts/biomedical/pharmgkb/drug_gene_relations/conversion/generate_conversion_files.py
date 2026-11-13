@@ -29,9 +29,10 @@ Requirements:
 """
 import sys
 from xml.etree import ElementTree
-import requests
-import pandas as pd
+
 from chembl_webresource_client.new_client import new_client
+import pandas as pd
+import requests
 
 
 def pharm_to_chembl(pharm_ids):

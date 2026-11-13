@@ -13,10 +13,15 @@
 # limitations under the License.
 """Tests for acs_spec_generator.py"""
 
-import unittest
+import json
+import os
 import tempfile
+import unittest
 
-from .acs_spec_generator import *
+from .acs_spec_generator import columns_from_zip_list
+from .acs_spec_generator import create_combined_spec
+from .acs_spec_generator import create_new_spec
+from .acs_spec_generator import get_spec_list
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 _TEST_ZIP = os.path.join(_SCRIPT_PATH, 'testdata', 'S2303_alabama_2019.zip')

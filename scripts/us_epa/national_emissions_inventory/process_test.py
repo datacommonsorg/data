@@ -27,7 +27,8 @@ _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, _MODULE_DIR)
 
 from config import df_columns
-from process import USAirEmissionTrends, process_files
+from process import USAirEmissionTrends
+from process import process_files
 
 
 class ProcessEnhancedTest(unittest.TestCase):

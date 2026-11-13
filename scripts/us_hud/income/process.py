@@ -22,11 +22,12 @@ python3 process.py
 import csv
 import datetime
 import os
-import pandas as pd
+from typing import IO, Iterator
+
 from absl import app
 from absl import flags
 from absl import logging
-from typing import IO, Iterator
+import pandas as pd
 import python_calamine
 import requests
 from retry import retry
