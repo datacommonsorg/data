@@ -9,7 +9,7 @@
             "provenance_description": "Japan Population Census, Employment, Education, Mortality, and Health Statistics from the Portal Site of Official Statistics of Japan (e-Stat).",
             "scripts": [
                 "download_script.py",
-                "../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/*.csv --pv_map=japan_census_pv_map.csv --config_file=japan_census_metadata.csv --output_path=output_files/japan_census_output --output_counters=counters/japan_census_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
+                "../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/*.csv --pv_map=japan_census_pv_map.csv --config_file=japan_census_metadata.csv --places_resolved_csv=japan_census_places_resolved.csv --output_path=output_files/japan_census_output --output_counters=counters/japan_census_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --log_level=-2 --log_every_n=1000"
             ],
             "import_inputs": [
                 {

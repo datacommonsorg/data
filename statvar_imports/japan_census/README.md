@@ -28,14 +28,15 @@ The import pipeline downloads all 17 raw CSV tables directly from e-Stat (`https
 
 *   **Files**:
     *   `download_script.py`: Downloads all 17 raw CSV tables directly from e-Stat `dbview` and Dashboard `dataSearch` into `input_files/`.
-    *   `japan_census_metadata.csv`: Configuration file for `stat_var_processor.py` specifying `output_columns`, `mapped_rows,12`, and `mapped_columns,5`.
-    *   `japan_census_pv_map.csv`: Property-value mapping file mapping e-Stat Japanese age/gender/metric headers, time codes, and 5-digit region codes (`01000`–`47382`) to Data Commons StatisticalVariables and place DCIDs (`country/JPN` and `wikidataId/Q...`).
+    *   `japan_census_metadata.csv`: Configuration file for `stat_var_processor.py` specifying `output_columns`, `mapped_rows,12`, `mapped_columns,5`, and offline place resolution settings.
+    *   `japan_census_pv_map.csv`: Property-value mapping file mapping e-Stat Japanese age/gender/metric headers, time codes, and region-code column headers to Data Commons StatisticalVariables and `observationAbout`.
+    *   `japan_census_places_resolved.csv`: Resolved place mapping CSV (`place_name,dcid`) mapping all 1,965 e-Stat 5-digit region codes (`00000`–`47382`) to Data Commons place DCIDs (`country/JPN` and `wikidataId/Q...`).
     *   `validation_config.json`: Configuration defining value bounds and date freshness validation rules across all 101 StatisticalVariables.
     *   `test_data/`: Sample input data (`sample_input.csv`) and expected outputs (`sample_expected_output.csv`, `sample_expected_output.tmcf`) for testing.
 
 *   **Transformation pipeline**:
     1.  `download_script.py` fetches all 17 raw CSV files into `input_files/`.
-    2.  `tools/statvar_importer/stat_var_processor.py` processes `input_files/*.csv` directly using `japan_census_pv_map.csv` and `japan_census_metadata.csv`, referencing canonical schema `gs://unresolved_mcf/scripts/statvar/stat_vars.mcf`.
+    2.  `tools/statvar_importer/stat_var_processor.py` processes `input_files/*.csv` directly using `japan_census_pv_map.csv`, `japan_census_places_resolved.csv`, and `japan_census_metadata.csv`, referencing canonical schema `gs://unresolved_mcf/scripts/statvar/stat_vars.mcf`.
     3.  The processor produces `output_files/japan_census_output.csv`, `output_files/japan_census_output.tmcf`, and `counters/japan_census_counters.csv`.
 
 *   **Data Quality Checks**:
@@ -74,9 +75,12 @@ python3 ../../tools/statvar_importer/stat_var_processor.py \
   --input_data=input_files/*.csv \
   --pv_map=japan_census_pv_map.csv \
   --config_file=japan_census_metadata.csv \
+  --places_resolved_csv=japan_census_places_resolved.csv \
   --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
   --output_path=output_files/japan_census_output \
-  --output_counters=counters/japan_census_counters.csv
+  --output_counters=counters/japan_census_counters.csv \
+  --log_level=-2 \
+  --log_every_n=1000
 ```
 
 ### Run Sample Integration Test
@@ -86,6 +90,7 @@ python3 ../../tools/statvar_importer/stat_var_processor.py \
   --input_data=test_data/sample_input.csv \
   --pv_map=japan_census_pv_map.csv \
   --config_file=japan_census_metadata.csv \
+  --places_resolved_csv=japan_census_places_resolved.csv \
   --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
   --output_path=test_data/sample_expected_output
 ```
