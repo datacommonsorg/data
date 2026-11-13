@@ -251,6 +251,12 @@ def _get_key_val_for_svobs(facility_id, stat_var, facility_comp_ownership,
     return key_val
 
 
+def _format_ownership_pct(val):
+    if abs(val - round(val)) < 1e-9:
+        return int(round(val))
+    return round(val, 6)
+
+
 # Read from the EpaParentCompanyOwnership.csv file generated while processing
 # the parent company data.
 # Retun a map of (facility ID, year) to a dictionary of
@@ -263,8 +269,16 @@ def _facility_year_company_percentages(ownership_filepath):
             key = (in_row[_EPA_FACILITY_GHG_ID], in_row[_YEAR])
             if key not in facility_company_ownership:
                 facility_company_ownership[key] = {}
-            facility_company_ownership[key].update(
-                {in_row[_DCID]: in_row[_PERCENT_OWNERSHIP]})
+            dcid = in_row[_DCID]
+            pct = in_row[_PERCENT_OWNERSHIP]
+            if dcid in facility_company_ownership[key]:
+                total = min(
+                    100.0,
+                    float(facility_company_ownership[key][dcid]) + float(pct))
+                facility_company_ownership[key][dcid] = str(
+                    _format_ownership_pct(total))
+            else:
+                facility_company_ownership[key][dcid] = pct
 
     return facility_company_ownership
 
@@ -351,6 +365,8 @@ def process_companies(input_table_path,
 
         rows_written = 0
         missing_facility_id_count = 0
+        seen_raw_company_filings = set()
+        aggregated_ownership = {}
         with open(input_table, "r") as rfp:
             cr = csv.DictReader(rfp)
             for in_row in cr:
@@ -376,11 +392,12 @@ def process_companies(input_table_path,
 
                 company_name = company_name.replace("\"", "").replace("'", "")
 
-                company_id = fh.name_to_id(company_name)
-                if not company_id:
+                raw_company_id = fh.name_to_id(company_name)
+                if not raw_company_id:
                     _COUNTERS_COMPANIES["company_name_not_found"].add(ghg_id)
                     continue
 
+                company_id = raw_company_id
                 # Replace the company_id with a duplicate mapping, if it exists.
                 if company_id in dupes:
                     _COUNTERS_COMPANIES["company_ids_replaced"].add(company_id)
@@ -404,12 +421,6 @@ def process_companies(input_table_path,
                         (company_id, year))
                     percent_own = 100
 
-                ownership_out_row = {
-                    _DCID: company_id,
-                    _EPA_FACILITY_GHG_ID: ghg_id,
-                    _PERCENT_OWNERSHIP: percent_own,
-                    _YEAR: year
-                }
                 rows_written += 1
                 if rows_written % 500 == 0:
                     print("**********************************")
@@ -420,7 +431,19 @@ def process_companies(input_table_path,
                 # Only insert the ownership relationships where the facility exists in data commons.
                 if ghg_id in facility_ids:
                     if year:
-                        ownershipWriter.writerow(ownership_out_row)
+                        raw_filing_key = (ghg_id, year, raw_company_id.lower())
+                        if raw_filing_key not in seen_raw_company_filings:
+                            seen_raw_company_filings.add(raw_filing_key)
+                            own_key = (company_id, ghg_id, year)
+                            if own_key not in aggregated_ownership:
+                                aggregated_ownership[own_key] = percent_own
+                            else:
+                                total = min(
+                                    100.0,
+                                    float(aggregated_ownership[own_key]) +
+                                    float(percent_own))
+                                aggregated_ownership[
+                                    own_key] = _format_ownership_pct(total)
                 else:
                     _COUNTERS_COMPANIES["facility_does_not_exist"].add(ghg_id)
 
@@ -460,6 +483,14 @@ def process_companies(input_table_path,
                         }
                         tableWriter.writerow(table_out_row)
                     processed_companies[company_id.lower()] = company_id
+
+            for (comp_id, fac_id, yr), pct in aggregated_ownership.items():
+                ownershipWriter.writerow({
+                    _DCID: comp_id,
+                    _EPA_FACILITY_GHG_ID: fac_id,
+                    _PERCENT_OWNERSHIP: pct,
+                    _YEAR: yr,
+                })
 
         print("Produced " + str(rows_written) + " rows from " + _TABLE)
         print("Geo Resolution Stats: \n" + counters_string(_COUNTERS_COMPANIES))

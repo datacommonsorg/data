@@ -127,9 +127,24 @@ def _add_static_duplicates(static_mappings, company_id_count):
         _add_to_duplicate_mapping(k, v, company_id_count)
 
 
-def _insert_overlaps(loc_map, company_id_count):
+def _get_root(company_id):
+    seen = set()
+    curr = company_id
+    while curr in _DUPLICATE_MAPPING and curr not in seen:
+        seen.add(curr)
+        curr = _DUPLICATE_MAPPING[curr]
+    return curr
+
+
+def _insert_overlaps(loc_map, company_id_count, disallowed_pairs=None):
     count_dupe_loc = 0
     loc_id_contained_count = 0
+    disallowed_adj = {}
+    if disallowed_pairs:
+        for c1, c2 in disallowed_pairs:
+            disallowed_adj.setdefault(c1, set()).add(c2)
+            disallowed_adj.setdefault(c2, set()).add(c1)
+
     for a, v in loc_map.items():
         v = sorted(v)
         if len(v) > 1:
@@ -142,6 +157,8 @@ def _insert_overlaps(loc_map, company_id_count):
                     # Determine the SequenceMatcher ratio between the two ids.
                     v_i = v[i]
                     v_j = v[j]
+                    if disallowed_pairs and (v_i, v_j) in disallowed_pairs:
+                        continue
                     m1 = v_i.lower()
                     m2 = v_j.lower()
                     seq1 = difflib.SequenceMatcher(a=_str_matching_replace(m1),
@@ -153,8 +170,42 @@ def _insert_overlaps(loc_map, company_id_count):
 
                     # If the score is > 80%, then add the duplicate relationship
                     if (diff_score > 0.8):
+                        if disallowed_adj:
+                            r_i = _get_root(v_i)
+                            r_j = _get_root(v_j)
+                            if (r_i in disallowed_adj and
+                                    r_j in disallowed_adj[r_i]):
+                                continue
+                            old_i = _DUPLICATE_MAPPING.get(v_i)
+                            old_j = _DUPLICATE_MAPPING.get(v_j)
+                            _add_to_duplicate_mapping(v_i, v_j,
+                                                      company_id_count)
+                            if (_DUPLICATE_MAPPING.get(v_i) != old_i or
+                                    _DUPLICATE_MAPPING.get(v_j) != old_j):
+                                target_root = _get_root(v_i)
+                                candidates = [
+                                    k for k in _DUPLICATE_MAPPING
+                                    if k in disallowed_adj and
+                                    _get_root(k) == target_root
+                                ]
+                                if target_root in disallowed_adj:
+                                    candidates.append(target_root)
+                                candidate_set = set(candidates)
+                                if any(disallowed_adj[c] & candidate_set
+                                       for c in candidate_set):
+                                    if old_i is None:
+                                        _DUPLICATE_MAPPING.pop(v_i, None)
+                                    else:
+                                        _DUPLICATE_MAPPING[v_i] = old_i
+                                    if old_j is None:
+                                        _DUPLICATE_MAPPING.pop(v_j, None)
+                                    else:
+                                        _DUPLICATE_MAPPING[v_j] = old_j
+                                    continue
+                        else:
+                            _add_to_duplicate_mapping(v_i, v_j,
+                                                      company_id_count)
                         id_match_found = True
-                        _add_to_duplicate_mapping(v_i, v_j, company_id_count)
 
             if id_match_found:
                 loc_id_contained_count += 1
@@ -188,6 +239,8 @@ def preprocess(input_table_path, existing_facilities_file):
     unique_company_names = set()
     address_map = {}
     facility_map = {}
+    facility_year_company_addrs = {}
+    seen_facility_year_company = set()
 
     unique_company_ids = set()
     company_id_count = {}
@@ -225,16 +278,32 @@ def preprocess(input_table_path, existing_facilities_file):
                 continue
             unique_company_names.add(company_name)
 
+            year = fh.v(_TABLE, in_row, "YEAR", table_prefix=_TABLE_PREFIX)
             address = _str(
                 fh.get_address(_TABLE, in_row, table_prefix=_TABLE_PREFIX))
 
-            # Populate the address_map and facility_map.
-            if address not in address_map:
-                address_map[address] = set()
+            if year:
+                fy_key = (facility_id, year)
+                if fy_key not in facility_year_company_addrs:
+                    facility_year_company_addrs[fy_key] = {}
+                if company_id not in facility_year_company_addrs[fy_key]:
+                    facility_year_company_addrs[fy_key][company_id] = set()
+                if address:
+                    facility_year_company_addrs[fy_key][company_id].add(address)
 
-            existing_ids = address_map[address]
-            existing_ids.add(company_id)
-            address_map.update({address: existing_ids})
+                fyc_key = (facility_id, year, company_id.lower())
+                if fyc_key in seen_facility_year_company:
+                    continue
+                seen_facility_year_company.add(fyc_key)
+
+            # Populate the address_map and facility_map.
+            if address:
+                if address not in address_map:
+                    address_map[address] = set()
+
+                existing_ids = address_map[address]
+                existing_ids.add(company_id)
+                address_map.update({address: existing_ids})
 
             if facility_id not in facility_map:
                 facility_map[facility_id] = set()
@@ -253,10 +322,25 @@ def preprocess(input_table_path, existing_facilities_file):
     (count_dupe_addr,
      address_id_contained_count) = _insert_overlaps(address_map,
                                                     company_id_count)
+
+    # Identify distinct co-owners in the same (facility_id, year) that do not
+    # share an address and have not already been merged by static or address
+    # mappings, so facility_map does not collapse distinct co-owners.
+    co_owners_diff_addr = set()
+    for comp_addrs in facility_year_company_addrs.values():
+        comp_ids = sorted(comp_addrs.keys())
+        for i in range(len(comp_ids)):
+            for j in range(i + 1, len(comp_ids)):
+                c1, c2 = comp_ids[i], comp_ids[j]
+                if _get_root(c1) == _get_root(c2):
+                    continue
+                if not comp_addrs[c1] or not comp_addrs[c2] or comp_addrs[
+                        c1].isdisjoint(comp_addrs[c2]):
+                    co_owners_diff_addr.add((c1, c2))
+
     print("Determining Facility duplicates...")
-    (count_dupe_facility,
-     facility_id_contained_count) = _insert_overlaps(facility_map,
-                                                     company_id_count)
+    (count_dupe_facility, facility_id_contained_count) = _insert_overlaps(
+        facility_map, company_id_count, disallowed_pairs=co_owners_diff_addr)
 
     print("Resolving duplicate indirections..")
     _resolve_multiple_indirections()

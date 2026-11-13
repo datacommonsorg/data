@@ -576,6 +576,69 @@ class ProcessTest(unittest.TestCase):
                 fh.get_all_svobs(['epaGhgrpFacilityId/1001'], {'Count_Person'}),
                 ({}, {}))
 
+    def test_coowner_disambiguation_and_ownership_aggregation(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            with open(os.path.join(tmp_dir, 'existing_facilities.csv'),
+                      'w') as fp:
+                fp.write('epaGhgrpFacilityId\n'
+                         'epaGhgrpFacilityId/1000145\n'
+                         'epaGhgrpFacilityId/1000184\n'
+                         'epaGhgrpFacilityId/1000200\n')
+            with open(os.path.join(tmp_dir, 'V_PARENT_COMPANY_INFO.csv'),
+                      'w') as fp:
+                fp.write(
+                    'FACILITY_ID,YEAR,PARENT_COMPANY_NAME,'
+                    'PARENT_CO_STREET_ADDRESS,PARENT_CO_CITY,PARENT_CO_STATE,'
+                    'PARENT_CO_ZIP,PARENT_CO_PERCENT_OWN\n'
+                    # Distinct co-owners at different addresses on same facility/year:
+                    '1000145,2020,"East Texas Electric Cooperative, Inc.",'
+                    '2905 Westward Dr,Nacogdoches,TX,75964,45\n'
+                    '1000145,2020,"Northeast Texas Electric Cooperative, Inc.",'
+                    '2221 HGTV Way,Longview,TX,75604,55\n'
+                    # Punctuation-variant duplicate filing of same company (96% twice):
+                    '1000184,2021,Dart Container Corp.,'
+                    '500 Hogsback Rd,Mason,MI,48854,96\n'
+                    '1000184,2021,Dart Container Corp,'
+                    '500 Hogsback Rd,Mason,MI,48854,96\n'
+                    # Disjoint subsidiaries at same HQ address (40% + 60% = 100%):
+                    '1000200,2021,Acme Energy Operating Co,'
+                    '100 Main St,Houston,TX,77002,40\n'
+                    '1000200,2021,Acme Energy Operating Corp,'
+                    '100 Main St,Houston,TX,77002,60\n')
+
+            pre_process.preprocess(tmp_dir, 'existing_facilities')
+            # East Texas and Northeast Texas must NOT be merged by facility_map.
+            self.assertNotIn('EastTexasElectricCooperativeInc',
+                             pre_process._DUPLICATE_MAPPING)
+            self.assertNotIn('NortheastTexasElectricCooperativeInc',
+                             pre_process._DUPLICATE_MAPPING)
+            # Same-HQ subsidiaries are merged by address_map.
+            self.assertEqual(
+                pre_process._DUPLICATE_MAPPING.get('AcmeEnergyOperatingCo'),
+                'AcmeEnergyOperatingCorp')
+
+            process_companies(tmp_dir,
+                              'existing_facilities',
+                              tmp_dir,
+                              tmp_dir,
+                              resolve_geo=False,
+                              write_table=False)
+            ownership_csv = os.path.join(tmp_dir,
+                                         'EpaParentCompanyOwnership.csv')
+            pct_map = ppc._facility_year_company_percentages(ownership_csv)
+            self.assertEqual(
+                pct_map[('epaGhgrpFacilityId/1000145', '2020')], {
+                    'EpaParentCompany/EastTexasElectricCooperativeInc':
+                        '45',
+                    'EpaParentCompany/NortheastTexasElectricCooperativeInc':
+                        '55',
+                })
+            self.assertEqual(pct_map[('epaGhgrpFacilityId/1000184', '2021')],
+                             {'EpaParentCompany/DartContainerCorp': '96'})
+            self.assertEqual(
+                pct_map[('epaGhgrpFacilityId/1000200', '2021')],
+                {'EpaParentCompany/AcmeEnergyOperatingCorp': '100'})
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -3,7 +3,7 @@
 
 This directory contains scripts to import the EPA parent company information and
 facility ownership data from the following GHG table:
-- [`V_PARENT_COMPANY_INFO`](https://enviro.epa.gov/enviro/ef_metadata_html.ef_metadata_table?p_table_name=V_PARENT_COMPANY_INFO)
+- [`V_PARENT_COMPANY_INFO`](https://www.epa.gov/ghgreporting)
 
 The generated parent companies are of type `EpaParentCompany` and they are
 attached to a `CensusZipCodeTabulationArea` and `County` (via
@@ -64,16 +64,16 @@ percentage and if no percentage is provided it is assumed to be 100.
     "levelSummary": {
       "LEVEL_INFO": {
         "counters": {
-          "NumRowSuccesses": "7412",
-          "NumPVSuccesses": "37040",
-          "Existence_NumChecks": "58633",
-          "NumNodeSuccesses": "7414",
-          "Existence_NumDcCalls": "6"
+          "NumRowSuccesses": "7436",
+          "NumPVSuccesses": "37159",
+          "Existence_NumChecks": "58804",
+          "NumNodeSuccesses": "7436",
+          "Existence_NumDcCalls": "5"
         }
       },
       "LEVEL_WARNING": {
         "counters": {
-          "StrSplit_EmptyToken_locatedIn": "12",
+          "StrSplit_EmptyToken_locatedIn": "13",
           "API_EmptyDcCallResponse": "1",
           "StrSplit_EmptyToken_address": "8"
         }
@@ -85,15 +85,16 @@ percentage and if no percentage is provided it is assumed to be 100.
     "levelSummary": {
       "LEVEL_INFO": {
         "counters": {
-          "NumRowSuccesses": "127966",
-          "NumPVSuccesses": "1023728",
-          "Existence_NumChecks": "1082380",
-          "NumNodeSuccesses": "135383",
-          "Existence_NumDcCalls": "7"
+          "NumRowSuccesses": "127619",
+          "NumPVSuccesses": "1020952",
+          "Existence_NumChecks": "1043272",
+          "NumNodeSuccesses": "135056",
+          "Existence_NumDcCalls": "3"
         }
       },
       "LEVEL_WARNING": {
         "counters": {
+          "Existence_MissingTriple_domainIncludes": "1",
           "StatsCheck_Inconsistent_Values": "122",
           "StatsCheck_Data_Holes": "2"
         }
@@ -118,11 +119,11 @@ percentage and if no percentage is provided it is assumed to be 100.
     "levelSummary": {
       "LEVEL_INFO": {
         "counters": {
-          "NumRowSuccesses": "225983",
-          "NumPVSuccesses": "2259830",
-          "Existence_NumChecks": "2770429",
-          "NumNodeSuccesses": "233397",
-          "Existence_NumDcCalls": "7"
+          "NumRowSuccesses": "226771",
+          "NumPVSuccesses": "2267710",
+          "Existence_NumChecks": "2743560",
+          "NumNodeSuccesses": "234207",
+          "Existence_NumDcCalls": "3"
         }
       },
       "LEVEL_WARNING": {
