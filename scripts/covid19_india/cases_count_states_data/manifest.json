@@ -19,6 +19,9 @@
             "source_files": [
                 "COVID19_cases_indian_states.csv"
             ],
+            "config_override": {
+                "disable_import_workflow": true
+            },
             "cron_schedule": "0 5 * * *"
         }
     ]

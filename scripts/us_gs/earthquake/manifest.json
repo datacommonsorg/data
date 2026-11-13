@@ -19,6 +19,9 @@
             "source_files": [
                 "/tmp/usgs/*.csv"
             ],
+            "config_override": {
+                "disable_import_workflow": true
+            },
             "cron_schedule": "0 */3 * * *"
         }
     ]

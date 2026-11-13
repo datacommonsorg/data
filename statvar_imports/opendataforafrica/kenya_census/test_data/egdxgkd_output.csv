@@ -1,9 +1,9 @@
 observationAbout,observationDate,variableMeasured,value,unit,scalingFactor,observationPeriod
-country/KEN,2018,dcid:Count_Student_KenyaCertificateSecondaryEducation_Male,201,,,P1Y
-country/KEN,2019,dcid:Count_Student_KenyaCertificateSecondaryEducation_Male,360,,,P1Y
-country/KEN,2020,dcid:Count_Student_KenyaCertificateSecondaryEducation_Male,589,,,P1Y
-country/KEN,2021,dcid:Count_Student_KenyaCertificateSecondaryEducation_Male,791,,,P1Y
-country/KEN,2022,dcid:Count_Student_KenyaCertificateSecondaryEducation_Male,856,,,P1Y
+country/KEN,2018,dcid:Count_Student_KenyaCertificateSecondaryEducation_Male_OutstandingPerformance,201,,,P1Y
+country/KEN,2019,dcid:Count_Student_KenyaCertificateSecondaryEducation_Male_OutstandingPerformance,360,,,P1Y
+country/KEN,2020,dcid:Count_Student_KenyaCertificateSecondaryEducation_Male_OutstandingPerformance,589,,,P1Y
+country/KEN,2021,dcid:Count_Student_KenyaCertificateSecondaryEducation_Male_OutstandingPerformance,791,,,P1Y
+country/KEN,2022,dcid:Count_Student_KenyaCertificateSecondaryEducation_Male_OutstandingPerformance,856,,,P1Y
 country/KEN,2018,dcid:Count_Student_KenyaCertificateSecondaryEducation_Male_ExcellentPerformance,2180,,,P1Y
 country/KEN,2019,dcid:Count_Student_KenyaCertificateSecondaryEducation_Male_ExcellentPerformance,3625,,,P1Y
 country/KEN,2020,dcid:Count_Student_KenyaCertificateSecondaryEducation_Male_ExcellentPerformance,4049,,,P1Y
@@ -17,3 +17,4 @@ country/KEN,2022,dcid:Count_Student_KenyaCertificateSecondaryEducation_Male_Supe
 country/KEN,2018,dcid:Count_Student_KenyaCertificateSecondaryEducation_Male_SolidPerformance,10100,,,P1Y
 country/KEN,2019,dcid:Count_Student_KenyaCertificateSecondaryEducation_Male_SolidPerformance,14688,,,P1Y
 country/KEN,2020,dcid:Count_Student_KenyaCertificateSecondaryEducation_Male_SolidPerformance,14933,,,P1Y
+country/KEN,2021,dcid:Count_Student_KenyaCertificateSecondaryEducation_Male_SolidPerformance,14761,,,P1Y
