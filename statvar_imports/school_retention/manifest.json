@@ -29,8 +29,8 @@
       "_comment": "Schedule: Weekly on Tuesday at 09:30 UTC",
       "validation_config_file": "validation_config.json",
       "resource_limits": {
-        "cpu": 16,
-        "memory": 128,
+        "cpu": 32,
+        "memory": 512,
         "disk": 500
       }
     }
