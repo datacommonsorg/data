@@ -39,7 +39,6 @@ chromium-driver \
 p7zip-full \
 libeccodes-dev \
 libeccodes-tools \
-mdbtools \
 && rm -rf /var/lib/apt/lists/*
 # Install the Google Cloud CLI
 RUN apt-get update && \
