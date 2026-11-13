@@ -18,10 +18,15 @@ Usage: python -m unittest discover -v -s ../ -p "preprocess_gpcc_spi_test.py"
 from dataclasses import dataclass
 import filecmp
 import os
+from pathlib import Path
+import sys
 import tempfile
 import unittest
 
-from .preprocess_gpcc_spi import preprocess_one
+REPO_ROOT = Path(__file__).resolve().parents[3]
+sys.path.insert(0, str(REPO_ROOT))
+
+from scripts.noaa.gpcc_spi.preprocess_gpcc_spi import preprocess_one
 
 # module_dir is the path to where this test is running from.
 module_dir = os.path.dirname(__file__)
