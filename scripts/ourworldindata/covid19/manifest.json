@@ -19,6 +19,9 @@
             "source_files": [
                 "OurWorldInData_Covid19.csv"
             ],
+            "config_override": {
+                "disable_import_workflow": true
+            },
             "cron_schedule": "0 2 * * *"
         }
     ]
