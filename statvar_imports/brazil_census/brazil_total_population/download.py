@@ -16,7 +16,7 @@
 Downloads resident population counts directly from official IBGE sources:
 1. Live IBGE SIDRA REST API:
    - Table 9514 (2022+ Census resident population by sex across n1/n2/n3/n6)
-   - Table 1378 (2010 Census resident population by sex across n1/n2/n3/n6)
+   - Table 1378 (2010 Census resident population by sex across n1/n2/n3; municipal sex disaggregations are provided by brazil_population_by_age_and_sex)
    - Table 6579 (2024–2026+ annual resident population estimates across n1/n2/n3/n6)
 2. Historical input workbooks from GCS input_files:
    - Brazil_2022_Muncipal_POP.xlsx (all 5,570 Brazilian municipalities)
@@ -313,21 +313,16 @@ def fetch_raw_input_files(
     # 3. 1991 POPU state files
     blobs = list(
         bucket.list_blobs(
-            prefix="country/brazil/input_files/Brazil_1991_gender/POPU91")
-    ) + list(bucket.list_blobs(prefix="country/brazil/input_files/POPU91"))
+            prefix="country/brazil/input_files/Brazil_1991_gender/POPU91"))
     rows_1991: List[Dict[str, Any]] = []
     for b in blobs:
         bname = os.path.basename(b.name)
         if bname.upper().endswith(".XLS"):
             content = b.download_as_bytes()
-            if raw_dir and "Brazil_1991_gender" in b.name:
+            if raw_dir:
                 with open(os.path.join(raw_dir, bname), "wb") as f:
                     f.write(content)
-            try:
-                rows_1991.extend(parse_raw_1991_popu(content, map_91))
-            except ValueError:
-                if "Brazil_1991_gender" in b.name:
-                    raise
+            rows_1991.extend(parse_raw_1991_popu(content, map_91))
     if not rows_1991:
         raise RuntimeError("No 1991 POPU records loaded from GCS.")
     rows.extend(rows_1991)

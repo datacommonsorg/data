@@ -286,6 +286,12 @@ def fetch_from_ibge_ftp_or_input_files(
                     for name in z.namelist():
                         if name.endswith(".xls") and "010100" in name:
                             content = z.read(name)
+                            if raw_dir:
+                                with open(
+                                        os.path.join(raw_dir,
+                                                     os.path.basename(name)),
+                                        "wb") as f:
+                                    f.write(content)
                             rows.extend(
                                 parse_raw_education_xls(content, mapping))
         if rows:
@@ -307,6 +313,10 @@ def fetch_from_ibge_ftp_or_input_files(
     for b in blobs:
         if b.name.endswith(".xls"):
             content = b.download_as_bytes()
+            if raw_dir:
+                with open(os.path.join(raw_dir, os.path.basename(b.name)),
+                          "wb") as f:
+                    f.write(content)
             rows.extend(parse_raw_education_xls(content, mapping))
     if not rows:
         raise RuntimeError(
@@ -459,7 +469,8 @@ def parse_2010_education_file(content_bytes: bytes,
     return rows
 
 
-def fetch_2010_education_files() -> List[Dict[str, Any]]:
+def fetch_2010_education_files(
+        raw_dir: Optional[str] = None) -> List[Dict[str, Any]]:
     """Loads 2010 municipal education workbooks across all states for public and private schools."""
     from google.cloud import storage
 
@@ -476,6 +487,10 @@ def fetch_2010_education_files() -> List[Dict[str, Any]]:
         for b in blobs:
             if b.name.endswith(".xls"):
                 content = b.download_as_bytes()
+                if raw_dir:
+                    with open(os.path.join(raw_dir, os.path.basename(b.name)),
+                              "wb") as f:
+                        f.write(content)
                 folder_rows.extend(parse_2010_education_file(content, rede))
         if not folder_rows:
             raise RuntimeError(
@@ -547,7 +562,7 @@ def download_all_years(
         all_rows.extend(raw_input_rows)
 
         # 2. 2010 Municipal Education workbooks (Public and Private)
-        rows_2010 = fetch_2010_education_files()
+        rows_2010 = fetch_2010_education_files(raw_dir=raw_dir)
         all_rows.extend(rows_2010)
 
         # 3. Live SIDRA API (Table 1972 for 2000 and 2010)

@@ -416,7 +416,8 @@ def parse_2000_literacy_xls(content_bytes: bytes) -> List[Dict[str, Any]]:
     return rows
 
 
-def parse_2000_literacy_files() -> List[Dict[str, Any]]:
+def parse_2000_literacy_files(
+        raw_dir: Optional[str] = None) -> List[Dict[str, Any]]:
     """Loads 2000 municipal literacy workbooks across all states from GCS."""
     from google.cloud import storage
 
@@ -428,7 +429,12 @@ def parse_2000_literacy_files() -> List[Dict[str, Any]]:
             prefix="country/brazil/input_files/Brazil_2000_literacy_input"))
     for b in blobs:
         if b.name.lower().endswith(".xls"):
-            rows.extend(parse_2000_literacy_xls(b.download_as_bytes()))
+            content = b.download_as_bytes()
+            if raw_dir:
+                with open(os.path.join(raw_dir, os.path.basename(b.name)),
+                          "wb") as f:
+                    f.write(content)
+            rows.extend(parse_2000_literacy_xls(content))
     if not rows:
         raise RuntimeError("No 2000 literacy records loaded from GCS.")
     return rows
@@ -509,7 +515,7 @@ def download_all_years(
         all_rows.extend(illit_2010_rows)
 
         # 4. 2000 Municipal Literacy (all 5,564 municipalities)
-        lit_2000_rows = parse_2000_literacy_files()
+        lit_2000_rows = parse_2000_literacy_files(raw_dir=raw_dir)
         all_rows.extend(lit_2000_rows)
 
     except Exception as e:
