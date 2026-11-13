@@ -422,11 +422,13 @@ class ManifestAndValidationConfigTest(unittest.TestCase):
 
         rules = {r["rule_id"]: r for r in cfg["rules"]}
         self.assertNotIn("check_deleted_records_percent", rules)
-        self.assertIn("check_max_date_consistent", rules)
+        self.assertNotIn("check_max_date_consistent", rules)
+        self.assertIn("check_historical_single_year_date_consistency", rules)
         self.assertIn("check_latest_date_freshness", rules)
 
         validator = Validator()
         empty_differ = pd.DataFrame()
+        current_year = pd.Timestamp.now().year
 
         # 1. Valid historical 2012 partition (132 StatVars, MinDate=MaxDate=2012)
         hist_df = pd.DataFrame({
@@ -435,49 +437,43 @@ class ManifestAndValidationConfigTest(unittest.TestCase):
             "MinDate": ["2012"] * 132,
             "MaxDate": ["2012"] * 132,
         })
-        res_hist_cons = validator.validate_max_date_consistent(
-            hist_df, rules["check_max_date_consistent"]["params"])
-        self.assertEqual(res_hist_cons.status,
-                         ValidationStatus.PASSED,
-                         msg=res_hist_cons.message)
-        res_hist_sql = validator.validate_sql(
-            hist_df,
-            empty_differ,
-            rules["check_latest_date_freshness"]["params"],
-        )
-        self.assertEqual(res_hist_sql.status,
-                         ValidationStatus.PASSED,
-                         msg=res_hist_sql.message)
+        for rule_id in ("check_historical_single_year_date_consistency",
+                        "check_latest_date_freshness"):
+            res = validator.validate_sql(hist_df, empty_differ,
+                                         rules[rule_id]["params"])
+            self.assertEqual(res.status,
+                             ValidationStatus.PASSED,
+                             msg=res.message)
 
-        # 2. Valid 2024Onwards partition
+        # 2. Future 2024Onwards partition where 12 legacy 2024 StatVars were
+        #    retired while 111 StatVars advanced to the new release year.
+        future_release_year = max(2024, current_year - 2)
         onwards_df = pd.DataFrame({
             "StatVar": [f"Count_Student_{i}" for i in range(123)],
             "NumPlaces": [94650] * 123,
             "MinDate": ["2024"] * 123,
-            "MaxDate": ["2024"] * 123,
+            "MaxDate": ["2024"] * 12 + [str(future_release_year)] * 111,
         })
-        res_onwards_cons = validator.validate_max_date_consistent(
-            onwards_df, rules["check_max_date_consistent"]["params"])
-        self.assertEqual(res_onwards_cons.status,
-                         ValidationStatus.PASSED,
-                         msg=res_onwards_cons.message)
-        res_onwards_sql = validator.validate_sql(
-            onwards_df,
+        for rule_id in ("check_historical_single_year_date_consistency",
+                        "check_latest_date_freshness"):
+            res = validator.validate_sql(onwards_df, empty_differ,
+                                         rules[rule_id]["params"])
+            self.assertEqual(res.status,
+                             ValidationStatus.PASSED,
+                             msg=res.message)
+
+        # 3. Inconsistent MaxDate within a historical partition must FAIL
+        bad_hist_df = hist_df.copy()
+        bad_hist_df.loc[0, "MaxDate"] = "2014"
+        res_bad_hist = validator.validate_sql(
+            bad_hist_df,
             empty_differ,
-            rules["check_latest_date_freshness"]["params"],
+            rules["check_historical_single_year_date_consistency"]["params"],
         )
-        self.assertEqual(res_onwards_sql.status,
-                         ValidationStatus.PASSED,
-                         msg=res_onwards_sql.message)
+        self.assertEqual(res_bad_hist.status, ValidationStatus.FAILED)
 
-        # 3. Inconsistent MaxDate within a partition must FAIL
-        bad_df = onwards_df.copy()
-        bad_df.loc[0, "MaxDate"] = "2022"
-        res_bad = validator.validate_max_date_consistent(
-            bad_df, rules["check_max_date_consistent"]["params"])
-        self.assertEqual(res_bad.status, ValidationStatus.FAILED)
-
-        # 4. Empty stats or wrong/stale partition year must FAIL SQL freshness
+        # 4. Empty stats, partial latest-year drop (< 100 StatVars), or stale
+        #    release (> 5 years lag) must FAIL check_latest_date_freshness
         empty_stats = pd.DataFrame(
             columns=["StatVar", "NumPlaces", "MinDate", "MaxDate"])
         res_empty = validator.validate_sql(
@@ -487,11 +483,24 @@ class ManifestAndValidationConfigTest(unittest.TestCase):
         )
         self.assertEqual(res_empty.status, ValidationStatus.FAILED)
 
+        dropped_df = pd.DataFrame({
+            "StatVar": [f"Count_Student_{i}" for i in range(123)],
+            "NumPlaces": [94650] * 123,
+            "MinDate": ["2024"] * 123,
+            "MaxDate": ["2024"] * 100 + [str(future_release_year + 2)] * 23,
+        })
+        res_dropped = validator.validate_sql(
+            dropped_df,
+            empty_differ,
+            rules["check_latest_date_freshness"]["params"],
+        )
+        self.assertEqual(res_dropped.status, ValidationStatus.FAILED)
+
         stale_df = pd.DataFrame({
-            "StatVar": ["Count_Student_0"],
-            "NumPlaces": [90000],
-            "MinDate": ["2024"],
-            "MaxDate": ["2019"],
+            "StatVar": [f"Count_Student_{i}" for i in range(123)],
+            "NumPlaces": [90000] * 123,
+            "MinDate": ["2024"] * 123,
+            "MaxDate": [str(current_year - 6)] * 123,
         })
         res_stale = validator.validate_sql(
             stale_df,

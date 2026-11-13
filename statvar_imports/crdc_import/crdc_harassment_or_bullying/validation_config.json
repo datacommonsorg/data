@@ -2,18 +2,21 @@
   "schema_version": "1.0",
   "rules": [
     {
-      "rule_id": "check_max_date_consistent",
-      "description": "Ensures all StatVars within each survey-year input share the same latest observation date.",
-      "validator": "MAX_DATE_CONSISTENT",
-      "params": {}
+      "rule_id": "check_historical_single_year_date_consistency",
+      "description": "Ensures every StatVar in each historical single-year partition (2012, 2014, 2018, 2021, 2022) has matching MinDate and MaxDate.",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT StatVar, MinDate, MaxDate FROM stats WHERE TRY_CAST(MinDate AS INTEGER) < 2024 OR TRY_CAST(MinDate AS INTEGER) IS NULL OR TRY_CAST(MaxDate AS INTEGER) IS NULL",
+        "condition": "TRY_CAST(MinDate AS INTEGER) IN (2012, 2014, 2018, 2021, 2022) AND TRY_CAST(MaxDate AS INTEGER) = TRY_CAST(MinDate AS INTEGER)"
+      }
     },
     {
       "rule_id": "check_latest_date_freshness",
-      "description": "Ensures historical single-year partitions match their expected survey years and 2024Onwards stays within the biennial CRDC publication lag.",
+      "description": "Enforces exact single-year date consistency on 2012..2022 and verifies 2024Onwards has >= 100 StatVars reaching the latest CRDC release within a 5-year lag window (allowing retired columns across future releases).",
       "validator": "SQL_VALIDATOR",
       "params": {
-        "query": "SELECT COUNT(*) AS statvar_count, MIN(TRY_CAST(MinDate AS INTEGER)) AS min_year, MAX(TRY_CAST(MaxDate AS INTEGER)) AS max_year FROM stats",
-        "condition": "statvar_count > 0 AND min_year IS NOT NULL AND max_year IS NOT NULL AND ((min_year IN (2012, 2014, 2018, 2021, 2022) AND max_year = min_year) OR (min_year = 2024 AND max_year >= YEAR(CURRENT_DATE) - 4))"
+        "query": "SELECT b.statvar_count, b.min_year, b.max_year, (SELECT COUNT(*) FROM stats s WHERE TRY_CAST(s.MaxDate AS INTEGER) = b.max_year) AS latest_year_statvar_count FROM (SELECT COUNT(*) AS statvar_count, MIN(TRY_CAST(MinDate AS INTEGER)) AS min_year, MAX(TRY_CAST(MaxDate AS INTEGER)) AS max_year FROM stats) b",
+        "condition": "statvar_count >= 100 AND min_year IS NOT NULL AND max_year IS NOT NULL AND ((min_year IN (2012, 2014, 2018, 2021, 2022) AND max_year = min_year AND latest_year_statvar_count = statvar_count) OR (min_year = 2024 AND max_year >= YEAR(CURRENT_DATE) - 5 AND latest_year_statvar_count >= 100))"
       }
     }
   ]

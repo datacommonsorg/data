@@ -21,7 +21,7 @@ This import processes school-level **Harassment or Bullying** data from the U.S.
 | `run.sh` | Verifies all required input partitions exist in `preprocessed_files/`, runs `stat_var_processor.py` in parallel to produce `processed_output/`, and verifies all `manifest.json` `.tmcf` and `.csv` outputs exist and contain data rows. |
 | `harassment_or_bullying_pvmap.csv` | Property-value mappings for CRDC Harassment and Bullying school metrics. |
 | `harassment_or_bullying_metadata.csv` | Configuration parameters for `stat_var_processor.py`. |
-| `validation_config.json` | Import-specific validation rules (`MAX_DATE_CONSISTENT` and `2024Onwards` date freshness; the `0.1%` deleted-records threshold, empty-import, missing-refs, and lint checks are inherited from the global `tools/import_validation/validation_config.json`). |
+| `validation_config.json` | Scoped SQL validation rules enforcing single-year date consistency on `2012..2022` and `>= 100` StatVar freshness within a 5-year lag window on `2024Onwards` (the `0.1%` deleted-records threshold, empty-import, missing-refs, and lint checks are inherited from `tools/import_validation/validation_config.json`). |
 | `download_preprocess_test.py` | Unit tests covering deterministic file discovery, retries/fail-fast download handling, string-safe preprocessing, `run.sh` pre-flight validation, and `validation_config.json` SQL checks. |
 
 ---
