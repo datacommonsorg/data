@@ -19,6 +19,9 @@
             "source_files": [
                 "COVIDTracking_US.csv"
             ],
+            "config_override": {
+                "disable_import_workflow": true
+            },
             "cron_schedule": "30 3 * * *"
         }
     ]
