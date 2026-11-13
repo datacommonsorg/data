@@ -1,0 +1,8 @@
+Node: E:population_age_maritalstatus_gender_nuts1->E0
+typeOf: dcs:StatVarObservation
+observationAbout: C:population_age_maritalstatus_gender_nuts1->observationAbout
+observationDate: C:population_age_maritalstatus_gender_nuts1->observationDate
+value: C:population_age_maritalstatus_gender_nuts1->value
+variableMeasured: C:population_age_maritalstatus_gender_nuts1->variableMeasured
+unit: C:population_age_maritalstatus_gender_nuts1->unit
+scalingFactor: C:population_age_maritalstatus_gender_nuts1->scalingFactor
