@@ -21,13 +21,19 @@ from unittest.mock import patch
 
 import pandas as pd
 
-CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
-if CURRENT_DIR not in sys.path:
-    sys.path.insert(0, CURRENT_DIR)
+try:
+    from opendataforafrica.kenya_census import convert_sdmx_xml_to_csv as kenya_converter
+except ModuleNotFoundError:
+    REPO_ROOT = os.path.abspath(
+        os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..",
+                     ".."))
+    if REPO_ROOT not in sys.path:
+        sys.path.insert(0, REPO_ROOT)
+    from statvar_imports.opendataforafrica.kenya_census import convert_sdmx_xml_to_csv as kenya_converter
 
-from convert_sdmx_xml_to_csv import convert_sdmx_xml_to_csv
-from convert_sdmx_xml_to_csv import convert_sdmx_xml_to_dataframe
-from convert_sdmx_xml_to_csv import main
+convert_sdmx_xml_to_csv = kenya_converter.convert_sdmx_xml_to_csv
+convert_sdmx_xml_to_dataframe = kenya_converter.convert_sdmx_xml_to_dataframe
+main = kenya_converter.main
 
 
 class ConvertSdmxXmlToCsvTest(unittest.TestCase):
@@ -91,9 +97,10 @@ class ConvertSdmxXmlToCsvTest(unittest.TestCase):
             "time_period": ["2024"],
             "value": [100]
         })
-        with patch("convert_sdmx_xml_to_csv.sdmx.read_sdmx"):
-            with patch(
-                    "convert_sdmx_xml_to_csv.sdmx.to_pandas",
+        with patch.object(kenya_converter.sdmx, "read_sdmx"):
+            with patch.object(
+                    kenya_converter.sdmx,
+                    "to_pandas",
                     return_value=mock_df,
             ):
                 df = convert_sdmx_xml_to_dataframe(xml_file)
@@ -105,9 +112,10 @@ class ConvertSdmxXmlToCsvTest(unittest.TestCase):
         idx = pd.MultiIndex.from_tuples([("KEN", "2024")],
                                         names=["REGION", "TIME_PERIOD"])
         mock_multi_df = pd.DataFrame({0: [250]}, index=idx)
-        with patch("convert_sdmx_xml_to_csv.sdmx.read_sdmx"):
-            with patch(
-                    "convert_sdmx_xml_to_csv.sdmx.to_pandas",
+        with patch.object(kenya_converter.sdmx, "read_sdmx"):
+            with patch.object(
+                    kenya_converter.sdmx,
+                    "to_pandas",
                     return_value=mock_multi_df,
             ):
                 df = convert_sdmx_xml_to_dataframe(xml_file)
@@ -117,9 +125,10 @@ class ConvertSdmxXmlToCsvTest(unittest.TestCase):
 
         # 3. Series with MultiIndex
         mock_series = pd.Series([500], index=idx, name="value")
-        with patch("convert_sdmx_xml_to_csv.sdmx.read_sdmx"):
-            with patch(
-                    "convert_sdmx_xml_to_csv.sdmx.to_pandas",
+        with patch.object(kenya_converter.sdmx, "read_sdmx"):
+            with patch.object(
+                    kenya_converter.sdmx,
+                    "to_pandas",
                     return_value=mock_series,
             ):
                 df = convert_sdmx_xml_to_dataframe(xml_file)
