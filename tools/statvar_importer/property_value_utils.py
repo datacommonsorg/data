@@ -16,7 +16,6 @@
 import os
 import re
 import sys
-
 from typing import Union
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -26,7 +25,9 @@ sys.path.append(os.path.dirname(os.path.dirname(_SCRIPT_DIR)))
 sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPT_DIR)), 'util'))
 
-from mcf_file_util import get_value_list, add_pv_to_node, strip_namespace
+from mcf_file_util import add_pv_to_node
+from mcf_file_util import get_value_list
+from mcf_file_util import strip_namespace
 
 
 def is_valid_property(prop: str, schemaless: bool = False) -> bool:

@@ -24,6 +24,14 @@ with the additional options:
 This generates a sample output CSV with atmost 100 rows selecting input rows
 with unique column values.
 
+To sample one row for each unique combination of values in a set of columns,
+such as the columns that define a StatVar, list the columns separated by '|'
+as a row key. Separate several row keys with commas:
+    --sampler_row_keys='Indicator|Sex|Age Group,Indicator|Unit'
+    --sampler_uniques_per_column=-1
+    --sampler_rows_per_key=1
+    --sampler_output_rows=-1
+
 Use the function: sample_csv_file(<input_file>, <output_file>)
 to generate sample CSV in code.
 """
@@ -75,13 +83,26 @@ flags.DEFINE_string(
     'sampler_unique_columns', '',
     'A comma-separated list of column names to use for selecting unique rows.')
 flags.DEFINE_list(
+    'sampler_row_keys', [],
+    'A comma-separated list of row keys. Each row key is a list of column '
+    'names separated by "|", such as "Indicator|Sex|Age Group". A row is '
+    'selected if the combination of its values in the key columns is new, '
+    'subject to sampler_rows_per_key and sampler_uniques_per_column. '
+    'sampler_column_regex does not apply to row keys. When set without '
+    'sampler_unique_columns, only the row keys are tracked. Every key column '
+    'must be in the header rows (see sampler_header_rows); otherwise the '
+    'sampler raises an error before reading the data.')
+flags.DEFINE_list(
     'sampler_column_keys', [],
     'A list of "column:file" pairs containing values that MUST be included '
     'in the sample if they appear in the input data. '
     'If empty (default), sampling is based on sampler_uniques_per_column.'
     'Example: "variableMeasured:prominent_svs.txt"')
-flags.DEFINE_string('sampler_input_delimiter', ',',
-                    'The delimiter used in the input CSV file.')
+flags.DEFINE_string(
+    'sampler_input_delimiter', '',
+    'The delimiter used in the input CSV file, such as ";" or "|". Use "tab" '
+    'or "\\t" for tabs. If empty (default), the delimiter is detected from '
+    'the file.')
 flags.DEFINE_string('sampler_input_encoding', 'UTF8',
                     'The encoding of the input CSV file.')
 flags.DEFINE_string('sampler_output_delimiter', None,
@@ -89,11 +110,10 @@ flags.DEFINE_string('sampler_output_delimiter', None,
 
 _FLAGS = flags.FLAGS
 
-import file_util
-import mcf_file_util
-
 from config_map import ConfigMap
 from counters import Counters
+import file_util
+import mcf_file_util
 
 
 # Class to sample a data file.
@@ -168,6 +188,14 @@ class DataSampler:
                 if col.strip()
             ]
 
+        # Row keys: list of lists of column names for combined keys.
+        self._row_key_names = parse_row_keys(
+            self._config.get('sampler_row_keys', []))
+        # Column indices for each row key, set from the header rows.
+        self._row_key_indices = [None] * len(self._row_key_names)
+        # Dictionary of row key index: {key value: count}
+        self._row_key_counts = {}
+
         # Must include values: dict of column_name -> set of values
         self._must_include_values = load_column_keys(
             self._config.get('sampler_column_keys', []))
@@ -223,8 +251,9 @@ class DataSampler:
             True if the column should be sampled for unique values.
         """
         if not self._unique_column_names:
-            # No specific columns specified, track all for unique sampling
-            return True
+            # No specific columns specified. Track all columns for unique
+            # sampling, unless row keys select the columns to track.
+            return not self._row_key_names
         # Check if this column is in our unique columns
         return column_index in self._unique_column_indices.values()
 
@@ -259,6 +288,16 @@ class DataSampler:
                 logging.level_debug() and logging.debug(
                     f'Mapped unique column "{column_name}" to index {index}')
 
+            for key_index, key_names in enumerate(self._row_key_names):
+                if column_name in key_names:
+                    indices = self._row_key_indices[key_index]
+                    if indices is None:
+                        indices = [None] * len(key_names)
+                        self._row_key_indices[key_index] = indices
+                    for name_index, name in enumerate(key_names):
+                        if name == column_name:
+                            indices[name_index] = index
+
             if self._must_include_values and column_name in self._must_include_values:
                 self._must_include_indices[index] = self._must_include_values[
                     column_name]
@@ -291,6 +330,26 @@ class DataSampler:
             return value
         return cur_header
 
+    def _get_row_key_values(self, row: list[str]) -> list:
+        """Returns the value of each row key for a row.
+
+        Args:
+            row: A row from the input file.
+
+        Returns:
+            A list with one string per row key, joining the row's values in
+            the key columns with '|'. The entry is None for a row key whose
+            columns are not all mapped from the header rows yet.
+        """
+        values = []
+        for indices in self._row_key_indices:
+            if indices is None or None in indices:
+                values.append(None)
+                continue
+            values.append('|'.join(
+                row[index] if index < len(row) else '' for index in indices))
+        return values
+
     def _add_row_counts(self, row: list[str]) -> None:
         """Updates the column counts for a selected row.
 
@@ -318,8 +377,27 @@ class DataSampler:
                     f'sampler-unique-values-column-{index}-{header}', 1)
             count = col_counts.get(value, 0)
             col_counts[value] = count + 1
+        # Update counts for each row key.
+        for key_index, value in enumerate(self._get_row_key_values(row)):
+            if value is None:
+                continue
+            key_counts = self._row_key_counts.setdefault(key_index, {})
+            if value not in key_counts:
+                self._counters.add_counter(
+                    f'sampler-unique-values-row-key-{key_index}', 1)
+            key_counts[value] = key_counts.get(value, 0) + 1
         self._selected_rows += 1
         return
+
+    def _get_missing_row_key_columns(self) -> list:
+        """Returns the row key column names not found in the header rows."""
+        missing = []
+        for key_names, indices in zip(self._row_key_names,
+                                      self._row_key_indices):
+            for name_index, name in enumerate(key_names):
+                if indices is None or indices[name_index] is None:
+                    missing.append(name)
+        return missing
 
     def select_row(self, row: list[str], sample_rate: float = -1) -> bool:
         """Determines whether a row should be added to the sample output.
@@ -370,6 +448,17 @@ class DataSampler:
                     self._counters.add_counter(
                         f'sampler-selected-column-{index}', 1)
                     return True
+        # Rule 3: Select the row if any row key has a new combination of values.
+        for key_index, value in enumerate(self._get_row_key_values(row)):
+            if value is None:
+                continue
+            key_counts = self._row_key_counts.get(key_index, {})
+            if (key_counts.get(value, 0) < max_count and
+                    len(key_counts) < max_uniques_per_col):
+                self._counters.add_counter('sampler-selected-rows', 1)
+                self._counters.add_counter(
+                    f'sampler-selected-row-key-{key_index}', 1)
+                return True
         # No new unique value for the row.
         # Check random sampler.
         if sample_rate < 0:
@@ -437,9 +526,8 @@ class DataSampler:
             if not input_encoding:
                 input_encoding = file_util.file_get_encoding(file)
             with file_util.FileIO(file, encoding=input_encoding) as csv_file:
-                csv_options = {'delimiter': self._config.get('input_delimiter')}
-                csv_options = file_util.file_get_csv_reader_options(
-                    file, csv_options)
+                csv_options = _get_csv_reader_options(
+                    file, self._config.get('input_delimiter'))
                 if not output_delimiter:
                     # No output delimiter set. Use same as input.
                     output_delimiter = csv_options.get('delimiter', ',')
@@ -480,6 +568,17 @@ class DataSampler:
                                     raise ValueError(
                                         f'Missing unique columns in headers: {missing}'
                                     )
+                            if row_index == header_rows and self._row_key_names:
+                                missing = self._get_missing_row_key_columns()
+                                if missing:
+                                    logging.error(
+                                        'Failed to map row key columns %s within '
+                                        '%d header row(s). Increase header_rows '
+                                        'or verify column names.', missing,
+                                        header_rows)
+                                    raise ValueError(
+                                        f'Missing row key columns in headers: {missing}'
+                                    )
                             continue
                         # Check if input row has any unique values to be output
                         if self.select_row(row, sample_rate):
@@ -496,6 +595,55 @@ class DataSampler:
         logging.level_debug() and logging.debug(
             f'Column counts: {self._column_counts}')
         return output_file
+
+
+def _get_csv_reader_options(file: str, delimiter: str = '') -> dict:
+    """Returns the CSV reader options for an input file.
+
+    Args:
+      file: name of the input file.
+      delimiter: delimiter of the file. If set, it's used instead of the
+        delimiter detected from the file. 'tab' or '\\t' mean a tab.
+
+    Returns:
+      dict with options for csv.reader(), such as 'delimiter'.
+    """
+    if delimiter in ('tab', '\\t'):
+        delimiter = '\t'
+    if delimiter:
+        # Limit detection to the given delimiter, so that it is always used.
+        # For example, ';' files with decimal commas are otherwise detected as
+        # ',' files.
+        return file_util.file_get_csv_reader_options(file,
+                                                     {'delimiter': delimiter},
+                                                     delim_chars=[delimiter])
+    return file_util.file_get_csv_reader_options(file, {'delimiter': ','})
+
+
+def parse_row_keys(row_keys) -> list:
+    """Returns a list of row keys, each a list of column names.
+
+    Args:
+      row_keys: a comma-separated string or a list of row keys. Each row key
+        is a string of column names separated by '|', or a list of column
+        names.
+
+    Returns:
+      a list of lists of column names, such as
+        [['Indicator', 'Sex'], ['Indicator', 'Unit']]
+    """
+    if not row_keys:
+        return []
+    if isinstance(row_keys, str):
+        row_keys = row_keys.split(',')
+    keys = []
+    for row_key in row_keys:
+        if isinstance(row_key, str):
+            row_key = row_key.split('|')
+        names = [name.strip() for name in row_key if name.strip()]
+        if names:
+            keys.append(names)
+    return keys
 
 
 def load_column_keys(column_keys: list) -> dict:
@@ -557,7 +705,11 @@ def sample_csv_file(input_file: str,
           - sampler_unique_columns: A comma-separated list of column names to
             use for selecting unique rows. Column names must appear within the
             first header_rows rows or ValueError will be raised.
-          - input_delimiter: The delimiter used in the input file.
+          - sampler_row_keys: A list of row keys, each a list of column names
+            separated by '|'. Selects rows with new combinations of values in
+            the key columns.
+          - input_delimiter: The delimiter used in the input file. If empty,
+            the delimiter is detected from the file.
           - output_delimiter: The delimiter to use in the output file.
           - input_encoding: The encoding of the input file.
         counters: optional Counters object to get counts of sampling.
@@ -618,6 +770,7 @@ def get_default_config() -> dict:
         'sampler_column_regex': _FLAGS.sampler_column_regex,
         'sampler_unique_columns': _FLAGS.sampler_unique_columns,
         'sampler_column_keys': _FLAGS.sampler_column_keys,
+        'sampler_row_keys': _FLAGS.sampler_row_keys,
         'input_delimiter': _FLAGS.sampler_input_delimiter,
         'output_delimiter': _FLAGS.sampler_output_delimiter,
         'input_encoding': _FLAGS.sampler_input_encoding,

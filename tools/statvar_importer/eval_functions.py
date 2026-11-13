@@ -35,13 +35,27 @@ format, you could use:
 }
 """
 
+import ast
 from datetime import datetime
+import os
 import re
+import sys
+import types
+from types import MappingProxyType
 
 from absl import logging
-import dateutil
-from dateutil import parser
+import dateutil.parser
 from dateutil.relativedelta import relativedelta
+
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+_UTIL_DIR = os.path.join(os.path.dirname(os.path.dirname(_SCRIPT_DIR)), 'util')
+if _UTIL_DIR not in sys.path:
+    sys.path.append(_UTIL_DIR)
+
+from dcid_generator import generate_node_dcid
+from dcid_generator import generate_place_dcid
+from dcid_generator import generate_statvar_obs_dcid
+from statvar_dcid_generator import get_statvar_dcid
 
 # String utility functions
 
@@ -110,44 +124,210 @@ def str_to_camel_case(input_string: str,
         [w[0].upper() + w[1:] for w in clean_str.split(' ') if len(w) > 0])
 
 
-# A dictionary of functions and modules that are safe to use in `eval()`.
-# This dictionary acts as a safelist, defining the execution environment for
-# the `evaluate_statement` function. By controlling the available globals,
-# we can prevent the execution of arbitrary or unsafe code.
-EVAL_GLOBALS = {
-    # Date time functions:
-    # - `dateutil.parser.parse`: For flexible date string parsing.
-    # - `format_date`: Custom function to format dates.
-    # - `datetime`: The datetime class from the datetime module.
-    # - `datetime.strptime`: For parsing dates with a specific format.
-    # - `relativedelta`: For date calculations.
+# Minimal Safe Builtins allowed in eval (immutable)
+SAFE_BUILTINS = MappingProxyType({
+    'int': int,
+    'float': float,
+    'str': str,
+    'bool': bool,
+    'len': len,
+    'min': min,
+    'max': max,
+    'abs': abs,
+    'round': round,
+    'list': list,
+    'dict': dict,
+    'tuple': tuple,
+    'set': set,
+    'True': True,
+    'False': False,
+    'None': None,
+})
+
+# Restricted namespaces for allowed modules (immutable)
+SAFE_MODULES = MappingProxyType({
+    're':
+        types.SimpleNamespace(
+            sub=re.sub,
+            search=re.search,
+            match=re.match,
+            split=re.split,
+            findall=re.findall,
+        ),
+    'datetime':
+        datetime,
+})
+
+# Callable functions that are safe to call in expressions (immutable)
+SAFE_CALLABLES = MappingProxyType({
     'dateutil_parser_parse': dateutil.parser.parse,
     'format_date': format_date,
     'datetime': datetime,
     'datetime_strptime': datetime.strptime,
     'relativedelta': relativedelta,
-
-    # String functions:
-    # - `str_to_camel_case`: Custom function for string case conversion.
     'str_to_camel_case': str_to_camel_case,
-
-    # Regex functions:
-    # - `re`: The 're' module for regular expression operations.
-    # - `re.sub`: The 'sub' function for string substitution.
-    're': re,
+    're': SAFE_MODULES['re'],
     're_sub': re.sub,
-}
+    're.sub': re.sub,
+    're.search': re.search,
+    're.match': re.match,
+    're.split': re.split,
+    're.findall': re.findall,
+    'datetime.strptime': datetime.strptime,
+
+    # DCID generation functions:
+    'generate_node_dcid': generate_node_dcid,
+    'generate_statvar_obs_dcid': generate_statvar_obs_dcid,
+    'generate_place_dcid': generate_place_dcid,
+    'get_statvar_dcid': get_statvar_dcid,
+})
+
+# Safe method names for string and container manipulation (immutable)
+SAFE_METHODS = frozenset({
+    'split', 'rsplit', 'lower', 'upper', 'title', 'capitalize', 'strip',
+    'lstrip', 'rstrip', 'replace', 'zfill', 'join', 'startswith', 'endswith',
+    'find', 'rfind', 'count', 'format', 'get', 'values', 'keys', 'items'
+})
+
+# Permitted AST syntax nodes in expressions
+ALLOWED_NODE_TYPES = (
+    ast.Expression,
+    ast.Expr,
+    ast.Assign,
+    ast.Constant,
+    ast.Name,
+    ast.UnaryOp,
+    ast.UAdd,
+    ast.USub,
+    ast.Not,
+    ast.Invert,
+    ast.BinOp,
+    ast.Add,
+    ast.Sub,
+    ast.Mult,
+    ast.Div,
+    ast.FloorDiv,
+    ast.Mod,
+    ast.Pow,
+    ast.BitAnd,
+    ast.BitOr,
+    ast.BitXor,
+    ast.LShift,
+    ast.RShift,
+    ast.BoolOp,
+    ast.And,
+    ast.Or,
+    ast.Compare,
+    ast.Eq,
+    ast.NotEq,
+    ast.Lt,
+    ast.LtE,
+    ast.Gt,
+    ast.GtE,
+    ast.Is,
+    ast.IsNot,
+    ast.In,
+    ast.NotIn,
+    ast.IfExp,
+    ast.Call,
+    ast.Attribute,
+    ast.Subscript,
+    ast.Slice,
+    ast.List,
+    ast.Tuple,
+    ast.Dict,
+    ast.Set,
+    ast.FormattedValue,
+    ast.JoinedStr,
+    ast.Load,
+    ast.Store,
+)
+
+# A dictionary of functions and modules that are safe to use in `eval()`.
+# This dictionary acts as a safelist, defining the execution environment for
+# the `evaluate_statement` function. By controlling the available globals,
+# we can prevent the execution of arbitrary or unsafe code.
+EVAL_GLOBALS = MappingProxyType({
+    'dateutil_parser_parse': dateutil.parser.parse,
+    'format_date': format_date,
+    'datetime': datetime,
+    'datetime_strptime': datetime.strptime,
+    'relativedelta': relativedelta,
+    'str_to_camel_case': str_to_camel_case,
+    're': SAFE_MODULES['re'],
+    're_sub': re.sub,
+
+    # DCID generation functions:
+    'generate_node_dcid': generate_node_dcid,
+    'generate_statvar_obs_dcid': generate_statvar_obs_dcid,
+    'generate_place_dcid': generate_place_dcid,
+    'get_statvar_dcid': get_statvar_dcid,
+})
+
+
+def _validate_ast_safety(node: ast.AST, allowed_callables: set):
+    """Walks the AST to ensure no dangerous syntax, modules, or attributes are accessed."""
+    for subnode in ast.walk(node):
+        if not isinstance(subnode, ALLOWED_NODE_TYPES):
+            raise ValueError(
+                f"Disallowed syntax construct: {type(subnode).__name__}")
+
+        # Prohibit access to private/dunder attributes (prevents class/mro breakouts)
+        if isinstance(subnode, ast.Attribute):
+            if subnode.attr.startswith('_'):
+                raise ValueError(
+                    f"Access to private attribute '{subnode.attr}' is prohibited"
+                )
+
+        # Prohibit access to private variable names
+        if isinstance(subnode, ast.Name):
+            if subnode.id.startswith('_'):
+                raise ValueError(
+                    f"Access to private identifier '{subnode.id}' is prohibited"
+                )
+
+        # Validate function and method invocations
+        if isinstance(subnode, ast.Call):
+            func = subnode.func
+            if isinstance(func, ast.Name):
+                if func.id.startswith('_') or (func.id not in SAFE_BUILTINS and
+                                               func.id
+                                               not in allowed_callables):
+                    raise ValueError(
+                        f"Call to unauthorized function: {func.id}")
+            elif isinstance(func, ast.Attribute):
+                attr = func.attr
+                if attr.startswith('_'):
+                    raise ValueError(
+                        f"Call to private method '{attr}' is prohibited")
+                if isinstance(func.value, ast.Name):
+                    full_name = f"{func.value.id}.{attr}"
+                    if full_name not in allowed_callables and attr not in SAFE_METHODS:
+                        raise ValueError(
+                            f"Call to unauthorized function: {full_name}")
+                elif isinstance(func.value, ast.Attribute) and isinstance(
+                        func.value.value, ast.Name):
+                    full_name = f"{func.value.value.id}.{func.value.attr}.{attr}"
+                    if full_name not in allowed_callables and attr not in SAFE_METHODS:
+                        raise ValueError(
+                            f"Call to unauthorized function: {full_name}")
+                elif attr not in SAFE_METHODS:
+                    raise ValueError(f"Call to unauthorized method: {attr}")
+            else:
+                raise ValueError(
+                    f"Call to unauthorized callable construct: {type(func).__name__}"
+                )
 
 
 def evaluate_statement(eval_str: str,
                        variables: dict = {},
                        functions: dict = EVAL_GLOBALS) -> (str, str):
-    """Evaluates a Python expression and returns the result.
+    """Evaluates a Python expression and returns the result safely.
 
-    This function is a safe wrapper around Python's `eval()` built-in. It
+    This function is a secure wrapper around Python's `eval()` built-in. It
     is designed to execute simple expressions, often used for data
-    transformations. The expression can optionally assign a value to a
-    variable.
+    transformations, preventing arbitrary code execution. The expression can
+    optionally assign a value to a variable.
 
     Args:
         eval_str: The string containing the expression to be evaluated, in the
@@ -180,13 +360,40 @@ def evaluate_statement(eval_str: str,
         >>> evaluate_statement('name = 1 + "2"')
         ('name', None)
     """
+    eval_str = eval_str.strip() if eval_str else ''
+    if not eval_str:
+        return ('', None)
+
     variable = ''
     statement = eval_str
     if '=' in eval_str:
-        variable, statement = eval_str.split('=', 1)
-    variable = variable.strip()
+        parts = eval_str.split('=', 1)
+        candidate_var = parts[0].strip()
+        rhs = parts[1].strip()
+        if candidate_var.isidentifier() and not rhs.startswith('='):
+            variable = candidate_var
+            statement = rhs
+
+    eval_globals = {
+        '__builtins__': SAFE_BUILTINS,
+        **SAFE_MODULES,
+        **SAFE_CALLABLES,
+    }
+    allowed_callables = set(SAFE_BUILTINS.keys()) | set(SAFE_CALLABLES.keys())
+
+    if functions:
+        for k, v in functions.items():
+            if not k.startswith('_'):
+                eval_globals[k] = v
+                if callable(v):
+                    allowed_callables.add(k)
+
     try:
-        result = eval(statement, functions, variables)
+        expr_tree = ast.parse(statement, mode='eval')
+        _validate_ast_safety(expr_tree.body, allowed_callables)
+
+        code = compile(expr_tree, filename='<eval>', mode='eval')
+        result = eval(code, eval_globals, variables.copy())
     except Exception as e:
         logging.debug(
             f'Failed to evaluate: {variable}={statement}, {e} in {variables}')

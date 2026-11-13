@@ -12,14 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
-import sys
-from absl import app, logging
 import datetime
 import glob
+import os
 import shutil
+import sys
+
+from absl import app
+from absl import logging
 import pandas as pd
-import re
+
 # NOTE: To handle .xlsx files, the 'openpyxl' library is required (pip install openpyxl).
 
 # --- Configuration Constants ---
@@ -169,7 +171,7 @@ def main(_):
     # Ensure all directories exist
     os.makedirs(_BASE_DOWNLOAD_DIRECTORY, exist_ok=True)
     os.makedirs(_SOURCE_FILES_DIRECTORY, exist_ok=True)
-    logging.info(f"Base output directories ensured to exist.")
+    logging.info("Base output directories ensured to exist.")
 
     # Define all years to process
     # MODIFIED: Generate starting years from _START_YEAR (2009)

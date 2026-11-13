@@ -1,0 +1,30 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "Sweden_Census_Health",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://www.statistikdatabasen.scb.se/pxweb/sv/ssd/START__BE__BE0101/",
+            "provenance_description": "Health and Vital Statistics (Deaths by region, age and sex; Municipal Fertility Rate by sex; Historical National Live Births by sex) from Statistics Sweden (SCB).",
+            "scripts": [
+                "download_health.py --output_dir=input_files",
+                "run.sh"
+            ],
+            "source_files": [
+                "input_files/*.csv",
+                "counters/*.csv",
+                "validation_config.json"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output/Death_NUTS1.tmcf",
+                    "cleaned_csv": "output/*.csv",
+                    "node_mcf": "output/*.mcf"
+                }
+            ],
+            "validation_config_file": "validation_config.json",
+            "cron_schedule": "0 08 * * 1"
+        }
+    ]
+}

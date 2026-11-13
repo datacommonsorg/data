@@ -12,21 +12,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from csv import DictReader
+from csv import DictWriter
 import os
+from os import path as ospath
+from os import remove
 import sys
-from absl import app
-from absl import flags
-from absl import logging
-from os import remove, path as ospath
-from csv import DictReader, DictWriter
 from urllib.request import urlopen
+
+from absl import logging
 
 # For finding util
 _CODE_DIR = os.path.dirname(os.path.realpath(__file__))
 sys.path.insert(1, os.path.join(_CODE_DIR, '../../../'))
-import util.name_to_alpha2 as name_to_alpha2
 import util.alpha2_to_dcid as alpha2_to_dcid
 import util.county_to_dcid as county_to_dcid
+import util.name_to_alpha2 as name_to_alpha2
 
 # Dictionary that maps a row name in the CSV file is mapped to a Schema place.
 # key = CSV's row name
@@ -70,7 +71,6 @@ def clean_csv(input_path: str, output_path: str) -> None:
     """
 
     try:
-        visited_dcids: set = set()
         logging.info(
             f"Starting CSV cleaning from '{input_path}' to '{output_path}'")
         # If output file already exists, remove it.
@@ -105,9 +105,10 @@ def clean_csv(input_path: str, output_path: str) -> None:
                 sub_region2: str = row['sub_region_2']
                 country_code: str = row['country_region_code']
                 date = row['date']
-            except KeyError:
+            except KeyError as e:
                 logging.error(
                     f"Missing expected column in row: {e}. Skipping row.")
+                continue
 
             # Convert the region name to a dcid/geoId.
             region_dcid: str = _get_region_dcid(sub_region2, sub_region1,
@@ -147,7 +148,7 @@ def clean_csv(input_path: str, output_path: str) -> None:
 
         f_input.close()
         f_output.close()
-        logging.info(f"CSV cleaning completed.")
+        logging.info("CSV cleaning completed.")
 
     except Exception as e:
         logging.fatal(f"Error while cleaning {e}.")
@@ -161,7 +162,7 @@ def _download_data(url: str, download_as: str) -> None:
         download_as (str): path to save the file.
     """
     try:
-        logging.info(f"Downloading starts..")
+        logging.info("Downloading starts..")
         # Request data from url.
         data: str = urlopen(url).read().decode('utf-8')
 
@@ -189,7 +190,7 @@ def _get_region_dcid(sub_region_2: str, sub_region_1: str,
     # Get rid of sub_region_1 whitespaces.
     # Hashmap keys don't contain whitespaces.
     try:
-        logging.info(f"Getting region dcid.")
+        logging.info("Getting region dcid.")
         sub_region_1 = sub_region_1.replace(" ", "")
 
         if sub_region_1:
@@ -209,13 +210,13 @@ def _get_region_dcid(sub_region_2: str, sub_region_1: str,
         # If the sub_region_1_alpha2 is not a key in COUNTY_MAP[State].
         if sub_region_2 and sub_region_2 not in COUNTY_MAP[sub_region_1_alpha2]:
             logging.info(f"The value of sub_region_2 is: {sub_region_2}")
-            logging.info(f"sub_region_2 not in COUNTY_MAP[sub_region_1_alpha2]")
+            logging.info("sub_region_2 not in COUNTY_MAP[sub_region_1_alpha2]")
             return None
 
         # If the sub_region_1_alpha2 is not a key in USSATE_MAP.
         if sub_region_1 and sub_region_1_alpha2 not in USSTATE_MAP:
             logging.info(
-                f"sub_region_1 and sub_region_1_alpha2 not in USSTATE_MAP")
+                "sub_region_1 and sub_region_1_alpha2 not in USSTATE_MAP")
 
             return None
 

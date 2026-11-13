@@ -12,13 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
-import json
-import csv
 import copy
+import csv
+
 import pandas as pd
-import numpy as np
-import urllib.request
 
 TEMPLATE_STAT_VAR = """Node: dcid:{name}
 description: "{description}"
@@ -265,7 +262,7 @@ class CensusPrimaryAbstractDataLoaderBase:
 
         key = "{0}_{1}".format(
             row["columnName"],
-            place_of_residence if place_of_residence != None else "Total")
+            place_of_residence if place_of_residence is not None else "Total")
         self.stat_var_index[key] = name
 
         self.mcf.append(row)

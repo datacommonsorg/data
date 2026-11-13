@@ -12,10 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import json
+import os
 import tempfile
 import unittest
 
-from .column_map_validator import *
+from .column_map_validator import check_column_map
 
 
 class TestColumnMapValidator(unittest.TestCase):

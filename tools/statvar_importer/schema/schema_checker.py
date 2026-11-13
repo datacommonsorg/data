@@ -25,12 +25,12 @@ To check a list of MCF files, run the command:
 
 import os
 import re
-import requests
 import sys
 
 from absl import app
 from absl import flags
 from absl import logging
+import requests
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
@@ -55,17 +55,15 @@ flags.DEFINE_string('schema_check_config', '', 'File with config parameters.')
 
 _FLAGS = flags.FLAGS
 
-import file_util
-import process_http_server
-
+import config_flags
 from config_map import ConfigMap
 from counters import Counters
-from config_map import ConfigMap
-from mcf_file_util import load_mcf_nodes, write_mcf_nodes, update_mcf_nodes
-from mcf_file_util import add_namespace, strip_namespace, add_mcf_node
-from schema_spell_checker import get_spell_checker, spell_check_nodes, get_default_spell_config
-
-import config_flags
+import file_util
+from mcf_file_util import load_mcf_nodes
+import process_http_server
+from schema_spell_checker import get_default_spell_config
+from schema_spell_checker import get_spell_checker
+from schema_spell_checker import spell_check_nodes
 
 
 # Check the URL
@@ -129,7 +127,7 @@ def get_urls_in_string(value: str, url_regex: re.Pattern = None) -> list[str]:
       list of URLs found in the value.
     """
     urls = []
-    if url_regex == None:
+    if url_regex is None:
         url_regex = get_url_regex()
     for matches in url_regex.finditer(str(value).strip()):
         url = matches.groupdict().get('url')
@@ -150,7 +148,7 @@ def get_node_urls(node: dict[str, str],
       dictionary keyed by URLs in the node with property as value.
     """
     node_urls = {}
-    if url_regex == None:
+    if url_regex is None:
         url_regex = get_url_regex()
     for prop, value in node.items():
         if prop and prop.startswith('#'):
@@ -256,7 +254,7 @@ def check_mcf_urls(nodes: dict[str, dict],
                 msg = cached_url.get('message', '')
                 counters.add_counter(f'url-cache-hits-{url_status}', 1)
             else:
-                counters.add_counter(f'url-lookups', 1)
+                counters.add_counter('url-lookups', 1)
                 url_status, msg = get_url_status(url)
                 url_status_cache[url] = {'status': url_status, 'message': msg}
                 counters.add_counter(f'url-status-{url_status}', 1)
@@ -394,7 +392,7 @@ def sanity_check_mcf(input_mcf: str,
     input_files = file_util.file_get_matching(input_mcf)
     for mcf_file in input_files:
         nodes = _get_nodes_from_file(mcf_file)
-        counters.add_counter(f'sanity-input-mcf-file', 1, mcf_file)
+        counters.add_counter('sanity-input-mcf-file', 1, mcf_file)
         logging.info(
             f'Loaded {len(nodes)} nodes from file for sanity check: {mcf_file}')
         context = {'file': mcf_file}

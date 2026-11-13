@@ -14,11 +14,12 @@
 import datetime
 import os
 import re
-import requests
 import shutil
 import zipfile
+
 from absl import app
 from absl import logging
+import requests
 
 
 def download_zip_file(extracted_zip_url, output_folder):
@@ -89,7 +90,7 @@ def process_zip_file(download_path, output_folder, extracted_year):
             f"All contents temporarily unzipped to {temp_extract_folder}")
 
         table_year_pattern = re.compile(
-            f"^Table_.*?{(str(extracted_year))}\.[^.]+$", re.IGNORECASE)
+            rf"^Table_.*?{(str(extracted_year))}\.[^.]+$", re.IGNORECASE)
         for root, dirs, files in os.walk(temp_extract_folder):
             for file in files:
                 file_path = os.path.join(root, file)

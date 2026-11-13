@@ -13,10 +13,10 @@
 # limitations under the License.
 """Tests for pharm.py."""
 import unittest
-import numpy as np
 
-import pharm
 import config
+import numpy as np
+import pharm
 
 
 class TestSuite(unittest.TestCase):

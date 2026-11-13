@@ -1,0 +1,139 @@
+id,name
+KN.A73,Gross Enrolment Ratio
+KN.A74,Gross Intake  Ratio
+KN.A75,Net Intake  Ratio
+KN.A76,Net Enrolment  Ratio (Total)
+KN.A77,Pupil Teacher Ratio
+KN.A78,Pupil Classroom Ratio
+KN.A79,Pupil Stance Ratio
+KN.A80,Enrolment
+KN.A83,Annual change in Enrolment (%)
+KN.A84,Number of Schools
+KN.A85,Number of Teachers
+KN.A86,Number of classrooms
+KN.A87,Number of Toilet Stances
+KN.A88,Population (6 - 12 years)
+KN.A89,Orphans in Primary School
+KN.A90,Share of orphans to total Enrolment
+KN.A92,Enrolment
+KN.A93,"Enrolment, P1"
+KN.A94,"Enrolment, P2"
+KN.A95,"Enrolment, P3"
+KN.A96,"Enrolment, P4"
+KN.A97,"Enrolment, P5"
+KN.A98,"Enrolment, P6"
+KN.A99,"Enrolment, P7"
+KN.A100,Pupils with adequate
+KN.A101,"Pupils with adequate, P1"
+KN.A102,"Pupils with adequate, P2"
+KN.A103,"Pupils with adequate, P3"
+KN.A104,"Pupils with adequate, P4"
+KN.A105,"Pupils with adequate, P5"
+KN.A106,"Pupils with adequate, P6"
+KN.A107,"Pupils with adequate, P7"
+KN.A108,Share of pupils with adequate space total Enrolment
+KN.A109,"Share of pupils with adequate space total Enrolment, P1"
+KN.A110,"Share of pupils with adequate space total Enrolment, P2"
+KN.A111,"Share of pupils with adequate space total Enrolment, P3"
+KN.A112,"Share of pupils with adequate space total Enrolment, P4"
+KN.A113,"Share of pupils with adequate space total Enrolment, P5"
+KN.A114,"Share of pupils with adequate space total Enrolment, P6"
+KN.A115,"Share of pupils with adequate space total Enrolment, P7"
+KN.A117,Pupils who registered
+KN.A118,Pupils Who Sat for PLE
+KN.A119,Pupils who passed PLE
+KN.A120,Division I
+KN.A121,Division II
+KN.A122,Division III
+KN.A123,Division IV
+KN.A124,Division U
+KN.A125,Division X
+KN.A126,Pass Rate (Percent)
+KN.A127,Performance index
+KN.A129,Primary seven (P.7) Completion rate
+KN.A130,Senior one (S.1) Transition rate to S1
+KN.A131,Primary teachers by level of qualification and sex
+KN.A133,DPE (Diploma in Primary Education)
+KN.A134,Grade II Teacher
+KN.A135,Grade III Teacher
+KN.A136,Grade IV Teacher
+KN.A137,"Grade V Teacher including DSNE, DSE,DTE"
+KN.A138,Graduate Teacher
+KN.A139,Licensed Teacher
+KN.A140,Other Training
+KN.A26,Primary school enrolment by class
+KN.A5,"Primary school enrolment by class and sex, P1"
+KN.A8,"Primary school enrolment by class and sex, P2"
+KN.A11,"Primary school enrolment by class and sex, P3"
+KN.A14,"Primary school enrolment by class and sex, P4"
+KN.A17,"Primary school enrolment by class and sex, P5"
+KN.A20,"Primary school enrolment by class and sex, P6"
+KN.A23,"Primary school enrolment by class and sex, P7"
+KN.A29,Primary Gross Intake Rate (PGI)
+KN.A30,Net Intake Rate (PNI)
+KN.A32,Primary Gross Enrolment (PGE)
+KN.A33,Primary Net Enrolment Rates (PNE)
+KN.A35,Pupil Teacher Ratio (PTR)
+KN.A36,Pupil Classroom Ratio (PCR)
+KN.A143,Gross Enrolment rate
+KN.A144,Net Enrolment rate
+KN.A145,Student Teacher Ratio
+KN.A146,Student Classroom Ratio
+KN.A147,Student Stance Ratio
+KN.A148,Enrolment
+KN.A151,Annual change in enrolment (%)
+KN.A152,Number of Schools
+KN.A153,Number of Teachers
+KN.A154,Number of classrooms
+KN.A155,Orphans in Secondary School
+KN.A156,Share of orphans to total enrolment
+KN.A157,Secondary teachers by level of qualification
+KN.A158,"Grade V Teacher including DSNE, DSE,DTE"
+KN.A159,Graduate Teacher
+KN.A160,Licensed Teacher
+KN.A161,Other Training
+KN.A163,Students who registered
+KN.A164,Students Who Sat for UCE
+KN.A165,Pass Rate
+KN.A166,Performance Index
+KN.A168,Students who registered
+KN.A169,Students Who Sat for UACE
+KN.A170,Students Who didn’t sit for UACE
+KN.A171,Students who passed
+KN.A172,"Principal passes, 3"
+KN.A173,"Principal passes, 2"
+KN.A174,"Principal passes, 1"
+KN.A176,Students who failed
+KN.A177,"Subsidiary, 1"
+KN.A178,Failure
+KN.A180,Pass Rate
+KN.A181,Performance Index
+KN.A183,Senior 4 Completion rate
+KN.A184,Transition rate to Secondary five (S.5)
+KN.A37,Secondary school enrolment by class
+KN.A38,Secondary school enrolment by class S1
+KN.A39,Secondary school enrolment by class S2
+KN.A40,Secondary school enrolment by class S3
+KN.A41,Secondary school enrolment by class S4
+KN.A42,Secondary school enrolment by class S5
+KN.A43,Secondary school enrolment by class S6
+KN.A45,Gross Intake Ratio (GIR)
+KN.A46,Net Intake  Ratio (NIR)
+KN.A47,Gross Enrolment Ratio (GER)
+KN.A48,Net Enrolment  Ratio (NER)
+KN.A186,All tertiary Institutions
+KN.A190,"Of which, Universities"
+KN.A193,Percentage enrolled in universities (%)
+KN.A195,"Institutions, total"
+KN.A196,Government
+KN.A197,Private
+KN.A198,Enrolment
+KN.A200,"Competency in literacy at   Primary 3, Total"
+KN.A201,"Competency in literacy at  Primary 6, Total"
+KN.A202,"Competency in numeracy at Primary 3, Total"
+KN.A203,"Competency in numeracy at Primary 6 , Total"
+KN.A205,Biology Total
+KN.A206,"Mathematics, Total"
+KN.A207,English language Total
+KN.A50,Student Teacher (STR)
+KN.A51,Student Classroom Ratio (SCR)

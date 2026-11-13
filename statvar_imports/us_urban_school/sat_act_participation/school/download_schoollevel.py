@@ -12,23 +12,30 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
-import requests
-import zipfile
+from datetime import date
 import io
-import pandas as pd
+import os
+from pathlib import Path
 import re
 import shutil
-from absl import logging, app, flags
-from pathlib import Path
-from datetime import date
+import zipfile
+
+from absl import app
+from absl import flags
+from absl import logging
+import pandas as pd
+import requests
 from retry import retry
-import sys
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('data_type', "sat_act",
-                    'The type of data to download: "sat_act".')
-flags.mark_flag_as_required('data_type')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('data_type', "sat_act",
+                        'The type of data to download: "sat_act".')
+    flags.mark_flag_as_required('data_type')
+
 
 BASE_URL_TEMPLATE = "https://civilrightsdata.ed.gov/assets/ocr/docs/{}.zip"
 
@@ -305,7 +312,6 @@ def download_and_extract(config_key, config_data, data_type, output_dir):
 
             target_member = None
             for name in zip_ref.namelist():
-                normalized_name = name.replace('\\', '/').lower()
 
                 general_match = False
                 for pattern in keywords:
@@ -390,4 +396,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

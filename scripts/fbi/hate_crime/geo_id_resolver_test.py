@@ -14,6 +14,7 @@
 """Tests for geo_id_resolver.py"""
 
 import unittest
+
 from . import geo_id_resolver
 
 

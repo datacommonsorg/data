@@ -12,14 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """Process EIA datasets to produce TMCF and CSV."""
-import os
-import sys
+from collections import defaultdict
 import csv
 import json
-from absl import logging
+import os
 import re
-from collections import defaultdict
-from sys import path
+import sys
+
+from absl import logging
 
 # For import util.alpha2_to_dcid
 # Setup path for import from data/util
@@ -27,10 +27,10 @@ _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '../../../../util/'))
 import alpha2_to_dcid as alpha2_to_dcid
+from counters import Counters
+import file_util
 import name_to_alpha2 as name_to_alpha2
 
-import file_util
-from counters import Counters
 from . import category
 
 PERIOD_MAP = {
