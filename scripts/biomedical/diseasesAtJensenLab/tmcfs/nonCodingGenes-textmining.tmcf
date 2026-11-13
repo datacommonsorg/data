@@ -1,0 +1,29 @@
+Node: E:nonCodingGenes->E1
+typeOf: dcs:Disease
+dcid: C:nonCodingGenes->DOID_dcid
+name: C:nonCodingGenes->Disease_Name
+diseaseOntologyID: C:nonCodingGenes->DOID
+
+Node: E:nonCodingGenes->E2
+typeOf: dcs:ICD10Code
+dcid: C:nonCodingGenes->ICD10_dcid
+name: C:nonCodingGenes->Disease_Name
+identifier: C:nonCodingGenes->ICD10
+
+Node: E:nonCodingGenes->E3
+typeOf: dcs:NonCodingRNA
+dcid: C:nonCodingGenes->Gene_dcid
+name: C:nonCodingGenes->Gene
+ensemblID: C:nonCodingGenes-textMining->ensemblID
+nonCodingRNAType: C:nonCodingGenes->RNA_type
+
+Node: E:nonCodingGenes->E4
+typeOf: dcs:DiseaseGeneAssociation
+dcid: C:nonCodingGenes->dcid
+name: C:nonCodingGenes->name
+associationType: C:nonCodingGenes-textMining->associationType
+confidence: C:nonCodingGenes-textMining->confidence
+diseaseID: C:nonCodingGenes->Disease_dcid
+geneID: E:nonCodingGenes->E3
+url: C:nonCodingGenes-textMining->url
+zScore: C:nonCodingGenes-textMining->z-score
