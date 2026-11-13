@@ -1,98 +1,61 @@
-# Civil Rights Data Collection (CRDC)
+# Civil Rights Data Collection (CRDC) — Harassment or Bullying
 
 ## 1. Import Overview
 
-This project processes and imports the Civil Rights Data Collection (CRDC) data from the U.S. Department of Education. The dataset provides biennial school-level data on a variety of topics, including student enrollment, educational programs, chronic absenteeism, and offenses.
+This import processes school-level **Harassment or Bullying** data from the U.S. Department of Education's Civil Rights Data Collection (CRDC) across published survey releases (`2011-12`, `2013-14`, `2017-18`, `2020-21`, `2021-22`, `2023-24`, and future `2024+` releases).
 
-* **Source URL**: [https://civilrightsdata.ed.gov/](https://civilrightsdata.ed.gov/)
-* **Import Type**: Automated
-* **Source Data Availability**: Biennial releases from the U.S. Department of Education.
-* **Release Frequency**: Biennial
-* **Notes**: This dataset provides school-level data. The import currently focuses on "Harassment or Bullying" data.
-
----
-
-## 2. Preprocessing Steps
-
-The import process is divided into two main stages: downloading the raw data, preprocessing and then processing it to generate the final artifacts for ingestion.
-
-* **Input files**:
-  * `download.py`: Downloads, unzips, filters, renames, and preprocesses the raw data.
-  * `harssment_and_bullying_pv_map.csv`: Configuration file for the chronic absenteeism data processing script.
-  * `harassment_or_bullying_metadata.csv`: Property-value mapping file used by the processor for chronic absenteeism.
-
-* **Transformation pipeline**:
-  1. `download.py` downloads the biennial data releases for all available years in the `source_files` directory, unzips them, filters for relevant files, renames them, and save it as csv files in the `input_files` directory.
-  2. `preprocess.py` adds the year column and rename the files.
-  3. After the download is complete, the `stat_var_processor.py` tool is run on the cleaned CSV files in the `input_files` directory using the shell script `run.sh`
-  4. The processor uses the metadata and pv_map files to generate the final `.csv`,`.tmcf` files, placing them in the `processed_output/` directory.
-
-* **Data Quality Checks**:
-  * Linting is performed on the generated output files using the DataCommons import tool.
+* **Import Name**: `CRDC_EducationSchool_HarassmentOrBullying`
+* **Source URL**: [https://civilrightsdata.ed.gov/data](https://civilrightsdata.ed.gov/data)
+* **Entity Type**: Public schools (`nces/<12-digit COMBOKEY>`)
+* **Schedule**: Weekly on Friday at `06:30 UTC` (`30 6 * * 5`)
 
 ---
 
-## 3. Autorefresh
+## 2. Pipeline Architecture & Files
 
-This import is designed to be autorefreshed.
-
-* **Steps**:
-  1. A Cloud Scheduler job, defined in `manifest.json`, runs biennially.
-  2. The job first executes `download.py` to automatically download the latest biennial data release.
-  3.The shell script `run.sh` then runs the `stat_var_processor.py` tool, which processes the yearly files and generates the final artifacts for Harassment or Bullying.
-  4. The final, validated output files are uploaded to a GCS bucket for ingestion into the Data Commons Knowledge Graph.
-
----
-
-## 4. Script Execution Details
-
-To run the import manually, follow these steps in order.
-
-### Step 1: Download and Preprocess Raw Data
-
-This script downloads all available biennial data files, unzips them, filters for relevant files, renames them, and adds 'year'.
-
-**Usage**:
-```bash
-python3 download.py
-```
-The processed source files will be located in `input_files/`.
+| File | Purpose |
+| :--- | :--- |
+| `manifest.json` | Declares scripts (`download.py`, `preprocess.py`, `run.sh`), `import_inputs` (`2012`, `2014`, `2018`, `2021`, `2022`, `2024Onwards`), `source_files`, `validation_config_file`, and Cloud Batch `resource_limits`. |
+| `download.py` | Downloads CRDC ZIP archives into temporary `source_files/`, deterministically discovers school-level (`SCH`) Harassment/Bullying tables mapped in `harassment_or_bullying_pvmap.csv` (excluding `LEA`, `__MACOSX`, `layout`, and unmapped `2011-12` `Reported Allegations` tables), and writes raw converted CSVs to `input_files/`. |
+| `preprocess.py` | Reads `input_files/*.csv` as strings (preserving leading zeros on `COMBOKEY` and keeping empty cells blank), strips stray quotes/backticks, inserts `Year` as column 2, and writes atomically to `preprocessed_files/`. |
+| `run.sh` | Verifies all required input partitions exist in `preprocessed_files/`, runs `stat_var_processor.py` in parallel to produce `processed_output/`, and verifies all `manifest.json` `.tmcf` and `.csv` outputs exist and contain data rows. |
+| `harassment_or_bullying_pvmap.csv` | Property-value mappings for CRDC Harassment and Bullying school metrics. |
+| `harassment_or_bullying_metadata.csv` | Configuration parameters for `stat_var_processor.py`. |
+| `validation_config.json` | Scoped SQL validation rules enforcing single-year date consistency on `2012..2022` and `>= 100` StatVar freshness within a 5-year lag window on `2024Onwards` (the `0.1%` deleted-records threshold, empty-import, missing-refs, and lint checks are inherited from `tools/import_validation/validation_config.json`). |
+| `download_preprocess_test.py` | Unit tests covering deterministic file discovery, retries/fail-fast download handling, string-safe preprocessing, `run.sh` pre-flight validation, and `validation_config.json` SQL checks. |
 
 ---
 
+## 3. Running Locally
 
-### Step 2: Process the Data
-
-This script processes all cleaned input files to generate the final CSV and TMCF files.
-
-The shell script `run.sh` runs the `stat_var_processor.py` tool on the all the files in the `input_files` folder (on every year wise data files) and execute them parallely.
-### For example:
-**Usage**:
+Run all commands from the `data` repository root (or from `statvar_imports/crdc_import/crdc_harassment_or_bullying/`):
 
 ```bash
-sh run.sh
+# 1. Set up the repository virtual environment
+./run_tests.sh -r
+
+# 2. Download raw CRDC Harassment/Bullying CSVs into input_files/
+.env/bin/python statvar_imports/crdc_import/crdc_harassment_or_bullying/download.py
+
+# 3. Preprocess CSVs into preprocessed_files/
+.env/bin/python statvar_imports/crdc_import/crdc_harassment_or_bullying/preprocess.py
+
+# 4. Run StatVar processing into processed_output/
+PYTHON_BIN="$PWD/.env/bin/python" bash statvar_imports/crdc_import/crdc_harassment_or_bullying/run.sh
 ```
 
-The stat_var_processor.py command in the shell script looks like the below:
-
-```bash
-python3 ../../../../tools/statvar_importer/stat_var_processor.py --input_data="input/Harassment and Bullying.csv" --pv_map="harssment_and_bullying_pvmap.csv" --config_file="harassment_or_bullying_metadata.csv" --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path="output/harassment_or_bullying"
-```
-To check the processing with the test data, run the below command from the project directory:
-
-```bash
-python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data="test_data/harassment_or_bullying_data.csv" --pv_map="harssment_or_bullying_pv_map.csv" --config_file="harassment_or_bullying_metadata.csv" --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path="test_data/expected_output/harassment_or_bullying"
-```
 ---
 
+## 4. Testing & Validation
 
-### Step 3: Validate the Output Files
+Run unit tests and lint checks from the `data` repository root:
 
-This command validates the generated files for formatting and semantic consistency before ingestion.
+```bash
+./run_tests.sh -p statvar_imports/crdc_import/crdc_harassment_or_bullying
+./run_tests.sh -l
+```
 
-**Usage**:
-
-Lint takes one TMCF with its CSV files per run; `-o` sets the folder for the report (`report.json` and `summary_report.html`).
+To lint generated MCF/TMCF/CSV artifacts with the Data Commons import tool:
 
 ```bash
 java -jar /path/to/datacommons-import-tool.jar lint -o lint_report/2012 \
@@ -106,6 +69,3 @@ for year in 2014 2018 2021 2022 2024Onwards; do
     processed_output/crdc_harassment_or_bullying_${year}*.mcf
 done
 ```
-This step ensures that the generated artifacts are ready for ingestion into Data Commons.
-
----

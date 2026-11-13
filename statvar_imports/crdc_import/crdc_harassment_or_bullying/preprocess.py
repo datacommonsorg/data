@@ -11,201 +11,160 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+"""Preprocesses extracted CRDC Harassment or Bullying CSVs for StatVar import."""
 
 from glob import glob
 import os
 import re
+import shutil
 
-import pandas as pd  # Required library for handling Excel and robust CSV files
+from absl import logging
+import pandas as pd
 
-# --- Configuration ---
-# Set the directory where your files are located.
-TARGET_DIR = 'input_files'
-# Define the delimiter used in your CSV files. This is only used for CSV files.
-DELIMITER = ','
+_SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
+DEFAULT_INPUT_DIR = os.path.join(_SCRIPT_PATH, "input_files")
+DEFAULT_OUTPUT_DIR = os.path.join(_SCRIPT_PATH, "preprocessed_files")
+DELIMITER = ","
+
+_CHARS_TO_REMOVE_RE = re.compile(r"[`'\"]")
+_YEAR_FROM_FILENAME_RE = re.compile(r"(\D|^)(\d{4})(\D|$)")
 
 
-def extract_year_from_filename(filename):
-    """
-    Extracts a four-digit year (YYYY) from the filename using a regular expression.
-    Returns the year as a string or None if not found.
-    """
-    # Regex pattern looks for four digits surrounded by non-digits or start/end of string.
-    match = re.search(r'(\D|^)(\d{4})(\D|$)', filename)
+def extract_year_from_filename(filename: str) -> str | None:
+    """Extracts a four-digit year (YYYY) from the filename."""
+    match = _YEAR_FROM_FILENAME_RE.search(filename)
     if match:
-        # Group 2 contains the four-digit year
         return match.group(2)
     return None
 
 
-def clean_dataframe(df):
-    """
-    Cleans string columns in the DataFrame by removing all backticks, quotes, 
-    and then stripping leading/trailing whitespace. This is a more aggressive 
-    cleaning step to handle inconsistent quoting and backticks in source data.
-    """
-    # Regex to find all backticks, single quotes, and double quotes globally
-    chars_to_remove = r"[`'\"]"
+def clean_dataframe(df: pd.DataFrame) -> pd.DataFrame:
+    """Removes backticks/quotes and strips whitespace from headers and cells."""
+    df = df.copy()
+    df.columns = [
+        _CHARS_TO_REMOVE_RE.sub("", str(col)).strip() for col in df.columns
+    ]
 
     for col in df.columns:
-        # Only process columns that are of object (string) type
-        if df[col].dtype == 'object':
-            # Convert to string to handle potential NaNs and other types cleanly
-            s = df[col].astype(str)
-
-            # 1. Remove ALL instances of the target characters globally in the string
-            s = s.str.replace(chars_to_remove, '', regex=True)
-
-            # 2. Strip leading/trailing whitespace
-            df[col] = s.str.strip()
+        if pd.api.types.is_object_dtype(
+                df[col]) or pd.api.types.is_string_dtype(df[col]):
+            # Preserve missing values as empty strings rather than literal 'nan'.
+            s = df[col].fillna("").astype(str)
+            s = s.str.replace(_CHARS_TO_REMOVE_RE, "", regex=True).str.strip()
+            if col.upper() == "COMBOKEY":
+                s = s.str.replace(r"^(\d+)\.0$", r"\1", regex=True)
+            df[col] = s
 
     return df
 
 
-def process_file(filepath, year):
-    """
-    Reads the file using pandas (supporting CSV and XLSX), 
-    inserts a 'Year' column as the second column, and conditionally inserts 
-    an 'NA' column for files from year '2010', cleans the data, and overwrites the original file.
-    
-    NOTE: This function requires 'pandas' and 'openpyxl' (for .xlsx) packages.
-    """
-    if year is None:
-        print(f"Skipping {filepath}: Year could not be extracted.")
-        return
-
-    print(f"Processing {filepath}... Inserting Year: {year}")
-
+def _read_source_file(filepath: str, sep: str = DELIMITER) -> pd.DataFrame:
+    """Reads a CSV or Excel file with all columns preserved as strings."""
     file_extension = os.path.splitext(filepath)[1].lower()
-
-    # 1. Read the file content using pandas
-    try:
-        if file_extension == '.csv':
-            # Use specified delimiter for CSV
-            df = pd.read_csv(filepath, sep=DELIMITER)
-        elif file_extension in ['.xlsx', '.xls']:
-            # Pandas can read Excel files, usually requiring 'openpyxl'
-            # Assumes data is in the first sheet (sheet_name=0)
-            df = pd.read_excel(filepath, sheet_name=0)
-        else:
-            print(
-                f"Skipping {filepath}: Unsupported file format ({file_extension}). Only CSV, XLSX, and XLS are supported."
-            )
-            return
-
-    except ImportError:
-        print(
-            "Error: Required library missing. Please install pandas and openpyxl: pip install pandas openpyxl"
+    if file_extension == ".csv":
+        for encoding in ("utf-8-sig", "latin-1"):
+            try:
+                return pd.read_csv(
+                    filepath,
+                    sep=sep,
+                    dtype=str,
+                    low_memory=False,
+                    keep_default_na=False,
+                    encoding=encoding,
+                )
+            except UnicodeDecodeError:
+                continue
+        raise ValueError(f"Unable to decode CSV file: {filepath}")
+    if file_extension in (".xlsx", ".xls"):
+        engine = "openpyxl" if file_extension == ".xlsx" else None
+        return pd.read_excel(
+            filepath,
+            sheet_name=0,
+            dtype=str,
+            keep_default_na=False,
+            engine=engine,
         )
-        return
-    except Exception as e:
-        # Catch reading errors
-        print(f"Error reading {filepath}: {e}")
-        return
+    raise ValueError(
+        f"Unsupported file format ({file_extension}) for {filepath}. "
+        "Only CSV, XLSX, and XLS are supported.")
 
+
+def process_file(filepath: str, year: str | None, output_dir: str) -> str:
+    """Cleans one CRDC file, inserts 'Year', and writes atomically to output_dir."""
+    if not year:
+        raise ValueError(
+            f"Could not extract 4-digit survey year from filename: {filepath}")
+
+    logging.info("Processing '%s' (Year=%s)...", filepath, year)
+    df = _read_source_file(filepath)
     if df.empty:
-        print(f"File {filepath} is empty. Skipping modification.")
-        return
+        raise ValueError(f"Input file '{filepath}' has 0 data rows.")
 
-    # --- NEW CLEANING STEP ---
-    # Apply aggressive cleaning to remove backticks and quotes globally
     df = clean_dataframe(df)
-    # -------------------------
-
-    # 2. Modify the data
-
-    # Check if 'Year' column already exists
-    if 'Year' in df.columns:
-        print(
-            f"File {filepath} already contains a 'Year' column. Skipping modification."
-        )
-        return
-
-    # Assign the new column with the year value
-    df['Year'] = year
-
-    is_2010_file = (year == '2010')
-
-    # Conditional addition of the 'NA' column
-    if is_2010_file:
-        print(f"Adding 'NA' column for 2010 file: {filepath}")
-        # Add the "NA" column with missing values (pd.NA)
-        df['NA'] = pd.NA
-
-    # Reorder columns: Get all column names
     cols = df.columns.tolist()
-
-    # Handle the case where the DataFrame might be read without any columns if it was malformed
     if not cols:
-        print(f"Error: Could not identify columns in {filepath}.")
-        return
+        raise ValueError(f"Could not identify columns in '{filepath}'.")
+
+    if "Year" not in df.columns:
+        df["Year"] = year
+
+    is_2010_file = year == "2010"
+    if is_2010_file and "NA" not in df.columns:
+        df["NA"] = ""
 
     first_col = cols[0]
-
-    # Define the base new column list: [First Col, 'Year', ...]
-    new_cols = [first_col, 'Year']
-
-    # If it's a 2010 file, insert 'NA' after 'Year'
+    new_cols = [first_col, "Year"]
+    cols_to_exclude = {first_col, "Year"}
     if is_2010_file:
-        new_cols.append('NA')
+        new_cols.append("NA")
+        cols_to_exclude.add("NA")
 
-    # Append all remaining columns
-    # We use a set for efficient exclusion of the columns we've already placed
-    cols_to_exclude = {first_col, 'Year'}
-    if is_2010_file:
-        cols_to_exclude.add('NA')
+    remaining_cols = [c for c in df.columns if c not in cols_to_exclude]
+    df = df[new_cols + remaining_cols]
 
-    remaining_cols = [col for col in cols if col not in cols_to_exclude]
-    new_cols.extend(remaining_cols)
-
-    # Apply the new column order
-    df = df[new_cols]
-
-    # 3. Write the modified content back to the original file
-    try:
-        if file_extension == '.csv':
-            # Save CSV file (index=False prevents writing the pandas index)
-            df.to_csv(filepath, index=False, sep=DELIMITER)
-        elif file_extension in ['.xlsx', '.xls']:
-            # Save Excel file (index=False prevents writing the pandas index)
-            # Using the same engine as read_excel for consistency
-            df.to_excel(filepath, index=False, engine='openpyxl')
-
-        print(f"Successfully updated {filepath}.")
-    except Exception as e:
-        print(f"Error writing to {filepath}: {e}")
+    os.makedirs(output_dir, exist_ok=True)
+    stem = os.path.splitext(os.path.basename(filepath))[0]
+    out_path = os.path.join(output_dir, f"{stem}.csv")
+    tmp_path = f"{out_path}.tmp"
+    df.to_csv(tmp_path, index=False, sep=DELIMITER)
+    os.replace(tmp_path, out_path)
+    logging.info("Wrote preprocessed CSV '%s' (%d rows).", out_path, len(df))
+    return out_path
 
 
-def main():
-    """
-    Main execution function to run the process. 
-    It iterates over files in the defined TARGET_DIR and modifies them.
-    """
-    print(f"Starting file processing in directory: {TARGET_DIR}")
+def run_preprocess(
+    input_dir: str = DEFAULT_INPUT_DIR,
+    output_dir: str = DEFAULT_OUTPUT_DIR,
+) -> list[str]:
+    """Preprocesses all CRDC files from input_dir into output_dir."""
+    logging.info("Starting preprocessing from '%s' to '%s'...", input_dir,
+                 output_dir)
+    if not os.path.isdir(input_dir):
+        raise FileNotFoundError(f"Input directory not found: {input_dir}")
 
-    # Get all files in the target directory
-    all_files = glob(os.path.join(TARGET_DIR, '*'))
-
-    # Filter out directories, focusing only on files that can be processed.
-    file_paths = [f for f in all_files if os.path.isfile(f)]
-
+    file_paths = sorted(
+        f for f in glob(os.path.join(input_dir, "*"))
+        if os.path.isfile(f) and not os.path.basename(f).startswith("."))
     if not file_paths:
-        print(
-            f"No files found in {TARGET_DIR}. Please check the path and ensure files exist."
-        )
-        return
+        raise RuntimeError(f"No input files found in '{input_dir}'.")
 
-    # Process each file found
+    if os.path.exists(output_dir):
+        shutil.rmtree(output_dir)
+    os.makedirs(output_dir, exist_ok=True)
+
+    written: list[str] = []
     for filepath in file_paths:
-        filename = os.path.basename(filepath)
+        year = extract_year_from_filename(os.path.basename(filepath))
+        written.append(process_file(filepath, year, output_dir))
 
-        # 1. Extract the year
-        year = extract_year_from_filename(filename)
+    logging.info("Preprocessing complete. Produced %d file(s) in '%s'.",
+                 len(written), output_dir)
+    return written
 
-        # 2. Process the file
-        process_file(filepath, year)
 
-    print("\nFile processing complete.")
+def main() -> None:
+    logging.set_verbosity(logging.INFO)
+    run_preprocess()
 
 
 if __name__ == "__main__":
