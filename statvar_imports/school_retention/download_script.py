@@ -28,6 +28,7 @@ from concurrent.futures import ThreadPoolExecutor
 from concurrent.futures import as_completed
 from datetime import datetime
 import glob
+import http.client
 import os
 from pathlib import Path
 import re
@@ -41,6 +42,7 @@ import numpy as np
 import pandas as pd
 import requests
 from retry import retry
+import urllib3.exceptions
 
 # ==========================================
 # Configuration
@@ -93,6 +95,12 @@ _INVALID_ID_STRINGS = {"", "nan", "none", "null", "na", "<na>"}
 _YES_VALUES = {"yes", "y", "1", "1.0", "true"}
 _NO_VALUES = {"no", "n", "0", "0.0", "false"}
 _KNOWN_SURVEY_YEARS = {2009, 2011, 2013, 2015, 2017, 2020, 2021, 2023}
+_DOWNLOAD_CHUNK_SIZE = 1024 * 1024
+_RETRYABLE_HTTP_EXCEPTIONS = (
+    requests.RequestException,
+    urllib3.exceptions.HTTPError,
+    http.client.HTTPException,
+)
 
 # ==========================================
 # Helper Functions
@@ -387,6 +395,7 @@ def process_dataframe(
     return transformed_path
 
 
+@retry(exceptions=_RETRYABLE_HTTP_EXCEPTIONS, tries=3, delay=2, backoff=2)
 def _is_zip_archive_available(url: str,
                               session: requests.Session = None) -> bool:
     """Checks via HTTP HEAD whether a CRDC zip archive exists."""
@@ -398,15 +407,22 @@ def _is_zip_archive_available(url: str,
                               headers=headers,
                               allow_redirects=True,
                               timeout=30)
+        if resp.status_code == 429 or resp.status_code >= 500:
+            raise requests.HTTPError(
+                f"Transient HTTP {resp.status_code} during HEAD check for "
+                f"{url}",
+                response=resp,
+            )
         if resp.status_code != 200:
             return False
         content_type = resp.headers.get("Content-Type", "").lower()
         return "html" not in content_type
-    except requests.RequestException:
-        return False
+    except _RETRYABLE_HTTP_EXCEPTIONS as exc:
+        logging.warning(f"Availability check failed for {url}: {exc}")
+        raise
 
 
-@retry(exceptions=(requests.RequestException,), tries=3, delay=2, backoff=2)
+@retry(exceptions=_RETRYABLE_HTTP_EXCEPTIONS, tries=3, delay=2, backoff=2)
 def try_download_url(url: str,
                      temp_file,
                      session: requests.Session = None) -> bool:
@@ -426,9 +442,11 @@ def try_download_url(url: str,
                 )
             if (resp.status_code == 200 and
                     "html" not in resp.headers.get("Content-Type", "").lower()):
-                shutil.copyfileobj(resp.raw, temp_file)
+                for chunk in resp.iter_content(chunk_size=_DOWNLOAD_CHUNK_SIZE):
+                    if chunk:
+                        temp_file.write(chunk)
                 return True
-    except requests.RequestException as exc:
+    except _RETRYABLE_HTTP_EXCEPTIONS as exc:
         logging.warning(f"Download attempt failed for {url}: {exc}")
         raise
     return False
@@ -442,19 +460,25 @@ def process_year_data(start_year: int,
     zip_label = f"{start_year}-{str(end_year)[-2:]}"
 
     with requests.Session() as session:
+        urls_to_try = possible_urls
         if start_year not in _KNOWN_SURVEY_YEARS:
-            if not any(
-                    _is_zip_archive_available(u, session=session)
-                    for u in possible_urls):
+            available_idx = next(
+                (i for i, u in enumerate(possible_urls)
+                 if _is_zip_archive_available(u, session=session)),
+                None,
+            )
+            if available_idx is None:
                 logging.info(
                     f"No published CRDC archive found for {zip_label}. Skipping."
                 )
                 return []
+            urls_to_try = possible_urls[available_idx:]
 
         produced_files = []
+        last_error = None
         with tempfile.NamedTemporaryFile(delete=True) as tmp_zip:
             downloaded = False
-            for url in possible_urls:
+            for url in urls_to_try:
                 tmp_zip.seek(0)
                 tmp_zip.truncate()
                 try:
@@ -464,21 +488,21 @@ def process_year_data(start_year: int,
                             f"Downloaded CRDC archive for {zip_label} from {url}"
                         )
                         break
-                except Exception as exc:
+                except _RETRYABLE_HTTP_EXCEPTIONS as exc:
+                    last_error = exc
                     logging.warning(
                         f"Could not download {zip_label} from {url}: {exc}")
 
             if not downloaded:
-                if start_year in _KNOWN_SURVEY_YEARS:
-                    raise RuntimeError(
-                        "Failed to download required historical CRDC archive "
-                        f"for {zip_label}")
-                return []
+                error_detail = f": {last_error}" if last_error else ""
+                raise RuntimeError(
+                    f"Failed to download CRDC archive for {zip_label}"
+                    f"{error_detail}")
 
             tmp_zip.flush()
             with zipfile.ZipFile(tmp_zip.name) as z:
                 matched_files = select_matched_files(z.namelist())
-                if not matched_files and start_year in _KNOWN_SURVEY_YEARS:
+                if not matched_files:
                     raise RuntimeError(
                         "No matching retention files found in CRDC archive "
                         f"for {zip_label}")

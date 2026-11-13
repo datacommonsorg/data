@@ -13,12 +13,17 @@
 # limitations under the License.
 """Unit tests for statvar_imports/school_retention/download_script.py."""
 
+import http.client
+import io
 import os
 import sys
 import tempfile
 import unittest
+from unittest import mock
 
 import pandas as pd
+import requests
+import urllib3.exceptions
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 _REPO_ROOT = os.path.abspath(os.path.join(_SCRIPT_DIR, "..", ".."))
@@ -218,32 +223,25 @@ class DownloadScriptTest(unittest.TestCase):
                 self.assertTrue(nces_id.isalnum())
 
     def test_try_download_url_truncates_temp_file_on_retry(self):
-        """Verifies try_download_url rewinds/truncates temp_file on retry."""
-        import io
-        from unittest import mock
+        """Verifies mid-stream urllib3/http.client errors retry and truncate."""
 
-        import requests
+        class _FlakyResponse:
 
-        class _FlakyRawStream:
-
-            def __init__(self, fail_after_write=False):
-                self._fail = fail_after_write
-                self._done = False
-
-            def read(self, _size=-1):
-                if self._done:
-                    return b""
-                self._done = True
-                if self._fail:
-                    raise requests.ConnectionError("mid-stream disconnect")
-                return b"CLEAN_ZIP_BYTES"
-
-        class _FakeResponse:
-
-            def __init__(self, raw_stream):
+            def __init__(self, partial_bytes=b"", exc=None, final_bytes=b""):
                 self.status_code = 200
                 self.headers = {"Content-Type": "application/zip"}
-                self.raw = raw_stream
+                self._partial_bytes = partial_bytes
+                self._exc = exc
+                self._final_bytes = final_bytes
+
+            def iter_content(self, chunk_size=1024):
+                del chunk_size
+                if self._partial_bytes:
+                    yield self._partial_bytes
+                if self._exc is not None:
+                    raise self._exc
+                if self._final_bytes:
+                    yield self._final_bytes
 
             def __enter__(self):
                 return self
@@ -252,19 +250,106 @@ class DownloadScriptTest(unittest.TestCase):
                 return False
 
         session = mock.MagicMock()
-        # First attempt writes partial bytes into temp_file before failing
-        temp_buf = io.BytesIO(b"STALE_PARTIAL_BYTES")
-        temp_buf.seek(len(b"STALE_PARTIAL_BYTES"))
+        temp_buf = io.BytesIO(b"INITIAL_STALE_BYTES")
+        temp_buf.seek(len(b"INITIAL_STALE_BYTES"))
         session.get.side_effect = [
-            _FakeResponse(_FlakyRawStream(fail_after_write=True)),
-            _FakeResponse(_FlakyRawStream(fail_after_write=False)),
+            _FlakyResponse(
+                partial_bytes=b"PARTIAL_ATTEMPT_1",
+                exc=urllib3.exceptions.ProtocolError(
+                    "Connection broken: IncompleteRead"),
+            ),
+            _FlakyResponse(
+                partial_bytes=b"PARTIAL_ATTEMPT_2",
+                exc=http.client.IncompleteRead(b"PARTIAL_ATTEMPT_2"),
+            ),
+            _FlakyResponse(final_bytes=b"CLEAN_ZIP_BYTES"),
         ]
 
         with mock.patch("time.sleep"):
             ok = download_script.try_download_url(
                 "https://example.com/archive.zip", temp_buf, session=session)
         self.assertTrue(ok)
+        self.assertEqual(session.get.call_count, 3)
         self.assertEqual(temp_buf.getvalue(), b"CLEAN_ZIP_BYTES")
+
+    def test_is_zip_archive_available_propagates_transient_failures(self):
+        """Verifies _is_zip_archive_available propagates 429/5xx/network errors."""
+        not_found = mock.MagicMock(status_code=404, headers={})
+        html_resp = mock.MagicMock(status_code=200,
+                                   headers={"Content-Type": "text/html"})
+        zip_resp = mock.MagicMock(status_code=200,
+                                  headers={"Content-Type": "application/zip"})
+        rate_limited = mock.MagicMock(status_code=429, headers={})
+        server_err = mock.MagicMock(status_code=503, headers={})
+
+        session = mock.MagicMock()
+        session.head.side_effect = [not_found, html_resp, zip_resp]
+        self.assertFalse(
+            download_script._is_zip_archive_available("https://example.com/a",
+                                                      session=session))
+        self.assertFalse(
+            download_script._is_zip_archive_available("https://example.com/b",
+                                                      session=session))
+        self.assertTrue(
+            download_script._is_zip_archive_available("https://example.com/c",
+                                                      session=session))
+
+        with mock.patch("time.sleep"):
+            session.head.side_effect = [rate_limited] * 3
+            with self.assertRaises(requests.HTTPError):
+                download_script._is_zip_archive_available(
+                    "https://example.com/rate_limited", session=session)
+
+            session.head.side_effect = [server_err] * 3
+            with self.assertRaises(requests.HTTPError):
+                download_script._is_zip_archive_available(
+                    "https://example.com/server_error", session=session)
+
+            session.head.side_effect = requests.ConnectionError("DNS failure")
+            with self.assertRaises(requests.ConnectionError):
+                download_script._is_zip_archive_available(
+                    "https://example.com/net_error", session=session)
+
+    def test_process_year_data_raises_when_future_archive_download_fails(self):
+        """Verifies post-2023 years raise RuntimeError if available download fails."""
+        with mock.patch.object(download_script,
+                               "_is_zip_archive_available",
+                               return_value=False):
+            self.assertEqual(
+                download_script.process_year_data(2025,
+                                                  2026,
+                                                  mapped_cols=self.mapped_cols),
+                [],
+            )
+
+        with (
+                mock.patch.object(download_script,
+                                  "_is_zip_archive_available",
+                                  return_value=True),
+                mock.patch.object(
+                    download_script,
+                    "try_download_url",
+                    side_effect=urllib3.exceptions.ProtocolError(
+                        "mid-stream reset"),
+                ),
+        ):
+            with self.assertRaises(RuntimeError):
+                download_script.process_year_data(2025,
+                                                  2026,
+                                                  mapped_cols=self.mapped_cols)
+
+        with (
+                mock.patch.object(download_script,
+                                  "_is_zip_archive_available",
+                                  return_value=True),
+                mock.patch.object(download_script,
+                                  "try_download_url",
+                                  return_value=False),
+        ):
+            with self.assertRaises(RuntimeError):
+                download_script.process_year_data(2025,
+                                                  2026,
+                                                  mapped_cols=self.mapped_cols)
 
 
 if __name__ == "__main__":
