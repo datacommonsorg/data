@@ -18,17 +18,16 @@ import sys
 import tempfile
 import unittest
 from unittest.mock import patch
+
 import pandas as pd
 
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 if CURRENT_DIR not in sys.path:
     sys.path.insert(0, CURRENT_DIR)
 
-from convert_sdmx_xml_to_csv import (
-    convert_sdmx_xml_to_dataframe,
-    convert_sdmx_xml_to_csv,
-    main,
-)
+from convert_sdmx_xml_to_csv import convert_sdmx_xml_to_csv
+from convert_sdmx_xml_to_csv import convert_sdmx_xml_to_dataframe
+from convert_sdmx_xml_to_csv import main
 
 
 class ConvertSdmxXmlToCsvTest(unittest.TestCase):
