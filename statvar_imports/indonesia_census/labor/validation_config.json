@@ -1,0 +1,46 @@
+{
+    "schema_version": "1.0",
+    "definitions": {
+        "scopes": {
+            "active_labor_statvars": {
+                "variables": {
+                    "dcids": [
+                        "Count_Person_InLaborForce_Male_AsAFractionOf_Count_Person_Male",
+                        "Count_Person_InLaborForce_Female_AsAFractionOf_Count_Person_Female",
+                        "Count_Person_FormalLabor_AsAFractionOf_Count_Person_InLaborForce"
+                    ]
+                }
+            },
+            "lfpr_statvars": {
+                "variables": {
+                    "dcids": [
+                        "Count_Person_InLaborForce_Male_AsAFractionOf_Count_Person_Male",
+                        "Count_Person_InLaborForce_Female_AsAFractionOf_Count_Person_Female"
+                    ]
+                }
+            }
+        }
+    },
+    "rules": [
+        {
+            "rule_id": "check_labor_max_date_consistency",
+            "validator": "MAX_DATE_CONSISTENT",
+            "scope": "@active_labor_statvars",
+            "params": {}
+        },
+        {
+            "rule_id": "check_lfpr_num_places_consistency",
+            "validator": "NUM_PLACES_CONSISTENT",
+            "scope": "@lfpr_statvars",
+            "params": {}
+        },
+        {
+            "rule_id": "check_labor_min_observations_and_freshness",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT COUNT(*) AS total_rows, SUM(CASE WHEN StatVar IN ('Count_Person_InLaborForce_Male_AsAFractionOf_Count_Person_Male', 'Count_Person_InLaborForce_Female_AsAFractionOf_Count_Person_Female') AND NumPlaces >= 540 AND NumObservations >= 4300 AND CAST(MinDate AS INTEGER) <= 2018 AND CAST(MaxDate AS INTEGER) >= YEAR(CURRENT_DATE) - 2 THEN 1 ELSE 0 END) AS valid_lfpr_rows, SUM(CASE WHEN StatVar = 'Count_Person_FormalLabor_AsAFractionOf_Count_Person_InLaborForce' AND NumPlaces >= 35 AND NumObservations >= 380 AND CAST(MinDate AS INTEGER) <= 2015 AND CAST(MaxDate AS INTEGER) >= YEAR(CURRENT_DATE) - 2 THEN 1 ELSE 0 END) AS valid_fl_rows FROM stats",
+                "condition": "total_rows IN (1, 2, 3) AND total_rows = (valid_lfpr_rows + valid_fl_rows) AND valid_lfpr_rows IN (0, 2) AND valid_fl_rows IN (0, 1)"
+            }
+        }
+    ]
+}
