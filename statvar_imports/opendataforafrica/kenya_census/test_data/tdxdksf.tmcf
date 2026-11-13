@@ -1,0 +1,9 @@
+Node: E:tdxdksf->E0
+observationAbout: C:tdxdksf->observationAbout
+observationDate: C:tdxdksf->observationDate
+variableMeasured: C:tdxdksf->variableMeasured
+value: C:tdxdksf->value
+unit: C:tdxdksf->unit
+scalingFactor: C:tdxdksf->scalingFactor
+observationPeriod: C:tdxdksf->observationPeriod
+typeOf: dcs:StatVarObservation

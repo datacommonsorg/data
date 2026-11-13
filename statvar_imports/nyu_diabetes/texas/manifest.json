@@ -20,6 +20,9 @@
           "cleaned_csv": "output_files/tennessee_output.csv"
         }
       ],
+      "config_override": {
+        "disable_import_workflow": true
+      },
       "cron_schedule": "0 05 * * 5"
     }
   ]
