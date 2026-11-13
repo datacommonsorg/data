@@ -345,6 +345,111 @@ class DataSamplerTest(unittest.TestCase):
             # Header + 2 unique values = 3 lines
             self.assertEqual(len(lines), 3)
 
+    def _write_row_keys_input(self) -> str:
+        """Writes an input file with repeated combinations of key columns."""
+        input_file = os.path.join(self._tmp_dir, 'row_keys_input.csv')
+        with open(input_file, 'w', newline='') as f:
+            writer = csv.writer(f)
+            writer.writerow(['place', 'indicator', 'sex', 'unit', 'note'])
+            for place in ['p1', 'p2', 'p3']:
+                for indicator in ['births', 'deaths']:
+                    for sex in ['male', 'female']:
+                        for unit in ['count', 'percent']:
+                            writer.writerow(
+                                [place, indicator, sex, unit, f'note {place}'])
+        return input_file
+
+    def test_row_keys(self):
+        """Tests that row keys select one row for each combination."""
+        input_file = self._write_row_keys_input()
+        config = {
+            'sampler_row_keys': 'indicator|sex,indicator|unit',
+            'sampler_uniques_per_column': -1,
+            'sampler_rows_per_key': 1,
+            'sampler_output_rows': -1,
+        }
+        data_sampler.sample_csv_file(input_file, self.output_file, config)
+        with open(self.output_file, newline='') as f:
+            rows = list(csv.DictReader(f))
+        self.assertEqual(
+            {(row['indicator'], row['sex']) for row in rows},
+            {(i, s) for i in ['births', 'deaths'] for s in ['male', 'female']})
+        self.assertEqual({(row['indicator'], row['unit']) for row in rows}, {
+            (i, u) for i in ['births', 'deaths'] for u in ['count', 'percent']
+        })
+        # Only the row keys are tracked, so other columns don't add rows.
+        self.assertLessEqual(len(rows), 8)
+        self.assertEqual({row['place'] for row in rows}, {'p1'})
+
+    def test_row_keys_with_unique_columns(self):
+        """Tests that row keys combine with unique columns."""
+        input_file = self._write_row_keys_input()
+        config = {
+            'sampler_row_keys': ['indicator|sex'],
+            'sampler_unique_columns': 'place',
+            'sampler_column_regex': '.*',
+            'sampler_uniques_per_column': -1,
+            'sampler_rows_per_key': 1,
+            'sampler_output_rows': -1,
+        }
+        data_sampler.sample_csv_file(input_file, self.output_file, config)
+        with open(self.output_file, newline='') as f:
+            rows = list(csv.DictReader(f))
+        self.assertEqual({row['place'] for row in rows}, {'p1', 'p2', 'p3'})
+        self.assertEqual(len({(row['indicator'], row['sex']) for row in rows}),
+                         4)
+
+    def test_row_keys_missing_column_raises_error(self):
+        """Tests that a row key column missing from the header raises."""
+        input_file = self._write_row_keys_input()
+        config = {'sampler_row_keys': 'indicator|age'}
+        with self.assertRaisesRegex(ValueError, 'age'):
+            data_sampler.sample_csv_file(input_file, self.output_file, config)
+
+    def test_parse_row_keys(self):
+        """Tests parsing row keys from strings and lists."""
+        self.assertEqual(data_sampler.parse_row_keys('a|b, c'),
+                         [['a', 'b'], ['c']])
+        self.assertEqual(data_sampler.parse_row_keys(['a|b', ['c', 'd']]),
+                         [['a', 'b'], ['c', 'd']])
+        self.assertEqual(data_sampler.parse_row_keys(''), [])
+
+    def _write_decimal_comma_input(self) -> str:
+        """Writes a ';' file with decimal commas in every row."""
+        input_file = os.path.join(self._tmp_dir, 'decimal_comma_input.csv')
+        with open(input_file, 'w') as f:
+            f.write('place;indicator;value\n')
+            for place in ['p1', 'p2', 'p3']:
+                for indicator in ['births', 'deaths']:
+                    f.write(f'{place};{indicator};1,5\n')
+        return input_file
+
+    def test_input_delimiter_overrides_detected_delimiter(self):
+        """Tests that a configured delimiter is used instead of a detected one."""
+        input_file = self._write_decimal_comma_input()
+        config = {
+            'input_delimiter': ';',
+            'sampler_row_keys': 'indicator',
+            'sampler_uniques_per_column': -1,
+            'sampler_rows_per_key': 1,
+            'sampler_output_rows': -1,
+        }
+        data_sampler.sample_csv_file(input_file, self.output_file, config)
+        with open(self.output_file) as f:
+            lines = f.read().splitlines()
+        self.assertEqual(
+            lines, ['place;indicator;value', 'p1;births;1,5', 'p1;deaths;1,5'])
+
+    def test_tab_delimiter_alias(self):
+        """Tests that 'tab' means a tab delimiter."""
+        input_file = os.path.join(self._tmp_dir, 'tab_input.tsv')
+        with open(input_file, 'w') as f:
+            f.write('a\tb\n1\t2\n3\t4\n')
+        config = {'input_delimiter': 'tab', 'sampler_output_rows': -1}
+        data_sampler.sample_csv_file(input_file, self.output_file, config)
+        with open(self.output_file) as f:
+            self.assertEqual(f.readline(), 'a\tb\n')
+
     def test_load_column_keys(self):
         """Tests that load_column_keys correctly parses the include list."""
         file1 = os.path.join(self._tmp_dir, 'file1.csv')

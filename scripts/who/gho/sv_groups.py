@@ -13,9 +13,9 @@
 # limitations under the License.
 """A simple script to parse the WHO GHO indicator categories."""
 import csv
+import os
 import re
 import sys
-import os
 
 from absl import app
 

@@ -13,18 +13,19 @@
 # limitations under the License.
 
 import csv
-import io
-import ssl
-import urllib.request
-import sys
-import requests
-import re
+import logging
 import os
-from .common_util import *
 
 import pandas as pd
-import logging
-from .geocode_cities import *
+import requests
+
+from .common_util import TEMPLATE_MCF_TEMPLATE
+from .common_util import int_from_field
+from .common_util import is_digit
+from .common_util import remove_digits
+from .common_util import remove_extra_chars
+from .geocode_cities import read_geocodes
+from .geocode_cities import update_crime_geocode
 
 # Years that FBI doesn't public arson data.
 # 2019, 2018, 2017

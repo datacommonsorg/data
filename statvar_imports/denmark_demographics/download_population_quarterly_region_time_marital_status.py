@@ -17,11 +17,13 @@ It fetches demographic data including region, sex, age, and marital status,
 processes the JSON-STAT response into a flat structure, and saves it as a CSV.
 """
 
-import pandas as pd
 import itertools
 import os
+
 from absl import logging
-from statbank_utils import find_key_recursive, fetch_statbank_api
+import pandas as pd
+from statbank_utils import fetch_statbank_api
+from statbank_utils import find_key_recursive
 
 logging.set_verbosity(logging.INFO)
 

@@ -13,9 +13,9 @@
 # limitations under the License.
 """Tests for facilities_helper.py."""
 
+from pathlib import Path
 import sys
 import unittest
-from pathlib import Path
 from unittest import mock
 
 # Kept at scripts/us_epa/ instead of scripts/us_epa/util/ because the repo's

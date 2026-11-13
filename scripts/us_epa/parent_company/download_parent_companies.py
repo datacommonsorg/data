@@ -15,10 +15,7 @@
 
 import os
 import pathlib
-import ssl
 import sys
-
-import pandas as pd
 
 from absl import app
 from absl import flags
@@ -30,8 +27,12 @@ from us_epa.util import facilities_helper as fh
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string('companies_table_name', '', 'Name of table to download')
-flags.DEFINE_string('output_path', 'tmp_data', 'Output directory')
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('companies_table_name', '', 'Name of table to download')
+    flags.DEFINE_string('output_path', 'tmp_data', 'Output directory')
+
 
 _API_ROOT = 'https://data.epa.gov/efservice/'
 _MAX_ROWS = 10000
@@ -46,4 +47,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

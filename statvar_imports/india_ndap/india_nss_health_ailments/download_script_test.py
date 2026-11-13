@@ -16,7 +16,8 @@ import json
 import os
 import sys
 import unittest
-from unittest.mock import Mock, patch
+from unittest.mock import Mock
+from unittest.mock import patch
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, _SCRIPT_PATH)
@@ -26,10 +27,6 @@ import download_script
 
 
 class DownloadScriptTest(unittest.TestCase):
-
-    @classmethod
-    def setUpClass(cls):
-        download_script._FLAGS.mark_as_parsed()
 
     @patch('download_script.storage.Client')
     def test_load_config_gcs(self, mock_storage_client):
@@ -177,10 +174,10 @@ class DownloadScriptTest(unittest.TestCase):
 
     @patch('download_script.download_data')
     @patch('download_script.preprocess_and_save')
-    def test_main(self, mock_preprocess_and_save, mock_download_data):
+    def test_run(self, mock_preprocess_and_save, mock_download_data):
         mock_download_data.return_value = [('data',)]
-        download_script.main(None)
-        mock_download_data.assert_called_once()
+        download_script.run('config.json')
+        mock_download_data.assert_called_once_with('config.json')
         mock_preprocess_and_save.assert_called_once_with([('data',)])
 
 

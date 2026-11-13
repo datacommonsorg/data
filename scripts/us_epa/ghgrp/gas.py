@@ -68,7 +68,7 @@ def col_to_sv(col):
         suffix = 'CarbonDioxide_Biogenic'
     elif dcid in GAS_COLUMNS_TO_NAME:
         suffix = f'{col_to_dcid(dcid.strip())}_NonBiogenic'
-    assert suffix != None
+    assert suffix is not None
     return f'Annual_Emissions_{suffix}'
 
 

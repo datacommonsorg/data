@@ -12,13 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import filecmp
 import os
-import json
-import pandas as pd
 import unittest
-from india_census.common.base import CensusPrimaryAbstractDataLoaderBase
+
 from india_census.primary_religion_data.preprocess import CensusPrimaryReligiousDataLoader
+import pandas as pd
 
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)

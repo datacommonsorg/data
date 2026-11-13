@@ -17,9 +17,9 @@ import shutil
 import sys
 import tempfile
 import unittest
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock
+from unittest.mock import patch
 
-from absl import flags
 import requests
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -28,19 +28,7 @@ if _SCRIPT_DIR not in sys.path:
 if 'download_util_script' in sys.modules:
     sys.modules.setdefault('util.download_util_script',
                            sys.modules['download_util_script'])
-_SAVED_FLAGS = {
-    _name: flags.FLAGS[_name]
-    for _name in ('api_url', 'bulk_url', 'temp_dir', 'output_dir')
-    if _name in flags.FLAGS
-}
-for _flag_name in _SAVED_FLAGS:
-    delattr(flags.FLAGS, _flag_name)
-
 import fema_download
-
-for _flag_name, _flag_obj in _SAVED_FLAGS.items():
-    delattr(flags.FLAGS, _flag_name)
-    flags.FLAGS[_flag_name] = _flag_obj
 
 
 class FemaDownloadTest(unittest.TestCase):
@@ -536,7 +524,7 @@ class FemaDownloadTest(unittest.TestCase):
         with open(test_file, 'w', encoding='utf-8') as f:
             f.write("dateOfLoss,yearOfLoss,state\n")
             for i in range(99):
-                f.write(f"2020-05-10,2020,CA\n")
+                f.write("2020-05-10,2020,CA\n")
 
         # When expecting 100 records, 99 is >= 98 (98%), so it should be valid
         self.assertTrue(

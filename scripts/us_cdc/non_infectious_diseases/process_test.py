@@ -15,9 +15,9 @@
 
 import os
 import unittest
+
 import pandas as pd
 from pandas.testing import assert_frame_equal
-
 from process import process_non_infectious_data
 
 

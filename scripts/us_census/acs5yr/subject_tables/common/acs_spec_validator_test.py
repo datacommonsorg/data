@@ -12,9 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import copy
 import unittest
 
-from .acs_spec_validator import *
+from .acs_spec_validator import find_columns_with_no_properties
+from .acs_spec_validator import find_extra_inferred_properties
+from .acs_spec_validator import find_extra_tokens
+from .acs_spec_validator import find_ignore_conflicts
+from .acs_spec_validator import find_missing_denominator_total_column
+from .acs_spec_validator import find_missing_denominators
+from .acs_spec_validator import find_multiple_measurement
+from .acs_spec_validator import find_multiple_population
+from .acs_spec_validator import find_repeating_denominators
 
 
 class TestSpecValidator(unittest.TestCase):

@@ -17,17 +17,26 @@ and generates cleaned CSV, MCF, TMCF file.
 """
 import os
 import sys
-from absl import app, flags, logging
+
+from absl import app
+from absl import flags
+from absl import logging
 
 _COMMON_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(1, _COMMON_PATH)
 # pylint: disable=wrong-import-position
-from common.euro_stat import EuroStat
+from common import download
+
 # pylint: enable=wrong-import-position
-from common import import_download_details, download
+from common import import_download_details
+from common.euro_stat import EuroStat
 
 _FLAGS = flags.FLAGS
-flags.DEFINE_string('mode', '', 'Options: download or process')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('mode', '', 'Options: download or process')
 
 
 class EuroStatPhysicalActivity(EuroStat):
@@ -245,4 +254,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

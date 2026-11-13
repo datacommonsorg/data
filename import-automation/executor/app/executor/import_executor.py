@@ -17,22 +17,21 @@ based on manifests.
 """
 
 import dataclasses
+import datetime
+from enum import Enum
 import fnmatch
-import glob
 import json
 import logging
 import os
-import shutil
 import shlex
-import sys
+import shutil
 import subprocess
+import sys
 import tempfile
 import threading
 import time
 import traceback
 from typing import Callable, Dict, Iterable, List, Optional, Tuple
-import datetime
-from enum import Enum
 
 REPO_DIR = os.path.dirname(
     os.path.dirname(
@@ -42,24 +41,27 @@ sys.path.append(REPO_DIR)
 sys.path.append(os.path.join(REPO_DIR, 'tools'))
 sys.path.append(os.path.join(REPO_DIR, 'util'))
 
-import file_util
-from log_util import log_function_call, log_metric
-
-from counters import Counters
-from timer import Timer
-from import_differ.import_differ import ImportDiffer
-from tools.import_validation.runner import ValidationRunner
-from tools.import_validation.result import ValidationStatus, ValidationResult
-from tools.import_validation.validation_config import merge_and_save_config
 from app import configs
 from app import utils
 from app.executor import cloud_run_simple_import
 from app.executor import import_target
+from app.executor import manifest_utils
 from app.service import email_notifier
 from app.service import file_uploader
 from app.service import github_api
 from app.service import import_service
+from counters import Counters
+import file_util
 from google.cloud import storage
+from import_differ.import_differ import ImportDiffer
+from log_util import log_function_call
+from log_util import log_metric
+from timer import Timer
+
+from tools.import_validation.result import ValidationResult
+from tools.import_validation.result import ValidationStatus
+from tools.import_validation.runner import ValidationRunner
+from tools.import_validation.validation_config import merge_and_save_config
 
 # Email address for status messages.
 _DEBUG_EMAIL_ADDR = 'datacommons-debug+imports@google.com'
@@ -178,20 +180,6 @@ class ImportExecutor:
         self.local_repo_dir: str = local_repo_dir
         self.counters = Counters()
 
-    def execute_imports_on_commit(self, commit_sha: str) -> ExecutionResult:
-        """Executes imports upon a GitHub commit.
-
-    Args:
-        commit_sha: ID of the commit as a string.
-
-    Returns:
-        ExecutionResult object describing the results of the imports.
-    """
-        return run_and_handle_exception(
-            self._execute_imports_on_commit_helper,
-            commit_sha,
-        )
-
     def execute_imports_on_update(self,
                                   absolute_import_name: str) -> ExecutionResult:
         """Executes imports upon a scheduled update.
@@ -253,7 +241,7 @@ class ImportExecutor:
             absolute_import_dir = os.path.join(repo_dir, import_dir)
             manifest_path = os.path.join(absolute_import_dir,
                                          self.config.manifest_filename)
-            manifest = parse_manifest(manifest_path)
+            manifest = manifest_utils.parse_manifest(manifest_path)
             logging.info('%s: loaded manifest %s', absolute_import_name,
                          manifest_path)
 
@@ -279,68 +267,6 @@ class ImportExecutor:
         logging.info('%s: END', absolute_import_name)
         return ExecutionResult(ImportStatus.SUCCESS, executed_imports,
                                'No issues')
-
-    def _execute_imports_on_commit_helper(
-        self,
-        commit_sha: str,
-    ) -> ExecutionResult:
-        """Helper for execute_imports_on_commit.
-
-    Args: See execute_imports_on_commit.
-
-    Returns:
-        ExecutionResult object describing the results of the executions.
-
-    Raises:
-        ExecutionError: The execution of an import failed for any reason.
-    """
-
-        # Import targets specified in the commit message,
-        # e.g., 'scripts/us_fed/treasury:constant_maturity', 'constant_maturity'
-        targets = import_target.find_targets_in_commit(commit_sha, 'IMPORTS',
-                                                       self.github)
-        if not targets:
-            return ExecutionResult(
-                ImportStatus.SKIP, [],
-                'No import target specified in commit message')
-        # Relative paths to directories having files changed by the commit
-        # containing manifests, e.g. 'scripts/us_fed/treasury'.
-        manifest_dirs = self.github.find_dirs_in_commit_containing_file(
-            commit_sha, self.config.manifest_filename)
-
-        with tempfile.TemporaryDirectory() as tmpdir:
-            repo_dir = self.github.download_repo(
-                tmpdir, commit_sha, self.config.repo_download_timeout)
-            logging.info(f'Downloaded repo: {repo_dir}')
-
-            imports_to_execute = import_target.find_imports_to_execute(
-                targets=targets,
-                manifest_dirs=manifest_dirs,
-                manifest_filename=self.config.manifest_filename,
-                repo_dir=repo_dir,
-            )
-
-            executed_imports = []
-            for relative_dir, spec in imports_to_execute:
-                try:
-                    self._import_one(
-                        repo_dir=repo_dir,
-                        relative_import_dir=relative_dir,
-                        absolute_import_dir=os.path.join(
-                            repo_dir, relative_dir),
-                        import_spec=spec,
-                    )
-
-                except Exception:
-                    raise ExecutionError(
-                        ExecutionResult(ImportStatus.FAILURE, executed_imports,
-                                        traceback.format_exc()))
-                absolute_name = import_target.get_absolute_import_name(
-                    relative_dir, spec['import_name'])
-                executed_imports.append(absolute_name)
-
-            return ExecutionResult(ImportStatus.SUCCESS, executed_imports,
-                                   'No issues')
 
     @log_function_call
     def _import_one(
@@ -378,7 +304,7 @@ class ImportExecutor:
             if self.notifier and not self.config.disable_email_notifications:
                 msg = f'Failed Import: {import_name} ({absolute_import_name})\n\n'
                 msg += f'{_SEE_LOGS_MESSAGE}\n\n'
-                msg += f'Stack Trace: \n'
+                msg += 'Stack Trace: \n'
                 msg += f'{exc}'
                 self.notifier.send(
                     subject=f'Import Automation Failure - {import_name}',
@@ -414,30 +340,14 @@ class ImportExecutor:
         return ''
 
     def _get_import_input_files(self, import_input, absolute_import_dir):
-        input_files = []
-        errors = []
-        # Get import files in the order template_mcf, node_mcf and cleaned_csv
-        for file_type in sorted(import_input.keys(), reverse=True):
-            pattern = import_input[file_type]
-            patterns = [pattern]
-            if isinstance(pattern, list):
-                patterns = pattern
-            for pattern in patterns:
-                if pattern:
-                    files = glob.glob(os.path.join(absolute_import_dir,
-                                                   pattern),
-                                      recursive=True)
-                    if not files and not glob.has_magic(pattern):
-                        errors.append(
-                            f'No matching files for {file_type}:{pattern}')
-                    else:
-                        input_files.extend(sorted(files))
-        if errors:
-            logging.fatal(
-                f'Missing import files in {absolute_import_dir}: {errors}')
+        try:
+            return manifest_utils.get_import_input_files(
+                import_input, absolute_import_dir)
+        except manifest_utils.MissingInputFilesError as e:
+            logging.fatal(str(e))
             raise RuntimeError(
-                'Import job failed due to missing user script output files.')
-        return input_files
+                'Import job failed due to missing user script output files.'
+            ) from e
 
     @log_function_call
     def _invoke_import_tool(self, absolute_import_dir: str,
@@ -464,12 +374,13 @@ class ImportExecutor:
 
             # Run dc import tool to generate resolved mcf.
             logging.info(f'Generating resolved mcf for {import_prefix}')
-            import_tool_args = [f'-o={output_path}', 'genmcf']
-            import_tool_args.extend(input_files)
+            import_tool_args = _get_import_tool_args(
+                output_path, input_files, self.config.import_tool_num_threads)
             timer = Timer()
             process = _run_user_script(
                 interpreter_path='java',
-                script_path='-XX:MaxRAMPercentage=50.0 -jar ' +
+                script_path='-XX:MaxRAMPercentage='
+                f'{self.config.import_tool_max_ram_percentage} -jar ' +
                 self.config.import_tool_path,
                 timeout=self.config.user_script_timeout,
                 args=import_tool_args,
@@ -1039,7 +950,7 @@ class ImportExecutor:
                 timeout=self.config.importer_import_timeout,
             )
         logging.info(f'Import status summary: {import_summary}')
-        logging.info(f'Import workflow completed successfully!')
+        logging.info('Import workflow completed successfully!')
 
     @log_function_call
     def _upload_import_inputs(self, import_dir: str, output_dir: str,
@@ -1156,23 +1067,6 @@ class ImportExecutor:
         if next_data_refresh_date:
             node += f'nextDataRefreshDate: "{next_data_refresh_date}"\n'
         return node
-
-
-def parse_manifest(path: str) -> dict:
-    """Parses the import manifest.
-
-  Args:
-      path: Path to the import manifest file as a string.
-
-  Returns:
-      The parsed manifest as a dict.
-
-  Raises:
-      Same exceptions as open and json.load if the file does not exist or
-      contains malformed json.
-  """
-    with open(path) as file:
-        return json.load(file)
 
 
 def run_and_handle_exception(
@@ -1454,6 +1348,34 @@ def _run_user_script(
     if args:
         script_args.extend(args)
     return _run_with_timeout_async(script_args, timeout, cwd, env, name)
+
+
+def _get_cpu_count() -> int:
+    """Returns the number of CPUs available to this process."""
+    try:
+        return len(os.sched_getaffinity(0))
+    except AttributeError:  # Not available on some platforms (e.g. macOS).
+        return os.cpu_count() or 1
+
+
+def _get_import_tool_args(output_path: str, input_files: List[str],
+                          num_threads: int) -> List[str]:
+    """Returns the command line arguments for import tool genmcf.
+
+    Args:
+        output_path: Directory to write the genmcf output to.
+        input_files: Input files (TMCF, CSV, MCF) to process.
+        num_threads: Maximum number of threads to use. The number of threads
+            passed is capped at the number of available CPUs. If not positive,
+            -n is not passed and the import tool chooses the number of threads.
+    """
+    args = [f'-o={output_path}']
+    if num_threads > 0:
+        num_threads = min(num_threads, _get_cpu_count())
+        args.append(f'-n={num_threads}')
+    args.append('genmcf')
+    args.extend(input_files)
+    return args
 
 
 def _clean_time(

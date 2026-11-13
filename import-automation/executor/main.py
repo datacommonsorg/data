@@ -14,8 +14,8 @@
 """
 Import executor entrypoint.
 """
-import logging
 import json
+import logging
 import os
 import sys
 import time
@@ -25,26 +25,31 @@ REPO_DIR = os.path.dirname(
 sys.path.append(REPO_DIR)
 sys.path.append(os.path.join(REPO_DIR, 'util'))
 
-from absl import flags
-from absl import app
+import dataclasses
 
+from absl import app
+from absl import flags
 from app import configs
 from app.executor import import_executor
+from app.executor import manifest_utils
+from app.executor.import_executor import ImportStage
+from app.executor.import_executor import ImportStatus
+from app.service import email_notifier
 from app.service import file_uploader
 from app.service import github_api
-from app.service import email_notifier
-import dataclasses
-from app.executor.import_executor import ImportStatus, ImportStage
 from google.cloud import secretmanager
-
 import log_util
 
 _FLAGS = flags.FLAGS
-flags.DEFINE_string('import_name', '', 'Absoluate import name.')
-flags.DEFINE_string('import_config', '{}', 'Import executor configuration.')
-flags.DEFINE_boolean(
-    'enable_cloud_logging', True,
-    'Enable Google Cloud Logging for proper severity levels in GCP.')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('import_name', '', 'Absoluate import name.')
+    flags.DEFINE_string('import_config', '{}', 'Import executor configuration.')
+    flags.DEFINE_boolean(
+        'enable_cloud_logging', True,
+        'Enable Google Cloud Logging for proper severity levels in GCP.')
 
 
 def _override_configs(import_name: str, import_dir: str,
@@ -85,16 +90,13 @@ def _override_configs(import_name: str, import_dir: str,
 
     manifest_path = os.path.join(config.local_repo_dir, import_dir,
                                  config.manifest_filename)
-    manifest_config = {}
-    with open(manifest_path, "r") as f:
-        logging.info('Overriding config from manifest %s', manifest_path)
-        manifest_config = json.load(f)
-        logging.info(f'Import manifest: {json.dumps(manifest_config)}')
-        for import_spec in manifest_config.get("import_specifications", []):
-            if import_spec.get("import_name") == import_name:
-                config = dataclasses.replace(
-                    config, **import_spec.get("config_override", {}))
-                break
+    logging.info('Overriding config from manifest %s', manifest_path)
+    manifest_config = manifest_utils.parse_manifest(manifest_path)
+    logging.info(f'Import manifest: {json.dumps(manifest_config)}')
+    import_spec = manifest_utils.get_import_spec(manifest_config, import_name)
+    if import_spec:
+        config = dataclasses.replace(config,
+                                     **import_spec.get("config_override", {}))
 
     config = dataclasses.replace(config, **user_config)
     return config
@@ -152,4 +154,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

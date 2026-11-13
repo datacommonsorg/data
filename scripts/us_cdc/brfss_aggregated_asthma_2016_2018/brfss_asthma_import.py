@@ -19,8 +19,10 @@ Counties and County-Equivalents with Corresponding Current Asthma Prevalence, 20
 """
 import os
 import sys
+
+from absl import app
+from absl import flags
 import pandas as pd
-from absl import flags, app
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -33,11 +35,16 @@ default_input_path = os.path.join(
     _SCRIPT_PATH, "./data/Extracted_State-maps-for-asthma-prevalence.tsv")
 default_output_path = os.path.join(_SCRIPT_PATH, "./data/output")
 FLAGS = flags.FLAGS
-flags.DEFINE_string(
-    'inputfile_path', default_input_path,
-    'Path to the extracted tabular data file in csv/tsv file format')
-flags.DEFINE_string('outputdir_path', default_output_path,
-                    'Path to the output directory')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        'inputfile_path', default_input_path,
+        'Path to the extracted tabular data file in csv/tsv file format')
+    flags.DEFINE_string('outputdir_path', default_output_path,
+                        'Path to the output directory')
+
 
 # Predefined strings for the statvar mcf and template mcf
 _TEMPLATE_MCF = """
@@ -214,4 +221,5 @@ def main(_) -> None:
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

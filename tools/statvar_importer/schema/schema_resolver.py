@@ -16,7 +16,6 @@
 import os
 import pprint
 import sys
-from typing import Union
 
 from absl import app
 from absl import flags
@@ -34,16 +33,19 @@ sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(_SCRIPT_DIR))),
                  'util'))
 
-import process_http_server
-
-from mcf_file_util import load_mcf_nodes, write_mcf_nodes, get_node_dcid
-from mcf_file_util import add_namespace, strip_namespace, normalize_mcf_node
-from mcf_diff import fingerprint_node
+from config_map import ConfigMap
+from counters import Counters
 
 # imports from data/util
 import file_util
-from config_map import ConfigMap
-from counters import Counters
+from mcf_diff import fingerprint_node
+from mcf_file_util import add_namespace
+from mcf_file_util import get_node_dcid
+from mcf_file_util import load_mcf_nodes
+from mcf_file_util import normalize_mcf_node
+from mcf_file_util import strip_namespace
+from mcf_file_util import write_mcf_nodes
+import process_http_server
 from statvar_dcid_generator import get_statvar_dcid
 
 _FLAGS = flags.FLAGS
@@ -155,7 +157,7 @@ class SchemaResolver:
             logging.error(
                 f'Cannot add additional PVs {node} for existing node: {schema_node}'
             )
-            self._counters.add_counter(f'error-duplicate-node', 1)
+            self._counters.add_counter('error-duplicate-node', 1)
             return node_added
 
         normalized_node = normalize_mcf_node(node, quantity_range_to_dcid=True)

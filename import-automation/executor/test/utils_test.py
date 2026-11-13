@@ -15,15 +15,14 @@
 Tests for app/utils.py and test/utils.py.
 """
 
+import datetime
+import hashlib
+import tempfile
 import unittest
 from unittest import mock
-import datetime
-import tempfile
-import hashlib
-
-import requests
 
 import app.utils
+import requests
 import test.utils
 
 

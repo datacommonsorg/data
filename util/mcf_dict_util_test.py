@@ -13,9 +13,19 @@
 # limitations under the License.
 
 from __future__ import absolute_import
+
+from collections import OrderedDict
 import unittest
 
-from mcf_dict_util import *
+from mcf_dict_util import dict_list_to_mcf_str
+from mcf_dict_util import drop_nodes
+from mcf_dict_util import get_dcid_node
+from mcf_dict_util import mcf_dict_rename_namespace
+from mcf_dict_util import mcf_dict_rename_prop
+from mcf_dict_util import mcf_dict_rename_prop_value
+from mcf_dict_util import mcf_to_dict_list
+from mcf_dict_util import node_list_check_existence_dc
+from mcf_dict_util import node_list_check_existence_node_list
 
 
 class TestMCFDict(unittest.TestCase):
@@ -114,42 +124,6 @@ class TestMCFDict(unittest.TestCase):
                 'value': 'v3',
                 'namespace': 'l'
             },
-            'd': {
-                'value': 'v4',
-                'namespace': 'schema'
-            },
-            'e': {
-                'value': 'v5',
-                'namespace': 'dcid'
-            },
-            'dcid': {
-                'value': 'node3',
-                'namespace': ''
-            },
-        })
-
-        node4_str = """Node: node3
-        a: v1
-        b: dcs:v2
-        #c : l: v3
-        d: schema:  v4
-        e:   dcid: v5
-        dcid: node3
-        """
-        node4_dict = OrderedDict({
-            'Node': {
-                'value': 'node3',
-                'namespace': ''
-            },
-            'a': {
-                'value': 'v1',
-                'namespace': ''
-            },
-            'b': {
-                'value': 'v2',
-                'namespace': 'dcs'
-            },
-            '__comment1': '#c : l: v3',
             'd': {
                 'value': 'v4',
                 'namespace': 'schema'
