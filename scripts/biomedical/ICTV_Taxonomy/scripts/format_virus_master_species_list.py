@@ -25,8 +25,9 @@ taxonomy is encoded in enum format.
 """
 
 # load environment
-import pandas as pd
 import sys
+
+import pandas as pd
 
 # declare universal variables
 DICT_CHANGE_ENUM = {

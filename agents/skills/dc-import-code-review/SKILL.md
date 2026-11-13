@@ -35,7 +35,9 @@ GitHub unchanged unless the user explicitly authorizes publishing under
   content. Publishing is limited to one comment-only review.
 - Enumerate every changed path before filtering the review.
 - Report findings only for changed files under `scripts/**` and
-  `statvar_imports/**`.
+  `statvar_imports/**`, plus the infra PR finding below.
+- [rule-infra-pr] Report changed paths outside those directories as one
+  finding asking to move them into a separate infra PR.
 - List changed paths outside those directories as skipped. Read unchanged or
   shared code only when needed to understand an in-scope change, and do not
   report unrelated findings from that context.
@@ -191,7 +193,7 @@ Use priority to describe remediation urgency, not confidence:
 | Priority | Meaning |
 |---|---|
 | P0 | Immediate security issue, broad data corruption, production emergency, or a failed check that a review workflow marks as required before merge |
-| P1 | Likely incorrect data, import failure, or serious reliability problem |
+| P1 | Likely incorrect data, import failure, serious reliability problem, or tests that silently never run |
 | P2 | Realistic validation, testing, maintainability, or operational risk |
 | P3 | Minor, localized improvement |
 

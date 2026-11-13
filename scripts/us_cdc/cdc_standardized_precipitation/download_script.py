@@ -43,7 +43,10 @@ import os
 import sys
 import urllib.parse
 import urllib.request
-from absl import app, flags, logging
+
+from absl import app
+from absl import flags
+from absl import logging
 
 # Add the project root to the Python path for robust module imports
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -55,15 +58,18 @@ from util import download_util_script as download_util
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string("import_name", None,
-                    "The name of the import configuration to process.")
-flags.DEFINE_string("config_file", "import_configs.json",
-                    "Path to the JSON configuration file.")
-flags.DEFINE_boolean(
-    "dry_run", False,
-    "If true, prints the actions that would be taken without downloading files."
-)
-flags.mark_flag_as_required("import_name")
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string("import_name", None,
+                        "The name of the import configuration to process.")
+    flags.DEFINE_string("config_file", "import_configs.json",
+                        "Path to the JSON configuration file.")
+    flags.DEFINE_boolean(
+        "dry_run", False,
+        "If true, prints the actions that would be taken without downloading files."
+    )
+    flags.mark_flag_as_required("import_name")
 
 
 def _get_inferred_filename(url: str, is_zip: bool) -> str:
@@ -229,4 +235,5 @@ def main(argv):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

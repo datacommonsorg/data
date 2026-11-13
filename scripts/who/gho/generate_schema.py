@@ -14,15 +14,14 @@
 """Script to generate schema mcfs and get the mapping of dimensions/indicators
 to their corresponding schema dcid."""
 
-import requests
 import json
-import re
 import os
+import re
+
+import requests
 
 # Map of dimension code to title to use to build a dcid for that dimension
 PROP_TITLE_MAP = {
-    "GOVERNMENTBENEFIT":
-        "Substance Use Disorder Government Benefit",
     "GROUP":
         "Substance Use Disorder Resource Group",
     "RSUDPREVENTIONPROGRAMME":
@@ -43,8 +42,6 @@ PROP_TITLE_MAP = {
         "Occupation",
     "PROGRAMME":
         "Substance Use Disorder Program",
-    "RSUDREP":
-        "Representative Type",
     "RSUDSPECIFICPOPULATION":
         "Grouping Of People",
     "DRUGSUPERVISION":
@@ -252,7 +249,7 @@ def generate_dimensions_schema(curated_dim_types, person_dim_types,
         "https://ghoapi.azureedge.net/api/Dimension").json().get("value", [])
     for d in dimensions:
         d_code = d.get('Code', "")
-        if not d_code in cprops or d_code in curated_dim_types:
+        if d_code not in cprops or d_code in curated_dim_types:
             continue
         # Make the dimension title usable as a dcid by replacing _ with space,
         # capitalizing the first letter of every word and removing an end "s"
@@ -273,10 +270,10 @@ def generate_dimensions_schema(curated_dim_types, person_dim_types,
         # eg. "substanceAbuseAwarenessActivityType" ->
         # "SubstanceAbuseAwarenessActivityTypeEnum"
         enum_dcid = prop_dcid[0].upper() + prop_dcid[1:] + "Enum"
-        if not prop_dcid in seen_dcids:
+        if prop_dcid not in seen_dcids:
             description = ""
             if d_code in PROP_NODE_DESCRIPTION_MAP:
-                name = PROP_NODE_DESCRIPTION_MAP[d_code]
+                description = PROP_NODE_DESCRIPTION_MAP[d_code]
             domainType = "Thing"
             if d_code in person_dim_types:
                 domainType = "Person"
@@ -297,9 +294,9 @@ def generate_dimensions_schema(curated_dim_types, person_dim_types,
             # eg. "Finance/taxation" -> "WHO/FinanceOrTaxation" or
             # "Government-sponsored mHealth programmes are being evaluated" ->
             # "WHO/GovernmentSponsoredMhealthProgrammesAreBeingEvaluated"
-            v_title = re.sub("\s|\,|\-|\.", "", v_title)
+            v_title = re.sub(r"\s|\,|\-|\.", "", v_title)
             node_dcid = "WHO/" + v_title.replace("/", "Or")
-            if not node_dcid in seen_dcids[prop_dcid]:
+            if node_dcid not in seen_dcids[prop_dcid]:
                 mcf_result.extend(get_val_node(node_dcid, enum_dcid))
             seen_dcids[prop_dcid].add(node_dcid)
             dim_value_map[d_code][v_code] = "dcs:" + node_dcid
@@ -328,8 +325,8 @@ def get_indicator_description(indicator_name):
     Returns:
         description: a string that can be used as a node description.
     """
-    description = re.sub("\–|\−", "-", indicator_name)
-    description = re.sub('\“|\”', '"', description)
+    description = re.sub(r"\–|\−", "-", indicator_name)
+    description = re.sub(r'\“|\”', '"', description)
     description = description.replace(" ", "")
     description = description.replace("m²", "square metre")
     return description

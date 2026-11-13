@@ -15,16 +15,16 @@
 # How to run the script to download the files:
 # python3 download_script.py
 
+import datetime
 import os
-import requests
 import shutil
 import sys
 import zipfile
-import datetime
 
 from absl import app
 from absl import logging
 import download_config
+import requests
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 GCS_OUTPUT_DIR = os.path.join(_SCRIPT_PATH, 'gcs_output')
@@ -58,7 +58,6 @@ def download_and_extract_data(url, input_folder, year):
                         found_accident_csv = False
                         for item in zip_ref.infolist():
                             if item.filename.upper().endswith("ACCIDENT.CSV"):
-                                parts = item.filename.split("/")
                                 output_filename = f"ACCIDENT_{year}.csv"
                                 output_filepath = os.path.join(
                                     input_folder, output_filename)

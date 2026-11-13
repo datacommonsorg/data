@@ -21,18 +21,22 @@ TMCF files.
 _propety_correction() and _sv_name_correction() are abstract methods, these
 method needs to implemented by Subclasses.
 """
-import os
-import sys
-import re
-import pandas as pd
-import numpy as np
-from absl import flags, logging
 import inspect
+import os
+import re
+import sys
+
+from absl import flags
+from absl import logging
+import numpy as np
+import pandas as pd
+
 # For import common.replacement_functions
 _COMMON_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(1, _COMMON_PATH)
 # pylint: disable=wrong-import-position
-from common.replacement_functions import (split_column, replace_col_values)
+from common.replacement_functions import replace_col_values
+from common.replacement_functions import split_column
 from common.sv_config import file_to_sv_mapping
 
 # For import util.alpha2_to_dcid
@@ -41,6 +45,7 @@ _COMMON_PATH = os.path.abspath(
 sys.path.insert(1, _COMMON_PATH)
 # pylint: disable=wrong-import-order
 from util.alpha2_to_dcid import COUNTRY_MAP
+
 # pylint: enable=wrong-import-position
 # pylint: enable=wrong-import-order
 

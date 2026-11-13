@@ -16,17 +16,17 @@
 Usage: python3 download.py
 '''
 
-import os
-import io
-import requests
-import zipfile
-from pathlib import Path
-from retry import retry
 import configparser
-import sys
-from absl import logging
-from absl import flags
+import io
+import os
+from pathlib import Path
+import zipfile
+
 from absl import app
+from absl import flags
+from absl import logging
+import requests
+from retry import retry
 
 # Define flags for command-line argument parsing
 _FLAGS = flags.FLAGS

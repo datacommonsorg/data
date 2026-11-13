@@ -15,17 +15,15 @@
 Data Commons importer client.
 """
 
+import dataclasses
+import logging
 import os
 import time
-import logging
-import dataclasses
 from typing import Dict, Iterable
-
-import requests
-from google.cloud import storage
 
 from app.executor import import_target
 from app.service import iap_request
+from google.cloud import storage
 
 _PROXY_HOST = 'https://datcom-api-key-sandbox.uc.r.appspot.com'
 _PROXY_IMPORT_TABLE = f'{_PROXY_HOST}/ImportTable'

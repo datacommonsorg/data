@@ -13,9 +13,9 @@
 # limitations under the License.
 
 import json
-import csv
-import pandas as pd
 import urllib.request
+
+import pandas as pd
 
 # 1. All counts are at India level, so geographic reference code will always be IN
 # 2. Only cumulative counts are available at this point

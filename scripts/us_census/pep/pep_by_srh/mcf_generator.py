@@ -18,11 +18,19 @@ There are two mcf files generated
 2. population_estimate_by_srh_agg.mcf - for importing aggregated data
 """
 
-import os
 import logging
-from constants import OUTPUT_DIR, MCF_SRH, MCF_SH, MCF_RH
+import os
+import sys
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
+_SCRIPTS_DIR = os.path.abspath(os.path.join(_CODEDIR, '../../../'))
+if _SCRIPTS_DIR not in sys.path:
+    sys.path.append(_SCRIPTS_DIR)
+
+from us_census.pep.pep_by_srh.constants import MCF_RH
+from us_census.pep.pep_by_srh.constants import MCF_SRH
+from us_census.pep.pep_by_srh.constants import OUTPUT_DIR
+
 os.system("mkdir -p " + _CODEDIR + OUTPUT_DIR)
 
 

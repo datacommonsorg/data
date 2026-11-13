@@ -71,6 +71,9 @@
             "source_files": [
                 "input_files/*.csv"
             ],
+            "config_override": {
+                "disable_import_workflow": true
+            },
             "cron_schedule": "30 05 * * 1"
         }
     ]

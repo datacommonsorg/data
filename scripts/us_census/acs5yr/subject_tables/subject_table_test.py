@@ -17,7 +17,6 @@ import os
 import sys
 import tempfile
 import unittest
-import zipfile
 
 import pandas as pd
 from pandas.testing import assert_frame_equal
@@ -29,10 +28,7 @@ sys.path.insert(0, _SCRIPT_PATH)
 
 from common.data_loader import process_subject_tables
 
-try:
-    from .process import set_column_map
-except ImportError:
-    from process import set_column_map
+from .process import set_column_map
 
 # These directories are excluded from testing
 _EXCLUDE_DIRS = ['common', 's2201', '__pycache__', '~']

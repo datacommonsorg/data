@@ -17,15 +17,15 @@ https://firms.modaps.eosdis.nasa.gov/api/.
 These fire points are converted to S2Cells of level 13.
 """
 
-import ast
+from io import StringIO
 import os
 import sys
-import pandas as pd
+import time
 
 from absl import app
 from absl import flags
 from absl import logging
-from io import StringIO
+import pandas as pd
 
 flags.DEFINE_string('config_path',
                     'gs://datcom-import-cache/fires/firms/firms_config.py',
@@ -40,6 +40,7 @@ sys.path.append(_SCRIPTS_DIR)
 sys.path.append(os.path.dirname(_SCRIPTS_DIR))
 
 from earthengine import raster_to_csv as r2csv
+
 from util import download_util
 from util.config_map import ConfigMap
 
@@ -68,7 +69,7 @@ def _download_fires_csv(urls: list, output_csv: str):
                                                  retries=3,
                                                  retry_secs=300)
             if not csv_data or ',' not in csv_data:
-                logging.debug(f'Failed to download csv data. retrying.')
+                logging.debug('Failed to download csv data. retrying.')
                 time.sleep(100)
             else:
                 break

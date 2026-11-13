@@ -12,15 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
-import sys
-from absl import app
-from absl import logging
 import datetime
 import glob
-import shutil
-import pandas as pd
+import os
 import re
+import shutil
+import sys
+
+from absl import app
+from absl import logging
+import pandas as pd
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 
