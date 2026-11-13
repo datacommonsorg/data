@@ -28,13 +28,13 @@
 # <path-to-data-repo> with the absolute path to your local checkout of the
 # `data` repository (e.g., ~/projects/data):
 #
-#   echo "alias dc-import='<path-to-data-repo>/tools/scripts/run_import_tool.sh'" >> ~/.bashrc
+#   echo "alias dc-import='<path-to-data-repo>/import-automation/executor/scripts/run_import_tool.sh'" >> ~/.bashrc
 #   source ~/.bashrc
 #
 # Note: Aliases are not available in non-interactive shells (e.g., coding agents
 # or scripts). In those cases, call the script directly:
 #
-#   <path-to-data-repo>/tools/scripts/run_import_tool.sh lint ...
+#   <path-to-data-repo>/import-automation/executor/scripts/run_import_tool.sh lint ...
 #
 # Note: Set `export DC_API_KEY="<your-key>"` if running existence or resolution
 # checks against the Data Commons API.

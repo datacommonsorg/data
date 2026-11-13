@@ -20,7 +20,6 @@ import dataclasses
 import datetime
 from enum import Enum
 import fnmatch
-import glob
 import json
 import logging
 import os
@@ -46,6 +45,7 @@ from app import configs
 from app import utils
 from app.executor import cloud_run_simple_import
 from app.executor import import_target
+from app.executor import manifest_utils
 from app.service import email_notifier
 from app.service import file_uploader
 from app.service import github_api
@@ -241,7 +241,7 @@ class ImportExecutor:
             absolute_import_dir = os.path.join(repo_dir, import_dir)
             manifest_path = os.path.join(absolute_import_dir,
                                          self.config.manifest_filename)
-            manifest = parse_manifest(manifest_path)
+            manifest = manifest_utils.parse_manifest(manifest_path)
             logging.info('%s: loaded manifest %s', absolute_import_name,
                          manifest_path)
 
@@ -340,30 +340,14 @@ class ImportExecutor:
         return ''
 
     def _get_import_input_files(self, import_input, absolute_import_dir):
-        input_files = []
-        errors = []
-        # Get import files in the order template_mcf, node_mcf and cleaned_csv
-        for file_type in sorted(import_input.keys(), reverse=True):
-            pattern = import_input[file_type]
-            patterns = [pattern]
-            if isinstance(pattern, list):
-                patterns = pattern
-            for pattern in patterns:
-                if pattern:
-                    files = glob.glob(os.path.join(absolute_import_dir,
-                                                   pattern),
-                                      recursive=True)
-                    if not files and not glob.has_magic(pattern):
-                        errors.append(
-                            f'No matching files for {file_type}:{pattern}')
-                    else:
-                        input_files.extend(sorted(files))
-        if errors:
-            logging.fatal(
-                f'Missing import files in {absolute_import_dir}: {errors}')
+        try:
+            return manifest_utils.get_import_input_files(
+                import_input, absolute_import_dir)
+        except manifest_utils.MissingInputFilesError as e:
+            logging.fatal(str(e))
             raise RuntimeError(
-                'Import job failed due to missing user script output files.')
-        return input_files
+                'Import job failed due to missing user script output files.'
+            ) from e
 
     @log_function_call
     def _invoke_import_tool(self, absolute_import_dir: str,
@@ -1083,23 +1067,6 @@ class ImportExecutor:
         if next_data_refresh_date:
             node += f'nextDataRefreshDate: "{next_data_refresh_date}"\n'
         return node
-
-
-def parse_manifest(path: str) -> dict:
-    """Parses the import manifest.
-
-  Args:
-      path: Path to the import manifest file as a string.
-
-  Returns:
-      The parsed manifest as a dict.
-
-  Raises:
-      Same exceptions as open and json.load if the file does not exist or
-      contains malformed json.
-  """
-    with open(path) as file:
-        return json.load(file)
 
 
 def run_and_handle_exception(

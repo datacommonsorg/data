@@ -1,0 +1,30 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "Sweden_Census_Demographic",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://www.statistikdatabasen.scb.se/pxweb/en/ssd/START__BE__BE0101__BE0101A/",
+            "provenance_description": "Population by region, marital status, age and sex from Statistics Sweden (SCB) (1860-present National and 1968-present Sub-National).",
+            "scripts": [
+                "download_demographic.py --output_dir=input_files",
+                "run.sh"
+            ],
+            "source_files": [
+                "input_files/*.csv",
+                "counters/*.csv",
+                "validation_config.json"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output/population_nuts1.tmcf",
+                    "cleaned_csv": "output/*.csv",
+                    "node_mcf": "output/*.mcf"
+                }
+            ],
+            "validation_config_file": "validation_config.json",
+            "cron_schedule": "0 05 * * 1"
+        }
+    ]
+}

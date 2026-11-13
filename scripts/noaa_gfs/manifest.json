@@ -31,7 +31,9 @@
                 "skip_gcs_upload": true,
                 "invoke_differ_tool": false,
                 "invoke_import_validation": false,
-                "invoke_import_tool": false
+                "invoke_import_tool": false,
+                "skip_staging_ingestion": true,
+                "skip_prod_ingestion": true
             }
         }
     ]

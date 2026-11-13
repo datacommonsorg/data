@@ -21,6 +21,9 @@
       "source_file": [
         "input_files/*"
       ],
+      "config_override": {
+        "disable_import_workflow": true
+      },
       "cron_schedule": "0 7 * * 0",
       "_comment": "Schedule: Weekly on Sunday at 07:00 UTC"
     }
