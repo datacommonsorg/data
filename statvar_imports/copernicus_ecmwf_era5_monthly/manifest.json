@@ -5,11 +5,11 @@
       "curator_emails": [
         "support@datacommons.org"
       ],
-      "provenance_url": "https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-single-levels",
+      "provenance_url": "https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels",
       "provenance_description": "Generated using Copernicus Climate Change Service information (2022)",
       "scripts": [
-        "download_and_process.py",
-        "../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/*.celsius.csv --pv_map=copernicus_ecmwf_era5_monthly_pvmap.csv --config_file=copernicus_ecmwf_era5_monthly_metadata.csv --output_path=output/era5_monthly --output_counters=counters/era5_monthly_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
+        "download_and_process.py --noskip_gcs_baseline --strict_ee=true",
+        "../../tools/statvar_importer/stat_var_processor.py --input_data=history_files/*.celsius.csv,input_files/*.celsius.csv --pv_map=copernicus_ecmwf_era5_monthly_pvmap.csv --config_file=copernicus_ecmwf_era5_monthly_metadata.csv --output_path=output/era5_monthly --output_counters=counters/era5_monthly_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
       ],
       "import_inputs": [
         {
@@ -19,6 +19,7 @@
         }
       ],
       "source_files": [
+        "raw_files/*.csv",
         "input_files/*.csv",
         "counters/*.csv",
         "validation_config.json"
@@ -27,9 +28,9 @@
       "validation_config_file": "validation_config.json",
       "user_script_timeout": 28800,
       "resource_limits": {
-        "cpu": 16,
-        "memory": 64,
-        "disk": 100
+        "cpu": 32,
+        "memory": 256,
+        "disk": 200
       }
     }
   ]

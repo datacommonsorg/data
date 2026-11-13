@@ -9,7 +9,7 @@ providing Copernicus Climate Change Service / ECMWF ERA5 and ERA5-Land monthly
 climate reanalysis aggregates for `AdministrativeArea1` and `AdministrativeArea2`
 places worldwide.
 
-- **Source URL**: https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-single-levels
+- **Source URL**: https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels
 - **Earth Engine Catalog**:
   - Historical baseline (`1979-01` to `2020-06`): `ECMWF/ERA5/MONTHLY` (cached in
     `gs://datacommons_public/unresolved_mcf/copernicus_ecmwf/era5_monthly/` and
@@ -89,13 +89,35 @@ All 7 active variables preserve exact production schema parity with
 - `download_and_process_test.py` and `test_data/`: Unit and E2E tests and
   fixtures.
 
-## 3. Running Locally and Refresh Procedure
+## 3. Prerequisites (Earth Engine Setup)
+
+1. Install Python dependencies from `requirements.txt` (`earthengine-api`).
+2. Enable the Earth Engine API on the target GCP project (default:
+   `datcom-import-automation-prod`, or override via `--ee_project` / `EE_PROJECT`)
+   and register the project at
+   https://console.cloud.google.com/earth-engine/configuration.
+3. Authenticate ADC with Earth Engine scopes for local runs:
+   `gcloud auth application-default login --scopes="https://www.googleapis.com/auth/earthengine,https://www.googleapis.com/auth/cloud-platform"`
+   (automated Cloud Batch / Composer workers use their attached service account ADC).
+4. Ensure the Earth Engine place boundary tables exist and grant read ACLs to
+   the runner service account:
+   - `projects/<PROJECT_ID>/assets/all_administrativearea1`
+   - `projects/<PROJECT_ID>/assets/all_administrativearea2`
+   *(Boundary GeoJSONs exported from `PlaceExt` must be normalized with 2D
+   coordinate stripping and `ST_GEOGFROMGEOJSON(..., make_valid => TRUE)` before
+   Earth Engine `--geodesic --primary_geometry_column=geo_json_coordinates`
+   ingestion.)*
+
+## 4. Running Locally and Refresh Procedure
 
 From the repository root:
 
 ```bash
 # Step 1: Download historical baseline into history_files/ and fetch/convert new EE months into input_files/
-python3 statvar_imports/copernicus_ecmwf_era5_monthly/download_and_process.py
+python3 statvar_imports/copernicus_ecmwf_era5_monthly/download_and_process.py \
+  --noskip_gcs_baseline \
+  --strict_ee=true \
+  --ee_project=<PROJECT_ID>
 
 # Step 2: Run StatVarProcessor
 python3 tools/statvar_importer/stat_var_processor.py \
@@ -107,7 +129,7 @@ python3 tools/statvar_importer/stat_var_processor.py \
   --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
 ```
 
-## 4. Testing
+## 5. Testing
 
 Run the unit and end-to-end test suite from the repository root:
 

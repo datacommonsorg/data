@@ -28,7 +28,8 @@ Pipeline stages:
 """
 
 from collections import OrderedDict
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import as_completed
 import csv
 import datetime
 import glob
@@ -98,18 +99,26 @@ flags.DEFINE_string(
     'End year-month (YYYY-MM) inclusive for Earth Engine extraction. '
     'Defaults to the previous calendar month.',
 )
+_DEFAULT_EE_PROJECT = os.environ.get('EE_PROJECT',
+                                     'datcom-import-automation-prod')
+_DEFAULT_EE_PLACE_ASSETS = [
+    asset.strip() for asset in os.environ.get(
+        'EE_PLACE_ASSETS',
+        f'projects/{_DEFAULT_EE_PROJECT}/assets/all_administrativearea1,'
+        f'projects/{_DEFAULT_EE_PROJECT}/assets/all_administrativearea2',
+    ).split(',') if asset.strip()
+]
+
 flags.DEFINE_string(
     'ee_project',
-    os.environ.get('EE_PROJECT', 'datcom-infosys-dev'),
-    'GCP project ID with Earth Engine API enabled.',
+    _DEFAULT_EE_PROJECT,
+    'GCP project ID with Earth Engine API enabled (or set EE_PROJECT env var).',
 )
 flags.DEFINE_list(
     'ee_place_assets',
-    [
-        'projects/datcom-infosys-dev/assets/all_administrativearea1',
-        'projects/datcom-infosys-dev/assets/all_administrativearea2',
-    ],
-    'Earth Engine FeatureCollection assets containing place geometries and dcid.',
+    _DEFAULT_EE_PLACE_ASSETS,
+    'Earth Engine FeatureCollection assets containing place geometries and dcid '
+    '(or set EE_PLACE_ASSETS env var).',
 )
 flags.DEFINE_integer(
     'reduce_region_scale',
@@ -118,9 +127,8 @@ flags.DEFINE_integer(
 )
 flags.DEFINE_bool(
     'skip_gcs_baseline',
-    True,
-    'If True (default), skip syncing baseline .celsius.csv files from GCS. '
-    'Baseline history data remains on GCS for the differ.',
+    False,
+    'If True, skip syncing baseline .celsius.csv files (1979-01..2020-06) from GCS.',
 )
 flags.DEFINE_bool(
     'skip_ee_fetch',
@@ -129,8 +137,9 @@ flags.DEFINE_bool(
 )
 flags.DEFINE_bool(
     'strict_ee',
-    False,
-    'If True, fail the run if Earth Engine initialization or fetch fails.',
+    True,
+    'If True, fail the run if Earth Engine initialization, fetch, or post-2020-06 '
+    'extraction returns empty.',
 )
 flags.DEFINE_integer(
     'parallelism',
@@ -211,9 +220,7 @@ CANONICAL_CSV_COLUMNS: List[str] = [
 
 def map_era5_land_columns(columns: List[str]) -> List[str]:
     """Maps ERA5-Land band names in a CSV header to canonical ERA5 column names."""
-    return [
-        ERA5_LAND_BAND_MAP.get(col.strip(), col.strip()) for col in columns
-    ]
+    return [ERA5_LAND_BAND_MAP.get(col.strip(), col.strip()) for col in columns]
 
 
 def convert_kelvin_to_celsius_value(value_str: str) -> str:
@@ -271,21 +278,19 @@ def convert_kelvin_to_celsius_csv(in_csv_path: str, out_csv_path: str) -> str:
             writer = csv.writer(out_file, lineterminator='\n')
             try:
                 raw_header = next(reader)
+                header = map_era5_land_columns(raw_header)
+                writer.writerow(header)
+                temp_col_indices = [
+                    idx for idx, col_name in enumerate(header)
+                    if 'temperature' in col_name
+                ]
+                for row in reader:
+                    for idx in temp_col_indices:
+                        if idx < len(row) and row[idx]:
+                            row[idx] = convert_kelvin_to_celsius_value(row[idx])
+                    writer.writerow(row)
             except StopIteration:
-                os.replace(tmp_path, out_csv_path)
-                return out_csv_path
-
-            header = map_era5_land_columns(raw_header)
-            writer.writerow(header)
-            temp_col_indices = [
-                idx for idx, col_name in enumerate(header)
-                if 'temperature' in col_name
-            ]
-            for row in reader:
-                for idx in temp_col_indices:
-                    if idx < len(row) and row[idx]:
-                        row[idx] = convert_kelvin_to_celsius_value(row[idx])
-                writer.writerow(row)
+                pass
         os.replace(tmp_path, out_csv_path)
     except Exception:
         if os.path.exists(tmp_path):
@@ -294,8 +299,7 @@ def convert_kelvin_to_celsius_csv(in_csv_path: str, out_csv_path: str) -> str:
     return out_csv_path
 
 
-def convert_directory_kelvin_to_celsius(in_dir: str,
-                                        out_dir: str) -> List[str]:
+def convert_directory_kelvin_to_celsius(in_dir: str, out_dir: str) -> List[str]:
     """Converts all raw `.csv` files in `in_dir` into `.celsius.csv` in `out_dir`."""
     if not os.path.isdir(in_dir):
         return []
@@ -381,8 +385,7 @@ def sync_baseline_from_gcs(
     _parse_gcs_uri(gcs_prefix)
     os.makedirs(dest_dir, exist_ok=True)
     gcs_pattern = f"{gcs_prefix.rstrip('/')}/*.celsius.csv"
-    logging.info('Listing baseline .celsius.csv files matching %s',
-                 gcs_pattern)
+    logging.info('Listing baseline .celsius.csv files matching %s', gcs_pattern)
     celsius_uris = [
         uri for uri in file_util.file_get_matching(gcs_pattern)
         if uri.endswith('.celsius.csv')
@@ -409,8 +412,7 @@ def sync_baseline_from_gcs(
                     dest_dir,
                     session,
                 ):
-                gcs_uri
-                for gcs_uri in celsius_uris
+                    gcs_uri for gcs_uri in celsius_uris
             }
             for future in as_completed(future_to_uri):
                 downloaded_paths.append(future.result())
@@ -499,8 +501,7 @@ def _compute_ee_monthly_features(
 
     start_date = f'{year_month}-01'
     end_date = f'{_next_year_month(year_month)}-01'
-    dataset = ee.ImageCollection(dataset_asset).filterDate(
-        start_date, end_date)
+    dataset = ee.ImageCollection(dataset_asset).filterDate(start_date, end_date)
     first_image_info = dataset.first().getInfo()
     if not first_image_info:
         logging.warning('No image found in %s for %s', dataset_asset,
@@ -521,7 +522,8 @@ def _compute_ee_monthly_features(
     mean_dst = [dst for _, dst in ERA5_LAND_MEAN_BANDS]
 
     def _handle_place(place):
-        area = place.geometry().area(maxError=1000)
+        geom = place.geometry()
+        area = geom.area(maxError=1000)
         is_oversized = area.lte(0).Or(area.gt(world_area_threshold))
         effective_scale = ee.Algorithms.If(
             area.gt(ADAPTIVE_SCALE_AREA_THRESHOLD),
@@ -550,7 +552,7 @@ def _compute_ee_monthly_features(
                     ee.Dictionary(),
                     image.select(src_bands, dst_bands).reduceRegion(
                         reducer=reducer,
-                        geometry=place.geometry(),
+                        geometry=geom,
                         scale=effective_scale,
                         maxPixels=REDUCE_REGION_MAX_PIXELS,
                     ),
@@ -628,8 +630,7 @@ def write_ee_feature_collection_to_csv(
         prefix=f'.{os.path.basename(out_csv_path)}.', dir=out_dir)
     os.close(fd)
     try:
-        with open(tmp_path, mode='w', encoding='utf-8',
-                  newline='') as out_file:
+        with open(tmp_path, mode='w', encoding='utf-8', newline='') as out_file:
             writer = csv.DictWriter(
                 out_file,
                 fieldnames=CANONICAL_CSV_COLUMNS,
@@ -683,9 +684,10 @@ def _fetch_single_ee_month(
             reduce_region_scale=reduce_region_scale,
         )
         if not fc_info or not fc_info.get('features'):
-            logging.warning(
-                'No features returned for asset=%s month=%s',
-                place_asset, ym)
+            msg = f'No features returned for asset={place_asset} month={ym}'
+            if strict:
+                raise RuntimeError(msg)
+            logging.warning('%s', msg)
             return None
         write_ee_feature_collection_to_csv(fc_info, raw_path)
         convert_kelvin_to_celsius_csv(raw_path, celsius_path)
@@ -755,7 +757,9 @@ def fetch_era5_land_from_ee(
             ])
             ee.Initialize(credentials=credentials, project=ee_project)
         except Exception as exc:
-            msg = (f'Unable to initialize Earth Engine for project {ee_project!r}: {exc}')
+            msg = (
+                f'Unable to initialize Earth Engine for project {ee_project!r}: {exc}'
+            )
             if strict:
                 raise RuntimeError(msg) from exc
             logging.warning('%s; continuing with cached/existing files.', msg)
@@ -835,8 +839,7 @@ def fetch_era5_land_from_ee(
                         reduce_region_scale,
                         strict,
                         auth_failed_event,
-                    )
-                    for place_asset, ym, raw_path, celsius_path in
+                    ) for place_asset, ym, raw_path, celsius_path in
                     remaining_tasks
                 ]
                 for future in as_completed(futures):
@@ -897,8 +900,8 @@ def run_pipeline(
             ee_parallelism=ee_parallelism,
         )
 
-    history_files = sorted(
-        glob.glob(os.path.join(history_dir, '*.celsius.csv')))
+    history_files = sorted(glob.glob(os.path.join(history_dir,
+                                                  '*.celsius.csv')))
     input_files = sorted(glob.glob(os.path.join(input_dir, '*.celsius.csv')))
     if not history_files and not input_files:
         raise RuntimeError(
@@ -915,13 +918,20 @@ def run_pipeline(
 
 
 def main(_):
+    ee_place_assets = FLAGS.ee_place_assets
+    if (not FLAGS['ee_place_assets'].present and
+            not os.environ.get('EE_PLACE_ASSETS')):
+        ee_place_assets = [
+            f'projects/{FLAGS.ee_project}/assets/all_administrativearea1',
+            f'projects/{FLAGS.ee_project}/assets/all_administrativearea2',
+        ]
     run_pipeline(
         gcs_baseline_prefix=FLAGS.gcs_baseline_prefix,
         history_dir=FLAGS.history_dir,
         raw_dir=FLAGS.raw_dir,
         input_dir=FLAGS.input_dir,
         ee_dataset=FLAGS.ee_dataset,
-        ee_place_assets=FLAGS.ee_place_assets,
+        ee_place_assets=ee_place_assets,
         ee_start_date=FLAGS.ee_start_date,
         ee_end_date=FLAGS.ee_end_date,
         ee_project=FLAGS.ee_project,

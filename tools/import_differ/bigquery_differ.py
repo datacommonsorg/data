@@ -43,7 +43,6 @@ Usage via import_differ.py:
 """
 
 from collections import defaultdict
-from concurrent.futures import ThreadPoolExecutor, as_completed
 import contextlib
 import csv
 from datetime import datetime
@@ -215,9 +214,10 @@ def _remove_temp_file(path: str) -> None:
         logging.warning('Failed to remove temporary file %s: %s', path, exc)
 
 
-def stream_mcf_files_list(mcf_files: List[str], obs_csv_path: str,
-                          schema_csv_path: str) -> Tuple[int, int]:
-    """Streams a list of MCF files node-by-node into CSVs."""
+def stream_mcf_to_csv(mcf_pattern: str, obs_csv_path: str,
+                      schema_csv_path: str) -> Tuple[int, int]:
+    """Streams MCF files node-by-node into observation and schema CSVs in O(1) memory."""
+    mcf_files = file_get_matching(mcf_pattern)
     total_obs = 0
     total_schema = 0
 
@@ -266,15 +266,6 @@ def stream_mcf_files_list(mcf_files: List[str], obs_csv_path: str,
                     total_obs += o_inc
                     total_schema += s_inc
 
-    return total_obs, total_schema
-
-
-def stream_mcf_to_csv(mcf_pattern: str, obs_csv_path: str,
-                      schema_csv_path: str) -> Tuple[int, int]:
-    """Streams MCF files node-by-node into observation and schema CSVs in O(1) memory."""
-    mcf_files = file_get_matching(mcf_pattern)
-    total_obs, total_schema = stream_mcf_files_list(mcf_files, obs_csv_path,
-                                                    schema_csv_path)
     logging.info('Completed streaming MCF to CSV: %d obs, %d schema nodes',
                  total_obs, total_schema)
     return total_obs, total_schema
@@ -322,61 +313,14 @@ def load_mcf_to_bq_tables(bq_client: bigquery.Client,
         base_dir = (temp_dir.rstrip('/') if temp_dir else stack.enter_context(
             tempfile.TemporaryDirectory()))
         tag = f'_{suffix}' if suffix else ''
-        mcf_files = file_get_matching(mcf_pattern)
-        if not mcf_files:
-            logging.warning('No MCF files matched pattern: %s', mcf_pattern)
-            return 0, 0
-
-        # Parallelize across files if running on GCS with multiple shards.
-        if len(mcf_files) > 1 and file_is_gcs(base_dir):
-            num_workers = min(16, len(mcf_files))
-            file_chunks = [mcf_files[i::num_workers] for i in range(num_workers)]
-            chunk_obs_paths = [
-                f'{base_dir}/obs{tag}_{i:02d}.csv' for i in range(num_workers)
-            ]
-            chunk_schema_paths = [
-                f'{base_dir}/schema{tag}_{i:02d}.csv' for i in range(num_workers)
-            ]
-            obs_count = 0
-            schema_count = 0
-            try:
-                logging.info(
-                    'Streaming %d MCF files across %d worker threads to GCS...',
-                    len(mcf_files), num_workers)
-                with ThreadPoolExecutor(max_workers=num_workers) as executor:
-                    futures = [
-                        executor.submit(stream_mcf_files_list, file_chunks[i],
-                                        chunk_obs_paths[i], chunk_schema_paths[i])
-                        for i in range(num_workers) if file_chunks[i]
-                    ]
-                    for f in as_completed(futures):
-                        o_cnt, s_cnt = f.result()
-                        obs_count += o_cnt
-                        schema_count += s_cnt
-
-                logging.info('Loading observation CSV chunks into BigQuery table %s...',
-                             obs_table_ref)
-                load_csv_to_bq_table(bq_client, f'{base_dir}/obs{tag}_*.csv',
-                                     obs_table_ref, OBS_BQ_SCHEMA,
-                                     expiration_hours)
-                logging.info('Loading schema CSV chunks into BigQuery table %s...',
-                             schema_table_ref)
-                load_csv_to_bq_table(bq_client, f'{base_dir}/schema{tag}_*.csv',
-                                     schema_table_ref, SCHEMA_NODE_BQ_SCHEMA,
-                                     expiration_hours)
-            finally:
-                for p in chunk_obs_paths + chunk_schema_paths:
-                    _remove_temp_file(p)
-            return obs_count, schema_count
-
         obs_csv = (f'{base_dir}/obs{tag}.csv' if file_is_gcs(base_dir) else
                    os.path.join(base_dir, f'obs{tag}.csv'))
         schema_csv = (f'{base_dir}/schema{tag}.csv' if file_is_gcs(base_dir)
                       else os.path.join(base_dir, f'schema{tag}.csv'))
 
         try:
-            obs_count, schema_count = stream_mcf_files_list(
-                mcf_files, obs_csv, schema_csv)
+            obs_count, schema_count = stream_mcf_to_csv(mcf_pattern, obs_csv,
+                                                        schema_csv)
             try:
                 load_csv_to_bq_table(bq_client, obs_csv, obs_table_ref,
                                      OBS_BQ_SCHEMA, expiration_hours)
@@ -491,22 +435,14 @@ def run_bigquery_differ(
             expiration_hours=expiration_hours)
 
         logging.info('Step 2/3: Loading previous MCF data into BigQuery...')
-        if previous_data == current_data:
-            logging.info(
-                'previous_data matches current_data; copying BigQuery tables directly...'
-            )
-            bq_client.copy_table(curr_obs_table, prev_obs_table).result()
-            bq_client.copy_table(curr_schema_table, prev_schema_table).result()
-            prev_obs_count, prev_schema_count = curr_obs_count, curr_schema_count
-        else:
-            prev_obs_count, prev_schema_count = load_mcf_to_bq_tables(
-                bq_client,
-                previous_data,
-                prev_obs_table,
-                prev_schema_table,
-                temp_dir=gcs_temp_dir,
-                suffix=f'prev_{suffix}',
-                expiration_hours=expiration_hours)
+        prev_obs_count, prev_schema_count = load_mcf_to_bq_tables(
+            bq_client,
+            previous_data,
+            prev_obs_table,
+            prev_schema_table,
+            temp_dir=gcs_temp_dir,
+            suffix=f'prev_{suffix}',
+            expiration_hours=expiration_hours)
 
         logging.info('Step 3/3: Running BigQuery FULL OUTER JOIN diff...')
         obs_diff_sql = f"""

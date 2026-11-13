@@ -19,7 +19,8 @@ import subprocess
 import sys
 import tempfile
 import unittest
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock
+from unittest.mock import patch
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 _REPO_ROOT = os.path.abspath(os.path.join(_SCRIPT_DIR, '..', '..'))
@@ -153,8 +154,7 @@ class DownloadAndProcessTest(unittest.TestCase):
 
         celsius_csv = os.path.join(
             self.temp_dir, 'all_administrativearea1_2020-07.ee.celsius.csv')
-        download_and_process.convert_kelvin_to_celsius_csv(
-            raw_csv, celsius_csv)
+        download_and_process.convert_kelvin_to_celsius_csv(raw_csv, celsius_csv)
         with open(celsius_csv, mode='r', encoding='utf-8') as f:
             lines = f.read().splitlines()
         self.assertEqual(len(lines), 2)
@@ -194,8 +194,7 @@ class DownloadAndProcessTest(unittest.TestCase):
             )
             os.makedirs(output_folder, exist_ok=True)
             out_path = os.path.join(
-                output_folder,
-                'all_administrativearea2_2020-06.ee.celsius.csv')
+                output_folder, 'all_administrativearea2_2020-06.ee.celsius.csv')
             with open(out_path, 'w', encoding='utf-8') as f:
                 f.write('date,dcid\n2020-06,geoId/06\n')
             return True
@@ -411,12 +410,13 @@ class DownloadAndProcessTest(unittest.TestCase):
 
         mock_places = MagicMock()
         mock_places.first.return_value.getInfo.return_value = {'id': 'place1'}
+        mock_place = MagicMock()
         mock_flattened = MagicMock()
         mock_mapped_places = MagicMock()
         mock_mapped_places.flatten.return_value = mock_flattened
 
         def places_map_side_effect(place_fn):
-            place_fn(MagicMock())
+            place_fn(mock_place)
             return mock_mapped_places
 
         mock_places.map.side_effect = places_map_side_effect
@@ -434,8 +434,7 @@ class DownloadAndProcessTest(unittest.TestCase):
                 raise RuntimeError('Transient EE 503 error')
             if 'pageToken' not in params:
                 return {
-                    'type':
-                    'FeatureCollection',
+                    'type': 'FeatureCollection',
                     'features': [{
                         'id': 'f1',
                         'properties': {
@@ -444,12 +443,11 @@ class DownloadAndProcessTest(unittest.TestCase):
                             'temperature_2m': 293.15,
                         },
                     }],
-                    'nextPageToken':
-                    'page_2',
+                    'nextPageToken': 'page_2',
                 }
             return {
                 'type':
-                'FeatureCollection',
+                    'FeatureCollection',
                 'features': [{
                     'id': 'f2',
                     'properties': {
@@ -482,6 +480,8 @@ class DownloadAndProcessTest(unittest.TestCase):
 
         self.assertEqual(len(generated), 1)
         self.assertEqual(calls['count'], 3)
+        # Once per _compute_ee_monthly_features attempt (2 attempts due to retry).
+        self.assertEqual(mock_place.geometry.call_count, 2)
         mock_ee.Reducer.mean.return_value.unweighted.assert_called()
         self.assertEqual(
             mock_ee.Algorithms.If.call_args_list[0].args[1:],
@@ -498,8 +498,8 @@ class DownloadAndProcessTest(unittest.TestCase):
         raw_dir = os.path.join(self.temp_dir, 'raw_par')
         input_dir = os.path.join(self.temp_dir, 'input_par')
         os.makedirs(input_dir, exist_ok=True)
-        cached_file = os.path.join(input_dir,
-                                   'all_administrativearea1_2020-07.ee.celsius.csv')
+        cached_file = os.path.join(
+            input_dir, 'all_administrativearea1_2020-07.ee.celsius.csv')
         with open(cached_file, mode='w', encoding='utf-8') as f:
             f.write('date,dcid\n2020-07,geoId/06\n')
 
@@ -509,10 +509,11 @@ class DownloadAndProcessTest(unittest.TestCase):
                          reduce_region_scale):
             del dataset_asset
             self.assertEqual(reduce_region_scale, 1000)
-            fetched_pairs.append((os.path.basename(geo_locations_asset),
-                                  year_month))
+            fetched_pairs.append(
+                (os.path.basename(geo_locations_asset), year_month))
             return {
-                'type': 'FeatureCollection',
+                'type':
+                    'FeatureCollection',
                 'features': [{
                     'id': f'{year_month}_1',
                     'properties': {
@@ -573,8 +574,27 @@ class DownloadAndProcessTest(unittest.TestCase):
                     strict=True,
                 )
 
-    def test_fetch_era5_land_from_ee_non_strict_stops_on_permission_error(
-            self):
+    def test_fetch_era5_land_from_ee_strict_raises_on_empty_features(self):
+        """Verifies strict=True raises when EE returns no features for a month."""
+        mock_ee = MagicMock()
+        mock_ee.ImageCollection.return_value.filterDate.return_value.first.return_value.getInfo.return_value = None
+        with patch.object(download_and_process, 'ee', mock_ee):
+            with self.assertRaises(RuntimeError):
+                download_and_process.fetch_era5_land_from_ee(
+                    dataset_asset='ECMWF/ERA5_LAND/MONTHLY_AGGR',
+                    place_assets=[
+                        'projects/datcom-import-automation-prod/assets/all_administrativearea1'
+                    ],
+                    start_ym='2020-07',
+                    end_ym='2020-07',
+                    raw_dir=os.path.join(self.temp_dir, 'raw_empty'),
+                    input_dir=os.path.join(self.temp_dir, 'input_empty'),
+                    ee_project='datcom-import-automation-prod',
+                    reduce_region_scale=1000,
+                    strict=True,
+                )
+
+    def test_fetch_era5_land_from_ee_non_strict_stops_on_permission_error(self):
         """Verifies strict=False aborts remaining months on 403 permission error."""
         mock_ee = MagicMock()
         mock_ee.ImageCollection.return_value.filterDate.return_value.first.return_value.getInfo.side_effect = (

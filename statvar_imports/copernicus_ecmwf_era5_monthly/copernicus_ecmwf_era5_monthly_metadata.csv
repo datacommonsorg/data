@@ -3,4 +3,5 @@ header_rows,1
 mapped_rows,1
 output_precision_digits,16
 output_columns,"observationDate,observationAbout,value,unit,variableMeasured"
+# Disable DC API node reconciliation to avoid HTTP 429 rate-limiting across 26M+ static observations.
 reconcile_nodes,0

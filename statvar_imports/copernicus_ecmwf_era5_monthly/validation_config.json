@@ -8,12 +8,21 @@
       "params": {}
     },
     {
+      "rule_id": "check_min_date_historical",
+      "description": "Checks that historical baseline observations from 1979-01 are included.",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT StatVar, MinDate FROM stats",
+        "condition": "MinDate <= '1979-01'"
+      }
+    },
+    {
       "rule_id": "check_max_date_freshness",
-      "description": "Checks that the latest observation date does not regress below 2020-06.",
+      "description": "Checks that the latest observation date is within the last 3 months.",
       "validator": "SQL_VALIDATOR",
       "params": {
         "query": "SELECT StatVar, MaxDate FROM stats",
-        "condition": "MaxDate >= '2020-06'"
+        "condition": "MaxDate >= strftime(current_date - INTERVAL 3 MONTH, '%Y-%m')"
       }
     },
     {

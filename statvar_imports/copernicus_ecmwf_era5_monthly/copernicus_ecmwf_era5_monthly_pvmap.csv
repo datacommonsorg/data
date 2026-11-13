@@ -1,10 +1,10 @@
 key,property,value,p2,v2,p3,v3,p4,v4,p5,v5
 date,observationDate,{Data},,,,,,,,
 dcid,observationAbout,{Data},,,,,,,,
-minimum_2m_air_temperature,variableMeasured,Min_Temperature,value,{Number},unit,Celsius,measurementMethod,ERA5Monthly,observationPeriod,P1M
-maximum_2m_air_temperature,variableMeasured,Max_Temperature,value,{Number},unit,Celsius,measurementMethod,ERA5Monthly,observationPeriod,P1M
-mean_2m_air_temperature,variableMeasured,Mean_Temperature,value,{Number},unit,Celsius,measurementMethod,ERA5Monthly,observationPeriod,P1M
-dewpoint_2m_temperature,variableMeasured,DewPointTemperature_SurfaceLevel,value,{Number},unit,Millimeter,measurementMethod,ERA5Monthly,observationPeriod,P1M
-surface_pressure,variableMeasured,AtmosphericPressure_SurfaceLevel,value,{Number},unit,Pascal,measurementMethod,ERA5Monthly,observationPeriod,P1M
-u_component_of_wind_10m,variableMeasured,WindSpeed_UComponent_Height10Meters,value,{Number},unit,MetersPerSecond,measurementMethod,ERA5Monthly,observationPeriod,P1M
-v_component_of_wind_10m,variableMeasured,WindSpeed_VComponent_Height10Meters,value,{Number},unit,MetersPerSecond,measurementMethod,ERA5Monthly,observationPeriod,P1M
+minimum_2m_air_temperature,variableMeasured,Min_Temperature,value,{Number},unit,Celsius,measurementMethod,dcAggregate/ERA5Monthly,observationPeriod,P1M
+maximum_2m_air_temperature,variableMeasured,Max_Temperature,value,{Number},unit,Celsius,measurementMethod,dcAggregate/ERA5Monthly,observationPeriod,P1M
+mean_2m_air_temperature,variableMeasured,Mean_Temperature,value,{Number},unit,Celsius,measurementMethod,dcAggregate/ERA5Monthly,observationPeriod,P1M
+dewpoint_2m_temperature,variableMeasured,DewPointTemperature_SurfaceLevel,value,{Number},unit,Millimeter,measurementMethod,dcAggregate/ERA5Monthly,observationPeriod,P1M
+surface_pressure,variableMeasured,AtmosphericPressure_SurfaceLevel,value,{Number},unit,Pascal,measurementMethod,dcAggregate/ERA5Monthly,observationPeriod,P1M
+u_component_of_wind_10m,variableMeasured,WindSpeed_UComponent_Height10Meters,value,{Number},unit,MetersPerSecond,measurementMethod,dcAggregate/ERA5Monthly,observationPeriod,P1M
+v_component_of_wind_10m,variableMeasured,WindSpeed_VComponent_Height10Meters,value,{Number},unit,MetersPerSecond,measurementMethod,dcAggregate/ERA5Monthly,observationPeriod,P1M

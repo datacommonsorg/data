@@ -5,5 +5,5 @@ value: C:era5_monthly->value
 unit: C:era5_monthly->unit
 variableMeasured: C:era5_monthly->variableMeasured
 typeOf: dcs:StatVarObservation
-measurementMethod: ERA5Monthly
+measurementMethod: dcAggregate/ERA5Monthly
 observationPeriod: P1M
