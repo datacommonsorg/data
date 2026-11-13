@@ -1,0 +1,7 @@
+observationAbout,observationDate,value,variableMeasured,unit,scalingFactor
+dcid:nuts/SE1,1968,111535,dcid:Count_Person_0To4Years_Male_Unmarried,,
+dcid:nuts/SE1,2024,108412,dcid:Count_Person_0To4Years_Male_Unmarried,,
+dcid:nuts/SE1,1968,195234,dcid:Count_Person_5To14Years_Female_Unmarried,,
+dcid:nuts/SE1,2024,241890,dcid:Count_Person_5To14Years_Female_Unmarried,,
+dcid:nuts/SE1,1968,42,dcid:Count_Person_95OrMoreYears_Male_Married,,
+dcid:nuts/SE1,2024,315,dcid:Count_Person_95OrMoreYears_Male_Married,,

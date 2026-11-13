@@ -31,7 +31,7 @@ Download all place properties in the KG with the dcid using BQ:
       latitude,
       longitude,
       ARRAY_TO_STRING(linked_contained_in_place, ',') as containedInPlace
-    FROM \`datcom-store.dc_kg_latest.Place\`
+    FROM \\`datcom-store.dc_kg_latest.Place\\`
     WHERE SUBSTRING(id, 4) not in ('ipcc', 'grid', 's2Ce')
   )
 
@@ -54,7 +54,6 @@ To resolve places in a csv file on command line:
 
 import ast
 import csv
-import glob
 import itertools
 import os
 import sys

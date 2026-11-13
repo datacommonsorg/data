@@ -29,10 +29,7 @@ sys.path.insert(0, _SCRIPT_PATH)
 
 from common.data_loader import process_subject_tables
 
-try:
-    from .process import set_column_map
-except ImportError:
-    from process import set_column_map
+from .process import set_column_map
 
 # These directories are excluded from testing
 _EXCLUDE_DIRS = ['common', 's2201', '__pycache__', '~']
@@ -134,13 +131,12 @@ class TestSubjectTable(unittest.TestCase):
                 continue
 
             with tempfile.TemporaryDirectory() as tmp_dir:
-                if 'raw_csvs' in paths:
+                zip_path = paths.get('zip')
+                if not zip_path:
                     zip_path = os.path.join(tmp_dir, 'test_input.zip')
                     with zipfile.ZipFile(zip_path, 'w') as zf:
                         for raw_csv in paths['raw_csvs']:
                             zf.write(raw_csv, arcname=os.path.basename(raw_csv))
-                else:
-                    zip_path = paths['zip']
                 # generate CSV, MCF and Column Map
                 set_column_map(zip_path, paths['spec'], tmp_dir)
                 process_subject_tables(table_prefix='test',

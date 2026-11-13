@@ -18,17 +18,23 @@ This script processes data from:
 - ./data/superfund_sites_with_status.csv
   This file lists all superfund sites on the NPL with a note on the site's status on the NPL. This file also provides different dates when the NPL status of a site changed. This dataset is exported from the data view in  https://epa.maps.arcgis.com/apps/webappviewer/index.html?id=33cebcdfdd1b4c3a8b51d416956c41f1
 """
-from absl import app, flags
 import os
-import sys
+
+from absl import app
+from absl import flags
 import pandas as pd
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('site_funding_input_path', './data',
-                    'Path to the directory with input files')
-flags.DEFINE_string(
-    'site_funding_output_path', './data/output',
-    'Path to the directory where generated files are to be stored.')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('site_funding_input_path', './data',
+                        'Path to the directory with input files')
+    flags.DEFINE_string(
+        'site_funding_output_path', './data/output',
+        'Path to the directory where generated files are to be stored.')
+
 
 _DATASET_NAME = "./superfund_sites_with_status.csv"
 
@@ -163,4 +169,5 @@ def main(_) -> None:
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

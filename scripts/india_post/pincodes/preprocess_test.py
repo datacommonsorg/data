@@ -14,13 +14,12 @@
 
 __author__ = ["Thejesh GN (i@thejeshgn.com)"]
 
-import filecmp
 import os
-import json
 import tempfile
 import unittest
-import pandas as pd
+
 from india_post.pincodes.preprocess import IndiaPostPincodesDataLoader
+import pandas as pd
 
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
@@ -29,7 +28,7 @@ module_dir_ = os.path.dirname(__file__)
 class TestPreprocess(unittest.TestCase):
 
     def test_create_cleaned_csv(self):
-        with tempfile.TemporaryDirectory() as tmp_dir:
+        with tempfile.TemporaryDirectory():
             pincode_csv_path = os.path.join(module_dir_, 'test_data/test.csv')
             clean_csv_file_path = os.path.join(module_dir_,
                                                'test_data/clean.csv')
