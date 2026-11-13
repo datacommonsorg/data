@@ -18,6 +18,9 @@
             "source_files": [
                 "data.csv"
             ],
+            "config_override": {
+                "disable_import_workflow": true
+            },
             "cron_schedule": "30 11 * * *"
         }
     ]

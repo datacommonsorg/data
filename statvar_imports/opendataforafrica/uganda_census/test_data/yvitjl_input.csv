@@ -1,0 +1,41 @@
+REGION,ID_REGION,REGIONID_REGION,VARIABLE,ID_VARIABLE,SOURCE_VARIABLE,DEFINITION_VARIABLE,UNIT_VARIABLE,FREQ,TIME_PERIOD,OBS_VALUE
+UG,UG,UG,KN.PH.HU.HOS,KN.PH.HU.HOS,Ministry of Health,,number,A,2006,114.0
+UG-56,UG-56,UG-56,KN.PH.HU.HOS,KN.PH.HU.HOS,Ministry of Health,,number,A,2006,1.0
+UG-72,UG-72,UG-72,KN.PH.HU.HOS,KN.PH.HU.HOS,Ministry of Health,,number,A,2006,0.0
+UG-48,UG-48,UG-48,KN.PH.HU.HOS,KN.PH.HU.HOS,Ministry of Health,,number,A,2006,1.0
+UG-70,UG-70,UG-70,KN.PH.HU.HOS,KN.PH.HU.HOS,Ministry of Health,,number,A,2006,2.0
+UG,UG,UG,KN.PH.HU.HCC,KN.PH.HU.HCC,Ministry of Health,,number,A,2006,3123.0
+UG,UG,UG,KN.PH.HU.HCC,KN.PH.HU.HCC,Ministry of Health,,number,A,2007,3123.0
+UG,UG,UG,KN.PH.HU.HCC,KN.PH.HU.HCC,Ministry of Health,,number,A,2009,3123.0
+UG,UG,UG,KN.PH.HU.HCC,KN.PH.HU.HCC,Ministry of Health,,number,A,2010,4450.0
+UG-56,UG-56,UG-56,KN.PH.HU.HCC,KN.PH.HU.HCC,Ministry of Health,,number,A,2006,44.0
+UG,UG,UG,KN.PH.BEDS.TOTAL,KN.PH.BEDS.TOTAL,Ministry of Health,,number,A,2009,13285.0
+UG,UG,UG,KN.PH.BEDS.TOTAL,KN.PH.BEDS.TOTAL,Ministry of Health,,number,A,2010,13285.0
+UG,UG,UG,KN.PH.BEDS.TOTAL,KN.PH.BEDS.TOTAL,Ministry of Health,,number,A,2013,5205.0
+UG-C,UG-C,UG-C,KN.PH.BEDS.TOTAL,KN.PH.BEDS.TOTAL,Ministry of Health,,number,A,2013,2234.0
+UG-86,UG-86,UG-86,KN.PH.BEDS.TOTAL,KN.PH.BEDS.TOTAL,Ministry of Health,,number,A,2013,24.0
+UG,UG,UG,KN.PH.BEDS.GOV,KN.PH.BEDS.GOV,Ministry of Health,,number,A,2009,5983.0
+UG,UG,UG,KN.PH.BEDS.GOV,KN.PH.BEDS.GOV,Ministry of Health,,number,A,2010,5983.0
+UG,UG,UG,KN.PH.BEDS.GOV,KN.PH.BEDS.GOV,Ministry of Health,,number,A,2013,2843.0
+UG-C,UG-C,UG-C,KN.PH.BEDS.GOV,KN.PH.BEDS.GOV,Ministry of Health,,number,A,2013,584.0
+UG-86,UG-86,UG-86,KN.PH.BEDS.GOV,KN.PH.BEDS.GOV,Ministry of Health,,number,A,2013,14.0
+UG,UG,UG,KN.PH.DHC,KN.PH.DHC,Ministry of Health,,number,A,2007,32.0
+UG,UG,UG,KN.PH.DHC,KN.PH.DHC,Ministry of Health,,number,A,2008,33.0
+UG,UG,UG,KN.PH.DHC,KN.PH.DHC,Ministry of Health,,number,A,2009,34.0
+UG,UG,UG,KN.PH.DHC,KN.PH.DHC,Ministry of Health,,number,A,2010,33.0
+UG,UG,UG,KN.PH.DHC,KN.PH.DHC,Ministry of Health,,number,A,2011,39.0
+UG,UG,UG,KN.A6,KN.A6,Ministry of Health,,%,A,2012,38.0
+UG,UG,UG,KN.A6,KN.A6,Ministry of Health,,%,A,2013,39.0
+UG,UG,UG,KN.A6,KN.A6,Ministry of Health,,%,A,2014,44.0
+UG,UG,UG,KN.A6,KN.A6,Ministry of Health,,%,A,2015,53.0
+UG,UG,UG,KN.A6,KN.A6,Ministry of Health,,%,A,2016,55.0
+UG,UG,UG,KN.PH.IMMU.MEASLES,KN.PH.IMMU.MEASLES,Uganda National Expanded Programme for Immunisation (UNEPI),,%,A,2005,87.0
+UG,UG,UG,KN.PH.IMMU.MEASLES,KN.PH.IMMU.MEASLES,Uganda National Expanded Programme for Immunisation (UNEPI),,%,A,2006,89.0
+UG,UG,UG,KN.PH.IMMU.MEASLES,KN.PH.IMMU.MEASLES,Uganda National Expanded Programme for Immunisation (UNEPI),,%,A,2007,87.0
+UG,UG,UG,KN.PH.IMMU.MEASLES,KN.PH.IMMU.MEASLES,Uganda National Expanded Programme for Immunisation (UNEPI),,%,A,2008,77.0
+UG,UG,UG,KN.PH.IMMU.MEASLES,KN.PH.IMMU.MEASLES,Uganda National Expanded Programme for Immunisation (UNEPI),,%,A,2009,80.0
+UG,UG,UG,KN.PH.IMMU.BCG,KN.PH.IMMU.BCG,Uganda National Expanded Programme for Immunisation (UNEPI),,%,A,2005,94.0
+UG,UG,UG,KN.PH.IMMU.BCG,KN.PH.IMMU.BCG,Uganda National Expanded Programme for Immunisation (UNEPI),,%,A,2006,85.0
+UG,UG,UG,KN.PH.IMMU.BCG,KN.PH.IMMU.BCG,Uganda National Expanded Programme for Immunisation (UNEPI),,%,A,2007,90.0
+UG,UG,UG,KN.PH.IMMU.BCG,KN.PH.IMMU.BCG,Uganda National Expanded Programme for Immunisation (UNEPI),,%,A,2008,86.0
+UG,UG,UG,KN.PH.IMMU.BCG,KN.PH.IMMU.BCG,Uganda National Expanded Programme for Immunisation (UNEPI),,%,A,2009,90.0
