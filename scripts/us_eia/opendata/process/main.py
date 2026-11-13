@@ -16,8 +16,8 @@
 import os
 import sys
 
-from absl import flags
 from absl import app
+from absl import flags
 
 # Allows the following module imports to work when running as a script
 # relative to scripts/
@@ -25,11 +25,24 @@ sys.path.append(
     os.path.dirname(
         os.path.dirname(
             os.path.dirname(os.path.dirname(os.path.abspath(__file__))))))
-from us_eia.opendata.process import coal, common, elec, intl, ng, nuclear, pet, seds, total
+from us_eia.opendata.process import coal
+from us_eia.opendata.process import common
+from us_eia.opendata.process import elec
+from us_eia.opendata.process import intl
+from us_eia.opendata.process import ng
+from us_eia.opendata.process import nuclear
+from us_eia.opendata.process import pet
+from us_eia.opendata.process import seds
+from us_eia.opendata.process import total
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('data_dir', 'tmp_raw_data', 'Raw data dir')
-flags.DEFINE_string('dataset', 'ELEC', 'Name of the dataset')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('data_dir', 'tmp_raw_data', 'Raw data dir')
+    flags.DEFINE_string('dataset', 'ELEC', 'Name of the dataset')
+
 
 # Value: (name, extract_fn, schema_fn)
 _DATASETS = {
@@ -63,4 +76,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

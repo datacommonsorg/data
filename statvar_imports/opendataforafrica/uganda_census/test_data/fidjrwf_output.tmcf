@@ -1,0 +1,9 @@
+Node: E:fidjrwf_output->E0
+observationAbout: C:fidjrwf_output->observationAbout
+observationDate: C:fidjrwf_output->observationDate
+variableMeasured: C:fidjrwf_output->variableMeasured
+value: C:fidjrwf_output->value
+unit: C:fidjrwf_output->unit
+scalingFactor: C:fidjrwf_output->scalingFactor
+observationPeriod: C:fidjrwf_output->observationPeriod
+typeOf: dcs:StatVarObservation

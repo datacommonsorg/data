@@ -14,12 +14,13 @@
 
 # How to run the script to download the files:
 # python3 download.py
-import requests
-from bs4 import BeautifulSoup
 import os
 import zipfile
+
 from absl import app
 from absl import logging
+from bs4 import BeautifulSoup
+import requests
 from retry import retry
 
 

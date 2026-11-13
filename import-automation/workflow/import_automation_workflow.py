@@ -19,19 +19,26 @@ and triggers Spanner ingestion Cloud Workflows for staging and production.
 
 from __future__ import annotations
 
+from datetime import datetime
+from datetime import timezone
 import json
 import logging
 import os
 import re
 import sys
 import time
-from datetime import datetime, timezone
 from typing import Any, Callable
 
-from airflow.sdk import BaseSensorOperator, DAG, Param, Variable, task
-from airflow.exceptions import AirflowException, AirflowFailException, AirflowSkipException
+from airflow.exceptions import AirflowException
+from airflow.exceptions import AirflowFailException
+from airflow.exceptions import AirflowSkipException
 from airflow.providers.google.cloud.hooks.cloud_batch import CloudBatchHook
 from airflow.providers.google.cloud.sensors.workflows import WorkflowExecutionSensor
+from airflow.sdk import DAG
+from airflow.sdk import BaseSensorOperator
+from airflow.sdk import Param
+from airflow.sdk import Variable
+from airflow.sdk import task
 from airflow.utils.trigger_rule import TriggerRule
 
 # Enable Jinja templating for project_id on WorkflowExecutionSensor
@@ -42,12 +49,10 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 if current_dir not in sys.path:
     sys.path.insert(0, current_dir)
 
-from golden_verification import (
-    HumanApprovalSensor,
-    get_golden_test_imports,
-    is_golden_test_import,
-    verify_golden_tests,
-)
+from golden_verification import HumanApprovalSensor
+from golden_verification import get_golden_test_imports
+from golden_verification import is_golden_test_import
+from golden_verification import verify_golden_tests
 
 # -----------------------------------------------------------------------------
 # Configuration & Helpers
@@ -55,7 +60,6 @@ from golden_verification import (
 
 DAG_ID = os.environ.get("IMPORT_AUTOMATION_DAG_ID", "ManualRefresh")
 DEFAULT_IMAGE_URI = "us-docker.pkg.dev/datcom-ci/gcr.io/dc-import-executor:stable"
-DEFAULT_SKIP_PROD_INGESTION = False
 DEFAULT_RESOURCES = {
     "machine": "n2-standard-8",
     "cpu": 8000,
@@ -197,32 +201,6 @@ def normalize_batch_resources(
         "memory": int(mem_gib * 1024),
         "disk": disk,
     }
-
-
-# TODO: Move staging and prod ingestion denylist configuration to each import's manifest.json.
-PROD_DENYLIST = frozenset({
-    "CDC_OzoneCensusTract",
-    "CDC_OzoneCounty",
-    "CDC_PM25CensusTract",
-    "CDC_PM25County",
-    "EPACriteriaAirPollutants",
-    "NOAA_GlobalForecastSystem",
-    "USFed_ConstantMaturityRates_Test",
-})
-
-STAGING_DENYLIST = frozenset({
-    "NOAA_GlobalForecastSystem",
-})
-
-
-def is_staging_denylisted(import_name: str) -> bool:
-    short_name = import_name.split(":")[-1]
-    return import_name in STAGING_DENYLIST or short_name in STAGING_DENYLIST
-
-
-def is_prod_denylisted(import_name: str) -> bool:
-    short_name = import_name.split(":")[-1]
-    return import_name in PROD_DENYLIST or short_name in PROD_DENYLIST
 
 
 def get_config_var(key: str, default: str = "") -> str:
@@ -767,11 +745,15 @@ def update_import_version_helper(cfg: dict[str, Any]) -> dict[str, Any]:
         })
 
     imports_res = version_res.get("imports", [])
-    if not imports_res or imports_res[0].get("status") not in ("STAGING",
-                                                               "SKIP"):
-        msg = version_res.get("message", "Status not STAGING or SKIP")
+    if not imports_res or imports_res[0].get("status") not in (
+            "STAGING",
+            "SKIP",
+            "INACTIVE",
+    ):
+        msg = version_res.get("message",
+                              "Status not STAGING, SKIP, or INACTIVE")
         logging.info(
-            "Import status is not STAGING or SKIP (%s); skipping Spanner ingestion.",
+            "Import status is not STAGING, SKIP, or INACTIVE (%s); skipping Spanner ingestion.",
             msg)
         return {"status": "SKIPPED", "message": f"Skipped: {msg}"}
 
@@ -854,6 +836,11 @@ def trigger_environment_ingestion(
 # -----------------------------------------------------------------------------
 
 
+def _is_true(val: Any) -> bool:
+    """Returns True if val is boolean True or the case-insensitive string 'true'."""
+    return val is True or str(val).lower() == "true"
+
+
 def resolve_workflow_context(context: dict[str, Any],
                              default_import_name: str = "") -> dict[str, Any]:
     """Normalizes runtime parameters, environment variables, and fallback defaults."""
@@ -884,7 +871,7 @@ def resolve_workflow_context(context: dict[str, Any],
 
     def to_bool(key: str, default: bool = False) -> bool:
         v = get_val(key, default)
-        return v is True or str(v).lower() == "true"
+        return _is_true(v)
 
     import_name = get_val("importName", default_import_name) or getattr(
         dag, "dag_id", "")
@@ -938,6 +925,19 @@ def resolve_workflow_context(context: dict[str, Any],
     raw_invoke_val = import_config_dict.get("invoke_import_validation", True)
     skip_validation_job = (raw_invoke_val is False or
                            str(raw_invoke_val).lower() == "false")
+    skip_staging_cfg = _is_true(
+        import_config_dict.get("skip_staging_ingestion", False))
+    skip_prod_cfg = _is_true(
+        import_config_dict.get("skip_prod_ingestion", False))
+    if "skipStagingIngestion" in conf:
+        skip_staging_ingestion = _is_true(conf["skipStagingIngestion"])
+    else:
+        skip_staging_ingestion = (to_bool("skipStagingIngestion") or
+                                  skip_staging_cfg)
+    if "skipProdIngestion" in conf:
+        skip_prod_ingestion = _is_true(conf["skipProdIngestion"])
+    else:
+        skip_prod_ingestion = to_bool("skipProdIngestion") or skip_prod_cfg
     batch_config_dict = dict(import_config_dict)
     batch_config_dict["invoke_import_validation"] = False
     batch_config_dict["invoke_differ_tool"] = False
@@ -1001,11 +1001,9 @@ def resolve_workflow_context(context: dict[str, Any],
             to_bool("skipImportJob") or to_bool("skipValidationJob")
             or skip_validation_job,
         "skipStagingIngestion":
-            is_staging_denylisted(import_name)
-            or to_bool("skipStagingIngestion"),
+            skip_staging_ingestion,
         "skipProdIngestion":
-            is_prod_denylisted(import_name)
-            or to_bool("skipProdIngestion", DEFAULT_SKIP_PROD_INGESTION),
+            skip_prod_ingestion,
         "dryRunIngestion":
             to_bool("dryRunIngestion"),
         "forceIngestion":
@@ -1242,9 +1240,7 @@ base_dag_params = {
               type="boolean",
               description="Skip staging ingestion"),
     "skipProdIngestion":
-        Param(default=DEFAULT_SKIP_PROD_INGESTION,
-              type="boolean",
-              description="Skip prod ingestion"),
+        Param(default=False, type="boolean", description="Skip prod ingestion"),
     "resources":
         Param(default=DEFAULT_RESOURCES,
               type="object",
@@ -1299,7 +1295,7 @@ def build_dag(
     config_override: dict[str, Any] | None = None,
     resource_limits: dict[str, Any] | None = None,
     extra_tags: list[str] | None = None,
-    is_paused_upon_creation: bool = True,
+    is_paused_upon_creation: bool | None = None,
     pre_prod_gate_factory: Callable[[], Any] | None = None,
     golden_test_allowlist: set[str] | None = None,
 ) -> DAG:
@@ -1309,10 +1305,16 @@ def build_dag(
     has_golden_check = (is_golden_test_import(import_name, allowlist=allowlist)
                         or is_golden_test_import(dag_id, allowlist=allowlist))
 
-    target_import = import_name or dag_id
-    skip_staging_default = is_staging_denylisted(target_import)
-    skip_prod_default = (is_prod_denylisted(target_import) or
-                         DEFAULT_SKIP_PROD_INGESTION)
+    cfg_override = config_override if isinstance(config_override, dict) else {}
+    skip_staging_default = _is_true(
+        cfg_override.get("skip_staging_ingestion", False))
+    skip_prod_default = _is_true(cfg_override.get("skip_prod_ingestion", False))
+    disable_workflow = _is_true(
+        cfg_override.get("disable_import_workflow", False))
+    if is_paused_upon_creation is None:
+        paused_upon_creation = disable_workflow
+    else:
+        paused_upon_creation = bool(is_paused_upon_creation) or disable_workflow
 
     params = {
         **base_dag_params,
@@ -1361,7 +1363,7 @@ def build_dag(
         max_active_runs=10,
         params=params,
         tags=["data-commons", "import-automation"] + (extra_tags or []),
-        is_paused_upon_creation=is_paused_upon_creation,
+        is_paused_upon_creation=paused_upon_creation,
     )
 
     with dag_instance:

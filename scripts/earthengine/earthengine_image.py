@@ -40,26 +40,24 @@ To view task status, visit https://code.earthengine.google.com/tasks
 """
 
 import ast
-import ee
-import glob
+import collections
+import collections.abc
 import os
 import re
 import sys
 import time
 
-# Workaround for collection.Callable needed for ee.Initialize()
-import collections
-import collections.abc
+import ee
 
+# Workaround for collection.Callable needed for ee.Initialize()
 collections.Callable = collections.abc.Callable
+
+from datetime import date
+from datetime import timedelta
 
 from absl import app
 from absl import flags
 from absl import logging
-from datetime import date
-from datetime import datetime
-from datetime import timedelta
-from dateutil.relativedelta import relativedelta
 from google.auth import compute_engine
 
 _SCRIPTS_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -70,10 +68,9 @@ sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)), 'util'))
 
 import common_flags
+from counters import Counters
 import file_util
 import utils
-
-from counters import Counters
 
 flags.DEFINE_bool(
     'ee_remote', False,

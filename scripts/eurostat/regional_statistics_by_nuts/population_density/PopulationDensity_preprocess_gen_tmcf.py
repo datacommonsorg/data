@@ -15,21 +15,25 @@
 import sys
 
 sys.path.insert(1, '../../../../util')
-from six.moves import urllib
-from alpha2_to_dcid import COUNTRY_MAP
-from nuts_codes_names import NUTS1_CODES_NAMES
-import numpy as np
-import pandas as pd
-import io
 import csv
 import os
+
 from absl import app
-from absl import logging
 from absl import flags
+from absl import logging
+from alpha2_to_dcid import COUNTRY_MAP
+from nuts_codes_names import NUTS1_CODES_NAMES
+import pandas as pd
+from six.moves import urllib
 
 _FLAGS = flags.FLAGS
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
-flags.DEFINE_string('mode', '', 'Options: download or process')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('mode', '', 'Options: download or process')
+
 
 _OUTPUT_COLUMNS = [
     'Date',
@@ -188,4 +192,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

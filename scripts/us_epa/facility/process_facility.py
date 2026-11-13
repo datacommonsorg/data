@@ -3,8 +3,8 @@
 import csv
 import json
 import os.path
-import sys
 from pathlib import Path
+import sys
 
 from absl import app
 from absl import flags
@@ -18,16 +18,20 @@ from util.dc_api_wrapper import dc_api_get_node_property
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '../..'))  # for Crosswalk
-from us_epa.util.crosswalk import Crosswalk
 from us_epa.util import facilities_helper as fh
+from us_epa.util.crosswalk import Crosswalk
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string(
-    'epa_input_tables_path', 'tmp_data',
-    'Path to directory contain crosswalk.csv, V_GHG_EMITTER_FACILITIES.csv, etc.'
-)
-flags.DEFINE_string('epa_output_path', 'output', 'Output directory')
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        'epa_input_tables_path', 'tmp_data',
+        'Path to directory contain crosswalk.csv, V_GHG_EMITTER_FACILITIES.csv, etc.'
+    )
+    flags.DEFINE_string('epa_output_path', 'output', 'Output directory')
+
 
 # Input tables we process
 # Schema: https://enviro.epa.gov/enviro/ef_metadata_html.ef_metadata_table?p_table_name=<table>
@@ -272,4 +276,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

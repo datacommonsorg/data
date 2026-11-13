@@ -13,10 +13,10 @@
 # limitations under the License.
 
 import os
-import unittest
+import shutil
 import sys
 import tempfile
-import shutil
+import unittest
 
 # Ensure the process module can be imported
 MODULE_DIR = os.path.dirname(__file__)

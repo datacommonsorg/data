@@ -13,9 +13,10 @@
 # limitations under the License.
 
 import os
-import unittest
-import pandas as pd
 import sys
+import unittest
+
+import pandas as pd
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '../nps'))

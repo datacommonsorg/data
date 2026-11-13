@@ -11,11 +11,15 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-import requests
+import io
+import os
 import zipfile
-import io, os, config
-from absl import app, logging
+
+from absl import app
+from absl import logging
+import config
 import pandas as pd
+import requests
 from retry import retry
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))

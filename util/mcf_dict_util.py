@@ -51,16 +51,13 @@ Caveats:
 - Extra empty lines would be dropped
 """
 
-import ast
+from collections import OrderedDict
 import glob
 import logging
 import os
 import re
-import json
 from sys import path
-import requests
 from typing import Dict, Optional, Union
-from collections import OrderedDict
 
 _MODULE_DIR = os.path.dirname(os.path.realpath(__file__))
 path.insert(1, os.path.join(_MODULE_DIR, '../'))

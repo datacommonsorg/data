@@ -1,5 +1,5 @@
 parameter,value
-url,https://ethiopia.opendataforafrica.org/xtqdbuc/ethiopia-statistics-2011?regionId=ET-AA#
+url,https://kenya.opendataforafrica.org/
 description,
 #place_type,
 #places_within,
@@ -14,4 +14,4 @@ header_rows,1
 drop_statvars_without_svobs,0
 mapped_rows,1
 mapped_columns,4
-input_rows,19
+#input_rows,19

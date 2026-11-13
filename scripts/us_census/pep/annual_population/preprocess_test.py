@@ -17,8 +17,9 @@ Script to automate the testing for USA Population preprocess script.
 
 import os
 import sys
-import unittest
 import tempfile
+import unittest
+
 # _MODULE_DIR is the path to where this test is running from.
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _SCRIPTS_DIR = os.path.abspath(os.path.join(_MODULE_DIR, '../../../'))
@@ -27,23 +28,25 @@ for path in (_SCRIPTS_DIR, _MODULE_DIR):
         sys.path.append(path)
 
 import re
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock
+from unittest.mock import patch
+
 import pandas as pd
+from us_census.pep.annual_population.constants import TEST_DATA_DIR
+import us_census.pep.annual_population.preprocess as prep
+from us_census.pep.annual_population.preprocess import USA
 
 # pylint: disable=wrong-import-position
 # pylint: disable=import-error
-from us_census.pep.annual_population.preprocess import (
-    process,
-    _process_nationals_2029,
-    _process_states_2029,
-    download_with_retry,
-    _create_retry_session,
-    add_future_year_urls,
-    popchg_file_name_pattern,
-    USA,
-)
-import us_census.pep.annual_population.preprocess as prep
-from us_census.pep.annual_population.constants import TEST_DATA_DIR
+from us_census.pep.annual_population.preprocess import TransientDownloadError
+from us_census.pep.annual_population.preprocess import _create_retry_session
+from us_census.pep.annual_population.preprocess import _process_nationals_2029
+from us_census.pep.annual_population.preprocess import _process_states_2029
+from us_census.pep.annual_population.preprocess import add_future_year_urls
+from us_census.pep.annual_population.preprocess import download_with_retry
+from us_census.pep.annual_population.preprocess import popchg_file_name_pattern
+from us_census.pep.annual_population.preprocess import process
+
 # pylint: enable=import-error
 # pylint: enable=wrong-import-position
 
@@ -233,7 +236,7 @@ class TestDownloadAndUrlProbing(unittest.TestCase):
         self.assertIn(503, adapter.max_retries.status_forcelist)
 
     def test_download_with_retry_raises_on_html_error(self):
-        """Tests that download_with_retry raises ValueError on HTML error page (soft-404)."""
+        """Tests that download_with_retry raises TransientDownloadError on HTML error page (soft-404)."""
         session = MagicMock()
         mock_resp = MagicMock()
         mock_resp.status_code = 200
@@ -243,7 +246,7 @@ class TestDownloadAndUrlProbing(unittest.TestCase):
 
         with tempfile.TemporaryDirectory() as tmp_dir:
             dest_file = os.path.join(tmp_dir, 'test.xlsx')
-            with self.assertRaises(ValueError) as ctx:
+            with self.assertRaises(TransientDownloadError) as ctx:
                 download_with_retry.__wrapped__(session,
                                                 'https://census.gov/test.xlsx',
                                                 dest_file)
@@ -336,6 +339,54 @@ class TestDownloadAndUrlProbing(unittest.TestCase):
         self.assertTrue(
             any('NST-EST2023-POPCHG2020_2023.csv' in url
                 for url in download_urls))
+
+    def test_load_data_df_raises_on_bad_csv_lines(self):
+        """Tests that _load_data_df raises ParserError on malformed CSV instead of silently skipping."""
+        from us_census.pep.annual_population.preprocess import _load_data_df
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.csv',
+                                         delete=False) as f:
+            f.write("col0,col1,col2\n")
+            f.write("1,2,3\n")
+            f.write("1,2,3,4\n")  # bad line with extra column
+            f.write("4,5,6\n")
+            tmp_path = f.name
+        try:
+            with self.assertRaises(pd.errors.ParserError):
+                _load_data_df(tmp_path, "csv", header=0)
+        finally:
+            if os.path.exists(tmp_path):
+                os.remove(tmp_path)
+
+    def test_process_float_count_person_not_inflated(self):
+        """Tests that float Count_Person values (e.g. 341784857.0) are not inflated by 10x."""
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            input_dir = os.path.join(tmp_dir, "input")
+            os.makedirs(input_dir, exist_ok=True)
+            dummy_file = os.path.join(input_dir, "NST-EST2024-POP.xlsx")
+            with open(dummy_file, "w") as f:
+                f.write("dummy")
+
+            mock_df = pd.DataFrame({
+                "Year": [2024],
+                "Location": ["country/USA"],
+                "Count_Person": [341784857.0],
+            })
+
+            cleaned_csv = os.path.join(tmp_dir, "cleaned.csv")
+            mcf_path = os.path.join(tmp_dir, "out.mcf")
+            tmcf_path = os.path.join(tmp_dir, "out.tmcf")
+
+            with patch("us_census.pep.annual_population.preprocess._process_nationals_2029",
+                       return_value=mock_df), \
+                 patch("us_census.pep.annual_population.preprocess._process_states_2029",
+                       return_value=pd.DataFrame()), \
+                 patch("us_census.pep.annual_population.preprocess._generate_mcf"), \
+                 patch("us_census.pep.annual_population.preprocess._generate_tmcf"):
+                process(input_dir, cleaned_csv, mcf_path, tmcf_path, False)
+
+            result_df = pd.read_csv(cleaned_csv)
+            self.assertEqual(result_df["Count_Person"].iloc[0], 341784857)
+            self.assertNotEqual(result_df["Count_Person"].iloc[0], 3417848570)
 
 
 if __name__ == '__main__':

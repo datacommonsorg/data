@@ -60,13 +60,11 @@ To create a web form for any script with commandline args, use it as follows:
 import cgi
 from http import server
 import os
-import select
 import socket
 import subprocess
 import sys
 import threading
 import time
-from urllib import parse
 
 from absl import app
 from absl import flags

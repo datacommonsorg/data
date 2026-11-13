@@ -1,0 +1,9 @@
+Node: E:yvitjl_output->E0
+observationAbout: C:yvitjl_output->observationAbout
+observationDate: C:yvitjl_output->observationDate
+variableMeasured: C:yvitjl_output->variableMeasured
+value: C:yvitjl_output->value
+unit: C:yvitjl_output->unit
+scalingFactor: C:yvitjl_output->scalingFactor
+observationPeriod: C:yvitjl_output->observationPeriod
+typeOf: dcs:StatVarObservation

@@ -15,8 +15,8 @@
 GitHub API client for downloading a repository.
 """
 
-import os
 import logging
+import os
 import tarfile
 import tempfile
 

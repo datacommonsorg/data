@@ -535,14 +535,10 @@ class DownloadNndssAnnualDataTest(unittest.TestCase):
         )
         self.assertEqual(download_nndss_annual_data._DEFAULT_OUTPUT_DIR,
                          expected)
-        download_nndss_annual_data.FLAGS(['download_nndss_annual_data.py'])
-        self.assertEqual(download_nndss_annual_data.FLAGS.output_dir, expected)
 
     @mock.patch('download_nndss_annual_data.download_all')
-    def test_main_execution(self, mock_download_all):
-        # Parse flags before calling main directly in test
-        download_nndss_annual_data.FLAGS(['download_nndss_annual_data.py'])
-        download_nndss_annual_data.main(['download_nndss_annual_data.py'])
+    def test_run_with_defaults(self, mock_download_all):
+        download_nndss_annual_data.run()
         mock_download_all.assert_called_once()
         args, _ = mock_download_all.call_args
         self.assertEqual(len(args[0]), 6)  # 6 verticals
