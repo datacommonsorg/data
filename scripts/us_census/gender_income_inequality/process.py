@@ -20,8 +20,11 @@ import pandas as pd
 
 _FLAGS = flags.FLAGS
 
-flags.DEFINE_string("out_file", "gender_income_inequality.csv",
-                    "CSV output file name.")
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string("out_file", "gender_income_inequality.csv",
+                        "CSV output file name.")
 
 
 def calculate_gender_income_inequality() -> pd.DataFrame:
@@ -72,22 +75,23 @@ def calculate_gender_income_inequality() -> pd.DataFrame:
     logging.info(f"Job {query_job.job_id} is running. Waiting for results...")
     # Fetch results and convert to a Pandas DataFrame.
     results_df = query_job.to_dataframe()
-    logging.info(f"Finished fetching data from BigQuery.")
+    logging.info("Finished fetching data from BigQuery.")
     return results_df
 
 
 def main(_):
     # Define a local file path for the output
     output_filename = _FLAGS.out_file
-    logging.info(f"Fetching data from BigQuery...")
+    logging.info("Fetching data from BigQuery...")
     results_df = calculate_gender_income_inequality()
     if not results_df.empty:
         # Write the DataFrame to a local CSV file.
         results_df.to_csv(output_filename, index=False)
         logging.info(f"Data written to local file: {output_filename}")
     else:
-        logging.error(f"Received empty datafrom from BQ.")
+        logging.error("Received empty datafrom from BQ.")
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

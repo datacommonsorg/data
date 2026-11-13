@@ -18,12 +18,20 @@ National, State and County
 and generate final CSV, MCF, TMCF file.
 """
 
-import pandas as pd
-from absl import logging
 import os
-from common import Outputfiles, _OUTPUTFINAL, _OUTPUTINTERMEDIATE
+import sys
+
+from absl import logging
+import pandas as pd
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
+_SCRIPTS_DIR = os.path.abspath(os.path.join(_CODEDIR, '../../../'))
+if _SCRIPTS_DIR not in sys.path:
+    sys.path.append(_SCRIPTS_DIR)
+
+from us_census.pep.us_pep_sexrace.common import _OUTPUTFINAL
+from us_census.pep.us_pep_sexrace.common import _OUTPUTINTERMEDIATE
+from us_census.pep.us_pep_sexrace.common import Outputfiles
 
 
 def write_to_tmcf(filename: str, tmcf: str):
@@ -54,7 +62,7 @@ def process_national_before_2000(df: pd.DataFrame):
         df['geo_ID'] = df['geo_ID'].str.strip()
 
         # sorting the values based on year and geoid
-        df.sort_values(by=['Year', 'geo_ID'], ascending=True, inplace=True)
+        df = df.sort_values(by=['Year', 'geo_ID'], ascending=True)
 
         df = df.replace('nan', '')
         # writing output to final csv
@@ -84,7 +92,7 @@ def process_state_county_before_2000(df: pd.DataFrame):
         df['geo_ID'] = df['geo_ID'].str.strip()
 
         # sorting the values based on year and geoid
-        df.sort_values(by=['Year', 'geo_ID'], ascending=True, inplace=True)
+        df = df.sort_values(by=['Year', 'geo_ID'], ascending=True)
 
         # writing output to final csv
         df = df[[
@@ -130,7 +138,7 @@ def process_state_county_after_2000(df: pd.DataFrame):
         df['geo_ID'] = df['geo_ID'].str.strip()
 
         # sorting the values based on year and geoid
-        df.sort_values(by=['Year', 'geo_ID'], ascending=True, inplace=True)
+        df = df.sort_values(by=['Year', 'geo_ID'], ascending=True)
 
         df = df.replace('nan', '')
         #Year,geo_ID
@@ -160,7 +168,7 @@ def process_national_after_2000(df: pd.DataFrame):
         df['geo_ID'] = df['geo_ID'].str.strip()
 
         # sorting the values based on year and geoid
-        df.sort_values(by=['Year', 'geo_ID'], ascending=True, inplace=True)
+        df = df.sort_values(by=['Year', 'geo_ID'], ascending=True)
 
         # dropping unwanted column
         df = df.drop(columns=['Unnamed: 0','Count_Person_Male',\

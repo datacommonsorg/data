@@ -19,19 +19,26 @@ and triggers Spanner ingestion Cloud Workflows for staging and production.
 
 from __future__ import annotations
 
+from datetime import datetime
+from datetime import timezone
 import json
 import logging
 import os
 import re
 import sys
 import time
-from datetime import datetime, timezone
 from typing import Any, Callable
 
-from airflow.sdk import BaseSensorOperator, DAG, Param, Variable, task
-from airflow.exceptions import AirflowException, AirflowFailException, AirflowSkipException
+from airflow.exceptions import AirflowException
+from airflow.exceptions import AirflowFailException
+from airflow.exceptions import AirflowSkipException
 from airflow.providers.google.cloud.hooks.cloud_batch import CloudBatchHook
 from airflow.providers.google.cloud.sensors.workflows import WorkflowExecutionSensor
+from airflow.sdk import DAG
+from airflow.sdk import BaseSensorOperator
+from airflow.sdk import Param
+from airflow.sdk import Variable
+from airflow.sdk import task
 from airflow.utils.trigger_rule import TriggerRule
 
 # Enable Jinja templating for project_id on WorkflowExecutionSensor
@@ -42,12 +49,10 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 if current_dir not in sys.path:
     sys.path.insert(0, current_dir)
 
-from golden_verification import (
-    HumanApprovalSensor,
-    get_golden_test_imports,
-    is_golden_test_import,
-    verify_golden_tests,
-)
+from golden_verification import HumanApprovalSensor
+from golden_verification import get_golden_test_imports
+from golden_verification import is_golden_test_import
+from golden_verification import verify_golden_tests
 
 # -----------------------------------------------------------------------------
 # Configuration & Helpers
@@ -199,36 +204,25 @@ def normalize_batch_resources(
     }
 
 
+# TODO: Move staging and prod ingestion denylist configuration to each import's manifest.json.
 PROD_DENYLIST = frozenset({
-    "Brazil_RuralDevelopmentProgram",
-    "CDC500",
+    "CDC_OzoneCensusTract",
     "CDC_OzoneCounty",
+    "CDC_PM25CensusTract",
     "CDC_PM25County",
-    "CensusCountyBusinessPatterns",
-    "CensusSAHIE",
-    "EIA_Electricity",
-    "EPA_EJSCREEN",
-    "EPA_GHGRP",
-    "FARS_CrashData",
-    "FBIGovCrime",
-    "FireWFIGS",
-    "INPE_Fire_Event_Count",
-    "IndiaNSS_HealthAilments",
-    "India_RBIStateDomesticProduct",
-    "NASA_VIIRSActiveFiresEvents",
-    "NCES_PrivateSchool",
-    "NCES_PublicSchool",
-    "NCES_SchoolDistrict",
-    "NOAA_GPCC_StandardardizedPrecipitationIndex",
+    "EPACriteriaAirPollutants",
     "NOAA_GlobalForecastSystem",
-    "OECDRegionalDemography_Population",
-    "UNEnergy",
-    "USCensusPEP_AgeSexRaceHispanicOrigin",
-    "USDA_AgricultureCensus",
     "USFed_ConstantMaturityRates_Test",
-    "USNationalPrisonerStatistics",
-    "WorldBankDatasets",
 })
+
+STAGING_DENYLIST = frozenset({
+    "NOAA_GlobalForecastSystem",
+})
+
+
+def is_staging_denylisted(import_name: str) -> bool:
+    short_name = import_name.split(":")[-1]
+    return import_name in STAGING_DENYLIST or short_name in STAGING_DENYLIST
 
 
 def is_prod_denylisted(import_name: str) -> bool:
@@ -298,9 +292,15 @@ def _make_http_post(url: str,
     return resp.json() if resp.content else {}
 
 
-def _report_import_failure(helper_url: str, job_id: str, import_name: str,
-                           bucket: str, exec_time: int) -> None:
-    """Notifies import-helper of a batch job failure to update Spanner metadata."""
+def _report_import_failure(
+    helper_url: str,
+    job_id: str,
+    import_name: str,
+    bucket: str,
+    exec_time: int,
+    status: str = "FAILURE",
+) -> None:
+    """Notifies import-helper of a batch job failure to update BigQuery metadata."""
     try:
         _make_http_post(
             f"{helper_url}/imports/status", {
@@ -312,7 +312,7 @@ def _report_import_failure(helper_url: str, job_id: str, import_name: str,
                     "importName":
                         import_name,
                     "status":
-                        "FAILURE",
+                        status,
                     "latestVersion":
                         f"gs://{bucket}/{import_name.replace(':', '/')}"
                 }],
@@ -334,19 +334,25 @@ def _build_batch_job_spec(
     resources: dict[str, Any],
     gcs_mount_bucket: str,
     gcs_mount_path: str = "/tmp/gcs",
+    entrypoint: str | None = None,
+    commands: list[str] | None = None,
 ) -> dict[str, Any]:
     """Builds a dictionary-based Cloud Batch job descriptor."""
     sa_email = get_config_var("CLOUD_BATCH_SERVICE_ACCOUNT")
+    container_spec: dict[str, Any] = {
+        "imageUri":
+            image_uri,
+        "commands":
+            commands if commands is not None else [
+                f"--import_name={import_name}",
+                f"--import_config={import_config}",
+            ],
+    }
+    if entrypoint:
+        container_spec["entrypoint"] = entrypoint
     task_spec = {
         "runnables": [{
-            "container": {
-                "imageUri":
-                    image_uri,
-                "commands": [
-                    f"--import_name={import_name}",
-                    f"--import_config={import_config}"
-                ]
-            },
+            "container": container_spec,
             "environment": {
                 "variables": {
                     "IMPORT_NAME": import_name,
@@ -490,7 +496,7 @@ def _compute_batch_exec_time(
 
 
 class CloudBatchImportSensor(BaseSensorOperator):
-    """Submits and polls a Google Cloud Batch import job in reschedule mode.
+    """Submits and polls a Google Cloud Batch import or validation job in reschedule mode.
 
     Running in ``mode="reschedule"`` ensures each poke executes quickly and releases
     the Celery worker slot between checks. This prevents long-running imports (>6h)
@@ -505,8 +511,9 @@ class CloudBatchImportSensor(BaseSensorOperator):
         import_name: str = "",
         gcp_conn_id: str = "google_cloud_default",
         mode: str = "reschedule",
-        poke_interval: int = 60,
+        poke_interval: int = 300,
         timeout: int = 604800,
+        is_validation: bool = False,
         **kwargs: Any,
     ):
         super().__init__(
@@ -517,20 +524,35 @@ class CloudBatchImportSensor(BaseSensorOperator):
         )
         self.import_name = import_name
         self.gcp_conn_id = gcp_conn_id
+        self.is_validation = is_validation
         self._job_result: dict[str, Any] = {}
 
     def poke(self, context: dict[str, Any]) -> bool:
         cfg = resolve_workflow_context(context,
                                        default_import_name=self.import_name)
-        if cfg["skipImportJob"]:
-            logging.info(
-                "skipImportJob is True; skipping Cloud Batch import job.")
-            raise AirflowSkipException(
-                "Import job skipped by configuration (skipImportJob=True).")
+        if self.is_validation:
+            if cfg["skipImportJob"] or cfg.get("skipValidationJob"):
+                logging.info(
+                    "Skipping Cloud Batch validation job (skipImportJob=%s, skipValidationJob=%s).",
+                    cfg["skipImportJob"],
+                    cfg.get("skipValidationJob"),
+                )
+                raise AirflowSkipException(
+                    "Validation job skipped by configuration.")
+            job_id = cfg["validationJobId"]
+            job_label = "validation"
+        else:
+            if cfg["skipImportJob"]:
+                logging.info(
+                    "skipImportJob is True; skipping Cloud Batch import job.")
+                raise AirflowSkipException(
+                    "Import job skipped by configuration (skipImportJob=True).")
+            job_id = cfg["jobId"]
+            job_label = "import"
 
         hook = CloudBatchHook(gcp_conn_id=self.gcp_conn_id)
         job_resource_name = (
-            f"projects/{cfg['projectId']}/locations/{cfg['region']}/jobs/{cfg['jobId']}"
+            f"projects/{cfg['projectId']}/locations/{cfg['region']}/jobs/{job_id}"
         )
         poke_start_time = time.time()
         job = None
@@ -541,24 +563,44 @@ class CloudBatchImportSensor(BaseSensorOperator):
             except Exception as get_err:
                 if not _is_not_found_error(get_err):
                     raise
-                job_spec = _build_batch_job_spec(
-                    cfg["imageUri"],
-                    cfg["importName"],
-                    cfg["batchImportConfig"],
-                    cfg["jobId"],
-                    cfg["resources"],
-                    cfg["gcsMountBucket"],
-                    cfg["gcsMountPath"],
-                )
+                if self.is_validation:
+                    val_commands = [
+                        "/data/import-automation/validator/main.py",
+                        f"--import_name={cfg['importName']}",
+                        f"--import_config={cfg['importConfig']}",
+                        "--run_bq_differ",
+                    ]
+                    job_spec = _build_batch_job_spec(
+                        cfg["imageUri"],
+                        cfg["importName"],
+                        cfg["importConfig"],
+                        job_id,
+                        cfg["resources"],
+                        cfg["gcsMountBucket"],
+                        cfg["gcsMountPath"],
+                        entrypoint="python",
+                        commands=val_commands,
+                    )
+                else:
+                    job_spec = _build_batch_job_spec(
+                        cfg["imageUri"],
+                        cfg["importName"],
+                        cfg["batchImportConfig"],
+                        job_id,
+                        cfg["resources"],
+                        cfg["gcsMountBucket"],
+                        cfg["gcsMountPath"],
+                    )
                 logging.info(
-                    "Submitting Cloud Batch job '%s' (%s, %s)...",
-                    cfg["jobId"],
+                    "Submitting Cloud Batch %s job '%s' (%s, %s)...",
+                    job_label,
+                    job_id,
                     cfg["projectId"],
                     cfg["region"],
                 )
                 try:
                     job = hook.submit_batch_job(
-                        job_name=cfg["jobId"],
+                        job_name=job_id,
                         job=job_spec,
                         region=cfg["region"],
                         project_id=cfg["projectId"],
@@ -566,8 +608,9 @@ class CloudBatchImportSensor(BaseSensorOperator):
                 except Exception as submit_err:
                     if _is_already_exists_error(submit_err):
                         logging.info(
-                            "Cloud Batch job '%s' already exists; fetching status.",
-                            cfg["jobId"],
+                            "Cloud Batch %s job '%s' already exists; fetching status.",
+                            job_label,
+                            job_id,
                         )
                         job = hook.get_conn().get_job(name=job_resource_name)
                     else:
@@ -581,11 +624,11 @@ class CloudBatchImportSensor(BaseSensorOperator):
             if state == "SUCCEEDED":
                 exec_time = _compute_batch_exec_time(job, context,
                                                      poke_start_time)
-                logging.info("Cloud Batch job '%s' succeeded in %ss.",
-                             cfg["jobId"], exec_time)
+                logging.info("Cloud Batch %s job '%s' succeeded in %ss.",
+                             job_label, job_id, exec_time)
                 self._job_result = {
                     "status": "SUCCESS",
-                    "jobId": cfg["jobId"],
+                    "jobId": job_id,
                     "name": job_resource_name,
                     "executionTime": exec_time,
                     "result": str(job),
@@ -600,12 +643,13 @@ class CloudBatchImportSensor(BaseSensorOperator):
                     for ev in status_events[-3:])
                 detail = f" (events: {event_desc})" if event_desc else ""
                 raise RuntimeError(
-                    f"Cloud Batch job '{cfg['jobId']}' entered terminal state {state}{detail}"
+                    f"Cloud Batch {job_label} job '{job_id}' entered terminal state {state}{detail}"
                 )
 
             logging.info(
-                "Cloud Batch job '%s' is in state %s; rescheduling next check in %ss.",
-                cfg["jobId"],
+                "Cloud Batch %s job '%s' is in state %s; rescheduling next check in %ss.",
+                job_label,
+                job_id,
                 state,
                 self.poke_interval,
             )
@@ -613,9 +657,17 @@ class CloudBatchImportSensor(BaseSensorOperator):
         except Exception as e:
             exec_time = _compute_batch_exec_time(job, context, poke_start_time)
             helper_url = cfg["helperUrlFn"](cfg["importHelperService"], "")
-            _report_import_failure(helper_url, cfg["jobId"], cfg["importName"],
-                                   cfg["gcsImportBucket"], exec_time)
-            raise AirflowException(f"Cloud Batch import job failed: {e}") from e
+            failure_status = "VALIDATION" if self.is_validation else "FAILURE"
+            _report_import_failure(
+                helper_url,
+                job_id,
+                cfg["importName"],
+                cfg["gcsImportBucket"],
+                exec_time,
+                status=failure_status,
+            )
+            raise AirflowException(
+                f"Cloud Batch {job_label} job failed: {e}") from e
 
     def execute(self, context: dict[str, Any]) -> dict[str, Any]:
         super().execute(context)
@@ -623,13 +675,14 @@ class CloudBatchImportSensor(BaseSensorOperator):
             return self._job_result
         cfg = resolve_workflow_context(context,
                                        default_import_name=self.import_name)
+        job_id = cfg["validationJobId"] if self.is_validation else cfg["jobId"]
         return {
             "status":
                 "SUCCESS",
             "jobId":
-                cfg["jobId"],
+                job_id,
             "name":
-                f"projects/{cfg['projectId']}/locations/{cfg['region']}/jobs/{cfg['jobId']}",
+                f"projects/{cfg['projectId']}/locations/{cfg['region']}/jobs/{job_id}",
             "executionTime":
                 0,
             "result":
@@ -667,110 +720,37 @@ def _run_import_job_fn(import_name: str = "", **context: Any) -> dict[str, Any]:
 run_import_job.function = _run_import_job_fn  # type: ignore[attr-defined]
 
 
-def _run_cloud_run_job(
-    project_id: str,
-    region: str,
-    job_name: str,
-    args: list[str],
-    timeout_seconds: int = 7200,
-    poll_interval: int = 15,
-) -> dict[str, Any]:
-    """Triggers a Cloud Run v2 Job execution and polls the LRO until completion."""
-    import google.auth
-    from google.auth.transport.requests import AuthorizedSession
-
-    creds, _ = google.auth.default(
-        scopes=["https://www.googleapis.com/auth/cloud-platform"])
-    session = AuthorizedSession(creds)
-
-    run_url = f"https://run.googleapis.com/v2/projects/{project_id}/locations/{region}/jobs/{job_name}:run"
-    payload = {
-        "overrides": {
-            "containerOverrides": [{
-                "args": args,
-            }]
-        }
-    }
-    logging.info("Triggering Cloud Run job '%s' via %s with args: %s", job_name,
-                 run_url, args)
-    resp = session.post(run_url, json=payload, timeout=60)
-    resp.raise_for_status()
-    operation = resp.json()
-    op_name = operation.get("name")
-    if not op_name:
-        raise RuntimeError(
-            f"Cloud Run jobs.run did not return an operation name: {operation}")
-
-    logging.info(
-        "Waiting for Cloud Run job operation '%s' to complete (timeout: %ss)...",
-        op_name, timeout_seconds)
-    op_url = f"https://run.googleapis.com/v2/{op_name}"
-    start_time = time.time()
-
-    while True:
-        if operation.get("done"):
-            if "error" in operation:
-                err = operation["error"]
-                raise RuntimeError(
-                    f"Cloud Run job '{job_name}' failed with error: {err}")
-            response_data = operation.get("response", {})
-            failed_count = response_data.get("failedCount", 0)
-            cancelled_count = response_data.get("cancelledCount", 0)
-            if failed_count > 0 or cancelled_count > 0:
-                raise RuntimeError(
-                    f"Cloud Run job '{job_name}' execution failed "
-                    f"(failedCount={failed_count}, cancelledCount={cancelled_count}): {response_data}"
-                )
-            logging.info("Cloud Run job '%s' completed successfully.", job_name)
-            return response_data or operation
-
-        if time.time() - start_time > timeout_seconds:
-            raise TimeoutError(
-                f"Cloud Run job '{job_name}' operation '{op_name}' timed out after {timeout_seconds}s."
-            )
-
-        time.sleep(poll_interval)
-        poll_resp = session.get(op_url, timeout=60)
-        poll_resp.raise_for_status()
-        operation = poll_resp.json()
+def run_validation_job(
+    import_name: str = "",
+    task_id: str = "run_validation_job",
+    **kwargs: Any,
+) -> CloudBatchImportSensor:
+    """Creates a reschedule-mode sensor that submits and monitors a Cloud Batch validation job."""
+    return CloudBatchImportSensor(
+        task_id=task_id,
+        import_name=import_name,
+        is_validation=True,
+        **kwargs,
+    )
 
 
-@task(task_id="run_validation_job")
-def run_validation_job(import_name: str = "", **context) -> dict[str, Any]:
-    """Executes the Cloud Run validation job after the Batch import job."""
-    cfg = resolve_workflow_context(context, default_import_name=import_name)
-    if cfg["skipImportJob"]:
-        logging.info(
-            "skipImportJob is True; skipping Cloud Run validation job.")
-        raise AirflowSkipException(
-            "Validation job skipped by configuration (skipImportJob=True).")
-
-    start_time = time.time()
-    try:
-        res = _run_cloud_run_job(
-            project_id=cfg["projectId"],
-            region=cfg["region"],
-            job_name=cfg["validationJobName"],
-            args=[
-                f"--import_name={cfg['importName']}",
-                f"--import_config={cfg['importConfig']}",
-            ],
-            timeout_seconds=7200,
-        )
-        exec_time = int(time.time() - start_time)
+def _run_validation_job_fn(import_name: str = "",
+                           **context: Any) -> dict[str, Any]:
+    sensor = CloudBatchImportSensor(
+        task_id="run_validation_job",
+        import_name=import_name,
+        is_validation=True,
+    )
+    if not sensor.poke(context):
+        cfg = resolve_workflow_context(context, default_import_name=import_name)
         return {
-            "status": "SUCCESS",
-            "jobName": cfg["validationJobName"],
-            "executionTime": exec_time,
-            "result": str(res),
+            "status": "RUNNING",
+            "jobId": cfg["validationJobId"],
         }
-    except Exception as e:
-        exec_time = int(time.time() - start_time)
-        helper_url = cfg["helperUrlFn"](cfg["importHelperService"], "")
-        _report_import_failure(helper_url, cfg["jobId"], cfg["importName"],
-                               cfg["gcsImportBucket"], exec_time)
-        raise AirflowException(f"Cloud Run validation job failed: {e}") from e
+    return sensor._job_result
 
+
+run_validation_job.function = _run_validation_job_fn  # type: ignore[attr-defined]
 
 # -----------------------------------------------------------------------------
 # Cloud Workflows & Ingestion Helpers
@@ -937,29 +917,38 @@ def resolve_workflow_context(context: dict[str, Any],
                                "spanner-ingestion-workflow",
                                "SPANNER_INGESTION_WORKFLOW_NAME")
 
-    validation_job_name = cfg_val("validationJobName", "import-validator-job",
-                                  "VALIDATION_JOB_NAME")
-
+    default_import_config: dict[str, Any] = {
+        "gcp_project_id": project_id,
+        "gcs_project_id": project_id,
+        "storage_prod_bucket_name": gcs_import_bucket,
+        "gcs_bucket_volume_mount": gcs_mount_bucket,
+    }
     import_config = get_val("importConfig")
     if not import_config or import_config == "{}":
-        import_config_dict: dict[str, Any] = {
-            "gcp_project_id": project_id,
-            "gcs_project_id": project_id,
-            "storage_prod_bucket_name": gcs_import_bucket,
-            "gcs_bucket_volume_mount": gcs_mount_bucket,
-        }
+        import_config_dict = dict(default_import_config)
     elif isinstance(import_config, str):
         try:
-            import_config_dict = json.loads(import_config)
+            parsed_cfg = json.loads(import_config)
+            import_config_dict = {
+                **default_import_config,
+                **(parsed_cfg if isinstance(parsed_cfg, dict) else {}),
+            }
         except Exception:
-            import_config_dict = {}
+            import_config_dict = dict(default_import_config)
     elif isinstance(import_config, dict):
-        import_config_dict = dict(import_config)
+        import_config_dict = {**default_import_config, **import_config}
     else:
-        import_config_dict = {}
+        import_config_dict = dict(default_import_config)
+
+    raw_invoke_val = import_config_dict.get("invoke_import_validation", True)
+    skip_validation_job = (raw_invoke_val is False or
+                           str(raw_invoke_val).lower() == "false")
+    batch_config_dict = dict(import_config_dict)
+    batch_config_dict["invoke_import_validation"] = False
+    batch_config_dict["invoke_differ_tool"] = False
 
     import_config_str = json.dumps(import_config_dict)
-    batch_import_config_str = import_config_str
+    batch_import_config_str = json.dumps(batch_config_dict)
 
     exec_dt = (context.get("logical_date") or
                getattr(dag_run, "logical_date", None) or
@@ -967,6 +956,10 @@ def resolve_workflow_context(context: dict[str, Any],
                getattr(dag_run, "start_date", None))
     run_ts = int(exec_dt.timestamp()) if exec_dt else int(time.time())
     run_id = dag_run.run_id if dag_run else f"manual__{datetime.now(timezone.utc).isoformat()}"
+    job_id = get_val("jobId") or generate_job_id(import_name, run_ts)
+    validation_job_id = (get_val("validationJobId") or
+                         get_val("validationJobName") or
+                         f"{job_id[:58].rstrip('-')}-val")
 
     def helper_url(service_name: str, suffix: str = "") -> str:
         svc = f"{service_name}{suffix}"
@@ -982,15 +975,17 @@ def resolve_workflow_context(context: dict[str, Any],
         "importName":
             import_name,
         "jobId":
-            get_val("jobId") or generate_job_id(import_name, run_ts),
+            job_id,
+        "validationJobId":
+            validation_job_id,
+        "validationJobName":
+            validation_job_id,
         "imageUri":
             get_val("imageUri", DEFAULT_IMAGE_URI),
         "importConfig":
             import_config_str,
         "batchImportConfig":
             batch_import_config_str,
-        "validationJobName":
-            validation_job_name,
         "gcsMountBucket":
             gcs_mount_bucket,
         "gcsImportBucket":
@@ -1007,8 +1002,12 @@ def resolve_workflow_context(context: dict[str, Any],
             spanner_workflow,
         "skipImportJob":
             to_bool("skipImportJob"),
+        "skipValidationJob":
+            to_bool("skipImportJob") or to_bool("skipValidationJob")
+            or skip_validation_job,
         "skipStagingIngestion":
-            to_bool("skipStagingIngestion"),
+            is_staging_denylisted(import_name)
+            or to_bool("skipStagingIngestion"),
         "skipProdIngestion":
             is_prod_denylisted(import_name)
             or to_bool("skipProdIngestion", DEFAULT_SKIP_PROD_INGESTION),
@@ -1048,14 +1047,30 @@ def update_import_version(**context) -> dict[str, Any]:
 def trigger_staging_ingestion(**context) -> dict[str, Any]:
     """Triggers staging Spanner ingestion via ingestion-helper."""
     cfg = resolve_workflow_context(context)
+    ti = context.get("ti")
     if cfg["skipStagingIngestion"]:
+        if ti:
+            ti.xcom_push(
+                key="return_value",
+                value={
+                    "status": "SKIPPED",
+                    "message": "Staging ingestion skipped",
+                },
+            )
         raise AirflowSkipException(
             "Staging ingestion skipped by configuration (skipStagingIngestion=True)."
         )
 
-    ti = context.get("ti")
     version_res = ti.xcom_pull(task_ids="update_import_version") if ti else None
     if isinstance(version_res, dict) and version_res.get("status") == "SKIPPED":
+        if ti:
+            ti.xcom_push(
+                key="return_value",
+                value={
+                    "status": "SKIPPED",
+                    "message": version_res.get("message", "Skipped"),
+                },
+            )
         raise AirflowSkipException(
             f"Staging ingestion skipped: {version_res.get('message', 'Skipped')}"
         )
@@ -1136,7 +1151,7 @@ def trigger_prod_ingestion(**context) -> dict[str, Any]:
     return res
 
 
-@task(task_id="workflow_summary", trigger_rule=TriggerRule.ALL_DONE)
+@task(task_id="workflow_summary", trigger_rule=TriggerRule.NONE_FAILED)
 def workflow_summary(**context) -> dict[str, Any]:
     """Aggregates workflow outputs and fails the DAG run if any upstream task failed."""
     cfg, ti = resolve_workflow_context(context), context.get("ti")
@@ -1190,15 +1205,8 @@ def workflow_summary(**context) -> dict[str, Any]:
     ]
     if not failed and ti is not None and (
             dag_task_ids is None or "trigger_prod_ingestion" in dag_task_ids):
-        prod_trigger_val = ti.xcom_pull(task_ids="trigger_prod_ingestion")
-        if prod_trigger_val is None:
+        if ti.xcom_pull(task_ids="trigger_prod_ingestion") is None:
             failed.append("prod (upstream_failed or failed)")
-        elif (
-                isinstance(prod_trigger_val, dict) and
-                prod_trigger_val.get("status") == "SUBMITTED" and
-            (dag_task_ids is None or "wait_prod_ingestion" in dag_task_ids) and
-                ti.xcom_pull(task_ids="wait_prod_ingestion") is None):
-            failed.append("prod_wait (upstream_failed or failed)")
     if failed:
         error_msg = f"Workflow failed in upstream stage(s): {', '.join(dict.fromkeys(failed))}"
         logging.error(error_msg)
@@ -1242,12 +1250,6 @@ base_dag_params = {
         Param(default=DEFAULT_SKIP_PROD_INGESTION,
               type="boolean",
               description="Skip prod ingestion"),
-    "dryRunIngestion":
-        Param(default=False, type="boolean", description="Dry run ingestion"),
-    "forceIngestion":
-        Param(default=False,
-              type="boolean",
-              description="Force ingestion even if already SUCCESS"),
     "resources":
         Param(default=DEFAULT_RESOURCES,
               type="object",
@@ -1312,9 +1314,22 @@ def build_dag(
     has_golden_check = (is_golden_test_import(import_name, allowlist=allowlist)
                         or is_golden_test_import(dag_id, allowlist=allowlist))
 
+    target_import = import_name or dag_id
+    skip_staging_default = is_staging_denylisted(target_import)
+    skip_prod_default = (is_prod_denylisted(target_import) or
+                         DEFAULT_SKIP_PROD_INGESTION)
+
     params = {
         **base_dag_params,
         **(golden_dag_params if has_golden_check else {}),
+        "skipStagingIngestion":
+            Param(default=skip_staging_default,
+                  type="boolean",
+                  description="Skip staging ingestion"),
+        "skipProdIngestion":
+            Param(default=skip_prod_default,
+                  type="boolean",
+                  description="Skip prod ingestion"),
         **({
             "importName":
                 Param(import_name,
@@ -1366,8 +1381,8 @@ def build_dag(
             execution_id=
             "{{ (ti.xcom_pull(task_ids='trigger_staging_ingestion') or {}).get('executionId', '') }}",
             mode="reschedule",
-            poke_interval=60,
-            timeout=21600,
+            poke_interval=300,
+            timeout=86400,
         )
         prod_wait = WorkflowExecutionSensor(
             task_id="wait_prod_ingestion",
@@ -1380,17 +1395,19 @@ def build_dag(
             execution_id=
             "{{ (ti.xcom_pull(task_ids='trigger_prod_ingestion') or {}).get('executionId', '') }}",
             mode="reschedule",
-            poke_interval=60,
-            timeout=21600,
+            poke_interval=300,
+            timeout=86400,
         )
         batch_task = run_import_job(import_name=import_name)
+        validation_task = run_validation_job(import_name=import_name)
         version_task = update_import_version()
         staging_task = trigger_staging_ingestion()
         prod_task = trigger_prod_ingestion()
         summary_task = workflow_summary()
 
         pipeline: list[Any] = [
-            batch_task, version_task, staging_task, staging_wait
+            batch_task, validation_task, version_task, staging_task,
+            staging_wait
         ]
         if has_golden_check:
             golden_task = verify_golden_tests()

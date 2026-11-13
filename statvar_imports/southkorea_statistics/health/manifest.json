@@ -19,7 +19,8 @@
           "cleaned_csv": "output/diseasereport.csv"
         }
       ],
-      "cron_schedule": "0 10 1,15 * *",
+      "cron_schedule": "0 9 * * 3",
+      "_comment": "Schedule: Weekly on Wednesday at 09:00 UTC",
       "source_files": ["source_files/*.csv"]
     }
   ]

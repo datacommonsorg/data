@@ -16,16 +16,23 @@ Unit tests for air_quality.py
 
 Usage: python3 -m unittest discover -v -s . -p "*_test.py"
 '''
-import unittest, csv, os, sys, tempfile
+import csv
+import os
+import sys
+import tempfile
+import unittest
 
 module_dir_ = os.path.dirname(__file__)
 
 sys.path.append(module_dir_)
 
-from air_quality import (create_csv, create_sites_mcf, get_camel_case,
-                         write_csv, write_sites_mcf, write_tmcf,
-                         _sanitize_dcid_component, _is_cross_border_site,
-                         _make_site_dcid, _format_site_node)
+from air_quality import _sanitize_dcid_component
+from air_quality import create_csv
+from air_quality import create_sites_mcf
+from air_quality import get_camel_case
+from air_quality import write_csv
+from air_quality import write_sites_mcf
+from air_quality import write_tmcf
 
 
 class TestCriteriaGasesTest(unittest.TestCase):

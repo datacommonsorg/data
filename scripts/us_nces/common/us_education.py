@@ -24,17 +24,26 @@ import json
 import os
 import re
 import sys
-import warnings
-import numpy as np
-import pandas as pd
+
 from absl import logging
 from google.cloud import storage
+import numpy as np
+import pandas as pd
 
 CODEDIR = os.path.dirname(__file__)
 sys.path.insert(1, os.path.join(CODEDIR, '../../..'))
 
-from common.prop_conf import *
-from common.replacement_functions import (replace_values, _UNREADABLE_TEXT)
+from common.prop_conf import DF_DEFAULT_MCF_PROP
+from common.prop_conf import FORM_STATVAR
+from common.prop_conf import SV_NODE_FORMAT
+from common.prop_conf import SV_PROP_ORDER
+from common.prop_conf import TMCF_TEMPLATE
+from common.prop_conf import TMCF_TEMPLATE_PLACE_DISTRICT
+from common.prop_conf import TMCF_TEMPLATE_PLACE_PRIVATE
+from common.prop_conf import TMCF_TEMPLATE_PLACE_PUBLIC
+from common.replacement_functions import _UNREADABLE_TEXT
+from common.replacement_functions import replace_values
+
 from util.alpha2_to_dcid import USSTATE_MAP
 from util.dc_api_wrapper import dc_api_is_defined_dcid
 from util.statvar_dcid_generator import get_statvar_dcid
@@ -501,8 +510,8 @@ class USEducation:
             col_post_2017].combine_first(self._final_df_place[col_pre_2017])
 
         # Clean up the old columns
-        self._final_df_place.drop(columns=[col_pre_2017, col_post_2017],
-                                  inplace=True)
+        self._final_df_place = self._final_df_place.drop(
+            columns=[col_pre_2017, col_post_2017])
 
         # Restructuring School District ID according to Data Commons.
         self._final_df_place["State_District_ID"] = \
@@ -1070,7 +1079,7 @@ class USEducation:
                     df_final["year"] = pd.to_numeric(df_final["year"])
                     df_final["year"] = df_final["year"] + 1
                     # Dropping Duplicates and writing to a file
-                    df_final.drop_duplicates(inplace=True)
+                    df_final = df_final.drop_duplicates()
                     df_final.to_csv(self._cleaned_csv_file_path,
                                     header=False,
                                     index=False,
@@ -1136,14 +1145,14 @@ class USEducation:
 
         f_deno = []
         for dcnode in mcf_:
-            deno_matched = re.findall("(Node: dcid:)(\w+)", dcnode)[0][1]
+            deno_matched = re.findall(r"(Node: dcid:)(\w+)", dcnode)[0][1]
             f_deno.append(deno_matched)
         # Passes the Node through check_dcid_existance to check if the SV is
         # already existing.
         node_status = dc_api_is_defined_dcid(f_deno)
         f_deno = []
         for dcnode in mcf_:
-            deno_matched = re.findall("(Node: dcid:)(\w+)", dcnode)[0][1]
+            deno_matched = re.findall(r"(Node: dcid:)(\w+)", dcnode)[0][1]
             status = node_status[deno_matched]
             if not status:
                 f_deno.append(dcnode)

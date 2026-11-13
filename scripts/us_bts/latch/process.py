@@ -28,7 +28,9 @@ import os
 import sys
 import warnings
 
-from absl import app, flags, logging
+from absl import app
+from absl import flags
+from absl import logging
 import numpy as np
 import pandas as pd
 
@@ -36,17 +38,27 @@ _CODEDIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(1, _CODEDIR)
 
 # pylint: disable=wrong-import-position
-# pylint: disable=wildcard-import
-# pylint: disable=unused-wildcard-import
-from constants import *
-# pylint: enable=wildcard-import
-# pylint: enable=unused-wildcard-import
+from constants import ACS_SRUVEY_MEASUREMENT_METHOD
+from constants import CONF_2009_FILE
+from constants import CONF_2017_FILE
+from constants import DEFAULT_MEASUREMENT_METHOD
+from constants import DF_DEFAULT_MCF_PROP
+from constants import FINAL_DATA_COLS
+from constants import FORM_STATVAR
+from constants import MELT_OBV_COL
+from constants import MELT_VAR_COL
+from constants import PADDING
+from constants import RENAME_COLUMNS
+from constants import SV_NODE_FORMAT
+from constants import SV_PROP_ORDER
+from constants import TMCF_TEMPLATE
 
 sys.path.insert(1, os.path.join(_CODEDIR, '../../../util/'))
 
 # pylint: disable=import-error
-from statvar_dcid_generator import get_statvar_dcid
 import file_util
+from statvar_dcid_generator import get_statvar_dcid
+
 # pylint: enable=import-error
 # pylint: enable=wrong-import-position
 _FLAGS = flags.FLAGS
@@ -54,8 +66,14 @@ _DEFAULT_INPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                    'input_files')
 _DEFAULT_OUTPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                     'output_files')
-flags.DEFINE_string("input_path", _DEFAULT_INPUT_PATH,
-                    "Import Data File's List")
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string("input_path", _DEFAULT_INPUT_PATH,
+                        "Import Data File's List")
+
+
 _ROWS_PER_FILE = 4000000
 
 
@@ -184,16 +202,13 @@ def _process_household_transportation(input_file: str,
                           sep=file_conf["input_file_delimiter"])
 
     basic_cols = file_conf.get("basic_cols", [])
-    # Creating Population Columns
-    pop_cols = file_conf.get("pop_cols", []) + file_conf.get("extra_cols", [])
+    raw_pop_cols = file_conf.get("pop_cols", []) + file_conf.get(
+        "extra_cols", [])
 
-    data_df = data_df[basic_cols + pop_cols]
+    data_df = data_df[basic_cols + raw_pop_cols]
     data_df = data_df.rename(columns=RENAME_COLUMNS)
 
-    columns_info = [basic_cols, pop_cols]
-    for column_var in columns_info:
-        for idx, column in enumerate(column_var):
-            column_var[idx] = RENAME_COLUMNS.get(column, column)
+    pop_cols = [RENAME_COLUMNS.get(col, col) for col in raw_pop_cols]
 
     data_df = _apply_filters(data_df, file_conf)
 
@@ -530,4 +545,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

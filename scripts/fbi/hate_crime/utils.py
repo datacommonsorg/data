@@ -12,12 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """Utility functions."""
+import csv
 import os
 import sys
-import csv
-import pandas as pd
 
 from geo_id_resolver import convert_to_place_dcid
+import pandas as pd
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -196,7 +196,7 @@ def make_time_place_aggregation(dataframe,
         agg_dict = {}
     agg_list = []
 
-    if country == True:
+    if country:
         # Year + Country
         agg_country = agg_hate_crime_df(dataframe,
                                         groupby_cols=(['DATA_YEAR'] +
@@ -214,7 +214,7 @@ def make_time_place_aggregation(dataframe,
                                   multi_index=multi_index)
     agg_state['Place'] = agg_state.apply(
         lambda row: convert_to_place_dcid(row['STATE_ABBR']), axis=1)
-    agg_state.drop(columns=['STATE_ABBR'], inplace=True)
+    agg_state = agg_state.drop(columns=['STATE_ABBR'])
     agg_list.append(agg_state)
 
     # Year + City
@@ -228,7 +228,7 @@ def make_time_place_aggregation(dataframe,
     agg_city['Place'] = agg_city.apply(lambda row: convert_to_place_dcid(
         row['STATE_ABBR'], row['PUG_AGENCY_NAME'], 'City'),
                                        axis=1)
-    agg_city.drop(columns=['PUG_AGENCY_NAME', 'STATE_ABBR'], inplace=True)
+    agg_city = agg_city.drop(columns=['PUG_AGENCY_NAME', 'STATE_ABBR'])
     agg_list.append(agg_city)
 
     return agg_list

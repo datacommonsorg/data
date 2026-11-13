@@ -16,7 +16,8 @@
                     "cleaned_csv": "output_files/ejscreen_airpollutants.csv"
                 }
             ],
-            "cron_schedule": "0 10 1,15 * *",
+            "cron_schedule": "0 6 * * 0",
+            "_comment": "Schedule: Weekly on Sunday at 06:00 UTC",
             "source_files": [
                 "input_files/*"
             ],

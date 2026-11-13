@@ -12,19 +12,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import os
+from pathlib import Path
+import shutil
+import time
+
+from absl import app
+from absl import logging
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import time
-from absl import app, logging
-import os
-import shutil
-import pandas as pd
-from pathlib import Path
+from selenium.webdriver.support.ui import WebDriverWait
 
 tmpdir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "tmp")
 Path(tmpdir).mkdir(parents=True, exist_ok=True)
+
 
 def download_file(url, input_file_path):
     """
@@ -53,33 +55,40 @@ def download_file(url, input_file_path):
             try:
                 driver.get(url.format(year, year))
                 excel_link = WebDriverWait(driver, 10).until(
-                    EC.element_to_be_clickable((By.XPATH, "//a[contains(text(),'Download Excel')]"))
-                )
+                    EC.element_to_be_clickable(
+                        (By.XPATH, "//a[contains(text(),'Download Excel')]")))
                 excel_link.click()
                 time.sleep(5)
                 logging.info(f"{url.format(year, year)} clicked.")
                 for filename in os.listdir(tmpdir):
                     if filename.endswith((".xlsx", ".xls")):
                         old_file = os.path.join(tmpdir, filename)
-                        new_file = os.path.join(input_file_path, f'nces_hbcu_input_{count}_{filename}')
+                        new_file = os.path.join(
+                            input_file_path,
+                            f'nces_hbcu_input_{count}_{filename}')
                         shutil.copyfile(old_file, new_file)
                         os.remove(old_file)
                         count += 1
-            except Exception as e:
-                logging.warning(f"No Excel link found for year 20{year} or No future url found")
+            except Exception:
+                logging.warning(
+                    f"No Excel link found for year 20{year} or No future url found"
+                )
                 break
-    except Exception as e:
-        logging.fatal(f"Error during the main loop")
+    except Exception:
+        logging.fatal("Error during the main loop")
     finally:
         driver.quit()
         logging.info("ChromeDriver has been closed.")
 
+
 def main(_):
-    inputdir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "input_files")
+    inputdir = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                            "input_files")
     Path(inputdir).mkdir(parents=True, exist_ok=True)
     url = 'https://nces.ed.gov/programs/digest/d{}/tables/dt{}_313.30.asp'
     download_file(url, inputdir)
     shutil.rmtree(tmpdir)
+
 
 if __name__ == "__main__":
     app.run(main)

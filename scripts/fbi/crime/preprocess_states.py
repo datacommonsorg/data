@@ -13,23 +13,25 @@
 # limitations under the License.
 
 from sys import path
+
 # For import util.alpha2_to_dcid
 path.insert(1, '../../../')
 
 import csv
-import io
-import ssl
-import urllib.request
-import sys
-import requests
-import re
+import logging
 import os
 
 import pandas as pd
-import logging
-from .geocode_cities import *
-from .common_util import *
+import requests
+
 import util.alpha2_to_dcid as alpha2_to_dcid
+
+from .common_util import TEMPLATE_MCF_TEMPLATE
+from .common_util import YEARS_WITH_TWO_RAPE_COLUMNS
+from .common_util import int_from_field
+from .common_util import remove_digits
+from .common_util import remove_extra_chars
+from .geocode_cities import find_crime_state
 
 USSTATE_MAP = alpha2_to_dcid.USSTATE_MAP
 
@@ -320,9 +322,8 @@ if __name__ == '__main__':
         read_file.insert(_YEAR_INDEX, 'Year', year)
         # Since the legacy rape column value should not be included in the total count, nor in forcible rape value, we drop it.
         if year in YEARS_WITH_TWO_RAPE_COLUMNS:
-            read_file.drop(read_file.columns[[_LEGACY_RAPE_INDEX]],
-                           axis=1,
-                           inplace=True)
+            read_file = read_file.drop(read_file.columns[[_LEGACY_RAPE_INDEX]],
+                                       axis=1)
         read_file.to_csv(csv_file, index=None, header=True)
         csv_files.append(csv_file)
         os.remove(xls_file)

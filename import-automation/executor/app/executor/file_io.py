@@ -13,8 +13,6 @@
 # limitations under the License.
 """Utilities to read/write files on GCS"""
 
-from typing import Union
-from absl import app
 from absl import logging
 from google.cloud import storage
 
@@ -114,7 +112,6 @@ def file_copy(src_filename: str, dst_filename: str) -> str:
   """
 
     # Get source file handle to read from
-    src_fh = None
     with file_open(src_filename, mode='rb') as src_file:
         with file_open(dst_filename, mode='wb') as dst_file:
             _copy_file_chunks(src_file, dst_file)

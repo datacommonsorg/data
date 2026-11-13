@@ -12,11 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import filecmp
 import os
 import tempfile
 import unittest
-from .preprocess import *
+
+from .preprocess import calculate_crimes
+from .preprocess import create_formatted_csv_file
+from .preprocess import create_tmcf_file
 
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)

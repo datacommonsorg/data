@@ -23,6 +23,7 @@ python3 parse_precipitation_index.py input_file output_file
 '''
 
 import sys
+
 import pandas as pd
 
 
@@ -46,10 +47,9 @@ def clean_precipitation_data(file_path, output_file):
     data["month"] = data["month"].map("{:02}".format)
     data["date"] = data["year"].astype(str) + "-" + data["month"].astype(str)
     if "Evapotranspiration" in file_path:
-        data.rename(columns={
+        data = data.rename(columns={
             "spei": "StandardizedPrecipitation" + "EvapotranspirationIndex"
-        },
-                    inplace=True)
+        })
         data["fips"] = "0" + data["fips"].astype(str)
         data = pd.melt(
             data,
@@ -61,8 +61,7 @@ def clean_precipitation_data(file_path, output_file):
             value_name='Value')
         data["dcid"] = "geoId/" + data["fips"].astype(str)
     elif "Palmer" in file_path:
-        data.rename(columns={"pdsi": "PalmerDroughtSeverityIndex"},
-                    inplace=True)
+        data = data.rename(columns={"pdsi": "PalmerDroughtSeverityIndex"})
         data["countyfips"] = "0" + data["countyfips"].astype(str)
         data = pd.melt(
             data,
@@ -72,8 +71,7 @@ def clean_precipitation_data(file_path, output_file):
             value_name='Value')
         data["dcid"] = "geoId/" + data["countyfips"].astype(str)
     else:
-        data.rename(columns={"spi": "StandardizedPrecipitationIndex"},
-                    inplace=True)
+        data = data.rename(columns={"spi": "StandardizedPrecipitationIndex"})
         data["countyfips"] = "0" + data["countyfips"].astype(str)
         data = pd.melt(
             data,
