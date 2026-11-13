@@ -47,6 +47,7 @@ Joins 1-degree grid SPI values (`output_files/*.csv`) with place area ratios (`g
 ## Running Tests
 
 ```bash
+python3 -m unittest scripts/noaa/gpcc_spi/download_test.py
 python3 -m unittest scripts/noaa/gpcc_spi/preprocess_gpcc_spi_test.py
 python3 -m unittest scripts/noaa/gpcc_spi/gpcc_spi_aggregation_test.py
 ```
