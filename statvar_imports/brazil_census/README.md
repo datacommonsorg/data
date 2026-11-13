@@ -9,11 +9,10 @@ All sub-imports are organized into dedicated, year-agnostic topic folders under 
 Each subfolder contains:
 - `download.py`: Automated multi-year extraction script (queries official IBGE SIDRA REST API, merges historical census baselines, and archives raw payloads under `raw_files/`)
 - `download_test.py`: Hermetic unit tests
-- `<topic>.csv`: Cleaned observations CSV
 - `<topic>.tmcf`: Template MCF mapping data columns to Data Commons schema
 - `<topic>_pvmap.csv`: Property-value mapping definition
 - `<topic>_metadata.csv`: Configuration parameters for `stat_var_processor.py`
-- `input_files/<topic>.csv`: Processed tabular input data (`Ano,Localidade,...`)
+- `input_files/<topic>.csv`: Processed tabular input data (`Ano,Localidade,...`) (plus `brazil_literacy/brazil_literacy_rates.csv`)
 - `raw_files/`: Archived raw upstream SIDRA JSON and IBGE XLS/CSV payloads
 - `counters/<topic>_counters.csv`: Processing counters and metrics
 - `README.md`: Dataset documentation and provenance
@@ -21,7 +20,7 @@ Each subfolder contains:
 Shared top-level files in `statvar_imports/brazil_census/`:
 - `manifest.json`: Consolidated Data Commons import specification (`Brazil_Census`) covering all 7 topic download scripts and 8 `import_inputs`
 - `validation_config.json`: Consolidated validation rules (threshold $\le 0.1\%$ deletions, date freshness and historical start date checks, place count checks)
-- `brazil_places_resolved.csv`: Shared entity mapping to Wikidata and Data Commons DCIDs for all 5,598 Brazilian places (country, 5 macro-regions, 27 states, and 5,565 municipalities)
+- `brazil_places_resolved.csv`: Shared entity mapping to Wikidata and Data Commons DCIDs for all 5,604 Brazilian places (1 country, 5 macro-regions, 27 states, and 5,571 municipalities, plus historical/alias/encoding variants)
 
 ---
 

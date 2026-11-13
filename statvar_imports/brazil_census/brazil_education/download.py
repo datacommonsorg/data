@@ -26,6 +26,7 @@ Downloads educational enrollment data directly from official IBGE sources:
 import io
 import json
 import os
+import shutil
 import sys
 import tempfile
 from typing import Any, Dict, List, Optional, Tuple
@@ -162,12 +163,13 @@ def get_robust_session() -> requests.Session:
 
 
 def _get_raw_dir(target_path: str) -> str:
-    """Returns the directory for archiving raw downloaded payloads."""
+    """Returns a clean directory for archiving raw downloaded payloads."""
     if os.path.abspath(target_path) == os.path.abspath(DEFAULT_OUTPUT_FILE):
         raw_dir = os.path.join(SCRIPT_DIR, "raw_files")
     else:
         raw_dir = os.path.join(os.path.dirname(os.path.abspath(target_path)),
                                "raw_files")
+    shutil.rmtree(raw_dir, ignore_errors=True)
     os.makedirs(raw_dir, exist_ok=True)
     return raw_dir
 
@@ -270,35 +272,45 @@ def fetch_from_ibge_ftp_or_input_files(
     raw_dir: Optional[str] = None,
 ) -> List[Dict[str, Any]]:
     """Fetches municipal education workbooks from live IBGE FTP or GCS raw input files."""
-    rows: List[Dict[str, Any]] = []
     mapping = load_municipal_mapping(raw_dir=raw_dir)
 
-    # 1. Primary: Attempt live download from official IBGE FTP portal
+    # 1. Primary: Attempt complete live download from official IBGE FTP portal.
+    # Stage rows and raw payloads until all 27 UFs succeed so partial FTP failures
+    # never leak into raw_dir or mix with GCS fallback rows.
+    ftp_rows: List[Dict[str, Any]] = []
+    ftp_blobs: List[Tuple[str, bytes]] = []
     try:
         logging.info(
             "Attempting download of 2000 Census education workbooks from official IBGE FTP portal..."
         )
+        downloaded_ufs = 0
         for uf in UF_CODES_2000:
             zip_url = f"{IBGE_FTP_2000_EDUCATION_BASE}{uf}.zip"
             res = session.get(zip_url, timeout=30)
-            if res.status_code == 200:
-                with zipfile.ZipFile(io.BytesIO(res.content)) as z:
-                    for name in z.namelist():
-                        if name.endswith(".xls") and "010100" in name:
-                            content = z.read(name)
-                            if raw_dir:
-                                with open(
-                                        os.path.join(raw_dir,
-                                                     os.path.basename(name)),
-                                        "wb") as f:
-                                    f.write(content)
-                            rows.extend(
-                                parse_raw_education_xls(content, mapping))
-        if rows:
+            res.raise_for_status()
+            uf_has_xls = False
+            with zipfile.ZipFile(io.BytesIO(res.content)) as z:
+                for name in z.namelist():
+                    if name.endswith(".xls") and "010100" in name:
+                        content = z.read(name)
+                        ftp_rows.extend(
+                            parse_raw_education_xls(content, mapping))
+                        ftp_blobs.append((os.path.basename(name), content))
+                        uf_has_xls = True
+            if uf_has_xls:
+                downloaded_ufs += 1
+        if downloaded_ufs == len(UF_CODES_2000) and ftp_rows:
+            if raw_dir:
+                for fname, content in ftp_blobs:
+                    with open(os.path.join(raw_dir, fname), "wb") as f:
+                        f.write(content)
             logging.info(
-                f"Successfully downloaded and parsed {len(rows)} records from live IBGE FTP portal."
+                f"Successfully downloaded and parsed {len(ftp_rows)} records from live IBGE FTP portal."
             )
-            return rows
+            return ftp_rows
+        logging.warning(
+            f"Incomplete IBGE FTP download ({downloaded_ufs}/{len(UF_CODES_2000)} UFs). Falling back to GCS raw input files..."
+        )
     except Exception as e:
         logging.warning(
             f"Live IBGE FTP download failed ({e}). Falling back to GCS raw input files..."
@@ -307,6 +319,7 @@ def fetch_from_ibge_ftp_or_input_files(
     # 2. Secondary: GCS raw input_files
     from google.cloud import storage
 
+    rows: List[Dict[str, Any]] = []
     client = storage.Client()
     bucket = client.bucket(GCS_BUCKET_NAME)
     blobs = list(bucket.list_blobs(prefix=GCS_INPUT_DIR))
@@ -356,6 +369,36 @@ IBGE_STATE_CODE_TO_NAME = {
     "53": "Distrito Federal",
 }
 
+STATE_CODE_TO_SIGLA = {
+    "11": "RO",
+    "12": "AC",
+    "13": "AM",
+    "14": "RR",
+    "15": "PA",
+    "16": "AP",
+    "17": "TO",
+    "21": "MA",
+    "22": "PI",
+    "23": "CE",
+    "24": "RN",
+    "25": "PB",
+    "26": "PE",
+    "27": "AL",
+    "28": "SE",
+    "29": "BA",
+    "31": "MG",
+    "32": "ES",
+    "33": "RJ",
+    "35": "SP",
+    "41": "PR",
+    "42": "SC",
+    "43": "RS",
+    "50": "MS",
+    "51": "MT",
+    "52": "GO",
+    "53": "DF",
+}
+
 RAW_2010_COL_TO_NIVEL = {
     1: "Total",
     2: "Creche",
@@ -383,14 +426,6 @@ def parse_2010_education_file(content_bytes: bytes,
     if header_idx is None:
         raise ValueError(
             f"Could not find header row in 2010 education XLS ({rede}).")
-    muni_start = None
-    for idx in range(header_idx + 1, len(df)):
-        val = df.iloc[idx, 0]
-        if pd.notna(val) and "munic" in str(val).lower():
-            muni_start = idx + 1
-            break
-    if muni_start is None:
-        muni_start = header_idx + 1
     code_col = 10 if df.shape[1] > 10 else None
     if code_col is None:
         for col_i in range(df.shape[1]):
@@ -402,6 +437,25 @@ def parse_2010_education_file(content_bytes: bytes,
             if code_col is not None:
                 break
 
+    first_7 = None
+    if code_col is not None and code_col < df.shape[1]:
+        for idx in range(header_idx + 1, len(df)):
+            raw_code = str(df.iloc[idx, code_col]).strip()
+            if raw_code.isnumeric() and len(raw_code) == 7:
+                first_7 = idx
+                break
+
+    muni_start = first_7
+    if muni_start is None:
+        for idx in range(header_idx + 1, len(df)):
+            val = df.iloc[idx, 0]
+            if pd.notna(val) and "munic" in str(val).lower():
+                muni_start = idx + 1
+                break
+    if muni_start is None:
+        muni_start = header_idx + 1
+
+    state_code = ""
     for idx in range(len(df)):
         val0 = str(df.iloc[idx, 0]).strip()
         if val0 == "Total":
@@ -409,6 +463,7 @@ def parse_2010_education_file(content_bytes: bytes,
                         (code_col is not None and
                          code_col < df.shape[1]) else "")
             if raw_code and raw_code.isnumeric() and len(raw_code) == 2:
+                state_code = raw_code
                 state_loc = IBGE_STATE_CODE_TO_NAME.get(raw_code, raw_code)
                 for c_idx, nivel in RAW_2010_COL_TO_NIVEL.items():
                     if nivel != "Classe de alfabetização":
@@ -439,14 +494,19 @@ def parse_2010_education_file(content_bytes: bytes,
         raw_code = (str(df.iloc[idx, code_col]).strip() if
                     (code_col is not None and code_col < df.shape[1]) else "")
         is_muni_code = raw_code.isnumeric() and len(raw_code) == 7
-        place = raw_code if is_muni_code else str(df.iloc[idx, 0]).strip()
-        if not place or (pd.isna(df.iloc[idx, 0]) and not is_muni_code):
-            continue
-        place_lower = place.lower()
-        if (place == "nan" or
-            ("fonte" in place_lower and "fonte boa" not in place_lower) or
-                "nota" in place_lower):
-            continue
+        val0 = "" if pd.isna(df.iloc[idx, 0]) else str(df.iloc[idx, 0]).strip()
+        if is_muni_code:
+            place = raw_code
+        else:
+            if not val0:
+                continue
+            val0_lower = val0.lower()
+            if (val0_lower == "nan" or "continua" in val0_lower or
+                ("fonte" in val0_lower and "fonte boa" not in val0_lower) or
+                    "nota" in val0_lower):
+                continue
+            sigla = STATE_CODE_TO_SIGLA.get(state_code, "")
+            place = f"{val0} - {sigla}" if sigla else val0
         for c_idx, nivel in RAW_2010_COL_TO_NIVEL.items():
             if c_idx >= df.shape[1]:
                 continue
@@ -528,6 +588,12 @@ def fetch_2022_education_sidra(
             except (ValueError, TypeError):
                 continue
 
+            year_str = str(r.get("D3N", "")).strip()
+            try:
+                year = int(year_str)
+            except ValueError:
+                continue
+
             if str(r.get("NC", "")).strip() == "6":
                 loc = str(r.get("D1C", "")).strip()
             else:
@@ -540,7 +606,7 @@ def fetch_2022_education_sidra(
             if not nivel:
                 continue
 
-            key = (2022, loc, "Total", nivel)
+            key = (year, loc, "Total", nivel)
             sidra_2022_acc[key] = sidra_2022_acc.get(key, 0) + val
     return sidra_2022_acc
 

@@ -290,10 +290,15 @@ class DownloadTest(unittest.TestCase):
         self.assertIn("107453", download_mod.TABLE_1378_AGE_CODES)
         self.assertIn("111286", download_mod.TABLE_1378_AGE_CODES)
         self.assertIn("93086", download_mod.TABLE_9514_AGE_CODES)
-        for c in download_mod.COHORTS_0_14:
-            self.assertIn(c, download_mod.COHORTS_0_14)
-        for c in download_mod.COHORTS_15_59:
-            self.assertIn(c, download_mod.COHORTS_15_59)
+        self.assertEqual(len(download_mod.COHORTS_0_14), 3)
+        self.assertEqual(len(download_mod.COHORTS_15_59), 9)
+        self.assertTrue(
+            set(download_mod.COHORTS_0_14).isdisjoint(
+                set(download_mod.COHORTS_15_59)))
+        for code in ("93070", "93084", "93085", "93087", "93088", "93089",
+                     "93090", "93091", "93092", "93093", "93094"):
+            self.assertIn(code, download_mod.TABLE_1378_AGE_CODES)
+            self.assertIn(code, download_mod.TABLE_9514_AGE_CODES)
 
     @patch.object(download_mod, "fetch_raw_historical_files")
     def test_download_all_years_success(self, mock_hist):

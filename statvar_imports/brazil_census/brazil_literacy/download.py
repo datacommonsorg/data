@@ -23,9 +23,10 @@ tabular CSV input files.
 import io
 import json
 import os
+import shutil
 import sys
 import tempfile
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 if SCRIPT_DIR not in sys.path:
@@ -124,12 +125,13 @@ def get_robust_session() -> requests.Session:
 
 
 def _get_raw_dir(target_path: str) -> str:
-    """Returns the directory for archiving raw downloaded payloads."""
+    """Returns a clean directory for archiving raw downloaded payloads."""
     if os.path.abspath(target_path) == os.path.abspath(DEFAULT_OUTPUT_FILE):
         raw_dir = os.path.join(SCRIPT_DIR, "raw_files")
     else:
         raw_dir = os.path.join(os.path.dirname(os.path.abspath(target_path)),
                                "raw_files")
+    shutil.rmtree(raw_dir, ignore_errors=True)
     os.makedirs(raw_dir, exist_ok=True)
     return raw_dir
 
@@ -612,14 +614,19 @@ def _fetch_2022_literacy_rates_rows(
     places_map = _load_places_resolved_map()
     rows_2022: List[Dict[str, Any]] = []
 
-    def resolve_loc(r: Dict[str, Any]) -> Optional[str]:
+    def resolve_loc(r: Dict[str, Any]) -> str:
         if str(r.get("NC", "")).strip() == "6":
             raw_loc = str(r.get("D1C", "")).strip()
         else:
             raw_loc = str(r.get("D1N", "")).strip()
             if raw_loc == "Brasil":
                 raw_loc = "Brazil"
-        return places_map.get(raw_loc)
+        resolved = places_map.get(raw_loc)
+        if not resolved:
+            raise ValueError(
+                f"Unresolved place identifier in SIDRA literacy rates: {raw_loc!r}"
+            )
+        return resolved
 
     # 1. Table 9543: 15+ literacy rate (c287=100362) and 15-19 literacy rate (c287=93086)
     raw_9543 = fetch_sidra_data(
@@ -634,18 +641,17 @@ def _fetch_2022_literacy_rates_rows(
             continue
         try:
             rate_val = float(val_str)
+            year = int(str(r.get("D3N", "")).strip())
         except (ValueError, TypeError):
             continue
         dcid = resolve_loc(r)
-        if not dcid:
-            continue
         c287 = str(r.get("D6C", "")).strip()
         if c287 == "100362":
             rows_2022.append({
                 "observationAbout":
                     dcid,
                 "observationDate":
-                    2022,
+                    year,
                 "variableMeasured":
                     "dcid:Count_Person_Illiterate_AsAFractionOf_Count_Person",
                 "value":
@@ -660,7 +666,7 @@ def _fetch_2022_literacy_rates_rows(
                 "observationAbout":
                     dcid,
                 "observationDate":
-                    2022,
+                    year,
                 "variableMeasured":
                     "dcid:Count_Person_15To19Years_Literate_AsAFractionOf_Count_Person_15To19Years",
                 "value":
@@ -672,7 +678,7 @@ def _fetch_2022_literacy_rates_rows(
             })
 
     # 2. Table 9542: Counts by age and literacy status for exact 20+, 15-24, 25-59, and 60+ rate calculation
-    counts: Dict[str, Dict[str, Dict[str, int]]] = {}
+    counts: Dict[Tuple[int, str], Dict[str, Dict[str, int]]] = {}
     for fname, url in TABLE_9542_RATES_URLS:
         raw_9542 = fetch_sidra_data(
             session,
@@ -685,19 +691,19 @@ def _fetch_2022_literacy_rates_rows(
                 continue
             try:
                 cnt_val = int(round(float(val_str)))
+                year = int(str(r.get("D3N", "")).strip())
             except (ValueError, TypeError):
                 continue
             dcid = resolve_loc(r)
-            if not dcid:
-                continue
             c59 = str(r.get("D6C", "")).strip()
             c287 = str(r.get("D7C", "")).strip()
-            counts.setdefault(dcid, {}).setdefault(c59, {})[c287] = cnt_val
+            counts.setdefault((year, dcid), {}).setdefault(c59,
+                                                           {})[c287] = cnt_val
 
     single_60_64 = ["6613", "6614", "6615", "6616", "6617"]
     broad_25_64 = ["2999", "9482", "9483", "9484"]
 
-    for dcid, by_status in counts.items():
+    for (year, dcid), by_status in counts.items():
         tot = by_status.get("93024", {})
         lit = by_status.get("1023", {})
         illit = by_status.get("1024", {})
@@ -711,7 +717,7 @@ def _fetch_2022_literacy_rates_rows(
                     "observationAbout":
                         dcid,
                     "observationDate":
-                        2022,
+                        year,
                     "variableMeasured":
                         "dcid:Count_Person_20OrMoreYears_Literate_AsAFractionOf_Count_Person_20OrMoreYears",
                     "value":
@@ -731,7 +737,7 @@ def _fetch_2022_literacy_rates_rows(
                     "observationAbout":
                         dcid,
                     "observationDate":
-                        2022,
+                        year,
                     "variableMeasured":
                         "dcid:Count_Person_15To24Years_Illiterate_AsAFractionOf_Count_Person_15To24Years",
                     "value":
@@ -753,7 +759,7 @@ def _fetch_2022_literacy_rates_rows(
                     "observationAbout":
                         dcid,
                     "observationDate":
-                        2022,
+                        year,
                     "variableMeasured":
                         "dcid:Count_Person_25To59Years_Illiterate_AsAFractionOf_Count_Person_25To59Years",
                     "value":
@@ -771,7 +777,7 @@ def _fetch_2022_literacy_rates_rows(
                     "observationAbout":
                         dcid,
                     "observationDate":
-                        2022,
+                        year,
                     "variableMeasured":
                         "dcid:Count_Person_60OrMoreYears_Illiterate_AsAFractionOf_Count_Person_60OrMoreYears",
                     "value":
@@ -815,6 +821,13 @@ def ensure_literacy_rates_file(
     df2_rates = df2[df2["unit"] == "dcs:Percent"]
     hist_df = pd.concat([df1, df2_rates], ignore_index=True)
     hist_df["scalingFactor"] = 100
+    redirect_qid_map = {
+        "dcid:wikidataId/Q22062362": "dcid:wikidataId/Q1877935",
+        "dcid:wikidataId/Q22066972": "dcid:wikidataId/Q19948781",
+        "dcid:wikidataId/Q22067433": "dcid:wikidataId/Q10854988",
+    }
+    hist_df["observationAbout"] = hist_df["observationAbout"].replace(
+        redirect_qid_map)
 
     rows_2022 = _fetch_2022_literacy_rates_rows(active_session, raw_dir=raw_dir)
     df_2022 = pd.DataFrame(rows_2022)

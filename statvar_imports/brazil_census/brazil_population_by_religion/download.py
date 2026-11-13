@@ -23,6 +23,7 @@ Downloads resident population by religious affiliation from official IBGE source
 import io
 import json
 import os
+import shutil
 import sys
 import tempfile
 from typing import Any, Dict, List, Optional
@@ -80,12 +81,13 @@ def get_robust_session() -> requests.Session:
 
 
 def _get_raw_dir(target_path: str) -> str:
-    """Returns the directory for archiving raw downloaded payloads."""
+    """Returns a clean directory for archiving raw downloaded payloads."""
     if os.path.abspath(target_path) == os.path.abspath(DEFAULT_OUTPUT_FILE):
         raw_dir = os.path.join(SCRIPT_DIR, "raw_files")
     else:
         raw_dir = os.path.join(os.path.dirname(os.path.abspath(target_path)),
                                "raw_files")
+    shutil.rmtree(raw_dir, ignore_errors=True)
     os.makedirs(raw_dir, exist_ok=True)
     return raw_dir
 
@@ -146,6 +148,10 @@ def parse_raw_religion_xls(content_bytes: bytes,
             place = "Brazil"
 
         for c_idx, rel in col_map.items():
+            # Table 9 (2000 Religion) reports Sample estimates (169,872,856 for Brazil);
+            # skip Total for 2000 so Universe Count_Person (169,799,170) is authoritative.
+            if rel == "Total" and year == 2000:
+                continue
             val = r.iloc[c_idx]
             if pd.isna(val) or str(val).strip() in ["-", "...", "..", "X", ""]:
                 continue

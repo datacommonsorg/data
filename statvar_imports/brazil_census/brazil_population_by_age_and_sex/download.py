@@ -26,6 +26,7 @@ Downloads resident population by detailed age and sex from official IBGE sources
 import io
 import json
 import os
+import shutil
 import sys
 import tempfile
 from typing import Any, Dict, List, Optional
@@ -168,12 +169,13 @@ def get_robust_session() -> requests.Session:
 
 
 def _get_raw_dir(target_path: str) -> str:
-    """Returns the directory for archiving raw downloaded payloads."""
+    """Returns a clean directory for archiving raw downloaded payloads."""
     if os.path.abspath(target_path) == os.path.abspath(DEFAULT_OUTPUT_FILE):
         raw_dir = os.path.join(SCRIPT_DIR, "raw_files")
     else:
         raw_dir = os.path.join(os.path.dirname(os.path.abspath(target_path)),
                                "raw_files")
+    shutil.rmtree(raw_dir, ignore_errors=True)
     os.makedirs(raw_dir, exist_ok=True)
     return raw_dir
 
@@ -329,7 +331,7 @@ def parse_raw_1991_popu_age_sex(content_bytes: bytes,
 
         fem_val = row.iloc[1]
         masc_val = row.iloc[2]
-        place_resolved = map_91.get(place_raw, place_raw).replace("dcid:", "")
+        place_resolved = map_91.get(place_raw, place_raw)
 
         f_int = None
         m_int = None

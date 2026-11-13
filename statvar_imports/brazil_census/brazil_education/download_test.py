@@ -111,7 +111,7 @@ class DownloadTest(unittest.TestCase):
                         "NC": "1",
                         "D1N": "Brasil",
                         "D3N": "2022",
-                        "D4C": "0",
+                        "D4C": "95300",
                         "D4N": "Total",
                         "V": "10000000"
                     },
@@ -119,7 +119,7 @@ class DownloadTest(unittest.TestCase):
                         "NC": "1",
                         "D1N": "Brasil",
                         "D3N": "2022",
-                        "D4C": "116562",
+                        "D4C": "95301",
                         "D4N": "Creche",
                         "V": "2000000"
                     },
@@ -135,14 +135,23 @@ class DownloadTest(unittest.TestCase):
         self.assertTrue(os.path.isfile(saved_file))
 
         df = pd.read_csv(saved_file)
-        self.assertEqual(len(df), 2)
+        self.assertEqual(len(df), 4)
         self.assertEqual(
             list(df.columns),
             ["Ano", "Localidade", "RedeEnsino", "NivelEnsino", "Estudantes"],
         )
-        total_row = df[df["NivelEnsino"] == "Total"].iloc[0]
-        self.assertEqual(total_row["Localidade"], "Brazil")
-        self.assertEqual(total_row["Estudantes"], 59565188)
+        self.assertIn(2022, df["Ano"].values)
+        total_2010 = df[(df["Ano"] == 2010) &
+                        (df["NivelEnsino"] == "Total")].iloc[0]
+        self.assertEqual(total_2010["Localidade"], "Brazil")
+        self.assertEqual(total_2010["Estudantes"], 59565188)
+        creche_2022 = df[(df["Ano"] == 2022) &
+                         (df["NivelEnsino"] == "Creche")].iloc[0]
+        self.assertEqual(creche_2022["Localidade"], "Brazil")
+        self.assertEqual(
+            creche_2022["Estudantes"],
+            2000000 * len(download_mod.TABLE_2022_EDUCATION_SPECS),
+        )
 
     @patch.object(download_mod, "fetch_2010_education_files", return_value=[])
     @patch.object(download_mod,

@@ -27,6 +27,7 @@ Downloads resident population counts directly from official IBGE sources:
 import io
 import json
 import os
+import shutil
 import sys
 import tempfile
 from typing import Any, Dict, List, Optional, Tuple
@@ -91,12 +92,13 @@ def get_robust_session() -> requests.Session:
 
 
 def _get_raw_dir(target_path: str) -> str:
-    """Returns the directory for archiving raw downloaded payloads."""
+    """Returns a clean directory for archiving raw downloaded payloads."""
     if os.path.abspath(target_path) == os.path.abspath(DEFAULT_OUTPUT_FILE):
         raw_dir = os.path.join(SCRIPT_DIR, "raw_files")
     else:
         raw_dir = os.path.join(os.path.dirname(os.path.abspath(target_path)),
                                "raw_files")
+    shutil.rmtree(raw_dir, ignore_errors=True)
     os.makedirs(raw_dir, exist_ok=True)
     return raw_dir
 
@@ -217,7 +219,7 @@ def parse_raw_municipal_2022(content_bytes: bytes,
             pop = int(pop_str)
         except (ValueError, TypeError):
             continue
-        place_id = mapping.get(full_code, muni_name).replace("dcid:", "")
+        place_id = mapping.get(full_code, muni_name)
         rows.append({
             "Ano": 2022,
             "Localidade": place_id,
@@ -247,7 +249,7 @@ def parse_raw_1991_popu(content_bytes: bytes,
 
         fem_val = row.iloc[1]
         masc_val = row.iloc[2]
-        place_resolved = map_91.get(place_raw, place_raw).replace("dcid:", "")
+        place_resolved = map_91.get(place_raw, place_raw)
 
         f_int = None
         m_int = None
@@ -331,16 +333,17 @@ def fetch_raw_input_files(
 
 
 def _load_local_places_map() -> Dict[str, str]:
-    """Loads ../brazil_places_resolved.csv mapping 7-digit IBGE codes to DCIDs."""
+    """Loads ../brazil_places_resolved.csv mapping 7-digit IBGE codes to dcid:<dcid>."""
     places_csv = os.path.join(SCRIPT_DIR, "..", "brazil_places_resolved.csv")
     mapping: Dict[str, str] = {}
     if os.path.isfile(places_csv):
         df = pd.read_csv(places_csv, dtype=str)
         for _, row in df.iterrows():
             name = str(row.get("place_name", row.get("name", ""))).strip()
-            dcid = str(row.get("dcid", "")).strip().replace("dcid:", "")
+            dcid = str(row.get("dcid", "")).strip()
             if name and dcid:
-                mapping[name] = dcid
+                mapping[name] = dcid if dcid.startswith(
+                    "dcid:") else f"dcid:{dcid}"
     return mapping
 
 
@@ -386,7 +389,7 @@ def download_all_years(
             nc = str(r.get("NC", "")).strip()
             d1c = str(r.get("D1C", "")).strip()
             if nc == "6" and d1c:
-                loc = muni_map.get(d1c, d1c).replace("dcid:", "")
+                loc = muni_map.get(d1c, d1c)
             else:
                 loc = str(r.get("D1N", "")).strip()
                 if loc == "Brasil":
@@ -457,7 +460,7 @@ def download_all_years(
             nc = str(r.get("NC", "")).strip()
             d1c = str(r.get("D1C", "")).strip()
             if nc == "6" and d1c:
-                loc = muni_map.get(d1c, d1c).replace("dcid:", "")
+                loc = muni_map.get(d1c, d1c)
             else:
                 loc = str(r.get("D1N", "")).strip()
                 if loc == "Brasil":
