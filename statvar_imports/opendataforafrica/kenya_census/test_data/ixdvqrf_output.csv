@@ -1,0 +1,6 @@
+observationAbout,observationDate,variableMeasured,value,unit,scalingFactor,observationPeriod
+country/KEN,2018,dcid:Count_BirthEvent_Male,582895,,,P1Y
+country/KEN,2019,dcid:Count_BirthEvent_Male,603774,,,P1Y
+country/KEN,2020,dcid:Count_BirthEvent_Male,575657,,,P1Y
+country/KEN,2021,dcid:Count_BirthEvent_Male,612097,,,P1Y
+country/KEN,2022,dcid:Count_BirthEvent_Male,619927,,,P1Y
