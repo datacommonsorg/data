@@ -1,0 +1,11 @@
+Node: E:mesh_pubchem_mapping->E1
+typeOf: dcs:ChemicalCompound
+dcid: C:mesh_pubchem_mapping->CID_dcid
+pubChemCompoundID: C:mesh_pubchem_mapping->CID
+
+Node: E:mesh_pubchem_mapping->E2
+typeOf: dcs:MeSHSupplementaryConceptRecord
+dcid: C:mesh_pubchem_mapping->Record_dcid
+name: C:mesh_pubchem_mapping->RecordName
+identifier: C:mesh_pubchem_mapping->RecordID
+sameAs: E:mesh_pubchem_mapping->E1
