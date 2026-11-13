@@ -29,17 +29,18 @@ cd scripts/us_census/acs5yr/subject_tables
 
 ## Downloading Raw Data
 
-Raw data overlays (`ACSDT5Y<YEAR>.B25031_data_with_overlays_1111-11-11T111111.csv`) are downloaded from the [U.S. Census Bureau data.census.gov B25031 table](https://data.census.gov/table/ACSDT5Y2024.B25031?q=B25031) or via the common ACS API downloader utility and packaged into `B25031/B25031.zip`:
+Raw data overlays (`ACSDT5Y<YEAR>.B25031_data_with_overlays_1111-11-11T111111.csv`) are downloaded from the [U.S. Census Bureau data.census.gov B25031 table](https://data.census.gov/table/ACSDT5Y2024.B25031?q=B25031) or via the common ACS API downloader utility and staged into `B25031/B25031.zip`:
 
 ```bash
 python3 ../../api_utils/census_api_data_downloader.py \
   --dataset=acs/acs5 \
   --table_id=B25031 \
-  --output_path=B25031/ \
+  --q_variable=B25031_001E \
+  --output_path=. \
   --api_key=<CENSUS_API_KEY> \
   --start_year=2015 \
-  --end_year=2024 \
-  --all_summaries
+  --end_year=2024
+cp acs/acs5/B25031/B25031.zip B25031/B25031.zip
 ```
 
 ## Processing & Generating Artifacts
@@ -59,7 +60,7 @@ python3 process.py \
 To run the Data Commons import tool (`genmcf`) locally without external API existence-check errors (using the [Data Commons Import Tool JAR](https://github.com/datacommonsorg/import/releases) or building it from [`tools/import_validation`](https://github.com/datacommonsorg/import)):
 
 ```bash
-curl -L -O https://datacommons.org/import-tool/datacommons-import-tool-0.1-jar-with-dependencies.jar
+curl -L -O https://github.com/datacommonsorg/import/releases/download/0.1/datacommons-import-tool-0.1-jar-with-dependencies.jar
 java -jar datacommons-import-tool-0.1-jar-with-dependencies.jar genmcf \
   -e=false \
   B25031/B25031_cleaned.csv \
@@ -86,7 +87,7 @@ gcloud dataflow flex-template run "btable-b25031-dev-differ" \
 
 - `B25031_spec.json`: JSON specification mapping Census column tokens, bedroom counts, units (`USDollar`), and measurement qualifiers (`Monthly`) to Data Commons schema properties.
 - `B25031_summary.json`: Summary of per-vintage column counts, row counts, StatVar counts, and observation counts (`2015`–`2024`).
-- `testdata/`: Hermetic test fixtures (`B25031_test.zip`, `B25031_cleaned.csv`, `B25031_output.mcf`, `B25031_output.tmcf`, and `column_map.json`) validated by `subject_table_test.py`.
+- `testdata/`: Hermetic test fixtures (`ACSDT5Y2023.B25031_data_with_overlays_1111-11-11T111111.csv`, `B25031_cleaned.csv`, `B25031_output.mcf`, `B25031_output.tmcf`, and `column_map.json`) validated by `subject_table_test.py`.
 
 ## Running Tests
 
