@@ -6,7 +6,7 @@
                 "support@datacommons.org"
             ],
             "provenance_url": "https://www.inegi.org.mx/temas/",
-            "provenance_description": "Mexican Demographics, Population, Migration, Religion, Literacy and Unemployment data from National Institute of Statistics and Geography (INEGI) at Country and State level.",
+            "provenance_description": "Mexican demographics, population, migration, religion, literacy, and unemployment data from the National Institute of Statistics and Geography (INEGI) at country and state level.",
             "scripts": [
                 "download.py --config_path=config.json",
                 "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Mexico_Migration_input.csv --pv_map=pvmap/MexicoCensus_Demographics_pvmap.csv,pvmap/place_mapping.csv --config_file=metadata.csv --output_path=output/Mexico_Migration_output --output_counters=counters/Mexico_Migration_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
@@ -107,7 +107,7 @@
                 "support@datacommons.org"
             ],
             "provenance_url": "https://www.inegi.org.mx/temas/",
-            "provenance_description": "Mexican Health and Mortality data from National Institute of Statistics and Geography (INEGI) at Country and State level.",
+            "provenance_description": "Mexican health and mortality data from the National Institute of Statistics and Geography (INEGI) at country and state level.",
             "scripts": [
                 "download.py --config_path=config.json",
                 "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Mexico_Death_Diabetes_input.csv --pv_map=pvmap/MexicoCensus_Health_pvmap.csv,pvmap/place_mapping.csv --config_file=metadata.csv --output_path=output/Mexico_Death_Diabetes_output --output_counters=counters/Mexico_Death_Diabetes_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
@@ -173,7 +173,7 @@
                 "support@datacommons.org"
             ],
             "provenance_url": "https://www.inegi.org.mx/temas/",
-            "provenance_description": "Mexican Education Enrollment and Student-to-Teacher Ratio data from National Institute of Statistics and Geography (INEGI) at Country and State level.",
+            "provenance_description": "Mexican education enrollment and student-to-teacher ratio data from the National Institute of Statistics and Geography (INEGI) at country and state level.",
             "scripts": [
                 "download.py --config_path=config.json",
                 "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Mexico_SchoolEnrollment_input.csv --pv_map=pvmap/MexicoCensus_Education_pvmap.csv,pvmap/place_mapping.csv --config_file=metadata.csv --output_path=output/Mexico_SchoolEnrollment_output --output_counters=counters/Mexico_SchoolEnrollment_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
