@@ -1,0 +1,45 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_subnational_population_max_date_consistency",
+            "validator": "MAX_DATE_CONSISTENT",
+            "scope": {
+                "data_source": "stats",
+                "variables": {
+                    "regex": [
+                        "^Count_Person(|_Female|_Male|_(0To4|5To9|10To14|15To19|20To24|25To29|30To34|35To39|40To44|45To49|50To54|55To59|60To64|65To69|70To74|75To79|80OrMore)Years(|_Female|_Male))$"
+                    ]
+                }
+            },
+            "params": {}
+        },
+        {
+            "rule_id": "check_subnational_population_count_and_freshness",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT StatVar, SUM(NumObservations) AS TotalObs, MAX(MaxDate) AS LatestDate FROM stats WHERE NumPlaces >= 35 GROUP BY StatVar",
+                "condition": "TotalObs >= 70 AND CAST(LatestDate AS INTEGER) >= 2023",
+                "failure_message": "Subnational population StatVar validation failed for Srilanka_Census."
+            }
+        },
+        {
+            "rule_id": "check_agriculture_cereal_yield_freshness",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT StatVar, SUM(NumObservations) AS TotalObs, MAX(MaxDate) AS LatestDate FROM stats WHERE StatVar = 'Yield_FarmInventory_Cereal_AsAFractionOf_Area_Farm' GROUP BY StatVar",
+                "condition": "TotalObs >= 60 AND CAST(LatestDate AS INTEGER) >= 2022",
+                "failure_message": "Agriculture cereal yield StatVar validation failed for Srilanka_Census."
+            }
+        },
+        {
+            "rule_id": "check_education_indicators_count_and_freshness",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT COUNT(*) AS EduStatVars, SUM(NumObservations) AS TotalObs, MAX(CAST(MaxDate AS INTEGER)) AS LatestDate FROM stats WHERE regexp_matches(StatVar, '^(Count_Student|Count_Teacher|Mean_SchoolingDuration)|Education|School')",
+                "condition": "EduStatVars >= 290 AND TotalObs >= 3300 AND LatestDate >= 2019",
+                "failure_message": "Education indicators count or freshness validation failed for Srilanka_Census."
+            }
+        }
+    ]
+}
