@@ -389,6 +389,11 @@ def download_all_years(
             nc = str(r.get("NC", "")).strip()
             d1c = str(r.get("D1C", "")).strip()
             if nc == "6" and d1c:
+                # 5101837 (Boa Esperança do Norte - MT, incorporated 2024) has Q123021065
+                # which is not yet indexed in Data Commons KG geos/, causing
+                # Existence_MissingReference_observationAbout lint errors if emitted.
+                if d1c == "5101837":
+                    continue
                 loc = muni_map.get(d1c, d1c)
             else:
                 loc = str(r.get("D1N", "")).strip()
@@ -460,6 +465,11 @@ def download_all_years(
             nc = str(r.get("NC", "")).strip()
             d1c = str(r.get("D1C", "")).strip()
             if nc == "6" and d1c:
+                # 5101837 (Boa Esperança do Norte - MT, incorporated 2024) has Q123021065
+                # which is not yet indexed in Data Commons KG geos/, causing
+                # Existence_MissingReference_observationAbout lint errors if emitted.
+                if d1c == "5101837":
+                    continue
                 loc = muni_map.get(d1c, d1c)
             else:
                 loc = str(r.get("D1N", "")).strip()

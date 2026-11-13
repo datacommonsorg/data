@@ -821,13 +821,6 @@ def ensure_literacy_rates_file(
     df2_rates = df2[df2["unit"] == "dcs:Percent"]
     hist_df = pd.concat([df1, df2_rates], ignore_index=True)
     hist_df["scalingFactor"] = 100
-    redirect_qid_map = {
-        "dcid:wikidataId/Q22062362": "dcid:wikidataId/Q1877935",
-        "dcid:wikidataId/Q22066972": "dcid:wikidataId/Q19948781",
-        "dcid:wikidataId/Q22067433": "dcid:wikidataId/Q10854988",
-    }
-    hist_df["observationAbout"] = hist_df["observationAbout"].replace(
-        redirect_qid_map)
 
     rows_2022 = _fetch_2022_literacy_rates_rows(active_session, raw_dir=raw_dir)
     df_2022 = pd.DataFrame(rows_2022)

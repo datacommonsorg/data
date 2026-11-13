@@ -20,7 +20,7 @@ Each subfolder contains:
 Shared top-level files in `statvar_imports/brazil_census/`:
 - `manifest.json`: Consolidated Data Commons import specification (`Brazil_Census`) covering all 7 topic download scripts and 8 `import_inputs`
 - `validation_config.json`: Consolidated validation rules (threshold $\le 0.1\%$ deletions, date freshness and historical start date checks, place count checks)
-- `brazil_places_resolved.csv`: Shared entity mapping to Wikidata and Data Commons DCIDs for all 5,604 Brazilian places (1 country, 5 macro-regions, 27 states, and 5,571 municipalities, plus historical/alias/encoding variants)
+- `brazil_places_resolved.csv`: Shared entity mapping to Wikidata and Data Commons DCIDs for all 5,603 Brazilian places in Data Commons KG (1 country, 5 macro-regions, 27 states, and 5,570 municipalities, plus historical/alias/encoding variants; IBGE 2024 municipality `5101837` is skipped until added to Data Commons `geos`)
 
 ---
 
