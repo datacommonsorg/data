@@ -8,7 +8,7 @@ import logging
 import os
 import re
 
-from .states import *
+from .states import get_states
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 

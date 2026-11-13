@@ -32,7 +32,12 @@ from state_division_to_dcid import get_place_dcid
 from statvar_dcid_generator import get_statvar_dcid
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('mode', '', 'Options: download or process')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('mode', '', 'Options: download or process')
+
 
 _TEMPLATE_MCF = """Node: E:NNDSWeekly->E0
 typeOf: dcs:StatVarObservation
@@ -480,4 +485,5 @@ def main(_) -> None:
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

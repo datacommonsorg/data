@@ -41,25 +41,26 @@ _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 FLAGS = flags.FLAGS
 
-if 'output_dir' not in FLAGS:
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
     flags.DEFINE_string(
         'output_dir',
         os.path.join(_SCRIPT_DIR, 'input_files'),
         'Directory to save downloaded raw input CSV files.',
     )
-if 'start_year' not in FLAGS:
     flags.DEFINE_integer(
         'start_year',
         1985,
         'Start year to fetch from SCB PxWeb API (default: 1985 for full history).',
     )
-if 'end_year' not in FLAGS:
     flags.DEFINE_integer(
         'end_year',
         None,
         'Optional end year. Defaults to None (automatically fetches up to the '
         'latest available year in SCB API, e.g. 2025+ in future runs).',
     )
+
 
 # Swedish SCB PxWeb API endpoint for Education (UF0506B/Utbildning)
 SCB_API_URL = (
@@ -869,4 +870,5 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)
