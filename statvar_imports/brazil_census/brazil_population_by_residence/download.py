@@ -32,7 +32,9 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 if SCRIPT_DIR not in sys.path:
     sys.path.insert(0, SCRIPT_DIR)
 
-from absl import app, flags, logging
+from absl import app
+from absl import flags
+from absl import logging
 import pandas as pd
 import requests
 from requests.adapters import HTTPAdapter

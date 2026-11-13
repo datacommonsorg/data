@@ -19,7 +19,8 @@ import shutil
 import sys
 import tempfile
 import unittest
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock
+from unittest.mock import patch
 
 import pandas as pd
 import requests
@@ -172,6 +173,110 @@ class DownloadTest(unittest.TestCase):
                                    fallback_to_cached=True)
         self.assertEqual(saved, cached_csv)
         self.assertTrue(os.path.isfile(saved))
+
+    def test_fetch_2022_literacy_rates_skips_5101837_and_raises_unknown(self):
+        """Tests that unindexed 5101837 is skipped while other unmapped places raise ValueError."""
+        session = MagicMock()
+
+        def mock_get(url, **kwargs):
+            resp = MagicMock()
+            resp.raise_for_status.return_value = None
+            if "9543" in url:
+                resp.json.return_value = [
+                    {
+                        "NC": "Nível Territorial"
+                    },
+                    {
+                        "NC": "6",
+                        "D1C": "5101837",
+                        "D1N": "Boa Esperança do Norte - MT",
+                        "D3N": "2022",
+                        "D6C": "100362",
+                        "V": "91.5",
+                    },
+                    {
+                        "NC": "1",
+                        "D1N": "Brasil",
+                        "D3N": "2022",
+                        "D6C": "100362",
+                        "V": "93.0",
+                    },
+                ]
+            else:
+                resp.json.return_value = [
+                    {
+                        "NC": "Nível Territorial"
+                    },
+                    {
+                        "NC": "6",
+                        "D1C": "5101837",
+                        "D1N": "Boa Esperança do Norte - MT",
+                        "D3N": "2022",
+                        "D6C": "1023",
+                        "D7C": "100362",
+                        "V": "900",
+                    },
+                    {
+                        "NC": "1",
+                        "D1N": "Brasil",
+                        "D3N": "2022",
+                        "D6C": "93024",
+                        "D7C": "100362",
+                        "V": "1000",
+                    },
+                ]
+            return resp
+
+        session.get.side_effect = mock_get
+        rows = download_mod._fetch_2022_literacy_rates_rows(session=session)
+        abouts = {r["observationAbout"] for r in rows}
+        self.assertEqual(abouts, {"dcid:country/BRA"})
+
+        def mock_get_unknown(url, **kwargs):
+            resp = MagicMock()
+            resp.raise_for_status.return_value = None
+            if "9543" in url:
+                resp.json.return_value = [
+                    {
+                        "NC": "Nível Territorial"
+                    },
+                    {
+                        "NC": "6",
+                        "D1C": "9999999",
+                        "D1N": "Unknown - XX",
+                        "D3N": "2022",
+                        "D6C": "100362",
+                        "V": "80.0",
+                    },
+                ]
+            else:
+                resp.json.return_value = [
+                    {
+                        "NC": "Nível Territorial"
+                    },
+                    {
+                        "NC": "6",
+                        "D1C": "5101837",
+                        "D1N": "Boa Esperança do Norte - MT",
+                        "D3N": "2022",
+                        "D6C": "1023",
+                        "D7C": "100362",
+                        "V": "900",
+                    },
+                    {
+                        "NC": "1",
+                        "D1N": "Brasil",
+                        "D3N": "2022",
+                        "D6C": "93024",
+                        "D7C": "100362",
+                        "V": "1000",
+                    },
+                ]
+            return resp
+
+        session.get.side_effect = mock_get_unknown
+        with self.assertRaises(ValueError):
+            download_mod._fetch_2022_literacy_rates_rows(session=session)
 
 
 if __name__ == "__main__":

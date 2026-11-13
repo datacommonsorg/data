@@ -19,7 +19,8 @@ import shutil
 import sys
 import tempfile
 import unittest
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock
+from unittest.mock import patch
 
 import pandas as pd
 import requests
@@ -77,6 +78,7 @@ class DownloadTest(unittest.TestCase):
                         "NC": "1",
                         "D1N": "Brasil",
                         "D3N": "2010",
+                        "D4N": "Total",
                         "D5N": "Total",
                         "V": "190755799"
                     },
@@ -84,8 +86,25 @@ class DownloadTest(unittest.TestCase):
                         "NC": "1",
                         "D1N": "Brasil",
                         "D3N": "2010",
-                        "D5N": "Urbana",
+                        "D4N": "Urbana",
+                        "D5N": "Total",
                         "V": "160925792"
+                    },
+                    {
+                        "NC": "1",
+                        "D1N": "Brasil",
+                        "D3N": "2010",
+                        "D4N": "Urbana",
+                        "D5N": "Homens",
+                        "V": "77713000"
+                    },
+                    {
+                        "NC": "1",
+                        "D1N": "Brasil",
+                        "D3N": "2010",
+                        "D4N": "Urbana",
+                        "D5N": "Mulheres",
+                        "V": "83212792"
                     },
                 ]
             else:
@@ -142,6 +161,11 @@ class DownloadTest(unittest.TestCase):
             ["Ano", "Localidade", "Situacao", "Sexo", "Populacao"],
         )
         self.assertIn(1940, df["Ano"].values)
+        df_2010 = df[df["Ano"] == 2010]
+        pairs_2010 = set(zip(df_2010["Situacao"], df_2010["Sexo"]))
+        self.assertIn(("Urbana", "Total"), pairs_2010)
+        self.assertIn(("Urbana", "Masculino"), pairs_2010)
+        self.assertIn(("Urbana", "Feminino"), pairs_2010)
 
     @patch.object(download_mod, "fetch_raw_input_files", return_value=[])
     def test_download_empty_response_raises(self, _mock_raw_input):

@@ -32,7 +32,9 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 if SCRIPT_DIR not in sys.path:
     sys.path.insert(0, SCRIPT_DIR)
 
-from absl import app, flags, logging
+from absl import app
+from absl import flags
+from absl import logging
 import pandas as pd
 import requests
 from requests.adapters import HTTPAdapter
@@ -614,9 +616,18 @@ def _fetch_2022_literacy_rates_rows(
     places_map = _load_places_resolved_map()
     rows_2022: List[Dict[str, Any]] = []
 
-    def resolve_loc(r: Dict[str, Any]) -> str:
+    def resolve_loc(r: Dict[str, Any]) -> Optional[str]:
         if str(r.get("NC", "")).strip() == "6":
             raw_loc = str(r.get("D1C", "")).strip()
+            # 5101837 (Boa Esperança do Norte - MT, incorporated 2024) has Q123021065
+            # which is not yet indexed in Data Commons KG geos/, causing
+            # Existence_MissingReference_observationAbout lint errors if emitted.
+            if raw_loc == "5101837":
+                logging.warning(
+                    "Skipping unindexed 2024 municipality 5101837 (%s) in SIDRA literacy rates.",
+                    r.get("D1N", ""),
+                )
+                return None
         else:
             raw_loc = str(r.get("D1N", "")).strip()
             if raw_loc == "Brasil":
@@ -645,6 +656,8 @@ def _fetch_2022_literacy_rates_rows(
         except (ValueError, TypeError):
             continue
         dcid = resolve_loc(r)
+        if not dcid:
+            continue
         c287 = str(r.get("D6C", "")).strip()
         if c287 == "100362":
             rows_2022.append({
@@ -695,6 +708,8 @@ def _fetch_2022_literacy_rates_rows(
             except (ValueError, TypeError):
                 continue
             dcid = resolve_loc(r)
+        if not dcid:
+            continue
             c59 = str(r.get("D6C", "")).strip()
             c287 = str(r.get("D7C", "")).strip()
             counts.setdefault((year, dcid), {}).setdefault(c59,
