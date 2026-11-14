@@ -1,0 +1,102 @@
+key,prop,val,prop2,val2
+Grade:3,schoolGradeLevel,SchoolGrade3,,
+Grade:03,schoolGradeLevel,SchoolGrade3,,
+Grade:4,schoolGradeLevel,SchoolGrade4,,
+Grade:04,schoolGradeLevel,SchoolGrade4,,
+Grade:5,schoolGradeLevel,SchoolGrade5,,
+Grade:05,schoolGradeLevel,SchoolGrade5,,
+Grade:6,schoolGradeLevel,SchoolGrade6,,
+Grade:06,schoolGradeLevel,SchoolGrade6,,
+Grade:7,schoolGradeLevel,SchoolGrade7,,
+Grade:07,schoolGradeLevel,SchoolGrade7,,
+Grade:8,schoolGradeLevel,SchoolGrade8,,
+Grade:08,schoolGradeLevel,SchoolGrade8,,
+Grade:11,schoolGradeLevel,SchoolGrade11,,
+Grade:011,schoolGradeLevel,SchoolGrade11,,
+Grade:13,schoolGradeLevel,SchoolGrade13,,
+Grade:013,schoolGradeLevel,SchoolGrade13,,
+Test ID:1,schoolSubject,EnglishLanguageArts,,
+Test ID:01,schoolSubject,EnglishLanguageArts,,
+Test ID:2,schoolSubject,Mathematics,,
+Test ID:02,schoolSubject,Mathematics,,
+Student Group ID:1,,,,
+Student Group ID:001,,,,
+Student Group ID:3,gender,Male,,
+Student Group ID:003,gender,Male,,
+Student Group ID:4,gender,Female,,
+Student Group ID:004,gender,Female,,
+Student Group ID:6,languageFluencyLevel,InitialFluentProficient__ReclassifiedFluentProficient__OnlyEnglish,languageLearned,EnglishLearner
+Student Group ID:006,languageFluencyLevel,InitialFluentProficient__ReclassifiedFluentProficient__OnlyEnglish,languageLearned,EnglishLearner
+Student Group ID:7,languageFluencyLevel,InitialFluentProficient,languageLearned,EnglishLearner
+Student Group ID:007,languageFluencyLevel,InitialFluentProficient,languageLearned,EnglishLearner
+Student Group ID:8,languageFluencyLevel,ReclassifiedFluentProficient,languageLearned,EnglishLearner
+Student Group ID:008,languageFluencyLevel,ReclassifiedFluentProficient,languageLearned,EnglishLearner
+Student Group ID:28,socialVulnerabilityStatus,Migrant,,
+Student Group ID:028,socialVulnerabilityStatus,Migrant,,
+Student Group ID:29,socialVulnerabilityStatus,NotMigrant,,
+Student Group ID:029,socialVulnerabilityStatus,NotMigrant,,
+Student Group ID:31,socialVulnerabilityStatus,EconomicallyDisadvantaged,,
+Student Group ID:031,socialVulnerabilityStatus,EconomicallyDisadvantaged,,
+Student Group ID:50,armedForcesStatus,FamilyOfArmedForces,,
+Student Group ID:050,armedForcesStatus,FamilyOfArmedForces,,
+Student Group ID:51,armedForcesStatus,NotFamilyOfArmedForces,,
+Student Group ID:051,armedForcesStatus,NotFamilyOfArmedForces,,
+Student Group ID:52,socialVulnerabilityStatus,Homeless,,
+Student Group ID:052,socialVulnerabilityStatus,Homeless,,
+Student Group ID:53,socialVulnerabilityStatus,HavingHome,,
+Student Group ID:053,socialVulnerabilityStatus,HavingHome,,
+Student Group ID:74,race,BlackOrAfricanAmericanAlone,,
+Student Group ID:074,race,BlackOrAfricanAmericanAlone,,
+Student Group ID:75,race,AmericanIndianOrAlaskaNative,,
+Student Group ID:075,race,AmericanIndianOrAlaskaNative,,
+Student Group ID:76,race,Asian,,
+Student Group ID:076,race,Asian,,
+Student Group ID:77,race,Filipino,,
+Student Group ID:077,race,Filipino,,
+Student Group ID:78,race,HispanicOrLatino,,
+Student Group ID:078,race,HispanicOrLatino,,
+Student Group ID:79,race,NativeHawaiianOrOtherPacificIslanderAlone,,
+Student Group ID:079,race,NativeHawaiianOrOtherPacificIslanderAlone,,
+Student Group ID:80,race,White,,
+Student Group ID:080,race,White,,
+Student Group ID:90,parentEducationStatus,LessThanHighSchoolGraduate,,
+Student Group ID:090,parentEducationStatus,LessThanHighSchoolGraduate,,
+Student Group ID:91,parentEducationStatus,HighSchoolGraduateIncludesEquivalency,,
+Student Group ID:091,parentEducationStatus,HighSchoolGraduateIncludesEquivalency,,
+Student Group ID:92,parentEducationStatus,SomeCollegeNoDegree,,
+Student Group ID:092,parentEducationStatus,SomeCollegeNoDegree,,
+Student Group ID:93,parentEducationStatus,CollegeGraduate,,
+Student Group ID:093,parentEducationStatus,CollegeGraduate,,
+Student Group ID:94,parentEducationStatus,GraduateSchoolOrPostGraduate,,
+Student Group ID:094,parentEducationStatus,GraduateSchoolOrPostGraduate,,
+Student Group ID:99,disabilityStatus,NoDisability,,
+Student Group ID:099,disabilityStatus,NoDisability,,
+Student Group ID:111,socialVulnerabilityStatus,NotEconomicallyDisadvantaged,,
+Student Group ID:120,languageLearned,EnglishLearner,languageLearningDuration,[- 12 Month]
+Student Group ID:121,parentEducationStatus,CA_DeclinedToState,,
+Student Group ID:128,disabilityStatus,WithDisability,,
+Student Group ID:142,languageLearned,EnglishLearner,languageLearningDuration,[12 - Month]
+Student Group ID:144,race,TwoOrMoreRaces,,
+Student Group ID:160,languageLearned,English,languageLearningStatus,CurrentLearner
+Student Group ID:170,languageLearned,English,languageLearningStatus,EverLearned
+Student Group ID:180,languageLearned,OnlyEnglish,,
+Student Group ID:190,languageLearned,English,languageLearningStatus,ToBeDetermined
+Student Group ID:200,race,BlackOrAfricanAmericanAlone,socialVulnerabilityStatus,EconomicallyDisadvantaged
+Student Group ID:201,race,AmericanIndianOrAlaskaNative,socialVulnerabilityStatus,EconomicallyDisadvantaged
+Student Group ID:202,race,Asian,socialVulnerabilityStatus,EconomicallyDisadvantaged
+Student Group ID:203,race,Filipino,socialVulnerabilityStatus,EconomicallyDisadvantaged
+Student Group ID:204,race,HispanicOrLatino,socialVulnerabilityStatus,EconomicallyDisadvantaged
+Student Group ID:205,race,NativeHawaiianOrOtherPacificIslanderAlone,socialVulnerabilityStatus,EconomicallyDisadvantaged
+Student Group ID:206,race,White,socialVulnerabilityStatus,EconomicallyDisadvantaged
+Student Group ID:207,race,TwoOrMoreRaces,socialVulnerabilityStatus,EconomicallyDisadvantaged
+Student Group ID:220,race,BlackOrAfricanAmericanAlone,socialVulnerabilityStatus,NotEconomicallyDisadvantaged
+Student Group ID:221,race,AmericanIndianOrAlaskaNative,socialVulnerabilityStatus,NotEconomicallyDisadvantaged
+Student Group ID:222,race,Asian,socialVulnerabilityStatus,NotEconomicallyDisadvantaged
+Student Group ID:223,race,Filipino,socialVulnerabilityStatus,NotEconomicallyDisadvantaged
+Student Group ID:224,race,HispanicOrLatino,socialVulnerabilityStatus,NotEconomicallyDisadvantaged
+Student Group ID:225,race,NativeHawaiianOrOtherPacificIslanderAlone,socialVulnerabilityStatus,NotEconomicallyDisadvantaged
+Student Group ID:226,race,White,socialVulnerabilityStatus,NotEconomicallyDisadvantaged
+Student Group ID:227,race,TwoOrMoreRaces,socialVulnerabilityStatus,NotEconomicallyDisadvantaged
+Student Group ID:240,socialVulnerabilityStatus,Foster,,
+Student Group ID:241,socialVulnerabilityStatus,NotFoster,,
+Student Group ID:243,languageLearned,English,languageLearningAgeGroup,Adult
