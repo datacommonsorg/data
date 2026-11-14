@@ -1,0 +1,10 @@
+Node: dcid:emittedThing
+typeOf: dcs:Property
+name: "emittedThing"
+rangeIncludes: dcid:AirPollutantEnum,dcid:ChemicalCompound,dcid:EPA_CriteriaAirPollutant
+
+Node: dcid:emissionSource
+typeOf: dcs:Property
+name: "emissionSource"
+rangeIncludes: dcid:ElectricityConsumptionSectorEnum,dcid:EmissionSourceEnum
+
