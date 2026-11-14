@@ -1,0 +1,91 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "max_date_consistent_population_religion_series",
+      "description": "Ensure CBS national population by religion series (id=2,1,1,1) share a consistent MaxDate",
+      "validator": "MAX_DATE_CONSISTENT",
+      "scope": {
+        "variables": {
+          "dcids": [
+            "Count_Person",
+            "Count_Person_Arab",
+            "Count_Person_CBSIsraelNonJudaismOrNonArabChristianOrNoReligion",
+            "Count_Person_Judaism"
+          ]
+        }
+      },
+      "params": {}
+    },
+    {
+      "rule_id": "max_date_consistent_live_births",
+      "description": "Ensure CBS live birth by religion indicators share a consistent MaxDate",
+      "validator": "MAX_DATE_CONSISTENT",
+      "scope": {
+        "variables": {
+          "regex": [
+            "^Count_BirthEvent_LiveBirth_.*$"
+          ]
+        }
+      },
+      "params": {}
+    },
+    {
+      "rule_id": "max_date_consistent_mortality_events",
+      "description": "Ensure CBS infant death and total death by religion indicators share a consistent MaxDate",
+      "validator": "MAX_DATE_CONSISTENT",
+      "scope": {
+        "variables": {
+          "regex": [
+            "^Count_MortalityEvent_(Arab|CBSIsraelJudaismOrNonArabChristianOrNoReligion|Infant_.*)$"
+          ]
+        }
+      },
+      "params": {}
+    },
+    {
+      "rule_id": "max_date_consistent_cause_of_death",
+      "description": "Ensure CBS cause-of-death mortality rate indicators share a consistent MaxDate",
+      "validator": "MAX_DATE_CONSISTENT",
+      "scope": {
+        "variables": {
+          "regex": [
+            "^Count_MortalityEvent_.*_AsAFractionOf_Count_Person_.*$"
+          ]
+        }
+      },
+      "params": {}
+    },
+    {
+      "rule_id": "max_date_consistent_census_2008",
+      "description": "Ensure all 2008 Census demographic, age-bracket, urban/rural, marital status, and employment indicators share a consistent MaxDate",
+      "validator": "MAX_DATE_CONSISTENT",
+      "scope": {
+        "variables": {
+          "regex": [
+            "^Count_Person_([0-9].*|Male|Female|Urban.*|Rural.*|Employed.*|NeverMarried|MarriedAndNotSeparated|Divorced|Separated|Widowed)$"
+          ]
+        }
+      },
+      "params": {}
+    },
+    {
+      "rule_id": "check_active_time_series_freshness_and_bounds",
+      "description": "Verify MaxDate is within allowable publication lag and values are non-negative for active CBS Time-Series DataBank indicators",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT StatVar, MaxDate, MinValue, MaxValue, NumPlaces, COUNT(*) OVER () AS total_svs FROM stats WHERE StatVar IN ('Count_Person', 'Count_Person_Judaism', 'Count_Person_Arab', 'Count_Person_CBSIsraelNonJudaismOrNonArabChristianOrNoReligion') OR regexp_matches(StatVar, '^Count_(BirthEvent|MortalityEvent)')",
+        "condition": "total_svs = 47 AND NumPlaces >= 1 AND MinValue >= 0 AND ((regexp_matches(StatVar, '_AsAFractionOf_') AND CAST(MaxDate AS INTEGER) >= (EXTRACT(YEAR FROM CURRENT_DATE) - 4)) OR (regexp_matches(StatVar, '^Count_BirthEvent_') AND CAST(MaxDate AS INTEGER) >= (EXTRACT(YEAR FROM CURRENT_DATE) - 3)) OR (NOT regexp_matches(StatVar, '_AsAFractionOf_|^Count_BirthEvent_') AND CAST(MaxDate AS INTEGER) >= (EXTRACT(YEAR FROM CURRENT_DATE) - 2)))"
+      }
+    },
+    {
+      "rule_id": "check_census_2008_and_historical_bounds",
+      "description": "Verify MaxDate and non-negative values for 2008 Census and historical population series",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT StatVar, MaxDate, MinValue, MaxValue, NumPlaces, COUNT(*) OVER () AS total_svs FROM stats WHERE StatVar NOT IN ('Count_Person', 'Count_Person_Judaism', 'Count_Person_Arab', 'Count_Person_CBSIsraelNonJudaismOrNonArabChristianOrNoReligion') AND NOT regexp_matches(StatVar, '^Count_(BirthEvent|MortalityEvent)')",
+        "condition": "((StatVar = 'Count_Person_NonJudaism' AND MaxDate = '1993') OR (StatVar != 'Count_Person_NonJudaism' AND MaxDate = '2008')) AND total_svs = 257 AND NumPlaces >= 1 AND MinValue >= 0 AND (NOT regexp_matches(StatVar, '_AsAFractionOf_') OR MaxValue <= 100)"
+      }
+    }
+  ]
+}
