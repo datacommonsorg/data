@@ -1,0 +1,6 @@
+Node: E:nz_international_migration->E0
+observationAbout: C:nz_international_migration->observationAbout
+observationDate: C:nz_international_migration->observationDate
+variableMeasured: C:nz_international_migration->variableMeasured
+value: C:nz_international_migration->value
+typeOf: dcs:StatVarObservation

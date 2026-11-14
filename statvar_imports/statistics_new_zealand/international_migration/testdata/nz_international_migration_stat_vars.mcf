@@ -1,0 +1,13 @@
+# Auto generated using command: "../../../tools/statvar_importer/stat_var_processor.py --input_data=testdata/test_input.csv --pv_map=pvmap.csv --config_file=metadata.csv --output_path=testdata/nz_international_migration" on 2026-10-29 10:02:08.629957
+
+Node: dcid:Count_Person_NZCitizen_CountryAFG_Arrivals_LongTermMigrant_NZAndAustralianCitizenVisa
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+citizenship: dcid:NZCitizen
+countryOfResidence: dcid:country/AFG
+migrationDirection: dcid:Arrivals
+passengerType: dcid:LongTermMigrant
+visaType: dcid:NZAndAustralianCitizenVisa
+
