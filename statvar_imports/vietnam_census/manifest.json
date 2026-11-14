@@ -1,0 +1,80 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "Vietnam_Census",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://www.gso.gov.vn/en/homepage/",
+            "provenance_description": "Vietnam Demographics, Economy, Health, Education data from Portal Site of General Statistics Office by natioanl, province and city level.",
+            "scripts": [
+                "viet_download.py","../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Death.csv --places_resolved_csv=places_resolved.csv --pv_map=pvmaps/Death-pvmap.csv --config_file=metadata/Death-metadata.csv --output_path=sample_output/Death",																
+"../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/EducationData.csv --places_resolved_csv=places_resolved.csv --pv_map=pvmaps/EducationData-pvmap.csv --config_file=metadata/EducationData-metadata.csv --output_path=sample_output/Education",																
+"../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Employment.csv --places_resolved_csv=places_resolved.csv --pv_map=pvmaps/Employment-pvmap.csv --config_file=metadata/Employment-metadata.csv --output_path=sample_output/Employment",																
+"../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Health.csv --places_resolved_csv=places_resolved.csv --pv_map=pvmaps/Health-pvmap.csv --config_file=metadata/Health-metadata.csv --output_path=sample_output/Health",																
+"../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/LabourForce.csv --places_resolved_csv=places_resolved.csv --pv_map=pvmaps/LabourForce-pvmap.csv --config_file=metadata/LabourForce-metadata.csv --output_path=sample_output/Labour",																
+"../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Lifeexpectancy.csv --places_resolved_csv=places_resolved.csv --pv_map=pvmaps/Lifeexpectancy-pvmap.csv --config_file=metadata/Lifeexpectancy-metadata.csv --output_path=sample_output/Lifeexpentancy",																
+"../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/NumberOfClasses.csv --places_resolved_csv=places_resolved.csv --pv_map=pvmaps/NumberofClasses-pvmap.csv --config_file=metadata/NumberofClasses-metadata.csv --output_path=sample_output/Number_ofClasses",																
+"../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/NumberOfSchool.csv --places_resolved_csv=places_resolved.csv --pv_map=pvmaps/NumberofSchool-pvmap.csv --config_file=metadata/NumberofSchool-metadata.csv --output_path=sample_output/Number_ofSchool",																
+"../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/NumberOfStudent.csv --places_resolved_csv=places_resolved.csv --pv_map=pvmaps/NumberofStudent-pvmap.csv --config_file=metadata/NumberofStudent-metadata.csv --output_path=sample_output/Number_ofStudent",																
+"../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/NumberOfTeacher.csv --places_resolved_csv=places_resolved.csv --pv_map=pvmaps/NumberofTeacher-pvmap.csv --config_file=metadata/NumberofTeacher-metadata.csv --output_path=sample_output/Number_ofTeacher",																
+"../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Population.csv --places_resolved_csv=places_resolved.csv --pv_map=pvmaps/Population-pvmap.csv --config_file=metadata/Population-metadata.csv --output_path=sample_output/Population",																
+"../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/UnemploymentRate.csv --places_resolved_csv=places_resolved.csv --pv_map=pvmaps/UnemploymentRate-pvmap.csv --config_file=metadata/UnemploymentRate-metadata.csv --output_path=sample_output/Unemployement"	
+            ],
+            "import_inputs": [
+        {
+          "template_mcf": "sample_output/Death.tmcf",
+          "cleaned_csv": "sample_output/Death.csv"
+        },
+        {
+          "template_mcf": "sample_output/Education.tmcf",
+          "cleaned_csv": "sample_output/Education.csv"
+        },
+        {
+          "template_mcf": "sample_output/Employment.tmcf",
+          "cleaned_csv": "sample_output/Employment.csv"
+        },
+        {
+          "template_mcf": "sample_output/Health.tmcf",
+          "cleaned_csv": "sample_output/Health.csv"
+        },
+        {
+          "template_mcf": "sample_output/Labour.tmcf",
+          "cleaned_csv": "sample_output/Labour.csv"
+        },
+        {
+          "template_mcf": "sample_output/Lifeexpentancy.tmcf",
+          "cleaned_csv": "sample_output/Lifeexpentancy.csv"
+        },
+        {
+          "template_mcf": "sample_output/Number_ofClasses.tmcf",
+          "cleaned_csv": "sample_output/Number_ofClasses.csv"
+        },
+        {
+          "template_mcf": "sample_output/Number_ofSchool.tmcf",
+          "cleaned_csv": "sample_output/Number_ofSchool.csv"
+        },
+        {
+          "template_mcf": "sample_output/Number_ofStudent.tmcf",
+          "cleaned_csv": "sample_output/Number_ofStudent.csv"
+        },
+        {
+          "template_mcf": "sample_output/Number_ofTeacher.tmcf",
+          "cleaned_csv": "sample_output/Number_ofTeacher.csv"
+        },
+        {
+          "template_mcf": "sample_output/Population.tmcf",
+          "cleaned_csv": "sample_output/Population.csv"
+        },
+        {
+          "template_mcf": "sample_output/Unemployement.tmcf",
+          "cleaned_csv": "sample_output/Unemployement.csv"
+        }
+      ],
+      "source_files": [
+          "input_files/*"
+      ],
+      "cron_schedule": "30 05 * * 1"
+        }
+    ]
+}
