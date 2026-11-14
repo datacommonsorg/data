@@ -1,0 +1,7 @@
+Node: E:brazil_total_population_output->E0
+observationAbout: C:brazil_total_population_output->observationAbout
+observationDate: C:brazil_total_population_output->observationDate
+observationPeriod: C:brazil_total_population_output->observationPeriod
+value: C:brazil_total_population_output->value
+variableMeasured: C:brazil_total_population_output->variableMeasured
+typeOf: dcs:StatVarObservation
