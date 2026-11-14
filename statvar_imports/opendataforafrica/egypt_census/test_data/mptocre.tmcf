@@ -1,0 +1,9 @@
+Node: E:mptocre->E0
+observationAbout: C:mptocre->observationAbout
+observationDate: C:mptocre->observationDate
+variableMeasured: C:mptocre->variableMeasured
+value: C:mptocre->value
+unit: C:mptocre->unit
+scalingFactor: C:mptocre->scalingFactor
+observationPeriod: C:mptocre->observationPeriod
+typeOf: dcs:StatVarObservation

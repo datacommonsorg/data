@@ -1,0 +1,13 @@
+key,prop,val,p1,v1,p2,v2,p3,v3,p4,v4
+TIME_PERIOD,observationDate,{Number},,,,,,,,
+OBS_VALUE,value,{Number},observationAbout,country/EGY,,,,,,
+FREQ:A,observationPeriod,P1Y,,,,,,,,
+NAMEARAB_INDICATORS:معدل الخصوبة الكلى,measuredProperty,fertilityRate,populationType,Person,gender,Female,name,"""Fertility rate of women""",alternateName,"""معدل الخصوبة الكلى@ar"""
+NAMEARAB_INDICATORS:معدلات الخصوبة التفصيلية,#ignore,ignore,,,,,,,,
+15-19,#ignore,ignore,,,,,,,,
+20-24,#ignore,ignore,,,,,,,,
+25-29,#ignore,ignore,,,,,,,,
+30-34,#ignore,ignore,,,,,,,,
+35-39,#ignore,ignore,,,,,,,,
+40-44,#ignore,ignore,,,,,,,,
+45-49,#ignore,ignore,,,,,,,,

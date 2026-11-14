@@ -1,0 +1,11 @@
+observationAbout,observationDate,variableMeasured,value,unit,scalingFactor,observationPeriod
+country/EGY,1988,dcid:FertilityRate_Person_Female,4.4,,,P1Y
+country/EGY,1991,dcid:FertilityRate_Person_Female,4.1,,,P1Y
+country/EGY,1995,dcid:FertilityRate_Person_Female,3.6,,,P1Y
+country/EGY,1997,dcid:FertilityRate_Person_Female,3.3,,,P1Y
+country/EGY,1998,dcid:FertilityRate_Person_Female,3.4,,,P1Y
+country/EGY,2000,dcid:FertilityRate_Person_Female,3.5,,,P1Y
+country/EGY,2003,dcid:FertilityRate_Person_Female,3.2,,,P1Y
+country/EGY,2005,dcid:FertilityRate_Person_Female,3.1,,,P1Y
+country/EGY,2008,dcid:FertilityRate_Person_Female,3,,,P1Y
+country/EGY,2014,dcid:FertilityRate_Person_Female,3.5,,,P1Y
