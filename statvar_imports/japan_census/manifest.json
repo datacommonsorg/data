@@ -1,0 +1,36 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "Japan_Census",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://www.e-stat.go.jp/",
+            "provenance_description": "Japan Population Census, Employment, Education, Mortality, and Health Statistics from the Portal Site of Official Statistics of Japan (e-Stat).",
+            "scripts": [
+                "download_script.py",
+                "../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/*.csv --pv_map=japan_census_pv_map.csv --config_file=japan_census_metadata.csv --places_resolved_csv=japan_census_places_resolved.csv --output_path=output_files/japan_census_output --output_counters=counters/japan_census_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --log_level=-2 --log_every_n=1000"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output_files/japan_census_output.tmcf",
+                    "cleaned_csv": "output_files/japan_census_output.csv",
+                    "node_mcf": "output_files/*.mcf"
+                }
+            ],
+            "source_files": [
+                "input_files/*.csv",
+                "counters/*.csv",
+                "japan_census_places_resolved.csv",
+                "validation_config.json"
+            ],
+            "cron_schedule": "0 5 * * 1",
+            "validation_config_file": "validation_config.json",
+            "resource_limits": {
+                "cpu": 8,
+                "memory": 32,
+                "disk": 100
+            }
+        }
+    ]
+}
