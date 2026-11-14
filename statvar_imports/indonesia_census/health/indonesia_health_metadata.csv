@@ -1,0 +1,17 @@
+parameter,value
+dataset,indonesia
+url,https://www.bps.go.id/
+description,"Health statistics for Indonesia across provinces and regencies/cities from Badan Pusat Statistik (BPS)."
+#place_type,"Country,AdministrativeArea1,AdministrativeArea2"
+#places_within,country/IDN
+release_frequency,P1Y
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor"
+header_rows,2
+header_columns,1
+mapped_rows,3
+mapped_columns,1
+recon_property,"variableMeasured,measurementMethod"
+spell_allow_words,"neonatorum,batra"
+merge_Place_Columns,False
+ignore_numeric_commas,True
+generate_statvar_name,True

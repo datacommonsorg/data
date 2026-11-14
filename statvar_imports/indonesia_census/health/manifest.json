@@ -1,0 +1,38 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "Indonesia_Census_Health",
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
+      "provenance_url": "https://www.bps.go.id/",
+      "provenance_description": "Health Statistics for Indonesia across provinces and regencies/cities from Statistics Indonesia (Badan Pusat Statistik - BPS).",
+      "scripts": [
+        "download.py --output_dir=input_files --raw_output_dir=raw_files",
+        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/*.csv --pv_map=indonesia_health_pvmap.csv --config_file=indonesia_health_metadata.csv --places_resolved_csv=indonesia_health_places_resolved.csv --statvar_dcid_remap_csv=statvar_remap.csv --output_path=output_files/indonesia_health_output"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "output_files/indonesia_health_output.tmcf",
+          "node_mcf": "output_files/*.mcf",
+          "csv": "output_files/indonesia_health_output.csv"
+        }
+      ],
+      "source_files": [
+        "raw_files/*",
+        "input_files/*",
+        "indonesia_health_pvmap.csv",
+        "indonesia_health_metadata.csv",
+        "indonesia_health_places_resolved.csv",
+        "statvar_remap.csv"
+      ],
+      "validation_config_file": "validation_config.json",
+      "cron_schedule": "0 9 1 * *",
+      "resource_limits": {
+        "cpu": 4,
+        "memory": 8,
+        "disk": 50
+      }
+    }
+  ]
+}

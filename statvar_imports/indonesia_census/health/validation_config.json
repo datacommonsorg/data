@@ -1,0 +1,60 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_health_max_date_consistency",
+            "validator": "MAX_DATE_CONSISTENT",
+            "scope": {
+                "data_source": "stats",
+                "variables": {
+                    "dcids": [
+                        "Count_Person_15OrMoreYears_Smoking_AsFractionOf_Count_Person_15OrMoreYears",
+                        "Count_HealthEstablishment_WithUnmetNeed",
+                        "Count_Person_Male_ConditionDiseasedPerson_AsAFractionOf_Count_Person",
+                        "Count_Person_Female_ConditionDiseasedPerson_AsAFractionOf_Count_Person"
+                    ]
+                }
+            },
+            "params": {}
+        },
+        {
+            "rule_id": "check_health_min_observations_and_freshness_2025_cohort",
+            "validator": "SQL_VALIDATOR",
+            "scope": {
+                "data_source": "stats",
+                "variables": {
+                    "dcids": [
+                        "Count_Person_15OrMoreYears_Smoking_AsFractionOf_Count_Person_15OrMoreYears",
+                        "Count_HealthEstablishment_WithUnmetNeed",
+                        "Count_Person_Male_ConditionDiseasedPerson_AsAFractionOf_Count_Person",
+                        "Count_Person_Female_ConditionDiseasedPerson_AsAFractionOf_Count_Person"
+                    ]
+                }
+            },
+            "params": {
+                "query": "SELECT SUM(NumObservations) AS TotalObs, MIN(CAST(MaxDate AS INTEGER)) AS MinLatestDate FROM stats WHERE NumPlaces >= 35",
+                "condition": "TotalObs >= 1500 AND MinLatestDate >= YEAR(CURRENT_DATE) - 1",
+                "failure_message": "2025-cohort Health StatVar observation count or freshness validation failed."
+            }
+        },
+        {
+            "rule_id": "check_health_min_observations_and_freshness_2024_cohort",
+            "validator": "SQL_VALIDATOR",
+            "scope": {
+                "data_source": "stats",
+                "variables": {
+                    "dcids": [
+                        "LifeExpectancy_Person_Male",
+                        "LifeExpectancy_Person_Female",
+                        "Count_Person_15To49Years_ContraceptionMethod_Female_Married_AsAFractionOf_Count_Person_15To49Year_Female_Married"
+                    ]
+                }
+            },
+            "params": {
+                "query": "SELECT SUM(NumObservations) AS TotalObs, MIN(CAST(MaxDate AS INTEGER)) AS MinLatestDate FROM stats WHERE NumPlaces >= 35",
+                "condition": "TotalObs >= 15000 AND MinLatestDate >= YEAR(CURRENT_DATE) - 2",
+                "failure_message": "2024-cohort Health StatVar observation count or freshness validation failed."
+            }
+        }
+    ]
+}
