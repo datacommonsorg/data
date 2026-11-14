@@ -15,7 +15,12 @@
 
 import csv
 import io
+import os
+import sys
 import unittest
+
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(_SCRIPT_DIR)
 
 from process import get_statvars
 from process import write_csv
@@ -24,13 +29,17 @@ from process import write_csv
 class ProcessTest(unittest.TestCase):
 
     def test_write_csv(self):
-        with open('./testdata/ag_census_input.txt') as f_in:
-            d = get_statvars('statvars')
+        input_path = os.path.join(_SCRIPT_DIR, 'testdata',
+                                  'ag_census_input.txt')
+        statvars_path = os.path.join(_SCRIPT_DIR, 'statvars')
+        expected_path = os.path.join(_SCRIPT_DIR, 'testdata',
+                                     'ag_census_output.csv')
+        with open(input_path) as f_in:
+            d = get_statvars(statvars_path)
             reader = csv.DictReader(f_in, delimiter='\t')
             f_out = io.StringIO()
-            f_expected = open('testdata/ag_census_output.csv')
-            expected = f_expected.read()
-            f_expected.close()
+            with open(expected_path) as f_expected:
+                expected = f_expected.read()
             write_csv(reader, f_out, d)
             self.assertEqual(expected, f_out.getvalue())
 
