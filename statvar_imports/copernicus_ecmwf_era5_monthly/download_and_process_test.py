@@ -286,9 +286,12 @@ class DownloadAndProcessTest(unittest.TestCase):
         self.assertEqual(history_files, [])
         self.assertEqual(len(input_files), 1)
         expected_celsius = os.path.join(
-            self.test_data_dir, 'all_administrativearea2_2020-06.ee.celsius.csv')
-        with open(input_files[0], mode='r', encoding='utf-8') as got_f, open(
-                expected_celsius, mode='r', encoding='utf-8') as want_f:
+            self.test_data_dir,
+            'all_administrativearea2_2020-06.ee.celsius.csv')
+        with open(input_files[0], mode='r',
+                  encoding='utf-8') as got_f, open(expected_celsius,
+                                                   mode='r',
+                                                   encoding='utf-8') as want_f:
             got_content = got_f.read()
             self.assertEqual(got_content, want_f.read())
 
@@ -316,7 +319,8 @@ class DownloadAndProcessTest(unittest.TestCase):
             'gs://datacommons_public/unresolved_mcf/copernicus_ecmwf/'
             'era5_monthly/all_administrativearea2_2020-06.ee.celsius.csv')
         fixture_celsius = os.path.join(
-            self.test_data_dir, 'all_administrativearea2_2020-06.ee.celsius.csv')
+            self.test_data_dir,
+            'all_administrativearea2_2020-06.ee.celsius.csv')
 
         def fake_download(url, output_folder, unzip=False, **kwargs):
             del url, unzip, kwargs
