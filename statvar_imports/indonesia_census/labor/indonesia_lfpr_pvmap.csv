@@ -1,0 +1,5 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6
+Province/Regency/City,observationAbout,{Data},,,,,,,,,,
+Year,observationDate,{Data},,,,,,,,,,
+Male,gender,Male,populationType,Person,measuredProperty,count,employmentStatus,BLS_InLaborForce,measurementDenominator,",-employmentStatus",value,{Number}
+Female,gender,Female,populationType,Person,measuredProperty,count,employmentStatus,BLS_InLaborForce,measurementDenominator,",-employmentStatus",value,{Number}

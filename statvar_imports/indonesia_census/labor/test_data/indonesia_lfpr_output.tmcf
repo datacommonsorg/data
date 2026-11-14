@@ -1,0 +1,6 @@
+Node: E:indonesia_lfpr_output->E0
+observationAbout: C:indonesia_lfpr_output->observationAbout
+observationDate: C:indonesia_lfpr_output->observationDate
+value: C:indonesia_lfpr_output->value
+variableMeasured: C:indonesia_lfpr_output->variableMeasured
+typeOf: dcs:StatVarObservation

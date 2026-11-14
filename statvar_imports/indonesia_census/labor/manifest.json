@@ -1,0 +1,39 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "Indonesia_Census_Labor",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://www.bps.go.id/en/statistics-table/2/MjIwMCMy/labor-force-participation-rate-by-sex.html",
+            "provenance_description": "Statistics Indonesia (Badan Pusat Statistik - BPS), Labor Force Participation Rate by Sex and Percentage of Formal Labor by Province.",
+            "scripts": [
+                "download.py --output_dir=input_files",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/labor_force_participation_rate_by_sex.csv --pv_map=indonesia_lfpr_pvmap.csv --config_file=indonesia_lfpr_metadata.csv --places_resolved_csv=indonesia_labor_places_resolved.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/indonesia_lfpr_output --output_counters=input_files/indonesia_lfpr_counters.txt",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/percentage_of_formal_labor_by_province.csv --pv_map=indonesia_formal_labor_pvmap.csv --config_file=indonesia_formal_labor_metadata.csv --places_resolved_csv=indonesia_labor_places_resolved.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/indonesia_formal_labor_output --output_counters=input_files/indonesia_formal_labor_counters.txt"
+            ],
+            "source_files": [
+                "input_files/*"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output_files/indonesia_lfpr_output.tmcf",
+                    "node_mcf": "output_files/indonesia_lfpr_output*.mcf",
+                    "cleaned_csv": "output_files/indonesia_lfpr_output.csv"
+                },
+                {
+                    "template_mcf": "output_files/indonesia_formal_labor_output.tmcf",
+                    "node_mcf": "output_files/indonesia_formal_labor_output*.mcf",
+                    "cleaned_csv": "output_files/indonesia_formal_labor_output.csv"
+                }
+            ],
+            "cron_schedule": "0 0 15 3 *",
+            "validation_config_file": "validation_config.json",
+            "resource_limits": {
+                "cpu": 4,
+                "memory": 16,
+                "disk": 50
+            }
+        }
+    ]
+}
