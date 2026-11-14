@@ -449,6 +449,31 @@ def _next_year_month(ym: str) -> str:
     return f'{dt.year:04d}-{dt.month + 1:02d}'
 
 
+# Trailing calendar-month lag tolerated when --strict_ee=true encounters an
+# unpublished latest month in Earth Engine; validation_config.json enforces SLA.
+_TRAILING_FRESHNESS_MONTHS = 3
+
+
+def _subtract_months(year: int, month: int,
+                     delta_months: int) -> Tuple[int, int]:
+    total_months = year * 12 + (month - 1) - delta_months
+    return total_months // 12, total_months % 12 + 1
+
+
+def _is_within_freshness_window(
+    ym: str,
+    lag_months: int = _TRAILING_FRESHNESS_MONTHS,
+    today: Optional[datetime.date] = None,
+) -> bool:
+    """Returns True if `ym` is strictly newer than `(today - lag_months)` (`%Y-%m`)."""
+    if today is None:
+        today = datetime.date.today()
+    cutoff_year, cutoff_month = _subtract_months(today.year, today.month,
+                                                 lag_months)
+    cutoff_ym = f'{cutoff_year:04d}-{cutoff_month:02d}'
+    return ym > cutoff_ym
+
+
 def _default_end_year_month(today: Optional[datetime.date] = None) -> str:
     """Returns the previous calendar month in `YYYY-MM` format."""
     if today is None:
@@ -685,7 +710,7 @@ def _fetch_single_ee_month(
         )
         if not fc_info or not fc_info.get('features'):
             msg = f'No features returned for asset={place_asset} month={ym}'
-            if strict:
+            if strict and not _is_within_freshness_window(ym):
                 raise RuntimeError(msg)
             logging.warning('%s', msg)
             return None
@@ -846,6 +871,11 @@ def fetch_era5_land_from_ee(
                     res = future.result()
                     if res:
                         generated_celsius_files.append(res)
+
+    if strict and not generated_celsius_files:
+        raise RuntimeError(
+            f'No Earth Engine data fetched for range {start_ym}..{end_ym} '
+            f'(project={ee_project!r}).')
 
     return sorted(generated_celsius_files)
 
