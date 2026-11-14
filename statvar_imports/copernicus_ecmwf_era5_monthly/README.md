@@ -84,8 +84,9 @@ All 7 active variables preserve exact production schema parity with
 - `manifest.json`: Import automation specification running `download_and_process.py`
   followed by `../../tools/statvar_importer/stat_var_processor.py`.
 - `validation_config.json`: Import-specific validation rules
-  (`MAX_DATE_CONSISTENT`, `SQL_VALIDATOR` freshness check,
-  `NUM_PLACES_CONSISTENT`), merged with the default base validation rules.
+  (`MAX_DATE_CONSISTENT` and `SQL_VALIDATOR` checks for `1979-01` historical
+  coverage, 3-month freshness lag, and 7-StatVar place coverage consistency),
+  merged with the default base validation rules.
 - `download_and_process_test.py` and `test_data/`: Unit and E2E tests and
   fixtures.
 

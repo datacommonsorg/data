@@ -27,9 +27,12 @@
     },
     {
       "rule_id": "check_num_places_consistent",
-      "description": "Checks that the number of places is consistent across all 7 ERA5 monthly StatVars.",
-      "validator": "NUM_PLACES_CONSISTENT",
-      "params": {}
+      "description": "Checks that all 7 ERA5 monthly StatVars cover >= 14350 places and differ by at most 1 historical coastal place.",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT COUNT(*) AS num_statvars, MIN(NumPlaces) AS min_places, MAX(NumPlaces) AS max_places FROM stats",
+        "condition": "num_statvars = 7 AND min_places >= 14350 AND (max_places - min_places) <= 1"
+      }
     }
   ]
 }
