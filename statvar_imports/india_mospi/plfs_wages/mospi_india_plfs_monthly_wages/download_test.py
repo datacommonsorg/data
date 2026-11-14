@@ -148,6 +148,62 @@ class DownloadTest(unittest.TestCase):
             download.fetch_mospi_monthly_wages(session=session,
                                                retry_delay_seconds=0.01)
 
+    def test_fetch_mospi_monthly_wages_handles_omitted_optional_keys_and_plfs_year(
+            self):
+        session = mock.Mock(spec=requests.Session)
+        rec_no_month = _sample_api_record('Agriculture Year', '2023-24',
+                                          'Apr-Jun', '20100.5')
+        del rec_no_month['month']
+        rec_calendar_plfs = _sample_api_record('Calendar Year', 'PLFS 2025',
+                                               None, '21500.4')
+        del rec_calendar_plfs['month']
+        del rec_calendar_plfs['quarter']
+        payload = {
+            'statusCode': True,
+            'meta_data': {
+                'page': 1,
+                'totalRecords': 2,
+                'totalPages': 1,
+                'recordPerPage': 200,
+            },
+            'data': [rec_no_month, rec_calendar_plfs],
+        }
+        session.get.return_value = _mock_response(200, payload)
+
+        df = download.fetch_mospi_monthly_wages(session=session,
+                                                retry_delay_seconds=0.01)
+
+        self.assertEqual(len(df), 2)
+        self.assertEqual(list(df.columns), download.COLUMNS)
+        self.assertEqual(df.iloc[0]['year'], '2023-24')
+        self.assertEqual(df.iloc[0]['quarter'], 'Apr-Jun')
+        self.assertEqual(df.iloc[0]['month'], '')
+        self.assertEqual(df.iloc[1]['year'], '2025')
+        self.assertEqual(df.iloc[1]['quarter'], '')
+        self.assertEqual(df.iloc[1]['month'], '')
+        self.assertEqual(df.iloc[1]['value'], '21500.4')
+
+    def test_fetch_mospi_monthly_wages_raises_on_missing_required_column(self):
+        session = mock.Mock(spec=requests.Session)
+        bad_record = _sample_api_record()
+        del bad_record['value']
+        payload = {
+            'statusCode': True,
+            'meta_data': {
+                'page': 1,
+                'totalRecords': 1,
+                'totalPages': 1,
+                'recordPerPage': 200,
+            },
+            'data': [bad_record],
+        }
+        session.get.return_value = _mock_response(200, payload)
+
+        with self.assertRaisesRegex(RuntimeError,
+                                    "missing columns \\['value'\\]"):
+            download.fetch_mospi_monthly_wages(session=session,
+                                               retry_delay_seconds=0.01)
+
     @mock.patch.object(download.time, 'sleep')
     def test_fetch_page_retries_transient_503_and_succeeds(self, mock_sleep):
         session = mock.Mock(spec=requests.Session)

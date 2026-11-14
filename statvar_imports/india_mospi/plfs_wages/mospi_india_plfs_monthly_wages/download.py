@@ -19,6 +19,7 @@ automatically while preserving all historical observations.
 """
 
 import os
+import re
 import ssl
 import sys
 import tempfile
@@ -68,6 +69,18 @@ COLUMNS = [
     'unit',
 ]
 
+REQUIRED_API_COLUMNS = (
+    'year_type',
+    'year',
+    'frequency',
+    'indicator',
+    'state',
+    'gender',
+    'sector',
+    'value',
+    'unit',
+)
+
 KEY_COLUMNS = [
     'year_type',
     'year',
@@ -80,6 +93,7 @@ KEY_COLUMNS = [
     'month',
 ]
 
+_PLFS_YEAR_PREFIX_RE = re.compile(r'^PLFS\s+(\d{4})$', re.IGNORECASE)
 _RETRYABLE_STATUS_CODES = frozenset({429, 500, 502, 503, 504})
 
 FLAGS = flags.FLAGS
@@ -226,6 +240,16 @@ def _fetch_page(
     raise RuntimeError(f'Unreachable retry state for {api_url}')
 
 
+def _normalize_record(item: dict[str, Any]) -> dict[str, str]:
+    """Normalizes one MoSPI API JSON record into the 11-column CSV schema."""
+    row = {
+        col: '' if item.get(col) is None else str(item.get(col)).strip()
+        for col in COLUMNS
+    }
+    row['year'] = _PLFS_YEAR_PREFIX_RE.sub(r'\1', row['year'])
+    return row
+
+
 def fetch_mospi_monthly_wages(
     session: requests.Session,
     api_url: str = DEFAULT_API_URL,
@@ -286,15 +310,14 @@ def fetch_mospi_monthly_wages(
             )
 
         for item in records:
-            missing_cols = [col for col in COLUMNS if col not in item]
+            missing_cols = [
+                col for col in REQUIRED_API_COLUMNS if col not in item
+            ]
             if missing_cols:
                 raise RuntimeError(
                     f'MoSPI API record on page {page} missing columns {missing_cols}'
                 )
-            all_rows.append({
-                col: '' if item[col] is None else str(item[col])
-                for col in COLUMNS
-            })
+            all_rows.append(_normalize_record(item))
         page += 1
 
     if expected_total_records is not None and len(
