@@ -47,15 +47,17 @@ repository contracts and instructions take precedence.
   failing job rather than partial success.
 - Catch specific exceptions only when handling or enriching them; preserve the
   original traceback and include safe operational context.
-- Check HTTP responses and external-command exit status before accepting their
-  output.
+- Check HTTP responses, external-command exit status, and helper return values
+  (such as `download_util_script.download_file()` returning `False` or
+  `download_util.download_file_from_url()` returning `None`) before accepting
+  their output.
 - Make directory creation and repeated execution safe, and do not expose
   incomplete output as successful output.
 - Use structured logging for operational progress and failures.
-- Raise an exception for unrecoverable errors and let it propagate; put the
-  details needed to debug it, such as the failed URL, file, or count, in its
-  message, which the job log prints. Flag `absl.logging.fatal()` on these
-  paths, since it aborts only under `app.run()`.
+- For unrecoverable errors, log an error with the details needed to debug it,
+  such as the failed URL, file, or count, then raise an exception with the same
+  details and let it propagate. Flag `absl.logging.fatal()` on these paths,
+  since it aborts only under `app.run()`.
 
 ## Data transformation
 
