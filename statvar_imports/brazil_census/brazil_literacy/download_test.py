@@ -203,7 +203,7 @@ class DownloadTest(unittest.TestCase):
                     },
                 ]
             else:
-                resp.json.return_value = [
+                table_9542_rows = [
                     {
                         "NC": "Nível Territorial"
                     },
@@ -216,21 +216,60 @@ class DownloadTest(unittest.TestCase):
                         "D7C": "100362",
                         "V": "900",
                     },
-                    {
+                ]
+                bra_counts = {
+                    ("93024", "100362"): "1000",
+                    ("93024", "93086"): "100",
+                    ("93024", "93087"): "100",
+                    ("93024", "2999"): "200",
+                    ("93024", "9482"): "200",
+                    ("93024", "9483"): "200",
+                    ("93024", "9484"): "200",
+                    ("93024", "6613"): "20",
+                    ("93024", "6614"): "20",
+                    ("93024", "6615"): "20",
+                    ("93024", "6616"): "20",
+                    ("93024", "6617"): "20",
+                    ("93024", "3000"): "100",
+                    ("1023", "100362"): "900",
+                    ("1023", "93086"): "98",
+                    ("1024", "93086"): "2",
+                    ("1024", "93087"): "3",
+                    ("1024", "2999"): "10",
+                    ("1024", "9482"): "10",
+                    ("1024", "9483"): "10",
+                    ("1024", "9484"): "10",
+                    ("1024", "6613"): "2",
+                    ("1024", "6614"): "2",
+                    ("1024", "6615"): "2",
+                    ("1024", "6616"): "2",
+                    ("1024", "6617"): "2",
+                    ("1024", "3000"): "20",
+                }
+                for (c59, c287), val in bra_counts.items():
+                    table_9542_rows.append({
                         "NC": "1",
                         "D1N": "Brasil",
                         "D3N": "2022",
-                        "D6C": "93024",
-                        "D7C": "100362",
-                        "V": "1000",
-                    },
-                ]
+                        "D6C": c59,
+                        "D7C": c287,
+                        "V": val,
+                    })
+                resp.json.return_value = table_9542_rows
             return resp
 
         session.get.side_effect = mock_get
         rows = download_mod._fetch_2022_literacy_rates_rows(session=session)
         abouts = {r["observationAbout"] for r in rows}
         self.assertEqual(abouts, {"dcid:country/BRA"})
+        measured = {r["variableMeasured"] for r in rows}
+        for expected_sv in (
+                "dcid:Count_Person_20OrMoreYears_Literate_AsAFractionOf_Count_Person_20OrMoreYears",
+                "dcid:Count_Person_15To24Years_Illiterate_AsAFractionOf_Count_Person_15To24Years",
+                "dcid:Count_Person_25To59Years_Illiterate_AsAFractionOf_Count_Person_25To59Years",
+                "dcid:Count_Person_60OrMoreYears_Illiterate_AsAFractionOf_Count_Person_60OrMoreYears",
+        ):
+            self.assertIn(expected_sv, measured)
 
         def mock_get_unknown(url, **kwargs):
             resp = MagicMock()

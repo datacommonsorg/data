@@ -708,8 +708,8 @@ def _fetch_2022_literacy_rates_rows(
             except (ValueError, TypeError):
                 continue
             dcid = resolve_loc(r)
-        if not dcid:
-            continue
+            if not dcid:
+                continue
             c59 = str(r.get("D6C", "")).strip()
             c287 = str(r.get("D7C", "")).strip()
             counts.setdefault((year, dcid), {}).setdefault(c59,
