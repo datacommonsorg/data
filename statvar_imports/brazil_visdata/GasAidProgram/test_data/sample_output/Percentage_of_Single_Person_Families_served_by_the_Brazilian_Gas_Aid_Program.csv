@@ -1,0 +1,13 @@
+observationAbout,observationDate,value,variableMeasured,unit,scalingFactor
+country/BRA,2023-10,5634630,dcid:Count_Household_GasAidProgram_ReceivedPaymentPreviousMonth,,
+country/BRA,2023-10,843637,dcid:Count_Household_GasAidProgram_ReceivedPaymentPreviousMonth_SinglePerson,,
+country/BRA,2023-10,2181,dcid:Count_Place_GasAidProgram_16OrMorePercentHouseholds_SinglePerson,,
+country/BRA,2023-10,14.97,dcid:Count_Household_GasAidProgram_SinglePerson,Percent,100
+country/BRA,2023-12,5512823,dcid:Count_Household_GasAidProgram_ReceivedPaymentPreviousMonth,,
+country/BRA,2023-12,768775,dcid:Count_Household_GasAidProgram_ReceivedPaymentPreviousMonth_SinglePerson,,
+country/BRA,2023-12,1856,dcid:Count_Place_GasAidProgram_16OrMorePercentHouseholds_SinglePerson,,
+country/BRA,2023-12,13.95,dcid:Count_Household_GasAidProgram_SinglePerson,Percent,100
+country/BRA,2024-02,5413092,dcid:Count_Household_GasAidProgram_ReceivedPaymentPreviousMonth,,
+country/BRA,2024-02,693436,dcid:Count_Household_GasAidProgram_ReceivedPaymentPreviousMonth_SinglePerson,,
+country/BRA,2024-02,1456,dcid:Count_Place_GasAidProgram_16OrMorePercentHouseholds_SinglePerson,,
+country/BRA,2024-02,12.81,dcid:Count_Household_GasAidProgram_SinglePerson,Percent,100
