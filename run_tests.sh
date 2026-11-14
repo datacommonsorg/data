@@ -67,6 +67,25 @@ function run_py_lint_test {
   fi
 }
 
+# Checks that all JSON files are valid. Uses only the Python standard library,
+# so it doesn't need setup_python.
+function run_json_lint {
+  echo "#### Testing JSON files"
+  python3 tools/lint/json_lint.py
+}
+
+# Runs all lint checks (Python and JSON). Runs every check even if an earlier
+# one fails, so all errors are reported at once.
+function run_lint_test {
+  local failed=false
+  # Subshell, because run_py_lint_test exits on the first error.
+  ( run_py_lint_test ) || failed=true
+  run_json_lint || failed=true
+  if [[ "$failed" = true ]]; then
+    exit 1
+  fi
+}
+
 # Run Python tests. Requires folder to run tests in specified in $1.
 function run_py_test {
   if [ $# -eq 0 ]
@@ -87,9 +106,10 @@ function run_all_py_tests {
 }
 
 function help {
-  echo "Usage: $0 -rpluaf"
+  echo "Usage: $0 -rpljuaf"
   echo "-r       Install Python requirements"
-  echo "-l       Test lint on Python code"
+  echo "-l       Test lint (Python code and JSON files)"
+  echo "-j       Test only JSON files"
   echo "-p       Run Python tests in specified folder, e.g. ./run_tests.sh -p util"
   echo "-u       Run all Python unit tests"
   echo "-a       Run all checks (unit tests and lint)"
@@ -97,7 +117,7 @@ function help {
   exit 1
 }
 
-while getopts rp:lusiaf OPTION; do
+while getopts rp:ljusiaf OPTION; do
   case $OPTION in
     r)
         echo "### Installing Python requirements"
@@ -105,7 +125,11 @@ while getopts rp:lusiaf OPTION; do
         ;;
     l)
         echo "### Testing lint"
-        run_py_lint_test
+        run_lint_test
+        ;;
+    j)
+        echo "### Testing JSON files"
+        run_json_lint
         ;;
     p)
         echo "### Running Python tests in ${OPTARG}"
@@ -122,7 +146,7 @@ while getopts rp:lusiaf OPTION; do
     a)
         echo "### Running all checks (unit tests and lint)"
         run_all_py_tests
-        run_py_lint_test
+        run_lint_test
         ;;
     *)
         help
