@@ -33,8 +33,7 @@ import file_util
 from google.api_core import exceptions as api_core_exceptions
 from google.cloud import storage
 
-DEFAULT_API_KEY_GCS_PATH = (
-    'gs://unresolved_mcf/country/indonesia/config.json')
+DEFAULT_API_KEY_GCS_PATH = ('gs://unresolved_mcf/country/indonesia/config.json')
 
 _FLAGS = flags.FLAGS
 flags.DEFINE_string(
