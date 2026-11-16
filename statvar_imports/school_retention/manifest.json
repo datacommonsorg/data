@@ -6,7 +6,7 @@
         "support@datacommons.org"
       ],
       "provenance_url": "https://civilrightsdata.ed.gov/data",
-      "provenance_description": "This data provides an overview of student retention rates, categorized by gender, race/ethnicity, disability status, and language fluency, specifically for School Grades 1 to 12.",
+      "provenance_description": "This data provides an overview of student retention counts and indicators, categorized by gender, race/ethnicity, disability status, and language fluency, for Kindergarten and School Grades 1 to 12.",
       "scripts": [
         "download_script.py",
         "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/*.csv --pv_map=retention_pvmap.csv --config_file=retention_metadata.csv --output_path=output/retention_output --output_counters=counters/retention_counters.csv --recon_property=variableMeasured --log_level=-2 --log_every_n=1000"

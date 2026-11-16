@@ -66,8 +66,6 @@ FALLBACK_KEYWORDS = [
     r"School Data\.csv$",
 ]
 
-KEYWORDS = RETENTION_KEYWORDS + FALLBACK_KEYWORDS
-
 EXCLUDE_COLS = [
     "JJ",
     "SCH_JUST",
@@ -141,14 +139,6 @@ def _is_excluded_archive_member(filename: str) -> bool:
     if re.search(r"(^|[_\W])lea([_\W]|$)", basename, re.IGNORECASE):
         return True
     return False
-
-
-def matches_keywords(filename: str) -> bool:
-    """Returns True if filename matches CRDC school retention file patterns."""
-    if _is_excluded_archive_member(filename):
-        return False
-    return any(
-        re.search(pattern, filename, re.IGNORECASE) for pattern in KEYWORDS)
 
 
 def select_matched_files(namelist: list) -> list:

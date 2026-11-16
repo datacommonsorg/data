@@ -58,11 +58,23 @@ python3 ../../tools/statvar_importer/stat_var_processor.py \
   --log_every_n=1000
 ```
 
-#### Step 3: Run Unit Tests
+#### Step 3: Run Unit and Sample E2E Tests
 
 From the `data/` repository root:
 ```bash
 ./run_tests.sh -p statvar_imports/school_retention
+```
+
+To run `stat_var_processor.py` directly against the sample CSV fixture in `test_data/`:
+```bash
+python3 ../../tools/statvar_importer/stat_var_processor.py \
+  --input_data=test_data/retention_input.csv \
+  --pv_map=retention_pvmap.csv \
+  --config_file=retention_metadata.csv \
+  --output_path=/tmp/retention_check/retention_output \
+  --output_counters=/tmp/retention_check/retention_counters.csv \
+  --recon_property=variableMeasured \
+  --log_level=-2
 ```
 
 ### Autorefresh type
