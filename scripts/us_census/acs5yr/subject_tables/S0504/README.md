@@ -48,7 +48,7 @@ The data is sliced by the following properties:
 
 - **Years**: `2010–2024`
 - **Geography**: Country (`010`), Census Division (`030`), State (`040`), County (`050`), County Subdivision (`060`), Census Tract (`140`), Block Group (`150`), Place (`160`), Metropolitan/Micropolitan Statistical Area (`310`), Congressional District (`500`), ZCTA (`860`), and School Districts (`950`, `960`, `970`)
-- **Source Table**: [US Census Bureau Table S0504: Selected Characteristics of the Native and Foreign-Born Populations](https://data.census.gov/table?q=S0504)
+- **Source Table**: [US Census Bureau Table S0504: Selected Characteristics of the Foreign-Born Population by Region of Birth: Africa, Northern America, and Oceania](https://data.census.gov/table?q=S0504)
 
 ## Prerequisites & Working Directory
 
@@ -118,9 +118,9 @@ From the repository root, run the directory-scoped test runner:
 
 1. Download the new ACS 5-Year `S0504` release CSV (`ACSST5Y<YEAR>.S0504_data_with_overlays_*.csv`) and add it to `S0504/S0504.zip`.
 2. Update `S0504/S0504_spec.json`:
-   - Add `"INCOME IN THE PAST 12 MONTHS (IN <YEAR> INFLATION-ADJUSTED DOLLARS)": "Annual"` / `"EARNINGS IN THE PAST 12 MONTHS (IN <YEAR> INFLATION-ADJUSTED DOLLARS) FOR FULL-TIME, YEAR-ROUND WORKERS": "Annual"` (if new header variants appear) and `"InflationAdjustedUSD_<YEAR>"` under `pvs.unit` / `measurement` as needed.
-   - Add the `<YEAR>` inflation-adjusted earnings and household income denominator blocks under `denominators` (for `Foreign born; Born in Africa`, `Foreign born; Born in Northern America`, and `Foreign born; Born in Oceania`).
-   - Verify whether any new Census header labels or non-applicable cross-tabulations require entries in `pvs` or `ignoreColumns`.
+   - Add the `<YEAR>` entries under `preprocess.find_and_replace` (`Estimate!!Foreign-born; Born in ...` and `Margin of Error!!Foreign-born; Born in ...` for `Africa`, `Northern America`, and `Oceania`) stripping the `With <income type>!!` token before `Mean ... (dollars)` under `INCOME IN THE PAST 12 MONTHS (IN <YEAR> INFLATION-ADJUSTED DOLLARS)!!Households` (`With earnings`, `With Social Security income`, `With Supplemental Security Income`, `With cash public assistance income`, and `With retirement income`).
+   - Add the `<YEAR>` `EARNINGS IN THE PAST 12 MONTHS (IN <YEAR> INFLATION-ADJUSTED DOLLARS) FOR FULL-TIME, YEAR-ROUND WORKERS!!Population 16 years and over with earnings` and `INCOME IN THE PAST 12 MONTHS (IN <YEAR> INFLATION-ADJUSTED DOLLARS)!!Households` denominator blocks under `denominators` (for `Estimate!!Foreign-born; Born in Africa`, `Estimate!!Foreign-born; Born in Northern America`, and `Estimate!!Foreign-born; Born in Oceania`).
+   - Verify whether any new Census header labels, unit/measurement tokens (inflation-adjusted dollars currently stay parameterized as `InflationAdjustedUSD_CurrentYear` in `measurement` and `pvs.earnings`), or non-applicable cross-tabulations require entries in `pvs`, `measurement`, or `ignoreColumns`.
 3. Create the output directory (`mkdir -p ./S0504/output`) and run `process.py` as shown above.
 4. Run `./run_tests.sh -p scripts/us_census/acs5yr/subject_tables` and validate the generated MCF/TMCF/CSV artifacts with the Data Commons import tool (`dc-import` / `genmcf`) and `import_differ`.
 
