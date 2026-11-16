@@ -28,7 +28,7 @@ This import processes school-level **Harassment or Bullying** data from the U.S.
 
 ## 3. Running Locally
 
-Run all commands from the `data` repository root (or from `statvar_imports/crdc_import/crdc_harassment_or_bullying/`):
+Run the following commands from the `data` repository root (outputs are written under `statvar_imports/crdc_import/crdc_harassment_or_bullying/`):
 
 ```bash
 # 1. Set up the repository virtual environment
@@ -55,7 +55,7 @@ Run unit tests and lint checks from the `data` repository root:
 ./run_tests.sh -l
 ```
 
-To lint generated MCF/TMCF/CSV artifacts with the Data Commons import tool:
+From the import directory (`statvar_imports/crdc_import/crdc_harassment_or_bullying/`), lint generated MCF/TMCF/CSV artifacts with the Data Commons import tool:
 
 ```bash
 java -jar /path/to/datacommons-import-tool.jar lint -o lint_report/2012 \
