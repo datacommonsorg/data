@@ -1,0 +1,78 @@
+Node: dcid:Annual_FoodBudgetShortfall
+typeOf: dcs:StatisticalVariable
+populationType: dcid:Food
+measuredProperty: budgetShortfall
+measurementQualifier: dcid:Annual
+name: "Annual Food Budget Shortfall"
+statType: dcs:measuredValue
+
+Node: dcid:Mean_MealCost_Person_FoodSecure
+typeOf: dcs:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:cost
+foodSecurityStatus: dcs:FoodSecure
+foodType: dcid:Meal
+statType: dcs:meanValue
+name: "Average Meal Cost for Food Secure People"
+
+Node: dcid:Count_Child_FoodInsecure
+typeOf: dcs:StatisticalVariable
+populationType: schema:Child
+foodSecurityStatus: dcs:FoodInSecure
+name: "Population: Food Insecure Children"
+measuredProperty: dcid:count
+statType: dcs:measuredValue
+
+
+Node: dcid:Count_Child_FoodInsecure_EligibleForManyChildNutritionBenefits
+typeOf: dcs:StatisticalVariable
+measuredProperty: dcid:count
+populationType: schema:Child
+foodSecurityStatus: dcs:FoodInSecure
+benefitsStatus: dcid:EligibleForManyChildNutritionBenefits
+statType: dcs:measuredValue
+name: "Food Insecure Children Eligible for Benefits"
+
+Node: dcid:Count_Child_FoodInsecure_IneligibleForChildNutritionBenefits
+typeOf: dcs:StatisticalVariable
+measuredProperty: dcid:count
+populationType: schema:Child
+foodSecurityStatus: dcs:FoodInSecure
+benefitsStatus: dcid:IneligibleForManyChildNutritionBenefits
+statType: dcs:measuredValue
+name: "Food Insecure Children Ineligible for Benefits"
+
+Node: dcid:Count_Person_FoodInsecure
+typeOf: dcs:StatisticalVariable
+measuredProperty: dcid:count
+populationType: schema:Person
+foodSecurityStatus: dcs:FoodInSecure
+statType: dcs:measuredValue
+name: "Population: Food Insecure People"
+
+Node: dcid:Count_Person_FoodInsecure_EligibleForAllFederalBenefits
+typeOf: dcs:StatisticalVariable
+measuredProperty: dcid:count
+populationType: schema:Person
+foodSecurityStatus: dcs:FoodInSecure
+benefitsStatus: dcid:EligibleForAllFederalBenefits
+statType: dcs:measuredValue
+name: "Food Insecure People Eligible for All Federal Benefits"
+
+Node: dcid:Count_Person_FoodInsecure_EligibleForSomeFederalBenefits
+typeOf: dcs:StatisticalVariable
+measuredProperty: dcid:count
+populationType: schema:Person
+foodSecurityStatus: dcs:FoodInSecure
+benefitsStatus: dcid:EligibleForSomeFederalBenefits
+statType: dcs:measuredValue
+name: "Food Insecure People Eligible for Some Federal Benefits"
+
+Node: dcid:Count_Person_FoodInsecure_IneligibleForFederalBenefits
+typeOf: dcs:StatisticalVariable
+measuredProperty: dcid:count
+populationType: schema:Person
+foodSecurityStatus: dcs:FoodInSecure
+benefitsStatus: dcid:IneligibleForFederalBenefits
+statType: dcs:measuredValue
+name: "Food Insecure People Ineligible for Federal Benefits"

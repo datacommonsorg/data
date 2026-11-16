@@ -1,0 +1,12 @@
+key,prop,value,p1,v1,p2,v2,p3,v3
+dcid,observationAbout,{Data},,,,,,
+observationDate,observationDate,{Data},,,,,,
+Count_Person_FoodInsecure,variableMeasured,dcs:Count_Person_FoodInsecure,value,{Number},measurementMethod,dcs:FeedingAmerica_Estimate,,
+Count_Person_FoodInsecure_EligibleForAllFederalBenefits,variableMeasured,dcs:Count_Person_FoodInsecure_EligibleForAllFederalBenefits,value,{Number},measurementMethod,dcs:FeedingAmerica_Estimate,,
+Count_Person_FoodInsecure_EligibleForSomeFederalBenefits,variableMeasured,dcs:Count_Person_FoodInsecure_EligibleForSomeFederalBenefits,value,{Number},measurementMethod,dcs:FeedingAmerica_Estimate,,
+Count_Person_FoodInsecure_IneligibleForFederalBenefits,variableMeasured,dcs:Count_Person_FoodInsecure_IneligibleForFederalBenefits,value,{Number},measurementMethod,dcs:FeedingAmerica_Estimate,,
+Count_Child_FoodInsecure,variableMeasured,dcs:Count_Child_FoodInsecure,value,{Number},measurementMethod,dcs:FeedingAmerica_Estimate,,
+Count_Child_FoodInsecure_EligibleForManyChildNutritionBenefits,variableMeasured,dcs:Count_Child_FoodInsecure_EligibleForManyChildNutritionBenefits,value,{Number},measurementMethod,dcs:FeedingAmerica_Estimate,,
+Count_Child_FoodInsecure_IneligibleForChildNutritionBenefits,variableMeasured,dcs:Count_Child_FoodInsecure_IneligibleForChildNutritionBenefits,value,{Number},measurementMethod,dcs:FeedingAmerica_Estimate,,
+Mean_MealCost_Person_FoodSecure,variableMeasured,dcs:Mean_MealCost_Person_FoodSecure,value,{Number},unit,dcs:USDollar,measurementMethod,dcs:FeedingAmerica_Estimate
+Annual_FoodBudgetShortfall,variableMeasured,dcs:Annual_FoodBudgetShortfall,value,{Number},unit,dcs:USDollar,measurementMethod,dcs:FeedingAmerica_Estimate

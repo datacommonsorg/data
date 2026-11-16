@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "check_min_value",
+      "validator": "MIN_VALUE_CHECK",
+      "params": {
+        "minimum": 0
+      }
+    },
+    {
+      "rule_id": "check_active_statvars_freshness_and_places",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT StatVar, NumPlaces, NumObservations, CAST(MaxDate AS INTEGER) AS LatestDate FROM stats WHERE StatVar != 'Count_Person_FoodInsecure_EligibleForSomeFederalBenefits'",
+        "condition": "NumPlaces >= 3190 AND NumObservations >= 22000 AND LatestDate >= 2024",
+        "failure_message": "Active FeedingAmerica_MapMealGap StatVars failed place count, observation count, or 2024 freshness check."
+      }
+    },
+    {
+      "rule_id": "check_some_benefits_historical_statvar",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT StatVar, NumPlaces, NumObservations, CAST(MaxDate AS INTEGER) AS LatestDate FROM stats WHERE StatVar = 'Count_Person_FoodInsecure_EligibleForSomeFederalBenefits'",
+        "condition": "NumPlaces >= 2200 AND NumObservations >= 6400 AND LatestDate >= 2020",
+        "failure_message": "Historical StatVar Count_Person_FoodInsecure_EligibleForSomeFederalBenefits (2018-2020) failed validation."
+      }
+    }
+  ]
+}

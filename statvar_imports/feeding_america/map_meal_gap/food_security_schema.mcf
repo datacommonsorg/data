@@ -1,0 +1,75 @@
+Node: dcid:Food
+typeOf: dcs:Class
+subClassOf: dcs:Thing
+name: "Food"
+
+Node: dcid:budgetShortfall
+typeOf: dcs:Property
+name: "budgetShortfall"
+domainIncludes: dcid:Food
+
+Node: dcid:cost
+typeOf: dcs:Property
+domainIncludes: dcid:Food,dcid:Person
+
+Node: dcid:foodSecurityStatus
+typeOf: dcs:Property
+name: "foodSecurityStatus"
+domainIncludes: dcid:Person,dcid:Child
+rangeIncludes: dcid:FoodSecurityStatusEnum
+
+Node: dcid:FoodSecurityStatusEnum
+typeOf: dcs:Class
+subClassOf: dcs:Enumeration
+name: "FoodSecurityStatusEnum"
+
+Node: dcid:FoodSecure
+typeOf: dcid:FoodSecurityStatusEnum
+name: "Food Secure"
+isProvisional: dcs:True
+
+Node: dcid:FoodInSecure
+typeOf: dcid:FoodSecurityStatusEnum
+name: "Food In Secure"
+isProvisional: dcs:True
+
+Node: dcid:foodType
+typeOf: dcs:Property
+name: "foodType"
+domainIncludes: dcid:Person
+rangeIncludes: dcid:FoodTypeEnum
+isProvisional: dcs:True
+
+Node: dcid:FoodTypeEnum
+typeOf: dcs:Class
+subClassOf: dcs:Enumeration
+name: "FoodTypeEnum"
+
+Node: dcid:Meal
+typeOf: dcid:FoodTypeEnum
+name: "Meal"
+
+Node: dcid:benefitsStatus
+typeOf: dcs:Property
+name: "benefitsStatus"
+domainIncludes: dcid:Child
+
+Node: dcid:EligibleForManyChildNutritionBenefits
+typeOf: dcid:BenefitsStatusEnum
+name: "Eligible For Many Child Nutrition Benefits"
+
+Node: dcid:IneligibleForManyChildNutritionBenefits
+typeOf: dcid:BenefitsStatusEnum
+name: "Ineligible For Many Child Nutrition Benefits"
+
+Node: dcid:EligibleForAllFederalBenefits
+typeOf: dcid:BenefitsStatusEnum
+name: "Eligible For All Federal Benefits"
+
+Node: dcid:EligibleForSomeFederalBenefits
+typeOf: dcid:BenefitsStatusEnum
+name: "Eligible For Some Federal Benefits"
+
+Node: dcid:IneligibleForFederalBenefits
+typeOf: dcid:BenefitsStatusEnum
+name: "Ineligible For Federal Benefits"
