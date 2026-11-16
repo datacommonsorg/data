@@ -397,25 +397,43 @@ def sync_baseline_from_gcs(
     logging.info('Found %d baseline .celsius.csv files in GCS; syncing to %s',
                  len(celsius_uris), dest_dir)
     downloaded_paths: List[str] = []
-    with requests.Session() as session:
-        adapter = requests.adapters.HTTPAdapter(
-            pool_connections=max_workers,
-            pool_maxsize=max_workers,
+    thread_local = threading.local()
+    sessions: List[requests.Session] = []
+    sessions_lock = threading.Lock()
+
+    def _get_worker_session() -> requests.Session:
+        session = getattr(thread_local, 'session', None)
+        if session is None:
+            session = requests.Session()
+            adapter = requests.adapters.HTTPAdapter(
+                pool_connections=4,
+                pool_maxsize=4,
+            )
+            session.mount('https://', adapter)
+            session.mount('http://', adapter)
+            thread_local.session = session
+            with sessions_lock:
+                sessions.append(session)
+        return session
+
+    def _download_worker(gcs_uri: str) -> str:
+        return _download_gcs_file_via_util(
+            gcs_uri,
+            dest_dir,
+            _get_worker_session(),
         )
-        session.mount('https://', adapter)
-        session.mount('http://', adapter)
+
+    try:
         with ThreadPoolExecutor(max_workers=max_workers) as executor:
             future_to_uri = {
-                executor.submit(
-                    _download_gcs_file_via_util,
-                    gcs_uri,
-                    dest_dir,
-                    session,
-                ):
-                    gcs_uri for gcs_uri in celsius_uris
+                executor.submit(_download_worker, gcs_uri): gcs_uri
+                for gcs_uri in celsius_uris
             }
             for future in as_completed(future_to_uri):
                 downloaded_paths.append(future.result())
+    finally:
+        for session in sessions:
+            session.close()
 
     downloaded_paths.sort()
     logging.info('Synced %d baseline .celsius.csv files to %s',
@@ -605,6 +623,16 @@ def _is_permission_or_auth_error(exc: Exception) -> bool:
     ))
 
 
+def _is_not_found_error(exc: Exception) -> bool:
+    """Returns True if `exc` indicates a missing Earth Engine asset (404 / not found)."""
+    text = str(exc).lower()
+    return any(token in text for token in (
+        '404',
+        'not found',
+        'does not exist',
+    ))
+
+
 def _compute_ee_monthly_features_with_retry(
     dataset_asset: str,
     geo_locations_asset: str,
@@ -626,7 +654,8 @@ def _compute_ee_monthly_features_with_retry(
         except FileNotFoundError:
             raise
         except Exception as exc:
-            if attempt == max_attempts or _is_permission_or_auth_error(exc):
+            if (attempt == max_attempts or _is_permission_or_auth_error(exc) or
+                    _is_not_found_error(exc)):
                 raise
             logging.warning(
                 'Transient Earth Engine error for asset=%s month=%s '

@@ -674,6 +674,26 @@ class DownloadAndProcessTest(unittest.TestCase):
                     strict=True,
                 )
 
+    def test_compute_ee_monthly_features_with_retry_fast_fails_on_not_found(
+            self):
+        """Verifies EE 404/not-found exceptions fail without retry sleeps."""
+        with patch.object(
+                download_and_process,
+                '_compute_ee_monthly_features',
+                side_effect=RuntimeError(
+                    '404 Asset "projects/p/assets/missing" does not exist'),
+        ) as mock_compute, patch(
+                'download_and_process.time.sleep') as mock_sleep:
+            with self.assertRaises(RuntimeError):
+                download_and_process._compute_ee_monthly_features_with_retry(
+                    dataset_asset='ECMWF/ERA5_LAND/MONTHLY_AGGR',
+                    geo_locations_asset='projects/p/assets/missing',
+                    year_month='2020-07',
+                    reduce_region_scale=1000,
+                )
+        self.assertEqual(mock_compute.call_count, 1)
+        mock_sleep.assert_not_called()
+
 
 if __name__ == '__main__':
     unittest.main()
