@@ -2,32 +2,17 @@
     "preprocess": {
         "find_and_replace": {
             "Foreign born; Born in Africa!!Estimate!!EMPLOYMENT STATUS!!In labor force!!Civilian labor force!!Unemployed!!Percent of civilian labor force": "Foreign born; Born in Africa!!Estimate!!EMPLOYMENT STATUS!!In labor force!!Civilian labor force!!Percent of civilian labor force",
-            "Foreign born; Born in Africa!!Margin of Error!!EMPLOYMENT STATUS!!In labor force!!Civilian labor force!!Unemployed!!Percent of civilian labor force": "Foreign born; Born in Africa!!Margin of Error!!EMPLOYMENT STATUS!!In labor force!!Civilian labor force!!Percent of civilian labor force",
             "Foreign born; Born in Northern America!!Estimate!!EMPLOYMENT STATUS!!In labor force!!Civilian labor force!!Unemployed!!Percent of civilian labor force": "Foreign born; Born in Northern America!!Estimate!!EMPLOYMENT STATUS!!In labor force!!Civilian labor force!!Percent of civilian labor force",
-            "Foreign born; Born in Northern America!!Margin of Error!!EMPLOYMENT STATUS!!In labor force!!Civilian labor force!!Unemployed!!Percent of civilian labor force": "Foreign born; Born in Northern America!!Margin of Error!!EMPLOYMENT STATUS!!In labor force!!Civilian labor force!!Percent of civilian labor force",
             "Foreign born; Born in Oceania!!Estimate!!EMPLOYMENT STATUS!!In labor force!!Civilian labor force!!Unemployed!!Percent of civilian labor force": "Foreign born; Born in Oceania!!Estimate!!EMPLOYMENT STATUS!!In labor force!!Civilian labor force!!Percent of civilian labor force",
-            "Foreign born; Born in Oceania!!Margin of Error!!EMPLOYMENT STATUS!!In labor force!!Civilian labor force!!Unemployed!!Percent of civilian labor force": "Foreign born; Born in Oceania!!Margin of Error!!EMPLOYMENT STATUS!!In labor force!!Civilian labor force!!Percent of civilian labor force",
             "Foreign born; Born in Africa!!Estimate!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed!!Percent of civilian labor force": "Foreign born; Born in Africa!!Estimate!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Percent of civilian labor force",
-            "Foreign born; Born in Africa!!Margin of Error!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed!!Percent of civilian labor force": "Foreign born; Born in Africa!!Margin of Error!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Percent of civilian labor force",
             "Foreign born; Born in Northern America!!Estimate!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed!!Percent of civilian labor force": "Foreign born; Born in Northern America!!Estimate!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Percent of civilian labor force",
-            "Foreign born; Born in Northern America!!Margin of Error!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed!!Percent of civilian labor force": "Foreign born; Born in Northern America!!Margin of Error!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Percent of civilian labor force",
             "Foreign born; Born in Oceania!!Estimate!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed!!Percent of civilian labor force": "Foreign born; Born in Oceania!!Estimate!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Percent of civilian labor force",
-            "Foreign born; Born in Oceania!!Margin of Error!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed!!Percent of civilian labor force": "Foreign born; Born in Oceania!!Margin of Error!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Percent of civilian labor force",
             "Estimate!!Foreign born; Born in Africa!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed!!Percent of civilian labor force": "Estimate!!Foreign born; Born in Africa!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Percent of civilian labor force",
-            "Margin of Error!!Foreign born; Born in Africa MOE!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed!!Percent of civilian labor force": "Margin of Error!!Foreign born; Born in Africa MOE!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Percent of civilian labor force",
             "Estimate!!Foreign born; Born in Northern America!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed!!Percent of civilian labor force": "Estimate!!Foreign born; Born in Northern America!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Percent of civilian labor force",
-            "Margin of Error!!Foreign born; Born in Northern America MOE!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed!!Percent of civilian labor force": "Margin of Error!!Foreign born; Born in Northern America MOE!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Percent of civilian labor force",
             "Estimate!!Foreign born; Born in Oceania!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed!!Percent of civilian labor force": "Estimate!!Foreign born; Born in Oceania!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Percent of civilian labor force",
-            "Margin of Error!!Foreign born; Born in Oceania MOE!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed!!Percent of civilian labor force": "Margin of Error!!Foreign born; Born in Oceania MOE!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Percent of civilian labor force",
-            "Margin of Error!!Foreign born; Born in Africa!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed!!Percent of civilian labor force": "Margin of Error!!Foreign born; Born in Africa!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Percent of civilian labor force",
-            "Margin of Error!!Foreign born; Born in Northern America!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed!!Percent of civilian labor force": "Margin of Error!!Foreign born; Born in Northern America!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Percent of civilian labor force",
-            "Margin of Error!!Foreign born; Born in Oceania!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed!!Percent of civilian labor force": "Margin of Error!!Foreign born; Born in Oceania!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Percent of civilian labor force",
             "Estimate!!Foreign-born; Born in Africa!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed!!Percent of civilian labor force": "Estimate!!Foreign-born; Born in Africa!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Percent of civilian labor force",
-            "Margin of Error!!Foreign-born; Born in Africa!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed!!Percent of civilian labor force": "Margin of Error!!Foreign-born; Born in Africa!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Percent of civilian labor force",
             "Estimate!!Foreign-born; Born in Northern America!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed!!Percent of civilian labor force": "Estimate!!Foreign-born; Born in Northern America!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Percent of civilian labor force",
-            "Margin of Error!!Foreign-born; Born in Northern America!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed!!Percent of civilian labor force": "Margin of Error!!Foreign-born; Born in Northern America!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Percent of civilian labor force",
             "Estimate!!Foreign-born; Born in Oceania!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed!!Percent of civilian labor force": "Estimate!!Foreign-born; Born in Oceania!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Percent of civilian labor force",
-            "Margin of Error!!Foreign-born; Born in Oceania!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed!!Percent of civilian labor force": "Margin of Error!!Foreign-born; Born in Oceania!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Percent of civilian labor force",
             "Foreign born; Born in Africa!!Estimate!!INCOME IN THE PAST 12 MONTHS (IN 2010 INFLATION-ADJUSTED DOLLARS)!!With earnings!!Mean earnings (dollars)": "Foreign born; Born in Africa!!Estimate!!INCOME IN THE PAST 12 MONTHS (IN 2010 INFLATION-ADJUSTED DOLLARS)!!Mean earnings (dollars)",
             "Foreign born; Born in Africa!!Margin of Error!!INCOME IN THE PAST 12 MONTHS (IN 2010 INFLATION-ADJUSTED DOLLARS)!!With earnings!!Mean earnings (dollars)": "Foreign born; Born in Africa!!Margin of Error!!INCOME IN THE PAST 12 MONTHS (IN 2010 INFLATION-ADJUSTED DOLLARS)!!Mean earnings (dollars)",
             "Foreign born; Born in Northern America!!Estimate!!INCOME IN THE PAST 12 MONTHS (IN 2010 INFLATION-ADJUSTED DOLLARS)!!With earnings!!Mean earnings (dollars)": "Foreign born; Born in Northern America!!Estimate!!INCOME IN THE PAST 12 MONTHS (IN 2010 INFLATION-ADJUSTED DOLLARS)!!Mean earnings (dollars)",
@@ -1226,6 +1211,24 @@
         "Margin of Error!!Foreign-born; Born in Northern America!!Occupied housing units!!HOUSING TENURE!!Owner-occupied housing units",
         "Estimate!!Foreign-born; Born in Oceania!!Occupied housing units!!HOUSING TENURE!!Owner-occupied housing units",
         "Margin of Error!!Foreign-born; Born in Oceania!!Occupied housing units!!HOUSING TENURE!!Owner-occupied housing units",
+        "Foreign born; Born in Africa!!Margin of Error!!EMPLOYMENT STATUS!!In labor force!!Civilian labor force!!Unemployed!!Percent of civilian labor force",
+        "Foreign born; Born in Northern America!!Margin of Error!!EMPLOYMENT STATUS!!In labor force!!Civilian labor force!!Unemployed!!Percent of civilian labor force",
+        "Foreign born; Born in Oceania!!Margin of Error!!EMPLOYMENT STATUS!!In labor force!!Civilian labor force!!Unemployed!!Percent of civilian labor force",
+        "Foreign born; Born in Africa!!Margin of Error!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed!!Percent of civilian labor force",
+        "Foreign born; Born in Northern America!!Margin of Error!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed!!Percent of civilian labor force",
+        "Foreign born; Born in Oceania!!Margin of Error!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed!!Percent of civilian labor force",
+        "Margin of Error!!Foreign born; Born in Africa MOE!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed!!Percent of civilian labor force",
+        "Margin of Error!!Foreign born; Born in Northern America MOE!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed!!Percent of civilian labor force",
+        "Margin of Error!!Foreign born; Born in Oceania MOE!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed!!Percent of civilian labor force",
+        "Margin of Error!!Foreign born; Born in Africa!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed!!Percent of civilian labor force",
+        "Margin of Error!!Foreign born; Born in Northern America!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed!!Percent of civilian labor force",
+        "Margin of Error!!Foreign born; Born in Oceania!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed!!Percent of civilian labor force",
+        "Margin of Error!!Foreign-born; Born in Africa!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed!!Percent of civilian labor force",
+        "Margin of Error!!Foreign-born; Born in Northern America!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed!!Percent of civilian labor force",
+        "Margin of Error!!Foreign-born; Born in Oceania!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed!!Percent of civilian labor force",
+        "Margin of Error!!Foreign-born; Born in Africa MOE!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed!!Percent of civilian labor force",
+        "Margin of Error!!Foreign-born; Born in Northern America MOE!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed!!Percent of civilian labor force",
+        "Margin of Error!!Foreign-born; Born in Oceania MOE!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed!!Percent of civilian labor force",
         "Employed"
     ],
     "denominators": {
@@ -1342,7 +1345,11 @@
             "Estimate!!Foreign-born; Born in Africa!!MARITAL STATUS!!Population 15 years and over!!Divorced or separated",
             "Margin of Error!!Foreign-born; Born in Africa!!MARITAL STATUS!!Population 15 years and over!!Divorced or separated",
             "Estimate!!Foreign-born; Born in Africa!!MARITAL STATUS!!Population 15 years and over!!Widowed",
-            "Margin of Error!!Foreign-born; Born in Africa!!MARITAL STATUS!!Population 15 years and over!!Widowed"
+            "Margin of Error!!Foreign-born; Born in Africa!!MARITAL STATUS!!Population 15 years and over!!Widowed",
+            "Margin of Error!!Foreign-born; Born in Africa MOE!!MARITAL STATUS!!Population 15 years and over!!Never married",
+            "Margin of Error!!Foreign-born; Born in Africa MOE!!MARITAL STATUS!!Population 15 years and over!!Now married, except separated",
+            "Margin of Error!!Foreign-born; Born in Africa MOE!!MARITAL STATUS!!Population 15 years and over!!Divorced or separated",
+            "Margin of Error!!Foreign-born; Born in Africa MOE!!MARITAL STATUS!!Population 15 years and over!!Widowed"
         ],
         "Estimate!!Foreign-born; Born in Africa!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school": [
             "Estimate!!Foreign-born; Born in Africa!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school!!Nursery school, preschool",
@@ -1859,7 +1866,11 @@
             "Estimate!!Foreign-born; Born in Northern America!!MARITAL STATUS!!Population 15 years and over!!Divorced or separated",
             "Margin of Error!!Foreign-born; Born in Northern America!!MARITAL STATUS!!Population 15 years and over!!Divorced or separated",
             "Estimate!!Foreign-born; Born in Northern America!!MARITAL STATUS!!Population 15 years and over!!Widowed",
-            "Margin of Error!!Foreign-born; Born in Northern America!!MARITAL STATUS!!Population 15 years and over!!Widowed"
+            "Margin of Error!!Foreign-born; Born in Northern America!!MARITAL STATUS!!Population 15 years and over!!Widowed",
+            "Margin of Error!!Foreign-born; Born in Northern America MOE!!MARITAL STATUS!!Population 15 years and over!!Never married",
+            "Margin of Error!!Foreign-born; Born in Northern America MOE!!MARITAL STATUS!!Population 15 years and over!!Now married, except separated",
+            "Margin of Error!!Foreign-born; Born in Northern America MOE!!MARITAL STATUS!!Population 15 years and over!!Divorced or separated",
+            "Margin of Error!!Foreign-born; Born in Northern America MOE!!MARITAL STATUS!!Population 15 years and over!!Widowed"
         ],
         "Estimate!!Foreign-born; Born in Northern America!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school": [
             "Estimate!!Foreign-born; Born in Northern America!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school!!Nursery school, preschool",
@@ -2376,7 +2387,11 @@
             "Estimate!!Foreign-born; Born in Oceania!!MARITAL STATUS!!Population 15 years and over!!Divorced or separated",
             "Margin of Error!!Foreign-born; Born in Oceania!!MARITAL STATUS!!Population 15 years and over!!Divorced or separated",
             "Estimate!!Foreign-born; Born in Oceania!!MARITAL STATUS!!Population 15 years and over!!Widowed",
-            "Margin of Error!!Foreign-born; Born in Oceania!!MARITAL STATUS!!Population 15 years and over!!Widowed"
+            "Margin of Error!!Foreign-born; Born in Oceania!!MARITAL STATUS!!Population 15 years and over!!Widowed",
+            "Margin of Error!!Foreign-born; Born in Oceania MOE!!MARITAL STATUS!!Population 15 years and over!!Never married",
+            "Margin of Error!!Foreign-born; Born in Oceania MOE!!MARITAL STATUS!!Population 15 years and over!!Now married, except separated",
+            "Margin of Error!!Foreign-born; Born in Oceania MOE!!MARITAL STATUS!!Population 15 years and over!!Divorced or separated",
+            "Margin of Error!!Foreign-born; Born in Oceania MOE!!MARITAL STATUS!!Population 15 years and over!!Widowed"
         ],
         "Estimate!!Foreign-born; Born in Oceania!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school": [
             "Estimate!!Foreign-born; Born in Oceania!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school!!Nursery school, preschool",
@@ -2780,16 +2795,6 @@
             "Margin of Error!!Foreign-born; Born in Oceania MOE!!Renter-occupied housing units!!GROSS RENT AS A PERCENTAGE OF HOUSEHOLD INCOME IN THE PAST 12 MONTHS!!Less than 30 percent",
             "Margin of Error!!Foreign-born; Born in Oceania MOE!!Renter-occupied housing units!!GROSS RENT AS A PERCENTAGE OF HOUSEHOLD INCOME IN THE PAST 12 MONTHS!!30 percent or more"
         ],
-        "Estimate!!Foreign-born; Born in Africa!!MARITAL STATUS!!Population 15 years and over": [
-            "Estimate!!Foreign-born; Born in Africa!!MARITAL STATUS!!Population 15 years and over!!Never married",
-            "Margin of Error!!Foreign-born; Born in Africa MOE!!MARITAL STATUS!!Population 15 years and over!!Never married",
-            "Estimate!!Foreign-born; Born in Africa!!MARITAL STATUS!!Population 15 years and over!!Now married, except separated",
-            "Margin of Error!!Foreign-born; Born in Africa MOE!!MARITAL STATUS!!Population 15 years and over!!Now married, except separated",
-            "Estimate!!Foreign-born; Born in Africa!!MARITAL STATUS!!Population 15 years and over!!Divorced or separated",
-            "Margin of Error!!Foreign-born; Born in Africa MOE!!MARITAL STATUS!!Population 15 years and over!!Divorced or separated",
-            "Estimate!!Foreign-born; Born in Africa!!MARITAL STATUS!!Population 15 years and over!!Widowed",
-            "Margin of Error!!Foreign-born; Born in Africa MOE!!MARITAL STATUS!!Population 15 years and over!!Widowed"
-        ],
         "Estimate!!Foreign-born; Born in Africa!!EARNINGS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS) FOR FULL-TIME, YEAR-ROUND WORKERS!!Population 16 years and over with earnings": [
             "Estimate!!Foreign-born; Born in Africa!!EARNINGS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS) FOR FULL-TIME, YEAR-ROUND WORKERS!!Population 16 years and over with earnings!!$1 to $9,999 or loss",
             "Margin of Error!!Foreign-born; Born in Africa MOE!!EARNINGS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS) FOR FULL-TIME, YEAR-ROUND WORKERS!!Population 16 years and over with earnings!!$1 to $9,999 or loss",
@@ -2820,16 +2825,6 @@
             "Estimate!!Foreign-born; Born in Africa!!INCOME IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Households!!With Food Stamp/SNAP benefits",
             "Margin of Error!!Foreign-born; Born in Africa MOE!!INCOME IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Households!!With Food Stamp/SNAP benefits"
         ],
-        "Estimate!!Foreign-born; Born in Northern America!!MARITAL STATUS!!Population 15 years and over": [
-            "Estimate!!Foreign-born; Born in Northern America!!MARITAL STATUS!!Population 15 years and over!!Never married",
-            "Margin of Error!!Foreign-born; Born in Northern America MOE!!MARITAL STATUS!!Population 15 years and over!!Never married",
-            "Estimate!!Foreign-born; Born in Northern America!!MARITAL STATUS!!Population 15 years and over!!Now married, except separated",
-            "Margin of Error!!Foreign-born; Born in Northern America MOE!!MARITAL STATUS!!Population 15 years and over!!Now married, except separated",
-            "Estimate!!Foreign-born; Born in Northern America!!MARITAL STATUS!!Population 15 years and over!!Divorced or separated",
-            "Margin of Error!!Foreign-born; Born in Northern America MOE!!MARITAL STATUS!!Population 15 years and over!!Divorced or separated",
-            "Estimate!!Foreign-born; Born in Northern America!!MARITAL STATUS!!Population 15 years and over!!Widowed",
-            "Margin of Error!!Foreign-born; Born in Northern America MOE!!MARITAL STATUS!!Population 15 years and over!!Widowed"
-        ],
         "Estimate!!Foreign-born; Born in Northern America!!EARNINGS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS) FOR FULL-TIME, YEAR-ROUND WORKERS!!Population 16 years and over with earnings": [
             "Estimate!!Foreign-born; Born in Northern America!!EARNINGS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS) FOR FULL-TIME, YEAR-ROUND WORKERS!!Population 16 years and over with earnings!!$1 to $9,999 or loss",
             "Margin of Error!!Foreign-born; Born in Northern America MOE!!EARNINGS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS) FOR FULL-TIME, YEAR-ROUND WORKERS!!Population 16 years and over with earnings!!$1 to $9,999 or loss",
@@ -2859,16 +2854,6 @@
             "Margin of Error!!Foreign-born; Born in Northern America MOE!!INCOME IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Households!!With retirement income",
             "Estimate!!Foreign-born; Born in Northern America!!INCOME IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Households!!With Food Stamp/SNAP benefits",
             "Margin of Error!!Foreign-born; Born in Northern America MOE!!INCOME IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Households!!With Food Stamp/SNAP benefits"
-        ],
-        "Estimate!!Foreign-born; Born in Oceania!!MARITAL STATUS!!Population 15 years and over": [
-            "Estimate!!Foreign-born; Born in Oceania!!MARITAL STATUS!!Population 15 years and over!!Never married",
-            "Margin of Error!!Foreign-born; Born in Oceania MOE!!MARITAL STATUS!!Population 15 years and over!!Never married",
-            "Estimate!!Foreign-born; Born in Oceania!!MARITAL STATUS!!Population 15 years and over!!Now married, except separated",
-            "Margin of Error!!Foreign-born; Born in Oceania MOE!!MARITAL STATUS!!Population 15 years and over!!Now married, except separated",
-            "Estimate!!Foreign-born; Born in Oceania!!MARITAL STATUS!!Population 15 years and over!!Divorced or separated",
-            "Margin of Error!!Foreign-born; Born in Oceania MOE!!MARITAL STATUS!!Population 15 years and over!!Divorced or separated",
-            "Estimate!!Foreign-born; Born in Oceania!!MARITAL STATUS!!Population 15 years and over!!Widowed",
-            "Margin of Error!!Foreign-born; Born in Oceania MOE!!MARITAL STATUS!!Population 15 years and over!!Widowed"
         ],
         "Estimate!!Foreign-born; Born in Oceania!!EARNINGS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS) FOR FULL-TIME, YEAR-ROUND WORKERS!!Population 16 years and over with earnings": [
             "Estimate!!Foreign-born; Born in Oceania!!EARNINGS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS) FOR FULL-TIME, YEAR-ROUND WORKERS!!Population 16 years and over with earnings!!$1 to $9,999 or loss",
@@ -3103,7 +3088,11 @@
             "Estimate!!Foreign born; Born in Africa!!MARITAL STATUS!!Population 15 years and over!!Divorced or separated",
             "Margin of Error!!Foreign born; Born in Africa!!MARITAL STATUS!!Population 15 years and over!!Divorced or separated",
             "Estimate!!Foreign born; Born in Africa!!MARITAL STATUS!!Population 15 years and over!!Widowed",
-            "Margin of Error!!Foreign born; Born in Africa!!MARITAL STATUS!!Population 15 years and over!!Widowed"
+            "Margin of Error!!Foreign born; Born in Africa!!MARITAL STATUS!!Population 15 years and over!!Widowed",
+            "Margin of Error!!Foreign born; Born in Africa MOE!!MARITAL STATUS!!Population 15 years and over!!Never married",
+            "Margin of Error!!Foreign born; Born in Africa MOE!!MARITAL STATUS!!Population 15 years and over!!Now married, except separated",
+            "Margin of Error!!Foreign born; Born in Africa MOE!!MARITAL STATUS!!Population 15 years and over!!Divorced or separated",
+            "Margin of Error!!Foreign born; Born in Africa MOE!!MARITAL STATUS!!Population 15 years and over!!Widowed"
         ],
         "Estimate!!Foreign born; Born in Africa!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school": [
             "Estimate!!Foreign born; Born in Africa!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school!!Nursery school, preschool",
@@ -3590,7 +3579,11 @@
             "Estimate!!Foreign born; Born in Northern America!!MARITAL STATUS!!Population 15 years and over!!Divorced or separated",
             "Margin of Error!!Foreign born; Born in Northern America!!MARITAL STATUS!!Population 15 years and over!!Divorced or separated",
             "Estimate!!Foreign born; Born in Northern America!!MARITAL STATUS!!Population 15 years and over!!Widowed",
-            "Margin of Error!!Foreign born; Born in Northern America!!MARITAL STATUS!!Population 15 years and over!!Widowed"
+            "Margin of Error!!Foreign born; Born in Northern America!!MARITAL STATUS!!Population 15 years and over!!Widowed",
+            "Margin of Error!!Foreign born; Born in Northern America MOE!!MARITAL STATUS!!Population 15 years and over!!Never married",
+            "Margin of Error!!Foreign born; Born in Northern America MOE!!MARITAL STATUS!!Population 15 years and over!!Now married, except separated",
+            "Margin of Error!!Foreign born; Born in Northern America MOE!!MARITAL STATUS!!Population 15 years and over!!Divorced or separated",
+            "Margin of Error!!Foreign born; Born in Northern America MOE!!MARITAL STATUS!!Population 15 years and over!!Widowed"
         ],
         "Estimate!!Foreign born; Born in Northern America!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school": [
             "Estimate!!Foreign born; Born in Northern America!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school!!Nursery school, preschool",
@@ -4077,7 +4070,11 @@
             "Estimate!!Foreign born; Born in Oceania!!MARITAL STATUS!!Population 15 years and over!!Divorced or separated",
             "Margin of Error!!Foreign born; Born in Oceania!!MARITAL STATUS!!Population 15 years and over!!Divorced or separated",
             "Estimate!!Foreign born; Born in Oceania!!MARITAL STATUS!!Population 15 years and over!!Widowed",
-            "Margin of Error!!Foreign born; Born in Oceania!!MARITAL STATUS!!Population 15 years and over!!Widowed"
+            "Margin of Error!!Foreign born; Born in Oceania!!MARITAL STATUS!!Population 15 years and over!!Widowed",
+            "Margin of Error!!Foreign born; Born in Oceania MOE!!MARITAL STATUS!!Population 15 years and over!!Never married",
+            "Margin of Error!!Foreign born; Born in Oceania MOE!!MARITAL STATUS!!Population 15 years and over!!Now married, except separated",
+            "Margin of Error!!Foreign born; Born in Oceania MOE!!MARITAL STATUS!!Population 15 years and over!!Divorced or separated",
+            "Margin of Error!!Foreign born; Born in Oceania MOE!!MARITAL STATUS!!Population 15 years and over!!Widowed"
         ],
         "Estimate!!Foreign born; Born in Oceania!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school": [
             "Estimate!!Foreign born; Born in Oceania!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school!!Nursery school, preschool",
@@ -4451,16 +4448,6 @@
             "Margin of Error!!Foreign born; Born in Oceania MOE!!Renter-occupied housing units!!GROSS RENT AS A PERCENTAGE OF HOUSEHOLD INCOME IN THE PAST 12 MONTHS!!Less than 30 percent",
             "Margin of Error!!Foreign born; Born in Oceania MOE!!Renter-occupied housing units!!GROSS RENT AS A PERCENTAGE OF HOUSEHOLD INCOME IN THE PAST 12 MONTHS!!30 percent or more"
         ],
-        "Estimate!!Foreign born; Born in Africa!!MARITAL STATUS!!Population 15 years and over": [
-            "Estimate!!Foreign born; Born in Africa!!MARITAL STATUS!!Population 15 years and over!!Never married",
-            "Margin of Error!!Foreign born; Born in Africa MOE!!MARITAL STATUS!!Population 15 years and over!!Never married",
-            "Estimate!!Foreign born; Born in Africa!!MARITAL STATUS!!Population 15 years and over!!Now married, except separated",
-            "Margin of Error!!Foreign born; Born in Africa MOE!!MARITAL STATUS!!Population 15 years and over!!Now married, except separated",
-            "Estimate!!Foreign born; Born in Africa!!MARITAL STATUS!!Population 15 years and over!!Divorced or separated",
-            "Margin of Error!!Foreign born; Born in Africa MOE!!MARITAL STATUS!!Population 15 years and over!!Divorced or separated",
-            "Estimate!!Foreign born; Born in Africa!!MARITAL STATUS!!Population 15 years and over!!Widowed",
-            "Margin of Error!!Foreign born; Born in Africa MOE!!MARITAL STATUS!!Population 15 years and over!!Widowed"
-        ],
         "Estimate!!Foreign born; Born in Africa!!EARNINGS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS) FOR FULL-TIME, YEAR-ROUND WORKERS!!Population 16 years and over with earnings": [
             "Estimate!!Foreign born; Born in Africa!!EARNINGS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS) FOR FULL-TIME, YEAR-ROUND WORKERS!!Population 16 years and over with earnings!!$1 to $9,999 or loss",
             "Margin of Error!!Foreign born; Born in Africa MOE!!EARNINGS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS) FOR FULL-TIME, YEAR-ROUND WORKERS!!Population 16 years and over with earnings!!$1 to $9,999 or loss",
@@ -4491,16 +4478,6 @@
             "Estimate!!Foreign born; Born in Africa!!INCOME IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Households!!With Food Stamp/SNAP benefits",
             "Margin of Error!!Foreign born; Born in Africa MOE!!INCOME IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Households!!With Food Stamp/SNAP benefits"
         ],
-        "Estimate!!Foreign born; Born in Northern America!!MARITAL STATUS!!Population 15 years and over": [
-            "Estimate!!Foreign born; Born in Northern America!!MARITAL STATUS!!Population 15 years and over!!Never married",
-            "Margin of Error!!Foreign born; Born in Northern America MOE!!MARITAL STATUS!!Population 15 years and over!!Never married",
-            "Estimate!!Foreign born; Born in Northern America!!MARITAL STATUS!!Population 15 years and over!!Now married, except separated",
-            "Margin of Error!!Foreign born; Born in Northern America MOE!!MARITAL STATUS!!Population 15 years and over!!Now married, except separated",
-            "Estimate!!Foreign born; Born in Northern America!!MARITAL STATUS!!Population 15 years and over!!Divorced or separated",
-            "Margin of Error!!Foreign born; Born in Northern America MOE!!MARITAL STATUS!!Population 15 years and over!!Divorced or separated",
-            "Estimate!!Foreign born; Born in Northern America!!MARITAL STATUS!!Population 15 years and over!!Widowed",
-            "Margin of Error!!Foreign born; Born in Northern America MOE!!MARITAL STATUS!!Population 15 years and over!!Widowed"
-        ],
         "Estimate!!Foreign born; Born in Northern America!!EARNINGS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS) FOR FULL-TIME, YEAR-ROUND WORKERS!!Population 16 years and over with earnings": [
             "Estimate!!Foreign born; Born in Northern America!!EARNINGS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS) FOR FULL-TIME, YEAR-ROUND WORKERS!!Population 16 years and over with earnings!!$1 to $9,999 or loss",
             "Margin of Error!!Foreign born; Born in Northern America MOE!!EARNINGS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS) FOR FULL-TIME, YEAR-ROUND WORKERS!!Population 16 years and over with earnings!!$1 to $9,999 or loss",
@@ -4530,16 +4507,6 @@
             "Margin of Error!!Foreign born; Born in Northern America MOE!!INCOME IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Households!!With retirement income",
             "Estimate!!Foreign born; Born in Northern America!!INCOME IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Households!!With Food Stamp/SNAP benefits",
             "Margin of Error!!Foreign born; Born in Northern America MOE!!INCOME IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Households!!With Food Stamp/SNAP benefits"
-        ],
-        "Estimate!!Foreign born; Born in Oceania!!MARITAL STATUS!!Population 15 years and over": [
-            "Estimate!!Foreign born; Born in Oceania!!MARITAL STATUS!!Population 15 years and over!!Never married",
-            "Margin of Error!!Foreign born; Born in Oceania MOE!!MARITAL STATUS!!Population 15 years and over!!Never married",
-            "Estimate!!Foreign born; Born in Oceania!!MARITAL STATUS!!Population 15 years and over!!Now married, except separated",
-            "Margin of Error!!Foreign born; Born in Oceania MOE!!MARITAL STATUS!!Population 15 years and over!!Now married, except separated",
-            "Estimate!!Foreign born; Born in Oceania!!MARITAL STATUS!!Population 15 years and over!!Divorced or separated",
-            "Margin of Error!!Foreign born; Born in Oceania MOE!!MARITAL STATUS!!Population 15 years and over!!Divorced or separated",
-            "Estimate!!Foreign born; Born in Oceania!!MARITAL STATUS!!Population 15 years and over!!Widowed",
-            "Margin of Error!!Foreign born; Born in Oceania MOE!!MARITAL STATUS!!Population 15 years and over!!Widowed"
         ],
         "Estimate!!Foreign born; Born in Oceania!!EARNINGS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS) FOR FULL-TIME, YEAR-ROUND WORKERS!!Population 16 years and over with earnings": [
             "Estimate!!Foreign born; Born in Oceania!!EARNINGS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS) FOR FULL-TIME, YEAR-ROUND WORKERS!!Population 16 years and over with earnings!!$1 to $9,999 or loss",
