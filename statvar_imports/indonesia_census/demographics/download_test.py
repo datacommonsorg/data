@@ -712,8 +712,6 @@ class DownloadTest(unittest.TestCase):
 
     def test_request_bps_json_redacts_api_key_in_logs(self):
         api_key = 'super_secret_bps_key_999'
-        url = ('https://webapi.bps.go.id/v1/api/list/model/th/lang/ind/'
-               f'domain/0000/var/2790/page/1/key/{api_key}/')
         captured_messages: list[str] = []
 
         class _CaptureHandler(std_logging.Handler):
