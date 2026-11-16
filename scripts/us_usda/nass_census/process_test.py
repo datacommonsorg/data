@@ -95,7 +95,43 @@ class ProcessTest(unittest.TestCase):
             # Should have retried 3 times (2 sleeps)
             self.assertEqual(mock_sleep.call_count, 2)
 
-    def test_download_and_process_data_future_year_404_skip(self):
+    @mock.patch('builtins.open', new_callable=mock.mock_open)
+    def test_download_file_streaming_success(self, mock_open_file):
+        mock_response = mock.MagicMock()
+        mock_response.iter_content.return_value = [b'chunk1', b'', b'chunk2']
+        mock_session = mock.MagicMock()
+        mock_session.get.return_value = mock_response
+
+        process.download_file('https://example.com/test.gz',
+                              '/path/to/output.gz',
+                              session=mock_session)
+
+        mock_session.get.assert_called_once_with('https://example.com/test.gz',
+                                                 stream=True,
+                                                 timeout=120)
+        mock_response.raise_for_status.assert_called_once()
+        mock_open_file.assert_called_once_with('/path/to/output.gz', 'wb')
+        handle = mock_open_file()
+        handle.write.assert_has_calls(
+            [mock.call(b'chunk1'), mock.call(b'chunk2')])
+
+    def test_download_file_retries_and_raises(self):
+        mock_session = mock.MagicMock()
+        mock_session.get.side_effect = requests.RequestException(
+            'Network error')
+
+        with mock.patch('time.sleep') as mock_sleep:
+            with self.assertRaises(requests.RequestException):
+                process.download_file('https://example.com/test.gz',
+                                      '/path/to/output.gz',
+                                      session=mock_session)
+            # Should retry 3 times (2 sleeps)
+            self.assertEqual(mock_sleep.call_count, 2)
+            self.assertEqual(mock_session.get.call_count, 3)
+
+    @mock.patch('os.makedirs')
+    def test_download_and_process_data_future_year_404_skip(
+            self, mock_makedirs):
         mock_dt = mock.MagicMock()
         mock_dt.now.return_value = datetime(2027, 1, 1)
         with mock.patch.object(process, 'check_url_status', return_value=False), \
@@ -104,13 +140,17 @@ class ProcessTest(unittest.TestCase):
             result = process.download_and_process_data(2027, {})
             self.assertIsNone(result)
 
-    def test_download_and_process_data_historical_year_404_raises(self):
+    @mock.patch('os.makedirs')
+    def test_download_and_process_data_historical_year_404_raises(
+            self, mock_makedirs):
         with mock.patch.object(process, 'check_url_status', return_value=False):
             # Historical year 2022 should fail loudly
             with self.assertRaises(requests.HTTPError):
                 process.download_and_process_data(2022, {})
 
-    def test_download_and_process_data_overdue_year_404_raises(self):
+    @mock.patch('os.makedirs')
+    def test_download_and_process_data_overdue_year_404_raises(
+            self, mock_makedirs):
         mock_dt = mock.MagicMock()
         mock_dt.now.return_value = datetime(2030, 1, 1)
         with mock.patch.object(process, 'check_url_status', return_value=False), \
