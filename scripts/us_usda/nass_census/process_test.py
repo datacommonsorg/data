@@ -25,9 +25,11 @@ from absl import flags
 import requests
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(_SCRIPT_DIR)
+_REPO_ROOT = os.path.abspath(os.path.join(_SCRIPT_DIR, '..', '..', '..'))
+if _REPO_ROOT not in sys.path:
+    sys.path.insert(0, _REPO_ROOT)
 
-import process
+from scripts.us_usda.nass_census import process
 
 
 class ProcessTest(unittest.TestCase):
