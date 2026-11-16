@@ -16,10 +16,12 @@
 from datetime import datetime
 import logging
 import os
+
 from google.cloud import spanner
 from google.cloud.spanner_admin_database_v1 import DatabaseAdminClient
 from google.cloud.spanner_admin_database_v1.types import UpdateDatabaseDdlRequest
-from google.cloud.spanner_v1.param_types import Array, INT64, STRING
+from google.cloud.spanner_v1.param_types import INT64
+from google.cloud.spanner_v1.param_types import STRING
 from google.cloud.spanner_v1.transaction import Transaction
 
 logging.getLogger().setLevel(logging.INFO)
@@ -50,7 +52,8 @@ class SpannerClient:
         status = params.get('status')
         latest_version = params.get('latest_version')
         next_refresh_str = params.get('next_refresh')
-        next_refresh = datetime.fromisoformat(next_refresh_str) if next_refresh_str else None
+        next_refresh = datetime.fromisoformat(
+            next_refresh_str) if next_refresh_str else None
         graph_path = params.get('graph_path')
         logging.info(f"Updating import summary in Spanner: {params}")
 
@@ -84,7 +87,8 @@ class SpannerClient:
         try:
             self.database.run_in_transaction(_record)
         except Exception as e:
-            logging.error(f'Error updating ImportSummary for {import_name}: {e}')
+            logging.error(
+                f'Error updating ImportSummary for {import_name}: {e}')
             raise
 
     def update_import_history(self,
@@ -109,7 +113,8 @@ class SpannerClient:
             data_volume: Optional data volume in bytes.
         """
         import_name = import_name.split(':')[-1]
-        logging.info(f"Updating ImportHistory for {import_name} to version {version}")
+        logging.info(
+            f"Updating ImportHistory for {import_name} to version {version}")
 
         def _record(transaction: Transaction):
             columns = [
@@ -129,7 +134,8 @@ class SpannerClient:
         try:
             self.database.run_in_transaction(_record)
         except Exception as e:
-            logging.error(f'Error updating ImportHistory for {import_name}: {e}')
+            logging.error(
+                f'Error updating ImportHistory for {import_name}: {e}')
             raise
 
     def get_import_history(self,
@@ -146,29 +152,31 @@ class SpannerClient:
                 ORDER BY UpdateTimestamp DESC
                 LIMIT @limit
             """
-            results = transaction.execute_sql(
-                sql_history,
-                params={
-                    'importName': short_name,
-                    'limit': limit,
-                    'status': status
-                },
-                param_types={
-                    'importName': STRING,
-                    'limit': INT64,
-                    'status': STRING
-                })
+            results = transaction.execute_sql(sql_history,
+                                              params={
+                                                  'importName': short_name,
+                                                  'limit': limit,
+                                                  'status': status
+                                              },
+                                              param_types={
+                                                  'importName': STRING,
+                                                  'limit': INT64,
+                                                  'status': STRING
+                                              })
             return [row[0] for row in results]
 
         try:
             return self.database.run_in_transaction(_query)
         except Exception as e:
-            logging.error(f"Error fetching version history for import '{short_name}': {e}")
+            logging.error(
+                f"Error fetching version history for import '{short_name}': {e}"
+            )
             return []
 
     def initialize_database(self):
         """Initializes the database by creating ImportSummary and ImportHistory tables if missing."""
-        logging.info("Checking database for ImportSummary and ImportHistory tables...")
+        logging.info(
+            "Checking database for ImportSummary and ImportHistory tables...")
         query = "SELECT table_name FROM information_schema.tables WHERE table_schema = ''"
         existing_tables = []
         with self.database.snapshot() as snapshot:
@@ -177,20 +185,28 @@ class SpannerClient:
                 existing_tables.append(row[0])
 
         required_tables = ["ImportSummary", "ImportHistory"]
-        missing_tables = [t for t in required_tables if t not in existing_tables]
+        missing_tables = [
+            t for t in required_tables if t not in existing_tables
+        ]
 
         if not missing_tables:
-            logging.info("ImportSummary and ImportHistory tables already exist.")
+            logging.info(
+                "ImportSummary and ImportHistory tables already exist.")
             return
 
-        logging.info(f"Missing tables: {missing_tables}. Initializing schema from schema.sql...")
+        logging.info(
+            f"Missing tables: {missing_tables}. Initializing schema from schema.sql..."
+        )
         schema_path = os.path.join(os.path.dirname(__file__), 'schema.sql')
         with open(schema_path, 'r') as f:
             schema_content = f.read()
 
         cleaned_statements = []
         for raw_stmt in schema_content.split(';'):
-            lines = [l for l in raw_stmt.splitlines() if not l.strip().startswith('--')]
+            lines = [
+                l for l in raw_stmt.splitlines()
+                if not l.strip().startswith('--')
+            ]
             cleaned = '\n'.join(lines).strip()
             if cleaned:
                 cleaned_statements.append(cleaned)
@@ -203,10 +219,8 @@ class SpannerClient:
 
         if statements_to_run:
             admin_client = DatabaseAdminClient()
-            request = UpdateDatabaseDdlRequest(
-                database=self.database.name,
-                statements=statements_to_run
-            )
+            request = UpdateDatabaseDdlRequest(database=self.database.name,
+                                               statements=statements_to_run)
             operation = admin_client.update_database_ddl(request=request)
             operation.result()
             logging.info(f"Successfully created tables: {missing_tables}")
