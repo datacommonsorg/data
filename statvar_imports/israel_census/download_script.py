@@ -250,6 +250,8 @@ def fetch_cbs_series_raw_csv(
                 header_line = raw_lines[0]
             text = content.decode('utf-8-sig', errors='replace')
             page_sids: set[str] = set()
+            page_current = page
+            page_last = 1
             for idx, row in enumerate(csv.DictReader(io.StringIO(text)),
                                       start=1):
                 sid = (row.get('id') or row.get('series_id') or '').strip()
@@ -257,6 +259,12 @@ def fetch_cbs_series_raw_csv(
                           '').strip()
                 t_period = (row.get('obs_time_period') or
                             row.get('time_period') or '').strip()
+                cur_str = (row.get('page_current_page') or '').strip()
+                last_str = (row.get('page_last_page') or '').strip()
+                if cur_str.isdigit():
+                    page_current = int(cur_str)
+                if last_str.isdigit():
+                    page_last = int(last_str)
                 if sid:
                     page_sids.add(sid)
                     if t_name in ('', 'Year') and t_period:
@@ -283,7 +291,7 @@ def fetch_cbs_series_raw_csv(
             else:
                 if len(raw_lines) > 1:
                     page_contents.append(b''.join(raw_lines[1:]))
-            if len(page_sids) < page_size:
+            if page_current >= page_last or len(page_sids) < page_size:
                 break
             page += 1
 

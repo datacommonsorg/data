@@ -75,7 +75,7 @@
       "validator": "SQL_VALIDATOR",
       "params": {
         "query": "SELECT StatVar, MaxDate, MinValue, MaxValue, NumPlaces, COUNT(*) OVER () AS total_svs FROM stats WHERE StatVar IN ('Count_Person', 'Count_Person_Judaism', 'Count_Person_Arab', 'Count_Person_CBSIsraelNonJudaismOrNonArabChristianOrNoReligion') OR regexp_matches(StatVar, '^Count_(BirthEvent|MortalityEvent)')",
-        "condition": "total_svs = 47 AND NumPlaces >= 1 AND MinValue >= 0 AND ((regexp_matches(StatVar, '_AsAFractionOf_') AND CAST(MaxDate AS INTEGER) >= (EXTRACT(YEAR FROM CURRENT_DATE) - 4)) OR (regexp_matches(StatVar, '^Count_BirthEvent_') AND CAST(MaxDate AS INTEGER) >= (EXTRACT(YEAR FROM CURRENT_DATE) - 3)) OR (NOT regexp_matches(StatVar, '_AsAFractionOf_|^Count_BirthEvent_') AND CAST(MaxDate AS INTEGER) >= (EXTRACT(YEAR FROM CURRENT_DATE) - 2)))"
+        "condition": "total_svs = 47 AND NumPlaces >= 1 AND MinValue >= 0 AND ((regexp_matches(StatVar, '_AsAFractionOf_') AND CAST(MaxDate AS INTEGER) >= (EXTRACT(YEAR FROM CURRENT_DATE) - 5)) OR (regexp_matches(StatVar, '^Count_BirthEvent_') AND CAST(MaxDate AS INTEGER) >= (EXTRACT(YEAR FROM CURRENT_DATE) - 4)) OR (NOT regexp_matches(StatVar, '_AsAFractionOf_|^Count_BirthEvent_') AND CAST(MaxDate AS INTEGER) >= (EXTRACT(YEAR FROM CURRENT_DATE) - 3)))"
       }
     },
     {
