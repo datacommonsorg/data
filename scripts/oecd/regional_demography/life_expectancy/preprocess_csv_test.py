@@ -12,15 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import unittest
 import os
-import pandas as pd
-import tempfile
 import sys
+import tempfile
+import unittest
 
 MODULE_DIR = os.path.dirname(__file__)
 sys.path.insert(0, MODULE_DIR)
-from preprocess_csv import process_data, generate_tmcf
+from preprocess_csv import generate_tmcf
+from preprocess_csv import process_data
 
 sys.path.insert(1, os.path.join(MODULE_DIR, '../'))
 from download import download_data_to_file_and_df

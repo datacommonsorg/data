@@ -14,13 +14,12 @@
 """A simple script to download existing Facilities in Data Commons."""
 
 import os
-import sys
 from pathlib import Path
-
-import pandas as pd
+import sys
 
 from absl import app
 from absl import flags
+import pandas as pd
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 if str(REPO_ROOT) not in sys.path:

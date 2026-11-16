@@ -13,7 +13,6 @@
 # limitations under the License.
 """EIA Coal Dataset specific functions."""
 
-from absl import logging
 import re
 
 from . import common

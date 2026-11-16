@@ -14,20 +14,28 @@
 """Import USDA Census of Agriculture."""
 
 import csv
-import io
-import os
-import sys
-import requests
-import gzip
-import shutil
 from datetime import datetime
-from absl import app, flags, logging
+import gzip
+import os
+import shutil
+import sys
+
+from absl import app
+from absl import flags
+from absl import logging
+import requests
 from retry import retry
 
 # Define flags
 _FLAGS = flags.FLAGS
-flags.DEFINE_string('output', 'output/agriculture.csv', 'Output CSV file')
-flags.DEFINE_string('mode', '', 'Mode to run: "download", "process", or both')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('output', 'output/agriculture.csv', 'Output CSV file')
+    flags.DEFINE_string('mode', '',
+                        'Mode to run: "download", "process", or both')
+
 
 # Constants
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -233,4 +241,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

@@ -14,12 +14,9 @@
 
 import json
 import os
-import pandas as pd
 import unittest
 
-from pandas.testing import assert_frame_equal
 from tools.import_differ import import_differ
-from tools.import_differ import differ_utils
 
 module_dir = os.path.dirname(__file__)
 

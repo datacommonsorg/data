@@ -18,6 +18,7 @@
 # pylint: disable=missing-function-docstring
 
 from __future__ import absolute_import
+
 import unittest
 
 from util import mcf_template_filler

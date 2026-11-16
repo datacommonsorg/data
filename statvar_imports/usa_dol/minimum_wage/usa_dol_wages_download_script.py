@@ -11,29 +11,30 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 '''
 This script downloads historical minimum wage data from the U.S. Department of Labor website.
 '''
 # Import necessary libraries
-import os
 import csv
-import requests
-import pandas as pd
+import os
+
 from absl import logging
 from bs4 import BeautifulSoup
+import pandas as pd
+import requests
 from retry import retry
 
 # URL of the data source
 url = "https://www.dol.gov/agencies/whd/state/minimum-wage/history"
-source_folder = "source_files" # For raw downloaded files.
-input_folder = "input_files"   # For processed, final output files.
+source_folder = "source_files"  # For raw downloaded files.
+input_folder = "input_files"  # For processed, final output files.
 os.makedirs(source_folder, exist_ok=True)
 os.makedirs(input_folder, exist_ok=True)
 file_path = os.path.join(source_folder, "raw_data.html")
 file_path2 = os.path.join(source_folder, "raw_data.csv")
 
-@retry(tries=5,delay=3,backoff=5)
+
+@retry(tries=5, delay=3, backoff=5)
 def download_with_retry(url):
     """
     Downloads content from a given URL with a retry mechanism.
@@ -53,9 +54,10 @@ def download_with_retry(url):
     """
     # Log the attempt to access the URL
     logging.info(f"Trying to access url : {url}")
-    response=requests.get(url)
+    response = requests.get(url)
     response.raise_for_status()
-    return response 
+    return response
+
 
 def extract_all_table_data(url):
     """
@@ -108,6 +110,7 @@ def extract_all_table_data(url):
     except requests.exceptions.RequestException as e:
         logging.fatal(f"Error fetching URL: {e}")
 
+
 def main():
     """
     Main function for data extraction, processing, and saving.
@@ -119,7 +122,6 @@ def main():
 
     # Check if table data was successfully extracted
     if all_tables_data:
-        all_dfs = []
         for index, table in enumerate(all_tables_data):
             if index == 0:
                 df = pd.DataFrame(table[1:], columns=table[0])
@@ -129,7 +131,9 @@ def main():
 
         transposed_df = df.transpose()
         transposed_df.to_csv('input_files/final_data.csv', header=False)
-if __name__ == "__main__" : 
+
+
+if __name__ == "__main__":
     # Set the logging verbosity to display info-level messages
     logging.set_verbosity(1)
     main()

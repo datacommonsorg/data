@@ -25,9 +25,10 @@ Usage: OPENSSL_CONF=openssl.cnf python3 download.py
 '''
 import csv
 import json
-import requests
 import os
 from xml.etree import ElementTree
+
+import requests
 
 PREFIX = '{http://www.SDMX.org/resources/SDMXML/schemas/v2_0/'
 

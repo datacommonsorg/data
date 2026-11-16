@@ -9,10 +9,12 @@ repository contracts and instructions take precedence.
   manifest contract, and verify that every referenced script and input exists.
 - Ensure `manifest.json` includes `node_mcf` under `import_inputs` pointing to
   generated schema/statvar MCF files (e.g., `output/*.mcf`).
-- Always retain downloaded source files in GCS via `source_files`, alongside
-  other operational artifacts (e.g., counter files from `--output_counters`,
-  `manifest.json`, or configs); do not confuse source artifacts with import
-  inputs.
+- Verify that `source_files` patterns cover every original file downloaded from
+  the source, including non-data files like HTML and PDF, rather than
+  sanitized copies, so each version keeps its raw source data in GCS for
+  debugging and source attribution. List other operational artifacts there too
+  (e.g., counter files from `--output_counters`, `manifest.json`, or configs);
+  do not confuse source artifacts with import inputs.
 - Add `cron_schedule`, `user_script_timeout`, and `resource_limits` only when
   the import needs scheduling or an override, and validate them when present.
 - Keep curator contacts valid without prescribing one fixed email value.
@@ -20,8 +22,9 @@ repository contracts and instructions take precedence.
 ## Documentation and organization
 
 - Document the source, dataset coverage, prerequisites, working directory,
-  download and processing steps, important files, testing, and refresh
-  procedure in `README.md`.
+  download and processing steps (including any custom preprocessing or
+  validation outside `stat_var_processor` and `validation_config.json`),
+  important files, testing, and refresh procedure in the import's `README.md`.
 - Preserve downloaded source files unchanged, and write transformed data to
   separate files.
 - Use consistent, descriptive names for new import files; prefer lowercase
@@ -29,6 +32,10 @@ repository contracts and instructions take precedence.
 - Keep test inputs and expected CSV or TMCF outputs clearly paired without
   requiring one universal test-directory layout.
 - Declare new dependencies in the repository-supported dependency file.
+- [rule-binary-files] Commit text files only; keep archives of any format,
+  pickles, and other binary files out of the PR unless they are stored
+  through Git LFS. Excel and PDF files are allowed only under `test_data/`;
+  tests that need an archive build it at run time from test fixtures.
 
 ## Execution and failure handling
 
@@ -44,8 +51,11 @@ repository contracts and instructions take precedence.
   output.
 - Make directory creation and repeated execution safe, and do not expose
   incomplete output as successful output.
-- Use structured logging for operational progress and failures; do not assume
-  that a logging severity terminates execution.
+- Use structured logging for operational progress and failures.
+- Raise an exception for unrecoverable errors and let it propagate; put the
+  details needed to debug it, such as the failed URL, file, or count, in its
+  message, which the job log prints. Flag `absl.logging.fatal()` on these
+  paths, since it aborts only under `app.run()`.
 
 ## Data transformation
 
@@ -56,27 +66,23 @@ repository contracts and instructions take precedence.
   StatisticalVariables and avoid creating duplicate statvar definitions.
 - Make aggregation, filtering, outlier handling, and date-range decisions
   explicit and testable; avoid arbitrary future-year cutoffs.
+- Retain non-numeric source placeholders (such as `-`) so `stat_var_processor`
+  can drop them, or filter out those observations explicitly; convert them to `0`
+  only when the source defines them as zero.
+- Normalize or match case-insensitively when checking source strings, and
+  check only strings needed to process the data.
 
 ## Import validation
 
-**CRITICAL: When `golden_summary_report.csv` or `validation_config.json` are present, you MUST rigorously enforce all validation and freshness rules defined in this section.**
-
+- Validate data with `validation_config.json` rules on `summary_report.csv` or
+  output files rather than custom Python validation scripts; when a check
+  cannot be expressed in `validation_config.json`, require a comment in the
+  script explaining why.
 - Configure `stat_var_processor` invocations with `--output_counters` to write
   counters to a file (e.g. under `counters/`), and ensure those counter files are
   included in the manifest's `source_files` so they are copied to GCS for
   validation.
-- Require explicit date validation in `validation_config.json` to ensure freshness
-  and date consistency across refreshes (since `golden_summary_report.csv`
-  intentionally excludes `MaxDate`):
-  - Read the latest accepted version from GCS:
-    `gcloud storage cat gs://<output_bucket>/<import_prefix>/latest_version.txt`
-    (use `datcom-prod-imports` by default).
-  - Read the latest summary report:
-    `gcloud storage cat gs://<output_bucket>/<import_prefix>/<latest_version>/input<N>/genmcf/summary_report.csv`
-  - Inspect the `MaxDate` column across all StatVars in that `summary_report.csv`:
-    - When `MaxDate` is uniform across StatVars, require `MAX_DATE_CONSISTENT`. If missing from `validation_config.json`, report a P2 finding.
-    - Require a date freshness check: use `MAX_DATE_LATEST` for current-year data, or a `SQL_VALIDATOR` rule verifying that `MaxDate` is within allowable lag (months/years) for the dataset's refresh schedule.
-    - For imports where StatVars have differing maximum dates across StatVars in `summary_report.csv`, require scoped `SQL_VALIDATOR` rules or per-StatVar checks instead of a blanket `MAX_DATE_CONSISTENT`.
+
 
 When reviewing `validation_config*.json` or a manifest change to
 `validation_config_file`, read:
@@ -84,6 +90,13 @@ When reviewing `validation_config*.json` or a manifest change to
 - [Import validation framework](../../../../tools/import_validation/README.md)
 - [Validation configuration and golden checks](../../../../tools/import_validation/Validations.md)
 - [Import artifact layout](../../../common/references/import-automation/artifact-layout.md)
+
+Then apply these rules:
+
+- Verify that each config meant for auto-refresh is set as
+  `validation_config_file` on its import specification in `manifest.json`, and
+  that the path exists relative to the import directory; otherwise auto-refresh
+  runs only the default validations.
 - Resolve local `GOLDENS_CHECK` paths relative to the validation config file
   passed to the runner, and verify that every `golden_files` path or glob
   matches at least one intended golden file.
@@ -91,14 +104,36 @@ When reviewing `validation_config*.json` or a manifest change to
   `<import>/<ImportName>/<version>/input<N>/validation/merged_validation_config.json`
   as the base. For example, reference `<import>/golden_data/golden_summary_report.csv`
   as `../../../../golden_data/golden_summary_report.csv`.
+- Require explicit date validation in `validation_config.json` to ensure freshness
+  and to catch refreshes that drop the latest data (since
+  `golden_summary_report.csv` intentionally excludes `MaxDate`):
+  - Read the latest accepted version from GCS:
+    `gcloud storage cat gs://<output_bucket>/<import_prefix>/latest_version.txt`
+    (use the bucket of the environment whose artifacts the PR, bug, or CL
+    links; `datcom-prod-imports` by default).
+  - Read the latest summary report:
+    `gcloud storage cat gs://<output_bucket>/<import_prefix>/<latest_version>/input<N>/genmcf/summary_report.csv`
+  - Inspect the `MaxDate` column across all StatVars in that `summary_report.csv`:
+    - Require a date freshness check: use `MAX_DATE_LATEST` for current-year data, or a `SQL_VALIDATOR` rule verifying that `MaxDate` is within allowable lag (months/years) for the dataset's refresh schedule.
+    - For imports where StatVars have differing maximum dates across StatVars in `summary_report.csv`, require scoped `SQL_VALIDATOR` rules or per-StatVar checks instead of a blanket `MAX_DATE_CONSISTENT`. If Per-StatVar checks get complicated (e.g. multiple sql conditions), prefer defining rules only for important StatVars.
 
 ## Download and processing reliability
 
+- Prefer the shared helpers in [util/](../../../../util/README.md) over new code that
+  does the same job, such as [mcf_dict_util.py](../../../../util/mcf_dict_util.py)
+  for reading, editing, and writing MCF, and
+  [file_util.py](../../../../util/file_util.py) or
+  [gcs_file.py](../../../../util/gcs_file.py) for local and GCS file operations.
 - Use the shared [Data Commons API wrapper](../../../../util/dc_api_wrapper.py)
   for Data Commons API calls unless it lacks the required functionality.
 - Use [download_util.py](../../../../util/download_util.py) or
   [download_util_script.py](../../../../util/download_util_script.py) for
   downloads unless both lack the required functionality.
+- Use [xml_to_json.py](../../../../util/xml_to_json.py) to convert XML source
+  files to JSON.
+- Use [sdmx_cli.py](../../../../tools/sdmx_import/sdmx_cli.py) for SDMX
+  downloads. When it lacks the required functionality, use the `sdmx1` library
+  it is built on instead of custom SDMX requests or parsing.
 - Log each outbound request's method, sanitized URL, query parameters, and
   request body. Redact credentials and sensitive data.
 - Consume every page from paginated sources.
@@ -111,6 +146,9 @@ When reviewing `validation_config*.json` or a manifest change to
   work across retries.
 - Publish outputs atomically so partial downloads or transformations cannot
   appear successful.
+- Download fresh data from the source on each run rather than reusing cached
+  files; for large downloads, reuse a cached file only when HTTP headers (such
+  as `ETag` or `Last-Modified`) confirm the source data is unchanged.
 
 ## Tests
 
@@ -118,3 +156,8 @@ When reviewing `validation_config*.json` or a manifest change to
   paths with representative fixtures.
 - Keep checked-in fixtures representative and generally no more than 100
   records.
+- Verify that every directory from the top-level import folder (`scripts/` or
+  `statvar_imports/`) down to each `*_test.py` file has an `__init__.py`, and
+  report a missing one as P1; `./run_tests.sh` uses `unittest discover`, which
+  skips directories without one, so those tests never run and the check still
+  passes.

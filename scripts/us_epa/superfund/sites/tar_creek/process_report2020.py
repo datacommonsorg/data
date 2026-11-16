@@ -18,10 +18,11 @@ Currently this script only supports the 6th five-year report of Tar Creek which 
 """
 import os
 import sys
-import tabula
-import pandas as pd
 
-from absl import app, flags
+from absl import app
+from absl import flags
+import pandas as pd
+import tabula
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -30,11 +31,17 @@ sys.path.append(os.path.join(_SCRIPT_PATH,
 from us_epa.util.superfund_vars import _TAR_CREEK_WELL_MAP
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('input_path', './data/tar_creek_reports/2020_TarCreek.pdf',
-                    'Path to the directory with the PDF for the pdf files.')
-flags.DEFINE_string(
-    'output_path', './data/output',
-    'Path to the directory where generated files are to be stored.')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        'input_path', './data/tar_creek_reports/2020_TarCreek.pdf',
+        'Path to the directory with the PDF for the pdf files.')
+    flags.DEFINE_string(
+        'output_path', './data/output',
+        'Path to the directory where generated files are to be stored.')
+
 
 # Curated map of strings and regex patterns to replace in the 2020 report
 _REPLACE_MAP = {
@@ -127,16 +134,13 @@ def process_2020_report(input_path: str,
             df[['temp', 'pH']] = df['Temo. DH'].str.split(n=1, expand=True)
 
             #replace the entires with start with '<' since the after splitting the column associated with the data is wrong.
-            df['Hardness Cadmium'].replace(to_replace=r'^<',
-                                           value='- <',
-                                           regex=True,
-                                           inplace=True)
+            df['Hardness Cadmium'] = df['Hardness Cadmium'].replace(
+                to_replace=r'^<', value='- <', regex=True)
             df[['Hardness',
                 'Cadmium']] = df['Hardness Cadmium'].str.split(n=1, expand=True)
-            df.drop(columns=[
+            df = df.drop(columns=[
                 'Unnamed: 0', 'Unnamed: 1', 'Temo. DH', 'Hardness Cadmium'
-            ],
-                    inplace=True)
+            ])
 
         if idx == 2:
             df = df.replace(to_replace=_REPLACE_MAP, regex=True)
@@ -147,9 +151,8 @@ def process_2020_report(input_path: str,
             df['observationDate'] = pd.to_datetime(
                 df['observationDate']).ffill()
             df[['temp', 'pH']] = df['Temp. pH'].str.split(n=1, expand=True)
-            df.drop(columns=['Unnamed: 0', 'Unnamed: 1', 'Temp. pH'],
-                    inplace=True)
-            df.rename(columns={'Su lfate': 'Sulfate'}, inplace=True)
+            df = df.drop(columns=['Unnamed: 0', 'Unnamed: 1', 'Temp. pH'])
+            df = df.rename(columns={'Su lfate': 'Sulfate'})
 
         if idx == 1:
             df = df[~df['Unnamed: 0'].str.contains('Averages')]
@@ -161,9 +164,8 @@ def process_2020_report(input_path: str,
             df['observationDate'] = pd.to_datetime(
                 df['observationDate']).ffill()
             df[['temp', 'pH']] = df['Temp. pH'].str.split(n=1, expand=True)
-            df.drop(columns=['Unnamed: 0', 'Unnamed: 1', 'Temp. pH'],
-                    inplace=True)
-            df.rename(columns={"0 .0 .": "D.O."}, inplace=True)
+            df = df.drop(columns=['Unnamed: 0', 'Unnamed: 1', 'Temp. pH'])
+            df = df.rename(columns={"0 .0 .": "D.O."})
 
         if idx == 0:
             df = df.replace(to_replace=_REPLACE_MAP, regex=True)
@@ -175,8 +177,7 @@ def process_2020_report(input_path: str,
                 df['observationDate']).ffill()
             df[['temp', 'pH']] = df['Temp. pH'].str.split(n=1, expand=True)
 
-            df.drop(columns=['Unnamed: 0', 'Unnamed: 1', 'Temp. pH'],
-                    inplace=True)
+            df = df.drop(columns=['Unnamed: 0', 'Unnamed: 1', 'Temp. pH'])
 
         df['observationAbout'] = _TAR_CREEK_WELL_MAP[extracted_well_name]
         df = df[columns]
@@ -195,4 +196,5 @@ def main(_) -> None:
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

@@ -12,10 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """Common data processing module for ACS Subject Tables"""
+import json
 import os
 import sys
-import json
 from zipfile import ZipFile
+
 from absl import logging
 import numpy as np
 import pandas as pd
@@ -430,10 +431,10 @@ class SubjectTableDataLoaderBase:
         ## write into the output tmcf
         tmcf_contents = '\n'.join(tmcf_contents)
         if not self.debug:
-            clean_csv.drop(columns=['Column'], inplace=True)
+            clean_csv = clean_csv.drop(columns=['Column'])
 
         ## update the csv by dropping empty column
-        clean_csv.drop(columns=empty_cols, inplace=True)
+        clean_csv = clean_csv.drop(columns=empty_cols)
         clean_csv.to_csv(self.clean_csv_path, index=False)
         return tmcf_contents
 

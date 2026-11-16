@@ -1,3 +1,5 @@
 parameter,value
 header_rows,1
-output_columns,"observationDate,observationAbout,variableMeasured,value,unit, scalingFactor"
+mapped_rows,1
+output_columns,"observationDate,observationAbout,variableMeasured,value"
+generate_statvar_name,True

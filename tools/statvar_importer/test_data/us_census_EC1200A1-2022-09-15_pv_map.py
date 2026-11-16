@@ -114,7 +114,6 @@
             "populationType": "dcs:USCEstablishment",
             "measuredProperty": "dcs:receiptsOrRevenue",
             "value": "{Number}",
-            "statType": "dcs:marginOfError",
             "MultiplyFactor": 1,
             "unit": "",
             "observationDate": "{Year}",

@@ -91,8 +91,20 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data="test
 This command validates the generated files for formatting and semantic consistency before ingestion.
 
 **Usage**:
+
+Lint takes one TMCF with its CSV files per run; `-o` sets the folder for the report (`report.json` and `summary_report.html`).
+
 ```bash
-java -jar /path/to/datacommons-import-tool.jar lint -d 'output/'
+java -jar /path/to/datacommons-import-tool.jar lint -o lint_report/2012 \
+  processed_output/crdc_harassment_or_bullying_2012*.csv \
+  processed_output/crdc_harassment_or_bullying_2012_part_01.tmcf \
+  processed_output/crdc_harassment_or_bullying_2012*.mcf
+for year in 2014 2018 2021 2022 2024Onwards; do
+  java -jar /path/to/datacommons-import-tool.jar lint -o lint_report/$year \
+    processed_output/crdc_harassment_or_bullying_${year}.csv \
+    processed_output/crdc_harassment_or_bullying_${year}.tmcf \
+    processed_output/crdc_harassment_or_bullying_${year}*.mcf
+done
 ```
 This step ensures that the generated artifacts are ready for ingestion into Data Commons.
 

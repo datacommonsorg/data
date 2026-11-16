@@ -15,21 +15,25 @@
 import sys
 
 sys.path.insert(1, '../../../../util')
-from six.moves import urllib
-from alpha2_to_dcid import COUNTRY_MAP
-from nuts_codes_names import NUTS1_CODES_NAMES
-import numpy as np
-import pandas as pd
-import io
 import csv
 import os
+
 from absl import app
-from absl import logging
 from absl import flags
+from absl import logging
+from alpha2_to_dcid import COUNTRY_MAP
+from nuts_codes_names import NUTS1_CODES_NAMES
+import pandas as pd
+from six.moves import urllib
 
 _FLAGS = flags.FLAGS
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
-flags.DEFINE_string('mode', '', 'Options: download or process')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('mode', '', 'Options: download or process')
+
 
 _OUTPUT_COLUMNS = [
     'Date',
@@ -71,7 +75,7 @@ def translate_wide_to_long(file_path):
         logging.info('Transforming data: wide to long.. ')
         df = pd.read_csv(file_path, delimiter='\t')
         df = df.rename(columns=({
-            'freq,unit,geo\TIME_PERIOD': 'unit,geo\\time'
+            r'freq,unit,geo\TIME_PERIOD': 'unit,geo\\time'
         }))
         df['unit,geo\\time'] = df['unit,geo\\time'].str.slice(2)
         header = list(df.columns.values)
@@ -88,7 +92,7 @@ def translate_wide_to_long(file_path):
         new = df[header[0]].str.split(",", n=1, expand=True)
         df['geo'] = new[1]
         df['unit'] = new[0]
-        df.drop(columns=[header[0]], inplace=True)
+        df = df.drop(columns=[header[0]])
         df['geo'] = df['geo'].apply(lambda geo: f'nuts/{geo}' if any(
             g.isdigit() for g in geo) or ('nuts/' + geo in NUTS1_CODES_NAMES)
                                     else COUNTRY_MAP.get(geo, f'{geo}'))
@@ -188,4 +192,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

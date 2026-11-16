@@ -15,8 +15,18 @@
 This Python Script is for State Level Data 2000-2010
 '''
 import os
+import sys
+
 import pandas as pd
-from common_functions import input_url, replace_agegrp
+
+_SCRIPTS_DIR = os.path.abspath(
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../'))
+if _SCRIPTS_DIR not in sys.path:
+    sys.path.append(_SCRIPTS_DIR)
+
+from us_census.pep.population_estimates_by_asr.common_functions import input_url
+from us_census.pep.population_estimates_by_asr.common_functions import replace_agegrp
+from us_census.pep.population_estimates_by_asr.process import load_url_or_path
 
 
 def state2000(url_file: str, output_folder: str):
@@ -25,13 +35,13 @@ def state2000(url_file: str, output_folder: str):
     cleans it and create a cleaned csv
     '''
     _url = input_url(url_file, "2000-10")
-    df = pd.read_csv(_url, encoding='ISO-8859-1')
+    df = pd.read_csv(load_url_or_path(_url), encoding='ISO-8859-1')
     #Writing raw data to csv
     df.to_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)),
                            "raw_data", 'raw_data_state_2000_2010.csv'),
               index=False)
     # Filtering the data needed.
-    df.drop(df[(df['RACE'] == 0) & (df['SEX'] == 0)].index, inplace=True)
+    df = df.drop(df[(df['RACE'] == 0) & (df['SEX'] == 0)].index)
     df = df.query("STATE != 0")
     df = df.query("AGEGRP != 0")
     df = df.query("ORIGIN == 0")
@@ -59,9 +69,8 @@ def state2000(url_file: str, output_folder: str):
     # Code 0 is sent if AGEGRP starts from 0 and 1 if it starts from 0To4
     df = replace_agegrp(df, 1)
     # Dropping unwanted columns.
-    df.drop(columns=['REGION','DIVISION', 'STATE', 'NAME', 'ORIGIN',\
-            'ESTIMATESBASE2000','CENSUS2010POP','POPESTIMATE2010'],\
-            inplace=True)
+    df = df.drop(columns=['REGION','DIVISION', 'STATE', 'NAME', 'ORIGIN',\
+            'ESTIMATESBASE2000','CENSUS2010POP','POPESTIMATE2010'],)
     df = df.melt(id_vars=['geo_ID','AGEGRP','SEX','RACE'], var_name='Year'\
             ,value_name='observation')
     # Making the years more understandable.

@@ -16,7 +16,9 @@
 import csv
 import io
 import unittest
-from process import get_statvars, write_csv
+
+from process import get_statvars
+from process import write_csv
 
 
 class ProcessTest(unittest.TestCase):

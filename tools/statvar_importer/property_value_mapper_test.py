@@ -13,13 +13,9 @@
 # limitations under the License.
 """Unit tests for property_value_mapper.py."""
 
-import unittest
-
 import os
 import sys
-
-from absl import app
-from absl import logging
+import unittest
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)

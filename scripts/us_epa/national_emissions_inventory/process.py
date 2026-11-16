@@ -16,6 +16,7 @@ This Python Script Load the datasets, cleans it
 and generates cleaned CSV, MCF, TMCF file.
 """
 
+import concurrent.futures
 import gc
 import os
 import shutil
@@ -23,34 +24,47 @@ import sys
 import time
 import traceback
 import uuid
-import concurrent.futures
-from absl import app, flags, logging
-import pandas as pd
+
+from absl import app
+from absl import flags
+from absl import logging
 import numpy as np
-from datetime import datetime
+import pandas as pd
 
 sys.path.insert(
     1, os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../'))
 
-from util.statvar_dcid_generator import get_statvar_dcid
-
 sys.path.insert(1, os.path.dirname(os.path.abspath(__file__)))
 
-from config import *
+from config import df_columns
+from config import drop_df
+from config import pollutants
+from config import replace_metadata
+from config import replace_source_metadata
+from config import replacement_08_11
+from config import replacement_14
+from config import replacement_17
+from config import replacement_20
+from config import replacement_point_17
+from config import replacement_tribes
 
 FLAGS = flags.FLAGS
 default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   'gcs_output')
-flags.DEFINE_string("intermediate_path",
-                    os.path.join(default_input_path, "intermediate_output"),
-                    "Path to save intermediate files.")
 
-flags.DEFINE_string("input_path", os.path.join(default_input_path,
-                                               "input_files"),
-                    "Import Data File's List")
-flags.DEFINE_string("output_path",
-                    os.path.join(default_input_path, "output_files"),
-                    "Path to save output files.")
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string("intermediate_path",
+                        os.path.join(default_input_path, "intermediate_output"),
+                        "Path to save intermediate files.")
+    flags.DEFINE_string("input_path",
+                        os.path.join(default_input_path, "input_files"),
+                        "Import Data File's List")
+    flags.DEFINE_string("output_path",
+                        os.path.join(default_input_path, "output_files"),
+                        "Path to save output files.")
+
 
 _MCF_TEMPLATE = ("Node: dcid:{statvar}\n"
                  "name: \"Annual Amount Emissions {statvar_name}\"\n"
@@ -124,7 +138,7 @@ class USAirEmissionTrends:
             df (pd.DataFrame): provides the regularized df as output
         """
         if '2008' in file_path or '2011' in file_path:
-            df.rename(columns=replacement_08_11, inplace=True)
+            df = df.rename(columns=replacement_08_11)
             df['pollutant type(s)'] = 'nan'
             if 'event' in file_path:
                 df['emissions type code'] = ''
@@ -140,7 +154,7 @@ class USAirEmissionTrends:
                 df['pollutant type(s)'] = 'nan'
             elif 'point_' in os.path.basename(
                     file_path) or 'facility_process' in file_path:
-                df.rename(columns=replacement_point_17, inplace=True)
+                df = df.rename(columns=replacement_point_17)
                 df['emissions type code'] = ''
             elif 'nonpoint' in file_path:
                 df['emissions type code'] = ''
@@ -150,23 +164,23 @@ class USAirEmissionTrends:
                 df['pollutant type(s)'] = 'nan'
             elif 'point_' in os.path.basename(
                     file_path) or 'facility_process' in file_path:
-                df.rename(columns=replacement_20, inplace=True)
+                df = df.rename(columns=replacement_20)
                 df['emissions type code'] = ''
             elif 'nonpoint' in file_path:
                 df['emissions type code'] = ''
             df['year'] = '2020'
         elif 'tribes' in file_path:
             if 'fips code' not in df.columns and 'tribal name' in df.columns:
-                df.rename(columns=replacement_tribes, inplace=True)
+                df = df.rename(columns=replacement_tribes)
                 df = self._data_standardize(df, 'fips code')
             else:
-                df.rename(columns=replacement_14, inplace=True)
+                df = df.rename(columns=replacement_14)
                 if 'event' in file_path or 'process' in file_path:
                     df['emissions type code'] = ''
             df['pollutant type(s)'] = 'nan'
             df['year'] = '2014'
         elif '2014' in file_path:
-            df.rename(columns=replacement_14, inplace=True)
+            df = df.rename(columns=replacement_14)
             if 'event' in file_path or 'process' in file_path:
                 df['emissions type code'] = ''
             df['pollutant type(s)'] = 'nan'
@@ -215,7 +229,7 @@ class USAirEmissionTrends:
                                                       regex=True).str.strip()
         df['scc'] = np.where(df['scc'].str.len() == 10, df['scc'].str[0:2],
                              df['scc'].str[0])
-        df.rename(columns=replacement_17, inplace=True)
+        df = df.rename(columns=replacement_17)
         df_pollutants = df[df['pollutant code'].isin(pollutants)]
         df_pollutants = self._data_standardize(df_pollutants, 'pollutant code')
         df['pollutant code'] = ''
@@ -246,7 +260,7 @@ class USAirEmissionTrends:
                 df = df.sort_values(by=[
                     'geo_Id', 'year', 'SV', 'Measurement_Method', 'observation'
                 ])
-                df.dropna(subset=['observation'], inplace=True)
+                df = df.dropna(subset=['observation'])
                 df['observation'] = np.where(df['unit'] == 'Pound',
                                              df['observation'] / 2000,
                                              df['observation'])
@@ -297,7 +311,7 @@ class USAirEmissionTrends:
 
             pollutant_name = ''
             pollutant_value = ''
-            if pollutant_start != None:
+            if pollutant_start is not None:
                 for i in sv_property[pollutant_start:-3]:
                     pollutant = pollutant + i + '_'
                 pollutant_value = '\nemittedThing: dcs:' + pollutant.rstrip('_')
@@ -360,7 +374,7 @@ class USAirEmissionTrends:
                 batch_concat = batch_concat.sort_values(by=[
                     'geo_Id', 'year', 'SV', 'Measurement_Method', 'observation'
                 ])
-                batch_concat.dropna(subset=['observation'], inplace=True)
+                batch_concat = batch_concat.dropna(subset=['observation'])
                 batch_concat['observation'] = np.where(
                     batch_concat['unit'] == 'Pound',
                     batch_concat['observation'] / 2000,
@@ -386,7 +400,7 @@ class USAirEmissionTrends:
 
         self.final_df = self.final_df.sort_values(
             by=['geo_Id', 'year', 'SV', 'Measurement_Method', 'observation'])
-        self.final_df.dropna(subset=['observation'], inplace=True)
+        self.final_df = self.final_df.dropna(subset=['observation'])
         self.final_df['observation'] = np.where(
             self.final_df['unit'] == 'Pound',
             self.final_df['observation'] / 2000, self.final_df['observation'])
@@ -518,4 +532,5 @@ def main(argv):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

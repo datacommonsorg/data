@@ -1,4 +1,5 @@
 parameter,value
 header_rows,3
-output_columns,"observationAbout,observationDate,variableMeasured,value,unit,observationPeriod"
+output_columns,"observationAbout,observationDate,variableMeasured,value"
 mapped_rows,3
+generate_schema_mcf,False

@@ -13,18 +13,20 @@
 # limitations under the License.
 """Tests for the ReportGenerator."""
 
-import unittest
+import json
 import os
 import sys
 import tempfile
+import unittest
+
 import pandas as pd
-import json
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, _SCRIPT_DIR)
 
 from report_generator import ReportGenerator
-from result import ValidationResult, ValidationStatus
+from result import ValidationResult
+from result import ValidationStatus
 
 
 class TestReportGenerator(unittest.TestCase):

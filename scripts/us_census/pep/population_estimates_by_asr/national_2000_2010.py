@@ -15,8 +15,18 @@
 This Python Script is for National Level Data 2000-2010.
 '''
 import os
+import sys
+
 import pandas as pd
-from common_functions import input_url, race_based_grouping
+
+_SCRIPTS_DIR = os.path.abspath(
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../'))
+if _SCRIPTS_DIR not in sys.path:
+    sys.path.append(_SCRIPTS_DIR)
+
+from us_census.pep.population_estimates_by_asr.common_functions import input_url
+from us_census.pep.population_estimates_by_asr.common_functions import race_based_grouping
+from us_census.pep.population_estimates_by_asr.process import load_url_or_path
 
 
 def national2000(url_file: str, output_folder: str):
@@ -27,7 +37,9 @@ def national2000(url_file: str, output_folder: str):
     # Getting input URL from the JSON file.
     _url = input_url(url_file, "2000-10")
     # Reading the csv format input file and converting it to a dataframe.
-    df = pd.read_csv(_url, encoding='ISO-8859-1', low_memory=False)
+    df = pd.read_csv(load_url_or_path(_url),
+                     encoding='ISO-8859-1',
+                     low_memory=False)
     #Writing raw data to csv
     df.to_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)),
                            "raw_data", 'national_2000_2010.csv'),
@@ -53,7 +65,7 @@ def national2000(url_file: str, output_folder: str):
     ])
     # Melt funtion used to change the Data frame format from wide to long.
     df['Year'] = df['YEAR']
-    df.drop(columns=['YEAR'], inplace=True)
+    df = df.drop(columns=['YEAR'])
     df = df.melt(id_vars=['Year','AGE'], var_name='sv' ,\
         value_name='observation')
     # Providing proper columns names.

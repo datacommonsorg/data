@@ -13,20 +13,28 @@
 # limitations under the License.
 """Generates GeoJSON MCF for Indian State and Districts."""
 
-import os
 import json
+import os
+
 from absl import app
 from absl import flags
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string('input_eu_01m_geojson', '',
-                    'Path to input files with 1:1 Million Eurostat geojson')
-flags.DEFINE_string('input_eu_10m_geojson', '',
-                    'Path to input files with 1:10 Million Eurostat geojson')
-flags.DEFINE_string('input_eu_20m_geojson', '',
-                    'Path to input files with 1:20 Million Eurostat geojson')
-flags.DEFINE_string('output_geojson_dir', '/tmp', 'Output directory path.')
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        'input_eu_01m_geojson', '',
+        'Path to input files with 1:1 Million Eurostat geojson')
+    flags.DEFINE_string(
+        'input_eu_10m_geojson', '',
+        'Path to input files with 1:10 Million Eurostat geojson')
+    flags.DEFINE_string(
+        'input_eu_20m_geojson', '',
+        'Path to input files with 1:20 Million Eurostat geojson')
+    flags.DEFINE_string('output_geojson_dir', '/tmp', 'Output directory path.')
+
 
 # Note1: When we emit geojson string, we use two json.dumps() so it
 # automatically escapes all inner quotes, and encloses the entire string in
@@ -100,4 +108,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

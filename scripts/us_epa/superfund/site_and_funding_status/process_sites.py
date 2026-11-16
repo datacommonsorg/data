@@ -22,25 +22,32 @@ This script processes data from two files namely:
 - ./data/401063.xlsx
   This file lists the different remedial actions carried out different superfund sites based on the contaminated media between 1982 to 2017. In this script, this dataset is used to map the ownership type (government-owned, privately-owned) of the site.
 """
-from absl import app, flags
+import csv
 import os
 import sys
+
+from absl import app
+from absl import flags
 import numpy as np
 import pandas as pd
-import json
-import csv
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '../../..'))  # for utils
-from us_epa.util.superfund_helper import make_list_of_geos_to_resolve, resolve_with_recon
+from us_epa.util.superfund_helper import make_list_of_geos_to_resolve
+from us_epa.util.superfund_helper import resolve_with_recon
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('site_details_dir', './data',
-                    'Path to the directory with input files')
-flags.DEFINE_string(
-    'sites_output_path', './data/output',
-    'Path to the directory where generated files are to be stored.')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('site_details_dir', './data',
+                        'Path to the directory with input files')
+    flags.DEFINE_string(
+        'sites_output_path', './data/output',
+        'Path to the directory where generated files are to be stored.')
+
 
 _SITE_TEMPLATE_MCF = """Node: E:SuperfundSite->E0
 typeOf: dcs:SuperfundSite
@@ -121,7 +128,7 @@ def process_sites(input_path: str, output_path: str, precision: int = 6) -> int:
                  'FederalGovernmentOwned', 'PrivatelyOwned'),
         site_ownership.index)
     # The way we used this dataset, we have a lot of duplicates
-    site_ownership.drop_duplicates(inplace=True)
+    site_ownership = site_ownership.drop_duplicates()
 
     site_csv = npl_sites[[
         'Site Name', 'Site EPA ID', 'Site Score', 'Region ID', 'Latitude',
@@ -136,8 +143,8 @@ def process_sites(input_path: str, output_path: str, precision: int = 6) -> int:
     site_csv['containedInPlace'] = site_csv.apply(get_geoId,
                                                   args=(geo_map,),
                                                   axis=1)
-    site_csv.drop(columns=['Latitude', 'Longitude'], inplace=True)
-    site_csv.rename(columns=_COL_NAME_MAP, inplace=True)
+    site_csv = site_csv.drop(columns=['Latitude', 'Longitude'])
+    site_csv = site_csv.rename(columns=_COL_NAME_MAP)
     # We processed 1,715 superfund sites -- initially all of them did not have `establishmentOwnership`.
     # After the merge, we have 1,317 PrivatelyOwned sites, 158 FederalGovernmentOwned sites and 240 sites do not have a value for the establishmentOwnership property.
     site_csv = pd.merge(site_csv, site_ownership, on='epaId', how='left')
@@ -161,4 +168,5 @@ def main(_) -> None:
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

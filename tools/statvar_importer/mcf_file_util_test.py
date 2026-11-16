@@ -19,15 +19,12 @@ import sys
 import tempfile
 import unittest
 
-from absl import logging
-
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
 sys.path.append(os.path.dirname(_SCRIPT_DIR))
 
+from mcf_diff import diff_mcf_nodes
 import mcf_file_util
-
-from mcf_diff import diff_mcf_files, diff_mcf_nodes
 
 # module_dir_ is the path to where this test is running from.
 _module_dir_ = os.path.dirname(__file__)
@@ -345,7 +342,7 @@ class TestAddPVToNode(unittest.TestCase):
                                      normalize=True)
         self.assertEqual(node, {"prop1": "dcid:value1,dcid:value2,dcid:value3"})
 
-    def test_add_pv_to_node_normalize_list_values(self):
+    def test_add_pv_to_node_list_values_no_normalize(self):
         node = {}
         mcf_file_util.add_pv_to_node("prop1", ["value1", "value2"],
                                      node,

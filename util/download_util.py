@@ -75,16 +75,15 @@ This contains the following utilities to download data from URLS:
   '''
 
 import gzip
-import json
 import os
-import requests
-import requests_cache
 import time
+from typing import Union
 import urllib
 
 from absl import logging
 from google.cloud import storage
-from typing import Union
+import requests
+import requests_cache
 
 # Response pre-filled for tests.
 _PREFILLED_RESPONSE = {}
@@ -272,7 +271,6 @@ def download_file_from_url(url: str,
         return content
 
     logging.info(f'Saving {len(content)} bytes from {url} into {output_file}')
-    output_dir = os.path.dirname(output_file)
     os.makedirs(os.path.dirname(output_file), exist_ok=True)
     with open(output_file, 'wb') as fp:
         fp.write(content)

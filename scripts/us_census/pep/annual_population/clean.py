@@ -16,6 +16,7 @@ This Python Script contains methods to clean the county, state datasets
 """
 import os
 import sys
+
 import pandas as pd
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -23,6 +24,7 @@ sys.path.insert(1, os.path.join(_MODULE_DIR, '../../../../'))
 # pylint: disable=wrong-import-position
 # pylint: disable=import-error
 import util.alpha2_to_dcid as alpha2todcid
+
 # pylint: enable=wrong-import-position
 # pylint: enable=import-error
 
@@ -79,6 +81,7 @@ def _move_data_to_right(data_df: pd.DataFrame, row_index: list) -> pd.DataFrame:
     Returns:
         pd.DataFrame: DataFrame
     """
+    data_df = data_df.astype(object)
     for row in row_index:
         for idx in range(_PROPER_DATA_END_COL_IDX, _EXTRA_LOCATION_COL_IDX, -1):
             data_df.iloc[row, idx] = data_df.iloc[row, idx - 1]
@@ -123,6 +126,7 @@ def _move_data_to_left(data_df: pd.DataFrame,
     Returns:
         pd.DataFrame: DataFrame
     """
+    data_df = data_df.astype(object)
     for row in row_values:
         for idx in range(idx1, idx2):
             data_df.iloc[row, idx] = data_df.iloc[row, idx + 1]
@@ -266,6 +270,7 @@ def clean_1970_1989_county_txt(data_df: pd.DataFrame, first_data_df_cols: list,
         pd.DataFrame: Cleaned DataFrame
     """
 
+    data_df = data_df.astype(object)
     idx = data_df[data_df[0] == "FIPS"].index.values
     next_idx = 0
     final_data_df = None

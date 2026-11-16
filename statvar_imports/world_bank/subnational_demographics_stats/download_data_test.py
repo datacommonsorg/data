@@ -59,9 +59,7 @@ class DownloadDataTest(unittest.TestCase):
         self.assertTrue(os.path.exists(output_csv))
         self.assertFalse(
             os.path.exists(
-                os.path.join(self.input_dir, "uuid_Series - Metadata.csv")
-            )
-        )
+                os.path.join(self.input_dir, "uuid_Series - Metadata.csv")))
         with open(output_csv, "r", encoding="utf-8") as f:
             content = f.read()
         self.assertIn("Afghanistan, Badakhshan", content)
@@ -88,8 +86,7 @@ class DownloadDataTest(unittest.TestCase):
         with open(csv_path, "w", encoding="latin1") as f:
             f.write(
                 'Series Name, Country Name ,2016 [YR2016]\n'
-                '"Population, total"," Afghanistan, Badakhshan ",1216000.0\n'
-            )
+                '"Population, total"," Afghanistan, Badakhshan ",1216000.0\n')
 
         download_data.preprocess(self.input_dir)
 
@@ -99,9 +96,8 @@ class DownloadDataTest(unittest.TestCase):
     @mock.patch.object(download_data.time, "sleep")
     @mock.patch.object(download_data.WebDriverWait, "until")
     @mock.patch.object(download_data.webdriver, "Chrome")
-    def test_download_worldbank_polls_until_zip_ready(
-        self, mock_chrome, mock_until, mock_sleep
-    ):
+    def test_download_worldbank_polls_until_zip_ready(self, mock_chrome,
+                                                      mock_until, mock_sleep):
         mock_driver = mock.MagicMock()
         mock_chrome.return_value = mock_driver
         mock_until.return_value = mock.MagicMock()
@@ -118,14 +114,12 @@ class DownloadDataTest(unittest.TestCase):
 
         mock_sleep.side_effect = create_zip_on_poll
 
-        download_data.download_worldbank.__wrapped__(
-            "https://example.com", self.input_dir
-        )
+        download_data.download_worldbank.__wrapped__("https://example.com",
+                                                     self.input_dir)
 
         self.assertFalse(os.path.exists(stale_file))
         self.assertTrue(
-            os.path.exists(os.path.join(self.input_dir, "downloaded.zip"))
-        )
+            os.path.exists(os.path.join(self.input_dir, "downloaded.zip")))
         mock_driver.set_page_load_timeout.assert_called_once_with(60)
         mock_driver.quit.assert_called_once()
 
@@ -133,16 +127,14 @@ class DownloadDataTest(unittest.TestCase):
     @mock.patch.object(download_data.WebDriverWait, "until")
     @mock.patch.object(download_data.webdriver, "Chrome")
     def test_download_worldbank_timeout_raises_and_closes_driver(
-        self, mock_chrome, mock_until, mock_sleep
-    ):
+            self, mock_chrome, mock_until, mock_sleep):
         mock_driver = mock.MagicMock()
         mock_chrome.return_value = mock_driver
         mock_until.return_value = mock.MagicMock()
 
         with self.assertRaises(RuntimeError):
             download_data.download_worldbank.__wrapped__(
-                "https://example.com", self.input_dir
-            )
+                "https://example.com", self.input_dir)
 
         mock_driver.quit.assert_called_once()
 

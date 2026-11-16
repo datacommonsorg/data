@@ -14,9 +14,9 @@
 """Tests for download_existing_facilities.py."""
 
 import os
+from pathlib import Path
 import sys
 import tempfile
-from pathlib import Path
 from unittest import mock
 
 from absl.testing import absltest
@@ -24,8 +24,7 @@ from absl.testing import absltest
 REPO_ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO_ROOT))
 
-from scripts.us_epa.parent_company.download_existing_facilities import (
-    download_existing_facilities,)
+from scripts.us_epa.parent_company.download_existing_facilities import download_existing_facilities
 
 
 class DownloadExistingFacilitiesTest(absltest.TestCase):

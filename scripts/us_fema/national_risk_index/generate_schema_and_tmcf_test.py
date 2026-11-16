@@ -1,5 +1,5 @@
-import sys
 import os
+import sys
 
 # Allows module imports to work when running as a script
 sys.path.append(
@@ -11,6 +11,7 @@ _TESTDIR = os.path.join(os.path.dirname(os.path.realpath(__file__)),
 
 import tempfile
 import unittest
+
 from us_fema.national_risk_index.generate_schema_and_tmcf import generate_schema_and_tmcf_from_file
 
 # module_dir_ is the path to where this test is running from.

@@ -16,6 +16,7 @@ Run "python3 parse_protein_atlas_test.py"
 """
 
 import unittest
+
 import parse_species
 
 CONST_INPUT = '''=======================

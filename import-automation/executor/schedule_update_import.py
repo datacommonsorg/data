@@ -12,26 +12,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 import dataclasses
-from datetime import datetime, timezone
-import sys
-import os
-import logging
+from datetime import datetime
+from datetime import timezone
 import json
+import logging
+import os
+import sys
 from typing import Dict
 
 from absl import app
 from absl import flags
 from app import configs
-from app.executor import import_target
 from app.executor import import_executor
-from app.executor import cloud_scheduler
+from app.executor import import_target
+from app.executor import manifest_utils
 from app.executor import scheduler_job_manager
 from app.executor import validation
 from app.service import email_notifier
 from app.service import file_uploader
 from app.service import github_api
-from google.cloud import storage
 from google.cloud import secretmanager
+from google.cloud import storage
 
 _CONFIG_OVERRIDE_FILE: str = 'config_override.json'
 
@@ -68,12 +69,13 @@ def _get_import_spec(repo_dir: str, absolute_import_path: str,
             f'Manifest for import could not be found. Import: {absolute_import_path}. Looking for {manifest_filename} at path: {manifest_fp}'
         )
 
-    manifest = import_executor.parse_manifest(manifest_fp)
+    manifest = manifest_utils.parse_manifest(manifest_fp)
     validation.is_manifest_valid(manifest, repo_dir, path)
 
-    for spec in manifest['import_specifications']:
-        if absolute_import_path.endswith(':' + spec['import_name']):
-            return spec
+    import_name = absolute_import_path.split(':')[-1]
+    spec = manifest_utils.get_import_spec(manifest, import_name)
+    if spec:
+        return spec
 
     # If we are here, the the import name was not found in the manifest.
     raise Exception(
@@ -243,7 +245,7 @@ def main(_):
     logging.info(f'Repo root directory: {repo_dir}')
     cfg = configs.ExecutorConfig()
     override_config = {}
-    logging.info(f'Reading Cloud scheduler configs from secret manager.')
+    logging.info('Reading Cloud scheduler configs from secret manager.')
     scheduler_config_dict = _get_scheduler_config(
         _FLAGS.gcp_project_id, _FLAGS.scheduler_config_secret)
     if mode == 'update':

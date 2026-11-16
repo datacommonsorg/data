@@ -20,24 +20,24 @@ import datetime
 import json
 import logging
 import os
-import pandas as pd
-import sys
+from sys import path
 import time
+from typing import Any, Callable, Union
 import zipfile
+
 from absl import app
 from absl import flags
-from sys import path
-from typing import Any, Callable, Union
-
-from census_api_helpers import get_identifier, get_yearwise_variable_column_map
+from census_api_helpers import get_identifier
+from census_api_helpers import get_yearwise_variable_column_map
+import pandas as pd
 from url_list_compiler import get_table_url_list
 
 module_dir_ = os.path.dirname(os.path.realpath(__file__))
 path.insert(1, os.path.join(module_dir_, '../../../'))
 
 from scripts.us_census.api_utils.download_utils import download_url_list_iterations
-from tools.download_utils.requests_wrappers import request_url_json
 from scripts.us_census.api_utils.status_file_utils import sync_status_list
+from tools.download_utils.requests_wrappers import request_url_json
 
 FLAGS = flags.FLAGS
 
@@ -311,7 +311,7 @@ def consolidate_files(dataset: str,
                         drop_list.append(column_name)
                         logging.debug('dropping %s column in file:%s',
                                       column_name, cur_csv_path)
-            df2.drop(drop_list, axis=1, inplace=True)
+            df2 = df2.drop(drop_list, axis=1)
 
             if 'GEO_ID' not in list(df2) or 'NAME' not in list(df2):
                 print("Error: Check", cur_csv_path,
@@ -337,7 +337,7 @@ def consolidate_files(dataset: str,
                 logging.info('appending column names to dataframe')
                 df2.loc[-1] = new_row
                 df2.index = df2.index + 1
-                df2.sort_index(inplace=True)
+                df2 = df2.sort_index()
             df = pd.concat([df, df2], ignore_index=True)
         if not df.empty:
             out_file_name = os.path.join(

@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
 This script downloads datasets from the National Statistics Office (NSO) of Mongolia
 PxWeb API via util.download_util.
@@ -33,68 +32,150 @@ from util import download_util
 
 FLAGS = flags.FLAGS
 
-DEMOGRAPHICS_TABLES = [
-    {"url": "https://data.1212.mn/api/v1/en/NSO/Population%2C%20household/1_Population%2C%20household/DT_NSO_0300_002V1.px", "filename": "mid_year_total_population_by_region.csv"},
-    {"url": "https://data.1212.mn/api/v1/en/NSO/Population%2C%20household/1_Population%2C%20household/DT_NSO_0300_033V1.px", "filename": "number_of_households_by_region.csv"},
-    {"url": "https://data.1212.mn/api/v1/en/NSO/Population%2C%20household/1_Population%2C%20household/DT_NSO_0300_003V1.px", "filename": "total_population_by_age_group_and_sex.csv"},
-    {"url": "https://data.1212.mn/api/v1/en/NSO/Population%2C%20household/1_Population%2C%20household/DT_NSO_0300_027V1.px", "filename": "total_population_by_sex_and_urban_rural.csv"},
-    {"url": "https://data.1212.mn/api/v1/en/NSO/Population%2C%20household/1_Population%2C%20household/DT_NSO_0300_077V2.px", "filename": "resident_population_by_agegroup_15_and_over_and_maritalstatus.csv"},
-    {"url": "https://data.1212.mn/api/v1/en/NSO/Regional%20development/Population%20and%20household/DT_NSO_0300_004V1.px", "filename": "total_population_by_region_and_urban_rural.csv"},
-    {"url": "https://data.1212.mn/api/v1/en/NSO/Population%2C%20household/1_Population%2C%20household/DT_NSO_0300_006V1.px", "filename": "number_of_households_by_region_and_urban_rural.csv"}
-]
+DEMOGRAPHICS_TABLES = [{
+    "url":
+        "https://data.1212.mn/api/v1/en/NSO/Population%2C%20household/1_Population%2C%20household/DT_NSO_0300_002V1.px",
+    "filename":
+        "mid_year_total_population_by_region.csv"
+}, {
+    "url":
+        "https://data.1212.mn/api/v1/en/NSO/Population%2C%20household/1_Population%2C%20household/DT_NSO_0300_033V1.px",
+    "filename":
+        "number_of_households_by_region.csv"
+}, {
+    "url":
+        "https://data.1212.mn/api/v1/en/NSO/Population%2C%20household/1_Population%2C%20household/DT_NSO_0300_003V1.px",
+    "filename":
+        "total_population_by_age_group_and_sex.csv"
+}, {
+    "url":
+        "https://data.1212.mn/api/v1/en/NSO/Population%2C%20household/1_Population%2C%20household/DT_NSO_0300_027V1.px",
+    "filename":
+        "total_population_by_sex_and_urban_rural.csv"
+}, {
+    "url":
+        "https://data.1212.mn/api/v1/en/NSO/Population%2C%20household/1_Population%2C%20household/DT_NSO_0300_077V2.px",
+    "filename":
+        "resident_population_by_agegroup_15_and_over_and_maritalstatus.csv"
+}, {
+    "url":
+        "https://data.1212.mn/api/v1/en/NSO/Regional%20development/Population%20and%20household/DT_NSO_0300_004V1.px",
+    "filename":
+        "total_population_by_region_and_urban_rural.csv"
+}, {
+    "url":
+        "https://data.1212.mn/api/v1/en/NSO/Population%2C%20household/1_Population%2C%20household/DT_NSO_0300_006V1.px",
+    "filename":
+        "number_of_households_by_region_and_urban_rural.csv"
+}]
 
-EDUCATION_TABLES = [
-    {"url": "https://data.1212.mn/api/v1/en/NSO/Regional%20development/Education%2C%20Science%2C%20and%20Intellectual%20Property/DT_NSO_2001_013V1.px", "filename": "number_of_students_in_universities_and_colleges_by_region.csv"},
-    {"url": "https://data.1212.mn/api/v1/en/NSO/Education%2C%20health/Universities%2C%20institutes%20and%20colleges/DT_NSO_2001_013V2.px", "filename": "students_of_universities_and_colleges_by_professional_field.csv"},
-    {"url": "https://data.1212.mn/api/v1/en/NSO/Regional%20development/Education%2C%20Science%2C%20and%20Intellectual%20Property/DT_NSO_2001_011V1.px", "filename": "number_of_kindergartens_by_region.csv"},
-    {"url": "https://data.1212.mn/api/v1/en/NSO/Education%2C%20health/Universities%2C%20institutes%20and%20colleges/DT_NSO_2001_016V1.px", "filename": "number_of_full_time_teachers_in_universities_and_colleges_by_sex.csv"},
-    {"url": "https://data.1212.mn/api/v1/en/NSO/Education%2C%20health/Universities%2C%20institutes%20and%20colleges/DT_NSO_2001_014V1.px", "filename": "graduates_of_universities_and_colleges_by_professional_field.csv"},
-    {"url": "https://data.1212.mn/api/v1/en/NSO/Education%2C%20health/Universities%2C%20institutes%20and%20colleges/DT_NSO_2001_015V2.px", "filename": "students_in_teritary_educational_institutions_by_sex_and_educational_degree.csv"}
-]
+EDUCATION_TABLES = [{
+    "url":
+        "https://data.1212.mn/api/v1/en/NSO/Regional%20development/Education%2C%20Science%2C%20and%20Intellectual%20Property/DT_NSO_2001_013V1.px",
+    "filename":
+        "number_of_students_in_universities_and_colleges_by_region.csv"
+}, {
+    "url":
+        "https://data.1212.mn/api/v1/en/NSO/Education%2C%20health/Universities%2C%20institutes%20and%20colleges/DT_NSO_2001_013V2.px",
+    "filename":
+        "students_of_universities_and_colleges_by_professional_field.csv"
+}, {
+    "url":
+        "https://data.1212.mn/api/v1/en/NSO/Regional%20development/Education%2C%20Science%2C%20and%20Intellectual%20Property/DT_NSO_2001_011V1.px",
+    "filename":
+        "number_of_kindergartens_by_region.csv"
+}, {
+    "url":
+        "https://data.1212.mn/api/v1/en/NSO/Education%2C%20health/Universities%2C%20institutes%20and%20colleges/DT_NSO_2001_016V1.px",
+    "filename":
+        "number_of_full_time_teachers_in_universities_and_colleges_by_sex.csv"
+}, {
+    "url":
+        "https://data.1212.mn/api/v1/en/NSO/Education%2C%20health/Universities%2C%20institutes%20and%20colleges/DT_NSO_2001_014V1.px",
+    "filename":
+        "graduates_of_universities_and_colleges_by_professional_field.csv"
+}, {
+    "url":
+        "https://data.1212.mn/api/v1/en/NSO/Education%2C%20health/Universities%2C%20institutes%20and%20colleges/DT_NSO_2001_015V2.px",
+    "filename":
+        "students_in_teritary_educational_institutions_by_sex_and_educational_degree.csv"
+}]
 
-HEALTH_TABLES = [
-    {"url": "https://data.1212.mn/api/v1/en/NSO/Education%2C%20health/Main%20indicators%20for%20Health%20sector/DT_NSO_2100_001V1.px", "filename": "number_of_abortions_by_region.csv"},
-    {"url": "https://data.1212.mn/api/v1/en/NSO/Regional%20development/Health/DT_NSO_2100_015V1.px", "filename": "infant_mortality_per_1000_live_births_by_month_region.csv"},
-    {"url": "https://data.1212.mn/api/v1/en/NSO/Regional%20development/Health/DT_NSO_2100_017V3.px", "filename": "number_of_mothers_delivered_child_by_month_region.csv"},
-    {"url": "https://data.1212.mn/api/v1/en/NSO/Education%2C%20health/Births%2C%20deaths/DT_NSO_2100_018V5.px", "filename": "live_births_by_month_region.csv"},
-    {
-        "url": "https://data.1212.mn/api/v1/en/NSO/Regional%20development/Health/DT_NSO_2100_005V3.px",
-        "filename": "number_of_hospital_beds_by_type.csv",
-        "query": [{
-            "code": "Бүс",
-            "selection": {
-                "filter": "item",
-                "values": ["0"]
-            }
-        }]
-    },
-    {"url": "https://data.1212.mn/api/v1/en/NSO/Education%2C%20health/Births%2C%20deaths/DT_NSO_2100_027V2.px", "filename": "deaths_by_month_and_region.csv"}
-]
+HEALTH_TABLES = [{
+    "url":
+        "https://data.1212.mn/api/v1/en/NSO/Education%2C%20health/Main%20indicators%20for%20Health%20sector/DT_NSO_2100_001V1.px",
+    "filename":
+        "number_of_abortions_by_region.csv"
+}, {
+    "url":
+        "https://data.1212.mn/api/v1/en/NSO/Regional%20development/Health/DT_NSO_2100_015V1.px",
+    "filename":
+        "infant_mortality_per_1000_live_births_by_month_region.csv"
+}, {
+    "url":
+        "https://data.1212.mn/api/v1/en/NSO/Regional%20development/Health/DT_NSO_2100_017V3.px",
+    "filename":
+        "number_of_mothers_delivered_child_by_month_region.csv"
+}, {
+    "url":
+        "https://data.1212.mn/api/v1/en/NSO/Education%2C%20health/Births%2C%20deaths/DT_NSO_2100_018V5.px",
+    "filename":
+        "live_births_by_month_region.csv"
+}, {
+    "url":
+        "https://data.1212.mn/api/v1/en/NSO/Regional%20development/Health/DT_NSO_2100_005V3.px",
+    "filename":
+        "number_of_hospital_beds_by_type.csv",
+    "query": [{
+        "code": "Бүс",
+        "selection": {
+            "filter": "item",
+            "values": ["0"]
+        }
+    }]
+}, {
+    "url":
+        "https://data.1212.mn/api/v1/en/NSO/Education%2C%20health/Births%2C%20deaths/DT_NSO_2100_027V2.px",
+    "filename":
+        "deaths_by_month_and_region.csv"
+}]
 
 EMPLOYMENT_TABLES = [
     {
-        "url": "https://data.1212.mn/api/v1/en/NSO/Labour%2C%20business/Labour/EMPLOYMENT%2C%20by%20economic%20activities%2C%20sex%2C%20age%20group%2C%20aimags%20and%20the%20Capital/DT_NSO_0400_035V7_1.px",
-        "filename": "employment_by_classification_of_economic_activities_region_gender_and_agegroup.csv"
+        "url":
+            "https://data.1212.mn/api/v1/en/NSO/Labour%2C%20business/Labour/EMPLOYMENT%2C%20by%20economic%20activities%2C%20sex%2C%20age%20group%2C%20aimags%20and%20the%20Capital/DT_NSO_0400_035V7_1.px",
+        "filename":
+            "employment_by_classification_of_economic_activities_region_gender_and_agegroup.csv"
     },
     {
-        "url": "https://data.1212.mn/api/v1/en/NSO/Labour%2C%20business/Labour/EMPLOYMENT%2C%20by%20occupation%2C%20sex%2C%20age%20group%2C%20region%2C%20aimags%20and%20the%20Capital/DT_NSO_0400_006V12_1.px",
-        "filename": "employment_by_occupation_by_region_gender_and_agegroup.csv"
+        "url":
+            "https://data.1212.mn/api/v1/en/NSO/Labour%2C%20business/Labour/EMPLOYMENT%2C%20by%20occupation%2C%20sex%2C%20age%20group%2C%20region%2C%20aimags%20and%20the%20Capital/DT_NSO_0400_006V12_1.px",
+        "filename":
+            "employment_by_occupation_by_region_gender_and_agegroup.csv"
     },
     {
-        "url": "https://data.1212.mn/api/v1/en/NSO/Labour%2C%20business/Labour/EMPLOYMENT%20TO%20POPULATION%20RATIO%2C%20by%20sex%2C%20age%20group%2C%20aimags%20and%20the%20Capital/DT_NSO_0400_035V3_1.px",
-        "filename": "employment_to_population_ratio_by_region_gender_and_agegroup.csv"
+        "url":
+            "https://data.1212.mn/api/v1/en/NSO/Labour%2C%20business/Labour/EMPLOYMENT%20TO%20POPULATION%20RATIO%2C%20by%20sex%2C%20age%20group%2C%20aimags%20and%20the%20Capital/DT_NSO_0400_035V3_1.px",
+        "filename":
+            "employment_to_population_ratio_by_region_gender_and_agegroup.csv"
     },
     {
-        "url": "https://data.1212.mn/api/v1/en/NSO/Labour%2C%20business/Labour/LABOUR%20FORCE%2C%20by%20sex%2C%20age%20group%2C%20aimags%20and%20the%20Capital/DT_NSO_0400_012V1_1.px",
-        "filename": "labour_force_by_region_gender_and_agegroup.csv"
+        "url":
+            "https://data.1212.mn/api/v1/en/NSO/Labour%2C%20business/Labour/LABOUR%20FORCE%2C%20by%20sex%2C%20age%20group%2C%20aimags%20and%20the%20Capital/DT_NSO_0400_012V1_1.px",
+        "filename":
+            "labour_force_by_region_gender_and_agegroup.csv"
     },
     {
-        "url": "https://data.1212.mn/api/v1/en/NSO/Labour%2C%20business/Labour/LABOUR%20UNDERUTILIZATION%2C%20by%20sex%2C%20age%20group%2C%20aimags%20and%20the%20Capital/DT_NSO_0400_014V3_1.px",
-        "filename": "labour_underutilization_by_region_gender_and_agegroup.csv"
+        "url":
+            "https://data.1212.mn/api/v1/en/NSO/Labour%2C%20business/Labour/LABOUR%20UNDERUTILIZATION%2C%20by%20sex%2C%20age%20group%2C%20aimags%20and%20the%20Capital/DT_NSO_0400_014V3_1.px",
+        "filename":
+            "labour_underutilization_by_region_gender_and_agegroup.csv"
     },
     {
-        "url": "https://data.1212.mn/api/v1/en/NSO/Labour%2C%20business/Labour/DT_NSO_0400_002V5.px",
-        "filename": "registered_unemployed_by_education_level_region_gender_month.csv",
+        "url":
+            "https://data.1212.mn/api/v1/en/NSO/Labour%2C%20business/Labour/DT_NSO_0400_002V5.px",
+        "filename":
+            "registered_unemployed_by_education_level_region_gender_month.csv",
         # PxWeb API does not support negative/exclusion filters, so we explicitly list
         # all 27 valid region codes to exclude legacy duplicate code "511" ("  Ulaanbaatar"),
         # which collides with code "5" ("Ulaanbaatar") after whitespace stripping and has
@@ -102,31 +183,25 @@ EMPLOYMENT_TABLES = [
         "query": [{
             "code": "Бүс",
             "selection": {
-                "filter": "item",
+                "filter":
+                    "item",
                 "values": [
-                    "0",
-                    "1", "181", "182", "183", "184", "185",
-                    "2", "261", "262", "263", "264", "265", "267",
-                    "3", "341", "342", "343", "344", "345", "346", "348",
-                    "4", "421", "422", "423",
-                    "5"
+                    "0", "1", "181", "182", "183", "184", "185", "2", "261",
+                    "262", "263", "264", "265", "267", "3", "341", "342", "343",
+                    "344", "345", "346", "348", "4", "421", "422", "423", "5"
                 ]
             }
         }]
     }
 ]
 
+
 def fetch_and_save_data(url, csv_filepath, query=None):
     """Fetches exactly formatted CSV data from the PxWeb API."""
     logging.info(f"Downloading {url} -> {csv_filepath}...")
 
     # Request PxWeb to output as CSV pre-pivoted by period
-    pxweb_json_payload = {
-        "query": query or [],
-        "response": {
-            "format": "csv"
-        }
-    }
+    pxweb_json_payload = {"query": query or [], "response": {"format": "csv"}}
 
     try:
         downloaded = download_util.download_file_from_url(
@@ -137,23 +212,15 @@ def fetch_and_save_data(url, csv_filepath, query=None):
             retries=5,
             retry_secs=5,
             output_file=csv_filepath,
-            overwrite=True
-        )
-        if (
-            not downloaded
-            or not os.path.exists(csv_filepath)
-            or os.path.getsize(csv_filepath) <= 10
-        ):
-            file_size = (
-                os.path.getsize(csv_filepath)
-                if os.path.exists(csv_filepath)
-                else 0
-            )
+            overwrite=True)
+        if (not downloaded or not os.path.exists(csv_filepath) or
+                os.path.getsize(csv_filepath) <= 10):
+            file_size = (os.path.getsize(csv_filepath)
+                         if os.path.exists(csv_filepath) else 0)
             warning_msg = (
                 f"Download attempt failed for URL: {url} -> {csv_filepath} "
                 f"(downloaded={downloaded}, exists={os.path.exists(csv_filepath)}, "
-                f"size={file_size} bytes)"
-            )
+                f"size={file_size} bytes)")
             logging.warning(warning_msg)
             error_msg = (
                 f"FATAL ERROR: Failed to download valid file {csv_filepath} from {url}"
@@ -169,18 +236,21 @@ def fetch_and_save_data(url, csv_filepath, query=None):
         logging.error(error_msg)
         raise RuntimeError(error_msg)
 
+
 def main(_):
     logging.set_verbosity(logging.INFO)
 
     # Demographics Data
-    demographics_dir = os.path.join(_SCRIPT_DIR, "mongolia_demographics", "input_files")
+    demographics_dir = os.path.join(_SCRIPT_DIR, "mongolia_demographics",
+                                    "input_files")
     os.makedirs(demographics_dir, exist_ok=True)
     for table in DEMOGRAPHICS_TABLES:
         filepath = os.path.join(demographics_dir, table['filename'])
         fetch_and_save_data(table['url'], filepath, table.get('query'))
 
     # Education Data
-    education_dir = os.path.join(_SCRIPT_DIR, "mongolia_education", "input_files")
+    education_dir = os.path.join(_SCRIPT_DIR, "mongolia_education",
+                                 "input_files")
     os.makedirs(education_dir, exist_ok=True)
     for table in EDUCATION_TABLES:
         filepath = os.path.join(education_dir, table['filename'])
@@ -194,13 +264,15 @@ def main(_):
         fetch_and_save_data(table['url'], filepath, table.get('query'))
 
     # Employment Data
-    employment_dir = os.path.join(_SCRIPT_DIR, "mongolia_employment", "input_files")
+    employment_dir = os.path.join(_SCRIPT_DIR, "mongolia_employment",
+                                  "input_files")
     os.makedirs(employment_dir, exist_ok=True)
     for table in EMPLOYMENT_TABLES:
         filepath = os.path.join(employment_dir, table['filename'])
         fetch_and_save_data(table['url'], filepath, table.get('query'))
 
     logging.info("All tasks completed")
+
 
 if __name__ == "__main__":
     app.run(main)

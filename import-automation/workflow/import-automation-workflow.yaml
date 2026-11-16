@@ -20,8 +20,11 @@ main:
           - stagingDenylist:
               "NOAA_GlobalForecastSystem": true
           - prodDenylist:
+              "CDC_OzoneCensusTract": true
               "CDC_OzoneCounty": true
+              "CDC_PM25CensusTract": true
               "CDC_PM25County": true
+              "EPACriteriaAirPollutants": true
               "NOAA_GlobalForecastSystem": true
               "USFed_ConstantMaturityRates_Test": true
           - shortImportName: ${text.split(importName, ":")[len(text.split(importName, ":")) - 1]}
@@ -122,13 +125,13 @@ main:
         result: versionResponse
     - checkSkipIngestion:
         switch:
-          - condition: ${len(versionResponse.body.imports) == 0 or (versionResponse.body.imports[0].status != "STAGING" and versionResponse.body.imports[0].status != "SKIP")}
+          - condition: ${len(versionResponse.body.imports) == 0 or (versionResponse.body.imports[0].status != "STAGING" and versionResponse.body.imports[0].status != "SKIP" and versionResponse.body.imports[0].status != "INACTIVE")}
             return:
               jobId: ${jobId}
               importName: ${importName}
               staging:
                 status: "SKIPPED"
-                message: '${"Import status is not STAGING or SKIP (" + versionResponse.body.message + "); skipped Spanner ingestion."}'
+                message: '${"Import status is not STAGING, SKIP, or INACTIVE (" + versionResponse.body.message + "); skipped Spanner ingestion."}'
               prod: ${defaultResult}
     - prepareIngestionArgs:
         assign:

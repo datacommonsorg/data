@@ -12,11 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import csv
 import os
-import pandas as pd
 import unittest
+
 from india_lgd.local_government_directory_districts.preprocess import LocalGovermentDirectoryDistrictsDataLoader
+import pandas as pd
 
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)

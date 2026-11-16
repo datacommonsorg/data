@@ -8,23 +8,53 @@
             "provenance_url": "https://civilrightsdata.ed.gov/data",
             "provenance_description": "The Civil Rights Data Collection (CRDC) provides data on key education and civil rights issues in our nation's public schools. This import focuses on harassment or bullying data.",
             "scripts": [
-                "download.py","preprocess.py","run.sh"
-                        ],
+                "download.py",
+                "preprocess.py",
+                "run.sh"
+            ],
             "import_inputs": [
                 {
+                    "template_mcf": "processed_output/crdc_harassment_or_bullying_2012_part_01.tmcf",
+                    "cleaned_csv": "processed_output/crdc_harassment_or_bullying_2012*.csv",
+                    "node_mcf": "processed_output/crdc_harassment_or_bullying_2012*.mcf"
+                },
+                {
+                    "template_mcf": "processed_output/crdc_harassment_or_bullying_2014.tmcf",
+                    "cleaned_csv": "processed_output/crdc_harassment_or_bullying_2014.csv",
+                    "node_mcf": "processed_output/crdc_harassment_or_bullying_2014*.mcf"
+                },
+                {
+                    "template_mcf": "processed_output/crdc_harassment_or_bullying_2018.tmcf",
+                    "cleaned_csv": "processed_output/crdc_harassment_or_bullying_2018.csv",
+                    "node_mcf": "processed_output/crdc_harassment_or_bullying_2018*.mcf"
+                },
+                {
+                    "template_mcf": "processed_output/crdc_harassment_or_bullying_2021.tmcf",
+                    "cleaned_csv": "processed_output/crdc_harassment_or_bullying_2021.csv",
+                    "node_mcf": "processed_output/crdc_harassment_or_bullying_2021*.mcf"
+                },
+                {
                     "template_mcf": "processed_output/crdc_harassment_or_bullying_2022.tmcf",
-                    "cleaned_csv": "processed_output/*.csv"
+                    "cleaned_csv": "processed_output/crdc_harassment_or_bullying_2022.csv",
+                    "node_mcf": "processed_output/crdc_harassment_or_bullying_2022*.mcf"
+                },
+                {
+                    "template_mcf": "processed_output/crdc_harassment_or_bullying_2024Onwards.tmcf",
+                    "cleaned_csv": "processed_output/crdc_harassment_or_bullying_2024Onwards.csv",
+                    "node_mcf": "processed_output/crdc_harassment_or_bullying_2024Onwards*.mcf"
                 }
-                ],
+            ],
             "source_files": [
-                "input_files/*.csv"
+                "input_files/*.csv",
+                "processed_output/*_counters.txt",
+                "validation_config.json"
             ],
             "cron_schedule": "30 6 * * 5",
             "_comment": "Schedule: Weekly on Friday at 06:30 UTC",
             "resource_limits": {
-                "cpu": 8,
-                "memory": 64,
-                "disk": 100
+                "cpu": 16,
+                "memory": 128,
+                "disk": 200
             }
         }
     ]
