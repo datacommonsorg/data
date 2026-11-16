@@ -52,5 +52,3 @@ python3 process.py \
 
 1. Percentage values in the dataset are converted into corresponding counts using the `denominators` configuration in `S0505_spec.json`.
 2. Monetary measurements (`Median earnings (dollars) for full-time, year-round workers`, `Mean earnings (dollars)`, `Median Household income (dollars)`, `Mean Social Security income (dollars)`, `Mean Supplemental Security Income (dollars)`, `Mean cash public assistance income (dollars)`, and `Mean retirement income (dollars)`) use `InflationAdjustedUSD_CurrentYear` as the unit.
-3. `Total`, `Total MOE`, `PERCENT ALLOCATED`, and `PERCENT IMPUTED` columns are ignored in `S0505_spec.json` to prevent duplication.
-4. `Count_Person_ForeignBorn_PlaceOfBirthAsia` and `MarginOfError_Count_Person_ForeignBorn_PlaceOfBirthAsia` are mapped to `Count_Person_PlaceOfBirthAsia` and `MarginOfError_Count_Person_PlaceOfBirthAsia` via `overwrite_dcids`.
