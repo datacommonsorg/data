@@ -42,9 +42,6 @@ if __name__ == '__main__':
                            sys.modules['__main__'])
     setattr(_sexrace_pkg, 'preprocess', sys.modules['__main__'])
 
-if 'mode' not in flags.FLAGS:
-    flags.DEFINE_string('mode', '', 'Options: download or process')
-
 _LAST_FETCHED_URL = (None, None)
 _SESSION = None
 
@@ -181,9 +178,15 @@ from us_census.pep.us_pep_sexrace.state.state_2020_2029 import process_state_202
 FLAGS = flags.FLAGS
 default_input_path = os.path.dirname(
     os.path.abspath(__file__)) + os.sep + "config_files"
-if 'input_path' not in flags.FLAGS:
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('mode', '', 'Options: download or process')
     flags.DEFINE_string("input_path", default_input_path,
                         "Import Data File's List")
+
+
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'output_files/intermediate')
 _FILES_TO_DOWNLOAD = None
 _BASELINE_YEAR = 2025
@@ -432,4 +435,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

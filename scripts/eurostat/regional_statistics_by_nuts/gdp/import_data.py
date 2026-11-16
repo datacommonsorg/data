@@ -33,7 +33,12 @@ from six.moves import urllib
 _FLAGS = flags.FLAGS
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _HISTORICAL_DATA_PATH = os.path.join(_MODULE_DIR, 'historical_deleted.csv')
-flags.DEFINE_string('mode', '', 'Options: download or process')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('mode', '', 'Options: download or process')
+
 
 # Imports country mapping alpha2 country codes to country DCIDs.
 sys.path.insert(1, '../../../../util')
@@ -294,4 +299,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

@@ -40,18 +40,23 @@ MIN_REQUEST_INTERVAL_SECONDS = 16.0  # CDC WONDER requires >= 15s between reques
 # Flags configuration
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string(
-    'verticals', 'all',
-    'Comma-separated list of verticals (age,sex,race,ethnicity,region,region_state) or "all"'
-)
-flags.DEFINE_string(
-    'years', 'all',
-    'Comma-separated list of years (e.g. "2016,2017,2018,2019,2020,2021,2022,2023") or single year'
-)
 _DEFAULT_OUTPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                    'input_files')
-flags.DEFINE_string('output_dir', _DEFAULT_OUTPUT_DIR,
-                    'Output directory to save downloaded CSV files')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        'verticals', 'all',
+        'Comma-separated list of verticals (age,sex,race,ethnicity,region,region_state) or "all"'
+    )
+    flags.DEFINE_string(
+        'years', 'all',
+        'Comma-separated list of years (e.g. "2016,2017,2018,2019,2020,2021,2022,2023") or single year'
+    )
+    flags.DEFINE_string('output_dir', _DEFAULT_OUTPUT_DIR,
+                        'Output directory to save downloaded CSV files')
+
 
 # Vertical breakdown configurations
 VERTICAL_CONFIGS = {
@@ -438,33 +443,44 @@ def download_all(verticals: list,
         logging.fatal("Zero downloads succeeded from CDC WONDER API.")
 
 
-def main(argv):
-    del argv  # Unused.
+def run(verticals: str = 'all',
+        years: str = 'all',
+        output_dir: str = _DEFAULT_OUTPUT_DIR) -> None:
+    """Downloads the selected verticals and years into output_dir.
 
-    if FLAGS.verticals.lower() == 'all':
+    Args:
+        verticals: Comma-separated list of verticals, or "all".
+        years: Comma-separated list of years, or "all".
+        output_dir: Directory to save the downloaded CSV files to.
+    """
+    if verticals.lower() == 'all':
         selected_verticals = list(VERTICAL_CONFIGS.keys())
     else:
         selected_verticals = [
-            v.strip() for v in FLAGS.verticals.split(',') if v.strip()
+            v.strip() for v in verticals.split(',') if v.strip()
         ]
 
-    if FLAGS.years.lower() == 'all':
+    if years.lower() == 'all':
         # Inclusive of published years up to datetime.date.today().year - 1
         selected_years = [
             str(y) for y in range(2016,
                                   datetime.date.today().year)
         ]
     else:
-        selected_years = [
-            y.strip() for y in FLAGS.years.split(',') if y.strip()
-        ]
+        selected_years = [y.strip() for y in years.split(',') if y.strip()]
 
     logging.info(
         f"Starting download for verticals={selected_verticals}, years={selected_years}"
     )
-    logging.info(f"Output directory: {FLAGS.output_dir}")
-    download_all(selected_verticals, selected_years, FLAGS.output_dir)
+    logging.info(f"Output directory: {output_dir}")
+    download_all(selected_verticals, selected_years, output_dir)
+
+
+def main(argv):
+    del argv  # Unused.
+    run(FLAGS.verticals, FLAGS.years, FLAGS.output_dir)
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

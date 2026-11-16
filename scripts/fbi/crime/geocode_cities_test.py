@@ -14,7 +14,9 @@
 
 import unittest
 
-from .geocode_cities import *
+from .geocode_cities import normalize_fbi_city
+from .geocode_cities import read_geocodes
+from .geocode_cities import update_crime_geocode
 
 
 class GeocodeCitiesTest(unittest.TestCase):

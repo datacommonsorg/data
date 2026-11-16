@@ -30,14 +30,20 @@ from urllib3.util.retry import Retry
 _CODEDIR = os.path.dirname(os.path.abspath(__file__))
 
 _FLAGS = flags.FLAGS
-flags.DEFINE_string(
-    "download_directory", _CODEDIR,
-    "Directory path where input_files/ folder will be populated")
-flags.DEFINE_boolean("overwrite", False,
-                     "Whether to force re-download existing files")
-flags.DEFINE_boolean(
-    "use_fallback_url", False,
-    "Whether to allow falling back to hardcoded URL if dynamic discovery fails")
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        "download_directory", _CODEDIR,
+        "Directory path where input_files/ folder will be populated")
+    flags.DEFINE_boolean("overwrite", False,
+                         "Whether to force re-download existing files")
+    flags.DEFINE_boolean(
+        "use_fallback_url", False,
+        "Whether to allow falling back to hardcoded URL if dynamic discovery fails"
+    )
+
 
 _CDC_LANDING_PAGE = (
     "https://www.cdc.gov/prams/php/data-research/mch-indicators-by-site.html")
@@ -184,4 +190,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)
