@@ -14,7 +14,7 @@ Date: *September 2026*
 | Date range covered | 1990, 2000, 2020, 2021 (1990 Decennial Census, 2000 Decennial Census, 2020 Island Area Decennial Census, 2017–2021 ACS 5-Year) |
 | Statistical Variables | `Count_Person_BelowPovertyLevelInThePast12Months_AsFractionOf_Count_Person` |
 | Unit / Scaling | `Percent` / `100` |
-| Refresh Cycle | Annual automated check (`30 05 1 1 *`) aligned with EDA/Census releases |
+| Refresh Cycle | Weekly automated check (`30 05 * * 1`) |
 
 ---
 
