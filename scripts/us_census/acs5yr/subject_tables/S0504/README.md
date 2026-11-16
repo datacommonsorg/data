@@ -86,6 +86,7 @@ python3 process.py \
   --table_prefix=S0504 \
   --has_percent=True \
   --debug=False \
+  --clean_numeric_values=True \
   --spec_path=S0504/S0504_spec.json \
   --input_path=S0504/S0504.zip \
   --output_dir=S0504/output
