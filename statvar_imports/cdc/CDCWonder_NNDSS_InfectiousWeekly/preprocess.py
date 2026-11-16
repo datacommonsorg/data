@@ -16,7 +16,6 @@
 import datetime
 import importlib.util
 import os
-import sys
 import time
 from pathlib import Path
 from typing import Dict, Optional, Tuple
@@ -132,14 +131,12 @@ def download_source_csv() -> str:
             retry_delay *= 2
 
     if not download_ok or not os.path.exists(RAW_FILE):
-        logging.error("Failed to download rows.csv after all retry attempts.")
-        sys.exit(1)
+        raise IOError("Failed to download rows.csv after all retry attempts.")
 
     size_mb = os.path.getsize(RAW_FILE) / (1024 * 1024)
     logging.info(f"Downloaded file size: {size_mb:.2f} MB.")
     if size_mb < 0.1:
-        logging.error("Downloaded file is suspiciously small (<0.1 MB).")
-        sys.exit(1)
+        raise ValueError("Downloaded file is suspiciously small (<0.1 MB).")
     return RAW_FILE
 
 
@@ -147,14 +144,25 @@ def preprocess_csv(filepath: str, out_filepath: str) -> pd.DataFrame:
     """Filter x9gk-5huc to valid Current week rows, add observationDate, and sum NY+NYC."""
     chunks = []
     ny_sums: Dict[Tuple[str, str, str, str], float] = {}
+    required_cols = [
+        "Current week",
+        "Current MMWR Year",
+        "MMWR WEEK",
+        "Reporting Area",
+        "Label",
+    ]
 
     reader = pd.read_csv(
         filepath, chunksize=100000, dtype=str, low_memory=False, on_bad_lines="skip"
     )
     for chunk_idx, chunk in enumerate(reader, start=1):
         logging.info(f"Processing chunk {chunk_idx}...")
-        if "Current week" not in chunk.columns:
-            raise KeyError("Missing required column 'Current week' in input CSV.")
+        if chunk_idx == 1:
+            missing_cols = [col for col in required_cols if col not in chunk.columns]
+            if missing_cols:
+                raise KeyError(
+                    f"Missing required columns in input CSV: {missing_cols}"
+                )
 
         if "Current week, flag" in chunk.columns:
             flag_series = chunk["Current week, flag"].fillna("").str.strip()
