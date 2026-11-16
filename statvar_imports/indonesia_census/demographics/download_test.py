@@ -22,11 +22,16 @@ import unittest
 from unittest import mock
 
 _CODEDIR = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(1, _CODEDIR)
-sys.path.insert(1, os.path.join(_CODEDIR, '../../../util/'))
+_REPO_ROOT = os.path.abspath(os.path.join(_CODEDIR, '../../..'))
+if _REPO_ROOT not in sys.path:
+    sys.path.insert(1, _REPO_ROOT)
+_UTIL_DIR = os.path.abspath(os.path.join(_CODEDIR, '../../../util'))
+if _UTIL_DIR not in sys.path:
+    sys.path.insert(1, _UTIL_DIR)
 
-import download
 import download_util
+
+from statvar_imports.indonesia_census.demographics import download
 
 
 class DownloadTest(unittest.TestCase):
