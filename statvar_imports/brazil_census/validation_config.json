@@ -2,17 +2,6 @@
     "schema_version": "1.0",
     "rules": [
         {
-            "rule_id": "check_deleted_records_percent",
-            "description": "Checks deleted records threshold.",
-            "validator": "DELETED_RECORDS_PERCENT",
-            "scope": {
-                "data_source": "differ_summary"
-            },
-            "params": {
-                "threshold": 0.1
-            }
-        },
-        {
             "rule_id": "check_max_date_freshness",
             "description": "Checks date freshness, historical start date, and expected StatVar count across Brazil Census StatVars.",
             "validator": "SQL_VALIDATOR",
