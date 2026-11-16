@@ -21,6 +21,7 @@
       "source_files": [
         "raw_files/*.csv",
         "input_files/*.csv",
+        "history_files/*.csv",
         "counters/*.csv",
         "validation_config.json"
       ],
