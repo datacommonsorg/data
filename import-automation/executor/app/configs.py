@@ -182,6 +182,12 @@ class ExecutorConfig:
     skip_gcs_upload: bool = False
     # Skip uploading input files to GCS.
     skip_input_upload: bool = False
+    # Skip staging Spanner ingestion in the import automation workflow.
+    skip_staging_ingestion: bool = False
+    # Skip production Spanner ingestion in the import automation workflow.
+    skip_prod_ingestion: bool = False
+    # Disable import workflow and pause the Airflow DAG for this import.
+    disable_import_workflow: bool = False
     # Ingest historic data from GCS.
     ingest_historic_data: bool = True
     # Maximum time a blocking call to the importer to
