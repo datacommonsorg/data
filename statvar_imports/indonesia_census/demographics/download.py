@@ -25,9 +25,11 @@ from typing import Any
 _CODEDIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(1, os.path.join(_CODEDIR, '../../../util/'))
 
+from absl import app
+from absl import flags
+from absl import logging
 import download_util
 import file_util
-from absl import app, flags, logging
 from google.api_core import exceptions as api_core_exceptions
 from google.cloud import storage
 
