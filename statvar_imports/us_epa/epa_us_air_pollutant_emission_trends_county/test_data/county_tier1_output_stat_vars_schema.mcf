@@ -1,5 +1,0 @@
-Node: dcid:emittedThing
-typeOf: dcs:Property
-name: "emittedThing"
-rangeIncludes: dcid:AirPollutantEnum,dcid:ChemicalCompound,dcid:EPA_CriteriaAirPollutant
-
