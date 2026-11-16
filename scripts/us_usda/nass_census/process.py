@@ -54,26 +54,36 @@ SKIPPED_VALUES = [
 ]
 
 
-def check_url_status(url):
+@retry(tries=3, delay=2, backoff=2, exceptions=(requests.RequestException,))
+def check_url_status(url, session=None):
+    client = session or requests
+    logging.info(f"HEAD {url}")
     try:
-        response = requests.head(url, timeout=30, allow_redirects=True)
-        return response.status_code == 200
+        response = client.head(url, timeout=30, allow_redirects=True)
+        if response.status_code == 200:
+            return True
+        if response.status_code == 404:
+            return False
+        response.raise_for_status()
+        return False
     except requests.RequestException as e:
         logging.error(f"Error checking URL {url}: {e}")
         raise
 
 
 @retry(tries=3, delay=2, backoff=2, exceptions=(requests.RequestException,))
-def download_file(url, output_path):
-    """
-    Download a file from the specified URL with retry logic.
+def download_file(url, output_path, session=None):
+    """Download a file from the specified URL with retry logic.
 
     Args:
         url (str): URL of the file to download.
         output_path (str): Local path to save the downloaded file.
+        session (requests.Session, optional): Shared requests session.
     """
+    client = session or requests
+    logging.info(f"GET {url}")
     try:
-        response = requests.get(url, stream=True, timeout=120)
+        response = client.get(url, stream=True, timeout=120)
         response.raise_for_status()  # Raise HTTPError for bad responses
         with open(output_path, 'wb') as f:
             for chunk in response.iter_content(chunk_size=1024):
@@ -171,16 +181,17 @@ def merge_csv_files(output_file, input_files):
         logging.info(f"Merged output written to: {output_file}")
 
 
-def download_and_process_data(year, d):
+def download_and_process_data(year, d, session=None):
     url = f"https://www.nass.usda.gov/sites/default/files/datasets/qs.census{year}.txt.gz"
     input_dir = "input"
     output_dir = "output"  # Define the output directory
     os.makedirs(input_dir, exist_ok=True)  # Ensure input directory exists
     os.makedirs(output_dir, exist_ok=True)  # Ensure output directory exists
 
-    if check_url_status(url):
+    if check_url_status(url, session=session):
         gz_file_path = os.path.join(input_dir, f"qs.census{year}.txt.gz")
-        download_file(url, gz_file_path)  # Download the .gz file
+        download_file(url, gz_file_path,
+                      session=session)  # Download the .gz file
         txt_file_path = unzip_file(gz_file_path,
                                    input_dir)  # Unzip to input directory
 
@@ -196,8 +207,13 @@ def download_and_process_data(year, d):
         logging.info(f"Processed file saved to: {output_file}")
         return output_file
     else:
-        logging.warning(f"URL not accessible, skipping year {year}: {url}")
-        return None
+        if year > 2022 and year >= datetime.now().year - 2:
+            logging.warning(
+                f"URL not accessible (404), skipping future census year {year}: {url}"
+            )
+            return None
+        raise requests.HTTPError(
+            f"Historical or overdue census year {year} returned 404 at {url}")
 
 
 def main(_):
@@ -212,11 +228,12 @@ def main(_):
     mode = _FLAGS.mode
     if mode == 'download' or mode == '':
         files = []
-        for year in range(2002, 2048, 5):
-            if year <= datetime.now().year:
-                file = download_and_process_data(year, d)
-                if file:
-                    files.append(file)
+        with requests.Session() as session:
+            for year in range(2002, 2048, 5):
+                if year <= datetime.now().year:
+                    file = download_and_process_data(year, d, session=session)
+                    if file:
+                        files.append(file)
         if not files:
             raise RuntimeError("No census files were downloaded or processed.")
         if mode == '':

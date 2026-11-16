@@ -1,2 +1,6 @@
 variableMeasured,observationAbout,value,unit,observationDate
+dcs:Count_Farm,dcid:country/USA,2000000,,2022
+dcs:Area_Farm,dcid:geoId/21,12800000,dcs:Acre,2022
+dcs:Count_Farm_10To49.9Acre,dcid:geoId/38,22127,,2022
+dcs:MarketValue_Farm_AgriculturalProducts,dcid:geoId/51191,1500000,dcs:USDollar,2022
 dcs:Count_1000OnwardsAcre,dcid:geoId/837,19,,2022
