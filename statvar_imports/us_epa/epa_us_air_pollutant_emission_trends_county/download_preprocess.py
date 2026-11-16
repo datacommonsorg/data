@@ -2,14 +2,13 @@ import csv
 import datetime
 import logging
 import os
-from pathlib import Path
 import re
 import shutil
 import subprocess
-import sys
 import zipfile
-import requests
+
 from bs4 import BeautifulSoup
+import requests
 
 # ---------------------------------------------------------
 # Path resolution and Environment Setup
@@ -49,7 +48,9 @@ def resolve_file_url(year: int):
     try:
         resp = requests.get(dir_url, headers=headers, timeout=20)
         if resp.status_code != 200:
-            logging.warning(f"Could not open directory {dir_url} (HTTP status: {resp.status_code})")
+            logging.warning(
+                f"Could not open directory {dir_url} (HTTP status: {resp.status_code})"
+            )
             return None, None
     except requests.RequestException as e:
         logging.warning(f"Network error accessing {dir_url}: {e}")
@@ -74,11 +75,13 @@ def resolve_file_url(year: int):
         logging.warning(f"No matching tier summary found in {dir_url}")
         # Log available archive files to debug naming conventions
         sample_files = [
-            f for f in all_files 
-            if any(ext in f.lower() for ext in [".zip", ".accdb", ".mdb", ".csv"])
+            f for f in all_files if any(
+                ext in f.lower() for ext in [".zip", ".accdb", ".mdb", ".csv"])
         ]
         if sample_files:
-            logging.info(f"Available database/archive files in {year}: {sample_files[:10]}")
+            logging.info(
+                f"Available database/archive files in {year}: {sample_files[:10]}"
+            )
         return None, None
 
     # Ranking logic:
@@ -106,7 +109,8 @@ def download_file(url: str, dest_path: str):
     headers = {"User-Agent": "Mozilla/5.0"}
     temp_path = dest_path + ".tmp"
     try:
-        with requests.get(url, headers=headers, stream=True, timeout=120) as resp:
+        with requests.get(url, headers=headers, stream=True,
+                          timeout=120) as resp:
             resp.raise_for_status()
             with open(temp_path, "wb") as f:
                 for chunk in resp.iter_content(chunk_size=1024 * 1024):
@@ -132,7 +136,8 @@ def extract_databases_from_zip(zip_path: str):
 
                 if not os.path.exists(target_path):
                     logging.info(f"Extracting {target_filename}...")
-                    with archive.open(file_info) as source, open(target_path, "wb") as dest:
+                    with archive.open(file_info) as source, open(
+                            target_path, "wb") as dest:
                         dest.write(source.read())
                 extracted_db_paths.append(target_path)
 
@@ -152,7 +157,8 @@ def export_db_to_csv(db_path: str, year: int):
             check=True,
         )
     except subprocess.CalledProcessError as e:
-        logging.error(f"Error reading tables from {db_path}: {e.stderr.strip()}")
+        logging.error(
+            f"Error reading tables from {db_path}: {e.stderr.strip()}")
         raise
 
     tables = [t.strip() for t in res.stdout.splitlines() if t.strip()]
@@ -180,26 +186,26 @@ def export_db_to_csv(db_path: str, year: int):
             header = next(reader, None)
             if header is not None:
                 writer.writerow(["year"] + header)
-                stfips_idx = header.index("stfips") if "stfips" in header else None
+                stfips_idx = header.index(
+                    "stfips") if "stfips" in header else None
                 state_idx = header.index("state") if "state" in header else None
                 for row in reader:
                     if row:
-                        if (
-                            year == 2014
-                            and stfips_idx is not None
-                            and state_idx is not None
-                            and len(row) > max(stfips_idx, state_idx)
-                            and row[state_idx].strip() == "Tribal"
-                        ):
+                        if (year == 2014 and stfips_idx is not None and
+                                state_idx is not None and
+                                len(row) > max(stfips_idx, state_idx) and
+                                row[state_idx].strip() == "Tribal"):
                             row[stfips_idx] = "88"
                         writer.writerow([year] + row)
 
         if proc.wait() != 0:
-            raise RuntimeError(f"mdb-export failed with exit code {proc.returncode}")
+            raise RuntimeError(
+                f"mdb-export failed with exit code {proc.returncode}")
 
 
 def main():
-    logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
+    logging.basicConfig(level=logging.INFO,
+                        format="%(asctime)s [%(levelname)s] %(message)s")
     check_and_create_dir(OUTPUT_DIR)
 
     target_years = get_target_years()
@@ -208,7 +214,8 @@ def main():
     for year in target_years:
         url, filename = resolve_file_url(year)
         if not url:
-            logging.warning(f"No matching summary found for year {year}. Skipping.")
+            logging.warning(
+                f"No matching summary found for year {year}. Skipping.")
             continue
 
         local_file = os.path.join(OUTPUT_DIR, filename)
@@ -238,11 +245,8 @@ def main():
     check_and_create_dir(COUNTY_OUTPUT_DIR)
     for fname in os.listdir(OUTPUT_DIR):
         src_path = os.path.join(OUTPUT_DIR, fname)
-        if (
-            os.path.isfile(src_path)
-            and fname.lower().endswith(".csv")
-            and "county" in fname.lower()
-        ):
+        if (os.path.isfile(src_path) and fname.lower().endswith(".csv") and
+                "county" in fname.lower()):
             dest_path = os.path.join(COUNTY_OUTPUT_DIR, fname)
             logging.info(f"Moving county CSV: {fname} -> {dest_path}")
             shutil.move(src_path, dest_path)
