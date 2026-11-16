@@ -95,8 +95,11 @@ class ProcessTest(unittest.TestCase):
             self.assertEqual(mock_sleep.call_count, 2)
 
     def test_download_and_process_data_future_year_404_skip(self):
-        with mock.patch.object(process, 'check_url_status', return_value=False):
-            # Future year 2027 should skip and return None
+        mock_dt = mock.MagicMock()
+        mock_dt.now.return_value = datetime(2027, 1, 1)
+        with mock.patch.object(process, 'check_url_status', return_value=False), \
+             mock.patch.object(process, 'datetime', mock_dt):
+            # Future year 2027 within skip window returns None
             result = process.download_and_process_data(2027, {})
             self.assertIsNone(result)
 
@@ -115,6 +118,7 @@ class ProcessTest(unittest.TestCase):
             with self.assertRaises(requests.HTTPError):
                 process.download_and_process_data(2027, {})
 
+    @mock.patch('os.makedirs')
     @mock.patch.object(process, 'check_url_status', return_value=True)
     @mock.patch.object(process, 'download_file')
     @mock.patch.object(process, 'unzip_file', return_value='input/test.txt')
@@ -122,7 +126,8 @@ class ProcessTest(unittest.TestCase):
     @mock.patch('file_util.FileIO')
     def test_download_and_process_data_success(self, mock_file_io,
                                                mock_write_csv, mock_unzip,
-                                               mock_download, mock_check_url):
+                                               mock_download, mock_check_url,
+                                               mock_makedirs):
         mock_session = mock.MagicMock()
         result = process.download_and_process_data(2022, {},
                                                    session=mock_session)
@@ -142,6 +147,7 @@ class ProcessTest(unittest.TestCase):
         self.assertIn("No census files were downloaded or processed.",
                       str(ctx.exception))
 
+    @mock.patch('os.makedirs')
     @mock.patch.object(process, 'get_statvars', return_value={})
     @mock.patch.object(process,
                        'download_and_process_data',
@@ -149,7 +155,8 @@ class ProcessTest(unittest.TestCase):
     @mock.patch.object(process, 'merge_csv_files')
     def test_main_download_and_merge_with_session(self, mock_merge,
                                                   mock_download,
-                                                  mock_get_statvars):
+                                                  mock_get_statvars,
+                                                  mock_makedirs):
         process._FLAGS.mode = ''
         process._FLAGS.output = 'output/agriculture.csv'
         process.main([])
