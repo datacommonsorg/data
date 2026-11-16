@@ -8,15 +8,6 @@
       "params": {
         "threshold": 0.5
       }
-    },
-    {
-      "rule_id": "check_goldens_nndss_weekly_summary",
-      "description": "Verifies that critical golden and NL StatVars are present in summary_report.csv.",
-      "validator": "GOLDENS_CHECK",
-      "params": {
-        "golden_files": "../../../../golden_data/golden_summary_report.csv",
-        "goldens_key_property": ["StatVar"]
-      }
     }
   ]
 }

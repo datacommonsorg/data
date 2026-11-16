@@ -75,7 +75,7 @@ Influenza-associated pediatric mortality,medicalCondition,Influenza,medicalStatu
 "Invasive pneumococcal disease, all ages, Confirmed",medicalCondition,StreptococcusPneumonia__InvasiveDisease,medicalStatus,ConfirmedCase,,,,,,
 "Invasive pneumococcal disease, all ages, Probable",medicalCondition,StreptococcusPneumonia__InvasiveDisease,medicalStatus,ProbableCase,,,,,,
 Legionellosis,medicalCondition,LegionnairesDisease,,,,,,,,
-Leprosy (Hansen's disease),#ignore,ignore,,,,,,,,
+Leprosy (Hansen's disease),medicalCondition,Leprosy,,,,,,,,
 Leptospirosis,medicalCondition,Leptospirosis,,,,,,,,
 "Listeriosis, Confirmed",medicalCondition,Listeriosis,medicalStatus,ConfirmedCase,,,,,,
 "Listeriosis, Probable",medicalCondition,Listeriosis,medicalStatus,ProbableCase,,,,,,
