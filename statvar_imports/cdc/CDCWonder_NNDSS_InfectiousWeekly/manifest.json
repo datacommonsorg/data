@@ -15,12 +15,12 @@
             "import_inputs": [
                 {
                     "template_mcf": "output/cdc_nndss_weekly_tables.tmcf",
-                    "cleaned_csv": "output/cdc_nndss_weekly_tables.csv"
+                    "cleaned_csv": "output/cdc_nndss_weekly_tables.csv",
+                    "node_mcf": "output/*.mcf"
                 }
             ],
             "source_files": [
                 "input_files/NNDSS_Weekly_Data.csv",
-                "golden_data/*.csv",
                 "counters/*.csv"
             ],
             "cron_schedule": "30 7 * * 4",
@@ -28,13 +28,5 @@
             "validation_config_file": "validation_config.json",
             "resource_limits": {"cpu": 8, "memory": 32, "disk": 100}
         }
-    ],
-    "config_override": {
-        "invoke_import_validation": true,
-        "invoke_import_tool": true,
-        "invoke_differ_tool": true,
-        "skip_input_upload": false,
-        "skip_gcs_upload": false,
-        "cleanup_gcs_volume_mount": false
-    }
+    ]
 }
