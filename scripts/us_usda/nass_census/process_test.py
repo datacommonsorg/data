@@ -22,6 +22,7 @@ import unittest
 from unittest import mock
 
 from absl import flags
+from absl.testing import flagsaver
 import requests
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -138,14 +139,16 @@ class ProcessTest(unittest.TestCase):
             os.path.join('input', 'qs.census2022.txt.gz'),
             session=mock_session)
 
+    @mock.patch('os.makedirs')
     @mock.patch.object(process, 'get_statvars', return_value={})
     @mock.patch.object(process, 'download_and_process_data', return_value=None)
-    def test_main_empty_files_raises(self, mock_download, mock_get_statvars):
-        process._FLAGS.mode = 'download'
-        with self.assertRaises(RuntimeError) as ctx:
-            process.main([])
-        self.assertIn("No census files were downloaded or processed.",
-                      str(ctx.exception))
+    def test_main_empty_files_raises(self, mock_download, mock_get_statvars,
+                                     mock_makedirs):
+        with flagsaver.flagsaver(mode='download'):
+            with self.assertRaises(RuntimeError) as ctx:
+                process.main([])
+            self.assertIn("No census files were downloaded or processed.",
+                          str(ctx.exception))
 
     @mock.patch('os.makedirs')
     @mock.patch.object(process, 'get_statvars', return_value={})
@@ -157,14 +160,13 @@ class ProcessTest(unittest.TestCase):
                                                   mock_download,
                                                   mock_get_statvars,
                                                   mock_makedirs):
-        process._FLAGS.mode = ''
-        process._FLAGS.output = 'output/agriculture.csv'
-        process.main([])
-        mock_merge.assert_called_once()
-        self.assertTrue(mock_download.called)
-        # Verify a session was passed to download_and_process_data
-        session_arg = mock_download.call_args[1].get('session')
-        self.assertIsInstance(session_arg, requests.Session)
+        with flagsaver.flagsaver(mode='', output='output/agriculture.csv'):
+            process.main([])
+            mock_merge.assert_called_once()
+            self.assertTrue(mock_download.called)
+            # Verify a session was passed to download_and_process_data
+            session_arg = mock_download.call_args[1].get('session')
+            self.assertIsInstance(session_arg, requests.Session)
 
 
 if __name__ == '__main__':
