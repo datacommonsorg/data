@@ -31,8 +31,13 @@ from urllib3.util.retry import Retry
 
 # Define flags
 _FLAGS = flags.FLAGS
-flags.DEFINE_string('config_path', '',
-                    'Path to the configuration file in the GCS bucket.')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('config_path', '',
+                        'Path to the configuration file in the GCS bucket.')
+
 
 # EPA Air Pollutant Emissions Trends Data provenance page
 EPA_TRENDS_PAGE_URL = ("https://www.epa.gov/air-emissions-inventories/"
@@ -317,4 +322,5 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

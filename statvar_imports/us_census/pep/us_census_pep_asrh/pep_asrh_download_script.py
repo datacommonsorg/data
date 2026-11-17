@@ -24,18 +24,23 @@ from retry import retry
 
 # Define command-line flags
 FLAGS = flags.FLAGS
-flags.DEFINE_string(
-    "input_path",
-    os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                 "gcs_output/input_files"),
-    "Directory to store downloaded files.",
-)
-flags.DEFINE_integer("start_year", 2030,
-                     "Starting year for data search (inclusive).")
-flags.DEFINE_integer(
-    "url_path_base_year", 2020,
-    "Base year for the URL path structure (e.g., '2020' in '.../2020-{YEAR}/...')."
-)
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        "input_path",
+        os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                     "gcs_output/input_files"),
+        "Directory to store downloaded files.",
+    )
+    flags.DEFINE_integer("start_year", 2030,
+                         "Starting year for data search (inclusive).")
+    flags.DEFINE_integer(
+        "url_path_base_year", 2020,
+        "Base year for the URL path structure (e.g., '2020' in '.../2020-{YEAR}/...')."
+    )
+
 
 _URLS_TO_SCAN = {
     "national": (
@@ -209,4 +214,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

@@ -71,6 +71,9 @@ select = [
     "F401",
     # Import sorting (isort).
     "I001",
+    # Star imports (`from x import *`) and names that may come from them.
+    "F403",
+    "F405",
 ]
 
 [lint.isort]

@@ -20,10 +20,14 @@ from absl import flags
 import requests
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('output_folder',
-                    '',
-                    'path to folder to keep the downloaded data in',
-                    short_name="output")
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('output_folder',
+                        '',
+                        'path to folder to keep the downloaded data in',
+                        short_name="output")
 
 
 def download_data(output_destination):
@@ -42,4 +46,5 @@ def main(args):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)
