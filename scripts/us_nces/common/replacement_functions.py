@@ -121,6 +121,8 @@ _SCHOOL_TYPE = {
         "NCES_DataMissing",
     "–":
         "NCES_DataMissing",
+    "†":
+        "NCES_DataNotApplicable",
 }
 
 _SCHOOL_GRADE = {
@@ -173,6 +175,7 @@ _SCHOOL_GRADE = {
     "Grade 13": "SchoolGrade13",
     np.nan: "NCES_GradeDataMissing",
     "–": "NCES_GradeDataMissing",
+    "†": "NCES_GradeDataNotApplicable",
     "All Ungraded": "NCESUngradedClasses",
     "Adult Education": "AdultEducation",
     "Transitional 1st grade": "TransitionalGrade1",
@@ -231,11 +234,12 @@ _SCHOOL_GRADE_PLACE = {
     "Grade 13": "SchoolGrade13",
     np.nan: "NCES_GradeDataMissing",
     "–": "NCES_GradeDataMissing",
+    "†": "NCES_GradeDataNotApplicable",
     "Adult Education": "AdultEducation",
     "Transitional 1st grade": "TransitionalGrade1"
 }
 
-_PHYSICAL_ADD = {np.nan: "", "–": "", "Po Box": "PO BOX"}
+_PHYSICAL_ADD = {np.nan: "", "–": "", "†": "", "Po Box": "PO BOX"}
 
 # pylint:disable=line-too-long
 _SCHOOL_LEVEL = {
@@ -276,9 +280,11 @@ _SCHOOL_LEVEL = {
     "Secondary":
         "SecondarySchool",
     np.nan:
-        "",
+        "NCES_SchoolLevelDataMissing",
     "–":
-        ""
+        "NCES_SchoolLevelDataMissing",
+    "†":
+        "NCES_SchoolLevelDataNotApplicable"
 }
 # pylint:enable=line-too-long
 
@@ -297,6 +303,7 @@ _RACE_ = {
 _LUNCH = {
     "Reduced-price Lunch":
         "ReducedLunch",
+    # Legacy mapping preserved for historical time-series continuity with NCES_PublicSchoolStats.
     "Free and Reduced Lunch":
         "DirectCertificationLunch",
     "Free Lunch":
@@ -314,9 +321,11 @@ _LUNCH = {
     "Yes under Provision 3":
         "NCES_NationalSchoolLunchProgramYesUnderProvision3",
     np.nan:
-        "NCES_MagnetDataMissing",
+        "NCES_NationalSchoolLunchProgramDataMissing",
     "–":
-        "NCES_MagnetDataMissing"
+        "NCES_NationalSchoolLunchProgramDataMissing",
+    "†":
+        "NCES_NationalSchoolLunchProgramDataNotApplicable"
 }
 
 _SCHOOL_STAFF = {
@@ -372,7 +381,7 @@ COLUMNS = {
     "Phone Number": "PhoneNumber"
 }
 
-_GENDER = {"female": "Female", "male": "Male"}
+_GENDER = {r"\bfemale\b": "Female", r"\bmale\b": "Male"}
 
 _LOCALE = {
     '13-City: Small': "NCES_CitySmall",
@@ -388,27 +397,30 @@ _LOCALE = {
     '31-Town: Fringe': "NCES_TownFringe",
     '43-Rural: Remote': "NCES_RuralRemote",
     np.nan: "NCES_LocaleDataMissing",
-    "–": "NCES_LocaleDataMissing"
+    "–": "NCES_LocaleDataMissing",
+    "†": "NCES_LocaleDataNotApplicable"
 }
 
 _UNREADABLE_TEXT = {"–": np.nan, "†": np.nan}
 
-_NAN = {np.nan: "", "nan": ""}
+_NAN = {np.nan: "", "nan": "", "–": "", "†": ""}
 
-_CITY = {np.nan: "", "–": "", " ": ""}
+_CITY = {np.nan: "", "–": "", "†": "", " ": ""}
 
 _MAGNET = {
     "1-Yes": "NCES_MagnetYes",
     "2-No": "NCES_MagnetNo",
     np.nan: "NCES_MagnetDataMissing",
-    "–": "NCES_MagnetDataMissing"
+    "–": "NCES_MagnetDataMissing",
+    "†": "NCES_MagnetDataNotApplicable"
 }
 
 _CHARTER = {
     np.nan: "NCES_CharterDataMissing",
     "1-Yes": "NCES_CharterYes",
     "2-No": "NCES_CharterNo",
-    "–": "NCES_CharterDataMissing"
+    "–": "NCES_CharterDataMissing",
+    "†": "NCES_CharterDataNotApplicable"
 }
 
 _TITLE = {
@@ -416,6 +428,8 @@ _TITLE = {
         "NCES_TitleISchoolStatusDataMissing",
     "–":
         "NCES_TitleISchoolStatusDataMissing",
+    "†":
+        "NCES_TitleISchoolStatusDataNotApplicable",
     "6-Not a Title I school":
         "NCES_TitleISchoolStatusNotEligible",
     "5-Title I schoolwide school":
@@ -431,23 +445,22 @@ _TITLE = {
 }
 
 _SCHOOL_PUBLIC_TYPE = {
-    "1-Regular school": "NCES_PublicSchoolTypeRegular",
-    "4-Alternative/other school": "NCES_PublicSchoolTypeOther",
-    "2-Special education school": "NCES_PublicSchoolTypeSpecialEducation",
-    "3-Vocational school": "NCES_PublicSchoolTypeVocational",
+    "1-regular school": "NCES_PublicSchoolTypeRegular",
+    "2-special education school": "NCES_PublicSchoolTypeSpecialEducation",
+    "3-vocational school": "NCES_PublicSchoolTypeVocational",
+    "3-career and technical school": "NCES_PublicSchoolTypeVocational",
+    "4-alternative/other school": "NCES_PublicSchoolTypeOther",
+    "4-alternative education school": "NCES_PublicSchoolTypeOther",
     np.nan: "NCES_PublicSchoolTypeDataMissing",
-    "–": "NCES_PublicSchoolTypeDataMissing"
+    "–": "NCES_PublicSchoolTypeDataMissing",
+    "†": "NCES_PublicSchoolTypeDataNotApplicable",
 }
 
 _STATE_NAME = {
-    'DODEA (Overseas and Domestic)':
-        'NCES_DepartmentOfDefenseEducationActivity',
-    "Bureau of Indian Education":
-        "NCES_BureauOfIndianEducation",
-    "DEPARTMENT OF DEFENSE EDUCATION ACTIVITY":
-        "NCES_DepartmentOfDefenseEducationActivity",
-    "DEPARTMENT OF DEFENSE":
-        "NCES_DepartmentOfDefenseEducationActivity"
+    'DODEA (Overseas and Domestic)': 'NCES_DepartmentOfDefense',
+    "Bureau of Indian Education": "NCES_BureauOfIndianEducation",
+    "DEPARTMENT OF DEFENSE EDUCATION ACTIVITY": "NCES_DepartmentOfDefense",
+    "DEPARTMENT OF DEFENSE": "NCES_DepartmentOfDefense"
 }
 
 
@@ -501,10 +514,15 @@ def replace_values(data_df: pd.DataFrame,
         "Agency_Name": _NAN,
         "School_Level_17": _SCHOOL_LEVEL,
         "School_Level_16": _SCHOOL_LEVEL,
+        "School_Level": _SCHOOL_LEVEL,
         "State_Agency_ID": _NAN,
         "State_School_ID": _NAN,
         "State_Name": _STATE_NAME
     }
+
+    if "School_Type_Public" in data_df.columns:
+        data_df["School_Type_Public"] = data_df["School_Type_Public"].str.lower(
+        )
 
     df_columns = data_df.columns.to_list()
     for column, replacements in cols_mapper.items():
