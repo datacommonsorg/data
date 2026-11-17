@@ -152,8 +152,19 @@ def preprocess_csv(filepath: str, out_filepath: str) -> pd.DataFrame:
         "Label",
     ]
 
+    bad_lines_count = 0
+
+    def _handle_bad_line(bad_line):
+        nonlocal bad_lines_count
+        bad_lines_count += 1
+        return None
+
     reader = pd.read_csv(
-        filepath, chunksize=100000, dtype=str, low_memory=False, on_bad_lines="skip"
+        filepath,
+        chunksize=100000,
+        dtype=str,
+        engine="python",
+        on_bad_lines=_handle_bad_line,
     )
     for chunk_idx, chunk in enumerate(reader, start=1):
         logging.info(f"Processing chunk {chunk_idx}...")
@@ -227,6 +238,8 @@ def preprocess_csv(filepath: str, out_filepath: str) -> pd.DataFrame:
         if chunks
         else pd.DataFrame(columns=OUTPUT_COLUMNS)
     )
+    if bad_lines_count:
+        logging.warning(f"Skipped {bad_lines_count} malformed CSV rows.")
     out_df.to_csv(out_filepath, index=False)
     logging.info(f"Wrote {len(out_df)} preprocessed rows to {out_filepath}.")
     return out_df

@@ -20,7 +20,9 @@
                 }
             ],
             "source_files": [
+                "input_files/rows.csv",
                 "input_files/NNDSS_Weekly_Data.csv",
+                "statvar_dcid_remap.csv",
                 "counters/*.csv"
             ],
             "cron_schedule": "30 7 * * 4",
