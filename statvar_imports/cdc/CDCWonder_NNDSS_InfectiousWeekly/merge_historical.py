@@ -49,10 +49,9 @@ flags.DEFINE_string(
 )
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-INPUT_DIR = os.path.join(SCRIPT_DIR, "input_files")
-HISTORICAL_LOCAL_FILE = os.path.join(INPUT_DIR,
+HISTORY_DIR = os.path.join(SCRIPT_DIR, "history")
+HISTORICAL_LOCAL_FILE = os.path.join(HISTORY_DIR,
                                      "historical_cdc_nndss_weekly_tables.csv")
-HISTORICAL_CUTOFF_DATE = "2022-01-01"
 MEASUREMENT_METHOD = "dcs:CDC_NNDSS_Diseases_WeeklyTables"
 
 OUTPUT_COLUMNS = [
@@ -77,25 +76,24 @@ observationPeriod: C:NNDSWeekly->observationPeriod
 
 def load_historical(local_path: str, bucket_name: str,
                     blob_name: str) -> pd.DataFrame:
-    """Load 2006-2021 historical rows (< 2022-01-01)."""
-    csv_path = local_path
-    if not csv_path:
-        from google.cloud import storage
+  """Load all historical baseline rows from 20250206 to ensure 0 deletions."""
+  csv_path = local_path
+  if not csv_path:
+    from google.cloud import storage
 
-        logging.info(
-            f"Downloading historical archive from gs://{bucket_name}/{blob_name}..."
-        )
-        client = storage.Client()
-        bucket = client.bucket(bucket_name)
-        bucket.blob(blob_name).download_to_filename(HISTORICAL_LOCAL_FILE)
-        csv_path = HISTORICAL_LOCAL_FILE
-
-    df = pd.read_csv(csv_path, usecols=OUTPUT_COLUMNS, dtype=str)
-    df = df.reindex(columns=OUTPUT_COLUMNS)
-    df = df[df["observationDate"] < HISTORICAL_CUTOFF_DATE].copy()
     logging.info(
-        f"Loaded {len(df)} historical rows (< {HISTORICAL_CUTOFF_DATE}).")
-    return df
+        f"Downloading historical archive from gs://{bucket_name}/{blob_name}..."
+    )
+    Path(HISTORY_DIR).mkdir(parents=True, exist_ok=True)
+    client = storage.Client()
+    bucket = client.bucket(bucket_name)
+    bucket.blob(blob_name).download_to_filename(HISTORICAL_LOCAL_FILE)
+    csv_path = HISTORICAL_LOCAL_FILE
+
+  df = pd.read_csv(csv_path, usecols=OUTPUT_COLUMNS, dtype=str)
+  df = df.reindex(columns=OUTPUT_COLUMNS)
+  logging.info(f"Loaded {len(df)} historical baseline rows.")
+  return df
 
 
 def merge_outputs(hist_df: pd.DataFrame, processor_csv_path: str,
@@ -132,8 +130,8 @@ def merge_outputs(hist_df: pd.DataFrame, processor_csv_path: str,
 
 
 def main(argv):
-    del argv
-    Path(INPUT_DIR).mkdir(parents=True, exist_ok=True)
+  del argv
+  Path(HISTORY_DIR).mkdir(parents=True, exist_ok=True)
     output_dir = _FLAGS.output_dir or os.path.join(SCRIPT_DIR, "output")
     processor_csv = _FLAGS.processor_csv or os.path.join(
         output_dir, "nndss_weekly_output.csv")
