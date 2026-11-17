@@ -317,6 +317,69 @@ class DownloadTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             download_mod._fetch_2022_literacy_rates_rows(session=session)
 
+    @patch.object(download_mod, "_fetch_2022_literacy_rates_rows")
+    def test_ensure_literacy_rates_file_fallback_and_preserve(self, _mock_rows):
+        """Tests that ensure_literacy_rates_file respects fallback_to_cached and protects target CSV."""
+        cached_rates = os.path.join(self.test_dir, "rates.csv")
+        with open(cached_rates, "w", encoding="utf-8") as f:
+            f.write("observationAbout,observationDate,variableMeasured,value\n"
+                    "dcid:country/BRA,2022,dcid:Dummy,0.9\n")
+
+        with patch("google.cloud.storage.Client",
+                   side_effect=RuntimeError("GCS unavailable")):
+            download_mod.ensure_literacy_rates_file(
+                rates_out=cached_rates,
+                session=MagicMock(),
+                fallback_to_cached=True,
+            )
+            with open(cached_rates, "r", encoding="utf-8") as f:
+                self.assertIn("dcid:Dummy,0.9", f.read())
+
+            with self.assertRaises(RuntimeError):
+                download_mod.ensure_literacy_rates_file(
+                    rates_out=cached_rates,
+                    session=MagicMock(),
+                    fallback_to_cached=False,
+                )
+
+    @patch.object(download_mod,
+                  "ensure_literacy_rates_file",
+                  side_effect=RuntimeError("Rates failed"))
+    @patch.object(download_mod, "parse_2000_literacy_files", return_value=[])
+    @patch.object(download_mod, "fetch_2010_illiterate_race", return_value=[])
+    @patch.object(download_mod, "fetch_raw_input_files", return_value=[])
+    def test_download_rates_failure_does_not_overwrite_existing_csv(
+            self, _mock_raw, _mock_2010, _mock_2000, _mock_rates):
+        """Tests that failing literacy rates keeps existing brazil_literacy.csv intact when fallback=False."""
+        session = MagicMock()
+        mock_response = MagicMock()
+        mock_response.json.return_value = [
+            {
+                "NC": "Nível Territorial"
+            },
+            {
+                "NC": "1",
+                "D1N": "Brasil",
+                "D3N": "2022",
+                "D4N": "Alfabetizadas",
+                "D5N": "Total",
+                "V": "151538411",
+            },
+        ]
+        mock_response.raise_for_status.return_value = None
+        session.get.return_value = mock_response
+
+        out_csv = os.path.join(self.test_dir, "existing_literacy.csv")
+        with open(out_csv, "w", encoding="utf-8") as f:
+            f.write("SENTINEL_EXISTING_CSV\n")
+
+        with self.assertRaises(RuntimeError):
+            download_all_years(session=session,
+                               output_file=out_csv,
+                               fallback_to_cached=False)
+        with open(out_csv, "r", encoding="utf-8") as f:
+            self.assertEqual(f.read(), "SENTINEL_EXISTING_CSV\n")
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -568,10 +568,19 @@ def download_all_years(
         raise RuntimeError(
             f"Atomic CSV write failed: {tmp_path} is missing or empty.")
 
+    try:
+        ensure_literacy_rates_file(
+            session=session,
+            raw_dir=raw_dir,
+            fallback_to_cached=fallback_to_cached,
+        )
+    except Exception:
+        if os.path.isfile(tmp_path):
+            os.remove(tmp_path)
+        raise
+
     os.replace(tmp_path, target_path)
     logging.info(f"Wrote {len(df)} records to {target_path}")
-
-    ensure_literacy_rates_file(session=session, raw_dir=raw_dir)
 
     return target_path
 
@@ -810,6 +819,7 @@ def ensure_literacy_rates_file(
     rates_out: Optional[str] = None,
     session: Optional[requests.Session] = None,
     raw_dir: Optional[str] = None,
+    fallback_to_cached: bool = True,
 ) -> None:
     """Generates fractional literacy rate observations across 2000, 2010, and 2022."""
     from google.cloud import storage
@@ -818,36 +828,50 @@ def ensure_literacy_rates_file(
                                              "brazil_literacy_rates.csv")
     active_session = session or get_robust_session()
 
-    client = storage.Client()
-    bucket = client.bucket(GCS_BUCKET_NAME)
-    b1 = bucket.blob(
-        "country/brazil/input_files/Brazil_2000_2010_Illiterate_age.csv")
-    b2 = bucket.blob("country/brazil/input_files/Brazil_2000_literate.csv")
-    bytes1 = b1.download_as_bytes()
-    bytes2 = b2.download_as_bytes()
-    if raw_dir:
-        with open(os.path.join(raw_dir, "Brazil_2000_2010_Illiterate_age.csv"),
-                  "wb") as f:
-            f.write(bytes1)
-        with open(os.path.join(raw_dir, "Brazil_2000_literate.csv"), "wb") as f:
-            f.write(bytes2)
-    df1 = pd.read_csv(io.BytesIO(bytes1))
-    df2 = pd.read_csv(io.BytesIO(bytes2))
-    df2_rates = df2[df2["unit"] == "dcs:Percent"]
-    hist_df = pd.concat([df1, df2_rates], ignore_index=True)
-    hist_df["scalingFactor"] = 100
+    try:
+        client = storage.Client()
+        bucket = client.bucket(GCS_BUCKET_NAME)
+        b1 = bucket.blob(
+            "country/brazil/input_files/Brazil_2000_2010_Illiterate_age.csv")
+        b2 = bucket.blob("country/brazil/input_files/Brazil_2000_literate.csv")
+        bytes1 = b1.download_as_bytes()
+        bytes2 = b2.download_as_bytes()
+        if raw_dir:
+            with open(
+                    os.path.join(raw_dir,
+                                 "Brazil_2000_2010_Illiterate_age.csv"),
+                    "wb") as f:
+                f.write(bytes1)
+            with open(os.path.join(raw_dir, "Brazil_2000_literate.csv"),
+                      "wb") as f:
+                f.write(bytes2)
+        df1 = pd.read_csv(io.BytesIO(bytes1))
+        df2 = pd.read_csv(io.BytesIO(bytes2))
+        df2_rates = df2[df2["unit"] == "dcs:Percent"]
+        hist_df = pd.concat([df1, df2_rates], ignore_index=True)
+        hist_df["scalingFactor"] = 100
 
-    rows_2022 = _fetch_2022_literacy_rates_rows(active_session, raw_dir=raw_dir)
-    df_2022 = pd.DataFrame(rows_2022)
-    combined = pd.concat([hist_df, df_2022], ignore_index=True)
-    combined = combined.drop_duplicates(
-        subset=["observationAbout", "observationDate", "variableMeasured"],
-        keep="last",
-    )
-    _write_rates_atomically(combined, target_rates)
-    logging.info(
-        f"Generated {len(combined)} rows in {target_rates} (historical GCS + live 2022 SIDRA)"
-    )
+        rows_2022 = _fetch_2022_literacy_rates_rows(active_session,
+                                                    raw_dir=raw_dir)
+        df_2022 = pd.DataFrame(rows_2022)
+        combined = pd.concat([hist_df, df_2022], ignore_index=True)
+        combined = combined.drop_duplicates(
+            subset=["observationAbout", "observationDate", "variableMeasured"],
+            keep="last",
+        )
+        _write_rates_atomically(combined, target_rates)
+        logging.info(
+            f"Generated {len(combined)} rows in {target_rates} (historical GCS + live 2022 SIDRA)"
+        )
+    except Exception as e:
+        if fallback_to_cached and os.path.isfile(target_rates):
+            logging.warning(
+                f"Literacy rates update failed ({e}). Falling back to cached copy: {target_rates}"
+            )
+            return
+        logging.error(f"Literacy rates generation error: {e}")
+        raise RuntimeError(
+            f"Error generating Brazil Census literacy rates: {e}") from e
 
 
 def main(argv: List[str]) -> None:

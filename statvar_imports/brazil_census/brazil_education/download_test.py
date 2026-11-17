@@ -208,6 +208,28 @@ class DownloadTest(unittest.TestCase):
         self.assertEqual(saved, cached_csv)
         self.assertTrue(os.path.isfile(saved))
 
+    def test_parse_raw_education_xls_logs_unmapped_codes(self):
+        """Tests that unmapped 2000 IBGE codes are logged via warning instead of silently skipped."""
+        rows = [["" for _ in range(3)] for _ in range(9)]
+        rows[6] = [
+            "Código da Unidade Geográfica",
+            "Student Nursery",
+            "Student PreKindergarten",
+        ]
+        rows[7] = [3550308, 100, 200]
+        rows[8] = [9999999, 50, 75]
+        fake_df = pd.DataFrame(rows)
+
+        with patch("pandas.read_excel", return_value=fake_df), \
+             self.assertLogs(level="WARNING") as cm:
+            parsed = download_mod.parse_raw_education_xls(
+                b"fake-xls",
+                mapping={"3550308": "São Paulo - SP"},
+            )
+        self.assertEqual(len(parsed), 2)
+        self.assertEqual({r["Localidade"] for r in parsed}, {"São Paulo - SP"})
+        self.assertTrue(any("9999999" in msg for msg in cm.output))
+
 
 if __name__ == "__main__":
     unittest.main()

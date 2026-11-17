@@ -425,6 +425,87 @@ class DownloadTest(unittest.TestCase):
                     "D5N": "55 a 59 anos",
                     "V": "5000",
                 },
+                {
+                    "NC": "1",
+                    "D1N": "Brasil",
+                    "D3N": year,
+                    "D4N": "Total",
+                    "D5N": "60 a 64 anos",
+                    "V": "4000",
+                },
+                {
+                    "NC": "1",
+                    "D1N": "Brasil",
+                    "D3N": year,
+                    "D4N": "Total",
+                    "D5N": "65 a 69 anos",
+                    "V": "3500",
+                },
+                {
+                    "NC": "1",
+                    "D1N": "Brasil",
+                    "D3N": year,
+                    "D4N": "Total",
+                    "D5N": "70 a 74 anos",
+                    "V": "3000",
+                },
+                {
+                    "NC": "1",
+                    "D1N": "Brasil",
+                    "D3N": year,
+                    "D4N": "Total",
+                    "D5N": "75 a 79 anos",
+                    "V": "2500",
+                },
+                {
+                    "NC": "1",
+                    "D1N": "Brasil",
+                    "D3N": year,
+                    "D4N": "Total",
+                    "D5N": "80 a 84 anos",
+                    "V": "1500",
+                },
+                {
+                    "NC": "1",
+                    "D1N": "Brasil",
+                    "D3N": year,
+                    "D4N": "Total",
+                    "D5N": "85 a 89 anos",
+                    "V": "1000",
+                },
+                {
+                    "NC": "1",
+                    "D1N": "Brasil",
+                    "D3N": year,
+                    "D4N": "Total",
+                    "D5N": "90 a 94 anos",
+                    "V": "500",
+                },
+                {
+                    "NC": "1",
+                    "D1N": "Brasil",
+                    "D3N": year,
+                    "D4N": "Total",
+                    "D5N": "95 a 99 anos",
+                    "V": "250",
+                },
+                {
+                    "NC": "1",
+                    "D1N": "Brasil",
+                    "D3N": year,
+                    "D4N": "Total",
+                    "D5N": "100 anos ou mais",
+                    "V": "100",
+                },
+                {
+                    "NC": "6",
+                    "D1C": "3550308",
+                    "D1N": "São Paulo - SP",
+                    "D3N": year,
+                    "D4N": "Total",
+                    "D5N": "15 a 19 anos",
+                    "V": "900000",
+                },
             ]
             return resp
 
@@ -440,6 +521,8 @@ class DownloadTest(unittest.TestCase):
         self.assertIn("1940", df["Ano"].astype(str).values)
         self.assertIn("2022", df["Ano"].astype(str).values)
         self.assertIn("De 0 a 14 anos", df["Idade"].values)
+        self.assertIn("De 60 anos ou mais", df["Idade"].values)
+        self.assertIn("3550308", df["Localidade"].astype(str).values)
 
     @patch.object(download_mod, "fetch_raw_historical_files")
     def test_download_all_years_fallback_to_cached(self, mock_hist):

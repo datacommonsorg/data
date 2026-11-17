@@ -234,6 +234,8 @@ def parse_raw_education_xls(file_content: bytes,
         elif c_str in RAW_COL_TO_NIVEL:
             col_map[idx] = RAW_COL_TO_NIVEL[c_str]
 
+    unmapped_codes = set()
+    skipped_unmapped = 0
     for r_idx in range(7, len(df)):
         r = df.iloc[r_idx]
         code = r.iloc[code_idx] if code_idx is not None else None
@@ -246,6 +248,8 @@ def parse_raw_education_xls(file_content: bytes,
 
         place_resolved = mapping.get(str(code_int))
         if not place_resolved:
+            unmapped_codes.add(str(code_int))
+            skipped_unmapped += 1
             continue
 
         for c_idx, nivel in col_map.items():
@@ -264,6 +268,12 @@ def parse_raw_education_xls(file_content: bytes,
                 "NivelEnsino": nivel,
                 "Estudantes": val_int,
             })
+    if unmapped_codes:
+        sample_codes = sorted(unmapped_codes)[:10]
+        logging.warning(
+            f"Skipped {skipped_unmapped} rows across {len(unmapped_codes)} "
+            f"unmapped 2000 IBGE codes in education XLS (sample: {sample_codes})"
+        )
     if not rows:
         raise ValueError("Parsed 0 rows from 2000 education XLS workbook.")
     return rows

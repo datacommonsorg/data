@@ -540,9 +540,11 @@ def download_all_years(
                 })
         all_rows.extend(sidra_2022_rows)
 
-        # 4. Compute broad age aggregations (0To14, 15To59, 60OrMore) for 2022
-        agg_rows = compute_broad_age_aggregations(sidra_2022_rows, "2022")
-        all_rows.extend(agg_rows)
+        # 4. Compute broad age aggregations (0To14, 15To59, 60OrMore) dynamically per fetched year
+        for year_str in sorted(
+            {r["Ano"] for r in sidra_2022_rows if r.get("Ano")}):
+            all_rows.extend(
+                compute_broad_age_aggregations(sidra_2022_rows, year_str))
 
     except Exception as e:
         if fallback_to_cached and os.path.isfile(target_path):
