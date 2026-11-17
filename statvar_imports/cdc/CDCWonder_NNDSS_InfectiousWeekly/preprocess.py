@@ -41,10 +41,8 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 INPUT_DIR = os.path.join(SCRIPT_DIR, "input_files")
 RAW_FILE = os.path.join(INPUT_DIR, "rows.csv")
 OUTPUT_FILE = os.path.join(INPUT_DIR, "NNDSS_Weekly_Data.csv")
-SOURCE_URL = (
-    "https://data.cdc.gov/api/views/x9gk-5huc/rows.csv"
-    "?accessType=DOWNLOAD&api_foundry=true"
-)
+SOURCE_URL = ("https://data.cdc.gov/api/views/x9gk-5huc/rows.csv"
+              "?accessType=DOWNLOAD&api_foundry=true")
 SKIP_FLAGS = {"N", "NN", "NP", "NC", "U"}
 
 OUTPUT_COLUMNS = [
@@ -86,15 +84,12 @@ def _format_number(val: float) -> str:
 def download_source_csv() -> str:
     """Download x9gk-5huc CSV from CDC with exponential backoff retry."""
     util_script_path = os.path.abspath(
-        os.path.join(SCRIPT_DIR, "../../../util/download_util_script.py")
-    )
-    spec = importlib.util.spec_from_file_location(
-        "download_util_script", util_script_path
-    )
+        os.path.join(SCRIPT_DIR, "../../../util/download_util_script.py"))
+    spec = importlib.util.spec_from_file_location("download_util_script",
+                                                  util_script_path)
     if spec is None or spec.loader is None:
         raise ImportError(
-            f"Could not load download_util_script from {util_script_path}"
-        )
+            f"Could not load download_util_script from {util_script_path}")
     download_util_script = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(download_util_script)
     download_file = download_util_script.download_file
@@ -124,8 +119,7 @@ def download_source_csv() -> str:
             )
         except Exception as exc:
             logging.warning(
-                f"Download attempt {attempt}/{max_attempts} raised {exc}."
-            )
+                f"Download attempt {attempt}/{max_attempts} raised {exc}.")
         if attempt < max_attempts:
             time.sleep(retry_delay)
             retry_delay *= 2
@@ -186,9 +180,8 @@ def preprocess_csv(filepath: str, out_filepath: str) -> pd.DataFrame:
 
         yw_pairs = chunk[["Current MMWR Year", "MMWR WEEK"]].drop_duplicates()
         date_lookup = {
-            (r["Current MMWR Year"], r["MMWR WEEK"]): get_mmwr_week_start_date(
-                r["Current MMWR Year"], r["MMWR WEEK"]
-            )
+            (r["Current MMWR Year"], r["MMWR WEEK"]):
+                get_mmwr_week_start_date(r["Current MMWR Year"], r["MMWR WEEK"])
             for _, r in yw_pairs.iterrows()
         }
         chunk["observationDate"] = [
@@ -203,9 +196,10 @@ def preprocess_csv(filepath: str, out_filepath: str) -> pd.DataFrame:
         is_ny_ex_nyc = area_upper == "NEW YORK"
         is_nyc = area_upper == "NEW YORK CITY"
 
-        for rec in chunk[is_ny_ex_nyc | is_nyc][
-            ["Current MMWR Year", "MMWR WEEK", "observationDate", "Label", "val_num"]
-        ].to_dict("records"):
+        for rec in chunk[is_ny_ex_nyc | is_nyc][[
+                "Current MMWR Year", "MMWR WEEK", "observationDate", "Label",
+                "val_num"
+        ]].to_dict("records"):
             key = (
                 rec["Current MMWR Year"],
                 rec["MMWR WEEK"],
@@ -219,24 +213,18 @@ def preprocess_csv(filepath: str, out_filepath: str) -> pd.DataFrame:
         chunks.append(kept[OUTPUT_COLUMNS])
 
     if ny_sums:
-        ny_rows = [
-            {
-                "Reporting Area": "NEW YORK",
-                "Current MMWR Year": k[0],
-                "MMWR WEEK": k[1],
-                "observationDate": k[2],
-                "Label": k[3],
-                "Current week": _format_number(v),
-            }
-            for k, v in ny_sums.items()
-        ]
+        ny_rows = [{
+            "Reporting Area": "NEW YORK",
+            "Current MMWR Year": k[0],
+            "MMWR WEEK": k[1],
+            "observationDate": k[2],
+            "Label": k[3],
+            "Current week": _format_number(v),
+        } for k, v in ny_sums.items()]
         chunks.append(pd.DataFrame(ny_rows, columns=OUTPUT_COLUMNS))
 
-    out_df = (
-        pd.concat(chunks, ignore_index=True)
-        if chunks
-        else pd.DataFrame(columns=OUTPUT_COLUMNS)
-    )
+    out_df = (pd.concat(chunks, ignore_index=True) if chunks else pd.DataFrame(
+        columns=OUTPUT_COLUMNS))
     if bad_lines_count:
         logging.warning(f"Skipped {bad_lines_count} malformed CSV rows.")
     out_df.to_csv(out_filepath, index=False)
