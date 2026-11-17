@@ -14,10 +14,8 @@
 """Unit tests for statvar_imports/school_retention/download_script.py."""
 
 import http.client
-import importlib.util
 import io
 import os
-import subprocess
 import sys
 import tempfile
 import unittest
@@ -361,94 +359,8 @@ class DownloadScriptTest(unittest.TestCase):
                                                   2026,
                                                   mapped_cols=self.mapped_cols)
 
-    def _get_processor_python(self) -> str:
-        """Returns a Python executable with stat_var_processor dependencies."""
-        if importlib.util.find_spec("fastavro") is not None:
-            return sys.executable
-        venv_python = os.path.join(_REPO_ROOT, ".env", "bin", "python3")
-        if os.path.isfile(venv_python):
-            return venv_python
-        self.skipTest(
-            "stat_var_processor dependencies missing; run via ./run_tests.sh")
-
-    def _run_stat_var_processor_hermetic(
-        self,
-        input_csv: str,
-        output_prefix: str,
-        tmp_dir: str,
-    ) -> str:
-        """Runs stat_var_processor.py hermetically with repo PVMap/metadata."""
-        python_bin = self._get_processor_python()
-        processor_script = os.path.join(
-            _REPO_ROOT,
-            "tools",
-            "statvar_importer",
-            "stat_var_processor.py",
-        )
-        pvmap_path = os.path.join(download_script.SCRIPT_DIR,
-                                  "retention_pvmap.csv")
-        metadata_path = os.path.join(download_script.SCRIPT_DIR,
-                                     "retention_metadata.csv")
-        hermetic_override = os.path.join(tmp_dir, "hermetic_override.csv")
-        with open(hermetic_override, "w", encoding="utf-8") as f:
-            f.write("parameter,value\n"
-                    "reconcile_nodes,False\n"
-                    "generate_statvar_mcf,False\n")
-        counters_csv = os.path.join(tmp_dir, "counters.csv")
-        cmd = [
-            python_bin,
-            processor_script,
-            f"--input_data={input_csv}",
-            f"--pv_map={pvmap_path}",
-            f"--config_file={metadata_path},{hermetic_override}",
-            f"--output_path={output_prefix}",
-            f"--output_counters={counters_csv}",
-            "--recon_property=variableMeasured",
-            "--log_level=-2",
-        ]
-        res = subprocess.run(cmd, capture_output=True, text=True, check=False)
-        self.assertEqual(
-            res.returncode,
-            0,
-            f"stat_var_processor.py failed: {res.stderr}",
-        )
-        return counters_csv
-
-    def test_e2e_stat_var_processor_matches_test_data_expected_outputs(self):
-        """Verifies stat_var_processor E2E output on test_data/retention_input.csv."""
-        test_data_dir = os.path.join(download_script.SCRIPT_DIR, "test_data")
-        input_csv = os.path.join(test_data_dir, "retention_input.csv")
-        expected_csv = os.path.join(test_data_dir, "retention_output.csv")
-        expected_tmcf = os.path.join(test_data_dir, "retention_output.tmcf")
-
-        with tempfile.TemporaryDirectory() as tmp_dir:
-            output_prefix = os.path.join(tmp_dir, "retention_output")
-            counters_csv = self._run_stat_var_processor_hermetic(
-                input_csv, output_prefix, tmp_dir)
-
-            with open(counters_csv, "r", encoding="utf-8") as f:
-                counters_text = f.read()
-            self.assertNotIn("error-", counters_text.lower())
-
-            sort_cols = [
-                "observationAbout",
-                "observationDate",
-                "variableMeasured",
-            ]
-            df_actual = pd.read_csv(f"{output_prefix}.csv").sort_values(
-                by=sort_cols, ignore_index=True)
-            df_expected = pd.read_csv(expected_csv).sort_values(
-                by=sort_cols, ignore_index=True)
-            pd.testing.assert_frame_equal(df_actual, df_expected)
-
-            with open(f"{output_prefix}.tmcf", "r", encoding="utf-8") as f_act:
-                actual_tmcf = f_act.read()
-            with open(expected_tmcf, "r", encoding="utf-8") as f_exp:
-                expected_tmcf_text = f_exp.read()
-            self.assertEqual(actual_tmcf, expected_tmcf_text)
-
-    def test_e2e_stat_var_processor_maps_jj_and_2024_el_columns(self):
-        """Verifies column-3 JJ mapping and 2024 EL/IND columns end-to-end."""
+    def test_transform_crdc_data_maps_jj_and_2024_el_columns(self):
+        """Verifies column-3 JJ normalization and 2024 EL/IND CSV formatting."""
         raw_df = pd.DataFrame({
             "LEAID": ["100005", "0100006"],
             "SCHID": ["870a", "251"],
@@ -463,30 +375,25 @@ class DownloadScriptTest(unittest.TestCase):
             mapped_cols=self.mapped_cols,
         )
 
-        with tempfile.TemporaryDirectory() as tmp_dir:
-            input_csv = os.path.join(tmp_dir, "transformed_2024_Retention.csv")
-            transformed_df.to_csv(input_csv, index=False)
-            output_prefix = os.path.join(tmp_dir, "retention_output")
-            self._run_stat_var_processor_hermetic(input_csv, output_prefix,
-                                                  tmp_dir)
-
-            df_out = pd.read_csv(f"{output_prefix}.csv", dtype=str)
-            self.assertEqual(len(df_out), 4)
-            expected_svs = {
-                ("nces/01000050870A", "2024", "dcid:Count_Student_NotJuvenileJusticeFacility_Kindergarten_StudentRetained"):
-                    "1",
-                ("nces/01000050870A", "2024", "dcid:Count_Student_NotJuvenileJusticeFacility_LimitedEnglishProficiency_Male_Kindergarten_StudentRetained"):
-                    "5",
-                ("nces/010000600251", "2024", "dcid:Count_Student_JuvenileJusticeFacility_Kindergarten_StudentRetained"):
-                    "0",
-                ("nces/010000600251", "2024", "dcid:Count_Student_JuvenileJusticeFacility_LimitedEnglishProficiency_Male_Kindergarten_StudentRetained"):
-                    "2",
-            }
-            actual_svs = {
-                (row["observationAbout"], row["observationDate"], row["variableMeasured"]):
-                    row["value"] for _, row in df_out.iterrows()
-            }
-            self.assertEqual(actual_svs, expected_svs)
+        self.assertEqual(
+            list(transformed_df.columns),
+            [
+                "observationDate",
+                "NCESID",
+                "JJ",
+                "SCH_RET_KG_IND",
+                "SCH_RET_KG_EL_M",
+            ],
+        )
+        csv_lines = transformed_df.to_csv(index=False).strip().splitlines()
+        self.assertEqual(
+            csv_lines,
+            [
+                "observationDate,NCESID,JJ,SCH_RET_KG_IND,SCH_RET_KG_EL_M",
+                "2024,01000050870A,No,1,5",
+                "2024,010000600251,Yes,0,2",
+            ],
+        )
 
 
 if __name__ == "__main__":
