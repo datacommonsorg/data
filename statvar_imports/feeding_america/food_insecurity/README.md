@@ -39,7 +39,22 @@
 
 ---
 
-## 3. Local Run & Counter Audit Summary (`2019–2024`)
+## 3. Data Diffs & Refresh Summary (`differ_summary.json`)
+
+Comparison against the legacy `FeedingAmerica_FoodInsecurity` baseline (`2019–2021`):
+
+| Metric | Count | Explanation |
+| :--- | :---: | :--- |
+| **Previous Observations (`2019–2021`)** | `150,729` | Legacy baseline across `3,630` states, counties, and congressional districts |
+| **Current Observations (`2019–2024`)** | `289,904` | Refreshed `2019–2024` output across `3,648` states, counties, and congressional districts |
+| **Added Observations** | `+139,175` | Net-new `2022–2024` observations (`2022`: `46,434`; `2023`: `46,325`; `2024`: `46,416`) |
+| **Modified Observations** | `0` | Exact parity across all `150,729` preserved `2019–2021` observations |
+| **Deleted Observations** | `0` (`0.0%`) | Zero historical deletions (`DELETED_RECORDS_PERCENT == 0.0%`) |
+| **Lint Errors / Missing Refs** | `0` / `0` | `289,922` generated nodes, `3,291,062` existence checks, `8/8` validation rules passed |
+
+---
+
+## 4. Local Run & Counter Audit Summary (`2019–2024`)
 
 | Metric | Value |
 | :--- | :---: |
@@ -55,7 +70,7 @@
 
 ---
 
-## 4. How to Run
+## 5. How to Run
 
 Prerequisites: Repository Python virtual environment (`.env`) created via `./run_tests.sh -r`, and read access to `gs://unresolved_mcf/scripts/statvar/stat_vars.mcf`.
 
