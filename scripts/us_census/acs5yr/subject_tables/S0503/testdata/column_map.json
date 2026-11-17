@@ -1,0 +1,458 @@
+{
+    "2016": {
+        "Foreign born; Born in Europe!!Estimate!!Foreign-born population": {
+            "Node": "dcid:Count_Person_PlaceOfBirthEurope",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:europe",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Europe!!Estimate!!CITIZENSHIP AND PERIOD OF ENTRY!!Naturalized citizen": {
+            "Node": "dcid:Count_Person_USCitizenByNaturalization_ForeignBorn_PlaceOfBirthEurope",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:europe",
+            "citizenship": "dcs:USCitizenByNaturalization",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Europe!!Estimate!!CITIZENSHIP AND PERIOD OF ENTRY!!Naturalized citizen!!Entered 2010 or later": {
+            "Node": "dcid:Count_Person_USCitizenByNaturalization_DateOfEntry2010OrLater_ForeignBorn_PlaceOfBirthEurope",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:europe",
+            "citizenship": "dcs:USCitizenByNaturalization",
+            "dateOfEntry": "[2010 - Date]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Europe!!Estimate!!Not a citizen": {
+            "Node": "dcid:Count_Person_NotAUSCitizen_ForeignBorn_PlaceOfBirthEurope",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:europe",
+            "citizenship": "dcs:NotAUSCitizen",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Europe!!Estimate!!Not a citizen!!Entered before 2000": {
+            "Node": "dcid:Count_Person_NotAUSCitizen_DateOfEntry2000OrEarlier_ForeignBorn_PlaceOfBirthEurope",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:europe",
+            "citizenship": "dcs:NotAUSCitizen",
+            "dateOfEntry": "[- 2000 Date]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Europe!!Estimate!!SEX AND AGE!!Male": {
+            "Node": "dcid:Count_Person_Male_ForeignBorn_PlaceOfBirthEurope",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:europe",
+            "gender": "dcs:Male",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Europe!!Estimate!!85 years and over": {
+            "Node": "dcid:Count_Person_85OrMoreYears_ForeignBorn_PlaceOfBirthEurope",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:europe",
+            "age": "[85 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Europe!!Estimate!!MARITAL STATUS!!Population 15 years and over": {
+            "Node": "dcid:Count_Person_15OrMoreYears_ForeignBorn_PlaceOfBirthEurope",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:europe",
+            "age": "[15 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Europe!!Estimate!!MARITAL STATUS!!Population 15 years and over!!Never married": {
+            "Node": "dcid:Count_Person_NeverMarried_ForeignBorn_PlaceOfBirthEurope",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:europe",
+            "age": "[15 - Years]",
+            "maritalStatus": "dcs:NeverMarried",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Northern and Western Europe!!Estimate!!Foreign-born population": {
+            "Node": "dcid:Count_Person_ForeignBorn_PlaceOfBirthNorthernWesternEurope",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:NorthernWesternEurope",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Northern and Western Europe!!Estimate!!CITIZENSHIP AND PERIOD OF ENTRY!!Naturalized citizen": {
+            "Node": "dcid:Count_Person_USCitizenByNaturalization_ForeignBorn_PlaceOfBirthNorthernWesternEurope",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:NorthernWesternEurope",
+            "citizenship": "dcs:USCitizenByNaturalization",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Northern and Western Europe!!Estimate!!85 years and over": {
+            "Node": "dcid:Count_Person_85OrMoreYears_ForeignBorn_PlaceOfBirthNorthernWesternEurope",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:NorthernWesternEurope",
+            "age": "[85 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Southern and Eastern Europe!!Estimate!!Foreign-born population": {
+            "Node": "dcid:Count_Person_ForeignBorn_PlaceOfBirthSouthernEasternEurope",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:SouthernEasternEurope",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Southern and Eastern Europe!!Estimate!!CITIZENSHIP AND PERIOD OF ENTRY!!Naturalized citizen": {
+            "Node": "dcid:Count_Person_USCitizenByNaturalization_ForeignBorn_PlaceOfBirthSouthernEasternEurope",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:SouthernEasternEurope",
+            "citizenship": "dcs:USCitizenByNaturalization",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Southern and Eastern Europe!!Estimate!!85 years and over": {
+            "Node": "dcid:Count_Person_85OrMoreYears_ForeignBorn_PlaceOfBirthSouthernEasternEurope",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:SouthernEasternEurope",
+            "age": "[85 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        }
+    },
+    "2021": {
+        "Estimate!!Foreign born; Born in Europe!!Foreign-born population": {
+            "Node": "dcid:Count_Person_PlaceOfBirthEurope",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:europe",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign born; Born in Europe!!Foreign-born population!!CITIZENSHIP AND PERIOD OF ENTRY!!Naturalized citizen": {
+            "Node": "dcid:Count_Person_USCitizenByNaturalization_ForeignBorn_PlaceOfBirthEurope",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:europe",
+            "citizenship": "dcs:USCitizenByNaturalization",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign born; Born in Europe!!Foreign-born population!!CITIZENSHIP AND PERIOD OF ENTRY!!Naturalized citizen!!Entered 2010 or later": {
+            "Node": "dcid:Count_Person_USCitizenByNaturalization_DateOfEntry2010OrLater_ForeignBorn_PlaceOfBirthEurope",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:europe",
+            "citizenship": "dcs:USCitizenByNaturalization",
+            "dateOfEntry": "[2010 - Date]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign born; Born in Europe!!Foreign-born population!!CITIZENSHIP AND PERIOD OF ENTRY!!Not a citizen": {
+            "Node": "dcid:Count_Person_NotAUSCitizen_ForeignBorn_PlaceOfBirthEurope",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:europe",
+            "citizenship": "dcs:NotAUSCitizen",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign born; Born in Europe!!Foreign-born population!!CITIZENSHIP AND PERIOD OF ENTRY!!Not a citizen!!Entered before 2000": {
+            "Node": "dcid:Count_Person_NotAUSCitizen_DateOfEntry2000OrEarlier_ForeignBorn_PlaceOfBirthEurope",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:europe",
+            "citizenship": "dcs:NotAUSCitizen",
+            "dateOfEntry": "[- 2000 Date]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign born; Born in Europe!!Foreign-born population!!SEX AND AGE!!Male": {
+            "Node": "dcid:Count_Person_Male_ForeignBorn_PlaceOfBirthEurope",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:europe",
+            "gender": "dcs:Male",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign born; Born in Europe!!Foreign-born population!!SEX AND AGE!!85 years and over": {
+            "Node": "dcid:Count_Person_85OrMoreYears_ForeignBorn_PlaceOfBirthEurope",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:europe",
+            "age": "[85 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign born; Born in Europe!!MARITAL STATUS!!Population 15  years and over": {
+            "Node": "dcid:Count_Person_15OrMoreYears_ForeignBorn_PlaceOfBirthEurope",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:europe",
+            "age": "[15 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign born; Born in Europe!!MARITAL STATUS!!Population 15  years and over!!Never married": {
+            "Node": "dcid:Count_Person_NeverMarried_ForeignBorn_PlaceOfBirthEurope",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:europe",
+            "age": "[15 - Years]",
+            "maritalStatus": "dcs:NeverMarried",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign born; Born in Northern and Western Europe!!Foreign-born population": {
+            "Node": "dcid:Count_Person_ForeignBorn_PlaceOfBirthNorthernWesternEurope",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:NorthernWesternEurope",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign born; Born in Northern and Western Europe!!Foreign-born population!!CITIZENSHIP AND PERIOD OF ENTRY!!Naturalized citizen": {
+            "Node": "dcid:Count_Person_USCitizenByNaturalization_ForeignBorn_PlaceOfBirthNorthernWesternEurope",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:NorthernWesternEurope",
+            "citizenship": "dcs:USCitizenByNaturalization",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign born; Born in Northern and Western Europe!!Foreign-born population!!SEX AND AGE!!85 years and over": {
+            "Node": "dcid:Count_Person_85OrMoreYears_ForeignBorn_PlaceOfBirthNorthernWesternEurope",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:NorthernWesternEurope",
+            "age": "[85 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign born; Born in Southern and Eastern Europe!!Foreign-born population": {
+            "Node": "dcid:Count_Person_ForeignBorn_PlaceOfBirthSouthernEasternEurope",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:SouthernEasternEurope",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign born; Born in Southern and Eastern Europe!!Foreign-born population!!CITIZENSHIP AND PERIOD OF ENTRY!!Naturalized citizen": {
+            "Node": "dcid:Count_Person_USCitizenByNaturalization_ForeignBorn_PlaceOfBirthSouthernEasternEurope",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:SouthernEasternEurope",
+            "citizenship": "dcs:USCitizenByNaturalization",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign born; Born in Southern and Eastern Europe!!Foreign-born population!!SEX AND AGE!!85 years and over": {
+            "Node": "dcid:Count_Person_85OrMoreYears_ForeignBorn_PlaceOfBirthSouthernEasternEurope",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:SouthernEasternEurope",
+            "age": "[85 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        }
+    },
+    "2024": {
+        "Estimate!!Foreign-born; Born in Europe!!Foreign-born population": {
+            "Node": "dcid:Count_Person_PlaceOfBirthEurope",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:europe",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign-born; Born in Europe!!Foreign-born population!!CITIZENSHIP AND PERIOD OF ENTRY!!Naturalized citizen": {
+            "Node": "dcid:Count_Person_USCitizenByNaturalization_ForeignBorn_PlaceOfBirthEurope",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:europe",
+            "citizenship": "dcs:USCitizenByNaturalization",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign-born; Born in Europe!!Foreign-born population!!CITIZENSHIP AND PERIOD OF ENTRY!!Naturalized citizen!!Entered 2010 or later": {
+            "Node": "dcid:Count_Person_USCitizenByNaturalization_DateOfEntry2010OrLater_ForeignBorn_PlaceOfBirthEurope",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:europe",
+            "citizenship": "dcs:USCitizenByNaturalization",
+            "dateOfEntry": "[2010 - Date]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign-born; Born in Europe!!Foreign-born population!!CITIZENSHIP AND PERIOD OF ENTRY!!Not a citizen": {
+            "Node": "dcid:Count_Person_NotAUSCitizen_ForeignBorn_PlaceOfBirthEurope",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:europe",
+            "citizenship": "dcs:NotAUSCitizen",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign-born; Born in Europe!!Foreign-born population!!CITIZENSHIP AND PERIOD OF ENTRY!!Not a citizen!!Entered before 2000": {
+            "Node": "dcid:Count_Person_NotAUSCitizen_DateOfEntry2000OrEarlier_ForeignBorn_PlaceOfBirthEurope",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:europe",
+            "citizenship": "dcs:NotAUSCitizen",
+            "dateOfEntry": "[- 2000 Date]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign-born; Born in Europe!!Foreign-born population!!SEX AND AGE!!Male": {
+            "Node": "dcid:Count_Person_Male_ForeignBorn_PlaceOfBirthEurope",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:europe",
+            "gender": "dcs:Male",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign-born; Born in Europe!!Foreign-born population!!SEX AND AGE!!85 years and over": {
+            "Node": "dcid:Count_Person_85OrMoreYears_ForeignBorn_PlaceOfBirthEurope",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:europe",
+            "age": "[85 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign-born; Born in Europe!!MARITAL STATUS!!Population 15  years and over": {
+            "Node": "dcid:Count_Person_15OrMoreYears_ForeignBorn_PlaceOfBirthEurope",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:europe",
+            "age": "[15 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign-born; Born in Europe!!MARITAL STATUS!!Population 15  years and over!!Never married": {
+            "Node": "dcid:Count_Person_NeverMarried_ForeignBorn_PlaceOfBirthEurope",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:europe",
+            "age": "[15 - Years]",
+            "maritalStatus": "dcs:NeverMarried",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign-born; Born in Northern and Western Europe!!Foreign-born population": {
+            "Node": "dcid:Count_Person_ForeignBorn_PlaceOfBirthNorthernWesternEurope",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:NorthernWesternEurope",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign-born; Born in Northern and Western Europe!!Foreign-born population!!CITIZENSHIP AND PERIOD OF ENTRY!!Naturalized citizen": {
+            "Node": "dcid:Count_Person_USCitizenByNaturalization_ForeignBorn_PlaceOfBirthNorthernWesternEurope",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:NorthernWesternEurope",
+            "citizenship": "dcs:USCitizenByNaturalization",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign-born; Born in Northern and Western Europe!!Foreign-born population!!SEX AND AGE!!85 years and over": {
+            "Node": "dcid:Count_Person_85OrMoreYears_ForeignBorn_PlaceOfBirthNorthernWesternEurope",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:NorthernWesternEurope",
+            "age": "[85 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign-born; Born in Southern and Eastern Europe!!Foreign-born population": {
+            "Node": "dcid:Count_Person_ForeignBorn_PlaceOfBirthSouthernEasternEurope",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:SouthernEasternEurope",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign-born; Born in Southern and Eastern Europe!!Foreign-born population!!CITIZENSHIP AND PERIOD OF ENTRY!!Naturalized citizen": {
+            "Node": "dcid:Count_Person_USCitizenByNaturalization_ForeignBorn_PlaceOfBirthSouthernEasternEurope",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:SouthernEasternEurope",
+            "citizenship": "dcs:USCitizenByNaturalization",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Foreign-born; Born in Southern and Eastern Europe!!Foreign-born population!!SEX AND AGE!!85 years and over": {
+            "Node": "dcid:Count_Person_85OrMoreYears_ForeignBorn_PlaceOfBirthSouthernEasternEurope",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:SouthernEasternEurope",
+            "age": "[85 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        }
+    }
+}
