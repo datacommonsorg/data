@@ -17,6 +17,10 @@ repository contracts and instructions take precedence.
   do not confuse source artifacts with import inputs.
 - Add `cron_schedule`, `user_script_timeout`, and `resource_limits` only when
   the import needs scheduling or an override, and validate them when present.
+- Semi-automated imports run on their `cron_schedule` like other auto-refresh
+  imports. Require a `cron_schedule` on them, leave
+  `config_override.disable_import_workflow` unset, and flag it when set to
+  `true`.
 - Keep curator contacts valid without prescribing one fixed email value.
 
 ## Documentation and organization
@@ -29,6 +33,11 @@ repository contracts and instructions take precedence.
   separate files.
 - Use consistent, descriptive names for new import files; prefer lowercase
   unless source naming or an established import convention requires otherwise.
+- [rule-statvar-imports-dir] Put an import under `statvar_imports/` only when
+  it runs `stat_var_processor`. Keep its PV map, processor config, and
+  `test_data/` fixtures in the import directory, as [rule-svp-unit-tests]
+  describes. Put imports whose custom scripts write the output without
+  `stat_var_processor` under `scripts/`, together with their configs.
 - Keep test inputs and expected CSV or TMCF outputs clearly paired without
   requiring one universal test-directory layout.
 - Declare new dependencies in the repository-supported dependency file.
@@ -156,6 +165,11 @@ Then apply these rules:
   paths with representative fixtures.
 - Keep checked-in fixtures representative and generally no more than 100
   records.
+- [rule-svp-unit-tests] Keep `stat_var_processor` out of unit tests; test the
+  PV map and config through `test_data/` fixtures as
+  [Create test data](../../../../tools/statvar_importer/README.md#create-test-data)
+  describes. Report as P1 any `*_test.py` that runs it, whether by import or
+  subprocess and even when hermetic.
 - Verify that every directory from the top-level import folder (`scripts/` or
   `statvar_imports/`) down to each `*_test.py` file has an `__init__.py`, and
   report a missing one as P1; `./run_tests.sh` uses `unittest discover`, which
