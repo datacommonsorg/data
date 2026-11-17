@@ -9,6 +9,7 @@ repository contracts and instructions take precedence.
   manifest contract, and verify that every referenced script and input exists.
 - Ensure `manifest.json` includes `node_mcf` under `import_inputs` pointing to
   generated schema/statvar MCF files (e.g., `output/*.mcf`).
+- Write place, StatVar, and schema nodes to separate MCF files.
 - Verify that `source_files` patterns cover every original file downloaded from
   the source, including non-data files like HTML and PDF, rather than
   sanitized copies, so each version keeps its raw source data in GCS for
@@ -17,6 +18,10 @@ repository contracts and instructions take precedence.
   do not confuse source artifacts with import inputs.
 - Add `cron_schedule`, `user_script_timeout`, and `resource_limits` only when
   the import needs scheduling or an override, and validate them when present.
+- Semi-automated imports run on their `cron_schedule` like other auto-refresh
+  imports. Require a `cron_schedule` on them, leave
+  `config_override.disable_import_workflow` unset, and flag it when set to
+  `true`.
 - Keep curator contacts valid without prescribing one fixed email value.
 
 ## Documentation and organization
@@ -29,6 +34,11 @@ repository contracts and instructions take precedence.
   separate files.
 - Use consistent, descriptive names for new import files; prefer lowercase
   unless source naming or an established import convention requires otherwise.
+- [rule-statvar-imports-dir] Put an import under `statvar_imports/` only when
+  it runs `stat_var_processor`. Keep its PV map, processor config, and
+  `test_data/` fixtures in the import directory, as [rule-svp-unit-tests]
+  describes. Put imports whose custom scripts write the output without
+  `stat_var_processor` under `scripts/`, together with their configs.
 - Keep test inputs and expected CSV or TMCF outputs clearly paired without
   requiring one universal test-directory layout.
 - Declare new dependencies in the repository-supported dependency file.
@@ -36,6 +46,11 @@ repository contracts and instructions take precedence.
   pickles, and other binary files out of the PR unless they are stored
   through Git LFS. Excel and PDF files are allowed only under `test_data/`;
   tests that need an archive build it at run time from test fixtures.
+- Store files larger than 500 KB, including text files such as place
+  mappings, in GCS or through Git LFS.
+- Keep files the import writes at run time out of the repository, such as
+  counter files from `--output_counters` and processor output (`.csv`,
+  `.tmcf`, `_stat_vars.mcf`). Fixtures under `test_data/` are the exception.
 
 ## Execution and failure handling
 
@@ -149,6 +164,9 @@ Then apply these rules:
 - Download fresh data from the source on each run rather than reusing cached
   files; for large downloads, reuse a cached file only when HTTP headers (such
   as `ETag` or `Last-Modified`) confirm the source data is unchanged.
+- Verify that the download script fetches releases for future years, such as
+  by building URLs from the source's naming pattern, rather than only the
+  years listed in the code.
 
 ## Tests
 
@@ -156,6 +174,11 @@ Then apply these rules:
   paths with representative fixtures.
 - Keep checked-in fixtures representative and generally no more than 100
   records.
+- [rule-svp-unit-tests] Keep `stat_var_processor` out of unit tests; test the
+  PV map and config through `test_data/` fixtures as
+  [Create test data](../../../../tools/statvar_importer/README.md#create-test-data)
+  describes. Report as P1 any `*_test.py` that runs it, whether by import or
+  subprocess and even when hermetic.
 - Verify that every directory from the top-level import folder (`scripts/` or
   `statvar_imports/`) down to each `*_test.py` file has an `__init__.py`, and
   report a missing one as P1; `./run_tests.sh` uses `unittest discover`, which
