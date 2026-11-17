@@ -16,6 +16,7 @@ import os
 import tempfile
 import unittest
 
+from .data_loader import SubjectTableDataLoaderBase
 from .data_loader import process_subject_tables
 
 base_path = os.path.dirname(__file__)
@@ -87,6 +88,24 @@ class DataLoaderBaseTest(unittest.TestCase):
                     debug=False,
                     delimiter='!!',
                     has_percent=True)
+
+    def test_top_bottom_code_normalization(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            loader = SubjectTableDataLoaderBase(
+                table_id='test_norm',
+                col_delimiter='!!',
+                has_percent=False,
+                debug=False,
+                output_path_dir=tmp_dir,
+                json_spec=os.path.join(base_path, "./testdata/spec_s2702.json"),
+                column_map_path=os.path.join(
+                    base_path, "./testdata/column_map_from_zip_expected.json"),
+                decimal_places=3,
+                estimate_period=5,
+                header_row=1)
+            self.assertEqual(loader._clean_cell_value('100-'), '100')
+            self.assertEqual(loader._clean_cell_value('3,500+'), '3500')
+            self.assertEqual(loader._clean_cell_value('3500+'), '3500')
 
     # TODO: add tests for processing a directory of files
 

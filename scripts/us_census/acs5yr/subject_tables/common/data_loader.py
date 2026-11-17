@@ -29,6 +29,11 @@ sys.path.append(os.path.join(_SCRIPT_PATH, '.'))  # for resolve_geo_id
 from resolve_geo_id import convert_to_place_dcid
 
 _IGNORED_VALUES = set(['-', '*', '**', '***', '*****', 'N', '(X)', 'null'])
+_TOP_BOTTOM_CODE_MAP = {
+    '100-': '100',
+    '3,500+': '3500',
+    '3500+': '3500',
+}
 _COLUMN_BATCH_SIZE = 100
 
 # TODO: Consider using logs for logging warning messages for debug at a later
@@ -251,14 +256,25 @@ class SubjectTableDataLoaderBase:
                         "number of observations"]
         return self.counter_dict
 
+    def _clean_cell_value(self, val):
+        if val in _IGNORED_VALUES:
+            return np.nan
+        if isinstance(val, str):
+            val_clean = val.strip().replace(',', '')
+            if val_clean in _TOP_BOTTOM_CODE_MAP:
+                return _TOP_BOTTOM_CODE_MAP[val_clean]
+            return val
+        return val
+
     def _replace_ignore_values_with_nan(self, df):
         """
         Replaces cells of the dataframe by column with nan if cell has values in
-        _IGNORED_VALUES.
+        _IGNORED_VALUES and normalizes top/bottom-coded values.
         """
         str_cols = df.select_dtypes(include=['object', 'string']).columns
         if len(str_cols) > 0 and not df.empty:
             df[str_cols] = df[str_cols].mask(df[str_cols].isin(_IGNORED_VALUES))
+            df[str_cols] = df[str_cols].replace(_TOP_BOTTOM_CODE_MAP)
         return df
 
     def _process_dataframe(self, df, filename):

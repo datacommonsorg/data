@@ -1,5 +1,7 @@
 Year,Place,StatVar,Quantity,Unit
 2023,country/USA,dcid:Monthly_Median_GrossRent_HousingUnit,1348,USDollar
+2023,geoId/1710941820,dcid:Monthly_Median_GrossRent_HousingUnit,100,USDollar
+2023,geoId/09120090700,dcid:Monthly_Median_GrossRent_HousingUnit,3500,USDollar
 2023,country/USA,dcid:Monthly_MarginOfError_GrossRent_HousingUnit,2,USDollar
 2023,country/USA,dcid:Monthly_Median_GrossRent_HousingUnit_0Bedrooms,1185,USDollar
 2023,country/USA,dcid:Monthly_MarginOfError_GrossRent_HousingUnit_0Bedrooms,5,USDollar
