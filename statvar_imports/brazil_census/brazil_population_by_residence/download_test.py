@@ -52,7 +52,7 @@ class DownloadTest(unittest.TestCase):
         super().tearDown()
 
     def test_robust_session_configuration(self):
-        """Verifies session retry configuration includes 429 and 5xx error codes."""
+        """Verifies session retry configuration includes 429, 5xx, and 52x codes."""
         session = get_robust_session()
         self.assertIsInstance(session, requests.Session)
         adapter = session.adapters.get("https://")
@@ -60,115 +60,59 @@ class DownloadTest(unittest.TestCase):
         self.assertEqual(adapter.max_retries.total, 10)
         self.assertIn(429, adapter.max_retries.status_forcelist)
         self.assertIn(500, adapter.max_retries.status_forcelist)
+        self.assertIn(520, adapter.max_retries.status_forcelist)
 
-    @patch.object(download_mod, "fetch_raw_input_files")
-    def test_download_mocked_success(self, mock_raw_input):
-        """Tests successful download and CSV emission."""
+    @patch.object(download_mod, "sync_historical_csv")
+    def test_download_mocked_success(self, mock_sync):
+        """Tests successful live 2022+ download and historical sync."""
         session = MagicMock()
-
-        def get_mock_response(url, **kwargs):
-            resp = MagicMock()
-            resp.raise_for_status.return_value = None
-            if "608" in url:
-                resp.json.return_value = [
-                    {
-                        "NC": "Nível Territorial"
-                    },
-                    {
-                        "NC": "1",
-                        "D1N": "Brasil",
-                        "D3N": "2010",
-                        "D4N": "Total",
-                        "D5N": "Total",
-                        "V": "190755799"
-                    },
-                    {
-                        "NC": "1",
-                        "D1N": "Brasil",
-                        "D3N": "2010",
-                        "D4N": "Urbana",
-                        "D5N": "Total",
-                        "V": "160925792"
-                    },
-                    {
-                        "NC": "1",
-                        "D1N": "Brasil",
-                        "D3N": "2010",
-                        "D4N": "Urbana",
-                        "D5N": "Homens",
-                        "V": "77713000"
-                    },
-                    {
-                        "NC": "1",
-                        "D1N": "Brasil",
-                        "D3N": "2010",
-                        "D4N": "Urbana",
-                        "D5N": "Mulheres",
-                        "V": "83212792"
-                    },
-                ]
-            else:
-                resp.json.return_value = [
-                    {
-                        "NC": "Nível Territorial"
-                    },
-                    {
-                        "NC": "1",
-                        "D1N": "Brasil",
-                        "D3N": "2022",
-                        "D4N": "Total",
-                        "V": "203080756"
-                    },
-                    {
-                        "NC": "1",
-                        "D1N": "Brasil",
-                        "D3N": "2022",
-                        "D4N": "Urbana",
-                        "V": "177508417"
-                    },
-                ]
-            return resp
-
-        session.get.side_effect = get_mock_response
-
-        mock_raw_input.return_value = [
+        resp = MagicMock()
+        resp.raise_for_status.return_value = None
+        resp.json.return_value = [
             {
-                "Ano": 1940,
-                "Localidade": "Brazil",
-                "Situacao": "Total",
-                "Sexo": "Total",
-                "Populacao": 41169321,
+                "NC": "Nível Territorial"
             },
             {
-                "Ano": 1940,
-                "Localidade": "Brazil",
-                "Situacao": "Urbana",
-                "Sexo": "Total",
-                "Populacao": 12877647,
+                "NC": "1",
+                "D1N": "Brasil",
+                "D3N": "2022",
+                "D4N": "Total",
+                "V": "203080756",
+            },
+            {
+                "NC": "1",
+                "D1N": "Brasil",
+                "D3N": "2022",
+                "D4N": "Urbana",
+                "V": "177508417",
+            },
+            {
+                "NC": "1",
+                "D1N": "Brasil",
+                "D3N": "2010",
+                "D4N": "Total",
+                "V": "190755799",
             },
         ]
+        session.get.return_value = resp
 
         out_csv = os.path.join(self.test_dir, "output.csv")
         saved_file = download_all_years(session=session,
                                         output_file=out_csv,
                                         fallback_to_cached=False)
         self.assertTrue(os.path.isfile(saved_file))
+        mock_sync.assert_called_once()
 
         df = pd.read_csv(saved_file)
-        self.assertGreaterEqual(len(df), 4)
+        self.assertEqual(len(df), 2)
         self.assertEqual(
             list(df.columns),
             ["Ano", "Localidade", "Situacao", "Sexo", "Populacao"],
         )
-        self.assertIn(1940, df["Ano"].values)
-        df_2010 = df[df["Ano"] == 2010]
-        pairs_2010 = set(zip(df_2010["Situacao"], df_2010["Sexo"]))
-        self.assertIn(("Urbana", "Total"), pairs_2010)
-        self.assertIn(("Urbana", "Masculino"), pairs_2010)
-        self.assertIn(("Urbana", "Feminino"), pairs_2010)
+        self.assertEqual(set(df["Ano"].values), {2022})
 
-    @patch.object(download_mod, "fetch_raw_input_files", return_value=[])
-    def test_download_empty_response_raises(self, _mock_raw_input):
+    @patch.object(download_mod, "sync_historical_csv")
+    def test_download_empty_response_raises(self, _mock_sync):
         """Tests that empty data raises RuntimeError when fallback is disabled."""
         session = MagicMock()
         mock_response = MagicMock()
@@ -182,8 +126,8 @@ class DownloadTest(unittest.TestCase):
                                output_file=out_csv,
                                fallback_to_cached=False)
 
-    @patch.object(download_mod, "fetch_raw_input_files", return_value=[])
-    def test_download_network_failure_raises(self, _mock_raw_input):
+    @patch.object(download_mod, "sync_historical_csv")
+    def test_download_network_failure_raises(self, _mock_sync):
         """Tests that network error raises RuntimeError when fallback is disabled."""
         session = MagicMock()
         session.get.side_effect = requests.ConnectionError(
@@ -195,16 +139,24 @@ class DownloadTest(unittest.TestCase):
                                output_file=out_csv,
                                fallback_to_cached=False)
 
-    @patch.object(download_mod, "fetch_raw_input_files", return_value=[])
-    def test_download_fallback_to_cached(self, _mock_raw_input):
-        """Tests that fallback to existing CSV succeeds when fallback is enabled."""
+    def test_download_fallback_to_cached(self):
+        """Tests that fallback succeeds when both cached CSV and history exist."""
         session = MagicMock()
         session.get.side_effect = requests.HTTPError("503 Service Unavailable")
 
         cached_csv = os.path.join(self.test_dir, "cached.csv")
         with open(cached_csv, "w", encoding="utf-8") as f:
             f.write("Ano,Localidade,Situacao,Sexo,Populacao\n"
-                    "1940,Brazil,Total,Total,100\n")
+                    "2022,Brazil,Total,Total,100\n")
+        hist_dir = os.path.join(self.test_dir, "history")
+        os.makedirs(hist_dir, exist_ok=True)
+        with open(
+                os.path.join(hist_dir,
+                             "brazil_population_by_residence_historical.csv"),
+                "w",
+                encoding="utf-8",
+        ) as f:
+            f.write("h\n1\n")
 
         saved = download_all_years(session=session,
                                    output_file=cached_csv,

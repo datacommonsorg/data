@@ -35,6 +35,7 @@ _SPEC.loader.exec_module(download_mod)
 FLAGS = download_mod.FLAGS
 download_all_years = download_mod.download_all_years
 get_robust_session = download_mod.get_robust_session
+sync_historical_csv = download_mod.sync_historical_csv
 
 
 class DownloadTest(unittest.TestCase):
@@ -50,7 +51,7 @@ class DownloadTest(unittest.TestCase):
         super().tearDown()
 
     def test_robust_session_configuration(self):
-        """Verifies session retry configuration includes 429 and 5xx error codes."""
+        """Verifies session retry configuration includes 429, 5xx, and 52x codes."""
         session = get_robust_session()
         self.assertIsInstance(session, requests.Session)
         adapter = session.adapters.get("https://")
@@ -58,16 +59,17 @@ class DownloadTest(unittest.TestCase):
         self.assertEqual(adapter.max_retries.total, 10)
         self.assertIn(429, adapter.max_retries.status_forcelist)
         self.assertIn(500, adapter.max_retries.status_forcelist)
+        self.assertIn(520, adapter.max_retries.status_forcelist)
 
-    @patch.object(download_mod, "fetch_raw_input_files")
-    def test_download_mocked_success(self, mock_raw_input):
-        """Tests successful download and CSV emission."""
+    @patch.object(download_mod, "sync_historical_csv")
+    def test_download_mocked_success(self, mock_sync):
+        """Tests successful live 2022+ Census & EstimaPop download + historical sync."""
         session = MagicMock()
 
         def get_mock_response(url, **kwargs):
             resp = MagicMock()
             resp.raise_for_status.return_value = None
-            if "1378" in url:
+            if "6579" in url:
                 resp.json.return_value = [
                     {
                         "NC": "Header"
@@ -75,9 +77,14 @@ class DownloadTest(unittest.TestCase):
                     {
                         "NC": "1",
                         "D1N": "Brasil",
-                        "D3N": "2010",
-                        "D5N": "Total",
-                        "V": "190755799"
+                        "D3N": "2024",
+                        "V": "212583750",
+                    },
+                    {
+                        "NC": "6",
+                        "D1C": "5101837",
+                        "D3N": "2024",
+                        "V": "1234",
                     },
                 ]
             else:
@@ -90,56 +97,42 @@ class DownloadTest(unittest.TestCase):
                         "D1N": "Brasil",
                         "D3N": "2022",
                         "D4N": "Total",
-                        "V": "203080756"
+                        "V": "203080756",
                     },
                     {
                         "NC": "1",
                         "D1N": "Brasil",
                         "D3N": "2022",
                         "D4N": "Homens",
-                        "V": "98532431"
+                        "V": "98532431",
                     },
                     {
                         "NC": "6",
                         "D1C": "3139904",
                         "D3N": "2022",
                         "D4N": "Total",
-                        "V": "13629"
+                        "V": "13629",
                     },
                 ]
             return resp
 
         session.get.side_effect = get_mock_response
 
-        mock_raw_input.return_value = [
-            {
-                "Ano": 1991,
-                "Localidade": "Brazil",
-                "Sexo": "Total",
-                "Populacao": 146825475,
-            },
-            {
-                "Ano": 1991,
-                "Localidade": "Brazil",
-                "Sexo": "Homens",
-                "Populacao": 72481000,
-            },
-        ]
-
         out_csv = os.path.join(self.test_dir, "output.csv")
         saved_file = download_all_years(session=session,
                                         output_file=out_csv,
                                         fallback_to_cached=False)
         self.assertTrue(os.path.isfile(saved_file))
+        mock_sync.assert_called_once()
 
         df = pd.read_csv(saved_file)
-        self.assertGreaterEqual(len(df), 4)
+        self.assertEqual(len(df), 4)
         self.assertEqual(list(df.columns),
                          ["Ano", "Localidade", "Sexo", "Populacao"])
-        self.assertIn(1991, df["Ano"].values)
+        self.assertEqual(set(df["Ano"].values), {2022, 2024})
 
-    @patch.object(download_mod, "fetch_raw_input_files", return_value=[])
-    def test_download_empty_response_raises(self, _mock_raw_input):
+    @patch.object(download_mod, "sync_historical_csv")
+    def test_download_empty_response_raises(self, _mock_sync):
         """Tests that empty data raises RuntimeError when fallback is disabled."""
         session = MagicMock()
         mock_response = MagicMock()
@@ -153,8 +146,8 @@ class DownloadTest(unittest.TestCase):
                                output_file=out_csv,
                                fallback_to_cached=False)
 
-    @patch.object(download_mod, "fetch_raw_input_files", return_value=[])
-    def test_download_network_failure_raises(self, _mock_raw_input):
+    @patch.object(download_mod, "sync_historical_csv")
+    def test_download_network_failure_raises(self, _mock_sync):
         """Tests that network error raises RuntimeError when fallback is disabled."""
         session = MagicMock()
         session.get.side_effect = requests.ConnectionError(
@@ -166,21 +159,65 @@ class DownloadTest(unittest.TestCase):
                                output_file=out_csv,
                                fallback_to_cached=False)
 
-    @patch.object(download_mod, "fetch_raw_input_files", return_value=[])
-    def test_download_fallback_to_cached(self, _mock_raw_input):
-        """Tests that fallback to existing CSV succeeds when fallback is enabled."""
+    def test_download_fallback_to_cached(self):
+        """Tests that fallback succeeds when both cached CSV and history exist."""
         session = MagicMock()
         session.get.side_effect = requests.HTTPError("503 Service Unavailable")
 
         cached_csv = os.path.join(self.test_dir, "cached.csv")
         with open(cached_csv, "w", encoding="utf-8") as f:
-            f.write("Ano,Localidade,Sexo,Populacao\n1991,Brazil,Total,100\n")
+            f.write("Ano,Localidade,Sexo,Populacao\n2022,Brazil,Total,100\n")
+        hist_dir = os.path.join(self.test_dir, "history")
+        os.makedirs(hist_dir, exist_ok=True)
+        with open(os.path.join(hist_dir,
+                               "brazil_total_population_historical.csv"),
+                  "w",
+                  encoding="utf-8") as f:
+            f.write("h\n1\n")
 
         saved = download_all_years(session=session,
                                    output_file=cached_csv,
                                    fallback_to_cached=True)
         self.assertEqual(saved, cached_csv)
         self.assertTrue(os.path.isfile(saved))
+
+    def test_sync_historical_csv_atomic_and_fallback(self):
+        """Tests sync_historical_csv atomic download and fallback behavior."""
+        dest = os.path.join(self.test_dir, "history", "hist.csv")
+
+        def fake_download(filename):
+            with open(filename, "w", encoding="utf-8") as f:
+                f.write("col\nval\n")
+
+        mock_blob = MagicMock()
+        mock_blob.download_to_filename.side_effect = fake_download
+        mock_client = MagicMock()
+        mock_client.bucket.return_value.blob.return_value = mock_blob
+
+        with patch("google.cloud.storage.Client", return_value=mock_client):
+            result = sync_historical_csv("country/brazil/history/hist.csv",
+                                         dest)
+        self.assertEqual(result, dest)
+        self.assertTrue(os.path.isfile(dest))
+        with open(dest, "r", encoding="utf-8") as f:
+            self.assertEqual(f.read(), "col\nval\n")
+
+        with patch("google.cloud.storage.Client",
+                   side_effect=RuntimeError("GCS offline")):
+            self.assertEqual(
+                sync_historical_csv(
+                    "country/brazil/history/hist.csv",
+                    dest,
+                    fallback_to_cached=True,
+                ),
+                dest,
+            )
+            with self.assertRaises(RuntimeError):
+                sync_historical_csv(
+                    "country/brazil/history/hist.csv",
+                    dest,
+                    fallback_to_cached=False,
+                )
 
 
 if __name__ == "__main__":

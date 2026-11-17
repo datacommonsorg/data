@@ -50,7 +50,7 @@ class DownloadTest(unittest.TestCase):
         super().tearDown()
 
     def test_robust_session_configuration(self):
-        """Verifies session retry configuration includes 429 and 5xx error codes."""
+        """Verifies session retry configuration includes 429, 5xx, and 52x codes."""
         session = get_robust_session()
         self.assertIsInstance(session, requests.Session)
         adapter = session.adapters.get("https://")
@@ -58,73 +58,45 @@ class DownloadTest(unittest.TestCase):
         self.assertEqual(adapter.max_retries.total, 10)
         self.assertIn(429, adapter.max_retries.status_forcelist)
         self.assertIn(500, adapter.max_retries.status_forcelist)
+        self.assertIn(520, adapter.max_retries.status_forcelist)
 
-    @patch.object(download_mod, "fetch_2010_education_files", return_value=[])
-    @patch.object(download_mod,
-                  "fetch_from_ibge_ftp_or_input_files",
-                  return_value=[])
-    def test_download_mocked_success(self, _mock_ftp, _mock_2010):
-        """Tests successful download and CSV emission with exact D5C category mapping."""
+    @patch.object(download_mod, "sync_historical_csv")
+    def test_download_mocked_success(self, mock_sync_history):
+        """Tests successful live 2022+ download and historical sync call."""
         session = MagicMock()
 
         def get_mock_response(url, **kwargs):
             resp = MagicMock()
             resp.raise_for_status.return_value = None
-            if "1972" in url:
-                resp.json.return_value = [
-                    {
-                        "NC": "Nível Territorial"
-                    },
-                    {
-                        "NC": "1",
-                        "D1N": "Brasil",
-                        "D3N": "2010",
-                        "D4N": "Total",
-                        "D5C": "0",
-                        "D5N": "Total",
-                        "V": "59565188"
-                    },
-                    {
-                        "NC": "1",
-                        "D1N": "Brasil",
-                        "D3N": "2010",
-                        "D4N": "Pública",
-                        "D5C": "95304",
-                        "D5N": "Regular do ensino fundamental",
-                        "V": "27500000"
-                    },
-                    {
-                        "NC": "1",
-                        "D1N": "Brasil",
-                        "D3N": "2010",
-                        "D4N": "Total",
-                        "D5C": "7910",
-                        "D5N": "Especialização de nível superior",
-                        "V": "666613"
-                    },
-                ]
-            else:
-                resp.json.return_value = [
-                    {
-                        "NC": "Nível Territorial"
-                    },
-                    {
-                        "NC": "1",
-                        "D1N": "Brasil",
-                        "D3N": "2022",
-                        "D4C": "95300",
-                        "D4N": "Total",
-                        "V": "10000000"
-                    },
-                    {
-                        "NC": "1",
-                        "D1N": "Brasil",
-                        "D3N": "2022",
-                        "D4C": "95301",
-                        "D4N": "Creche",
-                        "V": "2000000"
-                    },
-                ]
+            resp.json.return_value = [
+                {
+                    "NC": "Nível Territorial"
+                },
+                {
+                    "NC": "1",
+                    "D1N": "Brasil",
+                    "D3N": "2022",
+                    "D4C": "95300",
+                    "D4N": "Total",
+                    "V": "10000000",
+                },
+                {
+                    "NC": "1",
+                    "D1N": "Brasil",
+                    "D3N": "2022",
+                    "D4C": "95301",
+                    "D4N": "Creche",
+                    "V": "2000000",
+                },
+                {
+                    "NC": "1",
+                    "D1N": "Brasil",
+                    "D3N": "2010",
+                    "D4C": "95300",
+                    "D4N": "Total",
+                    "V": "999",
+                },
+            ]
             return resp
 
         session.get.side_effect = get_mock_response
@@ -134,31 +106,24 @@ class DownloadTest(unittest.TestCase):
                                         output_file=out_csv,
                                         fallback_to_cached=False)
         self.assertTrue(os.path.isfile(saved_file))
+        mock_sync_history.assert_called_once()
 
         df = pd.read_csv(saved_file)
-        self.assertEqual(len(df), 4)
+        self.assertEqual(len(df), 2)
         self.assertEqual(
             list(df.columns),
             ["Ano", "Localidade", "RedeEnsino", "NivelEnsino", "Estudantes"],
         )
-        self.assertIn(2022, df["Ano"].values)
-        total_2010 = df[(df["Ano"] == 2010) &
-                        (df["NivelEnsino"] == "Total")].iloc[0]
-        self.assertEqual(total_2010["Localidade"], "Brazil")
-        self.assertEqual(total_2010["Estudantes"], 59565188)
-        creche_2022 = df[(df["Ano"] == 2022) &
-                         (df["NivelEnsino"] == "Creche")].iloc[0]
+        self.assertEqual(set(df["Ano"].values), {2022})
+        creche_2022 = df[df["NivelEnsino"] == "Creche"].iloc[0]
         self.assertEqual(creche_2022["Localidade"], "Brazil")
         self.assertEqual(
             creche_2022["Estudantes"],
             2000000 * len(download_mod.TABLE_2022_EDUCATION_SPECS),
         )
 
-    @patch.object(download_mod, "fetch_2010_education_files", return_value=[])
-    @patch.object(download_mod,
-                  "fetch_from_ibge_ftp_or_input_files",
-                  return_value=[])
-    def test_download_empty_response_raises(self, _mock_ftp, _mock_2010):
+    @patch.object(download_mod, "sync_historical_csv")
+    def test_download_empty_response_raises(self, _mock_sync):
         """Tests that an empty response payload raises RuntimeError."""
         session = MagicMock()
         mock_response = MagicMock()
@@ -172,11 +137,8 @@ class DownloadTest(unittest.TestCase):
                                output_file=out_csv,
                                fallback_to_cached=False)
 
-    @patch.object(download_mod, "fetch_2010_education_files", return_value=[])
-    @patch.object(download_mod,
-                  "fetch_from_ibge_ftp_or_input_files",
-                  return_value=[])
-    def test_download_network_failure_raises(self, _mock_ftp, _mock_2010):
+    @patch.object(download_mod, "sync_historical_csv")
+    def test_download_network_failure_raises(self, _mock_sync):
         """Tests that network error raises RuntimeError when fallback is disabled."""
         session = MagicMock()
         session.get.side_effect = requests.ConnectionError(
@@ -188,47 +150,29 @@ class DownloadTest(unittest.TestCase):
                                output_file=out_csv,
                                fallback_to_cached=False)
 
-    @patch.object(download_mod, "fetch_2010_education_files", return_value=[])
-    @patch.object(download_mod,
-                  "fetch_from_ibge_ftp_or_input_files",
-                  return_value=[])
-    def test_download_fallback_to_cached(self, _mock_ftp, _mock_2010):
-        """Tests that fallback to existing CSV succeeds when fallback is enabled."""
+    def test_download_fallback_to_cached(self):
+        """Tests that fallback succeeds only when both cached CSV and history exist."""
         session = MagicMock()
         session.get.side_effect = requests.HTTPError("503 Service Unavailable")
 
         cached_csv = os.path.join(self.test_dir, "cached.csv")
         with open(cached_csv, "w", encoding="utf-8") as f:
-            f.write("Ano,Localidade,RedeEnsino,NivelEnsino,Populacao\n"
-                    "2010,Brazil,Total,Total,100\n")
+            f.write("Ano,Localidade,RedeEnsino,NivelEnsino,Estudantes\n"
+                    "2022,Brazil,Total,Total,100\n")
+        hist_dir = os.path.join(self.test_dir, "history")
+        os.makedirs(hist_dir, exist_ok=True)
+        with open(os.path.join(hist_dir, "brazil_education_historical.csv"),
+                  "w",
+                  encoding="utf-8") as f:
+            f.write(
+                "observationAbout,observationDate,observationPeriod,value,variableMeasured\n"
+                "dcid:country/BRA,2010,P1Y,100,dcid:Count_Student\n")
 
         saved = download_all_years(session=session,
                                    output_file=cached_csv,
                                    fallback_to_cached=True)
         self.assertEqual(saved, cached_csv)
         self.assertTrue(os.path.isfile(saved))
-
-    def test_parse_raw_education_xls_logs_unmapped_codes(self):
-        """Tests that unmapped 2000 IBGE codes are logged via warning instead of silently skipped."""
-        rows = [["" for _ in range(3)] for _ in range(9)]
-        rows[6] = [
-            "Código da Unidade Geográfica",
-            "Student Nursery",
-            "Student PreKindergarten",
-        ]
-        rows[7] = [3550308, 100, 200]
-        rows[8] = [9999999, 50, 75]
-        fake_df = pd.DataFrame(rows)
-
-        with patch("pandas.read_excel", return_value=fake_df), \
-             self.assertLogs(level="WARNING") as cm:
-            parsed = download_mod.parse_raw_education_xls(
-                b"fake-xls",
-                mapping={"3550308": "São Paulo - SP"},
-            )
-        self.assertEqual(len(parsed), 2)
-        self.assertEqual({r["Localidade"] for r in parsed}, {"São Paulo - SP"})
-        self.assertTrue(any("9999999" in msg for msg in cm.output))
 
 
 if __name__ == "__main__":

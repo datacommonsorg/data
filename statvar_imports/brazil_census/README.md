@@ -4,21 +4,22 @@
 
 This directory contains the consolidated automated Data Commons import pipeline (`Brazil_Census`) for demographic, socioeconomic, education, and literacy datasets from the **Instituto Brasileiro de Geografia e Estatística (IBGE)** Census of Brazil (*Censo Demográfico*) and annual municipal population estimates (*EstimaPop*).
 
-All sub-imports are organized into dedicated, year-agnostic topic folders under a single consolidated [`manifest.json`](manifest.json) (`import_name: "Brazil_Census"`) and a single root [`validation_config.json`](validation_config.json). Each topic pipeline dynamically fetches past, present (2010, 2022, 2024–2026+), and future releases from official IBGE SIDRA REST APIs, merges historical census baselines (1940, 1991, 2000, 2010), archives raw upstream payloads in `raw_files/`, and generates clean tabular input datasets.
+All sub-imports are organized into dedicated, year-agnostic topic folders under a single consolidated [`manifest.json`](manifest.json) (`import_name: "Brazil_Census"`) and a single root [`validation_config.json`](validation_config.json). Each topic pipeline dynamically fetches live `2022+` releases (and annual Table 6579 estimates) from official IBGE SIDRA REST APIs into `input_files/<topic>.csv`, syncs immutable pre-2022 historical CSVs (`1940`, `1991`, `2000`, `2010`) from `gs://unresolved_mcf/country/brazil/history/` into `history/<topic>_historical.csv`, archives raw upstream payloads in `raw_files/`, and processes both live and historical CSVs together in Cloud Batch via `stat_var_processor.py`.
 
 Each subfolder contains:
-- `download.py`: Automated multi-year extraction script (queries official IBGE SIDRA REST API, merges historical census baselines, and archives raw payloads under `raw_files/`)
+- `download.py`: Automated live `2022+` IBGE SIDRA REST API extraction and `history/*_historical.csv` sync script (archiving raw SIDRA JSON payloads under `raw_files/`)
 - `download_test.py`: Hermetic unit tests
-- `<topic>.tmcf`: Template MCF mapping data columns to Data Commons schema
-- `<topic>_pvmap.csv`: Property-value mapping definition
-- `<topic>_metadata.csv`: Configuration parameters for `stat_var_processor.py`
-- `input_files/<topic>.csv`: Processed tabular input data (`Ano,Localidade,...`) (plus `brazil_literacy/brazil_literacy_rates.csv`)
-- `raw_files/`: Archived raw upstream SIDRA JSON and IBGE XLS/CSV payloads
+- `<topic>_pvmap.csv`: Property-value mapping definition (plus `brazil_literacy/brazil_literacy_rates_pvmap.csv` for literacy rates)
+- `<topic>_metadata.csv`: Configuration parameters for `stat_var_processor.py` (plus `brazil_literacy/brazil_literacy_rates_metadata.csv`)
+- `<topic>.tmcf`: Pre-generated template MCF where applicable (outputs `brazil_literacy_rates` uses `stat_var_processor.py` PVMAP directly)
+- `input_files/<topic>.csv`: Live `2022+` tabular input data (`Ano,Localidade,...`) (plus companion `brazil_literacy/input_files/brazil_literacy_rates.csv`)
+- `history/<topic>_historical.csv`: Synced immutable pre-2022 historical baseline CSV (or `brazil_literacy/rates/history/brazil_literacy_rates_historical.csv`)
+- `raw_files/`: Archived raw upstream SIDRA JSON payloads
 - `counters/<topic>_counters.csv`: Processing counters and metrics
 - `README.md`: Dataset documentation and provenance
 
 Shared top-level files in `statvar_imports/brazil_census/`:
-- `brazil_download_utils.py`: Shared HTTP retry session (`get_robust_session`), `raw_files/` staging (`get_raw_dir`), and IBGE SIDRA API fetcher (`fetch_sidra_data`) used across all 7 topic download scripts
+- `brazil_download_utils.py`: Shared HTTP retry session (`get_robust_session`), `raw_files/` staging (`get_raw_dir`), immutable `< 2022` GCS sync (`get_history_path`, `sync_historical_csv`), IBGE SIDRA API fetcher (`fetch_sidra_data`), canonical location resolution (`resolve_sidra_loc`), and atomic writes (`write_df_atomically`) used across all 7 topic download scripts
 - `manifest.json`: Consolidated Data Commons import specification (`Brazil_Census`) covering all 7 topic download scripts and 8 `import_inputs`
 - `validation_config.json`: Custom consolidated validation rules (date freshness, historical start dates, StatVar counts, and minimum place count checks; inherits default checks including `check_deleted_records_percent` $\le 0.1\%$ from `tools/import_validation/validation_config.json`)
 - `brazil_places_resolved.csv`: Shared entity mapping to Wikidata and Data Commons DCIDs for all 5,603 Brazilian places in Data Commons KG (1 country, 5 macro-regions, 27 states, and 5,570 municipalities, plus historical/alias/encoding variants; IBGE 2024 municipality `5101837` is skipped until added to Data Commons `geos`)
@@ -45,10 +46,10 @@ The consolidated manifest [`manifest.json`](manifest.json) declares the `Brazil_
 
 ### Custom Downloader Rationale
 
-The shared repo utilities (`util/download_util.py`, `util/download_util_script.py`, `tools/download_utils/requests_wrappers.py`) only fetch/retry/cache individual URLs and save or unzip raw payloads. The `brazil_census` sub-imports use custom `download.py` modules (with shared `urllib3.util.Retry` sessions, `raw_files/` archiving, and `fallback_to_cached` atomic CSV writes) because IBGE ingestion requires:
+The shared repo utilities (`util/download_util.py`, `util/download_util_script.py`, `tools/download_utils/requests_wrappers.py`) only fetch/retry/cache individual URLs and save or unzip raw payloads. The `brazil_census` sub-imports use custom `download.py` modules (with shared `urllib3.util.Retry` sessions, `raw_files/` archiving, `sync_historical_csv` for immutable `< 2022` `history/` files, and `fallback_to_cached` atomic CSV writes) because IBGE ingestion requires:
 - **SIDRA JSON envelope & split queries**: `apisidra.ibge.gov.br` wraps column metadata in element `[0]` (`raw_json[1:]`), uses sentinel strings (`"-"`, `"..."`, `".."`, `"X"`), and enforces cell limits requiring split requests (e.g., `TABLE_2022_EDUCATION_SPECS` chunks and macro `n1/n2/n3` vs. municipal `n6` splits).
-- **Multi-UF FTP `.xls` archives & Excel parsing**: Downloads 27 per-state workbooks from `ftp.ibge.gov.br` (2000) and state/PR `tab4_21_1_3.xls` spreadsheets (2010), parsing offset headers, disambiguating homonyms/aggregates via `first_7` + `STATE_CODE_TO_SIGLA`, and staging FTP downloads in memory before writing `raw_files/`.
-- **Cross-decade alignment & derived metrics**: Merges `1940`/`1991`/`2000`/`2010`/`2022`/`2024–2026+` tables, skips conflicting `year == 2000` Sample `Total` rows in race/religion, computes broad age cohorts (`0To14`, `15To59`, `60OrMore`) and Table `9542` literacy-rate fractions, and skips unindexed 2024 municipality `5101837`.
+- **Immutable `history/` GCS sync**: Downloads finalized pre-2022 historical CSVs (`1940`, `1991`, `2000`, `2010`) from `gs://unresolved_mcf/country/brazil/history/` without re-parsing legacy workbooks during weekly refreshes.
+- **Derived metrics & unindexed entity guards**: Computes broad age cohorts (`0To14`, `15To59`, `60OrMore`) and Table `9542` literacy-rate fractions, parses `D3N` year strings dynamically, and skips unindexed 2024 municipality `5101837`.
 
 ---
 

@@ -54,7 +54,7 @@ class DownloadTest(unittest.TestCase):
         super().tearDown()
 
     def test_robust_session_configuration(self):
-        """Verifies session retry configuration includes 429 and 5xx error codes."""
+        """Verifies session retry configuration includes 429, 5xx, and 52x codes."""
         session = get_robust_session()
         self.assertIsInstance(session, requests.Session)
         adapter = session.adapters.get("https://")
@@ -63,6 +63,7 @@ class DownloadTest(unittest.TestCase):
         self.assertIn(429, adapter.max_retries.status_forcelist)
         self.assertIn(500, adapter.max_retries.status_forcelist)
         self.assertIn(503, adapter.max_retries.status_forcelist)
+        self.assertIn(520, adapter.max_retries.status_forcelist)
 
     def test_compute_broad_age_aggregations(self):
         """Tests calculation of 0To14, 15To59, and 60OrMore broad cohorts when all sub-cohorts exist."""
@@ -287,9 +288,7 @@ class DownloadTest(unittest.TestCase):
         self.assertIn("Invalid or empty response", str(ctx.exception))
 
     def test_age_code_coverage(self):
-        """Verifies TABLE_1378_AGE_CODES and TABLE_9514_AGE_CODES cover all required age cohorts."""
-        self.assertIn("107453", download_mod.TABLE_1378_AGE_CODES)
-        self.assertIn("111286", download_mod.TABLE_1378_AGE_CODES)
+        """Verifies TABLE_9514_AGE_CODES covers all required live age cohorts."""
         self.assertIn("93086", download_mod.TABLE_9514_AGE_CODES)
         self.assertEqual(len(download_mod.COHORTS_0_14), 3)
         self.assertEqual(len(download_mod.COHORTS_15_59), 9)
@@ -298,215 +297,60 @@ class DownloadTest(unittest.TestCase):
                 set(download_mod.COHORTS_15_59)))
         for code in ("93070", "93084", "93085", "93087", "93088", "93089",
                      "93090", "93091", "93092", "93093", "93094"):
-            self.assertIn(code, download_mod.TABLE_1378_AGE_CODES)
             self.assertIn(code, download_mod.TABLE_9514_AGE_CODES)
 
-    @patch.object(download_mod, "fetch_raw_historical_files")
-    def test_download_all_years_success(self, mock_hist):
-        """Tests download_all_years combining historical workbooks and live SIDRA data."""
-        mock_hist.return_value = [{
-            "Ano": "1940",
-            "Localidade": "Brazil",
-            "Idade": "Total",
-            "Sexo": "Total",
-            "Populacao": "41236315",
-        }]
+    @patch.object(download_mod, "sync_historical_csv")
+    def test_download_all_years_success(self, mock_sync):
+        """Tests download_all_years fetches live 2022+ SIDRA data and syncs history."""
         session = MagicMock()
 
         def get_mock_response(url, **kwargs):
             resp = MagicMock()
             resp.raise_for_status.return_value = None
-            year = "2010" if "1378" in url else "2022"
-            resp.json.return_value = [
-                {
-                    "NC": "Header"
-                },
-                {
-                    "NC": "1",
-                    "D1N": "Brasil",
-                    "D3N": year,
-                    "D4N": "Total",
-                    "D5N": "Total",
-                    "V": "200000",
-                },
-                {
-                    "NC": "1",
-                    "D1N": "Brasil",
-                    "D3N": year,
-                    "D4N": "Total",
-                    "D5N": "0 a 4 anos",
-                    "V": "1000",
-                },
-                {
-                    "NC": "1",
-                    "D1N": "Brasil",
-                    "D3N": year,
-                    "D4N": "Total",
-                    "D5N": "5 a 9 anos",
-                    "V": "2000",
-                },
-                {
-                    "NC": "1",
-                    "D1N": "Brasil",
-                    "D3N": year,
-                    "D4N": "Total",
-                    "D5N": "10 a 14 anos",
-                    "V": "3000",
-                },
-                {
-                    "NC": "1",
-                    "D1N": "Brasil",
-                    "D3N": year,
-                    "D4N": "Total",
-                    "D5N": "15 a 19 anos",
-                    "V": "4000",
-                },
-                {
-                    "NC": "1",
-                    "D1N": "Brasil",
-                    "D3N": year,
-                    "D4N": "Total",
-                    "D5N": "20 a 24 anos",
-                    "V": "5000",
-                },
-                {
-                    "NC": "1",
-                    "D1N": "Brasil",
-                    "D3N": year,
-                    "D4N": "Total",
-                    "D5N": "25 a 29 anos",
-                    "V": "5000",
-                },
-                {
-                    "NC": "1",
-                    "D1N": "Brasil",
-                    "D3N": year,
-                    "D4N": "Total",
-                    "D5N": "30 a 34 anos",
-                    "V": "5000",
-                },
-                {
-                    "NC": "1",
-                    "D1N": "Brasil",
-                    "D3N": year,
-                    "D4N": "Total",
-                    "D5N": "35 a 39 anos",
-                    "V": "5000",
-                },
-                {
-                    "NC": "1",
-                    "D1N": "Brasil",
-                    "D3N": year,
-                    "D4N": "Total",
-                    "D5N": "40 a 44 anos",
-                    "V": "5000",
-                },
-                {
-                    "NC": "1",
-                    "D1N": "Brasil",
-                    "D3N": year,
-                    "D4N": "Total",
-                    "D5N": "45 a 49 anos",
-                    "V": "5000",
-                },
-                {
-                    "NC": "1",
-                    "D1N": "Brasil",
-                    "D3N": year,
-                    "D4N": "Total",
-                    "D5N": "50 a 54 anos",
-                    "V": "5000",
-                },
-                {
-                    "NC": "1",
-                    "D1N": "Brasil",
-                    "D3N": year,
-                    "D4N": "Total",
-                    "D5N": "55 a 59 anos",
-                    "V": "5000",
-                },
-                {
-                    "NC": "1",
-                    "D1N": "Brasil",
-                    "D3N": year,
-                    "D4N": "Total",
-                    "D5N": "60 a 64 anos",
-                    "V": "4000",
-                },
-                {
-                    "NC": "1",
-                    "D1N": "Brasil",
-                    "D3N": year,
-                    "D4N": "Total",
-                    "D5N": "65 a 69 anos",
-                    "V": "3500",
-                },
-                {
-                    "NC": "1",
-                    "D1N": "Brasil",
-                    "D3N": year,
-                    "D4N": "Total",
-                    "D5N": "70 a 74 anos",
-                    "V": "3000",
-                },
-                {
-                    "NC": "1",
-                    "D1N": "Brasil",
-                    "D3N": year,
-                    "D4N": "Total",
-                    "D5N": "75 a 79 anos",
-                    "V": "2500",
-                },
-                {
-                    "NC": "1",
-                    "D1N": "Brasil",
-                    "D3N": year,
-                    "D4N": "Total",
-                    "D5N": "80 a 84 anos",
-                    "V": "1500",
-                },
-                {
-                    "NC": "1",
-                    "D1N": "Brasil",
-                    "D3N": year,
-                    "D4N": "Total",
-                    "D5N": "85 a 89 anos",
-                    "V": "1000",
-                },
-                {
-                    "NC": "1",
-                    "D1N": "Brasil",
-                    "D3N": year,
-                    "D4N": "Total",
-                    "D5N": "90 a 94 anos",
-                    "V": "500",
-                },
-                {
-                    "NC": "1",
-                    "D1N": "Brasil",
-                    "D3N": year,
-                    "D4N": "Total",
-                    "D5N": "95 a 99 anos",
-                    "V": "250",
-                },
-                {
-                    "NC": "1",
-                    "D1N": "Brasil",
-                    "D3N": year,
-                    "D4N": "Total",
-                    "D5N": "100 anos ou mais",
-                    "V": "100",
-                },
-                {
-                    "NC": "6",
-                    "D1C": "3550308",
-                    "D1N": "São Paulo - SP",
-                    "D3N": year,
-                    "D4N": "Total",
-                    "D5N": "15 a 19 anos",
-                    "V": "900000",
-                },
+            cohorts = [
+                ("Total", "200000"),
+                ("0 a 4 anos", "1000"),
+                ("5 a 9 anos", "2000"),
+                ("10 a 14 anos", "3000"),
+                ("15 a 19 anos", "4000"),
+                ("20 a 24 anos", "5000"),
+                ("25 a 29 anos", "5000"),
+                ("30 a 34 anos", "5000"),
+                ("35 a 39 anos", "5000"),
+                ("40 a 44 anos", "5000"),
+                ("45 a 49 anos", "5000"),
+                ("50 a 54 anos", "5000"),
+                ("55 a 59 anos", "5000"),
+                ("60 a 64 anos", "4000"),
+                ("65 a 69 anos", "3500"),
+                ("70 a 74 anos", "3000"),
+                ("75 a 79 anos", "2500"),
+                ("80 a 84 anos", "1500"),
+                ("85 a 89 anos", "1000"),
+                ("90 a 94 anos", "500"),
+                ("95 a 99 anos", "250"),
+                ("100 anos ou mais", "100"),
             ]
+            rows = [{"NC": "Header"}]
+            for idade, val in cohorts:
+                rows.append({
+                    "NC": "1",
+                    "D1N": "Brasil",
+                    "D3N": "2022",
+                    "D4N": "Total",
+                    "D5N": idade,
+                    "V": val,
+                })
+            rows.append({
+                "NC": "6",
+                "D1C": "3550308",
+                "D1N": "São Paulo - SP",
+                "D3N": "2022",
+                "D4N": "Total",
+                "D5N": "15 a 19 anos",
+                "V": "900000",
+            })
+            resp.json.return_value = rows
             return resp
 
         session.get.side_effect = get_mock_response
@@ -516,18 +360,16 @@ class DownloadTest(unittest.TestCase):
                                         output_file=out_csv,
                                         fallback_to_cached=False)
         self.assertTrue(os.path.isfile(saved_file))
+        mock_sync.assert_called_once()
 
         df = pd.read_csv(saved_file)
-        self.assertIn("1940", df["Ano"].astype(str).values)
-        self.assertIn("2022", df["Ano"].astype(str).values)
+        self.assertEqual(set(df["Ano"].astype(str).values), {"2022"})
         self.assertIn("De 0 a 14 anos", df["Idade"].values)
         self.assertIn("De 60 anos ou mais", df["Idade"].values)
         self.assertIn("3550308", df["Localidade"].astype(str).values)
 
-    @patch.object(download_mod, "fetch_raw_historical_files")
-    def test_download_all_years_fallback_to_cached(self, mock_hist):
-        """Tests that fallback to existing CSV succeeds when fallback is enabled."""
-        mock_hist.return_value = []
+    def test_download_all_years_fallback_to_cached(self):
+        """Tests that fallback succeeds when both cached CSV and history exist."""
         session = MagicMock()
         session.get.side_effect = requests.HTTPError("503 Service Unavailable")
 
@@ -536,6 +378,13 @@ class DownloadTest(unittest.TestCase):
             f.write(
                 "Ano,Localidade,Idade,Sexo,Populacao\n2022,Brazil,Total,Total,100\n"
             )
+        hist_dir = os.path.join(self.test_dir, "history")
+        os.makedirs(hist_dir, exist_ok=True)
+        with open(os.path.join(
+                hist_dir, "brazil_population_by_age_and_sex_historical.csv"),
+                  "w",
+                  encoding="utf-8") as f:
+            f.write("h\n1\n")
 
         saved = download_all_years(session=session,
                                    output_file=cached_csv,

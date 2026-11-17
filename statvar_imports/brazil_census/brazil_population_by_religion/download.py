@@ -11,19 +11,15 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Automated download script for Brazil Census Population by Religion data.
+"""Automated download script for Brazil Census Population by Religion live data.
 
-Downloads resident population by religious affiliation from official IBGE sources:
-1. Live IBGE SIDRA REST API:
-   - Table 9537 (2022+ Census 10+ population by religion across n1/n2/n3/n6)
-   - Table 2094 (2010 Census all-ages population by religion across n1/n2/n3/n6)
-2. Historical census files from GCS (1940, 2000).
+Downloads 2022+ resident population (10+ years) by religious affiliation from
+official IBGE SIDRA REST API (Table 9537 across n1/n2/n3/n6) and syncs
+immutable pre-2022 historical observations from GCS history/.
 """
 
-import io
 import os
 import sys
-import tempfile
 from typing import Any, Dict, List, Optional
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -36,8 +32,12 @@ from absl import app
 from absl import flags
 from absl import logging
 from brazil_download_utils import fetch_sidra_data
+from brazil_download_utils import get_history_path
 from brazil_download_utils import get_raw_dir
 from brazil_download_utils import get_robust_session
+from brazil_download_utils import resolve_sidra_loc
+from brazil_download_utils import sync_historical_csv
+from brazil_download_utils import write_df_atomically
 import pandas as pd
 import requests
 
@@ -46,10 +46,10 @@ SIDRA_BASE_URL = "https://apisidra.ibge.gov.br"
 TABLE_9537_API_URL = (
     f"{SIDRA_BASE_URL}/values/t/9537/n1/all/n2/all/n3/all/n6/all"
     f"/v/140/p/all/c133/all/c2/0/c58/0?formato=json")
-# Table 2094: População residente por religião (2010 all-ages across n1/n2/n3/n6)
-TABLE_2094_API_URL = (
-    f"{SIDRA_BASE_URL}/values/t/2094/n1/all/n2/all/n3/all/n6/all"
-    f"/v/93/p/2010/c133/0,95263,95277,2836,12890,2837?formato=json")
+
+GCS_BUCKET_NAME = "unresolved_mcf"
+GCS_HISTORY_BLOB = ("country/brazil/history/brazil_population_by_religion/"
+                    "brazil_population_by_religion_historical.csv")
 
 FLAGS = flags.FLAGS
 if "output_file" not in FLAGS:
@@ -75,185 +75,23 @@ def _get_raw_dir(target_path: str) -> str:
     return get_raw_dir(target_path, DEFAULT_OUTPUT_FILE, SCRIPT_DIR)
 
 
-def parse_raw_religion_xls(content_bytes: bytes,
-                           year: int) -> List[Dict[str, Any]]:
-    """Parses raw IBGE Table 8 religion XLS workbook."""
-    rows: List[Dict[str, Any]] = []
-    df = pd.read_excel(io.BytesIO(content_bytes))
-    if len(df) <= 5:
-        raise ValueError(
-            f"Religion XLS workbook for {year} has fewer than 6 rows.")
-    header_row = df.iloc[5]
-    col_map: Dict[int, str] = {}
-    for idx, c in enumerate(header_row):
-        c_str = str(c).strip()
-        if "Total" in c_str:
-            col_map[idx] = "Total"
-        elif "RomanCatholicismApostolic" in c_str or "Católica" in c_str:
-            col_map[idx] = "Católica Apostólica Romana"
-        elif "Evangelical" in c_str or "Evangélica" in c_str:
-            col_map[idx] = "Evangélica"
-        elif "OtherReligion" in c_str or "Outras" in c_str:
-            col_map[idx] = "Outras Religiões"
-        elif "NoReligion" in c_str or "Sem religião" in c_str:
-            col_map[idx] = "Sem Religião"
-        elif ("ReligionNotStated" in c_str or "Não declarada" in c_str or
-              "Sem declaração" in c_str):
-            col_map[idx] = "Não Declarada"
-
-    for r_idx in range(6, len(df)):
-        r = df.iloc[r_idx]
-        place = str(r.iloc[0]).strip()
-        place_lower = place.lower()
-        if (not place or pd.isna(r.iloc[0]) or
-            ("fonte" in place_lower and "fonte boa" not in place_lower)):
-            continue
-        if place == "Brasil":
-            place = "Brazil"
-
-        for c_idx, rel in col_map.items():
-            # Table 9 (2000 Religion) reports Sample estimates (169,872,856 for Brazil);
-            # skip Total for 2000 so Universe Count_Person (169,799,170) is authoritative.
-            if rel == "Total" and year == 2000:
-                continue
-            val = r.iloc[c_idx]
-            if pd.isna(val) or str(val).strip() in ["-", "...", "..", "X", ""]:
-                continue
-            try:
-                val_int = int(round(float(val)))
-            except (ValueError, TypeError):
-                continue
-            rows.append({
-                "Ano": year,
-                "Localidade": place,
-                "Religiao": rel,
-                "Populacao": val_int,
-            })
-    if not rows:
-        raise ValueError(
-            f"Parsed 0 rows from religion XLS workbook for {year}.")
-    return rows
-
-
-def fetch_raw_input_files(
-        raw_dir: Optional[str] = None) -> List[Dict[str, Any]]:
-    """Reads raw 1940 and 2000 religion input files from GCS."""
-    from google.cloud import storage
-
-    rows: List[Dict[str, Any]] = []
-    year_files = [
-        (1940, "Brazil_1940_religion.xls"),
-        (2000, "Brazil_2000_religion.xls"),
-    ]
-    client = storage.Client()
-    bucket = client.bucket("unresolved_mcf")
-
-    for year, fname in year_files:
-        blob = bucket.blob(
-            f"country/brazil/input_files/Brazil_1940_2000_religion/{fname}")
-        content = blob.download_as_bytes()
-        if raw_dir:
-            with open(os.path.join(raw_dir, fname), "wb") as f:
-                f.write(content)
-        rows.extend(parse_raw_religion_xls(content, year))
-
-    if not rows:
-        raise RuntimeError("No historical religion records loaded from GCS.")
-    return rows
-
-
 def download_all_years(
     session: requests.Session,
     output_file: Optional[str] = None,
     fallback_to_cached: bool = False,
 ) -> str:
-    """Downloads Brazil Census religion data across all census years."""
+    """Downloads live 2022+ Brazil Census religion data and syncs historical CSV."""
     target_path = output_file or DEFAULT_OUTPUT_FILE
     raw_dir = _get_raw_dir(target_path)
+    history_dest = get_history_path(
+        target_path,
+        DEFAULT_OUTPUT_FILE,
+        SCRIPT_DIR,
+        "brazil_population_by_religion_historical.csv",
+    )
     all_rows: List[Dict[str, Any]] = []
 
     try:
-        # 1. Historical data from raw input files in GCS input_files (1940, 2000)
-        raw_rows = fetch_raw_input_files(raw_dir=raw_dir)
-        all_rows.extend(raw_rows)
-
-        # 2. Live SIDRA API (Table 2094 for 2010 all-ages religion across n1/n2/n3/n6)
-        raw_2010 = fetch_sidra_data(
-            session,
-            TABLE_2094_API_URL,
-            raw_file_path=os.path.join(raw_dir, "sidra_2094_2010_n6.json"),
-        )
-        logging.info(
-            f"Retrieved {len(raw_2010) - 1} records from SIDRA Table 2094.")
-        rel_2010_by_loc: Dict[str, Dict[str, int]] = {}
-        for r in raw_2010[1:]:
-            if str(r.get("D3N", "")).strip() != "2010":
-                continue
-            val_str = r.get("V")
-            if val_str in ["...", "..", "X", None, ""]:
-                continue
-            val = 0 if val_str == "-" else None
-            if val is None:
-                try:
-                    val = int(round(float(val_str)))
-                except (ValueError, TypeError):
-                    continue
-            if str(r.get("NC", "")).strip() == "6":
-                loc = str(r.get("D1C", "")).strip()
-            else:
-                loc = str(r.get("D1N", "")).strip()
-                if loc == "Brasil":
-                    loc = "Brazil"
-            rel_raw = str(r.get("D4N", "")).strip()
-            rel_2010_by_loc.setdefault(loc, {})[rel_raw] = val
-
-        for loc, rmap in rel_2010_by_loc.items():
-            if "Católica Apostólica Romana" in rmap:
-                all_rows.append({
-                    "Ano": 2010,
-                    "Localidade": loc,
-                    "Religiao": "Católica Apostólica Romana",
-                    "Populacao": rmap["Católica Apostólica Romana"],
-                })
-            ev_val = rmap.get("Evangélicas", rmap.get("Evangélica"))
-            if ev_val is not None:
-                all_rows.append({
-                    "Ano": 2010,
-                    "Localidade": loc,
-                    "Religiao": "Evangélica",
-                    "Populacao": ev_val,
-                })
-            if "Sem religião" in rmap:
-                all_rows.append({
-                    "Ano": 2010,
-                    "Localidade": loc,
-                    "Religiao": "Sem Religião",
-                    "Populacao": rmap["Sem religião"],
-                })
-            nao_det = rmap.get("Não determinada e multiplo pertencimento", 0)
-            sem_decl = rmap.get("Sem declaração", 0)
-            if ("Não determinada e multiplo pertencimento" in rmap or
-                    "Sem declaração" in rmap):
-                all_rows.append({
-                    "Ano": 2010,
-                    "Localidade": loc,
-                    "Religiao": "Não Declarada",
-                    "Populacao": nao_det + sem_decl,
-                })
-            if "Total" in rmap:
-                known_sum = (rmap.get("Católica Apostólica Romana", 0) +
-                             (ev_val or 0) + rmap.get("Sem religião", 0) +
-                             nao_det + sem_decl)
-                outras_val = max(0, rmap["Total"] - known_sum)
-                all_rows.append({
-                    "Ano": 2010,
-                    "Localidade": loc,
-                    "Religiao": "Outras Religiões",
-                    "Populacao": outras_val,
-                })
-
-        # 3. Live SIDRA API (Table 9537 for 2022 10+ religion across n1/n2/n3/n6)
-        # Added after historical files so authoritative live SIDRA rows take precedence in drop_duplicates(keep="last").
         raw_sidra = fetch_sidra_data(
             session,
             TABLE_9537_API_URL,
@@ -277,13 +115,12 @@ def download_all_years(
                 year = int(year_str)
             except ValueError:
                 continue
+            if year < 2022:
+                continue
 
-            if str(r.get("NC", "")).strip() == "6":
-                loc = str(r.get("D1C", "")).strip()
-            else:
-                loc = str(r.get("D1N", "")).strip()
-                if loc == "Brasil":
-                    loc = "Brazil"
+            loc = resolve_sidra_loc(r)
+            if not loc:
+                continue
 
             rel_raw = str(r.get("D4N", "Total")).strip()
             if rel_raw == "Total":
@@ -336,8 +173,18 @@ def download_all_years(
                 "Populacao": val,
             })
 
+        if not all_rows:
+            raise RuntimeError("No live 2022+ religion records retrieved.")
+
+        sync_historical_csv(
+            GCS_HISTORY_BLOB,
+            history_dest,
+            gcs_bucket_name=GCS_BUCKET_NAME,
+            fallback_to_cached=fallback_to_cached,
+        )
     except Exception as e:
-        if fallback_to_cached and os.path.isfile(target_path):
+        if fallback_to_cached and os.path.isfile(
+                target_path) and os.path.isfile(history_dest):
             logging.warning(
                 f"Download failed ({e}). Falling back to cached copy: {target_path}"
             )
@@ -346,36 +193,9 @@ def download_all_years(
         raise RuntimeError(
             f"Error downloading Brazil Census religion data: {e}") from e
 
-    if not all_rows:
-        if fallback_to_cached and os.path.isfile(target_path):
-            return target_path
-        raise RuntimeError("No religion records retrieved from data sources.")
-
     df = pd.DataFrame(all_rows).drop_duplicates(
         subset=["Ano", "Localidade", "Religiao"], keep="last")
-    target_dir = os.path.dirname(os.path.abspath(target_path))
-    os.makedirs(target_dir, exist_ok=True)
-
-    with tempfile.NamedTemporaryFile(
-            mode="w",
-            delete=False,
-            dir=target_dir,
-            suffix=".csv",
-            encoding="utf-8",
-            newline="",
-    ) as tmp_file:
-        tmp_path = tmp_file.name
-        df.to_csv(tmp_file, index=False, encoding="utf-8")
-
-    if not os.path.isfile(tmp_path) or os.path.getsize(tmp_path) == 0:
-        if os.path.isfile(tmp_path):
-            os.remove(tmp_path)
-        raise RuntimeError(
-            f"Atomic CSV write failed: {tmp_path} is missing or empty.")
-
-    os.replace(tmp_path, target_path)
-    logging.info(f"Wrote {len(df)} records to {target_path}")
-
+    write_df_atomically(df, target_path)
     return target_path
 
 
@@ -390,8 +210,7 @@ def main(argv: List[str]) -> None:
         output_file=target_file,
         fallback_to_cached=FLAGS.fallback_to_cached,
     )
-    logging.info(
-        f"Successfully generated Brazil Census religion data at: {saved_file}")
+    logging.info(f"Religion download completed successfully: {saved_file}")
 
 
 if __name__ == "__main__":

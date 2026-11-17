@@ -50,7 +50,7 @@ class DownloadTest(unittest.TestCase):
         super().tearDown()
 
     def test_robust_session_configuration(self):
-        """Verifies session retry configuration includes 429 and 5xx error codes."""
+        """Verifies session retry configuration includes 429, 5xx, and 52x codes."""
         session = get_robust_session()
         self.assertIsInstance(session, requests.Session)
         adapter = session.adapters.get("https://")
@@ -58,17 +58,15 @@ class DownloadTest(unittest.TestCase):
         self.assertEqual(adapter.max_retries.total, 10)
         self.assertIn(429, adapter.max_retries.status_forcelist)
         self.assertIn(500, adapter.max_retries.status_forcelist)
+        self.assertIn(520, adapter.max_retries.status_forcelist)
 
+    @patch.object(download_mod, "sync_historical_csv")
     @patch.object(download_mod, "ensure_literacy_rates_file")
-    @patch.object(download_mod, "parse_2000_literacy_files", return_value=[])
-    @patch.object(download_mod, "fetch_2010_illiterate_race", return_value=[])
-    @patch.object(download_mod, "fetch_raw_input_files", return_value=[])
-    def test_download_mocked_success(self, _mock_raw, _mock_2010, _mock_2000,
-                                     mock_rates):
-        """Tests successful download and CSV emission."""
+    def test_download_mocked_success(self, mock_rates, mock_sync):
+        """Tests successful live 2022+ download and historical sync."""
         session = MagicMock()
         mock_response = MagicMock()
-        mock_payload = [
+        mock_response.json.return_value = [
             {
                 "NC": "Nível Territorial"
             },
@@ -88,8 +86,15 @@ class DownloadTest(unittest.TestCase):
                 "D5N": "Homens",
                 "V": "72000000",
             },
+            {
+                "NC": "1",
+                "D1N": "Brasil",
+                "D3N": "2010",
+                "D4N": "Alfabetizadas",
+                "D5N": "Total",
+                "V": "999",
+            },
         ]
-        mock_response.json.return_value = mock_payload
         mock_response.raise_for_status.return_value = None
         session.get.return_value = mock_response
 
@@ -99,6 +104,11 @@ class DownloadTest(unittest.TestCase):
                                         fallback_to_cached=False)
         self.assertTrue(os.path.isfile(saved_file))
         mock_rates.assert_called_once()
+        self.assertEqual(
+            mock_rates.call_args.kwargs["rates_out"],
+            os.path.join(self.test_dir, "brazil_literacy_rates.csv"),
+        )
+        mock_sync.assert_called_once()
 
         df = pd.read_csv(saved_file)
         self.assertEqual(len(df), 2)
@@ -114,14 +124,12 @@ class DownloadTest(unittest.TestCase):
                 "Populacao",
             ],
         )
+        self.assertEqual(set(df["Ano"].values), {2022})
         self.assertEqual(df["Localidade"].iloc[0], "Brazil")
 
+    @patch.object(download_mod, "sync_historical_csv")
     @patch.object(download_mod, "ensure_literacy_rates_file")
-    @patch.object(download_mod, "parse_2000_literacy_files", return_value=[])
-    @patch.object(download_mod, "fetch_2010_illiterate_race", return_value=[])
-    @patch.object(download_mod, "fetch_raw_input_files", return_value=[])
-    def test_download_empty_response_raises(self, _mock_raw, _mock_2010,
-                                            _mock_2000, _mock_rates):
+    def test_download_empty_response_raises(self, _mock_rates, _mock_sync):
         """Tests that an empty response payload raises RuntimeError."""
         session = MagicMock()
         mock_response = MagicMock()
@@ -135,12 +143,9 @@ class DownloadTest(unittest.TestCase):
                                output_file=out_csv,
                                fallback_to_cached=False)
 
+    @patch.object(download_mod, "sync_historical_csv")
     @patch.object(download_mod, "ensure_literacy_rates_file")
-    @patch.object(download_mod, "parse_2000_literacy_files", return_value=[])
-    @patch.object(download_mod, "fetch_2010_illiterate_race", return_value=[])
-    @patch.object(download_mod, "fetch_raw_input_files", return_value=[])
-    def test_download_network_failure_raises(self, _mock_raw, _mock_2010,
-                                             _mock_2000, _mock_rates):
+    def test_download_network_failure_raises(self, _mock_rates, _mock_sync):
         """Tests that network error raises RuntimeError when fallback is disabled."""
         session = MagicMock()
         session.get.side_effect = requests.ConnectionError(
@@ -153,12 +158,8 @@ class DownloadTest(unittest.TestCase):
                                fallback_to_cached=False)
 
     @patch.object(download_mod, "ensure_literacy_rates_file")
-    @patch.object(download_mod, "parse_2000_literacy_files", return_value=[])
-    @patch.object(download_mod, "fetch_2010_illiterate_race", return_value=[])
-    @patch.object(download_mod, "fetch_raw_input_files", return_value=[])
-    def test_download_fallback_to_cached(self, _mock_raw, _mock_2010,
-                                         _mock_2000, mock_rates):
-        """Tests that fallback to existing CSV also updates or falls back for rates CSV."""
+    def test_download_fallback_to_cached(self, mock_rates):
+        """Tests that fallback succeeds when both cached CSV and history exist."""
         session = MagicMock()
         session.get.side_effect = requests.HTTPError("503 Service Unavailable")
 
@@ -166,7 +167,13 @@ class DownloadTest(unittest.TestCase):
         with open(cached_csv, "w", encoding="utf-8") as f:
             f.write(
                 "Ano,Localidade,FaixaEtaria,Raca,StatusAlfabetizacao,Sexo,Populacao\n"
-                "2022,Brazil,15 anos ou mais,Total,Alfabetizado,Total,100\n")
+                "2022,Brazil,15 anos ou mais,Total,Alfabetizada,Total,100\n")
+        hist_dir = os.path.join(self.test_dir, "history")
+        os.makedirs(hist_dir, exist_ok=True)
+        with open(os.path.join(hist_dir, "brazil_literacy_historical.csv"),
+                  "w",
+                  encoding="utf-8") as f:
+            f.write("h\n1\n")
 
         saved = download_all_years(session=session,
                                    output_file=cached_csv,
@@ -296,15 +303,6 @@ class DownloadTest(unittest.TestCase):
                         "NC": "Nível Territorial"
                     },
                     {
-                        "NC": "6",
-                        "D1C": "5101837",
-                        "D1N": "Boa Esperança do Norte - MT",
-                        "D3N": "2022",
-                        "D6C": "1023",
-                        "D7C": "100362",
-                        "V": "900",
-                    },
-                    {
                         "NC": "1",
                         "D1N": "Brasil",
                         "D3N": "2022",
@@ -319,39 +317,43 @@ class DownloadTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             download_mod._fetch_2022_literacy_rates_rows(session=session)
 
-    @patch.object(download_mod, "_fetch_2022_literacy_rates_rows")
+    @patch.object(download_mod,
+                  "_fetch_2022_literacy_rates_rows",
+                  side_effect=RuntimeError("SIDRA offline"))
     def test_ensure_literacy_rates_file_fallback_and_preserve(self, _mock_rows):
         """Tests that ensure_literacy_rates_file respects fallback_to_cached and protects target CSV."""
         cached_rates = os.path.join(self.test_dir, "rates.csv")
         with open(cached_rates, "w", encoding="utf-8") as f:
             f.write("observationAbout,observationDate,variableMeasured,value\n"
                     "dcid:country/BRA,2022,dcid:Dummy,0.9\n")
+        rates_hist = os.path.join(self.test_dir, "history",
+                                  "brazil_literacy_rates_historical.csv")
+        os.makedirs(os.path.dirname(rates_hist), exist_ok=True)
+        with open(rates_hist, "w", encoding="utf-8") as f:
+            f.write("h\n1\n")
 
-        with patch("google.cloud.storage.Client",
-                   side_effect=RuntimeError("GCS unavailable")):
+        download_mod.ensure_literacy_rates_file(
+            rates_out=cached_rates,
+            session=MagicMock(),
+            fallback_to_cached=True,
+            rates_history_dest=rates_hist,
+        )
+        with open(cached_rates, "r", encoding="utf-8") as f:
+            self.assertIn("dcid:Dummy,0.9", f.read())
+
+        with self.assertRaises(RuntimeError):
             download_mod.ensure_literacy_rates_file(
                 rates_out=cached_rates,
                 session=MagicMock(),
-                fallback_to_cached=True,
+                fallback_to_cached=False,
+                rates_history_dest=rates_hist,
             )
-            with open(cached_rates, "r", encoding="utf-8") as f:
-                self.assertIn("dcid:Dummy,0.9", f.read())
-
-            with self.assertRaises(RuntimeError):
-                download_mod.ensure_literacy_rates_file(
-                    rates_out=cached_rates,
-                    session=MagicMock(),
-                    fallback_to_cached=False,
-                )
 
     @patch.object(download_mod,
                   "ensure_literacy_rates_file",
                   side_effect=RuntimeError("Rates failed"))
-    @patch.object(download_mod, "parse_2000_literacy_files", return_value=[])
-    @patch.object(download_mod, "fetch_2010_illiterate_race", return_value=[])
-    @patch.object(download_mod, "fetch_raw_input_files", return_value=[])
     def test_download_rates_failure_does_not_overwrite_existing_csv(
-            self, _mock_raw, _mock_2010, _mock_2000, _mock_rates):
+            self, _mock_rates):
         """Tests that failing literacy rates keeps existing brazil_literacy.csv intact when fallback=False."""
         session = MagicMock()
         mock_response = MagicMock()
