@@ -166,21 +166,32 @@ class GenerateColMapBase:
         """
         if spec has find_and_replace defined, this function updates column names
         """
-        if 'find_and_replace' in self.features['preprocess']:
-            find_and_replace_dict = self.features['preprocess'][
-                'find_and_replace']
-            # replace entire column name
-            if column in find_and_replace_dict:
-                return find_and_replace_dict[column]
-            # replace a token in the column name
-            else:
-                # TODO: Support the find_and_replace of more than one token
-                part_list = column.split(self.delimiter)
-                for idx, part in enumerate(part_list):
-                    if part in find_and_replace_dict:
-                        part_list[idx] = find_and_replace_dict[part]
-                        return self.delimiter.join(part_list)
-        return column
+        if 'find_and_replace' not in self.features.get('preprocess', {}):
+            return column
+
+        find_and_replace_dict = self.features['preprocess']['find_and_replace']
+        new_column = column
+
+        # 1. Handle multi-token keys/partial strings sorted by length (longest first)
+        sorted_keys = sorted(find_and_replace_dict.keys(),
+                             key=len,
+                             reverse=True)
+        for key in sorted_keys:
+            if key in new_column:
+                new_column = new_column.replace(key, find_and_replace_dict[key])
+
+        # 2. Token-based replacement for exact token matches
+        parts = new_column.split(self.delimiter)
+        modified_tokens = False
+        for idx, part in enumerate(parts):
+            if part in find_and_replace_dict:
+                parts[idx] = find_and_replace_dict[part]
+                modified_tokens = True
+
+        if modified_tokens:
+            new_column = self.delimiter.join(parts)
+
+        return new_column
 
     def _generate_stat_vars_from_spec(self):
         """generates stat_var nodes for each column in column list and 
@@ -201,17 +212,19 @@ class GenerateColMapBase:
         # len((set(self.features['ignoreColumns']) &
         # set(col.split(self.delimiter)) > 0:
         for col in self.column_list:
-            # TODO: Replace the type of ignore_token_count to boolean
-            ignore_token_count = 0
-            for part in col.split(self.delimiter):
-                for token in self.features['ignoreColumns']:
-                    if part == token:
-                        ignore_token_count = 1
-                    if token == col:
-                        ignore_token_count = 1
+            is_ignored = False
+            col_tokens = col.split(self.delimiter)
+            for ignore_pattern in self.features['ignoreColumns']:
+                if self.delimiter in ignore_pattern:
+                    if ignore_pattern in col:
+                        is_ignored = True
+                        break
+                elif ignore_pattern == col or ignore_pattern in col_tokens:
+                    is_ignored = True
+                    break
 
-            # if no tokens of the columns are in ignoreColumns of the spec
-            if ignore_token_count == 0:
+            # if no tokens/patterns of the column are in ignoreColumns of the spec
+            if not is_ignored:
                 renamed_col = self._find_and_replace_column_names(col)
                 # TODO: Before calling the column_to_statvar method,
                 # remove the base class or generalization token in the
