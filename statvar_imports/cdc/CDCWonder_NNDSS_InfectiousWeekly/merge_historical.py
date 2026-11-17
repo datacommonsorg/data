@@ -29,7 +29,7 @@ flags.DEFINE_string(
 )
 flags.DEFINE_string(
     "historical_gcs_blob",
-    "cdc/nndss_infectious_diseases_weekly/20250206/cdc_nndss_weekly_tables.csv",
+    "cdc/nndss_infectious_diseasesweekly/history/cdc_nndss_weekly_tables.csv",
     "GCS blob path for the 2006-2021 historical baseline CSV.",
 )
 flags.DEFINE_string(
