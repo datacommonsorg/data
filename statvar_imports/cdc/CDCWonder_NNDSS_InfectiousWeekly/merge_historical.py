@@ -52,6 +52,7 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 HISTORY_DIR = os.path.join(SCRIPT_DIR, "history")
 HISTORICAL_LOCAL_FILE = os.path.join(HISTORY_DIR,
                                      "historical_cdc_nndss_weekly_tables.csv")
+HISTORICAL_CUTOFF_DATE = "2022-01-01"
 MEASUREMENT_METHOD = "dcs:CDC_NNDSS_Diseases_WeeklyTables"
 
 OUTPUT_COLUMNS = [
@@ -76,7 +77,7 @@ observationPeriod: C:NNDSWeekly->observationPeriod
 
 def load_historical(local_path: str, bucket_name: str,
                     blob_name: str) -> pd.DataFrame:
-    """Load all historical baseline rows from 20250206 to ensure 0 deletions."""
+    """Load 2006-2021 historical rows (< 2022-01-01)."""
     csv_path = local_path
     if not csv_path:
         from google.cloud import storage
@@ -92,7 +93,9 @@ def load_historical(local_path: str, bucket_name: str,
 
     df = pd.read_csv(csv_path, usecols=OUTPUT_COLUMNS, dtype=str)
     df = df.reindex(columns=OUTPUT_COLUMNS)
-    logging.info(f"Loaded {len(df)} historical baseline rows.")
+    df = df[df["observationDate"] < HISTORICAL_CUTOFF_DATE].copy()
+    logging.info(
+        f"Loaded {len(df)} historical rows (< {HISTORICAL_CUTOFF_DATE}).")
     return df
 
 
