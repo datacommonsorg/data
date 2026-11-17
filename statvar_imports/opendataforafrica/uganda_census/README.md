@@ -6,7 +6,7 @@
 - **Publisher**: Uganda Bureau of Statistics (UBOS)
 - **Import Type**: `Semi-Automated` (`GCPCloudRunSemiAutomaticRefresh`)
 - **Release Frequency**: Annual (`P1Y`)
-- **Cron Schedule**: `0 5 * * 1` (Monday 05:00 UTC), with `config_override.disable_import_workflow: true` keeping the Airflow DAG paused by default until manually triggered or unpaused
+- **Cron Schedule**: `0 5 * * 1` (Monday 05:00 UTC; semi-automated Airflow/Cloud Batch schedule)
 - **Coverage**: Demographics, Health, Education, Census populations (1969 – 2016)
 - **Entity Resolution**:
   - National level: `country/UGA`
@@ -63,7 +63,7 @@ During scheduled import runs, the automated pipeline executes:
 3. **Validation**: Validates data freshness, record deletion thresholds, and schema lint rules.
 
 ### 4.3 Semi-Automated Refresh Cadence
-Because upstream SDMX XML downloads from `uganda.opendataforafrica.org` require browser export due to Cloudflare Turnstile bot protection (`GCPCloudRunSemiAutomaticRefresh`), refreshes are triggered on-demand via Cloud Batch / GCP Cloud Run after staging refreshed CSV files to GCS (source release frequency: `P1Y`). The manifest retains `"cron_schedule": "0 5 * * 1"` (Monday 05:00 UTC) alongside `"config_override": {"disable_import_workflow": true}` so import scheduler/catalog metadata stays valid while keeping the Airflow DAG paused in Composer by default (`is_paused: true`) unless manually triggered or unpaused.
+Because upstream SDMX XML downloads from `uganda.opendataforafrica.org` require browser export due to Cloudflare Turnstile bot protection (`GCPCloudRunSemiAutomaticRefresh`), refreshed CSV files are exported locally and staged to GCS first, while the automated Airflow/Cloud Batch pipeline runs on its weekly cron schedule (`0 5 * * 1`, Monday 05:00 UTC; source release frequency: `P1Y`) as well as via on-demand triggers.
 
 ## 5. Running the Data Processor
 
