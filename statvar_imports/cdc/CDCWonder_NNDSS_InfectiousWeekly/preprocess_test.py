@@ -83,6 +83,15 @@ class PreprocessTest(unittest.TestCase):
         self.assertEqual(records.get(("NEW YORK", "Campylobacteriosis")), "50")
         self.assertEqual(len(records), 3)
 
+    def test_preprocess_csv_header_only_missing_columns(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            in_csv = os.path.join(tmpdir, "rows.csv")
+            out_csv = os.path.join(tmpdir, "NNDSS_Weekly_Data.csv")
+            with open(in_csv, "w", encoding="utf-8") as f:
+                f.write("Reporting Area,Current MMWR Year\n")
+            with self.assertRaises(KeyError):
+                preprocess.preprocess_csv(in_csv, out_csv)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -152,6 +152,11 @@ def preprocess_csv(filepath: str, out_filepath: str) -> pd.DataFrame:
         "Label",
     ]
 
+    header_cols = pd.read_csv(filepath, nrows=0).columns
+    missing_cols = [col for col in required_cols if col not in header_cols]
+    if missing_cols:
+        raise KeyError(f"Missing required columns in input CSV: {missing_cols}")
+
     bad_lines_count = 0
 
     def _handle_bad_line(bad_line):
@@ -168,12 +173,6 @@ def preprocess_csv(filepath: str, out_filepath: str) -> pd.DataFrame:
     )
     for chunk_idx, chunk in enumerate(reader, start=1):
         logging.info(f"Processing chunk {chunk_idx}...")
-        if chunk_idx == 1:
-            missing_cols = [col for col in required_cols if col not in chunk.columns]
-            if missing_cols:
-                raise KeyError(
-                    f"Missing required columns in input CSV: {missing_cols}"
-                )
 
         if "Current week, flag" in chunk.columns:
             flag_series = chunk["Current week, flag"].fillna("").str.strip()
