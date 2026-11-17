@@ -6,7 +6,7 @@ Notifiable Infectious Diseases Data: Weekly tables from CDC WONDER containing in
 This `stat_var_processor` + `pvmap` pipeline:
 1. Preprocesses `x9gk-5huc` (`Current week` numeric values, `observationDate`, NY+NYC sum) via `preprocess.py`.
 2. Maps 2022–present observations to canonical StatVars via `stat_var_processor.py` and `nndss_weekly_pvmap.csv`.
-3. Merges the 2006–2021 historical archive from `gs://unresolved_mcf/cdc/nndss_infectious_diseases_weekly/20250206/cdc_nndss_weekly_tables.csv` (stored under `history/`) via `merge_historical.py`.
+3. Merges the 2006–2021 historical archive from `gs://unresolved_mcf/cdc/nndss_infectious_diseasesweekly/history/cdc_nndss_weekly_tables.csv` (stored locally under `history/`) via `merge_historical.py`.
 
 ## Prerequisites
 - Run commands from `statvar_imports/cdc/CDCWonder_NNDSS_InfectiousWeekly/`.
