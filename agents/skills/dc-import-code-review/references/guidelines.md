@@ -9,6 +9,7 @@ repository contracts and instructions take precedence.
   manifest contract, and verify that every referenced script and input exists.
 - Ensure `manifest.json` includes `node_mcf` under `import_inputs` pointing to
   generated schema/statvar MCF files (e.g., `output/*.mcf`).
+- Write place, StatVar, and schema nodes to separate MCF files.
 - Verify that `source_files` patterns cover every original file downloaded from
   the source, including non-data files like HTML and PDF, rather than
   sanitized copies, so each version keeps its raw source data in GCS for
@@ -45,6 +46,11 @@ repository contracts and instructions take precedence.
   pickles, and other binary files out of the PR unless they are stored
   through Git LFS. Excel and PDF files are allowed only under `test_data/`;
   tests that need an archive build it at run time from test fixtures.
+- Store files larger than 500 KB, including text files such as place
+  mappings, in GCS or through Git LFS.
+- Keep files the import writes at run time out of the repository, such as
+  counter files from `--output_counters` and processor output (`.csv`,
+  `.tmcf`, `_stat_vars.mcf`). Fixtures under `test_data/` are the exception.
 
 ## Execution and failure handling
 
@@ -158,6 +164,9 @@ Then apply these rules:
 - Download fresh data from the source on each run rather than reusing cached
   files; for large downloads, reuse a cached file only when HTTP headers (such
   as `ETag` or `Last-Modified`) confirm the source data is unchanged.
+- Verify that the download script fetches releases for future years, such as
+  by building URLs from the source's naming pattern, rather than only the
+  years listed in the code.
 
 ## Tests
 
