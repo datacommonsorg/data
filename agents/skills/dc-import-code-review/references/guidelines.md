@@ -17,6 +17,10 @@ repository contracts and instructions take precedence.
   do not confuse source artifacts with import inputs.
 - Add `cron_schedule`, `user_script_timeout`, and `resource_limits` only when
   the import needs scheduling or an override, and validate them when present.
+- Semi-automated imports run on their `cron_schedule` like other auto-refresh
+  imports. Require a `cron_schedule` on them, leave
+  `config_override.disable_import_workflow` unset, and flag it when set to
+  `true`.
 - Keep curator contacts valid without prescribing one fixed email value.
 
 ## Documentation and organization
