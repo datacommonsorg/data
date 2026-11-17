@@ -63,9 +63,8 @@ class MergeHistoricalTest(unittest.TestCase):
             loaded = merge_historical.load_historical(hist_csv, "", "")
             self.assertEqual(list(loaded.columns),
                              merge_historical.OUTPUT_COLUMNS)
-            self.assertEqual(len(loaded), 2)
-            self.assertEqual(list(loaded["observationDate"]),
-                             ["2021-12-26", "2022-01-02"])
+            self.assertEqual(len(loaded), 1)
+            self.assertEqual(loaded.iloc[0]["observationDate"], "2021-12-26")
 
     def test_merge_outputs_strips_prefixes_and_deduplicates(self):
         with tempfile.TemporaryDirectory() as tmpdir:

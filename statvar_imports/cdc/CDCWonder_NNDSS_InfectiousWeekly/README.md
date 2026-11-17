@@ -6,7 +6,7 @@ Notifiable Infectious Diseases Data: Weekly tables from CDC WONDER containing in
 This `stat_var_processor` + `pvmap` pipeline:
 1. Preprocesses `x9gk-5huc` (`Current week` numeric values, `observationDate`, NY+NYC sum) via `preprocess.py`.
 2. Maps 2022–present observations to canonical StatVars via `stat_var_processor.py` and `nndss_weekly_pvmap.csv`.
-3. Merges the `20250206` historical baseline from `gs://unresolved_mcf/cdc/nndss_infectious_diseases_weekly/20250206/cdc_nndss_weekly_tables.csv` (stored under `history/`) via `merge_historical.py`, overwriting overlapping `2022+` keys with fresh `x9gk-5huc` data so `0` baseline observations are deleted.
+3. Merges the 2006–2021 historical archive from `gs://unresolved_mcf/cdc/nndss_infectious_diseases_weekly/20250206/cdc_nndss_weekly_tables.csv` (stored under `history/`) via `merge_historical.py`.
 
 ## Prerequisites
 - Run commands from `statvar_imports/cdc/CDCWonder_NNDSS_InfectiousWeekly/`.
@@ -45,5 +45,6 @@ python3 -m unittest discover -v -s statvar_imports/cdc/CDCWonder_NNDSS_Infectiou
 ```
 
 ## Refresh & Approval Procedure
-- Weekly Cloud Batch refreshes run on schedule (`30 7 * * 4`) and preserve all `20250206` baseline observations under `history/` (`0` deletions vs `20250206`, passing the default `0.1%` `DELETED_RECORDS_PERCENT` threshold automatically).
-- `validation_config.json` enforces `check_weekly_statvars_freshness` (`SQL_VALIDATOR`: `fresh_svs >= 50` within 30 days).
+- Weekly Cloud Batch refreshes run on schedule (`30 7 * * 4`) and preserve all `2006–2021` observations from `20250206` under `history/`.
+- `validation_config.json` enforces `check_weekly_statvars_freshness` (`SQL_VALIDATOR`: `fresh_svs >= 50` within 30 days) and inherits the default `0.1%` `DELETED_RECORDS_PERCENT` threshold.
+- On the first automated refresh against `20250206`, `check_deleted_records_percent` (`0.1631%` = `877` upstream `2022–2024` CDC revisions, `0` deletions in `2006–2021`) requires one-time manual approval.
