@@ -76,24 +76,24 @@ observationPeriod: C:NNDSWeekly->observationPeriod
 
 def load_historical(local_path: str, bucket_name: str,
                     blob_name: str) -> pd.DataFrame:
-  """Load all historical baseline rows from 20250206 to ensure 0 deletions."""
-  csv_path = local_path
-  if not csv_path:
-    from google.cloud import storage
+    """Load all historical baseline rows from 20250206 to ensure 0 deletions."""
+    csv_path = local_path
+    if not csv_path:
+        from google.cloud import storage
 
-    logging.info(
-        f"Downloading historical archive from gs://{bucket_name}/{blob_name}..."
-    )
-    Path(HISTORY_DIR).mkdir(parents=True, exist_ok=True)
-    client = storage.Client()
-    bucket = client.bucket(bucket_name)
-    bucket.blob(blob_name).download_to_filename(HISTORICAL_LOCAL_FILE)
-    csv_path = HISTORICAL_LOCAL_FILE
+        logging.info(
+            f"Downloading historical archive from gs://{bucket_name}/{blob_name}..."
+        )
+        Path(HISTORY_DIR).mkdir(parents=True, exist_ok=True)
+        client = storage.Client()
+        bucket = client.bucket(bucket_name)
+        bucket.blob(blob_name).download_to_filename(HISTORICAL_LOCAL_FILE)
+        csv_path = HISTORICAL_LOCAL_FILE
 
-  df = pd.read_csv(csv_path, usecols=OUTPUT_COLUMNS, dtype=str)
-  df = df.reindex(columns=OUTPUT_COLUMNS)
-  logging.info(f"Loaded {len(df)} historical baseline rows.")
-  return df
+    df = pd.read_csv(csv_path, usecols=OUTPUT_COLUMNS, dtype=str)
+    df = df.reindex(columns=OUTPUT_COLUMNS)
+    logging.info(f"Loaded {len(df)} historical baseline rows.")
+    return df
 
 
 def merge_outputs(hist_df: pd.DataFrame, processor_csv_path: str,
@@ -130,8 +130,8 @@ def merge_outputs(hist_df: pd.DataFrame, processor_csv_path: str,
 
 
 def main(argv):
-  del argv
-  Path(HISTORY_DIR).mkdir(parents=True, exist_ok=True)
+    del argv
+    Path(HISTORY_DIR).mkdir(parents=True, exist_ok=True)
     output_dir = _FLAGS.output_dir or os.path.join(SCRIPT_DIR, "output")
     processor_csv = _FLAGS.processor_csv or os.path.join(
         output_dir, "nndss_weekly_output.csv")
