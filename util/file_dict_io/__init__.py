@@ -56,6 +56,8 @@ from file_dict_io.base import get_file_extension
 from file_dict_io.csv_io import CsvFileDictIO
 from file_dict_io.csv_io import is_csv_file
 from file_dict_io.csv_io import is_tsv_file
+from file_dict_io.dat_io import DatFileDictIO
+from file_dict_io.dat_io import is_dat_file
 from file_dict_io.json_io import JsonFileDictIO
 from file_dict_io.json_io import is_json_file
 from file_dict_io.json_io import is_jsonl_file
@@ -142,6 +144,7 @@ __all__ = [
     'McfFileDictIO',
     'AvroFileDictIO',
     'JsonFileDictIO',
+    'DatFileDictIO',
     'ShardedFileDictIO',
     'open_dict_file',
     'open_file_dict',
@@ -152,6 +155,7 @@ __all__ = [
     'is_json_file',
     'is_jsonl_file',
     'is_mcf_file',
+    'is_dat_file',
     'is_sharded_file',
     'get_default_shard_config',
     'get_record_dcid',
