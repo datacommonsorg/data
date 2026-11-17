@@ -23,12 +23,16 @@ import unittest
 from unittest import mock
 
 _CODEDIR = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(1, _CODEDIR)
 sys.path.insert(1, os.path.join(_CODEDIR, '../../util/'))
 sys.path.insert(1, os.path.join(_CODEDIR, '../../../util/'))
 
-import consolidate_historical
-import download
+try:
+    from statvar_imports.cdc.CDCDiabetes import consolidate_historical
+    from statvar_imports.cdc.CDCDiabetes import download
+except ImportError:
+    sys.path.insert(1, _CODEDIR)
+    import consolidate_historical
+    import download
 
 
 class _FakeResponse:
