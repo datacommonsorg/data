@@ -1,6 +1,6 @@
 key,p1,v1,p2,v2,,,,,,,,,,
 iso3_country,observationAbout,country/{Data},,,,,,,,,,,,
-start_time,#Regex,^(?P<observationDate>[0-9]{4})-01-01 00:00:00$,,,,,,,,,,,,
+start_time,#Regex,^(?P<observationDate>[0-9][0-9][0-9][0-9])-01-01 00:00:00$,,,,,,,,,,,,
 emissions_quantity,value,{Data},unit,MetricTonCO2e,,,,,,,,,,
 co2e_100yr,variableMeasured,dcid:Annual_Emissions_GreenhouseGas,observationPeriod,P1Y,measurementMethod,dcAggregate/ClimateTraceEstimate,,,,,,,,
 sector_agriculture,variableMeasured,dcid:Annual_Emissions_GreenhouseGas_Agriculture,measurementMethod,ClimateTraceEstimate,,,,,,,,,,
