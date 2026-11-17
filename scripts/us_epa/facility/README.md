@@ -3,7 +3,7 @@
 
 This directory contains scripts to import the EPA facility data from the
 consolidated GHGRP facility table:
-- [`PUB_DIM_FACILITY`](https://enviro.epa.gov/enviro/ef_metadata_html.ef_metadata_table?p_table_name=PUB_DIM_FACILITY)
+- [`PUB_DIM_FACILITY`](https://www.epa.gov/enviro/greenhouse-gas-overview)
   (which consolidates the retired legacy Envirofacts views
   `V_GHG_EMITTER_FACILITIES`, `V_GHG_SUPPLIER_FACILITIES`, and
   `V_GHG_INJECTION_FACILITIES`, covering Direct Emitters, Suppliers, and CO2
