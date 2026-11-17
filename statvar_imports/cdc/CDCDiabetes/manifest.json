@@ -12,6 +12,7 @@
       "import_inputs": [
         {
           "template_mcf": "output_files/common_tmcf.tmcf",
+          "node_mcf": "output_files/*.mcf",
           "cleaned_csv": [
             "output_files/cdc_diabetes_historical_2004_2021.csv",
             "output_files/cdc_diabetes.csv"
@@ -20,6 +21,7 @@
       ],
       "source_files": [
         "input_files/cdc_diabetes.csv",
+        "input_files/raw/*.json",
         "cdc_diabetes_pvmap.csv",
         "cdc_diabetes_metadata.csv",
         "counters/cdc_diabetes_counters.csv",

@@ -8,12 +8,12 @@
       "params": {}
     },
     {
-      "rule_id": "min_expected_max_date_2024",
-      "description": "Verifies that all 18 StatVars are present and MaxDate meets the expected freshness threshold (>= 2024).",
+      "rule_id": "min_expected_max_date",
+      "description": "Verifies that all 18 StatVars are present and MaxDate is within the expected 3-year CDC release lag.",
       "validator": "SQL_VALIDATOR",
       "params": {
         "query": "SELECT StatVar, MaxDate, COUNT(*) OVER () AS total_svs FROM stats",
-        "condition": "CAST(MaxDate AS INTEGER) >= 2024 AND total_svs = 18"
+        "condition": "CAST(MaxDate AS INTEGER) >= (EXTRACT(YEAR FROM CURRENT_DATE) - 3) AND total_svs = 18"
       }
     }
   ]

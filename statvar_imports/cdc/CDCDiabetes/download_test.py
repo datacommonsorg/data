@@ -117,6 +117,16 @@ class DownloadTest(unittest.TestCase):
                     'CC': '01000',
                     'CN': 'Alabama State Total'
                 },
+                {
+                    'CDC': 6000,
+                    'CC': '01',
+                    'CN': 'Invalid Short Code'
+                },
+                {
+                    'CDC': '²',
+                    'CC': '01001',
+                    'CN': 'Unicode Digit GeoID'
+                },
             ]
         }
         self.assertEqual(
@@ -253,6 +263,22 @@ class DownloadTest(unittest.TestCase):
             )
             with open(out_csv, 'r', encoding='utf-8') as fp:
                 rows = list(csv.reader(fp))
+            raw_dir = os.path.join(tmp_dir, 'raw')
+            self.assertTrue(
+                os.path.exists(
+                    os.path.join(raw_dir, 'InitAppData_1111-2222.json')))
+            self.assertTrue(
+                os.path.exists(
+                    os.path.join(
+                        raw_dir,
+                        'SurveillanceIndicatorsYearsList_Counties.json',
+                    )))
+            self.assertTrue(
+                os.path.exists(
+                    os.path.join(
+                        raw_dir,
+                        'AllCountiesDataOneYear_diabetes_total_2022.json',
+                    )))
 
         self.assertEqual(len(rows), 2)
         self.assertEqual(rows[0], download.INPUT_CSV_HEADERS)
@@ -354,14 +380,27 @@ class DownloadTest(unittest.TestCase):
                          'dcid:Percent_Person_20OrMoreYears_WithDiabetes,'
                          'No Data,dcid:AgeAdjustedPrevalence,P1Y\n')
 
+            dup_csv = os.path.join(
+                stage_dir, 'DiabetesAtlasCountyData_diabetes2021_v2.csv')
+            with open(dup_csv, 'w', encoding='utf-8', newline='') as fp:
+                fp.write('observationAbout,observationDate,variableMeasured,'
+                         'value,measurementMethod,observationPeriod\n')
+                fp.write('dcid:geoId/01001,2021,'
+                         'dcid:Percent_Person_20OrMoreYears_WithDiabetes,'
+                         '9.7,dcid:AgeAdjustedPrevalence,P1Y\n')
+
             out_csv = os.path.join(tmp_dir, 'out',
                                    'cdc_diabetes_historical_2004_2021.csv')
             with mock.patch.object(subprocess, 'run'):
-                consolidate_historical.consolidate_files(
-                    [sample_csv],
-                    out_csv,
-                    stage_dir,
-                )
+                with self.assertLogs(level='WARNING') as logs:
+                    consolidate_historical.consolidate_files(
+                        [sample_csv, dup_csv],
+                        out_csv,
+                        stage_dir,
+                    )
+            self.assertTrue(
+                any('Conflicting duplicate observation' in msg
+                    for msg in logs.output))
 
             with open(out_csv, 'r', encoding='utf-8') as fp:
                 rows = list(csv.reader(fp))
@@ -372,7 +411,7 @@ class DownloadTest(unittest.TestCase):
                     'dcid:geoId/01001',
                     '2021',
                     'dcid:Percent_Person_20OrMoreYears_WithDiabetes',
-                    '9.6',
+                    '9.7',
                     'dcid:AgeAdjustedPrevalence',
                     'P1Y',
                 ],

@@ -14,6 +14,7 @@
 """Downloads CDC US Diabetes Surveillance System (USDSS) county data."""
 
 import csv
+import json
 import math
 import os
 import re
@@ -143,6 +144,25 @@ COMMON_TMCF_CONTENT = ('Node: E:cdc_diabetes->E0\n'
                        'observationPeriod: C:cdc_diabetes->observationPeriod\n')
 
 
+def _write_text_atomic(path: str, content: str) -> None:
+    """Atomically writes UTF-8 text via a temporary file and os.replace."""
+    os.makedirs(os.path.dirname(path) or '.', exist_ok=True)
+    tmp_path = f'{path}.tmp'
+    with open(tmp_path, mode='w', encoding='utf-8') as fp:
+        fp.write(content)
+    os.replace(tmp_path, path)
+
+
+def _parse_ascii_int(val: Any) -> int | None:
+    """Parses an integer from an ASCII-digit string or int, else None."""
+    if isinstance(val, bool) or val is None:
+        return None
+    text = str(val).strip()
+    if not text or not text.isascii() or not text.isdigit():
+        return None
+    return int(text)
+
+
 def format_number(val: float) -> str:
     """Formats a finite float rounded to up to 5 decimal places."""
     if not math.isfinite(val):
@@ -202,6 +222,7 @@ def create_http_session() -> requests.Session:
 def discover_init_app_data_url(session: requests.Session) -> str:
     """Discovers the current InitAppData_*.json URL from the USDSS web app."""
     try:
+        logging.info('GET %s (discovering USDSS app bundle)', USDSS_REFERER)
         resp = session.get(USDSS_REFERER, timeout=30)
         resp.raise_for_status()
         bundle_match = re.search(
@@ -213,6 +234,7 @@ def discover_init_app_data_url(session: requests.Session) -> str:
             if not rel_path.startswith('diabetes/'):
                 rel_path = f'diabetes/{rel_path}'
             bundle_url = f'{USDSS_BASE_URL}/{rel_path}'
+            logging.info('GET %s (fetching USDSS app bundle JS)', bundle_url)
             bundle_resp = session.get(bundle_url, timeout=30)
             if bundle_resp.ok:
                 init_match = re.search(r'(InitAppData_[a-f0-9\-]+\.json)',
@@ -245,16 +267,13 @@ def parse_counties_by_geoid(init_data: dict[str, Any]) -> dict[int, str]:
     for county in init_data.get('counties_list') or []:
         if not isinstance(county, dict):
             continue
-        geoid_raw = county.get('CDC')
-        fips_raw = str(county.get('CC') or '').strip()
-        if geoid_raw is None or not str(geoid_raw).strip().isdigit():
+        geoid_int = _parse_ascii_int(county.get('CDC'))
+        fips_int = _parse_ascii_int(county.get('CC'))
+        if geoid_int is None or fips_int is None:
             continue
-        if not fips_raw or not re.match(r'^\d+$', fips_raw):
+        if fips_int < 1001 or fips_int % 1000 == 0:
             continue
-        fips_int = int(fips_raw)
-        if fips_int <= 0 or fips_int % 1000 == 0:
-            continue
-        counties_by_geoid[int(geoid_raw)] = f'{fips_int:05d}'
+        counties_by_geoid[geoid_int] = f'{fips_int:05d}'
     return counties_by_geoid
 
 
@@ -269,21 +288,17 @@ def parse_indicator_years(
     for entry in years_list:
         if not isinstance(entry, dict):
             continue
-        ind_raw = entry.get('IndicatorID')
-        if ind_raw is None or not str(ind_raw).strip().isdigit():
+        ind_id = _parse_ascii_int(entry.get('IndicatorID'))
+        if ind_id is None:
             continue
-        ind_id = int(ind_raw)
         valid_years: list[tuple[int, int]] = []
         for yr_obj in entry.get('YearsList') or []:
             if not isinstance(yr_obj, dict):
                 continue
-            yr_str = str(yr_obj.get('Year') or '').strip()
-            yr_id = yr_obj.get('YearID')
-            if (yr_str.isdigit() and yr_id is not None and
-                    str(yr_id).strip().isdigit()):
-                yr_int = int(yr_str)
-                if yr_int >= start_year:
-                    valid_years.append((yr_int, int(yr_id)))
+            yr_int = _parse_ascii_int(yr_obj.get('Year'))
+            yr_id = _parse_ascii_int(yr_obj.get('YearID'))
+            if yr_int is not None and yr_id is not None and yr_int >= start_year:
+                valid_years.append((yr_int, yr_id))
         valid_years.sort()
         indicator_years[ind_id] = valid_years
     return indicator_years
@@ -292,6 +307,7 @@ def parse_indicator_years(
 def fetch_usdss_metrics(
     start_year: int = 2022,
     session: requests.Session | None = None,
+    raw_output_dir: str | None = None,
 ) -> dict[tuple[str, str], dict[str, str]]:
     """Fetches county estimates from CDC USDSS API for all years >= start_year.
 
@@ -308,6 +324,12 @@ def fetch_usdss_metrics(
         init_resp = session.get(init_url, timeout=60)
         init_resp.raise_for_status()
         init_data = init_resp.json()
+        if raw_output_dir:
+            init_fname = os.path.basename(init_url) or 'InitAppData.json'
+            _write_text_atomic(
+                os.path.join(raw_output_dir, init_fname),
+                init_resp.text or json.dumps(init_data),
+            )
 
         counties_by_geoid = parse_counties_by_geoid(init_data)
         if not counties_by_geoid:
@@ -321,6 +343,12 @@ def fetch_usdss_metrics(
         years_resp = session.get(USDSS_YEARS_URL, timeout=60)
         years_resp.raise_for_status()
         years_list = years_resp.json()
+        if raw_output_dir:
+            _write_text_atomic(
+                os.path.join(raw_output_dir,
+                             'SurveillanceIndicatorsYearsList_Counties.json'),
+                years_resp.text or json.dumps(years_list),
+            )
 
         indicator_years = parse_indicator_years(years_list,
                                                 start_year=start_year)
@@ -359,6 +387,14 @@ def fetch_usdss_metrics(
                                         timeout=60)
                     resp.raise_for_status()
                     data = resp.json()
+                    if raw_output_dir:
+                        _write_text_atomic(
+                            os.path.join(
+                                raw_output_dir,
+                                f'AllCountiesDataOneYear_{condition}_{sex_group}_{yr_int}.json',
+                            ),
+                            resp.text or json.dumps(data),
+                        )
                     raw_map = (data.get('MapData')
                                if isinstance(data, dict) else None)
                     map_data = raw_map if isinstance(raw_map, list) else []
@@ -375,11 +411,9 @@ def fetch_usdss_metrics(
                     for item in map_data:
                         if not isinstance(item, dict):
                             continue
-                        geoid_raw = item.get('GeoID')
-                        if (geoid_raw is None or
-                                not str(geoid_raw).strip().isdigit()):
+                        geoid_int = _parse_ascii_int(item.get('GeoID'))
+                        if geoid_int is None:
                             continue
-                        geoid_int = int(geoid_raw)
                         fips = counties_by_geoid.get(geoid_int)
                         if not fips:
                             continue
@@ -449,8 +483,10 @@ def download_cdc_diabetes_data(
     session: requests.Session | None = None,
 ) -> str:
     """Downloads CDC USDSS county estimates and writes the input CSV file."""
+    raw_dir = os.path.join(output_dir, 'raw')
     records_by_place_year = fetch_usdss_metrics(start_year=start_year,
-                                                session=session)
+                                                session=session,
+                                                raw_output_dir=raw_dir)
     output_path = os.path.join(output_dir, input_filename)
     row_count = write_input_csv(output_path, records_by_place_year)
     if row_count == 0:
@@ -467,8 +503,7 @@ def copy_historical_files_from_gcs(
         return
     os.makedirs(historical_output_dir, exist_ok=True)
     dst_tmcf = os.path.join(historical_output_dir, 'common_tmcf.tmcf')
-    with open(dst_tmcf, mode='w', encoding='utf-8') as tmcf_f:
-        tmcf_f.write(COMMON_TMCF_CONTENT)
+    _write_text_atomic(dst_tmcf, COMMON_TMCF_CONTENT)
     logging.info('Wrote historical TMCF to %s', dst_tmcf)
 
     gcs_base = historical_gcs_dir.rstrip('/')

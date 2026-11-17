@@ -14,7 +14,25 @@
 
 ---
 
-## 2. Datasets & Architecture
+## 2. Prerequisites & Important Files
+
+### Prerequisites
+* Python 3 with repository dependencies installed (`./run_tests.sh -r`).
+* Read access to GCS buckets:
+  * `gs://unresolved_mcf/cdc/diabetes/historical/cdc_diabetes_historical_2004_2021.csv`
+  * `gs://unresolved_mcf/scripts/statvar/stat_vars.mcf`
+* Outbound HTTPS access to `https://usdss.cdc.gov`.
+
+### Important Files
+* `download.py`: Copies the `2004–2021` historical CSV from GCS into `output_files/`, fetches `2022+` USDSS county JSON payloads (saving raw responses under `input_files/raw/`), and writes `input_files/cdc_diabetes.csv`.
+* `consolidate_historical.py`: One-off helper used to consolidate the 162 legacy `2004–2021` CSV shards into `cdc_diabetes_historical_2004_2021.csv`.
+* `cdc_diabetes_pvmap.csv` & `cdc_diabetes_metadata.csv`: `stat_var_processor.py` PV mappings and config flags.
+* `manifest.json` & `validation_config.json`: Auto-refresh schedule, scripts, inputs, source artifact globs, and validation rules.
+* `download_test.py` & `test_data/`: Unit tests and sample processor input/output fixtures.
+
+---
+
+## 3. Datasets & Architecture
 
 This import downloads and processes county-level age-adjusted prevalence and standard error estimates for adults aged 20+ years from the CDC USDSS API (`download.py` + `stat_var_processor.py`):
 
@@ -36,20 +54,20 @@ This import downloads and processes county-level age-adjusted prevalence and sta
 
 ---
 
-## 3. Data Diffs & Refresh Summary (`differ_summary.json`)
+## 4. Data Diffs & Refresh Summary (`differ_summary.json`)
 
 | Metric | Count | Explanation |
 | :--- | :--- | :--- |
-| **Previous Observations** | `1,016,418` | Consolidated legacy CSVs covering `2004–2021` across `3,151` counties |
+| **Previous Observations** | `1,016,418` | Consolidated historical baseline CSV (`cdc_diabetes_historical_2004_2021.csv`, `2004–2021`) |
 | **Current Observations** | `1,181,088` | Automated pipeline covering `2004–2021` historical (`1,016,418`) + `2022–2024` CDC USDSS API data (`164,670`) across `3,159` counties |
 | **Added Observations** | `+164,670` | `2022–2024` county-level prevalence and standard error observations across `3,144` counties (`18` StatVars) |
-| **Modified Observations** | `0` | 100% exact value match across all `1,016,418` historical observations |
-| **Deleted Observations** | `0` (`0.0%`) | Zero deletions |
+| **Modified Observations** | `0` | Exact value match against the consolidated historical baseline CSV |
+| **Deleted Observations** | `0` (`0.0%`) | Zero deletions against the consolidated historical baseline CSV (diff against `gs://unresolved_mcf/cdc/diabetes/20240112/nodes.mcf-*-of-00018` tracked during staging) |
 | **Schema Diffs** | `0` | All `18` StatVars resolve to existing production Data Commons `StatisticalVariable`s |
 
 ---
 
-## 4. How to Run
+## 5. How to Run
 
 From the repository root (`data/`):
 
@@ -75,3 +93,11 @@ From the repository root (`data/`):
    ```bash
    python3 -m unittest discover -v -s statvar_imports/cdc/CDCDiabetes -p "*_test.py"
    ```
+
+---
+
+## 6. Refresh & Maintenance
+
+* Automated refreshes run weekly on Monday at `05:30 UTC` (`30 05 * * 1`) via Cloud Batch, writing outputs to `gs://datcom-prod-imports/statvar_imports/cdc/CDCDiabetes/CDCDiabetes/`.
+* On each annual CDC USDSS release, `validation_config.json` checks that all 18 StatVars share a consistent `MaxDate` within the 3-year release lag (`EXTRACT(YEAR FROM CURRENT_DATE) - 3`).
+* If USDSS changes its `InitAppData_*.json` discovery pattern or API stratification IDs (`IndicatorID`, `SexID`, `DatasetID`), inspect `input_files/raw/` in the failed GCS version and update the constants in `download.py`.

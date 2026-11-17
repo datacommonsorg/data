@@ -73,7 +73,12 @@ def list_source_csvs(source_dir: str) -> list[str]:
     """Lists all DiabetesAtlasCountyData_*.csv files in CNS, GCS, or local."""
     source_dir = source_dir.rstrip('/')
     if source_dir.startswith('gs://'):
-        cmd = ['gsutil', 'ls', f'{source_dir}/DiabetesAtlasCountyData_*.csv']
+        cmd = [
+            'gcloud',
+            'storage',
+            'ls',
+            f'{source_dir}/DiabetesAtlasCountyData_*.csv',
+        ]
         result = subprocess.run(cmd, capture_output=True, text=True, check=True)
         files = []
         for line in result.stdout.splitlines():
@@ -135,7 +140,8 @@ def consolidate_files(
     )
     if source_files[0].startswith('gs://'):
         subprocess.run(
-            ['gsutil', '-m', 'cp'] + source_files + [f'{local_staging_dir}/'],
+            ['gcloud', 'storage', 'cp'] + source_files +
+            [f'{local_staging_dir}/'],
             check=True,
         )
     elif source_files[0].startswith('/cns/'):
@@ -188,6 +194,15 @@ def consolidate_files(
                 period_val = period if period else DEFAULT_OBSERVATION_PERIOD
 
                 key = (obs_about_dcid, obs_date, var_measured_dcid)
+                if key in deduped_rows and deduped_rows[key]['value'] != val:
+                    logging.warning(
+                        'Conflicting duplicate observation for %s in %s: '
+                        'overwriting %s with %s',
+                        key,
+                        fname,
+                        deduped_rows[key]['value'],
+                        val,
+                    )
                 deduped_rows[key] = {
                     'observationAbout': obs_about_dcid,
                     'observationDate': obs_date,
