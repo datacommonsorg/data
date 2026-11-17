@@ -36,9 +36,21 @@ flags.DEFINE_string(
     "",
     "Optional output CSV path (defaults to input_files/NNDSS_Weekly_Data.csv).",
 )
+flags.DEFINE_bool(
+    "skip_gcs_history",
+    False,
+    "If true, skips downloading 2006-2021 historical files from GCS.",
+)
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 INPUT_DIR = os.path.join(SCRIPT_DIR, "input_files")
+HISTORY_DIR = os.path.join(SCRIPT_DIR, "history")
+HISTORY_GCS_BUCKET = "unresolved_mcf"
+HISTORY_GCS_PREFIX = "cdc/nndss_infectious_diseasesweekly/history"
+HISTORY_FILES = (
+    "cdc_nndss_weekly_tables_historical.csv",
+    "cdc_nndss_weekly_tables_historical.tmcf",
+)
 RAW_FILE = os.path.join(INPUT_DIR, "rows.csv")
 OUTPUT_FILE = os.path.join(INPUT_DIR, "NNDSS_Weekly_Data.csv")
 SOURCE_URL = ("https://data.cdc.gov/api/views/x9gk-5huc/rows.csv"
@@ -232,9 +244,30 @@ def preprocess_csv(filepath: str, out_filepath: str) -> pd.DataFrame:
     return out_df
 
 
+def download_historical_files(
+    history_dir: str = HISTORY_DIR,
+    bucket_name: str = HISTORY_GCS_BUCKET,
+    prefix: str = HISTORY_GCS_PREFIX,
+) -> None:
+    """Download frozen 2006-2021 historical CSV and TMCF from GCS."""
+    from google.cloud import storage
+
+    Path(history_dir).mkdir(parents=True, exist_ok=True)
+    client = storage.Client()
+    bucket = client.bucket(bucket_name)
+    for filename in HISTORY_FILES:
+        blob_path = f"{prefix}/{filename}"
+        dest_path = os.path.join(history_dir, filename)
+        logging.info(
+            f"Downloading gs://{bucket_name}/{blob_path} to {dest_path}...")
+        bucket.blob(blob_path).download_to_filename(dest_path)
+
+
 def main(argv):
     del argv
     Path(INPUT_DIR).mkdir(parents=True, exist_ok=True)
+    if not _FLAGS.skip_gcs_history:
+        download_historical_files()
     source_csv = _FLAGS.input_csv or download_source_csv()
     out_csv = _FLAGS.output_csv or OUTPUT_FILE
     preprocess_csv(source_csv, out_csv)
