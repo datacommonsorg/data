@@ -40,7 +40,14 @@ Shared top-level files in `statvar_imports/brazil_census/`:
 
 ## Automation Manifest
 
-The consolidated manifest [`manifest.json`](manifest.json) declares the `Brazil_Census` import specification across all 8 output tables and references the shared [`brazil_places_resolved.csv`](brazil_places_resolved.csv) and [`validation_config.json`](validation_config.json).
+The consolidated manifest [`manifest.json`](manifest.json) declares the `Brazil_Census` import specification across all 8 output tables (configured for weekly Cloud Batch execution via `cron_schedule: "0 10 * * 1"`, with unchanged weeks cleanly no-oping as `ImportStatus.SKIP`) and references the shared [`brazil_places_resolved.csv`](brazil_places_resolved.csv) and [`validation_config.json`](validation_config.json).
+
+### Custom Downloader Rationale
+
+The shared repo utilities (`util/download_util.py`, `util/download_util_script.py`, `tools/download_utils/requests_wrappers.py`) only fetch/retry/cache individual URLs and save or unzip raw payloads. The `brazil_census` sub-imports use custom `download.py` modules (with shared `urllib3.util.Retry` sessions, `raw_files/` archiving, and `fallback_to_cached` atomic CSV writes) because IBGE ingestion requires:
+- **SIDRA JSON envelope & split queries**: `apisidra.ibge.gov.br` wraps column metadata in element `[0]` (`raw_json[1:]`), uses sentinel strings (`"-"`, `"..."`, `".."`, `"X"`), and enforces cell limits requiring split requests (e.g., `TABLE_2022_EDUCATION_SPECS` chunks and macro `n1/n2/n3` vs. municipal `n6` splits).
+- **Multi-UF FTP `.xls` archives & Excel parsing**: Downloads 27 per-state workbooks from `ftp.ibge.gov.br` (2000) and state/PR `tab4_21_1_3.xls` spreadsheets (2010), parsing offset headers, disambiguating homonyms/aggregates via `first_7` + `STATE_CODE_TO_SIGLA`, and staging FTP downloads in memory before writing `raw_files/`.
+- **Cross-decade alignment & derived metrics**: Merges `1940`/`1991`/`2000`/`2010`/`2022`/`2024–2026+` tables, skips conflicting `year == 2000` Sample `Total` rows in race/religion, computes broad age cohorts (`0To14`, `15To59`, `60OrMore`) and Table `9542` literacy-rate fractions, and skips unindexed 2024 municipality `5101837`.
 
 ---
 
