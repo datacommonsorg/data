@@ -167,6 +167,24 @@ class DownloadTest(unittest.TestCase):
             download.USDSS_DEFAULT_INIT_APP_DATA,
         )
 
+    def test_discover_init_app_data_url_dynamic_variable_pattern(self):
+        session = mock.MagicMock()
+        session.get.side_effect = [
+            _FakeResponse(
+                text=
+                '<script src="scripts/surveillance_entry.3e09f93e.app.js"></script>'
+            ),
+            _FakeResponse(
+                text=('Q=Y,X="60eab9a7-3c02-42bd-a390-388188bd0940";'
+                      'n.getJsonFile("InitAppData_"+X+".json")'),
+                ok=True,
+            ),
+        ]
+        self.assertEqual(
+            download.discover_init_app_data_url(session),
+            'https://usdss.cdc.gov/diabetes/InitAppData_60eab9a7-3c02-42bd-a390-388188bd0940.json',
+        )
+
     def test_download_cdc_diabetes_data_writes_expected_csv(self):
         session = mock.MagicMock()
 

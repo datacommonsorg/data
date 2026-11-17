@@ -69,7 +69,7 @@ USDSS_COUNTY_DATA_URL = (
     'https://usdss.cdc.gov/webapi/Diabetes/AllCountiesDataOneYear')
 USDSS_DEFAULT_INIT_APP_DATA = (
     'https://usdss.cdc.gov/diabetes/'
-    'InitAppData_a76d04a7-0f44-4f44-9147-3be5354c46ba.json')
+    'InitAppData_60eab9a7-3c02-42bd-a390-388188bd0940.json')
 
 CONDITION_TO_INDICATOR_ID: dict[str, int] = {
     'diabetes': 151,  # Diagnosed Diabetes
@@ -219,6 +219,28 @@ def create_http_session() -> requests.Session:
     return session
 
 
+def _extract_init_app_data_filename(bundle_js: str) -> str | None:
+    """Extracts InitAppData_<uuid>.json from literal or variable-concatenated JS."""
+    literal_match = re.search(r'(InitAppData_[a-f0-9\-]+\.json)', bundle_js)
+    if literal_match:
+        return literal_match.group(1)
+
+    var_match = re.search(
+        r'["\']InitAppData_["\']\s*\+\s*([A-Za-z_$][A-Za-z0-9_$]*)\s*\+\s*["\']\.json["\']',
+        bundle_js,
+    ) or re.search(r'FileHashID\s*:\s*([A-Za-z_$][A-Za-z0-9_$]*)', bundle_js)
+    if var_match:
+        var_name = var_match.group(1)
+        uuid_match = re.search(
+            rf'(?<![A-Za-z0-9_$]){re.escape(var_name)}\s*=\s*'
+            r'["\']([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})["\']',
+            bundle_js,
+        )
+        if uuid_match:
+            return f'InitAppData_{uuid_match.group(1)}.json'
+    return None
+
+
 def discover_init_app_data_url(session: requests.Session) -> str:
     """Discovers the current InitAppData_*.json URL from the USDSS web app."""
     try:
@@ -237,10 +259,10 @@ def discover_init_app_data_url(session: requests.Session) -> str:
             logging.info('GET %s (fetching USDSS app bundle JS)', bundle_url)
             bundle_resp = session.get(bundle_url, timeout=30)
             if bundle_resp.ok:
-                init_match = re.search(r'(InitAppData_[a-f0-9\-]+\.json)',
-                                       bundle_resp.text)
-                if init_match:
-                    return f'{USDSS_BASE_URL}/diabetes/{init_match.group(1)}'
+                init_filename = _extract_init_app_data_filename(
+                    bundle_resp.text)
+                if init_filename:
+                    return f'{USDSS_BASE_URL}/diabetes/{init_filename}'
                 logging.warning('InitAppData pattern not found in bundle JS.')
             else:
                 logging.warning(

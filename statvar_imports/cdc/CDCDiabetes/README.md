@@ -6,7 +6,7 @@
 * **Provenance URL:** `https://usdss.cdc.gov/diabetes/surveillance.html`
 * **Data Download URLs (CDC USDSS API):**
   * `https://usdss.cdc.gov/diabetes/data/surveillance/SurveillanceIndicatorsYearsList_Counties.json`
-  * `https://usdss.cdc.gov/diabetes/InitAppData_a76d04a7-0f44-4f44-9147-3be5354c46ba.json` (dynamically discovered via `surveillance_entry.*.app.js`)
+  * `https://usdss.cdc.gov/diabetes/InitAppData_60eab9a7-3c02-42bd-a390-388188bd0940.json` (dynamically discovered via `surveillance_entry.*.app.js`)
   * `POST https://usdss.cdc.gov/webapi/Diabetes/AllCountiesDataOneYear`
 * **Release Frequency / Refresh Schedule:** Weekly check (`30 05 * * 1`, `P1Y` source release frequency)
 * **Geographic Coverage:**
