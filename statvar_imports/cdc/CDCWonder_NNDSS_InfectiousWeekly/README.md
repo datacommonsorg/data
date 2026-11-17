@@ -15,6 +15,7 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
   --input_data=input_files/NNDSS_Weekly_Data.csv \
   --pv_map=nndss_weekly_pvmap.csv \
   --config_file=nndss_weekly_metadata.csv \
+  --statvar_dcid_remap_csv=statvar_dcid_remap.csv \
   --output_path=output/nndss_weekly_output \
   --output_counters=counters/nndss_weekly_output_counters.csv \
   --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
@@ -23,5 +24,5 @@ python3 merge_historical.py
 
 ## Running Unit Tests
 ```bash
-python3 -m unittest preprocess_test.py
+python3 -m unittest discover -p '*_test.py'
 ```

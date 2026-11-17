@@ -1,4 +1,14 @@
 {
   "schema_version": "1.0",
-  "rules": []
+  "rules": [
+    {
+      "rule_id": "check_weekly_statvars_freshness",
+      "description": "Verifies that active weekly StatVars include recent observations within the last 30 days.",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT COUNT(*) AS fresh_svs FROM stats WHERE MaxDate >= strftime(current_date - INTERVAL 30 DAY, '%Y-%m-%d')",
+        "condition": "fresh_svs >= 50"
+      }
+    }
+  ]
 }

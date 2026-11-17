@@ -91,6 +91,7 @@ def load_historical(local_path: str, bucket_name: str, blob_name: str) -> pd.Dat
         csv_path = HISTORICAL_LOCAL_FILE
 
     df = pd.read_csv(csv_path, usecols=OUTPUT_COLUMNS, dtype=str)
+    df = df.reindex(columns=OUTPUT_COLUMNS)
     df = df[df["observationDate"] < HISTORICAL_CUTOFF_DATE].copy()
     logging.info(f"Loaded {len(df)} historical rows (< {HISTORICAL_CUTOFF_DATE}).")
     return df
