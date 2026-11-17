@@ -116,8 +116,10 @@ class GitHubAPITest(unittest.TestCase):
         headers = {'Content-Disposition': 'attachment; filename=abc'}
         get.return_value = utils.ResponseMock(200, raw=buf, headers=headers)
 
+        expected_exception = getattr(tarfile, 'OutsideDestinationError',
+                                     ValueError)
         with tempfile.TemporaryDirectory() as dir_path:
-            with self.assertRaises(tarfile.OutsideDestinationError):
+            with self.assertRaises(expected_exception):
                 self.github.download_repo(dir_path, 'commit-sha')
 
     def test_get_path_first_component(self):

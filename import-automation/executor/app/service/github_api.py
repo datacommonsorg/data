@@ -109,7 +109,7 @@ class GitHubRepoAPI:
                 if not files:
                     raise FileNotFoundError(
                         'Downloaded tar file does not contain the repository')
-                tar.extractall(dest_dir, filter='data')
+                _safe_extract_tar(tar, dest_dir)
                 repo_dir = os.path.join(dest_dir,
                                         _get_path_first_component(files[0]))
                 logging.info(
@@ -135,3 +135,16 @@ def _get_path_first_component(path: str) -> str:
     if index != -1:
         return path[:index]
     return path
+
+
+def _safe_extract_tar(tar: tarfile.TarFile, dest_dir: str) -> None:
+    """Extracts a tar archive into dest_dir while blocking path traversal."""
+    if hasattr(tarfile, 'data_filter'):
+        tar.extractall(dest_dir, filter='data')
+        return
+    resolved_dest = os.path.realpath(dest_dir)
+    for member in tar.getmembers():
+        member_path = os.path.realpath(os.path.join(resolved_dest, member.name))
+        if os.path.commonpath([resolved_dest, member_path]) != resolved_dest:
+            raise ValueError(f'Path traversal detected: {member.name}')
+    tar.extractall(dest_dir)
