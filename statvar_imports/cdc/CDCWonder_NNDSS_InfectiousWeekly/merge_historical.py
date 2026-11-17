@@ -50,9 +50,8 @@ flags.DEFINE_string(
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 INPUT_DIR = os.path.join(SCRIPT_DIR, "input_files")
-HISTORICAL_LOCAL_FILE = os.path.join(
-    INPUT_DIR, "historical_cdc_nndss_weekly_tables.csv"
-)
+HISTORICAL_LOCAL_FILE = os.path.join(INPUT_DIR,
+                                     "historical_cdc_nndss_weekly_tables.csv")
 HISTORICAL_CUTOFF_DATE = "2022-01-01"
 MEASUREMENT_METHOD = "dcs:CDC_NNDSS_Diseases_WeeklyTables"
 
@@ -76,7 +75,8 @@ observationPeriod: C:NNDSWeekly->observationPeriod
 """
 
 
-def load_historical(local_path: str, bucket_name: str, blob_name: str) -> pd.DataFrame:
+def load_historical(local_path: str, bucket_name: str,
+                    blob_name: str) -> pd.DataFrame:
     """Load 2006-2021 historical rows (< 2022-01-01)."""
     csv_path = local_path
     if not csv_path:
@@ -93,21 +93,19 @@ def load_historical(local_path: str, bucket_name: str, blob_name: str) -> pd.Dat
     df = pd.read_csv(csv_path, usecols=OUTPUT_COLUMNS, dtype=str)
     df = df.reindex(columns=OUTPUT_COLUMNS)
     df = df[df["observationDate"] < HISTORICAL_CUTOFF_DATE].copy()
-    logging.info(f"Loaded {len(df)} historical rows (< {HISTORICAL_CUTOFF_DATE}).")
+    logging.info(
+        f"Loaded {len(df)} historical rows (< {HISTORICAL_CUTOFF_DATE}).")
     return df
 
 
-def merge_outputs(
-    hist_df: pd.DataFrame, processor_csv_path: str, output_dir: str
-) -> pd.DataFrame:
+def merge_outputs(hist_df: pd.DataFrame, processor_csv_path: str,
+                  output_dir: str) -> pd.DataFrame:
     """Combine historical rows with stat_var_processor output and write final CSV/TMCF."""
     recent_df = pd.read_csv(processor_csv_path, dtype=str)
     recent_df["variableMeasured"] = recent_df["variableMeasured"].str.replace(
-        r"^(dcid:|dcs:)", "", regex=True
-    )
+        r"^(dcid:|dcs:)", "", regex=True)
     recent_df["observationAbout"] = recent_df["observationAbout"].str.replace(
-        r"^(dcid:|dcs:)", "", regex=True
-    )
+        r"^(dcid:|dcs:)", "", regex=True)
     recent_df["observationPeriod"] = "P1W"
     recent_df["measurementMethod"] = MEASUREMENT_METHOD
     recent_df = recent_df[OUTPUT_COLUMNS]
@@ -138,8 +136,7 @@ def main(argv):
     Path(INPUT_DIR).mkdir(parents=True, exist_ok=True)
     output_dir = _FLAGS.output_dir or os.path.join(SCRIPT_DIR, "output")
     processor_csv = _FLAGS.processor_csv or os.path.join(
-        output_dir, "nndss_weekly_output.csv"
-    )
+        output_dir, "nndss_weekly_output.csv")
     hist_df = load_historical(
         _FLAGS.historical_local_path,
         _FLAGS.historical_gcs_bucket,

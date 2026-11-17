@@ -17,8 +17,9 @@ import os
 import tempfile
 import unittest
 
-import merge_historical
 import pandas as pd
+
+from statvar_imports.cdc.CDCWonder_NNDSS_InfectiousWeekly import merge_historical
 
 
 class MergeHistoricalTest(unittest.TestCase):
@@ -27,30 +28,41 @@ class MergeHistoricalTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             hist_csv = os.path.join(tmpdir, "hist.csv")
             # Intentionally shuffled column order + 2022 row that should be filtered out
-            df = pd.DataFrame(
-                [
-                    {
-                        "value": "5",
-                        "variableMeasured": "Count_MedicalConditionIncident_ConditionAnthrax",
-                        "observationAbout": "geoId/01",
-                        "observationDate": "2021-12-26",
-                        "observationPeriod": "P1W",
-                        "measurementMethod": "dcs:CDC_NNDSS_Diseases_WeeklyTables",
-                    },
-                    {
-                        "value": "9",
-                        "variableMeasured": "Count_MedicalConditionIncident_ConditionAnthrax",
-                        "observationAbout": "geoId/01",
-                        "observationDate": "2022-01-02",
-                        "observationPeriod": "P1W",
-                        "measurementMethod": "dcs:CDC_NNDSS_Diseases_WeeklyTables",
-                    },
-                ]
-            )
+            df = pd.DataFrame([
+                {
+                    "value":
+                        "5",
+                    "variableMeasured":
+                        "Count_MedicalConditionIncident_ConditionAnthrax",
+                    "observationAbout":
+                        "geoId/01",
+                    "observationDate":
+                        "2021-12-26",
+                    "observationPeriod":
+                        "P1W",
+                    "measurementMethod":
+                        "dcs:CDC_NNDSS_Diseases_WeeklyTables",
+                },
+                {
+                    "value":
+                        "9",
+                    "variableMeasured":
+                        "Count_MedicalConditionIncident_ConditionAnthrax",
+                    "observationAbout":
+                        "geoId/01",
+                    "observationDate":
+                        "2022-01-02",
+                    "observationPeriod":
+                        "P1W",
+                    "measurementMethod":
+                        "dcs:CDC_NNDSS_Diseases_WeeklyTables",
+                },
+            ])
             df.to_csv(hist_csv, index=False)
 
             loaded = merge_historical.load_historical(hist_csv, "", "")
-            self.assertEqual(list(loaded.columns), merge_historical.OUTPUT_COLUMNS)
+            self.assertEqual(list(loaded.columns),
+                             merge_historical.OUTPUT_COLUMNS)
             self.assertEqual(len(loaded), 1)
             self.assertEqual(loaded.iloc[0]["observationDate"], "2021-12-26")
 
@@ -59,40 +71,52 @@ class MergeHistoricalTest(unittest.TestCase):
             proc_csv = os.path.join(tmpdir, "proc.csv")
             out_dir = os.path.join(tmpdir, "out")
 
-            hist_df = pd.DataFrame(
-                [
-                    {
-                        "observationDate": "2021-12-26",
-                        "observationAbout": "geoId/01",
-                        "observationPeriod": "P1W",
-                        "variableMeasured": "Count_MedicalConditionIncident_ConditionAnthrax",
-                        "value": "5",
-                        "measurementMethod": "dcs:CDC_NNDSS_Diseases_WeeklyTables",
-                    },
-                    {
-                        "observationDate": "2022-01-02",
-                        "observationAbout": "geoId/01",
-                        "observationPeriod": "P1W",
-                        "variableMeasured": "Count_MedicalConditionIncident_ConditionAnthrax",
-                        "value": "1",
-                        "measurementMethod": "dcs:CDC_NNDSS_Diseases_WeeklyTables",
-                    },
-                ]
-            )
-            pd.DataFrame(
-                [
-                    {
-                        "observationDate": "2022-01-02",
-                        "observationAbout": "dcid:geoId/01",
-                        "variableMeasured": "dcs:Count_MedicalConditionIncident_ConditionAnthrax",
-                        "value": "2",
-                    }
-                ]
-            ).to_csv(proc_csv, index=False)
+            hist_df = pd.DataFrame([
+                {
+                    "observationDate":
+                        "2021-12-26",
+                    "observationAbout":
+                        "geoId/01",
+                    "observationPeriod":
+                        "P1W",
+                    "variableMeasured":
+                        "Count_MedicalConditionIncident_ConditionAnthrax",
+                    "value":
+                        "5",
+                    "measurementMethod":
+                        "dcs:CDC_NNDSS_Diseases_WeeklyTables",
+                },
+                {
+                    "observationDate":
+                        "2022-01-02",
+                    "observationAbout":
+                        "geoId/01",
+                    "observationPeriod":
+                        "P1W",
+                    "variableMeasured":
+                        "Count_MedicalConditionIncident_ConditionAnthrax",
+                    "value":
+                        "1",
+                    "measurementMethod":
+                        "dcs:CDC_NNDSS_Diseases_WeeklyTables",
+                },
+            ])
+            pd.DataFrame([{
+                "observationDate":
+                    "2022-01-02",
+                "observationAbout":
+                    "dcid:geoId/01",
+                "variableMeasured":
+                    "dcs:Count_MedicalConditionIncident_ConditionAnthrax",
+                "value":
+                    "2",
+            }]).to_csv(proc_csv, index=False)
 
-            combined = merge_historical.merge_outputs(hist_df, proc_csv, out_dir)
+            combined = merge_historical.merge_outputs(hist_df, proc_csv,
+                                                      out_dir)
             self.assertEqual(len(combined), 2)
-            row_2022 = combined[combined["observationDate"] == "2022-01-02"].iloc[0]
+            row_2022 = combined[combined["observationDate"] ==
+                                "2022-01-02"].iloc[0]
             self.assertEqual(row_2022["observationAbout"], "geoId/01")
             self.assertEqual(
                 row_2022["variableMeasured"],
@@ -105,8 +129,8 @@ class MergeHistoricalTest(unittest.TestCase):
             )
             self.assertEqual(row_2022["value"], "2")
             self.assertTrue(
-                os.path.exists(os.path.join(out_dir, "cdc_nndss_weekly_tables.tmcf"))
-            )
+                os.path.exists(
+                    os.path.join(out_dir, "cdc_nndss_weekly_tables.tmcf")))
 
 
 if __name__ == "__main__":

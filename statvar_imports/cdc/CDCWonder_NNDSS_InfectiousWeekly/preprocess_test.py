@@ -18,14 +18,17 @@ import tempfile
 import unittest
 
 import pandas as pd
-import preprocess
+
+from statvar_imports.cdc.CDCWonder_NNDSS_InfectiousWeekly import preprocess
 
 
 class PreprocessTest(unittest.TestCase):
 
     def test_get_mmwr_week_start_date(self):
-        self.assertEqual(preprocess.get_mmwr_week_start_date(2022, 1), "2022-01-02")
-        self.assertEqual(preprocess.get_mmwr_week_start_date(2022, 10), "2022-03-06")
+        self.assertEqual(preprocess.get_mmwr_week_start_date(2022, 1),
+                         "2022-01-02")
+        self.assertEqual(preprocess.get_mmwr_week_start_date(2022, 10),
+                         "2022-03-06")
         self.assertIsNone(preprocess.get_mmwr_week_start_date(2022, 0))
         self.assertIsNone(preprocess.get_mmwr_week_start_date(2022, 54))
         self.assertIsNone(preprocess.get_mmwr_week_start_date("bad", 1))
@@ -79,7 +82,8 @@ class PreprocessTest(unittest.TestCase):
             records.get(("US RESIDENTS", "Chlamydia trachomatis infection")),
             "500",
         )
-        self.assertEqual(records.get(("NEW YORK CITY", "Campylobacteriosis")), "30")
+        self.assertEqual(records.get(("NEW YORK CITY", "Campylobacteriosis")),
+                         "30")
         self.assertEqual(records.get(("NEW YORK", "Campylobacteriosis")), "50")
         self.assertEqual(len(records), 3)
 
