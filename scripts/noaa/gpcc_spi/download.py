@@ -70,14 +70,15 @@ def download_one(url, path: str):
     with response as source:
         with open(path, 'wb') as dest:
             shutil.copyfileobj(source, dest)
+    logging.info('Finished downloading: %s', path)
 
 
 def download_all(download_dir: str, distribution: str, periods: List[str]):
     """Download spi nc files for all periods."""
     os.makedirs(download_dir, exist_ok=True)
 
-    periods = DEFAULT_PERIODS
-    distribution = DEFAULT_DISTRIBUTION
+    periods = periods or DEFAULT_PERIODS
+    distribution = distribution or DEFAULT_DISTRIBUTION
 
     with concurrent.futures.ThreadPoolExecutor() as executor:
         futures = []
@@ -88,12 +89,13 @@ def download_all(download_dir: str, distribution: str, periods: List[str]):
             url = f'https://www.ncei.noaa.gov/pub/data/nidis/gpcc/spi-pearson/gpcc-spi-{distribution}-{p}.nc'
             dest = os.path.join(download_dir, f'gpcc_spi_{distribution}_{p}.nc')
             futures.append(executor.submit(download_one, url, dest))
-            logging.info('Finished downloading: %s', dest)
+        for future in concurrent.futures.as_completed(futures):
+            future.result()
 
 
 def main(_):
     """Download all nc files."""
-    download_all(FLAGS.download_dir, FLAGS.periods, FLAGS.distribution)
+    download_all(FLAGS.download_dir, FLAGS.distribution, FLAGS.periods)
 
 
 if __name__ == "__main__":
