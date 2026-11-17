@@ -15,7 +15,7 @@ This importer fetches and processes U.S. Economic Development Administration (ED
 
 ## Important Files
 
-- `manifest.json`: Import automation specification, script sequence, input/output artifact paths (`node_mcf` configured with `investment_schema.mcf` and `output/*.mcf`), and weekly cron schedule (`30 05 * * 1`).
+- `manifest.json`: Import automation specification, script sequence, input/output artifact paths (`node_mcf` configured with `output/*.mcf`), and weekly cron schedule (`30 05 * * 1`).
 - `process.py`: Fetches EDA award obligations from the USAspending REST API partitioned by fiscal year, deduplicates cross-FY award amendments, excludes net negative de-obligations, and outputs `input_files/investment_cleaned.csv`.
 - `process_test.py`: Hermetic unit test suite covering pagination, deduplication, de-obligations, fiscal year calculation, sample fixtures, and error handling.
 - `test_data/`: Hermetic sample input (`sample_awards.json`), expected intermediate output (`sample_output.csv`), and expected `stat_var_processor.py` outputs (`sample_output_expected.csv`, `sample_output_expected.tmcf`) for unit testing.
@@ -35,7 +35,7 @@ Verify unit tests pass from the repository root:
 ### 2. Preprocessing (`process.py`)
 Run the Python script from `statvar_imports/commerce_eda_usaspending/` to download all awards from USAspending.gov partitioned by fiscal year and aggregate them into clean tall format:
 ```bash
-python3 statvar_imports/commerce_eda_usaspending/process.py
+python3 process.py
 ```
 Outputs produced:
 - `input_files/raw_usaspending_eda_awards.json`: Raw award JSON payloads from the API.
@@ -60,7 +60,7 @@ Outputs produced:
 - `counters/investment_counters.csv`: Processing counters and diff statistics.
 
 ### 4. Refresh & Validation Procedure
-Validate generated outputs against `validation_config.json` from the repository root:
+After generating `summary_report.csv`, `report.json`, and `differ_summary.json` via `dc-import genmcf` and `import_differ` (or downloading them from a Cloud Batch staging run into `statvar_imports/commerce_eda_usaspending/output/`), validate the generated outputs against `validation_config.json` from the repository root:
 ```bash
 python3 -m tools.import_validation.runner \
   --validation_config=statvar_imports/commerce_eda_usaspending/validation_config.json \
