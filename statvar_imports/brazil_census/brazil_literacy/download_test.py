@@ -157,8 +157,8 @@ class DownloadTest(unittest.TestCase):
     @patch.object(download_mod, "fetch_2010_illiterate_race", return_value=[])
     @patch.object(download_mod, "fetch_raw_input_files", return_value=[])
     def test_download_fallback_to_cached(self, _mock_raw, _mock_2010,
-                                         _mock_2000, _mock_rates):
-        """Tests that fallback to existing CSV succeeds when fallback is enabled."""
+                                         _mock_2000, mock_rates):
+        """Tests that fallback to existing CSV also updates or falls back for rates CSV."""
         session = MagicMock()
         session.get.side_effect = requests.HTTPError("503 Service Unavailable")
 
@@ -173,6 +173,8 @@ class DownloadTest(unittest.TestCase):
                                    fallback_to_cached=True)
         self.assertEqual(saved, cached_csv)
         self.assertTrue(os.path.isfile(saved))
+        mock_rates.assert_called_once()
+        self.assertTrue(mock_rates.call_args.kwargs["fallback_to_cached"])
 
     def test_fetch_2022_literacy_rates_skips_5101837_and_raises_unknown(self):
         """Tests that unindexed 5101837 is skipped while other unmapped places raise ValueError."""

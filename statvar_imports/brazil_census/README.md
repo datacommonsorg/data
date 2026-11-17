@@ -18,6 +18,7 @@ Each subfolder contains:
 - `README.md`: Dataset documentation and provenance
 
 Shared top-level files in `statvar_imports/brazil_census/`:
+- `brazil_download_utils.py`: Shared HTTP retry session (`get_robust_session`), `raw_files/` staging (`get_raw_dir`), and IBGE SIDRA API fetcher (`fetch_sidra_data`) used across all 7 topic download scripts
 - `manifest.json`: Consolidated Data Commons import specification (`Brazil_Census`) covering all 7 topic download scripts and 8 `import_inputs`
 - `validation_config.json`: Custom consolidated validation rules (date freshness, historical start dates, StatVar counts, and minimum place count checks; inherits default checks including `check_deleted_records_percent` $\le 0.1\%$ from `tools/import_validation/validation_config.json`)
 - `brazil_places_resolved.csv`: Shared entity mapping to Wikidata and Data Commons DCIDs for all 5,603 Brazilian places in Data Commons KG (1 country, 5 macro-regions, 27 states, and 5,570 municipalities, plus historical/alias/encoding variants; IBGE 2024 municipality `5101837` is skipped until added to Data Commons `geos`)

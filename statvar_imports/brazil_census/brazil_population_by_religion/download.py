@@ -21,24 +21,25 @@ Downloads resident population by religious affiliation from official IBGE source
 """
 
 import io
-import json
 import os
-import shutil
 import sys
 import tempfile
 from typing import Any, Dict, List, Optional
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-if SCRIPT_DIR not in sys.path:
-    sys.path.insert(0, SCRIPT_DIR)
+PARENT_DIR = os.path.dirname(SCRIPT_DIR)
+for _p in (PARENT_DIR, SCRIPT_DIR):
+    if _p not in sys.path:
+        sys.path.insert(0, _p)
 
 from absl import app
 from absl import flags
 from absl import logging
+from brazil_download_utils import fetch_sidra_data
+from brazil_download_utils import get_raw_dir
+from brazil_download_utils import get_robust_session
 import pandas as pd
 import requests
-from requests.adapters import HTTPAdapter
-from urllib3.util import Retry
 
 SIDRA_BASE_URL = "https://apisidra.ibge.gov.br"
 # Table 9537: População residente de 10 anos ou mais de idade por religião (2022+ across n1/n2/n3/n6)
@@ -69,48 +70,9 @@ DEFAULT_OUTPUT_FILE = os.path.join(DEFAULT_OUTPUT_DIR,
                                    "brazil_population_by_religion.csv")
 
 
-def get_robust_session() -> requests.Session:
-    """Configures a requests Session with retries and connection pooling."""
-    session = requests.Session()
-    retries = Retry(
-        total=10,
-        backoff_factor=1,
-        status_forcelist=[429, 500, 502, 503, 504],
-        raise_on_status=False,
-    )
-    session.mount("https://", HTTPAdapter(max_retries=retries))
-    return session
-
-
 def _get_raw_dir(target_path: str) -> str:
     """Returns a clean directory for archiving raw downloaded payloads."""
-    if os.path.abspath(target_path) == os.path.abspath(DEFAULT_OUTPUT_FILE):
-        raw_dir = os.path.join(SCRIPT_DIR, "raw_files")
-    else:
-        raw_dir = os.path.join(os.path.dirname(os.path.abspath(target_path)),
-                               "raw_files")
-    shutil.rmtree(raw_dir, ignore_errors=True)
-    os.makedirs(raw_dir, exist_ok=True)
-    return raw_dir
-
-
-def fetch_sidra_data(
-    session: requests.Session,
-    url: str,
-    raw_file_path: Optional[str] = None,
-) -> List[Dict[str, Any]]:
-    """Fetches raw JSON payload from IBGE SIDRA REST API."""
-    logging.info(f"Dispatching outbound HTTP request: url={url}")
-    res = session.get(url, timeout=90)
-    res.raise_for_status()
-    raw_json = res.json()
-    if not isinstance(raw_json, list) or len(raw_json) < 2:
-        raise RuntimeError(
-            f"Invalid or empty response payload from SIDRA API: {url}")
-    if raw_file_path:
-        with open(raw_file_path, "w", encoding="utf-8") as f:
-            json.dump(raw_json, f, ensure_ascii=False)
-    return raw_json
+    return get_raw_dir(target_path, DEFAULT_OUTPUT_FILE, SCRIPT_DIR)
 
 
 def parse_raw_religion_xls(content_bytes: bytes,
