@@ -14,12 +14,14 @@
 """Unit tests for CDCWonder_NNDSS_InfectiousWeekly preprocess.py."""
 
 import os
+import sys
 import tempfile
 import unittest
 
 import pandas as pd
 
-from statvar_imports.cdc.CDCWonder_NNDSS_InfectiousWeekly import preprocess
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import preprocess  # noqa: E402
 
 
 class PreprocessTest(unittest.TestCase):

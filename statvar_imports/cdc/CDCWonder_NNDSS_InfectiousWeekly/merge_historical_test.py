@@ -14,12 +14,14 @@
 """Unit tests for merge_historical.py."""
 
 import os
+import sys
 import tempfile
 import unittest
 
 import pandas as pd
 
-from statvar_imports.cdc.CDCWonder_NNDSS_InfectiousWeekly import merge_historical
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import merge_historical  # noqa: E402
 
 
 class MergeHistoricalTest(unittest.TestCase):
