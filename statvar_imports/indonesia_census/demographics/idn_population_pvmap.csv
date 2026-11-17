@@ -1,0 +1,3 @@
+observationDate,observationDate,{Number}
+observationAbout,observationAbout,{Data},populationType,dcs:Person
+Jumlah Penduduk (Ribu),value,{Number},#Multiply,1000
