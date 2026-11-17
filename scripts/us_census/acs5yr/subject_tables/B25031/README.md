@@ -36,37 +36,38 @@ python3 ../../api_utils/census_api_data_downloader.py \
   --dataset=acs/acs5 \
   --table_id=B25031 \
   --q_variable=B25031_001E \
-  --output_path=. \
+  --output_path=/tmp/census_download \
   --api_key=<CENSUS_API_KEY> \
   --start_year=2015 \
   --end_year=2024
-cp acs/acs5/B25031/B25031.zip B25031/B25031.zip
+cp /tmp/census_download/acs/acs5/B25031/B25031.zip B25031/B25031.zip
 ```
 
 ## Processing & Generating Artifacts
 
-Run `process.py` from `scripts/us_census/acs5yr/subject_tables` to generate the column map (`column_map.json`), cleaned CSV (`B25031_cleaned.csv`), TMCF (`B25031_output.tmcf`), StatVar MCF (`B25031_output.mcf`), and processing summary (`B25031_summary.json`):
+Create the output directory first, then run `process.py` from `scripts/us_census/acs5yr/subject_tables` to generate the column map (`column_map.json`), cleaned CSV (`B25031_cleaned.csv`), TMCF (`B25031_output.tmcf`), StatVar MCF (`B25031_output.mcf`), and processing summary (`B25031_summary.json`) in `B25031/output`:
 
 ```bash
+mkdir -p B25031/output
 python3 process.py \
   --option=all \
   --table_prefix=B25031 \
   --input_path=B25031/B25031.zip \
   --spec_path=B25031/B25031_spec.json \
-  --output_dir=B25031 \
+  --output_dir=B25031/output \
   --has_percent=False
 ```
 
-To run the Data Commons import tool (`genmcf`) locally without external API existence-check errors (using the [Data Commons Import Tool JAR](https://github.com/datacommonsorg/import/releases) or building it from [`tools/import_validation`](https://github.com/datacommonsorg/import)):
+To run the Data Commons import tool (`genmcf`) locally without external API existence-check errors (using the [Data Commons Import Tool JAR](https://github.com/datacommonsorg/import/releases) or building it from [`tool/`](https://github.com/datacommonsorg/import/tree/master/tool)):
 
 ```bash
 curl -L -O https://github.com/datacommonsorg/import/releases/download/0.1/datacommons-import-tool-0.1-jar-with-dependencies.jar
 java -jar datacommons-import-tool-0.1-jar-with-dependencies.jar genmcf \
   -e=false \
-  B25031/B25031_cleaned.csv \
-  B25031/B25031_output.tmcf \
-  B25031/B25031_output.mcf \
-  -o=B25031/dc_generated
+  B25031/output/B25031_cleaned.csv \
+  B25031/output/B25031_output.tmcf \
+  B25031/output/B25031_output.mcf \
+  -o=B25031/output/dc_generated
 ```
 
 To run the differ through Dataflow after staging the current and previous resolved MCF files to GCS:
@@ -100,5 +101,6 @@ From the repository root, run the common unit tests and end-to-end subject table
 ## Refresh Procedure
 
 1. Download the new ACS 5-Year `B25031` vintage CSV and add it to `B25031/B25031.zip`.
-2. Execute `process.py` as shown above to regenerate `B25031/B25031_summary.json`, `B25031/B25031_cleaned.csv`, `B25031/B25031_output.mcf`, and `B25031/B25031_output.tmcf`.
+2. Create `B25031/output`, execute `process.py` as shown above to regenerate `B25031_summary.json`, `B25031_cleaned.csv`, `B25031_output.mcf`, and `B25031_output.tmcf` in `B25031/output`, and copy `B25031/output/B25031_summary.json` to `B25031/B25031_summary.json`.
 3. Run `genmcf`, `table2mcf_flume`, `flume_resolver:resolver`, `import_differ`, and `stats_checker`, then update the CNS paths and `end_date_in_kg` in the corresponding import configuration.
+

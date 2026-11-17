@@ -66,6 +66,28 @@ class DataLoaderBaseTest(unittest.TestCase):
                                 f'./testdata/test_csv_2013{ext}')) as expected:
                     self.assertEqual(actual.read(), expected.read())
 
+    def test_invalid_filename_raises_value_error(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            invalid_csv = os.path.join(tmp_dir, "invalid_filename_S2702.csv")
+            with open(
+                    os.path.join(base_path, "./testdata/ACSST5Y2013_S2702.csv"),
+                    "r") as src, open(invalid_csv, "w") as dst:
+                dst.write(src.read())
+            with self.assertRaisesRegex(ValueError,
+                                        "Unable to extract year from filename"):
+                process_subject_tables(
+                    table_prefix='test_invalid',
+                    input_path=invalid_csv,
+                    output_dir=tmp_dir,
+                    column_map_path=os.path.join(
+                        base_path,
+                        "./testdata/column_map_from_zip_expected.json"),
+                    spec_path=os.path.join(base_path,
+                                           "./testdata/spec_s2702.json"),
+                    debug=False,
+                    delimiter='!!',
+                    has_percent=True)
+
     # TODO: add tests for processing a directory of files
 
 
