@@ -17,9 +17,8 @@ import os
 import tempfile
 import unittest
 
-import pandas as pd
-
 import merge_historical
+import pandas as pd
 
 
 class MergeHistoricalTest(unittest.TestCase):
