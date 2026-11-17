@@ -15,7 +15,9 @@
 Tests for github_api.py.
 """
 
+import io
 import os
+import tarfile
 import tempfile
 import unittest
 from unittest import mock
@@ -101,6 +103,22 @@ class GitHubAPITest(unittest.TestCase):
                 self.assertRaises(exceptions.HTTPError,
                                   self.github.download_repo, dir_path,
                                   'commit-sha')
+
+    @mock.patch('requests.get')
+    def test_download_repo_blocks_path_traversal(self, get):
+        buf = io.BytesIO()
+        with tarfile.open(fileobj=buf, mode='w:gz') as tar:
+            info = tarfile.TarInfo('../evil.txt')
+            payload = b'pwned'
+            info.size = len(payload)
+            tar.addfile(info, io.BytesIO(payload))
+        buf.seek(0)
+        headers = {'Content-Disposition': 'attachment; filename=abc'}
+        get.return_value = utils.ResponseMock(200, raw=buf, headers=headers)
+
+        with tempfile.TemporaryDirectory() as dir_path:
+            with self.assertRaises(tarfile.OutsideDestinationError):
+                self.github.download_repo(dir_path, 'commit-sha')
 
     def test_get_path_first_component(self):
         self.assertEqual(

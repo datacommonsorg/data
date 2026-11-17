@@ -109,7 +109,7 @@ class GitHubRepoAPI:
                 if not files:
                     raise FileNotFoundError(
                         'Downloaded tar file does not contain the repository')
-                tar.extractall(dest_dir)
+                tar.extractall(dest_dir, filter='data')
                 repo_dir = os.path.join(dest_dir,
                                         _get_path_first_component(files[0]))
                 logging.info(
