@@ -41,6 +41,12 @@ flags.DEFINE_bool(
     False,
     "If true, skips downloading 2006-2021 historical files from GCS.",
 )
+flags.DEFINE_bool(
+    "normalize_output",
+    False,
+    "If true, ensures output/nndss_weekly_output.{csv,tmcf} exposes "
+    "observationPeriod as a column so genmcf matches the historical TMCF.",
+)
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 INPUT_DIR = os.path.join(SCRIPT_DIR, "input_files")
@@ -263,8 +269,49 @@ def download_historical_files(
         bucket.blob(blob_path).download_to_filename(dest_path)
 
 
+def normalize_output_files(
+    output_dir: str = os.path.join(SCRIPT_DIR, "output"),
+    prefix: str = "nndss_weekly_output",
+) -> None:
+    """Ensure output CSV/TMCF exposes observationPeriod as a column."""
+    import csv
+
+    csv_path = os.path.join(output_dir, f"{prefix}.csv")
+    tmcf_path = os.path.join(output_dir, f"{prefix}.tmcf")
+
+    tmp_csv = f"{csv_path}.tmp"
+    with open(csv_path, "r", encoding="utf-8", newline="") as src:
+        reader = csv.reader(src)
+        header = next(reader)
+        if "observationPeriod" not in header:
+            with open(tmp_csv, "w", encoding="utf-8", newline="") as dst:
+                writer = csv.writer(dst)
+                writer.writerow(header + ["observationPeriod"])
+                for row in reader:
+                    writer.writerow(row + ["P1W"])
+            os.replace(tmp_csv, csv_path)
+
+    with open(tmcf_path, "r", encoding="utf-8") as f:
+        lines = f.readlines()
+    new_lines = []
+    found_period = False
+    for line in lines:
+        if line.startswith("observationPeriod:"):
+            new_lines.append(f"observationPeriod: C:{prefix}->observationPeriod\n")
+            found_period = True
+        else:
+            new_lines.append(line)
+    if not found_period:
+        new_lines.append(f"observationPeriod: C:{prefix}->observationPeriod\n")
+    with open(tmcf_path, "w", encoding="utf-8") as f:
+        f.writelines(new_lines)
+
+
 def main(argv):
     del argv
+    if _FLAGS.normalize_output:
+        normalize_output_files()
+        return
     Path(INPUT_DIR).mkdir(parents=True, exist_ok=True)
     if not _FLAGS.skip_gcs_history:
         download_historical_files()

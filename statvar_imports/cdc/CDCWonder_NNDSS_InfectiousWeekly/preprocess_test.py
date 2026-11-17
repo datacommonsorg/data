@@ -98,6 +98,29 @@ class PreprocessTest(unittest.TestCase):
             with self.assertRaises(KeyError):
                 preprocess.preprocess_csv(in_csv, out_csv)
 
+    def test_normalize_output_files(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            csv_path = os.path.join(tmpdir, "nndss_weekly_output.csv")
+            tmcf_path = os.path.join(tmpdir, "nndss_weekly_output.tmcf")
+            with open(csv_path, "w", encoding="utf-8") as f:
+                f.write("observationDate,observationAbout,value,variableMeasured\n"
+                        "2024-03-03,country/USA,3,StatVar1\n")
+            with open(tmcf_path, "w", encoding="utf-8") as f:
+                f.write("Node: E:nndss_weekly_output->E0\n"
+                        "observationPeriod: P1W\n"
+                        "typeOf: dcs:StatVarObservation\n")
+            preprocess.normalize_output_files(output_dir=tmpdir)
+            with open(csv_path, "r", encoding="utf-8") as f:
+                csv_text = f.read()
+            with open(tmcf_path, "r", encoding="utf-8") as f:
+                tmcf_text = f.read()
+            self.assertIn("observationPeriod", csv_text.splitlines()[0])
+            self.assertIn("2024-03-03,country/USA,3,StatVar1,P1W", csv_text)
+            self.assertIn(
+                "observationPeriod: C:nndss_weekly_output->observationPeriod",
+                tmcf_text,
+            )
+
 
 if __name__ == "__main__":
     unittest.main()
