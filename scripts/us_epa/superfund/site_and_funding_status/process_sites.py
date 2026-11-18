@@ -38,11 +38,16 @@ from us_epa.util.superfund_helper import make_list_of_geos_to_resolve
 from us_epa.util.superfund_helper import resolve_with_recon
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('site_details_dir', './data',
-                    'Path to the directory with input files')
-flags.DEFINE_string(
-    'sites_output_path', './data/output',
-    'Path to the directory where generated files are to be stored.')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('site_details_dir', './data',
+                        'Path to the directory with input files')
+    flags.DEFINE_string(
+        'sites_output_path', './data/output',
+        'Path to the directory where generated files are to be stored.')
+
 
 _SITE_TEMPLATE_MCF = """Node: E:SuperfundSite->E0
 typeOf: dcs:SuperfundSite
@@ -163,4 +168,5 @@ def main(_) -> None:
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

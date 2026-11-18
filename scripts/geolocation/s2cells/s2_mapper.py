@@ -24,21 +24,25 @@ import s2sphere
 
 FLAGS = flags.FLAGS
 
-# Params:
-# -------
-# {
-#   "s2lvls": [10],
-#   "aggrfunc": "sum" | "mean" | "max" | "min",
-#   "latcol": <col-name>,
-#   "lngcol": <col-name>,
-#   "datecol": <col-name>,
-#   "valcol": <col-name>,
-#   "datefmt": "YYYY-mm-dd" | "YYYY-mm" | "YYYY",  #  Optional
-#   "containedIn": "europe"
-# }
-flags.DEFINE_string('in_params', '', 'Input param file')
-flags.DEFINE_string('in_csv', '', 'Input CSV file')
-flags.DEFINE_string('out_dir', '/tmp', 'Output directory path.')
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    # Params:
+    # -------
+    # {
+    #   "s2lvls": [10],
+    #   "aggrfunc": "sum" | "mean" | "max" | "min",
+    #   "latcol": <col-name>,
+    #   "lngcol": <col-name>,
+    #   "datecol": <col-name>,
+    #   "valcol": <col-name>,
+    #   "datefmt": "YYYY-mm-dd" | "YYYY-mm" | "YYYY",  #  Optional
+    #   "containedIn": "europe"
+    # }
+    flags.DEFINE_string('in_params', '', 'Input param file')
+    flags.DEFINE_string('in_csv', '', 'Input CSV file')
+    flags.DEFINE_string('out_dir', '/tmp', 'Output directory path.')
+
 
 _MCF_FORMAT = """
 Node: dcid:s2CellId/{cid}
@@ -176,4 +180,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

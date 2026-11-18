@@ -32,15 +32,19 @@ _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 _DEFAULT_INPUT_DIR = os.path.join(_SCRIPT_DIR, 'input_files')
 _DEFAULT_OUTPUT_DIR = os.path.join(_SCRIPT_DIR, 'output')
 
-flags.DEFINE_string(
-    'input_path', _DEFAULT_INPUT_DIR,
-    'Path to input directory containing downloaded TSV/CSV files.')
-flags.DEFINE_string(
-    'output_path', _DEFAULT_OUTPUT_DIR,
-    'Path to directory where output CSV and TMCF files will be written.')
-flags.DEFINE_boolean(
-    'use_test_data', False,
-    'Generate mock baseline data if input directory has no files.')
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        'input_path', _DEFAULT_INPUT_DIR,
+        'Path to input directory containing downloaded TSV/CSV files.')
+    flags.DEFINE_string(
+        'output_path', _DEFAULT_OUTPUT_DIR,
+        'Path to directory where output CSV and TMCF files will be written.')
+    flags.DEFINE_boolean(
+        'use_test_data', False,
+        'Generate mock baseline data if input directory has no files.')
+
 
 _FLAGS = flags.FLAGS
 
@@ -550,4 +554,5 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

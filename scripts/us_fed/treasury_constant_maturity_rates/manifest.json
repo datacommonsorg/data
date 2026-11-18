@@ -22,7 +22,8 @@
             ],
             "cron_schedule": "15 3 * * *",
             "config_override": {
-                "enable_skip_status": false
+                "enable_skip_status": false,
+                "skip_prod_ingestion": true
             }
         },
         {

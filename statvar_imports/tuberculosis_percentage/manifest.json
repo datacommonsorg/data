@@ -18,7 +18,7 @@
                 {
                     "template_mcf": "output_files/tuberculosisPercentage_output.tmcf",
                     "cleaned_csv": "output_files/tuberculosisPercentage_output.csv",
-                    "stat_var_mcf": "output_files/tuberculosisPercentage_output_stat_vars.mcf"
+                    "node_mcf": "output_files/*.mcf"
                 }
             ],
             "cron_schedule": "0 12 * * 4",

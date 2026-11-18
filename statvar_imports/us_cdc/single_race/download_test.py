@@ -20,28 +20,13 @@ import tempfile
 import unittest
 from unittest import mock
 
-from absl import flags
-
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, _MODULE_DIR)
-
-_SAVED_FLAGS = {
-    _name: flags.FLAGS[_name]
-    for _name in ('states', 'years', 'output_dir', 'delay', 'timeout',
-                  'skip_existing', 'batch_size', 'batch_cooldown')
-    if _name in flags.FLAGS
-}
-for _flag_name in _SAVED_FLAGS:
-    delattr(flags.FLAGS, _flag_name)
 
 try:
     from statvar_imports.us_cdc.single_race import download
 except ModuleNotFoundError:
     import download
-
-for _flag_name, _flag_obj in _SAVED_FLAGS.items():
-    delattr(flags.FLAGS, _flag_name)
-    flags.FLAGS[_flag_name] = _flag_obj
 
 
 class DownloadTest(unittest.TestCase):
