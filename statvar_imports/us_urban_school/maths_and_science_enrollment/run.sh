@@ -89,7 +89,20 @@ if [[ ! -s "$SINGLE_2016_FILE" ]]; then
   exit 1
 fi
 
-for year in 2018 2021 2022 2024; do
+REQUIRED_MODERN_YEARS=(2018 2021 2022 2024)
+DISCOVERED_MODERN_YEARS=()
+if [[ -d "$SCRIPT_PATH/input_files" ]]; then
+  mapfile -t DISCOVERED_MODERN_YEARS < <(
+    find "$SCRIPT_PATH/input_files" -maxdepth 1 -type f -name "[0-9][0-9][0-9][0-9]_*.csv" -printf "%f\n" \
+      | awk -F_ '$1 >= 2018 { print $1 }' \
+      | sort -u
+  )
+fi
+mapfile -t ALL_MODERN_YEARS < <(
+  printf "%s\n" "${REQUIRED_MODERN_YEARS[@]}" "${DISCOVERED_MODERN_YEARS[@]}" | awk 'NF' | sort -u
+)
+
+for year in "${ALL_MODERN_YEARS[@]}"; do
   for subject in "${SUBJECTS[@]}"; do
     req_file="$SCRIPT_PATH/input_files/${year}_${subject}.csv"
     if [[ ! -s "$req_file" ]]; then
@@ -99,7 +112,11 @@ for year in 2018 2021 2022 2024; do
   done
 done
 
-LEGACY_XLSX_FILES=$(find "$SCRIPT_PATH/input_files" -maxdepth 1 -name "*.xlsx" | sort | paste -sd, -)
+LEGACY_XLSX_FILES=$(
+  find "$SCRIPT_PATH/input_files" -maxdepth 1 \( -name "2010_*.xlsx" -o -name "2012_*.xlsx" \) \
+    | sort \
+    | paste -sd, -
+)
 
 # --- 1. Process 2010 and 2012 Files (Older XLSX format) ---
 python3 "$PROCESSOR_PY" \

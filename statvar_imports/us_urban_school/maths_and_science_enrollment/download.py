@@ -14,6 +14,7 @@
 """Downloads and extracts CRDC Maths and Science enrollment source files."""
 
 from datetime import datetime
+import json
 import os
 from pathlib import Path
 import re
@@ -33,7 +34,8 @@ if 'force_download' not in FLAGS:
     flags.DEFINE_bool(
         'force_download',
         False,
-        'Re-download and overwrite existing files in input_files/ even if present.',
+        'Re-download and overwrite existing files in input_files/ without '
+        'checking upstream ETag or Last-Modified headers.',
     )
 
 # Base URL template
@@ -129,6 +131,90 @@ def _all_expected_files_exist(end_year: int, save_folder: str) -> bool:
         for name in expected)
 
 
+def _metadata_sidecar_path(end_year: int, save_folder: str) -> str:
+    """Returns hidden HTTP cache-metadata sidecar path for a survey year."""
+    return os.path.join(save_folder, f'.{end_year}_crdc_meta.json')
+
+
+def _write_cache_metadata(end_year: int, save_folder: str,
+                          headers_meta: dict[str, str]) -> None:
+    """Atomically records upstream ETag and Last-Modified headers."""
+    etag = (headers_meta.get('etag') or '').strip()
+    last_modified = (headers_meta.get('last_modified') or '').strip()
+    if not etag and not last_modified:
+        return
+    meta_path = _metadata_sidecar_path(end_year, save_folder)
+    fd, tmp_meta_path = tempfile.mkstemp(prefix=f'.{end_year}_crdc_meta.',
+                                         suffix='.json',
+                                         dir=save_folder)
+    os.close(fd)
+    try:
+        with open(tmp_meta_path, 'w', encoding='utf-8') as f:
+            json.dump({'etag': etag, 'last_modified': last_modified}, f)
+        os.replace(tmp_meta_path, meta_path)
+    finally:
+        if os.path.exists(tmp_meta_path):
+            os.remove(tmp_meta_path)
+
+
+def _is_cached_archive_fresh(
+        url: str,
+        end_year: int,
+        save_folder: str,
+        session: Optional[requests.Session] = None) -> bool:
+    """Returns True only when expected files exist and HTTP headers match."""
+    if not _all_expected_files_exist(end_year, save_folder):
+        return False
+
+    meta_path = _metadata_sidecar_path(end_year, save_folder)
+    if not os.path.isfile(meta_path):
+        return False
+
+    try:
+        with open(meta_path, encoding='utf-8') as f:
+            cached = json.load(f)
+    except (OSError, ValueError, TypeError):
+        return False
+
+    if not isinstance(cached, dict):
+        return False
+    cached_etag = (cached.get('etag') or '').strip()
+    cached_lm = (cached.get('last_modified') or '').strip()
+    if not cached_etag and not cached_lm:
+        return False
+
+    own_session = session is None
+    http = session or requests.Session()
+    try:
+        response = http.head(
+            url,
+            allow_redirects=True,
+            timeout=(_CONNECT_TIMEOUT_SECS, _CONNECT_TIMEOUT_SECS),
+        )
+        if response.status_code != 200:
+            return False
+        remote_etag = (response.headers.get('ETag') or '').strip()
+        remote_lm = (response.headers.get('Last-Modified') or '').strip()
+    except requests.exceptions.RequestException as exc:
+        logging.warning(
+            f'HEAD freshness check failed for {url}: {exc}; re-downloading.')
+        return False
+    finally:
+        if own_session:
+            http.close()
+
+    compared = False
+    if cached_etag and remote_etag:
+        if cached_etag != remote_etag:
+            return False
+        compared = True
+    if cached_lm and remote_lm:
+        if cached_lm != remote_lm:
+            return False
+        compared = True
+    return compared
+
+
 def add_year_ncesid_column(file_path: str,
                            year: int,
                            output_path: Optional[str] = None) -> None:
@@ -175,7 +261,7 @@ def download_zip_to_path(
         required: bool = True,
         session: Optional[requests.Session] = None,
         max_attempts: int = _MAX_ATTEMPTS,
-        initial_backoff_secs: float = _INITIAL_BACKOFF_SECS) -> None:
+        initial_backoff_secs: float = _INITIAL_BACKOFF_SECS) -> dict[str, str]:
     """Streams zip_url to dest_zip_path and validates ZIP integrity with retries.
 
     Full body transfer and zipfile.is_zipfile() validation happen inside the
@@ -205,6 +291,9 @@ def download_zip_to_path(
                     response.raise_for_status()
                     content_type = (response.headers.get('Content-Type') or
                                     '').lower()
+                    etag = (response.headers.get('ETag') or '').strip()
+                    last_modified = (response.headers.get('Last-Modified') or
+                                     '').strip()
 
                     with open(dest_zip_path, 'wb') as out_f:
                         for chunk in response.iter_content(
@@ -223,7 +312,7 @@ def download_zip_to_path(
                         f'Downloaded payload is not a valid ZIP archive '
                         f'(Content-Type={content_type!r}): {zip_url}')
 
-                return
+                return {'etag': etag, 'last_modified': last_modified}
             except UnreleasedArchiveError:
                 raise
             except Exception as exc:
@@ -242,6 +331,8 @@ def download_zip_to_path(
         if own_session:
             http.close()
 
+    return {'etag': '', 'last_modified': ''}
+
 
 def download_and_extract_zip(
         start_year: int,
@@ -252,30 +343,33 @@ def download_and_extract_zip(
         session: Optional[requests.Session] = None) -> list[str]:
     """Download and extract matching files for a CRDC survey year range."""
     os.makedirs(save_folder, exist_ok=True)
-    if not force_download and _all_expected_files_exist(end_year, save_folder):
-        logging.info(f'All expected files for {end_year} already exist in '
-                     f'{save_folder}; skipping download.')
+    zip_name = f'{start_year}-{str(end_year)[-2:]}-crdc-data.zip'
+    url = BASE_URL_TEMPLATE.format(start_year, str(end_year)[-2:])
+
+    if not force_download and _is_cached_archive_fresh(
+            url, end_year, save_folder, session=session):
+        logging.info(
+            f'All expected files for {end_year} in {save_folder} match '
+            f'upstream HTTP headers; skipping download.')
         return [
             os.path.join(save_folder, name)
             for name in expected_output_filenames(end_year)
         ]
 
-    zip_name = f'{start_year}-{str(end_year)[-2:]}-crdc-data.zip'
-    url = BASE_URL_TEMPLATE.format(start_year, str(end_year)[-2:])
     logging.info(f'Processing {zip_name} (required={required}) ...')
 
     fd, tmp_zip_path = tempfile.mkstemp(prefix=f'.{end_year}_crdc_',
                                         suffix='.zip',
                                         dir=save_folder)
     os.close(fd)
-    extracted_paths: list[str] = []
+    staged_outputs: dict[str, str] = {}
 
     try:
         try:
-            download_zip_to_path(url,
-                                 tmp_zip_path,
-                                 required=required,
-                                 session=session)
+            headers_meta = download_zip_to_path(url,
+                                                tmp_zip_path,
+                                                required=required,
+                                                session=session)
         except UnreleasedArchiveError as exc:
             logging.info(
                 f'Skipping unreleased future archive {zip_name}: {exc}')
@@ -292,7 +386,6 @@ def download_and_extract_zip(
                 base_output = filename_configs[subject]
                 ext = os.path.splitext(file_name)[1].lower()
                 output_filename = f'{end_year}_{base_output}{ext}'
-                output_path = os.path.join(save_folder, output_filename)
 
                 raw_fd, raw_tmp_path = tempfile.mkstemp(
                     prefix=f'.{output_filename}.raw.',
@@ -319,37 +412,48 @@ def download_and_extract_zip(
                     if os.path.getsize(proc_tmp_path) == 0:
                         raise RuntimeError(
                             f'Post-processed file is empty: {output_filename}')
-                    os.replace(proc_tmp_path, output_path)
-                    extracted_paths.append(output_path)
-                    logging.info(f'Extracted and processed: {output_filename}')
+                    prev_staged = staged_outputs.pop(output_filename, None)
+                    if prev_staged and os.path.exists(prev_staged):
+                        os.remove(prev_staged)
+                    staged_outputs[output_filename] = proc_tmp_path
+                except Exception:
+                    if os.path.exists(proc_tmp_path):
+                        os.remove(proc_tmp_path)
+                    raise
                 finally:
-                    for path in (raw_tmp_path, proc_tmp_path):
-                        if os.path.exists(path):
-                            os.remove(path)
+                    if os.path.exists(raw_tmp_path):
+                        os.remove(raw_tmp_path)
 
-        if not extracted_paths:
-            msg = f'No matching course files found inside {zip_name} ({url}).'
-            if required:
-                raise RuntimeError(msg)
-            logging.warning(msg)
-            return []
+        if not staged_outputs:
+            raise RuntimeError(
+                f'No matching course files found inside {zip_name} ({url}).')
 
-        if required:
-            missing = [
-                name for name in expected_output_filenames(end_year)
-                if not os.path.isfile(os.path.join(save_folder, name)) or
-                os.path.getsize(os.path.join(save_folder, name)) == 0
-            ]
-            if missing:
-                raise RuntimeError(
-                    f'Missing required extracted files from {zip_name}: '
-                    f'{missing}')
+        expected_names = expected_output_filenames(end_year)
+        missing = [
+            name for name in expected_names if name not in staged_outputs or
+            os.path.getsize(staged_outputs[name]) == 0
+        ]
+        if missing:
+            raise RuntimeError(
+                f'Missing expected extracted files from {zip_name}: {missing}')
 
+        extracted_paths: list[str] = []
+        for output_filename, proc_tmp_path in list(staged_outputs.items()):
+            output_path = os.path.join(save_folder, output_filename)
+            os.replace(proc_tmp_path, output_path)
+            del staged_outputs[output_filename]
+            extracted_paths.append(output_path)
+            logging.info(f'Extracted and processed: {output_filename}')
+
+        _write_cache_metadata(end_year, save_folder, headers_meta)
         logging.info(
             f'Completed {zip_name}: saved {len(extracted_paths)} file(s) into '
             f'{save_folder}.')
         return extracted_paths
     finally:
+        for path in staged_outputs.values():
+            if os.path.exists(path):
+                os.remove(path)
         if os.path.exists(tmp_zip_path):
             os.remove(tmp_zip_path)
 

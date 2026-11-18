@@ -13,6 +13,8 @@
 # limitations under the License.
 """Unit tests for US_Urban_MathsAndScience_Course_Enrollment."""
 
+import glob
+import importlib.util
 import io
 import json
 import os
@@ -43,6 +45,16 @@ from validation_config import merge_and_save_config  # pylint: disable=import-er
 from statvar_imports.us_urban_school.maths_and_science_enrollment import download  # pylint: disable=wrong-import-position
 
 
+def _resolve_processor_python() -> str:
+    """Returns a Python interpreter with stat_var_processor dependencies."""
+    if importlib.util.find_spec('fastavro') is not None:
+        return sys.executable
+    venv_python = os.path.join(_REPO_ROOT, '.env', 'bin', 'python')
+    if os.path.isfile(venv_python):
+        return venv_python
+    return sys.executable
+
+
 def _build_zip_bytes(entries: dict[str, bytes]) -> bytes:
     buf = io.BytesIO()
     with zipfile.ZipFile(buf, 'w', compression=zipfile.ZIP_DEFLATED) as zf:
@@ -51,8 +63,21 @@ def _build_zip_bytes(entries: dict[str, bytes]) -> bytes:
     return buf.getvalue()
 
 
+def _build_full_modern_zip_bytes() -> bytes:
+    csv_payload = b'LEAID,SCHID,TOT_SCIENR_PHYS_M\n0100001,00001,5\n'
+    return _build_zip_bytes({
+        'Advanced Mathematics.csv': csv_payload,
+        'Algebra II.csv': csv_payload,
+        'Biology.csv': csv_payload,
+        'Calculus.csv': csv_payload,
+        'Chemistry.csv': csv_payload,
+        'Geometry.csv': csv_payload,
+        'Physics.csv': csv_payload,
+    })
+
+
 class _FakeResponse:
-    """Minimal context-manager mock for requests.Session.get(stream=True)."""
+    """Minimal context-manager mock for requests.Session.get/head."""
 
     def __init__(self,
                  status_code: int = 200,
@@ -85,7 +110,7 @@ class _FakeResponse:
 
 
 class DownloadTest(unittest.TestCase):
-    """Tests download, extraction, retry, and post-processing behavior."""
+    """Tests download, extraction, HTTP cache checks, and retry behavior."""
 
     def test_detect_subject_matches_courses_and_ignores_temp_files(self):
         self.assertEqual(
@@ -96,6 +121,7 @@ class DownloadTest(unittest.TestCase):
         self.assertEqual(download.detect_subject('2015-16/School Data.csv'),
                          'School Data')
         self.assertIsNone(download.detect_subject('2021-22/~$Physics.xlsx'))
+        self.assertIsNone(download.detect_subject('2021-22/.2024_crdc_meta'))
         self.assertIsNone(download.detect_subject('2021-22/Enrollment.csv'))
 
     def test_add_year_ncesid_column_zero_pads_ids(self):
@@ -133,12 +159,19 @@ class DownloadTest(unittest.TestCase):
                 body=b'<html>502 Bad Gateway</html>',
                 headers={'Content-Type': 'text/html'},
             ),
-            _FakeResponse(status_code=200, body=valid_zip),
+            _FakeResponse(
+                status_code=200,
+                body=valid_zip,
+                headers={
+                    'Content-Type': 'application/zip',
+                    'ETag': '"v1"',
+                },
+            ),
         ]
 
         with tempfile.TemporaryDirectory() as tmp_dir:
             dest_zip = os.path.join(tmp_dir, '2016.zip')
-            download.download_zip_to_path(
+            headers_meta = download.download_zip_to_path(
                 'https://civilrightsdata.ed.gov/assets/ocr/docs/2015-16-crdc-data.zip',
                 dest_zip,
                 required=True,
@@ -147,6 +180,7 @@ class DownloadTest(unittest.TestCase):
                 initial_backoff_secs=1,
             )
             self.assertTrue(zipfile.is_zipfile(dest_zip))
+            self.assertEqual(headers_meta['etag'], '"v1"')
             self.assertEqual(session.get.call_count, 3)
             self.assertEqual(mock_sleep.call_count, 2)
 
@@ -183,30 +217,30 @@ class DownloadTest(unittest.TestCase):
             self.assertEqual(session.get.call_count, 2)
             mock_sleep.assert_not_called()
 
-    @mock.patch.object(download.time, 'sleep', return_value=None)
-    def test_required_year_raises_when_subject_file_missing(self, mock_sleep):
-        del mock_sleep
-        # Only 1 of the 7 required subject CSVs is present in the ZIP.
+    def test_published_zip_raises_and_writes_no_partial_files_when_missing_subject(
+            self):
+        # Only 1 of the 7 expected subject CSVs is present in the ZIP.
         incomplete_zip = _build_zip_bytes({
             'Physics.csv': b'LEAID,SCHID,TOT_SCIENR_PHYS_M\n1,2,5\n',
         })
-        session = mock.MagicMock()
-        session.get.return_value = _FakeResponse(status_code=200,
-                                                 body=incomplete_zip)
+        for required_flag, end_year in ((True, 2024), (False, 2026)):
+            session = mock.MagicMock()
+            session.get.return_value = _FakeResponse(status_code=200,
+                                                     body=incomplete_zip)
+            with tempfile.TemporaryDirectory() as tmp_dir:
+                with self.assertRaisesRegex(RuntimeError,
+                                            'Missing expected extracted files'):
+                    download.download_and_extract_zip(
+                        end_year - 1,
+                        end_year,
+                        required=required_flag,
+                        save_folder=tmp_dir,
+                        force_download=True,
+                        session=session,
+                    )
+                self.assertEqual(os.listdir(tmp_dir), [])
 
-        with tempfile.TemporaryDirectory() as tmp_dir:
-            with self.assertRaisesRegex(RuntimeError,
-                                        'Missing required extracted files'):
-                download.download_and_extract_zip(
-                    2023,
-                    2024,
-                    required=True,
-                    save_folder=tmp_dir,
-                    force_download=True,
-                    session=session,
-                )
-
-    def test_zip_with_no_matching_files_does_not_raise_unbound_local_error(
+    def test_zip_with_no_matching_files_raises_runtime_error_not_unbound_local(
             self):
         unmatched_zip = _build_zip_bytes({
             'Enrollment.csv': b'LEAID,SCHID\n1,2\n',
@@ -216,14 +250,15 @@ class DownloadTest(unittest.TestCase):
                                                  body=unmatched_zip)
 
         with tempfile.TemporaryDirectory() as tmp_dir:
-            extracted = download.download_and_extract_zip(
-                2025,
-                2026,
-                required=False,
-                save_folder=tmp_dir,
-                session=session,
-            )
-            self.assertEqual(extracted, [])
+            with self.assertRaisesRegex(RuntimeError,
+                                        'No matching course files found'):
+                download.download_and_extract_zip(
+                    2025,
+                    2026,
+                    required=False,
+                    save_folder=tmp_dir,
+                    session=session,
+                )
 
     def test_build_survey_schedule_excludes_odd_historical_years(self):
         schedule = download.build_survey_schedule(2026)
@@ -242,18 +277,46 @@ class DownloadTest(unittest.TestCase):
             ],
         )
 
-    def test_optional_year_skips_download_only_when_all_subject_files_exist(
-            self):
+    def test_cache_reused_only_when_http_headers_confirm_unchanged(self):
+        full_zip = _build_full_modern_zip_bytes()
         with tempfile.TemporaryDirectory() as tmp_dir:
-            expected_files = download.expected_output_filenames(2026)
-            for name in expected_files:
+            # 1. Pre-existing files WITHOUT HTTP metadata sidecar must NOT skip.
+            for name in download.expected_output_filenames(2026):
                 with open(os.path.join(tmp_dir, name), 'w',
                           encoding='utf-8') as f:
-                    f.write(
-                        'LEAID,SCHID,YEAR,ncesid\n0100001,00001,2026,010000100001\n'
-                    )
+                    f.write('stale\n')
 
             session = mock.MagicMock()
+            session.get.return_value = _FakeResponse(
+                status_code=200,
+                body=full_zip,
+                headers={
+                    'Content-Type': 'application/zip',
+                    'ETag': '"etag-v1"',
+                    'Last-Modified': 'Wed, 18 Nov 2026 00:00:00 GMT',
+                },
+            )
+            extracted = download.download_and_extract_zip(
+                2025,
+                2026,
+                required=False,
+                save_folder=tmp_dir,
+                force_download=False,
+                session=session,
+            )
+            self.assertEqual(len(extracted), 7)
+            self.assertEqual(session.get.call_count, 1)
+            session.head.assert_not_called()
+
+            # 2. Subsequent run with matching ETag/Last-Modified skips GET.
+            session.reset_mock()
+            session.head.return_value = _FakeResponse(
+                status_code=200,
+                headers={
+                    'ETag': '"etag-v1"',
+                    'Last-Modified': 'Wed, 18 Nov 2026 00:00:00 GMT',
+                },
+            )
             skipped = download.download_and_extract_zip(
                 2025,
                 2026,
@@ -263,10 +326,44 @@ class DownloadTest(unittest.TestCase):
                 session=session,
             )
             self.assertEqual(len(skipped), 7)
+            self.assertEqual(session.head.call_count, 1)
             session.get.assert_not_called()
 
-            # Removing one subject partition triggers download instead of skipping.
-            os.remove(os.path.join(tmp_dir, expected_files[0]))
+            # 3. Upstream ETag change triggers fresh GET download.
+            session.reset_mock()
+            session.head.return_value = _FakeResponse(
+                status_code=200,
+                headers={
+                    'ETag': '"etag-v2"',
+                    'Last-Modified': 'Wed, 18 Nov 2026 01:00:00 GMT',
+                },
+            )
+            session.get.return_value = _FakeResponse(
+                status_code=200,
+                body=full_zip,
+                headers={
+                    'Content-Type': 'application/zip',
+                    'ETag': '"etag-v2"',
+                    'Last-Modified': 'Wed, 18 Nov 2026 01:00:00 GMT',
+                },
+            )
+            refreshed = download.download_and_extract_zip(
+                2025,
+                2026,
+                required=False,
+                save_folder=tmp_dir,
+                force_download=False,
+                session=session,
+            )
+            self.assertEqual(len(refreshed), 7)
+            self.assertEqual(session.head.call_count, 1)
+            self.assertEqual(session.get.call_count, 1)
+
+            # 4. Missing one partition bypasses cache and re-downloads directly.
+            os.remove(
+                os.path.join(tmp_dir,
+                             download.expected_output_filenames(2026)[0]))
+            session.reset_mock()
             session.get.return_value = _FakeResponse(status_code=404,
                                                      body=b'Not Found')
             download.download_and_extract_zip(
@@ -277,11 +374,12 @@ class DownloadTest(unittest.TestCase):
                 force_download=False,
                 session=session,
             )
+            session.head.assert_not_called()
             self.assertEqual(session.get.call_count, 1)
 
 
 class ManifestRunScriptAndValidationTest(unittest.TestCase):
-    """Tests manifest resolution, run.sh guards/flags, and validation rules."""
+    """Tests manifest resolution, run.sh guards, processor fixtures, and validation."""
 
     def test_manifest_parses_and_handles_optional_wildcard_node_mcf(self):
         manifest_path = os.path.join(_MODULE_DIR, 'manifest.json')
@@ -304,13 +402,12 @@ class ManifestRunScriptAndValidationTest(unittest.TestCase):
                     f.write('col\n1\n')
                 with open(tmcf_path, 'w', encoding='utf-8') as f:
                     f.write('Node: E:X->E0\n')
-                # Without *_stat_vars.mcf generated, wildcard node_mcf must not
-                # raise MissingInputFilesError.
                 resolved = manifest_utils.get_import_input_files(
                     imp_input, tmp_dir)
                 self.assertEqual(len(resolved), 2)
 
-    def test_run_sh_enforces_recon_property_and_fails_on_missing_inputs(self):
+    def test_run_sh_enforces_recon_property_and_fails_on_missing_or_partial_future_inputs(
+            self):
         run_sh_path = os.path.join(_MODULE_DIR, 'run.sh')
         with open(run_sh_path, encoding='utf-8') as f:
             content = f.read()
@@ -318,8 +415,8 @@ class ManifestRunScriptAndValidationTest(unittest.TestCase):
         self.assertTrue(content.startswith('#!/bin/bash\n'))
         self.assertIn('set -euo pipefail', content)
         self.assertEqual(content.count('--recon_property=variableMeasured'), 3)
+        self.assertIn('-name "2010_*.xlsx" -o -name "2012_*.xlsx"', content)
 
-        # Verify run.sh fails fast when required input files are missing.
         with tempfile.TemporaryDirectory() as tmp_dir:
             copied_run_sh = os.path.join(tmp_dir, 'run.sh')
             with open(copied_run_sh, 'w', encoding='utf-8') as f:
@@ -330,6 +427,8 @@ class ManifestRunScriptAndValidationTest(unittest.TestCase):
 
             env = os.environ.copy()
             env['EXISTING_STATVAR_MCF'] = dummy_mcf
+
+            # Missing baseline inputs fails fast.
             proc = subprocess.run(['bash', copied_run_sh],
                                   capture_output=True,
                                   text=True,
@@ -337,6 +436,124 @@ class ManifestRunScriptAndValidationTest(unittest.TestCase):
                                   check=False)
             self.assertNotEqual(proc.returncode, 0)
             self.assertIn('Required input file', proc.stdout)
+
+            # Populate all 43 baseline files plus 1 partial 2026 file -> fails fast on missing 2026 sibling.
+            in_dir = os.path.join(tmp_dir, 'input_files')
+            os.makedirs(in_dir)
+            for year in (2010, 2012, 2016, 2018, 2021, 2022, 2024):
+                for name in download.expected_output_filenames(year):
+                    with open(os.path.join(in_dir, name), 'w',
+                              encoding='utf-8') as f:
+                        f.write('col\n1\n')
+            with open(os.path.join(in_dir, '2026_Physics.csv'),
+                      'w',
+                      encoding='utf-8') as f:
+                f.write('col\n1\n')
+
+            proc_partial = subprocess.run(['bash', copied_run_sh],
+                                          capture_output=True,
+                                          text=True,
+                                          env=env,
+                                          check=False)
+            self.assertNotEqual(proc_partial.returncode, 0)
+            self.assertIn('2026_Advanced_Mathematics.csv is missing or empty',
+                          proc_partial.stdout)
+
+    def test_pvmap_includes_jj_sch_just_and_el_mappings(self):
+        pvmap_path = os.path.join(_MODULE_DIR, 'maths_and_science_pvmap.csv')
+        with open(pvmap_path, encoding='utf-8') as f:
+            content = f.read()
+        self.assertIn(
+            'SCH_JUST:Yes,educationalInstitutionType,JuvenileJusticeFacility',
+            content)
+        self.assertIn(
+            'SCH_JUST:No,educationalInstitutionType,NotJuvenileJusticeFacility',
+            content)
+        for col in (
+                'SCH_MATHENR_ADVM_EL_M',
+                'SCH_MATHENR_ADVM_EL_F',
+                'SCH_MATHENR_GEOM_EL_M',
+                'SCH_MATHENR_GEOM_EL_F',
+                'SCH_MATHENR_ALG2_EL_M',
+                'SCH_MATHENR_ALG2_EL_F',
+                'SCH_MATHENR_CALC_EL_M',
+                'SCH_MATHENR_CALC_EL_F',
+                'SCH_SCIENR_BIOL_EL_M',
+                'SCH_SCIENR_BIOL_EL_F',
+                'SCH_SCIENR_CHEM_EL_M',
+                'SCH_SCIENR_CHEM_EL_F',
+                'SCH_SCIENR_PHYS_EL_M',
+                'SCH_SCIENR_PHYS_EL_F',
+        ):
+            self.assertIn(f'{col},value,{{Number}}', content)
+
+    def test_stat_var_processor_matches_expected_fixtures_for_jj_sch_just_and_el(
+            self):
+        test_data_dir = os.path.join(_MODULE_DIR, 'test_data')
+        input_files = sorted(
+            glob.glob(os.path.join(test_data_dir, '*_input.csv')))
+        self.assertEqual(len(input_files), 7)
+
+        expected_csv = os.path.join(test_data_dir,
+                                    'maths_and_science_output.csv')
+        expected_tmcf = os.path.join(test_data_dir,
+                                     'maths_and_science_output.tmcf')
+        existing_mcf = os.path.join(test_data_dir,
+                                    'maths_and_science_output_stat_vars.mcf')
+        processor_py = os.path.join(_REPO_ROOT, 'tools', 'statvar_importer',
+                                    'stat_var_processor.py')
+
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            hermetic_cfg = os.path.join(tmp_dir, 'metadata.csv')
+            with open(os.path.join(_MODULE_DIR, 'metadata.csv'),
+                      encoding='utf-8') as src_f:
+                base_metadata = src_f.read()
+            with open(hermetic_cfg, 'w', encoding='utf-8') as dst_f:
+                dst_f.write(base_metadata)
+                dst_f.write('\nreconcile_nodes,False\nrecon_lookup_api,False\n')
+
+            actual_prefix = os.path.join(tmp_dir, 'maths_and_science_output')
+            cmd = [
+                _resolve_processor_python(),
+                processor_py,
+                f'--input_data={",".join(input_files)}',
+                f'--pv_map={os.path.join(_MODULE_DIR, "maths_and_science_pvmap.csv")}',
+                f'--config_file={hermetic_cfg}',
+                f'--existing_statvar_mcf={existing_mcf}',
+                f'--output_path={actual_prefix}',
+            ]
+            proc = subprocess.run(cmd,
+                                  capture_output=True,
+                                  text=True,
+                                  check=False)
+            self.assertEqual(
+                proc.returncode,
+                0,
+                msg=f'stat_var_processor failed:\n{proc.stderr}',
+            )
+
+            with open(f'{actual_prefix}.csv', encoding='utf-8') as f_act, open(
+                    expected_csv, encoding='utf-8') as f_exp:
+                actual_csv_text = f_act.read()
+                self.assertEqual(actual_csv_text, f_exp.read())
+
+            with open(f'{actual_prefix}.tmcf', encoding='utf-8') as f_act, open(
+                    expected_tmcf, encoding='utf-8') as f_exp:
+                self.assertEqual(f_act.read(), f_exp.read())
+
+            # Confirm 2022 _EL_, 2024 SCH_JUST:Yes, and 2024 SCH_JUST:No outputs exist.
+            self.assertIn(
+                '2022,nces/010000299995,dcid:Count_Student_JuvenileJusticeFacility_LimitedEnglishProficiency_Enrolled_Male_Algebra2,0',
+                actual_csv_text,
+            )
+            self.assertIn(
+                '2024,nces/010000201705,dcid:Count_Student_JuvenileJusticeFacility_LimitedEnglishProficiency_Enrolled_Male_Physics,1',
+                actual_csv_text,
+            )
+            self.assertIn(
+                '2024,nces/010000500871,dcid:Count_Student_NotJuvenileJusticeFacility_LimitedEnglishProficiency_Enrolled_Female_Physics,3',
+                actual_csv_text,
+            )
 
     def _run_merged_validation(self,
                                stats_rows: list[dict],
@@ -417,13 +634,11 @@ class ManifestRunScriptAndValidationTest(unittest.TestCase):
                 'MinDate':
                     2018,
                 'MaxDate':
-                    2021,
+                    2024,
             },
         ]
-        # 0.1% (10 / 10,000) passes the inherited base check_deleted_records_percent rule
         self.assertTrue(
             self._run_merged_validation(split_rows, deleted_obs_count=10))
-        # >0.1% (11 / 10,000 = 0.11%) fails the inherited base rule
         self.assertFalse(
             self._run_merged_validation(split_rows, deleted_obs_count=11))
 
@@ -437,9 +652,12 @@ class ManifestRunScriptAndValidationTest(unittest.TestCase):
                     'MaxDate': 2012,
                 },
                 {
-                    'StatVar': 'Count_Student_Enrolled_Female_Physics',
-                    'MinDate': 2010,
-                    'MaxDate': 2012,
+                    'StatVar':
+                        'Count_Student_LimitedEnglishProficiency_Enrolled_Female_Physics',
+                    'MinDate':
+                        2010,
+                    'MaxDate':
+                        2012,
                 },
             ]))
 
@@ -464,8 +682,7 @@ class ManifestRunScriptAndValidationTest(unittest.TestCase):
                 },
             ]))
 
-        # Splits 2..8: 2018_onwards (with SCH_JUST mapped, non-LEP JJ/NotJJ
-        # StatVars span 2018..2024 and LEP JJ/NotJJ StatVars span 2018..2021)
+        # Splits 2..8: 2018_onwards (all StatVars including LEP span 2018..2024)
         self.assertTrue(
             self._run_merged_validation([
                 {
@@ -490,24 +707,13 @@ class ManifestRunScriptAndValidationTest(unittest.TestCase):
                     'MinDate':
                         2018,
                     'MaxDate':
-                        2021,
+                        2024,
                 },
             ]))
 
-    def test_pvmap_includes_jj_and_sch_just_mappings(self):
-        pvmap_path = os.path.join(_MODULE_DIR, 'maths_and_science_pvmap.csv')
-        with open(pvmap_path, encoding='utf-8') as f:
-            content = f.read()
-        self.assertIn(
-            'SCH_JUST:Yes,educationalInstitutionType,JuvenileJusticeFacility',
-            content)
-        self.assertIn(
-            'SCH_JUST:No,educationalInstitutionType,NotJuvenileJusticeFacility',
-            content)
-
-    def test_validation_config_fails_when_2024_data_missing_in_2018_split(self):
-        # If 2024 SCH_JUST observations drop out, non-LEP JJ/NotJJ MaxDate
-        # regresses to 2022 and SQL_VALIDATOR fails.
+    def test_validation_config_fails_when_2024_or_lep_data_missing_in_2018_split(
+            self):
+        # All StatVars regressing to 2022 caught by SQL_VALIDATOR.
         self.assertFalse(
             self._run_merged_validation([
                 {
@@ -524,13 +730,34 @@ class ManifestRunScriptAndValidationTest(unittest.TestCase):
                     'MinDate':
                         2018,
                     'MaxDate':
+                        2022,
+                },
+            ]))
+
+        # LEP regressing to 2021 while others reach 2024 caught by both rules.
+        self.assertFalse(
+            self._run_merged_validation([
+                {
+                    'StatVar':
+                        'Count_Student_NotJuvenileJusticeFacility_Enrolled_Male_Physics',
+                    'MinDate':
+                        2018,
+                    'MaxDate':
+                        2024,
+                },
+                {
+                    'StatVar':
+                        'Count_Student_NotJuvenileJusticeFacility_LimitedEnglishProficiency_Enrolled_Female_Physics',
+                    'MinDate':
+                        2018,
+                    'MaxDate':
                         2021,
                 },
             ]))
 
-    def test_validation_config_fails_when_max_date_inconsistent_within_cohort(
+    def test_validation_config_fails_on_unqualified_non_jj_statvar_or_cohort_mismatch(
             self):
-        # 2010_2012 stale MaxDate (< 2012) caught by SQL_VALIDATOR
+        # 2010_2012 mismatch (2010 vs 2012) caught by both rules.
         self.assertFalse(
             self._run_merged_validation([
                 {
@@ -548,7 +775,8 @@ class ManifestRunScriptAndValidationTest(unittest.TestCase):
                 },
             ]))
 
-        # Active JJ/NotJJ cohort mismatch (2024 vs 2026) caught by check_max_date_consistent
+        # Future SCH_JUST-style rename emitting a 2026 unqualified non-JJ StatVar
+        # alongside 2024 JJ/NotJJ StatVars fails validation.
         self.assertFalse(
             self._run_merged_validation([
                 {
@@ -560,12 +788,9 @@ class ManifestRunScriptAndValidationTest(unittest.TestCase):
                         2024,
                 },
                 {
-                    'StatVar':
-                        'Count_Student_WithDisability_JuvenileJusticeFacility_IDEA_Enrolled_Male_Physics',
-                    'MinDate':
-                        2018,
-                    'MaxDate':
-                        2026,
+                    'StatVar': 'Count_Student_Enrolled_Male_Physics',
+                    'MinDate': 2026,
+                    'MaxDate': 2026,
                 },
             ]))
 
