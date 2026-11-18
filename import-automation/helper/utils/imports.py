@@ -14,11 +14,12 @@
 """Utility functions for import helper."""
 
 import base64
-from datetime import datetime, timezone
+from datetime import datetime
+from datetime import timezone
 import json
 import logging
-import os
 import re
+
 import config
 import google.auth
 from google.auth.transport.requests import Request
@@ -108,7 +109,8 @@ def invoke_import_automation_workflow(project_id: str,
                                       graph_path: str = "/**/*.mcf*",
                                       cron_schedule: str = "",
                                       skip_import_job: bool | None = None,
-                                      skip_staging_ingestion: bool | None = None,
+                                      skip_staging_ingestion: bool |
+                                      None = None,
                                       skip_prod_ingestion: bool | None = None):
     """Triggers the import automation workflow."""
     import_config = {
@@ -186,9 +188,8 @@ def invoke_import_automation_airflow(import_name: str,
     """
     short_import_name = import_name.split(':')[-1]
     target_dag_id = dag_id or config.AIRFLOW_DEFAULT_DAG_ID
-    full_import_name = (
-        import_name if ':' in import_name else f"scripts/entities:{import_name}"
-    )
+    full_import_name = (import_name if ':' in import_name else
+                        f"scripts/entities:{import_name}")
 
     import_config = {
         "user_script_args": [f"--version={latest_version}"],
@@ -251,7 +252,8 @@ def invoke_import_automation_airflow(import_name: str,
 
     base_url = config.AIRFLOW_WEB_SERVER_URL.rstrip('/')
     url = f"{base_url}/api/v2/dags/{target_dag_id}/dagRuns"
-    logging.info(f"Invoking Airflow DAG {target_dag_id} for {import_name} at {url}")
+    logging.info(
+        f"Invoking Airflow DAG {target_dag_id} for {import_name} at {url}")
 
     if config.AIRFLOW_IAP_CLIENT_ID:
         token = id_token.fetch_id_token(Request(), config.AIRFLOW_IAP_CLIENT_ID)
@@ -273,7 +275,8 @@ def invoke_import_automation_airflow(import_name: str,
     return response
 
 
-def get_next_refresh(project_id: str, location: str, import_name: str) -> str | None:
+def get_next_refresh(project_id: str, location: str,
+                     import_name: str) -> str | None:
     """Fetches the next scheduled run time for the import job from Cloud Scheduler."""
     try:
         scheduler = build('cloudscheduler', 'v1', cache_discovery=False)
@@ -286,7 +289,8 @@ def get_next_refresh(project_id: str, location: str, import_name: str) -> str | 
         logging.warning(f"Could not fetch scheduler job {import_name}: {e}")
         return None
     except Exception as e:
-        logging.warning(f"Error connecting to Cloud Scheduler for {import_name}: {e}")
+        logging.warning(
+            f"Error connecting to Cloud Scheduler for {import_name}: {e}")
         return None
 
 
@@ -313,7 +317,8 @@ def get_import_params(request: dict) -> dict:
             latest_version = graph_path
         elif latest_version:
             clean_graph_path = graph_path.lstrip('/')
-            if not latest_version.rstrip('/').endswith(clean_graph_path.rstrip('/')):
+            if not latest_version.rstrip('/').endswith(
+                    clean_graph_path.rstrip('/')):
                 latest_version = f"{latest_version.rstrip('/')}/{clean_graph_path}"
 
     return {
