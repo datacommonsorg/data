@@ -74,6 +74,56 @@ select = [
     # Star imports (`from x import *`) and names that may come from them.
     "F403",
     "F405",
+    # Multiple imports or statements on one line.
+    # Note: E402 (late imports after sys.path edits) is deferred until imports are
+    # made root-relative; E722 (bare except) will be enabled separately.
+    "E401",
+    "E701",
+    "E702",
+    "E703",
+    # Lambda assignments and ambiguous names (`l`, `O`, `I`).
+    "E731",
+    "E741",
+    "E742",
+    "E743",
+    # Import shadowing, late/undefined __future__ imports, nested star imports.
+    "F402",
+    "F404",
+    "F406",
+    "F407",
+    # Invalid `%`-format strings.
+    "F501",
+    "F502",
+    "F503",
+    "F504",
+    "F505",
+    "F506",
+    "F507",
+    "F508",
+    "F509",
+    # Invalid `.format()` strings.
+    "F521",
+    "F522",
+    "F523",
+    "F524",
+    "F525",
+    # Repeated dict variable keys, invalid starred unpacking, unused annotations,
+    # and `raise NotImplemented`.
+    "F602",
+    "F621",
+    "F622",
+    "F842",
+    "F901",
+    # Missing newline at end of file.
+    "W292",
+    # Directive, mock, string-concatenation, and deprecated-UTC guards.
+    "RUF100",
+    "PGH003",
+    "PGH004",
+    "PGH005",
+    "ISC001",
+    "DTZ003",
+    "DTZ004",
 ]
 
 [lint.isort]
