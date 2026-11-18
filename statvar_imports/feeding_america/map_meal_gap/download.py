@@ -3,11 +3,14 @@
 
 import csv
 import html
+import http.client
 import json
+import math
 import os
 import re
 import shutil
 import subprocess
+import tempfile
 import time
 import urllib.error
 import urllib.request
@@ -15,7 +18,9 @@ import urllib.request
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 MAP_HOME_URL = 'https://map.feedingamerica.org/'
 MAPDATA_URL = 'https://map.feedingamerica.org/mapdata?maptype=county&year={year}&type={dtype}'
-BASELINE_GCS = 'gs://unresolved_mcf/feeding_america/map_meal_gap/input_files/FeedingAmerica_MMG_baseline_2018_2019.csv'
+BASELINE_GCS = (
+    'gs://unresolved_mcf/feeding_america/map_meal_gap/latest/input_files/'
+    'FeedingAmerica_MMG_baseline_2018_2019.csv')
 BASELINE_LOCAL = os.path.join(_SCRIPT_DIR, 'input_files',
                               'FeedingAmerica_MMG_baseline_2018_2019.csv')
 OUTPUT_INPUT_CSV = os.path.join(_SCRIPT_DIR, 'input_files',
@@ -38,6 +43,11 @@ FIELDNAMES = [
 ]
 
 
+def _is_non_retryable_http_error(err):
+    return (isinstance(err, urllib.error.HTTPError) and
+            400 <= err.code < 500 and err.code != 429)
+
+
 def fetch_json(url, max_retries=MAX_RETRIES):
     """Fetches JSON from url with exponential backoff on transient HTTP/network errors."""
     last_err = None
@@ -53,12 +63,18 @@ def fetch_json(url, max_retries=MAX_RETRIES):
             )
             with urllib.request.urlopen(req, timeout=60) as resp:
                 return json.loads(resp.read().decode('utf-8'))
-        except (urllib.error.HTTPError, urllib.error.URLError, TimeoutError,
+        except urllib.error.HTTPError as e:
+            if _is_non_retryable_http_error(e):
+                raise RuntimeError(
+                    f'Non-retryable HTTP {e.code} fetching {url}: {e}') from e
+            last_err = e
+        except (urllib.error.URLError, TimeoutError, http.client.HTTPException,
                 json.JSONDecodeError) as e:
             last_err = e
+        if attempt + 1 < max_retries:
             wait_secs = 2**attempt
             print(
-                f'Warning: request to {url} failed (attempt {attempt + 1}/{max_retries}: {e});'
+                f'Warning: request to {url} failed (attempt {attempt + 1}/{max_retries}: {last_err});'
                 f' retrying in {wait_secs}s...')
             time.sleep(wait_secs)
     raise RuntimeError(
@@ -66,39 +82,81 @@ def fetch_json(url, max_retries=MAX_RETRIES):
     ) from last_err
 
 
-def discover_years():
-    years = set(DEFAULT_YEARS)
-    try:
-        req = urllib.request.Request(
-            MAP_HOME_URL,
-            headers={'User-Agent': 'Mozilla/5.0 (DataCommons Import)'})
-        with urllib.request.urlopen(req, timeout=30) as resp:
-            page = resp.read().decode('utf-8', errors='ignore')
-        m = re.search(
-            r'data-page="app"\s+type="application/json">(.*?)</script>', page)
-        if not m:
-            m = re.search(r'data-page="([^"]+)"', page)
-            payload = json.loads(html.unescape(m.group(1))) if m else {}
-        else:
-            payload = json.loads(m.group(1))
-        for item in payload.get('props', {}).get('filters',
-                                                 {}).get('years', []):
-            yr = str(item.get('year', '')).strip()
-            if yr.isdigit() and int(yr) >= 2020:
-                years.add(yr)
-    except Exception as e:
-        print(f'Warning: dynamic year discovery fallback to defaults ({e})')
-    return sorted(years)
+def discover_years(max_retries=MAX_RETRIES):
+    """Discovers available Map the Meal Gap years (2020+) from the homepage Inertia payload."""
+    last_err = None
+    for attempt in range(max_retries):
+        try:
+            req = urllib.request.Request(
+                MAP_HOME_URL,
+                headers={'User-Agent': 'Mozilla/5.0 (DataCommons Import)'})
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                page = resp.read().decode('utf-8', errors='ignore')
+            m = re.search(
+                r'data-page="app"\s+type="application/json">(.*?)</script>',
+                page)
+            if m:
+                payload = json.loads(m.group(1))
+            else:
+                m = re.search(r'data-page="([^"]+)"', page)
+                if not m:
+                    raise ValueError(
+                        f'Missing data-page JSON payload in {MAP_HOME_URL}')
+                payload = json.loads(html.unescape(m.group(1)))
+            props = payload.get('props') if isinstance(payload, dict) else None
+            filters = props.get('filters') if isinstance(props, dict) else None
+            year_items = (filters.get('years')
+                          if isinstance(filters, dict) else None) or []
+            discovered = set()
+            for item in year_items:
+                if not isinstance(item, dict):
+                    continue
+                yr = str(item.get('year', '')).strip()
+                if yr.isdigit() and int(yr) >= 2020:
+                    discovered.add(yr)
+            if not discovered:
+                raise ValueError(
+                    f'No valid years (>= 2020) found in {MAP_HOME_URL} '
+                    'props.filters.years')
+            return sorted(set(DEFAULT_YEARS) | discovered)
+        except urllib.error.HTTPError as e:
+            if _is_non_retryable_http_error(e):
+                raise RuntimeError(
+                    f'Non-retryable HTTP {e.code} discovering years from '
+                    f'{MAP_HOME_URL}: {e}') from e
+            last_err = e
+        except (urllib.error.URLError, TimeoutError, http.client.HTTPException,
+                json.JSONDecodeError, ValueError) as e:
+            last_err = e
+        if attempt + 1 < max_retries:
+            wait_secs = 2**attempt
+            print(f'Warning: year discovery from {MAP_HOME_URL} failed '
+                  f'(attempt {attempt + 1}/{max_retries}: {last_err}); '
+                  f'retrying in {wait_secs}s...')
+            time.sleep(wait_secs)
+    raise RuntimeError(f'Failed to discover years from {MAP_HOME_URL} after '
+                       f'{max_retries} attempts: {last_err}') from last_err
 
 
 def _to_float(val):
     if val is None or val == '':
         return None
     try:
-        return float(val)
+        num = float(val)
     except (ValueError, TypeError):
         print(f'Warning: ignoring non-numeric value {val!r}')
         return None
+    if not math.isfinite(num):
+        print(f'Warning: ignoring non-finite value {val!r}')
+        return None
+    return num
+
+
+def _format_numeric(val):
+    num = _to_float(val)
+    if num is None:
+        return ''
+    return int(num) if num.is_integer() else num
 
 
 def resolve_bands(low_band, mid_band, high_band):
@@ -201,7 +259,7 @@ def main():
                     'observationDate':
                         year,
                     'Count_Person_FoodInsecure':
-                        '' if ov_pop is None else ov_pop,
+                        _format_numeric(ov_pop),
                     'Count_Person_FoodInsecure_EligibleForAllFederalBenefits':
                         (compute_product(ov_pop, ov_low)),
                     'Count_Person_FoodInsecure_EligibleForSomeFederalBenefits':
@@ -209,7 +267,7 @@ def main():
                     'Count_Person_FoodInsecure_IneligibleForFederalBenefits':
                         (compute_product(ov_pop, ov_high)),
                     'Count_Child_FoodInsecure':
-                        '' if ch_pop is None else ch_pop,
+                        _format_numeric(ch_pop),
                     'Count_Child_FoodInsecure_EligibleForManyChildNutritionBenefits':
                         (compute_product(ch_pop, ch_low)),
                     'Count_Child_FoodInsecure_IneligibleForChildNutritionBenefits':
@@ -217,15 +275,30 @@ def main():
                     'Mean_MealCost_Person_FoodSecure':
                         ('' if cost_val is None else round(cost_val, 2)),
                     'Annual_FoodBudgetShortfall':
-                        ('' if ov.get('money_needed') is None else
-                         ov.get('money_needed')),
+                        _format_numeric(ov.get('money_needed')),
                 }
 
-    with open(OUTPUT_INPUT_CSV, 'w', newline='', encoding='utf-8') as out_fp:
-        writer = csv.DictWriter(out_fp, fieldnames=FIELDNAMES)
-        writer.writeheader()
-        for (_, _), row in sorted(rows_by_key.items()):
-            writer.writerow(row)
+    out_dir = os.path.dirname(OUTPUT_INPUT_CSV) or '.'
+    os.makedirs(out_dir, exist_ok=True)
+    tmp_path = None
+    try:
+        with tempfile.NamedTemporaryFile(mode='w',
+                                         dir=out_dir,
+                                         prefix='.feedingamerica_input_',
+                                         suffix='.tmp',
+                                         newline='',
+                                         encoding='utf-8',
+                                         delete=False) as out_fp:
+            tmp_path = out_fp.name
+            writer = csv.DictWriter(out_fp, fieldnames=FIELDNAMES)
+            writer.writeheader()
+            for (_, _), row in sorted(rows_by_key.items()):
+                writer.writerow(row)
+        os.replace(tmp_path, OUTPUT_INPUT_CSV)
+        tmp_path = None
+    finally:
+        if tmp_path and os.path.exists(tmp_path):
+            os.unlink(tmp_path)
     print(f'Wrote {len(rows_by_key)} rows to {OUTPUT_INPUT_CSV}')
 
 

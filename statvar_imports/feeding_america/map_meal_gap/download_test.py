@@ -15,6 +15,7 @@
 """Unit tests for FeedingAmerica_MapMealGap download.py."""
 
 import csv
+import http.client
 import io
 import os
 import tempfile
@@ -60,6 +61,16 @@ class DownloadTest(unittest.TestCase):
         self.assertEqual(download.compute_product('', '0.5'), '')
         self.assertEqual(download.compute_product('bad', 0.5), '')
 
+    def test_format_numeric_validates_values(self):
+        self.assertEqual(download._format_numeric(8670), 8670)
+        self.assertEqual(download._format_numeric('8670.0'), 8670)
+        self.assertEqual(download._format_numeric(3.45), 3.45)
+        self.assertEqual(download._format_numeric(None), '')
+        self.assertEqual(download._format_numeric(''), '')
+        self.assertEqual(download._format_numeric('N/A'), '')
+        self.assertEqual(download._format_numeric('nan'), '')
+        self.assertEqual(download._format_numeric('inf'), '')
+
     def test_ensure_baseline_raises_when_missing_and_no_gsutil(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
             missing_path = os.path.join(tmp_dir, 'missing.csv')
@@ -102,6 +113,46 @@ class DownloadTest(unittest.TestCase):
         self.assertEqual(data, {'state': []})
         mock_sleep.assert_called_once_with(1)
 
+    def test_fetch_json_retries_on_http_exception(self):
+        err = http.client.IncompleteRead(b'partial')
+        good_resp = mock.MagicMock()
+        good_resp.__enter__.return_value.read.return_value = b'{"state": []}'
+        with (
+                mock.patch('urllib.request.urlopen',
+                           side_effect=[err, good_resp]),
+                mock.patch('time.sleep') as mock_sleep,
+        ):
+            data = download.fetch_json('https://example.com', max_retries=3)
+        self.assertEqual(data, {'state': []})
+        mock_sleep.assert_called_once_with(1)
+
+    def test_fetch_json_retries_on_429(self):
+        err = urllib.error.HTTPError('https://example.com', 429,
+                                     'Too Many Requests', {}, None)
+        good_resp = mock.MagicMock()
+        good_resp.__enter__.return_value.read.return_value = b'{"state": []}'
+        with (
+                mock.patch('urllib.request.urlopen',
+                           side_effect=[err, good_resp]),
+                mock.patch('time.sleep') as mock_sleep,
+        ):
+            data = download.fetch_json('https://example.com', max_retries=3)
+        self.assertEqual(data, {'state': []})
+        mock_sleep.assert_called_once_with(1)
+
+    def test_fetch_json_fails_fast_on_4xx(self):
+        err = urllib.error.HTTPError('https://example.com', 404, 'Not Found',
+                                     {}, None)
+        with (
+                mock.patch('urllib.request.urlopen', side_effect=err) as
+                mock_open,
+                mock.patch('time.sleep') as mock_sleep,
+        ):
+            with self.assertRaises(RuntimeError):
+                download.fetch_json('https://example.com', max_retries=3)
+        mock_open.assert_called_once()
+        mock_sleep.assert_not_called()
+
     def test_fetch_json_retries_on_json_decode_error(self):
         bad_resp = mock.MagicMock()
         bad_resp.__enter__.return_value.read.return_value = b'<html>502</html>'
@@ -121,10 +172,11 @@ class DownloadTest(unittest.TestCase):
                                      {}, None)
         with (
                 mock.patch('urllib.request.urlopen', side_effect=err),
-                mock.patch('time.sleep'),
+                mock.patch('time.sleep') as mock_sleep,
         ):
             with self.assertRaises(RuntimeError):
                 download.fetch_json('https://example.com', max_retries=2)
+        mock_sleep.assert_called_once_with(1)
 
     def test_discover_years_parses_inertia_payload(self):
         html_page = ('<html><script data-page="app" type="application/json">'
@@ -136,6 +188,59 @@ class DownloadTest(unittest.TestCase):
             years = download.discover_years()
         self.assertIn('2025', years)
         self.assertIn('2020', years)
+
+    def test_discover_years_retries_transient_error_and_succeeds(self):
+        err = http.client.RemoteDisconnected('closed')
+        html_page = ('<html><script data-page="app" type="application/json">'
+                     '{"props":{"filters":{"years":[{"year":"2025"}]}}}'
+                     '</script></html>').encode('utf-8')
+        good_resp = mock.MagicMock()
+        good_resp.__enter__.return_value = io.BytesIO(html_page)
+        with (
+                mock.patch('urllib.request.urlopen',
+                           side_effect=[err, good_resp]),
+                mock.patch('time.sleep') as mock_sleep,
+        ):
+            years = download.discover_years(max_retries=3)
+        self.assertIn('2025', years)
+        mock_sleep.assert_called_once_with(1)
+
+    def test_discover_years_raises_on_missing_data_page(self):
+        bad_resp = mock.MagicMock()
+        bad_resp.__enter__.return_value = io.BytesIO(
+            b'<html><body>No payload</body></html>')
+        with (
+                mock.patch('urllib.request.urlopen', return_value=bad_resp),
+                mock.patch('time.sleep'),
+        ):
+            with self.assertRaises(RuntimeError):
+                download.discover_years(max_retries=2)
+
+    def test_discover_years_raises_on_empty_years(self):
+        html_page = ('<html><script data-page="app" type="application/json">'
+                     '{"props":{"filters":{"years":[]}}}'
+                     '</script></html>').encode('utf-8')
+        resp = mock.MagicMock()
+        resp.__enter__.return_value = io.BytesIO(html_page)
+        with (
+                mock.patch('urllib.request.urlopen', return_value=resp),
+                mock.patch('time.sleep'),
+        ):
+            with self.assertRaises(RuntimeError):
+                download.discover_years(max_retries=2)
+
+    def test_discover_years_fails_fast_on_4xx(self):
+        err = urllib.error.HTTPError(download.MAP_HOME_URL, 403, 'Forbidden',
+                                     {}, None)
+        with (
+                mock.patch('urllib.request.urlopen', side_effect=err) as
+                mock_open,
+                mock.patch('time.sleep') as mock_sleep,
+        ):
+            with self.assertRaises(RuntimeError):
+                download.discover_years(max_retries=3)
+        mock_open.assert_called_once()
+        mock_sleep.assert_not_called()
 
     def test_main_merges_baseline_and_live_api(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
@@ -176,24 +281,43 @@ class DownloadTest(unittest.TestCase):
                             'fips': 'US',
                             'population': 100,
                         }],
-                        'county': [{
-                            'fips': '1001',
-                            'population': 8000,
-                            'low_band': 1.0,
-                            'mid_band': None,
-                            'high_band': None,
-                            'cost_per_meal': 3.456,
-                            'money_needed': 5000000,
-                        }],
+                        'county': [
+                            {
+                                'fips': '1001',
+                                'population': 8000,
+                                'low_band': 1.0,
+                                'mid_band': None,
+                                'high_band': None,
+                                'cost_per_meal': 3.456,
+                                'money_needed': 5000000,
+                            },
+                            {
+                                'fips': '1003',
+                                'population': 'N/A',
+                                'low_band': None,
+                                'mid_band': None,
+                                'high_band': None,
+                                'cost_per_meal': 'bad',
+                                'money_needed': 'N/A',
+                            },
+                        ],
                     }
                 return {
                     'state': [],
-                    'county': [{
-                        'fips': '1001',
-                        'population': 2000,
-                        'low_band': 0.75,
-                        'high_band': 0.25,
-                    }],
+                    'county': [
+                        {
+                            'fips': '1001',
+                            'population': 2000,
+                            'low_band': 0.75,
+                            'high_band': 0.25,
+                        },
+                        {
+                            'fips': '1003',
+                            'population': 'invalid',
+                            'low_band': None,
+                            'high_band': None,
+                        },
+                    ],
                 }
 
             with (
@@ -210,17 +334,30 @@ class DownloadTest(unittest.TestCase):
 
             with open(output_csv, 'r', encoding='utf-8') as f:
                 rows = list(csv.DictReader(f))
-            self.assertEqual(len(rows), 2)
+            self.assertEqual(len(rows), 3)
             self.assertEqual(rows[0]['dcid'], 'dcid:geoId/01001')
             self.assertEqual(rows[0]['observationDate'], '2019')
             self.assertEqual(rows[1]['dcid'], 'dcid:geoId/01001')
             self.assertEqual(rows[1]['observationDate'], '2024')
+            self.assertEqual(rows[1]['Count_Person_FoodInsecure'], '8000')
+            self.assertEqual(rows[1]['Count_Child_FoodInsecure'], '2000')
+            self.assertEqual(rows[1]['Annual_FoodBudgetShortfall'], '5000000')
             self.assertEqual(
                 rows[1]
                 ['Count_Person_FoodInsecure_IneligibleForFederalBenefits'],
                 '0.0',
             )
             self.assertEqual(rows[1]['Mean_MealCost_Person_FoodSecure'], '3.46')
+            self.assertEqual(rows[2]['dcid'], 'dcid:geoId/01003')
+            self.assertEqual(rows[2]['Count_Person_FoodInsecure'], '')
+            self.assertEqual(rows[2]['Count_Child_FoodInsecure'], '')
+            self.assertEqual(rows[2]['Mean_MealCost_Person_FoodSecure'], '')
+            self.assertEqual(rows[2]['Annual_FoodBudgetShortfall'], '')
+            # Ensure atomic temp file was cleaned up / renamed.
+            self.assertEqual(
+                sorted(os.listdir(tmp_dir)),
+                ['baseline.csv', 'output.csv'],
+            )
 
 
 if __name__ == '__main__':

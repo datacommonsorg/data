@@ -7,18 +7,21 @@
       "provenance_description": "Estimates of local food insecurity and food costs produced by Feeding America (Map the Meal Gap).",
       "scripts": [
         "download.py",
-        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/feedingamerica_mapmealgap_input.csv --pv_map=feedingamerica_mapmealgap_pvmap.csv --config_file=feedingamerica_mapmealgap_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf,feeding_america_stat_vars.mcf --output_path=output/feedingamerica_mapmealgap_output --output_counters=counters/feedingamerica_mapmealgap_counters.csv"
+        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/feedingamerica_mapmealgap_input.csv --pv_map=feedingamerica_mapmealgap_pvmap.csv --config_file=feedingamerica_mapmealgap_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/feedingamerica_mapmealgap_output --output_counters=counters/feedingamerica_mapmealgap_counters.csv"
       ],
       "import_inputs": [
         {
           "template_mcf": "output/feedingamerica_mapmealgap_output.tmcf",
           "cleaned_csv": "output/feedingamerica_mapmealgap_output.csv",
-          "node_mcf": "*.mcf"
+          "node_mcf": "output/*.mcf"
         }
       ],
       "source_files": [
         "input_files/*.csv",
-        "counters/*.csv"
+        "counters/*.csv",
+        "feedingamerica_mapmealgap_pvmap.csv",
+        "feedingamerica_mapmealgap_metadata.csv",
+        "validation_config.json"
       ],
       "cron_schedule": "0 09 1 * *",
       "validation_config_file": "validation_config.json"

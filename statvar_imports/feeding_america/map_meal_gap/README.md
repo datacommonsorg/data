@@ -33,7 +33,16 @@ Comparison against the legacy production `FeedingAmerica_MapMealGap` baseline (`
 
 ---
 
-## 3. How to Run
+## 3. Automation, Schedule & Baseline Staging
+
+- **Manifest:** `manifest.json`
+- **Cron Schedule:** `0 09 1 * *` (monthly on the 1st at 09:00 UTC)
+- **Historical Baseline (`2018–2019`):** Committed at `input_files/FeedingAmerica_MMG_baseline_2018_2019.csv` (`456,391` bytes, matching the legacy CNS CSV). If absent locally, `download.py` falls back to downloading it from `gs://unresolved_mcf/feeding_america/map_meal_gap/latest/input_files/FeedingAmerica_MMG_baseline_2018_2019.csv`.
+- **Schema & StatVars:** All 9 StatVars and supporting schema nodes are already defined in Data Commons canonical schema (`third_party/datacommons/schema/stat_vars/feeding_america_stat_vars.mcf` and `third_party/datacommons/schema/core/food_security_schema.mcf`) and indexed in `gs://unresolved_mcf/scripts/statvar/stat_vars.mcf`. `manifest.json` uses `"node_mcf": "output/*.mcf"` so existing schema is not re-ingested.
+
+---
+
+## 4. How to Run
 
 1. **Download and merge data (`2018–2019` baseline + `2020+` live API):**
    ```bash
@@ -47,12 +56,34 @@ Comparison against the legacy production `FeedingAmerica_MapMealGap` baseline (`
      --input_data=input_files/feedingamerica_mapmealgap_input.csv \
      --pv_map=feedingamerica_mapmealgap_pvmap.csv \
      --config_file=feedingamerica_mapmealgap_metadata.csv \
-     --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf,feeding_america_stat_vars.mcf \
+     --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
      --output_path=output/feedingamerica_mapmealgap_output \
      --output_counters=counters/feedingamerica_mapmealgap_counters.csv
    ```
 
-3. **Run unit tests:**
+3. **Verify `test_data/` fixtures against `stat_var_processor.py`:**
+   ```bash
+   ../../../.env/bin/python ../../../tools/statvar_importer/stat_var_processor.py \
+     --input_data=test_data/feedingamerica_mapmealgap_input.csv \
+     --pv_map=feedingamerica_mapmealgap_pvmap.csv \
+     --config_file=feedingamerica_mapmealgap_metadata.csv \
+     --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+     --output_path=/tmp/feedingamerica_test_output
+   diff -u test_data/feedingamerica_mapmealgap_output.tmcf /tmp/feedingamerica_test_output.tmcf
+   diff -u <(sort test_data/feedingamerica_mapmealgap_output.csv) <(sort /tmp/feedingamerica_test_output.csv)
+   ```
+
+4. **Run unit tests and Python lint/format checks (from repo root):**
    ```bash
    ./run_tests.sh -p statvar_imports/feeding_america/map_meal_gap
+   .env/bin/ruff check statvar_imports/feeding_america
+   .env/bin/yapf -r --diff -p --style=google statvar_imports/feeding_america
    ```
+
+5. **Run `dc-import lint` on generated outputs:**
+   ```bash
+   ../../../import-automation/executor/scripts/run_import_tool.sh lint \
+     output/feedingamerica_mapmealgap_output.tmcf \
+     output/feedingamerica_mapmealgap_output.csv
+   ```
+

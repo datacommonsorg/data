@@ -1,4 +1,3 @@
-dataset,feedingamerica_mapmealgap
+parameter,value
 header_rows,1
-output_csv_columns,"observationAbout,variableMeasured,observationDate,value,unit,measurementMethod"
-drop_statvar_without_svobs,True
+output_columns,"observationDate,observationAbout,value,measurementMethod,unit,variableMeasured"
