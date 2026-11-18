@@ -49,12 +49,44 @@ class DownloadTest(unittest.TestCase):
                          (0.0, None, 1.0))
         self.assertEqual(download.resolve_bands(0.486, 0.109, 0.406),
                          (0.486, 0.109, 0.406))
+        self.assertEqual(download.resolve_bands('', 'N/A', None),
+                         (None, None, None))
 
     def test_compute_product(self):
         self.assertEqual(download.compute_product(8670, 0.486), 4213.62)
         self.assertEqual(download.compute_product(2590, 0.0), 0.0)
         self.assertEqual(download.compute_product(None, 0.5), '')
         self.assertEqual(download.compute_product(1000, None), '')
+        self.assertEqual(download.compute_product('', '0.5'), '')
+        self.assertEqual(download.compute_product('bad', 0.5), '')
+
+    def test_ensure_baseline_raises_when_missing_and_no_gsutil(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            missing_path = os.path.join(tmp_dir, 'missing.csv')
+            with (
+                    mock.patch.object(download, 'BASELINE_LOCAL', missing_path),
+                    mock.patch('shutil.which', return_value=None),
+            ):
+                with self.assertRaises(FileNotFoundError):
+                    download.ensure_baseline()
+
+    def test_ensure_baseline_downloads_via_gsutil_check_true(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            baseline_path = os.path.join(tmp_dir, 'baseline.csv')
+
+            def fake_run(cmd, check=False):
+                self.assertTrue(check)
+                with open(baseline_path, 'w', encoding='utf-8') as f:
+                    f.write('dcid,observationDate\n')
+
+            with (
+                    mock.patch.object(download, 'BASELINE_LOCAL',
+                                      baseline_path),
+                    mock.patch('shutil.which', return_value='/usr/bin/gsutil'),
+                    mock.patch('subprocess.run', side_effect=fake_run) as m_run,
+            ):
+                download.ensure_baseline()
+            m_run.assert_called_once()
 
     def test_fetch_json_retries_and_succeeds(self):
         err = urllib.error.HTTPError('https://example.com', 500, 'Server Error',
@@ -68,6 +100,20 @@ class DownloadTest(unittest.TestCase):
         ):
             data = download.fetch_json('https://example.com', max_retries=3)
         self.assertEqual(data, {'state': []})
+        mock_sleep.assert_called_once_with(1)
+
+    def test_fetch_json_retries_on_json_decode_error(self):
+        bad_resp = mock.MagicMock()
+        bad_resp.__enter__.return_value.read.return_value = b'<html>502</html>'
+        good_resp = mock.MagicMock()
+        good_resp.__enter__.return_value.read.return_value = b'{"county": []}'
+        with (
+                mock.patch('urllib.request.urlopen',
+                           side_effect=[bad_resp, good_resp]),
+                mock.patch('time.sleep') as mock_sleep,
+        ):
+            data = download.fetch_json('https://example.com', max_retries=3)
+        self.assertEqual(data, {'county': []})
         mock_sleep.assert_called_once_with(1)
 
     def test_fetch_json_raises_after_max_retries(self):
@@ -126,7 +172,10 @@ class DownloadTest(unittest.TestCase):
             def fake_fetch_json(url):
                 if 'type=overall' in url:
                     return {
-                        'state': [],
+                        'state': [{
+                            'fips': 'US',
+                            'population': 100,
+                        }],
                         'county': [{
                             'fips': '1001',
                             'population': 8000,

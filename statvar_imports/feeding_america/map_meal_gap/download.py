@@ -53,8 +53,8 @@ def fetch_json(url, max_retries=MAX_RETRIES):
             )
             with urllib.request.urlopen(req, timeout=60) as resp:
                 return json.loads(resp.read().decode('utf-8'))
-        except (urllib.error.HTTPError, urllib.error.URLError,
-                TimeoutError) as e:
+        except (urllib.error.HTTPError, urllib.error.URLError, TimeoutError,
+                json.JSONDecodeError) as e:
             last_err = e
             wait_secs = 2**attempt
             print(
@@ -91,21 +91,36 @@ def discover_years():
     return sorted(years)
 
 
+def _to_float(val):
+    if val is None or val == '':
+        return None
+    try:
+        return float(val)
+    except (ValueError, TypeError):
+        print(f'Warning: ignoring non-numeric value {val!r}')
+        return None
+
+
 def resolve_bands(low_band, mid_band, high_band):
     """Restores 0.0 when the complementary band(s) sum to 100% (1.0) and API serialized 0% as null."""
-    if high_band is None and low_band is not None:
-        if round(float(low_band) + float(mid_band or 0.0), 4) >= 0.999:
-            high_band = 0.0
-    if low_band is None and high_band is not None:
-        if round(float(high_band) + float(mid_band or 0.0), 4) >= 0.999:
-            low_band = 0.0
-    return low_band, mid_band, high_band
+    low_val = _to_float(low_band)
+    mid_val = _to_float(mid_band)
+    high_val = _to_float(high_band)
+    if high_val is None and low_val is not None:
+        if round(low_val + (mid_val or 0.0), 4) >= 0.999:
+            high_val = 0.0
+    if low_val is None and high_val is not None:
+        if round(high_val + (mid_val or 0.0), 4) >= 0.999:
+            low_val = 0.0
+    return low_val, mid_val, high_val
 
 
 def compute_product(pop, band):
-    if pop is None or band is None:
+    pop_val = _to_float(pop)
+    band_val = _to_float(band)
+    if pop_val is None or band_val is None:
         return ''
-    return round(float(pop) * float(band), 2)
+    return round(pop_val * band_val, 2)
 
 
 def format_dcid(level, fips):
@@ -121,9 +136,17 @@ def format_dcid(level, fips):
 
 def ensure_baseline():
     os.makedirs(os.path.join(_SCRIPT_DIR, 'input_files'), exist_ok=True)
-    if not os.path.exists(BASELINE_LOCAL) and shutil.which('gsutil'):
-        subprocess.run(['gsutil', 'cp', BASELINE_GCS, BASELINE_LOCAL],
-                       check=False)
+    if not os.path.exists(BASELINE_LOCAL):
+        if shutil.which('gsutil'):
+            subprocess.run(['gsutil', 'cp', BASELINE_GCS, BASELINE_LOCAL],
+                           check=True)
+        else:
+            raise FileNotFoundError(
+                f'Baseline file {BASELINE_LOCAL} is missing and gsutil is not '
+                'available to download it.')
+    if not os.path.exists(BASELINE_LOCAL):
+        raise FileNotFoundError(
+            f'Baseline file {BASELINE_LOCAL} is missing after download.')
 
 
 def main():
@@ -131,18 +154,15 @@ def main():
     rows_by_key = {}
 
     # 1. Load 2018-2019 historical baseline verbatim
-    if os.path.exists(BASELINE_LOCAL):
-        with open(BASELINE_LOCAL, 'r', encoding='utf-8') as f:
-            reader = csv.DictReader(f)
-            for row in reader:
-                dcid = row['dcid'].strip()
-                if not dcid.startswith('dcid:'):
-                    dcid = f'dcid:{dcid}'
-                row['dcid'] = dcid
-                year = row['observationDate'].strip()
-                rows_by_key[(dcid, year)] = {
-                    k: row.get(k, '') for k in FIELDNAMES
-                }
+    with open(BASELINE_LOCAL, 'r', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            dcid = row['dcid'].strip()
+            if not dcid.startswith('dcid:'):
+                dcid = f'dcid:{dcid}'
+            row['dcid'] = dcid
+            year = row['observationDate'].strip()
+            rows_by_key[(dcid, year)] = {k: row.get(k, '') for k in FIELDNAMES}
 
     # 2. Fetch 2020+ data live from map.feedingamerica.org/mapdata
     for year in discover_years():
@@ -161,8 +181,7 @@ def main():
                 for item in child_data.get(level, [])
                 if item.get('fips')
             }
-            for fips in sorted(set(overall_by_fips) | set(child_by_fips),
-                               key=lambda x: int(x)):
+            for fips in sorted(set(overall_by_fips) | set(child_by_fips)):
                 dcid = format_dcid(level, fips)
                 if not dcid:
                     continue
@@ -175,7 +194,7 @@ def main():
                                                         ov.get('high_band'))
                 ch_low, _, ch_high = resolve_bands(ch.get('low_band'), None,
                                                    ch.get('high_band'))
-                cost_val = ov.get('cost_per_meal')
+                cost_val = _to_float(ov.get('cost_per_meal'))
                 rows_by_key[(dcid, year)] = {
                     'dcid':
                         dcid,
@@ -196,7 +215,7 @@ def main():
                     'Count_Child_FoodInsecure_IneligibleForChildNutritionBenefits':
                         (compute_product(ch_pop, ch_high)),
                     'Mean_MealCost_Person_FoodSecure':
-                        ('' if cost_val is None else round(float(cost_val), 2)),
+                        ('' if cost_val is None else round(cost_val, 2)),
                     'Annual_FoodBudgetShortfall':
                         ('' if ov.get('money_needed') is None else
                          ov.get('money_needed')),
