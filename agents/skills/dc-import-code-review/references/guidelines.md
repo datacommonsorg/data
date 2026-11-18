@@ -164,9 +164,10 @@ Then apply these rules:
 - Download fresh data from the source on each run rather than reusing cached
   files; for large downloads, reuse a cached file only when HTTP headers (such
   as `ETag` or `Last-Modified`) confirm the source data is unchanged.
-- Verify that the download script fetches releases for future years, such as
-  by building URLs from the source's naming pattern, rather than only the
-  years listed in the code.
+- Verify that download scripts for periodic or annual sources automatically
+  discover or download future years (such as `2027`) when source URLs follow
+  a predictable pattern, rather than relying only on a hardcoded year-to-URL
+  map.
 
 ## Tests
 

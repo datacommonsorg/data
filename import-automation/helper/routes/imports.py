@@ -14,30 +14,32 @@
 
 import logging
 import os
-from typing import List
-from fastapi import APIRouter, Depends, HTTPException
+
 from clients.bigquery import BigQueryClient
 from clients.storage import StorageClient
 import config
-from dependencies import get_bigquery_client, get_storage_client
-from routes.models import (
-    BaseResponse,
-    ImportState,
-    ImportVersionItem,
-    ResponseStatus,
-    UpdateImportStatusRequest,
-    UpdateImportVersionRequest,
-    UpdateImportVersionResponse,
-)
+from dependencies import get_bigquery_client
+from dependencies import get_storage_client
+from fastapi import APIRouter
+from fastapi import Depends
+from fastapi import HTTPException
+from routes.models import BaseResponse
+from routes.models import ImportState
+from routes.models import ImportVersionItem
+from routes.models import ResponseStatus
+from routes.models import UpdateImportStatusRequest
+from routes.models import UpdateImportVersionRequest
+from routes.models import UpdateImportVersionResponse
 from utils import imports as import_utils
 
 router = APIRouter(prefix="/imports", tags=["imports"])
 
 
 @router.post("/status", response_model=BaseResponse)
-def update_import_status(req: UpdateImportStatusRequest,
-                         bigquery: BigQueryClient = Depends(get_bigquery_client),
-                         storage: StorageClient = Depends(get_storage_client)):
+def update_import_status(
+    req: UpdateImportStatusRequest,
+    bigquery: BigQueryClient = Depends(get_bigquery_client),
+    storage: StorageClient = Depends(get_storage_client)):
     """Updates status and metadata of import jobs in BigQuery (ImportHistory & ImportSummary view)."""
     for item in req.imports:
         logging.info(
@@ -90,9 +92,10 @@ def update_import_status(req: UpdateImportStatusRequest,
 
 
 @router.post("/version", response_model=UpdateImportVersionResponse)
-def update_import_version(req: UpdateImportVersionRequest,
-                          bigquery: BigQueryClient = Depends(get_bigquery_client),
-                          storage: StorageClient = Depends(get_storage_client)):
+def update_import_version(
+    req: UpdateImportVersionRequest,
+    bigquery: BigQueryClient = Depends(get_bigquery_client),
+    storage: StorageClient = Depends(get_storage_client)):
     """Updates version and status of multiple imports in BigQuery (ImportHistory & ImportSummary view)."""
     updated_imports = []
     import_items = []
@@ -115,7 +118,8 @@ def update_import_version(req: UpdateImportVersionRequest,
         elif params.get('status') == 'SKIP':
             version = storage.get_import_version(import_name, is_staging=False)
             summary = storage.get_import_summary(import_name, version)
-            params['latest_version'] = import_utils.get_import_params(summary).get('latest_version')
+            params['latest_version'] = import_utils.get_import_params(
+                summary).get('latest_version')
 
         if not params.get('latest_version'):
             params['latest_version'] = version
@@ -132,12 +136,9 @@ def update_import_version(req: UpdateImportVersionRequest,
         bigquery.update_import_summary(params, comment=comment)
 
         import_items.append(
-            ImportVersionItem(
-                importName=import_name,
-                status=return_status,
-                latestVersion=params.get('latest_version')
-            )
-        )
+            ImportVersionItem(importName=import_name,
+                              status=return_status,
+                              latestVersion=params.get('latest_version')))
         updated_imports.append(
             f"Import: {import_name} Version: {version} Status: {params['status']}"
         )

@@ -13,10 +13,12 @@
 # limitations under the License.
 """Storage client for the import helper."""
 
-from datetime import datetime, timezone
+from datetime import datetime
+from datetime import timezone
 import json
 import logging
 import os
+
 import config
 from google.cloud import exceptions
 from google.cloud import storage
@@ -81,7 +83,8 @@ class StorageClient:
 
         if import_name and version:
             output_dir = self._get_output_dir(import_name)
-            summary_file = os.path.join(output_dir, version, _IMPORT_SUMMARY_JSON)
+            summary_file = os.path.join(output_dir, version,
+                                        _IMPORT_SUMMARY_JSON)
         else:
             latest_version = import_summary.get('latest_version') or ''
             graph_path = (import_summary.get('graph_path') or '').lstrip('/')
@@ -89,7 +92,8 @@ class StorageClient:
             if graph_path and base_path.endswith(graph_path.rstrip('/')):
                 base_path = base_path[:-len(graph_path.rstrip('/'))].rstrip('/')
             path = base_path.removeprefix('gs://').split('/', 1)
-            summary_file = os.path.join(path[1] if len(path) > 1 else path[0], _IMPORT_SUMMARY_JSON)
+            summary_file = os.path.join(path[1] if len(path) > 1 else path[0],
+                                        _IMPORT_SUMMARY_JSON)
 
         logging.info(
             f'Updating import summary at {summary_file} {import_summary}')
@@ -119,7 +123,8 @@ class StorageClient:
             return blob.download_as_text().strip()
         except exceptions.NotFound:
             logging.error(
-                f"{file_type.capitalize()} version file {version_file} not found")
+                f"{file_type.capitalize()} version file {version_file} not found"
+            )
             raise
 
     def update_version_file(self,
@@ -168,11 +173,9 @@ class StorageClient:
                 f'Generating default metadata for import {import_name}')
             base_name = import_name.split(':')[-1]
             refresh_date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-            default_provenance = (
-                f"Node: dcid:dc/base/{base_name}\n"
-                f"typeOf: dcid:Provenance\n"
-                f'lastDataRefreshDate: "{refresh_date}"\n'
-            )
+            default_provenance = (f"Node: dcid:dc/base/{base_name}\n"
+                                  f"typeOf: dcid:Provenance\n"
+                                  f'lastDataRefreshDate: "{refresh_date}"\n')
             new_blob = self.bucket.blob(
                 os.path.join(output_dir, version, 'provenance', 'genmcf',
                              'import_metadata_mcf.mcf'))
