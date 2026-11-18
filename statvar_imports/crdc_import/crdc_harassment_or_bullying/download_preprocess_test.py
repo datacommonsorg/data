@@ -28,12 +28,10 @@ _REPO_ROOT = os.path.abspath(os.path.join(_THIS_DIR, "../../.."))
 if _REPO_ROOT not in sys.path:
     sys.path.insert(0, _REPO_ROOT)
 
-from statvar_imports.crdc_import.crdc_harassment_or_bullying import (  # noqa: E402, I001
-    download, preprocess,
-)
-from tools.import_validation.validator import (  # noqa: E402, I001
-    ValidationStatus, Validator,
-)
+from statvar_imports.crdc_import.crdc_harassment_or_bullying import download
+from statvar_imports.crdc_import.crdc_harassment_or_bullying import preprocess
+from tools.import_validation.validator import ValidationStatus
+from tools.import_validation.validator import Validator
 
 
 class DownloadAndDiscoveryTest(unittest.TestCase):
