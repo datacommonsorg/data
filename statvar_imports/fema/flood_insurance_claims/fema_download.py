@@ -32,17 +32,23 @@ from absl import flags
 from util.download_util_script import _retry_method
 from util.download_util_script import download_file
 
-flags.DEFINE_string('api_url', 'https://www.fema.gov/api/open/v3/NfipClaims',
-                    'The base URL of the API endpoint to download data from.')
-flags.DEFINE_string(
-    'bulk_url',
-    'https://www.fema.gov/about/reports-and-data/openfema/v3/NfipClaimsV3.csv',
-    'The direct bulk download URL for the full dataset.')
-flags.DEFINE_string('temp_dir', os.path.join(script_dir, 'temp_fema_data'),
-                    'The temporary directory to store downloaded chunks.')
-flags.DEFINE_string(
-    'output_dir', os.path.join(script_dir, 'input_file'),
-    'The output directory to store the downloaded claims data.')
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        'api_url', 'https://www.fema.gov/api/open/v3/NfipClaims',
+        'The base URL of the API endpoint to download data from.')
+    flags.DEFINE_string(
+        'bulk_url',
+        'https://www.fema.gov/about/reports-and-data/openfema/v3/NfipClaimsV3.csv',
+        'The direct bulk download URL for the full dataset.')
+    flags.DEFINE_string('temp_dir', os.path.join(script_dir, 'temp_fema_data'),
+                        'The temporary directory to store downloaded chunks.')
+    flags.DEFINE_string(
+        'output_dir', os.path.join(script_dir, 'input_file'),
+        'The output directory to store the downloaded claims data.')
+
+
 _FLAGS = flags.FLAGS
 
 # Define the page size for each API request.
@@ -368,4 +374,5 @@ def main(argv):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

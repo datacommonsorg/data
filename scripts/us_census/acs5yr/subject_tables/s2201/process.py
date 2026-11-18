@@ -30,13 +30,20 @@ sys.path.insert(1, os.path.join(_CODEDIR, '..', 'common'))
 from resolve_geo_id import convert_to_place_dcid
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('output', None, 'Path to folder for output files')
-flags.DEFINE_string('download_id', None, 'Download id for input data')
-flags.DEFINE_string(
-    'input_zip', None,
-    'Path to local zip file containing downloaded Census data (e.g. S2201.zip)')
-flags.DEFINE_string('features', None, 'JSON of feature maps')
-flags.DEFINE_string('stat_vars', None, 'Path to list of supported stat_vars')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('output', None, 'Path to folder for output files')
+    flags.DEFINE_string('download_id', None, 'Download id for input data')
+    flags.DEFINE_string(
+        'input_zip', None,
+        'Path to local zip file containing downloaded Census data (e.g. S2201.zip)'
+    )
+    flags.DEFINE_string('features', None, 'JSON of feature maps')
+    flags.DEFINE_string('stat_vars', None,
+                        'Path to list of supported stat_vars')
+
 
 _TMCF_TEMPLATE = """
 Node: E:Subject_Table->E{index}
@@ -250,5 +257,6 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    _define_flags()
     flags.mark_flags_as_required(['output', 'features', 'stat_vars'])
     app.run(main)

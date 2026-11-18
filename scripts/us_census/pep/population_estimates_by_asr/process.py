@@ -146,11 +146,15 @@ def load_url_or_path(url_or_path: str):
 FLAGS = flags.FLAGS
 DEFAULT_INPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   "input_data")
-if 'mode' not in FLAGS:
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
     flags.DEFINE_string('mode', '', 'Options: download or process')
-if 'input_path' not in FLAGS:
     flags.DEFINE_string("input_path", DEFAULT_INPUT_PATH,
                         "Import Data File's List")
+
+
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
 _FILES_TO_DOWNLOAD = []
 _BASELINE_YEAR = 2025
@@ -497,4 +501,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

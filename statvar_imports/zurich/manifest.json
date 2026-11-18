@@ -54,6 +54,9 @@
                     "cleaned_csv": "bev_3903_age10_wiki/output/zurich_population_bev_3903_age10_wiki.csv"
                 }
             ],
+            "config_override": {
+                "disable_import_workflow": true
+            },
             "cron_schedule": "30 11 * * 6",
             "_comment": "Schedule: Weekly on Saturday at 11:30 UTC"
         },
@@ -109,6 +112,9 @@
                     "cleaned_csv": "bev_4031_hel_wiki/output/zurich_bev_4031_hel_wiki.csv"
                 }
             ],
+            "config_override": {
+                "disable_import_workflow": true
+            },
             "cron_schedule": "30 11 * * 0",
             "_comment": "Schedule: Weekly on Sunday at 11:30 UTC"
         },
@@ -132,6 +138,9 @@
                     "cleaned_csv": "bev_4031_wiki/output/zurich_bev_4031_wiki.csv"
                 }
             ],
+            "config_override": {
+                "disable_import_workflow": true
+            },
             "cron_schedule": "30 10 * * 1",
             "_comment": "Schedule: Weekly on Monday at 10:30 UTC"
         },
@@ -156,6 +165,9 @@
                     "cleaned_csv": "bev_3903_hel_wiki/output/zurich_population_bev_3903_hel_wiki.csv"
                 }
             ],
+            "config_override": {
+                "disable_import_workflow": true
+            },
             "cron_schedule": "30 10 * * 2",
             "_comment": "Schedule: Weekly on Tuesday at 10:30 UTC"
         },
@@ -179,6 +191,9 @@
                     "cleaned_csv": "bev_4031_sex_wiki/output/zurich_bev_4031_sex_wiki.csv"
                 }
             ],
+            "config_override": {
+                "disable_import_workflow": true
+            },
             "cron_schedule": "0 12 * * 3",
             "_comment": "Schedule: Weekly on Wednesday at 12:00 UTC"
         },
@@ -202,6 +217,9 @@
                     "cleaned_csv": "bev_3903_sex_wiki/output/zurich_population_bev_3903_sex_wiki.csv"
                 }
             ],
+            "config_override": {
+                "disable_import_workflow": true
+            },
             "cron_schedule": "30 12 * * 4",
             "_comment": "Schedule: Weekly on Thursday at 12:30 UTC"
         },

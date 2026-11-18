@@ -221,7 +221,9 @@ def download_url_list(url_list: list, url_api_modifier: Callable[[dict], str],
     logging.debug('Downloading url list of size %d', len(url_list))
 
     if not url_api_modifier:
-        url_api_modifier = lambda u, a: u['url']
+
+        def url_api_modifier(u, a):
+            return u['url']
 
     if 'max_parallel_req' not in rate_params:
         rate_params['max_parallel_req'] = 500

@@ -20,7 +20,6 @@ import unittest
 from unittest.mock import MagicMock
 from unittest.mock import patch
 
-from absl import flags
 import requests
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -29,19 +28,7 @@ if _SCRIPT_DIR not in sys.path:
 if 'download_util_script' in sys.modules:
     sys.modules.setdefault('util.download_util_script',
                            sys.modules['download_util_script'])
-_SAVED_FLAGS = {
-    _name: flags.FLAGS[_name]
-    for _name in ('api_url', 'bulk_url', 'temp_dir', 'output_dir')
-    if _name in flags.FLAGS
-}
-for _flag_name in _SAVED_FLAGS:
-    delattr(flags.FLAGS, _flag_name)
-
 import fema_download
-
-for _flag_name, _flag_obj in _SAVED_FLAGS.items():
-    delattr(flags.FLAGS, _flag_name)
-    flags.FLAGS[_flag_name] = _flag_obj
 
 
 class FemaDownloadTest(unittest.TestCase):

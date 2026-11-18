@@ -93,8 +93,8 @@ def process(categories_fp, output_mcf_fp):
             _str_to_id(sc), sc.title(), _str_to_id(mc))
 
     with open(output_mcf_fp, 'w') as f2:
-        for l in output_mcf:
-            f2.write(l)
+        for line in output_mcf:
+            f2.write(line)
 
 
 def main(_):

@@ -30,7 +30,21 @@ import csv
 import os
 import sys
 
-from util import *
+from util import ENUM_TEMPLATE
+from util import FIELDNAMES
+from util import MAPPED_CONCEPTS
+from util import MMETHOD_TEMPLATE
+from util import PROPERTY_TEMPLATE
+from util import SKIPPED_CONCEPTS
+from util import SV_TEMPLATE
+from util import UNIT_TEMPLATE
+from util import VALUE_TEMPLATE
+from util import format_description
+from util import format_unit_name
+from util import get_dcid
+from util import is_float
+from util import make_property
+from util import make_value
 
 sys.path.append(
     os.path.dirname(os.path.dirname(os.path.dirname(

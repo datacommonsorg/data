@@ -22,7 +22,9 @@
             },
             "validation_config_file": "validation_config_census_tract.json",
             "config_override": {
-                "invoke_differ_tool": false
+                "invoke_differ_tool": false,
+                "skip_prod_ingestion": true,
+                "disable_import_workflow": true
             },
             "import_inputs": [
                 {
@@ -67,7 +69,9 @@
             },
             "validation_config_file": "validation_config_census_tract.json",
             "config_override": {
-                "invoke_differ_tool": false
+                "invoke_differ_tool": false,
+                "skip_prod_ingestion": true,
+                "disable_import_workflow": true
             },
             "import_inputs": [
                 {
@@ -111,6 +115,9 @@
                 "disk": 500
             },
             "validation_config_file": "validation_config_county.json",
+            "config_override": {
+                "skip_prod_ingestion": true
+            },
             "import_inputs": [
                 {
                     "template_mcf": "PM25CountyPollution.tmcf",
@@ -153,6 +160,9 @@
                 "disk": 500
             },
             "validation_config_file": "validation_config_county.json",
+            "config_override": {
+                "skip_prod_ingestion": true
+            },
             "import_inputs": [
                 {
                     "template_mcf": "OzoneCountyPollution.tmcf",
