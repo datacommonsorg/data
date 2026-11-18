@@ -310,8 +310,10 @@ def normalize_output_files(
             new_lines.append(line)
     if not found_period:
         new_lines.append(f"observationPeriod: C:{prefix}->observationPeriod\n")
-    with open(tmcf_path, "w", encoding="utf-8") as f:
+    tmp_tmcf = f"{tmcf_path}.tmp"
+    with open(tmp_tmcf, "w", encoding="utf-8") as f:
         f.writelines(new_lines)
+    os.replace(tmp_tmcf, tmcf_path)
 
 
 def main(argv):
