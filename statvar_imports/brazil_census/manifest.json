@@ -12,7 +12,8 @@
                 "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=brazil_education/input_files/brazil_education.csv --pv_map=brazil_education/brazil_education_pvmap.csv --config_file=brazil_education/brazil_education_metadata.csv --places_resolved_csv=brazil_places_resolved.csv --output_path=brazil_education/brazil_education --output_counters=brazil_education/counters/brazil_education_counters.csv",
                 "brazil_literacy/download.py",
                 "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=brazil_literacy/input_files/brazil_literacy.csv --pv_map=brazil_literacy/brazil_literacy_pvmap.csv --config_file=brazil_literacy/brazil_literacy_metadata.csv --places_resolved_csv=brazil_places_resolved.csv --output_path=brazil_literacy/brazil_literacy --output_counters=brazil_literacy/counters/brazil_literacy_counters.csv",
-                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=brazil_literacy/input_files/brazil_literacy_rates.csv --pv_map=brazil_literacy/brazil_literacy_rates_pvmap.csv --config_file=brazil_literacy/brazil_literacy_rates_metadata.csv --places_resolved_csv=brazil_places_resolved.csv --output_path=brazil_literacy/rates/brazil_literacy_rates --output_counters=brazil_literacy/counters/brazil_literacy_rates_counters.csv",
+                "brazil_literacy_rates/download.py",
+                "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=brazil_literacy_rates/input_files/brazil_literacy_rates.csv --pv_map=brazil_literacy_rates/brazil_literacy_rates_pvmap.csv --config_file=brazil_literacy_rates/brazil_literacy_rates_metadata.csv --places_resolved_csv=brazil_places_resolved.csv --output_path=brazil_literacy_rates/brazil_literacy_rates --output_counters=brazil_literacy_rates/counters/brazil_literacy_rates_counters.csv",
                 "brazil_population_by_age_and_sex/download.py",
                 "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=brazil_population_by_age_and_sex/input_files/brazil_population_by_age_and_sex.csv --pv_map=brazil_population_by_age_and_sex/brazil_population_by_age_and_sex_pvmap.csv --config_file=brazil_population_by_age_and_sex/brazil_population_by_age_and_sex_metadata.csv --places_resolved_csv=brazil_places_resolved.csv --output_path=brazil_population_by_age_and_sex/brazil_population_by_age_and_sex --output_counters=brazil_population_by_age_and_sex/counters/brazil_population_by_age_and_sex_counters.csv",
                 "brazil_population_by_race/download.py",
@@ -32,6 +33,9 @@
                 "brazil_literacy/raw_files/*",
                 "brazil_literacy/input_files/*",
                 "brazil_literacy/counters/*.csv",
+                "brazil_literacy_rates/raw_files/*",
+                "brazil_literacy_rates/input_files/*",
+                "brazil_literacy_rates/counters/*.csv",
                 "brazil_population_by_age_and_sex/raw_files/*",
                 "brazil_population_by_age_and_sex/input_files/*",
                 "brazil_population_by_age_and_sex/counters/*.csv",
@@ -67,12 +71,12 @@
                     "node_mcf": "brazil_literacy/*.mcf"
                 },
                 {
-                    "template_mcf": "brazil_literacy/rates/brazil_literacy_rates.tmcf",
+                    "template_mcf": "brazil_literacy_rates/brazil_literacy_rates.tmcf",
                     "cleaned_csv": [
-                        "brazil_literacy/rates/history/brazil_literacy_rates_historical.csv",
-                        "brazil_literacy/rates/brazil_literacy_rates.csv"
+                        "brazil_literacy_rates/history/brazil_literacy_rates_historical.csv",
+                        "brazil_literacy_rates/brazil_literacy_rates.csv"
                     ],
-                    "node_mcf": "brazil_literacy/rates/*.mcf"
+                    "node_mcf": "brazil_literacy_rates/*.mcf"
                 },
                 {
                     "template_mcf": "brazil_population_by_age_and_sex/brazil_population_by_age_and_sex.tmcf",

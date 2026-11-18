@@ -61,8 +61,7 @@ class DownloadTest(unittest.TestCase):
         self.assertIn(520, adapter.max_retries.status_forcelist)
 
     @patch.object(download_mod, "sync_historical_csv")
-    @patch.object(download_mod, "ensure_literacy_rates_file")
-    def test_download_mocked_success(self, mock_rates, mock_sync):
+    def test_download_mocked_success(self, mock_sync):
         """Tests successful live 2022+ download and historical sync."""
         session = MagicMock()
         mock_response = MagicMock()
@@ -103,11 +102,6 @@ class DownloadTest(unittest.TestCase):
                                         output_file=out_csv,
                                         fallback_to_cached=False)
         self.assertTrue(os.path.isfile(saved_file))
-        mock_rates.assert_called_once()
-        self.assertEqual(
-            mock_rates.call_args.kwargs["rates_out"],
-            os.path.join(self.test_dir, "brazil_literacy_rates.csv"),
-        )
         mock_sync.assert_called_once()
 
         df = pd.read_csv(saved_file)
@@ -128,8 +122,7 @@ class DownloadTest(unittest.TestCase):
         self.assertEqual(df["Localidade"].iloc[0], "Brazil")
 
     @patch.object(download_mod, "sync_historical_csv")
-    @patch.object(download_mod, "ensure_literacy_rates_file")
-    def test_download_empty_response_raises(self, _mock_rates, _mock_sync):
+    def test_download_empty_response_raises(self, _mock_sync):
         """Tests that an empty response payload raises RuntimeError."""
         session = MagicMock()
         mock_response = MagicMock()
@@ -144,8 +137,7 @@ class DownloadTest(unittest.TestCase):
                                fallback_to_cached=False)
 
     @patch.object(download_mod, "sync_historical_csv")
-    @patch.object(download_mod, "ensure_literacy_rates_file")
-    def test_download_network_failure_raises(self, _mock_rates, _mock_sync):
+    def test_download_network_failure_raises(self, _mock_sync):
         """Tests that network error raises RuntimeError when fallback is disabled."""
         session = MagicMock()
         session.get.side_effect = requests.ConnectionError(
@@ -157,8 +149,7 @@ class DownloadTest(unittest.TestCase):
                                output_file=out_csv,
                                fallback_to_cached=False)
 
-    @patch.object(download_mod, "ensure_literacy_rates_file")
-    def test_download_fallback_to_cached(self, mock_rates):
+    def test_download_fallback_to_cached(self):
         """Tests that fallback succeeds when both cached CSV and history exist."""
         session = MagicMock()
         session.get.side_effect = requests.HTTPError("503 Service Unavailable")
@@ -180,209 +171,6 @@ class DownloadTest(unittest.TestCase):
                                    fallback_to_cached=True)
         self.assertEqual(saved, cached_csv)
         self.assertTrue(os.path.isfile(saved))
-        mock_rates.assert_called_once()
-        self.assertTrue(mock_rates.call_args.kwargs["fallback_to_cached"])
-
-    def test_fetch_2022_literacy_rates_skips_5101837_and_raises_unknown(self):
-        """Tests that unindexed 5101837 is skipped while other unmapped places raise ValueError."""
-        session = MagicMock()
-
-        def mock_get(url, **kwargs):
-            resp = MagicMock()
-            resp.raise_for_status.return_value = None
-            if "9543" in url:
-                resp.json.return_value = [
-                    {
-                        "NC": "Nível Territorial"
-                    },
-                    {
-                        "NC": "6",
-                        "D1C": "5101837",
-                        "D1N": "Boa Esperança do Norte - MT",
-                        "D3N": "2022",
-                        "D6C": "100362",
-                        "V": "91.5",
-                    },
-                    {
-                        "NC": "1",
-                        "D1N": "Brasil",
-                        "D3N": "2022",
-                        "D6C": "100362",
-                        "V": "93.0",
-                    },
-                ]
-            else:
-                table_9542_rows = [
-                    {
-                        "NC": "Nível Territorial"
-                    },
-                    {
-                        "NC": "6",
-                        "D1C": "5101837",
-                        "D1N": "Boa Esperança do Norte - MT",
-                        "D3N": "2022",
-                        "D6C": "1023",
-                        "D7C": "100362",
-                        "V": "900",
-                    },
-                ]
-                bra_counts = {
-                    ("93024", "100362"): "1000",
-                    ("93024", "93086"): "100",
-                    ("93024", "93087"): "100",
-                    ("93024", "2999"): "200",
-                    ("93024", "9482"): "200",
-                    ("93024", "9483"): "200",
-                    ("93024", "9484"): "200",
-                    ("93024", "6613"): "20",
-                    ("93024", "6614"): "20",
-                    ("93024", "6615"): "20",
-                    ("93024", "6616"): "20",
-                    ("93024", "6617"): "20",
-                    ("93024", "3000"): "100",
-                    ("1023", "100362"): "900",
-                    ("1023", "93086"): "98",
-                    ("1024", "93086"): "2",
-                    ("1024", "93087"): "3",
-                    ("1024", "2999"): "10",
-                    ("1024", "9482"): "10",
-                    ("1024", "9483"): "10",
-                    ("1024", "9484"): "10",
-                    ("1024", "6613"): "2",
-                    ("1024", "6614"): "2",
-                    ("1024", "6615"): "2",
-                    ("1024", "6616"): "2",
-                    ("1024", "6617"): "2",
-                    ("1024", "3000"): "20",
-                }
-                for (c59, c287), val in bra_counts.items():
-                    table_9542_rows.append({
-                        "NC": "1",
-                        "D1N": "Brasil",
-                        "D3N": "2022",
-                        "D6C": c59,
-                        "D7C": c287,
-                        "V": val,
-                    })
-                resp.json.return_value = table_9542_rows
-            return resp
-
-        session.get.side_effect = mock_get
-        rows = download_mod._fetch_2022_literacy_rates_rows(session=session)
-        abouts = {r["observationAbout"] for r in rows}
-        self.assertEqual(abouts, {"dcid:country/BRA"})
-        measured = {r["variableMeasured"] for r in rows}
-        for expected_sv in (
-                "dcid:Count_Person_20OrMoreYears_Literate_AsAFractionOf_Count_Person_20OrMoreYears",
-                "dcid:Count_Person_15To24Years_Illiterate_AsAFractionOf_Count_Person_15To24Years",
-                "dcid:Count_Person_25To59Years_Illiterate_AsAFractionOf_Count_Person_25To59Years",
-                "dcid:Count_Person_60OrMoreYears_Illiterate_AsAFractionOf_Count_Person_60OrMoreYears",
-        ):
-            self.assertIn(expected_sv, measured)
-
-        def mock_get_unknown(url, **kwargs):
-            resp = MagicMock()
-            resp.raise_for_status.return_value = None
-            if "9543" in url:
-                resp.json.return_value = [
-                    {
-                        "NC": "Nível Territorial"
-                    },
-                    {
-                        "NC": "6",
-                        "D1C": "9999999",
-                        "D1N": "Unknown - XX",
-                        "D3N": "2022",
-                        "D6C": "100362",
-                        "V": "80.0",
-                    },
-                ]
-            else:
-                resp.json.return_value = [
-                    {
-                        "NC": "Nível Territorial"
-                    },
-                    {
-                        "NC": "1",
-                        "D1N": "Brasil",
-                        "D3N": "2022",
-                        "D6C": "93024",
-                        "D7C": "100362",
-                        "V": "1000",
-                    },
-                ]
-            return resp
-
-        session.get.side_effect = mock_get_unknown
-        with self.assertRaises(ValueError):
-            download_mod._fetch_2022_literacy_rates_rows(session=session)
-
-    @patch.object(download_mod,
-                  "_fetch_2022_literacy_rates_rows",
-                  side_effect=RuntimeError("SIDRA offline"))
-    def test_ensure_literacy_rates_file_fallback_and_preserve(self, _mock_rows):
-        """Tests that ensure_literacy_rates_file respects fallback_to_cached and protects target CSV."""
-        cached_rates = os.path.join(self.test_dir, "rates.csv")
-        with open(cached_rates, "w", encoding="utf-8") as f:
-            f.write("observationAbout,observationDate,variableMeasured,value\n"
-                    "dcid:country/BRA,2022,dcid:Dummy,0.9\n")
-        rates_hist = os.path.join(self.test_dir, "history",
-                                  "brazil_literacy_rates_historical.csv")
-        os.makedirs(os.path.dirname(rates_hist), exist_ok=True)
-        with open(rates_hist, "w", encoding="utf-8") as f:
-            f.write("h\n1\n")
-
-        download_mod.ensure_literacy_rates_file(
-            rates_out=cached_rates,
-            session=MagicMock(),
-            fallback_to_cached=True,
-            rates_history_dest=rates_hist,
-        )
-        with open(cached_rates, "r", encoding="utf-8") as f:
-            self.assertIn("dcid:Dummy,0.9", f.read())
-
-        with self.assertRaises(RuntimeError):
-            download_mod.ensure_literacy_rates_file(
-                rates_out=cached_rates,
-                session=MagicMock(),
-                fallback_to_cached=False,
-                rates_history_dest=rates_hist,
-            )
-
-    @patch.object(download_mod,
-                  "ensure_literacy_rates_file",
-                  side_effect=RuntimeError("Rates failed"))
-    def test_download_rates_failure_does_not_overwrite_existing_csv(
-            self, _mock_rates):
-        """Tests that failing literacy rates keeps existing brazil_literacy.csv intact when fallback=False."""
-        session = MagicMock()
-        mock_response = MagicMock()
-        mock_response.json.return_value = [
-            {
-                "NC": "Nível Territorial"
-            },
-            {
-                "NC": "1",
-                "D1N": "Brasil",
-                "D3N": "2022",
-                "D4N": "Alfabetizadas",
-                "D5N": "Total",
-                "V": "151538411",
-            },
-        ]
-        mock_response.raise_for_status.return_value = None
-        session.get.return_value = mock_response
-
-        out_csv = os.path.join(self.test_dir, "existing_literacy.csv")
-        with open(out_csv, "w", encoding="utf-8") as f:
-            f.write("SENTINEL_EXISTING_CSV\n")
-
-        with self.assertRaises(RuntimeError):
-            download_all_years(session=session,
-                               output_file=out_csv,
-                               fallback_to_cached=False)
-        with open(out_csv, "r", encoding="utf-8") as f:
-            self.assertEqual(f.read(), "SENTINEL_EXISTING_CSV\n")
 
 
 if __name__ == "__main__":
