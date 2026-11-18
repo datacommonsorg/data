@@ -204,8 +204,8 @@ class SpannerClient:
         cleaned_statements = []
         for raw_stmt in schema_content.split(';'):
             lines = [
-                l for l in raw_stmt.splitlines()
-                if not l.strip().startswith('--')
+                line for line in raw_stmt.splitlines()
+                if not line.strip().startswith('--')
             ]
             cleaned = '\n'.join(lines).strip()
             if cleaned:
