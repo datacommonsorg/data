@@ -21,7 +21,9 @@
             "source_files": [
                 "input_files/*.csv",
                 "counters/*.csv",
+                "japan_census_metadata.csv",
                 "japan_census_places_resolved.csv",
+                "japan_census_pv_map.csv",
                 "validation_config.json"
             ],
             "cron_schedule": "0 5 * * 1",
