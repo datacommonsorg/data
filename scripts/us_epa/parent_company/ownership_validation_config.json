@@ -9,6 +9,15 @@
             "params": {
                 "threshold": 0
             }
+        },
+        {
+            "rule_id": "check_max_date_freshness",
+            "description": "Verifies that EpaOrganizationOwnership reaches at least reporting year 2023 (static floor avoids Jan 1 rolling-year false positives due to EPA GHGRP annual reporting lag).",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT COALESCE(MIN(CAST(LEFT(CAST(MaxDate AS VARCHAR), 4) AS INT)), 0) AS min_max_year FROM stats",
+                "condition": "min_max_year >= 2023"
+            }
         }
     ]
 }

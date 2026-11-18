@@ -1,0 +1,20 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_max_date_consistent",
+            "description": "Verifies that MaxDate is uniform across all EPA GHGRP parent company emission StatVars.",
+            "validator": "MAX_DATE_CONSISTENT",
+            "params": {}
+        },
+        {
+            "rule_id": "check_max_date_freshness",
+            "description": "Verifies that all StatVars reach at least reporting year 2023 (static floor avoids Jan 1 rolling-year false positives due to EPA GHGRP annual reporting lag).",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT COALESCE(MIN(CAST(LEFT(CAST(MaxDate AS VARCHAR), 4) AS INT)), 0) AS min_max_year FROM stats",
+                "condition": "min_max_year >= 2023"
+            }
+        }
+    ]
+}

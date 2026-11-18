@@ -137,3 +137,26 @@ percentage and if no percentage is provided it is assumed to be 100.
     }
     ```
 
+## Automated Validation
+
+Each import specification in `manifest.json` wires its own `validation_config_file`:
+
+- `companies_validation_config.json` (`EPA_ParentCompanies`): Adds a
+  `GOLDENS_CHECK` rule (`check_goldens_parent_companies`) verifying `25`
+  representative, 14-year-active `EpaParentCompany` nodes in
+  `golden_data/golden_parent_companies.mcf` against
+  `../genmcf/table_mcf_nodes_EpaParentCompanyTable.mcf` (`dcid`, `typeOf`, and
+  `locatedIn` for single-HQ companies; omits volatile `name`/`address` fields).
+- `ownership_validation_config.json` (`EPA_GHGRP_ParentCompanies_Ownership`):
+  Disables `check_lint_error_count` because `EpaOrganizationOwnership` stores
+  non-numeric facility DCIDs in `value`, and adds a static-floor `SQL_VALIDATOR`
+  freshness check (`check_max_date_freshness`: `COALESCE(MIN(...), 0) >= 2023`,
+  avoiding January 1 false positives from annual EPA reporting lag). Note that
+  `manifest.json` passes `"node_mcf": "output/table/*.mcf"` (excluding
+  `output/ownership/EpaParentCompanyOwnership.mcf`) so `EpaOrganizationOwnership`
+  resolves from canonical schema rather than being double-ingested as an instance
+  node.
+- `svobs_validation_config.json` (`EPA_GHGRP_ParentCompanies`): Adds
+  `MAX_DATE_CONSISTENT` (`check_max_date_consistent`) across all 50 emission
+  StatVars and a static-floor `SQL_VALIDATOR` freshness check
+  (`check_max_date_freshness`: `COALESCE(MIN(...), 0) >= 2023`).

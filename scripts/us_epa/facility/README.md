@@ -80,3 +80,16 @@ emitted as properties on the `EpaReportingFacility` node.
         }
       }
     ```
+
+## Automated Validation
+
+- `validation_config.json`: Wired via `validation_config_file` in `manifest.json`
+  for `EPA_GHGRPFacilities`. Adds a `GOLDENS_CHECK` rule
+  (`check_goldens_facilities`) verifying `26` representative
+  `EpaReportingFacility` nodes (`13` EIA power plants with `partOf` + `13`
+  industrial/landfill/refinery facilities without `partOf`) in
+  `golden_data/golden_facilities.mcf` against
+  `../genmcf/table_mcf_nodes_us_epa_facility.mcf` (covering `dcid`, `typeOf`,
+  `epaGhgrpFacilityId`, `naics`, `containedInPlace`, and `partOf`). Volatile
+  fields (`name`, `address`, `epaFrsId`, `latitude`, `longitude`) are omitted
+  from the goldens to avoid false positives on upstream EPA metadata updates.

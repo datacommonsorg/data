@@ -1,0 +1,123 @@
+Node: dcid:EpaParentCompany/WasteManagementInc
+dcid: "EpaParentCompany/WasteManagementInc"
+typeOf: dcid:EpaParentCompany
+locatedIn: dcid:zip/77002, dcid:geoId/48201
+
+Node: dcid:EpaParentCompany/RepublicServicesInc
+dcid: "EpaParentCompany/RepublicServicesInc"
+typeOf: dcid:EpaParentCompany
+locatedIn: dcid:zip/85054, dcid:geoId/04013
+
+Node: dcid:EpaParentCompany/KinderMorganInc
+dcid: "EpaParentCompany/KinderMorganInc"
+typeOf: dcid:EpaParentCompany
+locatedIn: dcid:zip/77002, dcid:geoId/48201
+
+Node: dcid:EpaParentCompany/UsGovernment
+dcid: "EpaParentCompany/UsGovernment"
+typeOf: dcid:EpaParentCompany
+
+Node: dcid:EpaParentCompany/BerkshireHathawayInc
+dcid: "EpaParentCompany/BerkshireHathawayInc"
+typeOf: dcid:EpaParentCompany
+locatedIn: dcid:zip/68131, dcid:geoId/31055
+
+Node: dcid:EpaParentCompany/KochIndustriesInc
+dcid: "EpaParentCompany/KochIndustriesInc"
+typeOf: dcid:EpaParentCompany
+locatedIn: dcid:zip/67220, dcid:geoId/20173
+
+Node: dcid:EpaParentCompany/DukeEnergyCorp
+dcid: "EpaParentCompany/DukeEnergyCorp"
+typeOf: dcid:EpaParentCompany
+locatedIn: dcid:zip/28202, dcid:geoId/37119
+
+Node: dcid:EpaParentCompany/SouthernCo
+dcid: "EpaParentCompany/SouthernCo"
+typeOf: dcid:EpaParentCompany
+locatedIn: dcid:zip/30308, dcid:geoId/13121
+
+Node: dcid:EpaParentCompany/EnterpriseProductsPartnersLP
+dcid: "EpaParentCompany/EnterpriseProductsPartnersLP"
+typeOf: dcid:EpaParentCompany
+locatedIn: dcid:zip/77002, dcid:geoId/48201
+
+Node: dcid:EpaParentCompany/XcelEnergyInc
+dcid: "EpaParentCompany/XcelEnergyInc"
+typeOf: dcid:EpaParentCompany
+locatedIn: dcid:zip/55401, dcid:geoId/27053
+
+Node: dcid:EpaParentCompany/LoewsCorp
+dcid: "EpaParentCompany/LoewsCorp"
+typeOf: dcid:EpaParentCompany
+locatedIn: dcid:zip/10065, dcid:geoId/36061
+
+Node: dcid:EpaParentCompany/AmericanElectricPower
+dcid: "EpaParentCompany/AmericanElectricPower"
+typeOf: dcid:EpaParentCompany
+locatedIn: dcid:zip/43215, dcid:geoId/39049
+
+Node: dcid:EpaParentCompany/SpectraEnergyCorp
+dcid: "EpaParentCompany/SpectraEnergyCorp"
+typeOf: dcid:EpaParentCompany
+locatedIn: dcid:zip/77056, dcid:geoId/48201
+
+Node: dcid:EpaParentCompany/EogResourcesInc
+dcid: "EpaParentCompany/EogResourcesInc"
+typeOf: dcid:EpaParentCompany
+locatedIn: dcid:zip/77002, dcid:geoId/48201
+
+Node: dcid:EpaParentCompany/OneokPartnersLP
+dcid: "EpaParentCompany/OneokPartnersLP"
+typeOf: dcid:EpaParentCompany
+locatedIn: dcid:zip/74103, dcid:geoId/40143
+
+Node: dcid:EpaParentCompany/TysonFoodsInc
+dcid: "EpaParentCompany/TysonFoodsInc"
+typeOf: dcid:EpaParentCompany
+locatedIn: dcid:zip/72762, dcid:geoId/05007
+
+Node: dcid:EpaParentCompany/CargillInc
+dcid: "EpaParentCompany/CargillInc"
+typeOf: dcid:EpaParentCompany
+locatedIn: dcid:zip/55391, dcid:geoId/27053
+
+Node: dcid:EpaParentCompany/DteEnergyCo
+dcid: "EpaParentCompany/DteEnergyCo"
+typeOf: dcid:EpaParentCompany
+locatedIn: dcid:zip/48226, dcid:geoId/26163
+
+Node: dcid:EpaParentCompany/CovantaHoldingCorp
+dcid: "EpaParentCompany/CovantaHoldingCorp"
+typeOf: dcid:EpaParentCompany
+locatedIn: dcid:zip/07960, dcid:geoId/34027
+
+Node: dcid:EpaParentCompany/MarathonPetroleumCorp
+dcid: "EpaParentCompany/MarathonPetroleumCorp"
+typeOf: dcid:EpaParentCompany
+locatedIn: dcid:zip/45840, dcid:geoId/39063
+
+Node: dcid:EpaParentCompany/ValeroEnergyCorp
+dcid: "EpaParentCompany/ValeroEnergyCorp"
+typeOf: dcid:EpaParentCompany
+locatedIn: dcid:zip/78249, dcid:geoId/48029
+
+Node: dcid:EpaParentCompany/AlliantEnergyCorp
+dcid: "EpaParentCompany/AlliantEnergyCorp"
+typeOf: dcid:EpaParentCompany
+locatedIn: dcid:zip/53718, dcid:geoId/55025
+
+Node: dcid:EpaParentCompany/NucorCorp
+dcid: "EpaParentCompany/NucorCorp"
+typeOf: dcid:EpaParentCompany
+locatedIn: dcid:zip/28211, dcid:geoId/37119
+
+Node: dcid:EpaParentCompany/USGypsumCorp
+dcid: "EpaParentCompany/USGypsumCorp"
+typeOf: dcid:EpaParentCompany
+locatedIn: dcid:zip/60661, dcid:geoId/17031
+
+Node: dcid:EpaParentCompany/MeritEnergyCoLLC
+dcid: "EpaParentCompany/MeritEnergyCoLLC"
+typeOf: dcid:EpaParentCompany
+locatedIn: dcid:zip/75240, dcid:geoId/48113
