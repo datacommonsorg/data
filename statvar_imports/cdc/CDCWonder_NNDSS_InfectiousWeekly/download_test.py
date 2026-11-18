@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Unit tests for CDCWonder_NNDSS_InfectiousWeekly preprocess.py."""
+"""Unit tests for CDCWonder_NNDSS_InfectiousWeekly download.py."""
 
 import os
 import sys
@@ -21,19 +21,19 @@ import unittest
 import pandas as pd
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import preprocess  # noqa: E402
+import download  # noqa: E402
 
 
-class PreprocessTest(unittest.TestCase):
+class DownloadTest(unittest.TestCase):
 
     def test_get_mmwr_week_start_date(self):
-        self.assertEqual(preprocess.get_mmwr_week_start_date(2022, 1),
+        self.assertEqual(download.get_mmwr_week_start_date(2022, 1),
                          "2022-01-02")
-        self.assertEqual(preprocess.get_mmwr_week_start_date(2022, 10),
+        self.assertEqual(download.get_mmwr_week_start_date(2022, 10),
                          "2022-03-06")
-        self.assertIsNone(preprocess.get_mmwr_week_start_date(2022, 0))
-        self.assertIsNone(preprocess.get_mmwr_week_start_date(2022, 54))
-        self.assertIsNone(preprocess.get_mmwr_week_start_date("bad", 1))
+        self.assertIsNone(download.get_mmwr_week_start_date(2022, 0))
+        self.assertIsNone(download.get_mmwr_week_start_date(2022, 54))
+        self.assertIsNone(download.get_mmwr_week_start_date("bad", 1))
 
     def test_preprocess_csv_filters_and_ny_sum(self):
         rows = [
@@ -74,7 +74,7 @@ class PreprocessTest(unittest.TestCase):
             in_csv = os.path.join(tmpdir, "rows.csv")
             out_csv = os.path.join(tmpdir, "NNDSS_Weekly_Data.csv")
             pd.DataFrame(rows).to_csv(in_csv, index=False)
-            out_df = preprocess.preprocess_csv(in_csv, out_csv)
+            out_df = download.preprocess_csv(in_csv, out_csv)
 
         records = {
             (r["Reporting Area"], r["Label"]): r["Current week"]
@@ -96,7 +96,7 @@ class PreprocessTest(unittest.TestCase):
             with open(in_csv, "w", encoding="utf-8") as f:
                 f.write("Reporting Area,Current MMWR Year\n")
             with self.assertRaises(KeyError):
-                preprocess.preprocess_csv(in_csv, out_csv)
+                download.preprocess_csv(in_csv, out_csv)
 
     def test_normalize_output_files(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -109,7 +109,7 @@ class PreprocessTest(unittest.TestCase):
                 f.write("Node: E:nndss_weekly_output->E0\n"
                         "observationPeriod: P1W\n"
                         "typeOf: dcs:StatVarObservation\n")
-            preprocess.normalize_output_files(output_dir=tmpdir)
+            download.normalize_output_files(output_dir=tmpdir)
             with open(csv_path, "r", encoding="utf-8") as f:
                 csv_text = f.read()
             with open(tmcf_path, "r", encoding="utf-8") as f:

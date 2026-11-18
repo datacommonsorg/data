@@ -4,18 +4,18 @@
 Notifiable Infectious Diseases Data: Weekly tables from CDC WONDER containing incident counts of infectious diseases reported by US states, New York City, the District of Columbia, US territories, and US Census divisions.
 
 This `stat_var_processor` + `pvmap` pipeline uses the two-input (`history/` + `live`) architecture:
-1. `preprocess.py` syncs the frozen `2006–2021` historical archive (`cdc_nndss_weekly_tables_historical.csv` & `.tmcf`) from `gs://unresolved_mcf/cdc/nndss_infectious_diseasesweekly/history/` into `history/`, and downloads/preprocesses `2022+` data from `x9gk-5huc` (`Current week` numeric values, `observationDate`, NY+NYC sum) into `input_files/NNDSS_Weekly_Data.csv`.
+1. `download.py` syncs the frozen `2006–2021` historical archive (`cdc_nndss_weekly_tables_historical.csv` & `.tmcf`) from `gs://unresolved_mcf/cdc/nndss_infectious_diseasesweekly/history/` into `history/`, and downloads/preprocesses `2022+` data from `x9gk-5huc` (`Current week` numeric values, `observationDate`, NY+NYC sum) into `input_files/NNDSS_Weekly_Data.csv`.
 2. `stat_var_processor.py` maps `2022+` observations to canonical StatVars via `nndss_weekly_pvmap.csv` into `output/nndss_weekly_output.{csv,tmcf}`.
-3. `manifest.json` passes both `history/cdc_nndss_weekly_tables_historical` and `output/nndss_weekly_output` in `import_inputs`, so `genmcf`, differ, and validation evaluate both together (emitting `nodes.mcf-00000-of-00002` and `nodes.mcf-00001-of-00002`).
+3. `download.py --normalize_output` exposes `observationPeriod` as a column in `output/nndss_weekly_output.{csv,tmcf}` and `manifest.json` passes both `history/` and `output/` in a single `import_inputs` entry, so `genmcf`, differ, and validation evaluate both together (emitting `nodes.mcf-00000-of-00002` and `nodes.mcf-00001-of-00002`).
 
 ## Prerequisites
 - Run commands from `statvar_imports/cdc/CDCWonder_NNDSS_InfectiousWeekly/`.
-- Ensure Google Cloud Application Default Credentials (`gcloud auth application-default login`) are configured for `preprocess.py` to download `history/` from `gs://unresolved_mcf/` (or pass `--skip_gcs_history` for offline runs).
+- Ensure Google Cloud Application Default Credentials (`gcloud auth application-default login`) are configured for `download.py` to download `history/` from `gs://unresolved_mcf/` (or pass `--skip_gcs_history` for offline runs).
 
 ## Processing Instructions
 ```bash
 cd statvar_imports/cdc/CDCWonder_NNDSS_InfectiousWeekly
-python3 preprocess.py
+python3 download.py
 python3 ../../../tools/statvar_importer/stat_var_processor.py \
   --input_data=input_files/NNDSS_Weekly_Data.csv \
   --pv_map=nndss_weekly_pvmap.csv \
@@ -24,6 +24,7 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
   --output_path=output/nndss_weekly_output \
   --output_counters=counters/nndss_weekly_output_counters.csv \
   --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
+python3 download.py --normalize_output
 ```
 
 ## Using `testdata/`
@@ -40,7 +41,7 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
 ## Running Unit Tests
 Run from the repository root (matching CI `run_tests.sh -u`):
 ```bash
-python3 -m unittest discover -v -s statvar_imports/ -p 'preprocess_test.py'
+python3 -m unittest discover -v -s statvar_imports/ -p 'download_test.py'
 ```
 
 ## Refresh & Approval Procedure
