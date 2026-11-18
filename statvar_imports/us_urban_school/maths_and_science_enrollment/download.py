@@ -252,8 +252,7 @@ def download_and_extract_zip(
         session: Optional[requests.Session] = None) -> list[str]:
     """Download and extract matching files for a CRDC survey year range."""
     os.makedirs(save_folder, exist_ok=True)
-    if required and not force_download and _all_expected_files_exist(
-            end_year, save_folder):
+    if not force_download and _all_expected_files_exist(end_year, save_folder):
         logging.info(f'All expected files for {end_year} already exist in '
                      f'{save_folder}; skipping download.')
         return [

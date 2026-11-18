@@ -242,6 +242,43 @@ class DownloadTest(unittest.TestCase):
             ],
         )
 
+    def test_optional_year_skips_download_only_when_all_subject_files_exist(
+            self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            expected_files = download.expected_output_filenames(2026)
+            for name in expected_files:
+                with open(os.path.join(tmp_dir, name), 'w',
+                          encoding='utf-8') as f:
+                    f.write(
+                        'LEAID,SCHID,YEAR,ncesid\n0100001,00001,2026,010000100001\n'
+                    )
+
+            session = mock.MagicMock()
+            skipped = download.download_and_extract_zip(
+                2025,
+                2026,
+                required=False,
+                save_folder=tmp_dir,
+                force_download=False,
+                session=session,
+            )
+            self.assertEqual(len(skipped), 7)
+            session.get.assert_not_called()
+
+            # Removing one subject partition triggers download instead of skipping.
+            os.remove(os.path.join(tmp_dir, expected_files[0]))
+            session.get.return_value = _FakeResponse(status_code=404,
+                                                     body=b'Not Found')
+            download.download_and_extract_zip(
+                2025,
+                2026,
+                required=False,
+                save_folder=tmp_dir,
+                force_download=False,
+                session=session,
+            )
+            self.assertEqual(session.get.call_count, 1)
+
 
 class ManifestRunScriptAndValidationTest(unittest.TestCase):
     """Tests manifest resolution, run.sh guards/flags, and validation rules."""
