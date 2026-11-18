@@ -6,7 +6,7 @@
 * **Provenance URL:** `https://usdss.cdc.gov/diabetes/surveillance.html`
 * **Data Download URLs (CDC USDSS API):**
   * `https://usdss.cdc.gov/diabetes/data/surveillance/SurveillanceIndicatorsYearsList_Counties.json`
-  * `https://usdss.cdc.gov/diabetes/InitAppData_60eab9a7-3c02-42bd-a390-388188bd0940.json` (dynamically discovered via `surveillance_entry.*.app.js`)
+  * `https://usdss.cdc.gov/diabetes/InitAppData_<uuid>.json` (dynamically discovered via `surveillance_entry.*.app.js`)
   * `POST https://usdss.cdc.gov/webapi/Diabetes/AllCountiesDataOneYear`
 * **Release Frequency / Refresh Schedule:** Weekly check (`30 05 * * 1`, `P1Y` source release frequency)
 * **Geographic Coverage:**
@@ -26,9 +26,9 @@
 ### Important Files
 * `download.py`: Copies the `2004–2021` historical CSV from GCS into `output_files/`, fetches `2022+` USDSS county JSON payloads (saving raw responses under `input_files/raw/`), and writes `input_files/cdc_diabetes.csv`.
 * `consolidate_historical.py`: One-off helper used to consolidate the 162 legacy `2004–2021` CSV shards into `cdc_diabetes_historical_2004_2021.csv`.
-* `cdc_diabetes_pvmap.csv` & `cdc_diabetes_metadata.csv`: `stat_var_processor.py` PV mappings and config flags.
+* `cdc_diabetes_pvmap.csv` & `cdc_diabetes_metadata.csv`: `stat_var_processor.py` schema property-value mappings (`populationType`, `measuredProperty`, `statType`, `age`, `gender`, `healthOutcome` / `healthBehavior`) and config flags.
 * `manifest.json` & `validation_config.json`: Auto-refresh schedule, scripts, inputs, source artifact globs, and validation rules.
-* `download_test.py` & `test_data/`: Unit tests and sample processor input/output fixtures.
+* `download_test.py` & `test_data/`: Unit tests for `download.py`, `consolidate_historical.py`, and `stat_var_processor.py` against the `test_data/` input/output fixtures.
 
 ---
 
@@ -46,7 +46,7 @@ This import downloads and processes county-level age-adjusted prevalence and sta
   * `SexID=591` (Total), `SexID=592` (Male), `SexID=593` (Female)
   * Standard error derived from the 95% confidence interval upper limit: `stdError = round((UpperLimit - Percentage) / 1.96, 5)`
 * **Generated Input & PVMap Files**:
-  * `input_files/cdc_diabetes.csv` (processed with `cdc_diabetes_pvmap.csv` and `cdc_diabetes_metadata.csv`)
+  * `input_files/cdc_diabetes.csv` (processed with `cdc_diabetes_pvmap.csv` and `cdc_diabetes_metadata.csv`; `stat_var_processor.py` resolves the broken-out schema PVs against `gs://unresolved_mcf/scripts/statvar/stat_vars.mcf` to the 18 existing StatVars below)
 * **StatVars (`18` active across 3 conditions × 3 sex groups × 2 `statType`s)**:
   * **Diagnosed Diabetes:** `Percent_Person_20OrMoreYears_WithDiabetes`, `dc/d4j16hnl53es2`, `dc/xmpy89x1nh8cg`, `dc/xwtlmj1vg7618`, `dc/nh3s4skee5483`, `dc/ryjdx30rfbfbb`
   * **Obesity:** `Percent_Person_20OrMoreYears_Obesity`, `dc/bzfel0wfs6qhf`, `dc/x13tvt8jsgrm4`, `dc/73vt0flpsz26b`, `dc/4lvmzr1h1ylk1`, `dc/h3vxgc4gwl4c7`
@@ -90,6 +90,10 @@ From the repository root (`data/`):
    ```
 
 3. **Run unit tests:**
+   ```bash
+   ./run_tests.sh -p statvar_imports/cdc/CDCDiabetes
+   ```
+   Or directly with `unittest`:
    ```bash
    python3 -m unittest discover -v -s statvar_imports/cdc/CDCDiabetes -p "*_test.py"
    ```
