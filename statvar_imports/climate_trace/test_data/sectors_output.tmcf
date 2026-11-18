@@ -6,5 +6,5 @@ value: C:sectors_output->value
 unit: C:sectors_output->unit
 measurementMethod: C:sectors_output->measurementMethod
 observationPeriod: C:sectors_output->observationPeriod
-#Aggregate: sum
 typeOf: dcs:StatVarObservation
+#Aggregate: sum

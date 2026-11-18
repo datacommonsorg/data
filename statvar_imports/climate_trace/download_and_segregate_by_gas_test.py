@@ -271,6 +271,19 @@ class DownloadAndSegregateByGasTest(unittest.TestCase):
             self.assertNotIn('subsector_net-soil-organic-carbon', ghg_map)
             self.assertNotIn('sector_fluorinated-gases', ghg_map)
 
+    def test_generate_greenhousegas_input_missing_columns_raises(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            bad_df = pd.DataFrame({
+                'iso3_country': ['USA'],
+                'start_time': ['2020-01-01 00:00:00'],
+            })
+            with self.assertRaisesRegex(
+                    ValueError,
+                    r'Missing required columns.*emissions_quantity.*sector.*subsector',
+            ):
+                download_and_segregate_by_gas.generate_greenhousegas_input(
+                    bad_df, tmp_dir)
+
     def test_append_legacy_subsector_rollups(self):
         raw_df = pd.DataFrame({
             'iso3_country': ['USA'] * 5,
@@ -380,15 +393,14 @@ def _write_offline_existing_statvars_mcf(path: str) -> None:
     for gas in _EMITTED_THINGS:
         for src in _EXISTING_BASELINE_EMISSION_SOURCES:
             dcid = f'Annual_Emissions_{gas}_{src}'
-            blocks.append(
-                f'Node: dcid:{dcid}\n'
-                'typeOf: dcs:StatisticalVariable\n'
-                'populationType: dcs:Emissions\n'
-                'measuredProperty: dcs:amount\n'
-                'measurementQualifier: dcs:Annual\n'
-                'statType: dcs:measuredValue\n'
-                f'emissionSource: dcs:{src}\n'
-                f'emittedThing: dcs:{gas}\n')
+            blocks.append(f'Node: dcid:{dcid}\n'
+                          'typeOf: dcs:StatisticalVariable\n'
+                          'populationType: dcs:Emissions\n'
+                          'measuredProperty: dcs:amount\n'
+                          'measurementQualifier: dcs:Annual\n'
+                          'statType: dcs:measuredValue\n'
+                          f'emissionSource: dcs:{src}\n'
+                          f'emittedThing: dcs:{gas}\n')
     with open(path, 'w', encoding='utf-8') as f:
         f.write('\n'.join(blocks))
 
@@ -475,6 +487,13 @@ class StatVarProcessorFixturesTest(unittest.TestCase):
             pv_map_file='climate_pvmap_sectors.csv',
             use_existing_mcf=True,
         )
+        df = pd.read_csv(os.path.join(TEST_DATA_DIR, 'sectors_output.csv'),
+                         dtype=str)
+        self.assertFalse(
+            df['variableMeasured'].str.contains('FluorinatedGases').any(),
+            'fluorinated-gases must be ignored in climate_pvmap_sectors.csv '
+            'to avoid duplicate observations with climate_pvmap_subsectors.csv',
+        )
 
     def test_subsectors_fixture(self):
         self._assert_fixture_matches(
@@ -483,6 +502,12 @@ class StatVarProcessorFixturesTest(unittest.TestCase):
             use_existing_mcf=True,
             remap_csv='statvar_remap.csv',
         )
+        df = pd.read_csv(os.path.join(TEST_DATA_DIR, 'subsectors_output.csv'),
+                         dtype=str,
+                         keep_default_na=False)
+        fg = df[df['variableMeasured'].str.contains('FluorinatedGases')]
+        self.assertGreater(len(fg), 0)
+        self.assertTrue((fg['measurementMethod'] == '').all())
 
     def test_greenhousegas_fixture(self):
         self._assert_fixture_matches(
@@ -530,7 +555,8 @@ class StatVarProcessorFixturesTest(unittest.TestCase):
                 with open(counters_csv, 'r', encoding='utf-8') as f_cnt:
                     counters = dict(csv.reader(f_cnt))
                 self.assertEqual(
-                    counters.get('1:process_input_warning-unresolved-value-ref'),
+                    counters.get(
+                        '1:process_input_warning-unresolved-value-ref'),
                     '2',
                     msg=f'Unexpected unresolved-value-ref warnings in {name}',
                 )

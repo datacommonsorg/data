@@ -261,11 +261,11 @@ def generate_greenhousegas_input(co2e_100yr_df, output_dir):
         'iso3_country', 'sector', 'subsector', 'start_time',
         'emissions_quantity'
     }
-    if not required_cols.issubset(co2e_100yr_df.columns):
-        logging.warning(
-            "Skipping greenhousegas_co2e_100yr.csv generation; missing required columns."
-        )
-        return
+    missing_cols = sorted(required_cols - set(co2e_100yr_df.columns))
+    if missing_cols:
+        raise ValueError(
+            "Missing required columns for greenhousegas_co2e_100yr.csv "
+            f"generation: {', '.join(missing_cols)}")
 
     df = co2e_100yr_df[~co2e_100yr_df['subsector'].isin(
         LEGACY_SUBSECTOR_ROLLUPS)][list(required_cols)].copy()
