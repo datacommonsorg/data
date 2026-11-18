@@ -49,6 +49,7 @@
                 "processed_output/*_counters.txt",
                 "validation_config.json"
             ],
+            "validation_config_file": "validation_config.json",
             "cron_schedule": "30 6 * * 5",
             "_comment": "Schedule: Weekly on Friday at 06:30 UTC",
             "resource_limits": {
