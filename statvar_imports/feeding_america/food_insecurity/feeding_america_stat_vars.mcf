@@ -1,17 +1,17 @@
 Node: dcid:Count_Child_FoodInsecure
-typeOf: dcs:StatisticalVariable
-populationType: schema:Child
-foodSecurityStatus: dcs:FoodInSecure
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Child
+foodSecurityStatus: dcid:FoodInSecure
 name: "Population: Food Insecure Children"
 measuredProperty: dcid:count
-statType: dcs:measuredValue
+statType: dcid:measuredValue
 
 Node: dcid:Count_Person_FoodInsecure
-typeOf: dcs:StatisticalVariable
+typeOf: dcid:StatisticalVariable
 measuredProperty: dcid:count
-populationType: schema:Person
-foodSecurityStatus: dcs:FoodInSecure
-statType: dcs:measuredValue
+populationType: dcid:Person
+foodSecurityStatus: dcid:FoodInSecure
+statType: dcid:measuredValue
 name: "Population: Food Insecure People"
 
 Node: dcid:Count_Child

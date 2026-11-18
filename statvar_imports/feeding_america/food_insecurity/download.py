@@ -184,18 +184,35 @@ def discover_years(session=None, max_retries=3):
                 if yr.isdigit() and int(yr) >= MIN_API_YEAR:
                     years.add(yr)
             return sorted(years)
-        except (requests.RequestException, ValueError, KeyError) as e:
-            last_err = e
-            if attempt + 1 < max_retries:
-                wait_secs = 2**attempt
+        except requests.HTTPError as e:
+            status = e.response.status_code if e.response is not None else None
+            if status is not None and status not in TRANSIENT_STATUS_CODES:
                 logging.warning(
-                    'Year discovery failed (attempt %d/%d: %s); retrying in %ds',
-                    attempt + 1,
-                    max_retries,
+                    'Permanent HTTP %s during year discovery; falling back to defaults (%s)',
+                    status,
                     e,
-                    wait_secs,
                 )
-                time.sleep(wait_secs)
+                return sorted(years)
+            last_err = e
+        except (ValueError, KeyError) as e:
+            logging.warning(
+                'Year discovery payload parse failed; falling back to defaults (%s)',
+                e,
+            )
+            return sorted(years)
+        except requests.RequestException as e:
+            last_err = e
+
+        if attempt + 1 < max_retries:
+            wait_secs = 2**attempt
+            logging.warning(
+                'Year discovery failed (attempt %d/%d: %s); retrying in %ds',
+                attempt + 1,
+                max_retries,
+                last_err,
+                wait_secs,
+            )
+            time.sleep(wait_secs)
     logging.warning('Dynamic year discovery fallback to defaults (%s)',
                     last_err)
     return sorted(years)

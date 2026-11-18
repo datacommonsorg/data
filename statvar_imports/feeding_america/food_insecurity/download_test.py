@@ -169,6 +169,21 @@ class DownloadTest(unittest.TestCase):
         self.assertIn('2025', years)
         mock_sleep.assert_called_once_with(1)
 
+    def test_discover_years_does_not_retry_permanent_4xx(self):
+        bad_resp = mock.MagicMock()
+        bad_resp.status_code = 404
+        bad_resp.url = 'https://map.feedingamerica.org/'
+        bad_resp.raise_for_status.side_effect = requests.HTTPError(
+            '404 Not Found', response=bad_resp)
+        session = mock.MagicMock()
+        session.get.return_value = bad_resp
+
+        with mock.patch('time.sleep') as mock_sleep:
+            years = download.discover_years(session=session, max_retries=3)
+        self.assertEqual(years, download.DEFAULT_YEARS)
+        mock_sleep.assert_not_called()
+        self.assertEqual(session.get.call_count, 1)
+
     def test_discover_years_fallback_on_error(self):
         session = mock.MagicMock()
         session.get.side_effect = requests.Timeout('timed out')
