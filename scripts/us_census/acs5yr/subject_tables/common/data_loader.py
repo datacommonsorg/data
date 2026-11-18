@@ -176,7 +176,7 @@ class SubjectTableDataLoaderBase:
             f = open(json_spec, 'r')
             self.json_spec = json.load(f)
             f.close()
-        except:
+        except (OSError, ValueError):
             logging.fatal(
                 "Please ensure that the path to the JSON spec is correct.")
 
@@ -185,7 +185,7 @@ class SubjectTableDataLoaderBase:
             f = open(column_map_path, 'r')
             self.column_map = json.load(f)
             f.close()
-        except:
+        except (OSError, ValueError):
             # TODO: If the module is called from `process.py`, the message needs
             # to be to run with --option=colmap. So rephrasing this message will help.
             logging.fatal(
@@ -517,7 +517,7 @@ class SubjectTableDataLoaderBase:
                                      low_memory=False)
                     self._process_dataframe(df, filename)
             self._get_outputs()
-        except:
+        except Exception:
             logging.fatal(
                 """ensure input path is that of directory with dataset files,
                 a zip file or a csv file""")

@@ -1,0 +1,449 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6
+jpn_gender_age_total_population.csv,observationAbout,00000
+"年齢（5歳階級），男女別人口及び人口性比 － 全国（大正9年～令和2年）",observationAbout,00000
+2015000010,#ignore,True,observationDate,2015
+2020000010,#ignore,True,observationDate,2020
+2025000010,#ignore,True,observationDate,2025
+2030000010,#ignore,True,observationDate,2030
+2035000010,#ignore,True,observationDate,2035
+2040000010,#ignore,True,observationDate,2040
+2045000010,#ignore,True,observationDate,2045
+2050000010,#ignore,True,observationDate,2050
+2055000010,#ignore,True,observationDate,2055
+2060000010,#ignore,True,observationDate,2060
+年齢不詳,#IgnoreRow,True
+（再掲）年齢不詳,#IgnoreRow,True
+100歳以上,#IgnoreRow,True
+（再掲）100歳以上,#IgnoreRow,True
+０～４歳,age,[0 4 Years]
+５～９歳,age,[5 9 Years]
+10～14歳,age,[10 14 Years]
+15～19歳,age,[15 19 Years]
+20～24歳,age,[20 24 Years]
+25～29歳,age,[25 29 Years]
+30～34歳,age,[30 34 Years]
+35～39歳,age,[35 39 Years]
+40～44歳,age,[40 44 Years]
+45～49歳,age,[45 49 Years]
+50～54歳,age,[50 54 Years]
+55～59歳,age,[55 59 Years]
+60～64歳,age,[60 64 Years]
+65～69歳,age,[65 69 Years]
+70～74歳,age,[70 74 Years]
+75～79歳,age,[75 79 Years]
+80～84歳,age,[80 84 Years]
+85歳以上,age,[85 - Years]
+85～89歳,age,[85 89 Years]
+90～94歳,age,[90 94 Years]
+95～99歳,age,[95 99 Years]
+100～104歳,age,[100 104 Years]
+105～109歳,age,[105 109 Years]
+110歳以上,age,[110 - Years]
+（再掲）15歳未満,age,YearsUpto14
+（再掲）15～64歳,age,[15 64 Years]
+（再掲）65歳以上,age,[65 - Years]
+15歳未満,age,YearsUpto14
+15～64歳,age,[15 64 Years]
+65歳以上,age,[65 - Years]
+男,gender,Male
+女,gender,Female
+人口【人】,measuredProperty,count,populationType,Person,#Eval,"value='' if Data == '人口【人】' else Data",#Filter,"Data != 'NA'"
+13100,#IgnoreRow,True
+15216,#IgnoreRow,True
+39202,#IgnoreRow,True
+割合【%】,#ignore,True,value,{Number}
+年齢，男女別割合【%】,#ignore,True,value,{Number}
+人口性比,#ignore,True,value,{Number}
+A4200_死亡数【人】,dcid,Count_Death,populationType,MortalityEvent,measuredProperty,count,value,{Number}
+A420001_死亡数（男）【人】,dcid,Count_Death_Male,populationType,MortalityEvent,measuredProperty,count,gender,Male,value,{Number}
+A420002_死亡数（女）【人】,dcid,Count_Death_Female,populationType,MortalityEvent,measuredProperty,count,gender,Female,value,{Number}
+E1301_幼稚園教員数【人】,populationType,Teacher,measuredProperty,count,schoolGradeLevel,Kindergarten,value,{Number}
+E2401_小学校教員数【人】,populationType,Teacher,measuredProperty,count,facultyType,ElementaryTeacher,value,{Number}
+E4401_高等学校教員数【人】,populationType,Teacher,measuredProperty,count,facultyType,UniversityAndCollegeTeacher,value,{Number}
+E2501_小学校児童数【人】,populationType,Student,measuredProperty,count,schoolGradeLevel,PrimarySchool,value,{Number}
+E3501_中学校生徒数【人】,populationType,Student,measuredProperty,count,schoolGradeLevel,MiddleSchool,value,{Number}
+E4501_高等学校生徒数【人】,populationType,Student,measuredProperty,count,schoolGradeLevel,HighSchool,value,{Number}
+E6302_大学学生数【人】,populationType,Student,measuredProperty,count,enrollmentLevel,Graduate,value,{Number}
+I9103_糖尿病による死亡者数【人】,populationType,MortalityEvent,measuredProperty,count,causeOfDeath,Diabetes,value,{Number}
+I9105_心疾患（高血圧性を除く）による死亡者数【人】,populationType,MortalityEvent,measuredProperty,count,causeOfDeath,HeartDiseaseExcludingHypertension,value,{Number}
+I9108_自殺者数【人】,populationType,MortalityEvent,measuredProperty,count,causeOfDeath,Suicide,value,{Number}
+就業者,dcid,Count_Person_Employed,populationType,Person,measuredProperty,count,employment,BLS_Employed,#Multiply,10,value,{Number}
+完全失業者,dcid,Count_Person_Unemployed,populationType,Person,measuredProperty,count,employment,BLS_Unemployed,#Multiply,10,value,{Number}
+非労働力人口,dcid,Count_Person_NotInLaborForce,populationType,Person,measuredProperty,count,employmentStatus,BLS_NotInLaborForce,age,Years16Onwards,#Multiply,10,value,{Number}
+率【％】,populationType,Person,measuredProperty,unemploymentRate,value,{Number}
+小学生【人】,populationType,Student,measuredProperty,count,schoolGradeLevel,PrimarySchool,value,{Number}
+中学生【人】,populationType,Student,measuredProperty,count,schoolGradeLevel,MiddleSchool,value,{Number}
+高校生【人】,populationType,Student,measuredProperty,count,schoolGradeLevel,HighSchool,value,{Number}
+大学・大学院生【人】,populationType,Student,measuredProperty,count,enrollmentLevel,Graduate,value,{Number}
+就業者（男女計）【万人】,dcid,Count_Person_Employed,populationType,Person,measuredProperty,count,employment,BLS_Employed,#Multiply,10,value,{Number}
+完全失業者（男女計）【万人】,dcid,Count_Person_Unemployed,populationType,Person,measuredProperty,count,employment,BLS_Unemployed,#Multiply,10,value,{Number}
+非労働力人口（男女計）【万人】,dcid,Count_Person_NotInLaborForce,populationType,Person,measuredProperty,count,employmentStatus,BLS_NotInLaborForce,age,Years16Onwards,#Multiply,10,value,{Number}
+完全失業率（男女計）【%】,populationType,Person,measuredProperty,unemploymentRate,value,{Number}
+1920年,observationDate,1920
+1925年,observationDate,1925
+1930年,observationDate,1930
+1935年,observationDate,1935
+1940年,observationDate,1940
+1945年,observationDate,1945
+1948年,observationDate,1948
+1949年,observationDate,1949
+1950年,observationDate,1950
+1951年,observationDate,1951
+1952年,observationDate,1952
+1953年,observationDate,1953
+1954年,observationDate,1954
+1955年,observationDate,1955
+1956年,observationDate,1956
+1957年,observationDate,1957
+1958年,observationDate,1958
+1959年,observationDate,1959
+1960年,observationDate,1960
+1961年,observationDate,1961
+1962年,observationDate,1962
+1963年,observationDate,1963
+1964年,observationDate,1964
+1965年,observationDate,1965
+1966年,observationDate,1966
+1967年,observationDate,1967
+1968年,observationDate,1968
+1969年,observationDate,1969
+1970年,observationDate,1970
+1971年,observationDate,1971
+1972年,observationDate,1972
+1973年,observationDate,1973
+1974年,observationDate,1974
+1975年,observationDate,1975
+1976年,observationDate,1976
+1977年,observationDate,1977
+1978年,observationDate,1978
+1979年,observationDate,1979
+1980年,observationDate,1980
+1981年,observationDate,1981
+1982年,observationDate,1982
+1983年,observationDate,1983
+1984年,observationDate,1984
+1985年,observationDate,1985
+1986年,observationDate,1986
+1987年,observationDate,1987
+1988年,observationDate,1988
+1989年,observationDate,1989
+1990年,observationDate,1990
+1991年,observationDate,1991
+1992年,observationDate,1992
+1993年,observationDate,1993
+1994年,observationDate,1994
+1995年,observationDate,1995
+1996年,observationDate,1996
+1997年,observationDate,1997
+1998年,observationDate,1998
+1999年,observationDate,1999
+2000年,observationDate,2000
+2001年,observationDate,2001
+2002年,observationDate,2002
+2003年,observationDate,2003
+2004年,observationDate,2004
+2005年,observationDate,2005
+2006年,observationDate,2006
+2007年,observationDate,2007
+2008年,observationDate,2008
+2009年,observationDate,2009
+2010年,observationDate,2010
+2011年,observationDate,2011
+2012年,observationDate,2012
+2013年,observationDate,2013
+2014年,observationDate,2014
+2015年,observationDate,2015
+2016年,observationDate,2016
+2017年,observationDate,2017
+2018年,observationDate,2018
+2019年,observationDate,2019
+2020年,observationDate,2020
+2021年,observationDate,2021
+2022年,observationDate,2022
+2023年,observationDate,2023
+2024年,observationDate,2024
+2025年,observationDate,2025
+2026年,observationDate,2026
+2027年,observationDate,2027
+2028年,observationDate,2028
+2029年,observationDate,2029
+2030年,observationDate,2030
+2031年,observationDate,2031
+2032年,observationDate,2032
+2033年,observationDate,2033
+2034年,observationDate,2034
+2035年,observationDate,2035
+2036年,observationDate,2036
+2037年,observationDate,2037
+2038年,observationDate,2038
+2039年,observationDate,2039
+2040年,observationDate,2040
+2041年,observationDate,2041
+2042年,observationDate,2042
+2043年,observationDate,2043
+2044年,observationDate,2044
+2045年,observationDate,2045
+2046年,observationDate,2046
+2047年,observationDate,2047
+2048年,observationDate,2048
+2049年,observationDate,2049
+2050年,observationDate,2050
+2051年,observationDate,2051
+2052年,observationDate,2052
+2053年,observationDate,2053
+2054年,observationDate,2054
+2055年,observationDate,2055
+2056年,observationDate,2056
+2057年,observationDate,2057
+2058年,observationDate,2058
+2059年,observationDate,2059
+2060年,observationDate,2060
+1920000000,observationDate,1920
+1921000000,observationDate,1921
+1922000000,observationDate,1922
+1923000000,observationDate,1923
+1924000000,observationDate,1924
+1925000000,observationDate,1925
+1926000000,observationDate,1926
+1927000000,observationDate,1927
+1928000000,observationDate,1928
+1929000000,observationDate,1929
+1930000000,observationDate,1930
+1931000000,observationDate,1931
+1932000000,observationDate,1932
+1933000000,observationDate,1933
+1934000000,observationDate,1934
+1935000000,observationDate,1935
+1936000000,observationDate,1936
+1937000000,observationDate,1937
+1938000000,observationDate,1938
+1939000000,observationDate,1939
+1940000000,observationDate,1940
+1941000000,observationDate,1941
+1942000000,observationDate,1942
+1943000000,observationDate,1943
+1944000000,observationDate,1944
+1945000000,observationDate,1945
+1946000000,observationDate,1946
+1947000000,observationDate,1947
+1948000000,observationDate,1948
+1949000000,observationDate,1949
+1950000000,observationDate,1950
+1951000000,observationDate,1951
+1952000000,observationDate,1952
+1953000000,observationDate,1953
+1954000000,observationDate,1954
+1955000000,observationDate,1955
+1956000000,observationDate,1956
+1957000000,observationDate,1957
+1958000000,observationDate,1958
+1959000000,observationDate,1959
+1960000000,observationDate,1960
+1961000000,observationDate,1961
+1962000000,observationDate,1962
+1963000000,observationDate,1963
+1964000000,observationDate,1964
+1965000000,observationDate,1965
+1966000000,observationDate,1966
+1967000000,observationDate,1967
+1968000000,observationDate,1968
+1969000000,observationDate,1969
+1970000000,observationDate,1970
+1971000000,observationDate,1971
+1972000000,observationDate,1972
+1973000000,observationDate,1973
+1974000000,observationDate,1974
+1975000000,observationDate,1975
+1976000000,observationDate,1976
+1977000000,observationDate,1977
+1978000000,observationDate,1978
+1979000000,observationDate,1979
+1980000000,observationDate,1980
+1981000000,observationDate,1981
+1982000000,observationDate,1982
+1983000000,observationDate,1983
+1984000000,observationDate,1984
+1985000000,observationDate,1985
+1986000000,observationDate,1986
+1987000000,observationDate,1987
+1988000000,observationDate,1988
+1989000000,observationDate,1989
+1990000000,observationDate,1990
+1991000000,observationDate,1991
+1992000000,observationDate,1992
+1993000000,observationDate,1993
+1994000000,observationDate,1994
+1995000000,observationDate,1995
+1996000000,observationDate,1996
+1997000000,observationDate,1997
+1998000000,observationDate,1998
+1999000000,observationDate,1999
+2000000000,observationDate,2000
+2001000000,observationDate,2001
+2002000000,observationDate,2002
+2003000000,observationDate,2003
+2004000000,observationDate,2004
+2005000000,observationDate,2005
+2006000000,observationDate,2006
+2007000000,observationDate,2007
+2008000000,observationDate,2008
+2009000000,observationDate,2009
+2010000000,observationDate,2010
+2011000000,observationDate,2011
+2012000000,observationDate,2012
+2013000000,observationDate,2013
+2014000000,observationDate,2014
+2015000000,observationDate,2015
+2016000000,observationDate,2016
+2017000000,observationDate,2017
+2018000000,observationDate,2018
+2019000000,observationDate,2019
+2020000000,observationDate,2020
+2021000000,observationDate,2021
+2022000000,observationDate,2022
+2023000000,observationDate,2023
+2024000000,observationDate,2024
+2025000000,observationDate,2025
+2026000000,observationDate,2026
+2027000000,observationDate,2027
+2028000000,observationDate,2028
+2029000000,observationDate,2029
+2030000000,observationDate,2030
+2031000000,observationDate,2031
+2032000000,observationDate,2032
+2033000000,observationDate,2033
+2034000000,observationDate,2034
+2035000000,observationDate,2035
+2036000000,observationDate,2036
+2037000000,observationDate,2037
+2038000000,observationDate,2038
+2039000000,observationDate,2039
+2040000000,observationDate,2040
+2041000000,observationDate,2041
+2042000000,observationDate,2042
+2043000000,observationDate,2043
+2044000000,observationDate,2044
+2045000000,observationDate,2045
+2046000000,observationDate,2046
+2047000000,observationDate,2047
+2048000000,observationDate,2048
+2049000000,observationDate,2049
+2050000000,observationDate,2050
+2051000000,observationDate,2051
+2052000000,observationDate,2052
+2053000000,observationDate,2053
+2054000000,observationDate,2054
+2055000000,observationDate,2055
+2056000000,observationDate,2056
+2057000000,observationDate,2057
+2058000000,observationDate,2058
+2059000000,observationDate,2059
+2060000000,observationDate,2060
+1975100000,observationDate,1975
+1976100000,observationDate,1976
+1977100000,observationDate,1977
+1978100000,observationDate,1978
+1979100000,observationDate,1979
+1980100000,observationDate,1980
+1981100000,observationDate,1981
+1982100000,observationDate,1982
+1983100000,observationDate,1983
+1984100000,observationDate,1984
+1985100000,observationDate,1985
+1986100000,observationDate,1986
+1987100000,observationDate,1987
+1988100000,observationDate,1988
+1989100000,observationDate,1989
+1990100000,observationDate,1990
+1991100000,observationDate,1991
+1992100000,observationDate,1992
+1993100000,observationDate,1993
+1994100000,observationDate,1994
+1995100000,observationDate,1995
+1996100000,observationDate,1996
+1997100000,observationDate,1997
+1998100000,observationDate,1998
+1999100000,observationDate,1999
+2000100000,observationDate,2000
+2001100000,observationDate,2001
+2002100000,observationDate,2002
+2003100000,observationDate,2003
+2004100000,observationDate,2004
+2005100000,observationDate,2005
+2006100000,observationDate,2006
+2007100000,observationDate,2007
+2008100000,observationDate,2008
+2009100000,observationDate,2009
+2010100000,observationDate,2010
+2011100000,observationDate,2011
+2012100000,observationDate,2012
+2013100000,observationDate,2013
+2014100000,observationDate,2014
+2015100000,observationDate,2015
+2016100000,observationDate,2016
+2017100000,observationDate,2017
+2018100000,observationDate,2018
+2019100000,observationDate,2019
+2020100000,observationDate,2020
+2021100000,observationDate,2021
+2022100000,observationDate,2022
+2023100000,observationDate,2023
+2024100000,observationDate,2024
+2025100000,observationDate,2025
+2026100000,observationDate,2026
+2027100000,observationDate,2027
+2028100000,observationDate,2028
+2029100000,observationDate,2029
+2030100000,observationDate,2030
+2031100000,observationDate,2031
+2032100000,observationDate,2032
+2033100000,observationDate,2033
+2034100000,observationDate,2034
+2035100000,observationDate,2035
+2036100000,observationDate,2036
+2037100000,observationDate,2037
+2038100000,observationDate,2038
+2039100000,observationDate,2039
+2040100000,observationDate,2040
+2041100000,observationDate,2041
+2042100000,observationDate,2042
+2043100000,observationDate,2043
+2044100000,observationDate,2044
+2045100000,observationDate,2045
+2046100000,observationDate,2046
+2047100000,observationDate,2047
+2048100000,observationDate,2048
+2049100000,observationDate,2049
+2050100000,observationDate,2050
+2051100000,observationDate,2051
+2052100000,observationDate,2052
+2053100000,observationDate,2053
+2054100000,observationDate,2054
+2055100000,observationDate,2055
+2056100000,observationDate,2056
+2057100000,observationDate,2057
+2058100000,observationDate,2058
+2059100000,observationDate,2059
+2060100000,observationDate,2060
+全国_時系列 コード,observationAbout,{Data}
+全国，都道府県，市区町村 コード,observationAbout,{Data}
+地域 コード,observationAbout,{Data}
+地域1980 コード,observationAbout,{Data}
+地域1985 コード,observationAbout,{Data}
+地域1990 コード,observationAbout,{Data}
+地域1995 コード,observationAbout,{Data}
+地域2000 コード,observationAbout,{Data}
+地域2005 コード,observationAbout,{Data}
+地域_時系列 コード,observationAbout,{Data}
+地域コード,observationAbout,{Data}
+地域（2010） コード,observationAbout,{Data}
+地域（2015） コード,observationAbout,{Data}
+地域（2020） コード,observationAbout,{Data}
+地域（2025） コード,observationAbout,{Data}
+地域（2030） コード,observationAbout,{Data}
+地域（2035） コード,observationAbout,{Data}
+地域（2040） コード,observationAbout,{Data}
+地域（2045） コード,observationAbout,{Data}
+地域（2050） コード,observationAbout,{Data}
+地域（2055） コード,observationAbout,{Data}
+地域（2060） コード,observationAbout,{Data}
