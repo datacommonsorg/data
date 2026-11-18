@@ -31,6 +31,7 @@ Example:
 import csv
 from io import UnsupportedOperation
 
+from absl import logging
 from file_dict_io.base import FileDictIO
 from file_dict_io.base import get_file_extension
 from file_dict_io.csv_io import CsvFileDictIO
@@ -58,9 +59,9 @@ def _detect_delimiter(header_line: str) -> str:
     """
     counts = {c: header_line.count(c) for c in _DELIMITER_CANDIDATES}
     delimiter = max(_DELIMITER_CANDIDATES, key=lambda c: counts[c])
-    if counts[delimiter] == 0:
-        raise ValueError(
-            'No delimiter found in the header row; pass delimiter=')
+    if counts[delimiter] == 0 and header_line.strip():
+        logging.warning(
+            'No delimiter found in the header row; reading as a single column.')
     return delimiter
 
 

@@ -190,6 +190,16 @@ class DatFileDictIOTest(unittest.TestCase):
         # Records read from an offset still use the cleaned header names.
         self.assertEqual(['name', 'value'], list(second[0].keys()))
 
+    def test_single_column_file(self):
+        path = self._write_file('single.dat', 'name\nAlice\nBob\n')
+        with DatFileDictIO(path, mode='r') as reader:
+            self.assertEqual(['name'], reader.headers())
+            self.assertEqual([{'name': 'Alice'}, {'name': 'Bob'}], list(reader))
+
+    def test_empty_file(self):
+        path = self._write_file('empty_file.dat', '')
+        self.assertEqual([], self._read_all(path))
+
 
 if __name__ == '__main__':
     unittest.main()
