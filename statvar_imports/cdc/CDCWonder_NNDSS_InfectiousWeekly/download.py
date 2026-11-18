@@ -251,7 +251,9 @@ def preprocess_csv(
         columns=OUTPUT_COLUMNS))
     if bad_lines_count:
         logging.warning(f"Skipped {bad_lines_count} malformed CSV rows.")
-    out_df.to_csv(out_filepath, index=False)
+    tmp_out = f"{out_filepath}.tmp"
+    out_df.to_csv(tmp_out, index=False)
+    os.replace(tmp_out, out_filepath)
     logging.info(f"Wrote {len(out_df)} preprocessed rows to {out_filepath}.")
     return out_df
 
