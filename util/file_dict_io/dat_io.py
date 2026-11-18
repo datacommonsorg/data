@@ -54,8 +54,8 @@ def _detect_delimiter(header_line: str) -> str:
     Returns:
       The detected delimiter character.
 
-    Raises:
-      ValueError: If no candidate delimiter occurs in `header_line`.
+    Returns:
+      The detected delimiter character, or '|' if no candidate occurs (single-column or empty file)..
     """
     counts = {c: header_line.count(c) for c in _DELIMITER_CANDIDATES}
     delimiter = max(_DELIMITER_CANDIDATES, key=lambda c: counts[c])
