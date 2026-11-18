@@ -77,9 +77,9 @@ def _write_row(year: int, geo: str, statvar_dcid: str, obs_date: str,
     writer.writerow(processed_dict)
 
 
-def _remove_from_list(l: list, e: str):
+def _remove_from_list(items: list, e: str):
     try:
-        l.remove(e)
+        items.remove(e)
     except ValueError:
         print(f"{e} not in list")
 
