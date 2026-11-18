@@ -13,15 +13,20 @@
 # limitations under the License.
 """Unit tests for CDCWonder_NNDSS_InfectiousWeekly download.py."""
 
+import importlib.util
 import os
-import sys
 import tempfile
 import unittest
 
 import pandas as pd
 
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import download  # noqa: E402
+_DOWNLOAD_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                              "download.py")
+_SPEC = importlib.util.spec_from_file_location("cdc_nndss_weekly_download",
+                                               _DOWNLOAD_PATH)
+assert _SPEC is not None and _SPEC.loader is not None
+download = importlib.util.module_from_spec(_SPEC)
+_SPEC.loader.exec_module(download)
 
 
 class DownloadTest(unittest.TestCase):
