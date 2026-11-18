@@ -34,6 +34,163 @@ except ImportError:
     import consolidate_historical
     import download
 
+_EXISTING_STATVARS_MCF = """Node: dcid:Percent_Person_20OrMoreYears_WithDiabetes
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measuredProperty: dcs:percent
+statType: dcs:measuredValue
+age: dcs:Years20Onwards
+healthOutcome: dcs:Diabetes
+
+Node: dcid:dc/d4j16hnl53es2
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measuredProperty: dcs:percent
+statType: dcs:stdError
+age: dcs:Years20Onwards
+healthOutcome: dcs:Diabetes
+
+Node: dcid:dc/xmpy89x1nh8cg
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measuredProperty: dcs:percent
+statType: dcs:measuredValue
+age: dcs:Years20Onwards
+gender: dcs:Male
+healthOutcome: dcs:Diabetes
+
+Node: dcid:dc/xwtlmj1vg7618
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measuredProperty: dcs:percent
+statType: dcs:stdError
+age: dcs:Years20Onwards
+gender: dcs:Male
+healthOutcome: dcs:Diabetes
+
+Node: dcid:dc/nh3s4skee5483
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measuredProperty: dcs:percent
+statType: dcs:measuredValue
+age: dcs:Years20Onwards
+gender: dcs:Female
+healthOutcome: dcs:Diabetes
+
+Node: dcid:dc/ryjdx30rfbfbb
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measuredProperty: dcs:percent
+statType: dcs:stdError
+age: dcs:Years20Onwards
+gender: dcs:Female
+healthOutcome: dcs:Diabetes
+
+Node: dcid:Percent_Person_20OrMoreYears_Obesity
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measuredProperty: dcs:percent
+statType: dcs:measuredValue
+age: dcs:Years20Onwards
+healthBehavior: dcs:Obesity
+
+Node: dcid:dc/bzfel0wfs6qhf
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measuredProperty: dcs:percent
+statType: dcs:stdError
+age: dcs:Years20Onwards
+healthBehavior: dcs:Obesity
+
+Node: dcid:dc/x13tvt8jsgrm4
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measuredProperty: dcs:percent
+statType: dcs:measuredValue
+age: dcs:Years20Onwards
+gender: dcs:Male
+healthBehavior: dcs:Obesity
+
+Node: dcid:dc/73vt0flpsz26b
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measuredProperty: dcs:percent
+statType: dcs:stdError
+age: dcs:Years20Onwards
+gender: dcs:Male
+healthBehavior: dcs:Obesity
+
+Node: dcid:dc/4lvmzr1h1ylk1
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measuredProperty: dcs:percent
+statType: dcs:measuredValue
+age: dcs:Years20Onwards
+gender: dcs:Female
+healthBehavior: dcs:Obesity
+
+Node: dcid:dc/h3vxgc4gwl4c7
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measuredProperty: dcs:percent
+statType: dcs:stdError
+age: dcs:Years20Onwards
+gender: dcs:Female
+healthBehavior: dcs:Obesity
+
+Node: dcid:Percent_Person_20OrMoreYears_PhysicalInactivity
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measuredProperty: dcs:percent
+statType: dcs:measuredValue
+age: dcs:Years20Onwards
+healthBehavior: dcs:PhysicalInactivity
+
+Node: dcid:dc/1yfe8eezs4jbc
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measuredProperty: dcs:percent
+statType: dcs:stdError
+age: dcs:Years20Onwards
+healthBehavior: dcs:PhysicalInactivity
+
+Node: dcid:dc/ty7pq88d26963
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measuredProperty: dcs:percent
+statType: dcs:measuredValue
+age: dcs:Years20Onwards
+gender: dcs:Male
+healthBehavior: dcs:PhysicalInactivity
+
+Node: dcid:dc/bv6fv4et0d8pd
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measuredProperty: dcs:percent
+statType: dcs:stdError
+age: dcs:Years20Onwards
+gender: dcs:Male
+healthBehavior: dcs:PhysicalInactivity
+
+Node: dcid:dc/tcqb49dvg7k53
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measuredProperty: dcs:percent
+statType: dcs:measuredValue
+age: dcs:Years20Onwards
+gender: dcs:Female
+healthBehavior: dcs:PhysicalInactivity
+
+Node: dcid:dc/t1hj2ymqdg5s6
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measuredProperty: dcs:percent
+statType: dcs:stdError
+age: dcs:Years20Onwards
+gender: dcs:Female
+healthBehavior: dcs:PhysicalInactivity
+"""
+
 
 class _FakeResponse:
     """Minimal mock HTTP response for requests.Session."""
@@ -533,6 +690,10 @@ class DownloadTest(unittest.TestCase):
                 f_out.write('reconcile_nodes,False\n')
                 f_out.write('recon_lookup_api,False\n')
 
+            existing_sv_mcf = os.path.join(tmp_dir, 'existing_statvars.mcf')
+            with open(existing_sv_mcf, 'w', encoding='utf-8') as f_sv:
+                f_sv.write(_EXISTING_STATVARS_MCF)
+
             out_prefix = os.path.join(tmp_dir, 'cdc_diabetes_output')
             cmd = [
                 sys.executable,
@@ -540,7 +701,7 @@ class DownloadTest(unittest.TestCase):
                 f'--input_data={input_csv}',
                 f'--pv_map={pvmap_csv}',
                 f'--config_file={hermetic_config}',
-                '--existing_statvar_mcf=',
+                f'--existing_statvar_mcf={existing_sv_mcf}',
                 f'--output_path={out_prefix}',
             ]
             subprocess.run(cmd, check=True, cwd=tmp_dir)
@@ -553,6 +714,7 @@ class DownloadTest(unittest.TestCase):
                       encoding='utf-8') as f_act_tmcf, open(
                           expected_tmcf, 'r', encoding='utf-8') as f_exp_tmcf:
                 self.assertEqual(f_act_tmcf.read(), f_exp_tmcf.read())
+            self.assertFalse(os.path.exists(f'{out_prefix}_stat_vars.mcf'))
 
 
 if __name__ == '__main__':
