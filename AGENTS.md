@@ -24,6 +24,18 @@ Read a folder's README before working in it.
 - [`util/`](util/README.md): Python and Go libraries for writing MCF and testing
   imports.
 
+## Imports
+
+Imports live in `scripts/` and `statvar_imports/`. Imports on auto-refresh also
+have a `manifest.json`; read the
+[manifest reference](agents/common/references/import-automation/manifest.md)
+before interpreting or editing one.
+
+- Diagnose an import (config, schedule, status, output, failures): follow
+  [`dc-import-diagnostics`](agents/skills/dc-import-diagnostics/SKILL.md).
+- Review import changes: follow
+  [`dc-import-code-review`](agents/skills/dc-import-code-review/SKILL.md).
+
 ## Python environment
 
 From the repo root, `./run_tests.sh -r` creates `.env` and installs
