@@ -125,9 +125,9 @@ def download_source_csv() -> str:
                 output_folder=INPUT_DIR,
                 unzip=False,
                 headers=None,
-                tries=3,
-                delay=5,
-                backoff=2,
+                tries=1,
+                delay=0,
+                backoff=1,
             )
             if download_ok and os.path.exists(RAW_FILE):
                 logging.info("Download completed successfully.")
@@ -272,9 +272,11 @@ def download_historical_files(
     for filename in HISTORY_FILES:
         blob_path = f"{prefix}/{filename}"
         dest_path = os.path.join(history_dir, filename)
+        tmp_dest = f"{dest_path}.tmp"
         logging.info(
             f"Downloading gs://{bucket_name}/{blob_path} to {dest_path}...")
-        bucket.blob(blob_path).download_to_filename(dest_path)
+        bucket.blob(blob_path).download_to_filename(tmp_dest)
+        os.replace(tmp_dest, dest_path)
 
 
 def normalize_output_files(

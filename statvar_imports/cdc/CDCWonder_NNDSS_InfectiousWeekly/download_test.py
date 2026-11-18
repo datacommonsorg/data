@@ -15,8 +15,11 @@
 
 import importlib.util
 import os
+import sys
 import tempfile
+import types
 import unittest
+from unittest import mock
 
 import pandas as pd
 
@@ -134,6 +137,115 @@ class DownloadTest(unittest.TestCase):
                 "observationPeriod: C:nndss_weekly_output->observationPeriod",
                 tmcf_text,
             )
+
+    def _run_download_source_csv(self, fake_download_file):
+        fake_mod = types.ModuleType("download_util_script")
+        fake_mod.download_file = fake_download_file
+        fake_spec = mock.Mock()
+        fake_spec.loader = mock.Mock()
+        with mock.patch.object(
+                download.importlib.util,
+                "spec_from_file_location",
+                return_value=fake_spec,
+        ), mock.patch.object(
+                download.importlib.util,
+                "module_from_spec",
+                return_value=fake_mod,
+        ), mock.patch.object(download.time, "sleep"):
+            return download.download_source_csv()
+
+    def test_download_source_csv_retries_then_succeeds(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            raw_path = os.path.join(tmpdir, "rows.csv")
+            calls = []
+
+            def _fake_download(**kwargs):
+                calls.append(kwargs)
+                if len(calls) == 1:
+                    return False
+                with open(raw_path, "wb") as f:
+                    f.write(b"x" * (200 * 1024))
+                return True
+
+            with mock.patch.object(download, "INPUT_DIR", tmpdir), \
+                 mock.patch.object(download, "RAW_FILE", raw_path):
+                out = self._run_download_source_csv(_fake_download)
+
+            self.assertEqual(out, raw_path)
+            self.assertEqual(len(calls), 2)
+            self.assertEqual(calls[0]["tries"], 1)
+
+    def test_download_source_csv_raises_ioerror_after_retries(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            raw_path = os.path.join(tmpdir, "rows.csv")
+            calls = []
+
+            def _always_fail(**kwargs):
+                calls.append(kwargs)
+                return False
+
+            with mock.patch.object(download, "INPUT_DIR", tmpdir), \
+                 mock.patch.object(download, "RAW_FILE", raw_path):
+                with self.assertRaises(IOError):
+                    self._run_download_source_csv(_always_fail)
+
+            self.assertEqual(len(calls), 3)
+
+    def test_download_source_csv_raises_valueerror_on_small_file(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            raw_path = os.path.join(tmpdir, "rows.csv")
+
+            def _write_tiny(**kwargs):
+                del kwargs
+                with open(raw_path, "wb") as f:
+                    f.write(b"tiny")
+                return True
+
+            with mock.patch.object(download, "INPUT_DIR", tmpdir), \
+                 mock.patch.object(download, "RAW_FILE", raw_path):
+                with self.assertRaises(ValueError):
+                    self._run_download_source_csv(_write_tiny)
+
+    def test_download_historical_files_atomic(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            downloaded_paths = []
+
+            def _fake_blob(blob_path):
+                blob = mock.Mock()
+
+                def _download_to(path):
+                    downloaded_paths.append(path)
+                    with open(path, "w", encoding="utf-8") as f:
+                        f.write(f"data:{blob_path}\n")
+
+                blob.download_to_filename.side_effect = _download_to
+                return blob
+
+            fake_bucket = mock.Mock()
+            fake_bucket.blob.side_effect = _fake_blob
+            fake_client = mock.Mock()
+            fake_client.bucket.return_value = fake_bucket
+            fake_storage = types.SimpleNamespace(Client=mock.Mock(
+                return_value=fake_client))
+            fake_gcloud = types.SimpleNamespace(storage=fake_storage)
+
+            with mock.patch.dict(
+                    sys.modules,
+                {
+                    "google.cloud": fake_gcloud,
+                    "google.cloud.storage": fake_storage,
+                },
+            ):
+                download.download_historical_files(history_dir=tmpdir)
+
+            self.assertTrue(
+                all(p.endswith(".tmp") for p in downloaded_paths),
+                downloaded_paths,
+            )
+            for fname in download.HISTORY_FILES:
+                dest = os.path.join(tmpdir, fname)
+                self.assertTrue(os.path.exists(dest))
+                self.assertFalse(os.path.exists(f"{dest}.tmp"))
 
 
 if __name__ == "__main__":
