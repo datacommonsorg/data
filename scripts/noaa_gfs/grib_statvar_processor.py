@@ -237,60 +237,62 @@ def format_level_dcid(level):
     Example: '2 m above ground' -> '2Meter'
              '1000 mb' -> '1000Millibar'
     """
-    l = str(level).lower().strip()
-    if l in STATIC_LEVEL_MAP:
-        return STATIC_LEVEL_MAP[l]
+    level_str = str(level).lower().strip()
+    if level_str in STATIC_LEVEL_MAP:
+        return STATIC_LEVEL_MAP[level_str]
 
     # Handle vertical altitude (Above Mean Sea Level)
-    if "m above mean sea level" in l:
-        val = l.split(" ")[0].replace("-", "To")
+    if "m above mean sea level" in level_str:
+        val = level_str.split(" ")[0].replace("-", "To")
         return f"{val}MetersAboveMeanSeaLevel"
 
-    if "entire atmosphere" in l:
+    if "entire atmosphere" in level_str:
         return ""
-    if "low cloud layer" in l:
+    if "low cloud layer" in level_str:
         return "LowCloudLayer"
-    if "middle cloud layer" in l:
+    if "middle cloud layer" in level_str:
         return "MiddleCloudLayer"
-    if "high cloud layer" in l:
+    if "high cloud layer" in level_str:
         return "HighCloudLayer"
-    if "cloud ceiling" in l:
+    if "cloud ceiling" in level_str:
         return "CloudCeiling"
 
     # Handle hybrid vertical coordinates
-    if "hybrid level" in l:
-        val = l.split(" ")[0]
+    if "hybrid level" in level_str:
+        val = level_str.split(" ")[0]
         return "LowestHybridLevel" if val == "1" else f"{val}HybridLevel"
 
     # Handle sub-surface depths
-    if "m below ground" in l:
-        match = re.search(r'([0-9.]+)-?([0-9.]*)', l)
+    if "m below ground" in level_str:
+        match = re.search(r'([0-9.]+)-?([0-9.]*)', level_str)
         if match:
             start, end = match.group(1), match.group(2)
             return f"{start}To{end}Meter" if end else f"{start}Meter"
 
     # Handle standard height above ground
-    if "m above ground" in l:
-        val = l.split(" ")[0].replace("-", "To")
+    if "m above ground" in level_str:
+        val = level_str.split(" ")[0].replace("-", "To")
         return f"{val}Meter"
 
     # Handle pressure levels (Millibars)
-    if "mb" in l:
-        val = l.split(" ")[0].replace("-", "To")
+    if "mb" in level_str:
+        val = level_str.split(" ")[0].replace("-", "To")
         return f"{val}Millibar"
 
     # Handle sigma (pressure-normalized) levels
-    if "sigma" in l:
-        val = l.split(" ")[0].replace("-", "To")
-        suffix = "SigmaLayer" if "layer" in l else "SigmaLevel"
+    if "sigma" in level_str:
+        val = level_str.split(" ")[0].replace("-", "To")
+        suffix = "SigmaLayer" if "layer" in level_str else "SigmaLevel"
         return f"{val}{suffix}"
 
     # Handle Potential Vorticity units (PVU)
-    if "pv=" in l:
+    if "pv=" in level_str:
         return "PotentialVorticityNeg2PVU" if (
-            "neg" in l or "-2" in l) else "PotentialVorticity2PVU"
-    return "".join(
-        word.capitalize() for word in l.replace("-", " ").split() if word)
+            "neg" in level_str or
+            "-2" in level_str) else "PotentialVorticity2PVU"
+    return "".join(word.capitalize()
+                   for word in level_str.replace("-", " ").split()
+                   if word)
 
 
 def construct_dcid(param_raw, level_raw):

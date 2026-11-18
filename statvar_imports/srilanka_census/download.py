@@ -443,7 +443,8 @@ def _refresh_wdi_rows_from_worldbank(
                                                    errors='replace')
         lines = wb_text.splitlines()
         header_idx = next(
-            (i for i, l in enumerate(lines) if l.startswith('"Country Name"')),
+            (i for i, line in enumerate(lines)
+             if line.startswith('"Country Name"')),
             None,
         )
         if header_idx is None:

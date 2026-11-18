@@ -115,9 +115,9 @@ def get_statvars(filename):
     d = {}
     with open(filename) as f:
         lines = f.readlines()
-    for l in lines:
-        l = l.strip()
-        p = l.split('^')
+    for line in lines:
+        line = line.strip()
+        p = line.split('^')
         d[p[0]] = tuple(p[1:])
     return d
 
