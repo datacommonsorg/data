@@ -694,6 +694,71 @@ class DownloadAndProcessTest(unittest.TestCase):
         self.assertEqual(mock_compute.call_count, 1)
         mock_sleep.assert_not_called()
 
+    def test_fetch_era5_land_strict_fails_on_intermediate_empty_month_in_window(
+            self):
+        """Fails if an empty month in the trailing window precedes a newer month."""
+        trailing_ym = download_and_process._default_end_year_month()
+        prev_year, prev_month = download_and_process._subtract_months(
+            int(trailing_ym[:4]), int(trailing_ym[5:7]), 1)
+        gap_ym = f'{prev_year:04d}-{prev_month:02d}'
+
+        raw_dir = os.path.join(self.temp_dir, 'raw_gap')
+        input_dir = os.path.join(self.temp_dir, 'input_gap')
+        os.makedirs(input_dir, exist_ok=True)
+        newer_csv = os.path.join(
+            input_dir, f'all_administrativearea1_{trailing_ym}.ee.celsius.csv')
+        with open(newer_csv, mode='w', encoding='utf-8') as f:
+            f.write(f'date,dcid\n{trailing_ym},geoId/06\n')
+
+        mock_ee = MagicMock()
+        mock_ee.ImageCollection.return_value.filterDate.return_value.first.return_value.getInfo.return_value = None
+        with patch.object(download_and_process, 'ee', mock_ee):
+            with self.assertRaises(RuntimeError):
+                download_and_process.fetch_era5_land_from_ee(
+                    dataset_asset='ECMWF/ERA5_LAND/MONTHLY_AGGR',
+                    place_assets=[
+                        'projects/datcom-import-automation-prod/assets/all_administrativearea1'
+                    ],
+                    start_ym=gap_ym,
+                    end_ym=trailing_ym,
+                    raw_dir=raw_dir,
+                    input_dir=input_dir,
+                    ee_project='datcom-import-automation-prod',
+                    reduce_region_scale=1000,
+                    strict=True,
+                )
+
+    def test_fetch_era5_land_strict_fails_on_cross_asset_empty_month_in_window(
+            self):
+        """Fails if an asset is empty for a month that succeeded on another asset."""
+        trailing_ym = download_and_process._default_end_year_month()
+        raw_dir = os.path.join(self.temp_dir, 'raw_cross')
+        input_dir = os.path.join(self.temp_dir, 'input_cross')
+        os.makedirs(input_dir, exist_ok=True)
+        asset1_csv = os.path.join(
+            input_dir, f'all_administrativearea1_{trailing_ym}.ee.celsius.csv')
+        with open(asset1_csv, mode='w', encoding='utf-8') as f:
+            f.write(f'date,dcid\n{trailing_ym},geoId/06\n')
+
+        mock_ee = MagicMock()
+        mock_ee.ImageCollection.return_value.filterDate.return_value.first.return_value.getInfo.return_value = None
+        with patch.object(download_and_process, 'ee', mock_ee):
+            with self.assertRaises(RuntimeError):
+                download_and_process.fetch_era5_land_from_ee(
+                    dataset_asset='ECMWF/ERA5_LAND/MONTHLY_AGGR',
+                    place_assets=[
+                        'projects/datcom-import-automation-prod/assets/all_administrativearea1',
+                        'projects/datcom-import-automation-prod/assets/all_administrativearea2',
+                    ],
+                    start_ym=trailing_ym,
+                    end_ym=trailing_ym,
+                    raw_dir=raw_dir,
+                    input_dir=input_dir,
+                    ee_project='datcom-import-automation-prod',
+                    reduce_region_scale=1000,
+                    strict=True,
+                )
+
 
 if __name__ == '__main__':
     unittest.main()

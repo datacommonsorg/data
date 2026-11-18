@@ -39,7 +39,7 @@ import sys
 import tempfile
 import threading
 import time
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, Set, Tuple
 
 from absl import app
 from absl import flags
@@ -822,6 +822,8 @@ def fetch_era5_land_from_ee(
     os.makedirs(raw_dir, exist_ok=True)
     os.makedirs(input_dir, exist_ok=True)
     generated_celsius_files: List[str] = []
+    fetched_months_by_asset: Dict[str, Set[str]] = {}
+    empty_months_by_asset: Dict[str, Set[str]] = {}
     pending_tasks: List[Tuple[str, str, str, str]] = []
 
     for place_asset in place_assets:
@@ -833,6 +835,7 @@ def fetch_era5_land_from_ee(
                     celsius_path) > 0:
                 logging.info('Skipping already-fetched %s', celsius_path)
                 generated_celsius_files.append(celsius_path)
+                fetched_months_by_asset.setdefault(place_asset, set()).add(ym)
                 continue
 
             raw_filename = f'{asset_name}_{ym}.ee.csv'
@@ -843,6 +846,15 @@ def fetch_era5_land_from_ee(
         return sorted(generated_celsius_files)
 
     auth_failed_event = threading.Event()
+
+    def _record_month_result(place_asset: str, ym: str,
+                             res: Optional[str]) -> None:
+        if res:
+            generated_celsius_files.append(res)
+            fetched_months_by_asset.setdefault(place_asset, set()).add(ym)
+        elif strict and not auth_failed_event.is_set():
+            empty_months_by_asset.setdefault(place_asset, set()).add(ym)
+
     # Execute the first pending task upfront to fail fast on permission/auth errors.
     first_asset, first_ym, first_raw, first_celsius = pending_tasks[0]
     first_result = _fetch_single_ee_month(
@@ -856,8 +868,7 @@ def fetch_era5_land_from_ee(
         strict=strict,
         auth_failed_event=auth_failed_event,
     )
-    if first_result:
-        generated_celsius_files.append(first_result)
+    _record_month_result(first_asset, first_ym, first_result)
 
     remaining_tasks = pending_tasks[1:]
     if remaining_tasks and not auth_failed_event.is_set():
@@ -875,13 +886,12 @@ def fetch_era5_land_from_ee(
                     strict=strict,
                     auth_failed_event=auth_failed_event,
                 )
-                if res:
-                    generated_celsius_files.append(res)
+                _record_month_result(place_asset, ym, res)
                 if auth_failed_event.is_set():
                     break
         else:
             with ThreadPoolExecutor(max_workers=workers) as executor:
-                futures = [
+                futures = {
                     executor.submit(
                         _fetch_single_ee_month,
                         dataset_asset,
@@ -893,13 +903,27 @@ def fetch_era5_land_from_ee(
                         reduce_region_scale,
                         strict,
                         auth_failed_event,
-                    ) for place_asset, ym, raw_path, celsius_path in
-                    remaining_tasks
-                ]
+                    ): (place_asset, ym) for place_asset, ym, raw_path,
+                    celsius_path in remaining_tasks
+                }
                 for future in as_completed(futures):
-                    res = future.result()
-                    if res:
-                        generated_celsius_files.append(res)
+                    place_asset, ym = futures[future]
+                    _record_month_result(place_asset, ym, future.result())
+
+    if strict:
+        for place_asset, empty_yms in empty_months_by_asset.items():
+            asset_fetched = fetched_months_by_asset.get(place_asset, set())
+            for empty_ym in sorted(empty_yms):
+                has_newer = any(f_ym > empty_ym for f_ym in asset_fetched)
+                has_sibling = any(
+                    empty_ym in fetched
+                    for other_asset, fetched in fetched_months_by_asset.items()
+                    if other_asset != place_asset)
+                if has_newer or has_sibling:
+                    raise RuntimeError(
+                        f'Gap in Earth Engine data within freshness window: '
+                        f'asset={place_asset} month={empty_ym} returned no '
+                        f'features while newer or sibling-asset data exists.')
 
     if strict and not generated_celsius_files:
         raise RuntimeError(
