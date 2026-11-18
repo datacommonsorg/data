@@ -439,6 +439,121 @@ class DownloadTest(unittest.TestCase):
                 ],
             )
 
+    def test_list_source_csvs_gcs_cns_and_local(self):
+        gcs_stdout = ('gs://bucket/path/DiabetesAtlasCountyData_b.csv\n'
+                      'gs://bucket/path/unrelated.csv\n'
+                      'gs://bucket/path/DiabetesAtlasCountyData_a.csv\n')
+        with mock.patch.object(
+                subprocess,
+                'run',
+                return_value=subprocess.CompletedProcess(args=[],
+                                                         returncode=0,
+                                                         stdout=gcs_stdout),
+        ) as mock_run:
+            self.assertEqual(
+                consolidate_historical.list_source_csvs('gs://bucket/path/'),
+                [
+                    'gs://bucket/path/DiabetesAtlasCountyData_a.csv',
+                    'gs://bucket/path/DiabetesAtlasCountyData_b.csv',
+                ],
+            )
+            mock_run.assert_called_once_with(
+                [
+                    'gcloud',
+                    'storage',
+                    'ls',
+                    'gs://bucket/path/DiabetesAtlasCountyData_*.csv',
+                ],
+                capture_output=True,
+                text=True,
+                check=True,
+            )
+
+        cns_stdout = ('/cns/dir/DiabetesAtlasCountyData_2.csv\n'
+                      '/cns/dir/notes.txt\n'
+                      '/cns/dir/DiabetesAtlasCountyData_1.csv\n')
+        with mock.patch.object(
+                subprocess,
+                'run',
+                return_value=subprocess.CompletedProcess(args=[],
+                                                         returncode=0,
+                                                         stdout=cns_stdout),
+        ) as mock_run:
+            self.assertEqual(
+                consolidate_historical.list_source_csvs('/cns/dir/'),
+                [
+                    '/cns/dir/DiabetesAtlasCountyData_1.csv',
+                    '/cns/dir/DiabetesAtlasCountyData_2.csv',
+                ],
+            )
+            mock_run.assert_called_once_with(
+                ['fileutil', 'ls', '/cns/dir/DiabetesAtlasCountyData_*.csv'],
+                capture_output=True,
+                text=True,
+                check=True,
+            )
+
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            for fname in (
+                    'DiabetesAtlasCountyData_y.csv',
+                    'DiabetesAtlasCountyData_x.csv',
+                    'other.csv',
+            ):
+                with open(os.path.join(tmp_dir, fname), 'w',
+                          encoding='utf-8') as fp:
+                    fp.write('')
+            self.assertEqual(
+                consolidate_historical.list_source_csvs(tmp_dir),
+                [
+                    os.path.join(tmp_dir, 'DiabetesAtlasCountyData_x.csv'),
+                    os.path.join(tmp_dir, 'DiabetesAtlasCountyData_y.csv'),
+                ],
+            )
+
+    def test_stat_var_processor_test_data_fixtures(self):
+        test_data_dir = os.path.join(_CODEDIR, 'test_data')
+        input_csv = os.path.join(test_data_dir, 'cdc_diabetes_input.csv')
+        expected_csv = os.path.join(test_data_dir, 'cdc_diabetes_output.csv')
+        expected_tmcf = os.path.join(test_data_dir, 'cdc_diabetes_output.tmcf')
+        pvmap_csv = os.path.join(_CODEDIR, 'cdc_diabetes_pvmap.csv')
+        metadata_csv = os.path.join(_CODEDIR, 'cdc_diabetes_metadata.csv')
+        sv_processor = os.path.abspath(
+            os.path.join(
+                _CODEDIR,
+                '../../../tools/statvar_importer/stat_var_processor.py',
+            ))
+
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            hermetic_config = os.path.join(tmp_dir, 'test_metadata.csv')
+            with open(metadata_csv, 'r', encoding='utf-8') as f_in, open(
+                    hermetic_config, 'w', encoding='utf-8') as f_out:
+                f_out.write(f_in.read().rstrip('\n') + '\n')
+                f_out.write('generate_statvar_mcf,False\n')
+                f_out.write('generate_schema_mcf,False\n')
+                f_out.write('reconcile_nodes,False\n')
+                f_out.write('recon_lookup_api,False\n')
+
+            out_prefix = os.path.join(tmp_dir, 'cdc_diabetes_output')
+            cmd = [
+                sys.executable,
+                sv_processor,
+                f'--input_data={input_csv}',
+                f'--pv_map={pvmap_csv}',
+                f'--config_file={hermetic_config}',
+                '--existing_statvar_mcf=',
+                f'--output_path={out_prefix}',
+            ]
+            subprocess.run(cmd, check=True, cwd=tmp_dir)
+
+            with open(f'{out_prefix}.csv', 'r',
+                      encoding='utf-8') as f_act, open(
+                          expected_csv, 'r', encoding='utf-8') as f_exp:
+                self.assertEqual(f_act.read(), f_exp.read())
+            with open(f'{out_prefix}.tmcf', 'r',
+                      encoding='utf-8') as f_act_tmcf, open(
+                          expected_tmcf, 'r', encoding='utf-8') as f_exp_tmcf:
+                self.assertEqual(f_act_tmcf.read(), f_exp_tmcf.read())
+
 
 if __name__ == '__main__':
     unittest.main()

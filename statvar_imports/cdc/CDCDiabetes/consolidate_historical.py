@@ -69,6 +69,17 @@ SUPPRESSED_TOKENS = frozenset({
 })
 
 
+def _filter_matching_csvs(paths: list[str]) -> list[str]:
+    """Filters and sorts paths matching DiabetesAtlasCountyData_*.csv."""
+    matched = []
+    for line in paths:
+        path = line.strip()
+        if path.endswith('.csv') and DIABETES_FILE_RE.match(
+                os.path.basename(path)):
+            matched.append(path)
+    return sorted(matched)
+
+
 def list_source_csvs(source_dir: str) -> list[str]:
     """Lists all DiabetesAtlasCountyData_*.csv files in CNS, GCS, or local."""
     source_dir = source_dir.rstrip('/')
@@ -80,23 +91,11 @@ def list_source_csvs(source_dir: str) -> list[str]:
             f'{source_dir}/DiabetesAtlasCountyData_*.csv',
         ]
         result = subprocess.run(cmd, capture_output=True, text=True, check=True)
-        files = []
-        for line in result.stdout.splitlines():
-            line = line.strip()
-            if line.endswith('.csv') and DIABETES_FILE_RE.match(
-                    os.path.basename(line)):
-                files.append(line)
-        return sorted(files)
+        return _filter_matching_csvs(result.stdout.splitlines())
     if source_dir.startswith('/cns/'):
         cmd = ['fileutil', 'ls', f'{source_dir}/DiabetesAtlasCountyData_*.csv']
         result = subprocess.run(cmd, capture_output=True, text=True, check=True)
-        files = []
-        for line in result.stdout.splitlines():
-            line = line.strip()
-            if line.endswith('.csv') and DIABETES_FILE_RE.match(
-                    os.path.basename(line)):
-                files.append(line)
-        return sorted(files)
+        return _filter_matching_csvs(result.stdout.splitlines())
     pattern = os.path.join(source_dir, 'DiabetesAtlasCountyData_*.csv')
     return sorted(glob.glob(pattern))
 
@@ -213,15 +212,18 @@ def consolidate_files(
                 }
 
     os.makedirs(os.path.dirname(output_csv_path) or '.', exist_ok=True)
-    with open(output_csv_path, mode='w', encoding='utf-8', newline='') as out_f:
+    tmp_csv_path = f'{output_csv_path}.tmp'
+    with open(tmp_csv_path, mode='w', encoding='utf-8', newline='') as out_f:
         writer = csv.DictWriter(out_f, fieldnames=OUTPUT_COLUMNS)
         writer.writeheader()
         for key in sorted(deduped_rows.keys()):
             writer.writerow(deduped_rows[key])
+    os.replace(tmp_csv_path, output_csv_path)
 
     table_name = os.path.splitext(os.path.basename(output_csv_path))[0]
     tmcf_path = os.path.splitext(output_csv_path)[0] + '.tmcf'
-    with open(tmcf_path, mode='w', encoding='utf-8') as tmcf_f:
+    tmp_tmcf_path = f'{tmcf_path}.tmp'
+    with open(tmp_tmcf_path, mode='w', encoding='utf-8') as tmcf_f:
         tmcf_f.write(f'Node: E:{table_name}->E0\n'
                      'typeOf: dcs:StatVarObservation\n'
                      f'observationAbout: C:{table_name}->observationAbout\n'
@@ -230,6 +232,7 @@ def consolidate_files(
                      f'value: C:{table_name}->value\n'
                      f'measurementMethod: C:{table_name}->measurementMethod\n'
                      f'observationPeriod: C:{table_name}->observationPeriod\n')
+    os.replace(tmp_tmcf_path, tmcf_path)
 
     logging.info(
         'Wrote %s: %d unique observations (from %d raw rows across %d files).',
