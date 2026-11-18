@@ -135,6 +135,8 @@ def _local_markdown_link_errors(repo_root: Path, entrypoints):
                     f'outside repository: {linked_path}')
                 continue
 
+            if linked_path.is_dir():
+                continue
             if not linked_path.is_file():
                 errors.append(
                     f'{source_name}: local link "{raw_target}" targets '
@@ -232,6 +234,22 @@ class MarkdownLinkContractTest(unittest.TestCase):
             self.assertIn('resolves outside repository', message)
             self.assertIn('SKILL.md', message)
 
+    def test_directory_links_resolve_when_directory_exists(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            repo_root = Path(temp_dir) / 'repo'
+            skill = repo_root / 'agents/skills/example/SKILL.md'
+            skill.parent.mkdir(parents=True)
+            (repo_root / 'docs').mkdir()
+            skill.write_text(
+                '[Existing](../../../docs/)\n'
+                '[Missing](../../../missing/)\n',
+                encoding='utf-8')
+
+            errors = _local_markdown_link_errors(repo_root, [skill])
+
+            self.assertEqual(1, len(errors), '\n'.join(errors))
+            self.assertIn('missing file: missing', errors[0])
+
 
 class SkillContractTest(unittest.TestCase):
 
@@ -259,6 +277,7 @@ class SkillContractTest(unittest.TestCase):
     def test_reachable_agent_markdown_links_resolve(self):
         entrypoints = sorted((self._agents_root / 'skills').glob('*/SKILL.md'))
         entrypoints.append(self._agents_root / 'README.md')
+        entrypoints.append(self._repo_root / 'AGENTS.md')
 
         errors = _local_markdown_link_errors(self._repo_root, entrypoints)
 
