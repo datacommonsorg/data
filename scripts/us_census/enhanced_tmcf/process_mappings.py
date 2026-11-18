@@ -26,16 +26,15 @@ The following steps are followed:
 
 import json
 import os
-import requests
 import sys
 import time
-
-from absl import app
-from absl import flags
 from typing import Dict, List
 from zipfile import ZipFile
 
+from absl import app
+from absl import flags
 import process_etmcf
+import requests
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))

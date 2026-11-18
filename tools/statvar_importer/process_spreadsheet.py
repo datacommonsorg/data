@@ -16,18 +16,11 @@
 For more details on configs and usage, please refer to the README.
 """
 
-import cgi
 import copy
-from http import server
 import multiprocessing
 import os
 import re
-import socket
-import subprocess
 import sys
-import threading
-import time
-from urllib import parse
 
 from absl import app
 from absl import flags
@@ -36,7 +29,6 @@ from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
-from googleapiclient.errors import HttpError
 import gspread
 
 flags.DEFINE_string('input_sheet', '', 'URL of spreadsheet to process')
@@ -51,10 +43,10 @@ sys.path.append(os.path.dirname(os.path.dirname(_SCRIPT_DIR)))
 sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPT_DIR)), 'util'))
 
-import stat_var_processor
-import file_util
 import config_flags
+import file_util
 import process_http_server
+import stat_var_processor
 
 _FLAGS = flags.FLAGS
 
@@ -101,14 +93,14 @@ def gdrive_get_credentials(token_file: str = 'tokens.json'):
     # If there are no (valid) credentials available, let the user log in.
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
-            logging.info(f'Refreshing credentials')
+            logging.info('Refreshing credentials')
             creds.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
                 f'{_HOME_DIR}/.config/gspread/credentials.json', _SCOPES)
             creds = flow.run_local_server(port=8100)
         # Save the credentials for the next run
-        with file_utli.FileIO(token_file, 'w') as token:
+        with file_util.FileIO(token_file, 'w') as token:
             token.write(creds.to_json())
     return creds
 
@@ -298,8 +290,8 @@ def process_spreadsheets(
                     'pv_map_files': [],
                 }
                 if parallelism > 1:
-                    task = pool.apply_async(stat_var_processor.process,
-                                            kwds=process_args)
+                    pool.apply_async(stat_var_processor.process,
+                                     kwds=process_args)
                 else:
                     stat_var_processor.process(**process_args)
             pool.close()

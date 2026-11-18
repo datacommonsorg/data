@@ -20,6 +20,7 @@ and Statewide.
 """
 
 import os
+
 from absl import app
 from absl import flags
 from absl import logging
@@ -30,16 +31,19 @@ from urllib3.util.retry import Retry
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string(
-    'output_dir',
-    'input_files',
-    'Directory where downloaded input CSV files will be saved.',
-)
-flags.DEFINE_string(
-    'endpoint',
-    'https://health.data.ny.gov/resource/jsy7-eb4n.json',
-    'Health Data NY BRFSS Socrata API endpoint.',
-)
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        'output_dir',
+        'input_files',
+        'Directory where downloaded input CSV files will be saved.',
+    )
+    flags.DEFINE_string(
+        'endpoint',
+        'https://health.data.ny.gov/resource/jsy7-eb4n.json',
+        'Health Data NY BRFSS Socrata API endpoint.',
+    )
 
 
 def create_session() -> requests.Session:
@@ -284,4 +288,5 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

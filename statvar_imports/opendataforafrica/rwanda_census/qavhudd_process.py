@@ -19,8 +19,8 @@ different columns.
 Hence creating a new column based on the available of the two columns
 '''
 
-import pandas as pd
 import numpy as np
+import pandas as pd
 
 # Reading the input file to make changes.
 df_input = pd.read_csv("gcs_output/input_files/qavhudd.csv")

@@ -1,7 +1,8 @@
 import os
-import requests
-import pandas as pd
+
 from absl import logging
+import pandas as pd
+import requests
 from retry import retry
 
 
@@ -31,7 +32,10 @@ def clean_values(df):
 def process_xlsx(file_path):
     try:
         logging.info(f"Reading file: {file_path}")
-        df_dict = pd.read_excel(file_path, sheet_name=None, header=None)
+        df_dict = pd.read_excel(file_path,
+                                sheet_name=None,
+                                header=None,
+                                engine="openpyxl")
 
         for sheet_name in df_dict:
             logging.info(f"Found sheet: {sheet_name}")
@@ -75,16 +79,15 @@ def process_xlsx(file_path):
                 header_rows = raw_df.iloc[5:9].copy()
                 data_df = raw_df.iloc[9:].copy()
 
-                header_rows = header_rows.ffill(axis=0).infer_objects(
-                    copy=False)
-                header_rows = header_rows.fillna('').astype(str)
+                header_rows = header_rows.ffill(
+                    axis=0).astype(object).fillna('').astype(str)
                 header_rows = header_rows.map(lambda x: ' '.join(x.split()))
                 combined_header = header_rows.apply(
                     lambda x: ' '.join(dict.fromkeys(x)).strip(), axis=0)
                 combined_header = combined_header.str.replace(' +',
                                                               ' ',
                                                               regex=True)
-                data_df.columns = combined_header.values
+                data_df.columns = combined_header.tolist()
 
                 first_col = data_df.iloc[:, 0].astype(str)
                 data_df.insert(0, 'Year', first_col.str.extract(r'(\d{4})')[0])
@@ -104,18 +107,17 @@ def process_xlsx(file_path):
                 header_rows = raw_df.iloc[5:9].copy()
                 data_df = raw_df.iloc[9:].copy()
 
-                header_rows = header_rows.ffill(axis=0).infer_objects(
-                    copy=False)
-                header_rows = header_rows.fillna('').astype(str)
+                header_rows = header_rows.ffill(
+                    axis=0).astype(object).fillna('').astype(str)
                 header_rows = header_rows.map(lambda x: ' '.join(x.split()))
                 combined_header = header_rows.apply(
                     lambda x: ' '.join(dict.fromkeys(x)).strip(), axis=0)
                 combined_header = combined_header.str.replace(' +',
                                                               ' ',
                                                               regex=True)
-                data_df.columns = combined_header.values
-
-                data_df.columns.values[0] = 'Year'
+                cols = combined_header.tolist()
+                cols[0] = 'Year'
+                data_df.columns = cols
 
                 data_df.to_csv(output_csv_path, index=False)
                 logging.info(f"Saved processed sheet to {output_csv_path}")
@@ -126,6 +128,7 @@ def process_xlsx(file_path):
                 logging.info(f"Processing {sheet_name} sheet...")
                 df = df_dict[sheet_name].copy()
                 df = clean_values(df)
+                df = df.astype(object)
                 df.iloc[6,
                         0] = "Year"  # Set column A of 7th row as header "Year"
                 df.to_csv(output_csv_path, index=False, header=False)
@@ -134,7 +137,7 @@ def process_xlsx(file_path):
             else:
                 logging.info(f"Skipping unrecognized sheet: {sheet_name}")
 
-    except Exception as e:
+    except Exception:
         logging.exception(f"Failed to process {file_path}")
         raise
 

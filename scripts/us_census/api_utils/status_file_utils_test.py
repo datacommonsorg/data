@@ -16,13 +16,11 @@ import json
 import os
 import unittest
 
-from scripts.us_census.api_utils.status_file_utils import (
-    get_failed_http_url_list,
-    get_failed_url_list,
-    get_pending_or_fail_url_list,
-    get_pending_url_list,
-    url_to_download,
-)
+from scripts.us_census.api_utils.status_file_utils import get_failed_http_url_list
+from scripts.us_census.api_utils.status_file_utils import get_failed_url_list
+from scripts.us_census.api_utils.status_file_utils import get_pending_or_fail_url_list
+from scripts.us_census.api_utils.status_file_utils import get_pending_url_list
+from scripts.us_census.api_utils.status_file_utils import url_to_download
 
 
 class TestCommonUtil(unittest.TestCase):

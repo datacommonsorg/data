@@ -12,12 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import pandas as pd
+from decimal import Decimal
+from decimal import InvalidOperation
 import os
 import sys
-from decimal import Decimal, InvalidOperation
-from absl import logging
+
 from absl import app
+from absl import logging
+import pandas as pd
 
 # --- GCS Configuration ---
 GCS_BUCKET_NAME = "unresolved_mcf"
@@ -156,7 +158,7 @@ def process_investment_csv(input_csv_filepath: str, output_csv_filepath: str,
                     # If the string cannot be converted to a Decimal (e.g., it's plain text),
                     # assign its original string value to val_to_append.
                     val_to_append = val_str
-                except Exception as e:
+                except Exception:
                     # This catches any other unexpected error during Decimal conversion.
                     # In case of an unexpected error, the value is appended as its original string.
                     val_to_append = val_str

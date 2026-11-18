@@ -20,7 +20,8 @@ import tempfile
 from unittest import mock
 
 from absl import app
-from absl.testing import absltest, flagsaver
+from absl.testing import absltest
+from absl.testing import flagsaver
 import pandas as pd
 import requests
 

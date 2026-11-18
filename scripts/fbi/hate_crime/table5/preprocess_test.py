@@ -13,12 +13,14 @@
 # limitations under the License.
 """Tests for Hate Crime Table 5."""
 
+import json
 import os
 import sys
-import unittest
 import tempfile
-import json
+import unittest
+
 import pandas as pd
+
 from . import preprocess
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))

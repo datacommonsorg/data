@@ -19,7 +19,8 @@ import csv
 import io
 import os
 import unittest
-from .aqicn import *
+
+from .aqicn import write_csv
 
 MODULE = os.path.dirname(__file__)
 

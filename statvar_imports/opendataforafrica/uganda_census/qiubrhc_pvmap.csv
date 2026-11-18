@@ -1,0 +1,21 @@
+"key","p1","v1","p2","v2","p3","v3","p4","v4","p5","v5"
+"REGIONID_REGION","observationAbout","{Data}",,,,,,,,
+"TIME_PERIOD","observationDate","{Number}",,,,,,,,
+"OBS_VALUE","value","{Number}",,,,,,,,
+"FREQ","observationPeriod","P1Y",,,,,,,,
+"VARIABLE:KN.CP","populationType","Person","measuredProperty","count","statType","measuredValue","name","Total Population",,
+"VARIABLE:KN.CP2","populationType","Person","measuredProperty","count","statType","measuredValue","gender","Male","name","Male Population"
+"VARIABLE:KN.CP3","populationType","Person","measuredProperty","count","statType","measuredValue","gender","Female","name","Female Population"
+"VARIABLE:KN.CP5","populationType","Person","measuredProperty","count","statType","measuredValue","placeOfResidenceClassification","Urban","name","Urban Population"
+"VARIABLE:KN.CP6","populationType","Person","measuredProperty","count","statType","measuredValue","placeOfResidenceClassification","Rural","name","Rural Population"
+"VARIABLE:KN.CP9","populationType","Person","measuredProperty","count","statType","measuredValue","residenceType","Household","name","Household Population"
+"VARIABLE:KN.CP10","populationType","Person","measuredProperty","count","statType","measuredValue","residenceType","GroupQuarters","name","Non-Household Population"
+"VARIABLE:Census Populations","populationType","Person","measuredProperty","count","statType","measuredValue","name","Total Population",,
+"VARIABLE:Total Population","populationType","Person","measuredProperty","count","statType","measuredValue","name","Total Population",,
+"VARIABLE:Male Population","populationType","Person","measuredProperty","count","statType","measuredValue","gender","Male","name","Male Population"
+"VARIABLE:Female Population","populationType","Person","measuredProperty","count","statType","measuredValue","gender","Female","name","Female Population"
+"VARIABLE:Urban Population","populationType","Person","measuredProperty","count","statType","measuredValue","placeOfResidenceClassification","Urban","name","Urban Population"
+"VARIABLE:Rural Population","populationType","Person","measuredProperty","count","statType","measuredValue","placeOfResidenceClassification","Rural","name","Rural Population"
+"VARIABLE:Household Population","populationType","Person","measuredProperty","count","statType","measuredValue","residenceType","Household","name","Household Population"
+"VARIABLE:Non-Household Population","populationType","Person","measuredProperty","count","statType","measuredValue","residenceType","GroupQuarters","name","Non-Household Population"
+"VARIABLE:Non-Househod Population","populationType","Person","measuredProperty","count","statType","measuredValue","residenceType","GroupQuarters","name","Non-Household Population"

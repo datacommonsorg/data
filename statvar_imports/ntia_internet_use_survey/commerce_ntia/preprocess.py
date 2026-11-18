@@ -15,10 +15,10 @@
 import os
 import sys
 
-from absl import app, logging
-import pandas as pd
-
+from absl import app
+from absl import logging
 import config
+import pandas as pd
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 

@@ -15,13 +15,13 @@
 Utility functions.
 """
 
-import time
+import datetime
 import os
 import re
-import datetime
-from croniter import croniter
+import time
 from typing import List
 
+from croniter import croniter
 import pytz
 import requests
 
@@ -149,29 +149,3 @@ def download_file(url: str, dest_dir: str, timeout: float = None) -> str:
                 if timeout is not None and time.time() - start > timeout:
                     raise requests.Timeout(f'Downloading {url} timed out')
         return path
-
-
-def parse_tag_list(message: str, tag: str, allowed_chars: str) -> List[str]:
-    """Parses a comma separated list following a tag.
-
-    Example:
-        The function call
-            parse_tag_list('abc IMPORTS=foo,bar abc', 'IMPORTS', 'a-z')
-        returns ['foo', 'bar'].
-
-    Args:
-        message: The message containing the list, as a string.
-        tag: The tag preceding the list, as a string.
-        allowed_chars: Valid characters in an element. This should be in regex
-            format, e.g. 'A-Za-z' and 'abc'.
-
-    Returns:
-        A list of elements each as a string.
-    """
-    targets = set()
-    pattern = r'(?:{}=)([{},]+)'.format(tag, allowed_chars)
-    target_lists = re.findall(pattern, message)
-    for target_list in target_lists:
-        for target in target_list.split(','):
-            targets.add(target)
-    return list(targets)

@@ -15,9 +15,11 @@
 
 Streams current and previous `.mcf` files (local or `gs://` wildcard paths) into
 normalized observation and schema CSVs in constant memory, loads them into
-ephemeral BigQuery tables, executes SQL FULL OUTER JOIN queries to compute
-per-StatVar ADDED/DELETED/MODIFIED counts, writes `differ_summary.json` and
-`differ_summary.csv` to `--output_location`, and drops the temporary tables.
+temporary BigQuery tables (which auto-expire after `--bq_table_ttl_hours`),
+executes SQL FULL OUTER JOIN queries to stream complete diff MCF files
+(`nodes-added.mcf`, `nodes-deleted.mcf`, `nodes-modified.mcf`,
+`nodes-original.mcf`) and compute per-StatVar ADDED/DELETED/MODIFIED counts
+(`differ_summary.json` and `differ_summary.csv`) in `--output_location`.
 
 To view all CLI flags, defaults, and usage details (recommended for agents):
   $ python3 tools/import_differ/bigquery_differ.py --help
@@ -40,9 +42,12 @@ Usage via import_differ.py:
       --project_id="datcom-import-automation-prod"
 """
 
+from collections import defaultdict
 import contextlib
 import csv
-from datetime import datetime, timedelta, timezone
+from datetime import datetime
+from datetime import timedelta
+from datetime import timezone
 import io
 import os
 import re
@@ -54,8 +59,10 @@ import uuid
 from absl import app
 from absl import flags
 from absl import logging
+from google.api_core import exceptions as gcp_exceptions
 from google.cloud import bigquery
 from google.cloud import storage
+import pandas as pd
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 _DATA_DIR = os.path.dirname(os.path.dirname(_SCRIPT_DIR))
@@ -64,7 +71,9 @@ sys.path.append(os.path.join(_DATA_DIR, 'util'))
 sys.path.append(os.path.join(_DATA_DIR, 'tools', 'statvar_importer'))
 
 import differ_utils
-from file_util import file_get_gcs_blob, file_get_matching, file_is_gcs
+from file_util import file_get_gcs_blob
+from file_util import file_get_matching
+from file_util import file_is_gcs
 from mcf_file_util import normalize_value
 
 OBSERVATION_KEY_PROPERTIES = [
@@ -79,8 +88,8 @@ OBSERVATION_KEY_PROPERTIES = [
 
 OBS_BQ_SCHEMA = [
     bigquery.SchemaField('key_combined', 'STRING'),
-    bigquery.SchemaField('variableMeasured', 'STRING'),
     bigquery.SchemaField('value', 'STRING'),
+    bigquery.SchemaField('node_id', 'STRING'),
 ]
 
 SCHEMA_NODE_BQ_SCHEMA = [
@@ -92,14 +101,15 @@ SCHEMA_NODE_BQ_SCHEMA = [
 def ensure_bq_dataset(bq_client: bigquery.Client,
                       dataset_ref: str,
                       expiration_hours: int = 12) -> None:
-    """Creates or updates the BigQuery dataset with the specified default table TTL."""
+    """Ensures the BigQuery dataset exists, setting default TTL on dedicated differ datasets."""
     expected_ttl_ms = expiration_hours * 3600 * 1000
     try:
         ds = bq_client.get_dataset(dataset_ref)
-        if ds.default_table_expiration_ms != expected_ttl_ms:
+        if (dataset_ref.endswith('.datcom_import_differ') and
+                ds.default_table_expiration_ms != expected_ttl_ms):
             ds.default_table_expiration_ms = expected_ttl_ms
             bq_client.update_dataset(ds, ['default_table_expiration_ms'])
-    except Exception:
+    except gcp_exceptions.NotFound:
         logging.info('Creating BigQuery dataset %s', dataset_ref)
         ds = bigquery.Dataset(dataset_ref)
         ds.default_table_expiration_ms = expected_ttl_ms
@@ -115,6 +125,13 @@ def _normalize_prop_val(value) -> str:
     return str(value) if value is not None else ''
 
 
+def _format_raw_prop(value) -> str:
+    """Formats a property value without numeric/namespace coercion."""
+    if isinstance(value, list):
+        return ', '.join(str(v).strip() for v in value)
+    return str(value).strip() if value is not None else ''
+
+
 def _flush_node_to_csv(node: Dict[str, Any], obs_writer: csv.writer,
                        schema_writer: csv.writer) -> Tuple[int, int]:
     """Writes a single parsed MCF node to either the observation or schema CSV writer."""
@@ -126,9 +143,10 @@ def _flush_node_to_csv(node: Dict[str, Any], obs_writer: csv.writer,
             for prop in OBSERVATION_KEY_PROPERTIES
         ]
         key_combined = ';'.join(key_parts)
-        var_measured = _normalize_prop_val(node.get('variableMeasured', ''))
-        val = _normalize_prop_val(node.get('value', ''))
-        obs_writer.writerow([key_combined, var_measured, val])
+        val = _format_raw_prop(node.get('value', ''))
+        raw_node_id = node.get('Node') or node.get('dcid', '')
+        node_id = _format_raw_prop(raw_node_id)
+        obs_writer.writerow([key_combined, val, node_id])
         return 1, 0
     else:
         raw_id = node.get('dcid') or node.get('Node', '')
@@ -163,7 +181,7 @@ def _open_text_stream(path: str, mode: str = 'r'):
             if not blob:
                 raise RuntimeError(
                     f'Failed to create GCS blob for write: {path}')
-            raw_stream = storage.fileio.BlobWriter(blob)
+            raw_stream = storage.fileio.BlobWriter(blob, ignore_flush=True)
             with io.TextIOWrapper(raw_stream, encoding='utf-8',
                                   newline=newline) as stream:
                 yield stream
@@ -206,7 +224,7 @@ def stream_mcf_to_csv(mcf_pattern: str, obs_csv_path: str,
          _open_text_stream(schema_csv_path, mode='w') as schema_file:
         obs_writer = csv.writer(obs_file)
         schema_writer = csv.writer(schema_file)
-        obs_writer.writerow(['key_combined', 'variableMeasured', 'value'])
+        obs_writer.writerow(['key_combined', 'value', 'node_id'])
         schema_writer.writerow(['dcid', 'value_combined'])
 
         for mcf_file in mcf_files:
@@ -323,6 +341,49 @@ def _sanitize_job_suffix(job_name: str) -> str:
     return f'{cleaned}_{uuid.uuid4().hex[:8]}'
 
 
+def _format_obs_mcf_node(key_combined: str, value: str, node_id: str) -> str:
+    """Reconstructs an observation MCF node block identically to ImportDiffer."""
+    lines = []
+    if node_id and node_id != 'nan':
+        lines.append(f'Node: {node_id}')
+    keys = (key_combined or '').split(';')
+    for i, prop in enumerate(OBSERVATION_KEY_PROPERTIES):
+        if i < len(keys) and keys[i] and keys[i] != 'nan':
+            lines.append(f'{prop}: {keys[i]}')
+    if value and value != 'nan':
+        lines.append(f'value: {value}')
+    lines.append('typeOf: StatVarObservation')
+    return '\n'.join(lines) + '\n\n'
+
+
+def _format_schema_mcf_node(dcid: str, value_combined: str) -> str:
+    """Reconstructs a schema MCF node block identically to ImportDiffer."""
+    lines = []
+    dcid_str = dcid or ''
+    if dcid_str.startswith('dcid:'):
+        lines.append(f'dcid: {dcid_str[len("dcid:"):]}')
+    else:
+        lines.append(f'Node: {dcid_str}')
+    for kv in (value_combined or '').split(';'):
+        if ':' in kv:
+            k, v = kv.split(':', 1)
+            lines.append(f'{k}: {v}')
+    return '\n'.join(lines) + '\n\n'
+
+
+def _row_val(row: Any, key: str) -> str:
+    """Extracts a string value from a BigQuery Row or dict, returning '' for None."""
+    val = row.get(key) if isinstance(row, dict) else getattr(row, key, None)
+    return str(val) if val is not None else ''
+
+
+def _join_output_path(output_location: str, filename: str) -> str:
+    """Joins output directory and filename for local or gs:// paths."""
+    if file_is_gcs(output_location):
+        return f"{output_location.rstrip('/')}/{filename}"
+    return os.path.join(output_location, filename)
+
+
 def run_bigquery_differ(
     current_data: str,
     previous_data: str,
@@ -338,7 +399,11 @@ def run_bigquery_differ(
         project_id = os.environ.get('GOOGLE_CLOUD_PROJECT') or os.environ.get(
             'PROJECT_ID', '')
 
-    bq_client = bigquery.Client(project=project_id)
+    client_opts = {'quota_project_id': project_id} if project_id else None
+    bq_client = bigquery.Client(project=project_id or None,
+                                client_options=client_opts)
+    if not project_id:
+        project_id = getattr(bq_client, 'project', '') or ''
     dataset_ref = f'{project_id}.{dataset_id}'
     ensure_bq_dataset(bq_client, dataset_ref, expiration_hours=expiration_hours)
 
@@ -347,93 +412,172 @@ def run_bigquery_differ(
     prev_obs_table = f'{dataset_ref}.prev_obs_{suffix}'
     curr_schema_table = f'{dataset_ref}.curr_schema_{suffix}'
     prev_schema_table = f'{dataset_ref}.prev_schema_{suffix}'
+    logging.info(
+        'Using BigQuery differ tables (TTL=%dh, suffix=%s): %s, %s, %s, %s',
+        expiration_hours,
+        suffix,
+        curr_obs_table,
+        prev_obs_table,
+        curr_schema_table,
+        prev_schema_table,
+    )
 
-    try:
-        logging.info('Step 1/3: Loading current MCF data into BigQuery...')
-        curr_obs_count, curr_schema_count = load_mcf_to_bq_tables(
-            bq_client,
-            current_data,
-            curr_obs_table,
-            curr_schema_table,
-            temp_dir=gcs_temp_dir,
-            suffix=f'curr_{suffix}',
-            expiration_hours=expiration_hours)
+    statvar_counts: Dict[str, Dict[str, int]] = defaultdict(lambda: {
+        'ADDED': 0,
+        'DELETED': 0,
+        'MODIFIED': 0
+    })
+    schema_counts = {'ADDED': 0, 'DELETED': 0, 'MODIFIED': 0}
 
-        logging.info('Step 2/3: Loading previous MCF data into BigQuery...')
-        prev_obs_count, prev_schema_count = load_mcf_to_bq_tables(
-            bq_client,
-            previous_data,
-            prev_obs_table,
-            prev_schema_table,
-            temp_dir=gcs_temp_dir,
-            suffix=f'prev_{suffix}',
-            expiration_hours=expiration_hours)
+    logging.info('Step 1/3: Loading current MCF data into BigQuery...')
+    curr_obs_count, curr_schema_count = load_mcf_to_bq_tables(
+        bq_client,
+        current_data,
+        curr_obs_table,
+        curr_schema_table,
+        temp_dir=gcs_temp_dir,
+        suffix=f'curr_{suffix}',
+        expiration_hours=expiration_hours)
 
-        logging.info('Step 3/3: Running BigQuery FULL OUTER JOIN diff...')
-        obs_diff_sql = f"""
-        WITH diff AS (
-          SELECT
-            COALESCE(c.variableMeasured, p.variableMeasured) AS variableMeasured,
-            CASE
-              WHEN p.key_combined IS NULL THEN 'ADDED'
-              WHEN c.key_combined IS NULL THEN 'DELETED'
-              WHEN c.value != p.value THEN 'MODIFIED'
-              ELSE 'UNMODIFIED'
-            END AS diff_type
-          FROM `{curr_obs_table}` c
-          FULL OUTER JOIN `{prev_obs_table}` p
-            ON c.key_combined = p.key_combined
-          WHERE c.value IS DISTINCT FROM p.value
-        )
-        SELECT
-          REGEXP_REPLACE(variableMeasured, '^dcid:', '') AS StatVar,
-          COUNTIF(diff_type = 'ADDED') AS ADDED,
-          COUNTIF(diff_type = 'DELETED') AS DELETED,
-          COUNTIF(diff_type = 'MODIFIED') AS MODIFIED
-        FROM diff
-        GROUP BY StatVar
-        ORDER BY StatVar
-        """
-        obs_diff_df = bq_client.query(obs_diff_sql).to_dataframe()
+    logging.info('Step 2/3: Loading previous MCF data into BigQuery...')
+    prev_obs_count, prev_schema_count = load_mcf_to_bq_tables(
+        bq_client,
+        previous_data,
+        prev_obs_table,
+        prev_schema_table,
+        temp_dir=gcs_temp_dir,
+        suffix=f'prev_{suffix}',
+        expiration_hours=expiration_hours)
 
-        schema_diff_sql = f"""
-        WITH diff AS (
-          SELECT
-            CASE
-              WHEN p.dcid IS NULL THEN 'ADDED'
-              WHEN c.dcid IS NULL THEN 'DELETED'
-              WHEN c.value_combined != p.value_combined THEN 'MODIFIED'
-              ELSE 'UNMODIFIED'
-            END AS diff_type
-          FROM `{curr_schema_table}` c
-          FULL OUTER JOIN `{prev_schema_table}` p
-            ON c.dcid = p.dcid
-          WHERE c.value_combined IS DISTINCT FROM p.value_combined
-        )
-        SELECT
-          COUNTIF(diff_type = 'ADDED') AS added_schema_count,
-          COUNTIF(diff_type = 'DELETED') AS deleted_schema_count,
-          COUNTIF(diff_type = 'MODIFIED') AS modified_schema_count
-        FROM diff
-        """
-        schema_rows = list(bq_client.query(schema_diff_sql).result())
-        if schema_rows:
-            added_schema = int(schema_rows[0].added_schema_count or 0)
-            deleted_schema = int(schema_rows[0].deleted_schema_count or 0)
-            modified_schema = int(schema_rows[0].modified_schema_count or 0)
-        else:
-            added_schema = deleted_schema = modified_schema = 0
+    logging.info('Step 3/3: Running BigQuery FULL OUTER JOIN diff...')
+    obs_diff_sql = f"""
+    SELECT
+      COALESCE(c.key_combined, p.key_combined) AS key_combined,
+      c.value AS curr_value,
+      p.value AS prev_value,
+      c.node_id AS curr_node,
+      p.node_id AS prev_node,
+      CASE
+        WHEN p.key_combined IS NULL THEN 'ADDED'
+        WHEN c.key_combined IS NULL THEN 'DELETED'
+        WHEN c.value != p.value THEN 'MODIFIED'
+        ELSE 'UNMODIFIED'
+      END AS diff_type
+    FROM `{curr_obs_table}` c
+    FULL OUTER JOIN `{prev_obs_table}` p
+      ON c.key_combined = p.key_combined
+    WHERE c.value IS DISTINCT FROM p.value
+    """
 
-    finally:
-        for table_id in (curr_obs_table, prev_obs_table, curr_schema_table,
-                         prev_schema_table):
-            bq_client.delete_table(table_id, not_found_ok=True)
+    schema_diff_sql = f"""
+    WITH curr_schema AS (
+      SELECT DISTINCT dcid, value_combined FROM `{curr_schema_table}`
+    ),
+    prev_schema AS (
+      SELECT DISTINCT dcid, value_combined FROM `{prev_schema_table}`
+    )
+    SELECT
+      COALESCE(c.dcid, p.dcid) AS dcid,
+      c.value_combined AS curr_value,
+      p.value_combined AS prev_value,
+      CASE
+        WHEN p.dcid IS NULL THEN 'ADDED'
+        WHEN c.dcid IS NULL THEN 'DELETED'
+        WHEN c.value_combined != p.value_combined THEN 'MODIFIED'
+        ELSE 'UNMODIFIED'
+      END AS diff_type
+    FROM curr_schema c
+    FULL OUTER JOIN prev_schema p
+      ON c.dcid = p.dcid
+    WHERE c.value_combined IS DISTINCT FROM p.value_combined
+    """
+
+    for fname in ('nodes-added.mcf', 'nodes-deleted.mcf', 'nodes-modified.mcf',
+                  'nodes-original.mcf'):
+        _remove_temp_file(_join_output_path(output_location, fname))
+
+    with contextlib.ExitStack() as mcf_stack:
+        open_streams: Dict[str, Any] = {}
+
+        def _write_mcf_block(filename: str, block: str) -> None:
+            if filename not in open_streams:
+                out_path = _join_output_path(output_location, filename)
+                open_streams[filename] = mcf_stack.enter_context(
+                    _open_text_stream(out_path, mode='w'))
+            open_streams[filename].write(block)
+
+        for row in bq_client.query(obs_diff_sql).result():
+            diff_type = _row_val(row, 'diff_type')
+            key_combined = _row_val(row, 'key_combined')
+            raw_sv = key_combined.split(';', 1)[0]
+            stat_var = (raw_sv[len('dcid:'):]
+                        if raw_sv.startswith('dcid:') else raw_sv)
+            if diff_type in ('ADDED', 'DELETED', 'MODIFIED'):
+                statvar_counts[stat_var][diff_type] += 1
+            if diff_type == 'ADDED':
+                _write_mcf_block(
+                    'nodes-added.mcf',
+                    _format_obs_mcf_node(key_combined,
+                                         _row_val(row, 'curr_value'),
+                                         _row_val(row, 'curr_node')))
+            elif diff_type == 'DELETED':
+                _write_mcf_block(
+                    'nodes-deleted.mcf',
+                    _format_obs_mcf_node(key_combined,
+                                         _row_val(row, 'prev_value'),
+                                         _row_val(row, 'prev_node')))
+            elif diff_type == 'MODIFIED':
+                _write_mcf_block(
+                    'nodes-modified.mcf',
+                    _format_obs_mcf_node(key_combined,
+                                         _row_val(row, 'curr_value'),
+                                         _row_val(row, 'curr_node')))
+                _write_mcf_block(
+                    'nodes-original.mcf',
+                    _format_obs_mcf_node(key_combined,
+                                         _row_val(row, 'prev_value'),
+                                         _row_val(row, 'prev_node')))
+
+        for row in bq_client.query(schema_diff_sql).result():
+            diff_type = _row_val(row, 'diff_type')
+            dcid = _row_val(row, 'dcid')
+            if diff_type in schema_counts:
+                schema_counts[diff_type] += 1
+            if diff_type == 'ADDED':
+                _write_mcf_block(
+                    'nodes-added.mcf',
+                    _format_schema_mcf_node(dcid, _row_val(row, 'curr_value')))
+            elif diff_type == 'DELETED':
+                _write_mcf_block(
+                    'nodes-deleted.mcf',
+                    _format_schema_mcf_node(dcid, _row_val(row, 'prev_value')))
+            elif diff_type == 'MODIFIED':
+                _write_mcf_block(
+                    'nodes-modified.mcf',
+                    _format_schema_mcf_node(dcid, _row_val(row, 'curr_value')))
+                _write_mcf_block(
+                    'nodes-original.mcf',
+                    _format_schema_mcf_node(dcid, _row_val(row, 'prev_value')))
+
+    if statvar_counts:
+        obs_diff_df = pd.DataFrame([{
+            'StatVar': sv,
+            'ADDED': counts['ADDED'],
+            'DELETED': counts['DELETED'],
+            'MODIFIED': counts['MODIFIED'],
+        } for sv, counts in sorted(statvar_counts.items())])
+    else:
+        obs_diff_df = pd.DataFrame(
+            columns=['StatVar', 'ADDED', 'DELETED', 'MODIFIED'])
 
     added_obs = int(obs_diff_df['ADDED'].sum()) if not obs_diff_df.empty else 0
     deleted_obs = int(
         obs_diff_df['DELETED'].sum()) if not obs_diff_df.empty else 0
     modified_obs = int(
         obs_diff_df['MODIFIED'].sum()) if not obs_diff_df.empty else 0
+    added_schema = schema_counts['ADDED']
+    deleted_schema = schema_counts['DELETED']
+    modified_schema = schema_counts['MODIFIED']
     obs_diff_total = added_obs + deleted_obs + modified_obs
     schema_diff_total = added_schema + deleted_schema + modified_schema
 

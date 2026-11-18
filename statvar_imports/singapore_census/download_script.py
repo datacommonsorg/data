@@ -13,11 +13,13 @@
 # # limitations under the License.
 
 import json
-import pandas as pd
-from urllib.request import Request, urlopen
 import os
+from urllib.request import Request
+from urllib.request import urlopen
+
 from absl import app
 from absl import logging
+import pandas as pd
 
 logging.set_verbosity(logging.INFO)
 

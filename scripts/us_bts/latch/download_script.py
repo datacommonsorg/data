@@ -20,20 +20,30 @@ import json
 import os
 import subprocess
 import sys
-from typing import List, Dict
+from typing import Dict, List
 from urllib.parse import urlparse
-from absl import app, flags, logging
+
+from absl import app
+from absl import flags
+from absl import logging
 
 logging.set_verbosity(logging.INFO)
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util/'))
 
-from download_util_script import _retry_method, download_file
+from download_util_script import _retry_method
+from download_util_script import download_file
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('output_dir', 'input_files',
-                    'Output directory to download files to.')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('output_dir', 'input_files',
+                        'Output directory to download files to.')
+
+
 _GCS_URLS_CONFIG_FILE = 'gs://unresolved_mcf/us_bts/latch/latest/import_configs.json'
 _SOCRATA_PAGINATION_LIMIT = 50000
 
@@ -176,17 +186,16 @@ def download_all_files_from_config(download_dir: str,
 
         output_path = os.path.join(download_dir, file_name)
 
-        success = False
         try:
             file_name_lower = file_name.lower()
             parsed_url = urlparse(url)
 
             if file_name_lower.endswith('.gz'):
-                success = _download_and_decompress_gz(url=parsed_url,
-                                                      output_path=output_path)
+                _download_and_decompress_gz(url=parsed_url,
+                                            output_path=output_path)
 
             elif file_name_lower.endswith('.zip'):
-                success = download_file(
+                download_file(
                     url,
                     output_folder=download_dir,
                     unzip=True,  # Instruct util to unzip
@@ -194,14 +203,14 @@ def download_all_files_from_config(download_dir: str,
             # Heuristic for Socrata API pagination: check if URL contains $limit or $offset,
             # or if it's a common Socrata resource path (e.g., /resource/ABCD-EFGH.json)
             # This heuristic might need adjustment based on specific URL patterns.
-            elif '$limit=' in url or '$offset=' in url or '/resource/' in parsed_url.path or not '.' in os.path.basename(
+            elif '$limit=' in url or '$offset=' in url or '/resource/' in parsed_url.path or '.' not in os.path.basename(
                     parsed_url.path):
-                success = _download_paginated_socrata_file(
-                    url=url, output_path=output_path)
+                _download_paginated_socrata_file(url=url,
+                                                 output_path=output_path)
             else:
                 # For all other direct file downloads, use the robust utility.
                 # The 'file_name' from config is NOT passed here as per 'no modification to download_util_script.py' constraint.
-                success = download_file(
+                download_file(
                     url=url,
                     output_folder=download_dir,
                     unzip=False,
@@ -225,4 +234,5 @@ def main(_) -> None:
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

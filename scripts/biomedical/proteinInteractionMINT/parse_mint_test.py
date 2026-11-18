@@ -16,6 +16,7 @@ Run "python3 parse_mint_test.py"
 """
 
 import unittest
+
 import parse_mint
 
 CONST_INPUT = (

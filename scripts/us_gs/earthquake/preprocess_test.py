@@ -17,9 +17,9 @@ python3 -m unittest discover -v -s ../ -p "preprocess_test.py"
 """
 
 import os
+import sys
 import unittest
 from unittest import mock
-import sys
 
 MODULE_DIR = os.path.dirname(__file__)
 TEST_DIR = os.path.join(MODULE_DIR, "test_data")

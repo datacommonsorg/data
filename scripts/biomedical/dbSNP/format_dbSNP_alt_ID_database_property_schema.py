@@ -23,8 +23,8 @@ variant for a .vcf or .txt input file as properties of GeneticVariant.
 		genetic variants as properties of GeneticVariant
 '''
 
-import sys
 import re
+import sys
 
 
 def make_camel_case(item):

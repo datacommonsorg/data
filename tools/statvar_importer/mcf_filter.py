@@ -25,11 +25,8 @@ To remove nodes defined in another MCF file:
 """
 
 from collections import OrderedDict
-from itertools import islice
 import os
 import sys
-import time
-import urllib
 
 from absl import app
 from absl import flags
@@ -54,10 +51,13 @@ sys.path.append(
 
 from counters import Counters
 from dc_api_wrapper import dc_api_get_node_property_values
-from mcf_file_util import load_mcf_nodes, write_mcf_nodes
-from mcf_file_util import add_namespace, strip_namespace
+from mcf_diff import diff_mcf_node_pvs
+from mcf_diff import get_diff_config
+from mcf_file_util import add_namespace
 from mcf_file_util import check_nodes_can_merge
-from mcf_diff import diff_mcf_node_pvs, get_diff_config
+from mcf_file_util import load_mcf_nodes
+from mcf_file_util import strip_namespace
+from mcf_file_util import write_mcf_nodes
 
 
 def drop_mcf_nodes(
@@ -98,19 +98,19 @@ def drop_mcf_nodes(
                 if config.get('output_nodes_with_additions',
                               False) and (deleted or modified):
                     output_nodes[dcid] = pvs
-                    counters.add_counter(f'input-nodes-with-additions', 1)
+                    counters.add_counter('input-nodes-with-additions', 1)
                 else:
-                    counters.add_counter(f'error-input-ignore-node-diff', 1,
+                    counters.add_counter('error-input-ignore-node-diff', 1,
                                          dcid)
             else:
                 logging.debug(f'Ignored Node: {dcid},\n{pvs}\n')
-                counters.add_counter(f'input-nodes-ignored', 1)
+                counters.add_counter('input-nodes-ignored', 1)
             # Check if nodes can be merged.
             if not check_nodes_can_merge(ignore_pvs, pvs):
                 logging.error(
                     f'Node has conflicting properties:{dcid}: {ignore_pvs}, {pvs}'
                 )
-                counters.add_counter(f'error-node-merge-conflict', 1, dcid)
+                counters.add_counter('error-node-merge-conflict', 1, dcid)
         else:
             output_nodes[dcid] = pvs
     return output_nodes
@@ -182,7 +182,7 @@ def filter_mcf_file(
     if output_mcf:
         write_mcf_nodes([output_nodes], output_mcf)
         logging.info(f'Wrote {len(output_nodes)} nodes to {output_mcf}')
-    counters.add_counter(f'output-nodes', len(output_nodes))
+    counters.add_counter('output-nodes', len(output_nodes))
     counters.print_counters()
     return output_nodes
 

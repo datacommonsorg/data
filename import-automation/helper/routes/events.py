@@ -14,6 +14,7 @@
 
 from datetime import datetime, timezone
 import logging
+from zoneinfo import ZoneInfo
 import croniter
 from fastapi import APIRouter, Depends, HTTPException, Request
 from clients.bigquery import BigQueryClient
@@ -29,6 +30,8 @@ from routes.models import (
     UpdateImportStatusRequest,
 )
 from utils import imports as import_utils
+
+_CDA_FEED_TIMEZONE = ZoneInfo("America/Los_Angeles")
 
 router = APIRouter(prefix="/imports", tags=["events"])
 
@@ -65,7 +68,7 @@ async def handle_feed_event(
 
     latest_version = attributes.get(
         'import_version',
-        datetime.now(timezone.utc).strftime("%Y-%m-%d"))
+        datetime.now(_CDA_FEED_TIMEZONE).strftime("%Y-%m-%d"))
     graph_path = attributes.get('graph_path', "/**/*.mcf*")
     import_size = attributes.get('import_size', 'small')
     cron_schedule = attributes.get('cron_schedule', '')

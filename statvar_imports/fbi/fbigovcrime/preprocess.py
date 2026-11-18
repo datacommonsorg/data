@@ -12,19 +12,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import sys
-import time
-from absl import logging
-from absl import flags
-from absl import app
 import os
 import re
-import pandas as pd
 import shutil
 import subprocess
+import sys
+
+from absl import app
+from absl import flags
+from absl import logging
+import pandas as pd
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('output_folder', 'download_folder', 'download folder name')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('output_folder', 'download_folder',
+                        'download folder name')
+
 
 # --- GCS Configuration ---
 GCS_BUCKET_NAME = "unresolved_mcf"
@@ -208,4 +214,5 @@ def main(unused_argv):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

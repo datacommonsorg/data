@@ -15,6 +15,7 @@
 
 import hashlib
 import unittest
+
 from manifest_to_mcf import process_text
 
 

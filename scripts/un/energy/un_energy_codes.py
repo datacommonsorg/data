@@ -13,11 +13,11 @@
 # limitations under the License.
 """Utilities to map UNData Energy codes to StatVar properties and values"""
 
-from typing import List
-
 import os
 import re
 import sys
+from typing import List
+
 from absl import logging
 
 # Allows the following module imports to work when running as a script

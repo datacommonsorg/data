@@ -35,8 +35,8 @@ To import to bigquery:
     ```
 """
 
-import os
 import json
+import os
 import sys
 
 IN_DATA_PATH = 'tmp_raw_data'

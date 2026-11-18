@@ -12,18 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
-import sys
 import hashlib
-import pandas as pd
-import requests
-import re
 import json
+import os
+import re
+import sys
 import tempfile
-from urllib.parse import urlparse, parse_qs, urlencode
-from absl import logging
+from urllib.parse import parse_qs
+from urllib.parse import urlencode
+from urllib.parse import urlparse
+
 from absl import app
-from google.cloud import storage
+from absl import logging
+import pandas as pd
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 data_dir = os.path.dirname(os.path.dirname(script_dir))

@@ -16,14 +16,9 @@
 __author__ = ["Thejesh GN (i@thejeshgn.com)"]
 
 import os
-import sys
-import json
-import csv
-import pandas as pd
-import numpy as np
-import requests
-import time
 from os import path
+import sys
+
 from india_udise.common.base import UDISEIndiaDataLoaderBase
 
 # module_dir_ is the path to where this test is running from.

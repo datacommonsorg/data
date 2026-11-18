@@ -31,6 +31,7 @@ sys.path.insert(1, os.path.join(_CODEDIR, '..', 'common'))
 from data_loader import SubjectTableDataLoaderBase
 from generate_col_map import process_zip_file
 from resolve_geo_id import convert_to_place_dcid
+
 # pylint: enable=wrong-import-position
 # pylint: enable=import-error
 

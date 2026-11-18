@@ -15,27 +15,26 @@ import functools
 import io
 import json
 import os
-import shutil
 import sys
 import time
 import zipfile
+
 from absl import app
 from absl import flags
 from absl import logging
 from bs4 import BeautifulSoup
-import requests
-import fetch_ncid
-from download_config import COLUMNS_SELECTOR_URL
 from download_config import COLUMNS_SELECTOR
+from download_config import COLUMNS_SELECTOR_URL
 from download_config import COLUMNS_TO_DOWNLOAD_WITH_SINGLE_API_CALL
-from download_config import COMPRESS_FILE_URL
 from download_config import COMPRESS_FILE
+from download_config import COMPRESS_FILE_URL
 from download_config import DOWNLOAD_URL
 from download_config import HEADERS
 from download_config import MAX_RETRIES
 from download_config import NCES_DOWNLOAD_URL
 from download_config import RETRY_SLEEP_SECS
-from download_config import YEAR_PAYLOAD, YEAR_URL
+from download_config import YEAR_PAYLOAD
+from download_config import YEAR_URL
 from download_files_details import DEFAULT_COLUMNS_SELECTED
 from download_files_details import DISTRICT_COLUMNS
 from download_files_details import KEY_COLUMNS_DISTRICT
@@ -43,6 +42,8 @@ from download_files_details import KEY_COLUMNS_PRIVATE
 from download_files_details import KEY_COLUMNS_PUBLIC
 from download_files_details import PRIVATE_COLUMNS
 from download_files_details import PUBLIC_COLUMNS
+import fetch_ncid
+import requests
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_MODULE_DIR, '../../../util/'))

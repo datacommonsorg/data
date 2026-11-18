@@ -20,10 +20,11 @@ URL: https://data.cdc.gov/browse?category=Environmental+Health+%26+Toxicology
 python3 parse_precipitation_index.py input_files output_files
 """
 
-import sys
-import pandas as pd
-from absl import logging
 import os
+import sys
+
+from absl import logging
+import pandas as pd
 
 logging.set_verbosity(logging.INFO)
 
