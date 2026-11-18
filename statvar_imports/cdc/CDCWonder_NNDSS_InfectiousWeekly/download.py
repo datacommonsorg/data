@@ -152,8 +152,12 @@ def download_source_csv() -> str:
     return RAW_FILE
 
 
-def preprocess_csv(filepath: str, out_filepath: str) -> pd.DataFrame:
-    """Filter x9gk-5huc to valid Current week rows, add observationDate, and sum NY+NYC."""
+def preprocess_csv(
+    filepath: str,
+    out_filepath: str,
+    min_year: int = 2022,
+) -> pd.DataFrame:
+    """Filter x9gk-5huc to valid Current week rows (>= min_year), add observationDate, and sum NY+NYC."""
     chunks = []
     ny_sums: Dict[Tuple[str, str, str, str], float] = {}
     required_cols = [
@@ -191,6 +195,8 @@ def preprocess_csv(filepath: str, out_filepath: str) -> pd.DataFrame:
             chunk = chunk[~flag_series.isin(SKIP_FLAGS)]
 
         chunk = chunk[chunk["Current week"].notna()].copy()
+        mmwr_year = pd.to_numeric(chunk["Current MMWR Year"], errors="coerce")
+        chunk = chunk[mmwr_year.notna() & (mmwr_year >= min_year)]
         chunk["val_num"] = pd.to_numeric(chunk["Current week"], errors="coerce")
         chunk = chunk[chunk["val_num"].notna() & (chunk["val_num"] >= 0)]
         if chunk.empty:
@@ -297,7 +303,8 @@ def normalize_output_files(
     found_period = False
     for line in lines:
         if line.startswith("observationPeriod:"):
-            new_lines.append(f"observationPeriod: C:{prefix}->observationPeriod\n")
+            new_lines.append(
+                f"observationPeriod: C:{prefix}->observationPeriod\n")
             found_period = True
         else:
             new_lines.append(line)

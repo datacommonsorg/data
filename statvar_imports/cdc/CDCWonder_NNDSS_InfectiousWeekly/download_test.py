@@ -69,6 +69,14 @@ class DownloadTest(unittest.TestCase):
                 "Current week": "5.0",
                 "Current week, flag": "N",
             },
+            {
+                "Reporting Area": "ALABAMA",
+                "Current MMWR Year": "2021",
+                "MMWR WEEK": "52",
+                "Label": "Campylobacteriosis",
+                "Current week": "12.0",
+                "Current week, flag": "-",
+            },
         ]
         with tempfile.TemporaryDirectory() as tmpdir:
             in_csv = os.path.join(tmpdir, "rows.csv")
@@ -103,8 +111,9 @@ class DownloadTest(unittest.TestCase):
             csv_path = os.path.join(tmpdir, "nndss_weekly_output.csv")
             tmcf_path = os.path.join(tmpdir, "nndss_weekly_output.tmcf")
             with open(csv_path, "w", encoding="utf-8") as f:
-                f.write("observationDate,observationAbout,value,variableMeasured\n"
-                        "2024-03-03,country/USA,3,StatVar1\n")
+                f.write(
+                    "observationDate,observationAbout,value,variableMeasured\n"
+                    "2024-03-03,country/USA,3,StatVar1\n")
             with open(tmcf_path, "w", encoding="utf-8") as f:
                 f.write("Node: E:nndss_weekly_output->E0\n"
                         "observationPeriod: P1W\n"
