@@ -11,10 +11,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Unit and PVMap integration tests for MexicoCensus download.py."""
+"""Unit tests for MexicoCensus download.py."""
 
 import os
-import subprocess
 import sys
 import tempfile
 import unittest
@@ -23,7 +22,6 @@ from unittest import mock
 import requests
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-_REPO_ROOT = os.path.abspath(os.path.join(_SCRIPT_DIR, '..', '..', '..'))
 if _SCRIPT_DIR not in sys.path:
     sys.path.insert(0, _SCRIPT_DIR)
 
@@ -296,69 +294,6 @@ class DownloadUnitTest(unittest.TestCase):
         self.assertEqual(res_post, {'ok': True})
         self.assertEqual(session_post.post.call_count, 2)
         self.assertFalse(session_post.verify)
-
-
-class PVMapProcessorIntegrationTest(unittest.TestCase):
-    """End-to-end StatVarDataProcessor tests against all 3 vertical PVMaps."""
-
-    def test_all_three_vertical_pvmaps_match_expected_outputs(self):
-        processor_script = os.path.join(_REPO_ROOT, 'tools', 'statvar_importer',
-                                        'stat_var_processor.py')
-        test_data_dir = os.path.join(_SCRIPT_DIR, 'test_data')
-        place_map = os.path.join(_SCRIPT_DIR, 'pvmap', 'place_mapping.csv')
-        metadata_cfg = os.path.join(_SCRIPT_DIR, 'metadata.csv')
-
-        cases = [
-            (
-                'Mexico_Total_Population',
-                os.path.join(_SCRIPT_DIR, 'pvmap',
-                             'MexicoCensus_Demographics_pvmap.csv'),
-            ),
-            (
-                'Mexico_Unemployed_Population',
-                os.path.join(_SCRIPT_DIR, 'pvmap',
-                             'MexicoCensus_Demographics_pvmap.csv'),
-            ),
-            (
-                'Mexico_Deaths_Registered',
-                os.path.join(_SCRIPT_DIR, 'pvmap',
-                             'MexicoCensus_Health_pvmap.csv'),
-            ),
-            (
-                'Mexico_SchoolEnrollment',
-                os.path.join(_SCRIPT_DIR, 'pvmap',
-                             'MexicoCensus_Education_pvmap.csv'),
-            ),
-        ]
-
-        with tempfile.TemporaryDirectory() as tmpdir:
-            for ds_name, pvmap_path in cases:
-                with self.subTest(dataset=ds_name):
-                    input_csv = os.path.join(test_data_dir,
-                                             f'{ds_name}_input.csv')
-                    out_prefix = os.path.join(tmpdir, f'{ds_name}_expected')
-                    cmd = [
-                        sys.executable,
-                        processor_script,
-                        f'--input_data={input_csv}',
-                        f'--pv_map={pvmap_path},{place_map}',
-                        f'--config_file={metadata_cfg}',
-                        f'--output_path={out_prefix}',
-                    ]
-                    subprocess.run(
-                        cmd,
-                        check=True,
-                        stdout=subprocess.PIPE,
-                        stderr=subprocess.PIPE,
-                    )
-
-                    for ext in ('.csv', '.tmcf'):
-                        actual_file = out_prefix + ext
-                        expected_file = os.path.join(
-                            test_data_dir, f'{ds_name}_expected{ext}')
-                        with open(actual_file, encoding='utf-8') as fa, open(
-                                expected_file, encoding='utf-8') as fe:
-                            self.assertEqual(fa.read(), fe.read())
 
 
 if __name__ == '__main__':

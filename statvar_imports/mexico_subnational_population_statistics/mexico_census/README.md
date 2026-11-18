@@ -103,7 +103,7 @@ To preserve all historical years without storing data files in the GitHub reposi
 - **`metadata.csv`**:
   - Shared `stat_var_processor.py` configuration file defining provenance URL and description parameters.
 - **`pvmap/place_mapping.csv`**:
-  - Shared place-resolution PVMap (`#Header,observationAbout`) that maps `"Estados Unidos Mexicanos"` / `"Total"` to `country/MEX` and all 32 Mexican state names (including INEGI footnote-suffixed and historical variants) to their `wikidataId/Q...` DCIDs.
+  - Shared place-resolution PVMap (`#Header,observationAbout`) that maps `"Estados Unidos Mexicanos"` to `country/MEX` (while national `"Total"` rows in vital statistics tables inherit `country/MEX` from Column-0 header mappings in the vertical PVMaps) and all 32 Mexican state names (including INEGI footnote-suffixed and historical variants) to their `wikidataId/Q...` DCIDs.
 - **`pvmap/MexicoCensus_Demographics_pvmap.csv`, `pvmap/MexicoCensus_Health_pvmap.csv`, `pvmap/MexicoCensus_Education_pvmap.csv`**:
   - 3 vertical-specific Property-Value maps (one per import in `manifest.json`) that combine the mappings for all 21 datasets across Demographics (12 datasets), Health (7 datasets), and Education (2 datasets), translating input filenames, Spanish row stubs, column headers, and time periods into Data Commons `StatVarObservation` properties.
   - For PxWeb datasets where 4-digit observation counts can collide with 4-digit year headers, year keys are scoped with a leading colon (`:YEAR`) so only header-row cells match year keys, while `Mexico_Unemployed_Population` year headers in Column 0 are scoped under their sequential column-header chain (`Period:2019`, `2019:2020`, ...).
