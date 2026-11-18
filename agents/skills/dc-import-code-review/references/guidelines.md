@@ -124,10 +124,11 @@ repository contracts and instructions take precedence.
 ### Metadata configuration
 
 - In `metadata.csv`, omit settings that keep their default in
-  `get_default_config()` (`tools/statvar_importer/config_flags.py`). Turning
-  off a feature the processor enables by default, such as `reconcile_nodes` or
-  `output_only_new_statvars`, needs a justification in a `metadata.csv`
-  comment; verify it against the code or evidence.
+  `get_default_config()`
+  ([config_flags.py](../../../../tools/statvar_importer/config_flags.py)).
+  Turning off a feature the processor enables by default, such as
+  `reconcile_nodes` or `output_only_new_statvars`, needs a justification in a
+  `metadata.csv` comment; verify it against the code or evidence.
 - Disabling `generate_schema_mcf` or `generate_statvar_mcf` leaves StatVars
   from later runs undefined, so a manual schema change does not justify it.
 
