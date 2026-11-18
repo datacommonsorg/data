@@ -182,7 +182,7 @@ if __name__ == '__main__':
             print(code)
             try:
                 data = json.load(f_in)
-            except:
+            except ValueError:
                 print('Error loading:', file)
                 continue
 

@@ -377,7 +377,7 @@ class NamesCls:
                         property_list.append(
                             char_replace(
                                 row['unique_name'].split('<')[1].split('>')[0]))
-                    except:
+                    except (AttributeError, IndexError):
                         logging.error(f"Error in split {property_value}")
                 else:
                     property_list.append(char_replace(row['name_txt']))
@@ -486,7 +486,7 @@ class HostCls:
             try:
                 current_node = FINAL_NCBI_TAXONOMY[row['tax_id']]
                 current_node['host'] = row['DC_host_enum']
-            except:
+            except KeyError:
                 logging.error(
                     f"Host tax_id -  {row['tax_id']} is missing in FINAL_NCBI_TAXONOMY"
                 )
@@ -543,7 +543,7 @@ class NodesCls:
                 current_node['division'] = DIVISION_DICT[row["division_code"]]
                 current_node['hasInheritedDivision'] = True if row[
                     'inherited_division'] == 1 else False
-            except:
+            except Exception:
                 logging.error(
                     f"Unable to get Nodes tax_id -  {row['tax_id']} in FINAL_NCBI_TAXONOMY"
                 )
@@ -578,7 +578,7 @@ class CategoriesCls:
                 current_node = FINAL_NCBI_TAXONOMY[row['tax_id']]
                 current_node['taxonTopLevelCategory'] = row[
                     'taxonTopLevelCategory']
-            except:
+            except KeyError:
                 # do nothing if Categories tax_id not available in FINAL_NCBI_TAXONOMY
                 pass
 

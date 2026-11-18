@@ -76,11 +76,13 @@ select = [
     "F405",
     # Multiple imports or statements on one line.
     # Note: E402 (late imports after sys.path edits) is deferred until imports are
-    # made root-relative; E722 (bare except) will be enabled separately.
+    # made root-relative.
     "E401",
     "E701",
     "E702",
     "E703",
+    # Bare `except:`, which also catches KeyboardInterrupt and SystemExit.
+    "E722",
     # Lambda assignments and ambiguous names (`l`, `O`, `I`).
     "E731",
     "E741",
