@@ -26,9 +26,6 @@
         "validation_config.json"
       ],
       "cron_schedule": "0 6 * * 0",
-      "config_override": {
-        "disable_import_workflow": true
-      },
       "validation_config_file": "validation_config.json",
       "user_script_timeout": 43200,
       "resource_limits": {
