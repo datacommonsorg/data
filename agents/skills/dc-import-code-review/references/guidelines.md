@@ -73,7 +73,8 @@ repository contracts and instructions take precedence.
 
 - Verify that StatisticalVariable names, mappings, units, and generated schema
   output remain consistent with the transformation.
-- When using `stat_var_processor`, pass `--existing_statvar_mcf` (e.g.,
+- [rule-existing-statvar-mcf] When using `stat_var_processor`, pass
+  `--existing_statvar_mcf` (e.g.,
   `gs://unresolved_mcf/scripts/statvar/stat_vars.mcf`) to reuse existing
   StatisticalVariables and avoid creating duplicate statvar definitions.
 - Make aggregation, filtering, outlier handling, and date-range decisions
@@ -99,15 +100,16 @@ repository contracts and instructions take precedence.
 - For pvmap key strings with punctuation (such as commas `,`) that can vary or
   change over time, use normalized keys in lowercase without punctuation (and
   normalize input strings accordingly) to ensure resilient lookups.
-- Within one source directory, keep pvmap rows that several import specs share
-  in one common pvmap passed to each `--pv_map`. Keep long place mappings in a
-  separate pvmap file too.
+- Avoid duplicating schema mappings in pvmaps for the same import; instead,
+  split the pvmap into reusable files. Within one source directory, keep rows
+  that several import specs share in one common pvmap passed to each
+  `--pv_map`, and keep long place mappings in a separate pvmap file.
 
 ### StatVar remapping (`--statvar_dcid_remap_csv`)
 
-- [rule-statvar-remap] When an import would otherwise generate a StatVar that
-  duplicates an existing schema definition, remap it to the existing canonical
-  DCID rather than introducing duplicate nodes in the schema:
+- [rule-statvar-remap] When an import config generates a StatVar DCID that
+  must be overridden to a different StatVar, even one with a different
+  definition, remap it with `--statvar_dcid_remap_csv`:
   1. Create a remap CSV (e.g., `statvar_remap.csv`) with the header
      `statvar,dcid`:
 
@@ -303,7 +305,8 @@ Then apply these rules:
   discover or download future years (such as `2027`) when source URLs follow
   a predictable pattern, rather than relying only on a hardcoded year-to-URL
   map.
-- When URLs are added or modified, verify that they exist and are accessible.
+- [rule-url-access] When URLs are added or modified, verify that they exist and
+  are accessible from GCP virtual machines, where import jobs run.
 - Inspect both HTTP status codes and page body content to catch soft 404s
   (e.g., pages returning HTTP 200 but rendering '404', 'Not Found', or
   redirecting to an error landing page).
