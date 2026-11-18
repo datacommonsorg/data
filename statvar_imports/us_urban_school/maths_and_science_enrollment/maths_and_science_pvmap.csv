@@ -2,6 +2,8 @@ YEAR,observationDate,{Data},enrollmentStatus,Enrolled,populationType,Student,mea
 ncesid,observationAbout,nces/{Data},,,,,,,,,,
 JJ:Yes,educationalInstitutionType,JuvenileJusticeFacility,,,,,,,,,,
 JJ:No,educationalInstitutionType,NotJuvenileJusticeFacility,,,,,,,,,,
+SCH_JUST:Yes,educationalInstitutionType,JuvenileJusticeFacility,,,,,,,,,,
+SCH_JUST:No,educationalInstitutionType,NotJuvenileJusticeFacility,,,,,,,,,,
 SCH_MATHENR_ADVM_HI_M,value,{Number},#Filter,Allow=int(value) >= 0,schoolSubject,AdvancedMathematics,race,HispanicOrLatino,gender,Male,,
 SCH_MATHENR_ADVM_HI_F,value,{Number},#Filter,Allow=int(value) >= 0,schoolSubject,AdvancedMathematics,race,HispanicOrLatino,gender,Female,,
 SCH_MATHENR_ADVM_AM_M,value,{Number},#Filter,Allow=int(value) >= 0,schoolSubject,AdvancedMathematics,race,AmericanIndianOrAlaskaNativeAlone,gender,Male,,

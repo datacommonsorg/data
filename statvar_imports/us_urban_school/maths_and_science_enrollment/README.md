@@ -51,6 +51,7 @@ python3 stat_var_processor.py \
 --pv_map=../../../statvar_imports/us_urban_school/maths_and_science_enrollment/maths_and_science_pvmap.csv \
 --config_file=../../../statvar_imports/us_urban_school/maths_and_science_enrollment/metadata.csv \
 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+--recon_property=variableMeasured \
 --output_path=../../../statvar_imports/us_urban_school/maths_and_science_enrollment/output_files/maths_and_science_2010_2012_output
 ```
 
@@ -61,6 +62,7 @@ python3 stat_var_processor.py \
 --pv_map=../../../statvar_imports/us_urban_school/maths_and_science_enrollment/maths_and_science_pvmap.csv \
 --config_file=../../../statvar_imports/us_urban_school/maths_and_science_enrollment/metadata.csv \
 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+--recon_property=variableMeasured \
 --output_path=../../../statvar_imports/us_urban_school/maths_and_science_enrollment/output_files/maths_and_science_2016_output
 ```
 
@@ -71,6 +73,7 @@ python3 stat_var_processor.py \
 --pv_map=../../../statvar_imports/us_urban_school/maths_and_science_enrollment/maths_and_science_pvmap.csv \
 --config_file=../../../statvar_imports/us_urban_school/maths_and_science_enrollment/metadata.csv \
 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+--recon_property=variableMeasured \
 --output_path=../../../statvar_imports/us_urban_school/maths_and_science_enrollment/output_files/advanced_mathematics_2018_onwards_output
 ```
 
@@ -80,6 +83,7 @@ python3 stat_var_processor.py \
 --pv_map=../../../statvar_imports/us_urban_school/maths_and_science_enrollment/maths_and_science_pvmap.csv \
 --config_file=../../../statvar_imports/us_urban_school/maths_and_science_enrollment/metadata.csv \
 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+--recon_property=variableMeasured \
 --output_path=../../../statvar_imports/us_urban_school/maths_and_science_enrollment/output_files/algebra2_2018_onwards_output
 ```
 
@@ -89,6 +93,7 @@ python3 stat_var_processor.py \
 --pv_map=../../../statvar_imports/us_urban_school/maths_and_science_enrollment/maths_and_science_pvmap.csv \
 --config_file=../../../statvar_imports/us_urban_school/maths_and_science_enrollment/metadata.csv \
 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+--recon_property=variableMeasured \
 --output_path=../../../statvar_imports/us_urban_school/maths_and_science_enrollment/output_files/biology_2018_onwards_output
 ```
 
@@ -98,6 +103,7 @@ python3 stat_var_processor.py \
 --pv_map=../../../statvar_imports/us_urban_school/maths_and_science_enrollment/maths_and_science_pvmap.csv \
 --config_file=../../../statvar_imports/us_urban_school/maths_and_science_enrollment/metadata.csv \
 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+--recon_property=variableMeasured \
 --output_path=../../../statvar_imports/us_urban_school/maths_and_science_enrollment/output_files/calculus_2018_onwards_output
 ```
 
@@ -107,6 +113,7 @@ python3 stat_var_processor.py \
 --pv_map=../../../statvar_imports/us_urban_school/maths_and_science_enrollment/maths_and_science_pvmap.csv \
 --config_file=../../../statvar_imports/us_urban_school/maths_and_science_enrollment/metadata.csv \
 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+--recon_property=variableMeasured \
 --output_path=../../../statvar_imports/us_urban_school/maths_and_science_enrollment/output_files/chemistry_2018_onwards_output
 ```
 
@@ -116,6 +123,7 @@ python3 stat_var_processor.py \
 --pv_map=../../../statvar_imports/us_urban_school/maths_and_science_enrollment/maths_and_science_pvmap.csv \
 --config_file=../../../statvar_imports/us_urban_school/maths_and_science_enrollment/metadata.csv \
 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+--recon_property=variableMeasured \
 --output_path=../../../statvar_imports/us_urban_school/maths_and_science_enrollment/output_files/geometry_2018_onwards_output
 ```
 
@@ -125,6 +133,8 @@ python3 stat_var_processor.py \
 --pv_map=../../../statvar_imports/us_urban_school/maths_and_science_enrollment/maths_and_science_pvmap.csv \
 --config_file=../../../statvar_imports/us_urban_school/maths_and_science_enrollment/metadata.csv \
 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+--recon_property=variableMeasured \
 --output_path=../../../statvar_imports/us_urban_school/maths_and_science_enrollment/output_files/physics_2018_onwards_output
 ```
+
 
