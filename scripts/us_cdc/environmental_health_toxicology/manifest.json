@@ -22,8 +22,7 @@
             },
             "validation_config_file": "validation_config_census_tract.json",
             "config_override": {
-                "skip_prod_ingestion": true,
-                "disable_import_workflow": true
+                "skip_prod_ingestion": true
             },
             "import_inputs": [
                 {
@@ -68,8 +67,7 @@
             },
             "validation_config_file": "validation_config_census_tract.json",
             "config_override": {
-                "skip_prod_ingestion": true,
-                "disable_import_workflow": true
+                "skip_prod_ingestion": true
             },
             "import_inputs": [
                 {
