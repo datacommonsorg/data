@@ -27,8 +27,7 @@ if _SCRIPT_DIR not in sys.path:
     sys.path.insert(0, _SCRIPT_DIR)
 
 try:
-    from statvar_imports.india_mospi.plfs_wages.mospi_india_plfs_daily_wages import (
-        download,)
+    from statvar_imports.india_mospi.plfs_wages.mospi_india_plfs_daily_wages import download
 except ModuleNotFoundError:
     import download  # pylint: disable=wrong-import-position
 
