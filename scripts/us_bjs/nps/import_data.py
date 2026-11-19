@@ -1,13 +1,16 @@
-import pandas as pd
-from absl import flags, logging
+import os
+import sys
+
 from absl import app
-import os, sys
+from absl import flags
+from absl import logging
+import pandas as pd
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '../nps'))
 
-import preprocess_data
 import nps_statvar_writer
+import preprocess_data
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 input_files = os.path.join(_MODULE_DIR, 'input_files')
@@ -108,8 +111,8 @@ def main(args):
         processed_df = preprocess_data.preprocess_df(df)
         save_csv(processed_df, FILENAME)
         generate_tmcf(processed_df)
-    except IOError as e:
-        logging.info(f"error during saving processed csv")
+    except IOError:
+        logging.info("error during saving processed csv")
     except Exception as e:
         logging.fatal(f"error during data processing: {e}")
 

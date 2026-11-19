@@ -15,15 +15,15 @@
 
 __author__ = ["Thejesh GN (i@thejeshgn.com)"]
 
-import os
-import re
-import json
 import csv
-import requests
-import time
+import json
+import os
 from os import path
-from csv import writer
+import re
+import time
+
 import pandas as pd
+import requests
 
 DATA_API_URL = "http://pgi.seshagun.gov.in/BackEnd-master/api/report/getTabularData"
 MASTER_API_URL = "http://pgi.seshagun.gov.in/BackEnd-master/api/report/getMasterData"

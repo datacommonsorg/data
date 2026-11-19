@@ -26,10 +26,10 @@ sys.path.append(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)))
 sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)), 'util'))
 
-import earthengine_image
-
 from counters import Counters
-from pipeline_stage_runner import StageRunner, register_stage_runner
+import earthengine_image
+from pipeline_stage_runner import StageRunner
+from pipeline_stage_runner import register_stage_runner
 
 
 class EarthEngineRunner(StageRunner):

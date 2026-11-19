@@ -17,14 +17,15 @@ Script to automate the testing for USA Population preprocess scripts.
 
 import os
 import sys
-import unittest
 import tempfile
+import unittest
 
 _MODULE_DIR = os.path.dirname(__file__)
 sys.path.insert(0, _MODULE_DIR)
 # pylint: disable = wrong-import-position
-from preprocess import process
 from constants import INPUT_DIRS
+from preprocess import process
+
 # pylint: enable = wrong-import-position
 # _MODULE_DIR is the path to where this test is running from.
 

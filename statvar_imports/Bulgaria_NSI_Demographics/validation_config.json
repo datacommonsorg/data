@@ -1,0 +1,38 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_max_date_consistent",
+            "description": "Verifies that MaxDate is uniform across all generated StatVars.",
+            "validator": "MAX_DATE_CONSISTENT",
+            "params": {}
+        },
+        {
+            "rule_id": "check_all_statvars_freshness",
+            "description": "Verify all active StatVars meet the 1-year publication lag freshness boundary (TRY_CAST(MaxDate AS INTEGER) >= year(current_date) - 1).",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT StatVar, MaxDate FROM stats",
+                "condition": "TRY_CAST(MaxDate AS INTEGER) >= year(current_date) - 1"
+            }
+        },
+        {
+            "rule_id": "check_num_places_coverage",
+            "description": "Verifies that all StatVars cover the expected minimum number of places (NumPlaces >= 23 for non-centenarian cohorts, NumPlaces >= 20 for 100+ cohorts where rural districts may have 0/suppressed '-' counts).",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT StatVar, NumPlaces FROM stats",
+                "condition": "(StatVar LIKE '%100OrMoreYears%' AND NumPlaces >= 20) OR (StatVar NOT LIKE '%100OrMoreYears%' AND NumPlaces >= 23)"
+            }
+        },
+        {
+            "rule_id": "check_statvar_and_age_cohort_coverage",
+            "description": "Verifies all 207 demographic StatVars (across all 22 age cohorts, Urban/Rural residence, and Male/Female breakdowns) are generated with non-negative values.",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT COUNT(DISTINCT StatVar) AS num_statvars, MIN(MinValue) AS min_val FROM stats",
+                "condition": "num_statvars >= 207 AND min_val >= 0"
+            }
+        }
+    ]
+}

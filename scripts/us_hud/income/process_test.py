@@ -12,10 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import datetime
+import filecmp
 import os
 import unittest
-import filecmp
-import datetime
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
@@ -62,7 +62,6 @@ class ProcessTest(unittest.TestCase):
 
     def test_process_with_dynamic_csv(self):
         matches = {'dcs:geoId/02110': 'dcs:geoId/0236400'}
-        output_data = []
         input_folder = TEST_DIR
 
         if not os.path.exists(OUTPUT_DIR):

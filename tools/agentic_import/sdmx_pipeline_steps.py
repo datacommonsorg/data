@@ -16,21 +16,19 @@
 from __future__ import annotations
 
 import abc
-import subprocess
-import sys
 from dataclasses import dataclass
 from pathlib import Path
+import subprocess
+import sys
 from typing import ClassVar, Sequence
 
 from absl import logging
 
 from tools.agentic_import.pipeline import Step
-from tools.agentic_import.sdmx_pipeline_config import (
-    FLAG_SDMX_AGENCY,
-    FLAG_SDMX_DATAFLOW_ID,
-    FLAG_SDMX_ENDPOINT,
-    PipelineConfig,
-)
+from tools.agentic_import.sdmx_pipeline_config import FLAG_SDMX_AGENCY
+from tools.agentic_import.sdmx_pipeline_config import FLAG_SDMX_DATAFLOW_ID
+from tools.agentic_import.sdmx_pipeline_config import FLAG_SDMX_ENDPOINT
+from tools.agentic_import.sdmx_pipeline_config import PipelineConfig
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 

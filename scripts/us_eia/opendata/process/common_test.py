@@ -17,13 +17,22 @@ import os
 import sys
 import tempfile
 import unittest
+
 from absl import logging
 
 # Allows the following module imports to work when running as a script.
 # relative to scripts/
 module_dir_ = os.path.dirname(__file__)
 sys.path.insert(0, module_dir_)
-from main import *
+from us_eia.opendata.process import coal
+from us_eia.opendata.process import common
+from us_eia.opendata.process import elec
+from us_eia.opendata.process import intl
+from us_eia.opendata.process import ng
+from us_eia.opendata.process import nuclear
+from us_eia.opendata.process import pet
+from us_eia.opendata.process import seds
+from us_eia.opendata.process import total
 
 module_dir_ = os.path.dirname(module_dir_)
 

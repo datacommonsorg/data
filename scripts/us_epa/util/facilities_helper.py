@@ -14,18 +14,18 @@
 """Helper functions used in the facilities and parent_company processing."""
 
 import os
+from pathlib import Path
 import ssl
 import sys
-from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO_ROOT))
 
+from re import sub
+
 from datacommons_client.models.observation import ObservationDate
 from datacommons_client.models.observation import ObservationSelect
 import pandas as pd
-
-from re import sub
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO_ROOT))

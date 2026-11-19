@@ -13,15 +13,14 @@
 # limitations under the License.
 """Utility functions for logging."""
 
+from functools import wraps
 import json
 import logging
 import os
 import sys
 
 from absl import flags
-
 from google.cloud.logging.handlers import StructuredLogHandler
-from functools import wraps
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(SCRIPT_DIR)
@@ -120,9 +119,9 @@ def configure_logging(enable_cloud_logging: bool):
             configure_cloud_logging()
             logging.info("Google Cloud Logging configured.")
         else:
-            logging.info(f'Not enabling cloud logging')
+            logging.info('Not enabling cloud logging')
     else:
-        logging.info(f'Not running on cloud, using default logging')
+        logging.info('Not running on cloud, using default logging')
 
 
 def log_function_call(func):

@@ -24,14 +24,22 @@ Dataset being processed: https://download.bls.gov/pub/time.series/jt/
 """
 import os
 import textwrap
-from absl import app, logging, flags
-from retry import retry
+
+from absl import app
+from absl import flags
+from absl import logging
+from map_config import _dcid_map
 import pandas as pd
 import requests
-from map_config import _dcid_map
+from retry import retry
 
 _FLAGS = flags.FLAGS
-flags.DEFINE_string('modes', '', 'Options: download or process')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('modes', '', 'Options: download or process')
+
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILES = _MODULE_DIR + "/input_files"
@@ -442,4 +450,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

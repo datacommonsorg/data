@@ -19,7 +19,7 @@ import unittest
 import pandas as pd
 from pandas.testing import assert_frame_equal
 
-from .process_sites import process_sites, check_geo_resolution
+from .process_sites import process_sites
 
 _EXPECTED_SITE_COUNT = 1
 

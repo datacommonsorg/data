@@ -16,14 +16,17 @@ Script to automate the testing for BLS_Jolts import.
 """
 
 import os
-import sys, shutil
+import sys
 import unittest
-from absl import app, logging
+
+from absl import app
+from absl import logging
 
 _MODULE_DIR = os.path.dirname(__file__)
 sys.path.insert(1, _MODULE_DIR)
 
-from bls_jolts import generate_cleaned_dataframe, process
+from bls_jolts import generate_cleaned_dataframe
+from bls_jolts import process
 
 INPUT_DIR = 'input_files'
 OUTPUT_DIR = 'actual_output_files'

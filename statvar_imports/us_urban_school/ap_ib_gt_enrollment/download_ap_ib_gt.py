@@ -12,17 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
-import requests
-import zipfile
-import io
-import pandas as pd
-import re
-from absl import logging, app, flags
-from pathlib import Path
 from datetime import date
+import io
+import os
+from pathlib import Path
+import re
+import zipfile
+
+from absl import app
+from absl import flags
+from absl import logging
+import pandas as pd
+import requests
 from retry import retry
-import sys
 
 FLAGS = flags.FLAGS
 
@@ -306,9 +308,9 @@ def download_and_extract(config_key, config_data, data_type, output_dir):
                 for name in zip_ref.namelist():
                     normalized_name = name.lower()
                     # For 2011-12, the files are more specific, e.g., "...Students who are taking AP Science.xlsx"
-                    if 'ap' in normalized_name and 'mathematics' in normalized_name and 'students' in normalized_name and not '$' in name:
+                    if 'ap' in normalized_name and 'mathematics' in normalized_name and 'students' in normalized_name and '$' not in name:
                         math_file_name = name
-                    elif 'ap' in normalized_name and 'science' in normalized_name and 'students' in normalized_name and not '$' in name:
+                    elif 'ap' in normalized_name and 'science' in normalized_name and 'students' in normalized_name and '$' not in name:
                         science_file_name = name
 
                 if not math_file_name or not science_file_name:
@@ -435,7 +437,7 @@ def main(_):
 
             download_and_extract(year_range, config_data, data_type, OUTPUT_DIR)
 
-    logging.info(f"\n--- All downloads complete ---")
+    logging.info("\n--- All downloads complete ---")
 
 
 if __name__ == '__main__':

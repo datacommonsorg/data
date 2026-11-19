@@ -1,0 +1,17 @@
+#key,property-1,value-1,property-2,value-2,property-3,value-3
+# place,,,,,,,,
+fips code,observationAbout,geoId/{Number},,,,,,
+# date,,,,,,,,
+year,observationDate,{Number},,,,,,
+# age groups,,,,,,,,
+25-30,age,25To30Years,,,,,,
+30-35,age,30To35Years,,,,,,
+# race codes,,,,,,,,
+wh,race,WhiteAlone,,,,,,
+a-pi,race,AsianOrPacificIslander,,,,,,
+# section rows,,,,,,,,
+males,gender,Male,,,,,,
+females,gender,Female,,,,,,
+# value columns,,,,,,,,
+total persons,value,{Number},populationType,Person,,
+fraction,value,{Number},populationType,Person,measurementDenominator,Count_Person

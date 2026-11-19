@@ -12,16 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import os
+from pathlib import Path
+import shutil
+import time
+
+from absl import app
+from absl import logging
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import time
-from absl import app, logging
-import os
-import shutil
-import pandas as pd
-from pathlib import Path
+from selenium.webdriver.support.ui import WebDriverWait
 
 tmpdir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "tmp")
 Path(tmpdir).mkdir(parents=True, exist_ok=True)
@@ -68,13 +69,13 @@ def download_file(url, input_file_path):
                         shutil.copyfile(old_file, new_file)
                         os.remove(old_file)
                         count += 1
-            except Exception as e:
+            except Exception:
                 logging.warning(
                     f"No Excel link found for year 20{year} or No future url found"
                 )
                 break
-    except Exception as e:
-        logging.fatal(f"Error during the main loop")
+    except Exception:
+        logging.fatal("Error during the main loop")
     finally:
         driver.quit()
         logging.info("ChromeDriver has been closed.")

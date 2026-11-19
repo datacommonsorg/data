@@ -16,23 +16,33 @@ Generates cleaned CSV and template MCF files for the EPA AirData.
 
 Usage: python3 air_quality.py [--data_start_year=YYYY] [--data_end_year=YYYY]
 '''
-import csv, os, re, requests, io, zipfile
-from urllib3.util import Retry
+import csv
+from datetime import datetime
+import io
+import os
+import re
+import zipfile
 
 from absl import app
 from absl import flags
 from absl import logging
-from datetime import datetime
+import requests
+from urllib3.util import Retry
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 _FLAGS = flags.FLAGS
 
-flags.DEFINE_integer('data_start_year', int(os.getenv('START_YEAR', '1980')),
-                     'Process data starting from this year.')
-flags.DEFINE_integer(
-    'data_end_year', int(os.getenv('END_YEAR', 0)),
-    'Process data upto this year. Defaults to the previous calendar year.')
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_integer('data_start_year', int(os.getenv('START_YEAR',
+                                                          '1980')),
+                         'Process data starting from this year.')
+    flags.DEFINE_integer(
+        'data_end_year', int(os.getenv('END_YEAR', 0)),
+        'Process data upto this year. Defaults to the previous calendar year.')
+
 
 # AQS parameter codes: https://aqs.epa.gov/aqsweb/documents/codetables/parameters.html
 POLLUTANTS = {
@@ -125,7 +135,7 @@ def create_csv(csv_file_path):
 
 
 def create_sites_mcf(sites_mcf_file_path):
-    with open(sites_mcf_file_path, 'w', encoding='utf-8') as f_out:
+    with open(sites_mcf_file_path, 'w', encoding='utf-8'):
         pass
 
 
@@ -379,4 +389,5 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

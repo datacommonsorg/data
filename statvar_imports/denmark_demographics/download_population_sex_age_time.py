@@ -18,11 +18,12 @@ categories (ensuring 'Total' values appear first) and pivots the data to a
 wide-format time series before saving to CSV.
 """
 
-import pandas as pd
+from io import StringIO
 import os
 import re
-from io import StringIO
+
 from absl import logging
+import pandas as pd
 from statbank_utils import fetch_statbank_api
 
 # Set logging verbosity

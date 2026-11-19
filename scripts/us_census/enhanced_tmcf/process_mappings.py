@@ -26,16 +26,15 @@ The following steps are followed:
 
 import json
 import os
-import requests
 import sys
 import time
-
-from absl import app
-from absl import flags
 from typing import Dict, List
 from zipfile import ZipFile
 
+from absl import app
+from absl import flags
 import process_etmcf
+import requests
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -164,7 +163,7 @@ def _download_mapping_file(post_req: Dict, data_path: str,
                 _download_zip(download_url, zipped_filepath)
                 print("   Succeeded.")
                 break
-            except:
+            except Exception:
                 seconds = 5
                 print(
                     f"        Sleeping for {seconds}s to allow more time for the zip file to be ready."

@@ -51,16 +51,13 @@ Caveats:
 - Extra empty lines would be dropped
 """
 
-import ast
+from collections import OrderedDict
 import glob
 import logging
 import os
 import re
-import json
 from sys import path
-import requests
 from typing import Dict, Optional, Union
-from collections import OrderedDict
 
 _MODULE_DIR = os.path.dirname(os.path.realpath(__file__))
 path.insert(1, os.path.join(_MODULE_DIR, '../'))
@@ -180,7 +177,7 @@ def mcf_dict_rename_prop(node_dict: Union[dict, OrderedDict], old_prop: str,
     if old_prop in node_dict:
         new_tuples = [(new_prop, v) if k == old_prop else (k, v)
                       for k, v in node_dict.items()]
-        if type(node_dict) == type(OrderedDict()):
+        if type(node_dict) is OrderedDict:
             return OrderedDict(new_tuples)
         else:
             return Dict(new_tuples)
@@ -336,7 +333,7 @@ def drop_nodes(node_list: list, dcid_list: list) -> list:
     """
     ret_list = []
     for node_dict in node_list:
-        if not get_dcid_node(node_dict) in dcid_list:
+        if get_dcid_node(node_dict) not in dcid_list:
             ret_list.append(node_dict.copy())
     return ret_list
 

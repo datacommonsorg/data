@@ -27,11 +27,10 @@ from pathlib import Path
 import sys
 from typing import Dict
 
-import geopandas as gpd
-from geojson_rewind import rewind
-
 from absl import app
 from absl import flags
+from geojson_rewind import rewind
+import geopandas as gpd
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO_ROOT))

@@ -25,7 +25,7 @@ import csv
 import io
 import os
 import re
-from urllib.request import urlopen
+
 from absl import app
 from absl import flags
 from absl import logging
@@ -137,8 +137,7 @@ class StateGDPDataLoader:
             data = list(reader)
             if data:
                 self.raw_df = pd.DataFrame(data, columns=header)
-                logging.info(
-                    f"Successfully loaded data from provided raw data.")
+                logging.info("Successfully loaded data from provided raw data.")
             else:
                 self.raw_df = None
                 raise ValueError("Error: No data found in provided raw data.")

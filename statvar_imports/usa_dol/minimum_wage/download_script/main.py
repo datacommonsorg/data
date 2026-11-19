@@ -1,9 +1,10 @@
-import os
 import csv
-import requests
-import pandas as pd
+import os
+
 from absl import logging
 from bs4 import BeautifulSoup
+import pandas as pd
+import requests
 from retry import retry
 
 url = "https://www.dol.gov/agencies/whd/state/minimum-wage/history"
@@ -61,7 +62,6 @@ def main():
     all_tables_data = extract_all_table_data(url)
 
     if all_tables_data:
-        all_dfs = []
         for index, table in enumerate(all_tables_data):
             if index == 0:
                 df = pd.DataFrame(table[1:], columns=table[0])
