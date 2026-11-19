@@ -43,6 +43,18 @@ import file_util
 
 record_count_query = '?$query=select%20count(*)%20as%20COLUMN_ALIAS_GUARD__count'
 
+_CENSUS_TRACT_PAGE_SIZE = 4_000_000
+
+
+def _stream_url_to_file(url: str, dest_path: str) -> None:
+    """Streams an HTTP GET response to dest_path in 16MB binary chunks."""
+    with requests.get(url, stream=True, timeout=(30, 300)) as response:
+        response.raise_for_status()
+        with open(dest_path, 'wb') as f:
+            for chunk in response.iter_content(chunk_size=16 * 1024 * 1024):
+                if chunk:
+                    f.write(chunk)
+
 
 def download_files(importname, configs):
 
@@ -52,13 +64,7 @@ def download_files(importname, configs):
         filename = os.path.join(_INPUT_FILE_PATH, input_file_name)
         tmp_filename = f"{filename}.tmp"
         try:
-            with requests.get(url, stream=True, timeout=(30, 300)) as response:
-                response.raise_for_status()
-                with open(tmp_filename, 'wb') as f:
-                    for chunk in response.iter_content(chunk_size=16 * 1024 *
-                                                       1024):
-                        if chunk:
-                            f.write(chunk)
+            _stream_url_to_file(url, tmp_filename)
             if not os.path.exists(tmp_filename) or os.path.getsize(
                     tmp_filename) <= 0:
                 raise IOError(
@@ -75,6 +81,76 @@ def download_files(importname, configs):
                 except OSError:
                     pass
             raise e
+
+    def download_paginated(base_url: str, input_file_name: str,
+                           record_count: int) -> None:
+        """Downloads large Census Tract datasets in deterministic Socrata pages."""
+        filename = os.path.join(_INPUT_FILE_PATH, input_file_name)
+        tmp_filename = f"{filename}.tmp"
+        page_tmp = f"{tmp_filename}.page"
+
+        @retry(tries=5, delay=2, backoff=2)
+        def fetch_page(page_url: str, expected_rows: int) -> None:
+            try:
+                _stream_url_to_file(page_url, page_tmp)
+                if not os.path.exists(page_tmp) or os.path.getsize(
+                        page_tmp) <= 0:
+                    raise IOError(
+                        f"Downloaded page {page_tmp} is empty or missing.")
+                with open(page_tmp, 'rb') as pf:
+                    header = pf.readline()
+                    if not header:
+                        raise IOError(f"Missing CSV header from {page_url}")
+                    row_count = sum(1 for line in pf if line.strip())
+                if row_count != expected_rows:
+                    raise IOError(f"Incomplete page from {page_url}: expected "
+                                  f"{expected_rows} rows, got {row_count}")
+            except Exception as e:
+                logging.error(f"Failed page download for {input_file_name} "
+                              f"from {page_url}: {e}")
+                if os.path.exists(page_tmp):
+                    try:
+                        os.remove(page_tmp)
+                    except OSError:
+                        pass
+                raise
+
+        try:
+            with open(tmp_filename, 'wb') as out_f:
+                offset = 0
+                while offset < record_count:
+                    page_limit = min(_CENSUS_TRACT_PAGE_SIZE,
+                                     record_count - offset)
+                    page_url = (f"{base_url}?$limit={page_limit}"
+                                f"&$offset={offset}&$order=:id")
+                    logging.info(
+                        f"Downloading {input_file_name} rows {offset}.."
+                        f"{offset + page_limit} of {record_count} from "
+                        f"{page_url}")
+                    fetch_page(page_url, page_limit)
+                    with open(page_tmp, 'rb') as pf:
+                        header = pf.readline()
+                        if offset == 0:
+                            out_f.write(header)
+                        shutil.copyfileobj(pf, out_f, length=16 * 1024 * 1024)
+                    os.remove(page_tmp)
+                    offset += page_limit
+            if not os.path.exists(tmp_filename) or os.path.getsize(
+                    tmp_filename) <= 0:
+                raise IOError(
+                    f"Downloaded file {tmp_filename} is empty or missing.")
+            shutil.move(tmp_filename, filename)
+            logging.info(
+                f"Successfully saved paginated {filename} from {base_url} "
+                f"({os.path.getsize(filename)} bytes)")
+        except Exception:
+            for p in (page_tmp, tmp_filename):
+                if os.path.exists(p):
+                    try:
+                        os.remove(p)
+                    except OSError:
+                        pass
+            raise
 
     @retry(tries=3, delay=2, backoff=2)
     def get_record_count_with_retry(count_url):
@@ -110,8 +186,12 @@ def download_files(importname, configs):
                     # the full dataset is downloaded.
                     # TODO: Evaluate incremental refresh by filtering latest
                     # years via Socrata $where queries once baseline is split.
-                    url_new = f"{url_new}?$limit={record_count}&$offset=0"
-                    download_with_retry(url_new, input_file_name)
+                    if "CensusTract" in importname:
+                        download_paginated(url_new, input_file_name,
+                                           record_count)
+                    else:
+                        url_new = f"{url_new}?$limit={record_count}&$offset=0"
+                        download_with_retry(url_new, input_file_name)
                     logging.info(
                         f"Successfully downloaded the source data from URL: "
                         f"{url_new}")

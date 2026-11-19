@@ -22,7 +22,6 @@
             },
             "validation_config_file": "validation_config_census_tract.json",
             "config_override": {
-                "invoke_differ_tool": false,
                 "skip_prod_ingestion": true,
                 "disable_import_workflow": true
             },
@@ -69,7 +68,6 @@
             },
             "validation_config_file": "validation_config_census_tract.json",
             "config_override": {
-                "invoke_differ_tool": false,
                 "skip_prod_ingestion": true,
                 "disable_import_workflow": true
             },
