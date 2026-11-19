@@ -16,6 +16,8 @@ import os
 import tempfile
 import unittest
 
+import pandas as pd
+
 from .data_loader import SubjectTableDataLoaderBase
 from .data_loader import process_subject_tables
 
@@ -103,9 +105,40 @@ class DataLoaderBaseTest(unittest.TestCase):
                 decimal_places=3,
                 estimate_period=5,
                 header_row=1)
-            self.assertEqual(loader._clean_cell_value('100-'), '100')
-            self.assertEqual(loader._clean_cell_value('3,500+'), '3500')
-            self.assertEqual(loader._clean_cell_value('3500+'), '3500')
+            df = pd.DataFrame(
+                {'val': ['100-', '3,500+', '3500+', '-', '***', '1348']})
+            cleaned_df = loader._replace_ignore_values_with_nan(df)
+            self.assertEqual(cleaned_df['val'].iloc[0], '100')
+            self.assertEqual(cleaned_df['val'].iloc[1], '3500')
+            self.assertEqual(cleaned_df['val'].iloc[2], '3500')
+            self.assertTrue(pd.isna(cleaned_df['val'].iloc[3]))
+            self.assertTrue(pd.isna(cleaned_df['val'].iloc[4]))
+            self.assertEqual(cleaned_df['val'].iloc[5], '1348')
+
+            b25031_dir = os.path.join(base_path, "../B25031")
+            test_csv_path = os.path.join(
+                tmp_dir, "ACSDT5Y2023.B25031_data_with_overlays.csv")
+            with open(test_csv_path, "w") as f:
+                f.write("GEO_ID,NAME,B25031_001E,B25031_001M\n")
+                f.write("Geography,Geographic Area Name,"
+                        "Estimate!!Median gross rent --!!Total:,"
+                        "Margin of Error!!Median gross rent --!!Total:\n")
+                f.write("0400000US01,Alabama,100-,***\n")
+                f.write('0400000US06,California,"3,500+",***\n')
+                f.write("0400000US36,New York,3500+,***\n")
+            process_subject_tables(
+                table_prefix='test_b25031_codes',
+                input_path=test_csv_path,
+                output_dir=tmp_dir,
+                column_map_path=os.path.join(b25031_dir,
+                                             "testdata/column_map.json"),
+                spec_path=os.path.join(b25031_dir, "B25031_spec.json"),
+                debug=False,
+                delimiter='!!',
+                has_percent=False)
+            out_df = pd.read_csv(
+                os.path.join(tmp_dir, "test_b25031_codes_cleaned.csv"))
+            self.assertEqual(out_df['Quantity'].tolist(), [100, 3500, 3500])
 
     # TODO: add tests for processing a directory of files
 

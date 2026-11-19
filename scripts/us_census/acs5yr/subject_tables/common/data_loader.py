@@ -256,16 +256,6 @@ class SubjectTableDataLoaderBase:
                         "number of observations"]
         return self.counter_dict
 
-    def _clean_cell_value(self, val):
-        if val in _IGNORED_VALUES:
-            return np.nan
-        if isinstance(val, str):
-            val_clean = val.strip().replace(',', '')
-            if val_clean in _TOP_BOTTOM_CODE_MAP:
-                return _TOP_BOTTOM_CODE_MAP[val_clean]
-            return val
-        return val
-
     def _replace_ignore_values_with_nan(self, df):
         """
         Replaces cells of the dataframe by column with nan if cell has values in
