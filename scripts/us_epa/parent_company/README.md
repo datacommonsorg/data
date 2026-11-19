@@ -148,11 +148,17 @@ percentage and if no percentage is provided it is assumed to be 100.
   `output/ownership/EpaParentCompanyOwnership.mcf`) so `EpaOrganizationOwnership`
   resolves from canonical schema rather than being double-ingested as an instance
   node.
-- `svobs_validation_config.json` (`EPA_GHGRP_ParentCompanies`): Adds
-  `MAX_DATE_CONSISTENT` (`check_max_date_consistent`) across all 50 emission
-  StatVars.
-- `SQL_VALIDATOR` date checks are intentionally omitted across both stats
-  imports because EPA GHGRP is an annual program with variable release lag where
-  date freshness checks can cause false positives on calendar-year rollovers
-  (such as January runs); default `check_deleted_records_percent` (`0.1%`)
-  already catches refreshes that drop a reporting year.
+- `EPA_GHGRP_ParentCompanies`: Uses the default import validation rules.
+  `MAX_DATE_CONSISTENT` is intentionally omitted because several niche sector
+  StatVars are backed by only `1–3` reporting parent companies in 2023 (e.g.,
+  `SiliconCarbideProduction`: `1`, `AdipicAcidProduction`: `2`,
+  `ZincProduction`: `2`, `AluminumProduction`/`HCFC22Production`/`LNGStorage`:
+  `3`), so a single facility closing or dropping below the reporting threshold
+  would legitimately keep that StatVar at an earlier `MaxDate` and fail a
+  blanket consistency check (matching upstream `EPA_GHGRP`, which also uses
+  default validations).
+- `SQL_VALIDATOR` date checks and checked-in `GOLDENS_CHECK` golden files are
+  intentionally omitted across these custom scripts because annual EPA GHGRP
+  reporting lags break wall-clock date checks on calendar-year rollovers (e.g.
+  January runs), and default `check_deleted_records_percent` (`0.1%`) already
+  catches refreshes that drop a reporting year.
