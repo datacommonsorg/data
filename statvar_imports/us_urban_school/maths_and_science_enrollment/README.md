@@ -11,7 +11,8 @@ This import ingests school-level enrollment counts in Advanced Mathematics, Alge
   - `run.sh`: Stages `stat_vars.mcf` locally once, checks that all required and discovered survey-year partitions exist, and runs `stat_var_processor.py` across all 9 output splits.
   - `maths_and_science_pvmap.csv` and `metadata.csv`: Property-value mappings and processor settings, including `JJ` and `SCH_JUST` institution-type mappings and `*_LEP_*` and `*_EL_*` English learner mappings.
   - `validation_config.json`: Enforces split-wide `MaxDate` consistency and freshness rules alongside the inherited `0.1%` deleted-records threshold.
-  - `download_test.py` and `test_data/`: Unit and fixture tests for downloads, `run.sh` guards, validation rules, and `stat_var_processor.py` output.
+  - `download_test.py`: Unit tests for downloads, manifest resolution, `run.sh` guards, PV map coverage, and validation rules.
+  - `test_data/`: Sample input CSVs and expected `.csv`, `.tmcf`, and StatVar `.mcf` fixtures for verifying mappings directly with `stat_var_processor.py`.
 
 ## Prerequisites
 
@@ -42,6 +43,7 @@ Pass `--force_download` to re-download and overwrite files in `input_files/` wit
 #### Option A: Run `run.sh`
 
 ```bash
+source ../../../.env/bin/activate
 bash run.sh
 ```
 
@@ -96,10 +98,26 @@ done
 
 ## Validation and testing
 
-Run the unit and fixture tests from the repository root:
+Run the unit tests from the repository root:
 
 ```bash
 ./run_tests.sh -p statvar_imports/us_urban_school/maths_and_science_enrollment
+```
+
+To verify `test_data/*_input.csv` against `test_data/maths_and_science_output.csv` and `test_data/maths_and_science_output.tmcf` directly with `stat_var_processor.py` from the repository root:
+
+```bash
+out_dir=$(mktemp -d)
+.env/bin/python tools/statvar_importer/stat_var_processor.py \
+  --input_data="statvar_imports/us_urban_school/maths_and_science_enrollment/test_data/*_input.csv" \
+  --pv_map="statvar_imports/us_urban_school/maths_and_science_enrollment/maths_and_science_pvmap.csv" \
+  --config_file="statvar_imports/us_urban_school/maths_and_science_enrollment/metadata.csv" \
+  --existing_statvar_mcf="statvar_imports/us_urban_school/maths_and_science_enrollment/test_data/maths_and_science_output_stat_vars.mcf" \
+  --output_path="${out_dir}/maths_and_science_output" \
+  --recon_property=variableMeasured
+diff -u statvar_imports/us_urban_school/maths_and_science_enrollment/test_data/maths_and_science_output.csv "${out_dir}/maths_and_science_output.csv"
+diff -u statvar_imports/us_urban_school/maths_and_science_enrollment/test_data/maths_and_science_output.tmcf "${out_dir}/maths_and_science_output.tmcf"
+rm -rf "${out_dir}"
 ```
 
 To run the import validation rules locally against generated GenMCF and differ artifacts from the repository root:

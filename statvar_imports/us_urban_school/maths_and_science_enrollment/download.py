@@ -186,6 +186,7 @@ def _is_cached_archive_fresh(
     own_session = session is None
     http = session or requests.Session()
     try:
+        logging.info(f'Sending HEAD request to check cache freshness: {url}')
         response = http.head(
             url,
             allow_redirects=True,
@@ -276,7 +277,7 @@ def download_zip_to_path(
         for attempt in range(1, max_attempts + 1):
             try:
                 logging.info(
-                    f'Downloading URL (attempt {attempt}/{max_attempts}): '
+                    f'Downloading via GET (attempt {attempt}/{max_attempts}): '
                     f'{zip_url}')
                 with http.get(zip_url,
                               stream=True,

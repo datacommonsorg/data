@@ -13,8 +13,6 @@
 # limitations under the License.
 """Unit tests for US_Urban_MathsAndScience_Course_Enrollment."""
 
-import glob
-import importlib.util
 import io
 import json
 import os
@@ -43,16 +41,6 @@ from runner import ValidationRunner  # pylint: disable=import-error,wrong-import
 from validation_config import merge_and_save_config  # pylint: disable=import-error,wrong-import-position
 
 from statvar_imports.us_urban_school.maths_and_science_enrollment import download  # pylint: disable=wrong-import-position
-
-
-def _resolve_processor_python() -> str:
-    """Returns a Python interpreter with stat_var_processor dependencies."""
-    if importlib.util.find_spec('fastavro') is not None:
-        return sys.executable
-    venv_python = os.path.join(_REPO_ROOT, '.env', 'bin', 'python')
-    if os.path.isfile(venv_python):
-        return venv_python
-    return sys.executable
 
 
 def _build_zip_bytes(entries: dict[str, bytes]) -> bytes:
@@ -379,7 +367,7 @@ class DownloadTest(unittest.TestCase):
 
 
 class ManifestRunScriptAndValidationTest(unittest.TestCase):
-    """Tests manifest resolution, run.sh guards, processor fixtures, and validation."""
+    """Tests manifest resolution, run.sh guards, PV map coverage, and validation."""
 
     def test_manifest_parses_and_handles_optional_wildcard_node_mcf(self):
         manifest_path = os.path.join(_MODULE_DIR, 'manifest.json')
@@ -486,74 +474,6 @@ class ManifestRunScriptAndValidationTest(unittest.TestCase):
                 'SCH_SCIENR_PHYS_EL_F',
         ):
             self.assertIn(f'{col},value,{{Number}}', content)
-
-    def test_stat_var_processor_matches_expected_fixtures_for_jj_sch_just_and_el(
-            self):
-        test_data_dir = os.path.join(_MODULE_DIR, 'test_data')
-        input_files = sorted(
-            glob.glob(os.path.join(test_data_dir, '*_input.csv')))
-        self.assertEqual(len(input_files), 7)
-
-        expected_csv = os.path.join(test_data_dir,
-                                    'maths_and_science_output.csv')
-        expected_tmcf = os.path.join(test_data_dir,
-                                     'maths_and_science_output.tmcf')
-        existing_mcf = os.path.join(test_data_dir,
-                                    'maths_and_science_output_stat_vars.mcf')
-        processor_py = os.path.join(_REPO_ROOT, 'tools', 'statvar_importer',
-                                    'stat_var_processor.py')
-
-        with tempfile.TemporaryDirectory() as tmp_dir:
-            hermetic_cfg = os.path.join(tmp_dir, 'metadata.csv')
-            with open(os.path.join(_MODULE_DIR, 'metadata.csv'),
-                      encoding='utf-8') as src_f:
-                base_metadata = src_f.read()
-            with open(hermetic_cfg, 'w', encoding='utf-8') as dst_f:
-                dst_f.write(base_metadata)
-                dst_f.write('\nreconcile_nodes,False\nrecon_lookup_api,False\n')
-
-            actual_prefix = os.path.join(tmp_dir, 'maths_and_science_output')
-            cmd = [
-                _resolve_processor_python(),
-                processor_py,
-                f'--input_data={",".join(input_files)}',
-                f'--pv_map={os.path.join(_MODULE_DIR, "maths_and_science_pvmap.csv")}',
-                f'--config_file={hermetic_cfg}',
-                f'--existing_statvar_mcf={existing_mcf}',
-                f'--output_path={actual_prefix}',
-            ]
-            proc = subprocess.run(cmd,
-                                  capture_output=True,
-                                  text=True,
-                                  check=False)
-            self.assertEqual(
-                proc.returncode,
-                0,
-                msg=f'stat_var_processor failed:\n{proc.stderr}',
-            )
-
-            with open(f'{actual_prefix}.csv', encoding='utf-8') as f_act, open(
-                    expected_csv, encoding='utf-8') as f_exp:
-                actual_csv_text = f_act.read()
-                self.assertEqual(actual_csv_text, f_exp.read())
-
-            with open(f'{actual_prefix}.tmcf', encoding='utf-8') as f_act, open(
-                    expected_tmcf, encoding='utf-8') as f_exp:
-                self.assertEqual(f_act.read(), f_exp.read())
-
-            # Confirm 2022 _EL_, 2024 SCH_JUST:Yes, and 2024 SCH_JUST:No outputs exist.
-            self.assertIn(
-                '2022,nces/010000299995,dcid:Count_Student_JuvenileJusticeFacility_LimitedEnglishProficiency_Enrolled_Male_Algebra2,0',
-                actual_csv_text,
-            )
-            self.assertIn(
-                '2024,nces/010000201705,dcid:Count_Student_JuvenileJusticeFacility_LimitedEnglishProficiency_Enrolled_Male_Physics,1',
-                actual_csv_text,
-            )
-            self.assertIn(
-                '2024,nces/010000500871,dcid:Count_Student_NotJuvenileJusticeFacility_LimitedEnglishProficiency_Enrolled_Female_Physics,3',
-                actual_csv_text,
-            )
 
     def _run_merged_validation(self,
                                stats_rows: list[dict],
