@@ -5,6 +5,7 @@
 - **Source**: [Kenya Open Data for Africa](https://kenya.opendataforafrica.org/)
 - **Publisher**: Kenya National Bureau of Statistics (KNBS)
 - **Import Type**: `Semi-Automated` (`GCPCloudRunSemiAutomaticRefresh` — Cloudflare anti-bot challenges on `kenya.opendataforafrica.org` require semi-automated SDMX XML downloads staged to GCS rather than `auto1w`)
+- **Schedule**: `30 05 * * 1` (Mondays at 05:30 UTC; semi-automated Airflow/Cloud Batch schedule)
 - **Coverage**: Demographics, Health, Education, Economy (2002 – present)
 - **Entity Resolution**:
   - National level: `country/KEN`
@@ -59,7 +60,7 @@ When updated census data is published on Kenya Open Data for Africa:
    ```
 
 ### 4.2 Automated Ingestion Pipeline
-During scheduled import runs, the automated pipeline executes:
+During scheduled import runs (`30 05 * * 1`, Mondays at 05:30 UTC) or on-demand triggers after refreshed CSVs are staged to GCS, the automated pipeline executes:
 1. **Download (`download.sh`)**: Fetches the staged CSV files into `input_files/`.
 2. **Transform (`stat_var_processor.py`)**: Runs each of the 12 table configurations, resolving place DCIDs and generating TMCF, CSV, and StatVar MCF outputs.
 3. **Validation**: Validates data freshness, record deletion thresholds, and schema lint rules.

@@ -216,8 +216,8 @@ def _import_gazetteer_file(file_name, item_type, geoids):
         delim = '|' if '|' in first_line else '\t'
         headers = first_line.split(delim)
 
-        for l in f:
-            items = [item.strip() for item in l.split(delim)]
+        for line in f:
+            items = [item.strip() for item in line.split(delim)]
             geoid_idx = next((i for i, h in enumerate(headers) if h == 'GEOID'),
                              None)
             if geoid_idx is None or geoid_idx >= len(items):
