@@ -1,0 +1,49 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_min_value",
+            "description": "Ensures all Medicare enrollee counts and reimbursement values are non-negative.",
+            "validator": "MIN_VALUE_CHECK",
+            "params": {
+                "minimum": 0
+            }
+        },
+        {
+            "rule_id": "check_Count_MedicareEnrollee",
+            "description": "Verifies total Medicare enrollee count coverage and freshness through 2019.",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT COUNT(*) AS NumStatVars, COALESCE(MIN(NumPlaces), 0) AS NumPlaces, COALESCE(MIN(NumObservations), 0) AS NumObservations, COALESCE(MIN(CAST(MaxDate AS INTEGER)), 0) AS LatestDate FROM stats WHERE StatVar = 'Count_MedicareEnrollee'",
+                "condition": "NumStatVars = 1 AND NumPlaces >= 3000 AND NumObservations >= 40000 AND LatestDate >= 2019"
+            }
+        },
+        {
+            "rule_id": "check_Mean_Price_MedicareEnrollee",
+            "description": "Verifies price-adjusted Medicare reimbursement per enrollee coverage and freshness through 2019.",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT COUNT(*) AS NumStatVars, COALESCE(MIN(NumPlaces), 0) AS NumPlaces, COALESCE(MIN(NumObservations), 0) AS NumObservations, COALESCE(MIN(CAST(MaxDate AS INTEGER)), 0) AS LatestDate FROM stats WHERE StatVar = 'dc/rn90czcrqcv06'",
+                "condition": "NumStatVars = 1 AND NumPlaces >= 3000 AND NumObservations >= 40000 AND LatestDate >= 2019"
+            }
+        },
+        {
+            "rule_id": "check_MedicareB_Enrollees",
+            "description": "Verifies Part B enrollee counts (Overall, Black, NonBlack) cover at least 1,500 places through 2019.",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT COUNT(*) AS NumStatVars, COALESCE(MIN(NumPlaces), 0) AS NumPlaces, COALESCE(MIN(NumObservations), 0) AS NumObservations, COALESCE(MIN(CAST(MaxDate AS INTEGER)), 0) AS LatestDate FROM stats WHERE StatVar IN ('Count_MedicareEnrollee_MedicareB', 'Count_MedicareEnrollee_MedicareB_Black', 'Count_MedicareEnrollee_MedicareB_NonBlack')",
+                "condition": "NumStatVars = 3 AND NumPlaces >= 1500 AND NumObservations >= 15000 AND LatestDate >= 2019"
+            }
+        },
+        {
+            "rule_id": "check_Diabetic_Enrollees",
+            "description": "Verifies diabetic enrollee counts (Black, NonBlack) cover at least 1,200 places through 2019.",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT COUNT(*) AS NumStatVars, COALESCE(MIN(NumPlaces), 0) AS NumPlaces, COALESCE(MIN(NumObservations), 0) AS NumObservations, COALESCE(MIN(CAST(MaxDate AS INTEGER)), 0) AS LatestDate FROM stats WHERE StatVar IN ('Count_MedicareEnrollee_ConditionDiabetic_Black', 'Count_MedicareEnrollee_ConditionDiabetic_NonBlack')",
+                "condition": "NumStatVars = 2 AND NumPlaces >= 1200 AND NumObservations >= 10000 AND LatestDate >= 2019"
+            }
+        }
+    ]
+}
