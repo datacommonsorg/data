@@ -19,18 +19,15 @@ import html
 import json
 import os
 import re
-import sys
 import time
 from typing import Any
-
-_CODEDIR = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(1, os.path.join(_CODEDIR, '../../../util/'))
 
 from absl import app
 from absl import flags
 from absl import logging
-import download_util
 import requests
+
+_CODEDIR = os.path.dirname(os.path.abspath(__file__))
 
 _FLAGS = flags.FLAGS
 if 'output_dir' not in _FLAGS:
@@ -186,11 +183,6 @@ def request_bps_json(
     retry_secs: int = 5,
 ) -> Any:
     """Fetches JSON from BPS WebAPI while redacting the API key from logs."""
-    prefilled_key = download_util._get_prefilled_key(url, {})
-    if prefilled_key in download_util._PREFILLED_RESPONSE or hasattr(
-            download_util.request_url, 'mock_calls'):
-        return download_util.request_url(url=url, output='json')
-
     redacted_url = redact_api_key(url)
     logging.info('Downloading URL: %s', redacted_url)
     last_error: Exception | None = None
@@ -395,21 +387,29 @@ def _parse_simdasi_payload(
         return []
     table_obj = data[1]
     available_years = [int(y) for y in (table_obj.get('list_tahun_data') or [])]
-    kolom = table_obj.get('kolom') or {}
-    rows = table_obj.get('data') or []
+    kolom = table_obj.get('kolom')
+    rows = table_obj.get('data')
+    if not isinstance(kolom, dict) or not isinstance(rows, list):
+        return sorted(available_years)
     for row in rows:
+        if not isinstance(row, dict):
+            continue
         place = normalize_place_label(
             row.get('label_raw') or row.get('label') or '')
         if not place:
             continue
-        variables = row.get('variables') or {}
+        variables = row.get('variables')
+        if not isinstance(variables, dict):
+            continue
         for col_id, col_meta in kolom.items():
             if not isinstance(col_meta, dict):
                 continue
             col_name = str(col_meta.get('nama_variabel', '')).strip()
             if not col_name or col_id not in variables:
                 continue
-            cell = variables.get(col_id) or {}
+            cell = variables.get(col_id)
+            if not isinstance(cell, dict):
+                continue
             val_str = clean_simdasi_integer(
                 cell.get('value_raw') if cell.
                 get('value_raw') is not None else cell.get('value'))
@@ -464,7 +464,6 @@ def write_education_csv(
     value_columns: tuple[str, ...] = ORDERED_VALUE_COLUMNS,
 ) -> None:
     """Writes the combined Indonesia Education CSV compatible with stat_var_processor.py."""
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)
     with open(output_path, 'w', newline='', encoding='utf-8') as fp:
         writer = csv.writer(fp)
         writer.writerow(['Provinsi', 'observationDate'] + list(value_columns))
@@ -532,6 +531,7 @@ def main(_) -> None:
         table_data=table_data,
         delay_sec=_FLAGS.request_delay_sec,
     )
+    os.makedirs(_FLAGS.output_dir, exist_ok=True)
     output_path = os.path.join(_FLAGS.output_dir, _FLAGS.output_filename)
     write_education_csv(
         output_path=output_path,

@@ -19,25 +19,32 @@ import os
 import sys
 import tempfile
 import unittest
+from unittest import mock
 
 _CODEDIR = os.path.dirname(os.path.abspath(__file__))
 _REPODIR = os.path.abspath(os.path.join(_CODEDIR, '../../..'))
 sys.path.insert(1, _REPODIR)
-sys.path.insert(1, os.path.join(_REPODIR, 'util'))
 
-import download_util
 from statvar_imports.indonesia_census.education import download
 
 
+def _make_mock_get(responses: dict[str, dict]):
+    """Returns a requests.get side_effect backed by a URL-to-JSON mapping."""
+
+    def _side_effect(url, timeout=30):
+        del timeout
+        if url not in responses:
+            raise AssertionError(f'Unexpected URL requested: {url}')
+        resp = mock.MagicMock()
+        resp.ok = True
+        resp.status_code = 200
+        resp.json.return_value = responses[url]
+        return resp
+
+    return _side_effect
+
+
 class DownloadTest(unittest.TestCase):
-
-    def setUp(self):
-        super().setUp()
-        download_util._PREFILLED_RESPONSE.clear()
-
-    def tearDown(self):
-        download_util._PREFILLED_RESPONSE.clear()
-        super().tearDown()
 
     def test_redact_api_key(self):
         url = (
@@ -75,10 +82,24 @@ class DownloadTest(unittest.TestCase):
         # 1. Mock Literacy by Province (var_id=1458)
         th_1458_url = ('https://webapi.bps.go.id/v1/api/list/model/th/lang/eng/'
                        f'domain/0000/var/1458/page/1/key/{api_key}/')
-        download_util.set_test_url_download_response(
-            url=th_1458_url,
-            params={},
-            response={
+        data_1458_url = (
+            'https://webapi.bps.go.id/v1/api/list/model/data/lang/eng/'
+            f'domain/0000/var/1458/th/122/key/{api_key}/')
+        # 2. Mock Literacy by Sex (var_id=1460)
+        th_1460_url = ('https://webapi.bps.go.id/v1/api/list/model/th/lang/eng/'
+                       f'domain/0000/var/1460/page/1/key/{api_key}/')
+        data_1460_url = (
+            'https://webapi.bps.go.id/v1/api/list/model/data/lang/eng/'
+            f'domain/0000/var/1460/th/111;122/key/{api_key}/')
+        # 3. Mock SIMDASI table
+        test_table_id = 'Uys0Mk9kelpxamVmMUYrMkRHSFcyZz09'
+        simdasi_url = (
+            'https://webapi.bps.go.id/v1/api/interoperabilitas/datasource/'
+            f'simdasi/id/25/tahun/2022/id_tabel/{test_table_id}/'
+            f'wilayah/0000000/key/{api_key}/')
+
+        mock_responses = {
+            th_1458_url: {
                 'status':
                     'OK',
                 'data': [
@@ -93,14 +114,7 @@ class DownloadTest(unittest.TestCase):
                     }],
                 ],
             },
-        )
-        data_1458_url = (
-            'https://webapi.bps.go.id/v1/api/list/model/data/lang/eng/'
-            f'domain/0000/var/1458/th/122/key/{api_key}/')
-        download_util.set_test_url_download_response(
-            url=data_1458_url,
-            params={},
-            response={
+            data_1458_url: {
                 'status': 'OK',
                 'var': [{
                     'val': 1458,
@@ -133,15 +147,7 @@ class DownloadTest(unittest.TestCase):
                     '9999145801220': 96.35,
                 },
             },
-        )
-
-        # 2. Mock Literacy by Sex (var_id=1460)
-        th_1460_url = ('https://webapi.bps.go.id/v1/api/list/model/th/lang/eng/'
-                       f'domain/0000/var/1460/page/1/key/{api_key}/')
-        download_util.set_test_url_download_response(
-            url=th_1460_url,
-            params={},
-            response={
+            th_1460_url: {
                 'status':
                     'OK',
                 'data': [
@@ -163,14 +169,7 @@ class DownloadTest(unittest.TestCase):
                     ],
                 ],
             },
-        )
-        data_1460_url = (
-            'https://webapi.bps.go.id/v1/api/list/model/data/lang/eng/'
-            f'domain/0000/var/1460/th/111;122/key/{api_key}/')
-        download_util.set_test_url_download_response(
-            url=data_1460_url,
-            params={},
-            response={
+            data_1460_url: {
                 'status': 'OK',
                 'var': [{
                     'val': 1460,
@@ -217,18 +216,7 @@ class DownloadTest(unittest.TestCase):
                     '3146001220': 99.99,
                 },
             },
-        )
-
-        # 3. Mock SIMDASI table
-        test_table_id = 'Uys0Mk9kelpxamVmMUYrMkRHSFcyZz09'
-        simdasi_url = (
-            'https://webapi.bps.go.id/v1/api/interoperabilitas/datasource/'
-            f'simdasi/id/25/tahun/2022/id_tabel/{test_table_id}/'
-            f'wilayah/0000000/key/{api_key}/')
-        download_util.set_test_url_download_response(
-            url=simdasi_url,
-            params={},
-            response={
+            simdasi_url: {
                 'status':
                     'OK',
                 'data': [
@@ -257,16 +245,20 @@ class DownloadTest(unittest.TestCase):
                     },
                 ],
             },
-        )
+        }
 
         table_data = {}
-        download.fetch_literacy_by_province('0000', 1458, api_key, table_data)
-        download.fetch_literacy_by_sex('0000', 1460, api_key, table_data)
-        download.fetch_simdasi_school_tables(
-            api_key=api_key,
-            table_data=table_data,
-            tables=(('MTs', test_table_id),),
-        )
+        with mock.patch.object(download.requests,
+                               'get',
+                               side_effect=_make_mock_get(mock_responses)):
+            download.fetch_literacy_by_province('0000', 1458, api_key,
+                                                table_data)
+            download.fetch_literacy_by_sex('0000', 1460, api_key, table_data)
+            download.fetch_simdasi_school_tables(
+                api_key=api_key,
+                table_data=table_data,
+                tables=(('MTs', test_table_id),),
+            )
 
         self.assertEqual(table_data[('ACEH', '2022')]['Literacy Rate (Total)'],
                          '98.25')
@@ -310,17 +302,69 @@ class DownloadTest(unittest.TestCase):
         api_key = 'secret_test_key'
         th_url = ('https://webapi.bps.go.id/v1/api/list/model/th/lang/eng/'
                   f'domain/0000/var/1458/page/1/key/{api_key}/')
-        download_util.set_test_url_download_response(
-            url=th_url,
-            params={},
-            response={
+        mock_responses = {
+            th_url: {
                 'status': 'ERROR',
                 'message': f'Failed for /key/{api_key}/',
             },
-        )
-        with self.assertRaises(RuntimeError) as ctx:
-            download.fetch_available_years('0000', 1458, api_key)
+        }
+        with mock.patch.object(download.requests,
+                               'get',
+                               side_effect=_make_mock_get(mock_responses)):
+            with self.assertRaises(RuntimeError) as ctx:
+                download.fetch_available_years('0000', 1458, api_key)
         self.assertNotIn(api_key, str(ctx.exception))
+
+    def test_parse_simdasi_payload_ignores_non_dict_entries(self):
+        payload = {
+            'status':
+                'OK',
+            'data': [
+                {},
+                {
+                    'list_tahun_data': [2022],
+                    'kolom': {
+                        'c1': {
+                            'nama_variabel': 'Jumlah Sekolah SD (Negeri)'
+                        },
+                        'c2': {
+                            'nama_variabel': 'Jumlah Guru SD (Negeri)'
+                        },
+                    },
+                    'data': [
+                        {
+                            'label_raw': 'Bali',
+                            'variables': [],
+                        },
+                        {
+                            'label_raw': 'Aceh',
+                            'variables': {
+                                'c1': None,
+                                'c2': 'unexpected_string',
+                            },
+                        },
+                        {
+                            'label_raw': 'Jawa Barat',
+                            'variables': {
+                                'c1': {
+                                    'value_raw': '1.234'
+                                },
+                                'c2': None,
+                            },
+                        },
+                    ],
+                },
+            ],
+        }
+        table_data = {}
+        years = download._parse_simdasi_payload(payload, '2022', table_data)
+        self.assertEqual(years, [2022])
+        self.assertEqual(
+            table_data,
+            {('JAWA BARAT', '2022'): {
+                 'Jumlah Sekolah SD (Negeri)': '1234'
+             }},
+        )
 
 
 if __name__ == '__main__':
