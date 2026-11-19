@@ -1,0 +1,32 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "Indonesia_Census_Education",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://www.bps.go.id/en/statistics-table?subject=521",
+            "provenance_description": "Statistics Indonesia (Badan Pusat Statistik - BPS) - Literacy Rate and Schools, Teachers, and Students by Province.",
+            "scripts": [
+                "download.py --output_dir=input_files",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/indonesia_education_input.csv --pv_map=indonesia_education_pvmap.csv --config_file=indonesia_education_metadata.csv --places_resolved_csv=indonesia_education_places_resolved.csv --output_path=output_files/indonesia_education_output --output_counters=counters/indonesia_education_counters.csv"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output_files/indonesia_education_output.tmcf",
+                    "cleaned_csv": "output_files/indonesia_education_output.csv",
+                    "node_mcf": "output_files/*.mcf"
+                }
+            ],
+            "source_files": [
+                "input_files/*.csv"
+            ],
+            "cron_schedule": "0 05 * * 1",
+            "resource_limits": {
+                "cpu": 4,
+                "memory": 16,
+                "disk": 50
+            }
+        }
+    ]
+}
