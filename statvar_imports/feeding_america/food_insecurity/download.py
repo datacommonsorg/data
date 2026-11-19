@@ -14,6 +14,7 @@
 # limitations under the License.
 """Downloads Feeding America Food Insecurity data (2022+) and merges with 2019-2021 baseline."""
 
+import argparse
 import csv
 import html
 import http.cookiejar
@@ -21,19 +22,25 @@ import json
 import logging
 import os
 import re
+import sys
 import tempfile
 import time
 
 import requests
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+_REPO_ROOT = os.path.abspath(os.path.join(_SCRIPT_DIR, '..', '..', '..'))
+_UTIL_DIR = os.path.join(_REPO_ROOT, 'util')
+if _UTIL_DIR not in sys.path:
+    sys.path.append(_UTIL_DIR)
+
+import file_util  # pylint: disable=wrong-import-position
+
 MAP_HOME_URL = 'https://map.feedingamerica.org/'
 MAPDATA_URL = 'https://map.feedingamerica.org/mapdata'
-BASELINE_LOCAL = os.path.join(
-    _SCRIPT_DIR,
-    'input_files',
-    'FeedingAmerica_FoodInsecurity_baseline_2019_2021.csv',
-)
+BASELINE_GCS_PATH = (
+    'gs://unresolved_mcf/feeding_america/food_insecurity/'
+    'input_files/FeedingAmerica_FoodInsecurity_baseline_2019_2021.csv')
 OUTPUT_INPUT_CSV = os.path.join(
     _SCRIPT_DIR,
     'input_files',
@@ -176,13 +183,41 @@ def discover_years(session=None, max_retries=3):
                 payload = json.loads(match.group(1))
             else:
                 attr_match = re.search(r'data-page="([^"]+)"', page)
-                payload = (json.loads(html.unescape(attr_match.group(1)))
-                           if attr_match else {})
-            for item in payload.get('props', {}).get('filters',
-                                                     {}).get('years', []):
+                if not attr_match:
+                    logging.warning(
+                        'No Inertia data-page payload found on %s; falling back to defaults',
+                        MAP_HOME_URL,
+                    )
+                    return sorted(years)
+                payload = json.loads(html.unescape(attr_match.group(1)))
+            if not isinstance(payload, dict):
+                raise ValueError(
+                    f'Expected JSON object for Inertia data-page, got {type(payload).__name__}'
+                )
+            props = payload.get('props')
+            filters = props.get('filters') if isinstance(props, dict) else None
+            raw_years = (filters.get('years')
+                         if isinstance(filters, dict) else None)
+            if not isinstance(raw_years, list):
+                logging.warning(
+                    'Missing or invalid props.filters.years in Inertia payload on %s; falling back to defaults',
+                    MAP_HOME_URL,
+                )
+                return sorted(years)
+            discovered = set()
+            for item in raw_years:
+                if not isinstance(item, dict):
+                    continue
                 yr = str(item.get('year', '')).strip()
                 if yr.isdigit() and int(yr) >= MIN_API_YEAR:
-                    years.add(yr)
+                    discovered.add(yr)
+            if not discovered:
+                logging.warning(
+                    'No years >= %d found in Inertia payload on %s; falling back to defaults',
+                    MIN_API_YEAR,
+                    MAP_HOME_URL,
+                )
+            years.update(discovered)
             return sorted(years)
         except requests.HTTPError as e:
             status = e.response.status_code if e.response is not None else None
@@ -194,7 +229,7 @@ def discover_years(session=None, max_retries=3):
                 )
                 return sorted(years)
             last_err = e
-        except (ValueError, KeyError) as e:
+        except (ValueError, KeyError, TypeError) as e:
             logging.warning(
                 'Year discovery payload parse failed; falling back to defaults (%s)',
                 e,
@@ -249,12 +284,13 @@ def format_dcid(level, fips):
 
 
 def load_baseline(baseline_path):
-    """Loads the immutable 2019-2021 historical baseline CSV verbatim."""
-    if not os.path.exists(baseline_path):
+    """Loads the immutable 2019-2021 historical baseline CSV from GCS or local disk."""
+    matching = file_util.file_get_matching(baseline_path)
+    if not matching:
         raise FileNotFoundError(
             f'Missing historical baseline CSV: {baseline_path}')
     rows_by_key = {}
-    with open(baseline_path, 'r', encoding='utf-8') as f:
+    with file_util.FileIO(matching[0], 'r', encoding='utf-8') as f:
         for row in csv.DictReader(f):
             dcid = row['dcid'].strip()
             if not dcid.startswith('dcid:'):
@@ -267,7 +303,7 @@ def load_baseline(baseline_path):
     if not rows_by_key:
         raise ValueError(f'Historical baseline CSV is empty: {baseline_path}')
     logging.info('Loaded %d historical baseline rows from %s', len(rows_by_key),
-                 baseline_path)
+                 matching[0])
     return rows_by_key
 
 
@@ -380,12 +416,29 @@ def write_csv_atomic(output_path, rows_by_key):
         raise
 
 
-def main():
+def parse_args(argv=None):
+    """Parses optional CLI arguments for baseline and output CSV paths."""
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        '--baseline_path',
+        default=BASELINE_GCS_PATH,
+        help='GCS URI or local path to the 2019-2021 historical baseline CSV.',
+    )
+    parser.add_argument(
+        '--output_csv',
+        default=OUTPUT_INPUT_CSV,
+        help='Destination path for the merged wide input CSV.',
+    )
+    return parser.parse_args(argv if argv is not None else [])
+
+
+def main(argv=None):
     logging.basicConfig(
         level=logging.INFO,
         format='%(asctime)s %(levelname)s %(message)s',
     )
-    rows_by_key = load_baseline(BASELINE_LOCAL)
+    args = parse_args(argv)
+    rows_by_key = load_baseline(args.baseline_path)
 
     with build_session() as session:
         years = discover_years(session=session)
@@ -447,9 +500,9 @@ def main():
                 logging.info('Year %s level=%s: merged %d rows', year, level,
                              added_for_level)
 
-    write_csv_atomic(OUTPUT_INPUT_CSV, rows_by_key)
-    logging.info('Wrote %d rows to %s', len(rows_by_key), OUTPUT_INPUT_CSV)
+    write_csv_atomic(args.output_csv, rows_by_key)
+    logging.info('Wrote %d rows to %s', len(rows_by_key), args.output_csv)
 
 
 if __name__ == '__main__':
-    main()
+    main(sys.argv[1:])

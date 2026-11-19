@@ -192,6 +192,52 @@ class DownloadTest(unittest.TestCase):
             years = download.discover_years(session=session, max_retries=2)
         self.assertEqual(years, download.DEFAULT_YEARS)
 
+    def test_discover_years_warns_when_data_page_missing(self):
+        resp = mock.MagicMock()
+        resp.status_code = 200
+        resp.text = '<html><body>Challenge or soft-404 page</body></html>'
+        session = mock.MagicMock()
+        session.get.return_value = resp
+
+        with self.assertLogs(level='WARNING') as logs:
+            years = download.discover_years(session=session)
+        self.assertEqual(years, download.DEFAULT_YEARS)
+        self.assertTrue(any('data-page' in msg for msg in logs.output))
+
+    def test_discover_years_handles_null_and_non_dict_inertia_fields(self):
+        payloads = [
+            '[]',
+            'null',
+            '{"props": null}',
+            '{"props": {"filters": null}}',
+            '{"props": {"filters": {"years": null}}}',
+            '{"props": {"filters": {"years": "2025"}}}',
+        ]
+        for body in payloads:
+            with self.subTest(body=body):
+                resp = mock.MagicMock()
+                resp.status_code = 200
+                resp.text = ('<script data-page="app" type="application/json">'
+                             f'{body}</script>')
+                session = mock.MagicMock()
+                session.get.return_value = resp
+                with self.assertLogs(level='WARNING'):
+                    years = download.discover_years(session=session)
+                self.assertEqual(years, download.DEFAULT_YEARS)
+
+    def test_discover_years_skips_non_dict_year_entries(self):
+        resp = mock.MagicMock()
+        resp.status_code = 200
+        resp.text = (
+            '<script data-page="app" type="application/json">'
+            '{"props":{"filters":{"years":[null,"bad",{"year":"2025"}]}}}'
+            '</script>')
+        session = mock.MagicMock()
+        session.get.return_value = resp
+
+        years = download.discover_years(session=session)
+        self.assertEqual(years, ['2022', '2023', '2024', '2025'])
+
     def test_load_baseline_missing_raises(self):
         with self.assertRaises(FileNotFoundError):
             download.load_baseline('/nonexistent/path/baseline.csv')
@@ -372,7 +418,8 @@ class DownloadTest(unittest.TestCase):
                 return {'district': [{'fips': '101', 'insecurity': 0.12}]}
 
             with (
-                    mock.patch.object(download, 'BASELINE_LOCAL', baseline_csv),
+                    mock.patch.object(download, 'BASELINE_GCS_PATH',
+                                      baseline_csv),
                     mock.patch.object(download, 'OUTPUT_INPUT_CSV', output_csv),
                     mock.patch.object(download,
                                       'discover_years',

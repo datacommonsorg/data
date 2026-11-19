@@ -1,4 +1,4 @@
-dataset,feedingamerica_foodinsecurity
+parameter,value
 header_rows,1
-output_csv_columns,"observationAbout,variableMeasured,observationDate,value,unit,scalingFactor,measurementMethod"
-drop_statvar_without_svobs,True
+mapped_rows,1
+output_columns,"observationDate,observationAbout,value,unit,scalingFactor,variableMeasured"

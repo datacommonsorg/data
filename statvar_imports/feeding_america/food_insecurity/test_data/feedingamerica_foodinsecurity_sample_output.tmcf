@@ -1,0 +1,9 @@
+Node: E:feedingamerica_foodinsecurity_sample_output->E0
+observationDate: C:feedingamerica_foodinsecurity_sample_output->observationDate
+observationAbout: C:feedingamerica_foodinsecurity_sample_output->observationAbout
+value: C:feedingamerica_foodinsecurity_sample_output->value
+unit: C:feedingamerica_foodinsecurity_sample_output->unit
+scalingFactor: C:feedingamerica_foodinsecurity_sample_output->scalingFactor
+variableMeasured: C:feedingamerica_foodinsecurity_sample_output->variableMeasured
+typeOf: dcs:StatVarObservation
+measurementMethod: dcs:FeedingAmerica_Estimate

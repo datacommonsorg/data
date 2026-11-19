@@ -22,8 +22,8 @@
       "validator": "SQL_VALIDATOR",
       "params": {
         "query": "SELECT StatVar, NumPlaces, NumObservations, CAST(MaxDate AS INTEGER) AS LatestDate FROM stats WHERE StatVar NOT IN ('Count_Person_FoodInsecure_HouseholdIncomeAboveStateLowThresholdAndBelowOrEqualStateHighThreshold_AsAFractionOf_Count_Person_FoodInsecure', 'Count_Person_FoodInsecure_HouseholdIncomeAboveStateHighThreshold_AsAFractionOf_Count_Person_FoodInsecure')",
-        "condition": "NumPlaces >= 2000 AND NumObservations >= 10000 AND LatestDate >= 2024",
-        "failure_message": "Active FeedingAmerica_FoodInsecurity StatVars failed place count, observation count, or 2024 freshness check."
+        "condition": "NumPlaces >= 2000 AND NumObservations >= 10000 AND LatestDate >= EXTRACT(YEAR FROM CURRENT_DATE - INTERVAL 6 MONTHS) - 2",
+        "failure_message": "Active FeedingAmerica_FoodInsecurity StatVars failed place count, observation count, or freshness check."
       }
     },
     {
