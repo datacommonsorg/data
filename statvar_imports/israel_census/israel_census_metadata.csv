@@ -1,5 +1,4 @@
 parameter,value
-url,https://www.cbs.gov.il/
 output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,measurementMethod"
 header_rows,1
 mapped_columns,3

@@ -24,6 +24,8 @@
         "input_files/*.csv",
         "input_files/*.json",
         "counters/*.csv",
+        "israel_census_metadata.csv",
+        "israel_census_pv_map.csv",
         "validation_config.json"
       ],
       "cron_schedule": "0 5 * * 1",

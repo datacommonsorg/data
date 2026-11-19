@@ -70,21 +70,48 @@
       "params": {}
     },
     {
+      "rule_id": "check_total_sv_count_no_nulls",
+      "description": "Verify summary_report.csv contains exactly 304 distinct non-null StatVar rows with no NULL or duplicate StatVar entries",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT COUNT(*) AS total_rows, COUNT(StatVar) AS non_null_rows, COUNT(DISTINCT StatVar) AS distinct_svs FROM stats",
+        "condition": "COALESCE(total_rows = 304 AND non_null_rows = 304 AND distinct_svs = 304, FALSE)"
+      }
+    },
+    {
+      "rule_id": "check_active_time_series_sv_count",
+      "description": "Verify all 47 distinct active CBS Time-Series DataBank indicators (4 population, 3 live-birth, 4 mortality-event, and 36 cause-of-death StatVars) are present with no duplicate rows",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT COUNT(*) AS row_count, COUNT(DISTINCT StatVar) AS active_sv_count, COUNT(DISTINCT CASE WHEN StatVar IN ('Count_Person', 'Count_Person_Judaism', 'Count_Person_Arab', 'Count_Person_CBSIsraelNonJudaismOrNonArabChristianOrNoReligion') THEN StatVar END) AS pop_svs, COUNT(DISTINCT CASE WHEN StatVar IN ('Count_BirthEvent_LiveBirth_Arab', 'Count_BirthEvent_LiveBirth_CBSIsraelArabChristian', 'Count_BirthEvent_LiveBirth_CBSIsraelJudaismOrNonArabChristianOrNoReligion') THEN StatVar END) AS birth_svs, COUNT(DISTINCT CASE WHEN StatVar IN ('Count_MortalityEvent_Arab', 'Count_MortalityEvent_CBSIsraelJudaismOrNonArabChristianOrNoReligion', 'Count_MortalityEvent_Infant_Arab', 'Count_MortalityEvent_Infant_CBSIsraelJudaismOrNonArabChristianOrNoReligion') THEN StatVar END) AS mort_event_svs, COUNT(DISTINCT CASE WHEN regexp_matches(StatVar, '^Count_MortalityEvent_.*_AsAFractionOf_Count_Person_.*$') THEN StatVar END) AS cod_svs FROM stats WHERE StatVar IN ('Count_Person', 'Count_Person_Judaism', 'Count_Person_Arab', 'Count_Person_CBSIsraelNonJudaismOrNonArabChristianOrNoReligion') OR regexp_matches(StatVar, '^Count_(BirthEvent|MortalityEvent)')",
+        "condition": "COALESCE(active_sv_count = 47 AND row_count = active_sv_count AND pop_svs = 4 AND birth_svs = 3 AND mort_event_svs = 4 AND cod_svs = 36, FALSE)"
+      }
+    },
+    {
+      "rule_id": "check_census_2008_and_historical_sv_count",
+      "description": "Verify all 257 distinct 2008 Census and historical population indicators are present with no duplicate rows",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT COUNT(*) AS row_count, COUNT(DISTINCT StatVar) AS census_sv_count FROM stats WHERE StatVar NOT IN ('Count_Person', 'Count_Person_Judaism', 'Count_Person_Arab', 'Count_Person_CBSIsraelNonJudaismOrNonArabChristianOrNoReligion') AND NOT regexp_matches(StatVar, '^Count_(BirthEvent|MortalityEvent)')",
+        "condition": "COALESCE(census_sv_count = 257 AND row_count = census_sv_count, FALSE)"
+      }
+    },
+    {
       "rule_id": "check_active_time_series_freshness_and_bounds",
-      "description": "Verify MaxDate is within allowable publication lag and values are non-negative for active CBS Time-Series DataBank indicators",
+      "description": "Verify strict 4-digit MaxDate within allowable publication lag, finite ordered non-negative values, and cause-of-death rate upper bound (<= 100000) for active CBS Time-Series DataBank indicators",
       "validator": "SQL_VALIDATOR",
       "params": {
         "query": "SELECT StatVar, MaxDate, MinValue, MaxValue, NumPlaces, COUNT(*) OVER () AS total_svs FROM stats WHERE StatVar IN ('Count_Person', 'Count_Person_Judaism', 'Count_Person_Arab', 'Count_Person_CBSIsraelNonJudaismOrNonArabChristianOrNoReligion') OR regexp_matches(StatVar, '^Count_(BirthEvent|MortalityEvent)')",
-        "condition": "total_svs = 47 AND NumPlaces >= 1 AND MinValue >= 0 AND ((regexp_matches(StatVar, '_AsAFractionOf_') AND CAST(MaxDate AS INTEGER) >= (EXTRACT(YEAR FROM CURRENT_DATE) - 5)) OR (regexp_matches(StatVar, '^Count_BirthEvent_') AND CAST(MaxDate AS INTEGER) >= (EXTRACT(YEAR FROM CURRENT_DATE) - 4)) OR (NOT regexp_matches(StatVar, '_AsAFractionOf_|^Count_BirthEvent_') AND CAST(MaxDate AS INTEGER) >= (EXTRACT(YEAR FROM CURRENT_DATE) - 3)))"
+        "condition": "COALESCE(StatVar IS NOT NULL AND MaxDate IS NOT NULL AND MinValue IS NOT NULL AND MaxValue IS NOT NULL AND NumPlaces IS NOT NULL AND total_svs = 47 AND isfinite(TRY_CAST(NumPlaces AS DOUBLE)) AND TRY_CAST(NumPlaces AS DOUBLE) >= 1 AND isfinite(TRY_CAST(MinValue AS DOUBLE)) AND isfinite(TRY_CAST(MaxValue AS DOUBLE)) AND TRY_CAST(MinValue AS DOUBLE) >= 0 AND TRY_CAST(MinValue AS DOUBLE) <= TRY_CAST(MaxValue AS DOUBLE) AND (NOT regexp_matches(StatVar, '_AsAFractionOf_') OR TRY_CAST(MaxValue AS DOUBLE) <= 100000) AND regexp_matches(CAST(MaxDate AS VARCHAR), '^[0-9]{4}$') AND ((regexp_matches(StatVar, '_AsAFractionOf_') AND TRY_CAST(MaxDate AS INTEGER) BETWEEN (EXTRACT(YEAR FROM CURRENT_DATE) - 5) AND EXTRACT(YEAR FROM CURRENT_DATE)) OR (regexp_matches(StatVar, '^Count_BirthEvent_') AND TRY_CAST(MaxDate AS INTEGER) BETWEEN (EXTRACT(YEAR FROM CURRENT_DATE) - 4) AND EXTRACT(YEAR FROM CURRENT_DATE)) OR (NOT regexp_matches(StatVar, '_AsAFractionOf_|^Count_BirthEvent_') AND TRY_CAST(MaxDate AS INTEGER) BETWEEN (EXTRACT(YEAR FROM CURRENT_DATE) - 3) AND EXTRACT(YEAR FROM CURRENT_DATE))), FALSE)"
       }
     },
     {
       "rule_id": "check_census_2008_and_historical_bounds",
-      "description": "Verify MaxDate and non-negative values for 2008 Census and historical population series",
+      "description": "Verify strict 4-digit MaxDate, finite ordered non-negative values, and percentage upper bound (<= 100) for 2008 Census and historical population series",
       "validator": "SQL_VALIDATOR",
       "params": {
         "query": "SELECT StatVar, MaxDate, MinValue, MaxValue, NumPlaces, COUNT(*) OVER () AS total_svs FROM stats WHERE StatVar NOT IN ('Count_Person', 'Count_Person_Judaism', 'Count_Person_Arab', 'Count_Person_CBSIsraelNonJudaismOrNonArabChristianOrNoReligion') AND NOT regexp_matches(StatVar, '^Count_(BirthEvent|MortalityEvent)')",
-        "condition": "((StatVar = 'Count_Person_NonJudaism' AND MaxDate = '1993') OR (StatVar != 'Count_Person_NonJudaism' AND MaxDate = '2008')) AND total_svs = 257 AND NumPlaces >= 1 AND MinValue >= 0 AND (NOT regexp_matches(StatVar, '_AsAFractionOf_') OR MaxValue <= 100)"
+        "condition": "COALESCE(StatVar IS NOT NULL AND MaxDate IS NOT NULL AND MinValue IS NOT NULL AND MaxValue IS NOT NULL AND NumPlaces IS NOT NULL AND regexp_matches(CAST(MaxDate AS VARCHAR), '^[0-9]{4}$') AND ((StatVar = 'Count_Person_NonJudaism' AND CAST(MaxDate AS VARCHAR) = '1993') OR (StatVar != 'Count_Person_NonJudaism' AND CAST(MaxDate AS VARCHAR) = '2008')) AND total_svs = 257 AND isfinite(TRY_CAST(NumPlaces AS DOUBLE)) AND TRY_CAST(NumPlaces AS DOUBLE) >= 1 AND isfinite(TRY_CAST(MinValue AS DOUBLE)) AND isfinite(TRY_CAST(MaxValue AS DOUBLE)) AND TRY_CAST(MinValue AS DOUBLE) >= 0 AND TRY_CAST(MinValue AS DOUBLE) <= TRY_CAST(MaxValue AS DOUBLE) AND (NOT regexp_matches(StatVar, '_AsAFractionOf_') OR TRY_CAST(MaxValue AS DOUBLE) <= 100), FALSE)"
       }
     }
   ]

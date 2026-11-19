@@ -19,6 +19,7 @@ import csv
 import json
 import math
 import os
+import re
 import tempfile
 from typing import Any
 
@@ -27,19 +28,13 @@ from absl import logging
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 VITAL_STATS_SERIES_COL_MAP = {
-    '3729': (
-        'Jews, Popululation no Religious Classification and Non-Arab Cristians - Infant Deaths'
-    ),
-    '3747': 'Arab Population - Infant Deaths',
-    '3751': (
-        'Jews, Popululation no Religious Classification and Non-Arab Cristians - Live-Births'
-    ),
-    '3752': 'Arab Population - Live-Births',
-    '3755': 'Arab Christians - Live-Births',
-    '3759': (
-        'Jews, Popululation no Religious Classification and Non-Arab Cristians - Deaths'
-    ),
-    '3762': 'Arab Population - Deaths',
+    '3729': 'infant_deaths_jews_others',
+    '3747': 'infant_deaths_arab',
+    '3751': 'live_births_jews_others',
+    '3752': 'live_births_arab',
+    '3755': 'live_births_arab_christian',
+    '3759': 'deaths_jews_others',
+    '3762': 'deaths_arab',
 }
 
 _CBS_ARAB_CHRISTIAN_LIVE_BIRTHS_FALLBACK = {
@@ -58,30 +53,74 @@ _CBS_ARAB_CHRISTIAN_LIVE_BIRTHS_FALLBACK = {
     '2008': '2042',
 }
 
+# Exact CBS Series API numeric IDs for path id=4,2,1 (36 ingested cause-of-death
+# mortality rate series, excluding the 6 unused "All Causes" total series).
+CAUSE_OF_DEATH_SERIES_COL_MAP = {
+    '70001': 'isc_jew_male',
+    '70002': 'mal_jew_male',
+    '70003': 'cer_jew_male',
+    '70004': 'ex_jew_male',
+    '70005': 'pne_jew_male',
+    '70006': 'infd_jew_male',
+    '70008': 'isc_jew_female',
+    '70009': 'mal_jew_female',
+    '70010': 'cer_jew_female',
+    '70011': 'ex_jew_female',
+    '70012': 'pne_jew_female',
+    '70013': 'infd_jew_female',
+    '70015': 'isc_male',
+    '70016': 'mal_male',
+    '70017': 'cer_male',
+    '70018': 'ex_male',
+    '70019': 'pne_male',
+    '70020': 'infd_male',
+    '70022': 'isc_female',
+    '70023': 'mal_female',
+    '70024': 'cer_female',
+    '70025': 'ex_female',
+    '70026': 'pne_female',
+    '70027': 'infd_female',
+    '70136': 'isc_arab_male',
+    '70137': 'mal_arab_male',
+    '70138': 'cer_arab_male',
+    '70139': 'ex_arab_male',
+    '70140': 'pne_arab_male',
+    '70141': 'infd_arab_male',
+    '70143': 'isc_arab_female',
+    '70144': 'mal_arab_female',
+    '70145': 'cer_arab_female',
+    '70146': 'ex_arab_female',
+    '70147': 'pne_arab_female',
+    '70148': 'infd_arab_female',
+}
+
+_CAUSE_OF_DEATH_IGNORED_SERIES_IDS = frozenset({
+    '70007',
+    '70014',
+    '70021',
+    '70028',
+    '70142',
+    '70149',
+})
+
+# Normalized (lowercase, punctuation stripped, whitespace collapsed) fallback maps
+# for synthetic inputs or renumbered CBS series without known numeric series_id.
 CAUSE_OF_DEATH_PREFIX_MAP = {
-    'Ischaemic Heart Diseases': 'isc',
-    'Malignant Neoplasm': 'mal',
-    'Cerebrovascular Diseases': 'cer',
-    'External Causes': 'ex',
-    'Pneumonia': 'pne',
-    'Infectious Diseases': 'infd',
+    'ischaemic heart diseases': 'isc',
+    'malignant neoplasm': 'mal',
+    'cerebrovascular diseases': 'cer',
+    'external causes': 'ex',
+    'pneumonia': 'pne',
+    'infectious diseases': 'infd',
 }
 
 CAUSE_GROUP_SUFFIX_MAP = {
-    'Total Population, Males': '_male',
-    'Total Population| Males': '_male',
-    'Total Population, Females': '_female',
-    'Total Population| Females': '_female',
-    'Jewish  and Others, Males': '_jew_male',
-    'Jewish  and Others| Males': '_jew_male',
-    'Jewish and Others, Males': '_jew_male',
-    'Jewish and Others| Males': '_jew_male',
-    'Jewish  and Others, Females': '_jew_female',
-    'Jewish  and Others| Females': '_jew_female',
-    'Jewish and Others, Females': '_jew_female',
-    'Jewish and Others| Females': '_jew_female',
-    'Arab Males': '_arab_male',
-    'Arab Females': '_arab_female',
+    'total population males': '_male',
+    'total population females': '_female',
+    'jewish and others males': '_jew_male',
+    'jewish and others females': '_jew_female',
+    'arab males': '_arab_male',
+    'arab females': '_arab_female',
 }
 
 CAUSE_OF_DEATH_COLS = (
@@ -204,6 +243,7 @@ CENSUS_2008_POP_SUBJECT_COL_MAP = {
 
 MIFKAD_2008_AGE_ROWS_1_14 = {
     'Total': '',
+    'TOTAL': '',
     'סך הכל': '',
     '14-0': '_0To14Years',
     '0-14': '_0To14Years',
@@ -294,27 +334,64 @@ EXPECTED_INPUT_TABLE_FILENAMES = (
     'isr_agebracket_gender_aa1_2008.csv',
     'isr_causeofdeath_religion_1950_2020.csv',
     'isr_livebirth_infantdeath_deaths_religion_1996_2021.csv',
-    'isr_menemployed_age_martialstatus_2008.csv',
+    'isr_menemployed_age_maritalstatus_2008.csv',
     'isr_population_religion_1949_2021.csv',
     'isr_subdistrict_age_gender_2008.csv',
     'isr_subdistrict_population_gender_2008.csv',
-    'isr_totalemployed_age_martialstatus_2008.csv',
+    'isr_totalemployed_age_maritalstatus_2008.csv',
     'isr_urban_rural_gender_aa1_2008.csv',
-    'isr_womenemployed_age_martialstatus_2008.csv',
+    'isr_womenemployed_age_maritalstatus_2008.csv',
 )
+
+_ANNUAL_TIME_PERIOD_RE = re.compile(r'^[0-9]{4}(?:-01)?$')
+_POPULATION_CORE_SIDS = frozenset({'3700', '3701', '3702', '3703', '3704'})
+
+
+def _parse_annual_year(time_period: str) -> str | None:
+    """Returns 4-digit ASCII year if time_period matches YYYY or YYYY-01, else None."""
+    if _ANNUAL_TIME_PERIOD_RE.fullmatch(time_period):
+        return time_period[:4]
+    return None
+
+
+def _is_subannual_period(time_period: str) -> bool:
+    """Returns True if time_period is YYYY-<suffix> with suffix != '01'."""
+    return (len(time_period) >= 6 and time_period[:4].isascii() and
+            time_period[:4].isdigit() and time_period[4] == '-' and
+            time_period[5:] != '01')
+
+
+def _find_blank_unit_subannual_sids(
+    series_rows: list[dict[str, str]],) -> set[str]:
+    """Finds series_ids that have sub-annual periods while time_unit is blank."""
+    flagged: set[str] = set()
+    for row in series_rows:
+        if row.get('time_unit', '').strip() != '':
+            continue
+        sid = row.get('series_id', '').strip()
+        tp = row.get('time_period', '').strip()
+        if sid and _is_subannual_period(tp):
+            flagged.add(sid)
+    return flagged
+
+
+def _normalize_cbs_label(text: str) -> str:
+    """Normalizes CBS labels by stripping pipe/comma punctuation and collapsing whitespace."""
+    return re.sub(r'\s+', ' ', re.sub(r'[|,]', ' ', text)).strip().lower()
 
 
 def _parse_number(val: str | None) -> float | None:
-    """Parses a numeric string (handling commas and whitespace) into float."""
+    """Parses a numeric string (handling commas and whitespace) into finite float."""
     if val is None:
         return None
     cleaned = str(val).replace(',', '').strip()
     if not cleaned or cleaned in ('-', '..', '...', '*'):
         return None
     try:
-        return float(cleaned)
+        parsed = float(cleaned)
     except ValueError:
         return None
+    return parsed if math.isfinite(parsed) else None
 
 
 def _format_number(val: float) -> str:
@@ -390,7 +467,10 @@ def read_raw_cbs_series_csv(csv_path: str) -> list[dict[str, str]]:
         raise FileNotFoundError(f'Missing raw CBS Series CSV file: {csv_path}')
     rows: list[dict[str, str]] = []
     with open(csv_path, 'r', encoding='utf-8-sig', errors='replace') as fp:
-        for row in csv.DictReader(fp):
+        for raw_row in csv.DictReader(fp):
+            row = {
+                k.strip(): (v or '') for k, v in raw_row.items() if k is not None
+            }
             rows.append({
                 'series_id': (row.get('id') or row.get('series_id') or
                               '').strip(),
@@ -412,43 +492,158 @@ def build_population_religion_rows(
     series_rows: list[dict[str, str]],) -> list[dict[str, str]]:
     """Builds unscaled rows (in thousands) for isr_population_religion_1949_2021.csv."""
     by_year: dict[str, dict[str, float]] = defaultdict(dict)
+    by_year_prio: dict[str, dict[str, tuple[bool, bool]]] = defaultdict(dict)
+    tainted_negative_years: set[str] = set()
+    blank_subannual_sids = _find_blank_unit_subannual_sids(series_rows)
+    warned_subannual_sids: set[str] = set()
     for row in series_rows:
-        if row.get('time_unit', '').strip() not in ('', 'Year'):
+        time_unit = row.get('time_unit', '').strip()
+        if time_unit not in ('', 'Year'):
             continue
         sid = row.get('series_id', '').strip()
+        if sid not in _POPULATION_CORE_SIDS:
+            continue
+        if time_unit == '' and sid in blank_subannual_sids:
+            if sid not in warned_subannual_sids:
+                logging.warning(
+                    'Skipping blank-time_unit sub-annual series sid=%s in population builder',
+                    sid,
+                )
+                warned_subannual_sids.add(sid)
+            continue
         tp = row.get('time_period', '').strip()
-        year = tp[:4]
+        year = _parse_annual_year(tp)
         val = _parse_number(row.get('value'))
-        if sid and len(year) == 4 and year.isdigit() and val is not None:
-            by_year[year][sid] = val
+        if year is None or val is None:
+            continue
+        if val < 0:
+            logging.warning(
+                'Skipping negative CBS population value for sid=%s year=%s: %s',
+                sid,
+                year,
+                val,
+            )
+            tainted_negative_years.add(year)
+            by_year.pop(year, None)
+            by_year_prio.pop(year, None)
+            continue
+        if year in tainted_negative_years:
+            continue
+        prio = (time_unit == 'Year', tp.endswith('-01'))
+        if sid in by_year[year]:
+            prev_val = by_year[year][sid]
+            prev_prio = by_year_prio[year][sid]
+            if not math.isclose(prev_val, val, abs_tol=1e-9):
+                logging.warning(
+                    'Duplicate CBS population row for sid=%s year=%s: '
+                    'existing=%s (prio=%s) vs incoming=%s (prio=%s)',
+                    sid,
+                    year,
+                    prev_val,
+                    prev_prio,
+                    val,
+                    prio,
+                )
+            if prio < prev_prio:
+                continue
+        by_year[year][sid] = val
+        by_year_prio[year][sid] = prio
 
     out_rows: list[dict[str, str]] = []
     for year, s_map in sorted(by_year.items()):
+        if year in tainted_negative_years:
+            continue
         val_total = s_map.get('3700')
         val_jews = s_map.get('3701')
         val_nonjews = s_map.get('3702')
         val_jews_others = s_map.get('3703')
         val_arab = s_map.get('3704')
 
-        min_expected_total = (val_jews_others or 0.0) + (val_arab or 0.0) - 1.0
-        if (val_jews_others is not None and
-            (val_total is None or val_jews is None or
-             val_total < min_expected_total or val_jews > val_jews_others or
-             (val_jews_others - val_jews) > val_jews)):
+        core_vals = (
+            val_total,
+            val_jews,
+            val_nonjews,
+            val_jews_others,
+            val_arab,
+        )
+        if not any(v is not None for v in core_vals):
+            continue
+        if val_total is None:
             logging.warning(
-                'Skipping anomalous CBS population row for year %s: '
-                'Total (%s), Jews (%s), Jews and Others (%s), Arab (%s)',
+                'Skipping incomplete CBS population row missing Total (3700) for year %s: '
+                'Jews (%s), Non-Jews (%s), Jews and Others (%s), Arab (%s)',
                 year,
-                val_total,
                 val_jews,
+                val_nonjews,
                 val_jews_others,
                 val_arab,
             )
             continue
+        if (val_jews is None and val_nonjews is None and
+                val_jews_others is None and val_arab is None):
+            logging.warning(
+                'Skipping total-only CBS population row lacking religion breakdown '
+                'for year %s: Total (%s)',
+                year,
+                val_total,
+            )
+            continue
+
+        if val_jews_others is not None:
+            min_expected_total = val_jews_others + (val_arab or 0.0) - 1.0
+            missing_post1994 = val_jews is None or val_arab is None
+            invalid_post1994 = (not missing_post1994 and
+                                (val_total < min_expected_total or
+                                 val_jews > val_jews_others or
+                                 (val_jews_others - val_jews) > val_jews or
+                                 val_arab > val_total))
+            if missing_post1994 or invalid_post1994:
+                logging.warning(
+                    'Skipping anomalous CBS population row for year %s: '
+                    'Total (%s), Jews (%s), Jews and Others (%s), Arab (%s)',
+                    year,
+                    val_total,
+                    val_jews,
+                    val_jews_others,
+                    val_arab,
+                )
+                continue
+        elif val_arab is not None:
+            logging.warning(
+                'Skipping anomalous CBS population row missing Jews and Others (3703) '
+                'for year %s: Total (%s), Jews (%s), Arab (%s)',
+                year,
+                val_total,
+                val_jews,
+                val_arab,
+            )
+            continue
+
+        # Validate pre-1995 Non-Jews (3702) independently even if 3703 is also present.
+        if val_nonjews is not None:
+            if (val_jews is None or val_total < val_jews + val_nonjews - 1.0 or
+                    val_jews > val_total or val_nonjews > val_total):
+                logging.warning(
+                    'Skipping anomalous pre-1995 CBS population row for year %s: '
+                    'Total (%s), Jews (%s), Non-Jews (%s)',
+                    year,
+                    val_total,
+                    val_jews,
+                    val_nonjews,
+                )
+                continue
+        if val_jews is not None and val_jews > val_total:
+            logging.warning(
+                'Skipping anomalous CBS population row for year %s: '
+                'Total (%s), Jews (%s)',
+                year,
+                val_total,
+                val_jews,
+            )
+            continue
 
         rec: dict[str, str] = {'Region': 'ISR', 'Year': year}
-        if val_total is not None:
-            rec['total'] = _format_number(val_total)
+        rec['total'] = _format_number(val_total)
         if val_jews is not None:
             rec['jews'] = _format_number(val_jews)
         if val_nonjews is not None:
@@ -458,8 +653,7 @@ def build_population_religion_rows(
             rec['Others'] = _format_number(val_jews_others - val_jews)
         if val_arab is not None:
             rec['arab'] = _format_number(val_arab)
-        if len(rec) > 2:
-            out_rows.append(rec)
+        out_rows.append(rec)
     return out_rows
 
 
@@ -467,23 +661,87 @@ def build_vital_statistics_rows(
     series_rows: list[dict[str, str]],) -> list[dict[str, str]]:
     """Builds rows for isr_livebirth_infantdeath_deaths_religion_1996_2021.csv."""
     by_year: dict[str, dict[str, str]] = defaultdict(dict)
+    by_year_prio: dict[str, dict[str, tuple[bool, bool]]] = defaultdict(dict)
+    tainted_negative_cells: set[tuple[str, str]] = set()
+    blank_subannual_sids = _find_blank_unit_subannual_sids(series_rows)
+    warned_subannual_sids: set[str] = set()
     for row in series_rows:
-        if row.get('time_unit', '').strip() not in ('', 'Year'):
+        time_unit = row.get('time_unit', '').strip()
+        if time_unit not in ('', 'Year'):
             continue
         sid = row.get('series_id', '').strip()
         col = VITAL_STATS_SERIES_COL_MAP.get(sid)
         if not col:
             continue
-        year = row.get('time_period', '').strip()[:4]
+        if time_unit == '' and sid in blank_subannual_sids:
+            if sid not in warned_subannual_sids:
+                logging.warning(
+                    'Skipping blank-time_unit sub-annual series sid=%s in vital stats builder',
+                    sid,
+                )
+                warned_subannual_sids.add(sid)
+            continue
+        tp = row.get('time_period', '').strip()
+        year = _parse_annual_year(tp)
         val = _parse_number(row.get('value'))
-        if len(year) == 4 and year.isdigit() and val is not None:
-            by_year[year][col] = _format_number(val)
+        if year is None or val is None:
+            continue
+        if val < 0:
+            logging.warning(
+                'Skipping negative CBS vital statistics value for sid=%s year=%s: %s',
+                sid,
+                year,
+                val,
+            )
+            tainted_negative_cells.add((year, col))
+            by_year[year].pop(col, None)
+            by_year_prio[year].pop(col, None)
+            continue
+        if (year, col) in tainted_negative_cells:
+            continue
+        formatted = _format_number(val)
+        prio = (time_unit == 'Year', tp.endswith('-01'))
+        if col in by_year[year]:
+            prev_val = by_year[year][col]
+            prev_prio = by_year_prio[year][col]
+            if prev_val != formatted:
+                logging.warning(
+                    'Duplicate CBS vital statistics row for sid=%s year=%s: '
+                    'existing=%s (prio=%s) vs incoming=%s (prio=%s)',
+                    sid,
+                    year,
+                    prev_val,
+                    prev_prio,
+                    formatted,
+                    prio,
+                )
+            if prio < prev_prio:
+                continue
+        by_year[year][col] = formatted
+        by_year_prio[year][col] = prio
 
-    ac_col = 'Arab Christians - Live-Births'
+    ac_col = 'live_births_arab_christian'
+    applied_ac_years: list[str] = []
     if ac_col in by_year.get('2009', {}):
         for yr, val_str in _CBS_ARAB_CHRISTIAN_LIVE_BIRTHS_FALLBACK.items():
+            if (yr, ac_col) in tainted_negative_cells:
+                logging.warning(
+                    'Not applying Arab Christian live-births fallback for %s '
+                    'due to rejected negative upstream value',
+                    yr,
+                )
+                continue
             if ac_col not in by_year[yr]:
                 by_year[yr][ac_col] = val_str
+                applied_ac_years.append(yr)
+    if applied_ac_years:
+        logging.info(
+            'Applied historical CBS Arab Christian live-births fallback for '
+            '%d years (%s..%s)',
+            len(applied_ac_years),
+            applied_ac_years[0],
+            applied_ac_years[-1],
+        )
 
     out_rows: list[dict[str, str]] = []
     for year, col_map in sorted(by_year.items()):
@@ -498,26 +756,128 @@ def build_cause_of_death_rows(
     series_rows: list[dict[str, str]],) -> list[dict[str, str]]:
     """Builds rows for isr_causeofdeath_religion_1950_2020.csv."""
     by_year: dict[str, dict[str, str]] = defaultdict(dict)
+    by_year_prio: dict[str, dict[str, tuple[bool, bool,
+                                            bool]]] = defaultdict(dict)
+    canonical_cells: set[tuple[str, str]] = set()
+    tainted_canonical_cells: set[tuple[str, str]] = set()
+    tainted_fallback_cells: set[tuple[str, str]] = set()
+    blank_subannual_sids = _find_blank_unit_subannual_sids(series_rows)
+    warned_subannual_sids: set[str] = set()
     for row in series_rows:
-        if row.get('time_unit', '').strip() not in ('', 'Year'):
+        time_unit = row.get('time_unit', '').strip()
+        if time_unit not in ('', 'Year'):
             continue
-        cause_raw = row.get('level4', '').strip()
-        group_raw = row.get('name_id', '').strip()
-        prefix = CAUSE_OF_DEATH_PREFIX_MAP.get(cause_raw)
-        suffix = CAUSE_GROUP_SUFFIX_MAP.get(group_raw)
-        if not (prefix and suffix):
+        sid = row.get('series_id', '').strip()
+        col = CAUSE_OF_DEATH_SERIES_COL_MAP.get(sid)
+        is_canonical = col is not None
+        if not col:
+            if sid in _CAUSE_OF_DEATH_IGNORED_SERIES_IDS:
+                continue
+            cause_norm = _normalize_cbs_label(row.get('level4', ''))
+            group_norm = _normalize_cbs_label(row.get('name_id', ''))
+            prefix = CAUSE_OF_DEATH_PREFIX_MAP.get(cause_norm)
+            suffix = CAUSE_GROUP_SUFFIX_MAP.get(group_norm)
+            if not (prefix and suffix):
+                continue
+            col = f'{prefix}{suffix}'
+        if time_unit == '' and sid in blank_subannual_sids:
+            if sid not in warned_subannual_sids:
+                logging.warning(
+                    'Skipping blank-time_unit sub-annual series sid=%s in cause-of-death builder',
+                    sid,
+                )
+                warned_subannual_sids.add(sid)
             continue
-        col = f'{prefix}{suffix}'
-        year = row.get('time_period', '').strip()[:4]
+        tp = row.get('time_period', '').strip()
+        year = _parse_annual_year(tp)
         val = _parse_number(row.get('value'))
-        if len(year) == 4 and year.isdigit() and val is not None:
-            by_year[year][col] = _format_number(val)
+        if year is None or val is None:
+            continue
+        if val < 0:
+            logging.warning(
+                'Skipping negative CBS cause-of-death value for sid=%s col=%s year=%s: %s',
+                sid,
+                col,
+                year,
+                val,
+            )
+            if is_canonical:
+                tainted_canonical_cells.add((year, col))
+                canonical_cells.discard((year, col))
+                by_year[year].pop(col, None)
+                by_year_prio[year].pop(col, None)
+            else:
+                tainted_fallback_cells.add((year, col))
+                if (year, col) not in canonical_cells:
+                    by_year[year].pop(col, None)
+                    by_year_prio[year].pop(col, None)
+            continue
+        if is_canonical and (year, col) in tainted_canonical_cells:
+            continue
+        if not is_canonical:
+            if ((year, col) in canonical_cells or
+                (year, col) in tainted_canonical_cells or
+                (year, col) in tainted_fallback_cells):
+                logging.warning(
+                    'Ignoring fallback cause-of-death series sid=%s for %s (%s): '
+                    'canonical or rejected series already seen',
+                    sid,
+                    col,
+                    year,
+                )
+                continue
+            logging.warning(
+                'Matched cause-of-death column %s (%s) via label fallback for '
+                'unmapped series_id=%r',
+                col,
+                year,
+                sid,
+            )
+        formatted = _format_number(val)
+        prio = (is_canonical, time_unit == 'Year', tp.endswith('-01'))
+        if col in by_year[year]:
+            prev_val = by_year[year][col]
+            prev_prio = by_year_prio[year][col]
+            if prev_val != formatted and not (is_canonical and
+                                              not prev_prio[0]):
+                logging.warning(
+                    'Duplicate CBS cause-of-death row for col=%s year=%s: '
+                    'existing=%s (prio=%s) vs incoming=%s (prio=%s)',
+                    col,
+                    year,
+                    prev_val,
+                    prev_prio,
+                    formatted,
+                    prio,
+                )
+            if prio < prev_prio:
+                continue
+        by_year[year][col] = formatted
+        by_year_prio[year][col] = prio
+        if is_canonical:
+            canonical_cells.add((year, col))
 
+    applied_2019_cols: list[str] = []
     for col, val_2019 in _CBS_2019_CAUSE_OF_DEATH_FALLBACK.items():
+        if (('2019', col) in tainted_canonical_cells or
+            ('2019', col) in tainted_fallback_cells):
+            logging.warning(
+                'Not applying 2019 cause-of-death fallback for %s '
+                'due to rejected negative upstream value',
+                col,
+            )
+            continue
         if (col not in by_year.get('2019', {}) and
                 col in by_year.get('2018', {}) and
                 col in by_year.get('2020', {})):
             by_year['2019'][col] = val_2019
+            applied_2019_cols.append(col)
+    if applied_2019_cols:
+        logging.info(
+            'Applied CBS Statistical Abstract 2019 cause-of-death fallback '
+            'for %d series',
+            len(applied_2019_cols),
+        )
 
     out_rows: list[dict[str, str]] = []
     for year, col_map in sorted(by_year.items()):
@@ -537,13 +897,31 @@ def parse_cbs_boardsgenerator_census_payload(
     rows: list[dict[str, str]] = []
     if not isinstance(payload, dict):
         return rows
-    for group in payload.get('Groups') or []:
-        group_id = str(group.get('Id') or '').strip()
-        group_name = str(group.get('Name') or '').strip()
-        for subj in group.get('Subjects') or []:
-            subject_id = str(subj.get('Id') or '').strip()
-            subject_name = str(subj.get('Name') or '').strip()
-            val = str(subj.get('Value') or '').strip()
+    groups = payload.get('Groups')
+    if not isinstance(groups, list):
+        return rows
+    for group in groups:
+        if not isinstance(group, dict):
+            continue
+        raw_group_id = group.get('Id')
+        raw_group_name = group.get('Name')
+        group_id = '' if raw_group_id is None else str(raw_group_id).strip()
+        group_name = ('' if raw_group_name is None else
+                      str(raw_group_name).strip())
+        subjects = group.get('Subjects')
+        if not isinstance(subjects, list):
+            continue
+        for subj in subjects:
+            if not isinstance(subj, dict):
+                continue
+            raw_subject_id = subj.get('Id')
+            raw_subject_name = subj.get('Name')
+            raw_val = subj.get('Value')
+            subject_id = ('' if raw_subject_id is None else
+                          str(raw_subject_id).strip())
+            subject_name = ('' if raw_subject_name is None else
+                            str(raw_subject_name).strip())
+            val = '' if raw_val is None else str(raw_val).strip()
             if not subject_id or not val:
                 continue
             rows.append({
@@ -565,14 +943,21 @@ def _convert_yishuv_json_to_csvs(json_path: str, output_dir: str) -> None:
             f'Missing raw 2008 Census JSON file: {json_path}')
     with open(json_path, 'r', encoding='utf-8') as fp:
         records = json.load(fp)
+    if not isinstance(records, list):
+        raise RuntimeError(
+            f'Expected list of records in 2008 Census JSON file: {json_path}')
 
     all_rows: list[dict[str, str]] = []
     for item in records:
+        if not isinstance(item, dict):
+            continue
+        raw_region_code = item.get('region_code')
+        raw_data_mode = item.get('data_mode')
         all_rows.extend(
             parse_cbs_boardsgenerator_census_payload(
                 item.get('payload') or {},
-                str(item.get('region_code') or ''),
-                str(item.get('data_mode') or ''),
+                '' if raw_region_code is None else str(raw_region_code),
+                '' if raw_data_mode is None else str(raw_data_mode),
             ))
 
     machoz_age: dict[str, dict[str, str]] = defaultdict(dict)
@@ -587,11 +972,31 @@ def _convert_yishuv_json_to_csvs(json_path: str, output_dir: str) -> None:
         raw_val = _parse_number(row.get('value'))
         if not (data_mode and reg_key and subject_id and raw_val is not None):
             continue
+        if raw_val < 0:
+            logging.warning(
+                'Skipping negative 2008 Census value for region_code=%s '
+                'data_mode=%s subject_id=%s: %s',
+                region_code,
+                data_mode,
+                subject_id,
+                raw_val,
+            )
+            continue
 
         if subject_id in CENSUS_2008_AGE_SUBJECT_COL_MAP:
             col = CENSUS_2008_AGE_SUBJECT_COL_MAP[subject_id]
-            target = machoz_age if data_mode == 'Machoz' else nafa_age
-            target[reg_key][col] = _format_number(raw_val)
+            if data_mode == 'Machoz':
+                machoz_age[reg_key][col] = _format_number(raw_val)
+            elif data_mode == 'Nafa':
+                nafa_age[reg_key][col] = _format_number(raw_val)
+            else:
+                logging.warning(
+                    'Skipping unexpected 2008 Census data_mode=%r for '
+                    'region_code=%s subject_id=%s',
+                    data_mode,
+                    region_code,
+                    subject_id,
+                )
 
         if data_mode == 'Nafa' and subject_id in CENSUS_2008_POP_SUBJECT_COL_MAP:
             col = CENSUS_2008_POP_SUBJECT_COL_MAP[subject_id]
@@ -652,14 +1057,41 @@ def _read_mifkad_table_rows(fpath: str) -> list[list[str]]:
     with open(fpath, 'rb') as fp:
         head = fp.read(8)
     if head.startswith(b'\xd0\xcf\x11\xe0') or head.startswith(b'PK\x03\x04'):
-        import pandas as pd  # pylint: disable=g-import-not-at-top
+        import pandas as pd  # pylint: disable=import-outside-toplevel
 
-        engine = 'openpyxl' if head.startswith(b'PK\x03\x04') else 'xlrd'
+        engine = 'openpyxl' if head.startswith(b'PK\x03\x04') else 'calamine'
         df = pd.read_excel(fpath, header=None, dtype=str,
                            engine=engine).fillna('')
         return [[str(c) for c in row] for row in df.values.tolist()]
     with open(fpath, 'r', encoding='utf-8-sig', errors='replace') as fp:
         return list(csv.reader(fp))
+
+
+def _match_mifkad_row_label(
+    row: list[str],
+    mapping: dict[str, str],
+    preferred_indices: tuple[int, ...],
+) -> str | None:
+    """Resolves a Mifkad row label against mapping using preferred indices, last non-empty cell, and row[0]."""
+    candidates: list[str] = []
+    for idx in preferred_indices:
+        if 0 <= idx < len(row):
+            cand = row[idx].strip()
+            if cand:
+                candidates.append(cand)
+    for cell in reversed(row):
+        cand = cell.strip()
+        if cand:
+            candidates.append(cand)
+            break
+    if row:
+        cand = row[0].strip()
+        if cand:
+            candidates.append(cand)
+    for cand in candidates:
+        if cand in mapping:
+            return mapping[cand]
+    return None
 
 
 def _convert_dem1_2_xls_to_csv(xls_path: str, dest_path: str) -> None:
@@ -670,8 +1102,7 @@ def _convert_dem1_2_xls_to_csv(xls_path: str, dest_path: str) -> None:
     for row in _read_mifkad_table_rows(xls_path):
         if len(row) < 10:
             continue
-        dist_label = row[-1].strip() or row[0].strip()
-        reg = MIFKAD_2008_DIST_MAP.get(dist_label)
+        reg = _match_mifkad_row_label(row, MIFKAD_2008_DIST_MAP, (10,))
         if not reg:
             continue
         vals: list[str] = []
@@ -680,6 +1111,16 @@ def _convert_dem1_2_xls_to_csv(xls_path: str, dest_path: str) -> None:
                 vals.append('')
                 continue
             val = _parse_number(row[col_idx])
+            if val is not None and val < 0:
+                logging.warning(
+                    'Skipping negative value in %s for %s col=%s: %s',
+                    xls_path,
+                    reg,
+                    col_name,
+                    val,
+                )
+                vals.append('')
+                continue
             vals.append('' if val is None else _format_number(val))
         if any(vals):
             rows_by_reg[reg] = vals
@@ -695,8 +1136,14 @@ def _convert_dem1_2_xls_to_csv(xls_path: str, dest_path: str) -> None:
 
 def _convert_dem1_14_xls_to_csv(xls_path: str, dest_path: str) -> None:
     """Converts dem1_14.xls (in hundreds) into isr_age_maritalstatus_2008.csv."""
+    # Canonical Data Commons StatVars (Count_Person_NeverMarried,
+    # Count_Person_MarriedAndNotSeparated, Count_Person_Divorced,
+    # Count_Person_Widowed, Count_Person_Separated) all specify
+    # age: Years15Onwards. Subtracting the 0-14 row from the all-ages TOTAL row
+    # yields the exact 15+ population (notably removing 2,052,460 children from
+    # Never married: 36,684.4 - 20,524.6 = 16,159.8 hundreds = 1,615,980).
     age_order = (
-        ('', 'All ages'),
+        ('', '15+'),
         ('_0To14Years', '0-14'),
         ('_15To24Years', '15-24'),
         ('_25To34Years', '25-34'),
@@ -721,20 +1168,68 @@ def _convert_dem1_14_xls_to_csv(xls_path: str, dest_path: str) -> None:
         ('_Separated', 'Married but separated'),
     )
 
-    cell_map: dict[tuple[str, str], str] = {}
+    raw_cells: dict[tuple[str, str], float] = {}
+    invalid_child_cols: set[str] = set()
     for row in _read_mifkad_table_rows(xls_path):
         if len(row) < 7:
             continue
-        age_label = row[0].strip() or (row[-1].strip() if row else '')
-        age_suf = MIFKAD_2008_AGE_ROWS_1_14.get(age_label)
+        age_suf = _match_mifkad_row_label(row, MIFKAD_2008_AGE_ROWS_1_14,
+                                          (7, 0))
         if age_suf is None:
             continue
         for col_idx, marital_suf in MIFKAD_2008_MARITAL_COLS_1_14:
             if age_suf == '' and marital_suf == '':
                 continue
             val = _parse_number(row[col_idx])
-            if val is not None:
-                cell_map[(age_suf, marital_suf)] = _format_number(val)
+            if val is None:
+                continue
+            if val < 0:
+                logging.warning(
+                    'Skipping negative cell (%s, %s) in %s: %s',
+                    age_suf or 'TOTAL',
+                    marital_suf or 'Total',
+                    xls_path,
+                    val,
+                )
+                if age_suf == '_0To14Years':
+                    invalid_child_cols.add(marital_suf)
+                continue
+            raw_cells[(age_suf, marital_suf)] = val
+
+    cell_map: dict[tuple[str, str], str] = {}
+    for (age_suf, marital_suf), val in raw_cells.items():
+        if age_suf != '':
+            cell_map[(age_suf, marital_suf)] = _format_number(val)
+            continue
+        if marital_suf in invalid_child_cols:
+            logging.warning(
+                'Skipping 15+ total for %s in %s due to negative 0-14 cell',
+                marital_suf,
+                xls_path,
+            )
+            continue
+        child_val = raw_cells.get(('_0To14Years', marital_suf))
+        if marital_suf == '_NeverMarried' and child_val is None:
+            logging.warning(
+                'Skipping 15+ Never married total in %s: missing 0-14 row '
+                'needed to subtract children from all-ages total (%s)',
+                xls_path,
+                val,
+            )
+            continue
+        if child_val is not None:
+            if val < child_val:
+                logging.warning(
+                    'Skipping anomalous 15+ total for %s in %s: all-ages (%s) < 0-14 (%s)',
+                    marital_suf,
+                    xls_path,
+                    val,
+                    child_val,
+                )
+                continue
+            cell_map[('', marital_suf)] = _format_number(val - child_val)
+        else:
+            cell_map[('', marital_suf)] = _format_number(val)
 
     if not cell_map:
         raise RuntimeError(f'No data rows extracted from {xls_path}')
@@ -781,19 +1276,42 @@ def _convert_emp_xls_to_csv(
     for row in _read_mifkad_table_rows(xls_path):
         if len(row) < 12:
             continue
-        marital_label = row[-1].strip() or row[0].strip()
-        marital_suf = MIFKAD_2008_EMP_MARITAL_ROWS.get(marital_label)
+        marital_suf = _match_mifkad_row_label(row, MIFKAD_2008_EMP_MARITAL_ROWS,
+                                              (12, 0))
         if marital_suf is None:
             continue
         for col_idx, age_suf in MIFKAD_2008_EMP_AGE_COLS:
             val = _parse_number(row[col_idx])
             if val is None:
                 continue
-            if (gender_suf == '' and marital_suf == '_Widowed' and
+            if val < 0:
+                logging.warning(
+                    'Skipping negative employment cell (%s, %s) in %s: %s',
+                    marital_suf or 'TOTAL',
+                    age_suf or 'TOTAL',
+                    xls_path,
+                    val,
+                )
+                continue
+            # CBS footnote R26 in lab4_14_1.xls (employed men) merges ages
+            # 15-39 for widowed men into the 35-39 cell (2.1 hundreds = 210).
+            if (gender_suf == '_Male' and marital_suf == '_Widowed' and
                     age_suf == '_35To39Years'):
                 widowed_15_39 = _format_number(val)
             else:
                 cell_map[(marital_suf, age_suf)] = _format_number(val)
+
+    if gender_suf == '_Male' and widowed_15_39:
+        overlapping = [
+            age_suf for age_suf in ('_15To24Years', '_25To29Years',
+                                    '_30To34Years')
+            if ('_Widowed', age_suf) in cell_map
+        ]
+        if overlapping:
+            raise RuntimeError(
+                f'Unexpected widowed male 15-34 cells {overlapping} present '
+                f'alongside CBS footnote R26 merged 15-39 cell in {xls_path}; '
+                f'emitting both would double-count ages 15-34')
 
     if not cell_map and not widowed_15_39:
         raise RuntimeError(f'No data rows extracted from {xls_path}')
@@ -810,14 +1328,33 @@ def _convert_emp_xls_to_csv(
             table_rows.append(['2008', 'ISR', 'מועסקים'] + row_vals)
         if any(vals):
             table_rows.append(['2008', 'ISR', m_label] + vals)
-    if gender_suf == '' and widowed_15_39:
+    if gender_suf == '_Male' and widowed_15_39:
         vals = [''] * len(age_cols)
         vals[0] = widowed_15_39
         table_rows.append(['2008', 'ISR', 'אלמן_15_39'] + vals)
     _write_table_atomically(dest_path, headers, table_rows)
 
 
-def build_input_tables(raw_dir: str, output_dir: str) -> list[str]:
+EXPECTED_MIN_DATA_ROWS_BY_TABLE: dict[str, int] = {
+    'isr_age_maritalstatus_2008.csv': 15,
+    'isr_agebracket_gender_aa1_2008.csv': 8,
+    'isr_causeofdeath_religion_1950_2020.csv': 70,
+    'isr_livebirth_infantdeath_deaths_religion_1996_2021.csv': 25,
+    'isr_menemployed_age_maritalstatus_2008.csv': 7,
+    'isr_population_religion_1949_2021.csv': 70,
+    'isr_subdistrict_age_gender_2008.csv': 11,
+    'isr_subdistrict_population_gender_2008.csv': 11,
+    'isr_totalemployed_age_maritalstatus_2008.csv': 5,
+    'isr_urban_rural_gender_aa1_2008.csv': 8,
+    'isr_womenemployed_age_maritalstatus_2008.csv': 6,
+}
+
+
+def build_input_tables(
+    raw_dir: str,
+    output_dir: str,
+    strict_completeness: bool = True,
+) -> list[str]:
     """Transforms all raw CBS files in raw_dir into the 11 staged CSV tables in output_dir."""
     if not os.path.isdir(raw_dir):
         raise FileNotFoundError(f'Input directory does not exist: {raw_dir}')
@@ -869,11 +1406,11 @@ def build_input_tables(raw_dir: str, output_dir: str) -> list[str]:
         os.path.join(output_dir, 'isr_age_maritalstatus_2008.csv'),
     )
     emp_tables = (
-        ('lab4_14.xls', 'isr_menemployed_age_martialstatus_2008.csv', '_Male',
+        ('lab4_14.xls', 'isr_totalemployed_age_maritalstatus_2008.csv', '',
          False),
-        ('lab4_14_1.xls', 'isr_totalemployed_age_martialstatus_2008.csv', '',
+        ('lab4_14_1.xls', 'isr_menemployed_age_maritalstatus_2008.csv', '_Male',
          False),
-        ('lab4_14_2.xls', 'isr_womenemployed_age_martialstatus_2008.csv',
+        ('lab4_14_2.xls', 'isr_womenemployed_age_maritalstatus_2008.csv',
          '_Female', True),
     )
     for xls_name, csv_name, gender_suf, is_female in emp_tables:
@@ -885,11 +1422,20 @@ def build_input_tables(raw_dir: str, output_dir: str) -> list[str]:
         )
 
     expected_set = set(EXPECTED_INPUT_TABLE_FILENAMES)
-    for existing_name in os.listdir(output_dir):
-        existing_path = os.path.join(output_dir, existing_name)
-        if existing_name not in expected_set and os.path.isfile(existing_path):
-            logging.info('Removing stale staged file: %s', existing_path)
-            os.remove(existing_path)
+    if os.path.realpath(output_dir) == os.path.realpath(_SCRIPT_DIR):
+        logging.warning(
+            'Refusing to run stale-file cleanup in script directory: %s',
+            output_dir,
+        )
+    else:
+        for existing_name in os.listdir(output_dir):
+            existing_path = os.path.join(output_dir, existing_name)
+            if (existing_name not in expected_set and
+                    existing_name.startswith('isr_') and
+                    existing_name.endswith('.csv') and
+                    os.path.isfile(existing_path)):
+                logging.info('Removing stale staged file: %s', existing_path)
+                os.remove(existing_path)
 
     staged_paths = [
         os.path.join(output_dir, fname)
@@ -902,11 +1448,15 @@ def build_input_tables(raw_dir: str, output_dir: str) -> list[str]:
             f'Missing expected staged CSV files in {output_dir}: {sorted(missing_tables)}'
         )
     for staged_path in staged_paths:
+        fname = os.path.basename(staged_path)
         with open(staged_path, 'r', encoding='utf-8') as fp:
-            row_count = sum(1 for _ in csv.reader(fp))
-        if row_count < 2:
+            data_rows = max(0, sum(1 for _ in csv.reader(fp)) - 1)
+        min_rows = (EXPECTED_MIN_DATA_ROWS_BY_TABLE.get(fname, 1)
+                    if strict_completeness else 1)
+        if data_rows < min_rows:
             raise RuntimeError(
-                f'Staged CSV file contains no data rows: {staged_path}')
+                f'Staged CSV file has too few data rows ({data_rows} < {min_rows}): '
+                f'{staged_path}')
     return staged_paths
 
 

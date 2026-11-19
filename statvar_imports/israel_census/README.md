@@ -14,7 +14,7 @@ This directory contains the automated import pipeline for the **Israel Central B
 - **Geographic Levels & Place Resolution (19 Places)**:
   - **Country:** Israel (`country/ISR`)
   - **Administrative Area 1 (7 CBS Districts):** Jerusalem (`wikidataId/Q192232`), Northern (`wikidataId/Q189942`), Haifa (`wikidataId/Q185845`), Central (`wikidataId/Q188785`), Tel Aviv (`wikidataId/Q192811`), Southern (`wikidataId/Q188781`), and Judea and Samaria Area (`wikidataId/Q513200`).
-  - **Administrative Area 2 (11 CBS Sub-districts):** Safed (`wikidataId/Q5423089`), Acre (`wikidataId/Q5423103`), Golan (`wikidataId/Q5423040`), Haifa (`wikidataId/Q5423411`), Hadera (`wikidataId/Q5423414`), Hasharon (`wikidataId/Q152379`), Petah Tikva (`wikidataId/Q46993019`), Ramla (`wikidataId/Q5419070`), Rehovot (`wikidataId/Q46992983`), Ashkelon (`wikidataId/Q5423623`), and Beersheba (`wikidataId/Q5423629`).
+  - **Administrative Area 2 (11 CBS Sub-districts):** Safed (`wikidataId/Q5423089`), Acre (`wikidataId/Q5423103`), Golan (`wikidataId/Q5423040`), Haifa (`wikidataId/Q5423411`), Hadera (`wikidataId/Q5423414`), Hasharon (`wikidataId/Q46993031`), Petah Tikva (`wikidataId/Q46993019`), Ramla (`wikidataId/Q5419070`), Rehovot (`wikidataId/Q46992983`), Ashkelon (`wikidataId/Q5423623`), and Beersheba (`wikidataId/Q5423629`).
   - CBS region codes (`ISR`, `DIST_1`..`DIST_7`, and `SUBDIST_21`..`SUBDIST_62`) are mapped to `country/ISR` and `wikidataId/Q*` DCIDs in `israel_census_pv_map.csv`.
 - **Statistical Variables (304 unique StatVars)**:
   - Population by religion (`id=2,1,1,1` on `apis.cbs.gov.il`, `1949`–`2024+`: Series IDs `3700`, `3701`, `3702`, `3703`, `3704`)
@@ -42,16 +42,16 @@ This directory contains the automated import pipeline for the **Israel Central B
      - `dem1_2.xls`, `dem1_14.xls`, `lab4_14.xls`, `lab4_14_1.xls`, `lab4_14_2.xls` (raw 2008 Census Mifkad spreadsheets).
 2. **`preprocess.py`**:
    - Transforms the raw payloads in `input_files/` into all 11 unscaled CSV tables in `staged_inputs/`:
-     - `isr_population_religion_1949_2021.csv` (from `cbs_series_2_1_1_1.csv`): Computes `Others` (`Count_Person_CBSIsraelNonJudaismOrNonArabChristianOrNoReligion`) as `Jews and Others (3703) - Jews (3701)` and skips incomplete/anomalous provisional years where `Total (3700) < Jews and Others (3703) + Arab (3704) - 1.0`.
-     - `isr_livebirth_infantdeath_deaths_religion_1996_2021.csv` (from `cbs_series_2_3_1.csv`): Preserves the `1996`–`2008` historical Arab Christian live-birth counts (`_CBS_ARAB_CHRISTIAN_LIVE_BIRTHS_FALLBACK`) when the API series `3755` starts in `2009`.
+     - `isr_population_religion_1949_2021.csv` (from `cbs_series_2_1_1_1.csv`): Computes `Others` (`Count_Person_CBSIsraelNonJudaismOrNonArabChristianOrNoReligion`) as `Jews and Others (3703) - Jews (3701)`. Skips anomalous or incomplete annual rows failing accounting checks: negative values, missing `Total (3700)`, `total`-only rows without any religion breakdown, post-1994 rows missing `Jews (3701)`/`Arab (3704)`/`Jews and Others (3703)`, `Total < Jews and Others + Arab - 1.0`, `Jews > Jews and Others`, `(Jews and Others - Jews) > Jews`, `Arab > Total`, pre-1995 `Non-Jews (3702)` rows missing `Jews (3701)` or failing `Total >= Jews + Non-Jews - 1.0`, or transition rows where `Jews > Total`.
+     - `isr_livebirth_infantdeath_deaths_religion_1996_2021.csv` (from `cbs_series_2_3_1.csv`): Preserves the `1996`–`2008` historical Arab Christian live-birth counts (`_CBS_ARAB_CHRISTIAN_LIVE_BIRTHS_FALLBACK`) if an upstream API feed truncates series `3755` to start in `2009`. *(Currently CBS returns all `28` annual rows `1996`–`2023` directly with `0` mismatches, so the fallback is dormant defensive code.)*
      - `isr_causeofdeath_religion_1950_2020.csv` (from `cbs_series_4_2_1.csv`): Preserves the 36 official `2019` CBS mortality rates (`_CBS_2019_CAUSE_OF_DEATH_FALLBACK`) omitted by the `id=4,2,1` API feed between `2018` and `2020`.
      - `isr_agebracket_gender_aa1_2008.csv`, `isr_subdistrict_age_gender_2008.csv`, `isr_subdistrict_population_gender_2008.csv` (from `cbs_yishuv_census_2008.json`).
-     - `isr_urban_rural_gender_aa1_2008.csv`, `isr_age_maritalstatus_2008.csv`, `isr_menemployed_age_martialstatus_2008.csv`, `isr_totalemployed_age_martialstatus_2008.csv`, `isr_womenemployed_age_martialstatus_2008.csv` (from `dem1_2.xls`, `dem1_14.xls`, `lab4_14.xls`, `lab4_14_1.xls`, `lab4_14_2.xls`). Suppresses the national `2008` `Grand totalTotal` cell in `dem1_2.xls` and the `(All ages, Total)` cell in `dem1_14.xls` so they do not conflict with the authoritative `2008` national `Count_Person` observation from `isr_population_religion_1949_2021.csv`.
+     - `isr_urban_rural_gender_aa1_2008.csv`, `isr_age_maritalstatus_2008.csv`, `isr_totalemployed_age_maritalstatus_2008.csv`, `isr_menemployed_age_maritalstatus_2008.csv`, `isr_womenemployed_age_maritalstatus_2008.csv` (from `dem1_2.xls`, `dem1_14.xls`, `lab4_14.xls`, `lab4_14_1.xls`, `lab4_14_2.xls`). Suppresses the national `2008` `Grand totalTotal` cell in `dem1_2.xls` (which would conflict with `Count_Person` from `isr_population_religion_1949_2021.csv`) and the `(15+, Total)` cell in `dem1_14.xls` (which would conflict with `Count_Person_15OrMoreYears` from `isr_agebracket_gender_aa1_2008.csv`). In `dem1_14.xls`, subtracts the `0-14` row from the all-ages `Never married` total (`36,684.4 - 20,524.6 = 16,159.8` hundreds = `1,615,980`) and emits the total row under `15+` to match Data Commons' canonical `age: Years15Onwards` marital-status StatVars. In `lab4_14_1.xls` (employed men), routes the combined `15–39` widowed cell (`2.1` hundreds, CBS footnote R26) to `אלמן_15_39` (`Count_Person_15To39Years_Employed_Male_Widowed`), and raises if separate `15–34` widowed male cells are also populated.
 3. **`stat_var_processor.py`**:
-   - Invoked from `manifest.json` in a single process over `staged_inputs/*.csv` using `israel_census_pv_map.csv` and `israel_census_metadata.csv` to generate `output_files/israel_census_output.{csv,tmcf,mcf}` and `counters/israel_census_counters.csv`.
+   - Invoked from `manifest.json` in a single process over `staged_inputs/*.csv` using `israel_census_pv_map.csv` and `israel_census_metadata.csv` to generate `output_files/israel_census_output.{csv,tmcf}` (plus `output_files/israel_census_output_stat_vars.mcf` when new StatVars are emitted) and `counters/israel_census_counters.csv`.
 
 ## Prerequisites & Working Directory
-- **Prerequisites:** Python 3.10+ with `requests`, `pandas`, `xlrd`, `openpyxl`, and `absl-py` (installed automatically via `./run_tests.sh`).
+- **Prerequisites:** Python 3.10+ with `requests`, `pandas`, `python-calamine`, `openpyxl`, and `absl-py` (installed automatically via `./run_tests.sh`).
 - **Working Directory:** Run the pipeline commands below from `statvar_imports/israel_census/`.
 
 ## How to Run Locally
@@ -77,6 +77,7 @@ python3 ../../tools/statvar_importer/stat_var_processor.py \
     --input_data=test_data/sample_input.csv \
     --pv_map=israel_census_pv_map.csv \
     --config_file=israel_census_metadata.csv \
+    --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
     --output_path=test_data/sample_output
 ```
 
@@ -89,6 +90,11 @@ python3 ../../tools/statvar_importer/stat_var_processor.py \
 # Or run unit tests directly from statvar_imports/israel_census/
 python3 -m unittest discover -s . -p "*_test.py" -v
 ```
+
+`validation_config.json` enforces:
+- Whole-table non-null uniqueness (`check_total_sv_count_no_nulls`: `total_rows = 304`, `COUNT(StatVar) = 304`, `COUNT(DISTINCT StatVar) = 304`) plus per-partition distinct StatVar counts (`47` active split across `4` population, `3` live-birth, `4` mortality-event, and `36` cause-of-death StatVars; `257` census/historical) with `COUNT(*) = COUNT(DISTINCT StatVar)` to catch `NULL` `StatVar` rows, drops, renames, or duplicates.
+- Strict 4-digit year `MaxDate` (`^[0-9]{4}$`), finite ordered non-negative values (`isfinite(TRY_CAST(... AS DOUBLE))` on `NumPlaces`, `MinValue`, and `MaxValue`, `MinValue >= 0`, `MinValue <= MaxValue`), percentage upper bound (`<= 100` for 2008 Census fractions), and cause-of-death mortality rate upper bound (`<= 100000` per 100,000).
+- Publication-lag `BETWEEN` ranges (`CURRENT_DATE - 5` to `CURRENT_DATE` for cause-of-death rates, `- 4` for live births, `- 3` for population and total/infant deaths). Each offset includes a `+1` year buffer over typical CBS publication lag so scheduled runs do not fail on January 1 before CBS publishes the next annual release.
 
 ## Refresh Procedure
 The import is configured for automated weekly refresh (`0 5 * * 1` in `manifest.json`). On each run, `download_script.py` fetches the latest raw annual series from `apis.cbs.gov.il` and the 2008 Census payloads from `boardsgenerator.cbs.gov.il` into `input_files/`, `preprocess.py` transforms all raw inputs into the 11 CSV tables in `staged_inputs/*.csv`, `stat_var_processor.py` generates `output_files/israel_census_output.{csv,tmcf}`, and `validation_config.json` verifies date consistency and value bounds.
