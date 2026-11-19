@@ -79,3 +79,13 @@ geoId/35013,2018,18,dcid:Percent_Person_64OrLessYears_2OrLessRatioToPovertyLine_
 geoId/35013,2018,1.5,dcid:MarginOfError_Percent_Person_64OrLessYears_2OrLessRatioToPovertyLine_NoHealthInsurance,P1Y,dcs:USCensusPovertyThreshold
 geoId/35013,2018,82,dcid:Percent_Person_64OrLessYears_2OrLessRatioToPovertyLine_WithHealthInsurance,P1Y,dcs:USCensusPovertyThreshold
 geoId/35013,2018,1.5,dcid:MarginOfError_Percent_Person_64OrLessYears_2OrLessRatioToPovertyLine_WithHealthInsurance,P1Y,dcs:USCensusPovertyThreshold
+geoId/01,2021,582140,dcid:Count_Person_21To29Years,P1Y,
+geoId/01,2021,0,dcid:MarginOfError_Count_Person_21To29Years,P1Y,
+geoId/01,2021,98964,dcid:Count_Person_21To29Years_NoHealthInsurance,P1Y,
+geoId/01,2021,4812,dcid:MarginOfError_Count_Person_21To29Years_NoHealthInsurance,P1Y,
+geoId/01,2021,483176,dcid:Count_Person_21To29Years_WithHealthInsurance,P1Y,
+geoId/01,2021,4812,dcid:MarginOfError_Count_Person_21To29Years_WithHealthInsurance,P1Y,
+geoId/01,2021,17,dcid:Percent_Person_21To29Years_NoHealthInsurance,P1Y,
+geoId/01,2021,0.8,dcid:MarginOfError_Percent_Person_21To29Years_NoHealthInsurance,P1Y,
+geoId/01,2021,83,dcid:Percent_Person_21To29Years_WithHealthInsurance,P1Y,
+geoId/01,2021,0.8,dcid:MarginOfError_Percent_Person_21To29Years_WithHealthInsurance,P1Y,
