@@ -15,6 +15,9 @@
                     "cleaned_csv": "cleaned_wdi.csv"
                 }
             ],
+            "config_override": {
+                "disable_import_workflow": true
+            },
             "cron_schedule": "30 6 * * 0",
             "_comment": "Schedule: Weekly on Sunday at 06:30 UTC"
         }
