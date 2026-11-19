@@ -23,8 +23,10 @@
       "source_files": [
         "input_files/*",
         "counters/*.csv",
-        "statvar_remap.csv"
+        "statvar_remap.csv",
+        "validation_config.json"
       ],
+      "validation_config_file": "validation_config.json",
       "cron_schedule": "30 05 7,24 * *"
     }
   ]

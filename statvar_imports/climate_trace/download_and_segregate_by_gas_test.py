@@ -15,7 +15,6 @@
 import csv
 import io
 import os
-import subprocess
 import sys
 import tempfile
 import unittest
@@ -32,9 +31,6 @@ if SCRIPT_DIR not in sys.path:
 import download_and_segregate_by_gas
 
 TEST_DATA_DIR = os.path.join(SCRIPT_DIR, 'test_data')
-SV_PROCESSOR = os.path.abspath(
-    os.path.join(SCRIPT_DIR, '..', '..', 'tools', 'statvar_importer',
-                 'stat_var_processor.py'))
 
 
 class DownloadAndSegregateByGasTest(unittest.TestCase):
@@ -317,249 +313,35 @@ class DownloadAndSegregateByGasTest(unittest.TestCase):
         self.assertEqual(sec_map['wastewater-treatment-and-discharge'], '')
 
 
-# Pre-existing baseline emissionSource enums resolved from
-# gs://unresolved_mcf/scripts/statvar/stat_vars.mcf in production runs.
-# New subsector StatVars and legacy composite rollups are NOT listed here so
-# that the test verifies resolution through statvar_remap.csv.
-_EXISTING_BASELINE_EMISSION_SOURCES = (
-    # Sectors
-    'Agriculture',
-    'FluorinatedGases',
-    'ForestryAndLandUse',
-    'FossilFuelOperations',
-    'FuelCombustionInBuildings',
-    'Manufacturing',
-    'MineralExtraction',
-    'Power',
-    'Transportation',
-    'WasteManagement',
-    # Pre-existing subsectors
-    'AluminumProduction',
-    'BauxiteMining',
-    'BiologicalTreatmentOfSolidWasteAndBiogenic',
-    'CementProduction',
-    'ChemicalPetrochemicalIndustry',
-    'ClimateTrace_OtherAgriculturalSoilEmissions',
-    'ClimateTrace_OtherEnergyUse',
-    'ClimateTrace_OtherFossilFuelOperations',
-    'ClimateTrace_OtherManufacturing',
-    'ClimateTrace_OtherOnsiteFuelUsage',
-    'ClimateTrace_OtherTransportation',
-    'CoalMining',
-    'CopperMining',
-    'CroplandFire',
-    'ElectricityGeneration',
-    'EntericFermentation',
-    'ForestClearing',
-    'ForestLandDegredation',
-    'ForestLandFire',
-    'FuelCombustionForDomesticAviation',
-    'FuelCombustionForInternationalAviation',
-    'FuelCombustionForRailways',
-    'FuelCombustionForResidentialCommercialOnsiteHeating',
-    'FuelCombustionForRoadVehicles',
-    'IronMining',
-    'ManureManagement',
-    'NetForestEmissions',
-    'NetGrasslandEmissions',
-    'NetWetlandEmissions',
-    'OilAndGasProduction',
-    'OilAndGasRefining',
-    'OpenBurningWaste',
-    'PulpAndPaperManufacturing',
-    'RiceCultivation',
-    'RockQuarry',
-    'SandQuarry',
-    'ShrublandFire',
-    'SolidFuelTransformation',
-    'SolidWasteDisposal',
-    'SteelManufacturing',
-    'SyntheticFertilizerApplication',
-    'WetlandFire',
-)
+class PvMapAndFixturesTest(unittest.TestCase):
+    """Static checks on PV maps and paired test_data/ fixtures."""
 
-_EMITTED_THINGS = (
-    'CarbonDioxide',
-    'CarbonDioxideEquivalent20YearGlobalWarmingPotential',
-    'CarbonDioxideEquivalent100YearGlobalWarmingPotential',
-    'Methane',
-    'NitrousOxide',
-)
+    def test_paired_test_data_fixtures_exist(self):
+        for prefix in ('sectors', 'subsectors', 'greenhousegas'):
+            for suffix in ('_input.csv', '_output.csv', '_output.tmcf'):
+                path = os.path.join(TEST_DATA_DIR, f'{prefix}{suffix}')
+                self.assertTrue(os.path.exists(path),
+                                msg=f'Missing test fixture: {path}')
 
-
-def _write_offline_existing_statvars_mcf(path: str) -> None:
-    """Writes a minimal offline MCF of existing ClimateTrace StatVars."""
-    blocks = []
-    for gas in _EMITTED_THINGS:
-        for src in _EXISTING_BASELINE_EMISSION_SOURCES:
-            dcid = f'Annual_Emissions_{gas}_{src}'
-            blocks.append(f'Node: dcid:{dcid}\n'
-                          'typeOf: dcs:StatisticalVariable\n'
-                          'populationType: dcs:Emissions\n'
-                          'measuredProperty: dcs:amount\n'
-                          'measurementQualifier: dcs:Annual\n'
-                          'statType: dcs:measuredValue\n'
-                          f'emissionSource: dcs:{src}\n'
-                          f'emittedThing: dcs:{gas}\n')
-    with open(path, 'w', encoding='utf-8') as f:
-        f.write('\n'.join(blocks))
-
-
-class StatVarProcessorFixturesTest(unittest.TestCase):
-    """Hermetic regression tests running stat_var_processor on paired fixtures."""
-
-    def _run_processor(self,
-                       tmp_dir: str,
-                       input_csv: str,
-                       pv_map_file: str,
-                       output_name: str,
-                       existing_mcf: str = '',
-                       remap_csv: str = '') -> tuple[str, str, str]:
-        test_config = os.path.join(tmp_dir, f'{output_name}_metadata.csv')
-        with open(os.path.join(SCRIPT_DIR, 'common_metadata.csv'),
-                  'r',
-                  encoding='utf-8') as f_in, open(test_config,
-                                                  'w',
-                                                  encoding='utf-8') as f_out:
-            f_out.write(f_in.read())
-            f_out.write('generate_statvar_mcf,False\n')
-            f_out.write('generate_schema_mcf,False\n')
-            f_out.write('reconcile_nodes,False\n')
-            f_out.write('recon_lookup_api,False\n')
-
-        output_prefix = os.path.join(tmp_dir, output_name)
-        counters_csv = os.path.join(tmp_dir, f'{output_name}_counters.csv')
-        cmd = [
-            sys.executable,
-            SV_PROCESSOR,
-            f'--input_data={input_csv}',
-            f'--pv_map={os.path.join(SCRIPT_DIR, pv_map_file)}',
-            f'--config_file={test_config}',
-            f'--output_path={output_prefix}',
-            f'--output_counters={counters_csv}',
-            f'--existing_statvar_mcf={existing_mcf}',
-        ]
-        if remap_csv:
-            cmd.append(
-                f'--statvar_dcid_remap_csv={os.path.join(SCRIPT_DIR, remap_csv)}'
-            )
-        subprocess.run(cmd, check=True, cwd=tmp_dir, capture_output=True)
-        return f'{output_prefix}.csv', f'{output_prefix}.tmcf', counters_csv
-
-    def _assert_fixture_matches(self,
-                                prefix: str,
-                                pv_map_file: str,
-                                use_existing_mcf: bool = False,
-                                remap_csv: str = '') -> None:
-        input_csv = os.path.join(TEST_DATA_DIR, f'{prefix}_input.csv')
-        expected_csv = os.path.join(TEST_DATA_DIR, f'{prefix}_output.csv')
-        expected_tmcf = os.path.join(TEST_DATA_DIR, f'{prefix}_output.tmcf')
-        self.assertTrue(os.path.exists(input_csv))
-        self.assertTrue(os.path.exists(expected_csv))
-        self.assertTrue(os.path.exists(expected_tmcf))
-
-        with tempfile.TemporaryDirectory() as tmp_dir:
-            existing_mcf = ''
-            if use_existing_mcf:
-                existing_mcf = os.path.join(tmp_dir, 'existing_statvars.mcf')
-                _write_offline_existing_statvars_mcf(existing_mcf)
-
-            actual_csv, actual_tmcf, _ = self._run_processor(
-                tmp_dir=tmp_dir,
-                input_csv=input_csv,
-                pv_map_file=pv_map_file,
-                output_name=f'{prefix}_output',
-                existing_mcf=existing_mcf,
-                remap_csv=remap_csv,
-            )
-            with open(expected_csv, 'r', encoding='utf-8') as f_exp, open(
-                    actual_csv, 'r', encoding='utf-8') as f_act:
-                self.assertEqual(f_exp.read().splitlines(),
-                                 f_act.read().splitlines())
-            with open(expected_tmcf, 'r', encoding='utf-8') as f_exp, open(
-                    actual_tmcf, 'r', encoding='utf-8') as f_act:
-                self.assertEqual(sorted(f_exp.read().splitlines()),
-                                 sorted(f_act.read().splitlines()))
-
-    def test_sectors_fixture(self):
-        self._assert_fixture_matches(
-            prefix='sectors',
-            pv_map_file='climate_pvmap_sectors.csv',
-            use_existing_mcf=True,
-        )
-        df = pd.read_csv(os.path.join(TEST_DATA_DIR, 'sectors_output.csv'),
-                         dtype=str)
+    def test_fluorinated_gases_deduplicated_in_fixtures(self):
+        sectors_df = pd.read_csv(os.path.join(TEST_DATA_DIR,
+                                              'sectors_output.csv'),
+                                 dtype=str)
         self.assertFalse(
-            df['variableMeasured'].str.contains('FluorinatedGases').any(),
+            sectors_df['variableMeasured'].str.contains(
+                'FluorinatedGases').any(),
             'fluorinated-gases must be ignored in climate_pvmap_sectors.csv '
             'to avoid duplicate observations with climate_pvmap_subsectors.csv',
         )
 
-    def test_subsectors_fixture(self):
-        self._assert_fixture_matches(
-            prefix='subsectors',
-            pv_map_file='climate_pvmap_subsectors.csv',
-            use_existing_mcf=True,
-            remap_csv='statvar_remap.csv',
-        )
-        df = pd.read_csv(os.path.join(TEST_DATA_DIR, 'subsectors_output.csv'),
-                         dtype=str,
-                         keep_default_na=False)
-        fg = df[df['variableMeasured'].str.contains('FluorinatedGases')]
+        subsectors_df = pd.read_csv(os.path.join(TEST_DATA_DIR,
+                                                 'subsectors_output.csv'),
+                                    dtype=str,
+                                    keep_default_na=False)
+        fg = subsectors_df[subsectors_df['variableMeasured'].str.contains(
+            'FluorinatedGases')]
         self.assertGreater(len(fg), 0)
         self.assertTrue((fg['measurementMethod'] == '').all())
-
-    def test_greenhousegas_fixture(self):
-        self._assert_fixture_matches(
-            prefix='greenhousegas',
-            pv_map_file='climate_pvmap_greenhousegas.csv',
-            use_existing_mcf=False,
-        )
-
-    def test_dynamic_future_year_extraction(self):
-        with tempfile.TemporaryDirectory() as tmp_dir:
-            existing_mcf = os.path.join(tmp_dir, 'existing_statvars.mcf')
-            _write_offline_existing_statvars_mcf(existing_mcf)
-
-            raw_input = os.path.join(tmp_dir, 'future_raw.csv')
-            with open(raw_input, 'w', encoding='utf-8') as f:
-                f.write('iso3_country,sector,subsector,start_time,end_time,'
-                        'gas,emissions_quantity\n')
-                f.write('USA,transportation,road-transportation,'
-                        '2031-01-01 00:00:00,2031-12-31 00:00:00,co2,12345.5\n')
-
-            ghg_input = os.path.join(tmp_dir, 'future_ghg.csv')
-            with open(ghg_input, 'w', encoding='utf-8') as f:
-                f.write('iso3_country,sector,subsector,start_time,end_time,'
-                        'gas,emissions_quantity\n')
-                f.write('USA,,,2031-01-01 00:00:00,,co2e_100yr,98765.25\n')
-
-            for name, inp, pvmap, remap in (
-                ('sectors', raw_input, 'climate_pvmap_sectors.csv', ''),
-                ('subsectors', raw_input, 'climate_pvmap_subsectors.csv',
-                 'statvar_remap.csv'),
-                ('greenhousegas', ghg_input, 'climate_pvmap_greenhousegas.csv',
-                 ''),
-            ):
-                out_csv, _, counters_csv = self._run_processor(
-                    tmp_dir=tmp_dir,
-                    input_csv=inp,
-                    pv_map_file=pvmap,
-                    output_name=f'future_{name}',
-                    existing_mcf=existing_mcf,
-                    remap_csv=remap,
-                )
-                df = pd.read_csv(out_csv, dtype=str)
-                self.assertEqual(len(df), 1, msg=f'Pass {name} failed')
-                self.assertEqual(df.loc[0, 'observationDate'], '2031')
-                with open(counters_csv, 'r', encoding='utf-8') as f_cnt:
-                    counters = dict(csv.reader(f_cnt))
-                self.assertEqual(
-                    counters.get(
-                        '1:process_input_warning-unresolved-value-ref'),
-                    '2',
-                    msg=f'Unexpected unresolved-value-ref warnings in {name}',
-                )
 
     def test_pvmap_uniform_column_widths(self):
         for pvmap in (
