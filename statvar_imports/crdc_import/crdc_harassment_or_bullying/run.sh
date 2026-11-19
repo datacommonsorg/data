@@ -1,3 +1,4 @@
+#!/bin/bash
 # Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,22 +13,76 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
-#!/bin/bash
+set -euo pipefail
 
 # =================================================================
-# CONFIGURATION SECTION - PLEASE EDIT THESE PATHS
+# CONFIGURATION SECTION
 # =================================================================
 
-INPUT_DIR="./input_files"
-PV_MAP_FILE="harassment_or_bullying_pvmap.csv"
-CONFIG_FILE="harassment_or_bullying_metadata.csv"
-OUTPUT_DIR="processed_output"
-EXISTING_MCF="gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
-PYTHON_SCRIPT="../../../tools/statvar_importer/stat_var_processor.py"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+INPUT_DIR="${INPUT_DIR:-$SCRIPT_DIR/preprocessed_files}"
+PV_MAP_FILE="${PV_MAP_FILE:-$SCRIPT_DIR/harassment_or_bullying_pvmap.csv}"
+CONFIG_FILE="${CONFIG_FILE:-$SCRIPT_DIR/harassment_or_bullying_metadata.csv}"
+OUTPUT_DIR="${OUTPUT_DIR:-$SCRIPT_DIR/processed_output}"
+EXISTING_MCF="${EXISTING_STATVAR_MCF:-gs://unresolved_mcf/scripts/statvar/stat_vars.mcf}"
+PYTHON_SCRIPT="${PYTHON_SCRIPT:-$SCRIPT_DIR/../../../tools/statvar_importer/stat_var_processor.py}"
+PYTHON_BIN="${PYTHON_BIN:-python3}"
 
 # Use all available vCPUs (defaults to 16 matching manifest.json resource_limits)
-MAX_PARALLEL_JOBS=$(nproc 2>/dev/null || echo 16)
+MAX_PARALLEL_JOBS="${MAX_PARALLEL_JOBS:-$(nproc 2>/dev/null || echo 16)}"
+
+# =================================================================
+# PRE-FLIGHT INPUT VERIFICATION
+# =================================================================
+
+if [ ! -d "$INPUT_DIR" ]; then
+    echo "Error: Preprocessed input directory '$INPUT_DIR' not found." >&2
+    exit 1
+fi
+
+REQUIRED_HISTORICAL_FILES=(
+    "crdc_harassment_or_bullying_2012_part_01.csv"
+    "crdc_harassment_or_bullying_2012_part_02.csv"
+    "crdc_harassment_or_bullying_2012_part_03.csv"
+    "crdc_harassment_or_bullying_2012_part_04.csv"
+    "crdc_harassment_or_bullying_2012_part_05.csv"
+    "crdc_harassment_or_bullying_2012_part_06.csv"
+    "crdc_harassment_or_bullying_2014.csv"
+    "crdc_harassment_or_bullying_2018.csv"
+    "crdc_harassment_or_bullying_2021.csv"
+    "crdc_harassment_or_bullying_2022.csv"
+)
+
+MISSING_INPUTS=0
+for req_file in "${REQUIRED_HISTORICAL_FILES[@]}"; do
+    if [ ! -s "$INPUT_DIR/$req_file" ]; then
+        echo "Error: Missing or empty required input file '$INPUT_DIR/$req_file'." >&2
+        MISSING_INPUTS=$((MISSING_INPUTS + 1))
+    fi
+done
+
+# Positively match 2024+ CSV files for the 2024Onwards partition.
+CSV_FILES_2024_ONWARD=$(
+    find "$INPUT_DIR" -maxdepth 1 -type f -name "*.csv" \
+        | grep -E "_(202[4-9]|20[3-9][0-9])(_part_[0-9]+)?\.csv$" \
+        | sort \
+        | paste -sd, - || true
+)
+
+if [ -z "$CSV_FILES_2024_ONWARD" ]; then
+    echo "Error: No 2024+ CSV files found in '$INPUT_DIR'." >&2
+    MISSING_INPUTS=$((MISSING_INPUTS + 1))
+fi
+
+if ! echo "$CSV_FILES_2024_ONWARD" | grep -Eq "_2024(_part_[0-9]+)?\.csv(,|$)"; then
+    echo "Error: Baseline 2024 CSV file is missing from '$INPUT_DIR'." >&2
+    MISSING_INPUTS=$((MISSING_INPUTS + 1))
+fi
+
+if [ "$MISSING_INPUTS" -gt 0 ]; then
+    echo "Aborting before StatVar processing due to $MISSING_INPUTS missing required input check(s)." >&2
+    exit 1
+fi
 
 # =================================================================
 # EXECUTION LOGIC
@@ -36,27 +91,15 @@ MAX_PARALLEL_JOBS=$(nproc 2>/dev/null || echo 16)
 rm -rf "$OUTPUT_DIR"
 mkdir -p "$OUTPUT_DIR"
 
-if [ ! -d "$INPUT_DIR" ]; then
-    echo "Error: Input directory '$INPUT_DIR' not found."
-    exit 1
-fi
-
 echo "Starting parallel processing of files in $INPUT_DIR (MAX_PARALLEL_JOBS=$MAX_PARALLEL_JOBS)..."
 JOB_COUNT=0
 FAILED_JOBS=0
 PIDS=()
 
 # 1. Process 2024 onwards files dynamically into a single 2024Onwards output
-CSV_FILES_2024_ONWARD=$(find "$INPUT_DIR" -maxdepth 1 -type f -name "*.csv" | grep -Ev "_(2012|2014|2018|2021|2022)(_|\.)" | sort | paste -sd, -)
-
-if [ -z "$CSV_FILES_2024_ONWARD" ]; then
-    echo "Error: No 2024+ CSV files found in '$INPUT_DIR'."
-    exit 1
-fi
-
 output_file="$OUTPUT_DIR/crdc_harassment_or_bullying_2024Onwards"
 echo "Launching job for 2024Onwards: $CSV_FILES_2024_ONWARD"
-python3 "$PYTHON_SCRIPT" \
+"$PYTHON_BIN" "$PYTHON_SCRIPT" \
     --input_data="$CSV_FILES_2024_ONWARD" \
     --pv_map="$PV_MAP_FILE" \
     --config_file="$CONFIG_FILE" \
@@ -68,12 +111,11 @@ python3 "$PYTHON_SCRIPT" \
 PIDS+=("$!")
 JOB_COUNT=$((JOB_COUNT + 1))
 
-# 2. Sort remaining (2012-2022) CSV files by size descending so the largest files start first
+# 2. Sort remaining (2012-2022) CSV files by size descending so largest files start first
 while IFS= read -r base_name; do
     [ -z "$base_name" ] && continue
     input_file="$INPUT_DIR/$base_name"
-    if [ -f "$input_file" ] && echo "$base_name" | grep -Eq "_(2012|2014|2018|2021|2022)(_.*)?\.csv$"; then
-        # If we reached the max number of parallel jobs, wait for a slot to open
+    if [ -f "$input_file" ] && echo "$base_name" | grep -Eq "_(2012|2014|2018|2021|2022)(_part_[0-9]+)?\.csv$"; then
         while [[ $(jobs -r -p | wc -l) -ge $MAX_PARALLEL_JOBS ]]; do
             wait -n 2>/dev/null || sleep 1
         done
@@ -83,7 +125,7 @@ while IFS= read -r base_name; do
 
         echo "Launching job for: $input_file"
 
-        python3 "$PYTHON_SCRIPT" \
+        "$PYTHON_BIN" "$PYTHON_SCRIPT" \
             --input_data="$input_file" \
             --pv_map="$PV_MAP_FILE" \
             --config_file="$CONFIG_FILE" \
@@ -101,14 +143,54 @@ done < <(find "$INPUT_DIR" -maxdepth 1 -type f -name "*.csv" -printf '%s\t%f\n' 
 echo "---"
 echo "Waiting for remaining $(jobs -r -p | wc -l) of $JOB_COUNT jobs to complete..."
 
-# Wait for all spawned processes and capture exit codes to identify failures
 for pid in "${PIDS[@]}"; do
     wait "$pid" || FAILED_JOBS=$((FAILED_JOBS + 1))
 done
 
 if [ "$FAILED_JOBS" -gt 0 ]; then
-    echo "Processing complete with $FAILED_JOBS errors."
+    echo "Processing failed with $FAILED_JOBS StatVar processor error(s)." >&2
     exit 1
-else
-    echo "All parallel processing jobs completed successfully. Output files are in $OUTPUT_DIR"
 fi
+
+# =================================================================
+# POST-FLIGHT OUTPUT CONTRACT VERIFICATION
+# =================================================================
+
+REQUIRED_TMCFS=(
+    "crdc_harassment_or_bullying_2012_part_01.tmcf"
+    "crdc_harassment_or_bullying_2014.tmcf"
+    "crdc_harassment_or_bullying_2018.tmcf"
+    "crdc_harassment_or_bullying_2021.tmcf"
+    "crdc_harassment_or_bullying_2022.tmcf"
+    "crdc_harassment_or_bullying_2024Onwards.tmcf"
+)
+
+REQUIRED_CSVS=(
+    "crdc_harassment_or_bullying_2012_part_01.csv"
+    "crdc_harassment_or_bullying_2012_part_02.csv"
+    "crdc_harassment_or_bullying_2012_part_03.csv"
+    "crdc_harassment_or_bullying_2012_part_04.csv"
+    "crdc_harassment_or_bullying_2012_part_05.csv"
+    "crdc_harassment_or_bullying_2012_part_06.csv"
+    "crdc_harassment_or_bullying_2014.csv"
+    "crdc_harassment_or_bullying_2018.csv"
+    "crdc_harassment_or_bullying_2021.csv"
+    "crdc_harassment_or_bullying_2022.csv"
+    "crdc_harassment_or_bullying_2024Onwards.csv"
+)
+
+for tmcf in "${REQUIRED_TMCFS[@]}"; do
+    if [ ! -s "$OUTPUT_DIR/$tmcf" ]; then
+        echo "Error: Expected output TMCF '$OUTPUT_DIR/$tmcf' is missing or empty." >&2
+        exit 1
+    fi
+done
+
+for csv_out in "${REQUIRED_CSVS[@]}"; do
+    if [ ! -s "$OUTPUT_DIR/$csv_out" ] || [ "$(wc -l < "$OUTPUT_DIR/$csv_out")" -le 1 ]; then
+        echo "Error: Expected output CSV '$OUTPUT_DIR/$csv_out' is missing or has 0 data rows." >&2
+        exit 1
+    fi
+done
+
+echo "All $JOB_COUNT processing jobs and output contract checks completed successfully. Output files are in $OUTPUT_DIR"

@@ -40,9 +40,14 @@ sys.path.append(os.path.join(_UTIL_DIR, '../../../util/'))
 import file_util
 
 _FLAGS = flags.FLAGS
-flags.DEFINE_string(
-    'config_path', 'gs://unresolved_mcf/cdc/cdc500places/download_config.json',
-    'Path to config file')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        'config_path',
+        'gs://unresolved_mcf/cdc/cdc500places/download_config.json',
+        'Path to config file')
 
 
 def read_config_file_from_gcs(file_path):
@@ -91,5 +96,6 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     logging.set_verbosity(2)
     app.run(main)

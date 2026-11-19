@@ -28,10 +28,15 @@ import requests
 from retry import retry
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string(
-    'data_type', None,
-    'The type of data to download: "enrollment" or "teachers".')
-flags.mark_flag_as_required('data_type')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        'data_type', None,
+        'The type of data to download: "enrollment" or "teachers".')
+    flags.mark_flag_as_required('data_type')
+
 
 BASE_URL_TEMPLATE = "https://civilrightsdata.ed.gov/assets/ocr/docs/{}.zip"
 
@@ -309,4 +314,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

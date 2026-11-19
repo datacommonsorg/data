@@ -29,11 +29,15 @@ sys.path.append(os.path.join(_SCRIPT_PATH, "../.."))
 from us_epa.parent_company import static_corrections as sc
 from us_epa.util import facilities_helper as fh
 
-flags.DEFINE_string("input_download_path", "tmp_data", "Input directory")
-flags.DEFINE_string("existing_facilities_file", "existing_facilities",
-                    "Filename for existing facilities ids")
-flags.DEFINE_string("output_base_path", "output",
-                    "Output directory for processed data.")
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string("input_download_path", "tmp_data", "Input directory")
+    flags.DEFINE_string("existing_facilities_file", "existing_facilities",
+                        "Filename for existing facilities ids")
+    flags.DEFINE_string("output_base_path", "output",
+                        "Output directory for processed data.")
+
 
 FLAGS = flags.FLAGS
 
@@ -293,4 +297,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

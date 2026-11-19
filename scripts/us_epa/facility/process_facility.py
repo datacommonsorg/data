@@ -23,11 +23,15 @@ from us_epa.util.crosswalk import Crosswalk
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string(
-    'epa_input_tables_path', 'tmp_data',
-    'Path to directory contain crosswalk.csv, V_GHG_EMITTER_FACILITIES.csv, etc.'
-)
-flags.DEFINE_string('epa_output_path', 'output', 'Output directory')
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        'epa_input_tables_path', 'tmp_data',
+        'Path to directory contain crosswalk.csv, V_GHG_EMITTER_FACILITIES.csv, etc.'
+    )
+    flags.DEFINE_string('epa_output_path', 'output', 'Output directory')
+
 
 # Input tables we process
 # Schema: https://enviro.epa.gov/enviro/ef_metadata_html.ef_metadata_table?p_table_name=<table>
@@ -151,7 +155,7 @@ def _resolve_places(facility_id, zip, provided_county, lat, lng):
         return '', '', '', ''
 
     county_candidates = fh.get_county_candidates(zip)
-    if any(provided_county in l for l in county_candidates):
+    if any(provided_county in candidates for candidates in county_candidates):
         # Provided county is in the candidate list, use that.
 
         if lat and lng and _validate_latlng(lat, lng, provided_county):
@@ -272,4 +276,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

@@ -57,7 +57,7 @@ def extract_series_to_jsonl(line, dataset):
         d = {'date': k}
         try:
             d['value'] = float(v)
-        except:
+        except (TypeError, ValueError):
             d['value_note'] = v
         list_data.append(d)
     json_data['data'] = list_data

@@ -27,7 +27,12 @@ sys.path.insert(1, os.path.join(_MODULE_DIR, '../../../../util'))
 from alpha2_to_dcid import COUNTRY_MAP
 from nuts_codes_names import NUTS1_CODES_NAMES
 
-flags.DEFINE_string('mode', '', 'Options: download or process')
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('mode', '', 'Options: download or process')
+
+
 _FLAGS = flags.FLAGS
 
 
@@ -248,4 +253,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)
