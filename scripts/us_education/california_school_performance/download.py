@@ -52,7 +52,14 @@ _REPO_ROOT = os.path.abspath(os.path.join(_SCRIPT_DIR, '../../../'))
 if _REPO_ROOT not in sys.path:
     sys.path.insert(0, _REPO_ROOT)
 
-from util.download_util_script import download_file
+if 'download_util_script' in sys.modules:
+    sys.modules.setdefault('util.download_util_script',
+                           sys.modules['download_util_script'])
+    download_file = sys.modules['download_util_script'].download_file
+else:
+    from util.download_util_script import download_file
+    sys.modules.setdefault('download_util_script',
+                           sys.modules['util.download_util_script'])
 
 FLAGS = flags.FLAGS
 
