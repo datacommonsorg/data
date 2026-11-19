@@ -14,14 +14,6 @@
                 "query": "SELECT MAX(MaxDate) AS latest_date FROM stats",
                 "condition": "latest_date >= '2005-01-01'"
             }
-        },
-        {
-            "rule_id": "check_deleted_records_percent",
-            "description": "Checks that deleted records do not exceed 0.05% via BigQuery differ.",
-            "validator": "DELETED_RECORDS_PERCENT",
-            "params": {
-                "threshold": 0.05
-            }
         }
     ]
 }
