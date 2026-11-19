@@ -77,7 +77,7 @@ if __name__ == '__main__':
                 with open(f'input/{identifier}.json', 'w') as f_out:
                     try:
                         f_out.write(json.dumps(result.json()))
-                    except:
+                    except ValueError:
                         print('Error parsing:', identifier)
-            except:
+            except Exception:
                 print('Error fetching data for:', identifier)

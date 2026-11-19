@@ -12,11 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from fastapi import HTTPException
 from clients.bigquery import BigQueryClient
 from clients.spanner import SpannerClient
 from clients.storage import StorageClient
 import config
+from fastapi import HTTPException
 
 _bigquery_client = None
 _spanner_client = None
@@ -30,7 +30,8 @@ def get_bigquery_client() -> BigQueryClient:
         if not bq_project or not config.BQ_DATASET_ID:
             raise HTTPException(
                 status_code=500,
-                detail="BigQuery configuration is missing. Ensure PROJECT_ID (or BQ_PROJECT_ID) and BQ_DATASET_ID are set."
+                detail=
+                "BigQuery configuration is missing. Ensure PROJECT_ID (or BQ_PROJECT_ID) and BQ_DATASET_ID are set."
             )
         _bigquery_client = BigQueryClient(
             bq_project,
@@ -47,13 +48,12 @@ def get_spanner_client() -> SpannerClient:
         if not config.SPANNER_PROJECT_ID or not config.SPANNER_INSTANCE_ID or not config.SPANNER_DATABASE_ID:
             raise HTTPException(
                 status_code=500,
-                detail="Spanner configuration is missing. Ensure SPANNER_PROJECT_ID, SPANNER_INSTANCE_ID, and SPANNER_DATABASE_ID are set."
+                detail=
+                "Spanner configuration is missing. Ensure SPANNER_PROJECT_ID, SPANNER_INSTANCE_ID, and SPANNER_DATABASE_ID are set."
             )
-        _spanner_client = SpannerClient(
-            config.SPANNER_PROJECT_ID,
-            config.SPANNER_INSTANCE_ID,
-            config.SPANNER_DATABASE_ID
-        )
+        _spanner_client = SpannerClient(config.SPANNER_PROJECT_ID,
+                                        config.SPANNER_INSTANCE_ID,
+                                        config.SPANNER_DATABASE_ID)
     return _spanner_client
 
 
@@ -63,7 +63,8 @@ def get_storage_client() -> StorageClient:
         if not config.GCS_BUCKET_ID:
             raise HTTPException(
                 status_code=500,
-                detail="GCS Bucket ID configuration is missing. Ensure GCS_BUCKET_ID is set."
+                detail=
+                "GCS Bucket ID configuration is missing. Ensure GCS_BUCKET_ID is set."
             )
         _storage_client = StorageClient(config.GCS_BUCKET_ID)
     return _storage_client
