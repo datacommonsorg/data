@@ -15,16 +15,16 @@
 """High-throughput StatVar observation processor for California School Performance (CAASPP).
 
 Processes normalized or raw CAASPP research files across all years (2015-present),
-resolving California CDS school/district/county/state codes via config/school_code_mapping.json
+resolving California CDS school/district/county/state codes via school_code_mapping.json
+(on GCS or local path), filtering out unmapped CA-... fallback place identifiers by default,
 and mapping all 55 student demographic subgroups, 8 grade levels (Grades 3-8, 11, and 13),
 2 subjects (ELA and Mathematics), and 7 assessment metrics to their canonical Data Commons
-Statistical Variables, producing cleaned CSV, TMCF, entity MCF, and counter outputs.
+Statistical Variables, producing cleaned CSV, TMCF, and counter outputs.
 """
 
 from collections import Counter
 import csv
 import glob
-import json
 import os
 import sys
 import tempfile
@@ -39,7 +39,7 @@ if _REPO_ROOT not in sys.path:
     sys.path.insert(0, _REPO_ROOT)
 
 try:
-    from statvar_imports.us_education.california_school_performance import download
+    from scripts.us_education.california_school_performance import download
 except ModuleNotFoundError:
     import download
 
@@ -56,16 +56,26 @@ flags.DEFINE_string(
                  'california_school_performance_pvmap.csv'),
     'Path to the PV map CSV file.',
 )
-flags.DEFINE_string(
-    'school_code_mapping',
-    os.path.join(_SCRIPT_DIR, 'config', 'school_code_mapping.json'),
-    'Path to the CDS-to-DCID school code mapping JSON file.',
+if 'school_code_mapping' not in FLAGS:
+    flags.DEFINE_string(
+        'school_code_mapping',
+        download.DEFAULT_SCHOOL_CODE_MAPPING,
+        'Local file path or gs:// GCS URI to the CDS-to-DCID school code mapping JSON file.',
+    )
+# TODO(b/545470159): Onboard newly opened California schools and districts with
+# standard nces/... DCIDs in a separate Place import instead of generating
+# provisional CA-... place identifiers alongside StatVarObservations.
+flags.DEFINE_boolean(
+    'drop_unmapped_places',
+    True,
+    'If true, filters out rows whose resolved place is an unmapped CA-... '
+    'fallback identifier so Place nodes and stats are not mixed in one import.',
 )
 flags.DEFINE_string(
     'output_path',
     os.path.join(_SCRIPT_DIR, 'output_files',
                  'california_school_performance_all_years_output'),
-    'Output prefix path for generated .csv, .tmcf, and .mcf files.',
+    'Output prefix path for generated .csv and .tmcf files (and _places.mcf when --drop_unmapped_places=False).',
 )
 flags.DEFINE_string(
     'output_counters',
@@ -270,8 +280,9 @@ def process_files(
     school_map_path: str,
     output_prefix: str,
     counters_path: str = '',
+    drop_unmapped_places: bool = True,
 ) -> dict[str, int]:
-    """Streams input file(s) and produces .csv, .tmcf, .mcf (for unmapped CA places), and optional counters CSV."""
+    """Streams input file(s) and produces .csv, .tmcf, optional _places.mcf, and optional counters CSV."""
     input_files = sorted(glob.glob(input_pattern))
     if not input_files and os.path.exists(input_pattern):
         input_files = [input_pattern]
@@ -280,11 +291,8 @@ def process_files(
             f'No input files matched pattern: {input_pattern}')
 
     sv_lookup = build_statvar_lookup(pv_map_path)
-    if os.path.exists(school_map_path):
-        with open(school_map_path, 'r', encoding='utf-8') as f:
-            school_map = json.load(f)
-    else:
-        school_map = {}
+    school_map = (download.load_school_code_map(school_map_path)
+                  if school_map_path else {})
 
     out_dir = os.path.dirname(os.path.abspath(output_prefix))
     os.makedirs(out_dir, exist_ok=True)
@@ -292,11 +300,12 @@ def process_files(
 
     csv_path = f'{output_prefix}.csv'
     tmcf_path = f'{output_prefix}.tmcf'
-    mcf_out_path = f'{output_prefix}.mcf'
+    places_mcf_path = f'{output_prefix}_places.mcf'
 
     counters: Counter = Counter()
     observed_statvars: set[str] = set()
     observed_ca_places: dict[str, tuple[str, str]] = {}
+    dropped_ca_places: set[str] = set()
     sample_invalid_dims: list[tuple[str, str, str, str]] = []
     sample_unmapped_dims: list[tuple[str, str, str]] = []
 
@@ -405,16 +414,20 @@ def process_files(
                                  if 0 <= idx_school < row_len else '')
                         place = download.resolve_place_dcid(
                             c_val, d_val, s_val, school_map)
-                    if (place.startswith('CA-') and
-                            place not in observed_ca_places):
-                        c_val = (raw_row[idx_county].strip().strip('"')
-                                 if 0 <= idx_county < row_len else '')
-                        s_val = (raw_row[idx_school].strip().strip('"')
-                                 if 0 <= idx_school < row_len else '')
-                        observed_ca_places[place] = (
-                            c_val.zfill(2),
-                            s_val.zfill(7),
-                        )
+                    if place.startswith('CA-'):
+                        if drop_unmapped_places:
+                            counters['dropped_unmapped_place_rows'] += 1
+                            dropped_ca_places.add(place)
+                            continue
+                        if place not in observed_ca_places:
+                            c_val = (raw_row[idx_county].strip().strip('"')
+                                     if 0 <= idx_county < row_len else '')
+                            s_val = (raw_row[idx_school].strip().strip('"')
+                                     if 0 <= idx_school < row_len else '')
+                            observed_ca_places[place] = (
+                                c_val.zfill(2),
+                                s_val.zfill(7),
+                            )
 
                     yr = (raw_row[idx_yr].strip().strip('"')
                           if 0 <= idx_yr < row_len else '')
@@ -513,7 +526,8 @@ def process_files(
             raise RuntimeError(
                 f'Processed {counters["input_data_rows"]} input rows but generated 0 observations '
                 f'(dropped_invalid={counters["dropped_invalid_dimension_rows"]}, '
-                f'dropped_unmapped={counters["dropped_unmapped_dimension_rows"]}).'
+                f'dropped_unmapped_dims={counters["dropped_unmapped_dimension_rows"]}, '
+                f'dropped_unmapped_places={counters["dropped_unmapped_place_rows"]}).'
             )
 
         temp_csv.flush()
@@ -538,31 +552,40 @@ def process_files(
             counters['dropped_unmapped_dimension_rows'],
             sample_unmapped_dims,
         )
+    counters['dropped_unmapped_places'] = len(dropped_ca_places)
+    if counters['dropped_unmapped_place_rows'] > 0:
+        logging.info(
+            'Filtered out %d rows across %d unmapped CA-... place entities (--drop_unmapped_places=True).',
+            counters['dropped_unmapped_place_rows'],
+            counters['dropped_unmapped_places'],
+        )
 
     # Write TMCF
     with open(tmcf_path, 'w', encoding='utf-8', newline='\n') as f_tmcf:
         f_tmcf.write(generate_tmcf(table_name))
 
-    # Write only unmapped CA-... School/SchoolDistrict Place entity nodes to .mcf.
-    # All 5,966 canonical CAASPP StatisticalVariable nodes already exist in Google3 schema
-    # and must not be re-emitted in node_mcf to prevent duplicate instance-node ingestion.
     counters['generated_statvars'] = len(observed_statvars)
     counters['generated_place_nodes'] = len(observed_ca_places)
-    with open(mcf_out_path, 'w', encoding='utf-8', newline='\n') as f_mcf:
-        blocks = []
-        for pl, (county_code,
-                 school_code) in sorted(observed_ca_places.items()):
-            dcid_key = f'dcid:{pl}'
-            c_num = int(county_code) if county_code.isdigit() else 0
-            contained_in = (f'dcid:geoId/06{c_num * 2 - 1:03d}'
-                            if 1 <= c_num <= 58 else 'dcid:geoId/06')
-            type_of = ('dcs:SchoolDistrict'
-                       if school_code == '0000000' else 'dcs:School')
-            blocks.append(
-                f'Node: {dcid_key}\ntypeOf: {type_of}\ncontainedInPlace: {contained_in}'
-            )
-        if blocks:
-            f_mcf.write('\n\n'.join(blocks) + '\n')
+    if not drop_unmapped_places:
+        # Keep Place entity nodes in a dedicated *_places.mcf file (never mixed with
+        # schema or StatisticalVariable definitions). All 5,966 canonical CAASPP
+        # StatisticalVariable nodes already exist in Google3 schema.
+        with open(places_mcf_path, 'w', encoding='utf-8',
+                  newline='\n') as f_mcf:
+            blocks = []
+            for pl, (county_code,
+                     school_code) in sorted(observed_ca_places.items()):
+                dcid_key = f'dcid:{pl}'
+                c_num = int(county_code) if county_code.isdigit() else 0
+                contained_in = (f'dcid:geoId/06{c_num * 2 - 1:03d}'
+                                if 1 <= c_num <= 58 else 'dcid:geoId/06')
+                type_of = ('dcs:SchoolDistrict'
+                           if school_code == '0000000' else 'dcs:School')
+                blocks.append(
+                    f'Node: {dcid_key}\ntypeOf: {type_of}\ncontainedInPlace: {contained_in}'
+                )
+            if blocks:
+                f_mcf.write('\n\n'.join(blocks) + '\n')
 
     # Write counters if requested
     if counters_path:
@@ -575,11 +598,11 @@ def process_files(
                 w_cnt.writerow([k, v])
 
     logging.info(
-        'Processed %d input rows into %d observations (%d StatVars, %d CA place nodes) -> %s',
+        'Processed %d input rows into %d observations (%d StatVars, %d dropped unmapped places) -> %s',
         counters['input_data_rows'],
         counters['output_svobs_rows'],
         counters['generated_statvars'],
-        counters['generated_place_nodes'],
+        counters['dropped_unmapped_places'],
         csv_path,
     )
     return dict(counters)
@@ -593,6 +616,7 @@ def main(argv):
         school_map_path=FLAGS.school_code_mapping,
         output_prefix=FLAGS.output_path,
         counters_path=FLAGS.output_counters,
+        drop_unmapped_places=FLAGS.drop_unmapped_places,
     )
 
 

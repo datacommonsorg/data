@@ -36,9 +36,10 @@ _CONFLICTING_FLAGS = (
     'test_mode',
     'clean',
     'keep_all_entities',
+    'school_code_mapping',
     'input_data',
     'pv_map',
-    'school_code_mapping',
+    'drop_unmapped_places',
     'output_path',
     'output_counters',
     'num_workers',
@@ -51,8 +52,8 @@ _SAVED_FLAGS = {
 for _flag_name in _SAVED_FLAGS:
     delattr(flags.FLAGS, _flag_name)
 
-from statvar_imports.us_education.california_school_performance import download
-from statvar_imports.us_education.california_school_performance import process
+from scripts.us_education.california_school_performance import download
+from scripts.us_education.california_school_performance import process
 
 for _flag_name in _CONFLICTING_FLAGS:
     if _flag_name in flags.FLAGS:
@@ -60,8 +61,15 @@ for _flag_name in _CONFLICTING_FLAGS:
 for _flag_name, _flag_obj in _SAVED_FLAGS.items():
     flags.FLAGS[_flag_name] = _flag_obj
 
+_SAMPLE_SCHOOL_MAP = os.path.join(_SCRIPT_DIR, 'test_data',
+                                  'sample_school_code_mapping.json')
+
 
 class CaliforniaSchoolPerformanceTest(unittest.TestCase):
+
+    def setUp(self):
+        super().setUp()
+        download.get_school_code_map(_SAMPLE_SCHOOL_MAP)
 
     def test_discover_year_urls_known_years(self):
         """Verify known year URL mapping retrieval and probe_latest revision upgrade."""
@@ -162,6 +170,42 @@ class CaliforniaSchoolPerformanceTest(unittest.TestCase):
         self.assertIn(2015, all_years)
         self.assertIn(2026, all_years)
 
+        # Simulate future year 2027 published on CAASPP portal
+        with patch.object(download, 'datetime') as mock_dt, \
+             patch.object(
+                 download,
+                 'probe_url_exists',
+                 side_effect=lambda u: u.endswith('sb_ca2027_all_csv_v1.zip'),
+             ):
+            mock_dt.now.return_value.year = 2027
+            self.assertEqual(
+                download.parse_years('2023-present'),
+                [2023, 2024, 2025, 2026, 2027],
+            )
+
+    def test_load_school_code_map_from_gcs(self):
+        """Verify load_school_code_map reads JSON mapping from a gs:// GCS URI."""
+        from unittest.mock import MagicMock
+
+        mock_blob = MagicMock()
+        mock_blob.download_as_text.return_value = (
+            '{"CA-0100016-0100016": "nces/060246711160"}')
+        mock_bucket = MagicMock()
+        mock_bucket.blob.return_value = mock_blob
+        mock_client = MagicMock()
+        mock_client.bucket.return_value = mock_bucket
+
+        with patch('google.cloud.storage.Client', return_value=mock_client):
+            loaded = download.load_school_code_map(
+                'gs://unresolved_mcf/scripts/us_education/california_school_performance/config/school_code_mapping.json'
+            )
+
+        mock_client.bucket.assert_called_once_with('unresolved_mcf')
+        mock_bucket.blob.assert_called_once_with(
+            'scripts/us_education/california_school_performance/config/school_code_mapping.json'
+        )
+        self.assertEqual(loaded, {'CA-0100016-0100016': 'nces/060246711160'})
+
     def test_normalize_and_filter_stream_caret_delimited(self):
         """Verify record normalization and entity filtering for caret-delimited format."""
         sample_caret = (
@@ -253,8 +297,7 @@ class CaliforniaSchoolPerformanceTest(unittest.TestCase):
                 pv_map_path=os.path.join(
                     _SCRIPT_DIR, 'config',
                     'california_school_performance_pvmap.csv'),
-                school_map_path=os.path.join(_SCRIPT_DIR, 'config',
-                                             'school_code_mapping.json'),
+                school_map_path=_SAMPLE_SCHOOL_MAP,
                 output_prefix=out_prefix,
             )
             self.assertEqual(counters['input_data_rows'], 1)
@@ -325,8 +368,8 @@ class CaliforniaSchoolPerformanceTest(unittest.TestCase):
         }
         self.assertEqual(len(unique_svs), 5966)
 
-    def test_process_emits_only_unmapped_ca_place_nodes_to_mcf(self):
-        """Verify .mcf output emits only unmapped CA-... place nodes and zero StatisticalVariable nodes."""
+    def test_process_unmapped_ca_places_drop_vs_retain(self):
+        """Verify unmapped CA-... places are filtered out by default and emitted to *_places.mcf only when drop_unmapped_places=False."""
         with tempfile.TemporaryDirectory() as tmp_dir:
             in_file = os.path.join(tmp_dir, 'input.txt')
             with open(in_file, 'w', encoding='utf-8') as f:
@@ -334,20 +377,45 @@ class CaliforniaSchoolPerformanceTest(unittest.TestCase):
                     'County Code^District Code^School Code^Place^Test Year^Student Group ID^Grade^Test ID^'
                     'Total Students Tested^Mean Scale Score^Percentage Standard Exceeded^Percentage Standard Met^'
                     'Percentage Standard Met and Above^Percentage Standard Nearly Met^Percentage Standard Not Met\n'
+                    '01^00016^0100016^nces/060246711160^2025^1^3^1^80^2420.0^25.0^25.0^50.0^25.0^25.0\n'
                     '01^99999^9999999^CA-0199999-9999999^2025^1^3^1^50^2410.0^20.0^25.0^45.0^25.0^30.0\n'
                 )
-            out_prefix = os.path.join(tmp_dir, 'out')
-            counters = process.process_files(
+
+            # 1. Default (drop_unmapped_places=True): filters out CA-... row and creates no MCF file.
+            out_dropped = os.path.join(tmp_dir, 'out_dropped')
+            counters_drop = process.process_files(
                 input_pattern=in_file,
                 pv_map_path=os.path.join(
                     _SCRIPT_DIR, 'config',
                     'california_school_performance_pvmap.csv'),
-                school_map_path=os.path.join(_SCRIPT_DIR, 'config',
-                                             'school_code_mapping.json'),
-                output_prefix=out_prefix,
+                school_map_path=_SAMPLE_SCHOOL_MAP,
+                output_prefix=out_dropped,
             )
-            self.assertEqual(counters['generated_place_nodes'], 1)
-            with open(f'{out_prefix}.mcf', 'r', encoding='utf-8') as f_mcf:
+            self.assertEqual(counters_drop['dropped_unmapped_place_rows'], 1)
+            self.assertEqual(counters_drop['dropped_unmapped_places'], 1)
+            self.assertEqual(counters_drop['generated_place_nodes'], 0)
+            self.assertEqual(counters_drop['output_svobs_rows'], 7)
+            self.assertFalse(os.path.exists(f'{out_dropped}_places.mcf'))
+            self.assertFalse(os.path.exists(f'{out_dropped}.mcf'))
+            with open(f'{out_dropped}.csv', 'r', encoding='utf-8') as f_csv:
+                csv_text = f_csv.read()
+            self.assertIn('nces/060246711160', csv_text)
+            self.assertNotIn('CA-0199999-9999999', csv_text)
+
+            # 2. Optional (drop_unmapped_places=False): writes separate *_places.mcf with zero StatVars.
+            out_kept = os.path.join(tmp_dir, 'out_kept')
+            counters_keep = process.process_files(
+                input_pattern=in_file,
+                pv_map_path=os.path.join(
+                    _SCRIPT_DIR, 'config',
+                    'california_school_performance_pvmap.csv'),
+                school_map_path=_SAMPLE_SCHOOL_MAP,
+                output_prefix=out_kept,
+                drop_unmapped_places=False,
+            )
+            self.assertEqual(counters_keep['generated_place_nodes'], 1)
+            self.assertEqual(counters_keep['output_svobs_rows'], 14)
+            with open(f'{out_kept}_places.mcf', 'r', encoding='utf-8') as f_mcf:
                 mcf_content = f_mcf.read()
             self.assertIn('Node: dcid:CA-0199999-9999999', mcf_content)
             self.assertIn('typeOf: dcs:School', mcf_content)
@@ -355,7 +423,7 @@ class CaliforniaSchoolPerformanceTest(unittest.TestCase):
             self.assertNotIn('StatisticalVariable', mcf_content)
 
     def test_end_to_end_process_matches_golden_output(self):
-        """Verify process.py generates exact expected CSV, TMCF, and MCF outputs on test_data."""
+        """Verify process.py generates exact expected CSV and TMCF across State, County, District, and School entities while filtering unmapped CA-... rows."""
         sample_input = os.path.join(_SCRIPT_DIR, 'test_data',
                                     'sample_input.txt')
         expected_csv = os.path.join(_SCRIPT_DIR, 'test_data',
@@ -371,21 +439,17 @@ class CaliforniaSchoolPerformanceTest(unittest.TestCase):
                 pv_map_path=os.path.join(
                     _SCRIPT_DIR, 'config',
                     'california_school_performance_pvmap.csv'),
-                school_map_path=os.path.join(_SCRIPT_DIR, 'config',
-                                             'school_code_mapping.json'),
+                school_map_path=_SAMPLE_SCHOOL_MAP,
                 output_prefix=out_prefix,
                 counters_path=counters_file,
             )
 
-            self.assertEqual(counters['input_data_rows'], 19)
-            self.assertEqual(counters['output_svobs_rows'], 131)
-            self.assertTrue(os.path.exists(f'{out_prefix}.mcf'))
+            self.assertEqual(counters['input_data_rows'], 22)
+            self.assertEqual(counters['dropped_unmapped_place_rows'], 1)
+            self.assertEqual(counters['dropped_unmapped_places'], 1)
+            self.assertEqual(counters['output_svobs_rows'], 145)
+            self.assertFalse(os.path.exists(f'{out_prefix}_places.mcf'))
             self.assertTrue(os.path.exists(counters_file))
-
-            # State-only sample has no unmapped CA-... schools, and canonical StatVars
-            # must not be re-emitted in node_mcf.
-            with open(f'{out_prefix}.mcf', 'r', encoding='utf-8') as f_mcf:
-                self.assertEqual(f_mcf.read(), '')
 
             with open(f'{out_prefix}.csv', 'r', encoding='utf-8') as f_actual, \
                  open(expected_csv, 'r', encoding='utf-8') as f_exp:
@@ -404,7 +468,9 @@ class CaliforniaSchoolPerformanceTest(unittest.TestCase):
                                    data_mode,
                                    output_dir,
                                    keep_all_entities,
-                                   raw_dir=None):
+                                   raw_dir=None,
+                                   out_filename='',
+                                   school_map=None):
                 with open(single_path, 'w', encoding='utf-8') as f:
                     f.write('^'.join(download.UNIFIED_HEADER) + '\n')
                     f.write(
@@ -421,6 +487,7 @@ class CaliforniaSchoolPerformanceTest(unittest.TestCase):
                 mock_flags.years = '2024'
                 mock_flags.data_mode = 'all_groups'
                 mock_flags.keep_all_entities = True
+                mock_flags.school_code_mapping = _SAMPLE_SCHOOL_MAP
                 download.main([])
 
             master_path = os.path.join(tmp_dir,
@@ -443,6 +510,7 @@ class CaliforniaSchoolPerformanceTest(unittest.TestCase):
                 mock_flags.years = '2024'
                 mock_flags.data_mode = 'all_groups'
                 mock_flags.keep_all_entities = True
+                mock_flags.school_code_mapping = _SAMPLE_SCHOOL_MAP
                 with self.assertRaises(RuntimeError):
                     download.main([])
 
@@ -452,8 +520,8 @@ class CaliforniaSchoolPerformanceTest(unittest.TestCase):
                 mock_pflags.pv_map = os.path.join(
                     _SCRIPT_DIR, 'config',
                     'california_school_performance_pvmap.csv')
-                mock_pflags.school_code_mapping = os.path.join(
-                    _SCRIPT_DIR, 'config', 'school_code_mapping.json')
+                mock_pflags.school_code_mapping = _SAMPLE_SCHOOL_MAP
+                mock_pflags.drop_unmapped_places = True
                 mock_pflags.output_path = os.path.join(tmp_dir, 'out')
                 mock_pflags.output_counters = ''
                 with self.assertRaises(FileNotFoundError):

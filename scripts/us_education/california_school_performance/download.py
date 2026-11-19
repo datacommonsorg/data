@@ -87,10 +87,19 @@ flags.DEFINE_boolean(
     False,
     'If true, deletes existing files in output_dir before downloading.',
 )
+DEFAULT_SCHOOL_CODE_MAPPING = (
+    'gs://unresolved_mcf/scripts/us_education/'
+    'california_school_performance/config/school_code_mapping.json')
+
 flags.DEFINE_boolean(
     'keep_all_entities',
     True,
     'If true, keeps all entities (State, Counties, School Districts, and Schools). Defaults to True.',
+)
+flags.DEFINE_string(
+    'school_code_mapping',
+    DEFAULT_SCHOOL_CODE_MAPPING,
+    'Local file path or gs:// GCS URI to the CDS-to-DCID school code mapping JSON file.',
 )
 
 BASE_URL = 'https://caaspp-elpac.ets.org/caaspp/researchfiles/'
@@ -109,25 +118,43 @@ def _get_http_session() -> requests.Session:
     return _HTTP_SESSION
 
 
-def get_school_code_map() -> dict[str, str]:
-    """Loads and caches the CDS-to-DCID place mapping from config/school_code_mapping.json."""
+def load_school_code_map(map_path: str) -> dict[str, str]:
+    """Loads the CDS-to-DCID place mapping from a local JSON file or gs:// GCS URI."""
+    if map_path.startswith('gs://'):
+        from google.cloud import storage
+
+        without_scheme = map_path[len('gs://'):]
+        bucket_name, blob_path = without_scheme.split('/', 1)
+        client = storage.Client()
+        blob = client.bucket(bucket_name).blob(blob_path)
+        return json.loads(blob.download_as_text(encoding='utf-8'))
+
+    if not os.path.exists(map_path):
+        raise FileNotFoundError(
+            f'School code mapping file not found: {map_path}')
+    with open(map_path, 'r', encoding='utf-8') as f:
+        return json.load(f)
+
+
+def get_school_code_map(map_path: str = '') -> dict[str, str]:
+    """Loads and caches the CDS-to-DCID place mapping."""
     global _SCHOOL_CODE_MAP
+    if map_path:
+        _SCHOOL_CODE_MAP = load_school_code_map(map_path)
+        return _SCHOOL_CODE_MAP
     if _SCHOOL_CODE_MAP is None:
-        map_path = os.path.join(_SCRIPT_DIR, 'config',
-                                'school_code_mapping.json')
-        if os.path.exists(map_path):
-            with open(map_path, 'r', encoding='utf-8') as f:
-                _SCHOOL_CODE_MAP = json.load(f)
-        else:
-            logging.warning('School code mapping file not found at %s',
-                            map_path)
-            _SCHOOL_CODE_MAP = {}
+        resolved_path = (FLAGS.school_code_mapping
+                         if FLAGS.is_parsed() else DEFAULT_SCHOOL_CODE_MAPPING)
+        _SCHOOL_CODE_MAP = load_school_code_map(resolved_path)
     return _SCHOOL_CODE_MAP
 
 
-# Known historical official zip filename per year: (all_subgroups_zip, all_students_zip).
-# Recent years (>=2022) and future years (>2026) also support dynamic version probing
-# from v4 down to v1 via discover_year_urls().
+# Fast-path filename cache for already-published CAASPP releases (2015–2026).
+# Future annual releases (e.g. 2027, 2028, ...) require NO edits to this map:
+# --years=2023-present and --years=all invoke get_all_available_years() and
+# discover_year_urls(), which automatically probe sb_ca{year}_all_csv_v4..v1.zip
+# up through (current_year + 1). Recent years (>=2022) also probe for newer
+# revisions (v2..v4) via probe_latest=True.
 KNOWN_YEAR_URL_MAP = {
     2015: ('sb_ca2015_all_csv_v3.zip', 'sb_ca2015_1_csv_v3.zip'),
     2016: ('sb_ca2016_all_csv_v3.zip', 'sb_ca2016_1_csv_v3.zip'),
@@ -302,7 +329,11 @@ def resolve_place_dcid(county_code: str,
     return ca_id
 
 
-def normalize_and_filter_stream(text_stream, keep_all_entities: bool = True):
+def normalize_and_filter_stream(
+    text_stream,
+    keep_all_entities: bool = True,
+    school_map: dict[str, str] | None = None,
+):
     """Yields normalized CAASPP records row-by-row from a text stream."""
     first_line = text_stream.readline()
     if not first_line:
@@ -386,7 +417,8 @@ def normalize_and_filter_stream(text_stream, keep_all_entities: bool = True):
             f'Missing required CAASPP columns {missing_cols} in header: {raw_header}'
         )
 
-    school_map = get_school_code_map()
+    if school_map is None:
+        school_map = get_school_code_map()
 
     def _clean_metric(idx: int, n_cols: int, row: list[str]) -> str:
         if 0 <= idx < n_cols:
@@ -438,14 +470,19 @@ def normalize_and_filter_stream(text_stream, keep_all_entities: bool = True):
         ]
 
 
-def normalize_and_filter_records(raw_bytes: bytes,
-                                 keep_all_entities: bool = True
-                                ) -> list[list[str]]:
+def normalize_and_filter_records(
+    raw_bytes: bytes,
+    keep_all_entities: bool = True,
+    school_map: dict[str, str] | None = None,
+) -> list[list[str]]:
     """Normalizes raw CAASPP records across all eras into unified columns."""
     text_io = io.StringIO(raw_bytes.decode('latin1'))
     return list(
-        normalize_and_filter_stream(text_io,
-                                    keep_all_entities=keep_all_entities))
+        normalize_and_filter_stream(
+            text_io,
+            keep_all_entities=keep_all_entities,
+            school_map=school_map,
+        ))
 
 
 def download_and_process_year(
@@ -455,6 +492,7 @@ def download_and_process_year(
     keep_all_entities: bool,
     raw_dir: str = '',
     out_filename: str = '',
+    school_map: dict[str, str] | None = None,
 ) -> str:
     """Downloads and preserves raw zip, streams normalized records, and saves output atomically."""
     urls = discover_year_urls(
@@ -519,7 +557,10 @@ def download_and_process_year(
             with z.open(candidates[0]) as member_file:
                 text_stream = io.TextIOWrapper(member_file, encoding='latin1')
                 for row in normalize_and_filter_stream(
-                        text_stream, keep_all_entities=keep_all_entities):
+                        text_stream,
+                        keep_all_entities=keep_all_entities,
+                        school_map=school_map,
+                ):
                     writer.writerow(row)
                     row_count += 1
 
@@ -556,6 +597,8 @@ def main(argv):
             elif os.path.isdir(p):
                 shutil.rmtree(p)
 
+    school_map = get_school_code_map(FLAGS.school_code_mapping)
+
     if FLAGS.test_mode:
         logging.info('Test mode: downloading 2024 sample...')
         try:
@@ -566,6 +609,7 @@ def main(argv):
                 FLAGS.keep_all_entities,
                 raw_dir=raw_dir,
                 out_filename='sb_ca_test_normalized.txt',
+                school_map=school_map,
             )
         except Exception as e:
             raise RuntimeError(f'Test mode download failed: {e}') from e
@@ -588,6 +632,8 @@ def main(argv):
                 output_dir,
                 FLAGS.keep_all_entities,
                 raw_dir,
+                '',
+                school_map,
             ):
                 year for year in years
         }
