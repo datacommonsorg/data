@@ -30,7 +30,6 @@
 ## 2. Files
 - `download.py`: Loads the immutable `2019–2021` historical baseline CSV from GCS (`gs://unresolved_mcf/feeding_america/food_insecurity/input_files/FeedingAmerica_FoodInsecurity_baseline_2019_2021.csv`, overridable via `--baseline_path`) using `util/file_util.py`, discovers available years (`>= 2022`) from `https://map.feedingamerica.org/`, fetches `county` and `district` JSON payloads across `overall`, `child`, `black`, `hispanic`, and `white` splits (using a stateless session with bounded retries and backoff), restores `0.0%` complementary bands when the API serializes `0%` as `null`, derives `Weekly_WeightedFoodSpendAmount_Person_FoodInSecure = money_needed / (population * 52 * 7 / 12)`, skips all-empty territory placeholders, and atomically writes `input_files/feedingamerica_foodinsecurity_input.csv`.
 - `download_test.py`: Hermetic unit tests for `download.py`.
-- `process_test.py`: Hermetic regression test verifying `stat_var_processor.py` against `test_data/` fixtures.
 - `test_data/`: Representative sample input (`feedingamerica_foodinsecurity_sample_input.csv`) and expected processor outputs (`feedingamerica_foodinsecurity_sample_output.csv`, `feedingamerica_foodinsecurity_sample_output.tmcf`) covering all 16 StatVars across state, county, congressional district, `2020` SNAP high-threshold columns, and `2024` live API records.
 - `feedingamerica_foodinsecurity_pvmap.csv`: Wide-to-long `stat_var_processor.py` PVMap for all 16 StatVars.
 - `feedingamerica_foodinsecurity_metadata.csv`: `stat_var_processor.py` configuration (`header_rows,1`, `mapped_rows,1`, fixed `output_columns`).
@@ -94,4 +93,16 @@ Prerequisites: Repository Python virtual environment (`.env`) created via `./run
 3. **Run unit tests and lint checks (from repository root):**
    ```bash
    ./run_tests.sh -p statvar_imports/feeding_america/food_insecurity
+   ```
+
+4. **Verify `stat_var_processor.py` directly against `test_data/` fixtures:**
+   ```bash
+   cd statvar_imports/feeding_america/food_insecurity
+   ../../../.env/bin/python ../../../tools/statvar_importer/stat_var_processor.py \
+     --input_data=test_data/feedingamerica_foodinsecurity_sample_input.csv \
+     --pv_map=feedingamerica_foodinsecurity_pvmap.csv \
+     --config_file=feedingamerica_foodinsecurity_metadata.csv \
+     --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+     --output_path=/tmp/feedingamerica_foodinsecurity_sample_output
+   diff -u test_data/feedingamerica_foodinsecurity_sample_output.csv /tmp/feedingamerica_foodinsecurity_sample_output.csv
    ```
