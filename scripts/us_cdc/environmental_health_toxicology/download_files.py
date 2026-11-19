@@ -89,6 +89,8 @@ def download_files(importname, configs):
         tmp_filename = f"{filename}.tmp"
         page_tmp = f"{tmp_filename}.page"
 
+        expected_header = None
+
         @retry(exceptions=(requests.exceptions.RequestException, IOError),
                tries=5,
                delay=2,
@@ -104,6 +106,12 @@ def download_files(importname, configs):
                     header = pf.readline()
                     if not header:
                         raise IOError(f"Missing CSV header from {page_url}")
+                    normalized_header = header.rstrip(b'\r\n')
+                    if (expected_header is not None and
+                            normalized_header != expected_header):
+                        raise IOError(
+                            f"CSV header mismatch on {page_url}: expected "
+                            f"{expected_header!r}, got {normalized_header!r}")
                     row_count = sum(1 for line in pf if line.strip())
                 if row_count != expected_rows:
                     raise IOError(f"Incomplete page from {page_url}: expected "
@@ -121,6 +129,7 @@ def download_files(importname, configs):
         try:
             with open(tmp_filename, 'wb') as out_f:
                 offset = 0
+                last_byte = b''
                 while offset < record_count:
                     page_limit = min(_CENSUS_TRACT_PAGE_SIZE,
                                      record_count - offset)
@@ -134,8 +143,18 @@ def download_files(importname, configs):
                     with open(page_tmp, 'rb') as pf:
                         header = pf.readline()
                         if offset == 0:
+                            expected_header = header.rstrip(b'\r\n')
                             out_f.write(header)
-                        shutil.copyfileobj(pf, out_f, length=16 * 1024 * 1024)
+                            last_byte = header[-1:]
+                        elif last_byte and last_byte != b'\n':
+                            out_f.write(b'\n')
+                            last_byte = b'\n'
+                        while True:
+                            chunk = pf.read(16 * 1024 * 1024)
+                            if not chunk:
+                                break
+                            out_f.write(chunk)
+                            last_byte = chunk[-1:]
                     os.remove(page_tmp)
                     offset += page_limit
             if not os.path.exists(tmp_filename) or os.path.getsize(

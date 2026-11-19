@@ -17,8 +17,11 @@
         },
         {
             "rule_id": "check_deleted_records_percent",
-            "description": "Disable deleted records check because differ is decoupled for high-scale Census Tracts.",
-            "enabled": false
+            "description": "Checks that deleted records do not exceed 0.05% via BigQuery differ.",
+            "validator": "DELETED_RECORDS_PERCENT",
+            "params": {
+                "threshold": 0.05
+            }
         }
     ]
 }
