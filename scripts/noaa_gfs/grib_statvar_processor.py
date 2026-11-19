@@ -408,7 +408,7 @@ def worker_process(args):
                 # --- FILTERING LOGIC ---
                 try:
                     has_bitmap = grb.bitmapPresent
-                except:
+                except Exception:
                     has_bitmap = False
 
                 valid_mask = np.ones(data_flat.shape, dtype=bool)
@@ -422,7 +422,7 @@ def worker_process(args):
                         m_val = grb.missingValue
                         if m_val is not None:
                             valid_mask &= (raw_data != m_val)
-                    except:
+                    except Exception:
                         pass
 
                 if not np.any(valid_mask):
@@ -483,14 +483,14 @@ def worker_process(args):
                         pv_val = s_val * (
                             10**-grb['scaleFactorOfFirstFixedSurface'])
                         l_str = f"PV={pv_val:g} (Km^2/kg/s) surface"
-                    except:
+                    except Exception:
                         l_str = f"PV={grb.level*1e-9:g} (Km^2/kg/s) surface"
                 elif l_type == "sigma":
                     try:
                         s_val = grb['scaledValueOfFirstFixedSurface'] * (
                             10**-grb['scaleFactorOfFirstFixedSurface'])
                         l_str = f"{s_val:g} sigma level"
-                    except:
+                    except Exception:
                         l_str = f"{grb.level} sigma level"
                 elif l_type == "sigmaLayer":
                     try:
@@ -499,7 +499,7 @@ def worker_process(args):
                         b = grb['scaledValueOfSecondFixedSurface'] * (
                             10**-grb['scaleFactorOfSecondFixedSurface'])
                         l_str = f"{t:g}-{b:g} sigma layer"
-                    except:
+                    except Exception:
                         l_str = f"{grb.level} sigma layer"
                 elif l_type == "depthBelowLandLayer":
                     try:
@@ -508,7 +508,7 @@ def worker_process(args):
                         b = grb['scaledValueOfSecondFixedSurface'] * (
                             10**-grb['scaleFactorOfSecondFixedSurface'])
                         l_str = f"{t:g}-{b:g} m below ground"
-                    except:
+                    except Exception:
                         l_str = f"{grb.level} m below ground"
                 elif l_type in [
                         "pressureFromGroundLayer", "heightAboveGroundLayer"
@@ -516,7 +516,7 @@ def worker_process(args):
                     unit_l = "mb above ground" if "pressure" in l_type else "m above ground"
                     try:
                         l_str = f"{grb.topLevel/100 if 'pressure' in l_type else grb.topLevel:g}-{grb.bottomLevel/100 if 'pressure' in l_type else grb.bottomLevel:g} {unit_l}"
-                    except:
+                    except Exception:
                         l_str = f"{grb.level} {unit_l}"
                 else:
                     l_str = f"{grb.level} {l_type}"

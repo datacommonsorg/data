@@ -35,6 +35,7 @@ from os import path
 import re
 
 from chembl_webresource_client.new_client import new_client
+from func_timeout import FunctionTimedOut
 from func_timeout import func_timeout
 import pandas as pd
 from utils.config import ADDITIONAL_INFO_TAGS
@@ -119,7 +120,7 @@ def get_drug_ref(drug_name, active_ingred):
     # find ChEMBL ID from chembl python api
     try:
         chembl_id = func_timeout(15, chembl_from_api, args=(synonym,))
-    except:
+    except (FunctionTimedOut, Exception):
         chembl_id = None
 
     if chembl_id:
