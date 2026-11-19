@@ -141,7 +141,7 @@ def fix_encoding(s):
     '''
     try:
         return s.encode('latin1').decode('utf8')
-    except:
+    except UnicodeError:
         return s.encode('utf8').decode('utf8')
 
 

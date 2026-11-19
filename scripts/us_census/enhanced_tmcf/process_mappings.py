@@ -163,7 +163,7 @@ def _download_mapping_file(post_req: Dict, data_path: str,
                 _download_zip(download_url, zipped_filepath)
                 print("   Succeeded.")
                 break
-            except:
+            except Exception:
                 seconds = 5
                 print(
                     f"        Sleeping for {seconds}s to allow more time for the zip file to be ready."
