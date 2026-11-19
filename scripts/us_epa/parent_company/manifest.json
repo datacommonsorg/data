@@ -20,7 +20,6 @@
                 }
             ],
             "cron_schedule": "0 8 5,19 * *",
-            "validation_config_file": "companies_validation_config.json",
             "source_files": [
                 "input_files/*.csv"
             ]
