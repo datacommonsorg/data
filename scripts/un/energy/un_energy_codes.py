@@ -1126,8 +1126,8 @@ def _add_pv_from_map_for_prefix(value_code: str,
       The prefix of the value_code found in code_map for which PVs were added.
     """
     # Look for codes in map from longest prefix to the shortest
-    for l in reversed(range(1, len(value_code) + 1)):
-        prefix = value_code[:l]
+    for prefix_len in reversed(range(1, len(value_code) + 1)):
+        prefix = value_code[:prefix_len]
         if _add_pv_from_map(prefix, code_map, stat_var_pv, counters):
             return prefix
     # No codes in map for any prefix length.
@@ -1180,9 +1180,10 @@ def _add_pv_for_production_code(code: str, pv: dict, counters=None) -> bool:
 
     # Add fuel type as energySource which could be a 1-3 letter prefix.
     prev_fuel = _get_energy_source_from_stat_var(pv)
-    for l in [3, 2, 1]:
-        if _add_pv_from_map(code[:l], UN_ENERGY_SOURCE_TYPE, pv, counters):
-            code = code[l:]
+    for prefix_len in [3, 2, 1]:
+        if _add_pv_from_map(code[:prefix_len], UN_ENERGY_SOURCE_TYPE, pv,
+                            counters):
+            code = code[prefix_len:]
             fuel = _get_energy_source_from_stat_var(pv)
             if prev_fuel is not None and fuel is not None and prev_fuel != fuel:
                 if prev_fuel == 'Electricity':

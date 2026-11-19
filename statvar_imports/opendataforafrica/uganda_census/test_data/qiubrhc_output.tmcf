@@ -1,0 +1,9 @@
+Node: E:qiubrhc_output->E0
+observationAbout: C:qiubrhc_output->observationAbout
+observationDate: C:qiubrhc_output->observationDate
+variableMeasured: C:qiubrhc_output->variableMeasured
+value: C:qiubrhc_output->value
+unit: C:qiubrhc_output->unit
+scalingFactor: C:qiubrhc_output->scalingFactor
+observationPeriod: C:qiubrhc_output->observationPeriod
+typeOf: dcs:StatVarObservation

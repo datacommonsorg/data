@@ -16,7 +16,10 @@ import os
 import tempfile
 import unittest
 
-from .preprocess_states import *
+from .preprocess_states import calculate_crimes
+from .preprocess_states import create_formatted_csv_file
+from .preprocess_states import create_tmcf_file
+from .preprocess_states import in_test
 
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)

@@ -28,11 +28,18 @@ import numpy as np
 import pandas as pd
 
 FLAGS = flags.FLAGS
-flags.DEFINE_integer('start_year', 1970, 'The starting year for data download.')
-flags.DEFINE_integer(
-    'end_year',
-    datetime.now().year + 6,
-    'The ending year for data download (current year + offset).')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_integer('start_year', 1970,
+                         'The starting year for data download.')
+    flags.DEFINE_integer(
+        'end_year',
+        datetime.now().year + 6,
+        'The ending year for data download (current year + offset).')
+
+
 start_time = time()
 DEFAULT_INPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   "input_files")
@@ -190,4 +197,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

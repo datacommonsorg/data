@@ -25,10 +25,16 @@ import requests
 from retry import retry
 
 _FLAGS = flags.FLAGS
-flags.DEFINE_string('input_file_path', 'input_files', 'Input files path')
-flags.DEFINE_string(
-    'config_file', 'gs://unresolved_mcf/cdc/environmental/import_configs.json',
-    'Config file path')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('input_file_path', 'input_files', 'Input files path')
+    flags.DEFINE_string(
+        'config_file',
+        'gs://unresolved_mcf/cdc/environmental/import_configs.json',
+        'Config file path')
+
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILE_PATH = None
@@ -135,4 +141,5 @@ def main(argv):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

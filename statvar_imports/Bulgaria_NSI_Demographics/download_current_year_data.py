@@ -64,32 +64,36 @@ HEADERS = {
 }
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string(
-    "gcs_dir",
-    DEFAULT_GCS_DIR,
-    "Destination GCS folder for raw source and annual input files.",
-)
-flags.DEFINE_string(
-    "local_dir",
-    DEFAULT_LOCAL_DIR,
-    "Local storage directory for raw downloaded source files.",
-)
-flags.DEFINE_string(
-    "sanitized_dir",
-    "",
-    "Optional output directory for sanitized CSVs ready for stat_var_processor.",
-)
-flags.DEFINE_boolean(
-    "dry_run",
-    False,
-    "Download and format locally without uploading to GCS.",
-)
-flags.DEFINE_boolean(
-    "allow_staged_fallback",
-    False,
-    "Allow falling back to existing staged GCS files if live NSI portal is "
-    "blocked by Cloudflare.",
-)
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        "gcs_dir",
+        DEFAULT_GCS_DIR,
+        "Destination GCS folder for raw source and annual input files.",
+    )
+    flags.DEFINE_string(
+        "local_dir",
+        DEFAULT_LOCAL_DIR,
+        "Local storage directory for raw downloaded source files.",
+    )
+    flags.DEFINE_string(
+        "sanitized_dir",
+        "",
+        "Optional output directory for sanitized CSVs ready for stat_var_processor.",
+    )
+    flags.DEFINE_boolean(
+        "dry_run",
+        False,
+        "Download and format locally without uploading to GCS.",
+    )
+    flags.DEFINE_boolean(
+        "allow_staged_fallback",
+        False,
+        "Allow falling back to existing staged GCS files if live NSI portal is "
+        "blocked by Cloudflare.",
+    )
 
 
 def _create_retry_session() -> requests.Session:
@@ -517,4 +521,5 @@ def main(argv):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)
