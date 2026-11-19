@@ -89,7 +89,10 @@ def download_files(importname, configs):
         tmp_filename = f"{filename}.tmp"
         page_tmp = f"{tmp_filename}.page"
 
-        @retry(tries=5, delay=2, backoff=2)
+        @retry(exceptions=(requests.exceptions.RequestException, IOError),
+               tries=5,
+               delay=2,
+               backoff=2)
         def fetch_page(page_url: str, expected_rows: int) -> None:
             try:
                 _stream_url_to_file(page_url, page_tmp)
