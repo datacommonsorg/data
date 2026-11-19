@@ -47,6 +47,13 @@ class DownloadTest(unittest.TestCase):
         self.assertEqual(download.format_place_dcid("99", False), "country/USA")
         self.assertIsNone(download.format_place_dcid("", False))
         self.assertIsNone(download.format_place_dcid("abc", False))
+        self.assertIsNone(download.format_place_dcid("0", True))
+        self.assertIsNone(download.format_place_dcid("-1", True))
+        self.assertIsNone(download.format_place_dcid("100", True))
+        self.assertIsNone(download.format_place_dcid("1", False))
+        self.assertIsNone(download.format_place_dcid("999", False))
+        self.assertIsNone(download.format_place_dcid("100000", False))
+        self.assertIsNone(download.format_place_dcid("4617620", False))
 
     def test_clean_numeric_value(self):
         self.assertEqual(download.clean_numeric_value(" 7,128 "), "7128")
@@ -162,6 +169,17 @@ class DownloadTest(unittest.TestCase):
             with self.assertRaises(RuntimeError):
                 download.download_file(mock_session,
                                        "https://example.com/missing.zip", dest)
+            self.assertFalse(dest.exists())
+
+    def test_download_file_raises_on_request_exception(self):
+        mock_session = mock.MagicMock()
+        mock_session.get.side_effect = requests.Timeout("timed out")
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            dest = Path(tmpdir) / "raw" / "timeout.zip"
+            with self.assertRaises(RuntimeError):
+                download.download_file(mock_session,
+                                       "https://example.com/timeout.zip", dest)
             self.assertFalse(dest.exists())
 
     def test_write_cleaned_csv(self):

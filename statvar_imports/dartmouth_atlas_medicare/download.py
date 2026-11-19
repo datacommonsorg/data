@@ -135,12 +135,11 @@ def atomic_write_bytes(target_path: Path, content: bytes) -> None:
 def download_file(session: requests.Session, url: str, dest_path: Path) -> None:
     """Downloads url to dest_path atomically, raising on HTTP or empty errors."""
     logging.info("GET %s", url)
-    response = session.get(url, timeout=REQUEST_TIMEOUT_SECONDS)
     try:
+        response = session.get(url, timeout=REQUEST_TIMEOUT_SECONDS)
         response.raise_for_status()
-    except requests.HTTPError as err:
-        raise RuntimeError(
-            f"Failed to download {url} (HTTP {response.status_code})") from err
+    except requests.RequestException as err:
+        raise RuntimeError(f"Failed to download {url}: {err}") from err
     if not response.content:
         raise RuntimeError(f"Downloaded empty response from {url}")
     atomic_write_bytes(dest_path, response.content)
@@ -161,7 +160,11 @@ def format_place_dcid(raw_code: str, is_state: bool) -> str | None:
     if code_int <= 0:
         return None
     if is_state:
+        if code_int > 99:
+            return None
         return f"geoId/{code_int:02d}"
+    if code_int < 1000 or code_int > 99999:
+        return None
     return f"geoId/{code_int:05d}"
 
 
@@ -203,12 +206,12 @@ def iter_csv_rows_from_zip(zip_path: Path):
             raise RuntimeError(f"No CSV files found in archive {zip_path}")
         for member in csv_members:
             with zf.open(member, "r") as raw_file:
-                text_stream = io.TextIOWrapper(raw_file,
-                                               encoding="utf-8-sig",
-                                               errors="replace")
-                reader = csv.DictReader(text_stream)
-                for row in reader:
-                    yield normalize_row(row)
+                with io.TextIOWrapper(raw_file,
+                                      encoding="utf-8-sig",
+                                      errors="replace") as text_stream:
+                    reader = csv.DictReader(text_stream)
+                    for row in reader:
+                        yield normalize_row(row)
 
 
 def extract_stdprices_observations(
