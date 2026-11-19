@@ -158,7 +158,7 @@ def inchi_key_to_chembl(inchi_keys):
                 chembl_mols.append(mol['molecule_chembl_id'])
             else:
                 chembl_mols.append('')
-        except:
+        except Exception:
             chembl_mols.append('')
             print('in error: ' + inchi_key)
 
