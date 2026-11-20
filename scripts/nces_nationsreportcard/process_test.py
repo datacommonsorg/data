@@ -1,0 +1,386 @@
+# Copyright 2026 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+"""Unit tests for NAEP StatVar processing (process.py)."""
+
+import ast
+import csv
+import os
+import subprocess
+import sys
+import tempfile
+import unittest
+
+MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+PROCESS_PY = os.path.join(MODULE_DIR, 'process.py')
+
+
+def _clean_nodes(mcf_path: str) -> dict[str, dict[str, str]]:
+    """Parses MCF nodes into {dcid: {prop: value}} without importing absl flags."""
+    nodes: dict[str, dict[str, str]] = {}
+    current_dcid = None
+    with open(mcf_path, encoding='utf-8') as f:
+        for raw_line in f:
+            line = raw_line.strip()
+            if not line or line.startswith('#') or ':' not in line:
+                continue
+            prop, value = (part.strip() for part in line.split(':', 1))
+            if prop == 'Node':
+                if value.startswith('dcs:'):
+                    value = f"dcid:{value.removeprefix('dcs:')}"
+                elif not value.startswith('dcid:'):
+                    value = f'dcid:{value}'
+                current_dcid = value
+                nodes.setdefault(current_dcid, {})
+            elif current_dcid is not None:
+                nodes[current_dcid][prop] = value
+    return nodes
+
+
+_CSV_COLUMNS = [
+    'year',
+    'sample',
+    'yearSampleLabel',
+    'Cohort',
+    'CohortLabel',
+    'stattype',
+    'subject',
+    'grade',
+    'scale',
+    'jurisdiction',
+    'variable',
+    'variableLabel',
+    'varValue',
+    'varValueLabel',
+    'value',
+    'isStatDisplayable',
+    'errorFlag',
+]
+
+
+def _make_row(year='2024',
+              grade='4',
+              stattype='MN:MN',
+              subject='MAT',
+              scale='MRPCM',
+              jurisdiction='NT',
+              variable='TOTAL',
+              var_value_label='All students',
+              value='240.123456789123',
+              displayable='1'):
+    cohort = {'4': '1', '8': '2', '12': '3'}[str(grade)]
+    return {
+        'year': str(year),
+        'sample': 'R3',
+        'yearSampleLabel': str(year),
+        'Cohort': cohort,
+        'CohortLabel': f'Grade {grade}',
+        'stattype': stattype,
+        'subject': subject,
+        'grade': str(grade),
+        'scale': scale,
+        'jurisdiction': jurisdiction,
+        'variable': variable,
+        'variableLabel': variable,
+        'varValue': '1',
+        'varValueLabel': var_value_label,
+        'value': str(value),
+        'isStatDisplayable': str(displayable),
+        'errorFlag': '0',
+    }
+
+
+class ProcessTest(unittest.TestCase):
+    """Tests clean SV generation, denominator SVs, filtering, and fast path."""
+
+    def setUp(self):
+        self._tmpdir = tempfile.TemporaryDirectory()
+        self.tmpdir = self._tmpdir.name
+        self.pv_map = [
+            os.path.join(MODULE_DIR, 'config', 'pv_map.py'),
+            f"jurisdiction:{os.path.join(MODULE_DIR, 'config', 'jurisdiction_map.py')}",
+        ]
+        self.base_conf_path = os.path.join(MODULE_DIR, 'config', 'naep_conf.py')
+
+    def tearDown(self):
+        self._tmpdir.cleanup()
+
+    def _run_process_cli(self,
+                         input_csv: str,
+                         output_prefix: str,
+                         config_path: str,
+                         counters_path: str | None = None) -> None:
+        cmd = [
+            sys.executable,
+            PROCESS_PY,
+            f'--input_data={input_csv}',
+            f'--output_path={output_prefix}',
+            f'--config_file={config_path}',
+            f"--pv_map={','.join(self.pv_map)}",
+        ]
+        if counters_path:
+            cmd.append(f'--output_counters={counters_path}')
+        subprocess.run(cmd, check=True)
+
+    def _write_fixture_csv(self, path: str, rows: list[dict]) -> bytes:
+        with open(path, 'w', newline='', encoding='utf-8') as f:
+            writer = csv.DictWriter(f,
+                                    fieldnames=_CSV_COLUMNS,
+                                    lineterminator='\n')
+            writer.writeheader()
+            writer.writerows(rows)
+        with open(path, 'rb') as f:
+            return f.read()
+
+    def _sample_rows(self) -> list[dict]:
+        return [
+            # Core composite mean across multiple years and jurisdictions
+            _make_row(year='2022', jurisdiction='NT', value='236.543219876543'),
+            _make_row(year='2024', jurisdiction='NT', value='238.123456789123'),
+            _make_row(year='2024', jurisdiction='NP', value='237.222222222222'),
+            _make_row(year='2024', jurisdiction='NR', value='249.333333333333'),
+            _make_row(year='2024', jurisdiction='RI', value='239.444444444444'),
+            _make_row(year='2024', jurisdiction='AS', value='210.555555555555'),
+            # Valid subgroup RP:RP share (must be retained)
+            _make_row(year='2024',
+                      stattype='RP:RP',
+                      jurisdiction='NT',
+                      variable='GENDER',
+                      var_value_label='Female',
+                      value='48.87654321'),
+            # Valid NT x SCHTYPE and NP x CHRTRPT (must be retained)
+            _make_row(year='2024',
+                      jurisdiction='NT',
+                      variable='SCHTYPE',
+                      var_value_label='Catholic',
+                      value='251.5'),
+            _make_row(year='2024',
+                      jurisdiction='NP',
+                      variable='CHRTRPT',
+                      var_value_label='Charter school',
+                      value='235.25'),
+            _make_row(year='2024',
+                      jurisdiction='NP',
+                      variable='CHRTRPT',
+                      var_value_label='Not a charter school',
+                      value='237.75'),
+            # Achievement levels (ALC & ALD -> require Count_Student_* denom SV)
+            _make_row(year='2024',
+                      stattype='ALC:AP',
+                      jurisdiction='NP',
+                      variable='GENDER',
+                      var_value_label='Female',
+                      value='41.12345678'),
+            _make_row(year='2024',
+                      stattype='ALD:AD',
+                      jurisdiction='NP',
+                      variable='GENDER',
+                      var_value_label='Female',
+                      value='9.87654321'),
+            _make_row(year='2024',
+                      stattype='ALC:AB',
+                      jurisdiction='RI',
+                      variable='SRACE10',
+                      var_value_label='White',
+                      value='82.5'),
+            # Pre-2009 Reading PerformaTaskScale + stdDeviationValue spell check
+            _make_row(year='2005',
+                      grade='8',
+                      stattype='SD:SD',
+                      subject='RED',
+                      scale='RRPS3',
+                      jurisdiction='NT',
+                      value='34.567891'),
+            # --- Rows that MUST be filtered out without mutating raw CSV ---
+            # 1. Suppressed 999 / 999.0 and isStatDisplayable == 0
+            _make_row(year='2024',
+                      jurisdiction='NR',
+                      variable='SRACE10',
+                      var_value_label='Black',
+                      value='999.0',
+                      displayable='0'),
+            _make_row(year='2024',
+                      jurisdiction='NR',
+                      variable='SRACE10',
+                      var_value_label='Asian',
+                      value='255.0',
+                      displayable='0'),
+            # 2. Redundant NP/NR x SCHTYPE double-tagging
+            _make_row(year='2024',
+                      jurisdiction='NP',
+                      variable='SCHTYPE',
+                      var_value_label='Public',
+                      value='237.222222222222'),
+            _make_row(year='2024',
+                      stattype='ALC:AP',
+                      jurisdiction='NR',
+                      variable='SCHTYPE',
+                      var_value_label='Catholic',
+                      value='52.0'),
+            # 3. Tautological NR x CHRTRPT (Private x Not a charter school)
+            _make_row(year='2024',
+                      jurisdiction='NR',
+                      variable='CHRTRPT',
+                      var_value_label='Not a charter school',
+                      value='249.333333333333'),
+            # 4. Constant-100% TOTAL x RP:RP row percentage
+            _make_row(year='2024',
+                      stattype='RP:RP',
+                      jurisdiction='NT',
+                      variable='TOTAL',
+                      var_value_label='All students',
+                      value='100.0'),
+        ]
+
+    def test_clean_svs_denominators_and_fast_path_equivalence(self):
+        csv_path = os.path.join(self.tmpdir, 'naep_sample.csv')
+        raw_bytes_before = self._write_fixture_csv(csv_path,
+                                                   self._sample_rows())
+
+        existing_mcf = os.path.join(self.tmpdir, 'existing_stat_vars.mcf')
+        with open(existing_mcf, 'w', encoding='utf-8') as f:
+            f.write(
+                'Node: dcid:Percent_NAEP_CumulativeAtOrAboveProficient_In_'
+                'Count_Student_Female_SchoolGrade4_Mathematics_PublicSchool\n'
+                'typeOf: dcid:StatisticalVariable\n'
+                'populationType: dcid:Student\n'
+                'measuredProperty: dcid:count\n'
+                'statType: dcid:measuredValue\n'
+                'educationalAchievementLevel: '
+                'dcid:NAEP_CumulativeAtOrAboveProficient\n'
+                'gender: dcid:Female\n'
+                'schoolGradeLevel: dcid:SchoolGrade4\n'
+                'schoolSubject: dcid:Mathematics\n'
+                'schoolType: dcid:NCES_PublicSchool\n'
+                'measurementDenominator: '
+                'dcid:Count_Student_Female_SchoolGrade4_Mathematics_'
+                'PublicSchool\n\n'
+                'Node: dcid:Count_Student_Female_SchoolGrade4_Mathematics_'
+                'PublicSchool\n'
+                'typeOf: dcid:StatisticalVariable\n'
+                'populationType: dcid:Student\n'
+                'measuredProperty: dcid:count\n'
+                'statType: dcid:measuredValue\n'
+                'gender: dcid:Female\n'
+                'schoolGradeLevel: dcid:SchoolGrade4\n'
+                'schoolSubject: dcid:Mathematics\n'
+                'schoolType: dcid:NCES_PublicSchool\n')
+
+        with open(self.base_conf_path, encoding='utf-8') as f:
+            base_conf = ast.literal_eval(f.read())
+        base_conf['existing_statvar_mcf'] = existing_mcf
+
+        fast_conf_path = os.path.join(self.tmpdir, 'fast_conf.py')
+        slow_conf_path = os.path.join(self.tmpdir, 'slow_conf.py')
+        with open(fast_conf_path, 'w', encoding='utf-8') as f:
+            f.write(repr(dict(base_conf, enable_naep_fast_path=True)))
+        with open(slow_conf_path, 'w', encoding='utf-8') as f:
+            f.write(repr(dict(base_conf, enable_naep_fast_path=False)))
+
+        fast_out = os.path.join(self.tmpdir, 'out_fast', 'naep_performance')
+        slow_out = os.path.join(self.tmpdir, 'out_slow', 'naep_performance')
+        fast_counters_csv = os.path.join(self.tmpdir, 'fast_counters.csv')
+        slow_counters_csv = os.path.join(self.tmpdir, 'slow_counters.csv')
+
+        self._run_process_cli(csv_path, fast_out, fast_conf_path,
+                              fast_counters_csv)
+        self._run_process_cli(csv_path, slow_out, slow_conf_path,
+                              slow_counters_csv)
+
+        # Raw input CSV must remain 100% untouched.
+        with open(csv_path, 'rb') as f:
+            self.assertEqual(f.read(), raw_bytes_before)
+
+        # No provisional schema MCF should be emitted.
+        self.assertFalse(os.path.exists(f'{fast_out}_stat_vars_schema.mcf'))
+        self.assertFalse(os.path.exists(f'{slow_out}_stat_vars_schema.mcf'))
+
+        # Memoized fast path must produce bit-for-bit identical CSV & MCF nodes.
+        with open(f'{fast_out}.csv',
+                  encoding='utf-8') as f1, open(f'{slow_out}.csv',
+                                                encoding='utf-8') as f2:
+            fast_csv_text = f1.read()
+            slow_csv_text = f2.read()
+        self.assertEqual(fast_csv_text, slow_csv_text)
+
+        fast_nodes = _clean_nodes(f'{fast_out}_stat_vars.mcf')
+        slow_nodes = _clean_nodes(f'{slow_out}_stat_vars.mcf')
+        self.assertEqual(fast_nodes, slow_nodes)
+
+        # Verify zero redundant cross-products or MeasurementDenominatorEnum.
+        self.assertIn('dcid:percent', fast_nodes)
+        self.assertEqual(fast_nodes['dcid:percent'].get('typeOf'),
+                         'dcs:Property')
+        self.assertEqual(fast_nodes['dcid:percent'].get('domainIncludes'),
+                         'dcid:Student')
+
+        for dcid, pvs in fast_nodes.items():
+            if dcid == 'dcid:percent':
+                continue
+            self.assertIn(
+                pvs.get('typeOf'),
+                ('dcid:StatisticalVariable', 'dcs:StatisticalVariable'),
+                f'Unexpected non-SV node {dcid}: {pvs}')
+            self.assertFalse(
+                'schoolType' in pvs and 'schoolManagement' in pvs,
+                f'Double-tagged schoolType+schoolManagement SV leaked: {dcid}')
+            if pvs.get('schoolType') in ('dcid:NCES_PrivateSchool',
+                                         'dcs:NCES_PrivateSchool'):
+                self.assertNotIn(
+                    'charterStatus', pvs,
+                    f'Tautological Private+Charter SV leaked: {dcid}')
+            if 'educationalAchievementLevel' in pvs:
+                denom_ref = pvs.get('measurementDenominator', '')
+                if denom_ref.startswith('dcs:'):
+                    denom_ref = f"dcid:{denom_ref.removeprefix('dcs:')}"
+                self.assertTrue(denom_ref.startswith('dcid:Count_Student_'),
+                                f'Missing denominator on {dcid}: {pvs}')
+                self.assertIn(denom_ref, fast_nodes,
+                              f'Dangling denominator {denom_ref} on {dcid}')
+
+        # Verify legacy ALC DCID reuse + full float precision + 0 error counters.
+        self.assertIn(
+            'dcid:Percent_NAEP_CumulativeAtOrAboveProficient_In_'
+            'Count_Student_Female_SchoolGrade4_Mathematics_PublicSchool',
+            fast_nodes)
+        self.assertIn('238.123456789123', fast_csv_text)
+        self.assertNotIn(',999', fast_csv_text)
+        self.assertIn('dcid:Percent_Student_Female_SchoolGrade4_Mathematics',
+                      fast_nodes)
+        self.assertNotIn('dcid:Percent_Student_SchoolGrade4_Mathematics',
+                         fast_nodes)
+        with open(fast_counters_csv, encoding='utf-8') as f:
+            err_rows = [
+                row[0]
+                for row in csv.reader(f)
+                if row and row[0].startswith('err')
+            ]
+        self.assertEqual(err_rows, [])
+
+    def test_sample_input_matches_expected_sample_output(self):
+        test_data_dir = os.path.join(MODULE_DIR, 'test_data')
+        sample_in_csv = os.path.join(test_data_dir, 'naep_input.csv')
+        actual_prefix = os.path.join(self.tmpdir, 'sample_run', 'naep_output')
+
+        self._run_process_cli(sample_in_csv, actual_prefix, self.base_conf_path)
+
+        for ext in ('.csv', '.tmcf'):
+            with open(f'{actual_prefix}{ext}',
+                      encoding='utf-8') as actual_f, open(
+                          os.path.join(test_data_dir, f'naep_output{ext}'),
+                          encoding='utf-8') as expected_f:
+                self.assertEqual(actual_f.read(), expected_f.read())
+
+
+if __name__ == '__main__':
+    unittest.main()
