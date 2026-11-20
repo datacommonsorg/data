@@ -91,9 +91,7 @@
                 "validation_config.json"
             ],
             "validation_config_file": "validation_config.json",
-            "config_override": {
-                "disable_import_workflow": true
-            },
+            "cron_schedule": "30 05 * * 1",
             "resource_limits": {
                 "cpu": 1,
                 "memory": 2,

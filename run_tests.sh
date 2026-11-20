@@ -16,7 +16,9 @@
 
 set -e
 
-# Array of top-level folders with Python code.
+# Top-level folders whose unit tests are run with `unittest discover`.
+# Lint and format checks run on the whole repo instead (see run_py_lint_*), so
+# new Python folders are checked without having to be added here.
 PYTHON_FOLDERS="util/ tools/ import-automation/executor import-automation/workflow scripts/ agents/common/ statvar_imports/"
 
 # Allow overriding via environment; default to false when unset.
@@ -47,21 +49,21 @@ function run_py_lint_fix {
   setup_python
   echo "#### Fixing Python lint (ruff)"
   # Applies only safe fixes; remaining issues are reported for manual fixes.
-  ruff check --fix $PYTHON_FOLDERS || true
+  ruff check --fix . || true
   echo "#### Fixing Python code"
-  yapf -r -i -p --style=google $PYTHON_FOLDERS
+  yapf -r -i -p --style=google .
 }
 
 # Tests Python code style
 function run_py_lint_test {
   setup_python
   echo "#### Testing Python lint (ruff)"
-  if ! ruff check $PYTHON_FOLDERS; then
+  if ! ruff check .; then
     echo "ERROR: Fix lint errors (some can be fixed by running ./run_tests.sh -f)" >&2
     exit 1
   fi
   echo "#### Testing Python format"
-  if ! yapf -r --diff -p --style=google $PYTHON_FOLDERS; then
+  if ! yapf -r --diff -p --style=google .; then
     echo "ERROR: Fix lint errors by running ./run_tests.sh -f" >&2
     exit 1
   fi

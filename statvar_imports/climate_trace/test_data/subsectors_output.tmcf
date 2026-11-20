@@ -1,0 +1,9 @@
+Node: E:subsectors_output->E0
+observationAbout: C:subsectors_output->observationAbout
+observationDate: C:subsectors_output->observationDate
+variableMeasured: C:subsectors_output->variableMeasured
+value: C:subsectors_output->value
+unit: C:subsectors_output->unit
+measurementMethod: C:subsectors_output->measurementMethod
+observationPeriod: C:subsectors_output->observationPeriod
+typeOf: dcs:StatVarObservation
