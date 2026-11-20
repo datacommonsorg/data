@@ -109,8 +109,10 @@ class SchemaResolver:
 
     def __init__(self,
                  mcf_files: list = '',
-                 config: dict = {},
+                 config: dict | None = None,
                  counters: Counters = None):
+        if config is None:
+            config = {}
         self._counters = counters
         if self._counters is None:
             self._counters = Counters()

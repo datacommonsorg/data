@@ -62,14 +62,18 @@ class StageRunner:
     '''
 
     def __init__(self,
-                 config_dicts: list = [],
-                 state: dict = {},
+                 config_dicts: list | None = None,
+                 state: dict | None = None,
                  counters=None):
+        if state is None:
+            state = {}
+        if config_dicts is None:
+            config_dicts = []
         self.set_up('runner', config_dicts, state, counters)
 
     def run(self,
             input_files: list = None,
-            config: dict = {},
+            config: dict | None = None,
             counters: Counters = None) -> list:
         '''Override in child class.
        Returns the output files generated after running processing for this stage
@@ -84,6 +88,8 @@ class StageRunner:
        Returns:
          list of output files that are passed on to the next stage as inputs.
         '''
+        if config is None:
+            config = {}
         logging.fatal(
             f'run() not implemented in {self.__class__}. Use a class with run() overridden.'
         )
@@ -91,8 +97,8 @@ class StageRunner:
 
     def set_up(self,
                name: str,
-               config_dicts: list = [],
-               state: dict = {},
+               config_dicts: list | None = None,
+               state: dict | None = None,
                counters=None):
         '''Called by derived classes to set up configs and state in the base class.
         Args:
@@ -101,6 +107,10 @@ class StageRunner:
           state: dictionary of parameters with current pipeline state
           counters: set of names counters for the pipeline
         '''
+        if state is None:
+            state = {}
+        if config_dicts is None:
+            config_dicts = []
         self.name = name
         # Dynamic state with parameters to be updated after run.
         self.state = state
@@ -155,12 +165,14 @@ class StageRunner:
         self.set_state(self.name, stage_state)
         return output_files
 
-    def get_inputs(self, inputs: list = []) -> list:
+    def get_inputs(self, inputs: list | None = None) -> list:
         '''Return a set of files matching inputs of the config.
         Gets files matching the pattern in the config for 'input_files'
         and the patter in the inputs list.
         '''
         # Get inputs from previous stage output and config.
+        if inputs is None:
+            inputs = []
         input_list = []
         if inputs:
             input_list.extend(inputs)
@@ -178,16 +190,20 @@ class StageRunner:
             output_dir = os.path.join(import_dir, self.name)
             self.set_config('output_dir', output_dir)
 
-    def get_output_dir(self, config_dict: dict = {}) -> str:
+    def get_output_dir(self, config_dict: dict | None = None) -> str:
         '''Returns the output directory from the config.'''
+        if config_dict is None:
+            config_dict = {}
         return self.get_config('output_dir', '', config_dict)
 
     def get_output_filename(self,
                             input_filename: str = '',
-                            config_dict: dict = {},
+                            config_dict: dict | None = None,
                             file_ext: str = '.csv') -> str:
         '''Returns the file name for output from the output_dir in the config
         and the basename of the input file with the file_ext specified.'''
+        if config_dict is None:
+            config_dict = {}
         filename = self.get_config('output_file', '', config_dict)
         if not filename:
             # Create filename from GCS settings.
@@ -223,9 +239,11 @@ class StageRunner:
     def get_config(self,
                    param: str,
                    default_value: str = '',
-                   config_dict: dict = {}) -> str:
+                   config_dict: dict | None = None) -> str:
         '''Returns the resolved config value for the param from config_dict
         or object's config.'''
+        if config_dict is None:
+            config_dict = {}
         if config_dict:
             value = config_dict.get(param, None)
             if value:

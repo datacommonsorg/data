@@ -94,7 +94,7 @@ def add_key_value(
     key: str,
     value: str,
     pvs: dict,
-    multi_value_keys: set = {},
+    multi_value_keys: set | None = None,
     overwrite: bool = True,
     normalize: bool = True,
 ) -> dict:
@@ -103,6 +103,8 @@ def add_key_value(
   If the key already exists, adds value to a list if key is a multi_value key,
   else replaces the value if overwrite is True.
   """
+    if multi_value_keys is None:
+        multi_value_keys = set()
     append_value = False
     if key in multi_value_keys:
         append_value = True
@@ -132,8 +134,12 @@ def get_value_as_list(value: str) -> Union[str, list]:
     return value
 
 
-def pvs_update(new_pvs: dict, pvs: dict, multi_value_keys: set = {}) -> dict:
+def pvs_update(new_pvs: dict,
+               pvs: dict,
+               multi_value_keys: set | None = None) -> dict:
     """Add the key:value pairs from the new_pvs into the pvs dictionary."""
+    if multi_value_keys is None:
+        multi_value_keys = set()
     for prop, value in new_pvs.items():
         add_key_value(prop,
                       value,
