@@ -85,7 +85,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Total!!Workers 16 years and over!!MEANS OF TRANSPORTATION TO WORK!!Car, truck, or van!!Carpooled!!In 2-person carpool": {
-            "Node": "dcid:Count_Person_Years16Onwards_2Person_CarTruckOrVanCarpooled_WorkCommute_Employed",
+            "Node": "dcid:Count_Person_Years16Onwards_CarpoolOccupancy2Person_CarTruckOrVanCarpooled_WorkCommute_Employed",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
             "populationType": "dcs:Person",
@@ -97,7 +97,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Total!!Workers 16 years and over!!MEANS OF TRANSPORTATION TO WORK!!Car, truck, or van!!Carpooled!!In 2-person carpool": {
-            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_2Person_CarTruckOrVanCarpooled_WorkCommute_Employed",
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_CarpoolOccupancy2Person_CarTruckOrVanCarpooled_WorkCommute_Employed",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
             "populationType": "dcs:Person",
@@ -109,7 +109,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Total!!Workers 16 years and over!!MEANS OF TRANSPORTATION TO WORK!!Car, truck, or van!!Carpooled!!In 3-person carpool": {
-            "Node": "dcid:Count_Person_Years16Onwards_3Person_CarTruckOrVanCarpooled_WorkCommute_Employed",
+            "Node": "dcid:Count_Person_Years16Onwards_CarpoolOccupancy3Person_CarTruckOrVanCarpooled_WorkCommute_Employed",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
             "populationType": "dcs:Person",
@@ -121,7 +121,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Total!!Workers 16 years and over!!MEANS OF TRANSPORTATION TO WORK!!Car, truck, or van!!Carpooled!!In 3-person carpool": {
-            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_3Person_CarTruckOrVanCarpooled_WorkCommute_Employed",
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_CarpoolOccupancy3Person_CarTruckOrVanCarpooled_WorkCommute_Employed",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
             "populationType": "dcs:Person",
@@ -133,7 +133,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Total!!Workers 16 years and over!!MEANS OF TRANSPORTATION TO WORK!!Car, truck, or van!!Carpooled!!In 4-or-more person carpool": {
-            "Node": "dcid:Count_Person_Years16Onwards_4OrMorePerson_CarTruckOrVanCarpooled_WorkCommute_Employed",
+            "Node": "dcid:Count_Person_Years16Onwards_CarpoolOccupancy4OrMorePerson_CarTruckOrVanCarpooled_WorkCommute_Employed",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
             "populationType": "dcs:Person",
@@ -145,7 +145,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Total!!Workers 16 years and over!!MEANS OF TRANSPORTATION TO WORK!!Car, truck, or van!!Carpooled!!In 4-or-more person carpool": {
-            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_4OrMorePerson_CarTruckOrVanCarpooled_WorkCommute_Employed",
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_CarpoolOccupancy4OrMorePerson_CarTruckOrVanCarpooled_WorkCommute_Employed",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
             "populationType": "dcs:Person",
@@ -469,7 +469,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Total!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!12:00 a.m. to 4:59 a.m.": {
-            "Node": "dcid:Count_Person_Years16Onwards_Hour0000To0459_WorkCommute_Employed_WorkedOutsideOfHome",
+            "Node": "dcid:Count_Person_Years16Onwards_StartTimeHour0000To0459_WorkCommute_Employed_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
             "populationType": "dcs:Person",
@@ -481,7 +481,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Total!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!12:00 a.m. to 4:59 a.m.": {
-            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_Hour0000To0459_WorkCommute_Employed_WorkedOutsideOfHome",
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0000To0459_WorkCommute_Employed_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
             "populationType": "dcs:Person",
@@ -493,7 +493,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Total!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!5:00 a.m. to 5:29 a.m.": {
-            "Node": "dcid:Count_Person_Years16Onwards_Hour0500To0529_WorkCommute_Employed_WorkedOutsideOfHome",
+            "Node": "dcid:Count_Person_Years16Onwards_StartTimeHour0500To0529_WorkCommute_Employed_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
             "populationType": "dcs:Person",
@@ -505,7 +505,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Total!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!5:00 a.m. to 5:29 a.m.": {
-            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_Hour0500To0529_WorkCommute_Employed_WorkedOutsideOfHome",
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0500To0529_WorkCommute_Employed_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
             "populationType": "dcs:Person",
@@ -517,7 +517,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Total!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!5:30 a.m. to 5:59 a.m.": {
-            "Node": "dcid:Count_Person_Years16Onwards_Hour0530To0559_WorkCommute_Employed_WorkedOutsideOfHome",
+            "Node": "dcid:Count_Person_Years16Onwards_StartTimeHour0530To0559_WorkCommute_Employed_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
             "populationType": "dcs:Person",
@@ -529,7 +529,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Total!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!5:30 a.m. to 5:59 a.m.": {
-            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_Hour0530To0559_WorkCommute_Employed_WorkedOutsideOfHome",
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0530To0559_WorkCommute_Employed_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
             "populationType": "dcs:Person",
@@ -541,7 +541,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Total!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!6:00 a.m. to 6:29 a.m.": {
-            "Node": "dcid:Count_Person_Years16Onwards_Hour0600To0629_WorkCommute_Employed_WorkedOutsideOfHome",
+            "Node": "dcid:Count_Person_Years16Onwards_StartTimeHour0600To0629_WorkCommute_Employed_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
             "populationType": "dcs:Person",
@@ -553,7 +553,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Total!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!6:00 a.m. to 6:29 a.m.": {
-            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_Hour0600To0629_WorkCommute_Employed_WorkedOutsideOfHome",
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0600To0629_WorkCommute_Employed_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
             "populationType": "dcs:Person",
@@ -565,7 +565,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Total!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!6:30 a.m. to 6:59 a.m.": {
-            "Node": "dcid:Count_Person_Years16Onwards_Hour0630To0659_WorkCommute_Employed_WorkedOutsideOfHome",
+            "Node": "dcid:Count_Person_Years16Onwards_StartTimeHour0630To0659_WorkCommute_Employed_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
             "populationType": "dcs:Person",
@@ -577,7 +577,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Total!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!6:30 a.m. to 6:59 a.m.": {
-            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_Hour0630To0659_WorkCommute_Employed_WorkedOutsideOfHome",
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0630To0659_WorkCommute_Employed_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
             "populationType": "dcs:Person",
@@ -589,7 +589,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Total!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!7:00 a.m. to 7:29 a.m.": {
-            "Node": "dcid:Count_Person_Years16Onwards_Hour0700To0729_WorkCommute_Employed_WorkedOutsideOfHome",
+            "Node": "dcid:Count_Person_Years16Onwards_StartTimeHour0700To0729_WorkCommute_Employed_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
             "populationType": "dcs:Person",
@@ -601,7 +601,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Total!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!7:00 a.m. to 7:29 a.m.": {
-            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_Hour0700To0729_WorkCommute_Employed_WorkedOutsideOfHome",
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0700To0729_WorkCommute_Employed_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
             "populationType": "dcs:Person",
@@ -613,7 +613,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Total!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!7:30 a.m. to 7:59 a.m.": {
-            "Node": "dcid:Count_Person_Years16Onwards_Hour0730To0759_WorkCommute_Employed_WorkedOutsideOfHome",
+            "Node": "dcid:Count_Person_Years16Onwards_StartTimeHour0730To0759_WorkCommute_Employed_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
             "populationType": "dcs:Person",
@@ -625,7 +625,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Total!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!7:30 a.m. to 7:59 a.m.": {
-            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_Hour0730To0759_WorkCommute_Employed_WorkedOutsideOfHome",
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0730To0759_WorkCommute_Employed_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
             "populationType": "dcs:Person",
@@ -637,7 +637,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Total!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!8:00 a.m. to 8:29 a.m.": {
-            "Node": "dcid:Count_Person_Years16Onwards_Hour0800To0829_WorkCommute_Employed_WorkedOutsideOfHome",
+            "Node": "dcid:Count_Person_Years16Onwards_StartTimeHour0800To0829_WorkCommute_Employed_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
             "populationType": "dcs:Person",
@@ -649,7 +649,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Total!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!8:00 a.m. to 8:29 a.m.": {
-            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_Hour0800To0829_WorkCommute_Employed_WorkedOutsideOfHome",
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0800To0829_WorkCommute_Employed_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
             "populationType": "dcs:Person",
@@ -661,7 +661,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Total!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!8:30 a.m. to 8:59 a.m.": {
-            "Node": "dcid:Count_Person_Years16Onwards_Hour0830To0859_WorkCommute_Employed_WorkedOutsideOfHome",
+            "Node": "dcid:Count_Person_Years16Onwards_StartTimeHour0830To0859_WorkCommute_Employed_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
             "populationType": "dcs:Person",
@@ -673,7 +673,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Total!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!8:30 a.m. to 8:59 a.m.": {
-            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_Hour0830To0859_WorkCommute_Employed_WorkedOutsideOfHome",
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0830To0859_WorkCommute_Employed_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
             "populationType": "dcs:Person",
@@ -685,7 +685,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Total!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!9:00 a.m. to 11:59 p.m.": {
-            "Node": "dcid:Count_Person_Years16Onwards_Hour0900To2359_WorkCommute_Employed_WorkedOutsideOfHome",
+            "Node": "dcid:Count_Person_Years16Onwards_StartTimeHour0900To2359_WorkCommute_Employed_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
             "populationType": "dcs:Person",
@@ -697,7 +697,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Total!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!9:00 a.m. to 11:59 p.m.": {
-            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_Hour0900To2359_WorkCommute_Employed_WorkedOutsideOfHome",
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0900To2359_WorkCommute_Employed_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
             "populationType": "dcs:Person",
@@ -1149,7 +1149,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Male!!Workers 16 years and over!!MEANS OF TRANSPORTATION TO WORK!!Car, truck, or van!!Carpooled!!In 2-person carpool": {
-            "Node": "dcid:Count_Person_Years16Onwards_2Person_CarTruckOrVanCarpooled_WorkCommute_Employed_Male",
+            "Node": "dcid:Count_Person_Years16Onwards_CarpoolOccupancy2Person_CarTruckOrVanCarpooled_WorkCommute_Employed_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
             "populationType": "dcs:Person",
@@ -1162,7 +1162,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Male!!Workers 16 years and over!!MEANS OF TRANSPORTATION TO WORK!!Car, truck, or van!!Carpooled!!In 2-person carpool": {
-            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_2Person_CarTruckOrVanCarpooled_WorkCommute_Employed_Male",
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_CarpoolOccupancy2Person_CarTruckOrVanCarpooled_WorkCommute_Employed_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
             "populationType": "dcs:Person",
@@ -1175,7 +1175,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Male!!Workers 16 years and over!!MEANS OF TRANSPORTATION TO WORK!!Car, truck, or van!!Carpooled!!In 3-person carpool": {
-            "Node": "dcid:Count_Person_Years16Onwards_3Person_CarTruckOrVanCarpooled_WorkCommute_Employed_Male",
+            "Node": "dcid:Count_Person_Years16Onwards_CarpoolOccupancy3Person_CarTruckOrVanCarpooled_WorkCommute_Employed_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
             "populationType": "dcs:Person",
@@ -1188,7 +1188,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Male!!Workers 16 years and over!!MEANS OF TRANSPORTATION TO WORK!!Car, truck, or van!!Carpooled!!In 3-person carpool": {
-            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_3Person_CarTruckOrVanCarpooled_WorkCommute_Employed_Male",
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_CarpoolOccupancy3Person_CarTruckOrVanCarpooled_WorkCommute_Employed_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
             "populationType": "dcs:Person",
@@ -1201,7 +1201,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Male!!Workers 16 years and over!!MEANS OF TRANSPORTATION TO WORK!!Car, truck, or van!!Carpooled!!In 4-or-more person carpool": {
-            "Node": "dcid:Count_Person_Years16Onwards_4OrMorePerson_CarTruckOrVanCarpooled_WorkCommute_Employed_Male",
+            "Node": "dcid:Count_Person_Years16Onwards_CarpoolOccupancy4OrMorePerson_CarTruckOrVanCarpooled_WorkCommute_Employed_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
             "populationType": "dcs:Person",
@@ -1214,7 +1214,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Male!!Workers 16 years and over!!MEANS OF TRANSPORTATION TO WORK!!Car, truck, or van!!Carpooled!!In 4-or-more person carpool": {
-            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_4OrMorePerson_CarTruckOrVanCarpooled_WorkCommute_Employed_Male",
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_CarpoolOccupancy4OrMorePerson_CarTruckOrVanCarpooled_WorkCommute_Employed_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
             "populationType": "dcs:Person",
@@ -1569,7 +1569,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Male!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!12:00 a.m. to 4:59 a.m.": {
-            "Node": "dcid:Count_Person_Years16Onwards_Hour0000To0459_WorkCommute_Employed_Male_WorkedOutsideOfHome",
+            "Node": "dcid:Count_Person_Years16Onwards_StartTimeHour0000To0459_WorkCommute_Employed_Male_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
             "populationType": "dcs:Person",
@@ -1582,7 +1582,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Male!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!12:00 a.m. to 4:59 a.m.": {
-            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_Hour0000To0459_WorkCommute_Employed_Male_WorkedOutsideOfHome",
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0000To0459_WorkCommute_Employed_Male_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
             "populationType": "dcs:Person",
@@ -1595,7 +1595,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Male!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!5:00 a.m. to 5:29 a.m.": {
-            "Node": "dcid:Count_Person_Years16Onwards_Hour0500To0529_WorkCommute_Employed_Male_WorkedOutsideOfHome",
+            "Node": "dcid:Count_Person_Years16Onwards_StartTimeHour0500To0529_WorkCommute_Employed_Male_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
             "populationType": "dcs:Person",
@@ -1608,7 +1608,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Male!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!5:00 a.m. to 5:29 a.m.": {
-            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_Hour0500To0529_WorkCommute_Employed_Male_WorkedOutsideOfHome",
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0500To0529_WorkCommute_Employed_Male_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
             "populationType": "dcs:Person",
@@ -1621,7 +1621,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Male!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!5:30 a.m. to 5:59 a.m.": {
-            "Node": "dcid:Count_Person_Years16Onwards_Hour0530To0559_WorkCommute_Employed_Male_WorkedOutsideOfHome",
+            "Node": "dcid:Count_Person_Years16Onwards_StartTimeHour0530To0559_WorkCommute_Employed_Male_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
             "populationType": "dcs:Person",
@@ -1634,7 +1634,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Male!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!5:30 a.m. to 5:59 a.m.": {
-            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_Hour0530To0559_WorkCommute_Employed_Male_WorkedOutsideOfHome",
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0530To0559_WorkCommute_Employed_Male_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
             "populationType": "dcs:Person",
@@ -1647,7 +1647,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Male!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!6:00 a.m. to 6:29 a.m.": {
-            "Node": "dcid:Count_Person_Years16Onwards_Hour0600To0629_WorkCommute_Employed_Male_WorkedOutsideOfHome",
+            "Node": "dcid:Count_Person_Years16Onwards_StartTimeHour0600To0629_WorkCommute_Employed_Male_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
             "populationType": "dcs:Person",
@@ -1660,7 +1660,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Male!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!6:00 a.m. to 6:29 a.m.": {
-            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_Hour0600To0629_WorkCommute_Employed_Male_WorkedOutsideOfHome",
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0600To0629_WorkCommute_Employed_Male_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
             "populationType": "dcs:Person",
@@ -1673,7 +1673,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Male!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!6:30 a.m. to 6:59 a.m.": {
-            "Node": "dcid:Count_Person_Years16Onwards_Hour0630To0659_WorkCommute_Employed_Male_WorkedOutsideOfHome",
+            "Node": "dcid:Count_Person_Years16Onwards_StartTimeHour0630To0659_WorkCommute_Employed_Male_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
             "populationType": "dcs:Person",
@@ -1686,7 +1686,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Male!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!6:30 a.m. to 6:59 a.m.": {
-            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_Hour0630To0659_WorkCommute_Employed_Male_WorkedOutsideOfHome",
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0630To0659_WorkCommute_Employed_Male_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
             "populationType": "dcs:Person",
@@ -1699,7 +1699,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Male!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!7:00 a.m. to 7:29 a.m.": {
-            "Node": "dcid:Count_Person_Years16Onwards_Hour0700To0729_WorkCommute_Employed_Male_WorkedOutsideOfHome",
+            "Node": "dcid:Count_Person_Years16Onwards_StartTimeHour0700To0729_WorkCommute_Employed_Male_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
             "populationType": "dcs:Person",
@@ -1712,7 +1712,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Male!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!7:00 a.m. to 7:29 a.m.": {
-            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_Hour0700To0729_WorkCommute_Employed_Male_WorkedOutsideOfHome",
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0700To0729_WorkCommute_Employed_Male_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
             "populationType": "dcs:Person",
@@ -1725,7 +1725,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Male!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!7:30 a.m. to 7:59 a.m.": {
-            "Node": "dcid:Count_Person_Years16Onwards_Hour0730To0759_WorkCommute_Employed_Male_WorkedOutsideOfHome",
+            "Node": "dcid:Count_Person_Years16Onwards_StartTimeHour0730To0759_WorkCommute_Employed_Male_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
             "populationType": "dcs:Person",
@@ -1738,7 +1738,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Male!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!7:30 a.m. to 7:59 a.m.": {
-            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_Hour0730To0759_WorkCommute_Employed_Male_WorkedOutsideOfHome",
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0730To0759_WorkCommute_Employed_Male_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
             "populationType": "dcs:Person",
@@ -1751,7 +1751,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Male!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!8:00 a.m. to 8:29 a.m.": {
-            "Node": "dcid:Count_Person_Years16Onwards_Hour0800To0829_WorkCommute_Employed_Male_WorkedOutsideOfHome",
+            "Node": "dcid:Count_Person_Years16Onwards_StartTimeHour0800To0829_WorkCommute_Employed_Male_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
             "populationType": "dcs:Person",
@@ -1764,7 +1764,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Male!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!8:00 a.m. to 8:29 a.m.": {
-            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_Hour0800To0829_WorkCommute_Employed_Male_WorkedOutsideOfHome",
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0800To0829_WorkCommute_Employed_Male_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
             "populationType": "dcs:Person",
@@ -1777,7 +1777,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Male!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!8:30 a.m. to 8:59 a.m.": {
-            "Node": "dcid:Count_Person_Years16Onwards_Hour0830To0859_WorkCommute_Employed_Male_WorkedOutsideOfHome",
+            "Node": "dcid:Count_Person_Years16Onwards_StartTimeHour0830To0859_WorkCommute_Employed_Male_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
             "populationType": "dcs:Person",
@@ -1790,7 +1790,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Male!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!8:30 a.m. to 8:59 a.m.": {
-            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_Hour0830To0859_WorkCommute_Employed_Male_WorkedOutsideOfHome",
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0830To0859_WorkCommute_Employed_Male_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
             "populationType": "dcs:Person",
@@ -1803,7 +1803,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Male!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!9:00 a.m. to 11:59 p.m.": {
-            "Node": "dcid:Count_Person_Years16Onwards_Hour0900To2359_WorkCommute_Employed_Male_WorkedOutsideOfHome",
+            "Node": "dcid:Count_Person_Years16Onwards_StartTimeHour0900To2359_WorkCommute_Employed_Male_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
             "populationType": "dcs:Person",
@@ -1816,7 +1816,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Male!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!9:00 a.m. to 11:59 p.m.": {
-            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_Hour0900To2359_WorkCommute_Employed_Male_WorkedOutsideOfHome",
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0900To2359_WorkCommute_Employed_Male_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
             "populationType": "dcs:Person",
@@ -2299,7 +2299,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Female!!Workers 16 years and over!!MEANS OF TRANSPORTATION TO WORK!!Car, truck, or van!!Carpooled!!In 2-person carpool": {
-            "Node": "dcid:Count_Person_Years16Onwards_2Person_CarTruckOrVanCarpooled_WorkCommute_Employed_Female",
+            "Node": "dcid:Count_Person_Years16Onwards_CarpoolOccupancy2Person_CarTruckOrVanCarpooled_WorkCommute_Employed_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
             "populationType": "dcs:Person",
@@ -2312,7 +2312,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Female!!Workers 16 years and over!!MEANS OF TRANSPORTATION TO WORK!!Car, truck, or van!!Carpooled!!In 2-person carpool": {
-            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_2Person_CarTruckOrVanCarpooled_WorkCommute_Employed_Female",
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_CarpoolOccupancy2Person_CarTruckOrVanCarpooled_WorkCommute_Employed_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
             "populationType": "dcs:Person",
@@ -2325,7 +2325,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Female!!Workers 16 years and over!!MEANS OF TRANSPORTATION TO WORK!!Car, truck, or van!!Carpooled!!In 3-person carpool": {
-            "Node": "dcid:Count_Person_Years16Onwards_3Person_CarTruckOrVanCarpooled_WorkCommute_Employed_Female",
+            "Node": "dcid:Count_Person_Years16Onwards_CarpoolOccupancy3Person_CarTruckOrVanCarpooled_WorkCommute_Employed_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
             "populationType": "dcs:Person",
@@ -2338,7 +2338,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Female!!Workers 16 years and over!!MEANS OF TRANSPORTATION TO WORK!!Car, truck, or van!!Carpooled!!In 3-person carpool": {
-            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_3Person_CarTruckOrVanCarpooled_WorkCommute_Employed_Female",
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_CarpoolOccupancy3Person_CarTruckOrVanCarpooled_WorkCommute_Employed_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
             "populationType": "dcs:Person",
@@ -2351,7 +2351,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Female!!Workers 16 years and over!!MEANS OF TRANSPORTATION TO WORK!!Car, truck, or van!!Carpooled!!In 4-or-more person carpool": {
-            "Node": "dcid:Count_Person_Years16Onwards_4OrMorePerson_CarTruckOrVanCarpooled_WorkCommute_Employed_Female",
+            "Node": "dcid:Count_Person_Years16Onwards_CarpoolOccupancy4OrMorePerson_CarTruckOrVanCarpooled_WorkCommute_Employed_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
             "populationType": "dcs:Person",
@@ -2364,7 +2364,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Female!!Workers 16 years and over!!MEANS OF TRANSPORTATION TO WORK!!Car, truck, or van!!Carpooled!!In 4-or-more person carpool": {
-            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_4OrMorePerson_CarTruckOrVanCarpooled_WorkCommute_Employed_Female",
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_CarpoolOccupancy4OrMorePerson_CarTruckOrVanCarpooled_WorkCommute_Employed_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
             "populationType": "dcs:Person",
@@ -2719,7 +2719,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Female!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!12:00 a.m. to 4:59 a.m.": {
-            "Node": "dcid:Count_Person_Years16Onwards_Hour0000To0459_WorkCommute_Employed_Female_WorkedOutsideOfHome",
+            "Node": "dcid:Count_Person_Years16Onwards_StartTimeHour0000To0459_WorkCommute_Employed_Female_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
             "populationType": "dcs:Person",
@@ -2732,7 +2732,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Female!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!12:00 a.m. to 4:59 a.m.": {
-            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_Hour0000To0459_WorkCommute_Employed_Female_WorkedOutsideOfHome",
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0000To0459_WorkCommute_Employed_Female_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
             "populationType": "dcs:Person",
@@ -2745,7 +2745,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Female!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!5:00 a.m. to 5:29 a.m.": {
-            "Node": "dcid:Count_Person_Years16Onwards_Hour0500To0529_WorkCommute_Employed_Female_WorkedOutsideOfHome",
+            "Node": "dcid:Count_Person_Years16Onwards_StartTimeHour0500To0529_WorkCommute_Employed_Female_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
             "populationType": "dcs:Person",
@@ -2758,7 +2758,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Female!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!5:00 a.m. to 5:29 a.m.": {
-            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_Hour0500To0529_WorkCommute_Employed_Female_WorkedOutsideOfHome",
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0500To0529_WorkCommute_Employed_Female_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
             "populationType": "dcs:Person",
@@ -2771,7 +2771,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Female!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!5:30 a.m. to 5:59 a.m.": {
-            "Node": "dcid:Count_Person_Years16Onwards_Hour0530To0559_WorkCommute_Employed_Female_WorkedOutsideOfHome",
+            "Node": "dcid:Count_Person_Years16Onwards_StartTimeHour0530To0559_WorkCommute_Employed_Female_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
             "populationType": "dcs:Person",
@@ -2784,7 +2784,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Female!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!5:30 a.m. to 5:59 a.m.": {
-            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_Hour0530To0559_WorkCommute_Employed_Female_WorkedOutsideOfHome",
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0530To0559_WorkCommute_Employed_Female_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
             "populationType": "dcs:Person",
@@ -2797,7 +2797,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Female!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!6:00 a.m. to 6:29 a.m.": {
-            "Node": "dcid:Count_Person_Years16Onwards_Hour0600To0629_WorkCommute_Employed_Female_WorkedOutsideOfHome",
+            "Node": "dcid:Count_Person_Years16Onwards_StartTimeHour0600To0629_WorkCommute_Employed_Female_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
             "populationType": "dcs:Person",
@@ -2810,7 +2810,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Female!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!6:00 a.m. to 6:29 a.m.": {
-            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_Hour0600To0629_WorkCommute_Employed_Female_WorkedOutsideOfHome",
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0600To0629_WorkCommute_Employed_Female_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
             "populationType": "dcs:Person",
@@ -2823,7 +2823,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Female!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!6:30 a.m. to 6:59 a.m.": {
-            "Node": "dcid:Count_Person_Years16Onwards_Hour0630To0659_WorkCommute_Employed_Female_WorkedOutsideOfHome",
+            "Node": "dcid:Count_Person_Years16Onwards_StartTimeHour0630To0659_WorkCommute_Employed_Female_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
             "populationType": "dcs:Person",
@@ -2836,7 +2836,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Female!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!6:30 a.m. to 6:59 a.m.": {
-            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_Hour0630To0659_WorkCommute_Employed_Female_WorkedOutsideOfHome",
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0630To0659_WorkCommute_Employed_Female_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
             "populationType": "dcs:Person",
@@ -2849,7 +2849,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Female!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!7:00 a.m. to 7:29 a.m.": {
-            "Node": "dcid:Count_Person_Years16Onwards_Hour0700To0729_WorkCommute_Employed_Female_WorkedOutsideOfHome",
+            "Node": "dcid:Count_Person_Years16Onwards_StartTimeHour0700To0729_WorkCommute_Employed_Female_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
             "populationType": "dcs:Person",
@@ -2862,7 +2862,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Female!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!7:00 a.m. to 7:29 a.m.": {
-            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_Hour0700To0729_WorkCommute_Employed_Female_WorkedOutsideOfHome",
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0700To0729_WorkCommute_Employed_Female_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
             "populationType": "dcs:Person",
@@ -2875,7 +2875,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Female!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!7:30 a.m. to 7:59 a.m.": {
-            "Node": "dcid:Count_Person_Years16Onwards_Hour0730To0759_WorkCommute_Employed_Female_WorkedOutsideOfHome",
+            "Node": "dcid:Count_Person_Years16Onwards_StartTimeHour0730To0759_WorkCommute_Employed_Female_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
             "populationType": "dcs:Person",
@@ -2888,7 +2888,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Female!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!7:30 a.m. to 7:59 a.m.": {
-            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_Hour0730To0759_WorkCommute_Employed_Female_WorkedOutsideOfHome",
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0730To0759_WorkCommute_Employed_Female_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
             "populationType": "dcs:Person",
@@ -2901,7 +2901,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Female!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!8:00 a.m. to 8:29 a.m.": {
-            "Node": "dcid:Count_Person_Years16Onwards_Hour0800To0829_WorkCommute_Employed_Female_WorkedOutsideOfHome",
+            "Node": "dcid:Count_Person_Years16Onwards_StartTimeHour0800To0829_WorkCommute_Employed_Female_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
             "populationType": "dcs:Person",
@@ -2914,7 +2914,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Female!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!8:00 a.m. to 8:29 a.m.": {
-            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_Hour0800To0829_WorkCommute_Employed_Female_WorkedOutsideOfHome",
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0800To0829_WorkCommute_Employed_Female_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
             "populationType": "dcs:Person",
@@ -2927,7 +2927,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Female!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!8:30 a.m. to 8:59 a.m.": {
-            "Node": "dcid:Count_Person_Years16Onwards_Hour0830To0859_WorkCommute_Employed_Female_WorkedOutsideOfHome",
+            "Node": "dcid:Count_Person_Years16Onwards_StartTimeHour0830To0859_WorkCommute_Employed_Female_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
             "populationType": "dcs:Person",
@@ -2940,7 +2940,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Female!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!8:30 a.m. to 8:59 a.m.": {
-            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_Hour0830To0859_WorkCommute_Employed_Female_WorkedOutsideOfHome",
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0830To0859_WorkCommute_Employed_Female_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
             "populationType": "dcs:Person",
@@ -2953,7 +2953,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Estimate!!Female!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!9:00 a.m. to 11:59 p.m.": {
-            "Node": "dcid:Count_Person_Years16Onwards_Hour0900To2359_WorkCommute_Employed_Female_WorkedOutsideOfHome",
+            "Node": "dcid:Count_Person_Years16Onwards_StartTimeHour0900To2359_WorkCommute_Employed_Female_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
             "populationType": "dcs:Person",
@@ -2966,7 +2966,7 @@
             "typeOf": "dcs:StatisticalVariable"
         },
         "Margin of Error!!Female!!Workers 16 years and over who did not work from home!!TIME OF DEPARTURE TO GO TO WORK!!9:00 a.m. to 11:59 p.m.": {
-            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_Hour0900To2359_WorkCommute_Employed_Female_WorkedOutsideOfHome",
+            "Node": "dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0900To2359_WorkCommute_Employed_Female_WorkedOutsideOfHome",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
             "populationType": "dcs:Person",
