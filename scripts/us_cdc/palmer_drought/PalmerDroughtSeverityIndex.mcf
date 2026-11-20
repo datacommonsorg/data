@@ -1,0 +1,6 @@
+Node: dcid:PalmerDroughtSeverityIndex_Atmosphere
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Atmosphere
+measuredProperty: dcs:palmerDroughtSeverityIndex
+statType: dcs:measuredValue
+name: "Palmer Drought Severity Index"
