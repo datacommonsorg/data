@@ -86,10 +86,15 @@ def convert_sdmx_xml_to_dataframe(xml_path: str) -> pd.DataFrame:
 
     if parsed is not None:
         if isinstance(parsed, dict):
-            dfs = [
-                v.reset_index() if hasattr(v, 'reset_index') else v
-                for v in parsed.values()
-            ]
+            dfs = []
+            for v in parsed.values():
+                if isinstance(v, pd.DataFrame) and not (isinstance(
+                        v.index, pd.MultiIndex) or v.index.name is not None):
+                    dfs.append(v)
+                elif hasattr(v, 'reset_index'):
+                    dfs.append(v.reset_index())
+                else:
+                    dfs.append(v)
             df = pd.concat(dfs, ignore_index=True) if dfs else pd.DataFrame()
         elif isinstance(parsed, pd.DataFrame):
             if isinstance(parsed.index,
