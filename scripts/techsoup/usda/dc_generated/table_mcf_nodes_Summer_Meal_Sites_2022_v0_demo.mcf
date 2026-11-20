@@ -1,0 +1,82 @@
+Node: dcid:usdaMealSite/-149.9256286_61.18804024_mtwthf
+dcid: "usdaMealSite/-149.9256286_61.18804024_mtwthf"
+daysOfOperation: "M", "T", "W", "TH", "F"
+endDate: "2022/08/17 12:00:00+00"
+afternoonSnackHours: "4:00-4:30"
+season: 2022
+lunchHours: "12:00-12:30"
+typeOf: dcid:UsdaSummerMealSiteDay
+mealSite: dcid:usdaMealSite/-149.9256286_61.18804024
+startDate: "2022/05/20 12:00:00+00"
+
+Node: dcid:usdaMealSite/-149.9256286_61.18804024
+zip: 99517
+dcid: "usdaMealSite/-149.9256286_61.18804024"
+city: "Anchorage"
+latitude: 61.18804024
+county: "Anchorage"
+state: "AK"
+typeOf: dcid:UsdaSummerMealSite
+longitude: -149.9256286
+
+Node: dcid:usdaMealSite/-145.7572342_60.5429198_mtwthf
+dcid: "usdaMealSite/-145.7572342_60.5429198_mtwthf"
+daysOfOperation: "M", "T", "W", "TH", "F"
+breakfastHours: "8:00-10:00"
+endDate: "2022/08/12 12:00:00+00"
+season: 2022
+lunchHours: "11:00-1:00"
+typeOf: dcid:UsdaSummerMealSiteDay
+mealSite: dcid:usdaMealSite/-145.7572342_60.5429198
+startDate: "2022/06/01 12:00:00+00"
+
+Node: dcid:usdaMealSite/-145.7572342_60.5429198
+zip: 99574
+dcid: "usdaMealSite/-145.7572342_60.5429198"
+city: "Cordova"
+latitude: 60.5429198
+county: "Valdez-Cordova"
+state: "AK"
+typeOf: dcid:UsdaSummerMealSite
+longitude: -145.7572342
+
+Node: dcid:usdaMealSite/-149.43749_61.58500751_mtwthf
+dcid: "usdaMealSite/-149.43749_61.58500751_mtwthf"
+daysOfOperation: "M", "T", "W", "TH", "F"
+endDate: "2022/08/18 12:00:00+00"
+season: 2022
+lunchHours: "11:00-1:00"
+typeOf: dcid:UsdaSummerMealSiteDay
+mealSite: dcid:usdaMealSite/-149.43749_61.58500751
+startDate: "2022/05/23 12:00:00+00"
+
+Node: dcid:usdaMealSite/-149.43749_61.58500751
+zip: 99654
+dcid: "usdaMealSite/-149.43749_61.58500751"
+city: "Wasilla"
+latitude: 61.58500751
+county: "Matanuska-Susitna"
+state: "AK"
+typeOf: dcid:UsdaSummerMealSite
+longitude: -149.43749
+
+Node: dcid:usdaMealSite/-70.06993077_41.76163589_mtwthf
+dcid: "usdaMealSite/-70.06993077_41.76163589_mtwthf"
+daysOfOperation: "M", "T", "W", "TH", "F"
+endDate: "2022/08/12 12:00:00+00"
+season: 2022
+lunchHours: "11:15:00 PM"
+typeOf: dcid:UsdaSummerMealSiteDay
+mealSite: dcid:usdaMealSite/-70.06993077_41.76163589
+startDate: "2022/07/05 12:00:00+00"
+
+Node: dcid:usdaMealSite/-70.06993077_41.76163589
+zip: 2631
+dcid: "usdaMealSite/-70.06993077_41.76163589"
+city: "Brewster"
+latitude: 41.76163589
+county: "Barnstable"
+state: "MA"
+typeOf: dcid:UsdaSummerMealSite
+longitude: -70.06993077
+
