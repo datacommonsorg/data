@@ -1,0 +1,9 @@
+key,prop,value,p1,v1,,,,
+KN.A1,measurementQualifier,RealValue,populationType,ExpenditureActivity,measuredProperty,amount,activitySource,GrossDomesticProduction
+KN.A2,measurementQualifier,Nominal,populationType,ExpenditureActivity,measuredProperty,amount,activitySource,GrossDomesticProduction
+OBS_VALUE,value,{Number},#Multiply,1000000,unit,NGN,,
+TIME_PERIOD,observationDate,{Number},observationAbout,country/NGA,,,,
+KN.A3,#ignore,ignore for now,,,,,,
+KN.A4,#ignore,ignore for now,,,,,,
+KN.A6,#ignore,ignore for now,,,,,,
+KN.A7,#ignore,ignore for now,,,,,,
