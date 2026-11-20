@@ -1,0 +1,23 @@
+Node: E:ncbi_gene_phenotype_associations->E1
+typeOf: dcs:UmlsConceptUniqueIdentifier
+dcid: C:ncbi_gene_phenotype_associations->MedGenCUI_dcid
+umlsConceptUniqueID: C:ncbi_gene_phenotype_associations->MedGenCUI
+
+Node: E:ncbi_gene_phenotype_associations->E2
+typeOf: dcs:MendelianInheritanceInManEntity
+dcid: C:ncbi_gene_phenotype_associations->omim_dcid
+onlineMendelianInheritanceInManID: C:ncbi_gene_phenotype_associations->MIM_number
+umlsConceptUniqueID: E:ncbi_gene_phenotype_associations->E1
+
+Node: E:ncbi_gene_phenotype_associations->E3
+typeOf: dcs:Gene
+dcid: C:ncbi_gene_phenotype_associations->GeneID
+
+Node: E:ncbi_gene_phenotype_associations->E4
+typeOf: dcs:GeneMendelianInheritanceInManIdentifierAssociation
+dcid: C:ncbi_gene_phenotype_associations->dcid
+geneID: E:ncbi_gene_phenotype_associations->E3
+geneOmimRelationshipComment: C:ncbi_gene_phenotype_associations->Comment
+geneOmimRelationshipSource: C:ncbi_gene_phenotype_associations->Source
+geneOmimRelationshipType: C:ncbi_gene_phenotype_associations->type
+onlineMendelianInheritanceInManID: E:ncbi_gene_phenotype_associations->E2
