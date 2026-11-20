@@ -1,0 +1,15 @@
+key,p1,v1,p2,v2,p3,v3
+Place,observationAbout,{Data},populationType,LandCover,measuredProperty,landArea
+Tree cover,landCoverType,TreeCover,,,,
+Grassland,landCoverType,GrassLand,,,,
+Sparse vegetation,landCoverType,SparseVegetation,,,,
+Cropland,landCoverType,Cropland,,,,
+Artificial surfaces,landCoverType,ArtificialSurfaces,,,,
+Inland water,landCoverType,InlandWater,,,,
+Shrubland,landCoverType,Shrubland,,,,
+Bare area,landCoverType,BareArea,,,,
+Wetland,landCoverType,Wetland,,,,
+Year,observationDate,{Number},,,,
+Value,value,{Number},,,,
+Percentage,unit,Percent,measurementDenominator,landArea,,
+Square kilometres,unit,SquareKilometer,#Multiply,1000,,
