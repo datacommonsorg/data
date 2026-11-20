@@ -1,0 +1,9 @@
+Node: E:naep_output->E0
+typeOf: C:naep_output->typeOf
+observationDate: C:naep_output->observationDate
+observationAbout: C:naep_output->observationAbout
+value: C:naep_output->value
+measurementMethod: C:naep_output->measurementMethod
+unit: C:naep_output->unit
+scalingFactor: C:naep_output->scalingFactor
+variableMeasured: C:naep_output->variableMeasured

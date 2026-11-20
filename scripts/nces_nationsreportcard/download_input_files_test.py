@@ -210,6 +210,27 @@ class DownloadInputFilesTest(unittest.TestCase):
             # Neither target CSV nor leftover .tmp file may exist after failure.
             self.assertEqual(os.listdir(tmpdir), [])
 
+    def test_fdopen_failure_closes_fd_and_removes_tempfile(self):
+        spec = [{
+            'subject': 'MUS',
+            'grade': 8,
+            'scales': ['MUSRP'],
+            'variables': ['TOTAL'],
+            'jurisdiction_batches': [dl.NATIONAL_JURISDICTION],
+        }]
+        with tempfile.TemporaryDirectory() as tmpdir:
+            with mock.patch('os.fdopen',
+                            side_effect=OSError('fdopen failed')), mock.patch(
+                                'os.close', wraps=os.close) as mock_close:
+                with self.assertRaises(OSError):
+                    dl.download_file('naep_national_mus.csv',
+                                     spec,
+                                     tmpdir,
+                                     max_workers=1,
+                                     read_timeout=5)
+            self.assertEqual(mock_close.call_count, 1)
+            self.assertEqual(os.listdir(tmpdir), [])
+
     def test_deterministic_row_order_under_concurrent_workers(self):
 
         def fake_fetch(subject,

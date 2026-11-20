@@ -867,8 +867,11 @@ def download_file(filename: str,
     fd, tmp_path = tempfile.mkstemp(prefix=f'.{filename}.',
                                     suffix='.tmp',
                                     dir=output_dir)
+    fd_owned_by_file = False
     try:
-        with os.fdopen(fd, 'w', newline='', encoding='utf-8') as csv_file:
+        csv_file = os.fdopen(fd, 'w', newline='', encoding='utf-8')
+        fd_owned_by_file = True
+        with csv_file:
             writer = csv.DictWriter(csv_file,
                                     fieldnames=CSV_COLUMNS,
                                     extrasaction='ignore',
@@ -878,6 +881,11 @@ def download_file(filename: str,
                                                 workers, timeout_secs)
         os.replace(tmp_path, output_path)
     except Exception:
+        if not fd_owned_by_file:
+            try:
+                os.close(fd)
+            except OSError:
+                pass
         if os.path.exists(tmp_path):
             os.remove(tmp_path)
         raise

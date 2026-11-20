@@ -314,8 +314,10 @@ class NaepEduPerformance(StatVarDataProcessor):
         statvar_mcf_file = self._config.get('output_statvar_mcf',
                                             f'{output_path}_stat_vars.mcf')
         if os.path.exists(statvar_mcf_file):
-            with open(statvar_mcf_file, 'r+', encoding='utf-8') as mcf_file:
-                if 'Node: dcid:percent' not in mcf_file.read():
+            with open(statvar_mcf_file, 'r', encoding='utf-8') as mcf_file:
+                content = mcf_file.read()
+            if 'Node: dcid:percent' not in content:
+                with open(statvar_mcf_file, 'a', encoding='utf-8') as mcf_file:
                     mcf_file.write('\nNode: dcid:percent\n'
                                    'typeOf: dcs:Property\n'
                                    'name: "percent"\n'

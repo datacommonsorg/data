@@ -37,56 +37,51 @@
         'statType': 'dcs:stdDeviationValue',
         'measuredProperty': 'dcs:assessmentScore',
     },
-    'ALC:AB':{
+    'ALC:AB': {
         'statType': 'dcs:measuredValue',
-        'educationalAchievementLevel' : 'dcs:NAEP_CumulativeAtOrAboveBasic',
+        'educationalAchievementLevel': 'dcs:NAEP_CumulativeAtOrAboveBasic',
         'measuredProperty': 'dcs:count',
         'unit': 'dcs:Percent',
         'scalingFactor': '100',
     },
-    'ALC:AD':{
+    'ALC:AD': {
         'statType': 'dcs:measuredValue',
-        'educationalAchievementLevel' : 'dcs:NAEP_CumulativeAtAdvanced',
+        'educationalAchievementLevel': 'dcs:NAEP_CumulativeAtAdvanced',
         'measuredProperty': 'dcs:count',
         'unit': 'dcs:Percent',
         'scalingFactor': '100',
     },
-
-    'ALC:AP':{
+    'ALC:AP': {
         'statType': 'dcs:measuredValue',
-        'educationalAchievementLevel' : 'dcs:NAEP_CumulativeAtOrAboveProficient',
+        'educationalAchievementLevel': 'dcs:NAEP_CumulativeAtOrAboveProficient',
         'measuredProperty': 'dcs:count',
         'unit': 'dcs:Percent',
         'scalingFactor': '100',
     },
-
-    'ALC:BB':{
+    'ALC:BB': {
         'statType': 'dcs:measuredValue',
-        'educationalAchievementLevel' : 'dcs:NAEP_CumulativeBelowBasic',
+        'educationalAchievementLevel': 'dcs:NAEP_CumulativeBelowBasic',
         'measuredProperty': 'dcs:count',
         'unit': 'dcs:Percent',
         'scalingFactor': '100',
     },
-
-    'ALD:AD':{
+    'ALD:AD': {
         'statType': 'dcs:measuredValue',
-        'educationalAchievementLevel' : 'dcs:NAEP_DiscreteAtAdvanced',
+        'educationalAchievementLevel': 'dcs:NAEP_DiscreteAtAdvanced',
         'measuredProperty': 'dcs:count',
         'unit': 'dcs:Percent',
         'scalingFactor': '100',
     },
-
     'ALD:BA': {
         'statType': 'dcs:measuredValue',
-        'educationalAchievementLevel' : 'dcs:NAEP_DiscreteAtBasic',
+        'educationalAchievementLevel': 'dcs:NAEP_DiscreteAtBasic',
         'measuredProperty': 'dcs:count',
         'unit': 'dcs:Percent',
         'scalingFactor': '100',
     },
-
     'ALD:PR': {
         'statType': 'dcs:measuredValue',
-        'educationalAchievementLevel' : 'dcs:NAEP_DiscreteAtProficient',
+        'educationalAchievementLevel': 'dcs:NAEP_DiscreteAtProficient',
         'measuredProperty': 'dcs:count',
         'unit': 'dcs:Percent',
         'scalingFactor': '100',
@@ -146,7 +141,7 @@
     'WRI': {
         'schoolSubject': 'dcs:Writing',
     },
-    'SCI':  {
+    'SCI': {
         'schoolSubject': 'dcs:Science',
     },
     # Column: grade
@@ -183,7 +178,8 @@
         'subjectAssessmentScale': 'dcid:GeometryScale',
     },
     'MRPS4': {
-        'subjectAssessmentScale': 'dcid:DataAnalysisStatisticsAndProbabilityScale',
+        'subjectAssessmentScale':
+            'dcid:DataAnalysisStatisticsAndProbabilityScale',
     },
     'MRPS5': {
         'subjectAssessmentScale': 'dcid:AlgebraScale',
@@ -201,13 +197,16 @@
         'subjectAssessmentScale': 'dcid:GainAndUseInformationScale',
     },
     'TRPP1': {
-        'subjectAssessmentScale': 'dcid:CommunicatingAndCollaboratingPracticeScale',
+        'subjectAssessmentScale':
+            'dcid:CommunicatingAndCollaboratingPracticeScale',
     },
     'TRPP2': {
-        'subjectAssessmentScale': 'dcid:DevelopingSolutionsAndAchievingGoalsPracticeScale',
+        'subjectAssessmentScale':
+            'dcid:DevelopingSolutionsAndAchievingGoalsPracticeScale',
     },
     'TRPP3': {
-        'subjectAssessmentScale': 'dcid:UnderstandingTechnologicalPrinciplesPracticeScale',
+        'subjectAssessmentScale':
+            'dcid:UnderstandingTechnologicalPrinciplesPracticeScale',
     },
     'HRPS1': {
         'subjectAssessmentScale': 'dcid:DemocracyScale',
@@ -267,7 +266,7 @@
     'Other private': {
         'schoolManagement': 'dcs:PrivateSchool',
     },
-    'Catholic' : {
+    'Catholic': {
         'schoolManagement': 'dcs:NCES_Catholic',
     },
     'Bureau of Indian Education': {
@@ -296,27 +295,27 @@
         'languageLearned': 'dcs:EnglishLearner',
         'languageLearningStatus': 'dcs:NotCurrentLearner',
     },
-   'Eligible': {
+    'Eligible': {
         'lunchEligibility': 'dcs:FreeOrReducedLunch'
-   },
-   'Not eligible': {
+    },
+    'Not eligible': {
         'lunchEligibility': 'dcs:NotFreeOrReducedLunch'
-   },
-   'Information not available': {
+    },
+    'Information not available': {
         'lunchEligibility': 'dcs:FreeLunchEligibilityInfoMissing'
-   },
-   'City': {
+    },
+    'City': {
         'schoolLocationType': 'dcs:City'
-   },
-   'Rural': {
+    },
+    'Rural': {
         'schoolLocationType': 'dcs:Rural'
-   },
-   'Town': {
+    },
+    'Town': {
         'schoolLocationType': 'dcs:Town'
-   },
-   'Suburb': {
+    },
+    'Suburb': {
         'schoolLocationType': 'dcs:Suburb'
-   },
+    },
     # Column: value
     'value': {
         'value': '{Number}',

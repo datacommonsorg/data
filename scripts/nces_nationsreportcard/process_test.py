@@ -351,6 +351,40 @@ class ProcessTest(unittest.TestCase):
         err_keys = [k for k in fast_counters if k.startswith('err')]
         self.assertEqual(err_keys, [])
 
+    def test_sample_input_matches_expected_sample_output(self):
+        test_data_dir = os.path.join(MODULE_DIR, 'test_data')
+        sample_in_csv = os.path.join(test_data_dir, 'naep_input.csv')
+        actual_prefix = os.path.join(self.tmpdir, 'sample_run', 'naep_output')
+
+        self.assertTrue(
+            run_stat_var_process(
+                data_processor_class=naep_process.NaepEduPerformance,
+                input_data=[sample_in_csv],
+                output_path=actual_prefix,
+                config=self.base_conf_path,
+                pv_map_files=self.pv_map,
+            ))
+
+        for ext in ('.csv', '.tmcf'):
+            with open(f'{actual_prefix}{ext}',
+                      encoding='utf-8') as actual_f, open(
+                          os.path.join(test_data_dir, f'naep_output{ext}'),
+                          encoding='utf-8') as expected_f:
+                self.assertEqual(actual_f.read(), expected_f.read())
+
+        def _strip_comments(mcf_path: str) -> list[str]:
+            with open(mcf_path, encoding='utf-8') as f:
+                return [
+                    ln for ln in f.read().splitlines()
+                    if not ln.lstrip().startswith('#')
+                ]
+
+        self.assertEqual(
+            _strip_comments(f'{actual_prefix}_stat_vars.mcf'),
+            _strip_comments(
+                os.path.join(test_data_dir, 'naep_output_stat_vars.mcf')),
+        )
+
 
 if __name__ == '__main__':
     unittest.main()
