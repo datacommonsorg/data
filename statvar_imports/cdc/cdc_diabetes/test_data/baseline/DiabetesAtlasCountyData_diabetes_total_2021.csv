@@ -1,0 +1,3 @@
+observationAbout,observationDate,variableMeasured,value,measurementMethod,observationPeriod
+geoId/01001,2021,dcid:Percent_Person_20OrMoreYears_WithDiabetes,9.5,AgeAdjustedPrevalence,P1Y
+geoId/01001,2021,dcid:dc/d4j16hnl53es2,0.81633,AgeAdjustedPrevalence,P1Y

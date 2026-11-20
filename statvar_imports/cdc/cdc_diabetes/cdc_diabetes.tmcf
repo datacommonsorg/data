@@ -1,0 +1,8 @@
+Node: E:cdc_diabetes->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C:cdc_diabetes->variableMeasured
+observationAbout: C:cdc_diabetes->observationAbout
+observationDate: C:cdc_diabetes->observationDate
+observationPeriod: C:cdc_diabetes->observationPeriod
+measurementMethod: C:cdc_diabetes->measurementMethod
+value: C:cdc_diabetes->value
