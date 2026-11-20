@@ -1,0 +1,16 @@
+parameter,value
+url,https://rc.doe.state.nj.us/download
+medataUrl,https://navilp7rg08njprsharedst.blob.core.windows.net/perf-reports-ct/DataFiles/2022-2023/Database_DistrictLayout.xlsx
+description,"US Education data of  the state New Jersey which contains data of student enrollment, student staff ration, student participation and performance in the state assessment and other education related data.  "
+#place_type,country
+#places_within,
+start_date,2016
+end_date,2022
+release_frequency,
+process,
+comments,
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor"
+places_resolved_csv,https://docs.google.com/spreadsheets/d/1r49oNqjz89_-CI0MYTJ0oWbdzxqkIiVA7yV9ORPrznY/edit?gid=1764842839#gid=1764842839
+header_rows,1
+drop_statvars_without_svobs,0
+word_delimiter,""""""
