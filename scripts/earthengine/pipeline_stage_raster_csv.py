@@ -41,20 +41,26 @@ class RasterCSVRunner(StageRunner):
     '''Class to generate CSV per input geoTif or CSV with lat/long.'''
 
     def __init__(self,
-                 config_dicts: list = [],
-                 state: dict = {},
+                 config_dicts: list | None = None,
+                 state: dict | None = None,
                  counters=None):
+        if state is None:
+            state = {}
+        if config_dicts is None:
+            config_dicts = []
         self.set_up('raster_csv', config_dicts, state, counters)
 
     def run(self,
             input_files: list = None,
-            config_dict: dict = {},
+            config_dict: dict | None = None,
             counters: Counters = None) -> list:
         '''Returns the csv files with data per geo point generated
         from the input files.
         The input geoTif files are converted to data per-s2 cell grid.
         Input csvs with lat,longs are also converted to data per grid point.
         '''
+        if config_dict is None:
+            config_dict = {}
         output_files = []
 
         for filename in file_util.file_get_matching(input_files):

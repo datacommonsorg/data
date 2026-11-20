@@ -236,8 +236,8 @@ def _update_and_calculate_state_crime(crime_csv, writer):
                 state = find_crime_state(crime)
                 geocode = USSTATE_MAP[state]
             except KeyError:
-                assert False, '{} state or its geocode not found'.format(
-                    crime['State'])
+                raise AssertionError('{} state or its geocode not found'.format(
+                    crime['State']))
 
             crime['Geocode'] = geocode
 

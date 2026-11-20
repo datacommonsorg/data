@@ -133,7 +133,7 @@ def get_simple_import_gcs_config(
 def cloud_run_simple_import_job(
     import_spec: dict,
     config_file: str,
-    env: dict = {},
+    env: dict | None = None,
     version: str = '',
     job_id: str = '',
     project_id: str = _DEFAULT_PROJECT,
@@ -161,6 +161,8 @@ def cloud_run_simple_import_job(
   Returns:
     Output directory with the script outputs.
   """
+    if env is None:
+        env = {}
     if not version:
         version = _get_time_version()
     # TODO: support parameters from import_config.json instead of manifest.json

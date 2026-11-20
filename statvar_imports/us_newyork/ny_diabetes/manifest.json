@@ -34,6 +34,9 @@
             ],
             "cron_schedule": "30 7 * * 2",
             "_comment": "Schedule: Weekly on Tuesday at 07:30 UTC",
+            "config_override": {
+                "disable_import_workflow": true
+            },
             "resource_limits": {
                 "cpu": 4, 
                 "memory": 8, 
