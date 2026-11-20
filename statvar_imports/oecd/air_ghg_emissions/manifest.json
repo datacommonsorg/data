@@ -19,7 +19,6 @@
                 }
             ],
             "source_files": [
-                "raw_files/*",
                 "input_files/*.csv",
                 "counters/*.csv",
                 "oecd_air_ghg_emissions_pvmap.csv",

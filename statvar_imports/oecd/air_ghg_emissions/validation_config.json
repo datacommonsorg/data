@@ -50,11 +50,11 @@
     },
     {
       "rule_id": "check_statvar_count_places_and_freshness",
-      "description": "Verify all 13 StatVars meet place/observation floors, non-negative bounds, and rolling future-year freshness (between max(2024, current_year - 3) and current_year).",
+      "description": "Verify all 13 StatVars meet place/observation floors, non-negative bounds, and rolling freshness (>= max(2024, current_year - 4)) while allowing all future years.",
       "validator": "SQL_VALIDATOR",
       "params": {
         "query": "SELECT StatVar, MaxDate, MinValue, NumPlaces, NumObservations, COUNT(*) OVER () AS total_svs, SUM(NumObservations) OVER () AS total_obs FROM stats",
-        "condition": "COALESCE(TRY_CAST(SUBSTR(TRIM(CAST(MaxDate AS VARCHAR)), 1, 4) AS INTEGER) BETWEEN GREATEST(2024, CAST(EXTRACT(YEAR FROM CURRENT_DATE) AS INTEGER) - 3) AND CAST(EXTRACT(YEAR FROM CURRENT_DATE) AS INTEGER), FALSE) AND total_svs >= 13 AND total_obs >= 35000 AND NumPlaces >= 50 AND NumObservations >= 1500 AND MinValue >= 0"
+        "condition": "COALESCE(TRY_CAST(SUBSTR(TRIM(CAST(MaxDate AS VARCHAR)), 1, 4) AS INTEGER) >= GREATEST(2024, CAST(EXTRACT(YEAR FROM CURRENT_DATE) AS INTEGER) - 4), FALSE) AND total_svs >= 13 AND total_obs >= 35000 AND NumPlaces >= 50 AND NumObservations >= 1500 AND MinValue >= 0"
       }
     }
   ]

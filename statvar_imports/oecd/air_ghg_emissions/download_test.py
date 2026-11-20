@@ -22,7 +22,6 @@ from pathlib import Path
 import subprocess
 import sys
 import tempfile
-from typing import Any
 import unittest
 from unittest import mock
 
@@ -149,12 +148,18 @@ measurementDenominator: dcs:Count_Person
 """
 
 
-def _write_to_sdmx_target(target: Any, payload: bytes) -> None:
-    """Writes bytes to either a binary file handle or a filesystem path."""
-    if hasattr(target, 'write'):
-        target.write(payload)
-    else:
-        Path(target).write_bytes(payload)
+def _make_csv_http_response(
+    payload: bytes,
+    url: str = 'https://sdmx.oecd.org/public/rest/data/test',
+) -> mock.MagicMock:
+    """Builds a mock streaming requests.Response yielding payload bytes."""
+    resp = mock.MagicMock()
+    resp.__enter__.return_value = resp
+    resp.__exit__.return_value = False
+    resp.url = url
+    resp.raise_for_status.return_value = None
+    resp.iter_content.return_value = [payload]
+    return resp
 
 
 class DownloadTest(unittest.TestCase):
@@ -397,97 +402,86 @@ class DownloadTest(unittest.TestCase):
                                                    self.valid_places)
 
     @mock.patch('statvar_imports.oecd.air_ghg_emissions.download.time.sleep')
-    @mock.patch(
-        'statvar_imports.oecd.air_ghg_emissions.download.sdmx.to_pandas')
     def test_fetch_sdmx_dataframe_retries_transient_http_429(
         self,
-        mock_to_pandas: mock.MagicMock,
         mock_sleep: mock.MagicMock,
     ) -> None:
         raw_dir = self.base_dir / 'raw'
         spec = download.SDMX_FEEDS[0]
-        mock_client = mock.MagicMock()
+        mock_session = mock.MagicMock()
 
         resp_429 = requests.Response()
         resp_429.status_code = 429
         err_429 = requests.exceptions.HTTPError('Too Many Requests',
                                                 response=resp_429)
+        err_ctx = mock.MagicMock()
+        err_ctx.__enter__.return_value = err_ctx
+        err_ctx.__exit__.return_value = False
+        err_ctx.raise_for_status.side_effect = err_429
 
-        def fake_data(*args, **kwargs):
-            if mock_client.data.call_count == 1:
-                raise err_429
-            _write_to_sdmx_target(
-                kwargs['tofile'],
-                b'<?xml version="1.0" encoding="utf-8"?><message:GenericData/>',
-            )
-            fake_msg = mock.MagicMock()
-            fake_msg.response.url = 'https://sdmx.oecd.org/public/rest/data/test'
-            return fake_msg
-
-        mock_client.data.side_effect = fake_data
-        idx = pd.MultiIndex.from_tuples(
-            [('AUS', 'A', 'GHG', '_T', 'T_CO2E', '2024')],
-            names=[
-                'REF_AREA',
-                'FREQ',
-                'POLLUTANT',
-                'MEASURE',
-                'UNIT_MEASURE',
-                'TIME_PERIOD',
-            ],
-        )
-        mock_to_pandas.return_value = pd.Series([518566.8], index=idx)
+        csv_payload = (
+            b'DATAFLOW,REF_AREA,FREQ,POLLUTANT,MEASURE,UNIT_MEASURE,'
+            b'TIME_PERIOD,OBS_VALUE,UNIT_MULT\n'
+            b'OECD.ENV.EPI:DSD_AIR_GHG@DF_AIR_GHG(1.0),AUS,A,GHG,_T,T_CO2E,'
+            b'2024,518566.8,3\n')
+        mock_session.get.side_effect = [
+            err_ctx,
+            _make_csv_http_response(csv_payload),
+        ]
 
         df = download.fetch_sdmx_dataframe(
-            client=mock_client,
+            session=mock_session,
             spec=spec,
             raw_dir=str(raw_dir),
             max_retries=3,
             retry_delay=0.01,
         )
         self.assertEqual(len(df), 1)
-        self.assertEqual(mock_client.data.call_count, 2)
+        self.assertEqual(df.iloc[0]['OBS_VALUE'], '518566.8')
+        self.assertEqual(mock_session.get.call_count, 2)
         mock_sleep.assert_called_once()
         self.assertTrue((raw_dir / spec.raw_filename).is_file())
 
     def test_fetch_sdmx_dataframe_fails_fast_on_permanent_404(self) -> None:
         raw_dir = self.base_dir / 'raw'
         spec = download.SDMX_FEEDS[0]
-        mock_client = mock.MagicMock()
+        mock_session = mock.MagicMock()
         resp_404 = requests.Response()
         resp_404.status_code = 404
-        mock_client.data.side_effect = requests.exceptions.HTTPError(
+        err_ctx = mock.MagicMock()
+        err_ctx.__enter__.return_value = err_ctx
+        err_ctx.__exit__.return_value = False
+        err_ctx.raise_for_status.side_effect = requests.exceptions.HTTPError(
             'Not Found', response=resp_404)
+        mock_session.get.return_value = err_ctx
+
         with self.assertRaises(RuntimeError):
             download.fetch_sdmx_dataframe(
-                client=mock_client,
+                session=mock_session,
                 spec=spec,
                 raw_dir=str(raw_dir),
                 max_retries=3,
                 retry_delay=0.01,
             )
-        self.assertEqual(mock_client.data.call_count, 1)
+        self.assertEqual(mock_session.get.call_count, 1)
 
-    def test_fetch_sdmx_dataframe_rejects_non_xml_and_cleans_tmp(self) -> None:
+    def test_fetch_sdmx_dataframe_rejects_invalid_csv_and_cleans_tmp(
+        self,) -> None:
         raw_dir = self.base_dir / 'raw'
         spec = download.SDMX_FEEDS[0]
-        mock_client = mock.MagicMock()
-
-        def fake_html_data(*args, **kwargs):
-            _write_to_sdmx_target(kwargs['tofile'], b'<html>Maintenance</html>')
-            return mock.MagicMock()
-
-        mock_client.data.side_effect = fake_html_data
-        with self.assertRaises(RuntimeError):
-            download.fetch_sdmx_dataframe(
-                client=mock_client,
-                spec=spec,
-                raw_dir=str(raw_dir),
-                max_retries=3,
-                retry_delay=0.01,
-            )
-        self.assertFalse((raw_dir / spec.raw_filename).exists())
-        self.assertFalse((raw_dir / f'{spec.raw_filename}.tmp').exists())
+        for bad_payload in (b'<html>Maintenance</html>', b'FOO,BAR\n1,2\n'):
+            mock_session = mock.MagicMock()
+            mock_session.get.return_value = _make_csv_http_response(bad_payload)
+            with self.assertRaises(RuntimeError):
+                download.fetch_sdmx_dataframe(
+                    session=mock_session,
+                    spec=spec,
+                    raw_dir=str(raw_dir),
+                    max_retries=3,
+                    retry_delay=0.01,
+                )
+            self.assertFalse((raw_dir / spec.raw_filename).exists())
+            self.assertFalse((raw_dir / f'{spec.raw_filename}.tmp').exists())
 
     def test_normalize_sdmx_feed_skips_placeholders_and_detects_conflicts(
         self,) -> None:
@@ -499,7 +493,7 @@ class DownloadTest(unittest.TestCase):
                 'MEASURE': '_T',
                 'UNIT_MEASURE': 'T_CO2E',
                 'TIME_PERIOD': '2023',
-                'value': '-',
+                'OBS_VALUE': '-',
                 'UNIT_MULT': '3',
             },
             {
@@ -509,7 +503,17 @@ class DownloadTest(unittest.TestCase):
                 'MEASURE': '_T',
                 'UNIT_MEASURE': 'T_CO2E',
                 'TIME_PERIOD': '2022',
-                'value': True,
+                'OBS_VALUE': True,
+                'UNIT_MULT': '3',
+            },
+            {
+                'REF_AREA': 'AUS',
+                'FREQ': 'A',
+                'POLLUTANT': 'GHG',
+                'MEASURE': '_T',
+                'UNIT_MEASURE': 'T_CO2E',
+                'TIME_PERIOD': '2021',
+                'OBS_VALUE': 'n.a.',
                 'UNIT_MULT': '3',
             },
             {
@@ -519,7 +523,7 @@ class DownloadTest(unittest.TestCase):
                 'MEASURE': '_T',
                 'UNIT_MEASURE': 'T_CO2E',
                 'TIME_PERIOD': '2024',
-                'value': 100.0,
+                'OBS_VALUE': '100.0',
                 'UNIT_MULT': '3',
             },
         ])
@@ -527,6 +531,8 @@ class DownloadTest(unittest.TestCase):
                                                self.valid_places)
         self.assertEqual(records,
                          {('W', 'GHG', 'THND_TONNECO2', '2024'): '100'})
+        with self.assertRaises(ValueError):
+            download._parse_unit_mult('THOUSANDS')
 
         df_conflict = pd.DataFrame([
             {
@@ -536,7 +542,7 @@ class DownloadTest(unittest.TestCase):
                 'MEASURE': '_T',
                 'UNIT_MEASURE': 'T_CO2E',
                 'TIME_PERIOD': '2024',
-                'value': 100.0,
+                'OBS_VALUE': '100.0',
                 'UNIT_MULT': '3',
             },
             {
@@ -546,7 +552,7 @@ class DownloadTest(unittest.TestCase):
                 'MEASURE': '_T',
                 'UNIT_MEASURE': 'T_CO2E',
                 'TIME_PERIOD': '2024',
-                'value': 200.0,
+                'OBS_VALUE': '200.0',
                 'UNIT_MULT': '3',
             },
         ])
@@ -560,7 +566,7 @@ class DownloadTest(unittest.TestCase):
             'MEASURE': '_T',
             'UNIT_MEASURE': 'T_CO2E',
             'TIME_PERIOD': '2024',
-            'value': 100.0,
+            'OBS_VALUE': '100.0',
             'UNIT_MULT': '3',
         }])
         with self.assertRaises(RuntimeError):
@@ -602,21 +608,26 @@ class DownloadTest(unittest.TestCase):
             download.main(['download.py'])
         mock_run.assert_called_once_with(
             output_dir=os.path.join(_MODULE_DIR, 'input_files'),
-            raw_dir=os.path.join(_MODULE_DIR, 'raw_files'),
+            raw_dir=os.path.join(_MODULE_DIR, 'input_files'),
             places_resolved_csv=os.path.join(
                 _MODULE_DIR, 'oecd_air_ghg_emissions_places_resolved.csv'),
             gcs_bucket=download.HISTORICAL_GCS_BUCKET,
             gcs_blob=download.HISTORICAL_GCS_BLOB,
         )
 
-    def test_create_sdmx_client_and_timeout_adapter(self) -> None:
-        client = download._create_sdmx_client(timeout=45)
+    def test_create_http_session_and_timeout_adapter(self) -> None:
+        session = download._create_http_session(timeout=45)
         self.assertEqual(
-            client.session.headers.get('User-Agent'),
+            session.headers.get('User-Agent'),
             download.DEFAULT_USER_AGENT,
         )
-        https_adapter = client.session.get_adapter('https://sdmx.oecd.org/')
-        http_adapter = client.session.get_adapter('http://sdmx.oecd.org/')
+        self.assertEqual(
+            download._build_sdmx_csv_url(download.SDMX_FEEDS[0]),
+            'https://sdmx.oecd.org/public/rest/data/'
+            'OECD.ENV.EPI,DSD_AIR_GHG@DF_AIR_GHG,/.A.GHG._T.T_CO2E+KG_CO2E_PS',
+        )
+        https_adapter = session.get_adapter('https://sdmx.oecd.org/')
+        http_adapter = session.get_adapter('http://sdmx.oecd.org/')
         self.assertIsInstance(https_adapter, download._TimeoutHTTPAdapter)
         self.assertIsInstance(http_adapter, download._TimeoutHTTPAdapter)
 
@@ -631,133 +642,53 @@ class DownloadTest(unittest.TestCase):
             mock_send.reset_mock()
             https_adapter.send(req, timeout=15)
             mock_send.assert_called_once_with(req, timeout=15)
+        session.close()
 
     @mock.patch(
         'statvar_imports.oecd.air_ghg_emissions.download.storage.Client')
     @mock.patch(
-        'statvar_imports.oecd.air_ghg_emissions.download._create_sdmx_client')
-    @mock.patch(
-        'statvar_imports.oecd.air_ghg_emissions.download.sdmx.to_pandas')
+        'statvar_imports.oecd.air_ghg_emissions.download._create_http_session')
     def test_download_and_process_end_to_end_purges_stale_csv(
         self,
-        mock_to_pandas: mock.MagicMock,
-        mock_create_client: mock.MagicMock,
+        mock_create_session: mock.MagicMock,
         mock_storage_cls: mock.MagicMock,
     ) -> None:
         out_dir = self.base_dir / 'input_files'
-        raw_dir = self.base_dir / 'raw_files'
         out_dir.mkdir(parents=True)
-        raw_dir.mkdir(parents=True)
         stale_csv = out_dir / 'old_stale.csv'
         stale_csv.write_text('stale\n', encoding='utf-8')
-        stale_raw = raw_dir / 'obsolete_raw.json'
-        stale_raw.write_text('{}', encoding='utf-8')
+        stale_json = out_dir / 'obsolete_raw.json'
+        stale_json.write_text('{}', encoding='utf-8')
 
-        mock_sdmx = mock.MagicMock()
-        mock_create_client.return_value = mock_sdmx
-
-        def fake_sdmx_data(*args, **kwargs):
-            _write_to_sdmx_target(
-                kwargs['tofile'],
-                b'<?xml version="1.0" encoding="utf-8"?><message:GenericData/>',
-            )
-            msg = mock.MagicMock()
-            msg.response.url = 'https://sdmx.oecd.org/test'
-            return msg
-
-        mock_sdmx.data.side_effect = fake_sdmx_data
-        air_rows = []
+        ghg_csv = ('REF_AREA,FREQ,POLLUTANT,MEASURE,UNIT_MEASURE,TIME_PERIOD,'
+                   'OBS_VALUE,UNIT_MULT\n'
+                   'AUS,A,GHG,_T,T_CO2E,2024,518566.8,3\n'
+                   'AUS,A,GHG,_T,KG_CO2E_PS,2024,19.41,3\n').encode('utf-8')
+        air_lines = [
+            'REF_AREA,FREQ,POLLUTANT,MEASURE,UNIT_MEASURE,TIME_PERIOD,'
+            'OBS_VALUE,UNIT_MULT'
+        ]
         for pollutant in ('CO', 'NOX', 'SOX', 'NMVOC'):
             for unit_measure, unit_mult in (('T', '3'), ('KG_PS', '0')):
-                air_rows.append({
-                    'REF_AREA': 'AUS',
-                    'FREQ': 'A',
-                    'POLLUTANT': pollutant,
-                    'MEASURE': 'T_EM_MM',
-                    'UNIT_MEASURE': unit_measure,
-                    'TIME_PERIOD': '2024',
-                    'value': 100.0,
-                    'UNIT_MULT': unit_mult,
-                })
+                air_lines.append(
+                    f'AUS,A,{pollutant},T_EM_MM,{unit_measure},2024,100.0,'
+                    f'{unit_mult}')
+        air_csv = ('\n'.join(air_lines) + '\n').encode('utf-8')
+        gg_csv = ('REF_AREA,FREQ,MEASURE,UNIT_MEASURE,ACTIVITY,TIME_PERIOD,'
+                  'OBS_VALUE,UNIT_MULT\n'
+                  'AUS,A,CO2_PBEM,T,_T,2024,355.97,6\n'
+                  'AUS,A,CO2_PBEMCAP,T_CO2E_PS,_T,2024,13.33,0\n'
+                  'AUS,A,CO2_PBPROD,USD_CO2,_T,2024,4.47,0\n').encode('utf-8')
 
-        mock_to_pandas.side_effect = [
-            pd.DataFrame([
-                {
-                    'REF_AREA': 'AUS',
-                    'FREQ': 'A',
-                    'POLLUTANT': 'GHG',
-                    'MEASURE': '_T',
-                    'UNIT_MEASURE': 'T_CO2E',
-                    'TIME_PERIOD': '2024',
-                    'value': 518566.8,
-                    'UNIT_MULT': '3',
-                },
-                {
-                    'REF_AREA': 'AUS',
-                    'FREQ': 'A',
-                    'POLLUTANT': 'GHG',
-                    'MEASURE': '_T',
-                    'UNIT_MEASURE': 'KG_CO2E_PS',
-                    'TIME_PERIOD': '2024',
-                    'value': 19.41,
-                    'UNIT_MULT': '3',
-                },
-            ]).set_index([
-                'REF_AREA',
-                'FREQ',
-                'POLLUTANT',
-                'MEASURE',
-                'UNIT_MEASURE',
-                'TIME_PERIOD',
-            ]),
-            pd.DataFrame(air_rows).set_index([
-                'REF_AREA',
-                'FREQ',
-                'POLLUTANT',
-                'MEASURE',
-                'UNIT_MEASURE',
-                'TIME_PERIOD',
-            ]),
-            pd.DataFrame([
-                {
-                    'REF_AREA': 'AUS',
-                    'FREQ': 'A',
-                    'MEASURE': 'CO2_PBEM',
-                    'UNIT_MEASURE': 'T',
-                    'ACTIVITY': '_T',
-                    'TIME_PERIOD': '2024',
-                    'value': 355.97,
-                    'UNIT_MULT': '6',
-                },
-                {
-                    'REF_AREA': 'AUS',
-                    'FREQ': 'A',
-                    'MEASURE': 'CO2_PBEMCAP',
-                    'UNIT_MEASURE': 'T_CO2E_PS',
-                    'ACTIVITY': '_T',
-                    'TIME_PERIOD': '2024',
-                    'value': 13.33,
-                    'UNIT_MULT': '0',
-                },
-                {
-                    'REF_AREA': 'AUS',
-                    'FREQ': 'A',
-                    'MEASURE': 'CO2_PBPROD',
-                    'UNIT_MEASURE': 'USD_CO2',
-                    'ACTIVITY': '_T',
-                    'TIME_PERIOD': '2024',
-                    'value': 4.47,
-                    'UNIT_MULT': '0',
-                },
-            ]).set_index([
-                'REF_AREA',
-                'FREQ',
-                'MEASURE',
-                'UNIT_MEASURE',
-                'ACTIVITY',
-                'TIME_PERIOD',
-            ]),
+        sess = mock.MagicMock()
+        sess.__enter__.return_value = sess
+        sess.__exit__.return_value = False
+        sess.get.side_effect = [
+            _make_csv_http_response(ghg_csv),
+            _make_csv_http_response(air_csv),
+            _make_csv_http_response(gg_csv),
         ]
+        mock_create_session.return_value = sess
 
         mock_blob = mock.MagicMock()
 
@@ -772,13 +703,19 @@ class DownloadTest(unittest.TestCase):
         mock_storage_cls.return_value.bucket.return_value.blob.return_value = (
             mock_blob)
 
+        # Default behavior downloads raw CSVs directly into input_files and
+        # retains all 4 raw CSVs alongside oecd_air_ghg_emissions_input.csv.
         staging_path = download.download_and_process(
             output_dir=str(out_dir),
-            raw_dir=str(raw_dir),
+            raw_dir=str(out_dir),
             places_resolved_csv=str(self.places_csv),
         )
         self.assertFalse(stale_csv.exists())
-        self.assertFalse(stale_raw.exists())
+        self.assertFalse(stale_json.exists())
+        self.assertTrue((out_dir / 'oecd_air_ghg_raw.csv').is_file())
+        self.assertTrue((out_dir / 'oecd_air_emissions_raw.csv').is_file())
+        self.assertTrue((out_dir / 'oecd_green_growth_co2_raw.csv').is_file())
+        self.assertTrue((out_dir / 'historical_baseline_2024.csv').is_file())
         self.assertTrue(Path(staging_path).is_file())
         with open(staging_path, mode='r', encoding='utf-8') as f:
             rows = list(csv.DictReader(f))
@@ -787,9 +724,9 @@ class DownloadTest(unittest.TestCase):
     def test_resolve_module_path_handles_relative_and_absolute(self) -> None:
         abs_path = '/tmp/example_dir'
         self.assertEqual(download._resolve_module_path(abs_path), abs_path)
-        rel_resolved = download._resolve_module_path('raw_files')
+        rel_resolved = download._resolve_module_path('input_files')
         self.assertTrue(os.path.isabs(rel_resolved))
-        self.assertTrue(rel_resolved.endswith('/raw_files'))
+        self.assertTrue(rel_resolved.endswith('/input_files'))
 
     def test_checked_in_configs_manifest_validation_and_sample_parity(
         self,) -> None:
@@ -808,10 +745,9 @@ class DownloadTest(unittest.TestCase):
             _REPO_ROOT,
             'statvar_imports/oecd/air_ghg_emissions',
         )
-        self.assertEqual(
-            manifest_data['import_specifications'][0]['scripts'][0],
-            'download.py',
-        )
+        spec_cfg = manifest_data['import_specifications'][0]
+        self.assertEqual(spec_cfg['scripts'][0], 'download.py')
+        self.assertNotIn('raw_files/*', spec_cfg['source_files'])
 
         stats_csv = self.base_dir / 'summary_report.csv'
         all_svs = sorted(
@@ -842,36 +778,37 @@ class DownloadTest(unittest.TestCase):
                         yr = current_year - 1
                     writer.writerow([sv, 80, 3000, 0.0, 100000.0, 1990, yr])
 
-        # Staggered valid future-year updates pass cleanly.
-        write_stats(
-            prod_year=max(2024, current_year - 2),
-            co2_year=current_year - 1,
-            ghg_year=current_year,
-        )
-        val_out = self.base_dir / 'validation_output.csv'
-        val_cmd = [
-            sys.executable,
-            '-m',
-            'tools.import_validation.runner',
-            f'--validation_config={module_path / "validation_config.json"}',
-            f'--stats_summary={stats_csv}',
-            f'--validation_output={val_out}',
-        ]
-        val_proc = subprocess.run(
-            val_cmd,
-            cwd=_REPO_ROOT,
-            capture_output=True,
-            text=True,
-            check=False,
-        )
-        self.assertEqual(val_proc.returncode, 0, msg=val_proc.stderr)
-
-        # Bogus future projection year (> current_year) and stale year (< 2024) fail.
-        for bad_year in (current_year + 5, 2021):
+        # Staggered current and future-year updates pass cleanly.
+        for valid_ghg_year in (current_year, current_year + 5):
             write_stats(
-                prod_year=bad_year,
-                co2_year=current_year - 1,
-                ghg_year=current_year - 1,
+                prod_year=max(2024, current_year - 3),
+                co2_year=current_year + 1,
+                ghg_year=valid_ghg_year,
+            )
+            val_out = self.base_dir / 'validation_output.csv'
+            val_cmd = [
+                sys.executable,
+                '-m',
+                'tools.import_validation.runner',
+                f'--validation_config={module_path / "validation_config.json"}',
+                f'--stats_summary={stats_csv}',
+                f'--validation_output={val_out}',
+            ]
+            val_proc = subprocess.run(
+                val_cmd,
+                cwd=_REPO_ROOT,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            self.assertEqual(val_proc.returncode, 0, msg=val_proc.stderr)
+
+        # Stale regressions (< max(2024, current_year - 4)) fail.
+        for stale_year in (2021, current_year - 5):
+            write_stats(
+                prod_year=stale_year,
+                co2_year=current_year,
+                ghg_year=current_year,
             )
             bad_proc = subprocess.run(
                 val_cmd,

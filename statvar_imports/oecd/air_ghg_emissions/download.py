@@ -16,7 +16,6 @@
 
 import csv
 from dataclasses import dataclass
-import logging as py_logging
 import math
 import os
 from pathlib import Path
@@ -30,7 +29,6 @@ from google.cloud import storage
 import pandas as pd
 import requests
 from requests.adapters import HTTPAdapter
-import sdmx
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _FLAGS = flags.FLAGS
@@ -39,6 +37,12 @@ SDMX_ENDPOINT = 'https://sdmx.oecd.org/public/rest/'
 SDMX_AGENCY_ID = 'OECD.ENV.EPI'
 DEFAULT_USER_AGENT = 'Mozilla/5.0 (X11; Linux x86_64) DataCommons/1.0'
 TRANSIENT_HTTP_STATUSES = frozenset({408, 429, 500, 502, 503, 504})
+REQUIRED_SDMX_CSV_COLUMNS = frozenset({
+    'REF_AREA',
+    'TIME_PERIOD',
+    'OBS_VALUE',
+    'UNIT_MULT',
+})
 
 HISTORICAL_GCS_BUCKET = 'unresolved_mcf'
 HISTORICAL_GCS_BLOB = ('oecd/oecd_air_and_ghg_emissions/'
@@ -58,12 +62,12 @@ OUTPUT_COLUMNS = [
 
 @dataclass(frozen=True)
 class SdmxFeedSpec:
-    """Configuration for a single OECD SDMX dataflow query."""
+    """Configuration for a single OECD SDMX-CSV dataflow query."""
 
     name: str
     dataflow_id: str
     raw_filename: str
-    key: dict[str, str]
+    selection_key: str
     params: dict[str, str]
     expected_series: frozenset[tuple[str, str]]
 
@@ -72,14 +76,12 @@ SDMX_FEEDS: tuple[SdmxFeedSpec, ...] = (
     SdmxFeedSpec(
         name='ghg',
         dataflow_id='DSD_AIR_GHG@DF_AIR_GHG',
-        raw_filename='oecd_air_ghg_raw.xml',
-        key={
-            'FREQ': 'A',
-            'POLLUTANT': 'GHG',
-            'MEASURE': '_T',
-            'UNIT_MEASURE': 'T_CO2E+KG_CO2E_PS',
+        raw_filename='oecd_air_ghg_raw.csv',
+        selection_key='.A.GHG._T.T_CO2E+KG_CO2E_PS',
+        params={
+            'dimensionAtObservation': 'AllDimensions',
+            'format': 'csvfile',
         },
-        params={},
         expected_series=frozenset({
             ('GHG', 'THND_TONNECO2'),
             ('GHG', 'TONNE_CAP'),
@@ -88,14 +90,12 @@ SDMX_FEEDS: tuple[SdmxFeedSpec, ...] = (
     SdmxFeedSpec(
         name='air_emissions',
         dataflow_id='DSD_AIR_EMISSIONS@DF_AIR_EMISSIONS',
-        raw_filename='oecd_air_emissions_raw.xml',
-        key={
-            'FREQ': 'A',
-            'POLLUTANT': 'CO+NOX+SOX+NMVOC',
-            'MEASURE': 'T_EM_MM',
-            'UNIT_MEASURE': 'T+KG_PS',
+        raw_filename='oecd_air_emissions_raw.csv',
+        selection_key='.A.CO+NOX+SOX+NMVOC.T_EM_MM.T+KG_PS',
+        params={
+            'dimensionAtObservation': 'AllDimensions',
+            'format': 'csvfile',
         },
-        params={},
         expected_series=frozenset({
             ('CO', 'THND_TONNE'),
             ('CO', 'KG_CAP'),
@@ -110,14 +110,13 @@ SDMX_FEEDS: tuple[SdmxFeedSpec, ...] = (
     SdmxFeedSpec(
         name='green_growth_co2',
         dataflow_id='DSD_GG@DF_GREEN_GROWTH',
-        raw_filename='oecd_green_growth_co2_raw.xml',
-        key={
-            'FREQ': 'A',
-            'MEASURE': 'CO2_PBEM+CO2_PBEMCAP+CO2_PBPROD',
-            'UNIT_MEASURE': 'T+T_CO2E_PS+USD_CO2',
-            'ACTIVITY': '_T',
+        raw_filename='oecd_green_growth_co2_raw.csv',
+        selection_key=
+        '.A.CO2_PBEM+CO2_PBEMCAP+CO2_PBPROD.T+T_CO2E_PS+USD_CO2._T',
+        params={
+            'dimensionAtObservation': 'AllDimensions',
+            'format': 'csvfile',
         },
-        params={},
         expected_series=frozenset({
             ('CO2', 'MLN_TONNE'),
             ('CO2', 'TONNE_CAP'),
@@ -223,8 +222,8 @@ def _define_flags(flag_values: flags.FlagValues = _FLAGS) -> None:
     )
     flags.DEFINE_string(
         'raw_dir',
-        os.path.join(_MODULE_DIR, 'raw_files'),
-        'Directory path to archive raw SDMX and GCS baseline files.',
+        os.path.join(_MODULE_DIR, 'input_files'),
+        'Directory path to download raw SDMX-CSV and GCS baseline CSV files.',
         flag_values=flag_values,
     )
     flags.DEFINE_string(
@@ -271,95 +270,98 @@ def load_resolved_places(places_csv_path: str) -> dict[str, str]:
     return places
 
 
-def _create_sdmx_client(
-    endpoint: str = SDMX_ENDPOINT,
-    agency_id: str = SDMX_AGENCY_ID,
-    timeout: int = 120,
-) -> sdmx.Client:
-    """Creates a configured sdmx.Client with bounded timeouts and headers."""
-    py_logging.getLogger('sdmx').setLevel(py_logging.WARNING)
-    sdmx.add_source(
-        {
-            'id': agency_id,
-            'url': endpoint,
-            'name': f'OECD SDMX ({agency_id})',
-        },
-        override=True,
-    )
-    client = sdmx.Client(agency_id)
-    client.session.headers.update({
+# Note on SDMX / HTTP helpers:
+# - tools/sdmx_import/sdmx_cli.py calls sdmx.to_pandas() without attributes,
+#   dropping UNIT_MULT (10^3 vs 10^6 scaling).
+# - sdmx1's CSV reader (sdmx.reader.csv) only targets SDMX-CSV 2.x (failing with
+#   ValueError on SDMX-CSV 1.0 DATAFLOW headers and AssertionError on unattached
+#   DataflowDefinition in sdmx.convert.pandas), while XML downloads take ~3 min.
+# - util/download_util.py and util/download_util_script.py retry permanent 4xx
+#   HTTP errors, cap GET timeouts at 30s, or call sys.exit().
+def _create_http_session(timeout: int = 120) -> requests.Session:
+    """Creates a configured requests.Session with bounded socket timeouts."""
+    session = requests.Session()
+    session.headers.update({
         'User-Agent': DEFAULT_USER_AGENT,
         'Accept-Encoding': 'gzip, deflate',
     })
     adapter = _TimeoutHTTPAdapter(timeout=timeout)
-    client.session.mount('https://', adapter)
-    client.session.mount('http://', adapter)
-    return client
+    session.mount('https://', adapter)
+    session.mount('http://', adapter)
+    return session
 
 
-def _validate_sdmx_xml_file(file_path: Path, dataflow_id: str) -> None:
-    """Verifies that a downloaded SDMX file is non-empty XML."""
+def _build_sdmx_csv_url(
+    spec: SdmxFeedSpec,
+    endpoint: str = SDMX_ENDPOINT,
+    agency_id: str = SDMX_AGENCY_ID,
+) -> str:
+    """Builds the OECD SDMX v2.1 REST data URL for a feed specification."""
+    base = endpoint.rstrip('/')
+    return f'{base}/data/{agency_id},{spec.dataflow_id},/{spec.selection_key}'
+
+
+def _validate_sdmx_csv_file(file_path: Path, dataflow_id: str) -> None:
+    """Verifies that a downloaded SDMX file is non-empty CSV with expected columns."""
     if not file_path.is_file() or file_path.stat().st_size == 0:
         raise RuntimeError(
             f'SDMX download produced an empty raw file for {dataflow_id} at '
             f'{file_path}')
-    with open(file_path, 'rb') as f:
-        head = f.read(256).lstrip()
-    if not head.startswith((b'<?xml', b'<message:', b'<GenericData')):
+    with open(file_path, mode='r', encoding='utf-8-sig', errors='replace') as f:
+        header_line = f.readline()
+    stripped = header_line.lstrip()
+    if not stripped or stripped.startswith('<'):
         raise RuntimeError(
-            f'Invalid SDMX-ML XML payload for {dataflow_id}: {head[:100]!r}')
+            f'Invalid SDMX-CSV payload for {dataflow_id}: {stripped[:100]!r}')
+    header_cols = {col.strip() for col in next(csv.reader([header_line]), [])}
+    missing_cols = REQUIRED_SDMX_CSV_COLUMNS - header_cols
+    if missing_cols:
+        raise RuntimeError(f'SDMX-CSV payload for {dataflow_id} missing '
+                           f'required columns {sorted(missing_cols)}: '
+                           f'got {sorted(header_cols)}')
 
 
 def fetch_sdmx_dataframe(
-    client: sdmx.Client,
+    session: requests.Session,
     spec: SdmxFeedSpec,
     raw_dir: str,
     max_retries: int = 3,
     retry_delay: float = 5.0,
 ) -> pd.DataFrame:
-    """Downloads an SDMX dataflow, archives the raw payload, and returns a DataFrame."""
+    """Downloads an OECD SDMX-CSV dataflow and returns a DataFrame."""
     os.makedirs(raw_dir, exist_ok=True)
     raw_dest = Path(raw_dir) / spec.raw_filename
     temp_raw = Path(f'{raw_dest}.tmp')
-    target_url = f'{SDMX_ENDPOINT.rstrip("/")}/data/{spec.dataflow_id}'
+    target_url = _build_sdmx_csv_url(spec)
 
     last_err: Exception | None = None
     for attempt in range(1, max_retries + 1):
         try:
             logging.info(
-                'Outbound SDMX request [attempt %d/%d]: method=GET '
-                'url=%s key=%s params=%s body=None',
+                'Outbound SDMX-CSV request [attempt %d/%d]: method=GET '
+                'url=%s params=%s body=None',
                 attempt,
                 max_retries,
                 target_url,
-                spec.key,
                 spec.params,
             )
-            with open(temp_raw, mode='w+b') as raw_fp:
-                msg = client.data(
-                    spec.dataflow_id,
-                    key=spec.key,
-                    params=spec.params,
-                    tofile=raw_fp,
-                )
-                raw_fp.flush()
-            _validate_sdmx_xml_file(temp_raw, spec.dataflow_id)
-            parsed = sdmx.to_pandas(msg, attributes='osgd')
-            if isinstance(parsed, pd.Series):
-                df = parsed.reset_index(name='value')
-            elif isinstance(parsed, pd.DataFrame):
-                df = parsed.reset_index()
-            else:
-                raise ValueError(
-                    f'Unexpected sdmx.to_pandas output type '
-                    f'{type(parsed).__name__} for {spec.dataflow_id}')
+            with session.get(target_url, params=spec.params,
+                             stream=True) as resp:
+                resp.raise_for_status()
+                response_url = resp.url
+                with open(temp_raw, mode='wb') as raw_fp:
+                    for chunk in resp.iter_content(chunk_size=65536):
+                        if chunk:
+                            raw_fp.write(chunk)
+            _validate_sdmx_csv_file(temp_raw, spec.dataflow_id)
+            df = pd.read_csv(temp_raw, dtype=str, keep_default_na=False)
             if df.empty:
                 raise ValueError(
-                    f'Parsed SDMX DataFrame is empty for {spec.dataflow_id}')
+                    f'Parsed SDMX-CSV DataFrame is empty for {spec.dataflow_id}'
+                )
             os.replace(temp_raw, raw_dest)
-            response_url = getattr(getattr(msg, 'response', None), 'url', '')
             logging.info(
-                'Received SDMX response for %s from %s (%d bytes archived to %s)',
+                'Received SDMX-CSV response for %s from %s (%d bytes -> %s)',
                 spec.dataflow_id,
                 response_url or target_url,
                 raw_dest.stat().st_size,
@@ -375,9 +377,8 @@ def fetch_sdmx_dataframe(
             if (status_code is not None and
                     status_code not in TRANSIENT_HTTP_STATUSES):
                 raise RuntimeError(
-                    f'Permanent HTTP {status_code} error fetching SDMX '
-                    f'{spec.dataflow_id} (url={target_url}, key={spec.key}): '
-                    f'{err}') from err
+                    f'Permanent HTTP {status_code} error fetching SDMX-CSV '
+                    f'{spec.dataflow_id} (url={target_url}): {err}') from err
             logging.warning(
                 'Transient HTTP error (%s) fetching %s (attempt %d/%d): %s',
                 status_code,
@@ -407,7 +408,7 @@ def fetch_sdmx_dataframe(
             time.sleep(sleep_secs)
 
     raise RuntimeError(
-        f'Failed to download SDMX dataflow {spec.dataflow_id} after '
+        f'Failed to download SDMX-CSV dataflow {spec.dataflow_id} after '
         f'{max_retries} attempts: {last_err}') from last_err
 
 
@@ -434,7 +435,10 @@ def _parse_float(raw_val: Any) -> float | None:
     text = str(raw_val).strip()
     if not text or text.lower() in ('nan', 'na', '..', '-'):
         return None
-    val = float(text)
+    try:
+        val = float(text)
+    except ValueError:
+        return None
     if math.isnan(val) or math.isinf(val):
         return None
     return val
@@ -478,7 +482,9 @@ def normalize_sdmx_feed(
         if not year.isdigit() or len(year) != 4:
             continue
 
-        obs_val = _parse_float(row.get('value'))
+        raw_obs = row.get('OBS_VALUE') if 'OBS_VALUE' in row else row.get(
+            'value')
+        obs_val = _parse_float(raw_obs)
         if obs_val is None:
             continue
 
@@ -697,8 +703,9 @@ def merge_observations(
 def write_staging_csv_atomic(
     output_dir: str,
     rows: list[dict[str, str]],
+    preserve_filenames: set[str] | None = None,
 ) -> str:
-    """Purges stale staging CSVs and atomically writes the unified input CSV."""
+    """Purges stale CSVs and atomically writes the unified input CSV."""
     if not rows:
         raise ValueError('Cannot write empty staging CSV')
 
@@ -707,8 +714,11 @@ def write_staging_csv_atomic(
     dest_path = out_dir / STAGING_CSV_FILENAME
     temp_path = out_dir / f'{STAGING_CSV_FILENAME}.tmp'
 
+    keep_names = {STAGING_CSV_FILENAME}
+    if preserve_filenames:
+        keep_names.update(preserve_filenames)
     for existing_csv in out_dir.glob('*.csv'):
-        if existing_csv != dest_path:
+        if existing_csv.name not in keep_names:
             existing_csv.unlink()
 
     try:
@@ -752,40 +762,45 @@ def download_and_process(
     gcs_bucket: str = HISTORICAL_GCS_BUCKET,
     gcs_blob: str = HISTORICAL_GCS_BLOB,
 ) -> str:
-    """Runs end-to-end SDMX download, GCS baseline backfill, and staging CSV generation."""
+    """Runs end-to-end SDMX-CSV download, GCS baseline backfill, and staging CSV generation."""
     valid_places = load_resolved_places(places_resolved_csv)
     logging.info('Loaded %d resolved place mappings.', len(valid_places))
 
-    sdmx_client = _create_sdmx_client()
+    work_raw_dir = raw_dir or output_dir
     live_records: dict[tuple[str, str, str, str], str] = {}
     expected_raw_files: set[str] = {HISTORICAL_RAW_FILENAME}
-    for spec in SDMX_FEEDS:
-        expected_raw_files.add(spec.raw_filename)
-        df = fetch_sdmx_dataframe(
-            client=sdmx_client,
-            spec=spec,
-            raw_dir=raw_dir,
-        )
-        feed_records = normalize_sdmx_feed(
-            spec.name,
-            df,
-            valid_places,
-            expected_series=spec.expected_series,
-        )
-        logging.info(
-            'Normalized %d observations from SDMX feed %s (%s).',
-            len(feed_records),
-            spec.name,
-            spec.dataflow_id,
-        )
-        live_records.update(feed_records)
+    with _create_http_session() as session:
+        for spec in SDMX_FEEDS:
+            expected_raw_files.add(spec.raw_filename)
+            df = fetch_sdmx_dataframe(
+                session=session,
+                spec=spec,
+                raw_dir=work_raw_dir,
+            )
+            feed_records = normalize_sdmx_feed(
+                spec.name,
+                df,
+                valid_places,
+                expected_series=spec.expected_series,
+            )
+            logging.info(
+                'Normalized %d observations from SDMX-CSV feed %s (%s).',
+                len(feed_records),
+                spec.name,
+                spec.dataflow_id,
+            )
+            live_records.update(feed_records)
 
     hist_csv_path = download_historical_baseline_from_gcs(
         gcs_bucket=gcs_bucket,
         gcs_blob=gcs_blob,
-        raw_dir=raw_dir,
+        raw_dir=work_raw_dir,
     )
-    _cleanup_stale_files(raw_dir, expected_raw_files)
+    same_dir = os.path.abspath(work_raw_dir) == os.path.abspath(output_dir)
+    expected_in_raw_dir = set(expected_raw_files)
+    if same_dir:
+        expected_in_raw_dir.add(STAGING_CSV_FILENAME)
+    _cleanup_stale_files(work_raw_dir, expected_in_raw_dir)
 
     historical_records = parse_historical_baseline_csv(
         csv_path=hist_csv_path,
@@ -800,7 +815,11 @@ def download_and_process(
         live_records=live_records,
         historical_records=historical_records,
     )
-    staging_path = write_staging_csv_atomic(output_dir, merged_rows)
+    staging_path = write_staging_csv_atomic(
+        output_dir,
+        merged_rows,
+        preserve_filenames=expected_raw_files if same_dir else None,
+    )
     logging.info(
         'Wrote %d total observations (%d live SDMX + %d retained historical) '
         'to %s',
