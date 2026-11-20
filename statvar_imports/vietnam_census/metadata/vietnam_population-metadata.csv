@@ -1,0 +1,15 @@
+parameter,value
+url,https://www.gso.gov.vn/en/px-web/?pxid=E0203-07&theme=Population%20and%20Employment
+description,"Average population by province, sex and residence by Cities, provincies, Average population and Year"
+#place_type,"Country,province,city"
+#places_within,country/VNM
+start_date,1995
+end_date,2022
+release_frequency,1years
+process,"To download data:
+Click on the url -> select all ""Cities, provincies"",""Average population"" and ""year""-> click on continue -> click save table as --> select comma delimited with heading -> on popup click on save."
+
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,measurementMethod,#input"
+header_rows,4
+mapped_rows,4
+mapped_columns,1
