@@ -61,7 +61,7 @@ def resolve_with_recon(output_path: str,
                 resolved_geos_map[(
                     str(response_elem["latitude"]) + ',' +
                     str(response_elem["longitude"]))] = place_dcid
-            except:
+            except (KeyError, TypeError):
                 print("This coordinate pair needs to be manually resolved: ",
                       response_elem)
                 resolved_geos_map[(str(response_elem["latitude"]) + ',' +
