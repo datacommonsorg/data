@@ -1,0 +1,8 @@
+Node: E:indonesia_health_output->E0
+observationAbout: C:indonesia_health_output->observationAbout
+observationDate: C:indonesia_health_output->observationDate
+value: C:indonesia_health_output->value
+variableMeasured: C:indonesia_health_output->variableMeasured
+unit: C:indonesia_health_output->unit
+scalingFactor: C:indonesia_health_output->scalingFactor
+typeOf: dcs:StatVarObservation

@@ -1,0 +1,111 @@
+Node: dcid:healthServiceType
+typeOf: dcs:Property
+name: "healthServiceType"
+domainIncludes: dcid:HealthEstablishment
+rangeIncludes: dcid:FamilyPlanningTypeEnum
+isProvisional: dcs:True
+
+Node: dcid:ContraceptionMethod
+typeOf: dcid:BirthControlMethodEnum
+name: "Contraception Method"
+isProvisional: dcs:True
+
+Node: dcid:TetanusNeonatorum
+typeOf: dcid:MedicalConditionIncidentTypeEnum
+name: "Tetanus Neonatorum"
+isProvisional: dcs:True
+
+Node: dcid:DengueHemorrhagicFever
+typeOf: dcid:MedicalConditionIncidentTypeEnum
+name: "Dengue Hemorrhagic Fever"
+isProvisional: dcs:True
+
+Node: dcid:DiseasedPerson
+typeOf: dcid:MedicalConditionIncidentTypeEnum
+name: "Diseased Person"
+isProvisional: dcs:True
+
+Node: dcid:NewlyConfirmedCase
+typeOf: dcid:MedicalStatusEnum
+name: "Newly Confirmed Case"
+isProvisional: dcs:True
+
+Node: dcid:GeneralHospitals
+typeOf: dcid:HealthEstablishmentTypeEnum
+name: "General Hospitals"
+isProvisional: dcs:True
+
+Node: dcid:SpecialHospitals
+typeOf: dcid:HealthEstablishmentTypeEnum
+name: "Special Hospitals"
+isProvisional: dcs:True
+
+Node: dcid:PublicHealthCenters
+typeOf: dcid:HealthEstablishmentTypeEnum
+name: "Public Health Centers"
+isProvisional: dcs:True
+
+Node: dcid:GovernmentHospital
+typeOf: dcid:HealthEstablishmentTypeEnum
+name: "Government Hospital"
+isProvisional: dcs:True
+
+Node: dcid:PrivateHospital
+typeOf: dcid:HealthEstablishmentTypeEnum
+name: "Private Hospital"
+isProvisional: dcs:True
+
+Node: dcid:DoctorPracticeOrPolyclinic
+typeOf: dcid:HealthEstablishmentTypeEnum
+name: "Doctor Practice or Polyclinic"
+isProvisional: dcs:True
+
+Node: dcid:CommunityHealthCenter
+typeOf: dcid:HealthEstablishmentTypeEnum
+name: "Community Health Center"
+isProvisional: dcs:True
+
+Node: dcid:HealthWorkerPractice
+typeOf: dcid:HealthEstablishmentTypeEnum
+name: "Health Worker Practice"
+isProvisional: dcs:True
+
+Node: dcid:BatraPractice
+typeOf: dcid:HealthEstablishmentTypeEnum
+name: "Batra Practice"
+isProvisional: dcs:True
+
+Node: dcid:BirthAttendant
+typeOf: dcid:HealthEstablishmentTypeEnum
+name: "Birth Attendant"
+isProvisional: dcs:True
+
+Node: dcid:BPS_OtherHealthEstablishments
+typeOf: dcid:HealthEstablishmentTypeEnum
+name: "BPS Other Health Establishments"
+isProvisional: dcs:True
+
+Node: dcid:PracticingDoctorOrMidwife
+typeOf: dcid:HealthEstablishmentTypeEnum
+name: "Practicing Doctor or Midwife"
+isProvisional: dcs:True
+
+Node: dcid:JointClinicOrDoctorPractice
+typeOf: dcid:HealthEstablishmentTypeEnum
+name: "Joint Clinic or Doctor Practice"
+isProvisional: dcs:True
+
+Node: dcid:VillageMaternityClinicOrIntegratedServiceOrMedicalCenter
+typeOf: dcid:HealthEstablishmentTypeEnum
+name: "Village Maternity Clinic, Integrated Service, or Medical Center"
+isProvisional: dcs:True
+
+Node: dcid:PracticeTraditionalOrAlternativeMedicine
+typeOf: dcid:HealthEstablishmentTypeEnum
+name: "Traditional Practice or Alternative Medicine"
+isProvisional: dcs:True
+
+Node: dcid:CommunityHealthResource
+typeOf: dcid:HealthEstablishmentTypeEnum
+name: "Community Health Resource"
+isProvisional: dcs:True
