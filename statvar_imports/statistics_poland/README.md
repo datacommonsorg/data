@@ -2,7 +2,7 @@
 
 ## Overview
 - **Import Name:** `statistics_poland`
-- **Import Type:** Automated (Scheduled via Cloud Batch cron: `0 0 1 1,4,7,10 *`)
+- **Import Type:** Automated (Scheduled via Cloud Batch cron: `30 11 * * 3`)
 - **Curator:** `support@datacommons.org`
 
 This import processes demographic population statistics for Poland from the official Central
@@ -23,8 +23,8 @@ Statistical Office of Poland (Główny Urząd Statystyczny - GUS) Bank Danych Lo
 - **Temporal Coverage:** Dynamic from 2003 through `current_year + 1` (currently 2025).
 
 ## Configuration & Credentials
-- **API Key:** GUS BDL API key is configured with a default client key and can be overridden
-  via the `BDL_API_KEY` environment variable:
+- **API Key:** Optional GUS BDL API key can be provided via the `BDL_API_KEY` environment variable
+  (anonymous requests are used if unset):
   ```bash
   export BDL_API_KEY="<your-gus-bdl-api-key>"
   ```
