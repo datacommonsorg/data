@@ -127,11 +127,12 @@ select = [
     "DTZ003",
     "DTZ004",
     # flake8-bugbear correctness rules (B0xx).
-    # Note: B006, B007, B018, and B020 (plus B9xx) are deferred to follow-up PRs.
+    # Note: B007, B020, and B904 are deferred to follow-up PRs.
     "B002",
     "B003",
     "B004",
     "B005",
+    "B006",
     "B008",
     "B009",
     "B010",
@@ -159,6 +160,14 @@ select = [
     "B034",
     "B035",
     "B039",
+]
+ignore = [
+    # Bare dict literals in `.py` config and PV-map files loaded via
+    # ast.literal_eval().
+    "B018",
+    # Skipped for now: noisy on same-DataFrame zip(df['a'], df['b']) calls and
+    # risky to flip to strict=True on untested legacy CSV scripts.
+    "B905",
 ]
 
 [lint.flake8-bugbear]
