@@ -1,7 +1,7 @@
 {
     "import_specifications": [
         {
-            "import_name": "covid19IndiaCasesCountStatesData",
+            "import_name": "Covid19IndiaData",
             "curator_emails": [
                 "support@datacommons.org"
             ],
