@@ -23,10 +23,11 @@ from unittest import mock
 import requests
 
 MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
-if MODULE_DIR not in sys.path:
-    sys.path.insert(0, MODULE_DIR)
+REPO_ROOT = os.path.abspath(os.path.join(MODULE_DIR, '..', '..'))
+if REPO_ROOT not in sys.path:
+    sys.path.insert(0, REPO_ROOT)
 
-import download_input_files as dl
+from scripts.nces_nationsreportcard import download_input_files as dl
 
 
 def _mock_response(status_code=200, json_payload=None, text=''):

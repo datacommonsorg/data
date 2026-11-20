@@ -51,17 +51,25 @@ MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string('output_dir', os.path.join(MODULE_DIR, 'input_files'),
-                    'Directory where downloaded NAEP CSV files will be saved.')
-flags.DEFINE_list(
-    'files', None, 'Optional comma-separated list of CSV filenames to download '
-    '(e.g. "naep_national_civ.csv,naep_state_wri.csv"). '
-    'If omitted, downloads all 16 files.')
+flags.DEFINE_string('output_dir',
+                    os.path.join(MODULE_DIR, 'input_files'),
+                    'Directory where downloaded NAEP CSV files will be saved.',
+                    allow_override=True)
+flags.DEFINE_list('files',
+                  None,
+                  'Optional comma-separated list of CSV filenames to download '
+                  '(e.g. "naep_national_civ.csv,naep_state_wri.csv"). '
+                  'If omitted, downloads all 16 files.',
+                  allow_override=True)
 flags.DEFINE_integer(
-    'max_workers', 8,
-    'Maximum number of concurrent HTTP worker threads for NAEP API requests.')
-flags.DEFINE_integer('read_timeout', 120,
-                     'HTTP read timeout in seconds per NAEP API request.')
+    'max_workers',
+    8,
+    'Maximum number of concurrent HTTP worker threads for NAEP API requests.',
+    allow_override=True)
+flags.DEFINE_integer('read_timeout',
+                     120,
+                     'HTTP read timeout in seconds per NAEP API request.',
+                     allow_override=True)
 
 NAEP_API_URL = 'https://www.nationsreportcard.gov/Dataservice/GetAdhocData.aspx'
 

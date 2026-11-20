@@ -29,14 +29,18 @@ from absl import flags
 
 MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 REPO_ROOT = os.path.abspath(os.path.join(MODULE_DIR, '..', '..'))
-sys.path.insert(1, os.path.join(REPO_ROOT, 'tools', 'statvar_importer'))
-sys.path.insert(1, os.path.join(REPO_ROOT, 'util'))
-sys.path.insert(1, os.path.join(MODULE_DIR, 'config'))
+for _path in (
+        REPO_ROOT,
+        os.path.join(REPO_ROOT, 'tools', 'statvar_importer'),
+        os.path.join(REPO_ROOT, 'util'),
+):
+    if _path not in sys.path:
+        sys.path.insert(1, _path)
 
 # pylint:disable=wrong-import-position,import-error,wildcard-import
-from conf import denominator_ignore_prop
 from mcf_file_util import get_numeric_value, strip_namespace
 import property_value_utils as pv_utils
+from scripts.nces_nationsreportcard.config.conf import denominator_ignore_prop
 from stat_var_processor import StatVarDataProcessor, process
 # pylint:enable=wrong-import-position,import-error,wildcard-import
 

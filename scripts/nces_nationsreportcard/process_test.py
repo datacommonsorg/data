@@ -13,26 +13,39 @@
 # limitations under the License.
 """Unit tests for NAEP StatVar processing (process.py)."""
 
+import ast
 import csv
 import os
+import subprocess
 import sys
 import tempfile
 import unittest
 
 MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
-REPO_ROOT = os.path.abspath(os.path.join(MODULE_DIR, '..', '..'))
-for _p in [
-        MODULE_DIR,
-        os.path.join(MODULE_DIR, 'config'),
-        os.path.join(REPO_ROOT, 'tools', 'statvar_importer'),
-        os.path.join(REPO_ROOT, 'util'),
-]:
-    if _p not in sys.path:
-        sys.path.insert(0, _p)
+PROCESS_PY = os.path.join(MODULE_DIR, 'process.py')
 
-from mcf_file_util import load_mcf_nodes
-import process as naep_process
-from stat_var_processor import process as run_stat_var_process
+
+def _clean_nodes(mcf_path: str) -> dict[str, dict[str, str]]:
+    """Parses MCF nodes into {dcid: {prop: value}} without importing absl flags."""
+    nodes: dict[str, dict[str, str]] = {}
+    current_dcid = None
+    with open(mcf_path, encoding='utf-8') as f:
+        for raw_line in f:
+            line = raw_line.strip()
+            if not line or line.startswith('#') or ':' not in line:
+                continue
+            prop, value = (part.strip() for part in line.split(':', 1))
+            if prop == 'Node':
+                if value.startswith('dcs:'):
+                    value = f"dcid:{value.removeprefix('dcs:')}"
+                elif not value.startswith('dcid:'):
+                    value = f'dcid:{value}'
+                current_dcid = value
+                nodes.setdefault(current_dcid, {})
+            elif current_dcid is not None:
+                nodes[current_dcid][prop] = value
+    return nodes
+
 
 _CSV_COLUMNS = [
     'year',
@@ -101,6 +114,23 @@ class ProcessTest(unittest.TestCase):
 
     def tearDown(self):
         self._tmpdir.cleanup()
+
+    def _run_process_cli(self,
+                         input_csv: str,
+                         output_prefix: str,
+                         config_path: str,
+                         counters_path: str | None = None) -> None:
+        cmd = [
+            sys.executable,
+            PROCESS_PY,
+            f'--input_data={input_csv}',
+            f'--output_path={output_prefix}',
+            f'--config_file={config_path}',
+            f"--pv_map={','.join(self.pv_map)}",
+        ]
+        if counters_path:
+            cmd.append(f'--output_counters={counters_path}')
+        subprocess.run(cmd, check=True)
 
     def _write_fixture_csv(self, path: str, rows: list[dict]) -> bytes:
         with open(path, 'w', newline='', encoding='utf-8') as f:
@@ -247,7 +277,7 @@ class ProcessTest(unittest.TestCase):
                 'schoolType: dcid:NCES_PublicSchool\n')
 
         with open(self.base_conf_path, encoding='utf-8') as f:
-            base_conf = eval(f.read())  # pylint: disable=eval-used
+            base_conf = ast.literal_eval(f.read())
         base_conf['existing_statvar_mcf'] = existing_mcf
 
         fast_conf_path = os.path.join(self.tmpdir, 'fast_conf.py')
@@ -259,27 +289,13 @@ class ProcessTest(unittest.TestCase):
 
         fast_out = os.path.join(self.tmpdir, 'out_fast', 'naep_performance')
         slow_out = os.path.join(self.tmpdir, 'out_slow', 'naep_performance')
-        fast_counters = {}
-        slow_counters = {}
+        fast_counters_csv = os.path.join(self.tmpdir, 'fast_counters.csv')
+        slow_counters_csv = os.path.join(self.tmpdir, 'slow_counters.csv')
 
-        self.assertTrue(
-            run_stat_var_process(
-                data_processor_class=naep_process.NaepEduPerformance,
-                input_data=[csv_path],
-                output_path=fast_out,
-                config=fast_conf_path,
-                pv_map_files=self.pv_map,
-                counters=fast_counters,
-            ))
-        self.assertTrue(
-            run_stat_var_process(
-                data_processor_class=naep_process.NaepEduPerformance,
-                input_data=[csv_path],
-                output_path=slow_out,
-                config=slow_conf_path,
-                pv_map_files=self.pv_map,
-                counters=slow_counters,
-            ))
+        self._run_process_cli(csv_path, fast_out, fast_conf_path,
+                              fast_counters_csv)
+        self._run_process_cli(csv_path, slow_out, slow_conf_path,
+                              slow_counters_csv)
 
         # Raw input CSV must remain 100% untouched.
         with open(csv_path, 'rb') as f:
@@ -297,15 +313,6 @@ class ProcessTest(unittest.TestCase):
             slow_csv_text = f2.read()
         self.assertEqual(fast_csv_text, slow_csv_text)
 
-        def _clean_nodes(mcf_path: str) -> dict:
-            return {
-                dcid: {
-                    k: v for k, v in pvs.items() if not k.startswith('#')
-                }
-                for dcid, pvs in load_mcf_nodes(mcf_path).items()
-                if dcid and not dcid.startswith('#')
-            }
-
         fast_nodes = _clean_nodes(f'{fast_out}_stat_vars.mcf')
         slow_nodes = _clean_nodes(f'{slow_out}_stat_vars.mcf')
         self.assertEqual(fast_nodes, slow_nodes)
@@ -320,8 +327,10 @@ class ProcessTest(unittest.TestCase):
         for dcid, pvs in fast_nodes.items():
             if dcid == 'dcid:percent':
                 continue
-            self.assertEqual(pvs.get('typeOf'), 'dcid:StatisticalVariable',
-                             f'Unexpected non-SV node {dcid}: {pvs}')
+            self.assertIn(
+                pvs.get('typeOf'),
+                ('dcid:StatisticalVariable', 'dcs:StatisticalVariable'),
+                f'Unexpected non-SV node {dcid}: {pvs}')
             self.assertFalse(
                 'schoolType' in pvs and 'schoolManagement' in pvs,
                 f'Double-tagged schoolType+schoolManagement SV leaked: {dcid}')
@@ -332,12 +341,14 @@ class ProcessTest(unittest.TestCase):
                     f'Tautological Private+Charter SV leaked: {dcid}')
             if 'educationalAchievementLevel' in pvs:
                 denom_ref = pvs.get('measurementDenominator', '')
+                if denom_ref.startswith('dcs:'):
+                    denom_ref = f"dcid:{denom_ref.removeprefix('dcs:')}"
                 self.assertTrue(denom_ref.startswith('dcid:Count_Student_'),
                                 f'Missing denominator on {dcid}: {pvs}')
                 self.assertIn(denom_ref, fast_nodes,
                               f'Dangling denominator {denom_ref} on {dcid}')
 
-        # Verify legacy ALC DCID reuse + full float precision + 0 spell errors.
+        # Verify legacy ALC DCID reuse + full float precision + 0 error counters.
         self.assertIn(
             'dcid:Percent_NAEP_CumulativeAtOrAboveProficient_In_'
             'Count_Student_Female_SchoolGrade4_Mathematics_PublicSchool',
@@ -348,22 +359,20 @@ class ProcessTest(unittest.TestCase):
                       fast_nodes)
         self.assertNotIn('dcid:Percent_Student_SchoolGrade4_Mathematics',
                          fast_nodes)
-        err_keys = [k for k in fast_counters if k.startswith('err')]
-        self.assertEqual(err_keys, [])
+        with open(fast_counters_csv, encoding='utf-8') as f:
+            err_rows = [
+                row[0]
+                for row in csv.reader(f)
+                if row and row[0].startswith('err')
+            ]
+        self.assertEqual(err_rows, [])
 
     def test_sample_input_matches_expected_sample_output(self):
         test_data_dir = os.path.join(MODULE_DIR, 'test_data')
         sample_in_csv = os.path.join(test_data_dir, 'naep_input.csv')
         actual_prefix = os.path.join(self.tmpdir, 'sample_run', 'naep_output')
 
-        self.assertTrue(
-            run_stat_var_process(
-                data_processor_class=naep_process.NaepEduPerformance,
-                input_data=[sample_in_csv],
-                output_path=actual_prefix,
-                config=self.base_conf_path,
-                pv_map_files=self.pv_map,
-            ))
+        self._run_process_cli(sample_in_csv, actual_prefix, self.base_conf_path)
 
         for ext in ('.csv', '.tmcf'):
             with open(f'{actual_prefix}{ext}',
