@@ -25,8 +25,8 @@ GCS_TEMPLATE_PATH = (
     "poland_data_sample/StatisticsPoland_input.csv")
 
 API_BASE_URL = "https://bdl.stat.gov.pl/api/v1"
-API_KEY = os.environ.get("BDL_API_KEY", "c9a9da02-47ab-4391-dff1-08de66e5ba7b")
-HEADERS = {'X-ClientId': API_KEY}
+API_KEY = os.environ.get("BDL_API_KEY")
+HEADERS = {'X-ClientId': API_KEY} if API_KEY else {}
 
 SUBJECT_ID = "P3447"
 
