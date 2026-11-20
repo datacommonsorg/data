@@ -1,0 +1,73 @@
+Name,Id
+Hospitals,KN.S2
+Public and central Hospitals,KN.S3
+Number of Public hospitals (more than 200 beds),KN.S4
+Number of Central hospitals (100-200 beds),KN.S5
+Number of Central hospitals (less than 100 beds),KN.S6
+Total Number of Public and central hospitals,KN.S7
+Number of Specialty Hospitals,KN.S8
+Beds,KN.S9
+Number of Beds in Public and central Hospitals,KN.S10
+"Number of Beds, in Public hospitals more than 200 beds",KN.S11
+"Number of Beds, in Central hospital 100-200 beds",KN.S12
+"Number of Beds, in Central hospital less than 100 beds",KN.S13
+Total Number of Beds in Public and central hospitals,KN.S14
+Number of beds in Specialty Hospitals,KN.S15
+Number of Crimes,KN.S16
+Social Care Houses,KN.S17
+Number of Social Care Facilities,KN.S18
+Number of Cases that obtained Full Services or left the Facility,KN.S19
+Number of Cases Exist at the end of the year,KN.S20
+Ambulance Services,KN.S21
+Number of Ambulance stations,KN.S22
+Accidents Reasons,KN.S23
+Traffic Accidents,KN.S24
+Tram (Traffic accidents),KN.S25
+Cars (Traffic accidents),KN.S26
+Bicycle or motorbike (Traffic accidents),KN.S27
+Railway (Traffic accidents),KN.S28
+Subway (Traffic accidents),KN.S29
+Other means (Traffic accidents),KN.S30
+Total Traffic accidents,KN.S31
+Fall from heights,KN.S32
+Collapse of buildings,KN.S33
+Injuries during work,KN.S34
+Firearms and sharp instruments,KN.S35
+Scuffles,KN.S36
+Proceed in suicide,KN.S37
+Poison gas and electric shocks,KN.S38
+Renal colic and different intestinal diseases,KN.S39
+Hard birth and Bleeding,KN.S40
+Burns,KN.S41
+Poisoning,KN.S42
+Drowning,KN.S43
+Sports games,KN.S47
+Other reasons,KN.S44
+Total Accidents,KN.S45
+Number of sorties,KN.S46
+Damages from Accidents,KN.S48
+Death,KN.S49
+Bleeding,KN.S50
+Wounds,KN.S51
+Loss of Consciousness,KN.S52
+Suffocation,KN.S53
+"Poisoning, Damages from accidents",KN.S54
+Insect Bites,KN.S55
+"Burns, Damages from accidents",KN.S56
+Dislocating,KN.S57
+Fracture,KN.S58
+Hernia,KN.S59
+Anaesthetics,KN.S60
+Scorpion or snake bites,KN.S64
+"Other (including contusion, bruises, fracture, etc.)",KN.S61
+Other Damages from Accidents,KN.S62
+Total Damages from accidents,KN.S63
+Number of athletic establishments,KN.S65
+Clubs following to governmental sector,KN.S66
+Clubs following to public & public business sector,KN.S67
+Clubs following to private sector,KN.S68
+Total Clubs,KN.S69
+Youth centers in cities,KN.S70
+Youth center in villages,KN.S71
+Total youth centers,KN.S72
+Total Number of athletic establishments,KN.S73

@@ -1,0 +1,181 @@
+place_name,dcid
+1,country/EGY
+2,wikidataId/Q30805
+3,wikidataId/Q29943
+4,wikidataId/Q31079
+5,wikidataId/Q31070
+6,wikidataId/Q30644
+7,wikidataId/Q31068
+8,wikidataId/Q31074
+9,wikidataId/Q31075
+10,wikidataId/Q30946
+11,wikidataId/Q30835
+12,wikidataId/Q30786
+13,wikidataId/Q30630
+14,wikidataId/Q31067
+15,wikidataId/Q30832
+16,wikidataId/Q30683
+17,wikidataId/Q30656
+18,wikidataId/Q30675
+19,wikidataId/Q29965
+20,wikidataId/Q30669
+21,wikidataId/Q31065
+22,wikidataId/Q29937
+23,wikidataId/Q30797
+24,wikidataId/Q30831
+25,wikidataId/Q30650
+26,wikidataId/Q30682
+27,wikidataId/Q30662
+28,wikidataId/Q30815
+KN.L1,country/EGY
+KN.L2,wikidataId/Q30805
+KN.L3,wikidataId/Q29943
+KN.L4,wikidataId/Q31079
+KN.L5,wikidataId/Q31070
+KN.L6,wikidataId/Q771345
+KN.L7,wikidataId/Q335708
+KN.L8,wikidataId/Q30644
+KN.L9,wikidataId/Q31068
+KN.L10,wikidataId/Q31074
+KN.L11,wikidataId/Q31075
+KN.L12,wikidataId/Q30946
+KN.L13,wikidataId/Q30835
+KN.L14,wikidataId/Q30786
+KN.L15,wikidataId/Q30630
+KN.L16,wikidataId/Q31067
+KN.L17,wikidataId/Q30832
+KN.L18,wikidataId/Q30683
+KN.L19,wikidataId/Q30656
+KN.L20,wikidataId/Q30675
+KN.L21,wikidataId/Q29965
+KN.L22,wikidataId/Q30669
+KN.L23,wikidataId/Q31065
+KN.L24,wikidataId/Q29937
+KN.L25,wikidataId/Q30797
+KN.L26,wikidataId/Q30831
+KN.L27,wikidataId/Q30650
+KN.L28,wikidataId/Q30682
+KN.L29,wikidataId/Q30662
+KN.L30,wikidataId/Q30815
+EG,country/EGY
+EG-C,wikidataId/Q30805
+EG-ALX,wikidataId/Q29943
+EG-PTS,wikidataId/Q31079
+EG-SUZ,wikidataId/Q31070
+EG-HU,wikidataId/Q771345
+EG-SU,wikidataId/Q335708
+EG-DT,wikidataId/Q30644
+EG-DK,wikidataId/Q31068
+EG-DA,wikidataId/Q31068
+EG-SHR,wikidataId/Q31074
+EG-KB,wikidataId/Q31075
+EG-KFS,wikidataId/Q30946
+EG-GH,wikidataId/Q30835
+EG-MNF,wikidataId/Q30786
+EG-BH,wikidataId/Q30630
+EG-IS,wikidataId/Q31067
+EG-GZ,wikidataId/Q30832
+EG-BNS,wikidataId/Q30683
+EG-FYM,wikidataId/Q30656
+EG-MN,wikidataId/Q30675
+EG-AST,wikidataId/Q29965
+EG-SHG,wikidataId/Q30669
+EG-KN,wikidataId/Q31065
+EG-ASN,wikidataId/Q29937
+EG-LX,wikidataId/Q30797
+EG-BA,wikidataId/Q30831
+EG-NV,wikidataId/Q30650
+EG-WAD,wikidataId/Q30650
+EG-MT,wikidataId/Q30682
+EG-SIN,wikidataId/Q30662
+EG-JS,wikidataId/Q30815
+Egypt,country/EGY
+Cairo,wikidataId/Q30805
+Alexandria,wikidataId/Q29943
+Port Said,wikidataId/Q31079
+Suez,wikidataId/Q31070
+Helwan,wikidataId/Q771345
+6th of October Governorate,wikidataId/Q335708
+Damietta,wikidataId/Q30644
+Dakahlia,wikidataId/Q31068
+Sharkia,wikidataId/Q31074
+Eastern,wikidataId/Q31074
+Kalyoubia,wikidataId/Q31075
+Qalyubia,wikidataId/Q31075
+Kafr El-Sheikh,wikidataId/Q30946
+Gharbia,wikidataId/Q30835
+Western,wikidataId/Q30835
+Menoufia,wikidataId/Q30786
+Behera,wikidataId/Q30630
+Beheira,wikidataId/Q30630
+The lake,wikidataId/Q30630
+Ismailia,wikidataId/Q31067
+Giza,wikidataId/Q30832
+Beni Suef,wikidataId/Q30683
+Fayoum,wikidataId/Q30656
+Minya,wikidataId/Q30675
+Assiut,wikidataId/Q29965
+Sohag,wikidataId/Q30669
+Qena,wikidataId/Q31065
+Aswan,wikidataId/Q29937
+Luxor,wikidataId/Q30797
+Red Sea,wikidataId/Q30831
+El Wadi El Gidid,wikidataId/Q30650
+New Valley,wikidataId/Q30650
+Matrouh,wikidataId/Q30682
+North Sinai,wikidataId/Q30662
+South Sinai,wikidataId/Q30815
+إجمالــــــــي الجمهــــورية,country/EGY
+القـــــــاهرة,wikidataId/Q30805
+الإسكندرية,wikidataId/Q29943
+بورسعيـــــد,wikidataId/Q31079
+السويــــــس,wikidataId/Q31070
+دميـــــــــاط,wikidataId/Q30644
+الدقهلـــــية,wikidataId/Q31068
+الشرقيــــــة,wikidataId/Q31074
+القليوبيـــــة,wikidataId/Q31075
+كفر الشيــــخ,wikidataId/Q30946
+الغربيــــــــة,wikidataId/Q30835
+المنوفيــــــــة,wikidataId/Q30786
+البحـــــــــيرة,wikidataId/Q30630
+الإسماعيلـــية,wikidataId/Q31067
+الجيــــــــــزة,wikidataId/Q30832
+بني سويف,wikidataId/Q30683
+الفيوم,wikidataId/Q30656
+المنيا,wikidataId/Q30675
+اسيوط,wikidataId/Q29965
+سوهاج,wikidataId/Q30669
+قنا,wikidataId/Q31065
+اسوان,wikidataId/Q29937
+الأقصر,wikidataId/Q30797
+البحر الأحمر,wikidataId/Q30831
+الوادي الجديد,wikidataId/Q30650
+مطروح,wikidataId/Q30682
+شمال سيناء,wikidataId/Q30662
+جنوب سيناء,wikidataId/Q30815
+مصر,country/EGY
+القاهـرة,wikidataId/Q30805
+الأسكندرية,wikidataId/Q29943
+بـورسعيـد,wikidataId/Q31079
+السويـس,wikidataId/Q31070
+دميـاط,wikidataId/Q30644
+الدقهلية,wikidataId/Q31068
+الشرقية,wikidataId/Q31074
+القليوبية,wikidataId/Q31075
+كفرالشيخ,wikidataId/Q30946
+الغربيـة,wikidataId/Q30835
+المنوفيـة,wikidataId/Q30786
+البحيـرة,wikidataId/Q30630
+الإسماعيلية,wikidataId/Q31067
+الجيزة,wikidataId/Q30832
+بنى سويف,wikidataId/Q30683
+الفيـوم,wikidataId/Q30656
+أسيوط,wikidataId/Q29965
+قنــا,wikidataId/Q31065
+أسوان,wikidataId/Q29937
+الأقصـر,wikidataId/Q30797
+البحر الحمر,wikidataId/Q30831
+الوادى الجديد,wikidataId/Q30650
+مطروح (1),wikidataId/Q30682
+شمال سينـاء (2),wikidataId/Q30662
+جنـوب سينـاء,wikidataId/Q30815

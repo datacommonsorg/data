@@ -1,0 +1,9 @@
+Node: E:ulouknf->E0
+observationAbout: C:ulouknf->observationAbout
+observationDate: C:ulouknf->observationDate
+variableMeasured: C:ulouknf->variableMeasured
+value: C:ulouknf->value
+unit: C:ulouknf->unit
+scalingFactor: C:ulouknf->scalingFactor
+observationPeriod: C:ulouknf->observationPeriod
+typeOf: dcs:StatVarObservation

@@ -1,0 +1,13 @@
+key,prop,val,p1,v1,p2,v2,Name1,"""""",Name2,"""""",AlternateName1,"""""",AlternateName2,"""""",#End,#value
+OBS_VALUE,value,{Number},observationAbout,country/EGY,populationType,Student,name,"""{Name1} ,{Name2}""",alternateName,"""{AlternateName1},{AlternateName2}@ar""",,,,,,
+TIME_PERIOD,observationDate,{Number},,,,,,,,,,,,,,
+FREQ:A,observationPeriod,P1Y,,,,,,,,,,,,,,
+الجامعات الحكومية والازهر,enrollmentStatus,EnrolledInEducationOrTraining,institutionType,PublicUniversity__AlAzharUniversity,Name1,Number of Public and Al-Azhar universities,AlternateName1,الجامعات الحكومية والازهر,,,,,,,,
+الجامعات الخاصة,enrollmentStatus,EnrolledInEducationOrTraining,institutionType,PrivateUniversity,Name1,Number of Private universities,AlternateName1,الجامعات الخاصة,,,,,,,,
+المعاهد العليا الخاصة,enrollmentStatus,EnrolledInEducationOrTraining,institutionType,PrivateHigherInstitute,Name1,Number of Private higher institutes,AlternateName1,المعاهد العليا الخاصة,,,,,,,,
+الاكاديميات,enrollmentStatus,EnrolledInEducationOrTraining,institutionType,Academy,Name1,Number of Academies,AlternateName1,الاكاديميات,,,,,,,,
+المعاهد الفنية فوق المتوسطة,enrollmentStatus,EnrolledInEducationOrTraining,institutionType,UpperMediumTechnicalInstitute,Name1,Number of Upper-medium technical institutes,AlternateName1,المعاهد الفنية فوق المتوسطة,,,,,,,,
+المعاهد المتنوعة,enrollmentStatus,EnrolledInEducationOrTraining,institutionType,OtherInstitute,Name1,Number of Various institutes,AlternateName1,المعاهد المتنوعة,,,,,,,,
+ذكور,gender,Male,,,Name2,male,AlternateName2,ذكور,,,,,,,,
+اناث,gender,Female,,,Name2,female,AlternateName2,اناث,,,,,,,,
+الاجمالى,,,,,Name2,"""""",AlternateName2,"""""",,,,,,,,
