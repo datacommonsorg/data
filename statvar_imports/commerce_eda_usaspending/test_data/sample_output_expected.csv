@@ -1,0 +1,6 @@
+observationAbout,observationDate,variableMeasured,value,unit
+geoId/01,2023,dcid:Amount_Investment,150000,USDollar
+geoId/01,2023,dcid:Amount_Investment_EconomicAdjustmentAssistance,50000,USDollar
+geoId/01,2023,dcid:Amount_Investment_PublicWorks,100000,USDollar
+geoId/06,2024,dcid:Amount_Investment,250000,USDollar
+geoId/06,2024,dcid:Amount_Investment_RegionalTechnologyAndInnovationHubs,250000,USDollar
