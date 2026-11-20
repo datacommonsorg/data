@@ -64,7 +64,7 @@ def download_and_extract_2015_16(data_type, output_dir):
     except Exception as e:
         raise RuntimeError(
             f"Failed to connect/download archive after retries for {config_key}: {e}"
-        )
+        ) from e
 
     logging.info("Download successful. Now extracting...")
 
@@ -127,7 +127,7 @@ def download_and_extract_2015_16(data_type, output_dir):
     except Exception as e:
         raise RuntimeError(
             f"An unhandled error occurred during extraction/processing for {config_key}: {e}"
-        )
+        ) from e
 
 
 def main(_):

@@ -74,7 +74,7 @@ def add_year_column(filepath: str, year: int):
         # Log the error so you see the filename
         logging.error(f"Could not add year column to {filepath}: {e}")
         # Kill the script immediately so you don't get bad data
-        raise RuntimeError(e)
+        raise RuntimeError(e) from e
 
 
 def main(_):

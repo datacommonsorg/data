@@ -213,9 +213,10 @@ class PVMapGenerator:
         working_dir = self._working_dir.resolve()
         try:
             real_path.relative_to(working_dir)
-        except ValueError:
+        except ValueError as e:
             raise ValueError(
-                f"Path '{path}' is outside working directory '{working_dir}'")
+                f"Path '{path}' is outside working directory '{working_dir}'"
+            ) from e
         return real_path
 
     def _resolve_path(self, path: str) -> Path:
@@ -249,9 +250,9 @@ class PVMapGenerator:
 
         try:
             resolved_path.read_text(encoding='utf-8')
-        except UnicodeDecodeError:
+        except UnicodeDecodeError as e:
             raise ValueError(f"Extra instruction file is not valid UTF-8 text: "
-                             f"{resolved_path}")
+                             f"{resolved_path}") from e
 
         return resolved_path
 

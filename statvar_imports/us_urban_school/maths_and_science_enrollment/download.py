@@ -94,7 +94,8 @@ def add_year_ncesid_column(file_path: str, year: int):
 
     except Exception as e:
         raise RuntimeError(
-            f"Failed to add YEAR and nces id columns to {file_path}: {e}")
+            f"Failed to add YEAR and nces id columns to {file_path}: {e}"
+        ) from e
 
 
 @retry(tries=3, delay=5, backoff=2)
