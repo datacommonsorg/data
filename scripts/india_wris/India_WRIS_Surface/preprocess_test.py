@@ -11,50 +11,95 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+"""Hermetic unit tests for India_WRIS_Surface preprocessing."""
 
 import json
 import os
+import sys
+import tempfile
 import unittest
 
 import pandas as pd
 
+_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+_SCRIPTS_DIR = os.path.abspath(os.path.join(_MODULE_DIR, '..', '..'))
+if _SCRIPTS_DIR not in sys.path:
+    sys.path.insert(0, _SCRIPTS_DIR)
+
+from india_wris.India_WRIS_Surface import preprocess
+
 DATASET_NAME = 'India_WRIS_Surface'
+_JSON_FILE_PATH = os.path.join(_MODULE_DIR, '..', 'util', 'surfaceWater.json')
 
-module_dir = os.path.dirname(__file__)
-json_file_path = os.path.join(module_dir, "../util/surfaceWater.json")
+with open(_JSON_FILE_PATH, 'r', encoding='utf-8') as j:
+    _PROPERTIES = json.loads(j.read())
 
-with open(json_file_path, 'r') as j:
-    properties = json.loads(j.read())
-
-pollutants, chem_props = properties
-
-tmcf_file = os.path.join(module_dir, "{}.tmcf".format(DATASET_NAME))
-mcf_file = os.path.join(module_dir, "{}.mcf".format(DATASET_NAME))
+_POLLUTANTS, _CHEM_PROPS = _PROPERTIES
+_TMCF_FILE = os.path.join(_MODULE_DIR, f'{DATASET_NAME}.tmcf')
+_MCF_FILE = os.path.join(_MODULE_DIR, f'{DATASET_NAME}.mcf')
 
 
 class TestPreprocess(unittest.TestCase):
 
-    # Test if all properties are in MCF and TMCF files
     def test_all_nodes_in_mcf_tmcf(self):
-        with open(mcf_file, 'r') as mcf, open(tmcf_file, 'r') as tmcf:
-            # find() method returns the character number if query string is
-            # present in the file, else returns -1
-            for pollutant in pollutants['Pollutant']:
-                self.assertTrue(mcf.read().find(pollutant['statvar']))
-                self.assertTrue(tmcf.read().find(pollutant['statvar']))
+        with (
+                open(_MCF_FILE, 'r', encoding='utf-8') as mcf,
+                open(_TMCF_FILE, 'r', encoding='utf-8') as tmcf,
+        ):
+            mcf_data = mcf.read()
+            tmcf_data = tmcf.read()
 
-            for chem_prop in chem_props['ChemicalProperty']:
-                self.assertTrue(mcf.read().find(chem_prop['statvar']))
-                self.assertTrue(tmcf.read().find(chem_prop['statvar']))
+        for pollutant in _POLLUTANTS['Pollutant']:
+            self.assertIn(pollutant['statvar'], mcf_data)
+            self.assertIn(pollutant['statvar'], tmcf_data)
+            self.assertIn(pollutant['name'], tmcf_data)
 
-    # Test if all columns in dataset are represented as nodes in MCF files
-    def test_all_columns_in_mcf_tmcf(self):
-        data = pd.read_csv(
-            os.path.join(module_dir, '{}.csv'.format(DATASET_NAME)))
-        with open(mcf_file, 'r') as mcf, open(tmcf_file, 'r') as tmcf:
-            for column in data.columns:
-                self.assertTrue(mcf.read().find(column))
-                self.assertTrue(tmcf.read().find(column))
+        for chem_prop in _CHEM_PROPS['ChemicalProperty']:
+            self.assertIn(chem_prop['statvar'], mcf_data)
+            self.assertIn(chem_prop['statvar'], tmcf_data)
+            self.assertIn(chem_prop['name'], tmcf_data)
+
+    def test_preprocess_creates_surface_dcids(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            input_csv = os.path.join(tmpdir, 'surfaceWater.csv')
+            rows = [
+                {
+                    'StateName': 'Assam',
+                    'DistrictName': 'Cachar',
+                    'Month': '2008-01',
+                    'Year': 2008,
+                    'StationName': 'Dholai',
+                    'SurfaceWaterStationLatitude': 24.58611,
+                    'SurfaceWaterStationLongitude': 92.84222,
+                    'Calcium(Ca)': 58.8,
+                    'Chloride(Cl)': 19.88,
+                },
+                {
+                    'StateName': 'Telangana',
+                    'DistrictName': 'Warangal Rural',
+                    'Month': '2019-05',
+                    'Year': 2019,
+                    'StationName': 'Perur',
+                    'SurfaceWaterStationLatitude': 18.0,
+                    'SurfaceWaterStationLongitude': 79.5,
+                    'Calcium(Ca)': 42.0,
+                    'Chloride(Cl)': 15.0,
+                },
+            ]
+            pd.DataFrame(rows).to_csv(input_csv, index=False)
+
+            out_dir = os.path.join(tmpdir, 'output')
+            preprocess.main([
+                f'--input_csv={input_csv}',
+                f'--output_dir={out_dir}',
+            ])
+
+            out_df = pd.read_csv(os.path.join(out_dir, f'{DATASET_NAME}.csv'))
+            self.assertEqual(len(out_df), 2)
+            self.assertEqual(
+                list(out_df['dcid']),
+                ['indiaWris/282_Dholai', 'indiaWris/36_Perur'],
+            )
 
 
 if __name__ == '__main__':
