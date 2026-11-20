@@ -35,10 +35,11 @@ python3 import_differ.py \
 ### Running the BigQuery Differ Manually (`bigquery_differ.py`)
 
 For large MCF datasets, [`bigquery_differ.py`](bigquery_differ.py) streams
-current and previous `.mcf` files in constant (O(1)) memory into temporary
-BigQuery tables (which auto-expire after `--bq_table_ttl_hours`), runs a SQL
-`FULL OUTER JOIN` diff, and streams the detailed `nodes-*.mcf` files along with
-`differ_summary.json` and `differ_summary.csv`.
+current and previous `.mcf` files in parallel across node-aligned byte-range
+chunks in bounded ($O(1)$ per worker) memory into sharded CSVs, loads them into
+temporary BigQuery tables (which auto-expire after `--bq_table_ttl_hours`), runs
+a SQL `FULL OUTER JOIN` diff, and streams the detailed `nodes-*.mcf` files along
+with `differ_summary.json` and `differ_summary.csv`.
 
 > Quote wildcard paths so your shell does not expand `*` locally. Both inputs
 > and `--output_location` can be local paths or `gs://` URIs in any combination.
@@ -85,6 +86,10 @@ python3 import_differ.py \
 - `gcs_temp_dir` (`bigquery_differ.py` only): Optional local or `gs://`
   directory for staging intermediate normalized CSVs before loading into
   BigQuery (defaults to a local temporary directory).
+- `max_workers`: Maximum parallel worker processes for MCF-to-CSV conversion in
+  BigQuery mode (default: `0`, which uses all available CPU cores).
+- `chunk_size_mb` (`bigquery_differ.py` only): Minimum byte-range chunk size in
+  MiB when splitting large MCF files across workers (default: `8`).
 
 ## Comparison rules
 

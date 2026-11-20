@@ -72,6 +72,11 @@ if 'bq_dataset' not in _FLAGS:
 if 'bq_table_ttl_hours' not in _FLAGS:
     flags.DEFINE_integer('bq_table_ttl_hours', 12,
                          'TTL in hours for temporary BigQuery differ tables.')
+if 'max_workers' not in _FLAGS:
+    flags.DEFINE_integer(
+        'max_workers', 0,
+        'Maximum parallel worker processes for BigQuery differ MCF conversion (0 uses all CPUs).'
+    )
 
 
 def val_str(value) -> str:
@@ -122,7 +127,8 @@ class ImportDiffer:
                  file_format='mcf',
                  runner_mode='native',
                  bq_dataset='datcom_import_differ',
-                 bq_table_ttl_hours=12):
+                 bq_table_ttl_hours=12,
+                 max_workers=None):
         self.current_data = current_data
         self.previous_data = previous_data
         self.output_path = output_location
@@ -132,6 +138,7 @@ class ImportDiffer:
         self.runner_mode = runner_mode
         self.bq_dataset = bq_dataset
         self.bq_table_ttl_hours = bq_table_ttl_hours
+        self.max_workers = max_workers
 
     def _cleanup_data(self, df: pd.DataFrame):
         for column in [Diff.ADDED, Diff.DELETED, Diff.MODIFIED]:
@@ -327,6 +334,7 @@ class ImportDiffer:
                 job_name=self.job_name,
                 dataset_id=self.bq_dataset,
                 expiration_hours=self.bq_table_ttl_hours,
+                max_workers=self.max_workers,
             )
         else:
             # Runs native Python differ.
@@ -417,7 +425,7 @@ def main(_):
                           _FLAGS.output_location, _FLAGS.project_id,
                           _FLAGS.job_name, _FLAGS.file_format,
                           _FLAGS.runner_mode, _FLAGS.bq_dataset,
-                          _FLAGS.bq_table_ttl_hours)
+                          _FLAGS.bq_table_ttl_hours, _FLAGS.max_workers or None)
     differ.run_differ()
 
 
