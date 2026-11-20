@@ -22,16 +22,20 @@ import pandas as pd
 
 _FLAGS = flags.FLAGS
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
-flags.DEFINE_string('input_file', 'input_files/input_file.tsv',
-                    'Path to input TSV file')
-flags.DEFINE_string('output_file', 'demo_r_mlifexp_cleaned.csv',
-                    'Path to output CSV file')
-flags.DEFINE_string('mode', '',
-                    'Mode of operation: download, process, or empty (both)')
-flags.DEFINE_string(
-    'historical_gcs_path',
-    'gs://unresolved_mcf/eurostat/life_expectancy/deleted_historical_data.csv',
-    'GCS path to the deleted historical data CSV file')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('input_file', 'input_files/input_file.tsv',
+                        'Path to input TSV file')
+    flags.DEFINE_string('output_file', 'demo_r_mlifexp_cleaned.csv',
+                        'Path to output CSV file')
+    flags.DEFINE_string(
+        'mode', '', 'Mode of operation: download, process, or empty (both)')
+    flags.DEFINE_string(
+        'historical_gcs_path',
+        'gs://unresolved_mcf/eurostat/life_expectancy/deleted_historical_data.csv',
+        'GCS path to the deleted historical data CSV file')
 
 
 def nuts_to_iso(data):
@@ -103,7 +107,7 @@ def download_data(download_link, download_path):
         logging.fatal(f'Download error for: {download_link}: {e}')
 
 
-def preprocess(input_file, output_file):
+def preprocess(input_file, output_file, historical_gcs_path=None):
     logging.info(f'Processing file: {input_file}')
 
     # Read TSV
@@ -162,23 +166,24 @@ def preprocess(input_file, output_file):
     # Select final columns
     final_df = data[['year', 'place', 'SV', 'value']]
 
-    # Read deleted historical data from GCS if it exists
-    try:
-        logging.info(
-            f"Reading historical deleted data from GCS: {_FLAGS.historical_gcs_path}"
-        )
-        deleted_df = pd.read_csv(_FLAGS.historical_gcs_path)
+    # Read deleted historical data from GCS, if a path is given.
+    if historical_gcs_path:
+        try:
+            logging.info(
+                f"Reading historical deleted data from GCS: {historical_gcs_path}"
+            )
+            deleted_df = pd.read_csv(historical_gcs_path)
 
-        # Combine dataframes. final_df is placed first so its versions are preferred.
-        final_df = pd.concat([final_df, deleted_df], ignore_index=True)
+            # Combine dataframes. final_df is placed first so its versions are preferred.
+            final_df = pd.concat([final_df, deleted_df], ignore_index=True)
 
-        # Deduplicate based on composite keys, keeping the first occurrence (from final_df)
-        final_df = final_df.drop_duplicates(subset=['year', 'place', 'SV'],
-                                            keep='first')
-    except Exception as e:
-        logging.warning(
-            f"Could not read historical deleted data from GCS: {e}. Proceeding with fresh data only."
-        )
+            # Deduplicate based on composite keys, keeping the first occurrence (from final_df)
+            final_df = final_df.drop_duplicates(subset=['year', 'place', 'SV'],
+                                                keep='first')
+        except Exception as e:
+            logging.warning(
+                f"Could not read historical deleted data from GCS: {e}. Proceeding with fresh data only."
+            )
 
     # Sort for consistency
     final_df = final_df.sort_values(['year', 'place', 'SV'])
@@ -200,8 +205,9 @@ def main(_):
     if mode == "" or mode == "download":
         download_data(_DATA_URL, input_file)
     if mode == "" or mode == "process":
-        preprocess(input_file, _FLAGS.output_file)
+        preprocess(input_file, _FLAGS.output_file, _FLAGS.historical_gcs_path)
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)
