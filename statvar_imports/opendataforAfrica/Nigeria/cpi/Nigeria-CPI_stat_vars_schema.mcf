@@ -1,0 +1,328 @@
+Node: dcid:consumerGoodsCategory
+typeOf: dcs:Property
+name: "consumerGoodsCategory"
+rangeIncludes: dcid:ConsumerGoodsCategoryEnum,dcid:Class,dcid:AlcoholicBeverageTypeEnum,dcid:ProductEnum,dcid:EducationalMajorEnum
+
+Node: dcid:AllItemsExceptFarmProducts
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "All Items Except Farm Products"
+isProvisional: dcs:True
+
+Node: dcid:AllItemsExceptFarmProductAndEnergy
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "All Items Except Farm Product And Energy"
+isProvisional: dcs:True
+
+Node: dcid:ImportedFood
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Imported Food"
+isProvisional: dcs:True
+
+Node: dcid:Food__NonAlcoholicBeverages
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Food__ Non Alcoholic Beverages"
+isProvisional: dcs:True
+
+Node: dcid:Bread__Cereals
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Bread__ Cereals"
+isProvisional: dcs:True
+
+Node: dcid:Meat
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Meat"
+isProvisional: dcs:True
+
+Node: dcid:Fish
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Fish"
+isProvisional: dcs:True
+
+Node: dcid:Milk__Cheese__Eggs
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Milk__ Cheese__ Eggs"
+isProvisional: dcs:True
+
+Node: dcid:Oil__Fats
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Oil__ Fats"
+isProvisional: dcs:True
+
+Node: dcid:Fruit
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Fruit"
+isProvisional: dcs:True
+
+Node: dcid:Vegetable
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Vegetable"
+isProvisional: dcs:True
+
+Node: dcid:Potatoes__Yam
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Potatoes__ Yam"
+isProvisional: dcs:True
+
+Node: dcid:FoodProducts
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Food Products"
+isProvisional: dcs:True
+
+Node: dcid:Coffee__Tea__Cocoa
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Coffee__ Tea__ Cocoa"
+isProvisional: dcs:True
+
+Node: dcid:SoftDrinks
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Soft Drinks"
+isProvisional: dcs:True
+
+Node: dcid:AlcoholicBeverages__Tobacco__Narcotics
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Alcoholic Beverages__ Tobacco__ Narcotics"
+isProvisional: dcs:True
+
+Node: dcid:Narcotics
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Narcotics"
+isProvisional: dcs:True
+
+Node: dcid:Clothing__Footwear
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Clothing__ Footwear"
+isProvisional: dcs:True
+
+Node: dcid:Garments
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Garments"
+isProvisional: dcs:True
+
+Node: dcid:ShoesAndOtherFootwear
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Shoes And Other Footwear"
+isProvisional: dcs:True
+
+Node: dcid:RepairAndHireOfFootwear
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Repair And Hire Of Footwear"
+isProvisional: dcs:True
+
+Node: dcid:Water__Electricity__Gas__OtherFuels
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Water__ Electricity__ Gas__ Other Fuels"
+isProvisional: dcs:True
+
+Node: dcid:HousingRentals
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Housing Rentals"
+isProvisional: dcs:True
+
+Node: dcid:WaterSupply
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Water Supply"
+isProvisional: dcs:True
+
+Node: dcid:DwellingRelatedServices
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Dwelling Related Services"
+isProvisional: dcs:True
+
+Node: dcid:Gas
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Gas"
+isProvisional: dcs:True
+
+Node: dcid:LiquidFuel
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Liquid Fuel"
+isProvisional: dcs:True
+
+Node: dcid:SolidFuel
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Solid Fuel"
+isProvisional: dcs:True
+
+Node: dcid:HouseholdEquipment__Furnishings
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Household Equipment__ Furnishings"
+isProvisional: dcs:True
+
+Node: dcid:Furniture__Furnishings
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Furniture__ Furnishings"
+isProvisional: dcs:True
+
+Node: dcid:CarpetsAndFloorCoverings
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Carpets And Floor Coverings"
+isProvisional: dcs:True
+
+Node: dcid:RepairOfFurniture
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Repair Of Furniture"
+isProvisional: dcs:True
+
+Node: dcid:HouseholdTextiles
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Household Textiles"
+isProvisional: dcs:True
+
+Node: dcid:RepairOfHouseholdAppliances
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Repair Of Household Appliances"
+isProvisional: dcs:True
+
+Node: dcid:Glassware__Tableware__HouseholdUtensils
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Glassware__ Tableware__ Household Utensils"
+isProvisional: dcs:True
+
+Node: dcid:NonDurableHouseholdGoods
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Non Durable Household Goods"
+isProvisional: dcs:True
+
+Node: dcid:DomesticServices__HouseholdServices
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Domestic Services__ Household Services"
+isProvisional: dcs:True
+
+Node: dcid:ParamedicalServices
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Paramedical Services"
+isProvisional: dcs:True
+
+Node: dcid:Motorcars
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Motorcars"
+isProvisional: dcs:True
+
+Node: dcid:Motorcycles
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Motorcycles"
+isProvisional: dcs:True
+
+Node: dcid:Bicycles
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Bicycles"
+isProvisional: dcs:True
+
+Node: dcid:Fuel__Lubricant
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Fuel__ Lubricant"
+isProvisional: dcs:True
+
+Node: dcid:usedFor
+typeOf: dcs:Property
+name: "usedFor"
+domainIncludes: dcid:ConsumerGoodsAndServices
+
+Node: dcid:PersonalTransportEquipment
+typeOf: dcid:WaterUseCategoryEnum
+name: "Personal Transport Equipment"
+isProvisional: dcs:True
+
+Node: dcid:MaintenanceAndRepair
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Maintenance And Repair"
+isProvisional: dcs:True
+
+Node: dcid:NGA_OtherServices
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "NGA_ Other Services"
+isProvisional: dcs:True
+
+Node: dcid:PassengerTransport
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Passenger Transport"
+isProvisional: dcs:True
+
+Node: dcid:modeOfTransportation
+typeOf: dcs:Property
+name: "modeOfTransportation"
+domainIncludes: dcid:ConsumerGoodsAndServices
+rangeIncludes: dcid:ModeOfTransportationEnum
+isProvisional: dcs:True
+
+Node: dcid:ModeOfTransportationEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "ModeOfTransportationEnum"
+isProvisional: dcs:True
+
+Node: dcid:ByRoad
+typeOf: dcid:ModeOfTransportationEnum
+name: "By Road"
+isProvisional: dcs:True
+
+Node: dcid:ByAir
+typeOf: dcid:ModeOfTransportationEnum
+name: "By Air"
+isProvisional: dcs:True
+
+Node: dcid:BySea__InlandWaterway
+typeOf: dcid:ModeOfTransportationEnum
+name: "By Sea__ Inland Waterway"
+isProvisional: dcs:True
+
+Node: dcid:TelephoneAndTelefaxEquipment
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Telephone And Telefax Equipment"
+isProvisional: dcs:True
+
+Node: dcid:TelephoneAndTelefaxService
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Telephone And Telefax Service"
+isProvisional: dcs:True
+
+Node: dcid:RecreationAndCulture
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Recreation And Culture"
+isProvisional: dcs:True
+
+Node: dcid:VideoAndAudioProducts__PhotographicEquipment
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Video And Audio Products__ Photographic Equipment"
+isProvisional: dcs:True
+
+Node: dcid:PhotographicDevelopment
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Photographic Development"
+isProvisional: dcs:True
+
+Node: dcid:GamesOfChances
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Games Of Chances"
+isProvisional: dcs:True
+
+Node: dcid:Book__Stationaries
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Book__ Stationaries"
+isProvisional: dcs:True
+
+Node: dcid:Restaurant__Hotel
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Restaurant__ Hotel"
+isProvisional: dcs:True
+
+Node: dcid:CateringServices
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Catering Services"
+isProvisional: dcs:True
+
+Node: dcid:MiscellaneousGoodsAndServices
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Miscellaneous Goods And Services"
+isProvisional: dcs:True
+
+Node: dcid:Appliances__Article__PersonalCareProducts
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Appliances__ Article__ Personal Care Products"
+isProvisional: dcs:True
+
+Node: dcid:Insurance
+typeOf: dcid:TobaccoUsageTypeEnum
+name: "Insurance"
+isProvisional: dcs:True
+

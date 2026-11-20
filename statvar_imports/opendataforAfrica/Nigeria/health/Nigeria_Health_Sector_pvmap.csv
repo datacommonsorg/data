@@ -1,0 +1,37 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4
+,,,,,,,,
+2007,observationDate,2007,observationAbout,country/NGA,populationType,Person,value,{Number}
+2008,observationDate,2008,observationAbout,country/NGA,populationType,Person,value,{Number}
+2009,observationDate,2009,observationAbout,country/NGA,populationType,Person,value,{Number}
+2010,observationDate,2010,observationAbout,country/NGA,populationType,Person,value,{Number}
+2011,observationDate,2011,observationAbout,country/NGA,populationType,Person,value,{Number}
+2012,observationDate,2012,observationAbout,country/NGA,populationType,Person,value,{Number}
+,,,,,,,,
+Male,gender,Male,#header,gender,,,,
+Female,gender,Female,#header,gender,,,,
+Both sex,gender,"""""",#header,gender,,,,
+Nigerian,ethnicity,Nigerian,,,,,,
+Non Nigerian,ethnicity,NonNigerian,,,,,,
+Medical Practitioners,occupation,MedicalPractitioner,ethnicity,Nigerian,,,,
+Dentists,occupation,Dentist,ethnicity,Nigerian,,,,
+Medical Practitioners 2,occupation,MedicalPractitioner,ethnicity,NonNigerian,,,,
+Dentists 2,occupation,Dentist,ethnicity,NonNigerian,,,,
+General Nurses,occupation,Nurse,specialization,GeneralNurse,name,"""General Nurses""",,
+Midwives,occupation,Nurse,specialization,Midwives,name,"""Midwives""",,
+Perioperative Nurses,occupation,Nurse,specialization,Perioperative,name,"""Perioperative Nurses""",,
+Cardio Thoracic Nurses,occupation,Nurse,specialization,CardioThoracicNurses,name,"""Cardio Thoracic Nurses""",,
+Intensive-Care Nurses,occupation,Nurse,specialization,IntensiveCareNurse,name,"""Intensive-Care Nurses""",,
+"Ear, Nose and Throat (ENT) Nurses",occupation,Nurse,specialization,ENT,name,"""Ear, Nose and Throat (ENT) Nurses""",,
+Public Health Nurses,occupation,Nurse,specialization,PublicHealth,name,"""Public Health Nurses""",,
+Burns and Plastic Nurses,occupation,Nurse,specialization,BurnsAndPlastic,name,"""Burns and Plastic Nurses""",,
+Orthopaedic Nurses,occupation,Nurse,specialization,Orthopedic,name,"""Orthopaedic Nurses""",,
+Anaesthetic Nurses,occupation,Nurse,specialization,Anasthetic,name,"""Anaesthetic Nurses""",,
+Nurse Administrator,occupation,Nurse,specialization,Administrator,name,"""Nurse Administrator""",,
+Midwife Educators,occupation,Nurse,specialization,MidwifeEducators,name,"""Midwife Educators""",,
+Paediatric Nurses,occupation,Nurse,specialization,Pediatric,name,"""Paediatric Nurses""",,
+Nurse Educators,occupation,Nurse,specialization,Educator,name,"""Nurse Educators""",,
+Public Health Nurse Educators,occupation,Nurse,specialization,PublicHealthNurseEducators,name,"""Public Health Nurse Educators""",,
+Psychiatric Nurses,occupation,Nurse,specialization,Psychatric,name,"""Psychiatric Nurses""",,
+Ophthalmic Nurses,occupation,Nurse,specialization,Ophthalmic,name,"""Ophthalmic Nurses""",,
+Accident and Emergency Nurses,occupation,Nurse,specialization,AccidentAndEmergency,name,"""Accident and Emergency Nurses""",,
+Occupational Health Nurses,occupation,Nurse,specialization,OccupationalHealth,name,"""Occupational Health Nurses""",,
