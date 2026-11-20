@@ -13,14 +13,14 @@
 # limitations under the License.
 """Unit tests for property_value_cache.py."""
 
-import unittest
-import os
 import csv
+import os
 import tempfile
+import unittest
 
 from absl import app
-from absl import logging
-from property_value_cache import PropertyValueCache, flatten_dict
+from property_value_cache import PropertyValueCache
+from property_value_cache import flatten_dict
 
 
 class PropertyValueCacheTest(unittest.TestCase):

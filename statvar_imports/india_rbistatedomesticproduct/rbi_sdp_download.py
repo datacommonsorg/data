@@ -14,14 +14,15 @@
 # How to run the script to download the files:
 # python3 rbi_sdp_download.py
 
-import os
-import requests
-from bs4 import BeautifulSoup
-from urllib.parse import urljoin
-from absl import logging
 import json
-import time
+import os
 import re
+import time
+from urllib.parse import urljoin
+
+from absl import logging
+from bs4 import BeautifulSoup
+import requests
 
 # Configure absl Logging
 logging.set_verbosity(logging.INFO)

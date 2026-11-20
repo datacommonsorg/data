@@ -13,8 +13,8 @@
 # limitations under the License.
 """Unit tests for schema_reconciler.py."""
 
-import sys
 import os
+import sys
 import unittest
 from unittest import mock
 

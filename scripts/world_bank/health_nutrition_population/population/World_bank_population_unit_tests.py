@@ -2,7 +2,6 @@ import filecmp
 import os
 import sys
 import unittest
-from absl import app
 
 # Allows the following module imports to work when running as a script
 # module_dir_ is the path to where this code is running from.
@@ -30,7 +29,7 @@ class TestWBPopulation(unittest.TestCase):
                                        'WorldBankHNP_Population_Tests')
         print(f'test file path: {data_input}, output: {test_output}')
 
-        test_counters = population.process(2, test_output, 32)
+        population.process(2, test_output, 32)
 
         for output in ['.csv']:
             print(filecmp.cmp(test_output + output, expected_output + output))

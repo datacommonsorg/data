@@ -13,23 +13,25 @@
 # limitations under the License.
 """Module for the ValidationRunner class."""
 
+import json
 import os
+import sys
+
 from absl import app
 from absl import flags
 from absl import logging
 import pandas as pd
-import json
-import sys
-from typing import Tuple
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, _SCRIPT_DIR)
 
-from validation_config import ValidationConfig
 from report_generator import ReportGenerator
+from result import ValidationResult
+from result import ValidationStatus
+from validation_config import ValidationConfig
+from validation_util import DIFFER_COLUMNS
+from validation_util import filter_dataframe
 from validator import Validator
-from result import ValidationResult, ValidationStatus
-from validation_util import DIFFER_COLUMNS, filter_dataframe
 
 _FLAGS = flags.FLAGS
 
@@ -160,7 +162,6 @@ class ValidationRunner:
                 summary_csv_path) > 0:
             return pd.read_csv(summary_csv_path)
 
-        import glob
         from collections import defaultdict
         stats = defaultdict(lambda: {'ADDED': 0, 'DELETED': 0, 'MODIFIED': 0})
 

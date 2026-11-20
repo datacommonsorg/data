@@ -13,11 +13,9 @@
 # limitations under the License.
 """Script to generate csv and the mcf for the StatisticalVariables. """
 
-import requests
 import json
-import csv
-import re
 import os
+import re
 
 # Drop these values because they just indicate that there's no data for the
 # particular observation
@@ -29,17 +27,17 @@ VALUES_TO_DROP = {
 AGE_REGEX_SUBS = [
     # replaces strings like [30 - Years] with strings like 30PlusYears
     {
-        "match": '\[(\d+)\s+-\s+([A-Za-z]+)\]',
+        "match": r'\[(\d+)\s+-\s+([A-Za-z]+)\]',
         "sub": '\\1Plus\\2'
     },
     # replaces strings like [30 - 49 Years] with strings like 30To49Years
     {
-        "match": '\\[(\d+)\s+(\d+)\s+([a-zA-Z]+)\]',
+        "match": '\\[(\\d+)\\s+(\\d+)\\s+([a-zA-Z]+)\\]',
         "sub": '\\1To\\2\\3'
     },
     # replaces strings like [- 30 Years] with strings like Under30Years
     {
-        "match": '\[-\s+(\d+)\s+([a-zA-Z]+)\]',
+        "match": r'\[-\s+(\d+)\s+([a-zA-Z]+)\]',
         "sub": 'Under\\1\\2'
     }
 ]
@@ -106,7 +104,7 @@ def get_value(entry):
         value = entry.get("Value", "")
         if value:
             value = value.replace(',', '').replace('\n', '')
-            if not re.findall('\w', value):
+            if not re.findall(r'\w', value):
                 value = ""
             if "[" in value:
                 value = f'"{value}"'
@@ -291,18 +289,18 @@ def generate_csv_and_sv(data_files, schema_mapping, sv_dcid_mapping,
                         # curated dcid and add it to the skipped_mcf_sv so that we
                         # skip adding an mcf node for this dcid
                         curated_dcid = sv_dcid_mapping[sv_dcid]
-                        if not curated_dcid in skipped_mcf_sv:
+                        if curated_dcid not in skipped_mcf_sv:
                             skipped_mcf_sv[curated_dcid] = set()
                         skipped_mcf_sv[curated_dcid].add(sv_dcid)
                         sv_dcid = curated_dcid
-                    if not sv_dcid in seen_sv:
+                    if sv_dcid not in seen_sv:
                         value_map[sv_dcid] = {}
-                        if not sv_dcid in skipped_mcf_sv:
+                        if sv_dcid not in skipped_mcf_sv:
                             mcf.insert(0, f"Node: dcid:{sv_dcid}")
                             mcf_result.extend(mcf + [""])
                     seen_sv.add(sv_dcid)
                     map_key = f"{spatial_dim}^{time_dim_value}^{time_period}"
-                    if not map_key in value_map[sv_dcid]:
+                    if map_key not in value_map[sv_dcid]:
                         value_map[sv_dcid][map_key] = []
                     comments_length = 0
                     if entry.get("Comments", ""):

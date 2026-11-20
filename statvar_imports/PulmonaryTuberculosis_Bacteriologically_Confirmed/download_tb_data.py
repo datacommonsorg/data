@@ -1,7 +1,8 @@
-import os
-import requests
 import io
+import os
+
 import pandas as pd
+import requests
 
 
 def download_who_tb_data_with_iso3():

@@ -16,8 +16,8 @@ This module provides generic class for testing processed csv, mcf and tmcf files
 """
 
 import os
-import unittest
 import tempfile
+import unittest
 
 
 class CommonTestClass:

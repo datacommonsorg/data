@@ -14,6 +14,7 @@
 """Tests for resolve_geo_id."""
 
 import unittest
+
 from .resolve_geo_id import convert_to_place_dcid
 
 _TEST_GEOIDS = {

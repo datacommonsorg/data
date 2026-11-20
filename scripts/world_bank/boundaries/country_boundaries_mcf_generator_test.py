@@ -16,11 +16,11 @@ Unit tests for country_boundaries_mcf_generator.py
 
 Usage: ./run_tests.sh -p scripts/world_bank/
 '''
-import unittest
 import os
-import tempfile
 import sys
+import tempfile
 from types import SimpleNamespace
+import unittest
 from unittest import mock
 
 import pandas as pd

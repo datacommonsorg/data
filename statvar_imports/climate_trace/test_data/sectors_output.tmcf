@@ -1,0 +1,10 @@
+Node: E:sectors_output->E0
+observationAbout: C:sectors_output->observationAbout
+observationDate: C:sectors_output->observationDate
+variableMeasured: C:sectors_output->variableMeasured
+value: C:sectors_output->value
+unit: C:sectors_output->unit
+measurementMethod: C:sectors_output->measurementMethod
+observationPeriod: C:sectors_output->observationPeriod
+typeOf: dcs:StatVarObservation
+#Aggregate: sum

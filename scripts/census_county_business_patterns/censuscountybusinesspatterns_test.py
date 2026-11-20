@@ -1,10 +1,12 @@
+import io
+import logging
 import os
 import sys
-import logging, unittest
-from absl import flags, app
-import shutil
-import io
+import unittest
+
+from absl import flags
 from cbp_co import CBPCOProcessor
+
 # from main import main, _LOCAL_OUTPUT_PATH, FLAGS # Import main and the path variable
 FLAGS = flags.FLAGS
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))

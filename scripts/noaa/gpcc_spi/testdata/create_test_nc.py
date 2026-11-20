@@ -18,11 +18,12 @@ cd scripts/noaa/gpcc_spi
 python create_test_nc.py
 """
 
+import os
+from pathlib import Path
+
 from absl import app
 import pandas as pd
 import xarray
-from pathlib import Path
-import os
 
 
 def create_test_nc(source_file):

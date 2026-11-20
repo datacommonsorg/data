@@ -20,24 +20,24 @@ import datetime
 import json
 import logging
 import os
-import pandas as pd
-import sys
+from sys import path
 import time
+from typing import Any, Callable, Union
 import zipfile
+
 from absl import app
 from absl import flags
-from sys import path
-from typing import Any, Callable, Union
-
-from census_api_helpers import get_identifier, get_yearwise_variable_column_map
+from census_api_helpers import get_identifier
+from census_api_helpers import get_yearwise_variable_column_map
+import pandas as pd
 from url_list_compiler import get_table_url_list
 
 module_dir_ = os.path.dirname(os.path.realpath(__file__))
 path.insert(1, os.path.join(module_dir_, '../../../'))
 
 from scripts.us_census.api_utils.download_utils import download_url_list_iterations
-from tools.download_utils.requests_wrappers import request_url_json
 from scripts.us_census.api_utils.status_file_utils import sync_status_list
+from tools.download_utils.requests_wrappers import request_url_json
 
 FLAGS = flags.FLAGS
 

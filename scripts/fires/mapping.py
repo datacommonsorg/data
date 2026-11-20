@@ -16,8 +16,6 @@
 CAUSE_DCID_MAP = {
     "Human":
         "FireCauseHuman",
-    "Natural":
-        "FireCauseNatural",
     "Unknown":
         "FireCauseUnknown",
     "Undetermined":

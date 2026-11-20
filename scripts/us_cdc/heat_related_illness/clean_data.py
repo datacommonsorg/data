@@ -13,26 +13,29 @@
 # limitations under the License.
 """A script to download EPH Tracking data."""
 
-import os
 import csv
-from bs4 import BeautifulSoup
-import pandas as pd
-from absl import app, logging, flags
 from datetime import datetime
-import time
-from retry import retry
-import re
 import json
-import sys
-from google.cloud import storage
+import os
+import re
 import shutil
+import sys
+import time
+
+from absl import app
+from absl import flags
+from absl import logging
+from bs4 import BeautifulSoup
+from google.cloud import storage
+import pandas as pd
+from retry import retry
 from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.chrome.options import Options as ChromeOptions
+from selenium.webdriver.chrome.service import Service as ChromeService
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 _CONFIG = None

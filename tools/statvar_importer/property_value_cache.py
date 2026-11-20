@@ -22,8 +22,6 @@ import os
 import sys
 import unicodedata
 
-from absl import app
-from absl import flags
 from absl import logging
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -32,9 +30,8 @@ sys.path.append(os.path.dirname(_SCRIPT_DIR))
 sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPT_DIR)), 'util'))
 
-import file_util
-from mcf_file_util import add_pv_to_node
 from counters import Counters
+import file_util
 
 # Indexed properties in order for lookup.
 _DEFAULT_KEY_PROPS = [

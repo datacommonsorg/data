@@ -28,7 +28,6 @@ Run "python3 generate_csv_and_mcf.py --help" for usage.
 from absl import app
 from absl import flags
 from absl import logging
-from datetime import datetime, timedelta
 import pandas as pd
 
 FLAGS = flags.FLAGS
@@ -92,7 +91,8 @@ def generate_csv():
     # Check if there are enough rows with latest date
     out_rows = out_df.shape[0]
     if out_rows < MIN_ROWS:
-        logging.fatal(f'Got only {in_rows},  not enough rows in url: {CSV_URL}')
+        logging.fatal(
+            f'Got only {out_rows},  not enough rows in url: {CSV_URL}')
 
     out_df.to_csv("treasury_constant_maturity_rates.csv", index=False)
 

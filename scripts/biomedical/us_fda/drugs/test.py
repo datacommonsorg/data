@@ -13,10 +13,10 @@
 # limitations under the License.
 """Tests for Drugs @ FDA import ."""
 import unittest
-import pandas as pd
 
 import clean
 import generate_mcf
+import pandas as pd
 
 # constants used for testing create_mcf()
 DICT1 = {

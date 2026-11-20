@@ -15,13 +15,14 @@
 # How to run the script to download the files:
 # python3 download_script.py
 
-import os
-import sys
-import shutil
-from absl import app
-from absl import logging
 import datetime
 import glob
+import os
+import shutil
+import sys
+
+from absl import app
+from absl import logging
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util/'))

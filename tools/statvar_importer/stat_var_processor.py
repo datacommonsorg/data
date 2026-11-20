@@ -32,7 +32,6 @@ For configs, outputs, and counters, see tools/statvar_importer/README.md.
 from collections import OrderedDict
 import csv
 import datetime
-import glob
 import itertools
 import multiprocessing
 import os
@@ -40,17 +39,11 @@ import re
 import sys
 import tempfile
 import time
-from typing import Union
 
 from absl import app
 from absl import flags
 from absl import logging
-import dateutil
-from dateutil import parser
-from dateutil.parser import parse
-import pandas as pd
 import process_http_server
-import requests
 
 # uncomment to run pprof
 # os.environ['PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION'] = 'python'
@@ -65,37 +58,46 @@ sys.path.append(
 sys.path.append(os.path.join(_SCRIPT_DIR, 'place'))
 sys.path.append(os.path.join(_SCRIPT_DIR, 'schema'))
 
-import eval_functions
-from log_util import configure_cloud_logging, running_on_cloud
-from utils import (capitalize_first_char, is_place_dcid,
-                   get_observation_date_format, get_observation_period_for_date,
-                   pvs_has_any_prop, str_from_number, prepare_input_data)
-import file_util
 import config_flags
-import data_annotator
-# import llm_statvar_name_generator
-
-import property_value_utils as pv_utils
-
-from filter_data_outliers import filter_data_svobs
-from mcf_file_util import get_numeric_value, get_value_list, add_pv_to_node
-from mcf_file_util import load_mcf_nodes, write_mcf_nodes, add_namespace, strip_namespace
-from mcf_filter import drop_existing_mcf_nodes
-from mcf_diff import fingerprint_node, fingerprint_mcf_nodes, diff_mcf_node_pvs
-from place_resolver import PlaceResolver
-from property_value_mapper import PropertyValueMapper
-from schema_resolver import SchemaResolver
-from json_to_csv import file_json_to_csv
-from schema_generator import generate_schema_nodes, generate_statvar_name
-from schema_checker import sanity_check_nodes
-from schema_reconciler import SchemaReconciler
 
 # imports from ../../util
-from config_map import ConfigMap, read_py_dict_from_file
-from counters import Counters, CounterOptions
+from config_map import ConfigMap
+from counters import CounterOptions
+from counters import Counters
+import data_annotator
 from dc_api_wrapper import dc_api_is_defined_dcid
-from download_util import download_file_from_url
+import eval_functions
+import file_util
+from filter_data_outliers import filter_data_svobs
+from json_to_csv import file_json_to_csv
+from log_util import configure_cloud_logging
+from log_util import running_on_cloud
+from mcf_diff import diff_mcf_node_pvs
+from mcf_diff import fingerprint_mcf_nodes
+from mcf_file_util import add_namespace
+from mcf_file_util import get_numeric_value
+from mcf_file_util import load_mcf_nodes
+from mcf_file_util import strip_namespace
+from mcf_file_util import write_mcf_nodes
+from mcf_filter import drop_existing_mcf_nodes
+from place_resolver import PlaceResolver
+from property_value_mapper import PropertyValueMapper
+
+# import llm_statvar_name_generator
+import property_value_utils as pv_utils
+from schema_checker import sanity_check_nodes
+from schema_generator import generate_schema_nodes
+from schema_generator import generate_statvar_name
+from schema_reconciler import SchemaReconciler
+from schema_resolver import SchemaResolver
 from statvar_dcid_generator import get_statvar_dcid
+from utils import capitalize_first_char
+from utils import get_observation_date_format
+from utils import get_observation_period_for_date
+from utils import is_place_dcid
+from utils import prepare_input_data
+from utils import pvs_has_any_prop
+from utils import str_from_number
 
 _FLAGS = flags.FLAGS
 
@@ -426,7 +428,7 @@ class StatVarsMap:
             logging.level_debug() and logging.log_every_n(
                 2, f'Remapped {dcid} to {remap_dcid} for {pvs}',
                 self._log_every_n)
-            self._counters.add_counter(f'remapped-statvar-dcid', 1, remap_dcid)
+            self._counters.add_counter('remapped-statvar-dcid', 1, remap_dcid)
             dcid = remap_dcid
         pvs['Node'] = add_namespace(dcid)
         logging.level_debug() and logging.log_every_n(
@@ -536,8 +538,7 @@ class StatVarsMap:
                             props_removed.append(prop)
                         self._counters.add_counter(
                             f'{counter_prefix}-undefined-value', 1, prop)
-                self._counters.add_counter(f'pvmap-defined-properties',
-                                           len(pvs))
+                self._counters.add_counter('pvmap-defined-properties', len(pvs))
         return props_removed
 
     def convert_to_schemaless_statvar(self, pvs: dict) -> dict:
@@ -612,7 +613,7 @@ class StatVarsMap:
                     f'Missing statvar properties {missing_props} in {pvs}',
                     self._log_every_n)
                 self._counters.add_counter(
-                    f'error-statvar-missing-property',
+                    'error-statvar-missing-property',
                     1,
                     f'{statvar_dcid}:missing-{missing_props}',
                 )
@@ -637,7 +638,7 @@ class StatVarsMap:
                 f'Cannot add duplicate statvars for {statvar_dcid}: old:'
                 f' {self._statvars_map[statvar_dcid]}, new: {pvs}',
                 self._log_every_n)
-            self._counters.add_counter(f'error-duplicate-statvars', 1,
+            self._counters.add_counter('error-duplicate-statvars', 1,
                                        statvar_dcid)
             return False
         logging.level_debug() and logging.log_every_n(
@@ -694,7 +695,7 @@ class StatVarsMap:
                 logging.ERROR,
                 f'Invalid values to aggregate in {current_pvs}, {new_pvs}',
                 self._log_every_n)
-            self._counters.add_counter(f'error-aggregate-invalid-values', 1)
+            self._counters.add_counter('error-aggregate-invalid-values', 1)
             return False
         aggregation_funcs = {
             'sum': lambda a, b: a + b,
@@ -761,9 +762,9 @@ class StatVarsMap:
     """
         # Check if SVObs aggregation is enabled.
         if svobs_key not in self._statvar_obs_map:
-            log.error(f'Unexpected missing SVObs: {svobs_key}:{svobs}')
+            logging.error(f'Unexpected missing SVObs: {svobs_key}:{svobs}')
             self._counters.add_counter(
-                'error-statvar-obs-missing-for-dup-svobs', 1, statvar_dcid)
+                'error-statvar-obs-missing-for-dup-svobs', 1, svobs_key)
             return
         existing_svobs = self._statvar_obs_map.get(svobs_key, None)
         if not existing_svobs:
@@ -817,7 +818,7 @@ class StatVarsMap:
                 logging.ERROR,
                 f'Missing SVObs properties {missing_props} in {pvs}',
                 self._log_every_n)
-            self._counters.add_counter(f'error-svobs-missing-property', 1,
+            self._counters.add_counter('error-svobs-missing-property', 1,
                                        f'{missing_props}')
             return False
         # Check if the SVObs already exists.
@@ -856,7 +857,7 @@ class StatVarsMap:
                 logging.ERROR, 'Duplicate SVObs with mismatched values:'
                 f' {self._statvar_obs_map[svobs_key]} != {pvs}',
                 self._log_every_n)
-            self._counters.add_counter(f'error-mismatched-svobs', 1,
+            self._counters.add_counter('error-mismatched-svobs', 1,
                                        pvs.get('variableMeasured', ''))
             self.set_statvar_dup_svobs(svobs_key, pvs)
             return False
@@ -1003,7 +1004,7 @@ class StatVarsMap:
             if self.is_valid_statvar(pvs):
                 valid_statvars[statvar] = pvs
             else:
-                self._counters.add_counter(f'dropped-invalid-statvars', 1,
+                self._counters.add_counter('dropped-invalid-statvars', 1,
                                            statvar)
         self._statvars_map = valid_statvars
 
@@ -1013,7 +1014,7 @@ class StatVarsMap:
             if self.is_valid_svobs(pvs):
                 valid_svobs[svobs_key] = pvs
             else:
-                self._counters.add_counter(f'dropped-invalid-svobs', 1,
+                self._counters.add_counter('dropped-invalid-svobs', 1,
                                            svobs_key)
         self._statvar_obs_map = valid_svobs
 
@@ -1370,7 +1371,7 @@ class StatVarsMap:
             for prop, value in existing_node.items():
                 if prop not in pvs:
                     pvs[prop] = value
-            self._counters.add_counter(f'existing-statvars-from-mcf', 1,
+            self._counters.add_counter('existing-statvars-from-mcf', 1,
                                        pvs.get('dcid'))
         else:
             logging.level_debug() and logging.log_every_n(
@@ -1441,9 +1442,9 @@ class StatVarDataProcessor:
         input_data = self._config.get('input_data', '')
         input_files = file_util.file_get_matching(input_data)
         if not input_files:
-            logging.log_every_n(
-                logging.INFO, f'Skipping pvmap generation without input data',
-                self._log_every_n)
+            logging.log_every_n(logging.INFO,
+                                'Skipping pvmap generation without input data',
+                                self._log_every_n)
             return
         pv_map_files = file_util.file_get_matching(
             self._config.get('pv_map', ''))
@@ -1458,9 +1459,9 @@ class StatVarDataProcessor:
                                                       suffix='-pvmap',
                                                       file_ext='.csv')
         if not pv_map_file:
-            logging.log_every_n(
-                logging.INFO, f'Skipping pvmap generation without pvmap file',
-                self._log_every_n)
+            logging.log_every_n(logging.INFO,
+                                'Skipping pvmap generation without pvmap file',
+                                self._log_every_n)
             return
         logging.log_every_n(
             logging.INFO,
@@ -1539,7 +1540,7 @@ class StatVarDataProcessor:
                 self._config.get('places_resolved_csv', '')):
             logging.log_every_n(
                 logging.INFO,
-                f'Enabling place name resolution: resolve_places=True',
+                'Enabling place name resolution: resolve_places=True',
                 self._log_every_n)
             self._config.set_config('resolve_places', True)
         logging.level_debug() and logging.log_every_n(
@@ -1572,19 +1573,27 @@ class StatVarDataProcessor:
         line_number: int = None,
         column_number: int = None,
     ):
+        """Sets the input context used in the '#input' reference.
+
+        Args:
+          filename: input file being processed.
+          line_number: line number in the file, counted from 1.
+          column_number: column index in the row, counted from 0. It is
+            stored counted from 1, like the line number.
+        """
         if filename:
             self._context['__FILE__'] = filename
             self._current_filename = os.path.basename(filename)
-        if line_number:
+        if line_number is not None:
             self._context['__LINE__'] = line_number
-        if column_number:
-            self._context['__COLUMN__'] = column_number
+        if column_number is not None:
+            self._context['__COLUMN__'] = column_number + 1
         self._file_context = f'{self._context.get("__FILE__")}:{self._context.get("__LINE__")}:{self._context.get("__COLUMN__")}'
 
     def init_file_section(self):
         self._section_column_pvs = {}
         self._section_svobs = 0
-        self._counters.add_counter(f'input-sections', 1,
+        self._counters.add_counter('input-sections', 1,
                                    self.get_current_filename())
 
     def get_current_filename(self) -> str:
@@ -1879,7 +1888,7 @@ class StatVarDataProcessor:
                 max_cols_per_file = int(
                     self._config.get('input_columns', sys.maxsize))
                 self._counters.add_counter(
-                    f'total', min(max_rows_per_file, num_file_rows))
+                    'total', min(max_rows_per_file, num_file_rows))
                 csvfile.seek(0)
                 csv_reader_options = {}
                 dialect = self._config.get('input_data_dialect')
@@ -1933,7 +1942,7 @@ class StatVarDataProcessor:
             logging.log_every_n(
                 logging.INFO, f'Processed {line_number} lines from {filename} @'
                 f' {line_rate:.2f} lines/sec.', self._log_every_n)
-            self._counters.set_counter(f'processing-input-rows-rate', line_rate,
+            self._counters.set_counter('processing-input-rows-rate', line_rate,
                                        filename)
 
         # Filter outlisers
@@ -1948,7 +1957,7 @@ class StatVarDataProcessor:
             logging.INFO,
             f'Processed {rows_processed} rows from {len(files)} files @'
             f' {input_rate:.2f} rows/sec.', self._log_every_n)
-        self._counters.set_counter(f'processing-input-rows-rate', input_rate)
+        self._counters.set_counter('processing-input-rows-rate', input_rate)
 
     def should_lookup_pv_for_row_column(self, row_index: int,
                                         column_index: int) -> bool:
@@ -2060,7 +2069,7 @@ class StatVarDataProcessor:
                 f'Setting column header PVs for row:{row_index}:{row_col_pvs}',
                 self._log_every_n)
             self.add_column_header_pvs(row_index, row_col_pvs, row)
-            self._counters.add_counter(f'input-header-rows', 1,
+            self._counters.add_counter('input-header-rows', 1,
                                        self.get_current_filename())
             return True
 
@@ -2094,7 +2103,7 @@ class StatVarDataProcessor:
                 f'Setting column header tagged PVs for row:{row_index}:{col_headers}',
                 self._log_every_n)
             self.add_column_header_pvs(row_index, col_headers, row)
-            self._counters.add_counter(f'input-header-rows', 1,
+            self._counters.add_counter('input-header-rows', 1,
                                        self.get_current_filename())
             return True
         return False
@@ -2284,7 +2293,7 @@ class StatVarDataProcessor:
             logging.level_debug() and logging.log_every_n(
                 logging.DEBUG, f'Found {row_svobs} SVObs in row:{row_index}',
                 self._log_every_n)
-            self._counters.add_counter(f'input-data-rows', 1,
+            self._counters.add_counter('input-data-rows', 1,
                                        self.get_current_filename())
         self._counters.add_counter('input-rows-processed', 1,
                                    self.get_current_filename())
@@ -2460,7 +2469,7 @@ class StatVarDataProcessor:
                 logging.DEBUG,
                 f'Ignoring SVObs PVs {pvs} in {self._file_context}',
                 self._log_every_n)
-            self._counters.add_counter(f'ignored-svobs-pvs', 1)
+            self._counters.add_counter('ignored-svobs-pvs', 1)
             # Return True so the cell with value is not treated as a header
             return True
 
@@ -2468,7 +2477,7 @@ class StatVarDataProcessor:
             logging.log_every_n(logging.ERROR,
                                 f'Unable to resolve SVObs date in {pvs}',
                                 self._log_every_n)
-            self._counters.add_counter(f'dropped-svobs-unresolved-date', 1)
+            self._counters.add_counter('dropped-svobs-unresolved-date', 1)
             return False
 
         if not self.should_allow_stat_var_obs_pvs(pvs):
@@ -2477,7 +2486,7 @@ class StatVarDataProcessor:
                 logging.DEBUG,
                 f'Filtering out SVObs PVs {pvs} in {self._file_context}',
                 self._log_every_n)
-            self._counters.add_counter(f'filter-dropped-svobs-pvs', 1)
+            self._counters.add_counter('filter-dropped-svobs-pvs', 1)
             # Return True so the cell with value is not treated as a header
             return True
 
@@ -2530,7 +2539,7 @@ class StatVarDataProcessor:
                         f'Dropping SVObs {svobs_pvs} for invalid statvar {statvar_pvs} in'
                         f' {self._file_context}', self._log_every_n)
                     self._counters.add_counter(
-                        f'dropped-svobs-with-invalid-statvar', 1, statvar_dcid)
+                        'dropped-svobs-with-invalid-statvar', 1, statvar_dcid)
                     return False
                 statvar_dcid = variable_measured
             svobs_pvs['variableMeasured'] = add_namespace(statvar_dcid)
@@ -2544,7 +2553,7 @@ class StatVarDataProcessor:
             logging.log_every_n(logging.ERROR,
                                 f'Unable to resolve SVObs place in {pvs}',
                                 self._log_every_n)
-            self._counters.add_counter(f'dropped-svobs-unresolved-place', 1,
+            self._counters.add_counter('dropped-svobs-unresolved-place', 1,
                                        statvar_dcid)
             return False
         if not self._statvars_map.add_statvar_obs(svobs_pvs, has_output_column):
@@ -2552,10 +2561,9 @@ class StatVarDataProcessor:
                 logging.ERROR,
                 f'Dropping invalid SVObs {svobs_pvs} for statvar {statvar_pvs} in'
                 f' {self._file_context}', self._log_every_n)
-            self._counters.add_counter(f'dropped-svobs-invalid', 1,
-                                       statvar_dcid)
+            self._counters.add_counter('dropped-svobs-invalid', 1, statvar_dcid)
             return False
-        self._counters.add_counter(f'generated-svobs', 1, statvar_dcid)
+        self._counters.add_counter('generated-svobs', 1, statvar_dcid)
         self._counters.add_counter(
             'generated-svobs-' + self.get_current_filename(), 1)
         self._section_svobs += 1
@@ -2675,7 +2683,7 @@ class StatVarDataProcessor:
         if not place:
             logging.log_every_n(logging.WARNING, f'No place in SVObs {pvs}',
                                 self._log_every_n)
-            self._counters.add_counter(f'warning-svobs-missing-place', 1,
+            self._counters.add_counter('warning-svobs-missing-place', 1,
                                        pvs.get('variableMeasured', ''))
             return False
         if is_place_dcid(place):
@@ -2721,13 +2729,13 @@ class StatVarDataProcessor:
             logging.level_debug() and logging.log_every_n(
                 logging.DEBUG, f'Resolved place {place} to {place_dcid}',
                 self._log_every_n)
-            self._counters.add_counter(f'resolved-places', 1)
+            self._counters.add_counter('resolved-places', 1)
             return True
 
         logging.log_every_n(logging.WARNING,
                             f'Unable to resolve place {place} in {pvs}',
                             self._log_every_n)
-        self._counters.add_counter(f'error-unresolved-place', 1, place_dcid)
+        self._counters.add_counter('error-unresolved-place', 1, place_dcid)
         return False
 
     def resolve_svobs_date(self, pvs: dict) -> bool:
@@ -2747,7 +2755,7 @@ class StatVarDataProcessor:
             resolved_date = datetime.datetime.strptime(
                 date_normalized,
                 output_date_format).strftime(output_date_format)
-        except ValueError as e:
+        except ValueError:
             # Date is not in expected format. Try formatting it.
             logging.log_every_n(
                 2, f'Formatting date {date} into {output_date_format}',
@@ -2768,7 +2776,7 @@ class StatVarDataProcessor:
                         2,
                         f'Formatted date {date} as {input_date_format} into {resolved_date}',
                         self._log_every_n)
-                except ValueError as e:
+                except ValueError:
                     logging.log_every_n(
                         logging.ERROR,
                         f'Unable to parse date {date_normalized} as {input_date_format}',
@@ -2937,7 +2945,6 @@ def process(
         f' {config_dict}...')
     input_data = prepare_input_data(config_dict)
     input_files = file_util.file_get_matching(input_data)
-    num_inputs = len(input_files)
     if file_util.file_is_local(output_path):
         output_dir = os.path.dirname(output_path)
         if output_dir:
