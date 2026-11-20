@@ -123,10 +123,33 @@ def fetch_sidra_data(
     return raw_json
 
 
+def discover_sidra_period_batches(
+    session: requests.Session,
+    probe_url: str,
+    min_year: int = 2022,
+    batch_size: int = 5,
+    raw_file_path: Optional[str] = None,
+) -> List[List[str]]:
+    """Discovers sorted numeric SIDRA periods >= min_year and chunks them."""
+    raw_json = fetch_sidra_data(session, probe_url, raw_file_path=raw_file_path)
+    years = set()
+    for record in raw_json[1:]:
+        period_str = str(record.get("D3C") or record.get("D3N") or "").strip()
+        if period_str.isdigit():
+            year = int(period_str)
+            if year >= min_year:
+                years.add(year)
+    sorted_years = [str(y) for y in sorted(years)]
+    return [
+        sorted_years[i:i + batch_size]
+        for i in range(0, len(sorted_years), batch_size)
+    ]
+
+
 def resolve_sidra_loc(
     record: Dict[str, Any],
     muni_map: Optional[Dict[str, str]] = None,
-    skip_5101837: bool = False,
+    skip_5101837: bool = True,
 ) -> Optional[str]:
     """Resolves IBGE SIDRA territorial identifier from D1C (muni) or D1N (macro)."""
     nc = str(record.get("NC", "")).strip()

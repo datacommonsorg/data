@@ -219,6 +219,71 @@ class DownloadTest(unittest.TestCase):
                     fallback_to_cached=False,
                 )
 
+    @patch.object(download_mod, "sync_historical_csv")
+    def test_table_6579_discovers_all_post_2022_periods_in_batches(
+            self, _mock_sync):
+        """Tests Table 6579 discovers >5 periods >2022 and fetches in 5-year batches."""
+        session = MagicMock()
+        seen_urls = []
+
+        def get_mock_response(url, **kwargs):
+            seen_urls.append(url)
+            resp = MagicMock()
+            resp.raise_for_status.return_value = None
+            if "6579/n1/1/" in url:
+                resp.json.return_value = [
+                    {
+                        "NC": "Header"
+                    },
+                    *[{
+                        "NC": "1",
+                        "D1N": "Brasil",
+                        "D3C": str(y),
+                        "D3N": str(y),
+                        "V": "200000000",
+                    } for y in range(2020, 2031) if y not in (2022, 2023)],
+                ]
+            elif "6579/" in url:
+                periods = url.split("/p/")[1].split("?")[0].split(",")
+                resp.json.return_value = [
+                    {
+                        "NC": "Header"
+                    },
+                    *[{
+                        "NC": "1",
+                        "D1N": "Brasil",
+                        "D3N": p,
+                        "V": str(210000000 + int(p)),
+                    } for p in periods],
+                ]
+            else:
+                resp.json.return_value = [
+                    {
+                        "NC": "Header"
+                    },
+                    {
+                        "NC": "1",
+                        "D1N": "Brasil",
+                        "D3N": "2022",
+                        "D4N": "Total",
+                        "V": "203080756",
+                    },
+                ]
+            return resp
+
+        session.get.side_effect = get_mock_response
+        out_csv = os.path.join(self.test_dir, "output_batches.csv")
+        download_all_years(session=session,
+                           output_file=out_csv,
+                           fallback_to_cached=False)
+
+        self.assertTrue(
+            any("/p/2024,2025,2026,2027,2028?" in u for u in seen_urls))
+        self.assertTrue(any("/p/2029,2030?" in u for u in seen_urls))
+        df = pd.read_csv(out_csv)
+        self.assertEqual(set(df["Ano"].values),
+                         {2022, 2024, 2025, 2026, 2027, 2028, 2029, 2030})
+
 
 if __name__ == "__main__":
     unittest.main()

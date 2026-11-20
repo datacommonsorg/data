@@ -32,6 +32,7 @@ for _p in (PARENT_DIR, SCRIPT_DIR):
 from absl import app
 from absl import flags
 from absl import logging
+from brazil_download_utils import discover_sidra_period_batches
 from brazil_download_utils import fetch_sidra_data
 from brazil_download_utils import get_history_path
 from brazil_download_utils import get_raw_dir
@@ -48,9 +49,11 @@ TABLE_9514_API_URL = (
     f"{SIDRA_BASE_URL}/values/t/9514/n1/all/n2/all/n3/all/n6/all"
     f"/v/93/p/all/c2/all/c287/100362/c286/113635?formato=json")
 # Table 6579: EstimaPop — População residente estimada (annual post-2022 estimates across n1/n2/n3/n6)
-TABLE_6579_API_URL = (
+TABLE_6579_PERIOD_PROBE_URL = (
+    f"{SIDRA_BASE_URL}/values/t/6579/n1/1/v/9324/p/all?formato=json")
+TABLE_6579_API_TEMPLATE = (
     f"{SIDRA_BASE_URL}/values/t/6579/n1/all/n2/all/n3/all/n6/all"
-    f"/v/9324/p/last%205?formato=json")
+    f"/v/9324/p/{{periods}}?formato=json")
 
 GCS_BUCKET_NAME = "unresolved_mcf"
 GCS_HISTORY_BLOB = ("country/brazil/history/brazil_total_population/"
@@ -154,40 +157,53 @@ def download_all_years(
             })
 
         # 2. Annual post-2022 population estimates from SIDRA API (Table 6579)
-        raw_6579 = fetch_sidra_data(
+        period_batches = discover_sidra_period_batches(
             session,
-            TABLE_6579_API_URL,
-            raw_file_path=os.path.join(raw_dir, "sidra_6579_estimates_n6.json"),
+            TABLE_6579_PERIOD_PROBE_URL,
+            min_year=2023,
+            batch_size=5,
+            raw_file_path=os.path.join(raw_dir, "sidra_6579_probe.json"),
         )
-        logging.info(
-            f"Retrieved {len(raw_6579) - 1} records from SIDRA Table 6579.")
-        for r in raw_6579[1:]:
-            val_str = r.get("V")
-            if val_str in ["-", "...", "..", "X", None, ""]:
-                continue
-            try:
-                val = int(round(float(val_str)))
-            except (ValueError, TypeError):
-                continue
+        for batch in period_batches:
+            periods_param = ",".join(batch)
+            periods_slug = "_".join(batch)
+            url_6579 = TABLE_6579_API_TEMPLATE.format(periods=periods_param)
+            raw_6579 = fetch_sidra_data(
+                session,
+                url_6579,
+                raw_file_path=os.path.join(
+                    raw_dir, f"sidra_6579_estimates_{periods_slug}_n6.json"),
+            )
+            logging.info(
+                f"Retrieved {len(raw_6579) - 1} records from SIDRA Table 6579 ({periods_param})."
+            )
+            for r in raw_6579[1:]:
+                val_str = r.get("V")
+                if val_str in ["-", "...", "..", "X", None, ""]:
+                    continue
+                try:
+                    val = int(round(float(val_str)))
+                except (ValueError, TypeError):
+                    continue
 
-            year_str = str(r.get("D3N", "")).strip()
-            try:
-                year = int(year_str)
-            except ValueError:
-                continue
-            if year <= 2022:
-                continue
+                year_str = str(r.get("D3N", "")).strip()
+                try:
+                    year = int(year_str)
+                except ValueError:
+                    continue
+                if year <= 2022:
+                    continue
 
-            loc = resolve_sidra_loc(r, muni_map=muni_map, skip_5101837=True)
-            if not loc:
-                continue
+                loc = resolve_sidra_loc(r, muni_map=muni_map, skip_5101837=True)
+                if not loc:
+                    continue
 
-            all_rows.append({
-                "Ano": year,
-                "Localidade": loc,
-                "Sexo": "Total",
-                "Populacao": val,
-            })
+                all_rows.append({
+                    "Ano": year,
+                    "Localidade": loc,
+                    "Sexo": "Total",
+                    "Populacao": val,
+                })
 
         if not all_rows:
             raise RuntimeError(

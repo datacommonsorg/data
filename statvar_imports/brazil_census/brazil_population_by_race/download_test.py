@@ -159,6 +159,91 @@ class DownloadTest(unittest.TestCase):
         self.assertEqual(saved, cached_csv)
         self.assertTrue(os.path.isfile(saved))
 
+    @patch.object(download_mod, "sync_historical_csv")
+    def test_table_9605_discovers_multiple_periods_and_skips_5101837(
+            self, _mock_sync):
+        """Tests Table 9605 discovers >=2022 periods dynamically and skips 5101837 by default."""
+        session = MagicMock()
+        seen_urls = []
+
+        def get_mock_response(url, **kwargs):
+            seen_urls.append(url)
+            resp = MagicMock()
+            resp.raise_for_status.return_value = None
+            if "/n1/1/" in url:
+                resp.json.return_value = [
+                    {
+                        "NC": "Header"
+                    },
+                    {
+                        "NC": "1",
+                        "D1N": "Brasil",
+                        "D3C": "2010",
+                        "D3N": "2010",
+                        "V": "190755799",
+                    },
+                    {
+                        "NC": "1",
+                        "D1N": "Brasil",
+                        "D3C": "2022",
+                        "D3N": "2022",
+                        "V": "203080756",
+                    },
+                    {
+                        "NC": "1",
+                        "D1N": "Brasil",
+                        "D3C": "2032",
+                        "D3N": "2032",
+                        "V": "215000000",
+                    },
+                ]
+            elif "/p/2032/" in url:
+                resp.json.return_value = [
+                    {
+                        "NC": "Header"
+                    },
+                    {
+                        "NC": "1",
+                        "D1N": "Brasil",
+                        "D3N": "2032",
+                        "D4N": "Total",
+                        "V": "215000000",
+                    },
+                    {
+                        "NC": "6",
+                        "D1C": "5101837",
+                        "D3N": "2032",
+                        "D4N": "Total",
+                        "V": "999",
+                    },
+                ]
+            else:
+                resp.json.return_value = [
+                    {
+                        "NC": "Header"
+                    },
+                    {
+                        "NC": "1",
+                        "D1N": "Brasil",
+                        "D3N": "2022",
+                        "D4N": "Total",
+                        "V": "203080756",
+                    },
+                ]
+            return resp
+
+        session.get.side_effect = get_mock_response
+        out_csv = os.path.join(self.test_dir, "race_multi.csv")
+        download_all_years(session=session,
+                           output_file=out_csv,
+                           fallback_to_cached=False)
+
+        self.assertTrue(any("/n6/all/v/93/p/2022/" in u for u in seen_urls))
+        self.assertTrue(any("/n6/all/v/93/p/2032/" in u for u in seen_urls))
+        df = pd.read_csv(out_csv)
+        self.assertEqual(set(df["Ano"].values), {2022, 2032})
+        self.assertNotIn("5101837", set(df["Localidade"].astype(str).values))
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -31,6 +31,7 @@ for _p in (PARENT_DIR, SCRIPT_DIR):
 from absl import app
 from absl import flags
 from absl import logging
+from brazil_download_utils import discover_sidra_period_batches
 from brazil_download_utils import fetch_sidra_data
 from brazil_download_utils import get_history_path
 from brazil_download_utils import get_raw_dir
@@ -45,13 +46,11 @@ SIDRA_BASE_URL = "https://apisidra.ibge.gov.br"
 # Table 9605: População residente por cor ou raça (2022+ across n1/n2/n3/n6 plus macro p/all)
 TABLE_9605_API_URL = (f"{SIDRA_BASE_URL}/values/t/9605/n1/all/n2/all/n3/all"
                       f"/v/93/p/all/c86/all?formato=json")
-TABLE_9605_API_URLS = [
-    (
-        "sidra_9605_2022_n6.json",
-        f"{SIDRA_BASE_URL}/values/t/9605/n1/all/n2/all/n3/all/n6/all/v/93/p/2022/c86/all?formato=json",
-    ),
-    ("sidra_9605_macro_all.json", TABLE_9605_API_URL),
-]
+TABLE_9605_PERIOD_PROBE_URL = (
+    f"{SIDRA_BASE_URL}/values/t/9605/n1/1/v/93/p/all/c86/95251?formato=json")
+TABLE_9605_N6_TEMPLATE = (
+    f"{SIDRA_BASE_URL}/values/t/9605/n1/all/n2/all/n3/all/n6/all"
+    f"/v/93/p/{{period}}/c86/all?formato=json")
 
 GCS_BUCKET_NAME = "unresolved_mcf"
 GCS_HISTORY_BLOB = ("country/brazil/history/brazil_population_by_race/"
@@ -98,7 +97,19 @@ def download_all_years(
     all_rows: List[Dict[str, Any]] = []
 
     try:
-        for fname, url in TABLE_9605_API_URLS:
+        period_batches = discover_sidra_period_batches(
+            session,
+            TABLE_9605_PERIOD_PROBE_URL,
+            min_year=2022,
+            batch_size=1,
+            raw_file_path=os.path.join(raw_dir, "sidra_9605_probe.json"),
+        )
+        api_urls = [(
+            f"sidra_9605_{batch[0]}_n6.json",
+            TABLE_9605_N6_TEMPLATE.format(period=batch[0]),
+        ) for batch in period_batches
+                   ] + [("sidra_9605_macro_all.json", TABLE_9605_API_URL)]
+        for fname, url in api_urls:
             raw_sidra = fetch_sidra_data(
                 session,
                 url,

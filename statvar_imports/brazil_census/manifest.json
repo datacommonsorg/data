@@ -5,7 +5,7 @@
             "curator_emails": [
                 "support@datacommons.org"
             ],
-            "provenance_url": "https://sidra.ibge.gov.br",
+            "provenance_url": "https://sidra.ibge.gov.br/tabela/9514",
             "provenance_description": "Brazil Census from IBGE (1940-2026+): population, age, sex, race, religion, residence, education, and literacy.",
             "scripts": [
                 "brazil_education/download.py",
