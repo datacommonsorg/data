@@ -1,0 +1,206 @@
+# Copyright 2026 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+"""Checks that JSON files in the repo are valid.
+
+A file fails the check if it:
+  - is not valid UTF-8 (a leading BOM is allowed),
+  - is not valid JSON (e.g. trailing commas, comments, merge-conflict markers),
+  - has the same key more than once in an object, or
+  - uses NaN, Infinity or -Infinity (accepted by Python, but not valid JSON).
+
+Formatting (indentation, key order, final newline) is not checked.
+
+Usage (from the repo root):
+  python3 tools/lint/json_lint.py            # Check the whole repo.
+  python3 tools/lint/json_lint.py a.json dir # Check specific files/folders.
+"""
+
+import collections
+import json
+import os
+import sys
+
+# File extensions to check.
+JSON_EXTENSIONS = ('.json', '.geojson')
+
+# Directory names skipped anywhere in the tree.
+EXCLUDED_DIRS = frozenset({
+    '.git',
+    # Python virtual environments. CI creates /workspace/.env, which contains
+    # JSON files shipped with installed packages.
+    '.env',
+    '.venv',
+    'node_modules',
+    '__pycache__',
+    '.ruff_cache',
+    # Local scratch outputs (also ignored by .gitignore).
+    'scratch',
+})
+
+# Files skipped by the check, relative to the repo root. Give a reason for
+# each entry, and remove it once the file is fixed.
+EXCLUDED_FILES = frozenset({
+    # Python-style config with `#` comments, not JSON.
+    'scripts/earthengine/ee_config.json',
+    # Contains unresolved merge-conflict markers (from #2250); needs the
+    # correct counter values to be restored.
+    'scripts/fao/validation/report.json',
+})
+
+# Large files stored with Git LFS (https://git-lfs.com) are checked out as a
+# small text "pointer" file instead of the real content, unless `git lfs pull`
+# is run. A pointer file isn't JSON, so it is skipped. Pointer files always
+# start with this line.
+_LFS_POINTER_PREFIX = b'version https://git-lfs.github.com/spec/'
+
+_REPO_ROOT = os.path.dirname(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+
+class _DuplicateKeyError(ValueError):
+    pass
+
+
+class _InvalidConstantError(ValueError):
+    pass
+
+
+def _reject_duplicate_keys(pairs):
+    """object_pairs_hook for json.loads that fails on repeated keys."""
+    result = dict(pairs)
+    # Fast path: no duplicates if every key made it into the dict. This avoids
+    # counting keys for every object, which is slow on large files.
+    if len(result) == len(pairs):
+        return result
+    counts = collections.Counter(key for key, _ in pairs)
+    duplicates = [key for key, count in counts.items() if count > 1]
+    raise _DuplicateKeyError(
+        f'duplicate keys: {", ".join(repr(k) for k in duplicates)}')
+
+
+def _reject_constant(name):
+    """parse_constant hook for json.loads that fails on NaN/Infinity."""
+    raise _InvalidConstantError(f'{name} is not valid JSON')
+
+
+def lint_file(path):
+    """Checks a single file.
+
+    Returns:
+      A list of error messages (empty if the file is valid), or None if the
+      file was skipped because it is a Git LFS pointer.
+    """
+    try:
+        with open(path, 'rb') as f:
+            raw = f.read()
+    except OSError as e:
+        return [f'cannot read file: {e}']
+
+    if raw.startswith(_LFS_POINTER_PREFIX):
+        return None
+
+    try:
+        text = raw.decode('utf-8-sig')
+    except UnicodeDecodeError as e:
+        return [f'not valid UTF-8: {e}']
+
+    try:
+        json.loads(text,
+                   object_pairs_hook=_reject_duplicate_keys,
+                   parse_constant=_reject_constant)
+    except json.JSONDecodeError as e:
+        return [f'{e.lineno}:{e.colno}: {e.msg}']
+    except ValueError as e:
+        # Duplicate keys, NaN/Infinity, and other values json.loads rejects
+        # (e.g. integers with more than 4300 digits).
+        return [str(e)]
+    return []
+
+
+def is_excluded_file(path, repo_root=_REPO_ROOT):
+    """Returns whether the file is listed in EXCLUDED_FILES."""
+    rel_path = os.path.relpath(path, repo_root)
+    return rel_path.replace(os.sep, '/') in EXCLUDED_FILES
+
+
+def _list_json_files(paths):
+    """Yields JSON files under the given paths, skipping EXCLUDED_DIRS."""
+    for path in paths:
+        if os.path.isfile(path):
+            candidates = [path]
+        else:
+            candidates = []
+            for dirpath, dirnames, filenames in os.walk(path):
+                dirnames[:] = sorted(
+                    d for d in dirnames if d not in EXCLUDED_DIRS)
+                candidates.extend(
+                    os.path.join(dirpath, name) for name in sorted(filenames))
+        for candidate in candidates:
+            if candidate.endswith(JSON_EXTENSIONS):
+                yield candidate
+
+
+def find_json_files(paths, repo_root=_REPO_ROOT):
+    """Yields JSON files under the given paths, skipping excluded ones.
+
+    Args:
+      paths: Files or directories to search.
+      repo_root: Directory that EXCLUDED_FILES entries are relative to.
+    """
+    for path in _list_json_files(paths):
+        if not is_excluded_file(path, repo_root):
+            yield path
+
+
+def main(argv):
+    paths = argv[1:] or [_REPO_ROOT]
+    missing = [path for path in paths if not os.path.exists(path)]
+    if missing:
+        for path in missing:
+            print(f'{path}: no such file or directory', file=sys.stderr)
+        return 1
+
+    num_checked = 0
+    num_failed = 0
+    num_excluded = 0
+    num_lfs = 0
+    for path in _list_json_files(paths):
+        if is_excluded_file(path):
+            num_excluded += 1
+            continue
+        errors = lint_file(path)
+        if errors is None:
+            num_lfs += 1
+            continue
+        num_checked += 1
+        if errors:
+            num_failed += 1
+            display_path = os.path.relpath(path)
+            if display_path.startswith('..'):
+                display_path = path
+            for error in errors:
+                print(f'{display_path}: {error}')
+
+    print(f'Checked {num_checked} JSON files, {num_failed} failed, '
+          f'{num_excluded + num_lfs} skipped ({num_excluded} in '
+          f'EXCLUDED_FILES, {num_lfs} Git LFS pointers).')
+    if num_failed:
+        print('ERROR: Fix the invalid JSON files listed above.',
+              file=sys.stderr)
+        return 1
+    return 0
+
+
+if __name__ == '__main__':
+    sys.exit(main(sys.argv))

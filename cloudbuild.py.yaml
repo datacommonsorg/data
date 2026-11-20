@@ -24,7 +24,7 @@ steps:
     - |
       ./run_tests.sh -u
 
-- id: python_format_check
+- id: lint
   name: python:3.12.8
   entrypoint: /bin/sh
   waitFor:
