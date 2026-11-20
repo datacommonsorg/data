@@ -25,7 +25,7 @@ from absl import logging
 # Setup path for import from data/util
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(_SCRIPT_PATH, '../../../../util/'))
+sys.path.append(os.path.join(_SCRIPT_PATH, '../../../../'))
 import alpha2_to_dcid as alpha2_to_dcid
 from counters import Counters
 import file_util
