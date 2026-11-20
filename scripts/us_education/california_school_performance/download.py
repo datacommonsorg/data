@@ -31,7 +31,8 @@ Usage:
   python3 download.py --test_mode
 """
 
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import as_completed
 import csv
 from datetime import datetime
 import io
@@ -42,6 +43,7 @@ import sys
 import tempfile
 import time
 import zipfile
+
 from absl import app
 from absl import flags
 from absl import logging
