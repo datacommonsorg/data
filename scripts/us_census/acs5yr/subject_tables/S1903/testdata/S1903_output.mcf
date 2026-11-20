@@ -1,0 +1,194 @@
+Node: dcid:Count_Household
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_HouseholderRaceWhiteAlone
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householderRace: dcs:WhiteAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_HouseholderRaceBlackOrAfricanAmericanAlone
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householderRace: dcs:BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_HouseholderRaceAmericanIndianOrAlaskaNativeAlone
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householderRace: dcs:AmericanIndianOrAlaskaNativeAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_HouseholderRaceAsianAlone
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householderRace: dcs:AsianAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_HouseholderRaceNativeHawaiianOrOtherPacificIslanderAlone
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householderRace: dcs:NativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_HouseholderRaceSomeOtherRaceAlone
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householderRace: dcs:SomeOtherRaceAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_HouseholderRaceTwoOrMoreRaces
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householderRace: dcs:TwoOrMoreRaces
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_HouseholderRaceHispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householderRace: dcs:HispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_HouseholderRaceWhiteAloneNotHispanicOrLatino
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householderRace: dcs:WhiteAloneNotHispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_HouseholderAge15To24Years
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householderAge: [15 24 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_HouseholderAge25To44Years
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householderAge: [25 44 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_HouseholderAge45To64Years
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householderAge: [45 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Household_HouseholderAge65OrMoreYears
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Household
+householderAge: [65 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Income_Household
+measuredProperty: dcs:income
+statType: dcs:medianValue
+populationType: dcs:Household
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Income_Household_HouseholderRaceWhiteAlone
+measuredProperty: dcs:income
+statType: dcs:medianValue
+populationType: dcs:Household
+householderRace: dcs:WhiteAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Income_Household_HouseholderRaceBlackOrAfricanAmericanAlone
+measuredProperty: dcs:income
+statType: dcs:medianValue
+populationType: dcs:Household
+householderRace: dcs:BlackOrAfricanAmericanAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Income_Household_HouseholderRaceAmericanIndianOrAlaskaNativeAlone
+measuredProperty: dcs:income
+statType: dcs:medianValue
+populationType: dcs:Household
+householderRace: dcs:AmericanIndianOrAlaskaNativeAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Income_Household_HouseholderRaceAsianAlone
+measuredProperty: dcs:income
+statType: dcs:medianValue
+populationType: dcs:Household
+householderRace: dcs:AsianAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Income_Household_HouseholderRaceNativeHawaiianOrOtherPacificIslanderAlone
+measuredProperty: dcs:income
+statType: dcs:medianValue
+populationType: dcs:Household
+householderRace: dcs:NativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Income_Household_HouseholderRaceSomeOtherRaceAlone
+measuredProperty: dcs:income
+statType: dcs:medianValue
+populationType: dcs:Household
+householderRace: dcs:SomeOtherRaceAlone
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Income_Household_HouseholderRaceTwoOrMoreRaces
+measuredProperty: dcs:income
+statType: dcs:medianValue
+populationType: dcs:Household
+householderRace: dcs:TwoOrMoreRaces
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Income_Household_HouseholderRaceHispanicOrLatino
+measuredProperty: dcs:income
+statType: dcs:medianValue
+populationType: dcs:Household
+householderRace: dcs:HispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Income_Household_HouseholderRaceWhiteAloneNotHispanicOrLatino
+measuredProperty: dcs:income
+statType: dcs:medianValue
+populationType: dcs:Household
+householderRace: dcs:WhiteAloneNotHispanicOrLatino
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Income_Household_HouseholderAge15To24Years
+measuredProperty: dcs:income
+statType: dcs:medianValue
+populationType: dcs:Household
+householderAge: [15 24 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Income_Household_HouseholderAge25To44Years
+measuredProperty: dcs:income
+statType: dcs:medianValue
+populationType: dcs:Household
+householderAge: [25 44 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Income_Household_HouseholderAge45To64Years
+measuredProperty: dcs:income
+statType: dcs:medianValue
+populationType: dcs:Household
+householderAge: [45 64 Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Income_Household_HouseholderAge65OrMoreYears
+measuredProperty: dcs:income
+statType: dcs:medianValue
+populationType: dcs:Household
+householderAge: [65 - Years]
+typeOf: dcs:StatisticalVariable
+

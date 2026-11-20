@@ -1,0 +1,478 @@
+{
+    "2010": {
+        "Total!!Estimate!!Households": {
+            "Node": "dcid:Count_Household",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Household",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!One race!!White": {
+            "Node": "dcid:Count_Household_HouseholderRaceWhiteAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Household",
+            "householderRace": "dcs:WhiteAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!One race!!Black or African American": {
+            "Node": "dcid:Count_Household_HouseholderRaceBlackOrAfricanAmericanAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Household",
+            "householderRace": "dcs:BlackOrAfricanAmericanAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!One race!!American Indian and Alaska Native": {
+            "Node": "dcid:Count_Household_HouseholderRaceAmericanIndianOrAlaskaNativeAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Household",
+            "householderRace": "dcs:AmericanIndianOrAlaskaNativeAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!One race!!Asian": {
+            "Node": "dcid:Count_Household_HouseholderRaceAsianAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Household",
+            "householderRace": "dcs:AsianAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!One race!!Native Hawaiian and Other Pacific Islander": {
+            "Node": "dcid:Count_Household_HouseholderRaceNativeHawaiianOrOtherPacificIslanderAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Household",
+            "householderRace": "dcs:NativeHawaiianOrOtherPacificIslanderAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!One race!!Some other race": {
+            "Node": "dcid:Count_Household_HouseholderRaceSomeOtherRaceAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Household",
+            "householderRace": "dcs:SomeOtherRaceAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Two or more races": {
+            "Node": "dcid:Count_Household_HouseholderRaceTwoOrMoreRaces",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Household",
+            "householderRace": "dcs:TwoOrMoreRaces",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Hispanic or Latino origin (of any race)": {
+            "Node": "dcid:Count_Household_HouseholderRaceHispanicOrLatino",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Household",
+            "householderRace": "dcs:HispanicOrLatino",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!White alone, not Hispanic or Latino": {
+            "Node": "dcid:Count_Household_HouseholderRaceWhiteAloneNotHispanicOrLatino",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Household",
+            "householderRace": "dcs:WhiteAloneNotHispanicOrLatino",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!HOUSEHOLD INCOME BY AGE OF HOUSEHOLDER!!15 to 24 years": {
+            "Node": "dcid:Count_Household_HouseholderAge15To24Years",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Household",
+            "householderAge": "[15 24 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!HOUSEHOLD INCOME BY AGE OF HOUSEHOLDER!!25 to 44 years": {
+            "Node": "dcid:Count_Household_HouseholderAge25To44Years",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Household",
+            "householderAge": "[25 44 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!HOUSEHOLD INCOME BY AGE OF HOUSEHOLDER!!45 to 64 years": {
+            "Node": "dcid:Count_Household_HouseholderAge45To64Years",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Household",
+            "householderAge": "[45 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!HOUSEHOLD INCOME BY AGE OF HOUSEHOLDER!!65 years and over": {
+            "Node": "dcid:Count_Household_HouseholderAge65OrMoreYears",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Household",
+            "householderAge": "[65 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Median income (dollars)!!Estimate!!Households": {
+            "Node": "dcid:Median_Income_Household",
+            "measuredProperty": "dcs:income",
+            "statType": "dcs:medianValue",
+            "unit": "InflationAdjustedUSD_CurrentYear",
+            "populationType": "dcs:Household",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Median income (dollars)!!Estimate!!One race!!White": {
+            "Node": "dcid:Median_Income_Household_HouseholderRaceWhiteAlone",
+            "measuredProperty": "dcs:income",
+            "statType": "dcs:medianValue",
+            "unit": "InflationAdjustedUSD_CurrentYear",
+            "populationType": "dcs:Household",
+            "householderRace": "dcs:WhiteAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Median income (dollars)!!Estimate!!One race!!Black or African American": {
+            "Node": "dcid:Median_Income_Household_HouseholderRaceBlackOrAfricanAmericanAlone",
+            "measuredProperty": "dcs:income",
+            "statType": "dcs:medianValue",
+            "unit": "InflationAdjustedUSD_CurrentYear",
+            "populationType": "dcs:Household",
+            "householderRace": "dcs:BlackOrAfricanAmericanAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Median income (dollars)!!Estimate!!One race!!American Indian and Alaska Native": {
+            "Node": "dcid:Median_Income_Household_HouseholderRaceAmericanIndianOrAlaskaNativeAlone",
+            "measuredProperty": "dcs:income",
+            "statType": "dcs:medianValue",
+            "unit": "InflationAdjustedUSD_CurrentYear",
+            "populationType": "dcs:Household",
+            "householderRace": "dcs:AmericanIndianOrAlaskaNativeAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Median income (dollars)!!Estimate!!One race!!Asian": {
+            "Node": "dcid:Median_Income_Household_HouseholderRaceAsianAlone",
+            "measuredProperty": "dcs:income",
+            "statType": "dcs:medianValue",
+            "unit": "InflationAdjustedUSD_CurrentYear",
+            "populationType": "dcs:Household",
+            "householderRace": "dcs:AsianAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Median income (dollars)!!Estimate!!One race!!Native Hawaiian and Other Pacific Islander": {
+            "Node": "dcid:Median_Income_Household_HouseholderRaceNativeHawaiianOrOtherPacificIslanderAlone",
+            "measuredProperty": "dcs:income",
+            "statType": "dcs:medianValue",
+            "unit": "InflationAdjustedUSD_CurrentYear",
+            "populationType": "dcs:Household",
+            "householderRace": "dcs:NativeHawaiianOrOtherPacificIslanderAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Median income (dollars)!!Estimate!!One race!!Some other race": {
+            "Node": "dcid:Median_Income_Household_HouseholderRaceSomeOtherRaceAlone",
+            "measuredProperty": "dcs:income",
+            "statType": "dcs:medianValue",
+            "unit": "InflationAdjustedUSD_CurrentYear",
+            "populationType": "dcs:Household",
+            "householderRace": "dcs:SomeOtherRaceAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Median income (dollars)!!Estimate!!Two or more races": {
+            "Node": "dcid:Median_Income_Household_HouseholderRaceTwoOrMoreRaces",
+            "measuredProperty": "dcs:income",
+            "statType": "dcs:medianValue",
+            "unit": "InflationAdjustedUSD_CurrentYear",
+            "populationType": "dcs:Household",
+            "householderRace": "dcs:TwoOrMoreRaces",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Median income (dollars)!!Estimate!!Hispanic or Latino origin (of any race)": {
+            "Node": "dcid:Median_Income_Household_HouseholderRaceHispanicOrLatino",
+            "measuredProperty": "dcs:income",
+            "statType": "dcs:medianValue",
+            "unit": "InflationAdjustedUSD_CurrentYear",
+            "populationType": "dcs:Household",
+            "householderRace": "dcs:HispanicOrLatino",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Median income (dollars)!!Estimate!!White alone, not Hispanic or Latino": {
+            "Node": "dcid:Median_Income_Household_HouseholderRaceWhiteAloneNotHispanicOrLatino",
+            "measuredProperty": "dcs:income",
+            "statType": "dcs:medianValue",
+            "unit": "InflationAdjustedUSD_CurrentYear",
+            "populationType": "dcs:Household",
+            "householderRace": "dcs:WhiteAloneNotHispanicOrLatino",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Median income (dollars)!!Estimate!!HOUSEHOLD INCOME BY AGE OF HOUSEHOLDER!!15 to 24 years": {
+            "Node": "dcid:Median_Income_Household_HouseholderAge15To24Years",
+            "measuredProperty": "dcs:income",
+            "statType": "dcs:medianValue",
+            "unit": "InflationAdjustedUSD_CurrentYear",
+            "populationType": "dcs:Household",
+            "householderAge": "[15 24 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Median income (dollars)!!Estimate!!HOUSEHOLD INCOME BY AGE OF HOUSEHOLDER!!25 to 44 years": {
+            "Node": "dcid:Median_Income_Household_HouseholderAge25To44Years",
+            "measuredProperty": "dcs:income",
+            "statType": "dcs:medianValue",
+            "unit": "InflationAdjustedUSD_CurrentYear",
+            "populationType": "dcs:Household",
+            "householderAge": "[25 44 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Median income (dollars)!!Estimate!!HOUSEHOLD INCOME BY AGE OF HOUSEHOLDER!!45 to 64 years": {
+            "Node": "dcid:Median_Income_Household_HouseholderAge45To64Years",
+            "measuredProperty": "dcs:income",
+            "statType": "dcs:medianValue",
+            "unit": "InflationAdjustedUSD_CurrentYear",
+            "populationType": "dcs:Household",
+            "householderAge": "[45 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Median income (dollars)!!Estimate!!HOUSEHOLD INCOME BY AGE OF HOUSEHOLDER!!65 years and over": {
+            "Node": "dcid:Median_Income_Household_HouseholderAge65OrMoreYears",
+            "measuredProperty": "dcs:income",
+            "statType": "dcs:medianValue",
+            "unit": "InflationAdjustedUSD_CurrentYear",
+            "populationType": "dcs:Household",
+            "householderAge": "[65 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        }
+    },
+    "2024": {
+        "Estimate!!Number!!HOUSEHOLD INCOME BY RACE AND HISPANIC OR LATINO ORIGIN OF HOUSEHOLDER!!Households": {
+            "Node": "dcid:Count_Household",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Household",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Number!!HOUSEHOLD INCOME BY RACE AND HISPANIC OR LATINO ORIGIN OF HOUSEHOLDER!!Households!!One race--!!White": {
+            "Node": "dcid:Count_Household_HouseholderRaceWhiteAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Household",
+            "householderRace": "dcs:WhiteAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Number!!HOUSEHOLD INCOME BY RACE AND HISPANIC OR LATINO ORIGIN OF HOUSEHOLDER!!Households!!One race--!!Black or African American": {
+            "Node": "dcid:Count_Household_HouseholderRaceBlackOrAfricanAmericanAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Household",
+            "householderRace": "dcs:BlackOrAfricanAmericanAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Number!!HOUSEHOLD INCOME BY RACE AND HISPANIC OR LATINO ORIGIN OF HOUSEHOLDER!!Households!!One race--!!American Indian and Alaska Native": {
+            "Node": "dcid:Count_Household_HouseholderRaceAmericanIndianOrAlaskaNativeAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Household",
+            "householderRace": "dcs:AmericanIndianOrAlaskaNativeAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Number!!HOUSEHOLD INCOME BY RACE AND HISPANIC OR LATINO ORIGIN OF HOUSEHOLDER!!Households!!One race--!!Asian": {
+            "Node": "dcid:Count_Household_HouseholderRaceAsianAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Household",
+            "householderRace": "dcs:AsianAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Number!!HOUSEHOLD INCOME BY RACE AND HISPANIC OR LATINO ORIGIN OF HOUSEHOLDER!!Households!!One race--!!Native Hawaiian and Other Pacific Islander": {
+            "Node": "dcid:Count_Household_HouseholderRaceNativeHawaiianOrOtherPacificIslanderAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Household",
+            "householderRace": "dcs:NativeHawaiianOrOtherPacificIslanderAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Number!!HOUSEHOLD INCOME BY RACE AND HISPANIC OR LATINO ORIGIN OF HOUSEHOLDER!!Households!!One race--!!Some other race": {
+            "Node": "dcid:Count_Household_HouseholderRaceSomeOtherRaceAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Household",
+            "householderRace": "dcs:SomeOtherRaceAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Number!!HOUSEHOLD INCOME BY RACE AND HISPANIC OR LATINO ORIGIN OF HOUSEHOLDER!!Households!!Two or more races": {
+            "Node": "dcid:Count_Household_HouseholderRaceTwoOrMoreRaces",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Household",
+            "householderRace": "dcs:TwoOrMoreRaces",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Number!!HOUSEHOLD INCOME BY RACE AND HISPANIC OR LATINO ORIGIN OF HOUSEHOLDER!!Households!!Hispanic or Latino origin (of any race)": {
+            "Node": "dcid:Count_Household_HouseholderRaceHispanicOrLatino",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Household",
+            "householderRace": "dcs:HispanicOrLatino",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Number!!HOUSEHOLD INCOME BY RACE AND HISPANIC OR LATINO ORIGIN OF HOUSEHOLDER!!Households!!White alone, not Hispanic or Latino": {
+            "Node": "dcid:Count_Household_HouseholderRaceWhiteAloneNotHispanicOrLatino",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Household",
+            "householderRace": "dcs:WhiteAloneNotHispanicOrLatino",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Number!!HOUSEHOLD INCOME BY AGE OF HOUSEHOLDER!!15 to 24 years": {
+            "Node": "dcid:Count_Household_HouseholderAge15To24Years",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Household",
+            "householderAge": "[15 24 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Number!!HOUSEHOLD INCOME BY AGE OF HOUSEHOLDER!!25 to 44 years": {
+            "Node": "dcid:Count_Household_HouseholderAge25To44Years",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Household",
+            "householderAge": "[25 44 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Number!!HOUSEHOLD INCOME BY AGE OF HOUSEHOLDER!!45 to 64 years": {
+            "Node": "dcid:Count_Household_HouseholderAge45To64Years",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Household",
+            "householderAge": "[45 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Number!!HOUSEHOLD INCOME BY AGE OF HOUSEHOLDER!!65 years and over": {
+            "Node": "dcid:Count_Household_HouseholderAge65OrMoreYears",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Household",
+            "householderAge": "[65 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median income (dollars)!!HOUSEHOLD INCOME BY RACE AND HISPANIC OR LATINO ORIGIN OF HOUSEHOLDER!!Households": {
+            "Node": "dcid:Median_Income_Household",
+            "measuredProperty": "dcs:income",
+            "statType": "dcs:medianValue",
+            "unit": "InflationAdjustedUSD_CurrentYear",
+            "populationType": "dcs:Household",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median income (dollars)!!HOUSEHOLD INCOME BY RACE AND HISPANIC OR LATINO ORIGIN OF HOUSEHOLDER!!Households!!One race--!!White": {
+            "Node": "dcid:Median_Income_Household_HouseholderRaceWhiteAlone",
+            "measuredProperty": "dcs:income",
+            "statType": "dcs:medianValue",
+            "unit": "InflationAdjustedUSD_CurrentYear",
+            "populationType": "dcs:Household",
+            "householderRace": "dcs:WhiteAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median income (dollars)!!HOUSEHOLD INCOME BY RACE AND HISPANIC OR LATINO ORIGIN OF HOUSEHOLDER!!Households!!One race--!!Black or African American": {
+            "Node": "dcid:Median_Income_Household_HouseholderRaceBlackOrAfricanAmericanAlone",
+            "measuredProperty": "dcs:income",
+            "statType": "dcs:medianValue",
+            "unit": "InflationAdjustedUSD_CurrentYear",
+            "populationType": "dcs:Household",
+            "householderRace": "dcs:BlackOrAfricanAmericanAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median income (dollars)!!HOUSEHOLD INCOME BY RACE AND HISPANIC OR LATINO ORIGIN OF HOUSEHOLDER!!Households!!One race--!!American Indian and Alaska Native": {
+            "Node": "dcid:Median_Income_Household_HouseholderRaceAmericanIndianOrAlaskaNativeAlone",
+            "measuredProperty": "dcs:income",
+            "statType": "dcs:medianValue",
+            "unit": "InflationAdjustedUSD_CurrentYear",
+            "populationType": "dcs:Household",
+            "householderRace": "dcs:AmericanIndianOrAlaskaNativeAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median income (dollars)!!HOUSEHOLD INCOME BY RACE AND HISPANIC OR LATINO ORIGIN OF HOUSEHOLDER!!Households!!One race--!!Asian": {
+            "Node": "dcid:Median_Income_Household_HouseholderRaceAsianAlone",
+            "measuredProperty": "dcs:income",
+            "statType": "dcs:medianValue",
+            "unit": "InflationAdjustedUSD_CurrentYear",
+            "populationType": "dcs:Household",
+            "householderRace": "dcs:AsianAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median income (dollars)!!HOUSEHOLD INCOME BY RACE AND HISPANIC OR LATINO ORIGIN OF HOUSEHOLDER!!Households!!One race--!!Native Hawaiian and Other Pacific Islander": {
+            "Node": "dcid:Median_Income_Household_HouseholderRaceNativeHawaiianOrOtherPacificIslanderAlone",
+            "measuredProperty": "dcs:income",
+            "statType": "dcs:medianValue",
+            "unit": "InflationAdjustedUSD_CurrentYear",
+            "populationType": "dcs:Household",
+            "householderRace": "dcs:NativeHawaiianOrOtherPacificIslanderAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median income (dollars)!!HOUSEHOLD INCOME BY RACE AND HISPANIC OR LATINO ORIGIN OF HOUSEHOLDER!!Households!!One race--!!Some other race": {
+            "Node": "dcid:Median_Income_Household_HouseholderRaceSomeOtherRaceAlone",
+            "measuredProperty": "dcs:income",
+            "statType": "dcs:medianValue",
+            "unit": "InflationAdjustedUSD_CurrentYear",
+            "populationType": "dcs:Household",
+            "householderRace": "dcs:SomeOtherRaceAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median income (dollars)!!HOUSEHOLD INCOME BY RACE AND HISPANIC OR LATINO ORIGIN OF HOUSEHOLDER!!Households!!Two or more races": {
+            "Node": "dcid:Median_Income_Household_HouseholderRaceTwoOrMoreRaces",
+            "measuredProperty": "dcs:income",
+            "statType": "dcs:medianValue",
+            "unit": "InflationAdjustedUSD_CurrentYear",
+            "populationType": "dcs:Household",
+            "householderRace": "dcs:TwoOrMoreRaces",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median income (dollars)!!HOUSEHOLD INCOME BY RACE AND HISPANIC OR LATINO ORIGIN OF HOUSEHOLDER!!Households!!Hispanic or Latino origin (of any race)": {
+            "Node": "dcid:Median_Income_Household_HouseholderRaceHispanicOrLatino",
+            "measuredProperty": "dcs:income",
+            "statType": "dcs:medianValue",
+            "unit": "InflationAdjustedUSD_CurrentYear",
+            "populationType": "dcs:Household",
+            "householderRace": "dcs:HispanicOrLatino",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median income (dollars)!!HOUSEHOLD INCOME BY RACE AND HISPANIC OR LATINO ORIGIN OF HOUSEHOLDER!!Households!!White alone, not Hispanic or Latino": {
+            "Node": "dcid:Median_Income_Household_HouseholderRaceWhiteAloneNotHispanicOrLatino",
+            "measuredProperty": "dcs:income",
+            "statType": "dcs:medianValue",
+            "unit": "InflationAdjustedUSD_CurrentYear",
+            "populationType": "dcs:Household",
+            "householderRace": "dcs:WhiteAloneNotHispanicOrLatino",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median income (dollars)!!HOUSEHOLD INCOME BY AGE OF HOUSEHOLDER!!15 to 24 years": {
+            "Node": "dcid:Median_Income_Household_HouseholderAge15To24Years",
+            "measuredProperty": "dcs:income",
+            "statType": "dcs:medianValue",
+            "unit": "InflationAdjustedUSD_CurrentYear",
+            "populationType": "dcs:Household",
+            "householderAge": "[15 24 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median income (dollars)!!HOUSEHOLD INCOME BY AGE OF HOUSEHOLDER!!25 to 44 years": {
+            "Node": "dcid:Median_Income_Household_HouseholderAge25To44Years",
+            "measuredProperty": "dcs:income",
+            "statType": "dcs:medianValue",
+            "unit": "InflationAdjustedUSD_CurrentYear",
+            "populationType": "dcs:Household",
+            "householderAge": "[25 44 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median income (dollars)!!HOUSEHOLD INCOME BY AGE OF HOUSEHOLDER!!45 to 64 years": {
+            "Node": "dcid:Median_Income_Household_HouseholderAge45To64Years",
+            "measuredProperty": "dcs:income",
+            "statType": "dcs:medianValue",
+            "unit": "InflationAdjustedUSD_CurrentYear",
+            "populationType": "dcs:Household",
+            "householderAge": "[45 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Estimate!!Median income (dollars)!!HOUSEHOLD INCOME BY AGE OF HOUSEHOLDER!!65 years and over": {
+            "Node": "dcid:Median_Income_Household_HouseholderAge65OrMoreYears",
+            "measuredProperty": "dcs:income",
+            "statType": "dcs:medianValue",
+            "unit": "InflationAdjustedUSD_CurrentYear",
+            "populationType": "dcs:Household",
+            "householderAge": "[65 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        }
+    }
+}
