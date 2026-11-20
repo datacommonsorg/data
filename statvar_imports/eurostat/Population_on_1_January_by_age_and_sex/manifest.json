@@ -1,0 +1,26 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "EuroStat_Population_on_1_January_by_age_and_sex",
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
+      "provenance_url": "https://ec.europa.eu/eurostat/databrowser/view/demo_pjan/default/table?lang=en",
+      "provenance_description": "Annual national and regional European population statistics on 1 January broken down by age and sex, compiled by Eurostat from demographic data provided by National Statistical Institutes.",
+      "scripts": [
+        "run.sh"
+      ],
+      "source_files": [
+        "input_files/*.csv"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "final_output/Population_on_1_January_by_age_and_sex_output.tmcf",
+          "cleaned_csv": "final_output/Population_on_1_January_by_age_and_sex_output.csv"
+        }
+      ],
+      "cron_schedule": "5 1 1,15 * *",
+      "resource_limits": {"cpu": 4, "memory": 8, "disk":100}
+        }
+   ]
+}
