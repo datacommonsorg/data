@@ -1,0 +1,25 @@
+# Auto generated using command: "process_spreadsheet.py --input_sheet=https://docs.google.com/spreadsheets/d/1L1SXYds6sbopVUDGPsayy73weqlcxmZauQKr2-JOZdY/edit?resourcekey=0-QXkPSguXkRjIodANr_FJRw&gid=1553389435#gid=1553389435 --existing_statvar_mcf=stat_vars.mcf --output_path=/usr/local/google/home/shamimansari/outputfile/Brazil28052025/" on 2025-06-02 09:52:08.670266
+
+Node: dcid:Amount_EconomicActivity_BrazilFoodAcquisitionProgram_Supply_GovernmentPayment_FarmingFamily
+typeOf: dcid:StatisticalVariable
+description: "Total amount paid to family farmers supplying the Food Acquisition Program (PAA) by the government"
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+alternateName: "Valor total pago aos agricultores familiares fornecedores do Programa de Aquisição de Alimentos (PAA) pelo governo@pt"
+benefitProgram: dcid:Brazil_FoodAcquisitionProgram
+foodSource: dcid:Supply
+governmentPaymentStatus: dcid:GovernmentPayment
+householdType: dcid:FarmingFamily
+
+Node: dcid:Count_Household_BrazilFoodAcquisitionProgram_Supply_FarmingFamily
+typeOf: dcid:StatisticalVariable
+description: "Number of Family Farmers Supplying the Food Acquisition Program (PAA)"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Número de Agricultores Familiares Abastecedores do Programa de Aquisição de Alimentos (PAA)@pt"
+benefitProgram: dcid:Brazil_FoodAcquisitionProgram
+foodSource: dcid:Supply
+householdType: dcid:FarmingFamily
+
