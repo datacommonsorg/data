@@ -52,15 +52,16 @@ def county1990(output_folder: str):
                 '/popest/tables/1990-2000/counties/asrh/casrh'+str(j)+'.txt'
             cols=['Year','geo_ID','Race',0,1,2,3,4,5,6,7\
                 ,8,9,10,11,12,13,14,15,16,17]
-            df = pd.read_table(load_url_or_path(url),
-                               index_col=False,
-                               sep=r'\s+',
-                               skiprows=16,
-                               skipfooter=14,
-                               engine='python',
-                               names=cols,
-                               encoding='ISO-8859-1',
-                               on_bad_lines=lambda line: line[:len(cols)])
+            df = pd.read_table(
+                load_url_or_path(url),
+                index_col=False,
+                sep=r'\s+',
+                skiprows=16,
+                skipfooter=14,
+                engine='python',
+                names=cols,
+                encoding='ISO-8859-1',
+                on_bad_lines=lambda line, cols=cols: line[:len(cols)])
             #Writing raw data to csv
             df.to_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                    "raw_data", 'raw_data_county_1990_2000.csv'),

@@ -40,7 +40,7 @@ if __name__ == '__main__':
     import us_census.pep.us_pep_sexrace as _sexrace_pkg
     sys.modules.setdefault('us_census.pep.us_pep_sexrace.preprocess',
                            sys.modules['__main__'])
-    setattr(_sexrace_pkg, 'preprocess', sys.modules['__main__'])
+    _sexrace_pkg.preprocess = sys.modules['__main__']
 
 _LAST_FETCHED_URL = (None, None)
 _SESSION = None
