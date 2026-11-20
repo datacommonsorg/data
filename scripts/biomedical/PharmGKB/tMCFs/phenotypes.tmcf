@@ -1,0 +1,13 @@
+Node: E:phenotypes->E1
+typeOf: dcs:MeSHDescriptor
+dcid: C:phenotypes->dcid_mesh
+name: C:phenotypes->Name
+medicalDictionaryForRegulatoryActivitiesId: C:phenotypes->MedDRA
+medicalSubjectHeadingID: C:phenotypes->MeSH
+mondoID: C:phenotypes->MONDO
+nationalDrugFileReferenceTerminologyCode: C:phenotypes->NDFRT
+pharmGKBID: C:phenotypes->pharmGKBID
+snomedCT: C:phenotypes->SnoMedCT
+synonym: C:phenotypes->synonyms
+umlsConceptUniqueID: C:phenotypes->UMLS
+url: C:phenotypes->URL

@@ -1,0 +1,23 @@
+Node: E:disease_disease->E1
+typeOf: dcs:Disease
+dcid: C:disease_disease->Entity1_dcid
+name: C:disease_disease->Entity1_name
+pharmGKBID: C:disease_disease->Entity1_id
+
+Node: E:disease_disease->E2
+typeOf: dcs:Disease
+dcid: C:disease_disease->Entity2_dcid
+name: C:disease_disease->Entity2_name
+pharmGKBID: C:disease_disease->Entity2_id
+
+Node: E:disease_disease->E3
+typeOf: dcs:DiseaseDiseaseAssociation
+dcid: C:disease_disease->dcid
+name: C:disease_disease->name
+isPharmacodynamicRelationship: C:disease_disease->PD
+isPharmacokineticRelationship: C:disease_disease->PK
+relationshipAssociationType: C:disease_disease->Association
+relationshipEvidenceType: C:disease_disease->Evidence	
+pubMedID: C:disease_disease->PMIDs	
+diseaseID: E:disease_disease->E1
+diseaseID: E:disease_disease->E2
