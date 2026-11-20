@@ -120,8 +120,6 @@ class CsvFileDictIO(FileDictIO):
         """Opens the CSV file with `csv.DictReader` (read) or `csv.DictWriter` (write)."""
         # Create a file handle for the file.
         super().open()
-        is_tsv = is_tsv_file(self.filename())
-        default_delim = '\t' if is_tsv else ','
         if self.is_read_mode():
             # Read the CSV file handle using DictReader and populate headers.
             fp = self.get_file_handle()
@@ -141,20 +139,7 @@ class CsvFileDictIO(FileDictIO):
                 fp = self.get_file_handle()
                 fp.seek(0)
                 sample = fp.read(4096)
-            delim_chars = ['\t'] if is_tsv else [',', '\t', ';', '|']
-            options = file_util.file_get_csv_reader_options(
-                self.filename(),
-                {'delimiter': default_delim},
-                data=sample,
-                delim_chars=delim_chars,
-            )
-            if is_tsv:
-                options['delimiter'] = '\t'
-            # Use RFC 4180 doubled quotes: the sniffer sets doublequote=False
-            # if its sample has no "" in a field. The sniffed quotechar is
-            # kept, so files quoted with ' still read correctly.
-            options.update(doublequote=True)
-            self._csv_options = options
+            self._csv_options = self._get_reader_options(sample)
             fp.seek(0)
             header_reader = csv.reader(iter(fp.readline, ''),
                                        **self._csv_options)
@@ -165,8 +150,7 @@ class CsvFileDictIO(FileDictIO):
                     file_headers = next(header_reader)
             except StopIteration:
                 file_headers = []
-            if file_headers and isinstance(file_headers[0], str):
-                file_headers[0] = file_headers[0].lstrip('\ufeff')
+            file_headers = self._clean_headers(file_headers)
             first_row_end = fp.tell()
             if not self._headers:
                 self._header_end_pos = first_row_end
@@ -185,7 +169,7 @@ class CsvFileDictIO(FileDictIO):
                                                   fieldnames=self.headers(),
                                                   **self._csv_options)
             logging.debug(
-                f'Opened CSV file {self.filename()} for {self._mode} with options: {options}, headers: {self.headers()}'
+                f'Opened CSV file {self.filename()} for {self._mode} with options: {self._csv_options}, headers: {self.headers()}'
             )
         else:
             # Write to the CSV file handle using DictWriter if headers are known.
@@ -195,6 +179,31 @@ class CsvFileDictIO(FileDictIO):
                 logging.info(
                     f'Headers not set for CSV file {self.filename()}. Deferring headers until first record write.'
                 )
+
+    def _get_reader_options(self, sample: str) -> dict:
+        """Returns csv reader options for the file, detected from `sample`."""
+        is_tsv = is_tsv_file(self.filename())
+        default_delim = '\t' if is_tsv else ','
+        delim_chars = ['\t'] if is_tsv else [',', '\t', ';', '|']
+        options = file_util.file_get_csv_reader_options(
+            self.filename(),
+            {'delimiter': default_delim},
+            data=sample,
+            delim_chars=delim_chars,
+        )
+        if is_tsv:
+            options['delimiter'] = '\t'
+        # Use RFC 4180 doubled quotes: the sniffer sets doublequote=False
+        # if its sample has no "" in a field. The sniffed quotechar is
+        # kept, so files quoted with ' still read correctly.
+        options.update(doublequote=True)
+        return options
+
+    def _clean_headers(self, headers: list) -> list:
+        """Returns header names with the UTF-8 BOM removed."""
+        if headers and isinstance(headers[0], str):
+            headers[0] = headers[0].lstrip('\ufeff')
+        return headers
 
     def _init_writer(self):
         """Initializes `self._csv_writer` and writes the header row once."""
