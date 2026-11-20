@@ -126,7 +126,44 @@ select = [
     "ISC001",
     "DTZ003",
     "DTZ004",
+    # flake8-bugbear correctness rules (B0xx).
+    # Note: B006, B007, B018, and B020 (plus B9xx) are deferred to follow-up PRs.
+    "B002",
+    "B003",
+    "B004",
+    "B005",
+    "B008",
+    "B009",
+    "B010",
+    "B011",
+    "B012",
+    "B013",
+    "B014",
+    "B015",
+    "B016",
+    "B017",
+    "B019",
+    "B021",
+    "B022",
+    "B023",
+    "B024",
+    "B025",
+    "B026",
+    "B027",
+    "B028",
+    "B029",
+    "B030",
+    "B031",
+    "B032",
+    "B033",
+    "B034",
+    "B035",
+    "B039",
 ]
+
+[lint.flake8-bugbear]
+# FastAPI route handlers use Depends(...) in default arguments by design.
+extend-immutable-calls = ["fastapi.Depends"]
 
 [lint.isort]
 # Google Python style: one import per line, `import x` and `from x import y`
