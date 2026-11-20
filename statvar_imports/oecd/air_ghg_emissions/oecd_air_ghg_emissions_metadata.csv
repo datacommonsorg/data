@@ -1,0 +1,7 @@
+parameter,value
+url,https://data-explorer.oecd.org/
+description,"Air, GHG emissions, and CO2 productivity at country level from OECD"
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit"
+header_rows,1
+mapped_columns,"2,3"
+generate_schema_mcf,False

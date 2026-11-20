@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "max_date_consistent_ghg",
+      "description": "Verify total and per-capita GHG emission series share the same latest year.",
+      "validator": "MAX_DATE_CONSISTENT",
+      "scope": {
+        "variables": {
+          "regex": [
+            "^Annual_(Amount_)?Emissions_GreenhouseGas.*$"
+          ]
+        }
+      },
+      "params": {}
+    },
+    {
+      "rule_id": "max_date_consistent_air_pollutants",
+      "description": "Verify co-released CLRTAP/OECD air pollutant series (CO, NOX, SOX, VOC) share the same latest year.",
+      "validator": "MAX_DATE_CONSISTENT",
+      "scope": {
+        "variables": {
+          "regex": [
+            "^Annual_Amount_Emissions_(CarbonMonoxide|OxidesOfNitrogen|OxidesOfSulfur|VolatileOrganicCompound).*$"
+          ]
+        }
+      },
+      "params": {}
+    },
+    {
+      "rule_id": "max_date_consistent_co2_emissions",
+      "description": "Verify total and per-capita production-based CO2 emission series share the same latest year.",
+      "validator": "MAX_DATE_CONSISTENT",
+      "scope": {
+        "variables": {
+          "regex": [
+            "^Annual_Amount_Emissions_CarbonDioxide.*$"
+          ]
+        }
+      },
+      "params": {}
+    },
+    {
+      "rule_id": "check_non_negative_emissions",
+      "description": "Verify all emission and CO2 productivity observations are non-negative.",
+      "validator": "MIN_VALUE_CHECK",
+      "params": {
+        "minimum": 0
+      }
+    },
+    {
+      "rule_id": "check_statvar_count_places_and_freshness",
+      "description": "Verify all 13 StatVars meet place/observation floors, non-negative bounds, and rolling future-year freshness (between max(2024, current_year - 3) and current_year).",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT StatVar, MaxDate, MinValue, NumPlaces, NumObservations, COUNT(*) OVER () AS total_svs, SUM(NumObservations) OVER () AS total_obs FROM stats",
+        "condition": "COALESCE(TRY_CAST(SUBSTR(TRIM(CAST(MaxDate AS VARCHAR)), 1, 4) AS INTEGER) BETWEEN GREATEST(2024, CAST(EXTRACT(YEAR FROM CURRENT_DATE) AS INTEGER) - 3) AND CAST(EXTRACT(YEAR FROM CURRENT_DATE) AS INTEGER), FALSE) AND total_svs >= 13 AND total_obs >= 35000 AND NumPlaces >= 50 AND NumObservations >= 1500 AND MinValue >= 0"
+      }
+    }
+  ]
+}
