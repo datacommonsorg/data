@@ -1,0 +1,135 @@
+Node: dcid:Count_Person_PlaceOfBirthEurope
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+nativity: dcs:USC_ForeignBorn
+placeOfBirth: dcs:europe
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_USCitizenByNaturalization_ForeignBorn_PlaceOfBirthEurope
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+nativity: dcs:USC_ForeignBorn
+placeOfBirth: dcs:europe
+citizenship: dcs:USCitizenByNaturalization
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_USCitizenByNaturalization_DateOfEntry2010OrLater_ForeignBorn_PlaceOfBirthEurope
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+nativity: dcs:USC_ForeignBorn
+placeOfBirth: dcs:europe
+citizenship: dcs:USCitizenByNaturalization
+dateOfEntry: [2010 - Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_NotAUSCitizen_ForeignBorn_PlaceOfBirthEurope
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+nativity: dcs:USC_ForeignBorn
+placeOfBirth: dcs:europe
+citizenship: dcs:NotAUSCitizen
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_NotAUSCitizen_DateOfEntry2000OrEarlier_ForeignBorn_PlaceOfBirthEurope
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+nativity: dcs:USC_ForeignBorn
+placeOfBirth: dcs:europe
+citizenship: dcs:NotAUSCitizen
+dateOfEntry: [- 2000 Date]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Male_ForeignBorn_PlaceOfBirthEurope
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+nativity: dcs:USC_ForeignBorn
+placeOfBirth: dcs:europe
+gender: dcs:Male
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_85OrMoreYears_ForeignBorn_PlaceOfBirthEurope
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+nativity: dcs:USC_ForeignBorn
+placeOfBirth: dcs:europe
+age: [85 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_15OrMoreYears_ForeignBorn_PlaceOfBirthEurope
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+nativity: dcs:USC_ForeignBorn
+placeOfBirth: dcs:europe
+age: [15 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_NeverMarried_ForeignBorn_PlaceOfBirthEurope
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+nativity: dcs:USC_ForeignBorn
+placeOfBirth: dcs:europe
+age: [15 - Years]
+maritalStatus: dcs:NeverMarried
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_ForeignBorn_PlaceOfBirthNorthernWesternEurope
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+nativity: dcs:USC_ForeignBorn
+placeOfBirth: dcs:NorthernWesternEurope
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_USCitizenByNaturalization_ForeignBorn_PlaceOfBirthNorthernWesternEurope
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+nativity: dcs:USC_ForeignBorn
+placeOfBirth: dcs:NorthernWesternEurope
+citizenship: dcs:USCitizenByNaturalization
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_85OrMoreYears_ForeignBorn_PlaceOfBirthNorthernWesternEurope
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+nativity: dcs:USC_ForeignBorn
+placeOfBirth: dcs:NorthernWesternEurope
+age: [85 - Years]
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_ForeignBorn_PlaceOfBirthSouthernEasternEurope
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+nativity: dcs:USC_ForeignBorn
+placeOfBirth: dcs:SouthernEasternEurope
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_USCitizenByNaturalization_ForeignBorn_PlaceOfBirthSouthernEasternEurope
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+nativity: dcs:USC_ForeignBorn
+placeOfBirth: dcs:SouthernEasternEurope
+citizenship: dcs:USCitizenByNaturalization
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_85OrMoreYears_ForeignBorn_PlaceOfBirthSouthernEasternEurope
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+nativity: dcs:USC_ForeignBorn
+placeOfBirth: dcs:SouthernEasternEurope
+age: [85 - Years]
+typeOf: dcs:StatisticalVariable
+

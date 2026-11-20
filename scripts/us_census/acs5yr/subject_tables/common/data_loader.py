@@ -335,7 +335,16 @@ class SubjectTableDataLoaderBase:
                         if key not in ('Node', 'unit', 'scalingFactor'):
                             self.mcf_dict[dcid][key] = value
 
-                col_vals = df[column].to_numpy()
+                col_vals = (
+                    df[column]
+                    .astype(str)
+                    .str.replace(',', '', regex=False)
+                    .str.replace('-', '', regex=False)
+                    .str.replace('+', '', regex=False)
+                    .replace({'': np.nan, 'nan': np.nan, 'None': np.nan})
+                    .astype(float)
+                    .to_numpy()
+                )
                 # Drop rows with observations for empty (null) values
                 valid_mask = valid_place_mask & pd.notna(col_vals)
                 n_obs = int(valid_mask.sum())
