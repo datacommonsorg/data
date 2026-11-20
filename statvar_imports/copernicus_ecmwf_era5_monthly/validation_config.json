@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "check_max_date_consistent",
+      "description": "Checks that the latest date is identical across all 7 ERA5 monthly StatVars.",
+      "validator": "MAX_DATE_CONSISTENT",
+      "params": {}
+    },
+    {
+      "rule_id": "check_min_date_historical",
+      "description": "Checks that historical baseline observations from 1979-01 are included.",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT StatVar, MinDate FROM stats",
+        "condition": "MinDate <= '1979-01'"
+      }
+    },
+    {
+      "rule_id": "check_max_date_freshness",
+      "description": "Checks that the latest observation date is within the last 3 months.",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT StatVar, MaxDate FROM stats",
+        "condition": "MaxDate >= strftime(current_date - INTERVAL 3 MONTH, '%Y-%m')"
+      }
+    },
+    {
+      "rule_id": "check_num_places_consistent",
+      "description": "Checks that all 7 ERA5 monthly StatVars cover >= 14350 places and differ by at most 1 historical coastal place.",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT COUNT(*) AS num_statvars, MIN(NumPlaces) AS min_places, MAX(NumPlaces) AS max_places FROM stats",
+        "condition": "num_statvars = 7 AND min_places >= 14350 AND (max_places - min_places) <= 1"
+      }
+    }
+  ]
+}
