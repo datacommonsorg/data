@@ -1,0 +1,34 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "EuroStat_Live_Births_Total_By_Month",
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
+      "provenance_url": "https://ec.europa.eu/eurostat/databrowser/view/DEMO_FMONTH__custom_270818/default/table?lang=en",
+      "provenance_description": "Annual tracking of the number of live births by month across reporting European countries",
+      "scripts": [
+        "run.sh"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "output_files/live_births_total_by_month_output.tmcf",
+          "cleaned_csv": "output_files/live_births_total_by_month_output.csv"
+        }
+      ],
+      "source_files": [
+        "input_files/*.csv"
+      ],
+      "cron_schedule": "5 1 1,15 * *",
+      "resource_limits": {"cpu": 4, "memory": 8, "disk":100},
+      "config_override": {
+         "invoke_import_validation": true,
+         "invoke_import_tool": true,
+         "invoke_differ_tool": true,
+         "skip_input_upload": false,
+         "skip_gcs_upload": false,
+         "cleanup_gcs_volume_mount": false
+        }
+      }
+    ]
+}
