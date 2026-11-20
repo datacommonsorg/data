@@ -499,9 +499,18 @@
         ]
     },
     "ignoreColumns": [
-        "id",
+        "Geography",
         "Geographic Area Name",
         "PERCENT IMPUTED",
-        "PERCENT ALLOCATED"
+        "PERCENT ALLOCATED",
+        "Annotation of Estimate",
+        "Annotation of Margin of Error",
+        "Annotation of Total",
+        "Annotation of Management, business, science, and arts occupations",
+        "Annotation of Service occupations",
+        "Annotation of Sales and office occupations",
+        "Annotation of Natural resources, construction, and maintenance occupations",
+        "Annotation of Production, transportation, and material moving occupations"
+
     ]
 }
