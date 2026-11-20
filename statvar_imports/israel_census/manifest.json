@@ -23,6 +23,7 @@
         "input_files/*.xls",
         "input_files/*.csv",
         "input_files/*.json",
+        "staged_inputs/*.csv",
         "counters/*.csv",
         "israel_census_metadata.csv",
         "israel_census_pv_map.csv",
