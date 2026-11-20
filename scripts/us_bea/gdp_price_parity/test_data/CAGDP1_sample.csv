@@ -1,0 +1,6 @@
+GeoFIPS,GeoName,Region,TableName,LineCode,IndustryClassification,Description,Unit,2023,2024
+" 00000","United States",0,CAGDP1,1,"...","Real GDP (thousands of chained 2017 dollars)","Thousands of chained 2017 dollars",22671096000,23302224000
+" 01001","Autauga, AL",5,CAGDP1,1,"...","Real GDP (thousands of chained 2017 dollars)","Thousands of chained 2017 dollars",1966248,2037717
+" 01001","Autauga, AL",5,CAGDP1,2,"...","Chain-type quantity index for real GDP","Quantity index",111.557,115.611
+" 01001","Autauga, AL",5,CAGDP1,3,"...","Current-dollar GDP (thousands of dollars)","Thousands of dollars",2440587,(D)
+" 91000","New England",1,CAGDP1,1,"...","Real GDP (thousands of chained 2017 dollars)","Thousands of chained 2017 dollars",1200000,1250000
