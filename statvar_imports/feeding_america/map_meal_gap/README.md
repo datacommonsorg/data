@@ -37,7 +37,7 @@ Comparison against the legacy production `FeedingAmerica_MapMealGap` baseline (`
 
 - **Manifest:** `manifest.json`
 - **Cron Schedule:** `0 09 1 * *` (monthly on the 1st at 09:00 UTC)
-- **Historical Baseline (`2018–2019`):** Committed at `input_files/FeedingAmerica_MMG_baseline_2018_2019.csv` (`456,391` bytes, matching the legacy CNS CSV). If absent locally, `download.py` falls back to downloading it from `gs://unresolved_mcf/feeding_america/map_meal_gap/latest/input_files/FeedingAmerica_MMG_baseline_2018_2019.csv`.
+- **Historical Baseline (`2018–2019`):** Staged in GCS at `gs://unresolved_mcf/feeding_america/map_meal_gap/latest/input_files/FeedingAmerica_MMG_baseline_2018_2019.csv` (`456,391` bytes, matching the legacy CNS CSV). `download.py` downloads it automatically to `input_files/FeedingAmerica_MMG_baseline_2018_2019.csv` via `util/file_util.py` if absent locally.
 - **Schema & StatVars:** All 9 StatVars and supporting schema nodes are already defined in Data Commons canonical schema (`third_party/datacommons/schema/stat_vars/feeding_america_stat_vars.mcf` and `third_party/datacommons/schema/core/food_security_schema.mcf`) and indexed in `gs://unresolved_mcf/scripts/statvar/stat_vars.mcf`. `manifest.json` uses `"node_mcf": "output/*.mcf"` so existing schema is not re-ingested.
 
 ---

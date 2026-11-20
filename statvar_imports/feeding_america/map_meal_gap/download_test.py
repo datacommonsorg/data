@@ -71,33 +71,82 @@ class DownloadTest(unittest.TestCase):
         self.assertEqual(download._format_numeric('nan'), '')
         self.assertEqual(download._format_numeric('inf'), '')
 
-    def test_ensure_baseline_raises_when_missing_and_no_gsutil(self):
+    def test_ensure_baseline_reuses_existing_local_file(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            baseline_path = os.path.join(tmp_dir, 'baseline.csv')
+            with open(baseline_path, 'w', encoding='utf-8') as f:
+                f.write('dcid,observationDate\n')
+            with (
+                    mock.patch.object(download, 'BASELINE_LOCAL',
+                                      baseline_path),
+                    mock.patch.object(download.file_util,
+                                      'file_get_matching') as m_match,
+                    mock.patch.object(download.file_util, 'file_copy') as
+                    m_copy,
+            ):
+                result = download.ensure_baseline()
+            self.assertEqual(result, baseline_path)
+            m_match.assert_not_called()
+            m_copy.assert_not_called()
+
+    def test_ensure_baseline_raises_when_missing_in_gcs(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
             missing_path = os.path.join(tmp_dir, 'missing.csv')
             with (
                     mock.patch.object(download, 'BASELINE_LOCAL', missing_path),
-                    mock.patch('shutil.which', return_value=None),
+                    mock.patch.object(download.file_util,
+                                      'file_get_matching',
+                                      return_value=[]),
             ):
                 with self.assertRaises(FileNotFoundError):
                     download.ensure_baseline()
 
-    def test_ensure_baseline_downloads_via_gsutil_check_true(self):
+    def test_ensure_baseline_downloads_via_file_util_atomically(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
             baseline_path = os.path.join(tmp_dir, 'baseline.csv')
 
-            def fake_run(cmd, check=False):
-                self.assertTrue(check)
-                with open(baseline_path, 'w', encoding='utf-8') as f:
+            def fake_copy(src, dst):
+                self.assertEqual(src, download.BASELINE_GCS)
+                with open(dst, 'w', encoding='utf-8') as f:
                     f.write('dcid,observationDate\n')
 
             with (
                     mock.patch.object(download, 'BASELINE_LOCAL',
                                       baseline_path),
-                    mock.patch('shutil.which', return_value='/usr/bin/gsutil'),
-                    mock.patch('subprocess.run', side_effect=fake_run) as m_run,
+                    mock.patch.object(download.file_util,
+                                      'file_get_matching',
+                                      return_value=[download.BASELINE_GCS]),
+                    mock.patch.object(download.file_util,
+                                      'file_copy',
+                                      side_effect=fake_copy) as m_copy,
             ):
-                download.ensure_baseline()
-            m_run.assert_called_once()
+                result = download.ensure_baseline()
+            self.assertEqual(result, baseline_path)
+            m_copy.assert_called_once()
+            self.assertEqual(os.listdir(tmp_dir), ['baseline.csv'])
+
+    def test_ensure_baseline_raises_and_cleans_up_on_empty_download(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            baseline_path = os.path.join(tmp_dir, 'baseline.csv')
+
+            def fake_empty_copy(src, dst):
+                self.assertEqual(src, download.BASELINE_GCS)
+                with open(dst, 'w', encoding='utf-8') as f:
+                    f.write('')
+
+            with (
+                    mock.patch.object(download, 'BASELINE_LOCAL',
+                                      baseline_path),
+                    mock.patch.object(download.file_util,
+                                      'file_get_matching',
+                                      return_value=[download.BASELINE_GCS]),
+                    mock.patch.object(download.file_util,
+                                      'file_copy',
+                                      side_effect=fake_empty_copy),
+            ):
+                with self.assertRaises(FileNotFoundError):
+                    download.ensure_baseline()
+            self.assertEqual(os.listdir(tmp_dir), [])
 
     def test_fetch_json_retries_and_succeeds(self):
         err = urllib.error.HTTPError('https://example.com', 500, 'Server Error',

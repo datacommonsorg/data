@@ -8,14 +8,19 @@ import json
 import math
 import os
 import re
-import shutil
-import subprocess
+import sys
 import tempfile
 import time
 import urllib.error
 import urllib.request
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+_REPO_ROOT = os.path.abspath(os.path.join(_SCRIPT_DIR, '..', '..', '..'))
+if os.path.join(_REPO_ROOT, 'util') not in sys.path:
+    sys.path.append(os.path.join(_REPO_ROOT, 'util'))
+
+import file_util  # pylint: disable=wrong-import-position
+
 MAP_HOME_URL = 'https://map.feedingamerica.org/'
 MAPDATA_URL = 'https://map.feedingamerica.org/mapdata?maptype=county&year={year}&type={dtype}'
 BASELINE_GCS = (
@@ -192,19 +197,38 @@ def format_dcid(level, fips):
     return None
 
 
-def ensure_baseline():
-    os.makedirs(os.path.join(_SCRIPT_DIR, 'input_files'), exist_ok=True)
-    if not os.path.exists(BASELINE_LOCAL):
-        if shutil.which('gsutil'):
-            subprocess.run(['gsutil', 'cp', BASELINE_GCS, BASELINE_LOCAL],
-                           check=True)
-        else:
-            raise FileNotFoundError(
-                f'Baseline file {BASELINE_LOCAL} is missing and gsutil is not '
-                'available to download it.')
-    if not os.path.exists(BASELINE_LOCAL):
+def ensure_baseline(baseline_gcs=None, baseline_local=None):
+    """Ensures the 2018-2019 historical baseline CSV exists locally, copying from GCS if absent."""
+    baseline_gcs = baseline_gcs or BASELINE_GCS
+    baseline_local = baseline_local or BASELINE_LOCAL
+    out_dir = os.path.dirname(baseline_local) or '.'
+    os.makedirs(out_dir, exist_ok=True)
+    if os.path.exists(baseline_local) and os.path.getsize(baseline_local) > 0:
+        return baseline_local
+    matching = file_util.file_get_matching(baseline_gcs)
+    if not matching:
         raise FileNotFoundError(
-            f'Baseline file {BASELINE_LOCAL} is missing after download.')
+            f'Baseline file {baseline_local} is missing locally and '
+            f'{baseline_gcs} was not found in GCS.')
+    print(f'Downloading historical baseline from {baseline_gcs} to '
+          f'{baseline_local}...')
+    tmp_path = None
+    try:
+        with tempfile.NamedTemporaryFile(dir=out_dir,
+                                         prefix='.feedingamerica_baseline_',
+                                         suffix='.tmp',
+                                         delete=False) as tmp_fp:
+            tmp_path = tmp_fp.name
+        file_util.file_copy(baseline_gcs, tmp_path)
+        if not os.path.exists(tmp_path) or os.path.getsize(tmp_path) == 0:
+            raise FileNotFoundError(
+                f'Downloaded baseline from {baseline_gcs} is empty.')
+        os.replace(tmp_path, baseline_local)
+        tmp_path = None
+    finally:
+        if tmp_path and os.path.exists(tmp_path):
+            os.unlink(tmp_path)
+    return baseline_local
 
 
 def main():
