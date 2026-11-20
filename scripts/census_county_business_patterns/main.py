@@ -108,7 +108,7 @@ def retry_method(url, filepath, headers=None):
                         f.write(chunk)
     except requests.exceptions.HTTPError as e:
         if e.response is not None and 400 <= e.response.status_code < 500:
-            raise NonRetryableHTTPError(e)
+            raise NonRetryableHTTPError(e) from e
         raise
 
 
