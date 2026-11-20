@@ -1,0 +1,35 @@
+name: Dependabot Approval
+on: pull_request
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  dependabot:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.user.login == 'dependabot[bot]' && github.repository == 'datacommonsorg/data'
+    steps:
+      - name: Dependabot metadata
+        id: dependabot-metadata
+        uses: dependabot/fetch-metadata@v3
+
+      - name: Enable auto-merge for Dependabot PRs
+        run: gh pr merge --auto --squash "$PR_URL"
+        env:
+          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          PR_URL: ${{github.event.pull_request.html_url}}
+
+      - name: Comment and approve patch or minor updates
+        if: ${{steps.dependabot-metadata.outputs.update-type == 'version-update:semver-patch' || steps.dependabot-metadata.outputs.update-type == 'version-update:semver-minor'}}
+        run: gh pr review $PR_URL --approve -b "Approving pull request because it includes a **patch or minor update**"
+        env:
+          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          PR_URL: ${{github.event.pull_request.html_url}}
+
+      - name: Comment and defer for major updates
+        if: ${{steps.dependabot-metadata.outputs.update-type == 'version-update:semver-major'}}
+        run: gh pr comment $PR_URL --body "Not auto-approving this pull request because it includes a **major update**"
+        env:
+          PR_URL: ${{github.event.pull_request.html_url}}
+          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
