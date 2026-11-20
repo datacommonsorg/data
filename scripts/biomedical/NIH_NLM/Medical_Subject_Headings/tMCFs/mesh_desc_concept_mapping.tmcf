@@ -1,0 +1,8 @@
+Node: E:mesh_desc_concept->E1
+typeOf: dcs:MeSHDescriptor
+dcid: C:mesh_desc_concept->Descriptor_dcid
+
+Node: E:mesh_desc_concept->E2
+typeOf: dcs:MeSHConcept
+dcid: C:mesh_desc_concept->Concept_dcid
+parent: E:mesh_desc_concept->E1
