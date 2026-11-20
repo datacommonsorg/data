@@ -1,0 +1,3 @@
+observationAbout,observationDate,value,variableMeasured,scalingFactor,observationPeriod,measurementQualifier,unit
+country/BRA,2021-12,1404,dcid:Count_Student_BrazilAuxilioSchoolSportsAidProgram_QualifiedStudent,,,,
+country/BRA,2021-12,140400,dcid:Amount_Student_BrazilAuxilioSchoolSportsAidProgram_FinancialBenefit_GovernmentPayment_Monthly,,,,BRL
