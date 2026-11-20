@@ -129,7 +129,8 @@ class Process_ETMCF_Test(unittest.TestCase):
         output_tmcf = "no_output"
         output_csv = "no_output"
         with tempfile.TemporaryDirectory() as tmp_dir:
-            with self.assertRaises(Exception):
+            with self.assertRaisesRegex(Exception,
+                                        r"Enhanced TMCF file should exist"):
                 process_etmcf.process_enhanced_tmcf(_INPUT_DIR, tmp_dir,
                                                     input_etmcf, input_csv,
                                                     output_tmcf, output_csv)
@@ -142,7 +143,8 @@ class Process_ETMCF_Test(unittest.TestCase):
         output_tmcf = "no_output"
         output_csv = "no_output"
         with tempfile.TemporaryDirectory() as tmp_dir:
-            with self.assertRaises(Exception):
+            with self.assertRaisesRegex(Exception,
+                                        r"Input CSV file should exist"):
                 process_etmcf.process_enhanced_tmcf(_INPUT_DIR, tmp_dir,
                                                     input_etmcf, input_csv,
                                                     output_tmcf, output_csv)

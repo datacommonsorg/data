@@ -270,8 +270,8 @@ def _get_bbox_coordinates(bounds: str) -> ee.Geometry.BBox:
         return None
     # Extract all coordinates.
     coords = list(filter(None, re.split(r'[^0-9\.+-]', bounds)))
-    latitudes = [float(coords[l]) for l in range(0, len(coords), 2)]
-    longitudes = [float(coords[l]) for l in range(1, len(coords), 2)]
+    latitudes = [float(coords[idx]) for idx in range(0, len(coords), 2)]
+    longitudes = [float(coords[idx]) for idx in range(1, len(coords), 2)]
     # Return the min/max latitude,longitude
     return {
         'west': min(longitudes),

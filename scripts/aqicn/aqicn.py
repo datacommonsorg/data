@@ -78,7 +78,7 @@ def datetime_valid(date):
   """
     try:
         datetime.fromisoformat(date)
-    except:
+    except (TypeError, ValueError):
         return False
     return True
 
