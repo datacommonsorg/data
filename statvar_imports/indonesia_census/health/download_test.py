@@ -23,14 +23,27 @@ import unittest
 from unittest import mock
 
 _CODEDIR = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(1, _CODEDIR)
-sys.path.insert(1, os.path.join(_CODEDIR, '../../../util/'))
+_REPO_ROOT = os.path.abspath(os.path.join(_CODEDIR, '../../..'))
+if _REPO_ROOT not in sys.path:
+    sys.path.insert(1, _REPO_ROOT)
+_UTIL_DIR = os.path.abspath(os.path.join(_CODEDIR, '../../../util'))
+if _UTIL_DIR not in sys.path:
+    sys.path.insert(1, _UTIL_DIR)
 
-import download  # pylint: disable=wrong-import-position
 import download_util  # pylint: disable=wrong-import-position
+
+from statvar_imports.indonesia_census.health import download  # pylint: disable=wrong-import-position
 
 
 class DownloadHealthTest(unittest.TestCase):
+
+    def setUp(self):
+        super().setUp()
+        download_util._PREFILLED_RESPONSE.clear()
+
+    def tearDown(self):
+        download_util._PREFILLED_RESPONSE.clear()
+        super().tearDown()
 
     def test_fetch_and_write_single_turvar_dynamic_table(self):
         domain = '0000'
@@ -553,6 +566,106 @@ class DownloadHealthTest(unittest.TestCase):
                     download.resolve_api_key('', bad_cfg_path)
                 self.assertIsInstance(ctx.exception.__cause__,
                                       json.JSONDecodeError)
+
+    def test_vervar_val_override_and_request_exception_redaction(self):
+        # Verify _request_bps_json redacts api_key when request_url raises.
+        secret_key = 'super_secret_bps_key_999'
+        bad_url = (f'{download.BPS_API_BASE}/list/model/th/domain/0000/'
+                   f'var/455/lang/eng/page/1/key/{secret_key}/')
+        with mock.patch.object(
+                download.download_util,
+                'request_url',
+                side_effect=RuntimeError(f'HTTP 500 for {bad_url}'),
+        ):
+            with self.assertRaises(RuntimeError) as exc_ctx:
+                download._request_bps_json(bad_url, api_key=secret_key)
+        self.assertNotIn(secret_key, str(exc_ctx.exception))
+        self.assertIn('<REDACTED>', str(exc_ctx.exception))
+        self.assertIsNone(exc_ctx.exception.__cause__)
+
+        # Verify Gorontalo province (7500) vs regency (7502) disambiguation by
+        # BPS vervar['val'] regardless of label casing.
+        domain = '0000'
+        var_id = '455'
+        api_key = 'test_key'
+        th_url = (f'{download.BPS_API_BASE}/list/model/th/domain/{domain}/'
+                  f'var/{var_id}/lang/eng/page/1/key/{api_key}/')
+        download_util.set_test_url_download_response(
+            url=th_url,
+            params={},
+            response={
+                'status':
+                    'OK',
+                'data': [
+                    {
+                        'page': 1,
+                        'pages': 1,
+                        'total': 1
+                    },
+                    [{
+                        'th_id': 124,
+                        'th': '2024'
+                    }],
+                ],
+            },
+        )
+        data_url = (f'{download.BPS_API_BASE}/list/model/data/domain/{domain}/'
+                    f'var/{var_id}/th/124/lang/eng/key/{api_key}/')
+        download_util.set_test_url_download_response(
+            url=data_url,
+            params={},
+            response={
+                'status': 'OK',
+                'var': [{
+                    'val': 455,
+                    'label': 'Life Expectancy'
+                }],
+                'turvar': [{
+                    'val': 211,
+                    'label': 'Male'
+                }],
+                'vervar': [
+                    {
+                        'val': 7500,
+                        'label': 'Gorontalo'
+                    },
+                    {
+                        'val': 7502,
+                        'label': 'Gorontalo'
+                    },
+                ],
+                'tahun': [{
+                    'val': 124,
+                    'label': '2024'
+                }],
+                'turtahun': [{
+                    'val': 0,
+                    'label': 'Tahun'
+                }],
+                'datacontent': {
+                    '75004552111240': 68.5,
+                    '75024552111240': 67.2,
+                },
+            },
+        )
+        with tempfile.TemporaryDirectory() as tmpdir:
+            files = download.download_all_health_datasets(
+                output_dir=tmpdir,
+                domain=domain,
+                api_key=api_key,
+                selected_datasets=['life_expectancy'],
+            )
+            with open(files[0], 'r', encoding='utf-8') as f:
+                rows = list(csv.reader(f))
+        self.assertEqual(
+            rows,
+            [
+                ['', 'Male'],
+                ['Province', 'Year 2024'],
+                ['Gorontalo', '68.5'],
+                ['Kab. Gorontalo', '67.2'],
+            ],
+        )
 
 
 if __name__ == '__main__':

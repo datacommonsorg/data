@@ -55,9 +55,9 @@ typeOf: dcid:HealthEstablishmentTypeEnum
 name: "Private Hospital"
 isProvisional: dcs:True
 
-Node: dcid:DoctorsPractice__Polyclinic
+Node: dcid:DoctorPracticeOrPolyclinic
 typeOf: dcid:HealthEstablishmentTypeEnum
-name: "Doctors Practice or Polyclinic"
+name: "Doctor Practice or Polyclinic"
 isProvisional: dcs:True
 
 Node: dcid:CommunityHealthCenter
@@ -85,24 +85,24 @@ typeOf: dcid:HealthEstablishmentTypeEnum
 name: "BPS Other Health Establishments"
 isProvisional: dcs:True
 
-Node: dcid:Midwife__PracticingDoctor
+Node: dcid:PracticingDoctorOrMidwife
 typeOf: dcid:HealthEstablishmentTypeEnum
-name: "Midwife or Practicing Doctor"
+name: "Practicing Doctor or Midwife"
 isProvisional: dcs:True
 
-Node: dcid:DoctorPractice__JointClinic
+Node: dcid:JointClinicOrDoctorPractice
 typeOf: dcid:HealthEstablishmentTypeEnum
-name: "Doctor Practice or Joint Clinic"
+name: "Joint Clinic or Doctor Practice"
 isProvisional: dcs:True
 
-Node: dcid:IntegratedService__MedicalCenter__VillageMaternityClinic
+Node: dcid:VillageMaternityClinicOrIntegratedServiceOrMedicalCenter
 typeOf: dcid:HealthEstablishmentTypeEnum
-name: "Integrated Service, Medical Center, or Village Maternity Clinic"
+name: "Village Maternity Clinic, Integrated Service, or Medical Center"
 isProvisional: dcs:True
 
-Node: dcid:AlternativeMedicine__PracticeTraditional
+Node: dcid:PracticeTraditionalOrAlternativeMedicine
 typeOf: dcid:HealthEstablishmentTypeEnum
-name: "Alternative Medicine or Traditional Practice"
+name: "Traditional Practice or Alternative Medicine"
 isProvisional: dcs:True
 
 Node: dcid:CommunityHealthResource

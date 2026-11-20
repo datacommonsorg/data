@@ -3,8 +3,8 @@ key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6,p7,v7,p8,v8,p9,v9
 Province,observationAbout,{Data}
 Provinsi,observationAbout,{Data}
 P R O V I N S I,observationAbout,{Data},Gender,,Place,,#End,#value
-Classification,observationAbout,country/IDN
-Sex,observationAbout,country/IDN
+Classification,observationAbout,dcid:country/IDN
+Sex,observationAbout,dcid:country/IDN
 # --- 1. Mortality ---
 Life Expectancy Rate By Regency/City and Gender (Year),populationType,Person,measuredProperty,lifeExpectancy,statType,measuredValue,unit,Years
 Male,populationType,Person,measuredProperty,lifeExpectancy,statType,measuredValue,unit,Years,gender,Male
@@ -29,16 +29,16 @@ Angka Kumulatif Kasus,populationType,MedicalConditionIncident,measuredProperty,c
 Kasus Baru,populationType,MedicalConditionIncident,measuredProperty,count,measurementQualifier,Annual,incidentType,AIDS,medicalStatus,NewlyConfirmedCase,alternateName,"""AIDS Kasus Baru@id"""
 LAKILAKI,populationType,Person,gender,Male,medicalCondition,DiseasedPerson,measurementDenominator,Count_Person,measuredProperty,count,Gender,LAKILAKI
 PEREMPUAN,populationType,Person,gender,Female,medicalCondition,DiseasedPerson,measurementDenominator,Count_Person,measuredProperty,count,Gender,PEREMPUAN
-Perkotaan,populationType,Person,placeOfResidenceClassification,Urban,medicalCondition,DiseasedPerson,measurementDenominator,Count_Person,measuredProperty,count,Place,Perkotaan,alternateName,"""Persentase di {Gender} Perkotaan yang Melaporkan Masalah Kesehatan@id""",#Header,"populationType,placeOfResidenceClassification,medicalCondition,measurementDenominator,measuredProperty,Place,alternateName",observationAbout,country/IDN
-Perdesaan,populationType,Person,placeOfResidenceClassification,Rural,medicalCondition,DiseasedPerson,measurementDenominator,Count_Person,measuredProperty,count,Place,Perdesaan,alternateName,"""Persentase di {Gender} Perdesaan yang Melaporkan Masalah Kesehatan@id""",#Header,"populationType,placeOfResidenceClassification,medicalCondition,measurementDenominator,measuredProperty,Place,alternateName",observationAbout,country/IDN
-Perkotaan+Perdesaan,populationType,Person,medicalCondition,DiseasedPerson,measurementDenominator,Count_Person,measuredProperty,count,alternateName,"""Persentase di {Gender} yang Melaporkan Masalah Kesehatan@id""",#Header,"populationType,medicalCondition,measurementDenominator,measuredProperty,alternateName",observationAbout,country/IDN
+Perkotaan,populationType,Person,placeOfResidenceClassification,Urban,medicalCondition,DiseasedPerson,measurementDenominator,Count_Person,measuredProperty,count,Place,Perkotaan,alternateName,"""Persentase di {Gender} Perkotaan yang Melaporkan Masalah Kesehatan@id""",#Header,"populationType,placeOfResidenceClassification,medicalCondition,measurementDenominator,measuredProperty,Place,alternateName"
+Perdesaan,populationType,Person,placeOfResidenceClassification,Rural,medicalCondition,DiseasedPerson,measurementDenominator,Count_Person,measuredProperty,count,Place,Perdesaan,alternateName,"""Persentase di {Gender} Perdesaan yang Melaporkan Masalah Kesehatan@id""",#Header,"populationType,placeOfResidenceClassification,medicalCondition,measurementDenominator,measuredProperty,Place,alternateName"
+Perkotaan+Perdesaan,populationType,Person,medicalCondition,DiseasedPerson,measurementDenominator,Count_Person,measuredProperty,count,alternateName,"""Persentase di {Gender} yang Melaporkan Masalah Kesehatan@id""",#Header,"populationType,medicalCondition,measurementDenominator,measuredProperty,alternateName"
 # --- 3. Risk Factors ---
 Percentage of Population Aged 15 Years and Older Who Smoked Tobacco by Province (Percent),populationType,Person,measuredProperty,count,age,Years15Onwards,healthBehavior,Smoking,measurementDenominator,Count_Person_15OrMoreYears
-Prevalence of Obesity Among Population Aged 18 Years and Older,populationType,Person,healthBehavior,Obesity,unit,Percent
+Prevalence of Obesity Among Population Aged 18 Years and Older,populationType,Person,healthBehavior,Obesity
 Urban,measuredProperty,count,age,Years18Onwards,placeOfResidenceClassification,Urban,measurementDenominator,Count_Person_18OrMoreYears_Urban
 Rural,measuredProperty,count,age,Years18Onwards,placeOfResidenceClassification,Rural,measurementDenominator,Count_Person_18OrMoreYears_Rural
 Urban+Rural,measuredProperty,percent,age,Years18Onwards
-Prevalence of Obesity Among Population Aged 18 Years and Older by Sex,populationType,Person,measuredProperty,count,age,Years18Onwards,healthBehavior,Obesity,unit,Percent
+Prevalence of Obesity Among Population Aged 18 Years and Older by Sex,populationType,Person,measuredProperty,count,age,Years18Onwards,healthBehavior,Obesity
 Man,gender,Male,measurementDenominator,Count_Person_18OrMoreYears_Male
 Woman,gender,Female,measurementDenominator,Count_Person_18OrMoreYears_Female
 Percentage of Married Women Aged 15-49 Years Old Currently Using Contraception Method (Percent),measuredProperty,count,populationType,Person,age,Years15To49,gender,Female,maritalStatus,Married,birthControlMethod,ContraceptionMethod,unit,Percent,measurementDenominator,Count_Person_15To49Year_Female_Married,alternateName,"""Married Women Aged 15-49 Using Contraception@id"""
@@ -49,16 +49,16 @@ Public Health Centers,populationType,HealthEstablishment,measuredProperty,count,
 Unmet Need of Health Services by Province (Percent),healthServiceType,WithUnmetNeed,populationType,HealthEstablishment,measuredProperty,count,unit,Percent,alternateName,"""Unmet Need of Health@id"""
 RS Pemerintah,populationType,HealthEstablishment,measuredProperty,count,healthEstablishmentType,GovernmentHospital,unit,Percent,scalingFactor,100.0,alternateName,"""Rumah Sakit Pemerintah@id"""
 RS Swasta,populationType,HealthEstablishment,measuredProperty,count,healthEstablishmentType,PrivateHospital,unit,Percent,scalingFactor,100.0,alternateName,"""Rumah Sakit swasta@id"""
-Praktek dokter/ Poliklinik,populationType,HealthEstablishment,measuredProperty,count,healthEstablishmentType,DoctorsPractice__Polyclinic,unit,Percent,scalingFactor,100.0,alternateName,"""Poliklinik Praktek Dokter@id"""
+Praktek dokter/ Poliklinik,populationType,HealthEstablishment,measuredProperty,count,healthEstablishmentType,DoctorPracticeOrPolyclinic,unit,Percent,scalingFactor,100.0,alternateName,"""Poliklinik Praktek Dokter@id"""
 puskesmas pustu,populationType,HealthEstablishment,measuredProperty,count,healthEstablishmentType,CommunityHealthCenter,unit,Percent,scalingFactor,100.0,alternateName,"""Pusat Kesehatan Masyarakat@id"""
 Praktek nakes,populationType,HealthEstablishment,measuredProperty,count,healthEstablishmentType,HealthWorkerPractice,unit,Percent,scalingFactor,100.0,alternateName,"""Praktik Tenaga Kesehatan@id"""
 Praktek batra,populationType,HealthEstablishment,measuredProperty,count,healthEstablishmentType,BatraPractice,unit,Percent,scalingFactor,100.0,alternateName,"""Latihan Batra@id"""
 Dukun bersalin,populationType,HealthEstablishment,measuredProperty,count,healthEstablishmentType,BirthAttendant,unit,Percent,scalingFactor,100.0,alternateName,"""Petugas Kelahiran@id"""
 Lainnya,populationType,HealthEstablishment,measuredProperty,count,healthEstablishmentType,BPS_OtherHealthEstablishments,unit,Percent,scalingFactor,100.0,alternateName,"""BPS Badan Kesehatan Lainnya@id"""
-Praktek dokter/ bidan,populationType,HealthEstablishment,measuredProperty,count,healthEstablishmentType,Midwife__PracticingDoctor,unit,Percent,scalingFactor,100.0,alternateName,"""Praktik Dokter atau Bidan@id"""
-Klinik/ praktek dokter bersama,populationType,HealthEstablishment,measuredProperty,count,healthEstablishmentType,DoctorPractice__JointClinic,unit,Percent,scalingFactor,100.0,alternateName,"""Klinik Bersama atau Praktek Dokter@id"""
-"Poskesdes, Polindes, Posyandu, Balai Pengobatan",populationType,HealthEstablishment,measuredProperty,count,healthEstablishmentType,IntegratedService__MedicalCenter__VillageMaternityClinic,unit,Percent,scalingFactor,100.0,alternateName,"""Klinik Bersalin Desa dan Pelayanan Terpadu dan Pusat Kesehatan@id"""
-Praktek pengobatan tradisional/ alternatif,populationType,HealthEstablishment,measuredProperty,count,healthEstablishmentType,AlternativeMedicine__PracticeTraditional,unit,Percent,scalingFactor,100.0,alternateName,"""Mempraktikkan pengobatan tradisional atau alternatif@id"""
+Praktek dokter/ bidan,populationType,HealthEstablishment,measuredProperty,count,healthEstablishmentType,PracticingDoctorOrMidwife,unit,Percent,scalingFactor,100.0,alternateName,"""Praktik Dokter atau Bidan@id"""
+Klinik/ praktek dokter bersama,populationType,HealthEstablishment,measuredProperty,count,healthEstablishmentType,JointClinicOrDoctorPractice,unit,Percent,scalingFactor,100.0,alternateName,"""Klinik Bersama atau Praktek Dokter@id"""
+"Poskesdes, Polindes, Posyandu, Balai Pengobatan",populationType,HealthEstablishment,measuredProperty,count,healthEstablishmentType,VillageMaternityClinicOrIntegratedServiceOrMedicalCenter,unit,Percent,scalingFactor,100.0,alternateName,"""Klinik Bersalin Desa dan Pelayanan Terpadu dan Pusat Kesehatan@id"""
+Praktek pengobatan tradisional/ alternatif,populationType,HealthEstablishment,measuredProperty,count,healthEstablishmentType,PracticeTraditionalOrAlternativeMedicine,unit,Percent,scalingFactor,100.0,alternateName,"""Mempraktikkan pengobatan tradisional atau alternatif@id"""
 UKBM,populationType,HealthEstablishment,measuredProperty,count,healthEstablishmentType,CommunityHealthResource,unit,Percent,scalingFactor,100.0,alternateName,"""Sumber Daya Kesehatan Masyarakat@id"""
 Jumlah,#ignore,True
 PENDUDUK LAKI-LAKI,gender,Male
