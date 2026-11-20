@@ -107,8 +107,10 @@ DYNAMIC_DATASETS = {
         'place_col': 'Province',
         'multi_turvar': True,
         'include_title_row': False,
+        'place_val_overrides': {
+            '7502': 'Kab. Gorontalo',
+        },
         'place_label_overrides': {
-            'Gorontalo': 'Kab. Gorontalo',
             'D I YOGYAKARTA': 'DI YOGYAKARTA',
         },
     },
@@ -293,6 +295,10 @@ def _request_bps_json(url: str, api_key: str = '') -> Any:
             handlers.append(hdlr)
     try:
         return download_util.request_url(url=url, output='json')
+    except Exception as exc:
+        raise RuntimeError(
+            f'Failed to request BPS WebAPI URL {redact_api_key(url, api_key)}: '
+            f'{redact_api_key(exc, api_key)}') from None
     finally:
         for hdlr in handlers:
             hdlr.removeFilter(redact_filter)
@@ -553,6 +559,7 @@ def fetch_dynamic_table(
     api_key: str,
     lang: str = 'eng',
     place_label_overrides: dict | None = None,
+    place_val_overrides: dict | None = None,
     raw_output_path: str | None = None,
 ) -> tuple[list[str], list[str], list[str], dict]:
     """Fetches all years of data for a BPS dynamic variable in 3-year batches.
@@ -563,6 +570,7 @@ def fetch_dynamic_table(
     api_key: BPS WebAPI key.
     lang: Language code ('eng' or 'ind').
     place_label_overrides: Optional mapping to rename specific vervar labels.
+    place_val_overrides: Optional mapping to rename specific vervar codes (val).
     raw_output_path: Optional file path to archive the raw JSON responses.
 
   Returns:
@@ -585,6 +593,7 @@ def fetch_dynamic_table(
     data_map = {}
     raw_chunks = []
     overrides = place_label_overrides or {}
+    val_overrides = {str(k): v for k, v in (place_val_overrides or {}).items()}
 
     for i in range(0, len(available_years), MAX_YEARS_PER_REQUEST):
         batch = available_years[i:i + MAX_YEARS_PER_REQUEST]
@@ -624,9 +633,11 @@ def fetch_dynamic_table(
                 categories.append(cat_label)
 
         for vv in vervar_list:
+            vv_val = str(vv.get('val', '')).strip()
             raw_place = clean_label(vv.get('label', ''))
-            place_label = normalize_place_name(
-                overrides.get(raw_place, raw_place))
+            overridden_place = val_overrides.get(
+                vv_val, overrides.get(raw_place, raw_place))
+            place_label = normalize_place_name(overridden_place)
             if place_label not in places_seen:
                 places_seen.add(place_label)
                 places.append(place_label)
@@ -959,6 +970,7 @@ def download_all_health_datasets(
             api_key=api_key,
             lang=cfg.get('lang', 'eng'),
             place_label_overrides=cfg.get('place_label_overrides'),
+            place_val_overrides=cfg.get('place_val_overrides'),
             raw_output_path=raw_json_path,
         )
         output_path = os.path.join(output_dir, cfg['filename'])

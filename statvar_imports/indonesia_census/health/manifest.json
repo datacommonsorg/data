@@ -16,7 +16,7 @@
           "template_mcf": "output_files/indonesia_health_output.tmcf",
           "node_mcf": [
             "indonesia_health_schema.mcf",
-            "output_files/*.mcf"
+            "output_files/*_stat_vars.mcf"
           ],
           "cleaned_csv": "output_files/indonesia_health_output.csv"
         }
@@ -32,7 +32,7 @@
         "indonesia_health_schema.mcf"
       ],
       "validation_config_file": "validation_config.json",
-      "cron_schedule": "0 9 1 * *",
+      "cron_schedule": "0 05 * * 1",
       "resource_limits": {
         "cpu": 4,
         "memory": 8,
