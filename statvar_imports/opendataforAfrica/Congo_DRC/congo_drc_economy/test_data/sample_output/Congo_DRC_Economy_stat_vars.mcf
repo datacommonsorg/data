@@ -1,0 +1,109 @@
+Node: dcid:AmountDue_Debt_ClubKinshasa
+typeOf: dcid:StatisticalVariable
+name: "External Debt, Due Service, Club Kinshasa, Foreign Trade, External Debt (Usd Million)"
+populationType: dcid:Debt
+measuredProperty: dcid:amountDue
+statType: dcid:measuredValue
+activitySource: dcid:ClubKinshasa
+
+Node: dcid:Amount_EconomicActivity_ActualSocialContribution_ProductionOfDomesticServices
+typeOf: dcid:StatisticalVariable
+name: "Production Of Domestic Services: Actual Social Contributions, Accounts Of Branches Of Economic Activity (In Millions Of Current Cdf), Tertiary : Production Of Domestic Services"
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+activitySource: dcid:ActualSocialContribution
+economicSector: dcid:ProductionOfDomesticServices
+
+Node: dcid:Amount_EconomicActivity_Donation_AfricanCapacityBuildingFoundation_Multilateral
+typeOf: dcid:StatisticalVariable
+name: "Donations, Acbf, Outdoor Donation, Multilateral Donations"
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+activitySource: dcid:Donation
+donationSource: dcid:AfricanCapacityBuildingFoundation
+donationType: dcid:Multilateral
+
+Node: dcid:Amount_EconomicActivity_Donation_Multilateral
+typeOf: dcid:StatisticalVariable
+name: "Multilateral Donations, Outdoor Donation"
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+activitySource: dcid:Donation
+donationType: dcid:Multilateral
+
+Node: dcid:Amount_EconomicActivity_Donation_WorldBankFoodAid_Multilateral
+typeOf: dcid:StatisticalVariable
+name: "Donations: World Bank: Food Aid, Outdoor Donation, Types Of Multilateral Original Donation( Millions Of Usd), Donations: World Bank"
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+activitySource: dcid:Donation
+donationSource: dcid:WorldBankFoodAid
+donationType: dcid:Multilateral
+
+Node: dcid:Amount_EconomicActivity_Donation_WorldBank_Multilateral
+typeOf: dcid:StatisticalVariable
+name: "Donations, World Bank, Outdoor Donation, Multilateral Donations"
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+activitySource: dcid:Donation
+donationSource: dcid:WorldBank
+donationType: dcid:Multilateral
+
+Node: dcid:Amount_EconomicActivity_GrossDomesticProduction
+typeOf: dcid:StatisticalVariable
+name: "Gdp Sna 93, (In Billions Of Cdf 2005)"
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+activitySource: dcid:GrossDomesticProduction
+
+Node: dcid:Amount_EconomicActivity_GrossOperatingSurplus_EducationAndHealth
+typeOf: dcid:StatisticalVariable
+name: "Education And Health: Gross Operating Surplus, Accounts Of Branches Of Economic Activity (In Millions Of Current Cdf), Tertiary : Education And Health"
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+activitySource: dcid:GrossOperatingSurplus
+economicSector: dcid:EducationAndHealth
+
+Node: dcid:Amount_EconomicActivity_ImputedSocialContribution_EducationAndHealth
+typeOf: dcid:StatisticalVariable
+name: "Education And Health: Imputed Social Contributions, Accounts Of Branches Of Economic Activity (In Millions Of Current Cdf), Tertiary : Education And Health"
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+activitySource: dcid:ImputedSocialContribution
+economicSector: dcid:EducationAndHealth
+
+Node: dcid:GrossDomesticProduct_EconomicActivity_GDPAtFactorCost
+typeOf: dcid:StatisticalVariable
+name: "Gdp At Factor Cost, Gross Domestic Product By Economic Activity Branch (In Billions Of Current Cdf)"
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:grossDomesticProduct
+statType: dcid:measuredValue
+activitySource: dcid:GDPAtFactorCost
+
+Node: dcid:GrossDomesticProduct_EconomicActivity_Households_FinalConsumptionExpenditure
+typeOf: dcid:StatisticalVariable
+name: "Final Consumption Expenditure: Households, Gross Domestic Product By Expenditure (Billions Of Cdf In 2005 Prices)"
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:grossDomesticProduct
+statType: dcid:measuredValue
+activitySource: dcid:Households
+expenditureType: dcid:FinalConsumptionExpenditure
+
+Node: dcid:RealValue_GrowthRate_GrossDomesticProduct_EconomicActivity_AgricultureOrForestOrBreedingOrHuntingOrFishing_PrimarySector
+typeOf: dcid:StatisticalVariable
+name: "Primary Sector: Agriculture, Forest, Breeding, Hunting And Fishing, Growth Rate Of Real Gross Domestic Product By Branch Of Economic Activity(In%)"
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:grossDomesticProduct
+measurementQualifier: dcid:RealValue
+statType: dcid:growthRate
+activitySource: dcid:Agriculture__Forest__Breeding__Hunting__Fishing
+economicSector: dcid:PrimarySector
+
