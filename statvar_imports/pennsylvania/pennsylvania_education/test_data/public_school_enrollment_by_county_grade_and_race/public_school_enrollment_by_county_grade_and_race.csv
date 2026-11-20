@@ -1,0 +1,471 @@
+County Code,County,Race,Pre-Kindergarten Half Day,Pre-Kindergarten Full Day,K4 Half Day,K4 Full Day,K5 Half Day,K5 Full Day,1st Grade,2nd Grade,3rd Grade,4th Grade,5th Grade,6th Grade,7th Grade,8th Grade,9th Grade,10th Grade,11th Grade,12th Grade,Total
+01,Adams,American Indian / Alaskan Native,0,0,0,0,0,0,0,,,0,,,,,,,,,18
+01,Adams,Asian,0,0,0,0,0,10,,,,,,,13,10,,11,,10,116
+01,Adams,Black or African American,0,0,0,0,0,16,28,22,31,23,25,30,22,18,23,19,34,22,313
+01,Adams,Hispanic,0,0,0,0,0,149,184,137,162,179,164,160,152,141,142,142,127,110,1949
+01,Adams,Multi-Racial,0,0,0,0,0,36,17,27,27,29,34,17,14,21,19,,15,,273
+01,Adams,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,,,0,,0,,0,,0,0,,,,13
+01,Adams,White,0,0,0,0,0,769,819,782,819,866,857,824,907,872,881,939,907,905,11147
+02,Allegheny,American Indian / Alaskan Native,0,,0,0,,16,17,18,16,16,19,18,12,16,16,14,14,13,209
+02,Allegheny,Asian,,,0,0,191,350,557,516,512,523,484,444,477,438,454,445,427,437,6267
+02,Allegheny,Black or African American,19,352,0,,37,2404,2370,2437,2523,,2366,2302,2243,2180,2521,2297,2180,2112,30878
+02,Allegheny,Hispanic,,15,0,0,39,223,239,244,254,,228,199,200,198,218,222,167,156,2860
+02,Allegheny,Multi-Racial,,35,0,0,98,615,,692,705,641,580,476,480,416,427,376,321,228,6839
+02,Allegheny,Native Hawaiian or other Pacific Islander(not hispanic),0,,0,0,,,10,,,,,,10,12,12,11,,,114
+02,Allegheny,White,72,149,0,0,2090,4646,6916,7017,7275,7242,7396,7376,7724,7756,7941,8119,8206,8265,98190
+03,Armstrong,American Indian / Alaskan Native,0,0,0,0,0,,,0,,,,,,,,,,,20
+03,Armstrong,Asian,0,0,0,0,0,,,,,,,,,,,,,,32
+03,Armstrong,Black or African American,0,0,0,0,0,,14,,,12,,10,10,10,10,,,15,119
+03,Armstrong,Hispanic,0,0,0,0,0,,,,,,,,,,,,,,56
+03,Armstrong,Multi-Racial,0,0,0,0,0,,,,10,10,,,,,,,,,70
+03,Armstrong,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,0,0,0,0,0,,0,0,,0,0,0,0,
+03,Armstrong,White,0,0,0,0,45,610,662,630,661,685,702,650,699,711,704,758,760,757,9034
+04,Beaver,American Indian / Alaskan Native,0,19,0,16,0,27,19,10,11,,,,,10,15,12,,,178
+04,Beaver,Asian,0,0,0,0,,14,16,20,17,19,18,23,25,30,,27,32,19,296
+04,Beaver,Black or African American,0,,0,,13,187,228,223,226,255,249,240,285,274,320,293,307,278,3389
+04,Beaver,Hispanic,0,,0,,0,26,28,36,44,29,46,45,54,54,95,80,61,60,660
+04,Beaver,Multi-Racial,0,,0,,,150,134,119,139,109,123,122,135,127,130,102,130,102,1635
+04,Beaver,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,,0,,0,0,,0,,,,,,,,22
+04,Beaver,White,20,14,0,17,296,1158,1542,1593,1670,1679,1737,1832,1944,2181,2579,2605,2642,2565,26074
+05,Bedford,American Indian / Alaskan Native,0,0,0,0,0,0,0,0,,0,,0,,,0,0,0,0,
+05,Bedford,Asian,0,0,0,0,0,,0,,0,0,,0,0,,0,,,,
+05,Bedford,Black or African American,0,0,0,0,0,,,,,,,,,,,,,,59
+05,Bedford,Hispanic,0,0,0,0,0,,,,,,,13,,,,,,,81
+05,Bedford,Multi-Racial,0,0,,0,0,,,,,,14,,,,,,,13,82
+05,Bedford,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,0,,0,0,0,0,0,0,,0,,0,,
+05,Bedford,White,20,43,45,11,0,424,435,446,467,482,486,458,503,483,517,514,563,553,6450
+06,Berks,American Indian / Alaskan Native,0,0,0,0,0,,,,,,,,,,,,,,58
+06,Berks,Asian,0,0,,0,,55,77,85,71,84,98,85,93,109,93,106,101,87,1151
+06,Berks,Black or African American,0,0,28,0,12,212,236,252,242,264,241,265,262,287,273,349,284,323,3530
+06,Berks,Hispanic,0,0,389,0,33,1617,1711,1807,1720,1752,1702,1636,1608,1497,1611,1722,1240,1308,21353
+06,Berks,Multi-Racial,0,0,,0,22,127,118,132,,118,136,120,114,89,97,88,69,60,1435
+06,Berks,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,,,,,,,,,,,,,,,35
+06,Berks,White,0,0,25,0,539,2035,2655,2797,2986,2992,3049,3148,3319,3268,3295,3300,3448,3416,40272
+07,Blair,American Indian / Alaskan Native,0,0,0,0,0,,,,,,,,,,,,,,26
+07,Blair,Asian,,0,0,0,0,,,,13,11,,17,12,,13,,12,,132
+07,Blair,Black or African American,,0,0,0,0,62,61,67,70,53,61,,60,62,56,65,61,53,806
+07,Blair,Hispanic,0,0,0,0,0,21,21,18,22,14,18,27,19,21,21,19,15,24,260
+07,Blair,Multi-Racial,,0,0,,0,22,18,14,11,16,17,13,,,,,,,134
+07,Blair,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,,0,,0,,,,,0,0,0,,0,12
+07,Blair,White,131,37,0,56,0,1162,1192,1207,1219,1226,1243,1234,1290,1343,1284,1347,1248,1257,16476
+08,Bradford,American Indian / Alaskan Native,0,0,0,0,0,,0,,,,,,,0,0,,,0,14
+08,Bradford,Asian,0,0,0,0,0,,,,10,,,,,,,,,,60
+08,Bradford,Black or African American,0,0,,0,0,,,,,,,,,,,,,,70
+08,Bradford,Hispanic,0,0,0,0,0,11,12,,,11,,12,,,12,,,,108
+08,Bradford,Multi-Racial,0,0,,0,0,18,,11,,12,,,10,11,,,,,113
+08,Bradford,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,0,0,0,,0,0,0,,0,0,,0,,
+08,Bradford,White,30,0,54,0,0,626,592,654,669,738,659,681,704,675,688,694,669,617,8750
+09,Bucks,American Indian / Alaskan Native,0,0,0,0,,,,,,10,,,17,12,,,,,116
+09,Bucks,Asian,0,0,0,0,145,246,377,401,398,387,434,407,410,432,411,393,399,379,5219
+09,Bucks,Black or African American,0,0,0,0,58,217,316,327,327,344,365,345,349,366,404,426,391,367,4602
+09,Bucks,Hispanic,0,0,0,0,161,331,557,502,540,559,544,490,508,499,516,509,404,430,6550
+09,Bucks,Multi-Racial,0,0,0,0,103,191,292,305,309,294,273,217,187,180,140,136,138,101,2866
+09,Bucks,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,0,,,,,,,,,,,,,52
+09,Bucks,White,0,0,0,0,2021,1822,4464,4684,4994,5157,5094,5267,5621,5543,5608,5773,5786,5954,67788
+10,Butler,American Indian / Alaskan Native,0,0,0,0,0,,0,,,0,,,0,,,,,,16
+10,Butler,Asian,0,0,0,0,15,,21,29,32,32,,27,33,27,16,28,28,20,345
+10,Butler,Black or African American,0,0,0,0,19,0,18,20,21,15,16,24,22,23,26,40,36,42,322
+10,Butler,Hispanic,0,0,0,0,24,,25,25,28,,27,22,21,25,20,30,25,21,334
+10,Butler,Multi-Racial,0,0,0,0,45,,46,55,,34,33,26,31,16,29,21,18,11,422
+10,Butler,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,0,0,0,0,0,0,0,,,0,0,0,0,
+10,Butler,White,0,0,0,0,1219,228,1529,1604,1729,1660,1772,1714,1878,1830,1910,1900,1937,1993,22903
+11,Cambria,American Indian / Alaskan Native,0,0,0,,0,,,0,0,0,0,0,0,,0,0,0,0,
+11,Cambria,Asian,0,0,0,0,0,,,,,,,,10,12,13,,,11,101
+11,Cambria,Black or African American,0,,,36,0,87,76,95,93,88,59,74,95,74,70,74,90,76,1095
+11,Cambria,Hispanic,,0,,0,0,29,29,,25,21,22,19,16,19,18,,12,,239
+11,Cambria,Multi-Racial,,,,15,0,65,84,78,82,65,55,55,41,40,37,35,28,19,711
+11,Cambria,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,,,,,,,0,,,0,0,,0,12
+11,Cambria,White,100,23,99,36,0,981,939,999,1054,1090,1086,1124,1133,1114,1182,1196,1204,1180,14540
+12,Cameron,American Indian / Alaskan Native,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,
+12,Cameron,Asian,0,0,0,0,0,0,0,0,0,,0,,0,0,,0,0,0,
+12,Cameron,Black or African American,0,0,0,0,0,0,0,0,,0,0,0,0,0,,,,,
+12,Cameron,Hispanic,0,0,0,0,0,,0,,,0,,0,,,0,,,,19
+12,Cameron,Multi-Racial,0,0,0,0,0,0,,0,0,,0,,0,,0,0,0,0,
+12,Cameron,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+12,Cameron,White,0,0,0,0,0,42,33,41,45,38,37,26,45,40,41,48,52,45,533
+13,Carbon,American Indian / Alaskan Native,0,0,0,0,0,,0,0,0,,,,,,,,,,19
+13,Carbon,Asian,0,0,0,0,,,,,,,,,,,,,,,47
+13,Carbon,Black or African American,0,0,0,0,,14,19,16,24,17,20,24,18,,29,31,26,17,290
+13,Carbon,Hispanic,0,0,0,0,,34,46,41,,35,40,50,35,48,43,58,44,43,587
+13,Carbon,Multi-Racial,0,0,0,0,,10,,19,26,17,14,14,,11,11,12,,,165
+13,Carbon,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,,,,,,0,0,,,,0,0,,13
+13,Carbon,White,0,0,0,0,172,347,523,551,617,624,587,650,628,626,608,621,608,563,7725
+14,Centre,American Indian / Alaskan Native,0,0,0,0,0,,,,,,,0,,,,,,,26
+14,Centre,Asian,0,0,0,0,0,45,57,57,55,48,63,38,57,50,37,46,46,33,632
+14,Centre,Black or African American,0,0,0,0,0,18,21,24,18,28,18,19,17,21,32,20,14,20,270
+14,Centre,Hispanic,0,0,0,,0,24,27,23,30,30,,28,30,28,20,28,24,23,347
+14,Centre,Multi-Racial,0,0,0,,0,38,54,41,35,42,42,40,,31,19,18,17,23,460
+14,Centre,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,,,,0,,0,0,0,,,,0,,14
+14,Centre,White,0,0,0,31,0,779,832,799,808,884,832,909,878,902,898,948,957,932,11389
+15,Chester,American Indian / Alaskan Native,0,0,0,0,0,,,,,13,,13,,,,,11,,106
+15,Chester,Asian,0,0,0,0,283,178,522,566,501,556,520,551,563,470,479,409,412,384,6394
+15,Chester,Black or African American,0,0,0,0,56,309,419,482,521,482,480,522,606,660,719,692,677,609,7234
+15,Chester,Hispanic,0,0,0,0,190,585,777,801,786,819,804,802,780,709,804,757,699,657,9970
+15,Chester,Multi-Racial,0,0,0,0,136,151,280,235,256,249,212,150,176,154,153,144,123,101,2520
+15,Chester,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,,0,,,,,11,,,,,,,0,68
+15,Chester,White,0,0,0,0,1953,1378,3618,3973,4116,4225,4476,4467,4857,5015,5162,5321,5341,5180,59082
+16,Clarion,American Indian / Alaskan Native,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,
+16,Clarion,Asian,0,0,0,0,0,,,,,,,,0,,0,,,,23
+16,Clarion,Black or African American,0,0,0,0,0,,,,,,,,,,11,10,10,,83
+16,Clarion,Hispanic,0,0,0,0,0,,,0,,0,,,,,,,,,31
+16,Clarion,Multi-Racial,0,0,0,0,0,,,,,11,,,,,,,,,72
+16,Clarion,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,,0,0,0,0,0,0,0,0,0,,0,0,
+16,Clarion,White,0,57,0,0,0,415,412,407,417,390,442,363,467,439,378,432,398,442,5459
+17,Clearfield,American Indian / Alaskan Native,0,0,0,0,0,,,,,0,0,,,,,0,,0,19
+17,Clearfield,Asian,0,0,0,0,0,,,,,,,,,,,,,,57
+17,Clearfield,Black or African American,0,0,0,0,0,,,,,,,,,,,,,,60
+17,Clearfield,Hispanic,0,0,0,0,0,,,,16,11,,,13,10,,10,,,111
+17,Clearfield,Multi-Racial,0,0,0,0,0,,11,13,15,23,10,13,14,14,10,,11,,156
+17,Clearfield,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,,0,,0,0,,0,0,0,0,0,,,
+17,Clearfield,White,0,0,0,0,0,791,794,842,904,874,858,881,915,871,849,864,888,884,11215
+18,Clinton,American Indian / Alaskan Native,0,0,0,0,0,,0,0,0,0,,0,0,0,0,0,0,,
+18,Clinton,Asian,0,0,0,0,0,,0,0,,0,,0,,,,,,,21
+18,Clinton,Black or African American,0,,0,0,0,,,,,,,,,,,,,,61
+18,Clinton,Hispanic,0,0,0,0,0,0,,,,,,10,,10,,,,,78
+18,Clinton,Multi-Racial,0,0,0,0,0,13,,,,,,,,,,,,,86
+18,Clinton,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,0,0,,0,0,0,0,0,0,0,0,0,,
+18,Clinton,White,0,87,0,0,0,283,310,297,333,309,342,329,336,334,309,335,342,346,4292
+19,Columbia,American Indian / Alaskan Native,0,0,0,0,0,,0,0,,0,,,,,,,,,26
+19,Columbia,Asian,0,0,0,0,0,,,,,,10,,12,,,,,10,97
+19,Columbia,Black or African American,0,0,0,0,0,12,11,13,,14,,14,11,13,,20,15,20,162
+19,Columbia,Hispanic,0,0,0,0,0,32,28,29,28,32,28,26,20,26,21,28,20,21,339
+19,Columbia,Multi-Racial,0,0,0,0,0,19,21,21,24,15,11,21,10,16,12,,11,,191
+19,Columbia,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,0,0,0,,0,,0,0,0,,0,0,,
+19,Columbia,White,0,28,0,0,0,624,603,592,640,649,668,639,700,761,764,735,752,732,8887
+20,Crawford,American Indian / Alaskan Native,0,0,0,0,0,,0,,,,,,,0,,10,,,37
+20,Crawford,Asian,0,0,0,0,0,,,,,,,0,,,,,,,39
+20,Crawford,Black or African American,0,0,0,0,0,13,13,,14,16,14,19,19,21,19,16,24,,229
+20,Crawford,Hispanic,0,0,0,0,0,,,,12,17,11,,,13,,15,18,,146
+20,Crawford,Multi-Racial,0,0,0,0,0,40,,29,32,25,32,27,23,30,21,16,,14,342
+20,Crawford,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,0,0,,,,,,,0,,0,0,,
+20,Crawford,White,0,0,0,0,0,499,523,559,564,608,599,564,630,591,654,691,700,637,7819
+21,Cumberland,American Indian / Alaskan Native,0,0,0,0,0,10,,,,,,,,,,,,,63
+21,Cumberland,Asian,0,0,0,0,84,46,120,147,138,118,147,146,142,106,104,120,132,117,1667
+21,Cumberland,Black or African American,0,0,0,0,,108,121,111,,118,102,97,103,107,96,108,102,95,1401
+21,Cumberland,Hispanic,0,0,0,0,39,88,133,121,132,144,143,140,123,124,125,122,116,94,1644
+21,Cumberland,Multi-Racial,0,0,0,0,69,109,165,139,132,144,113,133,94,97,88,74,65,64,1486
+21,Cumberland,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,,,,,,,,,0,,,0,,,17
+21,Cumberland,White,0,0,0,0,599,1090,1667,1700,1869,1832,1806,1841,1863,1832,1891,1892,1921,1893,23696
+22,Dauphin,American Indian / Alaskan Native,0,0,0,0,,,,,,,,10,,,,,10,,92
+22,Dauphin,Asian,0,0,0,0,116,56,166,153,138,166,165,134,134,159,158,166,170,169,2050
+22,Dauphin,Black or African American,0,0,0,0,225,537,780,826,868,805,781,762,743,782,1012,860,704,760,10445
+22,Dauphin,Hispanic,0,0,0,0,189,336,518,528,581,545,512,514,489,506,608,456,395,378,6555
+22,Dauphin,Multi-Racial,0,0,0,0,87,117,235,216,207,225,215,207,185,191,220,163,183,168,2619
+37,Lawrence,Asian,0,0,0,0,0,,,,,,,,,,,,,,60
+22,Dauphin,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,,,,,,,,,,,0,,,,40
+22,Dauphin,White,0,15,0,0,720,663,1495,1499,1670,1674,1675,1803,1901,2003,2408,2293,2169,2175,24163
+23,Delaware,American Indian / Alaskan Native,0,0,0,0,,,15,10,,10,10,,,,,,,,105
+23,Delaware,Asian,0,0,0,0,305,81,416,422,390,396,397,395,444,393,383,391,376,345,5134
+23,Delaware,Black or African American,0,100,0,0,446,1373,1765,1989,1983,1938,1934,1838,1759,1788,1830,1691,1623,1568,23626
+23,Delaware,Hispanic,0,0,0,0,153,144,343,351,311,288,291,241,267,237,225,211,207,204,3473
+23,Delaware,Multi-Racial,0,0,0,0,163,122,293,259,243,245,197,148,128,125,121,109,104,99,2356
+23,Delaware,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,,,,,,,,,,,,,,50
+23,Delaware,White,0,,0,0,1975,730,2891,2903,3018,3059,3069,3072,3150,3215,3072,3243,3160,,39905
+24,Elk,American Indian / Alaskan Native,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,,0,0,
+24,Elk,Asian,0,0,0,0,0,,0,,,,,,,0,,0,,0,12
+24,Elk,Black or African American,0,0,0,0,0,0,,,0,,,,,0,,0,,,17
+24,Elk,Hispanic,0,0,0,0,0,,,,,,,,,,,,,,60
+24,Elk,Multi-Racial,0,,0,0,0,,,,,10,,,,,,,,,73
+24,Elk,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,
+24,Elk,White,0,14,0,0,0,283,177,211,230,272,233,254,249,266,304,276,262,251,3282
+25,Erie,American Indian / Alaskan Native,0,0,0,0,0,,,,,,10,10,,,,,,,93
+25,Erie,Asian,23,17,0,0,0,70,77,64,61,88,56,72,59,71,88,68,81,59,954
+25,Erie,Black or African American,11,67,,0,0,394,445,458,456,455,454,377,345,363,,434,309,273,5319
+25,Erie,Hispanic,,22,0,0,0,169,207,,222,219,208,178,152,162,180,190,147,125,2417
+25,Erie,Multi-Racial,,22,,0,0,160,105,93,93,93,73,85,130,94,89,94,58,57,1256
+25,Erie,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,,,,,0,,,,,,,,0,20
+25,Erie,White,176,133,44,0,0,1959,1952,2060,2219,2233,2204,2118,2174,2205,2329,2308,2310,2301,28725
+26,Fayette,American Indian / Alaskan Native,0,0,0,0,0,0,,,,,,,0,,,,,,18
+26,Fayette,Asian,0,0,0,0,0,,,,0,,,,,,,,,,51
+26,Fayette,Black or African American,0,0,0,0,0,84,50,96,69,61,77,95,71,95,95,87,82,82,1044
+26,Fayette,Hispanic,0,0,0,0,0,21,25,12,22,12,10,13,,11,15,13,,,176
+26,Fayette,Multi-Racial,,0,0,0,0,94,84,74,63,65,47,47,33,37,46,20,31,,651
+26,Fayette,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,,,0,,,,0,,,,,,,30
+26,Fayette,White,58,0,0,0,0,1064,1024,1056,1070,1089,1089,1122,1145,1184,1203,1215,1099,1098,14516
+27,Forest,American Indian / Alaskan Native,0,0,0,0,0,0,0,0,0,0,0,,0,,,0,,0,
+27,Forest,Asian,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+27,Forest,Black or African American,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,,,
+27,Forest,Hispanic,0,,0,0,0,0,0,,,,,,0,,,,0,0,11
+27,Forest,Multi-Racial,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,,,0,
+27,Forest,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+27,Forest,White,0,25,0,0,0,23,30,25,38,33,38,37,20,27,35,38,36,43,448
+37,Lawrence,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,,
+28,Franklin,American Indian / Alaskan Native,0,0,0,0,0,0,,0,,0,,,,,,,,,37
+28,Franklin,Asian,0,0,0,0,,,10,,14,17,13,19,17,15,20,17,13,23,196
+28,Franklin,Black or African American,0,0,0,0,,59,69,72,66,79,62,,82,81,79,92,83,88,1015
+28,Franklin,Hispanic,0,0,0,0,,163,187,198,,203,169,175,157,150,150,137,132,162,2204
+28,Franklin,Multi-Racial,0,0,0,0,13,75,83,81,85,105,89,73,46,51,33,44,58,59,895
+28,Franklin,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,,,,,,0,,,,0,0,0,,16
+28,Franklin,White,0,0,0,0,178,890,1127,1144,1271,1248,1220,1165,1157,1141,1150,1244,1181,1297,15413
+29,Fulton,American Indian / Alaskan Native,0,0,0,0,0,0,0,0,0,0,0,,,0,0,,0,0,
+29,Fulton,Asian,0,0,0,0,0,0,0,,0,,,0,,,,0,0,,
+29,Fulton,Black or African American,0,0,0,0,0,0,,,,,,,,,,,,,23
+29,Fulton,Hispanic,0,0,0,,0,,,,,,,,,0,,0,0,,28
+29,Fulton,Multi-Racial,0,0,0,,0,,,,,,,,,0,,0,0,0,29
+29,Fulton,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,0,,0,0,0,0,0,0,0,,0,,0,
+29,Fulton,White,0,0,0,74,0,136,150,149,141,158,154,162,113,153,167,144,151,158,2010
+30,Greene,American Indian / Alaskan Native,0,0,0,0,0,0,0,,,,0,,,,,0,0,,
+30,Greene,Asian,0,0,0,0,0,0,,0,,,0,,,,,,,,18
+30,Greene,Black or African American,0,,0,0,0,,,0,,,,,,,,,,,50
+30,Greene,Hispanic,0,0,0,0,0,,0,,,,,,,,,,,,28
+30,Greene,Multi-Racial,0,,0,0,0,,,,,,,,,0,,,,,48
+30,Greene,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,0,,0,0,0,0,0,0,0,0,0,0,0,
+30,Greene,White,0,53,0,0,0,357,350,341,377,350,367,353,359,385,368,386,339,357,4742
+31,Huntingdon,American Indian / Alaskan Native,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,0,0,0,
+37,Lawrence,White,0,77,29,0,0,722,737,701,756,761,771,788,838,835,821,810,878,807,10331
+31,Huntingdon,Asian,0,0,0,0,0,0,0,0,,,,,,,,0,,,15
+31,Huntingdon,Black or African American,0,0,0,0,0,,,12,,,,11,,,10,21,14,14,139
+31,Huntingdon,Hispanic,0,0,0,0,0,,,,,,,,,,,,,0,67
+31,Huntingdon,Multi-Racial,0,0,0,0,0,,,16,14,10,,,,,,10,,14,120
+31,Huntingdon,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,0,0,0,0,,0,,0,0,,0,0,0,
+31,Huntingdon,White,0,0,0,0,0,346,352,382,415,387,407,402,362,410,472,425,424,420,5204
+32,Indiana,American Indian / Alaskan Native,0,0,0,0,0,0,0,,0,0,0,0,,,0,0,,0,
+32,Indiana,Asian,,,0,0,0,,17,15,16,,,14,17,12,11,16,17,16,173
+32,Indiana,Black or African American,0,,0,0,0,25,12,25,11,20,16,17,13,,18,,16,16,209
+32,Indiana,Hispanic,0,,0,0,0,,11,,,,,,,,,,,,83
+32,Indiana,Multi-Racial,0,,0,0,0,12,11,13,12,13,10,14,13,12,,,,,136
+32,Indiana,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,0,,0,0,,,,,,,0,0,,10
+32,Indiana,White,97,99,0,0,0,635,644,627,647,665,646,662,707,708,711,689,705,658,8900
+33,Jefferson,American Indian / Alaskan Native,0,0,0,0,0,0,,,0,0,0,0,,,,,,0,10
+33,Jefferson,Asian,0,0,0,0,0,,,,,,0,,,,0,,0,0,18
+33,Jefferson,Black or African American,0,0,0,0,0,,,0,,0,0,,0,,,,,,24
+33,Jefferson,Hispanic,0,0,0,0,0,,,,,,,,,,,,,,54
+33,Jefferson,Multi-Racial,0,0,0,0,0,,,,,,,,,,,,,,51
+33,Jefferson,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+33,Jefferson,White,0,0,0,0,0,340,345,300,371,356,333,342,377,392,452,428,387,415,4838
+34,Juniata,American Indian / Alaskan Native,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,0,0,,
+34,Juniata,Asian,0,0,0,0,0,0,0,0,0,,,,,,,,,,12
+34,Juniata,Black or African American,0,0,0,0,0,,,,,,,,,,,,0,,40
+34,Juniata,Hispanic,0,0,0,0,0,21,20,20,22,20,21,18,20,21,,16,,14,231
+34,Juniata,Multi-Racial,0,0,0,0,0,,,,,0,,0,,,,0,0,0,15
+34,Juniata,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,0,0,0,0,,0,0,0,0,0,0,0,0,
+34,Juniata,White,0,0,0,0,0,167,186,160,199,173,179,206,207,202,264,199,203,208,2553
+35,Lackawanna,American Indian / Alaskan Native,,0,0,0,,,,,,,,,,,,,,,47
+35,Lackawanna,Asian,49,0,0,0,,64,65,78,70,78,62,66,68,59,63,56,74,,942
+35,Lackawanna,Black or African American,27,,0,0,,118,104,118,120,126,133,141,117,110,124,132,147,116,1642
+35,Lackawanna,Hispanic,107,,0,0,,311,326,385,341,331,303,280,278,255,222,244,223,188,3805
+35,Lackawanna,Multi-Racial,25,,0,0,,103,94,113,83,103,105,68,58,43,34,25,34,25,920
+35,Lackawanna,Native Hawaiian or other Pacific Islander(not hispanic),,0,0,0,,,,,,,,11,12,11,10,,12,11,112
+35,Lackawanna,White,233,46,0,0,183,1276,1499,1405,1601,1624,1583,1603,1671,1630,1549,1690,1567,1642,20802
+36,Lancaster,American Indian / Alaskan Native,0,0,0,0,,,,,,,,,,,12,,,11,89
+36,Lancaster,Asian,0,28,0,0,50,109,162,162,154,172,174,175,178,189,197,185,191,178,2304
+36,Lancaster,Black or African American,0,55,0,0,53,201,244,243,282,295,307,285,314,310,345,362,297,298,3891
+36,Lancaster,Hispanic,,255,0,0,185,805,1011,1050,,1063,994,952,1003,914,1019,1042,863,750,13023
+36,Lancaster,Multi-Racial,,18,0,0,70,162,229,,237,226,217,186,164,137,162,107,103,98,2365
+36,Lancaster,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,,,,,,,,,,,,,,,42
+36,Lancaster,White,20,25,0,0,1770,1333,3308,3418,3422,3515,3514,3451,3625,3591,3618,3765,3810,3702,45887
+37,Lawrence,American Indian / Alaskan Native,0,0,0,0,0,,,0,,0,0,,0,,,0,,0,
+37,Lawrence,Black or African American,0,,,0,0,71,63,81,66,49,85,83,79,74,83,69,84,63,958
+37,Lawrence,Hispanic,0,0,0,0,0,13,21,19,20,14,12,13,10,12,11,14,14,10,183
+37,Lawrence,Multi-Racial,0,14,0,0,0,72,66,57,47,51,24,19,29,19,12,22,23,21,476
+38,Lebanon,American Indian / Alaskan Native,0,0,0,0,,0,,,,,,,0,,,,0,0,21
+38,Lebanon,Asian,0,0,0,,12,,11,24,21,23,24,20,19,28,32,27,19,17,284
+38,Lebanon,Black or African American,0,0,0,,26,17,45,38,47,43,36,49,49,46,46,,51,47,602
+38,Lebanon,Hispanic,0,0,0,220,33,265,311,350,299,314,298,316,315,311,317,313,246,223,4131
+38,Lebanon,Multi-Racial,0,0,0,12,20,32,47,33,21,40,17,24,27,23,20,23,11,14,364
+38,Lebanon,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,0,,0,,,0,0,,,,,,,18
+38,Lebanon,White,0,0,0,75,859,198,1023,1045,1066,1112,1115,1144,1068,1058,1120,1102,1056,1063,14104
+39,Lehigh,American Indian / Alaskan Native,0,0,0,0,,,,,,13,10,,,,,,,,91
+39,Lehigh,Asian,0,0,0,0,41,90,148,164,155,155,151,198,178,185,187,184,162,193,2191
+39,Lehigh,Black or African American,0,0,0,0,29,231,345,331,354,363,329,314,344,346,422,357,334,313,4412
+39,Lehigh,Hispanic,0,0,0,0,176,1178,1436,1463,1498,1505,1409,1368,1403,1325,1812,1404,1226,1163,18366
+39,Lehigh,Multi-Racial,0,0,0,0,50,84,142,161,246,226,193,163,103,102,61,66,73,62,1732
+39,Lehigh,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,,,,,,,,,,,,,,,52
+39,Lehigh,White,0,0,0,0,705,841,1698,1711,1809,1911,1921,1983,2083,2153,2095,2151,2132,2217,25410
+40,Luzerne,American Indian / Alaskan Native,0,0,0,0,,0,,,,,,,,,,,,,62
+40,Luzerne,Asian,0,0,0,0,,22,29,31,42,35,38,36,,38,40,37,41,33,481
+40,Luzerne,Black or African American,0,0,0,0,21,158,209,221,227,212,188,215,226,208,203,224,190,187,2689
+40,Luzerne,Hispanic,0,0,0,0,482,299,838,780,781,769,735,700,714,606,733,643,610,582,9272
+40,Luzerne,Multi-Racial,0,0,0,0,19,106,141,110,122,96,90,86,87,59,39,37,36,24,1052
+40,Luzerne,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,,,,,,0,,,,,0,,0,17
+40,Luzerne,White,0,0,0,0,437,1424,1971,2082,2086,2222,2112,2250,2348,2349,2313,2333,2305,2346,28578
+41,Lycoming,American Indian / Alaskan Native,0,0,0,0,0,,,,,,,,,,,,,,32
+41,Lycoming,Asian,,0,0,0,0,,13,,12,11,14,,18,11,12,,,10,138
+41,Lycoming,Black or African American,0,0,0,0,0,79,63,79,69,79,85,66,88,83,85,74,56,73,979
+41,Lycoming,Hispanic,,0,0,0,0,26,33,29,35,25,27,,25,34,27,27,28,24,383
+57,Sullivan,White,0,0,0,0,0,54,48,52,33,54,42,45,38,52,34,48,41,52,593
+41,Lycoming,Multi-Racial,,,0,,0,97,90,82,102,97,83,70,63,61,72,59,58,37,975
+41,Lycoming,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,,,,,,,,,,0,,,,23
+41,Lycoming,White,44,,0,54,0,903,974,942,1011,1049,1053,1011,,1042,1061,1025,1027,966,13248
+42,McKean,American Indian / Alaskan Native,0,,0,0,0,0,,,0,,,,,,,,0,,19
+42,McKean,Asian,0,,0,0,0,,,,,,,0,,,,,,,24
+42,McKean,Black or African American,0,,0,0,0,,,,,,,,,,10,11,,,55
+42,McKean,Hispanic,0,,0,0,0,,,,,,,17,,,,,,,99
+42,McKean,Multi-Racial,0,,,0,0,,,10,,,,,,,,,,,68
+42,McKean,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,,,,0,,,,0,0,0,0,0,,
+42,McKean,White,0,135,20,0,0,412,406,419,434,426,456,442,419,463,464,469,435,451,5851
+43,Mercer,American Indian / Alaskan Native,0,0,0,0,,0,,0,0,,,,,,,,,0,17
+43,Mercer,Asian,0,0,0,0,,,,,10,,,,12,10,16,19,14,23,139
+43,Mercer,Black or African American,0,0,0,0,,97,99,88,98,105,108,94,129,126,138,144,,170,1581
+43,Mercer,Hispanic,0,0,0,0,0,20,13,16,14,15,22,11,16,15,28,30,22,23,245
+43,Mercer,Multi-Racial,0,0,0,0,,65,64,54,49,69,47,38,39,36,36,29,29,,566
+43,Mercer,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,0,,,,,,,0,0,,0,,0,10
+43,Mercer,White,0,0,0,0,124,680,824,904,918,889,972,949,1059,977,1052,1044,1122,1078,12592
+44,Mifflin,American Indian / Alaskan Native,0,0,0,0,0,0,,0,0,,,0,0,,0,,0,0,
+44,Mifflin,Asian,0,0,0,0,0,,,,,0,0,,,,,,,,17
+44,Mifflin,Black or African American,0,0,0,0,0,,,,,,,14,,,,10,,,96
+44,Mifflin,Hispanic,0,0,0,0,0,11,15,25,13,22,15,11,17,12,10,,,,171
+44,Mifflin,Multi-Racial,0,0,0,0,0,,14,,,,12,,,,,,12,,96
+44,Mifflin,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,0,,,0,0,0,0,0,0,0,0,0,0,
+44,Mifflin,White,0,0,0,0,0,299,293,336,362,337,342,353,360,389,370,393,406,353,4593
+45,Monroe,American Indian / Alaskan Native,0,0,0,0,,,,,,,,,,,,,,,90
+45,Monroe,Asian,0,0,0,0,,37,32,34,43,49,41,52,43,,54,56,45,50,598
+45,Monroe,Black or African American,0,0,0,0,10,234,252,294,344,383,394,419,410,453,465,492,512,529,5191
+45,Monroe,Hispanic,0,0,0,0,28,355,411,414,477,444,410,397,439,434,483,472,448,501,5713
+45,Monroe,Multi-Racial,0,0,0,0,17,49,89,58,43,42,34,38,26,19,16,18,16,27,492
+45,Monroe,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,,,,,,,,,,,19,15,,,83
+45,Monroe,White,0,0,0,0,183,656,866,938,940,971,984,1061,1040,1138,1110,1222,1213,1208,13530
+46,Montgomery,American Indian / Alaskan Native,0,0,0,0,,,11,,15,10,11,10,15,14,12,11,13,13,157
+46,Montgomery,Asian,,0,0,0,429,230,762,777,731,,730,764,746,688,735,766,758,674,9619
+46,Montgomery,Black or African American,15,13,0,0,183,712,967,980,1103,1050,1071,1036,1104,1084,1258,1158,1123,1191,14048
+46,Montgomery,Hispanic,11,,0,0,229,564,,804,,817,777,711,681,642,714,611,539,508,9271
+46,Montgomery,Multi-Racial,,,0,0,209,281,500,521,490,449,464,363,364,289,279,222,229,196,4861
+46,Montgomery,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,,,,,,10,13,,,,,,17,10,108
+46,Montgomery,White,54,10,0,0,2304,2266,5092,5368,5446,5430,5492,5637,5664,5603,5654,5835,5679,5888,71422
+47,Montour,American Indian / Alaskan Native,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,,
+47,Montour,Asian,0,0,0,0,0,,10,12,12,,,,,,,,,,80
+47,Montour,Black or African American,0,0,0,0,0,,,,,,,,,,13,18,15,17,100
+47,Montour,Hispanic,0,0,0,0,0,,,,,,,,,,,,,10,86
+47,Montour,Multi-Racial,0,0,0,0,0,,,,,,,,,,,,10,,65
+47,Montour,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,0,,0,0,0,,0,0,0,0,0,0,,
+47,Montour,White,0,0,0,0,0,174,157,141,142,151,161,165,174,180,150,153,130,144,2022
+48,Northampton,American Indian / Alaskan Native,0,0,0,0,0,,,,,,,,,,,,0,,51
+48,Northampton,Asian,,,0,0,22,53,96,108,101,104,121,101,145,131,108,124,113,106,1438
+48,Northampton,Black or African American,,,0,0,31,193,238,261,286,281,299,302,322,293,370,376,348,334,3939
+48,Northampton,Hispanic,,64,0,0,56,727,768,732,757,840,811,786,800,809,,797,710,685,10191
+48,Northampton,Multi-Racial,0,0,0,0,23,122,141,122,161,129,138,127,130,99,75,67,61,55,1450
+48,Northampton,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,,,,,,,,,,,,,,,42
+48,Northampton,White,16,,0,0,228,1563,1788,1886,1950,2095,2075,2082,2193,2305,2362,,2300,2372,27716
+49,Northumberland,American Indian / Alaskan Native,0,0,0,0,0,,0,0,0,0,,,0,,,,0,,11
+49,Northumberland,Asian,0,0,,0,0,,,,,,,,,,,,,,47
+49,Northumberland,Black or African American,0,0,0,0,0,13,25,14,14,20,16,19,24,27,23,24,20,24,263
+49,Northumberland,Hispanic,0,0,,0,0,70,64,57,65,59,51,,50,60,48,46,25,35,706
+49,Northumberland,Multi-Racial,0,0,0,0,0,43,30,32,37,33,24,25,25,23,12,13,10,12,319
+49,Northumberland,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,0,,,0,,0,0,0,0,,0,0,0,
+49,Northumberland,White,0,0,35,0,0,773,713,779,774,738,821,770,766,772,856,745,757,721,10020
+50,Perry,American Indian / Alaskan Native,0,0,0,0,0,0,,,0,,,,0,,0,,0,,14
+50,Perry,Asian,0,0,0,0,0,,,0,0,0,,0,,0,,,0,,
+50,Perry,Black or African American,0,0,0,0,0,,,,,,,,,,12,22,20,26,105
+50,Perry,Hispanic,0,0,0,0,0,18,19,11,17,12,12,,13,,18,11,,16,173
+50,Perry,Multi-Racial,0,,0,0,0,19,11,10,13,,15,10,,,,,,,118
+50,Perry,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,0,,0,,,,0,0,0,0,,0,0,
+50,Perry,White,0,50,0,0,0,483,396,426,449,474,451,458,438,428,449,440,397,460,5799
+51,Philadelphia,American Indian / Alaskan Native,0,,0,0,0,24,37,32,,36,30,22,26,17,28,20,12,19,363
+51,Philadelphia,Asian,0,212,0,,0,907,972,982,1029,973,974,958,925,953,,1062,1017,937,12973
+51,Philadelphia,Black or African American,0,1174,0,57,0,8458,8795,8855,8775,8608,8154,7897,7959,7794,8916,8026,7423,7008,107899
+51,Philadelphia,Hispanic,0,104,0,,0,2879,3075,3236,3235,3089,3104,3030,2990,2942,,2944,2578,2376,38879
+51,Philadelphia,Multi-Racial,0,386,0,0,0,996,1443,1133,1135,1260,1008,986,790,546,478,557,393,322,11433
+51,Philadelphia,Native Hawaiian or other Pacific Islander(not hispanic),0,,0,,0,24,27,16,,11,,,,,,,,,120
+51,Philadelphia,White,0,185,0,,0,2264,2293,2284,,2211,2190,2040,2017,1946,2096,1932,1797,1735,27366
+52,Pike,American Indian / Alaskan Native,0,0,0,0,0,0,,,0,,0,,,,,,,,27
+52,Pike,Asian,,0,0,0,0,,,,,,10,10,,16,,13,11,11,124
+52,Pike,Black or African American,,0,0,0,0,,11,,10,,,13,13,14,12,14,12,21,146
+52,Pike,Hispanic,,,0,0,0,35,40,55,49,53,57,48,53,44,70,63,49,52,673
+52,Pike,Multi-Racial,0,0,0,0,0,19,15,14,18,21,,10,,12,10,10,17,12,187
+52,Pike,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,0,0,0,0,,0,0,,,0,0,,0,
+52,Pike,White,56,,0,0,0,395,424,456,414,473,494,460,542,547,523,551,,568,6490
+53,Potter,American Indian / Alaskan Native,0,0,0,0,0,,0,0,0,0,0,0,0,0,,0,0,0,
+53,Potter,Asian,0,0,0,,0,0,0,0,,0,0,,0,,0,0,,,11
+53,Potter,Black or African American,0,0,0,0,0,0,0,,0,,0,,,,,,,,18
+53,Potter,Hispanic,0,0,0,,0,,,,,,,,,,,,,,29
+53,Potter,Multi-Racial,0,0,0,,0,,,,,0,,,,,,0,,,30
+53,Potter,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+53,Potter,White,28,0,0,71,0,168,174,146,146,150,161,164,159,166,165,183,167,163,2211
+54,Schuylkill,American Indian / Alaskan Native,0,0,0,0,0,,,,0,,,,,0,,,,,22
+54,Schuylkill,Asian,0,0,0,0,0,,,,12,,,,10,,12,,10,,105
+54,Schuylkill,Black or African American,0,,0,0,,31,29,34,46,43,35,43,41,38,40,55,35,31,505
+54,Schuylkill,Hispanic,0,32,0,0,,93,86,99,92,90,,80,94,70,83,76,66,64,1133
+54,Schuylkill,Multi-Racial,0,,,0,,27,29,27,26,24,20,21,26,16,23,16,,,276
+54,Schuylkill,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,,,0,,,,,,,0,,,,17
+54,Schuylkill,White,0,30,37,0,152,1058,1089,1137,1261,1223,1307,1283,1289,1351,1261,1264,1316,1216,16274
+55,Snyder,American Indian / Alaskan Native,0,0,0,0,0,0,,0,,,,,0,,0,0,,0,11
+55,Snyder,Asian,0,0,0,0,0,,,,,,,,,,,,,,46
+55,Snyder,Black or African American,0,0,0,0,0,,,,,,,,,,,,,,79
+55,Snyder,Hispanic,0,0,0,0,0,,13,,12,,11,,20,12,10,,,11,133
+55,Snyder,Multi-Racial,0,0,0,0,0,10,,,14,13,,12,,,,,,,95
+55,Snyder,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+55,Snyder,White,0,0,0,0,0,293,331,320,306,337,400,354,364,374,373,364,325,327,4468
+56,Somerset,American Indian / Alaskan Native,0,0,0,0,0,,0,0,,0,,0,,0,0,,,,11
+56,Somerset,Asian,0,0,0,0,0,,0,,0,,,,,,,,,,48
+56,Somerset,Black or African American,0,0,0,,0,,,,,,,,,,,,,,64
+56,Somerset,Hispanic,0,,0,,0,,,11,16,,10,,,,,10,,,106
+56,Somerset,Multi-Racial,,,0,,0,13,12,,,13,,,,12,,,,,99
+56,Somerset,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,0,0,0,0,0,0,0,,,,,,,
+56,Somerset,White,47,54,0,92,0,569,565,633,594,652,614,624,666,706,674,769,720,711,8690
+57,Sullivan,American Indian / Alaskan Native,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+57,Sullivan,Asian,0,0,0,0,0,0,0,0,0,0,0,,,,,0,,0,
+57,Sullivan,Black or African American,0,0,0,0,0,,0,,0,0,,,0,,,,0,,12
+57,Sullivan,Hispanic,0,0,0,0,0,,,0,0,,0,0,,,,,0,0,
+57,Sullivan,Multi-Racial,0,0,0,0,0,0,,0,0,,0,0,0,0,,,0,,
+57,Sullivan,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+58,Susquehanna,American Indian / Alaskan Native,0,0,0,0,0,0,0,,0,,,,,,,,0,,13
+58,Susquehanna,Asian,0,,0,0,0,,,,,,,,0,0,,,,,27
+58,Susquehanna,Black or African American,0,0,,0,0,,,,,,,,,,,,,,74
+58,Susquehanna,Hispanic,0,,,0,0,11,14,10,,15,,12,,12,12,12,16,10,148
+58,Susquehanna,Multi-Racial,0,,,0,0,,,,,,,,,,,,,,58
+58,Susquehanna,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,,0,0,0,0,,,,,0,,0,0,
+58,Susquehanna,White,0,26,113,24,0,424,408,438,415,413,421,444,433,457,424,465,469,428,5802
+59,Tioga,American Indian / Alaskan Native,0,0,0,0,0,,0,,,,0,,,0,,,0,,15
+59,Tioga,Asian,0,0,0,0,0,,,0,,,0,,,,,,,0,27
+59,Tioga,Black or African American,0,0,0,0,0,,,,,,,,,,,,,,48
+59,Tioga,Hispanic,0,,0,0,0,10,,,,,,,,,,,,,73
+59,Tioga,Multi-Racial,0,,0,0,0,11,,10,10,,,,,,,,,,79
+59,Tioga,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,,,0,0,0,,0,0,0,0,0,0,0,
+59,Tioga,White,0,56,0,0,0,415,403,366,421,379,368,371,392,401,421,455,374,396,5218
+60,Union,American Indian / Alaskan Native,0,0,0,0,0,0,,0,0,0,,0,,,,0,,0,
+60,Union,Asian,,0,0,0,0,,,,,,10,,10,11,,,,,93
+60,Union,Black or African American,0,0,0,0,0,10,12,10,12,,10,,10,18,,,13,13,140
+60,Union,Hispanic,,0,0,0,0,13,16,11,,20,12,22,13,10,15,12,11,12,177
+60,Union,Multi-Racial,0,0,0,0,0,13,17,13,17,13,,10,,,,,,,113
+60,Union,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,,0,0,0,0,0,0,0,0,0,0,0,0,
+60,Union,White,16,0,0,0,0,273,241,230,245,238,246,284,325,269,294,301,278,283,3523
+61,Venango,American Indian / Alaskan Native,0,0,,0,0,0,0,,,0,0,,0,,,,0,,16
+61,Venango,Asian,0,0,0,0,0,,0,0,,,,,,,,,,,48
+61,Venango,Black or African American,0,0,,0,,10,12,,12,18,15,12,,16,11,11,12,19,165
+61,Venango,Hispanic,0,0,,0,0,14,12,10,,,,10,,,12,,,,118
+61,Venango,Multi-Racial,0,0,,0,0,16,19,30,17,12,12,,,,,,,,151
+61,Venango,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,0,,0,,,0,,,,0,,0,,12
+61,Venango,White,0,0,122,0,,560,557,589,560,563,576,560,566,529,,596,593,575,7559
+62,Warren,American Indian / Alaskan Native,0,0,0,0,0,0,0,,0,,0,,0,,0,,0,0,
+62,Warren,Asian,0,0,0,0,0,,0,0,,,0,,0,,0,,0,0,
+62,Warren,Black or African American,0,0,0,0,0,,,,,,,,,,,,,,34
+62,Warren,Hispanic,0,0,0,0,0,,,,,,,,,,,,,,53
+62,Warren,Multi-Racial,0,0,0,0,0,,,,10,,,,,,,,,,70
+62,Warren,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,0,,0,0,0,0,,0,0,0,0,,0,
+62,Warren,White,0,0,0,0,0,331,287,337,315,324,314,328,356,376,374,398,392,394,4526
+63,Washington,American Indian / Alaskan Native,0,0,0,0,0,0,0,,,,,,,,,,,,31
+63,Washington,Asian,0,0,0,0,12,,,17,24,17,16,20,19,32,19,26,24,24,267
+63,Washington,Black or African American,0,0,0,0,,55,56,76,84,74,77,75,64,81,105,,84,95,1066
+63,Washington,Hispanic,0,0,0,0,,30,,42,35,39,44,43,41,28,31,37,45,26,496
+63,Washington,Multi-Racial,0,0,0,0,22,113,132,139,116,101,104,109,85,81,67,48,36,36,1189
+63,Washington,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,,0,0,,,,0,,,,,,,,23
+63,Washington,White,0,0,0,0,561,1146,1702,1714,1771,1830,1838,1839,1862,1936,1981,1971,1958,1869,23978
+64,Wayne,American Indian / Alaskan Native,0,0,0,0,0,0,0,,,0,0,0,0,0,,,0,0,
+64,Wayne,Asian,,0,0,0,0,,,,,,,,,,,,0,0,25
+64,Wayne,Black or African American,0,0,0,0,0,,,,,,,,,,,10,11,,57
+64,Wayne,Hispanic,,0,0,0,0,26,18,,22,16,16,17,,12,,11,12,16,193
+64,Wayne,Multi-Racial,,0,0,0,0,,10,,11,12,,,10,,,,,,97
+64,Wayne,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,0,,0,,0,0,,0,0,,0,0,0,
+64,Wayne,White,85,0,0,0,0,284,251,288,272,311,293,285,323,353,365,329,336,334,4109
+65,Westmoreland,American Indian / Alaskan Native,0,0,0,0,0,,,,,,,0,,,,,,,47
+65,Westmoreland,Asian,0,0,0,0,,18,39,49,31,38,50,57,46,50,50,,62,50,607
+65,Westmoreland,Black or African American,0,27,0,0,10,146,154,144,165,170,138,140,149,145,155,141,130,140,1954
+65,Westmoreland,Hispanic,0,,0,,,47,56,50,48,55,52,41,45,43,44,45,36,39,607
+65,Westmoreland,Multi-Racial,0,,0,0,13,147,158,,143,125,140,150,119,102,100,90,70,76,1598
+65,Westmoreland,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,,,,,,,,,,,0,0,,,26
+65,Westmoreland,White,0,25,0,109,467,2442,2864,3007,3115,3184,3205,3132,3344,3328,3451,3406,3451,3581,42111
+66,Wyoming,American Indian / Alaskan Native,0,0,0,0,0,0,0,,0,0,,0,0,,,0,,,
+66,Wyoming,Asian,0,0,0,0,0,0,0,,0,,,0,,0,,,,,
+66,Wyoming,Black or African American,0,0,0,0,0,,,,0,,,,,,,,0,,29
+66,Wyoming,Hispanic,0,0,0,0,0,,,,,,,,,,,,,0,38
+66,Wyoming,Multi-Racial,0,0,0,0,0,,,,,11,,10,,,,,,,65
+66,Wyoming,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,0,0,,0,,0,,0,,,0,0,0,,
+66,Wyoming,White,0,0,0,0,0,214,232,208,226,274,239,274,258,250,254,246,262,283,3220
+67,York,American Indian / Alaskan Native,0,0,0,0,,,12,,,12,,11,,,,,10,,119
+67,York,Asian,0,0,0,0,21,42,89,85,78,80,95,86,117,78,84,108,103,100,1166
+67,York,Black or African American,0,0,0,0,52,338,377,403,452,424,481,482,470,458,495,492,410,413,5747
+67,York,Hispanic,,0,0,0,112,487,560,610,600,,617,588,574,544,,575,458,477,7462
+67,York,Multi-Racial,,0,0,0,69,186,280,314,,282,265,224,205,205,244,171,137,148,3058
+67,York,Native Hawaiian or other Pacific Islander(not hispanic),0,0,0,0,,,0,,,,,,,,,,,,49
+67,York,White,20,,0,0,1475,2124,3629,3803,3923,3943,3845,4008,4152,4032,,4077,3913,3779,50938
+00,Statewide,Total,1693,4662,1100,1064,27837,93310,125561,128606,132716,133466,132008,131033,134294,133340,139638,137985,132980,131219,1722514
