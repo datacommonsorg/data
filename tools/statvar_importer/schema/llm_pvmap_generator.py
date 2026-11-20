@@ -88,9 +88,11 @@ class LLM_PVMapGenerator:
 
     def __init__(
         self,
-        config_dict: dict = {},
+        config_dict: dict | None = None,
         counters: Counters = None,
     ):
+        if config_dict is None:
+            config_dict = {}
         self._config = ConfigMap()
         self._config.update_config(config_dict)
         self._counters = counters
