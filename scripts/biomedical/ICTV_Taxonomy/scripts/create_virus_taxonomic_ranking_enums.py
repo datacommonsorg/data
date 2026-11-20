@@ -22,8 +22,9 @@ ICTV Virus Metadata Resource.
 """
 
 # load environment
-import pandas as pd
 import sys
+
+import pandas as pd
 
 # declare universal variables
 HEADER = [

@@ -42,7 +42,6 @@ The output file will have the following columns:
   "CountryName": parent country name
 """
 
-import json
 import os
 import sys
 import urllib.parse
@@ -89,14 +88,12 @@ sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(_SCRIPT_DIR))),
                  'util'))
 
+from config_map import ConfigMap
+from counters import Counters
 import download_util
 import file_util
 import mcf_file_util
 import process_http_server
-
-from counters import Counters
-from config_map import ConfigMap
-from download_util import request_url
 from property_value_cache import PropertyValueCache
 
 _DEFAULT_CONFIG = {

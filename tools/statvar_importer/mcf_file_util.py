@@ -42,12 +42,12 @@ python3 mcf_file_util.py --input_mcf=test_data/*.mcf
 
 from collections import OrderedDict
 import csv
-import glob
 import hashlib
 import os
 import re
 import sys
 from typing import Union
+
 from absl import app
 from absl import flags
 from absl import logging
@@ -71,9 +71,8 @@ sys.path.append(os.path.dirname(os.path.dirname(_SCRIPT_DIR)))
 sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPT_DIR)), 'util'))
 
-import file_util
-
 from counters import Counters
+import file_util
 
 _DEFAULT_NODE_PVS = OrderedDict({
     'Node': '',

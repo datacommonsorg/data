@@ -2,7 +2,9 @@ import os
 import sys
 import tempfile
 import unittest
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock
+from unittest.mock import patch
+
 import pandas as pd
 import requests
 
@@ -10,17 +12,15 @@ CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 if CURRENT_DIR not in sys.path:
     sys.path.insert(0, CURRENT_DIR)
 
-from download_input_data import (
-    AGE_STEMS,
-    LOC_STEMS,
-    SEX_STEMS,
-    download_and_process,
-    fetch_variables,
-    get_http_session,
-    get_template_map,
-    load_template_from_gcs,
-    make_request,
-)
+from download_input_data import AGE_STEMS
+from download_input_data import LOC_STEMS
+from download_input_data import SEX_STEMS
+from download_input_data import download_and_process
+from download_input_data import fetch_variables
+from download_input_data import get_http_session
+from download_input_data import get_template_map
+from download_input_data import load_template_from_gcs
+from download_input_data import make_request
 
 
 class DownloadInputDataTest(unittest.TestCase):

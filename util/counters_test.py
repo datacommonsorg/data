@@ -15,13 +15,14 @@
 
 import os
 import sys
-import unittest
 import time
+import unittest
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
 
-from counters import Counters, CounterOptions
+from counters import CounterOptions
+from counters import Counters
 
 
 class TestCounters(unittest.TestCase):

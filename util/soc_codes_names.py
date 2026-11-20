@@ -14,6 +14,7 @@
 """SOCv2018 codes -> Occupation names"""
 
 import re
+
 import requests
 
 

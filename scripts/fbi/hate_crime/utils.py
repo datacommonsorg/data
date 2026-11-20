@@ -12,12 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """Utility functions."""
+import csv
 import os
 import sys
-import csv
-import pandas as pd
 
 from geo_id_resolver import convert_to_place_dcid
+import pandas as pd
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))

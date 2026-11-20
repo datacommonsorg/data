@@ -20,9 +20,12 @@ process has exclusive ownership of the state file for the duration of a run.
 
 from __future__ import annotations
 
+from dataclasses import asdict
+from dataclasses import dataclass
+from dataclasses import field
+from datetime import datetime
+from datetime import timezone
 import json
-from dataclasses import asdict, dataclass, field
-from datetime import datetime, timezone
 from pathlib import Path
 
 from absl import logging

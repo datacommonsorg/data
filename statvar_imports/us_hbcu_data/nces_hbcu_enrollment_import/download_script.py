@@ -12,16 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import os
+from pathlib import Path
+import shutil
+import time
+
+from absl import app
+from absl import logging
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import time
-from absl import app, logging
-import os
-import shutil
-import pandas as pd
-from pathlib import Path
+from selenium.webdriver.support.ui import WebDriverWait
 
 tmpdir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "tmp")
 Path(tmpdir).mkdir(parents=True, exist_ok=True)

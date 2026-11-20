@@ -20,17 +20,16 @@ Run this script in this folder:
 python3 process.py
 """
 
+from collections import defaultdict
 import csv
-import io
+import datetime
 import os
 import sys
-import datetime
 import time
 
 from absl import app
 from absl import flags
 from absl import logging
-from collections import defaultdict
 
 # Allows the following module imports to work when running as a script
 # module_dir_ is the path to where this code is running from.
@@ -38,20 +37,26 @@ module_dir_ = os.path.dirname(__file__)
 sys.path.append(os.path.join(module_dir_))
 
 from country_codes import get_country_dcid
+import download
 from rename_mapping import new_mapping_names
 import un_energy_codes
-import download
 
 FLAGS = flags.FLAGS
-flags.DEFINE_list('csv_data_files', [],
-                  'csv files from UNData Energy datasets to process')
-flags.DEFINE_string('output_path', 'output_data/un_energy_output',
-                    'Data set name used as file name for mcf and tmcf')
-flags.DEFINE_integer('debug_level', 0, 'Data dir to download into')
-flags.DEFINE_integer('debug_lines', 100000, 'Print error logs every N lines')
-flags.DEFINE_bool('copy_input_columns', False,
-                  'Add columns from the input csv into the output')
-flags.DEFINE_string('output_counters', '', 'File to write counters to')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_list('csv_data_files', [],
+                      'csv files from UNData Energy datasets to process')
+    flags.DEFINE_string('output_path', 'output_data/un_energy_output',
+                        'Data set name used as file name for mcf and tmcf')
+    flags.DEFINE_integer('debug_level', 0, 'Data dir to download into')
+    flags.DEFINE_integer('debug_lines', 100000,
+                         'Print error logs every N lines')
+    flags.DEFINE_bool('copy_input_columns', False,
+                      'Add columns from the input csv into the output')
+    flags.DEFINE_string('output_counters', '', 'File to write counters to')
+
 
 # Columns in the putput CSV
 # todo(ajaits): Should it include original columns like transaction code, fuel code, etc?
@@ -603,5 +608,6 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     logging.info('running main')
     app.run(main)

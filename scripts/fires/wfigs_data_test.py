@@ -2,14 +2,14 @@
 It imports two test datasets and checks if the processed output matches the
 expected output.
 """
-import unittest
-import os
-import pandas as pd
-import numpy as np
-import sys
 import json
-from datetime import datetime
+import os
+import sys
+import unittest
 from unittest.mock import patch
+
+import numpy as np
+import pandas as pd
 
 module_dir_ = os.path.dirname(__file__)
 sys.path.insert(0, module_dir_)

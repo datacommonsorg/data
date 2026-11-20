@@ -53,21 +53,18 @@ process_files - intermediate processed files are placed in this folder.
 output_files - output files (mcf, tmcf and csv are written here)
 """
 
+import json
 import os
 import sys
-import pandas as pd
-import requests
-import shutil
-import json
-import time
 import tempfile
-from datetime import datetime as dt
-from absl import logging
 
 from absl import app
 from absl import flags
-from retry import retry
+from absl import logging
+import pandas as pd
+import requests
 from requests.adapters import HTTPAdapter
+from retry import retry
 from urllib3.util.retry import Retry
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -75,31 +72,31 @@ _SCRIPTS_DIR = os.path.abspath(os.path.join(_MODULE_DIR, '../../../'))
 if _SCRIPTS_DIR not in sys.path:
     sys.path.append(_SCRIPTS_DIR)
 
-from us_census.pep.pep_by_srh.constants import (
-    DOWNLOAD_DIR,
-    OUTPUT_DIR,
-    PROCESS_AGG_DIR,
-    PROCESS_AS_IS_DIR,
-    RACE,
-    STAT_VAR_COL_MAPPING,
-    WORKING_DIRECTORIES,
-)
+from us_census.pep.pep_by_srh.constants import DOWNLOAD_DIR
+from us_census.pep.pep_by_srh.constants import PROCESS_AGG_DIR
+from us_census.pep.pep_by_srh.constants import PROCESS_AS_IS_DIR
+from us_census.pep.pep_by_srh.constants import RACE
+from us_census.pep.pep_by_srh.constants import STAT_VAR_COL_MAPPING
+from us_census.pep.pep_by_srh.constants import WORKING_DIRECTORIES
 from us_census.pep.pep_by_srh.mcf_generator import generate_mcf
 from us_census.pep.pep_by_srh.tmcf_generator import generate_tmcf
 
 _FLAGS = flags.FLAGS
 
-if 'mode' not in _FLAGS:
-    flags.DEFINE_string('mode', '', 'Options: download or process')
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
 output_path = '/output_files/'
 _FILES_TO_DOWNLOAD = []
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
-if 'data_directory' not in _FLAGS:
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('mode', '', 'Options: download or process')
     flags.DEFINE_string(
         "data_directory", DOWNLOAD_DIR,
         "Folder consisting of all input files required for processing")
+
 
 # Columns with single race(SR) or combination(SR CMBN) with one or more race
 # These columns are not used as part of current import
@@ -1885,4 +1882,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

@@ -18,7 +18,8 @@ import os
 import sys
 import tempfile
 import unittest
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock
+from unittest.mock import patch
 
 # Mock airflow modules before importing workflow modules
 mock_airflow = MagicMock()
@@ -144,13 +145,11 @@ if CURRENT_DIR not in sys.path:
     sys.path.insert(0, CURRENT_DIR)
 
 import build_manifest_catalog
-import import_dag_e2e_test
 import golden_verification
-from golden_verification import (
-    HumanApprovalSensor,
-    get_golden_trigger_id,
-)
+from golden_verification import HumanApprovalSensor
+from golden_verification import get_golden_trigger_id
 import import_automation_workflow
+import import_dag_e2e_test
 import import_dags_factory
 
 
@@ -349,6 +348,32 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
                 self.assertIn('ManualRefresh', target)
                 schema_dag = target['Schema']
                 self.assertIsNotNone(schema_dag)
+                self.assertFalse(
+                    schema_dag.params['skipStagingIngestion'].default)
+                self.assertFalse(schema_dag.params['skipProdIngestion'].default)
+
+                noaa_dag = target['NOAA_GlobalForecastSystem']
+                self.assertTrue(noaa_dag.params['skipStagingIngestion'].default)
+                self.assertTrue(noaa_dag.params['skipProdIngestion'].default)
+
+                for prod_skipped in (
+                        'CDC_OzoneCensusTract',
+                        'CDC_OzoneCounty',
+                        'CDC_PM25CensusTract',
+                        'CDC_PM25County',
+                        'EPACriteriaAirPollutants',
+                        'USFed_ConstantMaturityRates_Test',
+                ):
+                    self.assertFalse(
+                        target[prod_skipped].params['skipStagingIngestion'].
+                        default,
+                        prod_skipped,
+                    )
+                    self.assertTrue(
+                        target[prod_skipped].params['skipProdIngestion'].
+                        default,
+                        prod_skipped,
+                    )
 
     def test_build_dag_pipeline_wiring(self):
         dag = import_automation_workflow.build_dag(dag_id='test_dag',
@@ -746,34 +771,62 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
         self.assertEqual(mock_report_failure.call_args[1].get('status'),
                          'VALIDATION')
 
-    def test_staging_and_prod_denylist_skips_ingestion(self):
-        with patch.object(import_automation_workflow, 'STAGING_DENYLIST',
-                          frozenset({'DenylistedImport'})), patch.object(
-                              import_automation_workflow, 'PROD_DENYLIST',
-                              frozenset({'DenylistedImport'})):
-            dag = import_automation_workflow.build_dag(
-                dag_id='DenylistedImport',
-                import_name='scripts/test:DenylistedImport',
-            )
-            self.assertTrue(dag.params['skipStagingIngestion'].default)
-            self.assertTrue(dag.params['skipProdIngestion'].default)
+    def test_config_override_skips_staging_and_prod_ingestion(self):
+        dag = import_automation_workflow.build_dag(
+            dag_id='SkippedIngestionImport',
+            import_name='scripts/test:SkippedIngestionImport',
+            config_override={
+                'skip_staging_ingestion': True,
+                'skip_prod_ingestion': True,
+            },
+        )
+        self.assertTrue(dag.params['skipStagingIngestion'].default)
+        self.assertTrue(dag.params['skipProdIngestion'].default)
 
-            cfg = import_automation_workflow.resolve_workflow_context(
-                {'dag': dag})
-            self.assertTrue(cfg['skipStagingIngestion'])
-            self.assertTrue(cfg['skipProdIngestion'])
+        cfg = import_automation_workflow.resolve_workflow_context({'dag': dag})
+        self.assertTrue(cfg['skipStagingIngestion'])
+        self.assertTrue(cfg['skipProdIngestion'])
 
-            ti_mock = MagicMock()
-            with self.assertRaises(MockAirflowSkipException):
-                import_automation_workflow.trigger_staging_ingestion.function(
-                    dag=dag, ti=ti_mock)
-            ti_mock.xcom_push.assert_called_once_with(
-                key='return_value',
-                value={
-                    'status': 'SKIPPED',
-                    'message': 'Staging ingestion skipped',
-                },
-            )
+        ti_mock = MagicMock()
+        with self.assertRaises(MockAirflowSkipException):
+            import_automation_workflow.trigger_staging_ingestion.function(
+                dag=dag, ti=ti_mock)
+        ti_mock.xcom_push.assert_called_once_with(
+            key='return_value',
+            value={
+                'status': 'SKIPPED',
+                'message': 'Staging ingestion skipped',
+            },
+        )
+
+        # Verify dag_run.conf can explicitly override manifest skip defaults
+        dag_run = MagicMock()
+        dag_run.conf = {
+            'skipStagingIngestion': False,
+            'skipProdIngestion': False,
+        }
+        dag_run.run_id = 'override_run'
+        override_cfg = import_automation_workflow.resolve_workflow_context({
+            'dag': dag,
+            'dag_run': dag_run
+        })
+        self.assertFalse(override_cfg['skipStagingIngestion'])
+        self.assertFalse(override_cfg['skipProdIngestion'])
+
+    def test_disable_import_workflow_pauses_dag(self):
+        active_dag = import_automation_workflow.build_dag(
+            dag_id='ActiveImport',
+            import_name='scripts/test:ActiveImport',
+            config_override={},
+        )
+        self.assertFalse(active_dag.is_paused_upon_creation)
+
+        paused_dag = import_automation_workflow.build_dag(
+            dag_id='PausedImport',
+            import_name='scripts/test:PausedImport',
+            config_override={'disable_import_workflow': True},
+        )
+        self.assertTrue(paused_dag.is_paused_upon_creation)
 
 
 class E2EDagRunnerTest(unittest.TestCase):

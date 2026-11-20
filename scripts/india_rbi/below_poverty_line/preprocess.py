@@ -12,11 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import json
-import csv
-import pandas as pd
 import numpy as np
-import urllib.request
+import pandas as pd
 
 INDIA_ISO_CODES = {
     "Andhra Pradesh": "IN-AP",

@@ -26,18 +26,13 @@ SCHEDULES=IMPORTS=scripts/covid19_india/cases_count_states_data:covid19IndiaCase
 "
 """
 
-from dataclasses import dataclass
-import os
-import logging
 import json
-import traceback
-import tempfile
-from typing import Dict
-import cloud_run
-import cloud_batch
+import logging
 
 from app import configs
 from app.executor import cloud_scheduler
+import cloud_batch
+import cloud_run
 
 _GKE_SERVICE_ACCOUNT_KEY: str = 'gke_service_account'
 

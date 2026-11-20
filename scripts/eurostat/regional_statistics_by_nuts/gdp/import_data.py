@@ -19,21 +19,26 @@ Downloads and cleans GDP data from the Eurostat database.
     python3 import_data.py
 """
 
-import sys
-from six.moves import urllib
-import numpy as np
 import json
+import os
+import sys
+
+from absl import app
+from absl import flags
+from absl import logging
 import pandas as pd
 from preprocess_data import preprocess_df
-from absl import app
-from absl import logging
-from absl import flags
-import os
+from six.moves import urllib
 
 _FLAGS = flags.FLAGS
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _HISTORICAL_DATA_PATH = os.path.join(_MODULE_DIR, 'historical_deleted.csv')
-flags.DEFINE_string('mode', '', 'Options: download or process')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('mode', '', 'Options: download or process')
+
 
 # Imports country mapping alpha2 country codes to country DCIDs.
 sys.path.insert(1, '../../../../util')
@@ -294,4 +299,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

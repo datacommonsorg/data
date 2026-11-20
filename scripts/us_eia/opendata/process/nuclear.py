@@ -13,10 +13,7 @@
 # limitations under the License.
 """EIA Nuclear Status Dataset specific functions."""
 
-from absl import logging
 import re
-
-from . import common
 
 
 def extract_place_statvar(series_id, counters):

@@ -12,21 +12,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from csv import DictReader
+from csv import DictWriter
 import os
+from os import path as ospath
+from os import remove
 import sys
-from absl import app
-from absl import flags
-from absl import logging
-from os import remove, path as ospath
-from csv import DictReader, DictWriter
 from urllib.request import urlopen
+
+from absl import logging
 
 # For finding util
 _CODE_DIR = os.path.dirname(os.path.realpath(__file__))
 sys.path.insert(1, os.path.join(_CODE_DIR, '../../../'))
-import util.name_to_alpha2 as name_to_alpha2
 import util.alpha2_to_dcid as alpha2_to_dcid
 import util.county_to_dcid as county_to_dcid
+import util.name_to_alpha2 as name_to_alpha2
 
 # Dictionary that maps a row name in the CSV file is mapped to a Schema place.
 # key = CSV's row name

@@ -12,13 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
-import json
-import csv
 import copy
+import csv
+
 import pandas as pd
-import numpy as np
-import urllib.request
 
 TEMPLATE_STAT_VAR = """Node: dcid:{name}
 description: "{description}"

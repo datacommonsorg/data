@@ -14,13 +14,12 @@
 
 __author__ = ["Thejesh GN (i@thejeshgn.com)"]
 
-import filecmp
 import os
-import json
 import tempfile
 import unittest
-import pandas as pd
+
 from india_post.pincodes.preprocess import IndiaPostPincodesDataLoader
+import pandas as pd
 
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)

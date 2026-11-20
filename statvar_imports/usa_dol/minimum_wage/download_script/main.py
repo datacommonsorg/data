@@ -1,9 +1,10 @@
-import os
 import csv
-import requests
-import pandas as pd
+import os
+
 from absl import logging
 from bs4 import BeautifulSoup
+import pandas as pd
+import requests
 from retry import retry
 
 url = "https://www.dol.gov/agencies/whd/state/minimum-wage/history"

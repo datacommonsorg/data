@@ -17,10 +17,10 @@ for national 2010-2020 and it is aggregated
 from state 2010-2020 file.
 """
 
-import pandas as pd
 import os
 import sys
-import logging
+
+import pandas as pd
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 _SCRIPTS_DIR = os.path.abspath(os.path.join(_CODEDIR, '../../../../'))

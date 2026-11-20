@@ -17,8 +17,9 @@ This Python Script is for National Level Data 1980-1989.
 import os
 import sys
 from zipfile import ZipFile
-import pandas as pd
+
 import numpy as np
+import pandas as pd
 
 _SCRIPTS_DIR = os.path.abspath(
     os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../'))

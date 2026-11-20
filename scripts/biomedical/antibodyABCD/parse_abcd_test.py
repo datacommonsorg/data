@@ -16,6 +16,7 @@ Run "python3 parse_abcd_test.py"
 """
 
 import unittest
+
 from .parse_abcd import get_schema_piece
 
 CONST_INPUT = '''AAC  ABCD_AA001

@@ -25,6 +25,7 @@ import io
 import os
 import re
 import sys
+
 from absl import app
 from absl import flags
 from absl import logging
@@ -35,8 +36,9 @@ logging.set_verbosity(logging.INFO)
 sys.path.append(
     os.path.dirname(os.path.dirname(os.path.dirname(
         os.path.abspath(__file__)))))
-from us_bea.states_gdp import import_data
 import csv
+
+from us_bea.states_gdp import import_data
 
 FLAGS = flags.FLAGS
 flags.DEFINE_integer('latest_year_industry', None,

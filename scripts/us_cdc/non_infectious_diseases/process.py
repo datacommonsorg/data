@@ -13,23 +13,31 @@
 # limitations under the License.
 #
 """Processing script for data downloaded from the NORS dashboard"""
+import json
 import os
 import sys
-import json
+
+from absl import app
+from absl import flags
+from absl import logging
 import pandas as pd
-from absl import app, flags, logging
-from sodapy import Socrata
 import requests
+from sodapy import Socrata
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH,
                              '../../../util/'))  # for util modules
-from statvar_dcid_generator import get_statvar_dcid
 from state_division_to_dcid import get_place_dcid
+from statvar_dcid_generator import get_statvar_dcid
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('mode', '', 'Options: download or process')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('mode', '', 'Options: download or process')
+
 
 _TEMPLATE_MCF = """Node: E:NNDSWeekly->E0
 typeOf: dcs:StatVarObservation
@@ -477,4 +485,5 @@ def main(_) -> None:
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

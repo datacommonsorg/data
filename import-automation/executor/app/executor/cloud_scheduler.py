@@ -22,9 +22,10 @@ import json
 import os
 from typing import Dict
 
+from google.api_core.exceptions import AlreadyExists
+from google.api_core.exceptions import NotFound
 from google.cloud import scheduler_v1
 from google.protobuf import json_format
-from google.api_core.exceptions import AlreadyExists, NotFound
 
 CLOUD_RUN_SERVICE_ACCOUNT = os.getenv('CLOUD_SCHEDULER_CALLER_SA')
 

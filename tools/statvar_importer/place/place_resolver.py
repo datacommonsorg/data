@@ -38,15 +38,12 @@ such as wikidataId, PlaceId, etc.
 Additional candidate places may be filled in columns dcid<N>.
 """
 
-import ast
 import csv
-import glob
 import os
 import pprint as pp
 import re
 import sys
 import time
-from typing import Union
 
 from absl import app
 from absl import flags
@@ -125,17 +122,18 @@ sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(_SCRIPT_DIR))),
                  'util'))
 
-import file_util
-import process_http_server
-import wiki_place_resolver
-
-from counters import Counters
 from config_map import ConfigMap
+from counters import Counters
+from dc_api_wrapper import dc_api_batched_wrapper
+from dc_api_wrapper import dc_api_get_node_property
+from dc_api_wrapper import dc_api_resolve_latlng
+from dc_api_wrapper import dc_api_resolve_placeid
 from download_util import request_url
-from dc_api_wrapper import dc_api_batched_wrapper, dc_api_resolve_placeid
-from dc_api_wrapper import dc_api_resolve_latlng, dc_api_get_node_property
+import file_util
 from place_name_matcher import PlaceNameMatcher
+import process_http_server
 from property_value_cache import PropertyValueCache
+import wiki_place_resolver
 
 # Google Maps API
 # params used: &key=<>&address=<...>&components=country:<CC>|admin_area:<State>

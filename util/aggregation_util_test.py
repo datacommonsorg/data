@@ -14,15 +14,13 @@
 """Tests for aggregate_util.py"""
 
 import os
-import sys
 import unittest
-
-from absl import logging
 
 # Allows the following module imports to work when running as a script
 _SCRIPTS_DIR = os.path.dirname(__file__)
 
-from aggregation_util import aggregate_value, aggregate_dict
+from aggregation_util import aggregate_dict
+from aggregation_util import aggregate_value
 
 
 class AggregationUtilTest(unittest.TestCase):

@@ -17,7 +17,9 @@ import csv
 import os
 import tempfile
 import unittest
-from .process import set_column_map, process_subject_tables
+
+from .process import process_subject_tables
+from .process import set_column_map
 
 
 def _get_paths(table_dir):

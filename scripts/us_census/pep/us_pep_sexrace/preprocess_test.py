@@ -17,9 +17,9 @@ Script to automate the testing for USA Population by Sex Race preprocess script.
 
 import os
 import shutil
+import sys
 import unittest
 from unittest import mock
-import sys
 
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(os.path.abspath(__file__))
@@ -27,10 +27,9 @@ _SCRIPTS_DIR = os.path.abspath(os.path.join(module_dir_, '../../../'))
 if _SCRIPTS_DIR not in sys.path:
     sys.path.append(_SCRIPTS_DIR)
 
-import us_census.pep.us_pep_sexrace.common as common
 import us_census.pep.us_pep_sexrace.preprocess as preprocess
-from us_census.pep.us_pep_sexrace.preprocess import process
 from us_census.pep.us_pep_sexrace.preprocess import add_future_year_urls
+from us_census.pep.us_pep_sexrace.preprocess import process
 
 expected_data_folder = os.path.join(module_dir_,
                                     "test_data/expected_output_files")

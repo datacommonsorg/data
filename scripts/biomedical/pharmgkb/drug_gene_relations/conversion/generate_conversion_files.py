@@ -29,9 +29,10 @@ Requirements:
 """
 import sys
 from xml.etree import ElementTree
-import requests
-import pandas as pd
+
 from chembl_webresource_client.new_client import new_client
+import pandas as pd
+import requests
 
 
 def pharm_to_chembl(pharm_ids):
@@ -157,7 +158,7 @@ def inchi_key_to_chembl(inchi_keys):
                 chembl_mols.append(mol['molecule_chembl_id'])
             else:
                 chembl_mols.append('')
-        except:
+        except Exception:
             chembl_mols.append('')
             print('in error: ' + inchi_key)
 

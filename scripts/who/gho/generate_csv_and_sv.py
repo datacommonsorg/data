@@ -13,11 +13,9 @@
 # limitations under the License.
 """Script to generate csv and the mcf for the StatisticalVariables. """
 
-import requests
 import json
-import csv
-import re
 import os
+import re
 
 # Drop these values because they just indicate that there's no data for the
 # particular observation

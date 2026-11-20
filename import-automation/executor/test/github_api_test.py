@@ -15,16 +15,15 @@
 Tests for github_api.py.
 """
 
+import os
+import tempfile
 import unittest
 from unittest import mock
-import tempfile
-import os
 
-from requests import exceptions
-
-import test.utils
 from app.service import github_api
+from requests import exceptions
 from test import utils
+import test.utils
 
 
 class GitHubAPITest(unittest.TestCase):

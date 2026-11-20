@@ -15,22 +15,19 @@
 """
 
 import csv
-import datetime
+from datetime import timedelta
 import json
 import os
-import pickle
 import sys
 import time
 
 from absl import app
 from absl import flags
 from absl import logging
-from datetime import timedelta
 from dateutil import parser
-from geopy import distance
-from s2sphere import LatLng, CellId
-from shapely.geometry import Polygon, mapping
-from typing import Union
+from s2sphere import CellId
+from shapely.geometry import Polygon
+from shapely.geometry import mapping
 
 # Setup pprof
 #os.environ['PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION'] = 'python'
@@ -64,17 +61,16 @@ sys.path.append(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)))
 sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)), 'util'))
 
-import common_flags
-import file_util
-import statvar_dcid_generator
-import utils
-
 from aggregation_util import aggregate_dict
-from counters import Counters
-from latlng_recon_geojson import LatLng2Places
+import common_flags
 from config_map import ConfigMap
+from counters import Counters
 from dc_api_wrapper import dc_api_batched_wrapper
 from dc_api_wrapper import get_datacommons_client
+import file_util
+from latlng_recon_geojson import LatLng2Places
+import statvar_dcid_generator
+import utils
 
 # List of place types in increasing order of preference for name.
 # This is used to pick the name of the place from the list of affectedPlaces

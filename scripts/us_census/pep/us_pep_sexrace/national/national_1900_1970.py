@@ -17,10 +17,11 @@ for national 1900-1979 and the file
 is processed as is.
 """
 
-import pandas as pd
 import os
 import sys
+
 from absl import logging
+import pandas as pd
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 _SCRIPTS_DIR = os.path.abspath(os.path.join(_CODEDIR, '../../../../'))

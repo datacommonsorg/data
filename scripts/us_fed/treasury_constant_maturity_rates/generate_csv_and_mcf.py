@@ -28,7 +28,6 @@ Run "python3 generate_csv_and_mcf.py --help" for usage.
 from absl import app
 from absl import flags
 from absl import logging
-from datetime import datetime, timedelta
 import pandas as pd
 
 FLAGS = flags.FLAGS

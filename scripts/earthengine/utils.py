@@ -13,23 +13,20 @@
 # limitations under the License.
 """Utility functions"""
 
-import csv
 from datetime import date
 from datetime import datetime
-import glob
 import os
-from pathlib import Path
-import pickle
 import re
 import sys
-import tempfile
 from typing import Union
 
 from absl import logging
 from dateutil.relativedelta import relativedelta
 from geopy import distance
 import s2sphere
-from s2sphere import Cell, CellId, LatLng
+from s2sphere import Cell
+from s2sphere import CellId
+from s2sphere import LatLng
 from shapely.geometry import Polygon
 
 _SCRIPTS_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -39,7 +36,6 @@ sys.path.append(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)))
 sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)), 'util'))
 
-from config_map import ConfigMap, read_py_dict_from_file, write_py_dict_to_file
 from dc_api_wrapper import dc_api_get_node_property
 
 # Constants

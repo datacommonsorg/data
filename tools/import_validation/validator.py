@@ -13,19 +13,20 @@
 # limitations under the License.
 """Module for the Validator class."""
 
-import duckdb
-import pandas as pd
 import os
 import sys
+
+import duckdb
+import pandas as pd
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
 _DATA_DIR = os.path.dirname(os.path.dirname(_SCRIPT_DIR))
 sys.path.append(os.path.join(_DATA_DIR, 'util'))
 
-from result import ValidationResult, ValidationStatus
 from counters import Counters
-from validation_util import DIFFER_COLUMNS
+from result import ValidationResult
+from result import ValidationStatus
 import validator_goldens
 
 

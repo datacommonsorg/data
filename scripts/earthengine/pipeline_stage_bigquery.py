@@ -31,7 +31,8 @@ sys.path.append(
 
 from counters import Counters
 import file_util
-from pipeline_stage_runner import StageRunner, register_stage_runner
+from pipeline_stage_runner import StageRunner
+from pipeline_stage_runner import register_stage_runner
 
 
 class BigQueryExportRunner(StageRunner):

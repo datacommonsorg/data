@@ -31,7 +31,6 @@ To generate PV maps locally for a set of input strings, run the command:
     https://ai.google.dev/gemini-api/docs/api-key
 """
 
-import csv
 import os
 import sys
 
@@ -71,17 +70,17 @@ flags.DEFINE_string('llm_request', '',
                     'Output text file with copy prompt sent to LLM.')
 flags.DEFINE_string('llm_response', '', 'Output text file with LLM response.')
 
-import data_sampler
-import file_util
-import process_http_server
 import config_flags
-import schema_generator
-import mcf_file_util
-import property_value_mapper
-
 from config_map import ConfigMap
 from counters import Counters
-from genai_helper import GenAIHelper, read_text_file, get_genai_helper_config_from_flags
+import data_sampler
+import file_util
+from genai_helper import GenAIHelper
+from genai_helper import get_genai_helper_config_from_flags
+import mcf_file_util
+import process_http_server
+import property_value_mapper
+import schema_generator
 
 
 # Class to generate PV Maps using LLMs.

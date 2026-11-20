@@ -16,10 +16,10 @@
 Usage: python3 aqicn.py
 '''
 import csv
+from datetime import datetime
 import io
 import os
 import urllib.request
-from datetime import datetime
 
 module_dir_ = os.path.dirname(__file__)
 
@@ -78,7 +78,7 @@ def datetime_valid(date):
   """
     try:
         datetime.fromisoformat(date)
-    except:
+    except (TypeError, ValueError):
         return False
     return True
 

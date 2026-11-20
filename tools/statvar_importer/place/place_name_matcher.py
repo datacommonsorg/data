@@ -54,7 +54,6 @@ To resolve places in a csv file on command line:
 
 import ast
 import csv
-import glob
 import itertools
 import os
 import sys

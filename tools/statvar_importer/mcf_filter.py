@@ -25,11 +25,8 @@ To remove nodes defined in another MCF file:
 """
 
 from collections import OrderedDict
-from itertools import islice
 import os
 import sys
-import time
-import urllib
 
 from absl import app
 from absl import flags
@@ -54,10 +51,13 @@ sys.path.append(
 
 from counters import Counters
 from dc_api_wrapper import dc_api_get_node_property_values
-from mcf_file_util import load_mcf_nodes, write_mcf_nodes
-from mcf_file_util import add_namespace, strip_namespace
+from mcf_diff import diff_mcf_node_pvs
+from mcf_diff import get_diff_config
+from mcf_file_util import add_namespace
 from mcf_file_util import check_nodes_can_merge
-from mcf_diff import diff_mcf_node_pvs, get_diff_config
+from mcf_file_util import load_mcf_nodes
+from mcf_file_util import strip_namespace
+from mcf_file_util import write_mcf_nodes
 
 
 def drop_mcf_nodes(

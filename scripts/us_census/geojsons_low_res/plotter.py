@@ -19,8 +19,8 @@ Plots and compares two Geojson files: before and after running simplify.py.
                        --simplified_path simplified-data/geoId-01-simple.geojson
 """
 
-from absl import flags
 from absl import app
+from absl import flags
 import geopandas as gpd
 import matplotlib
 

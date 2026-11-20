@@ -59,16 +59,16 @@ flags.DEFINE_string('generated_mcf', '', 'MCF file for new schema nodes.')
 
 _FLAGS = flags.FLAGS
 
-import file_util
-import process_http_server
-
-from config_map import ConfigMap
-from dc_api_wrapper import dc_api_get_node_property_values
-from mcf_file_util import load_mcf_nodes, write_mcf_nodes, normalize_value
-from mcf_file_util import add_namespace, strip_namespace, add_mcf_node
-from mcf_file_util import get_value_list
-
 import config_flags
+from dc_api_wrapper import dc_api_get_node_property_values
+from mcf_file_util import add_mcf_node
+from mcf_file_util import add_namespace
+from mcf_file_util import get_value_list
+from mcf_file_util import load_mcf_nodes
+from mcf_file_util import normalize_value
+from mcf_file_util import strip_namespace
+from mcf_file_util import write_mcf_nodes
+import process_http_server
 
 # Base schema with some basic properties
 # This is excluded in generated schema.

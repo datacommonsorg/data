@@ -14,11 +14,12 @@
 import datetime
 import os
 import re
-import requests
 import shutil
 import zipfile
+
 from absl import app
 from absl import logging
+import requests
 
 
 def download_zip_file(extracted_zip_url, output_folder):

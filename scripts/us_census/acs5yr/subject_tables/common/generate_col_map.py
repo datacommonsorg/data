@@ -14,14 +14,14 @@
 """
 Module to generate a column map to their corresponding statistical variable defintions.
 """
-import os
-import io
-import sys
-import logging
-import json
-import csv
-from zipfile import ZipFile
 from collections import OrderedDict
+import csv
+import io
+import json
+import logging
+import os
+import sys
+from zipfile import ZipFile
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))

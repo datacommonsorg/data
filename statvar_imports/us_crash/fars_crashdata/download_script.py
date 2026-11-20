@@ -15,16 +15,16 @@
 # How to run the script to download the files:
 # python3 download_script.py
 
+import datetime
 import os
-import requests
 import shutil
 import sys
 import zipfile
-import datetime
 
 from absl import app
 from absl import logging
 import download_config
+import requests
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 GCS_OUTPUT_DIR = os.path.join(_SCRIPT_PATH, 'gcs_output')

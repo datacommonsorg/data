@@ -15,14 +15,9 @@
 __author__ = ["Thejesh GN (i@thejeshgn.com)"]
 
 import os
-import math
-import json
-import csv
-import pandas as pd
-import numpy as np
-import urllib.request
-from india.formatters import CodeFormatter
+
 from india.geo.districts import IndiaDistrictsMapper
+import pandas as pd
 
 PINCODE_TMCF = """Node: E:IndiaPost->E{index}
 typeOf: dcs:PinCodeArea

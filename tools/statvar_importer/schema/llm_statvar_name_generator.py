@@ -23,7 +23,6 @@ To generate names for statvars in an MCF file, run the command:
     https://ai.google.dev/gemini-api/docs/api-key
 """
 
-import csv
 import os
 import sys
 import tempfile
@@ -60,14 +59,16 @@ flags.DEFINE_string('llm_name_request', '',
 flags.DEFINE_string('llm_name_response', '',
                     'Output text file with LLM response.')
 
-import file_util
-import process_http_server
 import config_flags
-import mcf_file_util
-
 from config_map import ConfigMap
 from counters import Counters
-from genai_helper import GenAIHelper, read_text_file, write_text_to_file, get_genai_helper_config_from_flags
+import file_util
+from genai_helper import GenAIHelper
+from genai_helper import get_genai_helper_config_from_flags
+from genai_helper import read_text_file
+from genai_helper import write_text_to_file
+import mcf_file_util
+import process_http_server
 
 
 # Class to generate PV Maps using LLMs.

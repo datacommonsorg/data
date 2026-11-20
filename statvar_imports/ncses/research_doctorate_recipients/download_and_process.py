@@ -16,9 +16,10 @@
 # python3 download_and_process.py
 import os
 import sys
-import pandas as pd
+
 from absl import app
 from absl import logging
+import pandas as pd
 
 _CODEDIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(1, _CODEDIR)

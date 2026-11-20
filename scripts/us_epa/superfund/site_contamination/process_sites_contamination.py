@@ -20,9 +20,11 @@ This import uses the dataset:
     This file is a curated list of contaminant names and their respective ids on the Data Commons knowledge graph
 """
 
-from absl import app, flags
 import os
 import sys
+
+from absl import app
+from absl import flags
 import pandas as pd
 
 # Allows the following module imports to work when running as a script
@@ -35,13 +37,18 @@ sys.path.append(os.path.join(_SCRIPT_PATH,
 from statvar_dcid_generator import get_statvar_dcid
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('site_contamination_input_path', './data',
-                    'Path to the directory with input files')
-flags.DEFINE_string('contaminant_csv', './data',
-                    'Path to the contaminant.csv file')
-flags.DEFINE_string(
-    'site_contamination_output_path', './data/output',
-    'Path to the directory where generated files are to be stored.')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('site_contamination_input_path', './data',
+                        'Path to the directory with input files')
+    flags.DEFINE_string('contaminant_csv', './data',
+                        'Path to the contaminant.csv file')
+    flags.DEFINE_string(
+        'site_contamination_output_path', './data/output',
+        'Path to the directory where generated files are to be stored.')
+
 
 _TEMPLATE_MCF = """
 Node: E:SuperfundSite->E0
@@ -235,4 +242,5 @@ def main(_) -> None:
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

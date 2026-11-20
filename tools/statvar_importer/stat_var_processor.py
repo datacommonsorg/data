@@ -32,7 +32,6 @@ For configs, outputs, and counters, see tools/statvar_importer/README.md.
 from collections import OrderedDict
 import csv
 import datetime
-import glob
 import itertools
 import multiprocessing
 import os
@@ -40,17 +39,11 @@ import re
 import sys
 import tempfile
 import time
-from typing import Union
 
 from absl import app
 from absl import flags
 from absl import logging
-import dateutil
-from dateutil import parser
-from dateutil.parser import parse
-import pandas as pd
 import process_http_server
-import requests
 
 # uncomment to run pprof
 # os.environ['PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION'] = 'python'
@@ -65,37 +58,46 @@ sys.path.append(
 sys.path.append(os.path.join(_SCRIPT_DIR, 'place'))
 sys.path.append(os.path.join(_SCRIPT_DIR, 'schema'))
 
-import eval_functions
-from log_util import configure_cloud_logging, running_on_cloud
-from utils import (capitalize_first_char, is_place_dcid,
-                   get_observation_date_format, get_observation_period_for_date,
-                   pvs_has_any_prop, str_from_number, prepare_input_data)
-import file_util
 import config_flags
-import data_annotator
-# import llm_statvar_name_generator
-
-import property_value_utils as pv_utils
-
-from filter_data_outliers import filter_data_svobs
-from mcf_file_util import get_numeric_value, get_value_list, add_pv_to_node
-from mcf_file_util import load_mcf_nodes, write_mcf_nodes, add_namespace, strip_namespace
-from mcf_filter import drop_existing_mcf_nodes
-from mcf_diff import fingerprint_node, fingerprint_mcf_nodes, diff_mcf_node_pvs
-from place_resolver import PlaceResolver
-from property_value_mapper import PropertyValueMapper
-from schema_resolver import SchemaResolver
-from json_to_csv import file_json_to_csv
-from schema_generator import generate_schema_nodes, generate_statvar_name
-from schema_checker import sanity_check_nodes
-from schema_reconciler import SchemaReconciler
 
 # imports from ../../util
-from config_map import ConfigMap, read_py_dict_from_file
-from counters import Counters, CounterOptions
+from config_map import ConfigMap
+from counters import CounterOptions
+from counters import Counters
+import data_annotator
 from dc_api_wrapper import dc_api_is_defined_dcid
-from download_util import download_file_from_url
+import eval_functions
+import file_util
+from filter_data_outliers import filter_data_svobs
+from json_to_csv import file_json_to_csv
+from log_util import configure_cloud_logging
+from log_util import running_on_cloud
+from mcf_diff import diff_mcf_node_pvs
+from mcf_diff import fingerprint_mcf_nodes
+from mcf_file_util import add_namespace
+from mcf_file_util import get_numeric_value
+from mcf_file_util import load_mcf_nodes
+from mcf_file_util import strip_namespace
+from mcf_file_util import write_mcf_nodes
+from mcf_filter import drop_existing_mcf_nodes
+from place_resolver import PlaceResolver
+from property_value_mapper import PropertyValueMapper
+
+# import llm_statvar_name_generator
+import property_value_utils as pv_utils
+from schema_checker import sanity_check_nodes
+from schema_generator import generate_schema_nodes
+from schema_generator import generate_statvar_name
+from schema_reconciler import SchemaReconciler
+from schema_resolver import SchemaResolver
 from statvar_dcid_generator import get_statvar_dcid
+from utils import capitalize_first_char
+from utils import get_observation_date_format
+from utils import get_observation_period_for_date
+from utils import is_place_dcid
+from utils import prepare_input_data
+from utils import pvs_has_any_prop
+from utils import str_from_number
 
 _FLAGS = flags.FLAGS
 

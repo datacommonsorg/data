@@ -15,15 +15,17 @@
 This file takes the generated MCF file and makes a new MCF file which would have
 Stat Vars for the measurement denominator property values.
 """
-import re
 import os
+import re
 import sys
+
 from absl import flags
 
 # pylint: disable = wrong-import-position
 _COMMON_PATH = os.path.abspath(os.path.dirname(__file__))
 sys.path.insert(1, _COMMON_PATH)
 from dcid_existence import check_dcid_existence
+
 # pylint: enable = wrong-import-position
 
 _FLAGS = flags.FLAGS

@@ -2,9 +2,9 @@
 # measures, we consider it as different units measuring the same
 # StatisticalVariable
 import json
-import pandas as pd
-import numpy as np
 import logging
+
+import pandas as pd
 
 IGNORED_FIELDS = [
     "OBJECTID", "Shape", "Shape_Length", "Shape_Area", "STATE", "STATEABBRV",
@@ -87,16 +87,16 @@ DATACOMMONS_ALIASES = {
 }
 
 
-def prune_list_dupes(l):
+def prune_list_dupes(items):
     """
-    Given a list L, computes a new list K where the duplicate
-    items in L are omitted, but all other items keep their
+    Given a list items, computes a new list K where the duplicate
+    items are omitted, but all other items keep their
     initial ordering.
 
     Returns the new list K
     """
     k = []
-    for el in l:
+    for el in items:
         if el not in k:
             k.append(el)
     return k

@@ -45,7 +45,6 @@ variableMeasured and measurementMethod, set the following command line option:
 
 import os
 import sys
-from typing import Union
 
 from absl import app
 from absl import flags
@@ -63,16 +62,19 @@ sys.path.append(_DATA_DIR)
 sys.path.append(os.path.join(_DATA_DIR, 'util'))
 
 # imports from data/tools/statvar_importer
-import process_http_server
-
-from mcf_file_util import load_mcf_nodes, write_mcf_nodes
-from mcf_file_util import add_namespace, strip_namespace
-from mcf_file_util import add_mcf_node, add_pv_to_node, get_value_list
+from config_map import ConfigMap
+from counters import Counters
 
 # imports from data/util
 import dc_api_wrapper as dc_api
-from config_map import ConfigMap
-from counters import Counters
+from mcf_file_util import add_mcf_node
+from mcf_file_util import add_namespace
+from mcf_file_util import add_pv_to_node
+from mcf_file_util import get_value_list
+from mcf_file_util import load_mcf_nodes
+from mcf_file_util import strip_namespace
+from mcf_file_util import write_mcf_nodes
+import process_http_server
 
 _FLAGS = flags.FLAGS
 

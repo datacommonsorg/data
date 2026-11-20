@@ -21,7 +21,8 @@ import unittest
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
 
-from config_map import ConfigMap, get_config_map_from_file
+from config_map import ConfigMap
+from config_map import get_config_map_from_file
 
 
 class TestConfigMap(unittest.TestCase):

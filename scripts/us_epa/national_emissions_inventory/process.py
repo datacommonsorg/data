@@ -16,6 +16,7 @@ This Python Script Load the datasets, cleans it
 and generates cleaned CSV, MCF, TMCF file.
 """
 
+import concurrent.futures
 import gc
 import os
 import shutil
@@ -23,34 +24,47 @@ import sys
 import time
 import traceback
 import uuid
-import concurrent.futures
-from absl import app, flags, logging
-import pandas as pd
+
+from absl import app
+from absl import flags
+from absl import logging
 import numpy as np
-from datetime import datetime
+import pandas as pd
 
 sys.path.insert(
     1, os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../'))
 
-from util.statvar_dcid_generator import get_statvar_dcid
-
 sys.path.insert(1, os.path.dirname(os.path.abspath(__file__)))
 
-from config import *
+from config import df_columns
+from config import drop_df
+from config import pollutants
+from config import replace_metadata
+from config import replace_source_metadata
+from config import replacement_08_11
+from config import replacement_14
+from config import replacement_17
+from config import replacement_20
+from config import replacement_point_17
+from config import replacement_tribes
 
 FLAGS = flags.FLAGS
 default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   'gcs_output')
-flags.DEFINE_string("intermediate_path",
-                    os.path.join(default_input_path, "intermediate_output"),
-                    "Path to save intermediate files.")
 
-flags.DEFINE_string("input_path", os.path.join(default_input_path,
-                                               "input_files"),
-                    "Import Data File's List")
-flags.DEFINE_string("output_path",
-                    os.path.join(default_input_path, "output_files"),
-                    "Path to save output files.")
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string("intermediate_path",
+                        os.path.join(default_input_path, "intermediate_output"),
+                        "Path to save intermediate files.")
+    flags.DEFINE_string("input_path",
+                        os.path.join(default_input_path, "input_files"),
+                        "Import Data File's List")
+    flags.DEFINE_string("output_path",
+                        os.path.join(default_input_path, "output_files"),
+                        "Path to save output files.")
+
 
 _MCF_TEMPLATE = ("Node: dcid:{statvar}\n"
                  "name: \"Annual Amount Emissions {statvar_name}\"\n"
@@ -518,4 +532,5 @@ def main(argv):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

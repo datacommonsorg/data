@@ -1,8 +1,8 @@
-import os
-import sys
-import subprocess
-import re
 from collections import defaultdict
+import os
+import re
+import subprocess
+import sys
 
 # --- 1. Setup Data Commons Environment Paths ---
 py_script_path = os.path.expanduser('~/Desktop/data')

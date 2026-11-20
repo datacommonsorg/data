@@ -26,19 +26,21 @@ Key Features:
    (e.g., scaling land/ice cover).
 """
 
-import time
-import pygrib
-import numpy as np
 import csv as py_csv
-import re
-import os
 import json
-import io
+from multiprocessing import Pool
+from multiprocessing import cpu_count
+import os
 from pathlib import Path
-from multiprocessing import Pool, cpu_count
-from absl import app, flags, logging
+import re
+import time
+
+from absl import app
+from absl import flags
+from absl import logging
 from google.cloud import storage
-from google.api_core import exceptions
+import numpy as np
+import pygrib
 
 logging.set_verbosity(logging.INFO)
 
@@ -235,60 +237,62 @@ def format_level_dcid(level):
     Example: '2 m above ground' -> '2Meter'
              '1000 mb' -> '1000Millibar'
     """
-    l = str(level).lower().strip()
-    if l in STATIC_LEVEL_MAP:
-        return STATIC_LEVEL_MAP[l]
+    level_str = str(level).lower().strip()
+    if level_str in STATIC_LEVEL_MAP:
+        return STATIC_LEVEL_MAP[level_str]
 
     # Handle vertical altitude (Above Mean Sea Level)
-    if "m above mean sea level" in l:
-        val = l.split(" ")[0].replace("-", "To")
+    if "m above mean sea level" in level_str:
+        val = level_str.split(" ")[0].replace("-", "To")
         return f"{val}MetersAboveMeanSeaLevel"
 
-    if "entire atmosphere" in l:
+    if "entire atmosphere" in level_str:
         return ""
-    if "low cloud layer" in l:
+    if "low cloud layer" in level_str:
         return "LowCloudLayer"
-    if "middle cloud layer" in l:
+    if "middle cloud layer" in level_str:
         return "MiddleCloudLayer"
-    if "high cloud layer" in l:
+    if "high cloud layer" in level_str:
         return "HighCloudLayer"
-    if "cloud ceiling" in l:
+    if "cloud ceiling" in level_str:
         return "CloudCeiling"
 
     # Handle hybrid vertical coordinates
-    if "hybrid level" in l:
-        val = l.split(" ")[0]
+    if "hybrid level" in level_str:
+        val = level_str.split(" ")[0]
         return "LowestHybridLevel" if val == "1" else f"{val}HybridLevel"
 
     # Handle sub-surface depths
-    if "m below ground" in l:
-        match = re.search(r'([0-9.]+)-?([0-9.]*)', l)
+    if "m below ground" in level_str:
+        match = re.search(r'([0-9.]+)-?([0-9.]*)', level_str)
         if match:
             start, end = match.group(1), match.group(2)
             return f"{start}To{end}Meter" if end else f"{start}Meter"
 
     # Handle standard height above ground
-    if "m above ground" in l:
-        val = l.split(" ")[0].replace("-", "To")
+    if "m above ground" in level_str:
+        val = level_str.split(" ")[0].replace("-", "To")
         return f"{val}Meter"
 
     # Handle pressure levels (Millibars)
-    if "mb" in l:
-        val = l.split(" ")[0].replace("-", "To")
+    if "mb" in level_str:
+        val = level_str.split(" ")[0].replace("-", "To")
         return f"{val}Millibar"
 
     # Handle sigma (pressure-normalized) levels
-    if "sigma" in l:
-        val = l.split(" ")[0].replace("-", "To")
-        suffix = "SigmaLayer" if "layer" in l else "SigmaLevel"
+    if "sigma" in level_str:
+        val = level_str.split(" ")[0].replace("-", "To")
+        suffix = "SigmaLayer" if "layer" in level_str else "SigmaLevel"
         return f"{val}{suffix}"
 
     # Handle Potential Vorticity units (PVU)
-    if "pv=" in l:
+    if "pv=" in level_str:
         return "PotentialVorticityNeg2PVU" if (
-            "neg" in l or "-2" in l) else "PotentialVorticity2PVU"
-    return "".join(
-        word.capitalize() for word in l.replace("-", " ").split() if word)
+            "neg" in level_str or
+            "-2" in level_str) else "PotentialVorticity2PVU"
+    return "".join(word.capitalize()
+                   for word in level_str.replace("-", " ").split()
+                   if word)
 
 
 def construct_dcid(param_raw, level_raw):
@@ -404,7 +408,7 @@ def worker_process(args):
                 # --- FILTERING LOGIC ---
                 try:
                     has_bitmap = grb.bitmapPresent
-                except:
+                except Exception:
                     has_bitmap = False
 
                 valid_mask = np.ones(data_flat.shape, dtype=bool)
@@ -418,7 +422,7 @@ def worker_process(args):
                         m_val = grb.missingValue
                         if m_val is not None:
                             valid_mask &= (raw_data != m_val)
-                    except:
+                    except Exception:
                         pass
 
                 if not np.any(valid_mask):
@@ -479,14 +483,14 @@ def worker_process(args):
                         pv_val = s_val * (
                             10**-grb['scaleFactorOfFirstFixedSurface'])
                         l_str = f"PV={pv_val:g} (Km^2/kg/s) surface"
-                    except:
+                    except Exception:
                         l_str = f"PV={grb.level*1e-9:g} (Km^2/kg/s) surface"
                 elif l_type == "sigma":
                     try:
                         s_val = grb['scaledValueOfFirstFixedSurface'] * (
                             10**-grb['scaleFactorOfFirstFixedSurface'])
                         l_str = f"{s_val:g} sigma level"
-                    except:
+                    except Exception:
                         l_str = f"{grb.level} sigma level"
                 elif l_type == "sigmaLayer":
                     try:
@@ -495,7 +499,7 @@ def worker_process(args):
                         b = grb['scaledValueOfSecondFixedSurface'] * (
                             10**-grb['scaleFactorOfSecondFixedSurface'])
                         l_str = f"{t:g}-{b:g} sigma layer"
-                    except:
+                    except Exception:
                         l_str = f"{grb.level} sigma layer"
                 elif l_type == "depthBelowLandLayer":
                     try:
@@ -504,7 +508,7 @@ def worker_process(args):
                         b = grb['scaledValueOfSecondFixedSurface'] * (
                             10**-grb['scaleFactorOfSecondFixedSurface'])
                         l_str = f"{t:g}-{b:g} m below ground"
-                    except:
+                    except Exception:
                         l_str = f"{grb.level} m below ground"
                 elif l_type in [
                         "pressureFromGroundLayer", "heightAboveGroundLayer"
@@ -512,7 +516,7 @@ def worker_process(args):
                     unit_l = "mb above ground" if "pressure" in l_type else "m above ground"
                     try:
                         l_str = f"{grb.topLevel/100 if 'pressure' in l_type else grb.topLevel:g}-{grb.bottomLevel/100 if 'pressure' in l_type else grb.bottomLevel:g} {unit_l}"
-                    except:
+                    except Exception:
                         l_str = f"{grb.level} {unit_l}"
                 else:
                     l_str = f"{grb.level} {l_type}"

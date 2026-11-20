@@ -13,15 +13,14 @@
 # limitations under the License.
 """Utility functions for logging."""
 
+from functools import wraps
 import json
 import logging
 import os
 import sys
 
 from absl import flags
-
 from google.cloud.logging.handlers import StructuredLogHandler
-from functools import wraps
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(SCRIPT_DIR)

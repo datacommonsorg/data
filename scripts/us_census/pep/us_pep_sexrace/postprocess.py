@@ -18,21 +18,20 @@ National, State and County
 and generate final CSV, MCF, TMCF file.
 """
 
-import pandas as pd
-from absl import logging
 import os
 import sys
+
+from absl import logging
+import pandas as pd
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 _SCRIPTS_DIR = os.path.abspath(os.path.join(_CODEDIR, '../../../'))
 if _SCRIPTS_DIR not in sys.path:
     sys.path.append(_SCRIPTS_DIR)
 
-from us_census.pep.us_pep_sexrace.common import (
-    Outputfiles,
-    _OUTPUTFINAL,
-    _OUTPUTINTERMEDIATE,
-)
+from us_census.pep.us_pep_sexrace.common import _OUTPUTFINAL
+from us_census.pep.us_pep_sexrace.common import _OUTPUTINTERMEDIATE
+from us_census.pep.us_pep_sexrace.common import Outputfiles
 
 
 def write_to_tmcf(filename: str, tmcf: str):

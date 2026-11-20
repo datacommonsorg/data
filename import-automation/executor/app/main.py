@@ -24,17 +24,14 @@ The endpoints are:
 import dataclasses
 import logging
 
-import flask
-from google.cloud import scheduler
-
 from app import configs
-from app.executor import validation
-from app.executor.scheduler_job_manager import schedule_on_commit
 from app.executor import import_executor
+from app.executor.scheduler_job_manager import schedule_on_commit
+from app.service import email_notifier
 from app.service import file_uploader
 from app.service import github_api
-from app.service import email_notifier
 from app.service import import_service
+import flask
 
 
 def create_app():

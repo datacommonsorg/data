@@ -13,8 +13,6 @@
 # limitations under the License.
 """Utilities to read/write files on GCS"""
 
-from typing import Union
-from absl import app
 from absl import logging
 from google.cloud import storage
 

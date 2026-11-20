@@ -18,7 +18,10 @@
             ],
             "source_files": [
                 "BelowPovertyLine_india.csv"
-            ]
+            ],
+            "config_override": {
+                "disable_import_workflow": true
+            }
         }
     ]
 }

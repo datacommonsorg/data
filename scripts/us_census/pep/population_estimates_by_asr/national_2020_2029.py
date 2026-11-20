@@ -16,6 +16,7 @@ This Python Script is for National Level Data 2020-2029.
 '''
 import os
 import sys
+
 import pandas as pd
 
 _SCRIPTS_DIR = os.path.abspath(
@@ -23,10 +24,8 @@ _SCRIPTS_DIR = os.path.abspath(
 if _SCRIPTS_DIR not in sys.path:
     sys.path.append(_SCRIPTS_DIR)
 
-from us_census.pep.population_estimates_by_asr.common_functions import (
-    extract_year,
-    input_url,
-)
+from us_census.pep.population_estimates_by_asr.common_functions import extract_year
+from us_census.pep.population_estimates_by_asr.common_functions import input_url
 from us_census.pep.population_estimates_by_asr.process import load_url_or_path
 
 

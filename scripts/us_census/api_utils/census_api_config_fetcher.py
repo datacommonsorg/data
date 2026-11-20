@@ -15,23 +15,24 @@
 Function library to fetch the census API configuration and create usable configs.
 """
 
+from collections import OrderedDict
 import json
-import logging
 import os
-import sys
+from sys import path
+
 from absl import app
 from absl import flags
-from collections import OrderedDict
-from sys import path
 
 module_dir_ = os.path.dirname(os.path.realpath(__file__))
 module_parentdir_ = os.path.join(module_dir_, '..')
 CONFIG_PATH_ = os.path.join(module_dir_, 'config_files')
 path.insert(1, os.path.join(module_dir_, '../../../'))
 
-from scripts.us_census.api_utils.download_utils import download_url_list_iterations, async_save_resp_json
+from scripts.us_census.api_utils.download_utils import async_save_resp_json
+from scripts.us_census.api_utils.download_utils import download_url_list_iterations
+from scripts.us_census.api_utils.status_file_utils import get_pending_or_fail_url_list
+from scripts.us_census.api_utils.status_file_utils import sync_status_list
 from tools.download_utils.requests_wrappers import request_url_json
-from scripts.us_census.api_utils.status_file_utils import get_pending_or_fail_url_list, sync_status_list
 
 FLAGS = flags.FLAGS
 

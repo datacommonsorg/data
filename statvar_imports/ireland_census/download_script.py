@@ -13,10 +13,12 @@
 # limitations under the License.
 
 import os
+from pathlib import Path
+
+from absl import app
+from absl import logging
 import config
 import requests
-from absl import app, logging
-from pathlib import Path
 from retry import retry
 
 base_url = config.base_url

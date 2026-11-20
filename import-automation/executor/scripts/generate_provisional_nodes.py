@@ -27,13 +27,13 @@ Usage:
         --spanner_instance=dc-graph-staging\
         --spanner_database=dc_graph
 """
-import os
-import re
-import time
-import logging
 import csv
 import io
+import logging
+import os
+import re
 import sys
+import time
 
 from absl import app
 from absl import flags

@@ -16,8 +16,8 @@ import csv
 import io
 import os
 import ssl
-import urllib.request
 import sys
+import urllib.request
 
 module_dir_ = os.path.dirname(os.path.realpath(__file__))
 sys.path.insert(1, os.path.join(module_dir_, '../../../util'))

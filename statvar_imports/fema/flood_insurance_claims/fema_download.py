@@ -14,33 +14,41 @@
 
 import errno
 import os
-import sys
 import shutil
-import time
-import requests
+import sys
 from typing import Optional
-from absl import logging
+
 from absl import app
+from absl import logging
+import requests
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 data_dir = os.path.dirname(os.path.dirname(os.path.dirname(script_dir)))
 if data_dir not in sys.path:
     sys.path.insert(0, data_dir)
 
-from util.download_util_script import download_file, _retry_method
 from absl import flags
 
-flags.DEFINE_string('api_url', 'https://www.fema.gov/api/open/v3/NfipClaims',
-                    'The base URL of the API endpoint to download data from.')
-flags.DEFINE_string(
-    'bulk_url',
-    'https://www.fema.gov/about/reports-and-data/openfema/v3/NfipClaimsV3.csv',
-    'The direct bulk download URL for the full dataset.')
-flags.DEFINE_string('temp_dir', os.path.join(script_dir, 'temp_fema_data'),
-                    'The temporary directory to store downloaded chunks.')
-flags.DEFINE_string(
-    'output_dir', os.path.join(script_dir, 'input_file'),
-    'The output directory to store the downloaded claims data.')
+from util.download_util_script import _retry_method
+from util.download_util_script import download_file
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        'api_url', 'https://www.fema.gov/api/open/v3/NfipClaims',
+        'The base URL of the API endpoint to download data from.')
+    flags.DEFINE_string(
+        'bulk_url',
+        'https://www.fema.gov/about/reports-and-data/openfema/v3/NfipClaimsV3.csv',
+        'The direct bulk download URL for the full dataset.')
+    flags.DEFINE_string('temp_dir', os.path.join(script_dir, 'temp_fema_data'),
+                        'The temporary directory to store downloaded chunks.')
+    flags.DEFINE_string(
+        'output_dir', os.path.join(script_dir, 'input_file'),
+        'The output directory to store the downloaded claims data.')
+
+
 _FLAGS = flags.FLAGS
 
 # Define the page size for each API request.
@@ -366,4 +374,5 @@ def main(argv):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

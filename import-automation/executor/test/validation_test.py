@@ -15,7 +15,6 @@
 Tests for validation.py.
 """
 
-import json
 import os
 import tempfile
 import unittest

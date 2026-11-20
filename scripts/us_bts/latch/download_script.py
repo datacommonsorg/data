@@ -20,20 +20,30 @@ import json
 import os
 import subprocess
 import sys
-from typing import List, Dict
+from typing import Dict, List
 from urllib.parse import urlparse
-from absl import app, flags, logging
+
+from absl import app
+from absl import flags
+from absl import logging
 
 logging.set_verbosity(logging.INFO)
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util/'))
 
-from download_util_script import _retry_method, download_file
+from download_util_script import _retry_method
+from download_util_script import download_file
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('output_dir', 'input_files',
-                    'Output directory to download files to.')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('output_dir', 'input_files',
+                        'Output directory to download files to.')
+
+
 _GCS_URLS_CONFIG_FILE = 'gs://unresolved_mcf/us_bts/latch/latest/import_configs.json'
 _SOCRATA_PAGINATION_LIMIT = 50000
 
@@ -224,4 +234,5 @@ def main(_) -> None:
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

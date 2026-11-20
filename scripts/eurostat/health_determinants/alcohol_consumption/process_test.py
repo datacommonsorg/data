@@ -22,6 +22,7 @@ sys.path.insert(1, _COMMON_PATH)
 # pylint: disable=wrong-import-position
 from alcohol_consumption.process import EuroStatAlcoholConsumption
 from common.unitest_common_methods import CommonTestClass
+
 # pylint: enable=wrong-import-position
 
 

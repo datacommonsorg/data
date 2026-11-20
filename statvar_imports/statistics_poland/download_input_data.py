@@ -1,9 +1,10 @@
+from datetime import datetime
 import io
 import logging
 import os
 import sys
 import time
-from datetime import datetime
+
 from google.cloud import storage
 import pandas as pd
 import requests
@@ -307,7 +308,7 @@ def download_and_process():
         totals = pivot_df.T.groupby(level=['Sex', 'Location', 'Year']).sum().T
 
         new_columns = pd.MultiIndex.from_tuples(
-            [('total', s, l, y) for s, l, y in totals.columns],
+            [('total', s, loc, y) for s, loc, y in totals.columns],
             names=['Age', 'Sex', 'Location', 'Year'])
         totals.columns = new_columns
 

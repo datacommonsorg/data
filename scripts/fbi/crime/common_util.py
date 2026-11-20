@@ -19,18 +19,9 @@ import sys
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 sys.path.insert(1, os.path.join(_CODEDIR, '../../../'))
 
-import csv
-import io
-import ssl
-import urllib.request
-import sys
-import requests
-import re
 import os
-
-import pandas as pd
-import logging
-import util.alpha2_to_dcid as alpha2_to_dcid
+import re
+import sys
 
 # Automate Template MCF generation since there are many Statitical Variables.
 TEMPLATE_MCF_TEMPLATE = """
