@@ -1,0 +1,42 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "CDCWonder_NNDSS_InfectiousWeekly",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://data.cdc.gov/api/views/x9gk-5huc/rows.csv?accessType=DOWNLOAD&api_foundry=true",
+            "provenance_description": "Notifiable Infectious Diseases Data: Weekly tables from CDC WONDER which has the incident counts of different infectious diseases per week that are reported by the 50 states, New York City, the District of Columbia, and the U.S. territories.",
+            "scripts": [
+                "download.py",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/NNDSS_Weekly_Data.csv --pv_map=nndss_weekly_pvmap.csv --config_file=nndss_weekly_metadata.csv --statvar_dcid_remap_csv=statvar_dcid_remap.csv --output_path=output/nndss_weekly_output --output_counters=counters/nndss_weekly_output_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "download.py --normalize_output"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": [
+                        "history/cdc_nndss_weekly_tables_historical.tmcf",
+                        "output/nndss_weekly_output.tmcf"
+                    ],
+                    "node_mcf": "output/*.mcf",
+                    "cleaned_csv": [
+                        "history/cdc_nndss_weekly_tables_historical.csv",
+                        "output/nndss_weekly_output.csv"
+                    ]
+                }
+            ],
+            "source_files": [
+                "history/cdc_nndss_weekly_tables_historical.csv",
+                "history/cdc_nndss_weekly_tables_historical.tmcf",
+                "input_files/rows.csv",
+                "input_files/NNDSS_Weekly_Data.csv",
+                "statvar_dcid_remap.csv",
+                "counters/*.csv"
+            ],
+            "cron_schedule": "30 7 * * 4",
+            "_comment": "Schedule: Weekly on Thursday at 07:30 UTC",
+            "validation_config_file": "validation_config.json",
+            "resource_limits": {"cpu": 8, "memory": 32, "disk": 100}
+        }
+    ]
+}
