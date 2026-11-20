@@ -12,10 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """ Test for the data loader for the subject tables"""
+import json
 import os
 import tempfile
 import unittest
 
+import pandas as pd
+
+from .data_loader import SubjectTableDataLoaderBase
 from .data_loader import process_subject_tables
 
 base_path = os.path.dirname(__file__)
@@ -65,6 +69,71 @@ class DataLoaderBaseTest(unittest.TestCase):
                                 base_path,
                                 f'./testdata/test_csv_2013{ext}')) as expected:
                     self.assertEqual(actual.read(), expected.read())
+
+    def test_replace_ignore_values_with_nan_default_preserves_formatted(self):
+        loader = SubjectTableDataLoaderBase.__new__(SubjectTableDataLoaderBase)
+        df = pd.DataFrame({
+            'id': ['0400000US06', '0400000US12', '0400000US36'],
+            'Geographic Area Name': [
+                'California, US', 'Florida, US', 'New York, US'
+            ],
+            'median_age': ['9.0+', '-', '38.5'],
+            'median_income': ['250,000+', '2,500-', '(X)'],
+        })
+        cleaned = loader._replace_ignore_values_with_nan(df)
+        self.assertEqual(cleaned.loc[0, 'median_age'], '9.0+')
+        self.assertTrue(pd.isna(cleaned.loc[1, 'median_age']))
+        self.assertEqual(cleaned.loc[0, 'median_income'], '250,000+')
+        self.assertEqual(cleaned.loc[1, 'median_income'], '2,500-')
+        self.assertTrue(pd.isna(cleaned.loc[2, 'median_income']))
+
+    def test_replace_ignore_values_with_nan_cleans_top_bottom_coded(self):
+        loader = SubjectTableDataLoaderBase.__new__(SubjectTableDataLoaderBase)
+        loader.clean_numeric_values = True
+        df = pd.DataFrame({
+            'id': ['0400000US06', '0400000US12', '0400000US36'],
+            'Geographic Area Name': [
+                'California, US', 'Florida, US', 'New York, US'
+            ],
+            'median_age': ['9.0+', '-', '38.5'],
+            'median_income': ['250,000+', '2,500-', '(X)'],
+            'neg_val': ['-5.5', '+', '1,234'],
+        })
+        cleaned = loader._replace_ignore_values_with_nan(df)
+        self.assertEqual(cleaned.loc[0, 'Geographic Area Name'],
+                         'California, US')
+        self.assertEqual(cleaned.loc[0, 'median_age'], '9.0')
+        self.assertTrue(pd.isna(cleaned.loc[1, 'median_age']))
+        self.assertEqual(cleaned.loc[0, 'median_income'], '250000')
+        self.assertEqual(cleaned.loc[1, 'median_income'], '2500')
+        self.assertTrue(pd.isna(cleaned.loc[2, 'median_income']))
+        self.assertEqual(cleaned.loc[0, 'neg_val'], '-5.5')
+        self.assertTrue(pd.isna(cleaned.loc[1, 'neg_val']))
+        self.assertEqual(cleaned.loc[2, 'neg_val'], '1234')
+
+    def test_init_sets_clean_numeric_values_flag(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            spec_path = os.path.join(tmp_dir, 'spec.json')
+            cmap_path = os.path.join(tmp_dir, 'column_map.json')
+            with open(spec_path, 'w') as f:
+                json.dump({}, f)
+            with open(cmap_path, 'w') as f:
+                json.dump({}, f)
+
+            loader_enabled = SubjectTableDataLoaderBase(
+                table_id='test',
+                output_path_dir=tmp_dir,
+                json_spec=spec_path,
+                column_map_path=cmap_path,
+                clean_numeric_values=True)
+            self.assertTrue(loader_enabled.clean_numeric_values)
+
+            loader_default = SubjectTableDataLoaderBase(
+                table_id='test',
+                output_path_dir=tmp_dir,
+                json_spec=spec_path,
+                column_map_path=cmap_path)
+            self.assertFalse(loader_default.clean_numeric_values)
 
     # TODO: add tests for processing a directory of files
 

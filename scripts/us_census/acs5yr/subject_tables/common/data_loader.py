@@ -28,6 +28,8 @@ sys.path.append(os.path.join(_SCRIPT_PATH, '.'))  # for resolve_geo_id
 from resolve_geo_id import convert_to_place_dcid
 
 _IGNORED_VALUES = set(['-', '*', '**', '***', '*****', 'N', '(X)', 'null'])
+_NON_VALUE_COLUMNS = frozenset(
+    {'id', 'Geography', 'Geographic Area Name', 'GEO_ID', 'NAME'})
 _COLUMN_BATCH_SIZE = 100
 
 # TODO: Consider using logs for logging warning messages for debug at a later
@@ -44,7 +46,8 @@ def process_subject_tables(table_prefix='',
                            has_percent=False,
                            decimal_places=3,
                            header_row=1,
-                           estimate_period=5):
+                           estimate_period=5,
+                           clean_numeric_values=False):
     """
     Wrapper method for invoking the data processing module, maps files with the
     corresponding processing function based on input format (*.zip/*.csv),
@@ -75,6 +78,8 @@ def process_subject_tables(table_prefix='',
   header_row: specifies the row index to be considered as the dataframe's header
   for column name assignment. For subject tables, the second row (row index = 1)
   has a human readable column header. (default: 1)
+  clean_numeric_values: if set, strips commas and trailing '+' or '-' from
+    value columns (default: False)
 
   Outputs:
   The module will write the following files to the specified output directory
@@ -96,16 +101,18 @@ def process_subject_tables(table_prefix='',
   <table_prefix>_cleaned.csv will have an additional column containing the name of column in the dataset for which each StatVarObservation was recorded
   """
     ## create a data loader object with base parameters
-    data_loader = SubjectTableDataLoaderBase(table_id=table_prefix,
-                                             col_delimiter=delimiter,
-                                             has_percent=has_percent,
-                                             debug=debug,
-                                             output_path_dir=output_dir,
-                                             json_spec=spec_path,
-                                             column_map_path=column_map_path,
-                                             decimal_places=decimal_places,
-                                             estimate_period=estimate_period,
-                                             header_row=header_row)
+    data_loader = SubjectTableDataLoaderBase(
+        table_id=table_prefix,
+        col_delimiter=delimiter,
+        has_percent=has_percent,
+        debug=debug,
+        output_path_dir=output_dir,
+        json_spec=spec_path,
+        column_map_path=column_map_path,
+        decimal_places=decimal_places,
+        estimate_period=estimate_period,
+        header_row=header_row,
+        clean_numeric_values=clean_numeric_values)
 
     ## if input_path is a file, select csv/zip processing methods
     _, file_extension = os.path.splitext(input_path)
@@ -143,6 +150,8 @@ class SubjectTableDataLoaderBase:
 
   """
 
+    clean_numeric_values = False
+
     def __init__(self,
                  table_id='',
                  col_delimiter='!!',
@@ -153,7 +162,8 @@ class SubjectTableDataLoaderBase:
                  column_map_path='./',
                  decimal_places=3,
                  estimate_period=5,
-                 header_row=1):
+                 header_row=1,
+                 clean_numeric_values=False):
         """module init"""
         ## static inputs
         self.table_id = table_id
@@ -163,6 +173,7 @@ class SubjectTableDataLoaderBase:
         self.delimiter = col_delimiter
         self.estimate_period = estimate_period
         self.header_row = header_row
+        self.clean_numeric_values = bool(clean_numeric_values)
 
         ## set the output path, if not exists, make directory
         if not os.path.exists(output_path_dir):
@@ -252,12 +263,20 @@ class SubjectTableDataLoaderBase:
 
     def _replace_ignore_values_with_nan(self, df):
         """
-        Replaces cells of the dataframe by column with nan if cell has values in
-        _IGNORED_VALUES.
+        Replaces cells in _IGNORED_VALUES with nan and optionally cleans
+        comma-formatted and top/bottom-coded numeric strings (trailing '+' or
+        '-') in value columns when clean_numeric_values is enabled.
         """
         str_cols = df.select_dtypes(include=['object', 'string']).columns
         if len(str_cols) > 0 and not df.empty:
             df[str_cols] = df[str_cols].mask(df[str_cols].isin(_IGNORED_VALUES))
+            if self.clean_numeric_values:
+                value_cols = [
+                    col for col in str_cols if col not in _NON_VALUE_COLUMNS
+                ]
+                if value_cols:
+                    cleaned = df[value_cols].replace(r',|[+-]$', '', regex=True)
+                    df[value_cols] = cleaned.replace('', np.nan)
         return df
 
     def _process_dataframe(self, df, filename):
