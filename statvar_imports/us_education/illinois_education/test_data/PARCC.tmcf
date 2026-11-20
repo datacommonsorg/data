@@ -1,0 +1,8 @@
+Node: E:PARCC->E0
+observationAbout: C:PARCC->observationAbout
+observationDate: C:PARCC->observationDate
+value: C:PARCC->value
+variableMeasured: C:PARCC->variableMeasured
+unit: C:PARCC->unit
+scalingFactor: C:PARCC->scalingFactor
+typeOf: dcs:StatVarObservation

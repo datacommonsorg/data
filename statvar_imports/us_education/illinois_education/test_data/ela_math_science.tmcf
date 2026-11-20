@@ -1,0 +1,8 @@
+Node: E:ela_math_science->E0
+observationAbout: C:ela_math_science->observationAbout
+observationDate: C:ela_math_science->observationDate
+value: C:ela_math_science->value
+variableMeasured: C:ela_math_science->variableMeasured
+unit: C:ela_math_science->unit
+scalingFactor: C:ela_math_science->scalingFactor
+typeOf: dcs:StatVarObservation
