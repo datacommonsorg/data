@@ -1,0 +1,8 @@
+Node: E:feedingamerica_mapmealgap_output->E0
+observationDate: C:feedingamerica_mapmealgap_output->observationDate
+observationAbout: C:feedingamerica_mapmealgap_output->observationAbout
+value: C:feedingamerica_mapmealgap_output->value
+measurementMethod: C:feedingamerica_mapmealgap_output->measurementMethod
+unit: C:feedingamerica_mapmealgap_output->unit
+variableMeasured: C:feedingamerica_mapmealgap_output->variableMeasured
+typeOf: dcs:StatVarObservation

@@ -1,0 +1,11 @@
+dcid,observationDate,Count_Person_FoodInsecure,Count_Person_FoodInsecure_EligibleForAllFederalBenefits,Count_Person_FoodInsecure_EligibleForSomeFederalBenefits,Count_Person_FoodInsecure_IneligibleForFederalBenefits,Count_Child_FoodInsecure,Count_Child_FoodInsecure_EligibleForManyChildNutritionBenefits,Count_Child_FoodInsecure_IneligibleForChildNutritionBenefits,Mean_MealCost_Person_FoodSecure,Annual_FoodBudgetShortfall
+dcid:geoId/01,2018,829220,422020.0,132850.0,274480.0,251800,191368.0,60432.0,3.02,423745000
+dcid:geoId/01,2020,711370,377026.1,113819.2,220524.7,216040,177152.8,38887.2,3.13,358615000
+dcid:geoId/01,2024,919160,415460.32,,503699.68,276640,199180.8,77459.2,3.58,624874000
+dcid:geoId/01001,2019,8670,4213.62,945.03,3520.02,2590,1787.1,802.9,3,4439000
+dcid:geoId/01001,2021,7770,3752.91,,4017.09,2000,1360.0,640.0,3.6,4947000
+dcid:geoId/01001,2022,8860,3898.4,,4961.6,2410,1638.8,771.2,4.01,6680000
+dcid:geoId/01001,2023,8940,3853.14,,5086.86,2350,1560.4,789.6,3.64,6162000
+dcid:geoId/01001,2024,9350,4151.4,,5198.6,2850,1909.5,940.5,3.68,6528000
+dcid:geoId/01009,2020,7980,3606.96,2338.14,2034.9,1700,1700.0,0.0,3.06,3937000
+dcid:geoId/01011,2024,1990,413.92,,1576.08,670,670.0,0.0,3.83,1446000
