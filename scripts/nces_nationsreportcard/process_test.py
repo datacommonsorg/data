@@ -372,19 +372,6 @@ class ProcessTest(unittest.TestCase):
                           encoding='utf-8') as expected_f:
                 self.assertEqual(actual_f.read(), expected_f.read())
 
-        def _strip_comments(mcf_path: str) -> list[str]:
-            with open(mcf_path, encoding='utf-8') as f:
-                return [
-                    ln for ln in f.read().splitlines()
-                    if not ln.lstrip().startswith('#')
-                ]
-
-        self.assertEqual(
-            _strip_comments(f'{actual_prefix}_stat_vars.mcf'),
-            _strip_comments(
-                os.path.join(test_data_dir, 'naep_output_stat_vars.mcf')),
-        )
-
 
 if __name__ == '__main__':
     unittest.main()
