@@ -11,11 +11,11 @@
         },
         {
             "rule_id": "check_Count_MedicareEnrollee",
-            "description": "Verifies total Medicare enrollee count coverage and freshness through 2019.",
+            "description": "Verifies total Medicare enrollee count preserves historical HRR/HSA/county places (1999-2016) and refreshes through 2019.",
             "validator": "SQL_VALIDATOR",
             "params": {
                 "query": "SELECT COUNT(*) AS NumStatVars, COALESCE(MIN(NumPlaces), 0) AS NumPlaces, COALESCE(MIN(NumObservations), 0) AS NumObservations, COALESCE(MIN(CAST(MaxDate AS INTEGER)), 0) AS LatestDate FROM stats WHERE StatVar = 'Count_MedicareEnrollee'",
-                "condition": "NumStatVars = 1 AND NumPlaces >= 3000 AND NumObservations >= 40000 AND LatestDate >= 2019"
+                "condition": "NumStatVars = 1 AND NumPlaces >= 5500 AND NumObservations >= 95000 AND LatestDate >= 2019"
             }
         },
         {
@@ -24,7 +24,16 @@
             "validator": "SQL_VALIDATOR",
             "params": {
                 "query": "SELECT COUNT(*) AS NumStatVars, COALESCE(MIN(NumPlaces), 0) AS NumPlaces, COALESCE(MIN(NumObservations), 0) AS NumObservations, COALESCE(MIN(CAST(MaxDate AS INTEGER)), 0) AS LatestDate FROM stats WHERE StatVar = 'dc/rn90czcrqcv06'",
-                "condition": "NumStatVars = 1 AND NumPlaces >= 3000 AND NumObservations >= 40000 AND LatestDate >= 2019"
+                "condition": "NumStatVars = 1 AND NumPlaces >= 3000 AND NumObservations >= 45000 AND LatestDate >= 2019"
+            }
+        },
+        {
+            "rule_id": "check_MedicareA_Enrollees",
+            "description": "Verifies historical Part A enrollee counts (Overall, Black, NonBlack) are preserved across 2007-2014.",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT COUNT(*) AS NumStatVars, COALESCE(MIN(NumPlaces), 0) AS NumPlaces, COALESCE(MIN(NumObservations), 0) AS NumObservations, COALESCE(MIN(CAST(MaxDate AS INTEGER)), 0) AS LatestDate FROM stats WHERE StatVar IN ('Count_MedicareEnrollee_MedicareA', 'Count_MedicareEnrollee_MedicareA_Black', 'Count_MedicareEnrollee_MedicareA_NonBlack')",
+                "condition": "NumStatVars = 3 AND NumPlaces >= 1500 AND NumObservations >= 14000 AND LatestDate >= 2014"
             }
         },
         {

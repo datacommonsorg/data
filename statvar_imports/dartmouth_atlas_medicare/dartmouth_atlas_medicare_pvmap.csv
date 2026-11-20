@@ -1,6 +1,6 @@
 key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6
 year,observationDate,{Number},,,,,,,,,,
-place,observationAbout,{Data},,,,,,,,,,
+place,observationAbout,dcid:{Data},,,,,,,,,,
 value,value,{Number},,,,,,,,,,
 MedicareEnrollee_Count,populationType,MedicareEnrollee,measuredProperty,count,statType,measuredValue,observationPeriod,P1Y,,,,
 MedicareEnrollee_MeanPrice,populationType,MedicareEnrollee,measuredProperty,price,statType,meanValue,observationPeriod,P1Y,,,,
