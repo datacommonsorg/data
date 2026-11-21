@@ -67,6 +67,10 @@ function run_py_lint_test {
     echo "ERROR: Fix lint errors by running ./run_tests.sh -f" >&2
     exit 1
   fi
+  echo "#### Testing absl flag definitions"
+  if ! python3 tools/lint/absl_flags_lint.py; then
+    exit 1
+  fi
 }
 
 # Run Python tests. Requires folder to run tests in specified in $1.
