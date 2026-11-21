@@ -578,7 +578,7 @@ def consolidate_baseline(
                         continue
                     place = strip_quotes_and_prefix(
                         str(node.get("observationAbout", "")))
-                    if not is_valid_historical_place(place):
+                    if not place or "/" not in place:
                         continue
                     sv = strip_quotes_and_prefix(
                         str(node.get("variableMeasured", "")))
@@ -651,12 +651,15 @@ def consolidate_baseline(
     writer.writerow(OUTPUT_COLUMNS)
     mcf_lines: list[str] = []
 
+    csv_rows_written = 0
     for idx, ((year, place, sv), (period, _val_float, val_str,
                                   _exact)) in enumerate(sorted_items):
         about_dcid = f"dcid:{place}"
         sv_dcid = f"dcid:{sv}"
         obs_date_mcf = year if year.isdigit() else f'"{year}"'
-        writer.writerow([year, about_dcid, sv_dcid, val_str, period])
+        if is_valid_historical_place(place):
+            writer.writerow([year, about_dcid, sv_dcid, val_str, period])
+            csv_rows_written += 1
         mcf_lines.append(f"Node: E:DartmouthHistorical->E{idx}\n"
                          f"typeOf: dcs:StatVarObservation\n"
                          f"observationDate: {obs_date_mcf}\n"
@@ -673,9 +676,12 @@ def consolidate_baseline(
     unique_places = {place for _, place, _ in observations}
     unique_years = sorted({year for year, _, _ in observations})
     logging.info(
-        "Consolidated %d unique observations (%d StatVars, %d places, %s..%s) "
-        "-> %s, %s, %s",
+        "Consolidated %d CSV observations and %d unaltered baseline MCF "
+        "observations (%d invalid-place rows filtered from CSV; %d StatVars, "
+        "%d places, %s..%s) -> %s, %s, %s",
+        csv_rows_written,
         len(observations),
+        len(observations) - csv_rows_written,
         len(unique_svs),
         len(unique_places),
         unique_years[0],

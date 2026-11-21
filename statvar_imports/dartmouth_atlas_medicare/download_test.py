@@ -565,6 +565,7 @@ class ConsolidateHistoricalTest(unittest.TestCase):
                 tmcf_path.read_text(encoding="utf-8"),
                 consolidate_historical.COMMON_TMCF_CONTENT,
             )
+            csv_text = csv_path.read_text(encoding="utf-8")
             mcf_text = mcf_path.read_text(encoding="utf-8")
             self.assertIn("variableMeasured: dcid:dc/rn90czcrqcv06", mcf_text)
             self.assertIn("value: 10450.25", mcf_text)
@@ -572,9 +573,13 @@ class ConsolidateHistoricalTest(unittest.TestCase):
             # import_differ mcf_file_util.normalize_value().
             self.assertIn("observationDate: 2016\n", mcf_text)
             self.assertNotIn('observationDate: "2016"', mcf_text)
+            # Consolidated CSV drops unresolved legacy geoIds (0 lint errors),
+            # while baseline MCF retains all unaltered CNS observations so
+            # import_differ audits against the true previous refresh.
             for bad_place in ("geoId/99999", "geoId/999999", "geoId/99003",
                               "geoId/33929"):
-                self.assertNotIn(bad_place, mcf_text)
+                self.assertNotIn(f"dcid:{bad_place},", csv_text)
+                self.assertIn(f"observationAbout: dcid:{bad_place}\n", mcf_text)
 
     def test_is_valid_historical_place(self):
         for valid in ("country/USA", "geoId/01", "geoId/56", "geoId/72",
