@@ -1,0 +1,7 @@
+Node: E:dartmouth_atlas_medicare->E0
+observationDate: C:dartmouth_atlas_medicare->observationDate
+observationAbout: C:dartmouth_atlas_medicare->observationAbout
+variableMeasured: C:dartmouth_atlas_medicare->variableMeasured
+value: C:dartmouth_atlas_medicare->value
+observationPeriod: C:dartmouth_atlas_medicare->observationPeriod
+typeOf: dcs:StatVarObservation

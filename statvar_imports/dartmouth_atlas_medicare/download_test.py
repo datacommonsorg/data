@@ -71,6 +71,8 @@ class DownloadTest(unittest.TestCase):
         self.assertIsNone(download.format_place_dcid("99999", True))
         self.assertIsNone(download.format_place_dcid("1", False))
         self.assertIsNone(download.format_place_dcid("999", False))
+        self.assertIsNone(download.format_place_dcid("1000", False))
+        self.assertIsNone(download.format_place_dcid("33929", False))
         self.assertIsNone(download.format_place_dcid("99003", False))
         self.assertIsNone(download.format_place_dcid("100000", False))
         self.assertIsNone(download.format_place_dcid("4617620", False))
@@ -377,6 +379,34 @@ class ConsolidateHistoricalTest(unittest.TestCase):
                  "observationAbout: dcid:geoId/4617620\n"
                  "variableMeasured: dcid:Count_MedicareEnrollee\n"
                  "value: NaN\n"
+                 'observationPeriod: "P1Y"\n\n'
+                 "Node: E:ObsLegacyBogus99999\n"
+                 "typeOf: dcs:StatVarObservation\n"
+                 'observationDate: "2010"\n'
+                 "observationAbout: dcid:geoId/99999\n"
+                 "variableMeasured: dcid:Count_MedicareEnrollee\n"
+                 "value: 25450227\n"
+                 'observationPeriod: "P1Y"\n\n'
+                 "Node: E:ObsLegacyBogus999999\n"
+                 "typeOf: dcs:StatVarObservation\n"
+                 'observationDate: "2011"\n'
+                 "observationAbout: dcid:geoId/999999\n"
+                 "variableMeasured: dcid:Count_MedicareEnrollee_MedicareA\n"
+                 "value: 28423229\n"
+                 'observationPeriod: "P1Y"\n\n'
+                 "Node: E:ObsLegacyBogus99003\n"
+                 "typeOf: dcs:StatVarObservation\n"
+                 'observationDate: "2009"\n'
+                 "observationAbout: dcid:geoId/99003\n"
+                 "variableMeasured: dcid:Count_MedicareEnrollee\n"
+                 "value: 835\n"
+                 'observationPeriod: "P1Y"\n\n'
+                 "Node: E:ObsLegacyBogus33929\n"
+                 "typeOf: dcs:StatVarObservation\n"
+                 'observationDate: "2010"\n'
+                 "observationAbout: dcid:geoId/33929\n"
+                 "variableMeasured: dcid:Count_MedicareEnrollee\n"
+                 "value: 79\n"
                  'observationPeriod: "P1Y"\n'),
             )
             # dartmouth_reim has multiple collapsed slices (DME vs Total);
@@ -538,6 +568,26 @@ class ConsolidateHistoricalTest(unittest.TestCase):
             mcf_text = mcf_path.read_text(encoding="utf-8")
             self.assertIn("variableMeasured: dcid:dc/rn90czcrqcv06", mcf_text)
             self.assertIn("value: 10450.25", mcf_text)
+            # Numeric years must be unquoted to match import-tool genmcf and
+            # import_differ mcf_file_util.normalize_value().
+            self.assertIn("observationDate: 2016\n", mcf_text)
+            self.assertNotIn('observationDate: "2016"', mcf_text)
+            for bad_place in ("geoId/99999", "geoId/999999", "geoId/99003",
+                              "geoId/33929"):
+                self.assertNotIn(bad_place, mcf_text)
+
+    def test_is_valid_historical_place(self):
+        for valid in ("country/USA", "geoId/01", "geoId/56", "geoId/72",
+                      "geoId/01001", "geoId/02201", "geoId/51840",
+                      "geoId/0203000", "geoId/4617620"):
+            self.assertTrue(
+                consolidate_historical.is_valid_historical_place(valid), valid)
+        for invalid in ("", "USA", "geoId/", "geoId/03", "geoId/07", "geoId/99",
+                        "geoId/01000", "geoId/33929", "geoId/99003",
+                        "geoId/99999", "geoId/999999", "geoId/0100000"):
+            self.assertFalse(
+                consolidate_historical.is_valid_historical_place(invalid),
+                invalid)
 
     def test_consolidate_baseline_with_reim_csv_override(self):
         with tempfile.TemporaryDirectory() as tmpdir:

@@ -118,6 +118,15 @@ NON_NUMERIC_TOKENS: frozenset[str] = frozenset({
     "suppressed",
 })
 
+VALID_STATE_AND_TERRITORY_FIPS: frozenset[str] = frozenset({
+    "01", "02", "04", "05", "06", "08", "09", "10", "11", "12",
+    "13", "15", "16", "17", "18", "19", "20", "21", "22", "23",
+    "24", "25", "26", "27", "28", "29", "30", "31", "32", "33",
+    "34", "35", "36", "37", "38", "39", "40", "41", "42", "44",
+    "45", "46", "47", "48", "49", "50", "51", "53", "54", "55",
+    "56", "60", "66", "69", "72", "78",
+})
+
 
 def strip_quotes_and_prefix(raw: str) -> str:
     """Strips outer whitespace, quotes, and leading dcid:/dcs: namespace."""
@@ -128,6 +137,34 @@ def strip_quotes_and_prefix(raw: str) -> str:
         if text.startswith(prefix):
             text = text[len(prefix):].strip()
     return text
+
+
+def is_valid_historical_place(place: str) -> bool:
+    """Validates historical place DCIDs, dropping legacy CMS/SSA dummy codes.
+
+    Filters out unresolved legacy CNS place codes that fail Data Commons
+    existence checks (e.g., geoId/99999, geoId/999999, geoId/99003, geoId/33929)
+    while preserving valid 2-digit states, 5-digit counties (including retired
+    Alaska/SD/VA counties), 7-digit HRR/HSA Census places, and country/USA.
+    """
+    if place == "country/USA":
+        return True
+    if not place.startswith("geoId/"):
+        return False
+    code = place[6:]
+    if not code.isdigit():
+        return False
+    if len(code) == 2:
+        return code in VALID_STATE_AND_TERRITORY_FIPS
+    if len(code) == 5:
+        if code[:2] not in VALID_STATE_AND_TERRITORY_FIPS:
+            return False
+        county_subcode = int(code[2:])
+        return 0 < county_subcode < 900
+    if len(code) == 7:
+        return (code[:2] in VALID_STATE_AND_TERRITORY_FIPS and
+                int(code[2:]) > 0)
+    return False
 
 
 def format_finite_number(parsed: float) -> tuple[float, str] | None:
@@ -479,6 +516,8 @@ def parse_reim_csv_overrides(reim_csv_path: str) -> dict[tuple[str, str], str]:
                 code_int = int(place)
                 place = ("country/USA" if code_int in (99, 99999) else
                          f"geoId/{code_int:05d}")
+            if not is_valid_historical_place(place):
+                continue
             val_parsed = clean_numeric_value(
                 row.get("value") or row.get("reimbursement") or
                 row.get("measuredvalue") or "")
@@ -539,7 +578,7 @@ def consolidate_baseline(
                         continue
                     place = strip_quotes_and_prefix(
                         str(node.get("observationAbout", "")))
-                    if not place or "/" not in place:
+                    if not is_valid_historical_place(place):
                         continue
                     sv = strip_quotes_and_prefix(
                         str(node.get("variableMeasured", "")))
@@ -616,10 +655,11 @@ def consolidate_baseline(
                                   _exact)) in enumerate(sorted_items):
         about_dcid = f"dcid:{place}"
         sv_dcid = f"dcid:{sv}"
+        obs_date_mcf = year if year.isdigit() else f'"{year}"'
         writer.writerow([year, about_dcid, sv_dcid, val_str, period])
         mcf_lines.append(f"Node: E:DartmouthHistorical->E{idx}\n"
                          f"typeOf: dcs:StatVarObservation\n"
-                         f'observationDate: "{year}"\n'
+                         f"observationDate: {obs_date_mcf}\n"
                          f"observationAbout: {about_dcid}\n"
                          f"variableMeasured: {sv_dcid}\n"
                          f"value: {val_str}\n"
