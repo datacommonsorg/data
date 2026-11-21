@@ -72,7 +72,7 @@ def download_url_list_iterations(url_list: list,
                                  url_filter: Union[Callable[[list], list],
                                                    None] = None,
                                  max_itr: int = 3,
-                                 rate_params: dict = {}) -> int:
+                                 rate_params: dict | None = None) -> int:
     """Attempt to download a list of URLs in multiple iteration.
         Each iteration attempts to download calls that failed in previous iteration.
         NOTE: An extra iteration might occour to attempt failed calls using requests library rather than parallel calls.
@@ -90,6 +90,8 @@ def download_url_list_iterations(url_list: list,
         Returns:
             Count of url requests that failed.
     """
+    if rate_params is None:
+        rate_params = {}
     loop_ctr = 0
     if not url_filter:
         url_filter = default_url_filter

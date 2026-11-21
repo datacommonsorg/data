@@ -36,21 +36,27 @@ class EarthEngineRunner(StageRunner):
     '''Class to generate geoTif images from earth engine.'''
 
     def __init__(self,
-                 config_dicts: list = [],
-                 state: dict = {},
+                 config_dicts: list | None = None,
+                 state: dict | None = None,
                  counters=None):
+        if state is None:
+            state = {}
+        if config_dicts is None:
+            config_dicts = []
         configs = [earthengine_image.EE_DEFAULT_CONFIG]
         configs.extend(config_dicts)
         self.set_up('earthengine', configs, state, counters)
 
     def run(self,
             input_files: list = None,
-            config_dict: dict = {},
+            config_dict: dict | None = None,
             counters: Counters = None) -> list:
         '''Returns the list of geoTif images extracted from earth engine.
         If the stage's config:ee_wait_task is False,
         returns the list of earth engine tasks launched.
         '''
+        if config_dict is None:
+            config_dict = {}
         logging.info(f'Processing earth engine config: {config_dict}')
         # Generate ee images
         ee_tasks = earthengine_image.ee_process(config_dict)

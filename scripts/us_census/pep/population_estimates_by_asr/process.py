@@ -38,7 +38,7 @@ if __name__ == '__main__':
     import us_census.pep.population_estimates_by_asr as _asr_pkg
     sys.modules.setdefault('us_census.pep.population_estimates_by_asr.process',
                            sys.modules['__main__'])
-    setattr(_asr_pkg, 'process', sys.modules['__main__'])
+    _asr_pkg.process = sys.modules['__main__']
 
 
 def ensure_raw_data_dir():

@@ -54,17 +54,23 @@ class BigQueryExportRunner(StageRunner):
     )'''
 
     def __init__(self,
-                 config_dicts: list = [],
-                 state: dict = {},
+                 config_dicts: list | None = None,
+                 state: dict | None = None,
                  counters=None):
+        if state is None:
+            state = {}
+        if config_dicts is None:
+            config_dicts = []
         self.set_up('bq_export', config_dicts, state, counters)
 
     def run(self,
             input_files: list = None,
-            config_dict: dict = {},
+            config_dict: dict | None = None,
             counters: Counters = None) -> list:
         '''Returns the list of csv files exported from BigQuery.'''
         # Get the query
+        if config_dict is None:
+            config_dict = {}
         query = self.get_bq_query(config_dict)
         if not query:
             logging.error(
@@ -105,8 +111,10 @@ class BigQueryExportRunner(StageRunner):
         logging.info(f'Got output: "{output_files}" for query: {query}')
         return output_files
 
-    def get_bq_query(self, config_dict: dict = {}) -> str:
+    def get_bq_query(self, config_dict: dict | None = None) -> str:
         '''Returns the query to select data to export.'''
+        if config_dict is None:
+            config_dict = {}
         query = self.get_config('bq_query', '', config_dict).strip()
         if not query:
             # No query in config. Export the whole table is specified.
