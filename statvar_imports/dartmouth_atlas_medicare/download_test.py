@@ -70,8 +70,14 @@ class DownloadTest(unittest.TestCase):
         self.assertIsNone(download.format_place_dcid("100", True))
         self.assertIsNone(download.format_place_dcid("99999", True))
         self.assertIsNone(download.format_place_dcid("1", False))
+        self.assertEqual(download.format_place_dcid("24510", False),
+                         "geoId/24510")
+        self.assertEqual(download.format_place_dcid("51840", False),
+                         "geoId/51840")
         self.assertIsNone(download.format_place_dcid("999", False))
         self.assertIsNone(download.format_place_dcid("1000", False))
+        self.assertIsNone(download.format_place_dcid("31728", False))
+        self.assertIsNone(download.format_place_dcid("31745", False))
         self.assertIsNone(download.format_place_dcid("33929", False))
         self.assertIsNone(download.format_place_dcid("99003", False))
         self.assertIsNone(download.format_place_dcid("100000", False))
@@ -582,14 +588,37 @@ class ConsolidateHistoricalTest(unittest.TestCase):
                 self.assertIn(f"observationAbout: dcid:{bad_place}\n", mcf_text)
 
     def test_is_valid_historical_place(self):
-        for valid in ("country/USA", "geoId/01", "geoId/56", "geoId/72",
-                      "geoId/01001", "geoId/02201", "geoId/51840",
-                      "geoId/0203000", "geoId/4617620"):
+        for valid in (
+                "country/USA",
+                "geoId/01",
+                "geoId/56",
+                "geoId/72",
+                "geoId/01001",
+                "geoId/02201",
+                "geoId/24510",
+                "geoId/48507",
+                "geoId/51840",
+                "geoId/0203000",
+                "geoId/4617620",
+        ):
             self.assertTrue(
                 consolidate_historical.is_valid_historical_place(valid), valid)
-        for invalid in ("", "USA", "geoId/", "geoId/03", "geoId/07", "geoId/99",
-                        "geoId/01000", "geoId/33929", "geoId/99003",
-                        "geoId/99999", "geoId/999999", "geoId/0100000"):
+        for invalid in (
+                "",
+                "USA",
+                "geoId/",
+                "geoId/03",
+                "geoId/07",
+                "geoId/99",
+                "geoId/01000",
+                "geoId/31728",
+                "geoId/31745",
+                "geoId/33929",
+                "geoId/99003",
+                "geoId/99999",
+                "geoId/999999",
+                "geoId/0100000",
+        ):
             self.assertFalse(
                 consolidate_historical.is_valid_historical_place(invalid),
                 invalid)

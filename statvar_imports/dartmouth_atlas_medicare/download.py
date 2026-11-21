@@ -271,10 +271,12 @@ def format_place_dcid(raw_code: str, is_state: bool) -> str | None:
     if code_int < 1000 or code_int > 99999:
         return None
     county_fips = f"{code_int:05d}"
-    if county_fips[:2] not in VALID_COUNTY_STATE_FIPS:
+    state_fips = county_fips[:2]
+    if state_fips not in VALID_COUNTY_STATE_FIPS:
         return None
     county_subcode = int(county_fips[2:])
-    if county_subcode == 0 or county_subcode >= 900:
+    max_subcode = 840 if state_fips == "51" else 510
+    if county_subcode <= 0 or county_subcode > max_subcode:
         return None
     return f"geoId/{county_fips}"
 

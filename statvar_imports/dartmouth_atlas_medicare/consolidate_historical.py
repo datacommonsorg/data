@@ -119,12 +119,62 @@ NON_NUMERIC_TOKENS: frozenset[str] = frozenset({
 })
 
 VALID_STATE_AND_TERRITORY_FIPS: frozenset[str] = frozenset({
-    "01", "02", "04", "05", "06", "08", "09", "10", "11", "12",
-    "13", "15", "16", "17", "18", "19", "20", "21", "22", "23",
-    "24", "25", "26", "27", "28", "29", "30", "31", "32", "33",
-    "34", "35", "36", "37", "38", "39", "40", "41", "42", "44",
-    "45", "46", "47", "48", "49", "50", "51", "53", "54", "55",
-    "56", "60", "66", "69", "72", "78",
+    "01",
+    "02",
+    "04",
+    "05",
+    "06",
+    "08",
+    "09",
+    "10",
+    "11",
+    "12",
+    "13",
+    "15",
+    "16",
+    "17",
+    "18",
+    "19",
+    "20",
+    "21",
+    "22",
+    "23",
+    "24",
+    "25",
+    "26",
+    "27",
+    "28",
+    "29",
+    "30",
+    "31",
+    "32",
+    "33",
+    "34",
+    "35",
+    "36",
+    "37",
+    "38",
+    "39",
+    "40",
+    "41",
+    "42",
+    "44",
+    "45",
+    "46",
+    "47",
+    "48",
+    "49",
+    "50",
+    "51",
+    "53",
+    "54",
+    "55",
+    "56",
+    "60",
+    "66",
+    "69",
+    "72",
+    "78",
 })
 
 
@@ -157,10 +207,12 @@ def is_valid_historical_place(place: str) -> bool:
     if len(code) == 2:
         return code in VALID_STATE_AND_TERRITORY_FIPS
     if len(code) == 5:
-        if code[:2] not in VALID_STATE_AND_TERRITORY_FIPS:
+        state_fips = code[:2]
+        if state_fips not in VALID_STATE_AND_TERRITORY_FIPS:
             return False
         county_subcode = int(code[2:])
-        return 0 < county_subcode < 900
+        max_subcode = 840 if state_fips == "51" else 510
+        return 0 < county_subcode <= max_subcode
     if len(code) == 7:
         return (code[:2] in VALID_STATE_AND_TERRITORY_FIPS and
                 int(code[2:]) > 0)
