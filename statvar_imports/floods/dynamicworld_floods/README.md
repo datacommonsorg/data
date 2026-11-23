@@ -49,10 +49,10 @@ Run from the repository root (`data/`):
 
 ```bash
 # 1. Run unit & integration tests
-./run_tests.sh -p statvar_imports/dynamic_world_flood
+./run_tests.sh -p statvar_imports/floods/dynamicworld_floods
 
 # 2. Download monthly flood data directly from Earth Engine
-python3 statvar_imports/dynamic_world_flood/download_script.py \
+python3 statvar_imports/floods/dynamicworld_floods/download_script.py \
   --start_date=2026-01-01 \
   --end_date=2026-11-01 \
   --bounds=24.72,83.83,26.06,88.26

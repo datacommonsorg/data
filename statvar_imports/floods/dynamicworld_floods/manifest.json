@@ -9,7 +9,7 @@
             "provenance_description": "Monthly flood event area and count observations derived from Google Earth Engine Dynamic World V1 near-real-time land cover water probability bands masked against permanent water.",
             "scripts": [
                 "download_script.py",
-                "../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/dynamic_world_flood_place_svobs.csv --pv_map=dynamic_world_flood_pvmap.csv --config_file=dynamic_world_flood_metadata.csv --output_path=output/dynamic_world_flood_output --existing_schema_mcf=dynamic_world_flood_schema.mcf --output_counters=counters/dynamic_world_flood_counters.csv"
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/dynamic_world_flood_place_svobs.csv --pv_map=dynamic_world_flood_pvmap.csv --config_file=dynamic_world_flood_metadata.csv --output_path=output/dynamic_world_flood_output --existing_schema_mcf=dynamic_world_flood_schema.mcf --output_counters=counters/dynamic_world_flood_counters.csv"
             ],
             "import_inputs": [
                 {

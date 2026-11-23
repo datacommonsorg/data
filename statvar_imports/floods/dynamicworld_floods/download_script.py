@@ -40,7 +40,7 @@ import google.auth
 from google.auth.transport.requests import Request as GoogleAuthRequest
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-_REPO_ROOT = os.path.dirname(os.path.dirname(_SCRIPT_DIR))
+_REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(_SCRIPT_DIR)))
 _UTIL_DIR = os.path.join(_REPO_ROOT, 'util')
 _EE_SCRIPTS_DIR = os.path.join(_REPO_ROOT, 'scripts', 'earthengine')
 

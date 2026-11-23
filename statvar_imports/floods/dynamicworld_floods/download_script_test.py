@@ -23,7 +23,7 @@ import unittest
 from unittest import mock
 
 _TEST_DIR = os.path.dirname(os.path.abspath(__file__))
-_REPO_ROOT = os.path.dirname(os.path.dirname(_TEST_DIR))
+_REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(_TEST_DIR)))
 if _TEST_DIR not in sys.path:
     sys.path.insert(0, _TEST_DIR)
 if os.path.join(_REPO_ROOT, 'util') not in sys.path:
