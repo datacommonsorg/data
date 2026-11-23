@@ -13,7 +13,7 @@ Table `S0801` covers:
 
 ## Dataset Coverage
 
-- **Geography**: Country, State, County, County Subdivision, Place, Census Tract, ZIP Code Tabulation Area (ZCTA), Congressional District, Metropolitan/Micropolitan Statistical Area, and American Indian/Alaska Native/Native Hawaiian Areas (`155,630` to `200,299` unique geographies per vintage)
+- **Geography**: Country, State, County, County Subdivision, Place, Census Tract, ZIP Code Tabulation Area (ZCTA), Congressional District, Metropolitan/Micropolitan Statistical Area, and American Indian/Alaska Native/Native Hawaiian Areas (`155,630` to `205,875` unique geographies per vintage)
 - **Temporal Coverage**: `2010` to `Present` (latest ACS 5-Year release: `2024`, annual refresh cycle)
 - **Statistical Variables**: `288` StatVars defined in `S0801_output.mcf` (`282` active StatVars with observations per vintage across `2010`–`2024`)
 
@@ -64,6 +64,7 @@ java -Xmx16g -jar datacommons-import-tool-0.1-jar-with-dependencies.jar genmcf \
   -e=false \
   -rs=SUMMARY \
   -n=24 \
+  S0801/S0801_schema.mcf \
   S0801/S0801_output.mcf \
   S0801/S0801_output.tmcf \
   S0801/S0801_cleaned.csv \
