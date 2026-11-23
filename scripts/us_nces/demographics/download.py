@@ -281,7 +281,6 @@ def run(config_file, import_name, years_to_download) -> None:
         primary_key = KEY_COLUMNS_DISTRICT
         column_names = DISTRICT_COLUMNS
 
-        data = {}
     try:
         with file_util.FileIO(config_file, 'r') as f:
             data = json.load(f)

@@ -53,11 +53,12 @@ def _define_flags() -> None:
     flags.DEFINE_string('output_dir', _OUTPUT_DIR,
                         'Base directory to place the local output files.')
     flags.DEFINE_bool('test', False, 'Run in test mode.')
-    flags.DEFINE_integer('data_start_year', os.getenv('START_YEAR', '2016'),
+    flags.DEFINE_integer('data_start_year', int(os.getenv('START_YEAR',
+                                                          '2016')),
                          'Process data starting from this year.')
     flags.DEFINE_integer('data_end_year',
-                         os.getenv('END_YEAR',
-                                   datetime.now().year),
+                         int(os.getenv('END_YEAR',
+                                       datetime.now().year)),
                          'Process data till current year')
 
 
