@@ -37,7 +37,7 @@ This import extracts monthly flood event area (`Area_FloodEvent`) and count (`Co
 - `dynamic_world_flood_pvmap.csv`: Property-value mappings for `Area_FloodEvent` and `Count_FloodEvent`.
 - `dynamic_world_flood_metadata.csv`: `stat_var_processor.py` configuration (`header_rows=1`, `output_columns`).
 - `dynamic_world_flood_schema.mcf`: StatisticalVariable definitions for `Area_FloodEvent` and `Count_FloodEvent`.
-- `validation_config.json`: Import validation rules (`check_deleted_records_percent`, `check_max_date_consistent`, `check_flood_data_freshness`).
+- `validation_config.json`: Import-specific validation rules (`check_max_date_consistent`, `check_flood_data_freshness`), merged with the global defaults (`check_deleted_records_percent` at `0%`, `check_empty_import`, `check_missing_refs_count`, `check_lint_error_count`).
 - `test_data/`: Hermetic sample input (`sample_place_svobs.csv`) and expected processor outputs (`expected_output.csv`, `expected_output.tmcf`).
 - `requirements.txt`: Python dependencies for Earth Engine and raster/S2 processing.
 
