@@ -27,15 +27,16 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
 python3 download.py --normalize_output
 ```
 
-## Using `testdata/`
-Sample preprocessed input and expected output fixtures are in `testdata/`:
+## Using `test_data/`
+Sample preprocessed input and expected output fixtures are in `test_data/`:
 ```bash
 python3 ../../../tools/statvar_importer/stat_var_processor.py \
-  --input_data=testdata/NNDSS_Weekly_Data.csv \
+  --input_data=test_data/NNDSS_Weekly_Data.csv \
   --pv_map=nndss_weekly_pvmap.csv \
   --config_file=nndss_weekly_metadata.csv \
   --statvar_dcid_remap_csv=statvar_dcid_remap.csv \
-  --output_path=testdata/nndss_weekly_output
+  --output_path=test_data/nndss_weekly_output \
+  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
 ```
 
 ## Running Unit Tests
@@ -47,4 +48,4 @@ python3 -m unittest discover -v -s statvar_imports/ -p 'download_test.py'
 ## Refresh & Approval Procedure
 - Weekly Cloud Batch refreshes run on schedule (`30 7 * * 4`) and evaluate both `history/` (`2006–2021`) and `output/` (`2022+`) in `import_inputs`.
 - `validation_config.json` enforces `check_weekly_statvars_freshness` (`SQL_VALIDATOR`: `fresh_svs >= 50` within 30 days) and inherits the default `0.1%` `DELETED_RECORDS_PERCENT` threshold.
-- On the first automated refresh against `20250206`, `check_deleted_records_percent` (`0.1631%` = `877` upstream `2022–2024` CDC revisions, `0` deletions in `2006–2021`) requires one-time manual approval.
+- On the first automated refresh against `20250206`, `check_deleted_records_percent` (`0.1631%` = `877` deletions, `0` in `2006–2021`: `874` upstream CDC suppressions in `x9gk-5huc` + `3` intentional `2023-04-09` `ConditionHaemophilusMeningitis*` removals of `20250206` non-HPS Hantavirus mis-mapping via `#ignore`) requires one-time manual approval.
