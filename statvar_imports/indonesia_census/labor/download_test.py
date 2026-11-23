@@ -22,6 +22,7 @@ import unittest
 from unittest import mock
 
 import requests
+
 from statvar_imports.indonesia_census.labor import download
 
 

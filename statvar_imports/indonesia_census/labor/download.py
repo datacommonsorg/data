@@ -38,48 +38,6 @@ DEFAULT_LOCAL_CONFIG_PATH = (
 DEFAULT_GCS_CONFIG_PATH = 'gs://unresolved_mcf/country/indonesia/config.json'
 
 _FLAGS = flags.FLAGS
-if 'output_dir' not in _FLAGS:
-    flags.DEFINE_string(
-        'output_dir',
-        os.path.join(_CODEDIR, 'input_files'),
-        'Directory path to save the downloaded input CSV and raw JSON files.',
-    )
-if 'lfpr_filename' not in _FLAGS:
-    flags.DEFINE_string(
-        'lfpr_filename',
-        'labor_force_participation_rate_by_sex.csv',
-        'Filename for the Labor Force Participation Rate by Sex CSV table.',
-    )
-if 'formal_labor_filename' not in _FLAGS:
-    flags.DEFINE_string(
-        'formal_labor_filename',
-        'percentage_of_formal_labor_by_province.csv',
-        'Filename for the Percentage of Formal Labor by Province CSV table.',
-    )
-if 'domain' not in _FLAGS:
-    flags.DEFINE_string(
-        'domain',
-        '0000',
-        'BPS domain code (0000 for national/all-province tables).',
-    )
-if 'lfpr_var_id' not in _FLAGS:
-    flags.DEFINE_integer(
-        'lfpr_var_id',
-        2200,
-        'BPS variable ID for Labor Force Participation Rate by Sex.',
-    )
-if 'formal_labor_var_id' not in _FLAGS:
-    flags.DEFINE_integer(
-        'formal_labor_var_id',
-        1168,
-        'BPS variable ID for Percentage of Formal Labor by Province.',
-    )
-if 'api_key' not in _FLAGS:
-    flags.DEFINE_string(
-        'api_key',
-        os.environ.get('BPS_API_KEY', ''),
-        'BPS WebAPI key (loaded from GCS config.json if not set).',
-    )
 
 BPS_API_BASE_URL = 'https://webapi.bps.go.id/v1/api/list'
 MAX_YEARS_PER_REQUEST = 3
@@ -542,5 +500,45 @@ def main(_) -> None:
     )
 
 
+def _define_flags() -> None:
+    """Defines CLI flags when executed as a script."""
+    flags.DEFINE_string(
+        'output_dir',
+        os.path.join(_CODEDIR, 'input_files'),
+        'Directory path to save the downloaded input CSV and raw JSON files.',
+    )
+    flags.DEFINE_string(
+        'lfpr_filename',
+        'labor_force_participation_rate_by_sex.csv',
+        'Filename for the Labor Force Participation Rate by Sex CSV table.',
+    )
+    flags.DEFINE_string(
+        'formal_labor_filename',
+        'percentage_of_formal_labor_by_province.csv',
+        'Filename for the Percentage of Formal Labor by Province CSV table.',
+    )
+    flags.DEFINE_string(
+        'domain',
+        '0000',
+        'BPS domain code (0000 for national/all-province tables).',
+    )
+    flags.DEFINE_integer(
+        'lfpr_var_id',
+        2200,
+        'BPS variable ID for Labor Force Participation Rate by Sex.',
+    )
+    flags.DEFINE_integer(
+        'formal_labor_var_id',
+        1168,
+        'BPS variable ID for Percentage of Formal Labor by Province.',
+    )
+    flags.DEFINE_string(
+        'api_key',
+        os.environ.get('BPS_API_KEY', ''),
+        'BPS WebAPI key (loaded from GCS config.json if not set).',
+    )
+
+
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)
