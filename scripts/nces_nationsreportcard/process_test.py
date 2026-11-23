@@ -117,7 +117,8 @@ class _FakeStatVarsMap:
 
 
 def _build_lightweight_processor(
-        config_overrides: dict | None = None) -> naep_process.NaepEduPerformance:
+        config_overrides: dict | None = None
+) -> naep_process.NaepEduPerformance:
     """Creates a NaepEduPerformance instance without initializing StatVarDataProcessor."""
     proc = naep_process.NaepEduPerformance.__new__(
         naep_process.NaepEduPerformance)
@@ -187,8 +188,7 @@ class ProcessTest(unittest.TestCase):
             naep_process.is_redundant_naep_row('NT', 'TOTAL', 'MN:MN'))
 
     def test_should_drop_data_row_and_preprocess_row(self):
-        proc = _build_lightweight_processor(
-            {'enable_naep_fast_path': False})
+        proc = _build_lightweight_processor({'enable_naep_fast_path': False})
         proc._header_map = {col: idx for idx, col in enumerate(_CSV_COLUMNS)}
 
         valid_row = _make_row_list(value='238.5', displayable='1')
@@ -218,8 +218,8 @@ class ProcessTest(unittest.TestCase):
 
         # Suppressed and redundant PVs are marked with #ignore.
         self.assertTrue(
-            proc.preprocess_stat_var_obs_pvs({'value': '999.0'})[0].get(
-                '#ignore'))
+            proc.preprocess_stat_var_obs_pvs({'value': '999.0'
+                                             })[0].get('#ignore'))
         self.assertTrue(
             proc.preprocess_stat_var_obs_pvs({
                 'value': '240.0',
@@ -235,20 +235,32 @@ class ProcessTest(unittest.TestCase):
 
         # Achievement-level PVs synthesize and cache Count_Student_* denominator.
         alc_pvs = {
-            'value': '41.12345678',
-            'populationType': 'dcs:Student',
-            'measuredProperty': 'dcs:count',
-            'statType': 'dcs:measuredValue',
+            'value':
+                '41.12345678',
+            'populationType':
+                'dcs:Student',
+            'measuredProperty':
+                'dcs:count',
+            'statType':
+                'dcs:measuredValue',
             'educationalAchievementLevel':
                 'dcs:NAEP_CumulativeAtOrAboveProficient',
-            'gender': 'dcs:Female',
-            'schoolGradeLevel': 'dcs:SchoolGrade4',
-            'schoolSubject': 'dcs:Mathematics',
-            'schoolType': 'dcs:NCES_PublicSchool',
-            'unit': 'dcs:Percent',
-            'scalingFactor': '100',
-            'GradeVale': '4',
-            '#input': 'naep_sample.csv:2:15',
+            'gender':
+                'dcs:Female',
+            'schoolGradeLevel':
+                'dcs:SchoolGrade4',
+            'schoolSubject':
+                'dcs:Mathematics',
+            'schoolType':
+                'dcs:NCES_PublicSchool',
+            'unit':
+                'dcs:Percent',
+            'scalingFactor':
+                '100',
+            'GradeVale':
+                '4',
+            '#input':
+                'naep_sample.csv:2:15',
         }
         out_first = proc.preprocess_stat_var_obs_pvs(dict(alc_pvs))[0]
         self.assertEqual(
@@ -281,9 +293,11 @@ class ProcessTest(unittest.TestCase):
     def test_process_row_memoization_fast_path(self):
         proc = _build_lightweight_processor()
         proc._pv_mapper.get_all_pvs_for_value.side_effect = (
-            lambda juris, _ns: [{'observationAbout': f'dcs:geoId/{juris}'}])
-        proc.resolve_value_references = (
-            lambda pvs_list: dict(pvs_list[0]) if pvs_list else {})
+            lambda juris, _ns: [{
+                'observationAbout': f'dcs:geoId/{juris}'
+            }])
+        proc.resolve_value_references = (lambda pvs_list: dict(pvs_list[0])
+                                         if pvs_list else {})
         proc.resolve_svobs_place = lambda pvs: bool(pvs.get('observationAbout'))
         proc.resolve_svobs_date = lambda pvs: bool(pvs.get('observationDate'))
 
@@ -291,20 +305,26 @@ class ProcessTest(unittest.TestCase):
             if row_index == 1:
                 return
             proc._statvars_map.add_statvar_obs({
-                'typeOf': 'dcs:StatVarObservation',
-                'observationDate': row[0],
-                'observationAbout': 'dcs:country/USA',
-                'value': row[14],
+                'typeOf':
+                    'dcs:StatVarObservation',
+                'observationDate':
+                    row[0],
+                'observationAbout':
+                    'dcs:country/USA',
+                'value':
+                    row[14],
                 'measurementMethod':
                     'dcs:NCES_NationalAssessmentOfEducationalProgress',
                 'variableMeasured':
                     'dcid:Mean_AssessmentScore_Student_SchoolGrade4_Mathematics',
-                '#input': f'naep_sample.csv:{row_index}:15',
+                '#input':
+                    f'naep_sample.csv:{row_index}:15',
             })
 
-        with mock.patch.object(naep_process.StatVarDataProcessor,
-                               'process_row',
-                               side_effect=fake_super_process_row) as mock_super:
+        with mock.patch.object(
+                naep_process.StatVarDataProcessor,
+                'process_row',
+                side_effect=fake_super_process_row) as mock_super:
             # Row 1: header initializes _fast_cols.
             proc.process_row(_CSV_COLUMNS, 1)
             self.assertIsNotNone(proc._fast_cols)
