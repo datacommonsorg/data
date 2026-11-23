@@ -69,6 +69,7 @@ CSV_COLUMNS = [
 ]
 
 REQUIRED_TSV_COLUMNS = frozenset({
+    'SOURCE_DESC',
     'SHORT_DESC',
     'DOMAINCAT_DESC',
     'AGG_LEVEL_DESC',
@@ -385,7 +386,7 @@ def _process_tsv_stream(
         raise ValueError(f'Missing required TSV columns in {source_name}: '
                          f'{sorted(missing_cols)}')
 
-    source_idx = col_idx.get('SOURCE_DESC')
+    source_idx = col_idx['SOURCE_DESC']
     short_desc_idx = col_idx['SHORT_DESC']
     domaincat_idx = col_idx['DOMAINCAT_DESC']
     agg_idx = col_idx['AGG_LEVEL_DESC']
@@ -393,7 +394,7 @@ def _process_tsv_stream(
     county_idx = col_idx['COUNTY_CODE']
     year_idx = col_idx['YEAR']
     value_idx = col_idx['VALUE']
-    max_required_idx = max(idx for idx in (
+    max_required_idx = max(
         source_idx,
         short_desc_idx,
         domaincat_idx,
@@ -402,7 +403,7 @@ def _process_tsv_stream(
         county_idx,
         year_idx,
         value_idx,
-    ) if idx is not None)
+    )
 
     written = 0
     for line_num, row in enumerate(tsv_reader, start=2):
@@ -412,8 +413,7 @@ def _process_tsv_stream(
             raise ValueError(
                 f'Malformed TSV row at {source_name}:{line_num}: '
                 f'expected >{max_required_idx} columns, got {len(row)}')
-        if source_idx is not None and row[source_idx].strip().upper(
-        ) != 'CENSUS':
+        if row[source_idx].strip().upper() != 'CENSUS':
             continue
         year_str = row[year_idx].strip()
         if not is_census_year(year_str):

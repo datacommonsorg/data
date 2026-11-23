@@ -166,7 +166,8 @@ class ProcessTest(unittest.TestCase):
 
     def test_process_tsv_stream_missing_required_columns_raises(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
-            with self.assertRaises(ValueError):
+            with self.assertRaisesRegex(ValueError,
+                                        'Missing required TSV columns'):
                 process._process_tsv_stream(
                     io.StringIO('SHORT_DESC\tVALUE\nA\t1\n'),
                     'bad_header.txt',
@@ -174,10 +175,22 @@ class ProcessTest(unittest.TestCase):
                     {},
                     tmp_dir,
                 )
-            with self.assertRaises(ValueError):
+            with self.assertRaisesRegex(ValueError,
+                                        'Missing required TSV columns'):
                 process._process_tsv_stream(
                     io.StringIO('SHORT_DESC\tDOMAINCAT_DESC\tAGG_LEVEL_DESC\t'
                                 'STATE_FIPS_CODE\tCOUNTY_CODE\tYEAR\tVALUE\n'
+                                'A\tB\tNATIONAL\t\t\t2022\t1\n'),
+                    'missing_source_desc.txt',
+                    {},
+                    {},
+                    tmp_dir,
+                )
+            with self.assertRaisesRegex(ValueError, 'Malformed TSV row'):
+                process._process_tsv_stream(
+                    io.StringIO('SOURCE_DESC\tSHORT_DESC\tDOMAINCAT_DESC\t'
+                                'AGG_LEVEL_DESC\tSTATE_FIPS_CODE\tCOUNTY_CODE\t'
+                                'YEAR\tVALUE\n'
                                 'ONLY_TWO_COLS\tNOT SPECIFIED\n'),
                     'short_row.txt',
                     {},
