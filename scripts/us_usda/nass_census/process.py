@@ -365,61 +365,6 @@ def _format_observation(
     )
 
 
-def write_csv(reader: csv.DictReader, out, d: dict[str, tuple[str,
-                                                              ...]]) -> int:
-    """Writes matching Census observations from a DictReader to out."""
-    try:
-        fieldnames = reader.fieldnames or []
-        missing_cols = REQUIRED_TSV_COLUMNS - set(fieldnames)
-        if missing_cols:
-            raise ValueError(
-                f'Missing required TSV columns: {sorted(missing_cols)}')
-        has_source_col = 'SOURCE_DESC' in fieldnames
-
-        writer = csv.DictWriter(out,
-                                fieldnames=CSV_COLUMNS,
-                                lineterminator='\n')
-        writer.writeheader()
-        written = 0
-        for r in reader:
-            if (has_source_col and
-                    r.get('SOURCE_DESC', '').strip().upper() != 'CENSUS'):
-                continue
-            year_str = r.get('YEAR', '').strip()
-            if year_str and not is_census_year(year_str):
-                continue
-            obs_tuple = _format_observation(
-                short_desc=r['SHORT_DESC'],
-                domaincat_desc=r['DOMAINCAT_DESC'],
-                agg_level_desc=r['AGG_LEVEL_DESC'],
-                state_fips=r['STATE_FIPS_CODE'],
-                county_code=r['COUNTY_CODE'],
-                year_str=year_str,
-                raw_value=r['VALUE'],
-                statvars_map=d,
-            )
-            if obs_tuple is None:
-                continue
-            row = {
-                'variableMeasured': obs_tuple[0],
-                'observationAbout': obs_tuple[1],
-                'value': obs_tuple[2],
-                'observationDate': obs_tuple[4],
-            }
-            if obs_tuple[3]:
-                row['unit'] = obs_tuple[3]
-            writer.writerow(row)
-            written += 1
-
-        logging.info(
-            f"Output file: {getattr(out, 'name', '<stream>')} generated with {written} rows."
-        )
-        return written
-    except Exception as e:
-        logging.error(f'The write_csv method failed due to the error: {e}')
-        raise
-
-
 def _process_tsv_stream(
     text_stream,
     source_name: str,

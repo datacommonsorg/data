@@ -82,20 +82,29 @@ class ProcessTest(unittest.TestCase):
             process._define_flags()
         flags.FLAGS.mark_as_parsed()
 
-    def test_write_csv(self):
+    def test_process_tsv_stream(self):
         input_path = os.path.join(_SCRIPT_DIR, 'testdata',
                                   'ag_census_input.txt')
         statvars_path = os.path.join(_SCRIPT_DIR, 'statvars')
         expected_path = os.path.join(_SCRIPT_DIR, 'testdata',
                                      'ag_census_output.csv')
-        with open(input_path, encoding='utf-8') as f_in:
-            d = process.get_statvars(statvars_path)
-            reader = csv.DictReader(f_in, delimiter='\t')
-            f_out = io.StringIO()
-            with open(expected_path, encoding='utf-8') as f_expected:
-                expected = f_expected.read()
-            process.write_csv(reader, f_out, d)
-            self.assertEqual(expected, f_out.getvalue())
+        d = process.get_statvars(statvars_path)
+        with open(expected_path, encoding='utf-8') as f_expected:
+            expected = f_expected.read()
+
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            year_writers = {}
+            try:
+                with open(input_path, encoding='utf-8', newline='') as f_in:
+                    written = process._process_tsv_stream(
+                        f_in, 'ag_census_input.txt', d, year_writers, tmp_dir)
+            finally:
+                for _, handle, _ in year_writers.values():
+                    handle.close()
+            self.assertEqual(written, 5)
+            tmp_year_path = year_writers['2022'][0]
+            with open(tmp_year_path, encoding='utf-8') as f_actual:
+                self.assertEqual(expected, f_actual.read())
 
     def test_is_census_year(self):
         self.assertTrue(process.is_census_year('2002'))
@@ -108,50 +117,73 @@ class ProcessTest(unittest.TestCase):
         self.assertFalse(process.is_census_year(''))
         self.assertFalse(process.is_census_year('abc'))
 
-    def test_write_csv_filters_survey_and_non_census_years(self):
+    def test_process_input_files_filters_survey_and_non_census_years(self):
         tsv_data = '\n'.join([
             'SOURCE_DESC\tSHORT_DESC\tDOMAINCAT_DESC\tAGG_LEVEL_DESC\tSTATE_FIPS_CODE\tCOUNTY_CODE\tYEAR\tVALUE',
             'SURVEY\tFARM OPERATIONS - NUMBER OF OPERATIONS\tNOT SPECIFIED\tNATIONAL\t\t\t2022\t999',
             'CENSUS\tFARM OPERATIONS - NUMBER OF OPERATIONS\tNOT SPECIFIED\tNATIONAL\t\t\t2023\t888',
             'CENSUS\tFARM OPERATIONS - NUMBER OF OPERATIONS\tNOT SPECIFIED\tNATIONAL\t\t\t1997\t777',
+            'CENSUS\tFARM OPERATIONS - NUMBER OF OPERATIONS\tNOT SPECIFIED\tNATIONAL\t\t\t\t666',
             'CENSUS\tFARM OPERATIONS - NUMBER OF OPERATIONS\tNOT SPECIFIED\tNATIONAL\t\t\t2022\t (NA) ',
             'CENSUS\tFARM OPERATIONS - NUMBER OF OPERATIONS\tNOT SPECIFIED\tNATIONAL\t\t\t2002\t 2,128,982 ',
             'CENSUS\tFARM OPERATIONS - NUMBER OF OPERATIONS\tNOT SPECIFIED\tNATIONAL\t\t\t2027\t1,900,000',
-        ])
+        ]) + '\n'
         d = {
             'FARM OPERATIONS - NUMBER OF OPERATIONS%%NOT SPECIFIED':
                 ('Count_Farm',)
         }
-        reader = csv.DictReader(io.StringIO(tsv_data), delimiter='\t')
-        out = io.StringIO()
-        written = process.write_csv(reader, out, d)
-        self.assertEqual(written, 2)
-        rows = list(csv.DictReader(io.StringIO(out.getvalue())))
-        self.assertEqual(
-            rows,
-            [
-                {
-                    'variableMeasured': 'dcs:Count_Farm',
-                    'observationAbout': 'dcid:country/USA',
-                    'value': '2128982',
-                    'unit': '',
-                    'observationDate': '2002',
-                },
-                {
-                    'variableMeasured': 'dcs:Count_Farm',
-                    'observationAbout': 'dcid:country/USA',
-                    'value': '1900000',
-                    'unit': '',
-                    'observationDate': '2027',
-                },
-            ],
-        )
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            gz_path = os.path.join(tmp_dir, 'qs.economics_20261121.txt.gz')
+            with open(gz_path, 'wb') as f_gz:
+                f_gz.write(_make_gzip_bytes(tsv_data))
+            output_csv = os.path.join(tmp_dir, 'output', 'agriculture.csv')
+            year_files = process.process_input_files([gz_path], output_csv, d)
+            self.assertEqual(
+                [os.path.basename(p) for p in year_files],
+                ['agriculture_2002.csv', 'agriculture_2027.csv'],
+            )
+            with open(output_csv, encoding='utf-8', newline='') as f_out:
+                rows = list(csv.DictReader(f_out))
+            self.assertEqual(
+                rows,
+                [
+                    {
+                        'variableMeasured': 'dcs:Count_Farm',
+                        'observationAbout': 'dcid:country/USA',
+                        'value': '2128982',
+                        'unit': '',
+                        'observationDate': '2002',
+                    },
+                    {
+                        'variableMeasured': 'dcs:Count_Farm',
+                        'observationAbout': 'dcid:country/USA',
+                        'value': '1900000',
+                        'unit': '',
+                        'observationDate': '2027',
+                    },
+                ],
+            )
 
-    def test_write_csv_missing_required_columns_raises(self):
-        reader = csv.DictReader(io.StringIO('SHORT_DESC\tVALUE\nA\t1\n'),
-                                delimiter='\t')
-        with self.assertRaises(ValueError):
-            process.write_csv(reader, io.StringIO(), {})
+    def test_process_tsv_stream_missing_required_columns_raises(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            with self.assertRaises(ValueError):
+                process._process_tsv_stream(
+                    io.StringIO('SHORT_DESC\tVALUE\nA\t1\n'),
+                    'bad_header.txt',
+                    {},
+                    {},
+                    tmp_dir,
+                )
+            with self.assertRaises(ValueError):
+                process._process_tsv_stream(
+                    io.StringIO('SHORT_DESC\tDOMAINCAT_DESC\tAGG_LEVEL_DESC\t'
+                                'STATE_FIPS_CODE\tCOUNTY_CODE\tYEAR\tVALUE\n'
+                                'ONLY_TWO_COLS\tNOT SPECIFIED\n'),
+                    'short_row.txt',
+                    {},
+                    {},
+                    tmp_dir,
+                )
 
     def test_discover_sector_urls_success_and_dedup(self):
         urls = process.discover_sector_urls(_SAMPLE_DATASETS_HTML)
