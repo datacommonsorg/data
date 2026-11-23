@@ -46,15 +46,15 @@ python3 school_district/process.py --mode=all
 ```
 
 ### Import Architecture & Staggered Cron Scheduling
-Each domain is split into independent Cloud Batch imports in `manifest.json`. Because newer NCES data introduces newly defined places (such as brand-new school districts and public schools) that are referenced across imports (e.g., `NCES_PublicSchool` places reference parent school districts via `schoolDistrict: dcs:geoId/sch...`, and Stats imports reference places via `observationAbout`), jobs are organized into **three staggered tiers spaced 1 week (7 days) apart**.
+Each domain is split into independent Cloud Batch imports in `manifest.json`. Because newer NCES data introduces newly defined places (such as brand-new school districts and public schools) that are referenced across imports (e.g., `NCES_PublicSchool` places reference parent school districts via `schoolDistrict: dcs:geoId/sch...`, and Stats imports reference places via `observationAbout`), jobs are organized into **three staggered weekly tiers spaced 2 days apart (Monday → Wednesday → Friday)**.
 
-This 1-week buffer ensures that Data Commons Production ingests and indexes the newly defined Place nodes from Tier $N$ before Tier $N+1$ jobs execute, guaranteeing zero missing reference warnings (`check_missing_refs_count: PASSED`).
+This buffer ensures that Data Commons ingests and indexes the newly defined Place nodes from Tier $N$ before Tier $N+1$ jobs execute, preventing missing reference warnings (`check_missing_refs_count: PASSED`).
 
 #### Execution Tiers & Dependencies
 
 ```text
-[TIER 1: Week 1 (Day 3)]               [TIER 2: Week 2 (Day 10, +7d)]             [TIER 3: Week 3 (Day 17, +14d)]
-========================               ==============================             ===============================
+[TIER 1: Monday (08:00 UTC)]           [TIER 2: Wednesday (+2d)]                  [TIER 3: Friday (+4d)]
+============================           =========================                  ======================
 
 NCES_SchoolDistrict (Place) ─────────► NCES_SchoolDistrictStats (Stats)
 (Defines: dcid:geoId/sch...)     │     (Refs: observationAbout: dcs:geoId/sch...)
@@ -62,53 +62,22 @@ NCES_SchoolDistrict (Place) ─────────► NCES_SchoolDistrictSt
                                  └───► NCES_PublicSchool (Place) ───────────────► NCES_PublicSchoolStats (Stats)
                                        (Defines: dcid:nces/... [Public])          (Refs: observationAbout: dcs:nces/...)
                                        (Refs: schoolDistrict: dcs:geoId/sch...)
-
-NCES_PrivateSchool (Place) ──────────► NCES_PrivateSchoolStats (Stats)
-(Defines: dcid:nces/... [Private])     (Refs: observationAbout: dcs:nces/...)
 ```
 
-#### Staggered Quarterly Cron Schedule (`manifest.json`)
+#### Staggered Weekly Cron Schedule (`manifest.json`)
 
 | Execution Tier | Import Name | Domain | Manifest Path | Staggered `cron_schedule` |
 | :--- | :--- | :--- | :--- | :--- |
-| **Tier 1 (Week 1, Day 3)** | `NCES_SchoolDistrict` | School District (Place) | `school_district/manifest.json` | `"30 3 3 3,6,9,12 *"` |
-| **Tier 1 (Week 1, Day 3)** | `NCES_PrivateSchool` | Private School (Place) | `private_school/manifest.json` | `"30 4 3 3,6,9,12 *"` |
-| **Tier 2 (Week 2, Day 10)** | `NCES_SchoolDistrictStats` | School District (Stats) | `school_district/manifest.json` | `"30 3 10 3,6,9,12 *"` |
-| **Tier 2 (Week 2, Day 10)** | `NCES_PublicSchool` | Public School (Place) | `public_school/manifest.json` | `"30 5 10 3,6,9,12 *"` |
-| **Tier 2 (Week 2, Day 10)** | `NCES_PrivateSchoolStats` | Private School (Stats)* | `private_school/manifest.json` | `"30 7 10 3,6,9,12 *"` |
-| **Tier 3 (Week 3, Day 17)** | `NCES_PublicSchoolStats` | Public School (Stats) | `public_school/manifest.json` | `"30 3 17 3,6,9,12 *"` |
+| **Tier 1 (Monday, 08:00 UTC)** | `NCES_SchoolDistrict` | School District (Place) | `school_district/manifest.json` | `"0 8 * * 1"` |
+| **Tier 2 (Wednesday, 08:00 UTC)** | `NCES_SchoolDistrictStats` | School District (Stats) | `school_district/manifest.json` | `"0 8 * * 3"` |
+| **Tier 2 (Wednesday, 10:00 UTC)** | `NCES_PublicSchool` | Public School (Place) | `public_school/manifest.json` | `"0 10 * * 3"` |
+| **Tier 3 (Friday, 08:00 UTC)** | `NCES_PublicSchoolStats` | Public School (Stats) | `public_school/manifest.json` | `"0 8 * * 5"` |
 
 ---
 
-### High-Scale Differ & Validation Configuration (`NCES_PublicSchoolStats`)
-
-#### 1. What the Differ Issue Is & Why It Happens
-- **Dataset Scale**: `NCES_PublicSchoolStats` spans 15+ years across ~123,500 public schools and 198 StatisticalVariables, generating **238+ million `StatVarObservation` nodes** (~17 GB cleaned CSV and 120+ GB of resolved MCF).
-- **Single-VM Memory Bottleneck**: The standard in-process differ invoked by the Cloud Batch import executor runs on a single Cloud Batch VM and loads both the previous production MCF and current run MCF into memory concurrently. At 238M+ observations, differ execution runs out of memory (OOM) during the `DIFFER` stage.
-- **Configuration Decoupling**:
-  - In `public_school/manifest.json`, `NCES_PublicSchoolStats` sets `"config_override": {"invoke_differ_tool": false}` so the Cloud Batch job skips the in-process differ and completes `GENMCF` and SQL validation (`check_max_date_consistent`, `check_max_date_freshness`) cleanly.
-  - In `public_school/validation_config.json`, `"check_deleted_records_percent"` is set to `"enabled": false` because it depends on `differ_summary.json` from the in-process differ.
-
-#### 2. How to Run the Differ for `NCES_PublicSchoolStats` in Future Refreshes for test runs (Cloud Dataflow)
-For `NCES_PublicSchoolStats` (or any high-scale refresh that exceeds single-VM memory), run the differ externally on **Cloud Dataflow**.
-
-##### Running via Python `tools.differ.data_differ` (`DataflowRunner`)
-```bash
-python3 -m tools.differ.data_differ \
-    --runner=DataflowRunner \
-    --project=datcom-infosys-dev \
-    --region=us-central1 \
-    --temp_location="${STAGING_DIR}" \
-    --staging_location="${STAGING_DIR}" \
-    --job_name="nces-publicschoolstats-differ-highmem-$(date +%Y%m%d-%H%M%S)" \
-    --worker_machine_type=n2-highmem-16 \
-    --num_workers=10 \
-    --max_num_workers=100 \
-    --experiments=use_runner_v2 \
-    --existing_mcf_path="${OLD_RUN}/*.mcf" \
-    --new_mcf_path="${NEW_RUN}/*.mcf" \
-    --output_path="${DIFF_OUT}"
-```
+### Differ & Validation (`NCES_PublicSchoolStats`)
+Differ and validation (`check_deleted_records_percent`, `check_max_date_consistent`, and `check_max_date_freshness`) are enabled by default in `public_school/manifest.json` and `public_school/validation_config.json`.
+In production, the workflow runs the BigQuery differ (`validator/main.py --run_bq_differ`) automatically; for standalone dev checks on large MCFs, run `tools/import_differ/bigquery_differ.py` on the GCS paths.
 
 #### Cleaned Data
     import_name consists of the school name being used 
