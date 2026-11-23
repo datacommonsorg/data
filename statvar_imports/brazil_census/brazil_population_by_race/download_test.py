@@ -238,11 +238,41 @@ class DownloadTest(unittest.TestCase):
                            output_file=out_csv,
                            fallback_to_cached=False)
 
-        self.assertTrue(any("/n6/all/v/93/p/2022/" in u for u in seen_urls))
-        self.assertTrue(any("/n6/all/v/93/p/2032/" in u for u in seen_urls))
+        self.assertTrue(
+            any("t/9605/n6/all/v/93/p/2022/" in u for u in seen_urls))
+        self.assertTrue(
+            any("t/9605/n6/all/v/93/p/2032/" in u for u in seen_urls))
+        self.assertFalse(
+            any("/n1/all/n2/all/n3/all/n6/all/" in u for u in seen_urls))
         df = pd.read_csv(out_csv)
         self.assertEqual(set(df["Ano"].values), {2022, 2032})
         self.assertNotIn("5101837", set(df["Localidade"].astype(str).values))
+
+    @patch.object(download_mod, "sync_historical_csv")
+    def test_table_9605_empty_period_batches_raises(self, _mock_sync):
+        """Tests Table 9605 raises RuntimeError if probe returns only <2022 periods."""
+        session = MagicMock()
+        resp = MagicMock()
+        resp.raise_for_status.return_value = None
+        resp.json.return_value = [
+            {
+                "NC": "Header"
+            },
+            {
+                "NC": "1",
+                "D1N": "Brasil",
+                "D3C": "2010",
+                "D3N": "2010",
+                "V": "190755799",
+            },
+        ]
+        session.get.return_value = resp
+
+        out_csv = os.path.join(self.test_dir, "race_empty_periods.csv")
+        with self.assertRaises(RuntimeError):
+            download_all_years(session=session,
+                               output_file=out_csv,
+                               fallback_to_cached=False)
 
 
 if __name__ == "__main__":

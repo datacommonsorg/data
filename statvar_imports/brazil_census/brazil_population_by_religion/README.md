@@ -4,7 +4,7 @@
   - [IBGE SIDRA Table 9537](https://sidra.ibge.gov.br/tabela/9537) (2022 resident population aged 10+ by religion across national, regional, state, and municipal levels)
   - [IBGE SIDRA Table 2094](https://sidra.ibge.gov.br/tabela/2094) (2010 resident population of all ages by religion across national, regional, state, and municipal levels)
   - IBGE Historical Census baselines (`1940`, `2000`, `2010` synced from `gs://unresolved_mcf/country/brazil/history/brazil_population_by_religion/brazil_population_by_religion_historical.csv`)
-- **Raw Downloads**: `raw_files/` (`sidra_9537_2022_n6.json`, `sidra_2094_2010_n6.json`)
+- **Raw Downloads**: `raw_files/` (`sidra_9537_2022_n6.json`)
 - **Processed Inputs & Outputs**:
   - `input_files/brazil_population_by_religion.csv` (`Ano,Localidade,Religiao,Populacao`) + `history/brazil_population_by_religion_historical.csv` -> `brazil_population_by_religion.csv` & `brazil_population_by_religion.tmcf` (via `brazil_population_by_religion_pvmap.csv` and `brazil_population_by_religion_metadata.csv`)
 - **Coverage**: 1940, 2000, 2010, 2022+

@@ -284,6 +284,49 @@ class DownloadTest(unittest.TestCase):
         self.assertEqual(set(df["Ano"].values),
                          {2022, 2024, 2025, 2026, 2027, 2028, 2029, 2030})
 
+    @patch.object(download_mod, "sync_historical_csv")
+    def test_table_6579_empty_period_batches_raises(self, _mock_sync):
+        """Tests Table 6579 raises RuntimeError if probe returns only <=2022 periods."""
+        session = MagicMock()
+
+        def get_mock_response(url, **kwargs):
+            resp = MagicMock()
+            resp.raise_for_status.return_value = None
+            if "6579/n1/1/" in url:
+                resp.json.return_value = [
+                    {
+                        "NC": "Header"
+                    },
+                    {
+                        "NC": "1",
+                        "D1N": "Brasil",
+                        "D3C": "2021",
+                        "D3N": "2021",
+                        "V": "213317639",
+                    },
+                ]
+            else:
+                resp.json.return_value = [
+                    {
+                        "NC": "Header"
+                    },
+                    {
+                        "NC": "1",
+                        "D1N": "Brasil",
+                        "D3N": "2022",
+                        "D4N": "Total",
+                        "V": "203080756",
+                    },
+                ]
+            return resp
+
+        session.get.side_effect = get_mock_response
+        out_csv = os.path.join(self.test_dir, "output_empty_6579.csv")
+        with self.assertRaises(RuntimeError):
+            download_all_years(session=session,
+                               output_file=out_csv,
+                               fallback_to_cached=False)
+
 
 if __name__ == "__main__":
     unittest.main()

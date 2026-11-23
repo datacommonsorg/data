@@ -164,6 +164,9 @@ def download_all_years(
             batch_size=5,
             raw_file_path=os.path.join(raw_dir, "sidra_6579_probe.json"),
         )
+        if not period_batches:
+            raise RuntimeError(
+                "No >2022 periods discovered from SIDRA Table 6579.")
         for batch in period_batches:
             periods_param = ",".join(batch)
             periods_slug = "_".join(batch)

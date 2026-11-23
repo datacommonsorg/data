@@ -48,9 +48,8 @@ TABLE_9605_API_URL = (f"{SIDRA_BASE_URL}/values/t/9605/n1/all/n2/all/n3/all"
                       f"/v/93/p/all/c86/all?formato=json")
 TABLE_9605_PERIOD_PROBE_URL = (
     f"{SIDRA_BASE_URL}/values/t/9605/n1/1/v/93/p/all/c86/95251?formato=json")
-TABLE_9605_N6_TEMPLATE = (
-    f"{SIDRA_BASE_URL}/values/t/9605/n1/all/n2/all/n3/all/n6/all"
-    f"/v/93/p/{{period}}/c86/all?formato=json")
+TABLE_9605_N6_TEMPLATE = (f"{SIDRA_BASE_URL}/values/t/9605/n6/all"
+                          f"/v/93/p/{{period}}/c86/all?formato=json")
 
 GCS_BUCKET_NAME = "unresolved_mcf"
 GCS_HISTORY_BLOB = ("country/brazil/history/brazil_population_by_race/"
@@ -104,6 +103,9 @@ def download_all_years(
             batch_size=1,
             raw_file_path=os.path.join(raw_dir, "sidra_9605_probe.json"),
         )
+        if not period_batches:
+            raise RuntimeError(
+                "No >=2022 periods discovered from SIDRA Table 9605.")
         api_urls = [(
             f"sidra_9605_{batch[0]}_n6.json",
             TABLE_9605_N6_TEMPLATE.format(period=batch[0]),
