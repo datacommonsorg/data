@@ -1,0 +1,31 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "DynamicWorld_Flood",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_DYNAMICWORLD_V1",
+            "provenance_description": "Monthly flood event area and count observations derived from Google Earth Engine Dynamic World V1 near-real-time land cover water probability bands masked against permanent water.",
+            "scripts": [
+                "download_script.py",
+                "../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/dynamic_world_flood_place_svobs.csv --pv_map=dynamic_world_flood_pvmap.csv --config_file=dynamic_world_flood_metadata.csv --output_path=output/dynamic_world_flood_output --existing_schema_mcf=dynamic_world_flood_schema.mcf --output_counters=counters/dynamic_world_flood_counters.csv"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output/dynamic_world_flood_output.tmcf",
+                    "cleaned_csv": "output/dynamic_world_flood_output.csv",
+                    "node_mcf": "dynamic_world_flood_schema.mcf"
+                }
+            ],
+            "source_files": [
+                "input_files/dynamic_world_flood_place_svobs.csv",
+                "counters/*.csv",
+                "golden_data/*.csv",
+                "validation_config.json"
+            ],
+            "validation_config_file": "validation_config.json",
+            "cron_schedule": "0 8 2 * *"
+        }
+    ]
+}
