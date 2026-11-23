@@ -1,4 +1,4 @@
-# Dynamic World V1 Flood Import (`DynamicWorld_Flood`)
+# Dynamic World V1 Flood Import (`DynamicWorld_Floods`)
 
 ## Overview
 This import extracts monthly flood event area (`Area_FloodEvent`) and count (`Count_FloodEvent`) observations per S2 level-10 cell (`s2CellId/...`) directly from Google Earth Engine's Dynamic World V1 near-real-time land cover dataset:

@@ -1,7 +1,7 @@
 {
     "import_specifications": [
         {
-            "import_name": "DynamicWorld_Flood",
+            "import_name": "DynamicWorld_Floods",
             "curator_emails": [
                 "support@datacommons.org"
             ],
