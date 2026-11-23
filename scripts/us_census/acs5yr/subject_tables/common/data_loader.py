@@ -276,7 +276,7 @@ class SubjectTableDataLoaderBase:
                 ]
                 if value_cols:
                     cleaned = df[value_cols].replace(r',|[+-]$', '', regex=True)
-                    df[value_cols] = cleaned.replace('', np.nan)
+                    df[value_cols] = cleaned.replace(r'^\s*$', np.nan, regex=True)
         return df
 
     def _process_dataframe(self, df, filename):
