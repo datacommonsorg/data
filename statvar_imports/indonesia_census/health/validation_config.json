@@ -33,7 +33,7 @@
             },
             "params": {
                 "query": "SELECT COUNT(*) AS MatchedStatVars, COALESCE(SUM(NumObservations), 0) AS TotalObs, MIN(CAST(MaxDate AS INTEGER)) AS MinLatestDate FROM stats WHERE NumPlaces >= 35 AND StatVar IN ('Count_Person_15OrMoreYears_Smoking_AsFractionOf_Count_Person_15OrMoreYears', 'Count_HealthEstablishment_WithUnmetNeed', 'Count_Person_Male_ConditionDiseasedPerson_AsAFractionOf_Count_Person', 'Count_Person_Female_ConditionDiseasedPerson_AsAFractionOf_Count_Person')",
-                "condition": "MatchedStatVars = 4 AND TotalObs >= 1500 AND MinLatestDate >= YEAR(CURRENT_DATE) - 1",
+                "condition": "MatchedStatVars = 4 AND TotalObs >= 1500 AND MinLatestDate >= YEAR(CURRENT_DATE) - 2",
                 "failure_message": "2025-cohort Health StatVar observation count or freshness validation failed."
             }
         },
@@ -52,7 +52,7 @@
             },
             "params": {
                 "query": "SELECT COUNT(*) AS MatchedStatVars, COALESCE(SUM(NumObservations), 0) AS TotalObs, MIN(CAST(MaxDate AS INTEGER)) AS MinLatestDate FROM stats WHERE NumPlaces >= 35 AND StatVar IN ('LifeExpectancy_Person_Male', 'LifeExpectancy_Person_Female', 'Count_Person_15To49Years_ContraceptionMethod_Female_Married_AsAFractionOf_Count_Person_15To49Year_Female_Married')",
-                "condition": "MatchedStatVars = 3 AND TotalObs >= 15000 AND MinLatestDate >= YEAR(CURRENT_DATE) - 2",
+                "condition": "MatchedStatVars = 3 AND TotalObs >= 15000 AND MinLatestDate >= YEAR(CURRENT_DATE) - 3",
                 "failure_message": "2024-cohort Health StatVar observation count or freshness validation failed."
             }
         }

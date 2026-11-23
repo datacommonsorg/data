@@ -449,7 +449,12 @@ def clean_label(raw_label: str) -> str:
 
 
 def normalize_numeric_cell(val: str) -> str:
-    """Normalizes Indonesian-formatted numeric cells (e.g. '1.234,56', '2 727')."""
+    """Normalizes Indonesian-formatted numeric cells in BPS static HTML tables.
+
+    Assumes Indonesian locale formatting in BPS static HTML tables, where dots
+    or spaces separate thousands and commas separate decimals (e.g. '1.234,56',
+    '4.969' -> '4969', '2 727' -> '2727', '12,34' -> '12.34').
+    """
     cleaned = val.strip()
     if cleaned in ('-', '--', '–', '—', '...', 'n.a', 'N/A', 'NA'):
         return ''
@@ -893,15 +898,18 @@ def process_outpatient_static_table(grid: list[list[str]],
                         'PENDUDUK PEREMPUAN')
         raw_years = [c.strip() for c in sec_rows[0][1:]]
         raw_facilities = [c.strip() for c in sec_rows[1][1:]]
+        if len(raw_years) != len(raw_facilities):
+            raise RuntimeError(
+                f"Mismatched header lengths in {section['gender']} section of "
+                f"table 1620: {len(raw_years)} years vs "
+                f"{len(raw_facilities)} facilities")
         # Exclude redundant 'Jumlah' (100.00% total) columns in 2009-2014.
         keep_indices = [
             idx for idx, fac in enumerate(raw_facilities)
             if fac.lower() != 'jumlah'
         ]
         year_row = ['Provinsi'] + [
-            format_year_header(raw_years[idx])
-            for idx in keep_indices
-            if idx < len(raw_years)
+            format_year_header(raw_years[idx]) for idx in keep_indices
         ]
         facility_row = [gender_label
                        ] + [raw_facilities[idx] for idx in keep_indices]

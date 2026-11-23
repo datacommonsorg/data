@@ -667,6 +667,26 @@ class DownloadHealthTest(unittest.TestCase):
             ],
         )
 
+    def test_outpatient_static_table_mismatched_headers_raises(self):
+        bad_grid = [
+            ['PENDUDUK LAKI-LAKI'],
+            ['Provinsi', '2024'],
+            ['', 'RS Pemerintah', 'Puskesmas'],
+            ['ACEH', '10,5', '20,5'],
+            ['PENDUDUK PEREMPUAN'],
+            ['Provinsi', '2024'],
+            ['', 'RS Pemerintah'],
+            ['ACEH', '12,0'],
+        ]
+        with tempfile.TemporaryDirectory() as tmpdir:
+            with self.assertRaisesRegex(RuntimeError,
+                                        'Mismatched header lengths'):
+                download.process_outpatient_static_table(
+                    bad_grid,
+                    os.path.join(tmpdir, 'male.csv'),
+                    os.path.join(tmpdir, 'female.csv'),
+                )
+
 
 if __name__ == '__main__':
     unittest.main()
