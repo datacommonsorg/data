@@ -47,12 +47,12 @@ The data is sliced by the following properties:
 ## Dataset Coverage
 
 - **Years**: `2010–2024`
-- **Geography**: Country (`010`), Census Division (`030`), State (`040`), County (`050`), County Subdivision (`060`), Census Tract (`140`), Block Group (`150`), Place (`160`), Metropolitan/Micropolitan Statistical Area (`310`), Congressional District (`500`), ZCTA (`860`), and School Districts (`950`, `960`, `970`)
+- **Geography**: Source CSVs include Country (`010`), Census Division (`030`), State (`040`), County (`050`), County Subdivision (`060`), Census Tract (`140`), Place (`160`), Metropolitan/Micropolitan Statistical Area (`310`), Congressional District (`500`), ZCTA (`860`), and School Districts (`950`, `960`, `970`). *(Note: Census suppresses smaller summary levels—including all `060` and `140` rows and most sub-state geographies—for S0504, so `S0504_cleaned.csv` retains only geographies with non-suppressed observations.)*
 - **Source Table**: [US Census Bureau Table S0504: Selected Characteristics of the Foreign-Born Population by Region of Birth: Africa, Northern America, and Oceania](https://data.census.gov/table?q=S0504)
 
 ## Prerequisites & Working Directory
 
-Install the repository Python dependencies (`pip install -r requirements_all.txt`) and run the processing commands from `scripts/us_census/acs5yr/subject_tables`:
+From the repository root, create `.env` and install Python dependencies with `./run_tests.sh -r`, activate `.env` (`source .env/bin/activate`), and run the processing commands from `scripts/us_census/acs5yr/subject_tables`:
 
 ```shell
 cd scripts/us_census/acs5yr/subject_tables
@@ -112,7 +112,7 @@ Checked-in files in `S0504/`:
 From the repository root, run the directory-scoped test runner:
 
 ```shell
-./run_tests.sh -p scripts/us_census/acs5yr/subject_tables
+./run_tests.sh -p scripts/us_census/acs5yr
 ```
 
 ## Refresh Procedure
