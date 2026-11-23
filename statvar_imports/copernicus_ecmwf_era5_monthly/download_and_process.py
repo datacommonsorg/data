@@ -63,42 +63,6 @@ import file_util
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string(
-    'gcs_baseline_prefix',
-    'gs://datacommons_public/unresolved_mcf/copernicus_ecmwf/era5_monthly/',
-    'GCS URI prefix containing cached historical .celsius.csv files.',
-)
-flags.DEFINE_string(
-    'history_dir',
-    os.path.join(_SCRIPT_DIR, 'history_files'),
-    'Directory containing historical baseline .celsius.csv files (1979-01..2020-06).',
-)
-flags.DEFINE_string(
-    'raw_dir',
-    os.path.join(_SCRIPT_DIR, 'raw_files'),
-    'Directory containing raw Kelvin CSV files from Earth Engine.',
-)
-flags.DEFINE_string(
-    'input_dir',
-    os.path.join(_SCRIPT_DIR, 'input_files'),
-    'Directory containing newly fetched Kelvin-to-Celsius converted .celsius.csv files.',
-)
-flags.DEFINE_string(
-    'ee_dataset',
-    'ECMWF/ERA5_LAND/MONTHLY_AGGR',
-    'Earth Engine ImageCollection asset ID for post-2020-06 monthly data.',
-)
-flags.DEFINE_string(
-    'ee_start_date',
-    '2020-07',
-    'Start year-month (YYYY-MM) for Earth Engine extraction.',
-)
-flags.DEFINE_string(
-    'ee_end_date',
-    '',
-    'End year-month (YYYY-MM) inclusive for Earth Engine extraction. '
-    'Defaults to the previous calendar month.',
-)
 _DEFAULT_EE_PROJECT = os.environ.get('EE_PROJECT',
                                      'datcom-import-automation-prod')
 _DEFAULT_EE_PLACE_ASSETS = [
@@ -109,49 +73,88 @@ _DEFAULT_EE_PLACE_ASSETS = [
     ).split(',') if asset.strip()
 ]
 
-flags.DEFINE_string(
-    'ee_project',
-    _DEFAULT_EE_PROJECT,
-    'GCP project ID with Earth Engine API enabled (or set EE_PROJECT env var).',
-)
-flags.DEFINE_list(
-    'ee_place_assets',
-    _DEFAULT_EE_PLACE_ASSETS,
-    'Earth Engine FeatureCollection assets containing place geometries and dcid '
-    '(or set EE_PLACE_ASSETS env var).',
-)
-flags.DEFINE_integer(
-    'reduce_region_scale',
-    1000,
-    'Scale in meters for ee.Image.reduceRegion().',
-)
-flags.DEFINE_bool(
-    'skip_gcs_baseline',
-    False,
-    'If True, skip syncing baseline .celsius.csv files (1979-01..2020-06) from GCS.',
-)
-flags.DEFINE_bool(
-    'skip_ee_fetch',
-    False,
-    'If True, skip fetching new months from Earth Engine.',
-)
-flags.DEFINE_bool(
-    'strict_ee',
-    True,
-    'If True, fail the run if Earth Engine initialization, fetch, or post-2020-06 '
-    'extraction returns empty.',
-)
-flags.DEFINE_integer(
-    'parallelism',
-    min(16,
-        os.cpu_count() or 4),
-    'Number of parallel worker threads for baseline download.',
-)
-flags.DEFINE_integer(
-    'ee_parallelism',
-    12,
-    'Number of parallel worker threads for Earth Engine monthly fetches.',
-)
+
+def _define_flags() -> None:
+    """Registers CLI flags when running as a script."""
+    flags.DEFINE_string(
+        'gcs_baseline_prefix',
+        'gs://datacommons_public/unresolved_mcf/copernicus_ecmwf/era5_monthly/',
+        'GCS URI prefix containing cached historical .celsius.csv files.',
+    )
+    flags.DEFINE_string(
+        'history_dir',
+        os.path.join(_SCRIPT_DIR, 'history_files'),
+        'Directory containing historical baseline .celsius.csv files (1979-01..2020-06).',
+    )
+    flags.DEFINE_string(
+        'raw_dir',
+        os.path.join(_SCRIPT_DIR, 'raw_files'),
+        'Directory containing raw Kelvin CSV files from Earth Engine.',
+    )
+    flags.DEFINE_string(
+        'input_dir',
+        os.path.join(_SCRIPT_DIR, 'input_files'),
+        'Directory containing newly fetched Kelvin-to-Celsius converted .celsius.csv files.',
+    )
+    flags.DEFINE_string(
+        'ee_dataset',
+        'ECMWF/ERA5_LAND/MONTHLY_AGGR',
+        'Earth Engine ImageCollection asset ID for post-2020-06 monthly data.',
+    )
+    flags.DEFINE_string(
+        'ee_start_date',
+        '2020-07',
+        'Start year-month (YYYY-MM) for Earth Engine extraction.',
+    )
+    flags.DEFINE_string(
+        'ee_end_date',
+        '',
+        'End year-month (YYYY-MM) inclusive for Earth Engine extraction. '
+        'Defaults to the previous calendar month.',
+    )
+    flags.DEFINE_string(
+        'ee_project',
+        _DEFAULT_EE_PROJECT,
+        'GCP project ID with Earth Engine API enabled (or set EE_PROJECT env var).',
+    )
+    flags.DEFINE_list(
+        'ee_place_assets',
+        _DEFAULT_EE_PLACE_ASSETS,
+        'Earth Engine FeatureCollection assets containing place geometries and dcid '
+        '(or set EE_PLACE_ASSETS env var).',
+    )
+    flags.DEFINE_integer(
+        'reduce_region_scale',
+        1000,
+        'Scale in meters for ee.Image.reduceRegion().',
+    )
+    flags.DEFINE_bool(
+        'skip_gcs_baseline',
+        False,
+        'If True, skip syncing baseline .celsius.csv files (1979-01..2020-06) from GCS.',
+    )
+    flags.DEFINE_bool(
+        'skip_ee_fetch',
+        False,
+        'If True, skip fetching new months from Earth Engine.',
+    )
+    flags.DEFINE_bool(
+        'strict_ee',
+        True,
+        'If True, fail the run if Earth Engine initialization, fetch, or post-2020-06 '
+        'extraction returns empty.',
+    )
+    flags.DEFINE_integer(
+        'parallelism',
+        min(16,
+            os.cpu_count() or 4),
+        'Number of parallel worker threads for baseline download.',
+    )
+    flags.DEFINE_integer(
+        'ee_parallelism',
+        12,
+        'Number of parallel worker threads for Earth Engine monthly fetches.',
+    )
 
 # Kelvin to Celsius offset matching kelvin2celsius.sh
 KELVIN_OFFSET = 273.15
@@ -1028,4 +1031,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)
