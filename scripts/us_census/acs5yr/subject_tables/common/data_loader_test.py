@@ -98,6 +98,7 @@ class DataLoaderBaseTest(unittest.TestCase):
             'median_age': ['9.0+', '-', '38.5'],
             'median_income': ['250,000+', '2,500-', '(X)'],
             'neg_val': ['-5.5', '+', '1,234'],
+            'whitespace_col': ['   ', ' +', '42.0'],
         })
         cleaned = loader._replace_ignore_values_with_nan(df)
         self.assertEqual(cleaned.loc[0, 'Geographic Area Name'],
@@ -110,6 +111,9 @@ class DataLoaderBaseTest(unittest.TestCase):
         self.assertEqual(cleaned.loc[0, 'neg_val'], '-5.5')
         self.assertTrue(pd.isna(cleaned.loc[1, 'neg_val']))
         self.assertEqual(cleaned.loc[2, 'neg_val'], '1234')
+        self.assertTrue(pd.isna(cleaned.loc[0, 'whitespace_col']))
+        self.assertTrue(pd.isna(cleaned.loc[1, 'whitespace_col']))
+        self.assertEqual(cleaned.loc[2, 'whitespace_col'], '42.0')
 
     def test_init_sets_clean_numeric_values_flag(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
