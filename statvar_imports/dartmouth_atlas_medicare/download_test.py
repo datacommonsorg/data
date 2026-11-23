@@ -489,6 +489,44 @@ class DownloadTest(unittest.TestCase):
             },
         )
 
+    def test_iter_xlsx_rows_with_banner_rows_above_header(self):
+        xlsx_bytes = _build_xlsx_bytes([
+            (
+                "Data_With_Banner",
+                [
+                    ["Dartmouth Atlas Medicare Reimbursements 2020"],
+                    ["Note: Values of -88888 are suppressed."],
+                    [
+                        "Year",
+                        "County #",
+                        "Medicare Enrollees",
+                        "Price-adjusted Total Medicare Reimbursements per "
+                        "Enrollee (Parts A and B)",
+                    ],
+                    ["2020", "01001", "5,120", "$11,240.50"],
+                ],
+            ),
+        ])
+        with tempfile.TemporaryDirectory() as tmpdir:
+            wb_path = Path(tmpdir) / "county_stdprices_ffs_2020.xlsx"
+            wb_path.write_bytes(xlsx_bytes)
+            obs: dict[tuple[str, str, str], str] = {}
+            download.process_archive(
+                wb_path,
+                kind="stdprices_table",
+                is_state=False,
+                observations=obs,
+            )
+        self.assertEqual(
+            obs,
+            {
+                ("2020", "geoId/01001", "MedicareEnrollee_Count"):
+                    "5120",
+                ("2020", "geoId/01001", "MedicareEnrollee_MeanPrice"):
+                    "11240.5",
+            },
+        )
+
     def test_discover_source_archives_and_fallback(self):
         mock_session = mock.MagicMock()
         reim_resp = mock.MagicMock()

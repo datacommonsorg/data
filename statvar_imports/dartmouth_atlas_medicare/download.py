@@ -541,13 +541,20 @@ def iter_xlsx_rows(xlsx_path: Path):
                 if any(c.strip() for c in cells):
                     raw_rows.append(cells)
 
-            if len(raw_rows) < 2:
-                continue
-            header = [h.lstrip("\ufeff").strip().lower() for h in raw_rows[0]]
-            if "year" not in header:
+            header_idx: int | None = None
+            header: list[str] = []
+            for idx, candidate in enumerate(raw_rows[:10]):
+                normalized_hdr = [
+                    h.lstrip("\ufeff").strip().lower() for h in candidate
+                ]
+                if "year" in normalized_hdr:
+                    header_idx = idx
+                    header = normalized_hdr
+                    break
+            if header_idx is None or header_idx + 1 >= len(raw_rows):
                 continue
             found_data_sheet = True
-            for values in raw_rows[1:]:
+            for values in raw_rows[header_idx + 1:]:
                 row_dict = {
                     header[i]: (values[i] if i < len(values) else "").strip()
                     for i in range(len(header))
