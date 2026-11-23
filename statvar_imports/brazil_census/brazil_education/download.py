@@ -31,6 +31,7 @@ for _p in (PARENT_DIR, SCRIPT_DIR):
 from absl import app
 from absl import flags
 from absl import logging
+from brazil_download_utils import define_download_flags
 from brazil_download_utils import fetch_sidra_data
 from brazil_download_utils import get_history_path
 from brazil_download_utils import get_raw_dir
@@ -84,18 +85,6 @@ GCS_HISTORY_BLOB = (
     "country/brazil/history/brazil_education/brazil_education_historical.csv")
 
 FLAGS = flags.FLAGS
-if "output_file" not in FLAGS:
-    flags.DEFINE_string(
-        "output_file",
-        "",
-        "Output CSV file path. Defaults to input_files/brazil_education.csv.",
-    )
-if "fallback_to_cached" not in FLAGS:
-    flags.DEFINE_boolean(
-        "fallback_to_cached",
-        False,
-        "Whether to fallback to locally cached CSV if live download fails.",
-    )
 
 DEFAULT_OUTPUT_DIR = os.path.join(SCRIPT_DIR, "input_files")
 DEFAULT_OUTPUT_FILE = os.path.join(DEFAULT_OUTPUT_DIR, "brazil_education.csv")
@@ -219,4 +208,5 @@ def main(argv: List[str]) -> None:
 
 
 if __name__ == "__main__":
+    define_download_flags("brazil_education.csv")
     app.run(main)

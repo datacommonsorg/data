@@ -19,6 +19,7 @@ import shutil
 import tempfile
 from typing import Any, Dict, List, Optional
 
+from absl import flags
 from absl import logging
 import pandas as pd
 import requests
@@ -185,3 +186,19 @@ def write_df_atomically(df: pd.DataFrame, target_path: str) -> None:
 
     os.replace(tmp_path, target_path)
     logging.info(f"Wrote {len(df)} records to {target_path}")
+
+
+def define_download_flags(default_filename: str) -> None:
+    """Defines CLI flags for a Brazil Census download script."""
+    if "output_file" not in flags.FLAGS:
+        flags.DEFINE_string(
+            "output_file",
+            "",
+            f"Output CSV file path. Defaults to input_files/{default_filename}.",
+        )
+    if "fallback_to_cached" not in flags.FLAGS:
+        flags.DEFINE_boolean(
+            "fallback_to_cached",
+            False,
+            "Whether to fallback to locally cached CSV if live download fails.",
+        )
