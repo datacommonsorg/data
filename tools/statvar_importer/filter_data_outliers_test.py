@@ -17,9 +17,6 @@ import os
 import sys
 import unittest
 
-from absl import app
-from absl import logging
-
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
 sys.path.append(os.path.dirname(_SCRIPT_DIR))
@@ -27,8 +24,6 @@ sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPT_DIR)), 'util'))
 
 import filter_data_outliers as filter_data
-
-from config_map import ConfigMap
 
 
 class FilterDataOutlierTest(unittest.TestCase):

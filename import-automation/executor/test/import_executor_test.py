@@ -17,15 +17,18 @@ Tests for import_executor.py.
 
 import json
 import os
-import unittest
-from unittest import mock
 import subprocess
 import tempfile
 import threading
+import unittest
+from unittest import mock
 
+from app import configs
 from app.executor import import_executor
 from app.executor.import_executor import ImportStatus
-from tools.import_validation.result import ValidationResult, ValidationStatus
+
+from tools.import_validation.result import ValidationResult
+from tools.import_validation.result import ValidationStatus
 from tools.import_validation.runner import ValidationRunner
 
 
@@ -43,6 +46,35 @@ class ImportExecutorTest(unittest.TestCase):
         self.assertEqual(
             '2020-07-15',
             import_executor._clean_date('2020-07-15T12:07:17.365264+00:00'))
+
+    @mock.patch.object(import_executor, '_get_cpu_count', return_value=8)
+    def test_get_import_tool_args_with_num_threads(self, _):
+        self.assertEqual(['-o=/out', '-n=4', 'genmcf', 'a.tmcf', 'a.csv'],
+                         import_executor._get_import_tool_args(
+                             '/out', ['a.tmcf', 'a.csv'], 4))
+
+    @mock.patch.object(import_executor, '_get_cpu_count', return_value=2)
+    def test_get_import_tool_args_num_threads_capped_at_cpu_count(self, _):
+        self.assertEqual(['-o=/out', '-n=2', 'genmcf', 'a.tmcf', 'a.csv'],
+                         import_executor._get_import_tool_args(
+                             '/out', ['a.tmcf', 'a.csv'], 4))
+
+    @mock.patch.object(import_executor, '_get_cpu_count', return_value=8)
+    def test_get_import_tool_args_without_num_threads(self, _):
+        self.assertEqual(['-o=/out', 'genmcf', 'a.tmcf', 'a.csv'],
+                         import_executor._get_import_tool_args(
+                             '/out', ['a.tmcf', 'a.csv'], 0))
+
+    def test_get_cpu_count_is_positive(self):
+        self.assertGreaterEqual(import_executor._get_cpu_count(), 1)
+
+    def test_default_import_tool_num_threads(self):
+        self.assertEqual(4, configs.ExecutorConfig().import_tool_num_threads)
+
+    def test_default_import_tool_max_ram_percentage(self):
+        self.assertEqual(
+            75.0,
+            configs.ExecutorConfig().import_tool_max_ram_percentage)
 
     def test_run_with_timeout(self):
         self.assertRaises(subprocess.TimeoutExpired,

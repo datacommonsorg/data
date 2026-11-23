@@ -15,15 +15,15 @@
 # limitations under the License.
 
 import json
+from pathlib import Path
 import tempfile
 import unittest
-from pathlib import Path
 from unittest import mock
 
 from jinja2 import Template
 
-from tools.agentic_import.sdmx_support.metadata_enricher_find import (
-    Config, EnrichmentItemsFinder)
+from tools.agentic_import.sdmx_support.metadata_enricher_find import Config
+from tools.agentic_import.sdmx_support.metadata_enricher_find import EnrichmentItemsFinder
 
 
 class EnrichmentItemsFinderTest(unittest.TestCase):

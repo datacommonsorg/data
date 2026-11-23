@@ -13,8 +13,9 @@
 # limitations under the License.
 """Utility functions for the import validation tool."""
 
-import pandas as pd
 import re
+
+import pandas as pd
 
 DIFFER_COLUMNS = ['StatVar', 'ADDED', 'DELETED', 'MODIFIED']
 

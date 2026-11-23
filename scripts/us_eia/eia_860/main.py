@@ -18,21 +18,29 @@ data for import.
 Run this script in this folder:
 python3 main.py
 """
-from absl import app, flags
 import io
 import os
-import requests
 import sys
 import zipfile
+
+from absl import app
+from absl import flags
+import requests
 
 # Allows the following module imports to work when running as a script
 sys.path.append(
     os.path.dirname(os.path.dirname(os.path.dirname(
         os.path.abspath(__file__)))))
-from us_eia.eia_860 import utility, power_plant
+from us_eia.eia_860 import power_plant
+from us_eia.eia_860 import utility
 
 FLAGS = flags.FLAGS
-flags.DEFINE_boolean('skip_import', False, 'Skips downloading data.')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_boolean('skip_import', False, 'Skips downloading data.')
+
 
 _URL = 'https://www.eia.gov/electricity/data/eia860/xls/eia8602019.zip'
 _RAW_PATH = 'tmp_raw_data'
@@ -64,4 +72,5 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

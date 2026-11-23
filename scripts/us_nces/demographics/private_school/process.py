@@ -22,12 +22,10 @@ output_files - output files (mcf, tmcf and csv are written here)
 """
 
 import os
-import shutil
 import sys
-from absl import flags
-from absl import app
-from absl import logging
 import warnings
+
+from absl import logging
 
 warnings.simplefilter(action='ignore', category=FutureWarning)
 warnings.simplefilter(action='ignore', category=DeprecationWarning)
@@ -35,7 +33,22 @@ warnings.simplefilter(action='ignore', category=FutureWarning)
 MODULE_DIR = os.path.dirname(__file__)
 sys.path.insert(1, MODULE_DIR + '/../..')
 from common.us_education import USEducation
-from config import *
+from config import CSV_DUPLICATE_NAME
+from config import CSV_FILE_NAME
+from config import CSV_FILE_PLACE
+from config import DROP_BY_VALUE
+from config import EXCLUDE_DATA_COLUMNS
+from config import EXCLUDE_LIST
+from config import EXCLUDE_PLACE_COLUMNS
+from config import MCF_FILE_NAME
+from config import OBSERVATION_PERIOD
+from config import POSSIBLE_DATA_COLUMNS
+from config import POSSIBLE_PLACE_COLUMNS
+from config import RENAMING_PRIVATE_COLUMNS
+from config import SCHOOL_TYPE
+from config import SPLIT_HEADER_ON_SCHOOL_TYPE
+from config import TMCF_FILE_NAME
+from config import TMCF_FILE_PLACE
 
 
 class NCESPrivateSchool(USEducation):

@@ -13,22 +13,23 @@
 # limitations under the License.
 """A script to process FBI Hate Crime data."""
 
+import copy
+import json
 import os
 import sys
-import json
-import pandas as pd
-import numpy as np
-import copy
-from utils import flatten_by_column, make_time_place_aggregation
+
+from absl import app
 from absl import flags
 from absl import logging
-from absl import app
+import numpy as np
+import pandas as pd
+from utils import flatten_by_column
+from utils import make_time_place_aggregation
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util/'))
-import file_util
-from statvar_dcid_generator import get_statvar_dcid, _PREPEND_APPEND_REPLACE_MAP
+from statvar_dcid_generator import get_statvar_dcid
 
 _FLAGS = flags.FLAGS
 flags.DEFINE_string(
@@ -1754,10 +1755,12 @@ def _write_to_csv(df: pd.DataFrame, csv_file_name: str):
     df.to_csv(csv_file_name, index=False)
 
 
-def process_main(input_csv=os.path.join(_SCRIPT_PATH, 'source_data',
-                                        'hate_crime.csv'),
-                 output_path=os.path.join(_SCRIPT_PATH, 'aggregations')):
+def process_main(input_csv=None, output_path=None):
     global _SCRIPT_PATH, _INPUT_COLUMNS, _AGGREGATIONS
+    if input_csv is None:
+        input_csv = os.path.join(_SCRIPT_PATH, 'source_data', 'hate_crime.csv')
+    if output_path is None:
+        output_path = os.path.join(_SCRIPT_PATH, 'aggregations')
     output_path = os.path.expanduser(output_path)
     logging.info(f'Processing input: {_FLAGS.input_file}')
     #with file_util.FileIO(_FLAGS.input_file, 'r') as input_f:

@@ -33,9 +33,10 @@ can set the `cache_file` argument to a file path.
 """
 
 import os
-import requests
 import sys
 import threading
+
+import requests
 
 # Allows the following module imports to work when running as a script
 sys.path.append(

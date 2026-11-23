@@ -106,8 +106,11 @@ This command validates the generated files for formatting and semantic consisten
 
 # Usage:
 
+Lint takes one TMCF with its CSV files per run; `-o` sets the folder for the report (`report.json` and `summary_report.html`).
+
 ```Bash
-java -jar /path/to/datacommons-import-tool.jar lint -d 'processed_output/'
+java -jar /path/to/datacommons-import-tool.jar lint -o lint_report \
+  processed_output/*.csv processed_output/student_faculty_ratio.tmcf
 ```
 
 This step ensures that the generated artifacts are ready for ingestion into Data Commons.

@@ -21,6 +21,7 @@ Run "python3 parse_mint.py --help" for usage.
 
 import collections
 import re
+
 from absl import app
 from absl import flags
 
@@ -208,7 +209,7 @@ def check_dcid(alias):
         alias_map[key] = value
     if 'display_long' in alias_map:
         dcid = alias_map['display_long']
-        if re.search('[\W]+', dcid) or len(dcid.split('_')) != 2:
+        if re.search(r'[\W]+', dcid) or len(dcid.split('_')) != 2:
             return False
     return True
 

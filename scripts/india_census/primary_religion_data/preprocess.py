@@ -12,15 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
-import json
-import csv
 import copy
-import pandas as pd
-import numpy as np
-import tempfile
+import csv
+import os
 from os import path
-import urllib.request
+import tempfile
+
+import pandas as pd
+
 from ..common.utils import title_case
 
 CENSUS_DATA_COLUMN_START = 7
@@ -341,7 +340,7 @@ class CensusPrimaryReligiousDataLoader():
 
         key = "{0}_{1}".format(
             row["columnName"],
-            place_of_residence if place_of_residence != None else "Total")
+            place_of_residence if place_of_residence is not None else "Total")
 
         if data_category:
             key = key + "_" + title_case(data_category)

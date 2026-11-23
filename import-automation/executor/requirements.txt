@@ -12,6 +12,7 @@ dataclasses
 datacommons_client
 db-dtypes
 duckdb
+fastavro
 frozendict
 fsspec
 func-timeout
@@ -32,7 +33,6 @@ google-cloud-logging
 google-cloud-scheduler
 google-cloud-secret-manager
 gspread
-gunicorn
 legacy-cgi
 lxml
 numpy

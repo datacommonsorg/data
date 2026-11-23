@@ -13,11 +13,12 @@
 # limitations under the License.
 """Runs all of the scripts in order as if in a fresh directory.
 """
-import zipfile
 import io
-import requests
+import zipfile
+
 import clean
 import generate_mcf
+import requests
 
 
 def download_files():

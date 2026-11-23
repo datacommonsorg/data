@@ -1,0 +1,8 @@
+Node: E:Death_gender_NUTS1->E0
+observationAbout: C:Death_gender_NUTS1->observationAbout
+observationDate: C:Death_gender_NUTS1->observationDate
+value: C:Death_gender_NUTS1->value
+variableMeasured: C:Death_gender_NUTS1->variableMeasured
+unit: C:Death_gender_NUTS1->unit
+scalingFactor: C:Death_gender_NUTS1->scalingFactor
+typeOf: dcs:StatVarObservation

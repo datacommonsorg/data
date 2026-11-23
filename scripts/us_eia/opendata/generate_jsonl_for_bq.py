@@ -35,8 +35,8 @@ To import to bigquery:
     ```
 """
 
-import os
 import json
+import os
 import sys
 
 IN_DATA_PATH = 'tmp_raw_data'
@@ -57,7 +57,7 @@ def extract_series_to_jsonl(line, dataset):
         d = {'date': k}
         try:
             d['value'] = float(v)
-        except:
+        except (TypeError, ValueError):
             d['value_note'] = v
         list_data.append(d)
     json_data['data'] = list_data

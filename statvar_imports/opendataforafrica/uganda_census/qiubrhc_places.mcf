@@ -1,0 +1,4 @@
+Node: dcid:country/UGA_ConflictAreas
+typeOf: dcs:Place
+name: "Conflict Areas"
+containedInPlace: dcid:country/UGA

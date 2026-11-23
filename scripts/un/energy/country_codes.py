@@ -44,7 +44,6 @@ UN_COUNTRY_CODES = {
     204: 'country/BEN',  # Benin, BJ
     60: 'country/BMU',  # Bermuda, BM
     64: 'country/BTN',  # Bhutan, BT
-    68: 'country/BOL',  # Bolivia, Plurinational State of, BO
     68: 'country/BOL',  # Bolivia, BO
     535: 'country/BES',  # Bonaire St Eustatius Saba, BQ
     70: 'country/BIH',  # Bosnia and Herzegovina, BA
@@ -52,7 +51,6 @@ UN_COUNTRY_CODES = {
     74: 'country/BVT',  # Bouvet Island, BV
     76: 'country/BRA',  # Brazil, BR
     86: 'country/IOT',  # British Indian Ocean Territory, IO
-    96: 'country/BRN',  # Brunei Darussalam, BN
     96: 'country/BRN',  # Brunei, BN
     100: 'country/BGR',  # Bulgaria, BG
     854: 'country/BFA',  # Burkina Faso, BF
@@ -74,7 +72,6 @@ UN_COUNTRY_CODES = {
     180: 'country/COD',  # Congo, the Democratic Republic of the, CD
     184: 'country/COK',  # Cook Islands, CK
     188: 'country/CRI',  # Costa Rica, CR
-    384: 'country/CIV',  # Côte d'Ivoire, CI
     384: 'country/CIV',  # Ivory Coast, CI
     191: 'country/HRV',  # Croatia, HR
     192: 'country/CUB',  # Cuba, CU
@@ -147,7 +144,6 @@ UN_COUNTRY_CODES = {
     404: 'country/KEN',  # Kenya, KE
     296: 'country/KIR',  # Kiribati, KI
     408: 'country/PRK',  # Korea, Democratic People's Republic of, KP
-    410: 'country/KOR',  # Korea, Republic of, KR
     410: 'country/KOR',  # South Korea, KR
     412: 'country/XKS',  # Kosovo, XK, also XXK
     414: 'country/KWT',  # Kuwait, KW
@@ -157,7 +153,6 @@ UN_COUNTRY_CODES = {
     422: 'country/LBN',  # Lebanon, LB
     426: 'country/LSO',  # Lesotho, LS
     430: 'country/LBR',  # Liberia, LR
-    434: 'country/LBY',  # Libyan Arab Jamahiriya, LY
     434: 'country/LBY',  # Libya, LY
     438: 'country/LIE',  # Liechtenstein, LI
     440: 'country/LTU',  # Lithuania, LT
@@ -186,7 +181,6 @@ UN_COUNTRY_CODES = {
     500: 'country/MSR',  # Montserrat, MS
     504: 'country/MAR',  # Morocco, MA
     508: 'country/MOZ',  # Mozambique, MZ
-    104: 'country/MMR',  # Myanmar, MM
     104: 'country/MMR',  # Burma, MM
     516: 'country/NAM',  # Namibia, NA
     520: 'country/NRU',  # Nauru, NR
@@ -221,15 +215,12 @@ UN_COUNTRY_CODES = {
     638: 'country/REU',  # Réunion, RE
     639: '',  # Réunion, RE (additional)
     642: 'country/ROU',  # Romania, RO
-    643: 'country/RUS',  # Russian Federation, RU
     643: 'country/RUS',  # Russia, RU
     646: 'country/RWA',  # Rwanda, RW
     654: 'country/SHN',  # Saint Helena, Ascension and Tristan da Cunha, SH
     659: 'country/KNA',  # Saint Kitts and Nevis, KN
     662: 'country/LCA',  # Saint Lucia, LC
     666: 'country/SPM',  # Saint Pierre and Miquelon, PM
-    670: 'country/VCT',  # Saint Vincent and the Grenadines, VC
-    670: 'country/VCT',  # Saint Vincent & the Grenadines, VC
     670: 'country/VCT',  # St. Vincent and the Grenadines, VC
     882: 'country/WSM',  # Samoa, WS
     674: 'country/SMR',  # San Marino, SM
@@ -260,7 +251,6 @@ UN_COUNTRY_CODES = {
     756: 'country/CHE',  # Switzerland, CH
     757: '',  # Switzerland, CH (additional)
     760: 'country/SYR',  # Syrian Arab Republic, SY
-    158: 'country/TWN',  # Taiwan, Province of China, TW
     158: 'country/TWN',  # Taiwan, TW
     762: 'country/TJK',  # Tajikistan, TJ
     834: 'country/TZA',  # Tanzania, United Republic of, TZ
@@ -285,9 +275,7 @@ UN_COUNTRY_CODES = {
     810: '',  # USSR (former), SU (additional)
     860: 'country/UZB',  # Uzbekistan, UZ
     548: 'country/VUT',  # Vanuatu, VU
-    862: 'country/VEN',  # Venezuela, Bolivarian Republic of, VE
     862: 'country/VEN',  # Venezuela, VE
-    704: 'country/VNM',  # Viet Nam, VN
     704: 'country/VNM',  # Vietnam, VN
     92: 'country/VGB',  # Virgin Islands, British, VG
     850: 'country/VIR',  # Virgin Islands, U.S., VI

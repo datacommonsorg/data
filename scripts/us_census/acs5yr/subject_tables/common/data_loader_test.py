@@ -15,6 +15,7 @@
 import os
 import tempfile
 import unittest
+
 from .data_loader import process_subject_tables
 
 base_path = os.path.dirname(__file__)

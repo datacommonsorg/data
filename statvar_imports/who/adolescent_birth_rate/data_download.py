@@ -1,5 +1,6 @@
-import requests
 import os
+
+import requests
 
 output_dir = "input_files"
 

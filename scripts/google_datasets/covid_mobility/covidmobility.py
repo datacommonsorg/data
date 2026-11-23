@@ -13,19 +13,19 @@
 # limitations under the License.
 
 import os
-
 from sys import path
 
 module_dir_ = os.path.dirname(os.path.realpath(__file__))
 path.insert(1, os.path.join(module_dir_, '../../../'))
 
-from os import remove, path as ospath
 from csv import DictReader
+from os import path as ospath
+from os import remove
 from urllib.request import urlopen
 
-import util.name_to_alpha2 as name_to_alpha2
 import util.alpha2_to_dcid as alpha2_to_dcid
 import util.county_to_dcid as county_to_dcid
+import util.name_to_alpha2 as name_to_alpha2
 
 # Dictionary that maps a row name in the CSV file is mapped to a Schema place.
 # key = CSV's row name

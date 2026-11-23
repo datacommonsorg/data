@@ -39,13 +39,15 @@ input_files - downloaded files (from US census website) are placed here
 output_files - output files (mcf, tmcf and csv are written here)
 """
 
-import os
 from copy import deepcopy
-import pandas as pd
-import numpy as np
+import os
+
 from absl import app
 from cols_map import _get_mapper_cols_dict
-from constants import INPUT_DIRS, INPUT_DIR
+from constants import INPUT_DIR
+from constants import INPUT_DIRS
+import numpy as np
+import pandas as pd
 
 _CODEDIR = os.path.dirname(__file__)
 

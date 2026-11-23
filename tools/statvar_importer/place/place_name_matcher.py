@@ -31,7 +31,7 @@ Download all place properties in the KG with the dcid using BQ:
       latitude,
       longitude,
       ARRAY_TO_STRING(linked_contained_in_place, ',') as containedInPlace
-    FROM \`datcom-store.dc_kg_latest.Place\`
+    FROM \\`datcom-store.dc_kg_latest.Place\\`
     WHERE SUBSTRING(id, 4) not in ('ipcc', 'grid', 's2Ce')
   )
 
@@ -54,7 +54,6 @@ To resolve places in a csv file on command line:
 
 import ast
 import csv
-import glob
 import itertools
 import os
 import sys
@@ -106,8 +105,12 @@ class PlaceNameMatcher:
 
     def __init__(self,
                  place_file: str = '',
-                 places_within: list = [],
-                 config: dict = {}):
+                 places_within: list | None = None,
+                 config: dict | None = None):
+        if config is None:
+            config = {}
+        if places_within is None:
+            places_within = []
         self._config = dict(_DEFAULT_CONFIG)
         if config:
             self._config.update(config)
@@ -182,9 +185,11 @@ class PlaceNameMatcher:
         self,
         place_name: str,
         num_results: int = None,
-        property_filters: dict = {},
+        property_filters: dict | None = None,
     ) -> list:
         """Returns dcids that match the place name."""
+        if property_filters is None:
+            property_filters = {}
         if num_results is None:
             num_results = self._config.get('num_results', 10)
         matches = self._ngram_matcher.lookup(key=place_name,

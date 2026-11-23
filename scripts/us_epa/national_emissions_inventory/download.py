@@ -15,16 +15,17 @@
 This Python Script downloads the EPA files, into the input_files folder to be
 made available for further processing.
 """
-import os
-import requests
-import subprocess
-import sys
-import ssl
+from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import as_completed
 import json
-from absl import logging
-from concurrent.futures import ThreadPoolExecutor, as_completed
-from download_config import DOWNLOAD_CONFIG
+import os
+import ssl
+import subprocess
 from urllib.parse import urlparse
+
+from absl import logging
+from download_config import DOWNLOAD_CONFIG
+import requests
 
 # --- Configuration ---
 MAX_WORKERS = 5  # Number of concurrent downloads

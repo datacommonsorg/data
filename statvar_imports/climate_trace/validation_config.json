@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "check_max_date_consistent",
+      "description": "Verifies that all Climate TRACE StatVars share the same MaxDate.",
+      "validator": "MAX_DATE_CONSISTENT",
+      "params": {}
+    },
+    {
+      "rule_id": "check_max_date_freshness",
+      "description": "Verifies that every StatVar's MaxDate is within 1 year of the current year (allowing Jan-Jul runs before the current year's YTD release publishes).",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT StatVar, MaxDate FROM stats",
+        "condition": "COALESCE(TRY_CAST(MaxDate AS INTEGER), 0) >= YEAR(CURRENT_DATE) - 1"
+      }
+    }
+  ]
+}

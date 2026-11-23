@@ -16,7 +16,8 @@ import json
 import os
 import unittest
 
-from scripts.us_census.api_utils.download_utils import async_save_resp_json, download_url_list
+from scripts.us_census.api_utils.download_utils import async_save_resp_json
+from scripts.us_census.api_utils.download_utils import download_url_list
 
 
 class TestCommonUtil(unittest.TestCase):

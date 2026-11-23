@@ -17,28 +17,29 @@ Downloads and converts BLS CPI raw csv files to csv files of two columns:
 
 Usage: python3 generate_csv.py
 '''
-from curl_cffi import requests
-import pandas as pd
-from absl import flags
-from absl import app
-from absl import logging
-from retry import retry
 # FIX: Monkey-patch for Python 3.10+ where collections.Mapping was moved to collections.abc
-
 import collections
 import collections.abc
 
+from absl import app
+from absl import flags
+from absl import logging
+from curl_cffi import requests
+import pandas as pd
+from retry import retry
+
 collections.Mapping = collections.abc.Mapping
-import frozendict
 import os
 from pathlib import Path
-'''Defining the retry_method which will accepts below parameters
-   url: input url
-   headers: headers if you want to set
-'''
+
+import frozendict
+
 global buffer
 
 
+# Defining the retry_method which will accepts below parameters
+#   url: input url
+#   headers: headers if you want to set
 @retry(tries=3, delay=5, backoff=5)
 def retry_method(url, header):
     # To avoid 403 errors, we use impersonate to mimic a real browser's TLS fingerprint.
@@ -52,12 +53,18 @@ CSV_URLS = frozendict.frozendict({
     "c_cpi_u": "https://download.bls.gov/pub/time.series/su/su.data.1.AllItems"
 })
 _FLAGS = flags.FLAGS
-flags.DEFINE_integer(
-    'start_date', 1946,
-    'Data will process from assigned date which date format is <YYYY>')
-flags.DEFINE_string('input_path1', 'input_files', 'Input files path')
-flags.DEFINE_string('output_path1', 'output', 'Output files path')
-flags.DEFINE_string('mode', '', 'Options: download or process')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_integer(
+        'start_date', 1946,
+        'Data will process from assigned date which date format is <YYYY>')
+    flags.DEFINE_string('input_path1', 'input_files', 'Input files path')
+    flags.DEFINE_string('output_path1', 'output', 'Output files path')
+    flags.DEFINE_string('mode', '', 'Options: download or process')
+
+
 MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILE_PATH = None
 _OUTOUT_FILE_PATH = None
@@ -163,4 +170,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

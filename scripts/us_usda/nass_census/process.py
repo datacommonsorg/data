@@ -14,20 +14,28 @@
 """Import USDA Census of Agriculture."""
 
 import csv
-import io
-import os
-import sys
-import requests
-import gzip
-import shutil
 from datetime import datetime
-from absl import app, flags, logging
+import gzip
+import os
+import shutil
+import sys
+
+from absl import app
+from absl import flags
+from absl import logging
+import requests
 from retry import retry
 
 # Define flags
 _FLAGS = flags.FLAGS
-flags.DEFINE_string('output', 'output/agriculture.csv', 'Output CSV file')
-flags.DEFINE_string('mode', '', 'Mode to run: "download", "process", or both')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('output', 'output/agriculture.csv', 'Output CSV file')
+    flags.DEFINE_string('mode', '',
+                        'Mode to run: "download", "process", or both')
+
 
 # Constants
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -46,26 +54,36 @@ SKIPPED_VALUES = [
 ]
 
 
-def check_url_status(url):
+@retry(tries=3, delay=2, backoff=2, exceptions=(requests.RequestException,))
+def check_url_status(url, session=None):
+    client = session or requests
+    logging.info(f"HEAD {url}")
     try:
-        response = requests.head(url)
-        return response.status_code == 200
-    except requests.RequestException as e:
-        logging.fatal(f"Error checking URL {url}: {e}")
+        response = client.head(url, timeout=30, allow_redirects=True)
+        if response.status_code == 200:
+            return True
+        if response.status_code == 404:
+            return False
+        response.raise_for_status()
         return False
+    except requests.RequestException as e:
+        logging.error(f"Error checking URL {url}: {e}")
+        raise
 
 
 @retry(tries=3, delay=2, backoff=2, exceptions=(requests.RequestException,))
-def download_file(url, output_path):
-    """
-    Download a file from the specified URL with retry logic.
+def download_file(url, output_path, session=None):
+    """Download a file from the specified URL with retry logic.
 
     Args:
         url (str): URL of the file to download.
         output_path (str): Local path to save the downloaded file.
+        session (requests.Session, optional): Shared requests session.
     """
+    client = session or requests
+    logging.info(f"GET {url}")
     try:
-        response = requests.get(url, stream=True)
+        response = client.get(url, stream=True, timeout=120)
         response.raise_for_status()  # Raise HTTPError for bad responses
         with open(output_path, 'wb') as f:
             for chunk in response.iter_content(chunk_size=1024):
@@ -73,7 +91,7 @@ def download_file(url, output_path):
                     f.write(chunk)
         logging.info(f"Downloaded file: {output_path}")
     except requests.RequestException as e:
-        logging.fatal(f"Error downloading file from {url}: {e}")
+        logging.error(f"Error downloading file from {url}: {e}")
         raise
 
 
@@ -89,16 +107,17 @@ def unzip_file(input_path, output_dir):
         logging.info(f"Unzipped file to: {output_path}")
         return output_path
     except Exception as e:
-        logging.fatal(f"Error unzipping file {input_path}: {e}")
+        logging.error(f"Error unzipping file {input_path}: {e}")
+        raise
 
 
 def get_statvars(filename):
     d = {}
     with open(filename) as f:
         lines = f.readlines()
-    for l in lines:
-        l = l.strip()
-        p = l.split('^')
+    for line in lines:
+        line = line.strip()
+        p = line.split('^')
         d[p[0]] = tuple(p[1:])
     return d
 
@@ -140,10 +159,12 @@ def write_csv(reader, out, d):
             writer.writerow(row)
 
         logging.info(
-            f"Output file: {out.name} has been successfully generated.")
+            f"Output file: {getattr(out, 'name', '<stream>')} has been successfully generated."
+        )
 
     except Exception as e:
-        logging.fatal(f"The write_csv method failed due to the error: {e}")
+        logging.error(f"The write_csv method failed due to the error: {e}")
+        raise
 
 
 def merge_csv_files(output_file, input_files):
@@ -160,16 +181,17 @@ def merge_csv_files(output_file, input_files):
         logging.info(f"Merged output written to: {output_file}")
 
 
-def download_and_process_data(year, d):
-    url = f"https://www.nass.usda.gov/datasets/qs.census{year}.txt.gz"
+def download_and_process_data(year, d, session=None):
+    url = f"https://www.nass.usda.gov/sites/default/files/datasets/qs.census{year}.txt.gz"
     input_dir = "input"
     output_dir = "output"  # Define the output directory
     os.makedirs(input_dir, exist_ok=True)  # Ensure input directory exists
     os.makedirs(output_dir, exist_ok=True)  # Ensure output directory exists
 
-    if check_url_status(url):
+    if check_url_status(url, session=session):
         gz_file_path = os.path.join(input_dir, f"qs.census{year}.txt.gz")
-        download_file(url, gz_file_path)  # Download the .gz file
+        download_file(url, gz_file_path,
+                      session=session)  # Download the .gz file
         txt_file_path = unzip_file(gz_file_path,
                                    input_dir)  # Unzip to input directory
 
@@ -185,8 +207,13 @@ def download_and_process_data(year, d):
         logging.info(f"Processed file saved to: {output_file}")
         return output_file
     else:
-        logging.fatal(f"URL not accessible: {url}")
-        return None
+        if year > 2022 and year >= datetime.now().year - 2:
+            logging.warning(
+                f"URL not accessible (404), skipping future census year {year}: {url}"
+            )
+            return None
+        raise requests.HTTPError(
+            f"Historical or overdue census year {year} returned 404 at {url}")
 
 
 def main(_):
@@ -197,23 +224,25 @@ def main(_):
         logging.info(f"Created missing output directory: {output_dir}")
 
     #flag 'mode' to do the operations download and process together and individually
-    d = get_statvars('statvars')
+    d = get_statvars(os.path.join(_SCRIPT_DIR, 'statvars'))
     mode = _FLAGS.mode
     if mode == 'download' or mode == '':
         files = []
-        for year in range(2002, 2048, 5):
-            if year <= datetime.now().year:
-                file = download_and_process_data(year, d)
-                if file:
-                    files.append(file)
+        with requests.Session() as session:
+            for year in range(2002, 2048, 5):
+                if year <= datetime.now().year:
+                    file = download_and_process_data(year, d, session=session)
+                    if file:
+                        files.append(file)
+        if not files:
+            raise RuntimeError("No census files were downloaded or processed.")
         if mode == '':
             merge_csv_files(_FLAGS.output, files)
     elif mode == 'process':
         if not os.path.exists('input'):
-            logging.fatal(
+            raise FileNotFoundError(
                 "Input directory does not exist. Run with --mode=download first."
             )
-            return
         txt_files = [
             os.path.join('input', f)
             for f in os.listdir('input')
@@ -233,4 +262,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

@@ -40,27 +40,24 @@ To view task status, visit https://code.earthengine.google.com/tasks
 """
 
 import ast
-import datetime
-import ee
-import glob
+import collections
+import collections.abc
 import os
 import re
 import sys
 import time
 
-# Workaround for collection.Callable needed for ee.Initialize()
-import collections
-import collections.abc
+import ee
 
+# Workaround for collection.Callable needed for ee.Initialize()
 collections.Callable = collections.abc.Callable
+
+from datetime import date
+from datetime import timedelta
 
 from absl import app
 from absl import flags
 from absl import logging
-from datetime import date
-from datetime import datetime
-from datetime import timedelta
-from dateutil.relativedelta import relativedelta
 from google.auth import compute_engine
 
 _SCRIPTS_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -71,10 +68,9 @@ sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)), 'util'))
 
 import common_flags
+from counters import Counters
 import file_util
 import utils
-
-from counters import Counters
 
 flags.DEFINE_bool(
     'ee_remote', False,
@@ -274,8 +270,8 @@ def _get_bbox_coordinates(bounds: str) -> ee.Geometry.BBox:
         return None
     # Extract all coordinates.
     coords = list(filter(None, re.split(r'[^0-9\.+-]', bounds)))
-    latitudes = [float(coords[l]) for l in range(0, len(coords), 2)]
-    longitudes = [float(coords[l]) for l in range(1, len(coords), 2)]
+    latitudes = [float(coords[idx]) for idx in range(0, len(coords), 2)]
+    longitudes = [float(coords[idx]) for idx in range(1, len(coords), 2)]
     # Return the min/max latitude,longitude
     return {
         'west': min(longitudes),
@@ -286,7 +282,7 @@ def _get_bbox_coordinates(bounds: str) -> ee.Geometry.BBox:
 
 
 def ee_filter_bounds(col: ee.ImageCollection,
-                     config: dict = {}) -> ee.ImageCollection:
+                     config: dict | None = None) -> ee.ImageCollection:
     '''Retruns image or image collection filtered by the bounds
     in config[ee_bounds].
     Args:
@@ -295,6 +291,8 @@ def ee_filter_bounds(col: ee.ImageCollection,
     Returns:
       filtered image collection.
     '''
+    if config is None:
+        config = {}
     bbox_coords = _get_bbox_coordinates(config.get('ee_bounds', None))
     if bbox_coords:
         logging.info(f'Filtering image by bounds: {bbox_coords}')
@@ -304,7 +302,7 @@ def ee_filter_bounds(col: ee.ImageCollection,
 
 
 def ee_filter_date(col: ee.ImageCollection,
-                   config: dict = {}) -> ee.ImageCollection:
+                   config: dict | None = None) -> ee.ImageCollection:
     '''Returns the image collection filtered for the date range.
     Args:
       col: image collection
@@ -314,6 +312,8 @@ def ee_filter_date(col: ee.ImageCollection,
       filtered image collection.
     '''
     # Get start date or last week.
+    if config is None:
+        config = {}
     start_date = config.get('start_date', None)
     end_date = config.get('end_date', None)
     if start_date is None and end_date is None:
@@ -341,7 +341,7 @@ def ee_filter_date(col: ee.ImageCollection,
 
 
 def ee_reduce_image_collection(col: ee.ImageCollection,
-                               config: dict = {}) -> ee.Image:
+                               config: dict | None = None) -> ee.Image:
     '''Returns the image reduced from the image collection.
     Args:
       col: image collection
@@ -353,6 +353,8 @@ def ee_reduce_image_collection(col: ee.ImageCollection,
     Returns:
       image with bands changed to '<band>_<reducer>', eg: 'water_max'
     '''
+    if config is None:
+        config = {}
     if not isinstance(col, ee.ImageCollection):
         logging.error(f'Cannot reduce image: {col.id()} with config: {config}')
         return col
@@ -377,14 +379,14 @@ def ee_reduce_image_collection(col: ee.ImageCollection,
             # Get max value to filter by min threshold.
             reducers = ['max']
         if 'band_max' in config:
-            if not reducer:
+            if not reducers:
                 # Get min value to filter by max threshold alone.
-                reducer = ['min']
+                reducers = ['min']
             else:
                 # Get mean value if both min/max thresholds are set.
-                reducer = ['mean']
+                reducers = ['mean']
         elif 'band_eq' in config:
-            reducer = ['last']
+            reducers = ['last']
     img = ee.Image()
     for reducer in reducers:
         if reducer not in _REDUCER_DICT:
@@ -499,7 +501,7 @@ def ee_generate_image(config: dict) -> ee.Image:
         if dataset in config['datasets']:
             logging.info(f'Loading dataset: {dataset} from {config}')
             img = ee_generate_image(config['datasets'][dataset])
-            if img == None:
+            if img is None:
                 logging.error(f'Unable to get image for dataset {dataset}')
 
     # Load image from the config parameters and filter.
@@ -558,7 +560,8 @@ def ee_generate_image(config: dict) -> ee.Image:
     return img
 
 
-def export_ee_image_to_gcs(ee_image: ee.Image, config: dict = {}) -> str:
+def export_ee_image_to_gcs(ee_image: ee.Image,
+                           config: dict | None = None) -> str:
     '''Launch a task to export an EE image and returns the task id.
     View task status on https://code.earthengine.google.com/tasks.
     Assumes ee.Authenticate() has been run and user has access to the gcs_project.
@@ -572,6 +575,8 @@ def export_ee_image_to_gcs(ee_image: ee.Image, config: dict = {}) -> str:
       Once complete, the GCS folder will have multiple files with the name prefix.
     '''
     # Get the image region to export.
+    if config is None:
+        config = {}
     region_bbox = None
     bbox_coords = None
     if config.get('ee_bounds'):
@@ -604,7 +609,7 @@ def export_ee_image_to_gcs(ee_image: ee.Image, config: dict = {}) -> str:
         fileFormat='GeoTIFF')
     task.start()
     print(f'Created EE task: {task}')
-    print(f'Visit https://code.earthengine.google.com/tasks to view status.')
+    print('Visit https://code.earthengine.google.com/tasks to view status.')
     return task
 
 

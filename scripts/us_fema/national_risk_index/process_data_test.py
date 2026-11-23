@@ -11,9 +11,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-import sys
 import os
 import shutil
+import sys
 
 sys.path.append(
     os.path.dirname(os.path.dirname(os.path.dirname(
@@ -24,9 +24,11 @@ _TESTDIR = os.path.join(os.path.dirname(os.path.realpath(__file__)),
 
 import tempfile
 import unittest
+
 import pandas as pd
 from pandas.testing import assert_frame_equal
-from us_fema.national_risk_index.process_data import process_csv, fips_to_geoid
+from us_fema.national_risk_index.process_data import fips_to_geoid
+from us_fema.national_risk_index.process_data import process_csv
 
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)

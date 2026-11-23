@@ -1,0 +1,8 @@
+Node: E:population_country->E0
+typeOf: dcs:StatVarObservation
+observationAbout: C:population_country->observationAbout
+observationDate: C:population_country->observationDate
+value: C:population_country->value
+variableMeasured: C:population_country->variableMeasured
+unit: C:population_country->unit
+scalingFactor: C:population_country->scalingFactor

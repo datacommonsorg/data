@@ -14,8 +14,8 @@
 """Tests for raster_to_csv.py"""
 
 import os
-import tempfile
 import sys
+import tempfile
 import unittest
 
 from absl import logging
