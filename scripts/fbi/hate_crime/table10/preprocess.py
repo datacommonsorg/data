@@ -111,11 +111,10 @@ def _write_output_csv(reader: csv.DictReader, writer: csv.DictWriter,
     return statvars
 
 
-def _clean_dataframe(df: pd.DataFrame, year: str, table_num, config_file: str):
+def _clean_dataframe(df: pd.DataFrame, year: str, table_num,
+                     table_config: dict):
     """Clean the column names and offense type values in a dataframe."""
-    with file_util.FileIO(config_file, 'r') as f:
-        _YEARWISE_CONFIG = json.load(f)
-    year_config = _YEARWISE_CONFIG['table_config'][table_num]
+    year_config = table_config[table_num]
 
     if year_config:
         if isinstance(year_config, list):
@@ -150,7 +149,7 @@ def main(argv):
             logging.info(f"Processing : {xls_file_path}")
             read_file = pd.read_excel(xls_file_path, **config['args'])
             read_file = _clean_dataframe(read_file, year, table_num,
-                                         _FLAGS.config_file)
+                                         _YEARWISE_CONFIG['table_config'])
             read_file.insert(_YEAR_INDEX, 'Year', year)
             read_file.to_csv(csv_file_path, header=True, index=False)
             csv_files.append(csv_file_path)
