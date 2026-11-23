@@ -156,6 +156,7 @@ def _define_flags() -> None:
         'Number of parallel worker threads for Earth Engine monthly fetches.',
     )
 
+
 # Kelvin to Celsius offset matching kelvin2celsius.sh
 KELVIN_OFFSET = 273.15
 
