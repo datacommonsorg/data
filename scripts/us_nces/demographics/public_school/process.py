@@ -29,13 +29,6 @@ from absl import flags
 from absl import logging
 
 FLAGS = flags.FLAGS
-flags.DEFINE_enum(
-    'mode',
-    'all',
-    ['all', 'place', 'stats'],
-    'Execution mode: "place" for place entities only, "stats" for demographic'
-    ' observations only, "all" for both.',
-)
 
 MODULE_DIR = os.path.dirname(__file__)
 sys.path.insert(1, MODULE_DIR + '/../..')
@@ -57,6 +50,16 @@ from config import SCHOOL_TYPE
 from config import SPLIT_HEADER_ON_SCHOOL_TYPE
 from config import TMCF_FILE_NAME
 from config import TMCF_FILE_PLACE
+
+
+def _define_flags():
+    flags.DEFINE_enum(
+        'mode',
+        'all',
+        ['all', 'place', 'stats'],
+        'Execution mode: "place" for place entities only, "stats" for'
+        ' demographic observations only, "all" for both.',
+    )
 
 
 class NCESPublicSchool(USEducation):
@@ -141,4 +144,5 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)
