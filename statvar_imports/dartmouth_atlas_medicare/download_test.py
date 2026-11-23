@@ -520,6 +520,42 @@ class DownloadTest(unittest.TestCase):
         fallback = download.discover_source_archives(fail_session)
         self.assertEqual(len(fallback), len(download.SOURCE_ARCHIVES))
 
+    def test_classify_download_url_strict_host_validation(self):
+        # Valid HTTP/HTTPS URLs on exact host normalize to canonical HTTPS URL.
+        spec = download.classify_download_url(
+            "http://DATA.DARTMOUTHATLAS.ORG/downloads/tables/"
+            "hsa_mortality_2020.csv.zip")
+        self.assertEqual(
+            spec,
+            {
+                "filename": "hsa_mortality_2020.csv.zip",
+                "url": "https://data.dartmouthatlas.org/downloads/tables/"
+                       "hsa_mortality_2020.csv.zip",
+                "kind": "hsa_mortality",
+                "is_state": False,
+            },
+        )
+
+        # Reject spoofed host suffixes, userinfo, query substrings, ports, and
+        # non-HTTP(S) schemes.
+        rejected_urls = (
+            "http://data.dartmouthatlas.org.evil.com/downloads/tables/"
+            "hsa_mortality_2020.csv.zip",
+            "https://data.dartmouthatlas.org@evil.com/downloads/tables/"
+            "hsa_mortality_2020.csv.zip",
+            "https://evil.com/redirect?url=http://data.dartmouthatlas.org/"
+            "downloads/tables/hsa_mortality_2020.csv.zip",
+            "ftp://data.dartmouthatlas.org/downloads/tables/"
+            "hsa_mortality_2020.csv.zip",
+            "https://data.dartmouthatlas.org:8443/downloads/tables/"
+            "hsa_mortality_2020.csv.zip",
+            "https://data.dartmouthatlas.org/downloads/tables/"
+            "hsa_mortality_2020.csv.zip?token=1",
+            "http://[invalid/downloads/tables/hsa_mortality_2020.csv.zip",
+        )
+        for bad_url in rejected_urls:
+            self.assertIsNone(download.classify_download_url(bad_url), bad_url)
+
 
 class ConsolidateHistoricalTest(unittest.TestCase):
     """Tests legacy CNS MCF consolidation in consolidate_historical.py."""

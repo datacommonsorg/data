@@ -22,6 +22,7 @@ from pathlib import Path
 import re
 import sys
 import tempfile
+import urllib.parse
 import xml.etree.ElementTree as ET
 import zipfile
 
@@ -41,7 +42,8 @@ DEFAULT_HISTORICAL_GCS_DIR = (
     "gs://unresolved_mcf/dartmouth_atlas_medicare/historical")
 DEFAULT_HISTORICAL_OUTPUT_DIR = os.path.join(_CODEDIR, "output_files")
 
-PORTAL_URL = "https://data.dartmouthatlas.org"
+PORTAL_HOST = "data.dartmouthatlas.org"
+PORTAL_URL = f"https://{PORTAL_HOST}"
 BASE_URL = f"{PORTAL_URL}/downloads"
 DEFAULT_HSA_PLACES_CSV = Path(_CODEDIR) / "dartmouth_hsa_places.csv"
 HISTORICAL_CSVS: tuple[str, ...] = (
@@ -391,20 +393,29 @@ _CELL_COL_RE = re.compile(r"^([A-Z]+)")
 
 def classify_download_url(url: str) -> dict[str, object] | None:
     """Classifies a Dartmouth Atlas download URL into an archive spec."""
-    prefix = "https://data.dartmouthatlas.org"
-    normalized = url.strip()
-    if normalized.lower().startswith("http://data.dartmouthatlas.org"):
-        normalized = "https://" + normalized[len("http://"):]
-    if not normalized.lower().startswith(prefix):
+    try:
+        parsed = urllib.parse.urlsplit(url.strip())
+    except ValueError:
         return None
-    rel_path = normalized[len(prefix):]
+    if parsed.scheme.lower() not in ("http", "https"):
+        return None
+    if not parsed.hostname or parsed.hostname.lower() != PORTAL_HOST:
+        return None
+    if (parsed.username is not None or parsed.password is not None or
+            parsed.port is not None or parsed.query or parsed.fragment):
+        return None
+
+    rel_path = parsed.path
+    if ".." in rel_path.split("/"):
+        return None
+    canonical_url = f"{PORTAL_URL}{rel_path}"
     filename = os.path.basename(rel_path)
 
     m_std = _STDPRICES_RESEARCH_RE.match(rel_path)
     if m_std:
         return {
             "filename": filename,
-            "url": normalized,
+            "url": canonical_url,
             "kind": "stdprices",
             "is_state": m_std.group(1).lower() == "state",
         }
@@ -412,14 +423,14 @@ def classify_download_url(url: str) -> dict[str, object] | None:
     if m_hedis:
         return {
             "filename": filename,
-            "url": normalized,
+            "url": canonical_url,
             "kind": "hedis",
             "is_state": m_hedis.group(1).lower() == "state",
         }
     if _HSA_MORTALITY_TABLE_RE.match(rel_path):
         return {
             "filename": filename,
-            "url": normalized,
+            "url": canonical_url,
             "kind": "hsa_mortality",
             "is_state": False,
         }
@@ -427,7 +438,7 @@ def classify_download_url(url: str) -> dict[str, object] | None:
     if m_annual:
         return {
             "filename": filename,
-            "url": normalized,
+            "url": canonical_url,
             "kind": "stdprices_table",
             "is_state": m_annual.group(1).lower() == "state",
         }
