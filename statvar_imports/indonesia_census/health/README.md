@@ -5,7 +5,7 @@
 * **Import Group:** `international_stats`
 * **Source Agency:** Badan Pusat Statistik (BPS - Statistics Indonesia)
 * **Provenance URL:** `https://www.bps.go.id/` *(Note: BPS HTML web pages including `https://www.bps.go.id/` and `https://www.bps.go.id/en/statistics-table?subject=519` return HTTP 403 `cf-mitigated: challenge` from GCP datacenter IPs due to Cloudflare bot protection; automated data ingestion exclusively uses the official BPS WebAPI at `https://webapi.bps.go.id/v1/api/` — developer portal: `https://webapi.bps.go.id/developer/`.)*
-* **Source Data URL:** `https://www.bps.go.id/en/statistics-table?subject=519`
+* **Source Data URL:** `https://webapi.bps.go.id/developer/` *(BPS WebAPI developer portal; human-browsable HTML table catalog: `https://www.bps.go.id/en/statistics-table?subject=519`)*
 * **Data Download URL (BPS WebAPI):**
   * `https://webapi.bps.go.id/v1/api/list/model/th/domain/0000/var/{var_id}/lang/eng/`
   * `https://webapi.bps.go.id/v1/api/list/model/data/domain/0000/var/{var_id}/th/{th_ids}/lang/eng/`
