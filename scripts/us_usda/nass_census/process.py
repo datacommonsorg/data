@@ -609,7 +609,13 @@ def process_input_files(
                         output_dir,
                     )
             else:
-                with file_util.FileIO(path, 'r') as txt_stream:
+                with file_util.FileIO(
+                        path,
+                        'r',
+                        encoding='utf-8',
+                        errors='replace',
+                        newline='',
+                ) as txt_stream:
                     total_rows += _process_tsv_stream(
                         txt_stream,
                         os.path.basename(path),

@@ -340,6 +340,23 @@ class ProcessTest(unittest.TestCase):
             self.assertIn('No census observations were produced',
                           str(ctx.exception))
 
+    def test_process_input_files_plain_txt_utf8(self):
+        fixture_path = os.path.join(_SCRIPT_DIR, 'testdata',
+                                    'ag_census_input.txt')
+        expected_path = os.path.join(_SCRIPT_DIR, 'testdata',
+                                     'ag_census_output.csv')
+        statvars_map = process.get_statvars(
+            os.path.join(_SCRIPT_DIR, 'statvars'))
+        with open(expected_path, encoding='utf-8') as f:
+            expected_csv = f.read()
+
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            output_csv = os.path.join(tmp_dir, 'output', 'agriculture.csv')
+            process.process_input_files([fixture_path], output_csv,
+                                        statvars_map)
+            with open(output_csv, encoding='utf-8') as f:
+                self.assertEqual(f.read(), expected_csv)
+
 
 if __name__ == '__main__':
     unittest.main()
