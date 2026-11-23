@@ -87,7 +87,7 @@ def extract_all_table_data(url):
             # Initialize a list to hold all table data
             table_data = []
             # Iterate over each found table
-            for index, table in enumerate(all_tables):
+            for _index, table in enumerate(all_tables):
                 rows = table.find_all('tr')
                 table_rows = []
                 for row in rows:
@@ -99,7 +99,7 @@ def extract_all_table_data(url):
             # Write the extracted table data to a CSV file
             with open(file_path2, 'w', newline='') as csvfile:
                 writer = csv.writer(csvfile)
-                for index, table in enumerate(table_data):
+                for _index, table in enumerate(table_data):
                     writer.writerows(table)
                     writer.writerow([])
             logging.info("Downloaded files")

@@ -270,7 +270,7 @@ def filter_data_svobs(svobs: dict,
         filter_data_series(series, filter_min, filter_max, filter_max_change,
                            filter_max_yearly_change, filter_keep_recent,
                            counters, value_props)
-        for date, pvs in series.items():
+        for _date, pvs in series.items():
             # Add the svobs PVs keyed by the input key.
             key = pvs.pop('#Key')
             filtered_series[key] = pvs
