@@ -13,10 +13,14 @@
 # limitations under the License.
 
 import logging
-from fastapi import APIRouter, Depends, HTTPException
+
 from clients.bigquery import BigQueryClient
 from dependencies import get_bigquery_client
-from routes.models import BaseResponse, ResponseStatus
+from fastapi import APIRouter
+from fastapi import Depends
+from fastapi import HTTPException
+from routes.models import BaseResponse
+from routes.models import ResponseStatus
 from utils.logging import log_start
 
 router = APIRouter(prefix="/database", tags=["database"])
@@ -24,14 +28,14 @@ router = APIRouter(prefix="/database", tags=["database"])
 
 @router.post("/initialize", response_model=BaseResponse)
 @log_start
-def initialize_database(bigquery: BigQueryClient = Depends(get_bigquery_client)):
+def initialize_database(
+        bigquery: BigQueryClient = Depends(get_bigquery_client)):
     """Initializes BigQuery by creating the ImportHistory table and ImportSummary view."""
     try:
         bigquery.initialize_database()
         return BaseResponse(status=ResponseStatus.OK)
     except Exception as e:
-        logging.error(f"Failed to initialize BigQuery database in import-helper: {e}")
-        raise HTTPException(
-            status_code=500,
-            detail=f"Database initialization failed: {str(e)}"
-        )
+        logging.error(
+            f"Failed to initialize BigQuery database in import-helper: {e}")
+        raise HTTPException(status_code=500,
+                            detail=f"Database initialization failed: {str(e)}")

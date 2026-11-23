@@ -25,18 +25,23 @@ import pandas as pd
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(_SCRIPT_PATH, "../.."))
-from us_epa.parent_company import static_corrections as sc
-from us_epa.util import facilities_helper as fh
+REPO_ROOT = os.path.abspath(os.path.join(_SCRIPT_PATH, "../../.."))
+if REPO_ROOT not in sys.path:
+    sys.path.insert(0, REPO_ROOT)
+from scripts.us_epa.parent_company import static_corrections as sc
+from scripts.us_epa.util import facilities_helper as fh
 
 
 def _define_flags() -> None:
     """Defines command-line flags for this script."""
-    flags.DEFINE_string("input_download_path", "tmp_data", "Input directory")
-    flags.DEFINE_string("existing_facilities_file", "existing_facilities",
-                        "Filename for existing facilities ids")
-    flags.DEFINE_string("output_base_path", "output",
-                        "Output directory for processed data.")
+    flags.DEFINE_string("input_download_path",
+                        os.path.join(_SCRIPT_PATH, "input_files"),
+                        "Input directory",
+                        allow_override=True)
+    flags.DEFINE_string("existing_facilities_file",
+                        "existing_facilities",
+                        "Filename for existing facilities ids",
+                        allow_override=True)
 
 
 FLAGS = flags.FLAGS
@@ -122,11 +127,26 @@ def _add_static_duplicates(static_mappings, company_id_count):
         _add_to_duplicate_mapping(k, v, company_id_count)
 
 
-def _insert_overlaps(loc_map, company_id_count):
+def _get_root(company_id):
+    seen = set()
+    curr = company_id
+    while curr in _DUPLICATE_MAPPING and curr not in seen:
+        seen.add(curr)
+        curr = _DUPLICATE_MAPPING[curr]
+    return curr
+
+
+def _insert_overlaps(loc_map, company_id_count, disallowed_pairs=None):
     count_dupe_loc = 0
     loc_id_contained_count = 0
+    disallowed_adj = {}
+    if disallowed_pairs:
+        for c1, c2 in disallowed_pairs:
+            disallowed_adj.setdefault(c1, set()).add(c2)
+            disallowed_adj.setdefault(c2, set()).add(c1)
+
     for a, v in loc_map.items():
-        v = list(v)
+        v = sorted(v)
         if len(v) > 1:
             count_dupe_loc += 1
             id_match_found = False
@@ -137,6 +157,8 @@ def _insert_overlaps(loc_map, company_id_count):
                     # Determine the SequenceMatcher ratio between the two ids.
                     v_i = v[i]
                     v_j = v[j]
+                    if disallowed_pairs and (v_i, v_j) in disallowed_pairs:
+                        continue
                     m1 = v_i.lower()
                     m2 = v_j.lower()
                     seq1 = difflib.SequenceMatcher(a=_str_matching_replace(m1),
@@ -148,8 +170,42 @@ def _insert_overlaps(loc_map, company_id_count):
 
                     # If the score is > 80%, then add the duplicate relationship
                     if (diff_score > 0.8):
+                        if disallowed_adj:
+                            r_i = _get_root(v_i)
+                            r_j = _get_root(v_j)
+                            if (r_i in disallowed_adj and
+                                    r_j in disallowed_adj[r_i]):
+                                continue
+                            old_i = _DUPLICATE_MAPPING.get(v_i)
+                            old_j = _DUPLICATE_MAPPING.get(v_j)
+                            _add_to_duplicate_mapping(v_i, v_j,
+                                                      company_id_count)
+                            if (_DUPLICATE_MAPPING.get(v_i) != old_i or
+                                    _DUPLICATE_MAPPING.get(v_j) != old_j):
+                                target_root = _get_root(v_i)
+                                candidates = [
+                                    k for k in _DUPLICATE_MAPPING
+                                    if k in disallowed_adj and
+                                    _get_root(k) == target_root
+                                ]
+                                if target_root in disallowed_adj:
+                                    candidates.append(target_root)
+                                candidate_set = set(candidates)
+                                if any(disallowed_adj[c] & candidate_set
+                                       for c in candidate_set):
+                                    if old_i is None:
+                                        _DUPLICATE_MAPPING.pop(v_i, None)
+                                    else:
+                                        _DUPLICATE_MAPPING[v_i] = old_i
+                                    if old_j is None:
+                                        _DUPLICATE_MAPPING.pop(v_j, None)
+                                    else:
+                                        _DUPLICATE_MAPPING[v_j] = old_j
+                                    continue
+                        else:
+                            _add_to_duplicate_mapping(v_i, v_j,
+                                                      company_id_count)
                         id_match_found = True
-                        _add_to_duplicate_mapping(v_i, v_j, company_id_count)
 
             if id_match_found:
                 loc_id_contained_count += 1
@@ -171,6 +227,7 @@ def _resolve_multiple_indirections():
 
 
 def preprocess(input_table_path, existing_facilities_file):
+    _DUPLICATE_MAPPING.clear()
     # Get the existing facility ids in a set.
     existing_facilities_path = os.path.join(input_table_path,
                                             existing_facilities_file + ".csv")
@@ -182,6 +239,8 @@ def preprocess(input_table_path, existing_facilities_file):
     unique_company_names = set()
     address_map = {}
     facility_map = {}
+    facility_year_company_addrs = {}
+    seen_facility_year_company = set()
 
     unique_company_ids = set()
     company_id_count = {}
@@ -199,6 +258,8 @@ def preprocess(input_table_path, existing_facilities_file):
                                in_row,
                                "FACILITY_ID",
                                table_prefix=_TABLE_PREFIX)
+            if not facility_id:
+                continue
             ghg_id = _EPA_FACILITY_GHG_ID + "/" + facility_id
 
             # Only proceed if the facility_id exists in Data Commons.
@@ -212,19 +273,37 @@ def preprocess(input_table_path, existing_facilities_file):
             company_name = company_name.replace("\"", "").replace("'", "")
             if not company_name:
                 continue
-            unique_company_names.add(company_name)
             company_id = fh.name_to_id(company_name)
+            if not company_id:
+                continue
+            unique_company_names.add(company_name)
 
+            year = fh.v(_TABLE, in_row, "YEAR", table_prefix=_TABLE_PREFIX)
             address = _str(
                 fh.get_address(_TABLE, in_row, table_prefix=_TABLE_PREFIX))
 
-            # Populate the address_map and facility_map.
-            if address not in address_map:
-                address_map[address] = set()
+            if year:
+                fy_key = (facility_id, year)
+                if fy_key not in facility_year_company_addrs:
+                    facility_year_company_addrs[fy_key] = {}
+                if company_id not in facility_year_company_addrs[fy_key]:
+                    facility_year_company_addrs[fy_key][company_id] = set()
+                if address:
+                    facility_year_company_addrs[fy_key][company_id].add(address)
 
-            existing_ids = address_map[address]
-            existing_ids.add(company_id)
-            address_map.update({address: existing_ids})
+                fyc_key = (facility_id, year, company_id.lower())
+                if fyc_key in seen_facility_year_company:
+                    continue
+                seen_facility_year_company.add(fyc_key)
+
+            # Populate the address_map and facility_map.
+            if address:
+                if address not in address_map:
+                    address_map[address] = set()
+
+                existing_ids = address_map[address]
+                existing_ids.add(company_id)
+                address_map.update({address: existing_ids})
 
             if facility_id not in facility_map:
                 facility_map[facility_id] = set()
@@ -243,10 +322,25 @@ def preprocess(input_table_path, existing_facilities_file):
     (count_dupe_addr,
      address_id_contained_count) = _insert_overlaps(address_map,
                                                     company_id_count)
+
+    # Identify distinct co-owners in the same (facility_id, year) that do not
+    # share an address and have not already been merged by static or address
+    # mappings, so facility_map does not collapse distinct co-owners.
+    co_owners_diff_addr = set()
+    for comp_addrs in facility_year_company_addrs.values():
+        comp_ids = sorted(comp_addrs.keys())
+        for i in range(len(comp_ids)):
+            for j in range(i + 1, len(comp_ids)):
+                c1, c2 = comp_ids[i], comp_ids[j]
+                if _get_root(c1) == _get_root(c2):
+                    continue
+                if not comp_addrs[c1] or not comp_addrs[c2] or comp_addrs[
+                        c1].isdisjoint(comp_addrs[c2]):
+                    co_owners_diff_addr.add((c1, c2))
+
     print("Determining Facility duplicates...")
-    (count_dupe_facility,
-     facility_id_contained_count) = _insert_overlaps(facility_map,
-                                                     company_id_count)
+    (count_dupe_facility, facility_id_contained_count) = _insert_overlaps(
+        facility_map, company_id_count, disallowed_pairs=co_owners_diff_addr)
 
     print("Resolving duplicate indirections..")
     _resolve_multiple_indirections()
@@ -254,7 +348,8 @@ def preprocess(input_table_path, existing_facilities_file):
     # Write.
     print("Writing to file...")
     output_path = os.path.join(input_table_path, "DuplicateIdMappings.csv")
-    with open(output_path, "w") as opth:
+    tmp_output_path = output_path + ".tmp"
+    with open(tmp_output_path, "w") as opth:
         writer = csv.DictWriter(opth, ["Id", "MappedTo", "Occurences"],
                                 doublequote=False,
                                 escapechar="\\")
@@ -264,6 +359,7 @@ def preprocess(input_table_path, existing_facilities_file):
             d = {"Id": k, "MappedTo": v, "Occurences": company_id_count[v]}
             writer.writerow(d)
             num_rows_written += 1
+    os.replace(tmp_output_path, output_path)
 
     # Print some statistics.
     print("****************")
@@ -285,13 +381,18 @@ def preprocess(input_table_path, existing_facilities_file):
 
 def main(_):
     # Validate inputs.
-    assert FLAGS.input_download_path
-    assert FLAGS.existing_facilities_file
-    assert os.path.exists(
-        os.path.join(FLAGS.input_download_path,
-                     FLAGS.existing_facilities_file + ".csv"))
-    assert os.path.exists(
-        os.path.join(FLAGS.input_download_path, _TABLE + ".csv"))
+    if not FLAGS.input_download_path:
+        raise ValueError("input_download_path must be provided.")
+    if not FLAGS.existing_facilities_file:
+        raise ValueError("existing_facilities_file must be provided.")
+    existing_facilities_csv = os.path.join(
+        FLAGS.input_download_path, FLAGS.existing_facilities_file + ".csv")
+    if not os.path.exists(existing_facilities_csv):
+        raise FileNotFoundError(
+            f"Existing facilities file not found: {existing_facilities_csv}")
+    table_csv = os.path.join(FLAGS.input_download_path, _TABLE + ".csv")
+    if not os.path.exists(table_csv):
+        raise FileNotFoundError(f"Input table not found: {table_csv}")
 
     preprocess(FLAGS.input_download_path, FLAGS.existing_facilities_file)
 

@@ -1,0 +1,5 @@
+parameter,value
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,measurementMethod"
+header_rows,1
+mapped_columns,3
+output_precision_digits,4
