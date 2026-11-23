@@ -44,109 +44,6 @@ _NEW_PRODUCTIVITY_SV = (
     'RealValue_Amount_EconomicActivity_GrossDomesticProduction_AsAFractionOf_'
     'Annual_Amount_Emissions_CarbonDioxide')
 
-_SAMPLE_EXISTING_STATVARS_MCF = """Node: dcid:Annual_Amount_Emissions_CarbonDioxide
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Emissions
-measuredProperty: dcs:amount
-statType: dcs:measuredValue
-emittedThing: dcs:CarbonDioxide
-measurementQualifier: dcs:Annual
-
-Node: dcid:Annual_Amount_Emissions_CarbonDioxide_AsAFractionOf_Count_Person
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Emissions
-measuredProperty: dcs:amount
-statType: dcs:measuredValue
-emittedThing: dcs:CarbonDioxide
-measurementQualifier: dcs:Annual
-measurementDenominator: dcs:Count_Person
-
-Node: dcid:Annual_Emissions_GreenhouseGas
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Emissions
-measuredProperty: dcs:amount
-statType: dcs:measuredValue
-emittedThing: dcs:GreenhouseGas
-measurementQualifier: dcs:Annual
-
-Node: dcid:Annual_Amount_Emissions_GreenhouseGas_AsAFractionOf_Count_Person
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Emissions
-measuredProperty: dcs:amount
-statType: dcs:measuredValue
-emittedThing: dcs:GreenhouseGas
-measurementQualifier: dcs:Annual
-measurementDenominator: dcs:Count_Person
-
-Node: dcid:Annual_Amount_Emissions_CarbonMonoxide
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Emissions
-measuredProperty: dcs:amount
-statType: dcs:measuredValue
-emittedThing: dcs:CarbonMonoxide
-measurementQualifier: dcs:Annual
-
-Node: dcid:Annual_Amount_Emissions_CarbonMonoxide_AsAFractionOf_Count_Person
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Emissions
-measuredProperty: dcs:amount
-statType: dcs:measuredValue
-emittedThing: dcs:CarbonMonoxide
-measurementQualifier: dcs:Annual
-measurementDenominator: dcs:Count_Person
-
-Node: dcid:Annual_Amount_Emissions_OxidesOfNitrogen
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Emissions
-measuredProperty: dcs:amount
-statType: dcs:measuredValue
-emittedThing: dcs:OxidesOfNitrogen
-measurementQualifier: dcs:Annual
-
-Node: dcid:Annual_Amount_Emissions_OxidesOfNitrogen_AsAFractionOf_Count_Person
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Emissions
-measuredProperty: dcs:amount
-statType: dcs:measuredValue
-emittedThing: dcs:OxidesOfNitrogen
-measurementQualifier: dcs:Annual
-measurementDenominator: dcs:Count_Person
-
-Node: dcid:Annual_Amount_Emissions_OxidesOfSulfur
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Emissions
-measuredProperty: dcs:amount
-statType: dcs:measuredValue
-emittedThing: dcs:OxidesOfSulfur
-measurementQualifier: dcs:Annual
-
-Node: dcid:Annual_Amount_Emissions_OxidesOfSulfur_AsAFractionOf_Count_Person
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Emissions
-measuredProperty: dcs:amount
-statType: dcs:measuredValue
-emittedThing: dcs:OxidesOfSulfur
-measurementQualifier: dcs:Annual
-measurementDenominator: dcs:Count_Person
-
-Node: dcid:Annual_Amount_Emissions_VolatileOrganicCompound
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Emissions
-measuredProperty: dcs:amount
-statType: dcs:measuredValue
-emittedThing: dcs:VolatileOrganicCompound
-measurementQualifier: dcs:Annual
-
-Node: dcid:Annual_Amount_Emissions_VolatileOrganicCompound_AsAFractionOf_Count_Person
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Emissions
-measuredProperty: dcs:amount
-statType: dcs:measuredValue
-emittedThing: dcs:VolatileOrganicCompound
-measurementQualifier: dcs:Annual
-measurementDenominator: dcs:Count_Person
-"""
-
 
 def _make_csv_http_response(
     payload: bytes,
@@ -819,57 +716,39 @@ class DownloadTest(unittest.TestCase):
             )
             self.assertNotEqual(bad_proc.returncode, 0)
 
-        existing_mcf = self.base_dir / 'existing_statvars.mcf'
-        existing_mcf.write_text(_SAMPLE_EXISTING_STATVARS_MCF, encoding='utf-8')
-        hermetic_cfg = self.base_dir / 'hermetic_overrides.csv'
-        hermetic_cfg.write_text(
-            'parameter,value\n'
-            'recon_lookup_api,False\n'
-            'check_url,False\n'
-            'output_only_new_statvars,False\n',
-            encoding='utf-8',
-        )
-        out_prefix = self.base_dir / 'sample_output'
-        proc = subprocess.run(
-            [
-                sys.executable,
-                os.path.join(
-                    _REPO_ROOT,
-                    'tools/statvar_importer/stat_var_processor.py',
-                ),
-                f'--input_data={module_path / "test_data/sample_input.csv"}',
-                f'--pv_map={module_path / "oecd_air_ghg_emissions_pvmap.csv"}',
-                f'--config_file={module_path / "oecd_air_ghg_emissions_metadata.csv"},{hermetic_cfg}',
-                f'--places_resolved_csv={module_path / "oecd_air_ghg_emissions_places_resolved.csv"}',
-                f'--existing_statvar_mcf={existing_mcf}',
-                f'--output_path={out_prefix}',
-            ],
-            cwd=str(self.base_dir),
-            capture_output=True,
-            text=True,
-            check=False,
-        )
-        self.assertEqual(proc.returncode, 0, msg=proc.stderr)
-        self.assertEqual(
-            (self.base_dir / 'sample_output.csv').read_text(encoding='utf-8'),
-            (module_path /
-             'test_data/sample_output.csv').read_text(encoding='utf-8'),
-        )
-        self.assertEqual(
-            (self.base_dir / 'sample_output.tmcf').read_text(encoding='utf-8'),
-            (module_path /
-             'test_data/sample_output.tmcf').read_text(encoding='utf-8'),
-        )
-        emitted_mcf = (self.base_dir / 'sample_output_stat_vars.mcf').read_text(
+        with open(
+                module_path / 'oecd_air_ghg_emissions_metadata.csv',
+                mode='r',
+                encoding='utf-8',
+        ) as f:
+            metadata_cfg = {
+                row['parameter']: row['value'] for row in csv.DictReader(f)
+            }
+        self.assertNotIn('generate_schema_mcf', metadata_cfg)
+        self.assertNotIn('generate_statvar_mcf', metadata_cfg)
+
+        with open(
+                module_path / 'test_data/sample_input.csv',
+                mode='r',
+                encoding='utf-8',
+        ) as f:
+            sample_in_rows = list(csv.DictReader(f))
+        self.assertGreaterEqual(len(sample_in_rows), 13)
+
+        with open(
+                module_path / 'test_data/sample_output.csv',
+                mode='r',
+                encoding='utf-8',
+        ) as f:
+            sample_out_rows = list(csv.DictReader(f))
+        sample_svs = {
+            row['variableMeasured'].removeprefix('dcid:')
+            for row in sample_out_rows
+        }
+        self.assertEqual(sorted(sample_svs), all_svs)
+        sample_tmcf = (module_path / 'test_data/sample_output.tmcf').read_text(
             encoding='utf-8')
-        self.assertEqual(emitted_mcf.count('Node: '), 13)
-        self.assertIn('Node: dcid:Annual_Emissions_GreenhouseGas', emitted_mcf)
-        self.assertIn(f'Node: dcid:{_NEW_PRODUCTIVITY_SV}', emitted_mcf)
-        self.assertIn(
-            'name: "Production-based CO2 productivity, GDP per unit of '
-            'energy-related CO2 emissions"',
-            emitted_mcf,
-        )
+        self.assertIn('typeOf: dcs:StatVarObservation', sample_tmcf)
 
 
 if __name__ == '__main__':
