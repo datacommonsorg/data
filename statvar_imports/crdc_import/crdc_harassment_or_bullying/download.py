@@ -33,7 +33,7 @@ _UTIL_PATH = os.path.abspath(os.path.join(_SCRIPT_PATH, "../../../util"))
 if _UTIL_PATH not in sys.path:
     sys.path.append(_UTIL_PATH)
 
-from download_util_script import download_file  # noqa: E402
+from download_util_script import download_file
 
 _BASE_URL = "https://civilrightsdata.ed.gov/assets/ocr/docs/{year_range}-crdc-data.zip"
 _DEFAULT_DOWNLOAD_DIR = os.path.join(_SCRIPT_PATH, "source_files")

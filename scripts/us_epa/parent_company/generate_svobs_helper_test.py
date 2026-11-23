@@ -59,14 +59,14 @@ class GenerateSvobsHelperTest(unittest.TestCase):
                             "ownership.csv", "/tmp/svobs")
 
         statvars_facilities = mock_statvars.call_args.args[0]
-        self.assertEqual(set(statvars_facilities), {
+        self.assertEqual(statvars_facilities, [
             "epaGhgrpFacilityId/1001",
             "epaGhgrpFacilityId/1002",
-        })
-        self.assertEqual(set(mock_svobs.call_args.args[0]), {
+        ])
+        self.assertEqual(mock_svobs.call_args.args[0], [
             "epaGhgrpFacilityId/1001",
             "epaGhgrpFacilityId/1002",
-        })
+        ])
         self.assertEqual(mock_svobs.call_args.args[1], {"Count_Person"})
         mock_process_svobs.assert_called_once_with("/tmp/svobs", ownership,
                                                    facility_sv_map, facets)

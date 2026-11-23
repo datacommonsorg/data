@@ -233,7 +233,7 @@ class StatVarsMap:
         pv_map: dict,
         duplicate_prop: str = None,
         allow_equal_pvs: bool = True,
-        ignore_props: list = [],
+        ignore_props: list | None = None,
     ) -> bool:
         """Returns true if the key:pvs is added to the pv_map,
 
@@ -250,6 +250,8 @@ class StatVarsMap:
     Returns:
       True if the key:pvs tuple was added to the pv_map.
     """
+        if ignore_props is None:
+            ignore_props = []
         if key in pv_map:
             has_diff, diff_str, added, deleted, modified = diff_mcf_node_pvs(
                 self.get_valid_pvs(pvs),
@@ -438,7 +440,7 @@ class StatVarsMap:
     def remove_undefined_properties(
         self,
         pv_map_dict: dict,
-        ignore_props: list = [],
+        ignore_props: list | None = None,
         comment_removed_props: bool = False,
     ) -> list:
         """Remove any property:value tuples with undefined property or values
@@ -458,6 +460,8 @@ class StatVarsMap:
     Batches property and values to be looked up in the DC API.
     """
         # Collect all property and values to be checked in schema.
+        if ignore_props is None:
+            ignore_props = []
         props_removed = []
         lookup_dcids = set()
         for namespace, pv_map in pv_map_dict.items():
@@ -1488,8 +1492,10 @@ class StatVarDataProcessor:
     """
         return [pvs]
 
-    def setup_config(self, config_dict: dict = {}):
+    def setup_config(self, config_dict: dict | None = None):
         """Setup the config."""
+        if config_dict is None:
+            config_dict = {}
         self._config = ConfigMap(config_dict=config_dict)
         self._log_every_n = self._config.get('log_every_n', 10)
         # Convert mapped columns from letters to int

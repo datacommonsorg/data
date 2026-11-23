@@ -1755,10 +1755,12 @@ def _write_to_csv(df: pd.DataFrame, csv_file_name: str):
     df.to_csv(csv_file_name, index=False)
 
 
-def process_main(input_csv=os.path.join(_SCRIPT_PATH, 'source_data',
-                                        'hate_crime.csv'),
-                 output_path=os.path.join(_SCRIPT_PATH, 'aggregations')):
+def process_main(input_csv=None, output_path=None):
     global _SCRIPT_PATH, _INPUT_COLUMNS, _AGGREGATIONS
+    if input_csv is None:
+        input_csv = os.path.join(_SCRIPT_PATH, 'source_data', 'hate_crime.csv')
+    if output_path is None:
+        output_path = os.path.join(_SCRIPT_PATH, 'aggregations')
     output_path = os.path.expanduser(output_path)
     logging.info(f'Processing input: {_FLAGS.input_file}')
     #with file_util.FileIO(_FLAGS.input_file, 'r') as input_f:

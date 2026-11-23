@@ -287,7 +287,7 @@ def process_input_file(file, writer, concepts, svs, measurement_methods, units):
                         row['[UnitMultiplier]']
                         if '[UnitMultiplier]' in reader.fieldnames else '',
                 })
-        except:
+        except Exception:
             print(f'Finished processing {file}')
 
 

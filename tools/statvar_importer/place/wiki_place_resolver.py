@@ -144,10 +144,12 @@ class WikiPlaceResolver:
 
     def __init__(
         self,
-        config_dict: dict = {},
+        config_dict: dict | None = None,
         counters_dict: dict = None,
         cache: PropertyValueCache = None,
     ):
+        if config_dict is None:
+            config_dict = {}
         self._config = ConfigMap(_DEFAULT_CONFIG)
         self._config.update_config(config_dict)
         self._counters = Counters(counters_dict)

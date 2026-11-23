@@ -215,7 +215,7 @@ def check_mcf_urls(nodes: dict[str, dict],
                    urls_allowed: set[str] = None,
                    config: ConfigMap = None,
                    counters: Counters = None,
-                   url_status_cache: dict = {}) -> list[dict]:
+                   url_status_cache: dict | None = None) -> list[dict]:
     """Returns the URLs that don't load for each MCF node.
 
     Args:
