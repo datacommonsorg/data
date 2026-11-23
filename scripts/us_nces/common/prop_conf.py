@@ -145,19 +145,6 @@ def _PV_FORMAT(pv):
     return f'"{t[0]}": "dcs:{val}"'
 
 
-# pylint:disable=unnecessary-lambda-assignment
-_UPDATE_MEASUREMENT_DENO = lambda prop: _DENOMINATOR_PROP.get(prop, prop)
-_UPDATE_POPULATION_TYPE = lambda prop: _POPULATION_PROP.get(prop, "Student")
-_UPDATE_GRADE_LEVEL = lambda prop: _SCHOOL_GRADE_PROP.get(prop, prop)
-SV_NODE_FORMAT = lambda prop_val: f'Node: dcid:{prop_val}'
-# pylint:enable=unnecessary-lambda-assignment
-# Creating property pattern and the pattern is modified if required based on column.
-def _PV_FORMAT(prop_val):
-    if 'None' not in prop_val[1]:
-        return f'"{prop_val[0]}": "dcs:{prop_val[1]}"'
-    return ""
-
-
 def _UPDATE_MEASUREMENT_DENO(prop):
     return _DENOMINATOR_PROP.get(prop, prop)
 
