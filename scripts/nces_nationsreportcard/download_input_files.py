@@ -17,7 +17,7 @@ Queries:
   https://www.nationsreportcard.gov/Dataservice/GetAdhocData.aspx
 
 Optimizations in v2:
-  - Uses single 55-state queries for fast indexed composite scales, 13-state
+  - Uses single 55-state queries for fast indexed composite scales, 15-state
     pilot queries for Grade 12 Reading, and parallel 8-state batches directly
     for multi-year state content subscales (*RPS*) to avoid SQL full-table scan
     timeouts (>120s) and 3x retry penalties.

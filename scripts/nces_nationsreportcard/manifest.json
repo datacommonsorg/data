@@ -6,7 +6,7 @@
                 "support@datacommons.org"
             ],
             "provenance_url": "https://nces.ed.gov/nationsreportcard/",
-            "provenance_description": "National educational performance - Assessement score data across different grades, subjects and student categories (such as race, disability, etc).",
+            "provenance_description": "National educational performance - Assessment score data across different grades, subjects and student categories (such as race, disability, etc).",
             "scripts": [
                 "download_input_files.py",
                 "process.py --input_data=input_files/*.csv --pv_map=config/pv_map.py,jurisdiction:config/jurisdiction_map.py --config_file=config/naep_conf.py --output_path=output/naep_performance --output_counters=counters/naep_performance_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
