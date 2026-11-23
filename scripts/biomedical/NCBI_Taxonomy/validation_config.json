@@ -4,11 +4,7 @@
         {
             "rule_id": "check_missing_refs_count",
             "description": "Disabled for NCBI_Taxonomy because Taxon nodes in ncbi_taxonomy.tmcf reference parent Taxon nodes defined in the same TABLE_MCF via specializationOf. dc-import-tool's ExistenceChecker only registers INSTANCE_MCF (node_mcf) nodes in its local graph and queries the remote KG for TABLE_MCF references, causing Existence_MissingReference_specializationOf warnings for newly added or absent bio/* Taxon nodes.",
-            "validator": "MISSING_REFS_COUNT",
-            "enabled": false,
-            "params": {
-                "threshold": 0
-            }
+            "enabled": false
         }
     ]
 }
