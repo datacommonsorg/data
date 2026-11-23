@@ -14,10 +14,11 @@
 """Tests for process.py"""
 
 import csv
-from datetime import datetime
+import gzip
 import io
 import os
 import sys
+import tempfile
 import unittest
 from unittest import mock
 
@@ -31,6 +32,46 @@ if _REPO_ROOT not in sys.path:
     sys.path.insert(0, _REPO_ROOT)
 
 from scripts.us_usda.nass_census import process
+
+_SAMPLE_DATASETS_HTML = """
+<html><body>
+<section class="nass-datasets">
+  <ul>
+    <li><a href="/sites/default/files/datasets/qs.animals_products_20261120.txt.gz">old</a></li>
+    <li><a href="/sites/default/files/datasets/qs.animals_products_20261121.txt.gz" download>animals</a></li>
+    <li><a href="/sites/default/files/datasets/qs.crops_20261121.txt.gz" download>crops</a></li>
+    <li><a href="https://www.nass.usda.gov/sites/default/files/datasets/qs.demographics_20261121.txt.gz">demo</a></li>
+    <li><a href="/sites/default/files/datasets/qs.economics_20261121.txt.gz">econ</a></li>
+    <li><a href="/sites/default/files/datasets/qs.environmental_20261121.txt.gz">env</a></li>
+    <li><a href="https://evil.example.com/qs.crops_20990101.txt.gz">untrusted</a></li>
+  </ul>
+</section>
+</body></html>
+"""
+
+
+def _make_gzip_bytes(text: str) -> bytes:
+    buf = io.BytesIO()
+    with gzip.GzipFile(fileobj=buf, mode='wb') as gz:
+        gz.write(text.encode('utf-8'))
+    return buf.getvalue()
+
+
+def _mock_stream_response(
+    chunks: list[bytes],
+    status_code: int = 200,
+    headers: dict[str, str] | None = None,
+) -> mock.MagicMock:
+    resp = mock.MagicMock()
+    resp.status_code = status_code
+    resp.headers = headers or {}
+    resp.iter_content.return_value = chunks
+    if status_code >= 400:
+        resp.raise_for_status.side_effect = requests.HTTPError(
+            f'HTTP {status_code}', response=resp)
+    resp.__enter__.return_value = resp
+    resp.__exit__.return_value = False
+    return resp
 
 
 class ProcessTest(unittest.TestCase):
@@ -47,166 +88,257 @@ class ProcessTest(unittest.TestCase):
         statvars_path = os.path.join(_SCRIPT_DIR, 'statvars')
         expected_path = os.path.join(_SCRIPT_DIR, 'testdata',
                                      'ag_census_output.csv')
-        with open(input_path) as f_in:
+        with open(input_path, encoding='utf-8') as f_in:
             d = process.get_statvars(statvars_path)
             reader = csv.DictReader(f_in, delimiter='\t')
             f_out = io.StringIO()
-            with open(expected_path) as f_expected:
+            with open(expected_path, encoding='utf-8') as f_expected:
                 expected = f_expected.read()
             process.write_csv(reader, f_out, d)
             self.assertEqual(expected, f_out.getvalue())
 
-    def test_check_url_status_http_200(self):
-        mock_response = mock.MagicMock()
-        mock_response.status_code = 200
+    def test_is_census_year(self):
+        self.assertTrue(process.is_census_year('2002'))
+        self.assertTrue(process.is_census_year('2007'))
+        self.assertTrue(process.is_census_year('2022'))
+        self.assertTrue(process.is_census_year('2027'))
+        self.assertFalse(process.is_census_year('1997'))
+        self.assertFalse(process.is_census_year('2013'))
+        self.assertFalse(process.is_census_year('2023'))
+        self.assertFalse(process.is_census_year(''))
+        self.assertFalse(process.is_census_year('abc'))
+
+    def test_write_csv_filters_survey_and_non_census_years(self):
+        tsv_data = '\n'.join([
+            'SOURCE_DESC\tSHORT_DESC\tDOMAINCAT_DESC\tAGG_LEVEL_DESC\tSTATE_FIPS_CODE\tCOUNTY_CODE\tYEAR\tVALUE',
+            'SURVEY\tFARM OPERATIONS - NUMBER OF OPERATIONS\tNOT SPECIFIED\tNATIONAL\t\t\t2022\t999',
+            'CENSUS\tFARM OPERATIONS - NUMBER OF OPERATIONS\tNOT SPECIFIED\tNATIONAL\t\t\t2023\t888',
+            'CENSUS\tFARM OPERATIONS - NUMBER OF OPERATIONS\tNOT SPECIFIED\tNATIONAL\t\t\t1997\t777',
+            'CENSUS\tFARM OPERATIONS - NUMBER OF OPERATIONS\tNOT SPECIFIED\tNATIONAL\t\t\t2022\t (NA) ',
+            'CENSUS\tFARM OPERATIONS - NUMBER OF OPERATIONS\tNOT SPECIFIED\tNATIONAL\t\t\t2002\t 2,128,982 ',
+            'CENSUS\tFARM OPERATIONS - NUMBER OF OPERATIONS\tNOT SPECIFIED\tNATIONAL\t\t\t2027\t1,900,000',
+        ])
+        d = {
+            'FARM OPERATIONS - NUMBER OF OPERATIONS%%NOT SPECIFIED':
+                ('Count_Farm',)
+        }
+        reader = csv.DictReader(io.StringIO(tsv_data), delimiter='\t')
+        out = io.StringIO()
+        written = process.write_csv(reader, out, d)
+        self.assertEqual(written, 2)
+        rows = list(csv.DictReader(io.StringIO(out.getvalue())))
+        self.assertEqual(
+            rows,
+            [
+                {
+                    'variableMeasured': 'dcs:Count_Farm',
+                    'observationAbout': 'dcid:country/USA',
+                    'value': '2128982',
+                    'unit': '',
+                    'observationDate': '2002',
+                },
+                {
+                    'variableMeasured': 'dcs:Count_Farm',
+                    'observationAbout': 'dcid:country/USA',
+                    'value': '1900000',
+                    'unit': '',
+                    'observationDate': '2027',
+                },
+            ],
+        )
+
+    def test_write_csv_missing_required_columns_raises(self):
+        reader = csv.DictReader(io.StringIO('SHORT_DESC\tVALUE\nA\t1\n'),
+                                delimiter='\t')
+        with self.assertRaises(ValueError):
+            process.write_csv(reader, io.StringIO(), {})
+
+    def test_discover_sector_urls_success_and_dedup(self):
+        urls = process.discover_sector_urls(_SAMPLE_DATASETS_HTML)
+        self.assertEqual(
+            urls,
+            [
+                'https://www.nass.usda.gov/sites/default/files/datasets/qs.animals_products_20261121.txt.gz',
+                'https://www.nass.usda.gov/sites/default/files/datasets/qs.crops_20261121.txt.gz',
+                'https://www.nass.usda.gov/sites/default/files/datasets/qs.demographics_20261121.txt.gz',
+                'https://www.nass.usda.gov/sites/default/files/datasets/qs.economics_20261121.txt.gz',
+                'https://www.nass.usda.gov/sites/default/files/datasets/qs.environmental_20261121.txt.gz',
+            ],
+        )
+
+    def test_discover_sector_urls_missing_sector_raises(self):
+        incomplete_html = (
+            '<a href="/sites/default/files/datasets/qs.crops_20261121.txt.gz">'
+            'crops</a>')
+        with self.assertRaises(RuntimeError) as ctx:
+            process.discover_sector_urls(incomplete_html)
+        self.assertIn('Missing expected Quick Stats sector archives',
+                      str(ctx.exception))
+
+    def test_download_file_streaming_success(self):
+        gz_payload = _make_gzip_bytes('hello world\n')
+        resp = _mock_stream_response(
+            [gz_payload[:5], b'', gz_payload[5:]],
+            status_code=200,
+            headers={
+                'Content-Length': str(len(gz_payload)),
+                'ETag': '"v1"'
+            },
+        )
         mock_session = mock.MagicMock()
-        mock_session.head.return_value = mock_response
+        mock_session.get.return_value = resp
 
-        # With explicit session
-        self.assertTrue(
-            process.check_url_status('https://example.com/test.gz',
-                                     session=mock_session))
-        mock_session.head.assert_called_once_with('https://example.com/test.gz',
-                                                  timeout=30,
-                                                  allow_redirects=True)
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            out_path = os.path.join(tmp_dir, 'test.txt.gz')
+            process.download_file('https://www.nass.usda.gov/test.txt.gz',
+                                  out_path,
+                                  session=mock_session)
+            self.assertTrue(os.path.exists(out_path))
+            self.assertFalse(os.path.exists(f'{out_path}.part'))
+            with gzip.open(out_path, 'rt', encoding='utf-8') as f:
+                self.assertEqual(f.read(), 'hello world\n')
 
-        # Without session (using requests)
-        with mock.patch('requests.head', return_value=mock_response):
-            self.assertTrue(
-                process.check_url_status('https://example.com/test.gz'))
+    def test_download_file_resumes_on_truncated_transfer(self):
+        gz_payload = _make_gzip_bytes('resumed payload line\n')
+        split_at = len(gz_payload) // 2
+        first_resp = _mock_stream_response(
+            [gz_payload[:split_at]],
+            status_code=200,
+            headers={
+                'Content-Length': str(len(gz_payload)),
+                'ETag': '"abc"'
+            },
+        )
+        second_resp = _mock_stream_response(
+            [gz_payload[split_at:]],
+            status_code=206,
+            headers={'Content-Length': str(len(gz_payload) - split_at)},
+        )
+        mock_session = mock.MagicMock()
+        mock_session.get.side_effect = [first_resp, second_resp]
 
-    def test_check_url_status_404(self):
-        mock_response = mock.MagicMock()
-        mock_response.status_code = 404
-        with mock.patch('requests.head', return_value=mock_response):
-            self.assertFalse(
-                process.check_url_status('https://example.com/test.gz'))
-
-    def test_check_url_status_5xx_retries_and_raises(self):
-        mock_response = mock.MagicMock()
-        mock_response.status_code = 500
-        mock_response.raise_for_status.side_effect = requests.HTTPError(
-            '500 Server Error')
-
-        with mock.patch('requests.head', return_value=mock_response), \
+        with tempfile.TemporaryDirectory() as tmp_dir, \
              mock.patch('time.sleep') as mock_sleep:
-            with self.assertRaises(requests.HTTPError):
-                process.check_url_status('https://example.com/test.gz')
-            # Should have retried 3 times (2 sleeps)
-            self.assertEqual(mock_sleep.call_count, 2)
+            out_path = os.path.join(tmp_dir, 'resume.txt.gz')
+            process.download_file('https://www.nass.usda.gov/resume.txt.gz',
+                                  out_path,
+                                  session=mock_session)
+            self.assertEqual(mock_sleep.call_count, 1)
+            self.assertEqual(mock_session.get.call_count, 2)
+            second_headers = mock_session.get.call_args_list[1].kwargs[
+                'headers']
+            self.assertEqual(
+                second_headers,
+                {
+                    'Range': f'bytes={split_at}-',
+                    'If-Range': '"abc"'
+                },
+            )
+            with gzip.open(out_path, 'rt', encoding='utf-8') as f:
+                self.assertEqual(f.read(), 'resumed payload line\n')
 
-    @mock.patch('builtins.open', new_callable=mock.mock_open)
-    def test_download_file_streaming_success(self, mock_open_file):
-        mock_response = mock.MagicMock()
-        mock_response.iter_content.return_value = [b'chunk1', b'', b'chunk2']
+    def test_download_file_permanent_404_does_not_retry(self):
+        resp_404 = _mock_stream_response([], status_code=404)
         mock_session = mock.MagicMock()
-        mock_session.get.return_value = mock_response
+        mock_session.get.return_value = resp_404
 
-        process.download_file('https://example.com/test.gz',
-                              '/path/to/output.gz',
-                              session=mock_session)
-
-        mock_session.get.assert_called_once_with('https://example.com/test.gz',
-                                                 stream=True,
-                                                 timeout=120)
-        mock_response.raise_for_status.assert_called_once()
-        mock_open_file.assert_called_once_with('/path/to/output.gz', 'wb')
-        handle = mock_open_file()
-        handle.write.assert_has_calls(
-            [mock.call(b'chunk1'), mock.call(b'chunk2')])
-
-    def test_download_file_retries_and_raises(self):
-        mock_session = mock.MagicMock()
-        mock_session.get.side_effect = requests.RequestException(
-            'Network error')
-
-        with mock.patch('time.sleep') as mock_sleep:
-            with self.assertRaises(requests.RequestException):
-                process.download_file('https://example.com/test.gz',
-                                      '/path/to/output.gz',
-                                      session=mock_session)
-            # Should retry 3 times (2 sleeps)
-            self.assertEqual(mock_sleep.call_count, 2)
-            self.assertEqual(mock_session.get.call_count, 3)
-
-    @mock.patch('os.makedirs')
-    def test_download_and_process_data_future_year_404_skip(
-            self, mock_makedirs):
-        mock_dt = mock.MagicMock()
-        mock_dt.now.return_value = datetime(2027, 1, 1)
-        with mock.patch.object(process, 'check_url_status', return_value=False), \
-             mock.patch.object(process, 'datetime', mock_dt):
-            # Future year 2027 within skip window returns None
-            result = process.download_and_process_data(2027, {})
-            self.assertIsNone(result)
-
-    @mock.patch('os.makedirs')
-    def test_download_and_process_data_historical_year_404_raises(
-            self, mock_makedirs):
-        with mock.patch.object(process, 'check_url_status', return_value=False):
-            # Historical year 2022 should fail loudly
+        with tempfile.TemporaryDirectory() as tmp_dir, \
+             mock.patch('time.sleep') as mock_sleep:
+            out_path = os.path.join(tmp_dir, 'missing.txt.gz')
             with self.assertRaises(requests.HTTPError):
-                process.download_and_process_data(2022, {})
+                process.download_file(
+                    'https://www.nass.usda.gov/missing.txt.gz',
+                    out_path,
+                    session=mock_session,
+                )
+            self.assertEqual(mock_sleep.call_count, 0)
+            self.assertEqual(mock_session.get.call_count, 1)
+            self.assertFalse(os.path.exists(f'{out_path}.part'))
 
-    @mock.patch('os.makedirs')
-    def test_download_and_process_data_overdue_year_404_raises(
-            self, mock_makedirs):
-        mock_dt = mock.MagicMock()
-        mock_dt.now.return_value = datetime(2030, 1, 1)
-        with mock.patch.object(process, 'check_url_status', return_value=False), \
-             mock.patch.object(process, 'datetime', mock_dt):
-            # In 2030, 2027 is overdue and should raise HTTPError
-            with self.assertRaises(requests.HTTPError):
-                process.download_and_process_data(2027, {})
+    def test_main_download_and_process_modes(self):
+        fixture_path = os.path.join(_SCRIPT_DIR, 'testdata',
+                                    'ag_census_input.txt')
+        expected_path = os.path.join(_SCRIPT_DIR, 'testdata',
+                                     'ag_census_output.csv')
+        with open(fixture_path, encoding='utf-8') as f:
+            fixture_tsv = f.read()
+        with open(expected_path, encoding='utf-8') as f:
+            expected_csv = f.read()
 
-    @mock.patch('os.makedirs')
-    @mock.patch.object(process, 'check_url_status', return_value=True)
-    @mock.patch.object(process, 'download_file')
-    @mock.patch.object(process, 'unzip_file', return_value='input/test.txt')
-    @mock.patch.object(process, 'write_csv')
-    @mock.patch('file_util.FileIO')
-    def test_download_and_process_data_success(self, mock_file_io,
-                                               mock_write_csv, mock_unzip,
-                                               mock_download, mock_check_url,
-                                               mock_makedirs):
-        mock_session = mock.MagicMock()
-        result = process.download_and_process_data(2022, {},
-                                                   session=mock_session)
-        self.assertEqual(result, os.path.join('output', 'agriculture_2022.csv'))
-        mock_check_url.assert_called_once()
-        mock_download.assert_called_once_with(
-            'https://www.nass.usda.gov/sites/default/files/datasets/qs.census2022.txt.gz',
-            os.path.join('input', 'qs.census2022.txt.gz'),
-            session=mock_session)
+        empty_header = fixture_tsv.splitlines()[0] + '\n'
+        payload_by_sector = {
+            'economics': _make_gzip_bytes(fixture_tsv),
+            'animals_products': _make_gzip_bytes(empty_header),
+            'crops': _make_gzip_bytes(empty_header),
+            'demographics': _make_gzip_bytes(empty_header),
+            'environmental': _make_gzip_bytes(empty_header),
+        }
 
-    @mock.patch('os.makedirs')
-    @mock.patch.object(process, 'get_statvars', return_value={})
-    @mock.patch.object(process, 'download_and_process_data', return_value=None)
-    def test_main_empty_files_raises(self, mock_download, mock_get_statvars,
-                                     mock_makedirs):
-        with flagsaver.flagsaver(mode='download'):
+        def fake_download(url, dest_path, session=None):
+            for sector, gz_bytes in payload_by_sector.items():
+                if f'qs.{sector}_' in url:
+                    with open(dest_path, 'wb') as out_f:
+                        out_f.write(gz_bytes)
+                    return
+            raise AssertionError(f'Unexpected URL: {url}')
+
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            input_dir = os.path.join(tmp_dir, 'input')
+            os.makedirs(input_dir, exist_ok=True)
+            stale_file = os.path.join(input_dir, 'qs.crops_20260101.txt.gz')
+            with open(stale_file, 'wb') as f:
+                f.write(b'stale')
+            output_csv = os.path.join(tmp_dir, 'output', 'agriculture.csv')
+
+            with mock.patch.object(process,
+                                   'fetch_datasets_html',
+                                   return_value=_SAMPLE_DATASETS_HTML), \
+                 mock.patch.object(process,
+                                   'download_file',
+                                   side_effect=fake_download):
+                # 1. --mode=download fetches datasets.html + 5 .txt.gz archives and removes stale files.
+                with flagsaver.flagsaver(mode='download',
+                                         input_dir=input_dir,
+                                         output=output_csv):
+                    process.main([])
+                self.assertFalse(os.path.exists(stale_file))
+                self.assertTrue(
+                    os.path.exists(os.path.join(input_dir, 'datasets.html')))
+                self.assertEqual(len(os.listdir(input_dir)), 6)
+                self.assertFalse(os.path.exists(output_csv))
+
+                # 2. --mode=process streams existing .txt.gz files and writes outputs.
+                with flagsaver.flagsaver(mode='process',
+                                         input_dir=input_dir,
+                                         output=output_csv):
+                    process.main([])
+                with open(output_csv, encoding='utf-8') as f:
+                    self.assertEqual(f.read(), expected_csv)
+                year_csv = os.path.join(tmp_dir, 'output',
+                                        'agriculture_2022.csv')
+                self.assertTrue(os.path.exists(year_csv))
+
+                # 3. Default --mode='' downloads and processes in a single run.
+                with flagsaver.flagsaver(mode='',
+                                         input_dir=input_dir,
+                                         output=output_csv):
+                    process.main([])
+                with open(output_csv, encoding='utf-8') as f:
+                    self.assertEqual(f.read(), expected_csv)
+
+    def test_process_input_files_empty_observations_raises(self):
+        header_only = (
+            'SOURCE_DESC\tSHORT_DESC\tDOMAINCAT_DESC\tAGG_LEVEL_DESC\t'
+            'STATE_FIPS_CODE\tCOUNTY_CODE\tYEAR\tVALUE\n')
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            gz_path = os.path.join(tmp_dir, 'qs.crops_20261121.txt.gz')
+            with open(gz_path, 'wb') as f:
+                f.write(_make_gzip_bytes(header_only))
+            output_csv = os.path.join(tmp_dir, 'output', 'agriculture.csv')
             with self.assertRaises(RuntimeError) as ctx:
-                process.main([])
-            self.assertIn("No census files were downloaded or processed.",
+                process.process_input_files([gz_path], output_csv, {})
+            self.assertIn('No census observations were produced',
                           str(ctx.exception))
-
-    @mock.patch('os.makedirs')
-    @mock.patch.object(process, 'get_statvars', return_value={})
-    @mock.patch.object(process,
-                       'download_and_process_data',
-                       return_value='output/agriculture_2022.csv')
-    @mock.patch.object(process, 'merge_csv_files')
-    def test_main_download_and_merge_with_session(self, mock_merge,
-                                                  mock_download,
-                                                  mock_get_statvars,
-                                                  mock_makedirs):
-        with flagsaver.flagsaver(mode='', output='output/agriculture.csv'):
-            process.main([])
-            mock_merge.assert_called_once()
-            self.assertTrue(mock_download.called)
-            # Verify a session was passed to download_and_process_data
-            session_arg = mock_download.call_args[1].get('session')
-            self.assertIsInstance(session_arg, requests.Session)
 
 
 if __name__ == '__main__':
