@@ -110,7 +110,7 @@ series while ingesting new upstream years automatically:
 - `manifest.json`: Import automation specification (`cron_schedule`, combined
   historical + fresh `import_inputs`, `source_files`, `validation_config_file`).
 - `validation_config.json`: SQL and range validation rules across all 10
-  StatVars (including `MinPrice >= 1000` on `dc/rn90czcrqcv06`).
+  StatVars (including `MinPrice >= 750` on `dc/rn90czcrqcv06`).
 - `download_test.py` & `test_data/`: Hermetic unit tests (for `download.py` and
   `consolidate_historical.py`) and `stat_var_processor.py` sample fixtures.
 

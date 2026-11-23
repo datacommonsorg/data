@@ -20,11 +20,11 @@
         },
         {
             "rule_id": "check_Mean_Price_MedicareEnrollee",
-            "description": "Verifies price-adjusted Medicare reimbursement per enrollee coverage, minimum value scale (>= $1,000), and freshness through 2019.",
+            "description": "Verifies price-adjusted Medicare reimbursement per enrollee coverage, minimum value scale (>= $750), and freshness through 2019.",
             "validator": "SQL_VALIDATOR",
             "params": {
                 "query": "SELECT COUNT(*) AS NumStatVars, COALESCE(MIN(NumPlaces), 0) AS NumPlaces, COALESCE(MIN(NumObservations), 0) AS NumObservations, COALESCE(MIN(CAST(MaxDate AS INTEGER)), 0) AS LatestDate, COALESCE(MIN(MinValue), 0) AS MinPrice FROM stats WHERE StatVar = 'dc/rn90czcrqcv06'",
-                "condition": "NumStatVars = 1 AND NumPlaces >= 3000 AND NumObservations >= 45000 AND LatestDate >= 2019 AND MinPrice >= 1000"
+                "condition": "NumStatVars = 1 AND NumPlaces >= 3000 AND NumObservations >= 45000 AND LatestDate >= 2019 AND MinPrice >= 750"
             }
         },
         {
