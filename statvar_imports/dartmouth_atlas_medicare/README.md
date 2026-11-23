@@ -25,17 +25,17 @@ diabetic enrollee counts from the
   - `Count_MedicareEnrollee_ConditionDiabetic_Black`,
     `Count_MedicareEnrollee_ConditionDiabetic_NonBlack` (`2007–2019+`)
 - **Geographic Levels**: Country (`country/USA`), States (`geoId/XX`), Counties
-  (`geoId/XXXXX`, including retired Alaska county FIPS preserved in historical
-  data), and HRR/HSA Cities/Towns/Villages/Neighborhoods (`1999–2015`
-  historical `Count_MedicareEnrollee`).
+  (`geoId/XXXXX`, including retired Alaska/SD county FIPS preserved in
+  historical data), and `2,964` 7-digit HSA Cities/Towns/Villages/Neighborhoods
+  (`1999–2017+` `Count_MedicareEnrollee`).
 - **Temporal Granularity**: Annual (`observationPeriod: P1Y`).
 
 ## 2. Datasets & Architecture
 
 This import combines a consolidated historical baseline (`1999–2016`) staged in
-GCS with live Dartmouth Atlas longitudinal ZIP archives (`2003–2019+`) so
-subsequent automated iterations preserve 100% of historical series (`0%`
-deletions) while ingesting new upstream years automatically:
+GCS with live Dartmouth Atlas longitudinal ZIP archives and HSA mortality
+workbooks (`2003–2019+`) so subsequent automated iterations preserve historical
+series while ingesting new upstream years automatically:
 
 1. **Consolidated Historical Baseline in GCS (`1999–2016`)**:
    - `gs://unresolved_mcf/dartmouth_atlas_medicare/historical/dartmouth_atlas_medicare_historical_1999_2016.csv`
@@ -44,28 +44,46 @@ deletions) while ingesting new upstream years automatically:
      (`dartmouth_reim_count`, `dartmouth_reim`, `dartmouth_num_overall`,
      `dartmouth_num_enrollees`, `dartmouth_num_diabetics`,
      `dartmouth_mortality_count`; `cl/954587569`, `b/527799466`).
-   - Preserves all 10 production StatVars (including `MedicareA*` `2007–2014`,
-     year `2007` for Part B & Diabetic, `1999–2002` + ~3,300 resolved HRR/HSA
-     City/Town/Village places for `Count_MedicareEnrollee`, and retired Alaska
-     FIPS `geoId/02201`, `geoId/02270`).
+   - Preserves historical series across all 10 production StatVars (including
+     `MedicareA*` `2007–2014`, year `2007` for Part B & Diabetic, `1999–2002`
+     counties, `1999–2015` for the `2,964` resolved 7-digit HSA
+     City/Town/Village/Neighborhood places, and retired Alaska/SD county FIPS
+     such as `geoId/02201`, `geoId/02270`, `geoId/46113`).
+   - Truncated `< $1,000` sub-service `dc/rn90czcrqcv06` slices (where
+     comma-quoted `>= $1,000` Total values were dropped during `cl/954587569`
+     StatPop-to-SVObs conversion) and `2003–2009` 20%-sample county
+     `Count_MedicareEnrollee` rows overlapped by live archives are excluded /
+     pruned when staging `output_files/` so live `stdprice_total` and unified
+     100% county counts take precedence without duplicate keys.
    - Copied automatically by `download.py` into `output_files/` along with
      `output_files/common_tmcf.tmcf` on every run.
-2. **Live Upstream Archives (`https://data.dartmouthatlas.org/downloads/`)**:
-   - `research_files/county_stdprices_2003_2010.csv.zip` (`2003–2010` county
-     enrollees & Total price-adjusted reimbursements)
-   - `research_files/county_stdprices_ffs.csv.zip` (`2011–2019+` county
-     enrollees & Total price-adjusted reimbursements)
-   - `research_files/state_stdprices_2003_2010.csv.zip` (`2003–2010` state &
-     USA enrollees & Total price-adjusted reimbursements)
-   - `research_files/state_stdprices_ffs.csv.zip` (`2011–2019+` state & USA
-     enrollees & Total price-adjusted reimbursements)
-   - `research_files/county_hedis_6575ffs.csv.zip` (`2008–2019+` county Part B
-     & diabetic enrollees by race)
-   - `research_files/state_hedis_6575ffs.csv.zip` (`2008–2019+` state & USA
-     Part B & diabetic enrollees by race)
-   - On every run, `download.py` deduplicates live observations against keys
-     already present in the historical CSV so only net-new `(date, place,
-     stat_var)` observations are passed to `stat_var_processor.py`.
+2. **Live Upstream Archives & Dynamic Discovery (`https://data.dartmouthatlas.org/`)**:
+   - `downloads/research_files/county_stdprices_2003_2010.csv.zip` (`2003–2010`
+     unified 100% county enrollees & Total price-adjusted reimbursements)
+   - `downloads/research_files/county_stdprices_ffs.csv.zip` (`2011–2019+`
+     county enrollees & Total price-adjusted reimbursements)
+   - `downloads/research_files/state_stdprices_2003_2010.csv.zip` (`2003–2010`
+     state & USA enrollees & Total price-adjusted reimbursements)
+   - `downloads/research_files/state_stdprices_ffs.csv.zip` (`2011–2019+` state
+     & USA enrollees & Total price-adjusted reimbursements)
+   - `downloads/research_files/county_hedis_6575ffs.csv.zip` (`2008–2019+`
+     county Part B & diabetic enrollees by race)
+   - `downloads/research_files/state_hedis_6575ffs.csv.zip` (`2008–2019+` state
+     & USA Part B & diabetic enrollees by race)
+   - `downloads/tables/hsa_mortality_dead6599ffs_2016.xlsx` and
+     `downloads/tables/hsa_mortality_dead6599ffs_2017.xlsx` (`2016–2017` HSA
+     enrollee denominators advancing all `2,964` 7-digit HSA places; Dartmouth
+     Atlas discontinued HSA mortality tables after `2017`). *Note*: State
+     mortality tables (all-Medicare vs. FFS) and HRR mortality tables
+     (multi-county referral regions ~2x–10x larger than the 7-digit HSA city
+     series stored in `1999–2015`, e.g., Birmingham AL `2015` prod `120,523`
+     matches `2016` HSA `124,299` vs. `2016` HRR `359,057`) are intentionally
+     excluded to avoid scale discontinuities.
+   - On every run, `download.py` scrapes the official `/medicare-reimbursements/`,
+     `/primary-care/`, and `/mortality/` portal pages (falling back to
+     `SOURCE_ARCHIVES` with a warning on HTML/network errors) to automatically
+     discover any newly published longitudinal archives or `2020+` annual
+     tables, then deduplicates against retained historical keys.
 
 ## 3. Directory Layout
 
@@ -87,12 +105,14 @@ deletions) while ingesting new upstream years automatically:
   (`observationPeriod: P1Y`).
 - `dartmouth_statvar_remap.csv`: Maps generated StatVar DCIDs to existing KG
   DCIDs (including `dc/rn90czcrqcv06` and `DAD_Black`/`DAD_NonBlack` remaps).
+- `dartmouth_hsa_places.csv`: Reviewed lookup mapping Dartmouth Atlas `HSA #`
+  and `HSA Name` (`"ST- CITY"`) to all `2,964` resolved 7-digit place DCIDs.
 - `manifest.json`: Import automation specification (`cron_schedule`, combined
   historical + fresh `import_inputs`, `source_files`, `validation_config_file`).
 - `validation_config.json`: SQL and range validation rules across all 10
-  StatVars.
-- `download_test.py` & `test_data/`: Unit tests (for `download.py` and
-  `consolidate_historical.py`) and `stat_var_processor.py` test fixtures.
+  StatVars (including `MinPrice >= 1000` on `dc/rn90czcrqcv06`).
+- `download_test.py` & `test_data/`: Hermetic unit tests (for `download.py` and
+  `consolidate_historical.py`) and `stat_var_processor.py` sample fixtures.
 
 ## 4. One-Time Historical Staging (Prerequisites)
 
@@ -154,7 +174,8 @@ After PR merge and the first successful production run under
 submit a google3 CL updating:
 
 - `//depot/google3/datacommons/import/mcf/manifest/us_stats/Dartmouth_Atlas_Medicare.textproto`
-  (`end_date_in_kg: "2019"`, `provenance_url` / `data_download_url: "https://data.dartmouthatlas.org/"`, `automated_mcf_generation_by`, and `/bigstore/datcom-prod-imports/...` paths)
+  (`end_date_in_kg: "2019"`, `provenance_url` / `data_download_url: "https://data.dartmouthatlas.org/"`, `import_groups` / `automated_mcf_generation_by: "auto1w"`, `/cns/jv-d/home/datcom/.../latest/` paths, and `/bigstore/datcom-prod-imports/...` paths)
 - `//depot/google3/datacommons/import/mcf/resolved_mcf/import/Dartmouth_Atlas_Medicare.mcf`
-  (`lastDataRefreshDate`, `sourceDataUrl`, `automaticRefreshType`, `automatedRefreshFrequency`)
+  (remove `lastDataRefreshDate`, and set `url` / `sourceDataUrl` / `license: "https://data.dartmouthatlas.org/"`, `automaticRefreshType: dcid:GCPCloudRunAutomaticRefresh`, `automaticRefreshSchedule: "0 5 * * 1"`, and `sourceReleaseFrequency: "P1Y"`)
 - `//depot/google3/datacommons/import/mcf/encode_mcfs.textproto`
+  (`provenance_url: "https://data.dartmouthatlas.org/"` and `mcf_url: "/cns/jv-d/home/datcom/v3_resolved_mcf/dartmouth_atlas_medicare/latest/nodes.mcf@2"`)

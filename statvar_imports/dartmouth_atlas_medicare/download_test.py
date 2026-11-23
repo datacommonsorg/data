@@ -37,6 +37,37 @@ def _build_zip_bytes(entries: dict[str, bytes]) -> bytes:
     return buf.getvalue()
 
 
+def _build_xlsx_bytes(sheets: list[tuple[str, list[list[str]]]]) -> bytes:
+    """Builds a minimal valid .xlsx ZIP with inline-string cells for testing."""
+    ns = "http://schemas.openxmlformats.org/spreadsheetml/2006/main"
+    entries: dict[str, bytes] = {}
+    sheet_tags: list[str] = []
+    for idx, (sname, rows) in enumerate(sheets, start=1):
+        sheet_tags.append(
+            f'<sheet name="{sname}" sheetId="{idx}" r:id="rId{idx}"/>')
+        row_xml_parts: list[str] = []
+        for r_idx, row in enumerate(rows, start=1):
+            cell_parts: list[str] = []
+            for c_idx, val in enumerate(row):
+                col_letter = chr(ord("A") + c_idx)
+                cell_parts.append(f'<c r="{col_letter}{r_idx}" t="inlineStr">'
+                                  f"<is><t>{val}</t></is></c>")
+            row_xml_parts.append(
+                f'<row r="{r_idx}">{"".join(cell_parts)}</row>')
+        ws_xml = (f'<?xml version="1.0" encoding="UTF-8"?>'
+                  f'<worksheet xmlns="{ns}"><sheetData>'
+                  f'{"".join(row_xml_parts)}</sheetData></worksheet>')
+        entries[f"xl/worksheets/sheet{idx}.xml"] = ws_xml.encode("utf-8")
+
+    wb_xml = (
+        f'<?xml version="1.0" encoding="UTF-8"?>'
+        f'<workbook xmlns="{ns}" '
+        f'xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">'
+        f'<sheets>{"".join(sheet_tags)}</sheets></workbook>')
+    entries["xl/workbook.xml"] = wb_xml.encode("utf-8")
+    return _build_zip_bytes(entries)
+
+
 class DownloadTest(unittest.TestCase):
     """Tests normalization, filtering, and error handling in download.py."""
 
@@ -83,6 +114,8 @@ class DownloadTest(unittest.TestCase):
         self.assertIsNone(download.format_place_dcid("100000", False))
         self.assertIsNone(download.format_place_dcid("4617620", False))
         self.assertIsNone(download.format_place_dcid("999999", False))
+        self.assertIsNone(download.format_place_dcid("inf", False))
+        self.assertIsNone(download.format_place_dcid("-inf", True))
 
     def test_clean_numeric_value(self):
         self.assertEqual(download.clean_numeric_value(" 7,128 "), "7128")
@@ -239,6 +272,15 @@ class DownloadTest(unittest.TestCase):
                     ["2019", "geoId/01001", "MedicareEnrollee_Count", "3774"],
                 ],
             )
+            empty_path = Path(tmpdir) / "cleaned" / "empty.csv"
+            with self.assertRaises(RuntimeError):
+                download.write_cleaned_csv({}, empty_path, allow_empty=False)
+            download.write_cleaned_csv({}, empty_path, allow_empty=True)
+            with empty_path.open("r", encoding="utf-8") as handle:
+                self.assertEqual(
+                    list(csv.reader(handle)),
+                    [["year", "place", "stat_var_key", "value"]],
+                )
 
     def test_copy_historical_files_from_gcs(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -345,6 +387,138 @@ class DownloadTest(unittest.TestCase):
                         "2200000",
                 },
             )
+
+    def test_prunes_corrupted_reim_and_2003_2009_sample_counties(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            hist_csv = Path(tmpdir) / "historical.csv"
+            hist_csv.write_text(
+                "observationDate,observationAbout,variableMeasured,value,"
+                "observationPeriod\n"
+                # Corrupted < $1,000 CNS TFRecord sub-slice: must be pruned.
+                "2016,dcid:geoId/01001,dcid:dc/rn90czcrqcv06,218.5,P1Y\n"
+                # 2003-2009 20%-sample county overlapped by live: pruned.
+                "2005,dcid:geoId/01001,dcid:Count_MedicareEnrollee,935,P1Y\n"
+                # Retired county absent from live ZIPs: preserved!
+                "2008,dcid:geoId/02201,dcid:Count_MedicareEnrollee,520,P1Y\n"
+                # 7-digit HSA city in 2005: preserved!
+                "2005,dcid:geoId/0100820,dcid:Count_MedicareEnrollee,10385,P1Y\n"
+                # 2010 100%-scale county: preserved and deduplicated!
+                "2010,dcid:geoId/01001,dcid:Count_MedicareEnrollee,4700,P1Y\n",
+                encoding="utf-8",
+            )
+            live_obs = {
+                ("2016", "geoId/01001", "MedicareEnrollee_MeanPrice"): "10450",
+                ("2005", "geoId/01001", "MedicareEnrollee_Count"): "4675",
+                ("2010", "geoId/01001", "MedicareEnrollee_Count"): "4700",
+            }
+            keys = download.load_historical_observation_keys(
+                [hist_csv],
+                live_observations=live_obs,
+                rewrite_staged=True,
+            )
+            self.assertEqual(
+                keys,
+                {
+                    ("2008", "geoId/02201", "Count_MedicareEnrollee"),
+                    ("2005", "geoId/0100820", "Count_MedicareEnrollee"),
+                    ("2010", "geoId/01001", "Count_MedicareEnrollee"),
+                },
+            )
+            with hist_csv.open("r", encoding="utf-8") as handle:
+                staged_rows = list(csv.reader(handle))
+            self.assertEqual(len(staged_rows), 4)
+            net_new = download.filter_out_historical_observations(
+                live_obs, keys)
+            self.assertEqual(
+                net_new,
+                {
+                    ("2016", "geoId/01001", "MedicareEnrollee_MeanPrice"):
+                        "10450",
+                    ("2005", "geoId/01001", "MedicareEnrollee_Count"):
+                        "4675",
+                },
+            )
+
+    def test_process_hsa_mortality_xlsx_and_multi_dcid(self):
+        xlsx_bytes = _build_xlsx_bytes([
+            (
+                "Note about Measures",
+                [[
+                    "Values of -88888 indicate numbers were too small to "
+                    "ensure statistical precision"
+                ]],
+            ),
+            (
+                "hsa_mortality_dead6599ffs_2016",
+                [
+                    ["Year", "HSA #", "HSA Name", "Medicare Enrollees"],
+                    ["2016.0", "1001", "AL- ALABASTER", "15,166"],
+                    ["2016", "10073", "FL- MELBOURNE", "68397"],
+                    ["2016", "1099", "AL- TINY", "-88888"],
+                    ["2016", "99999", "US- UNITED STATES", "46608380"],
+                ],
+            ),
+        ])
+        with tempfile.TemporaryDirectory() as tmpdir:
+            wb_path = Path(tmpdir) / "hsa_mortality_dead6599ffs_2016.xlsx"
+            wb_path.write_bytes(xlsx_bytes)
+            hsa_csv = Path(tmpdir) / "dartmouth_hsa_places.csv"
+            hsa_csv.write_text(
+                "hsa_code,hsa_name,dcid\n"
+                "1001,AL- ALABASTER,geoId/0100820\n"
+                "10073,FL- MELBOURNE,geoId/1243975\n"
+                "10073,FL- MELBOURNE,geoId/1244075\n"
+                "1099,AL- TINY,geoId/0199999\n",
+                encoding="utf-8",
+            )
+            hsa_map = download.load_hsa_place_map(hsa_csv)
+            obs: dict[tuple[str, str, str], str] = {}
+            download.process_archive(
+                wb_path,
+                kind="hsa_mortality",
+                is_state=False,
+                observations=obs,
+                hsa_place_map=hsa_map,
+            )
+        self.assertEqual(
+            obs,
+            {
+                ("2016", "geoId/0100820", "MedicareEnrollee_Count"): "15166",
+                ("2016", "geoId/1243975", "MedicareEnrollee_Count"): "68397",
+                ("2016", "geoId/1244075", "MedicareEnrollee_Count"): "68397",
+            },
+        )
+
+    def test_discover_source_archives_and_fallback(self):
+        mock_session = mock.MagicMock()
+        reim_resp = mock.MagicMock()
+        reim_resp.text = (
+            '<a href="https://data.dartmouthatlas.org/downloads/tables/'
+            'county_stdprices_ffs_2020.csv.zip">County 2020</a>'
+            '<a href="https://data.dartmouthatlas.org/downloads/tables/'
+            'hrr_mortality_2019.csv.zip">HRR</a>')
+        pc_resp = mock.MagicMock()
+        pc_resp.text = ""
+        mort_resp = mock.MagicMock()
+        mort_resp.text = (
+            '<a href="https://data.dartmouthatlas.org/downloads/tables/'
+            'hsa_mortality_2020.csv.zip">HSA 2020</a>'
+            '<a href="https://data.dartmouthatlas.org/downloads/tables/'
+            'state_mortality_2020.csv.zip">State 2020</a>')
+        mock_session.get.side_effect = [reim_resp, pc_resp, mort_resp]
+
+        discovered = download.discover_source_archives(mock_session)
+        filenames = [str(s["filename"]) for s in discovered]
+        self.assertIn("county_stdprices_ffs_2020.csv.zip", filenames)
+        self.assertIn("hsa_mortality_2020.csv.zip", filenames)
+        self.assertNotIn("hrr_mortality_2019.csv.zip", filenames)
+        self.assertNotIn("state_mortality_2020.csv.zip", filenames)
+
+        # Network errors fall back cleanly to baseline SOURCE_ARCHIVES.
+        fail_session = mock.MagicMock()
+        fail_session.get.side_effect = requests.Timeout("portal timeout")
+        fallback = download.discover_source_archives(fail_session)
+        self.assertEqual(len(fallback), len(download.SOURCE_ARCHIVES))
 
 
 class ConsolidateHistoricalTest(unittest.TestCase):
@@ -623,11 +797,15 @@ class ConsolidateHistoricalTest(unittest.TestCase):
                 consolidate_historical.is_valid_historical_place(invalid),
                 invalid)
 
-    def test_consolidate_baseline_with_reim_csv_override(self):
+    def test_consolidate_baseline_excludes_sub_1000_reim_and_applies_reim_csv(
+            self):
         with tempfile.TemporaryDirectory() as tmpdir:
             cns_root = Path(tmpdir) / "stat_pop"
             out_dir = Path(tmpdir) / "historical"
             for tbl in consolidate_historical.ACTIVE_SUBTABLES:
+                val = "218.5" if tbl == "dartmouth_reim" else "4100"
+                sv = ("dc/rn90czcrqcv06"
+                      if tbl == "dartmouth_reim" else "Count_MedicareEnrollee")
                 self._write_subtable_mcf(
                     cns_root,
                     tbl,
@@ -635,10 +813,30 @@ class ConsolidateHistoricalTest(unittest.TestCase):
                      "typeOf: dcs:StatVarObservation\n"
                      'observationDate: "2016"\n'
                      "observationAbout: dcid:geoId/01001\n"
-                     "variableMeasured: dcid:dc/rn90czcrqcv06\n"
-                     "value: 11111\n"
+                     f"variableMeasured: dcid:{sv}\n"
+                     f"value: {val}\n"
                      'observationPeriod: "P1Y"\n'),
                 )
+
+            # Without --reim_csv, < $1,000 non-canonical dc/rn90czcrqcv06 slice
+            # is excluded from CSV while kept in unaltered baseline MCF.
+            csv_no_override, _, mcf_no_override = (
+                consolidate_historical.consolidate_baseline(
+                    source_dir=str(cns_root),
+                    output_dir=out_dir,
+                ))
+            self.assertNotIn(
+                "dcid:dc/rn90czcrqcv06",
+                csv_no_override.read_text(encoding="utf-8"),
+            )
+            self.assertIn(
+                "variableMeasured: dcid:dc/rn90czcrqcv06\nvalue: 218.5",
+                mcf_no_override.read_text(encoding="utf-8"),
+            )
+
+            # With --reim_csv, canonical Total priceAgeSexRace overrides apply
+            # to existing county keys, missing county-years, 2-digit states, and
+            # USA while rejecting empty slice tags and keeping MCF unaltered.
             reim_csv = Path(tmpdir) / "dartmouth_reim.csv"
             reim_csv.write_text(
                 "year,geoId,hasMedicareReimbursementFor,adjustmentType,value\n"
@@ -646,24 +844,43 @@ class ConsolidateHistoricalTest(unittest.TestCase):
                 "ageSexRace,11111\n"
                 "2016,geoId/01001,TotalMedicareReimbursement,"
                 "priceAgeSexRace,10321.50\n"
-                "2016,geoId/01001,HospitalReimbursement,"
-                "priceAgeSexRace,4000\n",
+                "2015,1001,TotalMedicareReimbursement,"
+                "priceAgeSexRace,9800\n"
+                "2016,06,TotalMedicareReimbursement,"
+                "priceAgeSexRace,9500.25\n"
+                "2016,99,TotalMedicareReimbursement,"
+                "priceAgeSexRace,10100\n"
+                "2016,06001,,,500\n",
                 encoding="utf-8",
             )
-            csv_path, _, _ = consolidate_historical.consolidate_baseline(
+            csv_path, _, mcf_path = consolidate_historical.consolidate_baseline(
                 source_dir=str(cns_root),
                 output_dir=out_dir,
                 reim_csv=str(reim_csv),
             )
             with csv_path.open("r", encoding="utf-8") as handle:
                 rows = list(csv.reader(handle))
+            by_key = {(r[0], r[1], r[2]): r[3] for r in rows[1:]}
             self.assertEqual(
-                rows[1],
-                [
-                    "2016", "dcid:geoId/01001", "dcid:dc/rn90czcrqcv06",
-                    "10321.5", "P1Y"
-                ],
+                by_key[("2016", "dcid:geoId/01001", "dcid:dc/rn90czcrqcv06")],
+                "10321.5",
             )
+            self.assertEqual(
+                by_key[("2015", "dcid:geoId/01001", "dcid:dc/rn90czcrqcv06")],
+                "9800",
+            )
+            self.assertEqual(
+                by_key[("2016", "dcid:geoId/06", "dcid:dc/rn90czcrqcv06")],
+                "9500.25",
+            )
+            self.assertEqual(
+                by_key[("2016", "dcid:country/USA", "dcid:dc/rn90czcrqcv06")],
+                "10100",
+            )
+            self.assertNotIn(
+                ("2016", "dcid:geoId/06001", "dcid:dc/rn90czcrqcv06"), by_key)
+            # Baseline MCF still reflects unaltered CNS observations.
+            self.assertNotIn("9500.25", mcf_path.read_text(encoding="utf-8"))
 
     def _encode_varint(self, val: int) -> bytes:
         out = bytearray()

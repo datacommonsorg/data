@@ -27,6 +27,7 @@
                 "dartmouth_atlas_medicare_pvmap.csv",
                 "dartmouth_atlas_medicare_metadata.csv",
                 "dartmouth_statvar_remap.csv",
+                "dartmouth_hsa_places.csv",
                 "counters/*.csv",
                 "validation_config.json"
             ],

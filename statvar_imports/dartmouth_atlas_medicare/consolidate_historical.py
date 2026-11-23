@@ -551,9 +551,7 @@ def parse_reim_csv_overrides(reim_csv_path: str) -> dict[tuple[str, str], str]:
             adj = strip_quotes_and_prefix(row.get("adjustmenttype", "")).lower()
             reim_for = strip_quotes_and_prefix(
                 row.get("hasmedicarereimbursementfor", "")).lower()
-            if adj and "priceagesexrace" not in adj:
-                continue
-            if reim_for and "total" not in reim_for:
+            if "priceagesexrace" not in adj or "total" not in reim_for:
                 continue
             year = strip_quotes_and_prefix(
                 row.get("year") or row.get("observationdate") or "")
@@ -566,8 +564,12 @@ def parse_reim_csv_overrides(reim_csv_path: str) -> dict[tuple[str, str], str]:
                 continue
             if place.isdigit():
                 code_int = int(place)
-                place = ("country/USA" if code_int in (99, 99999) else
-                         f"geoId/{code_int:05d}")
+                if code_int in (99, 99999):
+                    place = "country/USA"
+                elif len(place) <= 2 or code_int < 100:
+                    place = f"geoId/{code_int:02d}"
+                else:
+                    place = f"geoId/{code_int:05d}"
             if not is_valid_historical_place(place):
                 continue
             val_parsed = clean_numeric_value(
@@ -676,15 +678,17 @@ def consolidate_baseline(
             f"Missing required legacy Dartmouth Atlas sub-tables under "
             f"{source_dir}: {missing_subtables}")
 
+    baseline_observations = dict(observations)
+
     if reim_csv:
         reim_overrides = parse_reim_csv_overrides(reim_csv)
         replaced = 0
         for (year, place), val_str in reim_overrides.items():
             key = (year, place, REIM_STAT_VAR)
-            if key in observations:
-                observations[key] = (observations[key][0], float(val_str),
-                                     val_str, True)
-                replaced += 1
+            period = (observations[key][0]
+                      if key in observations else DEFAULT_OBSERVATION_PERIOD)
+            observations[key] = (period, float(val_str), val_str, True)
+            replaced += 1
         logging.info("Applied %d canonical dartmouth_reim.csv overrides",
                      replaced)
 
@@ -692,7 +696,8 @@ def consolidate_baseline(
         raise RuntimeError(
             f"No valid StatVarObservations extracted from {source_dir}")
 
-    sorted_items = sorted(observations.items())
+    sorted_csv_items = sorted(observations.items())
+    sorted_mcf_items = sorted(baseline_observations.items())
     output_dir.mkdir(parents=True, exist_ok=True)
     csv_path = output_dir / HISTORICAL_CSV_FILENAME
     tmcf_path = output_dir / COMMON_TMCF_FILENAME
@@ -704,14 +709,26 @@ def consolidate_baseline(
     mcf_lines: list[str] = []
 
     csv_rows_written = 0
+    for (year, place, sv), (period, val_float, val_str,
+                            is_exact) in sorted_csv_items:
+        if not is_valid_historical_place(place):
+            continue
+        # CNS stat_pop/dartmouth_reim TFRecords dropped comma-quoted >= $1,000
+        # Total rows during StatPop conversion, leaving only < $1,000
+        # sub-service slices; exclude those truncated slices from the CSV so
+        # live stdprice_total ZIPs supply unified Total reimbursements.
+        if sv == REIM_STAT_VAR and not is_exact and val_float < 1000.0:
+            continue
+        about_dcid = f"dcid:{place}"
+        sv_dcid = f"dcid:{sv}"
+        writer.writerow([year, about_dcid, sv_dcid, val_str, period])
+        csv_rows_written += 1
+
     for idx, ((year, place, sv), (period, _val_float, val_str,
-                                  _exact)) in enumerate(sorted_items):
+                                  _exact)) in enumerate(sorted_mcf_items):
         about_dcid = f"dcid:{place}"
         sv_dcid = f"dcid:{sv}"
         obs_date_mcf = year if year.isdigit() else f'"{year}"'
-        if is_valid_historical_place(place):
-            writer.writerow([year, about_dcid, sv_dcid, val_str, period])
-            csv_rows_written += 1
         mcf_lines.append(f"Node: E:DartmouthHistorical->E{idx}\n"
                          f"typeOf: dcs:StatVarObservation\n"
                          f"observationDate: {obs_date_mcf}\n"
@@ -729,10 +746,10 @@ def consolidate_baseline(
     unique_years = sorted({year for year, _, _ in observations})
     logging.info(
         "Consolidated %d CSV observations and %d unaltered baseline MCF "
-        "observations (%d invalid-place rows filtered from CSV; %d StatVars, "
+        "observations (%d filtered from CSV; %d StatVars, "
         "%d places, %s..%s) -> %s, %s, %s",
         csv_rows_written,
-        len(observations),
+        len(baseline_observations),
         len(observations) - csv_rows_written,
         len(unique_svs),
         len(unique_places),
