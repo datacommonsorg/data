@@ -26,27 +26,32 @@ from absl import logging
 import pandas as pd
 
 _FLAGS = flags.FLAGS
-flags.DEFINE_string(
-    "input_csv",
-    "",
-    "Optional local path to NNDSS Socrata CSV (skips CDC download).",
-)
-flags.DEFINE_string(
-    "output_csv",
-    "",
-    "Optional output CSV path (defaults to input_files/NNDSS_Weekly_Data.csv).",
-)
-flags.DEFINE_bool(
-    "skip_gcs_history",
-    False,
-    "If true, skips downloading 2006-2021 historical files from GCS.",
-)
-flags.DEFINE_bool(
-    "normalize_output",
-    False,
-    "If true, ensures output/nndss_weekly_output.{csv,tmcf} exposes "
-    "observationPeriod as a column so genmcf matches the historical TMCF.",
-)
+
+
+def _define_flags() -> None:
+    """Define CLI flags when running as a script."""
+    flags.DEFINE_string(
+        "input_csv",
+        "",
+        "Optional local path to NNDSS Socrata CSV (skips CDC download).",
+    )
+    flags.DEFINE_string(
+        "output_csv",
+        "",
+        "Optional output CSV path (defaults to input_files/NNDSS_Weekly_Data.csv).",
+    )
+    flags.DEFINE_bool(
+        "skip_gcs_history",
+        False,
+        "If true, skips downloading 2006-2021 historical files from GCS.",
+    )
+    flags.DEFINE_bool(
+        "normalize_output",
+        False,
+        "If true, ensures output/nndss_weekly_output.{csv,tmcf} exposes "
+        "observationPeriod as a column so genmcf matches the historical TMCF.",
+    )
+
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 INPUT_DIR = os.path.join(SCRIPT_DIR, "input_files")
@@ -334,4 +339,5 @@ def main(argv):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)
