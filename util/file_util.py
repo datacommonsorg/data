@@ -444,8 +444,6 @@ def file_estimate_num_rows(filename: Union[str, list]) -> int:
         # Get the average line size in the first 4K bytes.
         with FileIO(files[0], mode='rb', use_tempfile=False) as fp:
             sample = fp.read(4000)
-        if isinstance(sample, str):
-            sample = sample.encode()
         line_size = max(len(sample) / (sample.count(b'\n') + 1), 1)
         return int(filesize / line_size)
     return 0

@@ -156,7 +156,8 @@ class FileUtilsTest(unittest.TestCase):
         path = os.path.join(self._test_dir, 'latin1.dat')
         with open(path, 'wb') as f:
             f.write(b'GEO_ID|GEOGRAPHY\n')
-            f.write('05000US66075|Hagåtña District, GU\n'.encode('latin-1') * 200)
+            f.write('05000US66075|Hagåtña District, GU\n'.encode('latin-1') *
+                    200)
         estimate_rows = file_util.file_estimate_num_rows(path)
         self.assertTrue(math.isclose(201, estimate_rows, rel_tol=0.1))
 
