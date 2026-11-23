@@ -25,7 +25,7 @@ This import extracts monthly flood event area (`Area_FloodEvent`) and count (`Co
 3. **Lint, GenMCF, Differ & Validation**:
    - Validates and resolves MCF outputs with `import-tool.jar` (`lint` and `genmcf`).
    - Compares generated MCF against prior versions using `tools/import_differ/import_differ.py`.
-   - Validates thresholds, date consistency/freshness, and golden sets against `validation_config.json` and `golden_data/`.
+   - Validates thresholds and date consistency/freshness against `validation_config.json`.
 
 ---
 
@@ -37,11 +37,9 @@ This import extracts monthly flood event area (`Area_FloodEvent`) and count (`Co
 - `dynamic_world_flood_pvmap.csv`: Property-value mappings for `Area_FloodEvent` and `Count_FloodEvent`.
 - `dynamic_world_flood_metadata.csv`: `stat_var_processor.py` configuration (`header_rows=1`, `output_columns`).
 - `dynamic_world_flood_schema.mcf`: StatisticalVariable definitions for `Area_FloodEvent` and `Count_FloodEvent`.
-- `validation_config.json`: Import validation rules (`check_deleted_records_percent`, `check_max_date_consistent`, `check_flood_data_freshness`, `check_goldens_summary_report`, `check_goldens_output_csv`).
-- `golden_data/`: Golden summary (`golden_summary_report.csv`) and observation property-set (`golden_observations.csv`) fixtures.
+- `validation_config.json`: Import validation rules (`check_deleted_records_percent`, `check_max_date_consistent`, `check_flood_data_freshness`).
 - `test_data/`: Hermetic sample input (`sample_place_svobs.csv`) and expected processor outputs (`expected_output.csv`, `expected_output.tmcf`).
 - `requirements.txt`: Python dependencies for Earth Engine and raster/S2 processing.
-- `run_pipeline.sh`: End-to-end local runner script.
 
 ---
 
@@ -53,11 +51,9 @@ Run from the repository root (`data/`):
 # 1. Run unit & integration tests
 ./run_tests.sh -p statvar_imports/dynamic_world_flood
 
-# 2. Run full local pipeline (download -> stat_var_processor -> lint -> genmcf -> optional differ)
-bash statvar_imports/dynamic_world_flood/run_pipeline.sh
-
-# 3. Custom date range / bounds / differ baseline:
-START_DATE=2026-01-01 END_DATE=2026-11-01 BOUNDS=24.72,83.83,26.06,88.26 \
-  PREV_OUTPUT_MCF=path/to/previous.mcf \
-  bash statvar_imports/dynamic_world_flood/run_pipeline.sh
+# 2. Download monthly flood data directly from Earth Engine
+python3 statvar_imports/dynamic_world_flood/download_script.py \
+  --start_date=2026-01-01 \
+  --end_date=2026-11-01 \
+  --bounds=24.72,83.83,26.06,88.26
 ```

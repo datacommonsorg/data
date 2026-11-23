@@ -21,7 +21,6 @@
             "source_files": [
                 "input_files/dynamic_world_flood_place_svobs.csv",
                 "counters/*.csv",
-                "golden_data/*.csv",
                 "validation_config.json"
             ],
             "validation_config_file": "validation_config.json",

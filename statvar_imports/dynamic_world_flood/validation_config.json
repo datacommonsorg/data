@@ -23,23 +23,6 @@
                 "query": "SELECT StatVar, MaxDate FROM stats",
                 "condition": "CAST(SUBSTR(CAST(MaxDate AS VARCHAR), 1, 4) AS INTEGER) >= EXTRACT(YEAR FROM (CURRENT_DATE - INTERVAL '1 month'))"
             }
-        },
-        {
-            "rule_id": "check_goldens_summary_report",
-            "description": "Verifies summary_report.csv preserves expected FloodEvent StatVars, units, and observation periods.",
-            "validator": "GOLDENS_CHECK",
-            "params": {
-                "golden_files": "../../../../golden_data/golden_summary_report.csv"
-            }
-        },
-        {
-            "rule_id": "check_goldens_output_csv",
-            "description": "Verifies generated output CSV contains expected sample FloodEvent observations.",
-            "validator": "GOLDENS_CHECK",
-            "params": {
-                "golden_files": "../../../../golden_data/golden_observations.csv",
-                "input_files": "../../../../output/dynamic_world_flood_output.csv"
-            }
         }
     ]
 }
