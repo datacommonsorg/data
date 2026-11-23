@@ -166,6 +166,9 @@ you import modules and run tests, as below.
     [Google Python Style Guide](https://google.github.io/styleguide/pyguide.html)
     as specified in
     [.pylintrc](https://github.com/datacommonsorg/data/blob/master/.pylintrc).
+*   Scripts must define absl flags in a function that runs only when the script
+    is run, not at module level. This is enforced in CI by `./run_tests.sh -l`;
+    see [tools/lint](tools/lint/README.md).
 *   Tests must succeed.
 
 Consider automating coding to satisfy some of these requirements.

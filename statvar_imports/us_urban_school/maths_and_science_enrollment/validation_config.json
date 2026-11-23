@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "check_max_date_consistent",
+      "description": "Verifies that all StatVars within each input split share the same latest observation date (MaxDate).",
+      "validator": "MAX_DATE_CONSISTENT",
+      "params": {}
+    },
+    {
+      "rule_id": "check_max_date_freshness_all_inputs",
+      "description": "Verifies that every StatVar in each input split meets its expected latest observation date and institution-type qualification (2012 for 2010-2012 non-JJ StatVars, 2016 for the 2016 JJ/NotJJ split, and >= GREATEST(2024, YEAR(CURRENT_DATE) - 4) for 2018_onwards JJ/NotJJ StatVars).",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT StatVar, MinDate, MaxDate, CASE WHEN CAST(MinDate AS INTEGER) <= 2012 AND StatVar NOT LIKE '%JuvenileJusticeFacility%' THEN CAST(MaxDate AS INTEGER) = 2012 WHEN CAST(MinDate AS INTEGER) = 2016 AND StatVar LIKE '%JuvenileJusticeFacility%' THEN CAST(MaxDate AS INTEGER) = 2016 WHEN CAST(MinDate AS INTEGER) >= 2018 AND StatVar LIKE '%JuvenileJusticeFacility%' THEN CAST(MaxDate AS INTEGER) >= GREATEST(2024, YEAR(CURRENT_DATE) - 4) ELSE FALSE END AS is_fresh FROM stats UNION ALL SELECT 'EMPTY_STATS' AS StatVar, '' AS MinDate, '' AS MaxDate, FALSE AS is_fresh WHERE NOT EXISTS (SELECT 1 FROM stats)",
+        "condition": "is_fresh = TRUE"
+      }
+    }
+  ]
+}

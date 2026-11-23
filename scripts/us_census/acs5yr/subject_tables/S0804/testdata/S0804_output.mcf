@@ -1,0 +1,74 @@
+Node: dcid:Count_Person_Years16Onwards_Employed
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_Employed
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Median_Age_Person_Years16Onwards_Employed
+statType: dcs:medianValue
+measuredProperty: dcs:age
+populationType: dcs:Person
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Annual_Median_Income_Person_Years16Onwards_Employed_WithEarnings
+measuredProperty: dcs:income
+statType: dcs:medianValue
+populationType: dcs:Person
+measurementQualifier: dcs:Annual
+age: dcs:Years16Onwards
+incomeStatus: dcs:WithEarnings
+employmentStatus: dcs:Employed
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Years16Onwards_CarTruckOrVanDroveAlone_Employed
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+commuteMode: dcs:USC_CarTruckOrVanDroveAlone
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_SpeakEnglishVeryWell_Years16Onwards_CarTruckOrVanDroveAlone_Employed_LanguageOtherThanEnglishSpokenAtHome
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+commuteMode: dcs:USC_CarTruckOrVanDroveAlone
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+languageSpokenAtHome: dcs:LanguageOtherThanEnglish
+abilityToSpeakEnglish: dcs:SpeakEnglishVeryWell
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Years16Onwards_Employed_WorkedFromHome
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+placeOfWork: dcs:WorkedFromHome
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_SpeakEnglishVeryWell_Years16Onwards_Employed_LanguageOtherThanEnglishSpokenAtHome_WorkedFromHome
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+placeOfWork: dcs:WorkedFromHome
+age: dcs:Years16Onwards
+employmentStatus: dcs:Employed
+languageSpokenAtHome: dcs:LanguageOtherThanEnglish
+abilityToSpeakEnglish: dcs:SpeakEnglishVeryWell
+typeOf: dcs:StatisticalVariable
+

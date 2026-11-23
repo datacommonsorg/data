@@ -489,7 +489,7 @@ class RegularizeColumnsTest(unittest.TestCase):
             bad_file = os.path.join(temp_in, '1999_emissions.csv')
             with open(bad_file, 'w') as f:
                 f.write("col1,col2\n1,2\n")
-            with self.assertRaises(Exception):
+            with self.assertRaises(ValueError):
                 process_files(temp_in, temp_out, inter_dir)
         finally:
             shutil.rmtree(temp_in)

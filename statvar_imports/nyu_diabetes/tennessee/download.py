@@ -31,12 +31,16 @@ from urllib3.util import Retry
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_enum(
-    'download_source',
-    'tn',
-    ['tn', 'gcs'],
-    'Source from which input files are downloaded.',
-)
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_enum(
+        'download_source',
+        'tn',
+        ['tn', 'gcs'],
+        'Source from which input files are downloaded.',
+    )
+
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 INPUT_DIR = os.path.join(script_dir, "input_files")
@@ -240,14 +244,20 @@ def process_excel_files(input_dir):
     )
 
 
-def main(_):
+def run(download_source: str = 'tn') -> None:
+    """Downloads the Tennessee diabetes files and processes them.
+
+    Args:
+        download_source: 'tn' to download from TN.gov (falling back to GCS on
+            failure), or 'gcs' to download from GCS directly.
+    """
     Path(INPUT_DIR).mkdir(parents=True, exist_ok=True)
     tn_url_template = "https://www.tn.gov/content/dam/tn/health/documents/vital-statistics/death/{year}/Diabetes_County_{year}.xlsx"
     gcs_url_template = "gs://unresolved_mcf/nyu_diabetes/tennessee/latest/input_files/Diabetes_County_{year}.xlsx"
     start_year = 2019
     current_year = date.today().year
 
-    if FLAGS.download_source == 'gcs':
+    if download_source == 'gcs':
         final_urls = generate_urls(start_year, current_year, gcs_url_template)
         download_files_from_gcs(final_urls, save_folder=INPUT_DIR)
     else:
@@ -262,5 +272,10 @@ def main(_):
     process_excel_files(INPUT_DIR)
 
 
+def main(_):
+    run(FLAGS.download_source)
+
+
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

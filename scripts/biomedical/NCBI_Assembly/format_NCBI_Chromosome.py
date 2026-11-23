@@ -176,7 +176,7 @@ def write_assembly_unit(line, file_output, genome):
             the file (e.g. hg38, mm10)
     '''
     w = open(file_output, mode='a')
-    line[0] = line[0].strip('## ')
+    line[0] = line[0].removeprefix('##').strip()
     line[2] = line[2].replace(' ', '_')
     w.write('Node: dcid:bio/' + genome + '_' + line[2] + '\n')
     w.write('name:' + line[2] + '\n')

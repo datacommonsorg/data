@@ -26,8 +26,12 @@ import requests
 
 import util.alpha2_to_dcid as alpha2_to_dcid
 
-from .common_util import *
-from .geocode_cities import *
+from .common_util import TEMPLATE_MCF_TEMPLATE
+from .common_util import YEARS_WITH_TWO_RAPE_COLUMNS
+from .common_util import int_from_field
+from .common_util import remove_digits
+from .common_util import remove_extra_chars
+from .geocode_cities import find_crime_state
 
 USSTATE_MAP = alpha2_to_dcid.USSTATE_MAP
 
@@ -232,8 +236,8 @@ def _update_and_calculate_state_crime(crime_csv, writer):
                 state = find_crime_state(crime)
                 geocode = USSTATE_MAP[state]
             except KeyError:
-                assert False, '{} state or its geocode not found'.format(
-                    crime['State'])
+                raise AssertionError('{} state or its geocode not found'.format(
+                    crime['State']))
 
             crime['Geocode'] = geocode
 

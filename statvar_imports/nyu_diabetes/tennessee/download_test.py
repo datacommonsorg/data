@@ -17,7 +17,6 @@ import tempfile
 import unittest
 from unittest import mock
 
-from absl.testing import flagsaver
 from google.api_core import exceptions
 import requests
 
@@ -28,12 +27,6 @@ except ModuleNotFoundError:
 
 
 class DownloadTest(unittest.TestCase):
-
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-        if not download.FLAGS.is_parsed():
-            download.FLAGS.mark_as_parsed()
 
     def test_generate_urls_for_tn_and_gcs(self):
         tn_template = 'https://tn.example/{year}/Diabetes_County_{year}.xlsx'
@@ -289,29 +282,27 @@ class DownloadTest(unittest.TestCase):
                     temp_dir)
         mock_response.close.assert_called_once()
 
-    @flagsaver.flagsaver(download_source='tn')
     @mock.patch.object(download, 'process_excel_files')
     @mock.patch.object(download, 'download_files_from_gcs')
     @mock.patch.object(download, 'download_files')
-    def test_main_falls_back_to_gcs_on_tn_failure(self, mock_download_tn,
-                                                  mock_download_gcs,
-                                                  mock_process):
+    def test_run_falls_back_to_gcs_on_tn_failure(self, mock_download_tn,
+                                                 mock_download_gcs,
+                                                 mock_process):
         mock_download_tn.side_effect = requests.exceptions.HTTPError(
             '403 Client Error: Forbidden')
 
-        download.main(None)
+        download.run('tn')
 
         mock_download_tn.assert_called_once()
         mock_download_gcs.assert_called_once()
         mock_process.assert_called_once()
 
-    @flagsaver.flagsaver(download_source='gcs')
     @mock.patch.object(download, 'process_excel_files')
     @mock.patch.object(download, 'download_files_from_gcs')
     @mock.patch.object(download, 'download_files')
-    def test_main_with_gcs_source(self, mock_download_tn, mock_download_gcs,
-                                  mock_process):
-        download.main(None)
+    def test_run_with_gcs_source(self, mock_download_tn, mock_download_gcs,
+                                 mock_process):
+        download.run('gcs')
 
         mock_download_tn.assert_not_called()
         mock_download_gcs.assert_called_once()

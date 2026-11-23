@@ -36,8 +36,13 @@ from us_eia.opendata.process import seds
 from us_eia.opendata.process import total
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('data_dir', 'tmp_raw_data', 'Raw data dir')
-flags.DEFINE_string('dataset', 'ELEC', 'Name of the dataset')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('data_dir', 'tmp_raw_data', 'Raw data dir')
+    flags.DEFINE_string('dataset', 'ELEC', 'Name of the dataset')
+
 
 # Value: (name, extract_fn, schema_fn)
 _DATASETS = {
@@ -71,4 +76,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

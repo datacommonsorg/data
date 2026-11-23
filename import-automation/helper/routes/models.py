@@ -13,9 +13,12 @@
 # limitations under the License.
 
 from __future__ import annotations
+
 from enum import Enum
 from typing import List, Optional
-from pydantic import BaseModel, Field
+
+from pydantic import BaseModel
+from pydantic import Field
 
 
 class ResponseStatus(str, Enum):
@@ -41,6 +44,7 @@ class ImportState(str, Enum):
     RETRY = "RETRY"
     SKIP = "SKIP"
     VALIDATION = "VALIDATION"
+    INACTIVE = "INACTIVE"
 
 
 class ImportStatusItem(BaseModel):

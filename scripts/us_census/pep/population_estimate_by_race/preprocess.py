@@ -23,42 +23,88 @@
 """
 
 from datetime import datetime as dt
+import io
 from io import StringIO
 import json
 import os
 import re
+import shutil
 import sys
 import time
+import warnings
 
+from absl import app
+from absl import flags
 from absl import logging
+import pandas as pd
 import requests
 
 # To import util.alpha2_to_dcid
 _COMMON_PATH = os.path.abspath(
     os.path.join(os.path.dirname(__file__), '../../../../'))
 sys.path.insert(1, _COMMON_PATH)
-import warnings
 
 warnings.filterwarnings('ignore')
 
-from absl import app
-from absl import flags
-import pandas as pd
 from states_to_shortform import get_states
 
 from util.alpha2_to_dcid import USSTATE_MAP
 
-#pd.options.mode.copy_on_write = True
-
 _FLAGS = flags.FLAGS
-flags.DEFINE_string('mode', '', 'Options: download or process')
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
+_RAW_DATA_PATH = os.path.join(_MODULE_DIR, 'raw_data')
 
 default_input_path = os.path.dirname(
     os.path.abspath(__file__)) + os.sep + "input_files"
-flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('mode', '', 'Options: download or process')
+    flags.DEFINE_string("input_path", default_input_path,
+                        "Import Data File's List")
+
+
 _FILES_TO_DOWNLOAD = None
+_BASELINE_YEAR = 2025
+_SESSION = None
+
+_PEP_DIR = os.path.abspath(os.path.join(_MODULE_DIR, '..'))
+_SCRIPTS_DIR = os.path.abspath(os.path.join(_PEP_DIR, '../..'))
+for path_entry in (_SCRIPTS_DIR, _PEP_DIR):
+    if path_entry not in sys.path:
+        sys.path.insert(0, path_entry)
+from us_census.pep.download_util import TransientDownloadError
+from us_census.pep.download_util import atomic_to_csv
+from us_census.pep.download_util import atomic_to_excel
+from us_census.pep.download_util import create_retry_session as _create_retry_session
+from us_census.pep.download_util import download_with_retry
+from us_census.pep.download_util import head_with_html_retry as _head_with_html_retry
+
+
+def _get_session():
+    """Returns a module-level requests.Session reused across calls."""
+    global _SESSION
+    if _SESSION is None:
+        _SESSION = _create_retry_session()
+    return _SESSION
+
+
+def parse_srh_txt(text_or_file, skiprows: int = 14) -> pd.DataFrame:
+    """Parses SRH .txt file or text content into a DataFrame."""
+    cols = ['Area', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    if isinstance(text_or_file, str) and '\n' in text_or_file:
+        source = StringIO(text_or_file)
+    else:
+        source = text_or_file
+    return pd.read_table(source,
+                         sep=r'\s+',
+                         engine='python',
+                         skiprows=skiprows,
+                         names=cols,
+                         dtype=str,
+                         on_bad_lines='skip')
 
 
 # Generating geoID by taking Geographical area as input
@@ -526,16 +572,9 @@ def _clean_county_2022_csv_file(df: pd.DataFrame,
         df = df.query("AGEGRP == 0")
         # filter years 3 - 14
         df['YEAR'] = df['YEAR'].astype(str)
+        max_year = max(dt.today().year + 5, 2035)
         conversion_of_year_to_value = {
-            '2': '2020',
-            '3': '2021',
-            '4': '2022',
-            '5': '2023',
-            '6': '2024',
-            '7': '2025',
-            '8': '2026',
-            '9': '2027',
-            '10': '2028'
+            str(idx): str(2018 + idx) for idx in range(2, max_year - 2018 + 1)
         }
         df = df.replace({'YEAR': conversion_of_year_to_value})
         df.insert(6, 'geo_ID', 'geoId/', True)
@@ -620,6 +659,7 @@ def _clean_csv2_file(df: pd.DataFrame, file_path: str) -> pd.DataFrame:
         df (DataFrame) : Transformed DataFrame for csv dataset.
     """
     try:
+        df = df.astype(object)
         # keep header row (0) and data rows (14..64), dropping unwanted rows
         df = pd.concat([df.iloc[:1], df.iloc[14:65]])
         modify = [0, 30, 31, 32, 33, 34, 35, 40, 41, 42, 49]
@@ -644,7 +684,8 @@ def _clean_csv2_file(df: pd.DataFrame, file_path: str) -> pd.DataFrame:
 
         df["Geographic Area"] = [x.title() for x in df["Geographic Area"]]
     except Exception as e:
-        logging.fatal(f"error in the method clean_csv2_file,{file_path} -{e}")
+        raise RuntimeError(
+            f"error in the method clean_csv2_file, {file_path} - {e}") from e
     return df
 
 
@@ -671,6 +712,9 @@ def _clean_txt2_file(df: pd.DataFrame, file_path: str) -> pd.DataFrame:
         df = df[df['1'].str.contains("999")]
         df['Geographic Area'] = "United States"
         df['Year'] = df['1'].str[1:5]
+        for c in ['2', '5', '6', '7', '8', '9', '10', '11', '12']:
+            if c in df.columns:
+                df[c] = pd.to_numeric(df[c], errors='coerce').fillna(0)
         df['Total'] = df['2']
         # Adding individual columns to derive the required column
         df['Total White'] = df['5'] + df['6']
@@ -890,7 +934,7 @@ class CensusUSAPopulationByRace:
                 df = _clean_xls_file(df, file)
         elif ".csv" in file:
             if "srh" in file:
-                df = pd.read_csv(file)
+                df = pd.read_csv(file, dtype=object)
                 df["Year"] = "19" + file[-6:-4]
                 df = _clean_csv2_file(df, file)
             elif "co-est00" in file:
@@ -918,7 +962,7 @@ class CensusUSAPopulationByRace:
                     df[col] = df[col].astype('int64')
 
             #This change as be done to make sure to process all future files
-            elif "cc-est202" in file:
+            elif "cc-est20" in file:
                 df = pd.read_csv(file, encoding='ISO-8859-1', low_memory=False)
                 df = _clean_county_2022_csv_file(df, file)
                 if df.empty:
@@ -955,7 +999,8 @@ class CensusUSAPopulationByRace:
                                    index_col=False,
                                    sep=r'\s+',
                                    engine='python',
-                                   names=cols)
+                                   names=cols,
+                                   on_bad_lines='skip')
                 if "for" in file:
                     df = _clean_txt2_file(df, file)
         return df
@@ -1061,9 +1106,12 @@ class CensusUSAPopulationByRace:
         cleaned CSV file, MCF file and TMCF file.
         """
         #input_path = _FLAGS.input_path
-        ip_files = os.listdir(self.input_path)
+        ip_files = [
+            f for f in sorted(os.listdir(self.input_path))
+            if os.path.isfile(os.path.join(self.input_path, f))
+        ]
         self.input_files = [
-            self.input_path + os.sep + file for file in ip_files
+            os.path.join(self.input_path, file) for file in ip_files
         ]
         processed_count = 0
         total_files_to_process = len(self.input_files)
@@ -1078,9 +1126,9 @@ class CensusUSAPopulationByRace:
             if result:
                 processed_count += 1
             else:
-                logging.fatal(f'Failed to process {file}')
+                raise RuntimeError(f'Failed to process {file}')
         logging.info(f"No of files processed {processed_count}")
-        if processed_count == total_files_to_process & total_files_to_process > 0:
+        if processed_count == total_files_to_process and total_files_to_process > 0:
 
             name = "USA_Population_Count_by_Race_before_2000"
             generator_df=pd.read_csv\
@@ -1112,8 +1160,8 @@ class CensusUSAPopulationByRace:
             self._generate_mcf(generator_df.columns, name)
             self._generate_tmcf(generator_df.columns, name)
         else:
-            logging.fatal(
-                "Aborting output files as no of files to process not matching processed files"
+            raise RuntimeError(
+                f"Aborting output files: expected {total_files_to_process} files to process, but processed {processed_count}"
             )
 
     # Generating MCF files
@@ -1208,44 +1256,36 @@ class CensusUSAPopulationByRace:
 
 
 # The outputs are loaded into
-def _resolve_pe_11(file_name: str, url: str) -> pd.DataFrame:
+def _resolve_pe_11(file_name: str, text: str) -> pd.DataFrame:
     """
     This method cleans the dataframe loaded from a csv file format.
 
     Arguments:
         file_name (str) : File name of csv dataset
-        url: str : Refers to file URL
-
+        text (str) : Response text content
 
     Returns:
         df (DataFrame) : Transformed DataFrame for csv dataset.
     """
-    try:
-        year = file_name[-8:-4]
-        if int(year) < 1960:
-            cols = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
-            headers = {'User-Agent': 'Mozilla/5.0'}
-            response = requests.get(url, headers=headers, timeout=60)
-            response.raise_for_status()  # will raise for 403/404/etc.
-            df = pd.read_csv(StringIO(response.text), names=cols)
-            df = df[df["0"].str.contains("All ages", na=False)]
-            df['Year'] = year
-            df['Geographic Area'] = "United States"
-        else:
-            cols = [
-                "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11",
-                "12"
-            ]
-            headers = {'User-Agent': 'Mozilla/5.0'}
-            response = requests.get(url, headers=headers, timeout=60)
-            response.raise_for_status()  # will raise for 403/404/etc.
-            df = pd.read_csv(StringIO(response.text), names=cols, skiprows=2)
-            df = df[df["0"].str.contains("All ages", na=False)]
-            df['Year'] = year
-            df['Geographic Area'] = "United States"
-        return df
-    except Exception as e:
-        logging.fatal("Error Downloading the file:", e)
+    year = file_name[-8:-4]
+    if int(year) < 1960:
+        cols = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+        df = pd.read_csv(StringIO(text), names=cols, on_bad_lines='skip')
+        df = df[df["0"].str.contains("All ages", na=False)]
+        df['Year'] = year
+        df['Geographic Area'] = "United States"
+    else:
+        cols = [
+            "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"
+        ]
+        df = pd.read_csv(StringIO(text),
+                         names=cols,
+                         skiprows=2,
+                         on_bad_lines='skip')
+        df = df[df["0"].str.contains("All ages", na=False)]
+        df['Year'] = year
+        df['Geographic Area'] = "United States"
+    return df
 
 
 def add_future_yearurls():
@@ -1259,146 +1299,178 @@ def add_future_yearurls():
     urls_to_scan = [
         "https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/counties/asrh/cc-est{YEAR}-alldata.csv"
     ]
-
-    # This method will generate URLs for the years 2024 to 2029
-    for future_year in range(2024, 2030):
-        if dt.now().year >= future_year:
-            for url_template in urls_to_scan:
-                # FIX: Define url_to_check by formatting the template
-                url_to_check = url_template.replace("{YEAR}", str(future_year))
-
-                try:
-                    checkurl = requests.head(url_to_check,
-                                             timeout=10,
-                                             allow_redirects=True)
-
-                    # If it's 200 OK and NOT an HTML file
-                    if checkurl.status_code == 200 and 'text/csv' in checkurl.headers.get(
-                            'Content-Type', ''):
-                        _FILES_TO_DOWNLOAD.append(
-                            {"download_path": url_to_check})
-                    else:
-                        logging.info(
-                            f"Data for {future_year} not yet available at {url_to_check}"
-                        )
-                except requests.exceptions.RequestException:
-                    logging.error(f"URL unreachable: {url_to_check}")
+    session = _get_session()
+    for url_template in urls_to_scan:
+        found_url = None
+        max_future_year = dt.today().year + 1
+        for future_year in range(max_future_year, _BASELINE_YEAR - 1, -1):
+            url_to_check = url_template.replace("{YEAR}", str(future_year))
+            try:
+                checkurl = _head_with_html_retry(session,
+                                                 url_to_check,
+                                                 timeout=10)
+                if checkurl.status_code == 200:
+                    found_url = url_to_check
+                    break
+            except (TransientDownloadError,
+                    requests.exceptions.RequestException, OSError) as e:
+                logging.warning(f"URL unreachable: {url_to_check} - {e}")
+        if found_url:
+            _FILES_TO_DOWNLOAD.append({"download_path": found_url})
+        else:
+            baseline_url = url_template.replace("{YEAR}", str(_BASELINE_YEAR))
+            logging.info(
+                f"No future year URL found; falling back to baseline: {baseline_url}"
+            )
+            _FILES_TO_DOWNLOAD.append({"download_path": baseline_url})
 
 
 def download_files():
     """
     This method allows to download the input files.
-
     """
+    global _FILES_TO_DOWNLOAD, _SESSION
+    session = _get_session()
+    raw_data_dir = _RAW_DATA_PATH
+    os.makedirs(raw_data_dir, exist_ok=True)
+    os.makedirs(_INPUT_FILE_PATH, exist_ok=True)
+    try:
+        for file_to_dowload in _FILES_TO_DOWNLOAD:
+            url = file_to_dowload['download_path']
+            if file_to_dowload.get('file_name', '').strip():
+                source_file_name = file_to_dowload['file_name'].strip()
+            else:
+                source_file_name = url.split('/')[-1]
+            download_local_path = _INPUT_FILE_PATH
 
-    global _FILES_TO_DOWNLOAD
-    max_retry = 5
-    for file_to_dowload in _FILES_TO_DOWNLOAD:
-        file_name = None
-        download_local_path = _INPUT_FILE_PATH
-        url = file_to_dowload['download_path']
-        if 'file_name' in file_to_dowload and len(
-                file_to_dowload['file_name'] > 5):
-            file_name = file_to_dowload['file_name']
-        else:
-            file_name = url.split('/')[-1]
-        retry_number = 0
+            raw_file_path = os.path.join(raw_data_dir, source_file_name)
+            retry_number = 0
+            is_file_downloaded = False
+            while not is_file_downloaded:
+                out_file_name = source_file_name
+                try:
+                    download_with_retry(session, url, raw_file_path)
 
-        is_file_downloaded = False
-        # headers = {'User-Agent': 'Mozilla/5.0'}
-        # response = requests.get(url, headers=headers)
-        while not is_file_downloaded:
-            try:
-                headers = {'User-Agent': 'Mozilla/5.0'}
-                response = requests.get(url, headers=headers, timeout=60)
-                response.raise_for_status()
+                    with open(raw_file_path, 'rb') as f:
+                        raw_bytes = f.read()
 
-                content_type = response.headers.get('Content-Type', '').lower()
-                if 'text/html' in content_type:
-                    logging.warning(
-                        f"Server returned HTML for {url}. Skipping download.")
-                    is_file_downloaded = True  # Break the while loop
-                    continue  # Move to the next file in _FILES_TO_DOWNLOAD
-
-                if ".csv" in url:
-                    if "st-est" in url or 'SC-EST' in url:
-                        file_name = file_name.replace(".csv", ".xlsx")
-                        df = pd.read_csv(StringIO(response.text),
-                                         on_bad_lines='skip',
-                                         header=0)
-                        df.to_excel(download_local_path + os.sep + file_name\
-                            ,index=False,engine='xlsxwriter')
-                    elif "pe-11" in url:
-                        df = _resolve_pe_11(file_name, url)
-                        df.to_csv(download_local_path + os.sep + file_name,
-                                  index=False)
-                    elif "pe-19" in url:
-                        file_name = file_name.replace(".csv", ".xlsx")
-                        df = pd.read_csv(StringIO(response.text),
-                                         skiprows=5,
-                                         on_bad_lines='skip',
-                                         header=0)
-                        df.to_excel(download_local_path + os.sep + file_name\
-                            ,index=False,engine='xlsxwriter')
-                    elif "co-asr-7079" in url or "pe-02" in url:
-                        file_name = file_name.replace(".csv", ".xlsx")
-                        cols=['Year','FIPS','Race/Sex',1,2,3,4,5,6,7,8,9,10,11,12,\
-                            13,14,15,16,17,18]
-                        if "pe-02" in url:
-                            df = pd.read_csv(StringIO(response.text), skiprows=7, on_bad_lines='skip', \
-                                names=cols)
+                    if ".csv" in url:
+                        if "st-est" in url or 'SC-EST' in url:
+                            out_file_name = out_file_name.replace(
+                                ".csv", ".xlsx")
+                            df = pd.read_csv(StringIO(
+                                raw_bytes.decode('utf-8', errors='replace')),
+                                             header=0)
+                            atomic_to_excel(df,
+                                            os.path.join(
+                                                download_local_path,
+                                                out_file_name),
+                                            index=False,
+                                            engine='xlsxwriter')
+                        elif "pe-11" in url:
+                            df = _resolve_pe_11(
+                                out_file_name,
+                                raw_bytes.decode('utf-8', errors='replace'))
+                            atomic_to_csv(df,
+                                          os.path.join(download_local_path,
+                                                       out_file_name),
+                                          index=False)
+                        elif "pe-19" in url:
+                            out_file_name = out_file_name.replace(
+                                ".csv", ".xlsx")
+                            df = pd.read_csv(StringIO(
+                                raw_bytes.decode('utf-8', errors='replace')),
+                                             skiprows=5,
+                                             header=0)
+                            atomic_to_excel(df,
+                                            os.path.join(
+                                                download_local_path,
+                                                out_file_name),
+                                            index=False,
+                                            engine='xlsxwriter')
+                        elif "co-asr-7079" in url or "pe-02" in url:
+                            out_file_name = out_file_name.replace(
+                                ".csv", ".xlsx")
+                            cols = [
+                                'Year', 'FIPS', 'Race/Sex', 1, 2, 3, 4, 5, 6, 7,
+                                8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18
+                            ]
+                            if "pe-02" in url:
+                                df = pd.read_csv(StringIO(
+                                    raw_bytes.decode('utf-8',
+                                                     errors='replace')),
+                                                 skiprows=7,
+                                                 names=cols)
+                            else:
+                                df = pd.read_csv(StringIO(
+                                    raw_bytes.decode('utf-8',
+                                                     errors='replace')),
+                                                 names=cols)
+                            atomic_to_excel(df,
+                                            os.path.join(
+                                                download_local_path,
+                                                out_file_name),
+                                            index=False,
+                                            engine='xlsxwriter')
+                        elif "co-est00int-alldata" in url or "CC-EST2020-ALLDATA" in url or "cc-est2022-all" in url or "cc-est20" in url:
+                            shutil.copyfile(
+                                raw_file_path,
+                                os.path.join(download_local_path,
+                                             out_file_name))
                         else:
-                            df = pd.read_csv(StringIO(response.text),
-                                             on_bad_lines='skip',
-                                             names=cols)
-                        df.to_excel(download_local_path + os.sep + file_name,\
-                            index=False,engine='xlsxwriter')
-                    elif "co-est00int-alldata" in url or "CC-EST2020-ALLDATA" in url or "cc-est2022-all" in url or "cc-est20" in url:
-                        df = pd.read_csv(StringIO(response.text),
-                                         on_bad_lines='skip',
-                                         encoding='ISO-8859-1',
-                                         low_memory=False)
-                        df.to_csv(download_local_path + os.sep + file_name,
-                                  index=False)
+                            raise ValueError(f'Unknown csv file: {url}')
+
+                    elif ".txt" in url and "srh" in url:
+                        if "crh" in url:
+                            out_file_name = out_file_name.replace(
+                                "crh", "USCounty")
+                            df = pd.read_table(StringIO(
+                                raw_bytes.decode('utf-8', errors='replace')),
+                                               index_col=False,
+                                               engine='python',
+                                               on_bad_lines='skip')
+                            atomic_to_csv(df,
+                                          os.path.join(download_local_path,
+                                                       out_file_name),
+                                          index=False)
+                        else:
+                            df = parse_srh_txt(StringIO(
+                                raw_bytes.decode('utf-8', errors='replace')),
+                                               skiprows=14)
+                            out_file_name = out_file_name.replace(
+                                ".txt", ".csv")
+                            atomic_to_csv(df,
+                                          os.path.join(download_local_path,
+                                                       out_file_name),
+                                          index=False)
+
+                    elif "xlsx" in url:
+                        df = pd.read_excel(io.BytesIO(raw_bytes),
+                                           skiprows=2,
+                                           header=0)
+                        atomic_to_excel(df,
+                                        os.path.join(download_local_path,
+                                                     out_file_name),
+                                        index=False,
+                                        header=False,
+                                        engine='xlsxwriter')
                     else:
-                        logging.fatal(f'Unknown csv file: {url}')
+                        raise ValueError(f'Unknown file - {url}')
+                    is_file_downloaded = True
+                except (requests.exceptions.RequestException,
+                        TransientDownloadError, pd.errors.ParserError) as e:
+                    retry_number += 1
+                    if retry_number > 3:
+                        raise RuntimeError(
+                            f"Error downloading/processing file {url}: {e}"
+                        ) from e
+                    time.sleep(2)
 
-                elif ".txt" in url and "srh" in url:
-                    if "crh" in url:
-                        file_name = file_name.replace("crh", "USCounty")
-                        df = pd.read_table(StringIO(response.text),
-                                           index_col=False,
-                                           engine='python')
-                        df.to_csv(download_local_path + os.sep + file_name,
-                                  index=False)
-                    else:
-                        cols = ['Area', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-                        df = pd.read_table(StringIO(response.text),index_col=False,sep=r'\s+'\
-                            ,engine='python',skiprows=14,names=cols)
-                        file_name = file_name.replace(".txt", ".csv")
-                        df.to_csv(download_local_path + os.sep + file_name,
-                                  index=False)
-
-                elif "xlsx" in url:
-                    df = pd.read_excel(StringIO(response.text),
-                                       skiprows=2,
-                                       header=0)
-                    df.to_excel(download_local_path + os.sep + file_name\
-                        ,index=False,header=False,engine='xlsxwriter')
-                else:
-                    logging.fatal(f'Unknown file - {url}')
-
-                logging.info(f"Downloaded file : {url}")
-                is_file_downloaded = True
-
-            except Exception as e:
-                logging.error(f"Retry file download {url} - {e}")
-                time.sleep(5)
-                retry_number += 1
-                if retry_number > max_retry:
-                    logging.fatal(f"Error downloading URL- {url} -{e}")
-
-    return True
+            logging.info(f"Downloaded file : {url}")
+        return True
+    finally:
+        session.close()
+        _SESSION = None
 
 
 def main(_):
@@ -1427,4 +1499,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

@@ -12,9 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import csv
+import os
 import unittest
 
-from .common_util import *
+from .common_util import column_to_be_ignored
+from .common_util import columns_from_CSVreader
+from .common_util import find_missing_tokens
+from .common_util import get_spec_token_list
+from .common_util import get_tokens_list_from_column_list
+from .common_util import token_in_list_ignore_case
 
 
 class TestCommonUtil(unittest.TestCase):
