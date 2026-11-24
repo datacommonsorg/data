@@ -237,7 +237,8 @@ def process_excel_files(input_dir):
 
             except Exception as e:
                 raise RuntimeError(
-                    f"Failed to process and save Excel file {filename}: {e}")
+                    f"Failed to process and save Excel file {filename}: {e}"
+                ) from e
 
     logging.info(
         "\nExcel file processing complete. 'year' column added to all processed files."

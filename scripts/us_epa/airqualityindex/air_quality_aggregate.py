@@ -217,10 +217,10 @@ def process(_INPUT_FILE_PATH, start_year, end_year):
                                 reader = csv.DictReader(
                                     io.TextIOWrapper(infile, 'utf-8'))
                                 write_csv(output_file_path, reader)
-                        except FileNotFoundError:
+                        except FileNotFoundError as e:
                             raise FileNotFoundError(
                                 f"CSV file '{file_name}.csv' not found in the ZIP archive"
-                            )
+                            ) from e
 
             except Exception as e:
                 logging.fatal(
