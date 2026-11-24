@@ -17,13 +17,13 @@ Latest Data: The 2024 & 2025 data will be updated annually.
 
 ### Automation Refresh: The process.py has a parameter 'mode' with values 'download' and 'process'
 
-when the file 'process.py' is run with the flag --mode=download, it will  download and place it in the 'input/parts' & 'input/response' directory. i.e. python3 process.py --mode=download
+when the file 'process.py' is run with the flag --mode=download, it will download county-level survey responses partitioned by `state_alpha` (automatically falling back to per-county queries if a state exceeds the 50,000-row QuickStats limit) and place them in the 'input/parts' & 'input/response' directory. i.e. python3 process.py --mode=download
 
 when the file 'process.py' is ran with the flag --mode=process, it will process the downloaded files and place it in the 'output' directory. i.e. python3 process.py --mode=process
 
 when the file 'process.py' is ran without any flag, it will download and process the files and keep it in the respective directories as mentioned above. i.e. python3 process.py
 
-The output will be `output/ag-2023.csv`.
+The output will be `output/ag-<year>.csv` (from `start_year` through the current year).
 
 To run unit tests:
     python3 process_test.py
