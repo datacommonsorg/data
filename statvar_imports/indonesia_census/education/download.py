@@ -31,55 +31,6 @@ import requests
 _CODEDIR = os.path.dirname(os.path.abspath(__file__))
 
 _FLAGS = flags.FLAGS
-if 'output_dir' not in _FLAGS:
-    flags.DEFINE_string(
-        'output_dir',
-        os.path.join(_CODEDIR, 'input_files'),
-        'Directory path to save the downloaded input CSV file.',
-    )
-if 'output_filename' not in _FLAGS:
-    flags.DEFINE_string(
-        'output_filename',
-        'indonesia_education_input.csv',
-        'Filename for the combined Indonesia Education CSV table.',
-    )
-if 'domain' not in _FLAGS:
-    flags.DEFINE_string(
-        'domain',
-        '0000',
-        'BPS domain code (0000 for national/all-province tables).',
-    )
-if 'literacy_province_var_id' not in _FLAGS:
-    flags.DEFINE_integer(
-        'literacy_province_var_id',
-        1458,
-        'BPS variable ID for Literacy Rate of Population Aged 15+ by Province.',
-    )
-if 'literacy_sex_var_id' not in _FLAGS:
-    flags.DEFINE_integer(
-        'literacy_sex_var_id',
-        1460,
-        'BPS variable ID for Literacy Rate of Population Aged 15+ by Sex.',
-    )
-if 'api_key' not in _FLAGS:
-    flags.DEFINE_string(
-        'api_key',
-        os.environ.get('BPS_API_KEY', ''),
-        'BPS WebAPI key (loaded from GCS config.json if not set).',
-    )
-if 'request_delay_sec' not in _FLAGS:
-    flags.DEFINE_float(
-        'request_delay_sec',
-        0.5,
-        'Delay in seconds between SIMDASI API requests to respect BPS rate limits.',
-    )
-if 'enable_yearbook_fallback' not in _FLAGS:
-    flags.DEFINE_boolean(
-        'enable_yearbook_fallback',
-        True,
-        'Fall back to BPS Statistik Indonesia yearbook PDFs via BPS WebAPI '
-        'when SIMDASI id/25 returns empty values for school tables.',
-    )
 
 BPS_API_BASE_URL = 'https://webapi.bps.go.id/v1/api'
 MAX_YEARS_PER_REQUEST = 3
@@ -1141,5 +1092,51 @@ def main(_) -> None:
     )
 
 
+def _define_flags() -> None:
+    """Defines CLI flags when executed as a script."""
+    flags.DEFINE_string(
+        'output_dir',
+        os.path.join(_CODEDIR, 'input_files'),
+        'Directory path to save the downloaded input CSV file.',
+    )
+    flags.DEFINE_string(
+        'output_filename',
+        'indonesia_education_input.csv',
+        'Filename for the combined Indonesia Education CSV table.',
+    )
+    flags.DEFINE_string(
+        'domain',
+        '0000',
+        'BPS domain code (0000 for national/all-province tables).',
+    )
+    flags.DEFINE_integer(
+        'literacy_province_var_id',
+        1458,
+        'BPS variable ID for Literacy Rate of Population Aged 15+ by Province.',
+    )
+    flags.DEFINE_integer(
+        'literacy_sex_var_id',
+        1460,
+        'BPS variable ID for Literacy Rate of Population Aged 15+ by Sex.',
+    )
+    flags.DEFINE_string(
+        'api_key',
+        os.environ.get('BPS_API_KEY', ''),
+        'BPS WebAPI key (loaded from GCS config.json if not set).',
+    )
+    flags.DEFINE_float(
+        'request_delay_sec',
+        0.5,
+        'Delay in seconds between SIMDASI API requests to respect BPS rate limits.',
+    )
+    flags.DEFINE_boolean(
+        'enable_yearbook_fallback',
+        True,
+        'Fall back to BPS Statistik Indonesia yearbook PDFs via BPS WebAPI '
+        'when SIMDASI id/25 returns empty values for school tables.',
+    )
+
+
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)
