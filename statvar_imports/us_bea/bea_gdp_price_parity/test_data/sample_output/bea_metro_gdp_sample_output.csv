@@ -1,0 +1,8 @@
+observationDate,observationAbout,value,measurementMethod,variableMeasured
+2012,dcid:geoId/C10180,5932000000,dcs:BEASurvey,dcid:grossDomesticProduct
+2013,dcid:geoId/C10180,6092000000,dcs:BEASurvey,dcid:dc/c3wwfwyx45v5h
+2013,dcid:geoId/C10180,2.7,dcs:BEASurvey,dcid:dc/p9w3tzjzyqrr
+2013,dcid:geoId/C10420,31250000000,dcs:BEASurvey,dcid:dc/c3wwfwyx45v5h
+2013,dcid:geoId/C10420,1.8,dcs:BEASurvey,dcid:dc/p9w3tzjzyqrr
+2012,dcid:geoId/C10180,6397000000,dcs:BEAGDPMeasure,dcid:nominalGrossDomesticProduct
+2013,dcid:geoId/C10420,33890000000,dcs:BEAGDPMeasure,dcid:nominalGrossDomesticProduct

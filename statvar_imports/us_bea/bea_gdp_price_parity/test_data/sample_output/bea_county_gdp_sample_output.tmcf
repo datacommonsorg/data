@@ -1,0 +1,8 @@
+Node: E:bea_county_gdp_sample_output->E0
+observationDate: C:bea_county_gdp_sample_output->observationDate
+observationAbout: C:bea_county_gdp_sample_output->observationAbout
+value: C:bea_county_gdp_sample_output->value
+measurementMethod: dcs:BEASurvey
+variableMeasured: dcid:grossDomesticProduct
+typeOf: dcs:StatVarObservation
+unit: dcs:USDollar

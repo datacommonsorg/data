@@ -1,0 +1,7 @@
+key,p1,v1,p2,v2,p3,v3
+metro_gdp.csv,FileKind,real,measurementMethod,dcs:BEASurvey
+metro_nominal_gdp.csv,FileKind,nominal,measurementMethod,dcs:BEAGDPMeasure
+geoid,observationAbout,dcid:geoId/{Data}
+year,observationDate,{Data}
+grossDomesticProduct,value,{@Number},unit,dcs:USDollar,#Eval,"variableMeasured = 'dcid:nominalGrossDomesticProduct' if FileKind == 'nominal' else ('dcid:grossDomesticProduct' if observationDate == '2012' else 'dcid:dc/c3wwfwyx45v5h')"
+growthRate,value,{@Number},unit,dcs:USDollar,variableMeasured,dcid:dc/p9w3tzjzyqrr

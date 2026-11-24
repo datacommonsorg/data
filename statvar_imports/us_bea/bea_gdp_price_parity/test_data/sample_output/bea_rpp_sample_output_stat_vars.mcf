@@ -1,0 +1,39 @@
+Node: dcid:RegionalPriceParity_Product_BEAAllItems
+typeOf: dcid:StatisticalVariable
+name: "Regional price parity: all items"
+populationType: dcid:Product
+measuredProperty: dcid:regionalPriceParity
+statType: dcid:measuredValue
+beaProduct: dcid:BEAAllItems
+
+Node: dcid:RegionalPriceParity_Product_BEAGoods
+typeOf: dcid:StatisticalVariable
+name: "Regional price parity: goods"
+populationType: dcid:Product
+measuredProperty: dcid:regionalPriceParity
+statType: dcid:measuredValue
+beaProduct: dcid:BEAGoods
+
+Node: dcid:RegionalPriceParity_Product_BEAServicesHousing
+typeOf: dcid:StatisticalVariable
+name: "Regional price parity: services - housing"
+populationType: dcid:Product
+measuredProperty: dcid:regionalPriceParity
+statType: dcid:measuredValue
+beaProduct: dcid:BEAServicesHousing
+
+Node: dcid:RegionalPriceParity_Product_BEAServicesOthers
+typeOf: dcid:StatisticalVariable
+name: "Regional price parity: services - other"
+populationType: dcid:Product
+measuredProperty: dcid:regionalPriceParity
+statType: dcid:measuredValue
+beaProduct: dcid:BEAServicesOthers
+
+Node: dcid:RegionalPriceParity_Product_BEAServicesUtilities
+typeOf: dcid:StatisticalVariable
+name: "Regional price parity: services - utilities"
+populationType: dcid:Product
+measuredProperty: dcid:regionalPriceParity
+statType: dcid:measuredValue
+beaProduct: dcid:BEAServicesUtilities

@@ -1,0 +1,8 @@
+Node: E:bea_rpp_sample_output->E0
+observationDate: C:bea_rpp_sample_output->observationDate
+observationAbout: C:bea_rpp_sample_output->observationAbout
+value: C:bea_rpp_sample_output->value
+variableMeasured: C:bea_rpp_sample_output->variableMeasured
+observationPeriod: "P1Y"
+typeOf: dcs:StatVarObservation
+measurementMethod: dcs:BEASurvey

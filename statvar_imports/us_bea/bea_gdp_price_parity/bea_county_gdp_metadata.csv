@@ -1,0 +1,7 @@
+parameter,value
+header_rows,1
+mapped_rows,1
+mapped_columns,"4,5,8"
+word_delimiter,
+input_encoding,latin1
+output_precision_digits,15

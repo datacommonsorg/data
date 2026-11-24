@@ -1,0 +1,8 @@
+Node: E:bea_metro_gdp_sample_output->E0
+observationDate: C:bea_metro_gdp_sample_output->observationDate
+observationAbout: C:bea_metro_gdp_sample_output->observationAbout
+value: C:bea_metro_gdp_sample_output->value
+measurementMethod: C:bea_metro_gdp_sample_output->measurementMethod
+variableMeasured: C:bea_metro_gdp_sample_output->variableMeasured
+typeOf: dcs:StatVarObservation
+unit: dcs:USDollar

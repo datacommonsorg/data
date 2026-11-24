@@ -1,0 +1,5 @@
+GeoFIPS,GeoName,Region,TableName,LineCode,IndustryClassification,Description,Unit,2023,2024
+ "00000","United States", ,SARPP,1,"...","RPPs: All items ","Index",100.0,100.0
+ "01000","Alabama",5,SARPP,2,"...","RPPs: Goods ","Index",94.2,94.6
+ "01000","Alabama",5,SARPP,3,"...","RPPs: Services: Housing ","Index",80.8,81.5
+ "91000","New England",1,SARPP,1,"...","RPPs: All items ","Index",108.5,109.0
