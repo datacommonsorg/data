@@ -21,11 +21,12 @@ from unittest import mock
 
 import requests
 
-_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-if _SCRIPT_DIR not in sys.path:
-    sys.path.insert(0, _SCRIPT_DIR)
+_REPO_ROOT = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), '..', '..', '..'))
+if _REPO_ROOT not in sys.path:
+    sys.path.insert(0, _REPO_ROOT)
 
-import download  # pylint: disable=wrong-import-position
+from statvar_imports.mexico_subnational_population_statistics.mexico_census import download  # pylint: disable=wrong-import-position
 
 
 class DownloadUnitTest(unittest.TestCase):

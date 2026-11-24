@@ -42,14 +42,17 @@ _OUTPUT_DIR = os.path.join(_SCRIPT_DIR, 'input_files')
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string(
-    'config_path',
-    os.path.join(_SCRIPT_DIR, 'config.json'),
-    'Path to JSON configuration file containing API endpoints and datasets.',
-)
 
-_INEGI_HEADER_TITLE = (
-    'Instituto Nacional de Estadística y Geografía (INEGI)')
+def _define_flags() -> None:
+    """Defines command-line flags."""
+    flags.DEFINE_string(
+        'config_path',
+        os.path.join(_SCRIPT_DIR, 'config.json'),
+        'Path to JSON configuration file containing API endpoints and datasets.',
+    )
+
+
+_INEGI_HEADER_TITLE = ('Instituto Nacional de Estadística y Geografía (INEGI)')
 
 _FOOTNOTE_PREFIXES = (
     'nota:',
@@ -308,8 +311,8 @@ def unpack_pxweb_datatable(
     stubs: List[str] = payload_info['stubs']
     stub_headers: List[str] = payload_info.get('stub_headers', stubs)
     headings: List[str] = payload_info['headings']
-    var_selections: Dict[str, List[Tuple[str, str]]] = payload_info[
-        'var_Selections']
+    var_selections: Dict[str, List[Tuple[str,
+                                         str]]] = payload_info['var_Selections']
     title: str = payload_info.get('title', '')
     footnotes: List[str] = payload_info.get('footnotes', [])
 
@@ -664,4 +667,5 @@ def main(argv: List[str]) -> None:
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)
