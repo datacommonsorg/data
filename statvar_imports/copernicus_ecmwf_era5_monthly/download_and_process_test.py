@@ -759,6 +759,76 @@ class DownloadAndProcessTest(unittest.TestCase):
                     strict=True,
                 )
 
+    def test_fetch_ee_feature_collection_retries_page_timeout_in_place(self):
+        """Retries timed-out computeFeatures page in place using pageToken."""
+        mock_ee = MagicMock()
+        mock_dataset = MagicMock()
+        mock_dataset.first.return_value.getInfo.return_value = {'id': '202603'}
+        mock_dataset.map.side_effect = lambda img_fn: [img_fn(MagicMock())]
+        mock_ee.ImageCollection.return_value.filterDate.return_value = (
+            mock_dataset)
+
+        mock_places = MagicMock()
+        mock_places.first.return_value.getInfo.return_value = {'id': 'place1'}
+        mock_place = MagicMock()
+        mock_flattened = MagicMock()
+        mock_mapped_places = MagicMock()
+        mock_mapped_places.flatten.return_value = mock_flattened
+
+        def places_map_side_effect(place_fn):
+            place_fn(mock_place)
+            return mock_mapped_places
+
+        mock_places.map.side_effect = places_map_side_effect
+        mock_ee.FeatureCollection.return_value = mock_places
+
+        calls = []
+
+        def compute_features_side_effect(params):
+            calls.append(params.get('pageToken'))
+            if 'pageToken' not in params:
+                return {
+                    'type': 'FeatureCollection',
+                    'features': [{
+                        'id': 'f1',
+                        'properties': {
+                            'date': '2026-03',
+                            'dcid': 'geoId/06',
+                            'temperature_2m': 293.15,
+                        },
+                    }],
+                    'nextPageToken': 'page_2',
+                }
+            if len(calls) == 2:
+                raise RuntimeError('Computation timed out.')
+            return {
+                'type':
+                    'FeatureCollection',
+                'features': [{
+                    'id': 'f2',
+                    'properties': {
+                        'date': '2026-03',
+                        'dcid': 'geoId/36',
+                        'temperature_2m': 298.15,
+                    },
+                }],
+            }
+
+        mock_ee.data.computeFeatures.side_effect = compute_features_side_effect
+        with patch.object(download_and_process, 'ee',
+                          mock_ee), patch('download_and_process.time.sleep'):
+            res = download_and_process._compute_ee_monthly_features_with_retry(
+                dataset_asset='ECMWF/ERA5_LAND/MONTHLY_AGGR',
+                geo_locations_asset=
+                'projects/datcom-infosys-dev/assets/all_administrativearea2',
+                year_month='2026-03',
+                reduce_region_scale=1000,
+            )
+
+        self.assertEqual(len(res['features']), 2)
+        self.assertEqual(calls, [None, 'page_2', 'page_2'])
+        self.assertEqual(mock_place.geometry.call_count, 1)
+
 
 if __name__ == '__main__':
     unittest.main()

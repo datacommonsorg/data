@@ -152,7 +152,7 @@ def _define_flags() -> None:
     )
     flags.DEFINE_integer(
         'ee_parallelism',
-        12,
+        8,
         'Number of parallel worker threads for Earth Engine monthly fetches.',
     )
 
@@ -169,7 +169,7 @@ WORLD_AREA_THRESHOLD = 1.0e14
 
 # Page size for ee.data.computeFeatures pagination to keep per-RPC runtime well below
 # Earth Engine's 300s synchronous computeFeatures timeout.
-EE_COMPUTE_FEATURES_PAGE_SIZE = 500
+EE_COMPUTE_FEATURES_PAGE_SIZE = 200
 
 # Adaptive reduceRegion scale threshold: ERA5-Land native resolution is ~11.1 km (0.1 deg),
 # so regions > 100 km^2 (1e8 m^2) reduce cleanly at 10 km while smaller regions keep --reduce_region_scale.
@@ -507,7 +507,9 @@ def _default_end_year_month(today: Optional[datetime.date] = None) -> str:
 
 def _fetch_ee_feature_collection(
     flattened,
-    page_size: int = EE_COMPUTE_FEATURES_PAGE_SIZE,
+    page_size: Optional[int] = None,
+    page_max_attempts: int = 3,
+    page_retry_delay_secs: float = 5.0,
 ) -> Optional[dict]:
     """Fetches all features from an `ee.FeatureCollection`, paginating if supported.
 
@@ -517,6 +519,8 @@ def _fetch_ee_feature_collection(
     and explicit `pageSize` to retrieve all features without hitting element or
     synchronous timeout limits.
     """
+    if page_size is None:
+        page_size = EE_COMPUTE_FEATURES_PAGE_SIZE
     if ee is not None and hasattr(ee, 'data') and hasattr(
             ee.data, 'computeFeatures'):
         features = []
@@ -525,7 +529,25 @@ def _fetch_ee_feature_collection(
             params = {'expression': flattened, 'pageSize': page_size}
             if page_token:
                 params['pageToken'] = page_token
-            page = ee.data.computeFeatures(params)
+            delay = page_retry_delay_secs
+            for attempt in range(1, page_max_attempts + 1):
+                try:
+                    page = ee.data.computeFeatures(params)
+                    break
+                except Exception as exc:
+                    if attempt == page_max_attempts or 'timed out' not in str(
+                            exc).lower():
+                        raise
+                    logging.warning(
+                        'Earth Engine computeFeatures page timed out '
+                        '(attempt %d/%d); retrying page in %.1fs: %s',
+                        attempt,
+                        page_max_attempts,
+                        delay,
+                        exc,
+                    )
+                    time.sleep(delay)
+                    delay *= 2.0
             if not isinstance(page, dict):
                 return flattened.getInfo()
             features.extend(page.get('features', []))
@@ -642,8 +664,8 @@ def _compute_ee_monthly_features_with_retry(
     geo_locations_asset: str,
     year_month: str,
     reduce_region_scale: int,
-    max_attempts: int = 3,
-    initial_delay_secs: float = 2.0,
+    max_attempts: int = 5,
+    initial_delay_secs: float = 5.0,
 ) -> Optional[dict]:
     """Computes ERA5-Land monthly features in Earth Engine with exponential backoff."""
     delay = initial_delay_secs
@@ -784,7 +806,7 @@ def fetch_era5_land_from_ee(
     ee_project: str,
     reduce_region_scale: int,
     strict: bool = False,
-    ee_parallelism: int = 12,
+    ee_parallelism: int = 8,
 ) -> List[str]:
     """Fetches `start_ym..end_ym` from Earth Engine and converts to `.celsius.csv`."""
     if not end_ym:
