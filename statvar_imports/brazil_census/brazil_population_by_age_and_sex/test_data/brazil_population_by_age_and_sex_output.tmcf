@@ -1,0 +1,7 @@
+Node: E:brazil_population_by_age_and_sex_output->E0
+observationAbout: C:brazil_population_by_age_and_sex_output->observationAbout
+observationDate: C:brazil_population_by_age_and_sex_output->observationDate
+observationPeriod: C:brazil_population_by_age_and_sex_output->observationPeriod
+value: C:brazil_population_by_age_and_sex_output->value
+variableMeasured: C:brazil_population_by_age_and_sex_output->variableMeasured
+typeOf: dcs:StatVarObservation

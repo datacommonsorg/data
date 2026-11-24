@@ -1,0 +1,17 @@
+key,prop,val,p1,v1
+Localidade,observationAbout,{Data},,
+Ano,observationDate,{Number},observationPeriod,P1Y
+Estudantes,value,{Number},populationType,Student
+RedeEnsino:Total,populationType,Student,SchoolNet,Total
+RedeEnsino:Pública,typeOfSchool,dcs:PublicSchool,SchoolNet,Public
+RedeEnsino:Particular,typeOfSchool,dcs:PrivateSchool,SchoolNet,Private
+NivelEnsino:Total,populationType,Student,,
+NivelEnsino:Creche,enrollmentLevel,dcs:Nursery,,
+NivelEnsino:Pré-escolar,#Eval,"schoolGradeLevel='dcs:PreKindergarten' if '{SchoolNet}'=='Total' else None",#Filter,"enrollmentLevel=None if '{SchoolNet}'=='Total' else 'dcs:PreKindergarten'"
+NivelEnsino:Classe de alfabetização,enrollmentLevel,dcs:LiteracyCourse,,
+NivelEnsino:Educação de Jovens e Adultos,#Eval,"schoolGradeLevel='dcs:AdultEducation' if '{SchoolNet}'=='Total' else None",#Filter,"enrollmentLevel=None if '{SchoolNet}'=='Total' else 'dcs:AdultEducation'"
+NivelEnsino:Fundamental,enrollmentLevel,dcs:PrimaryEducation,,
+NivelEnsino:Médio,enrollmentLevel,dcs:BRA_HighSchool,,
+NivelEnsino:Pré-vestibular,enrollmentLevel,dcs:Brazil_PreVestibular,,
+NivelEnsino:Superior Graduação,enrollmentLevel,dcs:BachelorsDegree,,
+NivelEnsino:Pós-graduação,enrollmentLevel,dcs:MastersDegreeOrHigher,,
