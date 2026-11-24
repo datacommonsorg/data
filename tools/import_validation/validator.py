@@ -197,6 +197,45 @@ class Validator:
                 'threshold': threshold
             })
 
+    def validate_deleted_entity_count(self, summary: dict,
+                                      params: dict) -> ValidationResult:
+        """Checks if the total number of deleted entities is within a threshold.
+
+    Args:
+      summary: A dictionary containing the differ summary.
+      params: A dictionary containing the validation parameters, which may
+        have a 'threshold' key.
+
+    Returns:
+      A ValidationResult object.
+    """
+        threshold = params.get('threshold', 0)
+
+        if not summary or summary.get('deleted_schema_count') is None:
+            # If summary is missing or empty, assume 0 deleted entities.
+            deleted_entity_count = 0
+        else:
+            deleted_entity_count = int(summary['deleted_schema_count'])
+
+        if deleted_entity_count > threshold:
+            return ValidationResult(
+                ValidationStatus.FAILED,
+                'DELETED_ENTITY_COUNT',
+                message=
+                f"Found {deleted_entity_count} deleted entities, which is over the threshold of {threshold}.",
+                details={
+                    'deleted_entity_count': deleted_entity_count,
+                    'threshold': threshold
+                })
+
+        return ValidationResult(
+            ValidationStatus.PASSED,
+            'DELETED_ENTITY_COUNT',
+            details={
+                'deleted_entity_count': deleted_entity_count,
+                'threshold': threshold
+            })
+
     def validate_deleted_records_percent(self, summary: dict,
                                          params: dict) -> ValidationResult:
         """Checks if the percentage of deleted records is within a threshold.
