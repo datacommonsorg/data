@@ -49,8 +49,9 @@ async def handle_feed_event(
     """Processes Pub/Sub push notification for CDA transfer completion."""
     try:
         body = await request.json()
-    except Exception:
-        raise HTTPException(status_code=400, detail="Invalid JSON payload")
+    except Exception as e:
+        raise HTTPException(status_code=400,
+                            detail="Invalid JSON payload") from e
 
     message = import_utils.parse_message(body)
     if not message:
