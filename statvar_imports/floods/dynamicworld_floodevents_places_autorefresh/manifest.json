@@ -25,7 +25,7 @@
             ],
             "validation_config_file": "validation_config.json",
             "cron_schedule": "0 5 1 * *",
-            "user_script_timeout": 3600,
+            "user_script_timeout": 7200,
             "resource_limits": {
                 "cpu": 8,
                 "memory": 32,

@@ -109,6 +109,19 @@ class DownloadScriptTest(unittest.TestCase):
             datetime.date(2026, 1, 5))
         self.assertEqual((jan_start, jan_end), ('2025-12-01', '2026-01-01'))
 
+    def test_default_ytd_date_range(self):
+        start, end = download_script.default_ytd_date_range(
+            datetime.date(2026, 11, 24))
+        self.assertEqual((start, end), ('2026-01-01', '2026-11-01'))
+
+        jan_start, jan_end = download_script.default_ytd_date_range(
+            datetime.date(2027, 1, 5))
+        self.assertEqual((jan_start, jan_end), ('2026-01-01', '2027-01-01'))
+
+        feb_start, feb_end = download_script.default_ytd_date_range(
+            datetime.date(2027, 2, 1))
+        self.assertEqual((feb_start, feb_end), ('2027-01-01', '2027-02-01'))
+
     def test_iter_month_ranges_splits_multi_month(self):
         self.assertEqual(
             download_script.iter_month_ranges('2026-08-01', '2026-11-01'),
@@ -128,6 +141,8 @@ class DownloadScriptTest(unittest.TestCase):
         self.assertEqual(len(tiles), 34 * 90)
         self.assertEqual(tiles[0], (-60.0, -180.0, -56.0, -176.0))
         self.assertEqual(tiles[-1], (72.0, 176.0, 75.0, 180.0))
+        with self.assertRaises(ValueError):
+            download_script.generate_tiles(0.0, 0.0, 1.0, 1.0, 1e-7)
 
     def test_build_events_config_matches_flood_pipeline_config(self):
         cfg = download_script._build_events_config(
@@ -331,6 +346,144 @@ class DownloadScriptTest(unittest.TestCase):
                 wet[1, 2] = 1.0
                 dst.write(wet, 1)
             self.assertTrue(download_script._tile_has_flood_pixels(wet_tif))
+
+    def test_resolve_month_raster_csv_reuses_persistent_and_legacy_gcs_cache(
+            self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            out_dir = os.path.join(tmp_dir, 'out')
+            cache_dir = os.path.join(tmp_dir, 'gcs_cache')
+            os.makedirs(os.path.join(cache_dir, 'raster_csv'), exist_ok=True)
+            cached_jan = os.path.join(cache_dir, 'raster_csv',
+                                      'dw_flood_2026-01.csv')
+            with open(cached_jan, 'w', encoding='utf-8') as fh:
+                fh.write('area,date,s2CellId\n1.0,2026-01,dcid:s2CellId/0x1\n')
+
+            with mock.patch.object(download_script,
+                                   'init_earth_engine') as mock_init_ee:
+                # 1. Persistent cache hit should not initialize Earth Engine.
+                jan_path, ee_mod = (
+                    download_script.resolve_or_download_month_raster_csv(
+                        output_dir=out_dir,
+                        start_date='2026-01-01',
+                        end_date='2026-02-01',
+                        cache_dir=cache_dir,
+                    ))
+                self.assertEqual(
+                    jan_path,
+                    os.path.join(out_dir, 'raster_csv', 'dw_flood_2026-01.csv'),
+                )
+                self.assertTrue(os.path.exists(jan_path))
+                self.assertIsNone(ee_mod)
+                mock_init_ee.assert_not_called()
+
+                # 2. Legacy GCS bootstrap hit should copy into persistent cache.
+                def _fake_download(gcs_uri, local_path):
+                    self.assertTrue(
+                        gcs_uri.endswith('from_2026-02-01-raster_csv.csv'))
+                    os.makedirs(os.path.dirname(local_path), exist_ok=True)
+                    with open(local_path, 'w', encoding='utf-8') as fh:
+                        fh.write(
+                            'area,date,s2CellId\n2.0,2026-02,dcid:s2CellId/0x2\n'
+                        )
+                    return True
+
+                with mock.patch.object(
+                        download_script,
+                        '_try_download_gcs_object',
+                        side_effect=_fake_download,
+                ):
+                    feb_path, ee_mod = (
+                        download_script.resolve_or_download_month_raster_csv(
+                            output_dir=out_dir,
+                            start_date='2026-02-01',
+                            end_date='2026-03-01',
+                            cache_dir=cache_dir,
+                        ))
+                self.assertTrue(os.path.exists(feb_path))
+                self.assertTrue(
+                    os.path.exists(
+                        os.path.join(cache_dir, 'raster_csv',
+                                     'dw_flood_2026-02.csv')))
+                self.assertIsNone(ee_mod)
+                mock_init_ee.assert_not_called()
+
+    def test_resolve_month_raster_csv_skips_global_cache_for_custom_bounds(
+            self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            out_dir = os.path.join(tmp_dir, 'out')
+            cache_dir = os.path.join(tmp_dir, 'gcs_cache')
+            os.makedirs(os.path.join(cache_dir, 'raster_csv'), exist_ok=True)
+            with open(
+                    os.path.join(cache_dir, 'raster_csv',
+                                 'dw_flood_2026-10.csv'),
+                    'w',
+                    encoding='utf-8',
+            ) as fh:
+                fh.write('GLOBAL_CACHE_DATA\n')
+
+            fake_ee = mock.MagicMock()
+            with mock.patch.object(
+                    download_script,
+                    'init_earth_engine',
+                    return_value=fake_ee,
+            ), mock.patch.object(
+                    download_script,
+                    'download_earthengine_tiles',
+                    return_value=['/tmp/fake.tif'],
+            ) as mock_dl, mock.patch.object(
+                    download_script,
+                    'convert_geotiffs_to_raster_csv',
+                    return_value=os.path.join(out_dir, 'raster_csv',
+                                              'dw_flood_2026-10.csv'),
+            ):
+                os.makedirs(os.path.join(out_dir, 'raster_csv'), exist_ok=True)
+                path, ee_mod = (
+                    download_script.resolve_or_download_month_raster_csv(
+                        output_dir=out_dir,
+                        start_date='2026-10-01',
+                        end_date='2026-11-01',
+                        bounds_str='24.0,84.0,26.0,88.0',
+                        cache_dir=cache_dir,
+                    ))
+            mock_dl.assert_called_once()
+            self.assertIs(ee_mod, fake_ee)
+            self.assertTrue(path.endswith('dw_flood_2026-10.csv'))
+            # Global cache file must not have been overwritten by regional run.
+            with open(
+                    os.path.join(cache_dir, 'raster_csv',
+                                 'dw_flood_2026-10.csv'),
+                    'r',
+                    encoding='utf-8',
+            ) as fh:
+                self.assertEqual(fh.read(), 'GLOBAL_CACHE_DATA\n')
+
+    def test_persist_and_collect_prior_year_place_svobs_csvs(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            cache_dir = os.path.join(tmp_dir, 'gcs_cache')
+            csv_2026 = os.path.join(tmp_dir, '2026.csv')
+            with open(csv_2026, 'w', encoding='utf-8', newline='') as fh:
+                w = csv.writer(fh)
+                w.writerow([
+                    'observationAbout', 'observationDate', 'observationPeriod',
+                    'area', 'count'
+                ])
+                w.writerow(['country/IND', '2026', 'P1Y', '100.0', '5'])
+
+            persisted = download_script._persist_annual_place_svobs(
+                '2026', [csv_2026], cache_dir)
+            self.assertTrue(os.path.exists(persisted))
+            # Running 2026 again should NOT duplicate 2026 from prior-year cache.
+            self.assertEqual(
+                download_script._collect_prior_year_place_svobs_csvs(
+                    cache_dir, ['2026']),
+                [],
+            )
+            # Rolling over into 2027 carries forward 2026 automatically.
+            self.assertEqual(
+                download_script._collect_prior_year_place_svobs_csvs(
+                    cache_dir, ['2027']),
+                [persisted],
+            )
 
 
 if __name__ == '__main__':

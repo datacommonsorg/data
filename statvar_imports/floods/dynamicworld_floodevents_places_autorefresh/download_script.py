@@ -58,9 +58,15 @@ _DW_COLLECTION_ID = 'GOOGLE/DYNAMICWORLD/V1'
 _DEFAULT_LAND_MASK_ASSET = 'UMD/hansen/global_forest_change_2025_v1_13'
 _DEFAULT_BOUNDS = '-60,-180,75,180'
 _DEFAULT_OUTPUT_DIR = os.path.join(_SCRIPT_DIR, 'input_files')
+_DEFAULT_GCS_MOUNT_DIR = os.path.join(_SCRIPT_DIR, 'gcs_folder')
 _DEFAULT_PLACE_CACHE_FILE = (
     'gs://datcom-prod-imports/place_cache/place_properties_cache_with_s2_10.pkl'
 )
+_DEFAULT_LEGACY_RASTER_GCS_PREFIX = (
+    'gs://datcom-prod-imports/scripts/floods/raster_csv')
+_LEGACY_RASTER_FILENAME_TEMPLATE = (
+    'ee_image_dynamic_world-band_water-r_max-mask_land-s_1000-from_'
+    '{month}-01-raster_csv.csv')
 _DEFAULT_PIPELINE_CONFIG = os.path.join(_FLOODS_SCRIPTS_DIR,
                                         'flood_events_pipeline_config.py')
 _CONSOLIDATED_FILENAME = 'dynamicworld_floodevents_places_svobs.csv'
@@ -81,7 +87,7 @@ def _define_flags():
         'start_date',
         '',
         'Start date (YYYY-MM-DD, inclusive) for Earth Engine Dynamic World query. '
-        'Defaults to the first day of the previous complete calendar month.',
+        'Defaults to Jan 1 of the current YTD cycle (prior year Jan 1 in January).',
     )
     flags.DEFINE_string(
         'end_date',
@@ -133,6 +139,27 @@ def _define_flags():
         'Local output directory where downloaded files and CSVs are saved.',
     )
     flags.DEFINE_string(
+        'cache_dir',
+        '',
+        'Persistent directory (such as the executor-mounted gcs_folder) used to '
+        'cache monthly raster CSVs and completed annual place_svobs CSVs across '
+        'runs for global default bounds. Auto-uses ./gcs_folder if present.',
+    )
+    flags.DEFINE_string(
+        'legacy_raster_gcs_prefix',
+        _DEFAULT_LEGACY_RASTER_GCS_PREFIX,
+        'Optional GCS prefix containing existing legacy monthly raster CSVs '
+        '(used via object-only reads for global default bounds to bootstrap YTD '
+        'months without re-downloading from Earth Engine).',
+    )
+    flags.DEFINE_bool(
+        'carry_forward_prior_years',
+        True,
+        'Carry forward cached prior-year annual place_svobs CSVs from --cache_dir '
+        'when running with global default bounds so year rollovers do not delete '
+        'prior years.',
+    )
+    flags.DEFINE_string(
         'consolidated_csv',
         _CONSOLIDATED_FILENAME,
         'Filename inside --output_dir for the consolidated place SVObs CSV.',
@@ -151,7 +178,7 @@ def _define_flags():
     flags.DEFINE_bool(
         'skip_existing',
         True,
-        'Skip downloading GeoTIFF tiles whose target local file already exists.',
+        'Skip downloading GeoTIFF tiles or monthly raster CSVs that already exist.',
     )
 
 
@@ -164,6 +191,23 @@ def default_month_date_range(
     first_of_prev = last_of_prev.replace(day=1)
     return first_of_prev.strftime('%Y-%m-%d'), first_of_current.strftime(
         '%Y-%m-%d')
+
+
+def default_ytd_date_range(
+    reference_date: Optional[datetime.date] = None,) -> Tuple[str, str]:
+    """Returns (start_date, end_date) covering complete YTD calendar months.
+
+    In January, returns the full previous calendar year (Jan 1..Jan 1) so
+    December's final refresh completes the prior year's annual rollup.
+    """
+    today = reference_date or datetime.date.today()
+    first_of_current = today.replace(day=1)
+    if first_of_current.month == 1:
+        start = first_of_current.replace(year=first_of_current.year - 1,
+                                         month=1)
+    else:
+        start = first_of_current.replace(month=1)
+    return start.strftime('%Y-%m-%d'), first_of_current.strftime('%Y-%m-%d')
 
 
 def _next_month_start(dt: datetime.date) -> datetime.date:
@@ -206,6 +250,11 @@ def parse_bounds(bounds_str: str) -> Tuple[float, float, float, float]:
     return south, west, north, east
 
 
+def _is_default_global_bounds(bounds_str: str) -> bool:
+    """Returns True if bounds_str matches the default global bounding box."""
+    return parse_bounds(bounds_str) == parse_bounds(_DEFAULT_BOUNDS)
+
+
 def generate_tiles(
     south: float,
     west: float,
@@ -214,8 +263,10 @@ def generate_tiles(
     tile_size_deg: float,
 ) -> List[Tuple[float, float, float, float]]:
     """Splits a bounding box into sub-tiles of at most tile_size_deg."""
-    if tile_size_deg <= 0:
-        raise ValueError(f'tile_size_deg must be positive, got {tile_size_deg}')
+    if tile_size_deg < 1e-4:
+        raise ValueError(
+            f'tile_size_deg must be at least 1e-4 to avoid infinite loops due '
+            f'to rounding, got {tile_size_deg}')
     tiles: List[Tuple[float, float, float, float]] = []
     lat = south
     while lat < north - 1e-9:
@@ -321,9 +372,7 @@ def _download_with_util_atomic(
         if os.path.getsize(src_file) == 0:
             logging.warning('Downloaded empty file for %s', target_path)
             return False
-        tmp_dest = f'{target_path}.tmp'
-        shutil.move(src_file, tmp_dest)
-        os.replace(tmp_dest, target_path)
+        os.replace(src_file, target_path)
         return True
 
 
@@ -737,32 +786,234 @@ def generate_place_svobs_for_year(
         ))
 
 
+def _copy_file_atomic(src_path: str, dst_path: str) -> None:
+    """Copies src_path to dst_path atomically via a temp file in dst_path's dir."""
+    dst_dir = os.path.dirname(dst_path)
+    if dst_dir:
+        os.makedirs(dst_dir, exist_ok=True)
+    tmp_path = f'{dst_path}.tmp.{os.getpid()}'
+    try:
+        shutil.copyfile(src_path, tmp_path)
+        os.replace(tmp_path, dst_path)
+    except Exception:
+        if os.path.exists(tmp_path):
+            os.remove(tmp_path)
+        raise
+
+
+def _try_download_gcs_object(gcs_uri: str, local_path: str) -> bool:
+    """Downloads a single gs:// object atomically without bucket listing.
+
+    Returns True if the object was found and downloaded with non-zero size,
+    or False if the object does not exist or cannot be read.
+    """
+    if not gcs_uri or not gcs_uri.startswith('gs://'):
+        return False
+    parsed = urlparse(gcs_uri)
+    bucket_name = parsed.netloc
+    blob_name = parsed.path.lstrip('/')
+    if not bucket_name or not blob_name:
+        return False
+
+    os.makedirs(os.path.dirname(local_path), exist_ok=True)
+    tmp_path = f'{local_path}.tmp.{os.getpid()}'
+    try:
+        from google.api_core import exceptions as gcp_exceptions  # pylint: disable=import-outside-toplevel
+        from google.cloud import storage  # pylint: disable=import-outside-toplevel
+
+        client = storage.Client()
+        blob = client.bucket(bucket_name).blob(blob_name)
+        blob.download_to_filename(tmp_path)
+        if not os.path.exists(tmp_path) or os.path.getsize(tmp_path) == 0:
+            if os.path.exists(tmp_path):
+                os.remove(tmp_path)
+            return False
+        os.replace(tmp_path, local_path)
+        return True
+    except gcp_exceptions.NotFound:
+        if os.path.exists(tmp_path):
+            os.remove(tmp_path)
+        logging.info('Legacy GCS raster CSV not found: %s', gcs_uri)
+        return False
+    except Exception as exc:  # pylint: disable=broad-except
+        if os.path.exists(tmp_path):
+            os.remove(tmp_path)
+        logging.warning(
+            'Could not download legacy GCS raster CSV %s (%s); will download '
+            'from Earth Engine.', gcs_uri, exc)
+        return False
+
+
+def _resolve_effective_cache_dir(explicit_cache_dir: str) -> str:
+    """Returns explicit cache dir, or ./gcs_folder if mounted by executor."""
+    if explicit_cache_dir:
+        return os.path.abspath(explicit_cache_dir)
+    if os.path.isdir(_DEFAULT_GCS_MOUNT_DIR):
+        return _DEFAULT_GCS_MOUNT_DIR
+    return ''
+
+
+def resolve_or_download_month_raster_csv(
+    output_dir: str,
+    start_date: str,
+    end_date: str,
+    bounds_str: str = _DEFAULT_BOUNDS,
+    tile_size_deg: float = 4.0,
+    scale: int = 1000,
+    water_threshold: float = 0.7,
+    land_mask_asset: str = _DEFAULT_LAND_MASK_ASSET,
+    ee_project: str = '',
+    skip_existing: bool = True,
+    max_workers: int = 10,
+    convert_to_csv: bool = True,
+    cache_dir: str = '',
+    legacy_raster_gcs_prefix: str = _DEFAULT_LEGACY_RASTER_GCS_PREFIX,
+    ee_module=None,
+) -> Tuple[Optional[str], object]:
+    """Resolves a month's S2-13 raster CSV from local/GCS cache or Earth Engine.
+
+    Lookup order (for global default bounds when skip_existing=True):
+      1. Local <output_dir>/raster_csv/dw_flood_<YYYY-MM>.csv
+      2. Persistent cache <cache_dir>/raster_csv/dw_flood_<YYYY-MM>.csv
+      3. Legacy prod GCS raster CSV (object-only read, written through to cache)
+      4. Direct Earth Engine GeoTIFF download + raster_to_csv conversion
+    """
+    obs_month = start_date[:7]
+    raster_dir = os.path.join(output_dir, 'raster_csv')
+    local_raster_csv = os.path.join(raster_dir, f'dw_flood_{obs_month}.csv')
+    use_global_cache = _is_default_global_bounds(bounds_str)
+    cached_raster_csv = (os.path.join(cache_dir, 'raster_csv',
+                                      f'dw_flood_{obs_month}.csv') if
+                         (use_global_cache and cache_dir) else '')
+
+    if convert_to_csv and skip_existing:
+        if os.path.exists(local_raster_csv) and os.path.getsize(
+                local_raster_csv) > 0:
+            logging.info('Reusing existing local raster CSV for %s: %s',
+                         obs_month, local_raster_csv)
+            return local_raster_csv, ee_module
+
+        if cached_raster_csv and os.path.exists(
+                cached_raster_csv) and os.path.getsize(cached_raster_csv) > 0:
+            logging.info('Reusing cached raster CSV for %s from %s', obs_month,
+                         cached_raster_csv)
+            _copy_file_atomic(cached_raster_csv, local_raster_csv)
+            return local_raster_csv, ee_module
+
+        if use_global_cache and legacy_raster_gcs_prefix:
+            legacy_name = _LEGACY_RASTER_FILENAME_TEMPLATE.format(
+                month=obs_month)
+            legacy_uri = f'{legacy_raster_gcs_prefix.rstrip("/")}/{legacy_name}'
+            if _try_download_gcs_object(legacy_uri, local_raster_csv):
+                logging.info('Bootstrapped raster CSV for %s from %s',
+                             obs_month, legacy_uri)
+                if cached_raster_csv:
+                    _copy_file_atomic(local_raster_csv, cached_raster_csv)
+                return local_raster_csv, ee_module
+
+    if ee_module is None:
+        ee_module = init_earth_engine(ee_project)
+
+    tifs = download_earthengine_tiles(
+        output_dir=output_dir,
+        start_date=start_date,
+        end_date=end_date,
+        bounds_str=bounds_str,
+        tile_size_deg=tile_size_deg,
+        scale=scale,
+        water_threshold=water_threshold,
+        land_mask_asset=land_mask_asset,
+        ee_project=ee_project,
+        skip_existing=skip_existing,
+        max_workers=max_workers,
+        ee_module=ee_module,
+    )
+    if not convert_to_csv:
+        return None, ee_module
+
+    raster_csv = convert_geotiffs_to_raster_csv(
+        geotiff_files=tifs,
+        output_dir=output_dir,
+        start_date=start_date,
+    )
+    if raster_csv and cached_raster_csv:
+        _copy_file_atomic(raster_csv, cached_raster_csv)
+        logging.info('Persisted raster CSV for %s to cache: %s', obs_month,
+                     cached_raster_csv)
+    return raster_csv, ee_module
+
+
+def _persist_annual_place_svobs(
+    year: str,
+    place_svobs_csvs: List[str],
+    cache_dir: str,
+) -> Optional[str]:
+    """Saves a completed/updated annual place_svobs CSV to persistent cache."""
+    if not cache_dir or not place_svobs_csvs:
+        return None
+    cache_place_dir = os.path.join(cache_dir, 'place_svobs')
+    os.makedirs(cache_place_dir, exist_ok=True)
+    dest = os.path.join(cache_place_dir,
+                        f'DynamicWorldFloods-events-{year}-place_svobs.csv')
+    _consolidate_place_svobs_csvs(place_svobs_csvs, dest)
+    logging.info('Persisted annual place SVObs for %s to cache: %s', year, dest)
+    return dest
+
+
+def _collect_prior_year_place_svobs_csvs(
+    cache_dir: str,
+    active_years: List[str],
+) -> List[str]:
+    """Returns cached annual place_svobs CSVs for years not in active_years."""
+    if not cache_dir:
+        return []
+    cache_place_dir = os.path.join(cache_dir, 'place_svobs')
+    if not os.path.isdir(cache_place_dir):
+        return []
+    active_set = set(active_years)
+    carried: List[str] = []
+    for path in sorted(
+            glob.glob(
+                os.path.join(cache_place_dir,
+                             'DynamicWorldFloods-events-*-place_svobs.csv'))):
+        basename = os.path.basename(path)
+        parts = basename.split('-')
+        year = parts[2] if len(parts) >= 4 else ''
+        if year and year not in active_set and os.path.getsize(path) > 0:
+            carried.append(path)
+    return carried
+
+
 def main(_):
-    start_default, end_default = default_month_date_range()
+    start_default, end_default = default_ytd_date_range()
     start_date = _FLAGS.start_date or start_default
     end_date = _FLAGS.end_date or end_default
     output_dir = os.path.abspath(_FLAGS.output_dir)
     consolidated_path = os.path.join(output_dir, _FLAGS.consolidated_csv)
+    cache_dir = _resolve_effective_cache_dir(_FLAGS.cache_dir)
+    use_global_cache = _is_default_global_bounds(_FLAGS.bounds)
 
     month_ranges = iter_month_ranges(start_date, end_date)
     os.makedirs(output_dir, exist_ok=True)
     logging.info(
         'DynamicWorld_FloodEvents_Places_AutoRefresh download: '
-        'start=%s, end=%s (%d months), bounds=%s, place_cache=%s, out=%s',
+        'start=%s, end=%s (%d months), bounds=%s, cache_dir=%s, '
+        'place_cache=%s, out=%s',
         start_date,
         end_date,
         len(month_ranges),
         _FLAGS.bounds,
+        cache_dir or '<none>',
         _FLAGS.place_cache_file,
         output_dir,
     )
 
-    ee_module = init_earth_engine(_FLAGS.ee_project)
+    ee_module = None
     raster_csvs_by_year: Dict[str, List[str]] = {}
 
     for m_start, m_end in month_ranges:
         logging.info('Processing month window [%s, %s)', m_start, m_end)
-        tifs = download_earthengine_tiles(
+        raster_csv, ee_module = resolve_or_download_month_raster_csv(
             output_dir=output_dir,
             start_date=m_start,
             end_date=m_end,
@@ -774,28 +1025,41 @@ def main(_):
             ee_project=_FLAGS.ee_project,
             skip_existing=_FLAGS.skip_existing,
             max_workers=_FLAGS.max_workers,
+            convert_to_csv=_FLAGS.convert_to_csv,
+            cache_dir=cache_dir,
+            legacy_raster_gcs_prefix=_FLAGS.legacy_raster_gcs_prefix,
             ee_module=ee_module,
         )
-        if _FLAGS.convert_to_csv:
-            raster_csv = convert_geotiffs_to_raster_csv(
-                geotiff_files=tifs,
-                output_dir=output_dir,
-                start_date=m_start,
-            )
-            if raster_csv:
-                raster_csvs_by_year.setdefault(m_start[:4],
-                                               []).append(raster_csv)
+        if raster_csv:
+            raster_csvs_by_year.setdefault(m_start[:4], []).append(raster_csv)
 
     if _FLAGS.convert_to_csv:
         all_place_svobs_csvs: List[str] = []
-        for year, csv_list in sorted(raster_csvs_by_year.items()):
-            all_place_svobs_csvs.extend(
-                generate_place_svobs_for_year(
-                    raster_csvs=csv_list,
-                    output_dir=output_dir,
-                    year=year,
-                    place_cache_file=_FLAGS.place_cache_file,
-                ))
+        active_years = sorted(raster_csvs_by_year.keys())
+        for year in active_years:
+            csv_list = raster_csvs_by_year[year]
+            year_place_csvs = generate_place_svobs_for_year(
+                raster_csvs=csv_list,
+                output_dir=output_dir,
+                year=year,
+                place_cache_file=_FLAGS.place_cache_file,
+            )
+            all_place_svobs_csvs.extend(year_place_csvs)
+            is_ytd_for_year = any(
+                os.path.basename(p) == f'dw_flood_{year}-01.csv'
+                for p in csv_list)
+            if use_global_cache and cache_dir and is_ytd_for_year:
+                _persist_annual_place_svobs(year, year_place_csvs, cache_dir)
+
+        if (_FLAGS.carry_forward_prior_years and use_global_cache and
+                cache_dir):
+            prior_csvs = _collect_prior_year_place_svobs_csvs(
+                cache_dir, active_years)
+            if prior_csvs:
+                logging.info('Carrying forward %d cached prior-year CSV(s): %s',
+                             len(prior_csvs), prior_csvs)
+                all_place_svobs_csvs = prior_csvs + all_place_svobs_csvs
+
         row_count = _consolidate_place_svobs_csvs(all_place_svobs_csvs,
                                                   consolidated_path)
         if row_count == 0:
