@@ -1,0 +1,7 @@
+Node: E:brazil_population_by_race_output->E0
+observationAbout: C:brazil_population_by_race_output->observationAbout
+observationDate: C:brazil_population_by_race_output->observationDate
+observationPeriod: C:brazil_population_by_race_output->observationPeriod
+value: C:brazil_population_by_race_output->value
+variableMeasured: C:brazil_population_by_race_output->variableMeasured
+typeOf: dcs:StatVarObservation

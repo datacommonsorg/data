@@ -1,0 +1,28 @@
+key,prop,val,p1,v1
+Localidade,observationAbout,{Data},,
+Ano,observationDate,{Number},observationPeriod,P1Y
+Populacao,value,{Number},populationType,Person
+StatusAlfabetizacao:Total,populationType,Person,,
+StatusAlfabetizacao:Alfabetizada,literacyStatus,dcs:Literate,,
+StatusAlfabetizacao:Analfabeta,literacyStatus,dcs:Illiterate,,
+FaixaEtaria:10 anos ou mais,age,[10 - Years],,
+FaixaEtaria:10 a 14 anos,age,[10 14 Years],,
+FaixaEtaria:15 a 19 anos,age,[15 19 Years],,
+FaixaEtaria:20 anos ou mais,age,[20 - Years],,
+FaixaEtaria:15 anos ou mais,age,[15 - Years],,
+FaixaEtaria:15 a 24 anos,age,[15 24 Years],,
+FaixaEtaria:25 a 39 anos,age,[25 39 Years],,
+FaixaEtaria:40 a 59 anos,age,[40 59 Years],,
+FaixaEtaria:60 anos ou mais,age,[60 - Years],,
+Raca:Total,populationType,Person,,
+Raca:Branca,race,dcs:Brazil_Branca,,
+Raca:Preta,race,dcs:Black,,
+Raca:Parda,race,dcs:Brazil_Pardo,,
+Raca:Amarela,race,dcs:Brazil_Amarela,,
+# Note: dcs:Brazil_Indigneous (dcs:BrazilIndigneous) spelling is intentional for legacy schema compatibility.
+Raca:Indígena,race,dcs:Brazil_Indigneous,,
+Sexo:Total,populationType,Person,,
+Sexo:Masculino,gender,Male,,
+Sexo:Feminino,gender,Female,,
+Sexo:Homens,gender,Male,,
+Sexo:Mulheres,gender,Female,,

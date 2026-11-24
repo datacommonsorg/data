@@ -127,7 +127,7 @@ select = [
     "DTZ003",
     "DTZ004",
     # flake8-bugbear correctness rules (B0xx).
-    # Note: B007, B020, and B904 are deferred to follow-up PRs.
+    # Note: B007 and B020 are deferred to follow-up PRs.
     "B002",
     "B003",
     "B004",
@@ -160,6 +160,8 @@ select = [
     "B034",
     "B035",
     "B039",
+    # Exception chaining inside except blocks.
+    "B904",
 ]
 ignore = [
     # Bare dict literals in `.py` config and PV-map files loaded via

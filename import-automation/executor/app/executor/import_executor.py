@@ -255,11 +255,11 @@ class ImportExecutor:
                             absolute_import_dir=absolute_import_dir,
                             import_spec=spec,
                         )
-                    except Exception:
+                    except Exception as e:
                         raise ExecutionError(
                             ExecutionResult(ImportStatus.FAILURE,
                                             executed_imports,
-                                            traceback.format_exc()))
+                                            traceback.format_exc())) from e
                     executed_imports.append(
                         import_target.get_absolute_import_name(
                             import_dir, import_name_in_spec))
