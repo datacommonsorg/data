@@ -1,0 +1,9 @@
+Node: E:Mexico_Unemployed_Population_expected->E0
+observationAbout: C:Mexico_Unemployed_Population_expected->observationAbout
+observationDate: C:Mexico_Unemployed_Population_expected->observationDate
+value: C:Mexico_Unemployed_Population_expected->value
+variableMeasured: C:Mexico_Unemployed_Population_expected->variableMeasured
+unit: C:Mexico_Unemployed_Population_expected->unit
+scalingFactor: C:Mexico_Unemployed_Population_expected->scalingFactor
+observationPeriod: C:Mexico_Unemployed_Population_expected->observationPeriod
+typeOf: dcs:StatVarObservation

@@ -56,7 +56,7 @@ class GeocodeCitiesTest(unittest.TestCase):
         self.assertEqual(5553100, crime['Geocode'])
 
         # Deuplicate state and city, assert exception.
-        with self.assertRaises(Exception):
+        with self.assertRaises(AssertionError):
             update_crime_geocode(crime, geo_codes, found_set,
                                  cities_not_found_set)
 

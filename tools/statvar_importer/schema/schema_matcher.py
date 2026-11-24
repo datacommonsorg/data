@@ -102,8 +102,10 @@ class SchemaMatcher:
 
     def __init__(self,
                  mcf_file: str = '',
-                 config: dict = {},
+                 config: dict | None = None,
                  counters: Counters = None):
+        if config is None:
+            config = {}
         self._counters = counters
         if self._counters is None:
             self._counters = Counters()
@@ -130,9 +132,11 @@ class SchemaMatcher:
     def add_nodes_to_matcher(
         self,
         nodes: dict,
-        props: list = ['dcid', 'name', 'description', 'alternativeName'],
+        props: list | None = None,
     ):
         """Add the properties from the nodes to the ngram matcher for lookups."""
+        if props is None:
+            props = ['dcid', 'name', 'description', 'alternativeName']
         logging.log_every_n(
             logging.INFO,
             f'Adding {props} for {len(nodes)} nodes into matcher.',
@@ -159,9 +163,11 @@ class SchemaMatcher:
 
     def lookup_pvs_for_query(self,
                              query: str,
-                             types: list = [],
+                             types: list | None = None,
                              prop_as_key: bool = False) -> dict:
         """Returns the property:values that match the query string using the ngram matcher."""
+        if types is None:
+            types = []
         pvs = {}
         nodes = self._node_matcher.lookup(query,
                                           num_results=self._config.get(
@@ -356,7 +362,7 @@ def search_pvs(
     mcf_file: str,
     config: dict,
     input_file: str,
-    input_queries: list = [],
+    input_queries: list | None = None,
     output_file: str = None,
 ) -> dict:
     """Returns the matching property values for each input string.
@@ -380,6 +386,8 @@ def search_pvs(
       }
       or an empty dict when there are no matches.
     """
+    if input_queries is None:
+        input_queries = []
     counters = Counters()
     matcher = SchemaMatcher(mcf_file, config, counters)
     if not input_queries:

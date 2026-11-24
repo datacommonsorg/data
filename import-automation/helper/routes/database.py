@@ -37,5 +37,6 @@ def initialize_database(
     except Exception as e:
         logging.error(
             f"Failed to initialize BigQuery database in import-helper: {e}")
-        raise HTTPException(status_code=500,
-                            detail=f"Database initialization failed: {str(e)}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"Database initialization failed: {str(e)}") from e
