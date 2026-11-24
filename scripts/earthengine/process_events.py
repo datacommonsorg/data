@@ -1816,7 +1816,7 @@ def _rename_dict_keys(pvs: dict, rename_keys: dict) -> dict:
 
 
 def _first(s: set):
-    return next(iter(s))
+    return next(iter(s), None)
 
 
 def _format_property_values(pvs: dict,

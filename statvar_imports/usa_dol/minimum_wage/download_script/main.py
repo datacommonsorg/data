@@ -34,7 +34,7 @@ def extract_all_table_data(url):
 
         if all_tables:
             table_data = []
-            for _index, table in enumerate(all_tables):
+            for table in all_tables:
                 rows = table.find_all('tr')
                 table_rows = []
                 for row in rows:
@@ -45,7 +45,7 @@ def extract_all_table_data(url):
 
             with open(file_path2, 'w', newline='') as csvfile:
                 writer = csv.writer(csvfile)
-                for _index, table in enumerate(table_data):
+                for table in table_data:
                     writer.writerows(table)
                     writer.writerow([])
             logging.info("Downloaded files")
