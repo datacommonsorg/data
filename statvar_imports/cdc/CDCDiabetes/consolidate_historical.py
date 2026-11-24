@@ -32,18 +32,22 @@ import file_util
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string(
-    'cns_dir',
-    '/cns/jv-d/home/datcom/v3_mcf/cdc/diabetes/20240112',
-    'Legacy CNS directory (or gs:// prefix) containing the 162 2004-2021 CSVs.',
-    allow_override=True,
-)
-flags.DEFINE_string(
-    'output_dir',
-    'historical',
-    'Output directory for the consolidated historical baseline CSV and TMCF.',
-    allow_override=True,
-)
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        'cns_dir',
+        '/cns/jv-d/home/datcom/v3_mcf/cdc/diabetes/20240112',
+        'Legacy CNS directory (or gs:// prefix) containing the 162 2004-2021 CSVs.',
+        allow_override=True,
+    )
+    flags.DEFINE_string(
+        'output_dir',
+        'historical',
+        'Output directory for the consolidated historical baseline CSV and TMCF.',
+        allow_override=True,
+    )
+
 
 OUTPUT_COLUMNS = [
     'observationAbout',
@@ -259,4 +263,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

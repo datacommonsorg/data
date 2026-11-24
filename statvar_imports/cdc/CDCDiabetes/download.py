@@ -34,32 +34,37 @@ from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
 _FLAGS = flags.FLAGS
-flags.DEFINE_string(
-    'output_dir',
-    os.path.join(_CODEDIR, 'input_files'),
-    'Directory path to save the downloaded input CSV file.',
-    allow_override=True,
-)
-flags.DEFINE_string(
-    'historical_gcs_dir',
-    'gs://unresolved_mcf/cdc/diabetes/historical',
-    'GCS directory containing the consolidated 2004-2021 historical CSV file.',
-)
-flags.DEFINE_string(
-    'historical_output_dir',
-    os.path.join(_CODEDIR, 'output_files'),
-    'Directory path to copy the historical CSV and TMCF files into.',
-)
-flags.DEFINE_string(
-    'input_filename',
-    'cdc_diabetes.csv',
-    'Filename for the downloaded CDC Diabetes input CSV table.',
-)
-flags.DEFINE_integer(
-    'start_year',
-    2022,
-    'Minimum observation year to include in the downloaded CSV file.',
-)
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        'output_dir',
+        os.path.join(_CODEDIR, 'input_files'),
+        'Directory path to save the downloaded input CSV file.',
+        allow_override=True,
+    )
+    flags.DEFINE_string(
+        'historical_gcs_dir',
+        'gs://unresolved_mcf/cdc/diabetes/historical',
+        'GCS directory containing the consolidated 2004-2021 historical CSV file.',
+    )
+    flags.DEFINE_string(
+        'historical_output_dir',
+        os.path.join(_CODEDIR, 'output_files'),
+        'Directory path to copy the historical CSV and TMCF files into.',
+    )
+    flags.DEFINE_string(
+        'input_filename',
+        'cdc_diabetes.csv',
+        'Filename for the downloaded CDC Diabetes input CSV table.',
+    )
+    flags.DEFINE_integer(
+        'start_year',
+        2022,
+        'Minimum observation year to include in the downloaded CSV file.',
+    )
+
 
 USDSS_BASE_URL = 'https://usdss.cdc.gov'
 USDSS_REFERER = 'https://usdss.cdc.gov/diabetes/surveillance.html'
@@ -550,4 +555,5 @@ def main(_) -> None:
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)
