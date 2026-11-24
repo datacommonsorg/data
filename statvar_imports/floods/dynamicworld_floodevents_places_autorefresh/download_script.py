@@ -267,7 +267,20 @@ def build_dynamic_world_flood_image(
     if land_mask_asset:
         land_mask = ee_module.Image(land_mask_asset).select('datamask').eq(1)
         dw_water = dw_water.updateMask(land_mask)
-    return dw_water.selfMask().toFloat()
+    # Unmask to 0 before exporting so masked ocean/dry pixels become 0.0
+    # rather than -inf nodata, which scripts/earthengine/raster_to_csv.py
+    # would otherwise process via `np.where(arr != 0)`.
+    return dw_water.unmask(0).toFloat()
+
+
+def _tile_has_flood_pixels(tif_path: str) -> bool:
+    """Returns True if a GeoTIFF tile contains at least one flood pixel (>= 1)."""
+    import numpy as np
+    import rasterio
+
+    with rasterio.open(tif_path) as src:
+        band = src.read(1)
+        return bool(np.any(np.isfinite(band) & (band >= 1.0)))
 
 
 def _sanitize_url(url: str) -> str:
@@ -344,6 +357,9 @@ def _download_single_tile(
                              _format_tile_name(start_date, end_date, tile))
     if skip_existing and os.path.exists(tile_path) and os.path.getsize(
             tile_path) > 0:
+        if not _tile_has_flood_pixels(tile_path):
+            os.remove(tile_path)
+            return None
         logging.info('[%d/%d] Skipping existing tile: %s', idx, total_tiles,
                      tile_path)
         return tile_path
@@ -414,6 +430,15 @@ def _download_single_tile(
             delay=retry_delay,
             backoff=retry_backoff,
     ):
+        if not _tile_has_flood_pixels(tile_path):
+            logging.debug(
+                '[%d/%d] Tile %s has no flood pixels; removing.',
+                idx,
+                total_tiles,
+                os.path.basename(tile_path),
+            )
+            os.remove(tile_path)
+            return None
         return tile_path
     raise RuntimeError(f'Download failed for Earth Engine tile {tile}')
 

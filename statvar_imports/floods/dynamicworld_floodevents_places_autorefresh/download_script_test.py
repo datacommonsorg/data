@@ -82,8 +82,8 @@ class _FakeEEChain:
         self.calls.append(('updateMask', mask))
         return self
 
-    def selfMask(self):
-        self.calls.append(('selfMask',))
+    def unmask(self, value):
+        self.calls.append(('unmask', value))
         return self
 
     def toFloat(self):
@@ -165,6 +165,7 @@ class DownloadScriptTest(unittest.TestCase):
         self.assertIn(('filterDate', '2026-10-01', '2026-11-01'), calls)
         self.assertIn(('gte', 0.7), calls)
         self.assertIn(('max',), calls)
+        self.assertIn(('unmask', 0), calls)
 
     def test_download_earthengine_tiles_parallel_and_skips_empty(self):
         fake_ee = mock.MagicMock()
@@ -184,6 +185,10 @@ class DownloadScriptTest(unittest.TestCase):
                     download_script.download_util_script,
                     'download_file',
                     side_effect=_fake_download_file,
+            ), mock.patch.object(
+                    download_script,
+                    '_tile_has_flood_pixels',
+                    return_value=True,
             ):
                 paths = download_script.download_earthengine_tiles(
                     output_dir=tmp_dir,
@@ -297,6 +302,35 @@ class DownloadScriptTest(unittest.TestCase):
                 actual_tmcf = fh.read().replace('out->', 'expected_output->')
             with open(expected_tmcf, 'r', encoding='utf-8') as fh:
                 self.assertEqual(actual_tmcf, fh.read())
+
+    def test_tile_has_flood_pixels(self):
+        import numpy as np
+        import rasterio
+        from rasterio.transform import from_origin
+
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            dry_tif = os.path.join(tmp_dir, 'dry.tif')
+            wet_tif = os.path.join(tmp_dir, 'wet.tif')
+            profile = {
+                'driver': 'GTiff',
+                'height': 4,
+                'width': 4,
+                'count': 1,
+                'dtype': 'float32',
+                'crs': 'EPSG:4326',
+                'transform': from_origin(84.0, 26.0, 0.01, 0.01),
+            }
+            with rasterio.open(dry_tif, 'w', **profile) as dst:
+                dry = np.zeros((4, 4), dtype='float32')
+                dry[0, 0] = -np.inf
+                dst.write(dry, 1)
+            self.assertFalse(download_script._tile_has_flood_pixels(dry_tif))
+
+            with rasterio.open(wet_tif, 'w', **profile) as dst:
+                wet = np.zeros((4, 4), dtype='float32')
+                wet[1, 2] = 1.0
+                dst.write(wet, 1)
+            self.assertTrue(download_script._tile_has_flood_pixels(wet_tif))
 
 
 if __name__ == '__main__':
