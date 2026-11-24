@@ -54,7 +54,15 @@ series while ingesting new upstream years automatically:
      StatPop-to-SVObs conversion) and `2003–2009` 20%-sample county
      `Count_MedicareEnrollee` rows overlapped by live archives are excluded /
      pruned when staging `output_files/` so live `stdprice_total` and unified
-     100% county counts take precedence without duplicate keys.
+     100% county counts take precedence without duplicate keys. For `5` counties
+     in `2010` (`geoId/02105`, `geoId/02198`, `geoId/02275`, `geoId/08014`,
+     `geoId/51678`) where upstream `county_stdprices_2003_2010.csv.zip` omits
+     `2010` `stdprice_total` (`2011–2019` are present in
+     `county_stdprices_ffs.csv.zip`), pruning those `< $1,000` sub-service
+     artifacts (`$76`–`$964`) intentionally removes `5` corrupted observations,
+     alongside `98` legacy non-FIPS/dummy `geoId/*` rows (`31728`, `31745`,
+     `33929`, `99003`, `99999`, `999999`; `103` total rows in
+     `nodes-deleted.mcf`).
    - Copied automatically by `download.py` into `output_files/` along with
      `output_files/common_tmcf.tmcf` on every run.
 2. **Live Upstream Archives & Dynamic Discovery (`https://data.dartmouthatlas.org/`)**:
@@ -97,7 +105,10 @@ series while ingesting new upstream years automatically:
   UTF-8 BOM and header casing variations, filters `NaN`/suppressed/`-88888`/
   `-99999` values (`b/152544134`), maps CMS/SSA state codes (`01`–`53`) to US
   Census FIPS DCIDs (`geoId/01`–`geoId/56`), maps national codes (`99`/`99999`)
-  to `country/USA`, drops residual non-FIPS county codes (`99003`, `999999`),
+  to `country/USA`, drops residual non-FIPS/dummy place codes (`31728`, `31745`,
+  `33929`, `99003`, `99999`, `999999` as `geoId/*`), prunes `< $1,000`
+  corrupted historical `dc/rn90czcrqcv06` sub-service slices (including the `5`
+  omitted `2010` county rows `geoId/02105`, `02198`, `02275`, `08014`, `51678`),
   deduplicates against historical keys, and writes net-new rows to
   `input_files/cleaned/dartmouth_atlas_medicare.csv`.
 - `dartmouth_atlas_medicare_pvmap.csv`: PVMap for `stat_var_processor.py`.
