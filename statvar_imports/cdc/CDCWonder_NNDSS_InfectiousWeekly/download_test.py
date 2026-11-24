@@ -85,6 +85,38 @@ class DownloadTest(unittest.TestCase):
                 "Current week": "12.0",
                 "Current week, flag": "-",
             },
+            {
+                "Reporting Area": "NEW YORK",
+                "Current MMWR Year": "2022",
+                "MMWR WEEK": "10",
+                "Label": "Hansen's disease",
+                "Current week": "",
+                "Current week, flag": "N",
+            },
+            {
+                "Reporting Area": "NEW YORK CITY",
+                "Current MMWR Year": "2022",
+                "MMWR WEEK": "10",
+                "Label": "Hansen's disease",
+                "Current week": "1.0",
+                "Current week, flag": "-",
+            },
+            {
+                "Reporting Area": "NEW YORK",
+                "Current MMWR Year": "2022",
+                "MMWR WEEK": "10",
+                "Label": "Anthrax",
+                "Current week": "7.0",
+                "Current week, flag": "-",
+            },
+            {
+                "Reporting Area": "NEW YORK CITY",
+                "Current MMWR Year": "2022",
+                "MMWR WEEK": "10",
+                "Label": "Anthrax",
+                "Current week": "",
+                "Current week, flag": "-",
+            },
         ]
         with tempfile.TemporaryDirectory() as tmpdir:
             in_csv = os.path.join(tmpdir, "rows.csv")
@@ -103,7 +135,11 @@ class DownloadTest(unittest.TestCase):
         self.assertEqual(records.get(("NEW YORK CITY", "Campylobacteriosis")),
                          "30")
         self.assertEqual(records.get(("NEW YORK", "Campylobacteriosis")), "50")
-        self.assertEqual(len(records), 3)
+        self.assertEqual(records.get(("NEW YORK CITY", "Hansen's disease")),
+                         "1")
+        self.assertNotIn(("NEW YORK", "Hansen's disease"), records)
+        self.assertNotIn(("NEW YORK", "Anthrax"), records)
+        self.assertEqual(len(records), 4)
 
     def test_preprocess_csv_header_only_missing_columns(self):
         with tempfile.TemporaryDirectory() as tmpdir:

@@ -164,7 +164,8 @@ def preprocess_csv(
 ) -> pd.DataFrame:
     """Filter x9gk-5huc to valid Current week rows (>= min_year), add observationDate, and sum NY+NYC."""
     chunks = []
-    ny_sums: Dict[Tuple[str, str, str, str], float] = {}
+    ny_ex_nyc_vals: Dict[Tuple[str, str, str, str], float] = {}
+    nyc_vals: Dict[Tuple[str, str, str, str], float] = {}
     required_cols = [
         "Current week",
         "Current MMWR Year",
@@ -225,7 +226,7 @@ def preprocess_csv(
         is_ny_ex_nyc = area_upper == "NEW YORK"
         is_nyc = area_upper == "NEW YORK CITY"
 
-        for rec in chunk[is_ny_ex_nyc | is_nyc][[
+        for rec in chunk[is_ny_ex_nyc][[
                 "Current MMWR Year", "MMWR WEEK", "observationDate", "Label",
                 "val_num"
         ]].to_dict("records"):
@@ -235,21 +236,35 @@ def preprocess_csv(
                 rec["observationDate"],
                 rec["Label"],
             )
-            ny_sums[key] = ny_sums.get(key, 0.0) + float(rec["val_num"])
+            ny_ex_nyc_vals[key] = ny_ex_nyc_vals.get(key, 0.0) + float(
+                rec["val_num"])
+
+        for rec in chunk[is_nyc][[
+                "Current MMWR Year", "MMWR WEEK", "observationDate", "Label",
+                "val_num"
+        ]].to_dict("records"):
+            key = (
+                rec["Current MMWR Year"],
+                rec["MMWR WEEK"],
+                rec["observationDate"],
+                rec["Label"],
+            )
+            nyc_vals[key] = nyc_vals.get(key, 0.0) + float(rec["val_num"])
 
         kept = chunk[~is_ny_ex_nyc].copy()
         kept["Current week"] = kept["val_num"].map(_format_number)
         chunks.append(kept[OUTPUT_COLUMNS])
 
-    if ny_sums:
+    both_ny_keys = sorted(ny_ex_nyc_vals.keys() & nyc_vals.keys())
+    if both_ny_keys:
         ny_rows = [{
             "Reporting Area": "NEW YORK",
             "Current MMWR Year": k[0],
             "MMWR WEEK": k[1],
             "observationDate": k[2],
             "Label": k[3],
-            "Current week": _format_number(v),
-        } for k, v in ny_sums.items()]
+            "Current week": _format_number(ny_ex_nyc_vals[k] + nyc_vals[k]),
+        } for k in both_ny_keys]
         chunks.append(pd.DataFrame(ny_rows, columns=OUTPUT_COLUMNS))
 
     out_df = (pd.concat(chunks, ignore_index=True) if chunks else pd.DataFrame(
