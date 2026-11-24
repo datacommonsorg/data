@@ -31,14 +31,20 @@ from absl import logging
 import pandas as pd
 
 FLAGS = flags.FLAGS
-flags.DEFINE_boolean("csv", True, "Whether or not to generate the csv.")
-flags.DEFINE_boolean(
-    "mcf", False,
-    "Whether or not to generate the template and StatisticalVariable"
-    "instance MCFs.")
-flags.DEFINE_string("path", "FRB_H15.csv",
-                    "Path to the raw csv containing rates at all maturities.")
-flags.DEFINE_string("mode", "prod", "Processing mode (test/prod).")
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_boolean("csv", True, "Whether or not to generate the csv.")
+    flags.DEFINE_boolean(
+        "mcf", False,
+        "Whether or not to generate the template and StatisticalVariable "
+        "instance MCFs.")
+    flags.DEFINE_string(
+        "path", "FRB_H15.csv",
+        "Path to the raw csv containing rates at all maturities.")
+    flags.DEFINE_string("mode", "prod", "Processing mode (test/prod).")
+
 
 # Maturities for which interest rates are provided by BEA.
 # Treasury bills have maturities of a year or less, notes greater than 1 year up
@@ -65,7 +71,7 @@ CSV_PATH = "FRB_H15.csv"
 MIN_ROWS = 1000
 
 
-def generate_csv():
+def generate_csv(mode: str):
     '''Generates the csv containing the data portion of the constant
     maturity rate csv file downloaded from Federal Reserve'''
 
@@ -74,7 +80,7 @@ def generate_csv():
     name_template = "Market yield on U.S. Treasury securities at {}  constant"\
                     " maturity, quoted on investment basis"
 
-    if FLAGS.mode == 'test':
+    if mode == 'test':
         in_df = pd.read_csv(CSV_PATH, na_values="ND")
         logging.info(f'Got {in_df.shape} rows from {CSV_PATH}')
     else:
@@ -149,10 +155,11 @@ def generate_mcf():
 def main(_):
     """Runs the code."""
     if FLAGS.csv:
-        generate_csv()
+        generate_csv(FLAGS.mode)
     if FLAGS.mcf:
         generate_mcf()
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

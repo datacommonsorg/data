@@ -145,7 +145,7 @@ def add_year_column(file_path, year):
 
     except Exception as e:
         raise RuntimeError(
-            f"Failed to add year/ncesid column to {file_path.name}: {e}")
+            f"Failed to add year/ncesid column to {file_path.name}: {e}") from e
 
 
 def generate_future_configs(start_year):
@@ -239,7 +239,7 @@ def download_and_extract(config_key, config_data, data_type, output_dir):
             )
         except Exception as e:
             raise RuntimeError(
-                f"Failed to copy or process local 2009-10 file: {e}")
+                f"Failed to copy or process local 2009-10 file: {e}") from e
         return  # Skip the rest of the function for 2009-10
 
     keywords, search_constraint, output_name_fragment = get_file_keywords(
@@ -267,7 +267,7 @@ def download_and_extract(config_key, config_data, data_type, output_dir):
     except Exception as e:
         raise RuntimeError(
             f"Failed to connect/download archive after retries for {config_key}: {e}"
-        )
+        ) from e
 
     logging.info("Download successful. Now extracting...")
 
@@ -362,7 +362,7 @@ def download_and_extract(config_key, config_data, data_type, output_dir):
     except Exception as e:
         raise RuntimeError(
             f"An unhandled error occurred during extraction/processing for {config_key}: {e}"
-        )
+        ) from e
 
 
 def main(_):

@@ -142,8 +142,12 @@ class GenerateColMapBase:
   """
 
     # TODO - add typing hints and document the format.
-    def __init__(self, spec_dict={}, column_list=[], delimiter='!!'):
+    def __init__(self, spec_dict=None, column_list=None, delimiter='!!'):
         """module init"""
+        if column_list is None:
+            column_list = []
+        if spec_dict is None:
+            spec_dict = {}
         self.features = spec_dict
         self.column_list = column_list
         self.column_map = {}
