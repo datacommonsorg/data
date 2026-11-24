@@ -14,17 +14,21 @@
 """Consolidates the 162 legacy CDCDiabetes CSVs (2004-2021) into 1 baseline CSV."""
 
 import csv
-import glob
 import math
 import os
 import re
-import shutil
 import subprocess
+import sys
 import tempfile
+
+_CODEDIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(1, os.path.join(_CODEDIR, '../../util/'))
+sys.path.insert(1, os.path.join(_CODEDIR, '../../../util/'))
 
 from absl import app
 from absl import flags
 from absl import logging
+import file_util
 
 FLAGS = flags.FLAGS
 
@@ -69,11 +73,16 @@ SUPPRESSED_TOKENS = frozenset({
 })
 
 
-def _filter_matching_csvs(paths: list[str]) -> list[str]:
+def _filter_matching_csvs(
+    paths: list[str],
+    expected_dir: str = '',
+) -> list[str]:
     """Filters and sorts paths matching DiabetesAtlasCountyData_*.csv."""
     matched = []
     for line in paths:
         path = line.strip()
+        if expected_dir and os.path.dirname(path) != expected_dir:
+            continue
         if path.endswith('.csv') and DIABETES_FILE_RE.match(
                 os.path.basename(path)):
             matched.append(path)
@@ -82,22 +91,15 @@ def _filter_matching_csvs(paths: list[str]) -> list[str]:
 
 def list_source_csvs(source_dir: str) -> list[str]:
     """Lists all DiabetesAtlasCountyData_*.csv files in CNS, GCS, or local."""
-    source_dir = source_dir.rstrip('/')
-    if source_dir.startswith('gs://'):
-        cmd = [
-            'gcloud',
-            'storage',
-            'ls',
-            f'{source_dir}/DiabetesAtlasCountyData_*.csv',
-        ]
+    clean_dir = source_dir.rstrip('/')
+    pattern = f'{clean_dir}/DiabetesAtlasCountyData_*.csv'
+    if clean_dir.startswith('/cns/'):
+        cmd = ['fileutil', 'ls', pattern]
         result = subprocess.run(cmd, capture_output=True, text=True, check=True)
         return _filter_matching_csvs(result.stdout.splitlines())
-    if source_dir.startswith('/cns/'):
-        cmd = ['fileutil', 'ls', f'{source_dir}/DiabetesAtlasCountyData_*.csv']
-        result = subprocess.run(cmd, capture_output=True, text=True, check=True)
-        return _filter_matching_csvs(result.stdout.splitlines())
-    pattern = os.path.join(source_dir, 'DiabetesAtlasCountyData_*.csv')
-    return sorted(glob.glob(pattern))
+    expected_dir = clean_dir if file_util.file_is_gcs(clean_dir) else ''
+    return _filter_matching_csvs(file_util.file_get_matching(pattern),
+                                 expected_dir)
 
 
 def normalize_dcid(val: str) -> str:
@@ -129,21 +131,15 @@ def consolidate_files(
 ) -> None:
     """Copies CNS/GCS CSVs locally, merges, deduplicates, and writes output."""
     if not source_files:
-        logging.warning('No matching files found for %s', output_csv_path)
-        return
+        raise RuntimeError(
+            f'No matching source CSV files found for {output_csv_path}')
 
     logging.info(
         'Copying %d source files to local staging for %s...',
         len(source_files),
         output_csv_path,
     )
-    if source_files[0].startswith('gs://'):
-        subprocess.run(
-            ['gcloud', 'storage', 'cp'] + source_files +
-            [f'{local_staging_dir}/'],
-            check=True,
-        )
-    elif source_files[0].startswith('/cns/'):
+    if source_files[0].startswith('/cns/'):
         subprocess.run(
             ['fileutil', 'cp', '-f'] + source_files + [f'{local_staging_dir}/'],
             check=True,
@@ -152,8 +148,9 @@ def consolidate_files(
         for src_file in source_files:
             dst_file = os.path.join(local_staging_dir,
                                     os.path.basename(src_file))
-            if os.path.abspath(src_file) != os.path.abspath(dst_file):
-                shutil.copy2(src_file, dst_file)
+            if (file_util.file_is_gcs(src_file) or
+                    os.path.abspath(src_file) != os.path.abspath(dst_file)):
+                file_util.file_copy(src_file, dst_file)
 
     deduped_rows: dict[tuple[str, str, str], dict[str, str]] = {}
     total_rows_read = 0
@@ -245,6 +242,10 @@ def consolidate_files(
 
 def main(_):
     source_csvs = list_source_csvs(FLAGS.cns_dir)
+    if not source_csvs:
+        raise RuntimeError(
+            'No matching DiabetesAtlasCountyData_*.csv files found in '
+            f'{FLAGS.cns_dir}')
     logging.info('Found %d CDCDiabetes historical CSVs.', len(source_csvs))
 
     os.makedirs(FLAGS.output_dir, exist_ok=True)

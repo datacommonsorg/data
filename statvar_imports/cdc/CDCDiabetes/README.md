@@ -28,7 +28,7 @@
 * `consolidate_historical.py`: One-off helper used to consolidate the 162 legacy `2004–2021` CSV shards into `cdc_diabetes_historical_2004_2021.csv`.
 * `cdc_diabetes_pvmap.csv` & `cdc_diabetes_metadata.csv`: `stat_var_processor.py` schema property-value mappings (`populationType`, `measuredProperty`, `statType`, `age`, `gender`, `healthOutcome` / `healthBehavior`) and config flags.
 * `manifest.json` & `validation_config.json`: Auto-refresh schedule, scripts, inputs, source artifact globs, and validation rules.
-* `download_test.py` & `test_data/`: Unit tests for `download.py`, `consolidate_historical.py`, and `stat_var_processor.py` against the `test_data/` input/output fixtures.
+* `download_test.py` & `test_data/`: Unit tests for `download.py` and `consolidate_historical.py`, plus `test_data/` input and expected-output fixtures for `stat_var_processor.py`.
 
 ---
 

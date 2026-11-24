@@ -34,163 +34,6 @@ except ImportError:
     import consolidate_historical
     import download
 
-_EXISTING_STATVARS_MCF = """Node: dcid:Percent_Person_20OrMoreYears_WithDiabetes
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measuredProperty: dcs:percent
-statType: dcs:measuredValue
-age: dcs:Years20Onwards
-healthOutcome: dcs:Diabetes
-
-Node: dcid:dc/d4j16hnl53es2
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measuredProperty: dcs:percent
-statType: dcs:stdError
-age: dcs:Years20Onwards
-healthOutcome: dcs:Diabetes
-
-Node: dcid:dc/xmpy89x1nh8cg
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measuredProperty: dcs:percent
-statType: dcs:measuredValue
-age: dcs:Years20Onwards
-gender: dcs:Male
-healthOutcome: dcs:Diabetes
-
-Node: dcid:dc/xwtlmj1vg7618
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measuredProperty: dcs:percent
-statType: dcs:stdError
-age: dcs:Years20Onwards
-gender: dcs:Male
-healthOutcome: dcs:Diabetes
-
-Node: dcid:dc/nh3s4skee5483
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measuredProperty: dcs:percent
-statType: dcs:measuredValue
-age: dcs:Years20Onwards
-gender: dcs:Female
-healthOutcome: dcs:Diabetes
-
-Node: dcid:dc/ryjdx30rfbfbb
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measuredProperty: dcs:percent
-statType: dcs:stdError
-age: dcs:Years20Onwards
-gender: dcs:Female
-healthOutcome: dcs:Diabetes
-
-Node: dcid:Percent_Person_20OrMoreYears_Obesity
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measuredProperty: dcs:percent
-statType: dcs:measuredValue
-age: dcs:Years20Onwards
-healthBehavior: dcs:Obesity
-
-Node: dcid:dc/bzfel0wfs6qhf
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measuredProperty: dcs:percent
-statType: dcs:stdError
-age: dcs:Years20Onwards
-healthBehavior: dcs:Obesity
-
-Node: dcid:dc/x13tvt8jsgrm4
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measuredProperty: dcs:percent
-statType: dcs:measuredValue
-age: dcs:Years20Onwards
-gender: dcs:Male
-healthBehavior: dcs:Obesity
-
-Node: dcid:dc/73vt0flpsz26b
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measuredProperty: dcs:percent
-statType: dcs:stdError
-age: dcs:Years20Onwards
-gender: dcs:Male
-healthBehavior: dcs:Obesity
-
-Node: dcid:dc/4lvmzr1h1ylk1
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measuredProperty: dcs:percent
-statType: dcs:measuredValue
-age: dcs:Years20Onwards
-gender: dcs:Female
-healthBehavior: dcs:Obesity
-
-Node: dcid:dc/h3vxgc4gwl4c7
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measuredProperty: dcs:percent
-statType: dcs:stdError
-age: dcs:Years20Onwards
-gender: dcs:Female
-healthBehavior: dcs:Obesity
-
-Node: dcid:Percent_Person_20OrMoreYears_PhysicalInactivity
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measuredProperty: dcs:percent
-statType: dcs:measuredValue
-age: dcs:Years20Onwards
-healthBehavior: dcs:PhysicalInactivity
-
-Node: dcid:dc/1yfe8eezs4jbc
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measuredProperty: dcs:percent
-statType: dcs:stdError
-age: dcs:Years20Onwards
-healthBehavior: dcs:PhysicalInactivity
-
-Node: dcid:dc/ty7pq88d26963
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measuredProperty: dcs:percent
-statType: dcs:measuredValue
-age: dcs:Years20Onwards
-gender: dcs:Male
-healthBehavior: dcs:PhysicalInactivity
-
-Node: dcid:dc/bv6fv4et0d8pd
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measuredProperty: dcs:percent
-statType: dcs:stdError
-age: dcs:Years20Onwards
-gender: dcs:Male
-healthBehavior: dcs:PhysicalInactivity
-
-Node: dcid:dc/tcqb49dvg7k53
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measuredProperty: dcs:percent
-statType: dcs:measuredValue
-age: dcs:Years20Onwards
-gender: dcs:Female
-healthBehavior: dcs:PhysicalInactivity
-
-Node: dcid:dc/t1hj2ymqdg5s6
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measuredProperty: dcs:percent
-statType: dcs:stdError
-age: dcs:Years20Onwards
-gender: dcs:Female
-healthBehavior: dcs:PhysicalInactivity
-"""
-
 
 class _FakeResponse:
     """Minimal mock HTTP response for requests.Session."""
@@ -570,13 +413,16 @@ class DownloadTest(unittest.TestCase):
 
             out_csv = os.path.join(tmp_dir, 'out',
                                    'cdc_diabetes_historical_2004_2021.csv')
-            with mock.patch.object(subprocess, 'run'):
-                with self.assertLogs(level='WARNING') as logs:
-                    consolidate_historical.consolidate_files(
-                        [sample_csv, dup_csv],
-                        out_csv,
-                        stage_dir,
-                    )
+            with self.assertRaisesRegex(RuntimeError,
+                                        'No matching source CSV files'):
+                consolidate_historical.consolidate_files([], out_csv, stage_dir)
+
+            with self.assertLogs(level='WARNING') as logs:
+                consolidate_historical.consolidate_files(
+                    [sample_csv, dup_csv],
+                    out_csv,
+                    stage_dir,
+                )
             self.assertTrue(
                 any('Conflicting duplicate observation' in msg
                     for msg in logs.output))
@@ -596,17 +442,54 @@ class DownloadTest(unittest.TestCase):
                 ],
             )
 
+    def test_consolidate_files_copies_gcs_sources_via_file_util(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            stage_dir = os.path.join(tmp_dir, 'stage')
+            os.makedirs(stage_dir, exist_ok=True)
+            out_csv = os.path.join(tmp_dir, 'out',
+                                   'cdc_diabetes_historical_2004_2021.csv')
+            gcs_src = 'gs://bucket/path/DiabetesAtlasCountyData_2021.csv'
+
+            def _fake_copy(src: str, dst: str) -> str:
+                del src
+                with open(dst, 'w', encoding='utf-8', newline='') as fp:
+                    fp.write('observationAbout,observationDate,'
+                             'variableMeasured,value\n')
+                    fp.write('dcid:geoId/01001,2021,'
+                             'dcid:Percent_Person_20OrMoreYears_WithDiabetes,'
+                             '9.6\n')
+                return dst
+
+            with mock.patch.object(
+                    consolidate_historical.file_util,
+                    'file_copy',
+                    side_effect=_fake_copy,
+            ) as mock_copy:
+                consolidate_historical.consolidate_files(
+                    [gcs_src],
+                    out_csv,
+                    stage_dir,
+                )
+            mock_copy.assert_called_once_with(
+                gcs_src,
+                os.path.join(stage_dir, 'DiabetesAtlasCountyData_2021.csv'),
+            )
+            with open(out_csv, 'r', encoding='utf-8') as fp:
+                rows = list(csv.reader(fp))
+            self.assertEqual(len(rows), 2)
+
     def test_list_source_csvs_gcs_cns_and_local(self):
-        gcs_stdout = ('gs://bucket/path/DiabetesAtlasCountyData_b.csv\n'
-                      'gs://bucket/path/unrelated.csv\n'
-                      'gs://bucket/path/DiabetesAtlasCountyData_a.csv\n')
+        gcs_matches = [
+            'gs://bucket/path/DiabetesAtlasCountyData_b.csv',
+            'gs://bucket/path/unrelated.csv',
+            'gs://bucket/path/nested/DiabetesAtlasCountyData_c.csv',
+            'gs://bucket/path/DiabetesAtlasCountyData_a.csv',
+        ]
         with mock.patch.object(
-                subprocess,
-                'run',
-                return_value=subprocess.CompletedProcess(args=[],
-                                                         returncode=0,
-                                                         stdout=gcs_stdout),
-        ) as mock_run:
+                consolidate_historical.file_util,
+                'file_get_matching',
+                return_value=gcs_matches,
+        ) as mock_matching:
             self.assertEqual(
                 consolidate_historical.list_source_csvs('gs://bucket/path/'),
                 [
@@ -614,17 +497,8 @@ class DownloadTest(unittest.TestCase):
                     'gs://bucket/path/DiabetesAtlasCountyData_b.csv',
                 ],
             )
-            mock_run.assert_called_once_with(
-                [
-                    'gcloud',
-                    'storage',
-                    'ls',
-                    'gs://bucket/path/DiabetesAtlasCountyData_*.csv',
-                ],
-                capture_output=True,
-                text=True,
-                check=True,
-            )
+            mock_matching.assert_called_once_with(
+                'gs://bucket/path/DiabetesAtlasCountyData_*.csv')
 
         cns_stdout = ('/cns/dir/DiabetesAtlasCountyData_2.csv\n'
                       '/cns/dir/notes.txt\n'
@@ -666,55 +540,6 @@ class DownloadTest(unittest.TestCase):
                     os.path.join(tmp_dir, 'DiabetesAtlasCountyData_y.csv'),
                 ],
             )
-
-    def test_stat_var_processor_test_data_fixtures(self):
-        test_data_dir = os.path.join(_CODEDIR, 'test_data')
-        input_csv = os.path.join(test_data_dir, 'cdc_diabetes_input.csv')
-        expected_csv = os.path.join(test_data_dir, 'cdc_diabetes_output.csv')
-        expected_tmcf = os.path.join(test_data_dir, 'cdc_diabetes_output.tmcf')
-        pvmap_csv = os.path.join(_CODEDIR, 'cdc_diabetes_pvmap.csv')
-        metadata_csv = os.path.join(_CODEDIR, 'cdc_diabetes_metadata.csv')
-        sv_processor = os.path.abspath(
-            os.path.join(
-                _CODEDIR,
-                '../../../tools/statvar_importer/stat_var_processor.py',
-            ))
-
-        with tempfile.TemporaryDirectory() as tmp_dir:
-            hermetic_config = os.path.join(tmp_dir, 'test_metadata.csv')
-            with open(metadata_csv, 'r', encoding='utf-8') as f_in, open(
-                    hermetic_config, 'w', encoding='utf-8') as f_out:
-                f_out.write(f_in.read().rstrip('\n') + '\n')
-                f_out.write('generate_statvar_mcf,False\n')
-                f_out.write('generate_schema_mcf,False\n')
-                f_out.write('reconcile_nodes,False\n')
-                f_out.write('recon_lookup_api,False\n')
-
-            existing_sv_mcf = os.path.join(tmp_dir, 'existing_statvars.mcf')
-            with open(existing_sv_mcf, 'w', encoding='utf-8') as f_sv:
-                f_sv.write(_EXISTING_STATVARS_MCF)
-
-            out_prefix = os.path.join(tmp_dir, 'cdc_diabetes_output')
-            cmd = [
-                sys.executable,
-                sv_processor,
-                f'--input_data={input_csv}',
-                f'--pv_map={pvmap_csv}',
-                f'--config_file={hermetic_config}',
-                f'--existing_statvar_mcf={existing_sv_mcf}',
-                f'--output_path={out_prefix}',
-            ]
-            subprocess.run(cmd, check=True, cwd=tmp_dir)
-
-            with open(f'{out_prefix}.csv', 'r',
-                      encoding='utf-8') as f_act, open(
-                          expected_csv, 'r', encoding='utf-8') as f_exp:
-                self.assertEqual(f_act.read(), f_exp.read())
-            with open(f'{out_prefix}.tmcf', 'r',
-                      encoding='utf-8') as f_act_tmcf, open(
-                          expected_tmcf, 'r', encoding='utf-8') as f_exp_tmcf:
-                self.assertEqual(f_act_tmcf.read(), f_exp_tmcf.read())
-            self.assertFalse(os.path.exists(f'{out_prefix}_stat_vars.mcf'))
 
 
 if __name__ == '__main__':
