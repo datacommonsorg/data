@@ -98,7 +98,7 @@ def _load_mappings(pv_map_arg: Optional[str] = None) -> Tuple[dict, dict]:
         logging.error("Failed to parse state mapping file %s: %s", state_file,
                       e)
         raise RuntimeError(
-            f"Failed to parse state mapping file {state_file}: {e}")
+            f"Failed to parse state mapping file {state_file}: {e}") from e
 
     if not zone_file or not os.path.exists(zone_file):
         logging.error("Flood zone mapping file not found: %s", zone_file)
@@ -117,7 +117,7 @@ def _load_mappings(pv_map_arg: Optional[str] = None) -> Tuple[dict, dict]:
         logging.error("Failed to parse flood zone mapping file %s: %s",
                       zone_file, e)
         raise RuntimeError(
-            f"Failed to parse flood zone mapping file {zone_file}: {e}")
+            f"Failed to parse flood zone mapping file {zone_file}: {e}") from e
 
     return state_map, risk_zone_map
 
