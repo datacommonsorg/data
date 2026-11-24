@@ -31,35 +31,38 @@ FLAGS = flags.FLAGS
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-flags.DEFINE_string(
-    'input_dir',
-    os.path.join(_MODULE_DIR, 'raw_data'),
-    'Directory containing downloaded raw Opportunity Insights CSV files.',
-)
-flags.DEFINE_string(
-    'sv_output_prefix',
-    os.path.join(_MODULE_DIR, 'output', 'output'),
-    'Output prefix for generated TMCF, MCF, and StatVarObservation CSV shards.',
-)
-flags.DEFINE_string(
-    'shard_dir',
-    '',
-    'Optional output directory override (sets sv_output_prefix to <shard_dir>/output).',
-)
-flags.DEFINE_integer(
-    'max_rows_per_shard',
-    5_000,
-    'Base row budget per output CSV shard (scaled by dataset column width).',
-)
-
 DEFAULT_EXISTING_STATVAR_MCF = (
     'gs://unresolved_mcf/scripts/statvar/stat_vars.mcf')
 
-flags.DEFINE_string(
-    'existing_statvar_mcf',
-    DEFAULT_EXISTING_STATVAR_MCF,
-    'Existing StatVar MCF path passed to stat_var_processor.py during header resolution.',
-)
+
+def _define_flags() -> None:
+    """Defines command-line flags for preprocess.py."""
+    flags.DEFINE_string(
+        'input_dir',
+        os.path.join(_MODULE_DIR, 'raw_data'),
+        'Directory containing downloaded raw Opportunity Insights CSV files.',
+    )
+    flags.DEFINE_string(
+        'sv_output_prefix',
+        os.path.join(_MODULE_DIR, 'output', 'output'),
+        'Output prefix for generated TMCF, MCF, and StatVarObservation CSV shards.',
+    )
+    flags.DEFINE_string(
+        'shard_dir',
+        '',
+        'Optional output directory override (sets sv_output_prefix to <shard_dir>/output).',
+    )
+    flags.DEFINE_integer(
+        'max_rows_per_shard',
+        5_000,
+        'Base row budget per output CSV shard (scaled by dataset column width).',
+    )
+    flags.DEFINE_string(
+        'existing_statvar_mcf',
+        DEFAULT_EXISTING_STATVAR_MCF,
+        'Existing StatVar MCF path passed to stat_var_processor.py during header resolution.',
+    )
+
 
 DATASET_CONFIGS = [
     ('commuting_zone_outcomes.csv', 'commuting_zone', 'baseline_1978_1983'),
@@ -756,4 +759,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

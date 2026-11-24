@@ -42,21 +42,31 @@ else:
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string(
-    'raw_output_dir',
-    os.path.join(_MODULE_DIR, 'raw_data'),
-    'Directory where raw Opportunity Insights CSV files will be stored.',
-)
-flags.DEFINE_string(
-    'source_page_url',
-    'https://opportunityinsights.org/data/',
-    'Opportunity Insights data catalog page URL to scrape for latest download links.',
-)
-flags.DEFINE_bool(
-    'force_download',
-    False,
-    'If True, re-download and overwrite existing files.',
-)
+
+def _define_flags() -> None:
+    """Defines command-line flags for download.py."""
+    flags.DEFINE_string(
+        'raw_output_dir',
+        os.path.join(_MODULE_DIR, 'raw_data'),
+        'Directory where raw Opportunity Insights CSV files will be stored.',
+    )
+    flags.DEFINE_string(
+        'source_page_url',
+        'https://opportunityinsights.org/data/',
+        'Opportunity Insights data catalog page URL to scrape for latest download links.',
+    )
+    flags.DEFINE_bool(
+        'force_download',
+        False,
+        'If True, re-download and overwrite existing files.',
+    )
+    if 'output_dir' not in FLAGS:
+        flags.DEFINE_string(
+            'output_dir',
+            '',
+            'Optional alias for --raw_output_dir when invoked directly.',
+        )
+
 
 USER_AGENT = ('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 '
               '(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36')
@@ -337,10 +347,5 @@ def main(_):
 
 
 if __name__ == '__main__':
-    if 'output_dir' not in FLAGS:
-        flags.DEFINE_string(
-            'output_dir',
-            '',
-            'Optional alias for --raw_output_dir when invoked directly.',
-        )
+    _define_flags()
     app.run(main)

@@ -285,13 +285,16 @@ class DownloadAndPvmapTest(unittest.TestCase):
                     sv_output_prefix=os.path.join(tmpdir, 'output', 'output'),
                     existing_statvar_mcf='',
                 )
-            preprocess.FLAGS([
-                sys.argv[0],
-                f'--input_dir={os.path.join(tmpdir, "raw")}',
-                f'--sv_output_prefix={os.path.join(tmpdir, "output", "output")}',
-            ])
-            with self.assertRaises(FileNotFoundError):
-                preprocess.main([])
+            fake_flags = mock.Mock(
+                input_dir=os.path.join(tmpdir, 'raw'),
+                sv_output_prefix=os.path.join(tmpdir, 'output', 'output'),
+                shard_dir='',
+                max_rows_per_shard=5_000,
+                existing_statvar_mcf='',
+            )
+            with mock.patch.object(preprocess, 'FLAGS', fake_flags):
+                with self.assertRaises(FileNotFoundError):
+                    preprocess.main([])
 
     def test_extract_csv_from_zip_skips_nested_macosx(self):
         with tempfile.TemporaryDirectory() as tmpdir:
