@@ -74,7 +74,7 @@ class PropertyValueCache:
         self,
         filename: str = '',
         key_props: list = _DEFAULT_KEY_PROPS,
-        props: list = [],
+        props: list | None = None,
         normalize_key: bool = True,
         counters: Counters = None,
     ):
@@ -93,6 +93,8 @@ class PropertyValueCache:
             before lookup in the per-property index.
           counters: Counters object for cache hits and misses.
         """
+        if props is None:
+            props = []
         self._filename = filename
         self._normalize_key = normalize_key
         self._log_every_n = 10
@@ -367,8 +369,14 @@ class PropertyValueCache:
             return self.normalize_string(value)
         return value
 
-    def _add_props(self, key_props: list = [], props: list = []):
+    def _add_props(self,
+                   key_props: list | None = None,
+                   props: list | None = None):
         # Add any new key property.
+        if props is None:
+            props = []
+        if key_props is None:
+            key_props = []
         if key_props:
             for prop in key_props:
                 if prop not in self._key_props:

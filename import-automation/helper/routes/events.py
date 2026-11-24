@@ -12,23 +12,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from datetime import datetime, timezone
+from datetime import datetime
+from datetime import timezone
 import logging
 from zoneinfo import ZoneInfo
-import croniter
-from fastapi import APIRouter, Depends, HTTPException, Request
+
 from clients.bigquery import BigQueryClient
 from clients.storage import StorageClient
 import config
-from dependencies import get_bigquery_client, get_storage_client
+import croniter
+from dependencies import get_bigquery_client
+from dependencies import get_storage_client
+from fastapi import APIRouter
+from fastapi import Depends
+from fastapi import HTTPException
+from fastapi import Request
 from routes.imports import update_import_status
-from routes.models import (
-    BaseResponse,
-    ImportState,
-    ImportStatusItem,
-    ResponseStatus,
-    UpdateImportStatusRequest,
-)
+from routes.models import BaseResponse
+from routes.models import ImportState
+from routes.models import ImportStatusItem
+from routes.models import ResponseStatus
+from routes.models import UpdateImportStatusRequest
 from utils import imports as import_utils
 
 _CDA_FEED_TIMEZONE = ZoneInfo("America/Los_Angeles")
@@ -38,33 +42,38 @@ router = APIRouter(prefix="/imports", tags=["events"])
 
 @router.post("/feed", response_model=BaseResponse)
 async def handle_feed_event(
-    request: Request,
-    bigquery: BigQueryClient = Depends(get_bigquery_client),
-    storage: StorageClient = Depends(get_storage_client),
+        request: Request,
+        bigquery: BigQueryClient = Depends(get_bigquery_client),
+        storage: StorageClient = Depends(get_storage_client),
 ):
     """Processes Pub/Sub push notification for CDA transfer completion."""
     try:
         body = await request.json()
-    except Exception:
-        raise HTTPException(status_code=400, detail="Invalid JSON payload")
+    except Exception as e:
+        raise HTTPException(status_code=400,
+                            detail="Invalid JSON payload") from e
 
     message = import_utils.parse_message(body)
     if not message:
-        raise HTTPException(status_code=400, detail="Invalid Pub/Sub message format")
+        raise HTTPException(status_code=400,
+                            detail="Invalid Pub/Sub message format")
 
     attributes = message.get('attributes', {})
     message_id = message.get('messageId', '')
     if attributes.get('transfer_status') != 'TRANSFER_COMPLETED':
-        return BaseResponse(status=ResponseStatus.OK, message="Transfer not completed; skipped.")
+        return BaseResponse(status=ResponseStatus.OK,
+                            message="Transfer not completed; skipped.")
 
     duplicate = import_utils.check_duplicate(config.GCS_BUCKET_ID, message_id)
     if duplicate:
         logging.info(f"Message {message_id} already processed. Skipping.")
-        return BaseResponse(status=ResponseStatus.OK, message="Duplicate message skipped.")
+        return BaseResponse(status=ResponseStatus.OK,
+                            message="Duplicate message skipped.")
 
     import_name = attributes.get('import_name')
     if not import_name:
-        raise HTTPException(status_code=400, detail="Missing import_name in attributes")
+        raise HTTPException(status_code=400,
+                            detail="Missing import_name in attributes")
 
     latest_version = attributes.get(
         'import_version',
@@ -74,22 +83,16 @@ async def handle_feed_event(
     cron_schedule = attributes.get('cron_schedule', '')
     dag_id = attributes.get('dag_id')
 
-    invoke_airflow_dag = (
-        attributes.get('invoke_airflow_dag').lower() == 'true'
-        if attributes.get('invoke_airflow_dag') else True
-    )
-    skip_import_job = (
-        attributes.get('skip_import_job').lower() == 'true'
-        if attributes.get('skip_import_job') else True
-    )
+    invoke_airflow_dag = (attributes.get('invoke_airflow_dag').lower() == 'true'
+                          if attributes.get('invoke_airflow_dag') else True)
+    skip_import_job = (attributes.get('skip_import_job').lower() == 'true'
+                       if attributes.get('skip_import_job') else True)
     skip_staging_ingestion = (
         attributes.get('skip_staging_ingestion').lower() == 'true'
-        if attributes.get('skip_staging_ingestion') else None
-    )
-    skip_prod_ingestion = (
-        attributes.get('skip_prod_ingestion').lower() == 'true'
-        if attributes.get('skip_prod_ingestion') else None
-    )
+        if attributes.get('skip_staging_ingestion') else None)
+    skip_prod_ingestion = (attributes.get('skip_prod_ingestion').lower()
+                           == 'true'
+                           if attributes.get('skip_prod_ingestion') else None)
 
     if skip_import_job:
         feed_name = attributes.get('feed_name', 'cda_feed')
@@ -106,18 +109,14 @@ async def handle_feed_event(
                     f"Error calculating next refresh from schedule '{cron_schedule}': {e}"
                 )
 
-        status_req = UpdateImportStatusRequest(
-            imports=[
-                ImportStatusItem(
-                    importName=import_name,
-                    status=ImportState.STAGING,
-                    latestVersion=base_version_path,
-                    graphPath=graph_path
-                )
-            ],
-            jobId=feed_name,
-            nextRefresh=next_refresh
-        )
+        status_req = UpdateImportStatusRequest(imports=[
+            ImportStatusItem(importName=import_name,
+                             status=ImportState.STAGING,
+                             latestVersion=base_version_path,
+                             graphPath=graph_path)
+        ],
+                                               jobId=feed_name,
+                                               nextRefresh=next_refresh)
         update_import_status(status_req, bigquery=bigquery, storage=storage)
 
     if invoke_airflow_dag:
@@ -148,5 +147,5 @@ async def handle_feed_event(
             skip_prod_ingestion=skip_prod_ingestion,
         )
 
-    return BaseResponse(status=ResponseStatus.OK, message="Event processed successfully.")
-
+    return BaseResponse(status=ResponseStatus.OK,
+                        message="Event processed successfully.")

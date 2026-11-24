@@ -202,7 +202,7 @@ def format_quarter_label(period_item: Dict[str, Any]) -> str:
             return str(p_id)
         err_msg = f"Malformed period item missing 'id': {period_item}"
         logging.error(err_msg)
-        raise ValueError(err_msg)
+        raise ValueError(err_msg) from e
 
 
 def fetch_aggregate_series(

@@ -90,10 +90,12 @@ class PropertyValueMapper:
 
     def __init__(
         self,
-        pv_map_files: list = [],
+        pv_map_files: list | None = None,
         config_dict: dict = None,
         counters_dict: dict = None,
     ):
+        if pv_map_files is None:
+            pv_map_files = []
         self._config = ConfigMap(config_dict=config_dict)
         self._counters = Counters(
             counters_dict=counters_dict,

@@ -13,9 +13,11 @@
 # limitations under the License.
 """BigQuery client for import helper targeting ImportHistory table and ImportSummary view."""
 
-from datetime import datetime, timezone
+from datetime import datetime
+from datetime import timezone
 import logging
 import os
+
 from google.api_core import exceptions as gcp_exceptions
 from google.cloud import bigquery
 

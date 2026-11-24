@@ -35,9 +35,9 @@ def make_camel_case(item):
 	@return	string that is in camel case
 	"""
     camel_item = ""
-    l = item.split('_')
-    if len(l) > 2:
-        for i in l:
+    parts = item.split('_')
+    if len(parts) > 2:
+        for i in parts:
             if len(i) > 2:
                 i = i.lower()
                 camel_item = camel_item + i.capitalize()

@@ -27,16 +27,16 @@ mcf output file.
 import sys
 
 
-def format_name(l):
+def format_name(parts):
     '''
 	Convert string to camel case.
 
-	@l	list of components originally seperated by '_' to be reconstructed
+	@parts	list of components originally seperated by '_' to be reconstructed
 		in camel case
 	@return	camel case string
 	'''
     camel_item = ""
-    for i in l:
+    for i in parts:
         camel_item = camel_item + i.capitalize()
     return camel_item
 

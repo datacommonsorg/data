@@ -17,10 +17,22 @@ Function library to extract usable form of API configuration.
 
 import base64
 import itertools
+import json
+import os
 
 from absl import app
 from absl import flags
-from census_api_config_fetcher import *
+from census_api_config_fetcher import CONFIG_PATH_
+from census_api_config_fetcher import compile_dataset_group_map
+from census_api_config_fetcher import compile_dataset_group_years_map
+from census_api_config_fetcher import compile_geography_map
+from census_api_config_fetcher import compile_groups_map
+from census_api_config_fetcher import compile_year_map
+from census_api_config_fetcher import get_variables_name
+
+from scripts.us_census.api_utils.download_utils import async_save_resp_json
+from scripts.us_census.api_utils.download_utils import download_url_list_iterations
+from scripts.us_census.api_utils.status_file_utils import sync_status_list
 
 FLAGS = flags.FLAGS
 

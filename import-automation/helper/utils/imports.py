@@ -14,19 +14,19 @@
 """Utility functions for import helper."""
 
 import base64
-from datetime import datetime, timezone
+from datetime import datetime
+from datetime import timezone
 import json
 import logging
-import os
 import re
+
 import config
+import croniter
 import google.auth
 from google.auth.transport.requests import Request
 from google.cloud import storage
 from google.cloud.workflows import executions_v1
 from google.oauth2 import id_token
-from googleapiclient.discovery import build
-from googleapiclient.errors import HttpError
 import requests
 
 logging.getLogger().setLevel(logging.INFO)
@@ -108,7 +108,8 @@ def invoke_import_automation_workflow(project_id: str,
                                       graph_path: str = "/**/*.mcf*",
                                       cron_schedule: str = "",
                                       skip_import_job: bool | None = None,
-                                      skip_staging_ingestion: bool | None = None,
+                                      skip_staging_ingestion: bool |
+                                      None = None,
                                       skip_prod_ingestion: bool | None = None):
     """Triggers the import automation workflow."""
     import_config = {
@@ -186,9 +187,8 @@ def invoke_import_automation_airflow(import_name: str,
     """
     short_import_name = import_name.split(':')[-1]
     target_dag_id = dag_id or config.AIRFLOW_DEFAULT_DAG_ID
-    full_import_name = (
-        import_name if ':' in import_name else f"scripts/entities:{import_name}"
-    )
+    full_import_name = (import_name if ':' in import_name else
+                        f"scripts/entities:{import_name}")
 
     import_config = {
         "user_script_args": [f"--version={latest_version}"],
@@ -251,7 +251,8 @@ def invoke_import_automation_airflow(import_name: str,
 
     base_url = config.AIRFLOW_WEB_SERVER_URL.rstrip('/')
     url = f"{base_url}/api/v2/dags/{target_dag_id}/dagRuns"
-    logging.info(f"Invoking Airflow DAG {target_dag_id} for {import_name} at {url}")
+    logging.info(
+        f"Invoking Airflow DAG {target_dag_id} for {import_name} at {url}")
 
     if config.AIRFLOW_IAP_CLIENT_ID:
         token = id_token.fetch_id_token(Request(), config.AIRFLOW_IAP_CLIENT_ID)
@@ -273,21 +274,79 @@ def invoke_import_automation_airflow(import_name: str,
     return response
 
 
-def get_next_refresh(project_id: str, location: str, import_name: str) -> str | None:
-    """Fetches the next scheduled run time for the import job from Cloud Scheduler."""
+def _future_timestamp_or_none(value: str | None) -> str | None:
+    """Returns normalized ISO-8601 timestamp if value is in the future, else None."""
+    if not value or not isinstance(value, str):
+        return None
     try:
-        scheduler = build('cloudscheduler', 'v1', cache_discovery=False)
-        job_id = import_name.split(':')[-1]
-        job_name = f"projects/{project_id}/locations/{location}/jobs/{job_id}"
-        job = scheduler.projects().locations().jobs().get(
-            name=job_name).execute()
-        return job.get('scheduleTime')
-    except HttpError as e:
-        logging.warning(f"Could not fetch scheduler job {import_name}: {e}")
+        dt = datetime.fromisoformat(value)
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+        if dt > datetime.now(timezone.utc):
+            return dt.astimezone(timezone.utc).isoformat()
+    except ValueError:
+        logging.warning(
+            f"Ignoring invalid fallback next_refresh timestamp: {value!r}")
+    return None
+
+
+def _is_true(val: object) -> bool:
+    """Returns True when val is boolean True or case-insensitive 'true'."""
+    return val is True or str(val).lower() == 'true'
+
+
+def get_next_refresh(import_name: str,
+                     manifest: dict | None = None,
+                     fallback: str | None = None) -> str | None:
+    """Calculates the next scheduled run time from manifest config or fallback.
+
+    Args:
+        import_name: Import identifier (``<dir>:<name>`` or ``<name>``).
+        manifest: Parsed ``manifest.json`` dict from GCS, if available.
+        fallback: Optional fallback ISO-8601 timestamp (e.g. from ``import_summary.json``).
+
+    Returns:
+        ISO-8601 UTC timestamp string for the next scheduled refresh, or ``None``
+        when the import workflow is disabled/excluded or has no future schedule.
+    """
+    valid_fallback = _future_timestamp_or_none(fallback)
+    if not isinstance(manifest, dict):
+        return valid_fallback
+
+    short_name = import_name.split(':')[-1].strip()
+    specs = manifest.get('import_specifications')
+    if not isinstance(specs, list):
+        return valid_fallback
+
+    spec = next(
+        (s for s in specs
+         if isinstance(s, dict) and s.get('import_name') == short_name),
+        None,
+    )
+    if not spec:
+        return valid_fallback
+
+    cfg_override = spec.get('config_override')
+    if isinstance(
+            cfg_override,
+            dict) and (_is_true(cfg_override.get('disable_import_workflow')) or
+                       _is_true(cfg_override.get('exclude_import_workflow'))):
         return None
-    except Exception as e:
-        logging.warning(f"Error connecting to Cloud Scheduler for {import_name}: {e}")
-        return None
+
+    cron_schedule = (spec.get('cron_schedule') or '').strip()
+    if not cron_schedule:
+        return valid_fallback
+
+    try:
+        return croniter.croniter(
+            cron_schedule,
+            datetime.now(timezone.utc),
+        ).get_next(datetime).isoformat()
+    except croniter.CroniterError as e:
+        logging.warning(
+            f"Invalid cron_schedule {cron_schedule!r} in manifest for {import_name}: {e}"
+        )
+        return valid_fallback
 
 
 def get_import_params(request: dict) -> dict:
@@ -305,15 +364,15 @@ def get_import_params(request: dict) -> dict:
     data_volume = request_json.get('data_volume', 0)
     latest_version = request_json.get('latest_version', '')
     graph_path = request_json.get('graph_path', '')
-    next_refresh = request_json.get('next_refresh',
-                                    datetime.now(timezone.utc).isoformat())
+    next_refresh = request_json.get('next_refresh')
 
     if graph_path:
         if graph_path.startswith('gs://'):
             latest_version = graph_path
         elif latest_version:
             clean_graph_path = graph_path.lstrip('/')
-            if not latest_version.rstrip('/').endswith(clean_graph_path.rstrip('/')):
+            if not latest_version.rstrip('/').endswith(
+                    clean_graph_path.rstrip('/')):
                 latest_version = f"{latest_version.rstrip('/')}/{clean_graph_path}"
 
     return {

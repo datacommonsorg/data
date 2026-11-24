@@ -127,13 +127,19 @@ class DataTypeAnnotator:
     def __init__(
         self,
         data_type: str = '',
-        pvs: dict = {},
-        words: str = [],
+        pvs: dict | None = None,
+        words: str | list[str] | None = None,
         words_file: str = '',
-        regex_list: list[str] = [],
-        config_dict: dict = {},
+        regex_list: list[str] | None = None,
+        config_dict: dict | None = None,
         counters: Counters = None,
     ):
+        if config_dict is None:
+            config_dict = {}
+        if regex_list is None:
+            regex_list = []
+        if pvs is None:
+            pvs = {}
         self._config = ConfigMap()
         self._config.update_config(config_dict)
         self._counters = counters
@@ -260,13 +266,21 @@ def register_data_annotator(data_type: str, cls, args):
 
 
 def get_data_annotator(data_type: str,
-                       data_pvs: dict = {},
-                       words: list = [],
+                       data_pvs: dict | None = None,
+                       words: list | None = None,
                        words_file: str = '',
-                       regex_list: list = [],
-                       config_dict: dict = {},
+                       regex_list: list | None = None,
+                       config_dict: dict | None = None,
                        counters: Counters = None) -> DataTypeAnnotator:
     """Returns a data type annotator for the given type."""
+    if config_dict is None:
+        config_dict = {}
+    if regex_list is None:
+        regex_list = []
+    if words is None:
+        words = []
+    if data_pvs is None:
+        data_pvs = {}
     annotator = _DATA_TYPE_ANNOTATORS.get(data_type)
     if annotator is None:
         # Get the default annotator
@@ -285,9 +299,11 @@ class DataAnnotator:
 
     def __init__(
         self,
-        config_dict: dict = {},
+        config_dict: dict | None = None,
         counters: Counters = None,
     ):
+        if config_dict is None:
+            config_dict = {}
         self._config = ConfigMap()
         self._config.update_config(config_dict)
         self._counters = counters

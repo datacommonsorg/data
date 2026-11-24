@@ -224,8 +224,10 @@ class GeoEvent:
                 dates.add(date)
         return sorted(list(dates))
 
-    def get_event_places(self, dates: set = {}) -> list:
+    def get_event_places(self, dates: set | None = None) -> list:
         '''Returns a list of places for the event on the given dates.'''
+        if dates is None:
+            dates = set()
         place_ids = set()
         for place_id, date_pvs in self.get_places().items():
             for date, pvs in date_pvs.items():
@@ -234,8 +236,10 @@ class GeoEvent:
                 place_ids.update(_get_list(pvs.get('affectedPlace', '')))
         return sorted(list(place_ids))
 
-    def get_event_properties(self, dates: set = {}) -> dict:
+    def get_event_properties(self, dates: set | None = None) -> dict:
         '''Returns the properties aggregated across all places for the dates.'''
+        if dates is None:
+            dates = set()
         pvs = dict()
         for place_id, date_pvs in self.get_places().items():
             per_place_pvs = {}
@@ -1363,12 +1367,11 @@ class GeoEventsProcessor:
             tmcf_file.write('\n\n'.join(tmcf_nodes))
         return output_tmcf
 
-    def write_events_place_svobs(
-            self,
-            output_path: str,
-            event_ids: list = None,
-            event_props: list = ['area', 'count'],
-            date_formats: list = ['YYYY-MM-DD', 'YYYY-MM', 'YYYY']) -> list:
+    def write_events_place_svobs(self,
+                                 output_path: str,
+                                 event_ids: list = None,
+                                 event_props: list | None = None,
+                                 date_formats: list | None = None) -> list:
         '''Returns a list of generated CSV/tMCF files with SVObs for
         the affected places of events.
 
@@ -1398,6 +1401,10 @@ class GeoEventsProcessor:
         Returns:
          a list of filenames for CSV and tMCF generated.
         '''
+        if date_formats is None:
+            date_formats = ['YYYY-MM-DD', 'YYYY-MM', 'YYYY']
+        if event_props is None:
+            event_props = ['area', 'count']
         if not event_ids:
             event_ids = self.get_all_event_ids()
         logging.info(
@@ -1815,9 +1822,11 @@ def _first(s: set):
 
 
 def _format_property_values(pvs: dict,
-                            config: dict = {},
+                            config: dict | None = None,
                             digits: int = 5) -> dict:
     '''Returns a set of properties with formatted values.'''
+    if config is None:
+        config = {}
     fmt_pvs = {}
     for prop, value in pvs.items():
         fmt_value = value

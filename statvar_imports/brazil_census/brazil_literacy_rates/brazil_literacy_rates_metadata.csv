@@ -1,0 +1,6 @@
+parameter,value
+url,https://sidra.ibge.gov.br/tabela/9543
+description,Brazil Census: Literacy and illiteracy rates from IBGE
+output_columns,"observationAbout,observationDate,observationPeriod,scalingFactor,unit,value,variableMeasured"
+header_rows,1
+output_precision_digits,12

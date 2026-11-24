@@ -33,11 +33,16 @@ _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 _FLAGS = flags.FLAGS
 
-flags.DEFINE_integer('data_start_year', int(os.getenv('START_YEAR', '1980')),
-                     'Process data starting from this year.')
-flags.DEFINE_integer(
-    'data_end_year', int(os.getenv('END_YEAR', 0)),
-    'Process data upto this year. Defaults to the previous calendar year.')
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_integer('data_start_year', int(os.getenv('START_YEAR',
+                                                          '1980')),
+                         'Process data starting from this year.')
+    flags.DEFINE_integer(
+        'data_end_year', int(os.getenv('END_YEAR', 0)),
+        'Process data upto this year. Defaults to the previous calendar year.')
+
 
 # AQS parameter codes: https://aqs.epa.gov/aqsweb/documents/codetables/parameters.html
 POLLUTANTS = {
@@ -384,4 +389,5 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

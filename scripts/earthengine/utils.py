@@ -45,7 +45,7 @@ _MAX_LONGITUDE = 180.0
 # Utilities for dicts.
 
 
-def dict_filter_values(pvs: dict, config: dict = {}) -> bool:
+def dict_filter_values(pvs: dict, config: dict | None = None) -> bool:
     """Returns true if the property values are allowed by the config.
 
      removes the properties not allowed by the config from the dict.
@@ -57,6 +57,8 @@ def dict_filter_values(pvs: dict, config: dict = {}) -> bool:
   Returns:
     True if the key:values in pvs meet all config criteria.
   """
+    if config is None:
+        config = {}
     props = list(pvs.keys())
     is_allowed = True
     for p in props:

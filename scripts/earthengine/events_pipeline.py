@@ -191,8 +191,12 @@ class EventPipeline(StageRunner):
             f'Created pipeline with {len(self.stage_runners)} stages: {stage_names}'
         )
 
-    def run_stage(self, stage_name: str, input_files: list = []) -> list:
+    def run_stage(self,
+                  stage_name: str,
+                  input_files: list | None = None) -> list:
         '''Run a single stage and return the output files generated.'''
+        if input_files is None:
+            input_files = []
         for stage_runner in self.stage_runners:
             if stage_name == stage_runner.get_name():
                 logging.info(f'Running stage {stage_name} with {input_files}')
@@ -201,8 +205,10 @@ class EventPipeline(StageRunner):
             f'No stage runner for {stage_name} with input: {input_files}')
         return []
 
-    def run(self, run_stages: list = []) -> list:
+    def run(self, run_stages: list | None = None) -> list:
         '''Run all the stages in the pipeline.'''
+        if run_stages is None:
+            run_stages = []
         stage_count = 0
         output_files = []
         for stage_runner in self.stage_runners:

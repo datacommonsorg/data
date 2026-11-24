@@ -23,17 +23,19 @@ from absl import flags
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string('database', 'ABCD_v8.txt', 'input tissue atlas file path.')
 
-flags.DEFINE_string('uniprot_to_dcid',
-                    'uniprot_to_dcid.tsv',
-                    'uniprot_to_dcid.tsv file path.',
-                    short_name='u')
-
-flags.DEFINE_string('data_mcf',
-                    'AntibodyABCDData.mcf',
-                    'The output data mcf file path.',
-                    short_name='m')
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('database', 'ABCD_v8.txt',
+                        'input tissue atlas file path.')
+    flags.DEFINE_string('uniprot_to_dcid',
+                        'uniprot_to_dcid.tsv',
+                        'uniprot_to_dcid.tsv file path.',
+                        short_name='u')
+    flags.DEFINE_string('data_mcf',
+                        'AntibodyABCDData.mcf',
+                        'The output data mcf file path.',
+                        short_name='m')
 
 
 def get_class_name(a_string):
@@ -248,4 +250,5 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

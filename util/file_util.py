@@ -442,12 +442,9 @@ def file_estimate_num_rows(filename: Union[str, list]) -> int:
     filesize = file_get_size(files)
     if filesize > 0:
         # Get the average line size in the first 4K bytes.
-        with FileIO(files[0], use_tempfile=False) as fp:
-            lines = fp.read(4000)
-        if isinstance(lines, bytes):
-            # Convert bytes to str
-            lines = lines.decode()
-        line_size = max(len(lines) / (lines.count('\n') + 1), 1)
+        with FileIO(files[0], mode='rb', use_tempfile=False) as fp:
+            sample = fp.read(4000)
+        line_size = max(len(sample) / (sample.count(b'\n') + 1), 1)
         return int(filesize / line_size)
     return 0
 
@@ -549,7 +546,7 @@ def file_load_csv_dict(
     key_column: str = None,
     value_column: str = None,
     delimiter: str = ',',
-    config: dict = {},
+    config: dict | None = None,
     key_index: bool = False,
 ) -> dict:
     """Returns a dictionary loaded from a CSV file.
@@ -588,6 +585,8 @@ def file_load_csv_dict(
   Returns:
     dictionary of {key:value} loaded from the CSV file.
   """
+    if config is None:
+        config = {}
     csv_dict = {}
     input_files = file_get_matching(filename)
     logging.debug(f'Loading dict from csv files: {input_files}')
@@ -1083,12 +1082,11 @@ def file_get_encoding(file: str,
     return default
 
 
-def file_get_csv_reader_options(
-        file: str,
-        default_options: dict = {},
-        data: str = None,
-        encoding: str = None,
-        delim_chars: list = [',', '	', ';', '|', ':']) -> dict:
+def file_get_csv_reader_options(file: str,
+                                default_options: dict | None = None,
+                                data: str = None,
+                                encoding: str = None,
+                                delim_chars: list | None = None) -> dict:
     """Returns a dictionary with options for the CSV file reader.
 
     Args:
@@ -1107,6 +1105,10 @@ def file_get_csv_reader_options(
         'delimiter': delimiter character for CSV files.
         'dialect': File dialect, such as 'unix', 'excel'
     """
+    if delim_chars is None:
+        delim_chars = [',', '\t', ';', '|', ':']
+    if default_options is None:
+        default_options = {}
     # TODO: Add an option to use a given delimiter instead of the detected
     # one. default_options['delimiter'] is only used when no delimiter is
     # detected, so callers such as file_load_csv_dict(delimiter=';') can't

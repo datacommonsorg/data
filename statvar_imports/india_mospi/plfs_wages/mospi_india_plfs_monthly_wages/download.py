@@ -19,6 +19,7 @@ automatically while preserving all historical observations.
 """
 
 import os
+import re
 import ssl
 import sys
 import tempfile
@@ -68,6 +69,18 @@ COLUMNS = [
     'unit',
 ]
 
+REQUIRED_API_COLUMNS = (
+    'year_type',
+    'year',
+    'frequency',
+    'indicator',
+    'state',
+    'gender',
+    'sector',
+    'value',
+    'unit',
+)
+
 KEY_COLUMNS = [
     'year_type',
     'year',
@@ -80,63 +93,68 @@ KEY_COLUMNS = [
     'month',
 ]
 
+_PLFS_YEAR_PREFIX_RE = re.compile(r'^PLFS\s+(\d{4})$', re.IGNORECASE)
 _RETRYABLE_STATUS_CODES = frozenset({429, 500, 502, 503, 504})
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string(
-    'mospi_monthly_api_url',
-    DEFAULT_API_URL,
-    'MoSPI eSankhyiki PLFS getData REST endpoint.',
-    allow_override=True,
-)
-flags.DEFINE_string(
-    'mospi_monthly_gcs_baseline_path',
-    DEFAULT_GCS_BASELINE,
-    'GCS URI (or local path) of the staged historical baseline CSV.',
-    allow_override=True,
-)
-flags.DEFINE_string(
-    'mospi_monthly_output_file',
-    DEFAULT_OUTPUT_FILE,
-    'Destination CSV path for merged raw input data.',
-    allow_override=True,
-)
-flags.DEFINE_integer(
-    'mospi_monthly_page_size',
-    MAX_PAGE_SIZE,
-    'Records per API page (MoSPI enforces <= 200).',
-    allow_override=True,
-)
-flags.DEFINE_integer(
-    'mospi_monthly_timeout_seconds',
-    30,
-    'Per-request HTTP timeout.',
-    allow_override=True,
-)
-flags.DEFINE_integer(
-    'mospi_monthly_max_retries',
-    3,
-    'Maximum retry attempts for transient HTTP/network errors.',
-    allow_override=True,
-)
-flags.DEFINE_float(
-    'mospi_monthly_retry_delay_seconds',
-    5.0,
-    'Initial backoff delay in seconds between retries.',
-    allow_override=True,
-)
-flags.DEFINE_float(
-    'mospi_monthly_retry_backoff',
-    2.0,
-    'Exponential backoff multiplier between retry attempts.',
-    allow_override=True,
-)
-flags.DEFINE_bool(
-    'mospi_monthly_skip_live_api',
-    False,
-    'If true, only stage the GCS baseline without querying the live MoSPI API.',
-    allow_override=True,
-)
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        'mospi_monthly_api_url',
+        DEFAULT_API_URL,
+        'MoSPI eSankhyiki PLFS getData REST endpoint.',
+        allow_override=True,
+    )
+    flags.DEFINE_string(
+        'mospi_monthly_gcs_baseline_path',
+        DEFAULT_GCS_BASELINE,
+        'GCS URI (or local path) of the staged historical baseline CSV.',
+        allow_override=True,
+    )
+    flags.DEFINE_string(
+        'mospi_monthly_output_file',
+        DEFAULT_OUTPUT_FILE,
+        'Destination CSV path for merged raw input data.',
+        allow_override=True,
+    )
+    flags.DEFINE_integer(
+        'mospi_monthly_page_size',
+        MAX_PAGE_SIZE,
+        'Records per API page (MoSPI enforces <= 200).',
+        allow_override=True,
+    )
+    flags.DEFINE_integer(
+        'mospi_monthly_timeout_seconds',
+        30,
+        'Per-request HTTP timeout.',
+        allow_override=True,
+    )
+    flags.DEFINE_integer(
+        'mospi_monthly_max_retries',
+        3,
+        'Maximum retry attempts for transient HTTP/network errors.',
+        allow_override=True,
+    )
+    flags.DEFINE_float(
+        'mospi_monthly_retry_delay_seconds',
+        5.0,
+        'Initial backoff delay in seconds between retries.',
+        allow_override=True,
+    )
+    flags.DEFINE_float(
+        'mospi_monthly_retry_backoff',
+        2.0,
+        'Exponential backoff multiplier between retry attempts.',
+        allow_override=True,
+    )
+    flags.DEFINE_bool(
+        'mospi_monthly_skip_live_api',
+        False,
+        'If true, only stage the GCS baseline without querying the live MoSPI API.',
+        allow_override=True,
+    )
 
 
 class _LegacyTLSAdapter(HTTPAdapter):
@@ -222,6 +240,16 @@ def _fetch_page(
     raise RuntimeError(f'Unreachable retry state for {api_url}')
 
 
+def _normalize_record(item: dict[str, Any]) -> dict[str, str]:
+    """Normalizes one MoSPI API JSON record into the 11-column CSV schema."""
+    row = {
+        col: '' if item.get(col) is None else str(item.get(col)).strip()
+        for col in COLUMNS
+    }
+    row['year'] = _PLFS_YEAR_PREFIX_RE.sub(r'\1', row['year'])
+    return row
+
+
 def fetch_mospi_monthly_wages(
     session: requests.Session,
     api_url: str = DEFAULT_API_URL,
@@ -282,15 +310,14 @@ def fetch_mospi_monthly_wages(
             )
 
         for item in records:
-            missing_cols = [col for col in COLUMNS if col not in item]
+            missing_cols = [
+                col for col in REQUIRED_API_COLUMNS if col not in item
+            ]
             if missing_cols:
                 raise RuntimeError(
                     f'MoSPI API record on page {page} missing columns {missing_cols}'
                 )
-            all_rows.append({
-                col: '' if item[col] is None else str(item[col])
-                for col in COLUMNS
-            })
+            all_rows.append(_normalize_record(item))
         page += 1
 
     if expected_total_records is not None and len(
@@ -414,4 +441,5 @@ def main(argv: list[str]) -> None:
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

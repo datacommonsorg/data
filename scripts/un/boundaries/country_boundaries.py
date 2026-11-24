@@ -148,7 +148,7 @@ def get_multipolygon_geojson_coordinates(geojson):
             polygon[0].reverse()
         return geojson_coords
     else:
-        assert False, f"Type {geojson_type} unknown!"
+        raise AssertionError(f"Type {geojson_type} unknown!")
 
 
 def get_geojson_feature(geo_id: str, geo_name: str, geojson: Dict):
@@ -174,8 +174,7 @@ def get_geojson_feature(geo_id: str, geo_name: str, geojson: Dict):
             "coordinates": coordinates
         }
     else:
-        assert False, geojson_type
-        geo_feature = None
+        raise AssertionError(geojson_type)
     return geo_feature
 
 

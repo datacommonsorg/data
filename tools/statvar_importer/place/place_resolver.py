@@ -164,9 +164,11 @@ class PlaceResolver:
     def __init__(
         self,
         maps_api_key: str = None,
-        config_dict: dict = {},
+        config_dict: dict | None = None,
         counters_dict: dict = None,
     ):
+        if config_dict is None:
+            config_dict = {}
         self._maps_api_key = maps_api_key
         self._config = ConfigMap(config_dict)
         self._counters = Counters(counters_dict)
@@ -192,9 +194,9 @@ class PlaceResolver:
 
     def resolve_name(self,
                      places: dict,
-                     place_types: list = [],
-                     places_within: list = [],
-                     filter_pvs: dict = {}) -> dict:
+                     place_types: list | None = None,
+                     places_within: list | None = None,
+                     filter_pvs: dict | None = None) -> dict:
         """Returns a dictionary with dcid and placeId for each place.
 
     Args:
@@ -213,6 +215,12 @@ class PlaceResolver:
         latitude: approximate latitude for the place
         longitude: approximate longitude for the place
     """
+        if filter_pvs is None:
+            filter_pvs = {}
+        if places_within is None:
+            places_within = []
+        if place_types is None:
+            place_types = []
         logging.log_every_n(logging.DEBUG, f'Resolving places: {places}...',
                             self._log_every_n)
         results = {}
@@ -506,8 +514,8 @@ class PlaceResolver:
     def lookup_names(
         self,
         places: dict,
-        place_types: list = [],
-        places_within: list = [],
+        place_types: list | None = None,
+        places_within: list | None = None,
         num_results: int = 10,
     ) -> dict:
         """Returns a dictionary with dcid for each place.
@@ -532,6 +540,10 @@ class PlaceResolver:
     """
 
         # Get a list of unresolved places.
+        if places_within is None:
+            places_within = []
+        if place_types is None:
+            place_types = []
         results = {}
         unresolved_places = {}
         self._get_unresolved_places(places, unresolved_places, results)
@@ -580,7 +592,7 @@ class PlaceResolver:
         name: str,
         country: str = None,
         admin_area: str = '',
-        place_types: list = [],
+        place_types: list | None = None,
     ) -> dict:
         """Returns the Google maps place-id for a place.
 
@@ -596,6 +608,8 @@ class PlaceResolver:
     Returns:
       dictionary with attributes such as placeId, latitude, and longitude.
     """
+        if place_types is None:
+            place_types = []
         if not name:
             logging.log_every_n(logging.DEBUG,
                                 'Unable to resolve maps place with empty name',
@@ -665,12 +679,14 @@ class PlaceResolver:
         name: str,
         country: str = None,
         admin_area: str = '',
-        place_types: list = [],
+        place_types: list | None = None,
     ) -> dict:
         """Returns a dictionary with attributes for a place such as placeId,
     latitude, and longitude using the Maps Place API.
     """
         # Check if the place is in the maps cache.
+        if place_types is None:
+            place_types = []
         place_key = self._get_cache_key([name, country, admin_area])
         cached_place = self._get_cache_value(place_key, 'placeId')
         if cached_place:
@@ -800,9 +816,9 @@ class PlaceResolver:
     def filter_by_pvs(
         self,
         places: dict,
-        place_types: list = [],
-        places_within: list = [],
-        filter_pvs: dict = {},
+        place_types: list | None = None,
+        places_within: list | None = None,
+        filter_pvs: dict | None = None,
     ) -> dict:
         """Returns a dictionary of places that match the properties in filter_pvs.
 
@@ -813,6 +829,12 @@ class PlaceResolver:
         with property values in the filter_pvs are returned.
     """
         # Convert values for filter properties into a set
+        if filter_pvs is None:
+            filter_pvs = {}
+        if places_within is None:
+            places_within = []
+        if place_types is None:
+            place_types = []
         filter_value_set = {}
         for prop, filter_values in filter_pvs.items():
             value_set = _get_value_set(filter_values)
@@ -1222,9 +1244,9 @@ def _get_value_set(values: str) -> set:
 def process(
     input_filenames: list,
     output_filename: str,
-    input_place_names: list = [],
+    input_place_names: list | None = None,
     maps_api_key: str = '',
-    output_columns: list = [],
+    output_columns: list | None = None,
     config: ConfigMap = None,
 ):
     """Resolve the places in a csv file and save in output.
@@ -1246,6 +1268,10 @@ def process(
     place_names: list of place names to resolve.
     config_file: file with dictionary of config parameters for resolution.
   """
+    if output_columns is None:
+        output_columns = []
+    if input_place_names is None:
+        input_place_names = []
     counters = Counters()
     if not config:
         config = ConfigMap()
@@ -1308,8 +1334,6 @@ def process(
         return
 
     output_filename = file_util.file_get_name(output_filename, file_ext='.csv')
-    if output_columns is None:
-        output_columns = []
     for col in columns:
         if col not in output_columns:
             output_columns.append(col)
