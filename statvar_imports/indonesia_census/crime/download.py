@@ -38,42 +38,6 @@ DEFAULT_LOCAL_CONFIG_PATH = (
 DEFAULT_GCS_CONFIG_PATH = 'gs://unresolved_mcf/country/indonesia/config.json'
 
 _FLAGS = flags.FLAGS
-if 'output_dir' not in _FLAGS:
-    flags.DEFINE_string(
-        'output_dir',
-        os.path.join(_CODEDIR, 'input_files'),
-        'Directory path to save the downloaded input CSV file.',
-    )
-if 'output_filename' not in _FLAGS:
-    flags.DEFINE_string(
-        'output_filename',
-        'crime_according_to_police_territorial_jurisdiction.csv',
-        'Filename for the combined crime CSV table.',
-    )
-if 'domain' not in _FLAGS:
-    flags.DEFINE_string(
-        'domain',
-        '0000',
-        'BPS domain code (0000 for national/all-province tables).',
-    )
-if 'var_id' not in _FLAGS:
-    flags.DEFINE_integer(
-        'var_id',
-        101,
-        'BPS variable ID for Number Of Crime According To Police Territorial Jurisdiction.',
-    )
-if 'api_key' not in _FLAGS:
-    flags.DEFINE_string(
-        'api_key',
-        os.environ.get('BPS_API_KEY', ''),
-        'BPS WebAPI key (loaded from GCS config.json if not set).',
-    )
-if 'places_resolved_csv' not in _FLAGS:
-    flags.DEFINE_string(
-        'places_resolved_csv',
-        os.path.join(_CODEDIR, 'indonesia_crime_places_resolved.csv'),
-        'Path to resolved places CSV used to verify all BPS jurisdictions are mapped.',
-    )
 
 BPS_API_BASE_URL = 'https://webapi.bps.go.id/v1/api/list'
 MAX_YEARS_PER_REQUEST = 3
@@ -273,7 +237,11 @@ def validate_jurisdictions(
     jurisdictions: list[str],
     places_resolved_path: str,
 ) -> None:
-    """Verifies that all BPS jurisdictions are present in places_resolved_csv."""
+    """Verifies that all BPS jurisdictions are present in places_resolved_csv.
+
+    Kept in Python rather than validation_config.json so unmapped raw BPS
+    police jurisdiction names fail fast before stat_var_processor.py drops them.
+    """
     if not places_resolved_path or not os.path.exists(places_resolved_path):
         raise RuntimeError(
             f'Places resolved CSV not found at {places_resolved_path}.')
@@ -356,5 +324,40 @@ def main(_) -> None:
     )
 
 
+def _define_flags() -> None:
+    """Defines CLI flags when executed as a script."""
+    flags.DEFINE_string(
+        'output_dir',
+        os.path.join(_CODEDIR, 'input_files'),
+        'Directory path to save the downloaded input CSV file.',
+    )
+    flags.DEFINE_string(
+        'output_filename',
+        'crime_according_to_police_territorial_jurisdiction.csv',
+        'Filename for the combined crime CSV table.',
+    )
+    flags.DEFINE_string(
+        'domain',
+        '0000',
+        'BPS domain code (0000 for national/all-province tables).',
+    )
+    flags.DEFINE_integer(
+        'var_id',
+        101,
+        'BPS variable ID for Number Of Crime According To Police Territorial Jurisdiction.',
+    )
+    flags.DEFINE_string(
+        'api_key',
+        os.environ.get('BPS_API_KEY', ''),
+        'BPS WebAPI key (loaded from GCS config.json if not set).',
+    )
+    flags.DEFINE_string(
+        'places_resolved_csv',
+        os.path.join(_CODEDIR, 'indonesia_crime_places_resolved.csv'),
+        'Path to resolved places CSV used to verify all BPS jurisdictions are mapped.',
+    )
+
+
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)
