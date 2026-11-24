@@ -1,0 +1,4 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6,p7,v7
+Province,observationAbout,{Data},,,,,,,,,,,,
+Year,observationDate,{Data},,,,,,,,,,,,
+Percentage of Formal Labor by Province (Percent),populationType,Person,measuredProperty,count,employmentStatus,FormalLabor,unit,Percent,measurementDenominator,",-employmentStatus,+employmentStatus=InLaborForce",name,"""Percentage of formal labor in labor force""",value,{Number}
