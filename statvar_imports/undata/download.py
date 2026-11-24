@@ -30,10 +30,15 @@ from retry import retry
 
 # Define flags for command-line argument parsing
 _FLAGS = flags.FLAGS
-flags.DEFINE_string(
-    'config_path',
-    'config.ini',  # Default path for config file
-    'Path to the config file')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        'config_path',
+        'config.ini',  # Default path for config file
+        'Path to the config file')
+
 
 # Ensure the output directory exists
 OUTPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),
@@ -42,9 +47,8 @@ Path(OUTPUT_DIR).mkdir(parents=True, exist_ok=True)
 
 
 # Read the config file
-def read_config_file():
+def read_config_file(config_path):
     config = configparser.ConfigParser()
-    config_path = _FLAGS.config_path
     if not os.path.isabs(config_path):
         config_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                    config_path)
@@ -79,8 +83,8 @@ def retry_method(url, headers=HEADERS):
 
 
 # Function to download and save the ZIP file
-def download_file():
-    config = read_config_file()
+def download_file(config_path):
+    config = read_config_file(config_path)
     UN_ZIP_URL = config["DEFAULT"]["UN_ZIP_URL"]
     logging.info(f"Starting download from {UN_ZIP_URL}...")
     zip_path = os.path.join(OUTPUT_DIR, "UNdata_Export.zip")
@@ -143,9 +147,10 @@ def main(argv):
     logging.set_verbosity(logging.INFO)
 
     # Run the download and extraction process
-    zip_path = download_file()
+    zip_path = download_file(_FLAGS.config_path)
     extract_and_process(zip_path)
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)
