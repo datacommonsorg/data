@@ -60,9 +60,11 @@ class ProcessEventsTest(unittest.TestCase):
     def compare_csv_files(self,
                           expected_file: str,
                           actual_file: str,
-                          ignore_columns: list = []):
+                          ignore_columns: list | None = None):
         '''Compare CSV files with statvar observation data.'''
         # Sort files by columns.
+        if ignore_columns is None:
+            ignore_columns = []
         df_expected = pd.read_csv(expected_file)
         df_actual = pd.read_csv(actual_file)
         self.assertEqual(

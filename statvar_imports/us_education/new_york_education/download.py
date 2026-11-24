@@ -370,7 +370,7 @@ def process_and_save_data(file_paths):
         except Exception as e:
             logging.error(f"Failed to process file {file_path}: {e}")
             raise RuntimeError(
-                f"Critical failure while processing file {file_path}")
+                f"Critical failure while processing file {file_path}") from e
 
 
 def organize_files(download_dir, math_dir, english_dir, math_files,

@@ -130,9 +130,9 @@ def clean_csv(input_path: str, output_path: str) -> None:
                 try:
                     # Get the value for the current place.
                     value = row[place]
-                except KeyError:
+                except KeyError as e:
                     raise Exception(
-                        'One of the expected columns is non-existent!')
+                        'One of the expected columns is non-existent!') from e
 
                 if not value:
                     continue

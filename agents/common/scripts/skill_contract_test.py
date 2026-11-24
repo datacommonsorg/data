@@ -135,6 +135,12 @@ def _local_markdown_link_errors(repo_root: Path, entrypoints):
                     f'outside repository: {linked_path}')
                 continue
 
+            if linked_path.is_dir():
+                if fragment:
+                    errors.append(
+                        f'{source_name}: local link "{raw_target}" uses a '
+                        f'fragment for a directory: {linked_name}')
+                continue
             if not linked_path.is_file():
                 errors.append(
                     f'{source_name}: local link "{raw_target}" targets '
@@ -232,6 +238,25 @@ class MarkdownLinkContractTest(unittest.TestCase):
             self.assertIn('resolves outside repository', message)
             self.assertIn('SKILL.md', message)
 
+    def test_directory_links_require_existing_directory_without_fragment(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            repo_root = Path(temp_dir) / 'repo'
+            skill = repo_root / 'agents/skills/example/SKILL.md'
+            skill.parent.mkdir(parents=True)
+            (repo_root / 'docs').mkdir()
+            skill.write_text(
+                '[Existing](../../../docs/)\n'
+                '[Missing](../../../missing/)\n'
+                '[Fragment](../../../docs/#section)\n',
+                encoding='utf-8')
+
+            errors = _local_markdown_link_errors(repo_root, [skill])
+            message = '\n'.join(errors)
+
+            self.assertEqual(2, len(errors), message)
+            self.assertIn('missing file: missing', message)
+            self.assertIn('uses a fragment for a directory: docs', message)
+
 
 class SkillContractTest(unittest.TestCase):
 
@@ -259,6 +284,7 @@ class SkillContractTest(unittest.TestCase):
     def test_reachable_agent_markdown_links_resolve(self):
         entrypoints = sorted((self._agents_root / 'skills').glob('*/SKILL.md'))
         entrypoints.append(self._agents_root / 'README.md')
+        entrypoints.append(self._repo_root / 'AGENTS.md')
 
         errors = _local_markdown_link_errors(self._repo_root, entrypoints)
 

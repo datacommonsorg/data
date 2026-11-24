@@ -132,7 +132,7 @@ with open(os.path.join(_CITY_GEOCODES_PATH), encoding='utf8') as csvfile:
     csv_reader = csv.reader(csvfile)
     for a in csv_reader:
         if _CITY.get(a[0], ''):  # if key already exists in _CITY
-            assert False, f'Duplicate city found {a}'
+            raise AssertionError(f'Duplicate city found {a}')
         _CITY[a[0]] = a[1]
 
 

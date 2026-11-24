@@ -164,11 +164,11 @@ class StateGDPDataLoader:
                         raise ValueError(
                             f"Error: No data found in '{self._input_file}'.")
             except FileNotFoundError as e:
-                raise FileNotFoundError(f"Error: {e}")
+                raise FileNotFoundError(f"Error: {e}") from e
             except Exception as e:
                 logging.error(f"An error occurred while reading data: {e}")
                 self.raw_df = None
-                raise ValueError(f"Error loading data: {e}")
+                raise ValueError(f"Error loading data: {e}") from e
 
         if self.raw_df is not None:
             df = self.raw_df.copy()

@@ -745,11 +745,15 @@ def update_import_version_helper(cfg: dict[str, Any]) -> dict[str, Any]:
         })
 
     imports_res = version_res.get("imports", [])
-    if not imports_res or imports_res[0].get("status") not in ("STAGING",
-                                                               "SKIP"):
-        msg = version_res.get("message", "Status not STAGING or SKIP")
+    if not imports_res or imports_res[0].get("status") not in (
+            "STAGING",
+            "SKIP",
+            "INACTIVE",
+    ):
+        msg = version_res.get("message",
+                              "Status not STAGING, SKIP, or INACTIVE")
         logging.info(
-            "Import status is not STAGING or SKIP (%s); skipping Spanner ingestion.",
+            "Import status is not STAGING, SKIP, or INACTIVE (%s); skipping Spanner ingestion.",
             msg)
         return {"status": "SKIPPED", "message": f"Skipped: {msg}"}
 

@@ -266,7 +266,7 @@ class ImportDiffer:
                 key_combined = str(row[Column.key_combined.name])
 
                 # Helper to get value from row, handles cases with or without suffix
-                def get_val(base_name):
+                def get_val(base_name, row=row, col_suffix=col_suffix):
                     col_name = base_name + col_suffix
                     if col_name in row:
                         return str(row[col_name])

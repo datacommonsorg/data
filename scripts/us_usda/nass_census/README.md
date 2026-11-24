@@ -15,7 +15,7 @@ This import includes tables 1, 48-54 from the year 2022 to the latest year Censu
 
 Source: https://www.nass.usda.gov/AgCensus/index.php
 
-Link to the datasets:https://www.nass.usda.gov/datasets/
+Link to the datasets: https://www.nass.usda.gov/datasets
 
 Individual year files will be available in the provided link.
 
