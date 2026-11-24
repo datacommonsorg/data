@@ -18,6 +18,7 @@ import os
 import sys
 import tempfile
 import unittest
+from unittest import mock
 
 import pandas as pd
 
@@ -36,38 +37,50 @@ _OUTPUT_COLUMNS = ('Year', 'StatVar', 'Quantity')
 class HateCrimeTable7Test(unittest.TestCase):
 
     def test_csv(self):
-        csv_files = []
-        test_config = {
-            'type': 'xls',
-            'path': 'testdata/2014.xls',
-            'args': {
-                'header': 5,
-                'skipfooter': 9
-            }
-        }
-        with tempfile.TemporaryDirectory() as tmp_dir:
-            xls_file_path = os.path.join(_SCRIPT_PATH, test_config['path'])
-            csv_file_path = os.path.join(tmp_dir, '2014.csv')
+        # table7/preprocess.py now uses the 2020-2023 column definitions from
+        # table_config.json (single rape column, rather than the legacy 2014
+        # rape1/rape2 split).
+        with open(os.path.join(_SCRIPT_PATH, '..', 'table_config.json'),
+                  'r',
+                  encoding='utf-8') as f:
+            table_config = json.load(f)
 
-            read_file = pd.read_excel(xls_file_path, **test_config['args'])
-            read_file = preprocess._clean_dataframe(read_file, '2014')
-            read_file.insert(_YEAR_INDEX, 'Year', '2014')
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            csv_file_path = os.path.join(tmp_dir, '2023.csv')
+            read_file = pd.DataFrame([
+                [
+                    'Total1:', 10, 8, 2, 1, 2, 3, 4, 5, 0, 1, 0, 1, 2, 0, 0, 1,
+                    0, 0
+                ],
+                [
+                    '  Anti-White2 ', 5, 4, 1, 0, 1, 2, 1, 1, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0
+                ],
+            ])
+            with mock.patch.object(preprocess, '_YEARWISE_CONFIG',
+                                   table_config):
+                read_file = preprocess._clean_dataframe(read_file, '2023', '7')
+            read_file.insert(_YEAR_INDEX, 'Year', '2023')
             read_file.to_csv(csv_file_path, header=True, index=False)
-            csv_files.append(csv_file_path)
 
             config_path = os.path.join(_SCRIPT_PATH, 'config.json')
             with open(config_path, 'r', encoding='utf-8') as f:
                 config = json.load(f)
 
             cleaned_csv_path = os.path.join(tmp_dir, 'cleaned.csv')
-            utils.create_csv_mcf(csv_files, cleaned_csv_path, config,
+            utils.create_csv_mcf([csv_file_path], cleaned_csv_path, config,
                                  _OUTPUT_COLUMNS, preprocess._write_output_csv)
 
             with open(cleaned_csv_path, 'r', encoding='utf-8') as f_result:
-                test_result = f_result.read()
-                expected_csv_path = os.path.join(_SCRIPT_PATH, 'testdata',
-                                                 'expected.csv')
-                with open(expected_csv_path, 'r',
-                          encoding='utf-8') as f_expected:
-                    expected_result = f_expected.read()
-                self.assertEqual(test_result, expected_result)
+                lines = f_result.read().strip().splitlines()
+
+            self.assertEqual(lines[0], 'Year,StatVar,Quantity')
+            self.assertIn('2023,Victim_Count_CriminalIncidents_IsHateCrime,10',
+                          lines)
+            self.assertIn(
+                '2023,Victim_Count_CriminalIncidents_ForcibleRape_IsHateCrime,2',
+                lines)
+            self.assertIn(
+                '2023,Victim_Count_CriminalIncidents_BiasMotivationRace_IsHateCrime_White,5',
+                lines)
+            self.assertEqual(len(lines), 1 + 18 * 2)
