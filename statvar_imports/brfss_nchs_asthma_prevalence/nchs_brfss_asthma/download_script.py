@@ -213,7 +213,7 @@ def download_table(url, year, life_stage, save_path):
             logging.warning(f"No tables found on page: {url}")
     except Exception as e:
         logging.fatal(f"Error processing {url}: {e}")
-        raise RuntimeError(e)
+        raise RuntimeError(e) from e
 
 
 def main(_):
