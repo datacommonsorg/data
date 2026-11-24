@@ -31,7 +31,7 @@ To download the data, run the provided script:
 python3 data_download.py
 ```
 
-This will fetch the latest full dataset and save it locally as `input_files/adolescent_birth_rate_data.csv`, making it available for processing.
+This will fetch the latest full dataset and save it locally as `input_files/adolescent_birth_rate_input.csv`, making it available for processing.
 
 ## Processing Instructions
 To process the WHO Adolescent Birth Rate data and generate statistical variables, use the following command from the `adolescent_birth_rate` directory:
