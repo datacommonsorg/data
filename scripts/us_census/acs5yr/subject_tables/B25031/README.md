@@ -13,7 +13,7 @@ This U.S. Census Bureau American Community Survey (ACS) 5-Year Estimates Detaile
 
 ## Dataset Coverage
 
-- **Geography**: Country (`country/USA`), State, County, County Subdivision, Place, Census Tract, ZIP Code Tabulation Area (ZCTA), Congressional District, and School Districts across the United States and Puerto Rico.
+- **Geography**: Country (`country/USA`), State, County, County Subdivision, Place, Census Tract, ZIP Code Tabulation Area (ZCTA), Congressional District, Metropolitan/Micropolitan Statistical Areas (`geoId/C*`), and School Districts across the United States and Puerto Rico.
 - **Temporal Coverage**: `2015` to `Present` (latest ACS 5-Year release: `2024`, annual refresh cycle)
 - **Statistical Variables**: `14` StatVars defined in `B25031_output.mcf` (`7` median gross rent estimates and `7` margins of error across `2015`–`2024`)
 
