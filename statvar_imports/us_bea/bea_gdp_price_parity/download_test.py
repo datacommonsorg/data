@@ -245,17 +245,23 @@ class BeaGdpPriceParityTest(unittest.TestCase):
             f'--output_path={out_prefix}',
             f'--output_counters={counters_csv}',
         ]
-        subprocess.run(
-            cmd,
-            check=True,
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
-        )
+        try:
+            subprocess.run(
+                cmd,
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+        except subprocess.CalledProcessError as err:
+            self.fail(f'stat_var_processor.py failed (exit {err.returncode}).\n'
+                      f'STDOUT:\n{err.stdout}\nSTDERR:\n{err.stderr}')
 
-        actual_csv = Path(f'{out_prefix}.csv').read_text(encoding='utf-8')
-        expected_csv = Path(
-            os.path.join(_SAMPLE_OUTPUT_DIR,
-                         f'{output_stem}.csv')).read_text(encoding='utf-8')
+        actual_csv = (Path(f'{out_prefix}.csv').read_text(
+            encoding='utf-8').splitlines())
+        expected_csv = (Path(
+            os.path.join(
+                _SAMPLE_OUTPUT_DIR,
+                f'{output_stem}.csv')).read_text(encoding='utf-8').splitlines())
         self.assertEqual(actual_csv, expected_csv)
 
         actual_tmcf = _non_comment_lines(
