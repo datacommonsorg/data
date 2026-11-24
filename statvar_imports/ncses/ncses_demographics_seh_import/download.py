@@ -136,7 +136,7 @@ def download_xlsx_from_ncses_table(url, current_year):
             OSError) as e:
         logging.fatal(
             f"An unexpected error occurred during file processing: {e}")
-        raise RuntimeError("Failed to process ZIP file.")
+        raise RuntimeError("Failed to process ZIP file.") from e
 
     return True
 

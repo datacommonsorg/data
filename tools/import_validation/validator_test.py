@@ -147,6 +147,50 @@ class TestDeletedRecordsCountValidation(unittest.TestCase):
         self.assertEqual(result.details['deleted_records_count'], 0)
 
 
+class TestDeletedEntityCountValidation(unittest.TestCase):
+    '''Test Class for the DELETED_ENTITY_COUNT validation rule.'''
+
+    def setUp(self):
+        self.validator = Validator()
+
+    def test_deleted_entity_count_fails_when_over_threshold(self):
+        summary = {'deleted_schema_count': 2}
+        params = {'threshold': 1}
+        result = self.validator.validate_deleted_entity_count(summary, params)
+        self.assertEqual(result.status, ValidationStatus.FAILED)
+        self.assertEqual(result.details['deleted_entity_count'], 2)
+        self.assertEqual(result.details['threshold'], 1)
+
+    def test_deleted_entity_count_passes_when_at_threshold(self):
+        summary = {'deleted_schema_count': 2}
+        params = {'threshold': 2}
+        result = self.validator.validate_deleted_entity_count(summary, params)
+        self.assertEqual(result.status, ValidationStatus.PASSED)
+        self.assertEqual(result.details['deleted_entity_count'], 2)
+        self.assertEqual(result.details['threshold'], 2)
+
+    def test_deleted_entity_count_passes_on_zero_deleted_count(self):
+        summary = {'deleted_schema_count': 0}
+        params = {'threshold': 0}
+        result = self.validator.validate_deleted_entity_count(summary, params)
+        self.assertEqual(result.status, ValidationStatus.PASSED)
+        self.assertEqual(result.details['deleted_entity_count'], 0)
+        self.assertEqual(result.details['threshold'], 0)
+
+    def test_deleted_entity_count_passes_on_missing_column(self):
+        summary = {'previous_schema_count': 100}
+        params = {'threshold': 0}
+        result = self.validator.validate_deleted_entity_count(summary, params)
+        self.assertEqual(result.status, ValidationStatus.PASSED)
+        self.assertEqual(result.details['deleted_entity_count'], 0)
+
+    def test_deleted_entity_count_passes_on_missing_summary(self):
+        params = {'threshold': 0}
+        result = self.validator.validate_deleted_entity_count(None, params)
+        self.assertEqual(result.status, ValidationStatus.PASSED)
+        self.assertEqual(result.details['deleted_entity_count'], 0)
+
+
 class TestDeletedRecordsPercentValidation(unittest.TestCase):
     '''Test Class for the DELETED_RECORDS_PERCENT validation rule.'''
 
