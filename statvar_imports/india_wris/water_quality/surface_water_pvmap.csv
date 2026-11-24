@@ -1,0 +1,36 @@
+#key,property-1,value-1,property-2,value-2,property-3,value-3,property-4,value-4,property-5,value-5,property-6,value-6
+# Station and district metadata columns
+statename,StateRaw,{Data}
+districtname,DistrictRaw,{Data}
+month,observationDate,{Data}
+stationname,#Eval,"StationClean='Koderma' if Data.strip() == 'Kodarma' else re.sub('[^A-Za-z0-9_]+', '', Data)"
+DEFAULT_PV,#Eval,"observationAbout='indiaWris/' + ('530' if StateRaw.strip().lower() == 'karnataka' and DistrictRaw.strip().lower() == 'bijapur' else DistrictCode) + '_' + StationClean",observationPeriod,P1M,measurementMethod,IndiaWRIS
+# Solute concentration parameters
+aluminium al,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,SurfaceWater,contaminant,Aluminum,unit,MilligramsPerLitre,value,{Number}
+arsenic as,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,SurfaceWater,contaminant,Arsenic,unit,MicrogramsPerLitre,value,{Number}
+cyanides cn,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,SurfaceWater,contaminant,Cyanide,unit,MicrogramsPerLitre,value,{Number}
+carbonate co3,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,SurfaceWater,contaminant,Carbonate,unit,MilligramsPerLitre,value,{Number}
+calcium ca,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,SurfaceWater,contaminant,Calcium,unit,MilligramsPerLitre,value,{Number}
+chloride cl,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,SurfaceWater,contaminant,Chloride,unit,MilligramsPerLitre,value,{Number}
+fluorine f,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,SurfaceWater,contaminant,Fluorine,unit,MilligramsPerLitre,value,{Number}
+iron fe,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,SurfaceWater,contaminant,Iron,unit,MilligramsPerLitre,value,{Number}
+hydrogencarbonate hco3,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,SurfaceWater,contaminant,HydrogenCarbonate,unit,MilligramsPerLitre,value,{Number}
+mercury hg,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,SurfaceWater,contaminant,Mercury,unit,MicrogramsPerLitre,value,{Number}
+potassium k,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,SurfaceWater,contaminant,Potassium,unit,MilligramsPerLitre,value,{Number}
+magnesium mg,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,SurfaceWater,contaminant,Magnesium,unit,MilligramsPerLitre,value,{Number}
+ammonia nh3,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,SurfaceWater,contaminant,Ammonia,unit,MilligramsPerLitre,value,{Number}
+nitrate no3,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,SurfaceWater,contaminant,Nitrate,unit,MilligramsPerLitre,value,{Number}
+lead pb,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,SurfaceWater,contaminant,Lead,unit,MicrogramsPerLitre,value,{Number}
+silver ag,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,SurfaceWater,contaminant,Silver,unit,MicrogramsPerLitre,value,{Number}
+sulfate so4,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,SurfaceWater,contaminant,Sulfate,unit,MilligramsPerLitre,value,{Number}
+silicondioxide sio2,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,SurfaceWater,contaminant,SiliconDioxide,unit,MilligramsPerLitre,value,{Number}
+zinc zn,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,SurfaceWater,contaminant,Zinc,unit,MicrogramsPerLitre,value,{Number}
+# Chemical property parameters
+disolvedoxygen do,populationType,BodyOfWater,waterSource,SurfaceWater,measuredProperty,dissolvedOxygen,unit,MilligramsPerLitre,value,{Number}
+electricalconductivity,populationType,BodyOfWater,waterSource,SurfaceWater,measuredProperty,electricalConductivity,value,{Number}
+hardnesstotal,populationType,BodyOfWater,waterSource,SurfaceWater,measuredProperty,waterHardness,unit,MilligramsCaCO3PerLitre,value,{Number}
+alkalinitytotal,populationType,BodyOfWater,waterSource,SurfaceWater,measuredProperty,waterAlkalinity,unit,MilligramsCaCO3PerLitre,value,{Number}
+residualsodiumcarbonate,populationType,BodyOfWater,waterSource,SurfaceWater,measuredProperty,residualSodiumCarbonate,value,{Number}
+sodiumabsorptionratio sar,populationType,BodyOfWater,waterSource,SurfaceWater,measuredProperty,sodiumAdsorptionRatio,value,{Number}
+totaldissolvedsolids,populationType,BodyOfWater,waterSource,SurfaceWater,measuredProperty,totalDissolvedSolids,unit,MilligramsPerLitre,value,{Number}
+potentialofhydrogen ph,populationType,BodyOfWater,waterSource,SurfaceWater,measuredProperty,potentialOfHydrogen,value,{Number}

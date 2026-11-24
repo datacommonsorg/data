@@ -1,0 +1,36 @@
+#key,property-1,value-1,property-2,value-2,property-3,value-3,property-4,value-4,property-5,value-5,property-6,value-6
+# Station and district metadata columns
+station name,#Eval,"StationClean='Koderma' if Data.strip() == 'Kodarma' else re.sub('[^A-Za-z0-9_]+', '', Data)"
+state name,StateRaw,{Data}
+district name,DistrictRaw,{Data}
+date collection,observationDate,{Data}
+DEFAULT_PV,#Eval,"observationAbout='indiaWris/' + ('530' if StateRaw.strip().lower() == 'karnataka' and DistrictRaw.strip().lower() == 'bijapur' else DistrictCode) + '_' + StationClean",observationPeriod,P1Y,measurementMethod,IndiaWRIS
+# Solute concentration parameters
+arsenic mg l,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,Arsenic,unit,MicrogramsPerLitre,value,{Number}
+carbonate mg l,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,Carbonate,unit,MilligramsPerLitre,value,{Number}
+calcium mg l,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,Calcium,unit,MilligramsPerLitre,value,{Number}
+chloride mg l,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,Chloride,unit,MilligramsPerLitre,value,{Number}
+iron mg l,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,Iron,unit,MilligramsPerLitre,value,{Number}
+potassium mg l,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,Potassium,unit,MilligramsPerLitre,value,{Number}
+magnesium mg l,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,Magnesium,unit,MilligramsPerLitre,value,{Number}
+nitrate mg l,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,Nitrate,unit,MilligramsPerLitre,value,{Number}
+sodium mg l,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,Sodium,unit,MilligramsPerLitre,value,{Number}
+sulphate mg l,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,Sulfate,unit,MilligramsPerLitre,value,{Number}
+boron mg l,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,Boron,unit,MilligramsPerLitre,value,{Number}
+cadmium mg l,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,Cadmium,unit,MilligramsPerLitre,value,{Number}
+chromium mg l,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,Chromium,unit,MilligramsPerLitre,value,{Number}
+mercury mg l,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,Mercury,unit,MilligramsPerLitre,value,{Number}
+manganese mg l,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,Manganese,unit,MilligramsPerLitre,value,{Number}
+lead mg l,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,Lead,unit,MilligramsPerLitre,value,{Number}
+nickel mg l,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,Nickel,unit,MilligramsPerLitre,value,{Number}
+zinc mg l,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,Zinc,unit,MilligramsPerLitre,value,{Number}
+copper,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,Copper,value,{Number}
+uranium,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,Uranium,value,{Number}
+# Chemical property parameters
+electrical conductivity field,populationType,BodyOfWater,waterSource,GroundWater,measuredProperty,electricalConductivity,value,{Number}
+residual sodium carbonate,populationType,BodyOfWater,waterSource,GroundWater,measuredProperty,residualSodiumCarbonate,value,{Number}
+sodium absorption ratio,populationType,BodyOfWater,waterSource,GroundWater,measuredProperty,sodiumAdsorptionRatio,value,{Number}
+total hardness mg l,populationType,BodyOfWater,waterSource,GroundWater,measuredProperty,waterHardness,unit,MilligramsCaCO3PerLitre,value,{Number}
+total alkalinity mg l,populationType,BodyOfWater,waterSource,GroundWater,measuredProperty,waterAlkalinity,unit,MilligramsCaCO3PerLitre,value,{Number}
+total dissolved solids mg l,populationType,BodyOfWater,waterSource,GroundWater,measuredProperty,totalDissolvedSolids,unit,MilligramsPerLitre,value,{Number}
+dissolved oxygen1 mg l,populationType,BodyOfWater,waterSource,GroundWater,measuredProperty,dissolvedOxygen,unit,MilligramsPerLitre,value,{Number}
