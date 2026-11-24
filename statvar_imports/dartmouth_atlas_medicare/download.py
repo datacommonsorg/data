@@ -369,6 +369,10 @@ _DOWNLOAD_LINK_RE = re.compile(
     r"https?://data\.dartmouthatlas\.org/downloads/[^\s\"'<>]+",
     re.IGNORECASE,
 )
+_HREF_ATTR_RE = re.compile(
+    r"""href\s*=\s*["']([^"'\s<>]+)["']""",
+    re.IGNORECASE,
+)
 _STDPRICES_RESEARCH_RE = re.compile(
     r"^/downloads/research_files/(county|state)_stdprices[a-z0-9_]*\.csv\.zip$",
     re.IGNORECASE,
@@ -453,6 +457,7 @@ def discover_source_archives(
     discovered_new = 0
 
     for page_url in TOPIC_DISCOVERY_PAGES:
+        logging.info("GET %s", page_url)
         try:
             resp = session.get(page_url, timeout=REQUEST_TIMEOUT_SECONDS)
             resp.raise_for_status()
@@ -471,7 +476,11 @@ def discover_source_archives(
             )
             continue
 
-        for raw_link in sorted(set(_DOWNLOAD_LINK_RE.findall(html))):
+        candidate_links = set(_DOWNLOAD_LINK_RE.findall(html))
+        for raw_href in _HREF_ATTR_RE.findall(html):
+            candidate_links.add(urllib.parse.urljoin(page_url, raw_href))
+
+        for raw_link in sorted(candidate_links):
             spec = classify_download_url(raw_link)
             if spec and str(spec["url"]).lower() not in seen_urls:
                 seen_urls.add(str(spec["url"]).lower())
@@ -624,9 +633,13 @@ def load_hsa_place_map(
 
 
 def extract_stdprices_observations(
-        rows, is_state: bool, observations: dict[tuple[str, str, str],
-                                                 str]) -> None:
+    rows,
+    is_state: bool,
+    observations: dict[tuple[str, str, str], str],
+) -> tuple[int, int]:
     """Extracts Count_MedicareEnrollee and Mean Price observations."""
+    pop_count = 0
+    price_count = 0
     for row in rows:
         if row.get("eventname", "").lower() != "stdprice_total":
             continue
@@ -639,20 +652,27 @@ def extract_stdprices_observations(
         pop_val = clean_numeric_value(row.get("population", ""))
         if pop_val is not None:
             observations[(year, place, "MedicareEnrollee_Count")] = pop_val
+            pop_count += 1
         price_val = clean_numeric_value(row.get("adjusted_rate", ""))
         if price_val is not None:
             observations[(year, place,
                           "MedicareEnrollee_MeanPrice")] = price_val
+            price_count += 1
+    return pop_count, price_count
 
 
 def extract_stdprices_table_observations(
-        rows, is_state: bool, observations: dict[tuple[str, str, str],
-                                                 str]) -> None:
+    rows,
+    is_state: bool,
+    observations: dict[tuple[str, str, str], str],
+) -> tuple[int, int]:
     """Extracts enrollees and price-adjusted Total reimbursements from wide tables."""
     price_col = (
         "price-adjusted total medicare reimbursements per enrollee (parts a and b)"
     )
     code_col = "state #" if is_state else "county #"
+    pop_count = 0
+    price_count = 0
     for row in rows:
         year = _normalize_year(row.get("year", ""))
         if not year:
@@ -663,23 +683,32 @@ def extract_stdprices_table_observations(
         pop_val = clean_numeric_value(row.get("medicare enrollees", ""))
         if pop_val is not None:
             observations[(year, place, "MedicareEnrollee_Count")] = pop_val
+            pop_count += 1
         price_val = clean_numeric_value(row.get(price_col, ""))
         if price_val is not None:
             observations[(year, place,
                           "MedicareEnrollee_MeanPrice")] = price_val
+            price_count += 1
+    return pop_count, price_count
 
 
 def extract_hedis_observations(
-        rows, is_state: bool, observations: dict[tuple[str, str, str],
-                                                 str]) -> None:
+    rows,
+    is_state: bool,
+    observations: dict[tuple[str, str, str], str],
+) -> tuple[int, int]:
     """Extracts Part B and Diabetic race-stratified enrollee counts."""
+    part_b_count = 0
+    diabetic_count = 0
     for row in rows:
         event = row.get("eventname", "").lower()
         race = row.get("race", "").lower()
         if event == "ptbjune_amcare2":
             sv_key = HEDIS_PART_B_RACE_MAP.get(race)
+            is_part_b = True
         elif event == "diab_hgb":
             sv_key = HEDIS_DIABETIC_RACE_MAP.get(race)
+            is_part_b = False
         else:
             continue
         if not sv_key:
@@ -693,6 +722,11 @@ def extract_hedis_observations(
         pop_val = clean_numeric_value(row.get("population", ""))
         if pop_val is not None:
             observations[(year, place, sv_key)] = pop_val
+            if is_part_b:
+                part_b_count += 1
+            else:
+                diabetic_count += 1
+    return part_b_count, diabetic_count
 
 
 def extract_hsa_mortality_observations(
@@ -700,10 +734,11 @@ def extract_hsa_mortality_observations(
     observations: dict[tuple[str, str, str], str],
     hsa_place_map: tuple[dict[str, list[str]], dict[str, list[str]]] |
     None = None,
-) -> None:
+) -> int:
     """Extracts 7-digit HSA City/Town/Village Medicare enrollee denominators."""
     by_code, by_name = (hsa_place_map
                         if hsa_place_map is not None else load_hsa_place_map())
+    enrollee_count = 0
     for row in rows:
         year = _normalize_year(row.get("year", ""))
         if not year:
@@ -730,6 +765,8 @@ def extract_hsa_mortality_observations(
         if pop_val is not None:
             for dcid in dcids:
                 observations[(year, dcid, "MedicareEnrollee_Count")] = pop_val
+                enrollee_count += 1
+    return enrollee_count
 
 
 def process_archive(
@@ -739,27 +776,46 @@ def process_archive(
     observations: dict[tuple[str, str, str], str],
     hsa_place_map: tuple[dict[str, list[str]], dict[str, list[str]]] |
     None = None,
-) -> None:
-    """Dispatches a downloaded archive or workbook to the appropriate extractor."""
+) -> int:
+    """Dispatches an archive to its extractor and enforces non-empty extraction."""
     rows = iter_rows_from_archive(archive_path)
     if kind == "stdprices":
-        extract_stdprices_observations(rows,
-                                       is_state=is_state,
-                                       observations=observations)
+        pop_count, price_count = extract_stdprices_observations(
+            rows, is_state=is_state, observations=observations)
+        if pop_count == 0 or price_count == 0:
+            raise RuntimeError(
+                f"Schema drift or empty data in {archive_path} (kind={kind}): "
+                f"pop_count={pop_count}, price_count={price_count}")
+        extracted = pop_count + price_count
     elif kind == "stdprices_table":
-        extract_stdprices_table_observations(rows,
-                                             is_state=is_state,
-                                             observations=observations)
+        pop_count, price_count = extract_stdprices_table_observations(
+            rows, is_state=is_state, observations=observations)
+        if pop_count == 0 or price_count == 0:
+            raise RuntimeError(
+                f"Schema drift or empty data in {archive_path} (kind={kind}): "
+                f"pop_count={pop_count}, price_count={price_count}")
+        extracted = pop_count + price_count
     elif kind == "hedis":
-        extract_hedis_observations(rows,
-                                   is_state=is_state,
-                                   observations=observations)
+        part_b_count, diabetic_count = extract_hedis_observations(
+            rows, is_state=is_state, observations=observations)
+        if part_b_count == 0 or diabetic_count == 0:
+            raise RuntimeError(
+                f"Schema drift or empty data in {archive_path} (kind={kind}): "
+                f"part_b_count={part_b_count}, diabetic_count={diabetic_count}")
+        extracted = part_b_count + diabetic_count
     elif kind == "hsa_mortality":
-        extract_hsa_mortality_observations(rows,
-                                           observations=observations,
-                                           hsa_place_map=hsa_place_map)
+        extracted = extract_hsa_mortality_observations(
+            rows, observations=observations, hsa_place_map=hsa_place_map)
+        if extracted == 0:
+            raise RuntimeError(
+                f"Schema drift or empty data in {archive_path} (kind={kind}): "
+                "extracted 0 HSA observations")
     else:
         raise ValueError(f"Unknown archive kind: {kind}")
+
+    logging.info("Extracted %d observation(s) from %s (kind=%s)", extracted,
+                 archive_path, kind)
+    return extracted
 
 
 def write_cleaned_csv(

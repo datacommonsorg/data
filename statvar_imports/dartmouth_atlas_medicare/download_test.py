@@ -533,14 +533,15 @@ class DownloadTest(unittest.TestCase):
         reim_resp.text = (
             '<a href="https://data.dartmouthatlas.org/downloads/tables/'
             'county_stdprices_ffs_2020.csv.zip">County 2020</a>'
+            '<a href="/downloads/tables/state_stdprices_ffs_2020.xlsx">'
+            "State 2020 Relative</a>"
             '<a href="https://data.dartmouthatlas.org/downloads/tables/'
             'hrr_mortality_2019.csv.zip">HRR</a>')
         pc_resp = mock.MagicMock()
         pc_resp.text = ""
         mort_resp = mock.MagicMock()
         mort_resp.text = (
-            '<a href="https://data.dartmouthatlas.org/downloads/tables/'
-            'hsa_mortality_2020.csv.zip">HSA 2020</a>'
+            '<a href="/downloads/tables/hsa_mortality_2020.csv.zip">HSA 2020</a>'
             '<a href="https://data.dartmouthatlas.org/downloads/tables/'
             'state_mortality_2020.csv.zip">State 2020</a>')
         mock_session.get.side_effect = [reim_resp, pc_resp, mort_resp]
@@ -548,6 +549,7 @@ class DownloadTest(unittest.TestCase):
         discovered = download.discover_source_archives(mock_session)
         filenames = [str(s["filename"]) for s in discovered]
         self.assertIn("county_stdprices_ffs_2020.csv.zip", filenames)
+        self.assertIn("state_stdprices_ffs_2020.xlsx", filenames)
         self.assertIn("hsa_mortality_2020.csv.zip", filenames)
         self.assertNotIn("hrr_mortality_2019.csv.zip", filenames)
         self.assertNotIn("state_mortality_2020.csv.zip", filenames)
@@ -557,6 +559,78 @@ class DownloadTest(unittest.TestCase):
         fail_session.get.side_effect = requests.Timeout("portal timeout")
         fallback = download.discover_source_archives(fail_session)
         self.assertEqual(len(fallback), len(download.SOURCE_ARCHIVES))
+
+    def test_process_archive_raises_on_schema_drift(self):
+        # Partial column drift on stdprices_table (missing reimbursement col).
+        drifted_xlsx = _build_xlsx_bytes([
+            (
+                "Sheet1",
+                [
+                    ["Year", "County #", "Medicare Enrollees", "Renamed Price"],
+                    ["2020", "01001", "5120", "11240.50"],
+                ],
+            ),
+        ])
+        # Partial event drift on hedis (missing diab_hgb rows).
+        drifted_hedis = _build_zip_bytes({
+            "county_hedis.csv": (
+                "Geo_code,Geo_Label,Population,Year,Race,Cohort,Eventname\n"
+                "6083,COUNTY,3162,2019,Overall,Ambulatory care,ptbjune_amcare2\n"
+            ).encode("utf-8"),
+        })
+        with tempfile.TemporaryDirectory() as tmpdir:
+            wb_path = Path(tmpdir) / "drifted.xlsx"
+            wb_path.write_bytes(drifted_xlsx)
+            with self.assertRaisesRegex(RuntimeError, "price_count=0"):
+                download.process_archive(wb_path,
+                                         kind="stdprices_table",
+                                         is_state=False,
+                                         observations={})
+
+            hedis_path = Path(tmpdir) / "drifted_hedis.csv.zip"
+            hedis_path.write_bytes(drifted_hedis)
+            with self.assertRaisesRegex(RuntimeError, "diabetic_count=0"):
+                download.process_archive(hedis_path,
+                                         kind="hedis",
+                                         is_state=False,
+                                         observations={})
+
+    def test_sample_fixtures_cover_all_statvars_and_pvmap(self):
+        """Verifies test_data/ fixtures align with PVMap/remap without running SVP ([rule-svp-unit-tests])."""
+        pkg_dir = Path(download.__file__).resolve().parent
+        sample_in = pkg_dir / "test_data" / "sample_input.csv"
+        sample_out = pkg_dir / "test_data" / "sample_output.csv"
+        pvmap_csv = pkg_dir / "dartmouth_atlas_medicare_pvmap.csv"
+
+        with pvmap_csv.open("r", encoding="utf-8") as handle:
+            pvmap_keys = {row["key"] for row in csv.DictReader(handle)}
+        self.assertTrue(set(download.SV_KEY_TO_DCID).issubset(pvmap_keys))
+
+        with sample_in.open("r", encoding="utf-8") as handle:
+            in_rows = list(csv.DictReader(handle))
+        with sample_out.open("r", encoding="utf-8") as handle:
+            out_rows = list(csv.DictReader(handle))
+
+        self.assertEqual(len(in_rows), len(out_rows))
+        self.assertEqual(
+            {r["stat_var_key"] for r in in_rows},
+            set(download.SV_KEY_TO_DCID),
+        )
+        expected_pairs = {(
+            r["year"],
+            f"dcid:{r['place']}",
+            f"dcid:{download.SV_KEY_TO_DCID[r['stat_var_key']]}",
+            r["value"],
+            "P1Y",
+        ) for r in in_rows}
+        actual_pairs = {(
+            r["observationDate"],
+            r["observationAbout"],
+            r["variableMeasured"],
+            r["value"],
+            r["observationPeriod"],
+        ) for r in out_rows}
+        self.assertEqual(actual_pairs, expected_pairs)
 
     def test_classify_download_url_strict_host_validation(self):
         # Valid HTTP/HTTPS URLs on exact host normalize to canonical HTTPS URL.
