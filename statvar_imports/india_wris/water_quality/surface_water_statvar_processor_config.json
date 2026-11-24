@@ -5,7 +5,7 @@
     "release_frequency": "monthly",
     "start_date": "2001-01",
     "header_rows": 1,
-    "mapped_columns": [2],
+    "mapped_columns": [1, 2],
     "word_delimiter": "",
     "aggregate_duplicate_svobs": "last",
     "output_columns": [

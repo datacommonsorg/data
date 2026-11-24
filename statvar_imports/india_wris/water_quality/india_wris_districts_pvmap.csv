@@ -105,7 +105,7 @@ bhiwani,DistrictCode,059
 bhojpur,DistrictCode,193
 bhopal,DistrictCode,396
 bidar,DistrictCode,529
-bijapur,DistrictCode,636
+bijapur,DistrictCode,{BijapurCode}
 bijnor,DistrictCode,132
 bikaner,DistrictCode,093
 bilaspur,DistrictCode,375

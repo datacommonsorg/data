@@ -57,7 +57,7 @@ From `statvar_imports/india_wris/water_quality/`:
 
 ../../../.env/bin/python ../../../tools/statvar_importer/stat_var_processor.py \
   --input_data=input_files/groundWater.csv \
-  --pv_map=india_wris_districts_pvmap.csv,ground_water_pvmap.csv \
+  --pv_map='District Name:india_wris_districts_pvmap.csv,ground_water_pvmap.csv' \
   --config_file=ground_water_statvar_processor_config.json \
   --statvar_dcid_remap_csv=statvar_remap.csv \
   --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
@@ -88,7 +88,7 @@ From `statvar_imports/india_wris/water_quality/`:
 ```bash
 ../../../.env/bin/python ../../../tools/statvar_importer/stat_var_processor.py \
   --input_data=test_data/ground_water_input.csv \
-  --pv_map=india_wris_districts_pvmap.csv,ground_water_pvmap.csv \
+  --pv_map='District Name:india_wris_districts_pvmap.csv,ground_water_pvmap.csv' \
   --config_file=ground_water_statvar_processor_config.json \
   --statvar_dcid_remap_csv=statvar_remap.csv \
   --output_path=test_data/india_wris_ground \
