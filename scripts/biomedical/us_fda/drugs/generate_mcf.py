@@ -19,9 +19,14 @@ mcf file for the FDA Drugs import.
 import re
 from sys import path
 
-from utils.config import FDA_APP_TEMPLATE, ACTIVE_INGRED_TEMPLATE, \
-STRENGTH_TEMPLATE, DRUG_TEMPLATE, FDA_NODE, INGREDIENT_REPLACEMENTS
-from utils.format import get_qty_format, get_qty_range_format
+from utils.config import ACTIVE_INGRED_TEMPLATE
+from utils.config import DRUG_TEMPLATE
+from utils.config import FDA_APP_TEMPLATE
+from utils.config import FDA_NODE
+from utils.config import INGREDIENT_REPLACEMENTS
+from utils.config import STRENGTH_TEMPLATE
+from utils.format import get_qty_format
+from utils.format import get_qty_range_format
 
 path.insert(1, '../../../')
 from util import mcf_template_filler

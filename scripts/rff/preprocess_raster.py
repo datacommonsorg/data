@@ -14,17 +14,18 @@
 import csv
 import glob
 import json
-import numpy as np
-import os
-from osgeo import gdal
 from pathlib import Path
-from shapely import geometry
 import sys
+
+import numpy as np
+from osgeo import gdal
+from shapely import geometry
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO_ROOT))
-from util.dc_api_wrapper import dc_api_batched_wrapper, get_datacommons_client
 from scripts.rff import util
+from util.dc_api_wrapper import dc_api_batched_wrapper
+from util.dc_api_wrapper import get_datacommons_client
 
 bandname_to_gdcStatVars = {
     "std_dev": "StandardDeviation_<c_var>",

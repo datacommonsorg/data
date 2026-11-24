@@ -25,8 +25,9 @@ taxonomy is encoded in enum format.
 """
 
 # load environment
-import pandas as pd
 import sys
+
+import pandas as pd
 
 # declare universal variables
 DICT_CHANGE_ENUM = {
@@ -136,8 +137,8 @@ def clean_df(df):
         df.loc[index, 'genomeComposition'] = convert_gc_to_enum(
             row['genomeComposition'])
         df.loc[index, 'lastChange'] = convert_change_to_enum(row['lastChange'])
-        df.loc[index,
-               'taxonHistoryURL'] = row['taxonHistoryURL'].strip('ICTVonline=')
+        df.loc[index, 'taxonHistoryURL'] = row['taxonHistoryURL'].removeprefix(
+            'ICTVonline=')
     return df
 
 

@@ -36,33 +36,32 @@ input_files - downloaded files (from US census website) are placed here
 output_files - output files (mcf, tmcf and csv are written here)
 """
 
-import os
-import sys
+import datetime
 import json
-import warnings
-import requests
-import time
+import os
 import re
-import tempfile
-from datetime import datetime as dt
+import sys
+import time
+import warnings
+
+from absl import app
+from absl import flags
+from absl import logging
+import pandas as pd
+import requests
 
 warnings.filterwarnings('ignore')
-import pandas as pd
-from absl import app
-from absl import logging
-from absl import flags
-from retry import retry
-from requests.adapters import HTTPAdapter
-from urllib3.util.retry import Retry
 
 _FLAGS = flags.FLAGS
 
 
 def _define_flags():
-    flags.DEFINE_string('mode', '', 'Options: download or process')
-    flags.DEFINE_bool(
-        'is_summary_levels', False,
-        'Options: True for all summary_levels and False for only 162')
+    if 'mode' not in _FLAGS:
+        flags.DEFINE_string('mode', '', 'Options: download or process')
+    if 'is_summary_levels' not in _FLAGS:
+        flags.DEFINE_bool(
+            'is_summary_levels', False,
+            'Options: True for all summary_levels and False for only 162')
 
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -73,18 +72,24 @@ popchg_file_name_pattern = r"NST-EST\d{4}-POPCHG2020_\d{4}\.csv"
 sys.path.insert(1, _MODULE_DIR)
 # pylint: disable=wrong-import-position
 # pylint: disable=import-error
-from clean import (clean_data_df, clean_1970_1989_county_txt,
-                   process_states_1900_1969, process_states_1970_1979,
-                   process_states_1980_1989, process_states_1990_1999)
-
-from constants import (INPUT_DIRS, OUTPUT_DIR, SCALING_FACTOR_STATE_1900_1960,
-                       USA, USA_GEO_ID, DISTRICT_OF_COLUMBIA_STATE_CODE,
-                       DISTRICT_OF_COLUMBIA_COUNTY_CODE, INPUT_DIR)
+from clean import clean_1970_1989_county_txt
+from clean import clean_data_df
+from clean import process_states_1900_1969
+from clean import process_states_1970_1979
+from clean import process_states_1980_1989
+from clean import process_states_1990_1999
+from constants import DISTRICT_OF_COLUMBIA_COUNTY_CODE
+from constants import DISTRICT_OF_COLUMBIA_STATE_CODE
+from constants import OUTPUT_DIR
+from constants import SCALING_FACTOR_STATE_1900_1960
+from constants import USA
+from constants import USA_GEO_ID
 
 sys.path.insert(1, os.path.join(_MODULE_DIR, '../../../../'))
 import util.alpha2_to_dcid as alpha2todcid
-import util.name_to_alpha2 as statetoshortform
 import util.county_to_dcid as countytodcid
+import util.name_to_alpha2 as statetoshortform
+
 # pylint: enable=wrong-import-position
 # pylint: enable=import-error
 _FILES_TO_DOWNLOAD = []
@@ -117,7 +122,8 @@ def _load_data_df(path: str,
                   file_format: str,
                   header: str = None,
                   skip_rows: int = None,
-                  encoding: str = None) -> pd.DataFrame:
+                  encoding: str = None,
+                  names: list = None) -> pd.DataFrame:
     """
     Returns the DataFrame using input path and config.
     Args:
@@ -126,6 +132,7 @@ def _load_data_df(path: str,
         header (str, optional): Input File Header Index. Defaults to None.
         skip_rows (int, optional): Skip Rows Value. Defaults to None.
         encoding (str, optional): Input File Encoding. Defaults to None.
+        names (list, optional): Column names or range. Defaults to None.
 
     Returns:
         data_df (pd.DataFrame): Dataframe of input file
@@ -139,7 +146,10 @@ def _load_data_df(path: str,
                                 sep=r'\s+',
                                 engine='python',
                                 header=header,
-                                skiprows=skip_rows)
+                                names=names,
+                                skiprows=skip_rows,
+                                dtype=object,
+                                on_bad_lines='skip')
     elif file_format.lower() in ["xls", "xlsx"]:
         data_df = pd.read_excel(path, header=header)
     return data_df
@@ -619,9 +629,9 @@ def _process_county_file_99c8_00(file_path: str) -> pd.DataFrame:
                     for idx, val in enumerate(years_list):
                         if idx == 0:
                             continue
-                        outfile.write(
-                            str(val) + ',' + str(fips_code) + "," +
-                            str(tmp_line[idx + 2]) + "\n")
+                        val_person = str(tmp_line[idx + 2]).strip()
+                        if val_person.isdigit():
+                            outfile.write(f"{val},{fips_code},{val_person}\n")
     data_df = pd.read_csv("outfile.csv")
     data_df = data_df[data_df["Location"] != "country/USA"]
     os.remove("outfile.csv")
@@ -648,7 +658,7 @@ def _process_county_e8089co_e7079co(file_path: str) -> pd.DataFrame:
         "1978", "1979", "extra_data_col_1", "extra_data_col_2"
     ]
     if "e8089co.txt" in file_path:
-        skip_rows = 0
+        skip_rows = 23
         first_data_df_cols = [
             "Fips_Code", "Location", "extra_Location", "1980", "1981", "1982",
             "1983", "1984", "extra_data_col_1", "extra_data_col_2"
@@ -657,7 +667,7 @@ def _process_county_e8089co_e7079co(file_path: str) -> pd.DataFrame:
             "Fips_Code", "Location", "extra_Location", "1985", "1986", "1987",
             "1988", "1989", "extra_data_col_1", "extra_data_col_2"
         ]
-    data_df = _load_data_df(file_path, "txt", None, skip_rows)
+    data_df = _load_data_df(file_path, "txt", None, skip_rows, names=range(10))
     data_df = clean_1970_1989_county_txt(data_df, first_data_df_cols,
                                          second_data_df_cols)
     data_df = _unpivot_data_df(data_df, "Location", data_df.columns[1:])
@@ -766,7 +776,6 @@ def _process_counties(file_path: str) -> pd.DataFrame:
         pd.DataFrame: Processed County DataFrame
     """
     data_df = None
-    future_year_file_list = [f"co-est{x}-alldata" for x in range(2024, 2030)]
 
     if "99c8_00.txt" in file_path:
         data_df = _process_county_file_99c8_00(file_path)
@@ -776,8 +785,6 @@ def _process_counties(file_path: str) -> pd.DataFrame:
         data_df = data_df[data_df["Location"].str.len() != 8]
     elif "co-est2020" in file_path:
         data_df = _process_county_coest2020(file_path)
-    elif "co-est2023-alldata" in file_path:
-        data_df = _process_county_coest2029(file_path)
     elif "co-est2021" in file_path:
         data_df = _load_data_df(file_path, "xlsx", header=4)
         data_df.columns = ["Region", "04_2020", "2020", "2021"]
@@ -789,7 +796,7 @@ def _process_counties(file_path: str) -> pd.DataFrame:
         data_df["Location"] = data_df.apply(
             lambda x: _county_to_dcid(COUNTY_MAP, x.State, x.County), axis=1)
         data_df = _unpivot_data_df(data_df, ["Location"], ["2020", "2021"])
-    elif any([x for x in future_year_file_list if x in file_path]):
+    elif re.search(r"co-est20\d{2}-alldata", file_path):
         data_df = _process_county_coest2029(file_path)
     elif "co-est" in file_path:
         data_df = _load_data_df(file_path, "csv", encoding='ISO-8859-1')
@@ -819,8 +826,8 @@ def _process_counties(file_path: str) -> pd.DataFrame:
         data_df["Location"] = data_df["Location"].apply(_state_to_geo_id)
         data_df = data_df.iloc[1:, :]
         data_df = _unpivot_data_df(data_df, ["Location"], data_df.columns[:-2])
-        data_df["Count_Person"] = data_df["Count_Person"].str.replace(
-            ",", "", regex=False)
+        data_df["Count_Person"] = data_df["Count_Person"].astype(
+            str).str.replace(",", "", regex=False)
         data_df = data_df[["Year", "Location", "Count_Person"]]
 
     data_df = data_df[data_df["Location"] != "country/USA"]
@@ -898,7 +905,7 @@ def _process_cities(file_path: str,
         data_df = _process_city_1990_1999(file_path)
     if file_name_without_ext in [
             "sub-est2010-alt", "SUB-EST2020_ALL", "sub-est2021_all"
-    ] or file_name_without_ext.startswith("sub-est202"):
+    ] or re.search(r"sub-est20\d{2}", file_name_without_ext):
         data_df = _load_data_df(file_path,
                                 file_format="csv",
                                 header=0,
@@ -1064,7 +1071,7 @@ def process(input_path, cleaned_csv_file_path: str, mcf_file_path: str,
             elif file_name in [
                     'su-99-7_us.txt', "sub-est2010-alt.csv",
                     "SUB-EST2020_ALL.csv", "sub-est2021_all.csv"
-            ] or file_name.startswith("sub-est202"):
+            ] or re.search(r"sub-est20\d{2}", file_name):
                 data_df = _process_cities(file, is_summary_levels)
 
             if not data_df.empty:
@@ -1076,55 +1083,42 @@ def process(input_path, cleaned_csv_file_path: str, mcf_file_path: str,
             else:
                 logging.error(f"Failed to process {file}")
     except Exception as e:
-        logging.fatal(f"Error while processing files {e}")
+        raise RuntimeError(f"Error while processing files: {e}") from e
 
     logging.info(f"No of files to be processed {total_files_to_process}")
     logging.info(f"No of files processed {processed_count}")
-    if processed_count > 0:
-        if processed_count < total_files_to_process:
-            logging.warning(
-                f"Mismatch between files expected ({total_files_to_process}) and processed ({processed_count})"
-            )
-        final_df["Year"] = final_df["Year"].astype("int")
-        final_df = final_df.sort_values(by=["Location", "Year", "_vintage"],
-                                        kind="mergesort")
-        final_df = final_df.drop_duplicates(["Year", "Location"], keep="last")
-        final_df["Count_Person"] = final_df["Count_Person"].astype("int")
-        final_df[["Year", "Location",
-                  "Count_Person"]].to_csv(cleaned_csv_file_path, index=False)
-        _generate_mcf(mcf_file_path)
-        _generate_tmcf(tmcf_file_path)
-    else:
-        logging.fatal("No files were successfully processed.")
+    if total_files_to_process == 0 or processed_count < total_files_to_process:
+        raise RuntimeError(
+            f"Expected {total_files_to_process} files to be processed, but only {processed_count} were processed successfully."
+        )
 
-
-def _create_retry_session() -> requests.Session:
-    """Creates a requests Session configured with retry and backoff for transient errors."""
-    session = requests.Session()
-    session.headers.update({'User-Agent': 'Mozilla/5.0'})
-    retries = Retry(
-        total=5,
-        backoff_factor=2,
-        status_forcelist=[408, 429, 500, 502, 503, 504, 520],
-        allowed_methods=["HEAD", "GET"],
-        respect_retry_after_header=True,
+    final_df["Year"] = pd.to_numeric(final_df["Year"], errors="coerce")
+    final_df = final_df.dropna(subset=["Year"])
+    final_df["Year"] = final_df["Year"].astype("int")
+    final_df = final_df.sort_values(by=["Location", "Year", "_vintage"],
+                                    kind="mergesort")
+    final_df = final_df.drop_duplicates(["Year", "Location"], keep="last")
+    final_df["Count_Person"] = pd.to_numeric(
+        final_df["Count_Person"].astype(str).str.replace(",", "", regex=False),
+        errors="coerce",
     )
-    adapter = HTTPAdapter(max_retries=retries)
-    session.mount("https://", adapter)
-    session.mount("http://", adapter)
-    return session
+    final_df = final_df.dropna(subset=["Count_Person"])
+    final_df["Count_Person"] = final_df["Count_Person"].round().astype("int64")
+    final_df[["Year", "Location", "Count_Person"]].to_csv(cleaned_csv_file_path,
+                                                          index=False)
+    _generate_mcf(mcf_file_path)
+    _generate_tmcf(tmcf_file_path)
 
 
-@retry(tries=3, delay=2, backoff=2, exceptions=(ValueError,))
-def _head_with_html_retry(session: requests.Session,
-                          url: str,
-                          timeout: int = 30) -> requests.Response:
-    """Performs a HEAD request and retries if HTTP 200 returns an HTML error page."""
-    response = session.head(url, allow_redirects=True, timeout=timeout)
-    content_type = response.headers.get('Content-Type', '')
-    if response.status_code == 200 and 'html' in content_type.lower():
-        raise ValueError(f"Server returned HTTP 200 HTML response for {url}")
-    return response
+_PEP_DIR = os.path.abspath(os.path.join(_MODULE_DIR, '..'))
+_SCRIPTS_DIR = os.path.abspath(os.path.join(_PEP_DIR, '../..'))
+for path_entry in (_SCRIPTS_DIR, _PEP_DIR):
+    if path_entry not in sys.path:
+        sys.path.insert(0, path_entry)
+from us_census.pep.download_util import TransientDownloadError
+from us_census.pep.download_util import create_retry_session as _create_retry_session
+from us_census.pep.download_util import download_with_retry
+from us_census.pep.download_util import head_with_html_retry as _head_with_html_retry
 
 
 def add_future_year_urls():
@@ -1148,10 +1142,10 @@ def add_future_year_urls():
          2023),
     ]
     session = _create_retry_session()
-    # This method will get the latest year URLs available for the years baseline_year to 2030
+    max_future_year = datetime.date.today().year + 1
     for url, baseline_year in urls_to_scan:
         found = False
-        for future_year in range(2030, baseline_year - 1, -1):
+        for future_year in range(max_future_year, baseline_year - 1, -1):
             url_to_check = url.format(YEAR=future_year)
             try:
                 logging.info(f"checking future url if available {url_to_check}")
@@ -1166,7 +1160,7 @@ def add_future_year_urls():
                     _FILES_TO_DOWNLOAD.append({"download_path": url_to_check})
                     found = True
                     break
-            except (requests.RequestException, ValueError) as e:
+            except (requests.RequestException, TransientDownloadError) as e:
                 logging.error(f"URL is not accessible {url_to_check}: {e}")
         if not found:
             fallback_url = url.format(YEAR=baseline_year)
@@ -1174,35 +1168,6 @@ def add_future_year_urls():
                 f"No future URL confirmed via HEAD probe for {url}; falling back to known baseline URL: {fallback_url}"
             )
             _FILES_TO_DOWNLOAD.append({"download_path": fallback_url})
-
-
-@retry(tries=3, delay=5, backoff=2, exceptions=(ValueError,))
-def download_with_retry(session: requests.Session, url: str, dest_path: str):
-    logging.info(f"Downloading file from URL: {url} -> {dest_path}")
-    with session.get(url, stream=True, timeout=120) as response:
-        response.raise_for_status()
-        content_type = response.headers.get('Content-Type', '')
-        if 'html' in content_type.lower():
-            raise ValueError(f"Server returned HTML error page for URL: {url}")
-        tmp_file_path = None
-        try:
-            dest_dir = os.path.dirname(dest_path) or '.'
-            os.makedirs(dest_dir, exist_ok=True)
-            with tempfile.NamedTemporaryFile(dir=dest_dir,
-                                             delete=False) as tmp_file:
-                tmp_file_path = tmp_file.name
-                for chunk in response.iter_content(chunk_size=65536):
-                    if chunk:
-                        tmp_file.write(chunk)
-            os.replace(tmp_file_path, dest_path)
-            tmp_file_path = None
-        finally:
-            if tmp_file_path and os.path.exists(tmp_file_path):
-                try:
-                    os.remove(tmp_file_path)
-                except OSError:
-                    pass
-    logging.info(f"Downloaded file: {dest_path}")
 
 
 def download_files():
@@ -1220,9 +1185,8 @@ def download_files():
         for file_to_download in _FILES_TO_DOWNLOAD:
             file_name_to_save = None
             url = file_to_download['download_path']
-            if 'file_name' in file_to_download and len(
-                    file_to_download['file_name']) > 5:
-                file_name_to_save = file_to_download['file_name']
+            if file_to_download.get('file_name', '').strip():
+                file_name_to_save = file_to_download['file_name'].strip()
             else:
                 file_name_to_save = url.split('/')[-1]
             if 'file_path' in file_to_download:
@@ -1257,7 +1221,10 @@ def download_files():
             )
 
     except Exception as e:
-        logging.fatal(f"Error occurred in download method {e}")
+        logging.error(f"Error occurred in download method {e}")
+        raise
+    finally:
+        session.close()
 
 
 def main(_):

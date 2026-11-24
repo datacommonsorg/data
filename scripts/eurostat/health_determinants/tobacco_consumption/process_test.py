@@ -20,8 +20,9 @@ import sys
 _COMMON_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(1, _COMMON_PATH)
 # pylint: disable=wrong-import-position
-from tobacco_consumption.process import EuroStatTobaccoConsumption
 from common.unitest_common_methods import CommonTestClass
+from tobacco_consumption.process import EuroStatTobaccoConsumption
+
 # pylint: enable=wrong-import-position
 
 

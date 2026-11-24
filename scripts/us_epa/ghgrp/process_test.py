@@ -13,10 +13,9 @@
 # limitations under the License.
 """Tests for process.py"""
 
-import csv
 import os
-import tempfile
 import sys
+import tempfile
 import unittest
 
 # Allows the following module imports to work when running as a script

@@ -234,7 +234,7 @@ def fetch_and_save_data(url, csv_filepath, query=None):
         logging.warning(f"Exception during download for URL {url}: {e}")
         error_msg = f"FATAL ERROR: Failed to download from {url}: {e}"
         logging.error(error_msg)
-        raise RuntimeError(error_msg)
+        raise RuntimeError(error_msg) from e
 
 
 def main(_):

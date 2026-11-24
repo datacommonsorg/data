@@ -13,9 +13,9 @@
 # limitations under the License.
 """Resolving place dcid from FBI hate crime dataset."""
 
+import csv
 import os
 import sys
-import csv
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -132,7 +132,7 @@ with open(os.path.join(_CITY_GEOCODES_PATH), encoding='utf8') as csvfile:
     csv_reader = csv.reader(csvfile)
     for a in csv_reader:
         if _CITY.get(a[0], ''):  # if key already exists in _CITY
-            assert False, f'Duplicate city found {a}'
+            raise AssertionError(f'Duplicate city found {a}')
         _CITY[a[0]] = a[1]
 
 

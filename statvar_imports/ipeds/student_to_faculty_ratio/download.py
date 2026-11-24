@@ -12,15 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
-import sys
-import re
-import zipfile
-import time
-import requests
 from datetime import date
+import os
+import re
+import sys
+import time
 from urllib.parse import urlparse
-from absl import app, logging
+import zipfile
+
+from absl import app
+from absl import logging
+import requests
 
 # --- Configuration ---
 START_YEAR = 2009

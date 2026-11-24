@@ -30,8 +30,9 @@ property 'isExemplar'.
 """
 
 # set up environment
-import pandas as pd
 import sys
+
+import pandas as pd
 import unidecode
 
 # declare universal variables

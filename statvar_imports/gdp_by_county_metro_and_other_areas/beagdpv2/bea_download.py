@@ -12,11 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os, shutil
-import zipfile
-from absl import app, logging
+import os
 from pathlib import Path
-import bea_config, sys
+import shutil
+import sys
+import zipfile
+
+from absl import app
+from absl import logging
+import bea_config
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 

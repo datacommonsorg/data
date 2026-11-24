@@ -23,24 +23,31 @@ URL: https://chronicdata.cdc.gov/browse?category=500+Cities+%26+Places
 python3 parse_cdc_places.py
 '''
 
+import json
 import os
 import sys
-import pandas as pd
-import numpy as np
-import json
-from absl import logging
-from absl import flags
+
 from absl import app
-from google.cloud import storage
+from absl import flags
+from absl import logging
+import numpy as np
+import pandas as pd
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_MODULE_DIR, '../../../util/'))
 import file_util
 
 _FLAGS = flags.FLAGS
-flags.DEFINE_string(
-    'config_path', 'gs://unresolved_mcf/cdc/cdc500places/download_config.json',
-    'Path to config file')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        'config_path',
+        'gs://unresolved_mcf/cdc/cdc500places/download_config.json',
+        'Path to config file')
+
+
 _MODULE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                            'gcs_output')
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
@@ -401,4 +408,5 @@ def main(_):
 
 if __name__ == "__main__":
 
+    _define_flags()
     app.run(main)

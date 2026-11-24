@@ -26,16 +26,16 @@ import urllib
 
 from absl import logging
 from datacommons_client.client import DataCommonsClient
-from datacommons_client.utils.error_handling import APIError, DCConnectionError, DCStatusError
+from datacommons_client.utils.error_handling import APIError
+from datacommons_client.utils.error_handling import DCConnectionError
+from datacommons_client.utils.error_handling import DCStatusError
 import requests
 import requests_cache
-from tenacity import (
-    RetryCallState,
-    Retrying,
-    retry_if_exception,
-    stop_after_attempt,
-    wait_fixed,
-)
+from tenacity import RetryCallState
+from tenacity import Retrying
+from tenacity import retry_if_exception
+from tenacity import stop_after_attempt
+from tenacity import wait_fixed
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
@@ -170,7 +170,7 @@ def dc_api_batched_wrapper(
     dcids: list,
     args: dict,
     dcid_arg_kw: str = 'dcids',
-    headers: dict = {},
+    headers: dict | None = None,
     config: dict = None,
 ) -> dict:
     """A wrapper for DC API on dcids with batching support.
@@ -196,6 +196,8 @@ def dc_api_batched_wrapper(
   Returns:
     Merged function return values across all dcids.
   """
+    if headers is None:
+        headers = {}
     config = _validate_v2_config(config)
     api_result = {}
     index = 0
@@ -266,10 +268,10 @@ def get_dc_api_key(config: dict = None) -> str:
     if not api_key:
         logging.log_first_n(
             logging.WARNING,
-            f'Using default DC API key with limited quota. '
-            f'Please set an API key in the environment variable: DC_API_KEY.'
-            f'Refer https://docs.datacommons.org/api/python/v2/#authentication '
-            f'for more details.',
+            'Using default DC API key with limited quota. '
+            'Please set an API key in the environment variable: DC_API_KEY.'
+            'Refer https://docs.datacommons.org/api/python/v2/#authentication '
+            'for more details.',
             n=1,
         )
         api_key = _DEFAULT_DC_API_KEY
@@ -299,7 +301,7 @@ def get_datacommons_client(config: dict = None) -> DataCommonsClient:
     return DataCommonsClient(api_key=api_key, dc_instance=dc_instance, url=url)
 
 
-def dc_api_is_defined_dcid(dcids: list, config: dict = {}) -> dict:
+def dc_api_is_defined_dcid(dcids: list, config: dict | None = None) -> dict:
     """Returns a dictionary with dcids mapped to True/False based on whether
 
   the dcid is defined in the API and has a 'typeOf' property.
@@ -313,6 +315,8 @@ def dc_api_is_defined_dcid(dcids: list, config: dict = {}) -> dict:
   Returns:
     dictionary with each input dcid mapped to a True/False value.
   """
+    if config is None:
+        config = {}
     config = _validate_v2_config(config)
     # Set parameters for node API.
     client = get_datacommons_client(config)
@@ -336,7 +340,7 @@ def dc_api_is_defined_dcid(dcids: list, config: dict = {}) -> dict:
 
 def dc_api_get_node_property(dcids: list,
                              prop: Union[str, list],
-                             config: dict = {}) -> dict:
+                             config: dict | None = None) -> dict:
     """Returns a dictionary keyed by dcid with { prop:value } for each dcid.
 
      Uses the get_property_values() DC API to lookup the property for each dcid.
@@ -349,6 +353,8 @@ def dc_api_get_node_property(dcids: list,
   Returns:
     dictionary with each input dcid mapped to a property:value
   """
+    if config is None:
+        config = {}
     config = _validate_v2_config(config)
     if isinstance(prop, list):
         if not prop:
@@ -360,8 +366,10 @@ def dc_api_get_node_property(dcids: list,
 
 def _dc_api_get_node_property_v2(dcids: list,
                                  prop: Union[str, list],
-                                 config: dict = {}) -> dict:
+                                 config: dict | None = None) -> dict:
     # Set parameters for V2 node API.
+    if config is None:
+        config = {}
     client = get_datacommons_client(config)
     api_function = client.node.fetch_property_values
     args = {'properties': prop}
@@ -400,7 +408,8 @@ def _dc_api_get_node_property_v2(dcids: list,
     return response
 
 
-def dc_api_get_node_property_values(dcids: list, config: dict = {}) -> dict:
+def dc_api_get_node_property_values(dcids: list,
+                                    config: dict | None = None) -> dict:
     """Returns all the property values for a set of dcids from the DC API.
 
   Args:
@@ -412,6 +421,8 @@ def dc_api_get_node_property_values(dcids: list, config: dict = {}) -> dict:
     dictionary with each dcid with the namspace 'dcid:' as the key
     mapped to a dictionary of property:value.
   """
+    if config is None:
+        config = {}
     config = _validate_v2_config(config)
     # Lookup node properties using V2 node API
     client = get_datacommons_client(config)
@@ -451,7 +462,7 @@ def dc_api_get_node_property_values(dcids: list, config: dict = {}) -> dict:
 def dc_api_resolve_placeid(dcids: list,
                            in_prop: str = 'placeId',
                            *,
-                           config: dict = {}) -> dict:
+                           config: dict | None = None) -> dict:
     """Returns the resolved dcid for each of the placeid.
 
   Args:
@@ -463,6 +474,8 @@ def dc_api_resolve_placeid(dcids: list,
   Returns:
     dictionary keyed by input placeid with reoslved dcid as value.
   """
+    if config is None:
+        config = {}
     config = _validate_v2_config(config)
     client = get_datacommons_client(config)
     api_function = client.resolve.fetch

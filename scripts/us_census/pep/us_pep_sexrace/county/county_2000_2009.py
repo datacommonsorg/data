@@ -17,10 +17,17 @@ for county 2000-2009 and the file
 is processed as is.
 """
 
-import pandas as pd
 import os
+import sys
+
+import pandas as pd
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
+_SCRIPTS_DIR = os.path.abspath(os.path.join(_CODEDIR, '../../../../'))
+if _SCRIPTS_DIR not in sys.path:
+    sys.path.append(_SCRIPTS_DIR)
+
+from us_census.pep.us_pep_sexrace.preprocess import load_url_or_path
 
 
 def process_county_2000_2009(url: str) -> pd.DataFrame:
@@ -45,7 +52,9 @@ def process_county_2000_2009(url: str) -> pd.DataFrame:
             _url = url + str(j) + '.csv'
 
             # reading the input csv as dataframe
-            df = pd.read_csv(_url, encoding='ISO-8859-1', low_memory=False)
+            df = pd.read_csv(load_url_or_path(_url),
+                             encoding='ISO-8859-1',
+                             low_memory=False)
             df.to_csv(_CODEDIR + "/../input_files/" +
                       "county_result_2000_2009.csv")
             # years having 1 and 12 and 13 value are not requried

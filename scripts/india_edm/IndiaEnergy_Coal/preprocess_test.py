@@ -14,9 +14,9 @@
 
 import os
 import unittest
-import pandas as pd
 
 from india_edm.base import EnergyIndiaBase
+import pandas as pd
 
 DATASET_NAME = "IndiaEnergy_Coal"
 

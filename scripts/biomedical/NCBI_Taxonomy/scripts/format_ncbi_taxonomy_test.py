@@ -17,12 +17,25 @@ Date: 18-Apr-2024
 Last Edited: 03-Sep-2024
 """
 
-import os
 import copy
+import os
+from os.path import abspath
+from os.path import dirname
 import tempfile
 import unittest
+
 from deepdiff.diff import DeepDiff
-from .format_ncbi_taxonomy import *
+
+from .format_ncbi_taxonomy import CATEGORIES_COL
+from .format_ncbi_taxonomy import DIVISION_COL
+from .format_ncbi_taxonomy import HOST_COL
+from .format_ncbi_taxonomy import NAMES_COL
+from .format_ncbi_taxonomy import NODES_COL
+from .format_ncbi_taxonomy import CategoriesCls
+from .format_ncbi_taxonomy import DivisionCls
+from .format_ncbi_taxonomy import HostCls
+from .format_ncbi_taxonomy import NamesCls
+from .format_ncbi_taxonomy import NodesCls
 
 MODULE_DIR_PATH = dirname(dirname(abspath(__file__)))
 SOURCE_FILE_PATH = dirname(dirname(abspath(__file__))) + '/test_data/input'

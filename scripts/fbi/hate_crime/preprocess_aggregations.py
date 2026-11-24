@@ -13,31 +13,39 @@
 # limitations under the License.
 """A script to process FBI Hate Crime data."""
 
+import copy
+import json
 import os
 import sys
-import json
-import pandas as pd
-import numpy as np
-import copy
-from utils import flatten_by_column, make_time_place_aggregation
+
+from absl import app
 from absl import flags
 from absl import logging
-from absl import app
+import numpy as np
+import pandas as pd
+from utils import flatten_by_column
+from utils import make_time_place_aggregation
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util/'))
-import file_util
-from statvar_dcid_generator import get_statvar_dcid, _PREPEND_APPEND_REPLACE_MAP
+from statvar_dcid_generator import get_statvar_dcid
 
 _FLAGS = flags.FLAGS
-flags.DEFINE_string(
-    'input_file',
-    os.path.join(_SCRIPT_PATH, 'aggregations/hate_crime_data/hate_crime.csv'),
-    'Input csv file path which is downloaded from https://cde.ucr.cjis.gov/LATEST/webapp/#'
-)
-flags.DEFINE_string('config_file', os.path.join(_SCRIPT_PATH, 'config.json'),
-                    'Input config file')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        'input_file',
+        os.path.join(_SCRIPT_PATH,
+                     'aggregations/hate_crime_data/hate_crime.csv'),
+        'Input csv file path which is downloaded from https://cde.ucr.cjis.gov/LATEST/webapp/#'
+    )
+    flags.DEFINE_string('config_file', os.path.join(_SCRIPT_PATH,
+                                                    'config.json'),
+                        'Input config file')
+
 
 _CACHE_DIR = os.path.join(_SCRIPT_PATH, 'cache')
 
@@ -1754,22 +1762,25 @@ def _write_to_csv(df: pd.DataFrame, csv_file_name: str):
     df.to_csv(csv_file_name, index=False)
 
 
-def process_main(input_csv=os.path.join(_SCRIPT_PATH, 'source_data',
-                                        'hate_crime.csv'),
-                 output_path=os.path.join(_SCRIPT_PATH, 'aggregations')):
+def process_main(input_csv=None, output_path=None, config_file=None):
     global _SCRIPT_PATH, _INPUT_COLUMNS, _AGGREGATIONS
+    if input_csv is None:
+        input_csv = os.path.join(_SCRIPT_PATH, 'source_data', 'hate_crime.csv')
+    if output_path is None:
+        output_path = os.path.join(_SCRIPT_PATH, 'aggregations')
+    if config_file is None:
+        config_file = os.path.join(_SCRIPT_PATH, 'config.json')
     output_path = os.path.expanduser(output_path)
-    logging.info(f'Processing input: {_FLAGS.input_file}')
-    #with file_util.FileIO(_FLAGS.input_file, 'r') as input_f:
-    print(f"Loading input file into df : {_FLAGS.input_file}")
-    df = pd.read_csv(_FLAGS.input_file)
+    logging.info(f'Processing input: {input_csv}')
+    print(f"Loading input file into df : {input_csv}")
+    df = pd.read_csv(input_csv)
     df.columns = df.columns.str.upper()
     missing_cols = set(_INPUT_COLUMNS) - set(df.columns)
     if missing_cols:
         raise ValueError(f"Missing required columns: {missing_cols}")
     df = df[_INPUT_COLUMNS]
-    logging.info(f'Loading config: {_FLAGS.config_file}')
-    with open(_FLAGS.config_file, 'r', encoding='utf-8') as f:
+    logging.info(f'Loading config: {config_file}')
+    with open(config_file, 'r', encoding='utf-8') as f:
         config = json.load(f)
     config_old = copy.deepcopy(config)
     config_old['_COMMON_']['isHateCrime'] = 'True'
@@ -1808,5 +1819,11 @@ def process_main(input_csv=os.path.join(_SCRIPT_PATH, 'source_data',
         _write_statvar_mcf(statvar_list, f)
 
 
+def main(argv):
+    del argv  # Unused.
+    process_main(input_csv=_FLAGS.input_file, config_file=_FLAGS.config_file)
+
+
 if __name__ == '__main__':
-    app.run(process_main)
+    _define_flags()
+    app.run(main)

@@ -27,6 +27,7 @@ To generate PVMap for a CSV data file, run the command:
     https://ai.google.dev/gemini-api/docs/api-key
 """
 
+from collections import OrderedDict
 import csv
 import os
 import pprint
@@ -36,7 +37,6 @@ import sys
 from absl import app
 from absl import flags
 from absl import logging
-from collections import OrderedDict
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
@@ -57,17 +57,17 @@ flags.DEFINE_string('data_annotator_config', '',
 flags.DEFINE_boolean('llm_data_annotation', True,
                      'Enable data annotations with LLM.')
 
-import data_sampler
-import file_util
-import process_http_server
-
+import config_flags
 from config_map import ConfigMap
 from counters import Counters
-from ngram_matcher import NgramMatcher, normalized_string
+import data_sampler
+import file_util
+from llm_pvmap_generator import LLM_PVMapGenerator
+from llm_pvmap_generator import get_llm_config_from_flags
+from ngram_matcher import NgramMatcher
+from ngram_matcher import normalized_string
+import process_http_server
 from schema_matcher import SchemaMatcher
-from llm_pvmap_generator import LLM_PVMapGenerator, get_llm_config_from_flags
-
-import config_flags
 
 # Regex
 _NUMBER_REGEX = r'^[+0-9,\.$%-]+\s*$'
@@ -127,13 +127,19 @@ class DataTypeAnnotator:
     def __init__(
         self,
         data_type: str = '',
-        pvs: dict = {},
-        words: str = [],
+        pvs: dict | None = None,
+        words: str | list[str] | None = None,
         words_file: str = '',
-        regex_list: list[str] = [],
-        config_dict: dict = {},
+        regex_list: list[str] | None = None,
+        config_dict: dict | None = None,
         counters: Counters = None,
     ):
+        if config_dict is None:
+            config_dict = {}
+        if regex_list is None:
+            regex_list = []
+        if pvs is None:
+            pvs = {}
         self._config = ConfigMap()
         self._config.update_config(config_dict)
         self._counters = counters
@@ -260,13 +266,21 @@ def register_data_annotator(data_type: str, cls, args):
 
 
 def get_data_annotator(data_type: str,
-                       data_pvs: dict = {},
-                       words: list = [],
+                       data_pvs: dict | None = None,
+                       words: list | None = None,
                        words_file: str = '',
-                       regex_list: list = [],
-                       config_dict: dict = {},
+                       regex_list: list | None = None,
+                       config_dict: dict | None = None,
                        counters: Counters = None) -> DataTypeAnnotator:
     """Returns a data type annotator for the given type."""
+    if config_dict is None:
+        config_dict = {}
+    if regex_list is None:
+        regex_list = []
+    if words is None:
+        words = []
+    if data_pvs is None:
+        data_pvs = {}
     annotator = _DATA_TYPE_ANNOTATORS.get(data_type)
     if annotator is None:
         # Get the default annotator
@@ -285,9 +299,11 @@ class DataAnnotator:
 
     def __init__(
         self,
-        config_dict: dict = {},
+        config_dict: dict | None = None,
         counters: Counters = None,
     ):
+        if config_dict is None:
+            config_dict = {}
         self._config = ConfigMap()
         self._config.update_config(config_dict)
         self._counters = counters
@@ -653,7 +669,6 @@ def main(_):
         return
 
     logging.set_verbosity(1)
-    counters = Counters()
     config = ConfigMap(config_dict=get_data_annotator_config(),
                        filename=_FLAGS.data_annotator_config)
     generate_pvmap(_FLAGS.data_annotator_input, _FLAGS.annotator_output_pv_map,

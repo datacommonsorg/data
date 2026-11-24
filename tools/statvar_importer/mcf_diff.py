@@ -72,7 +72,10 @@ sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPT_DIR)), 'util'))
 
 from counters import Counters
-from mcf_file_util import load_mcf_nodes, filter_mcf_nodes, normalize_mcf_node, normalize_value, node_dict_to_text, get_node_dcid, strip_namespace
+from mcf_file_util import filter_mcf_nodes
+from mcf_file_util import load_mcf_nodes
+from mcf_file_util import node_dict_to_text
+from mcf_file_util import normalize_mcf_node
 
 flags.DEFINE_string('mcf1', '', 'MCF file with nodes')
 flags.DEFINE_string('mcf2', '', 'MCF file with nodes')
@@ -117,16 +120,22 @@ _FLAGS = flags.FLAGS
 # _FLAGS(sys.argv)  # Allow invocation without app.run()
 
 
+def _get_flag_value(name: str):
+    """Returns the flag value for `name` without mutating global parsed state."""
+    flag = _FLAGS[name]
+    return flag.value if _FLAGS.is_parsed() else flag._value
+
+
 def get_diff_config() -> dict:
     """Returns a dictionary of config parameters for MCF diff from flags."""
     return {
-        'ignore_property': _FLAGS.ignore_property,
-        'compare_property': _FLAGS.compare_property,
-        'fingerprint_dcid': _FLAGS.fingerprint_dcid,
-        'ignore_nodes_with_pv': _FLAGS.ignore_nodes_with_pv,
-        'compare_dcids': _FLAGS.compare_dcids,
-        'compare_nodes_with_pv': _FLAGS.compare_nodes_with_pv,
-        'show_diff_nodes_only': _FLAGS.show_diff_nodes_only,
+        'ignore_property': _get_flag_value('ignore_property'),
+        'compare_property': _get_flag_value('compare_property'),
+        'fingerprint_dcid': _get_flag_value('fingerprint_dcid'),
+        'ignore_nodes_with_pv': _get_flag_value('ignore_nodes_with_pv'),
+        'compare_dcids': _get_flag_value('compare_dcids'),
+        'compare_nodes_with_pv': _get_flag_value('compare_nodes_with_pv'),
+        'show_diff_nodes_only': _get_flag_value('show_diff_nodes_only'),
     }
 
 
@@ -159,8 +168,6 @@ def diff_mcf_node_pvs(node_1: dict,
   """
     if config is None:
         config = {}
-    dcid1 = get_node_dcid(node_1)
-    dcid2 = get_node_dcid(node_2)
     compare_props = set(config.get('compare_property', []))
     if not compare_props:
         compare_props = set(node_1.keys())
@@ -193,7 +200,7 @@ def diff_mcf_node_pvs(node_1: dict,
     for d in diff:
         diff_str.append(d)
         if d[0] == ' ':
-            counters and counters.add_counter(f'PVs-matched', 1)
+            counters and counters.add_counter('PVs-matched', 1)
         else:
             prop = ''
             value = ''
@@ -224,19 +231,19 @@ def diff_mcf_node_pvs(node_1: dict,
 
         if len(node1) > 0:
             if len(node2) > 0:
-                counters and counters.add_counter(f'nodes-with-diff', 1)
+                counters and counters.add_counter('nodes-with-diff', 1)
             else:
-                counters and counters.add_counter(f'nodes-missing-in-mcf2', 1)
+                counters and counters.add_counter('nodes-missing-in-mcf2', 1)
         else:
-            counters and counters.add_counter(f'nodes-missing-in-mcf1', 1)
+            counters and counters.add_counter('nodes-missing-in-mcf1', 1)
     else:
-        counters and counters.add_counter(f'nodes-matched', 1)
+        counters and counters.add_counter('nodes-matched', 1)
     return has_diff, '\n'.join(diff_str), pvs_added, pvs_deleted, pvs_modified
 
 
 def diff_mcf_nodes(nodes1: dict,
                    nodes2: dict,
-                   config: dict = {},
+                   config: dict | None = None,
                    counters: Counters = None) -> str:
     """Compare nodes across two dicts and report differences as a dict of counters.
 
@@ -249,12 +256,14 @@ def diff_mcf_nodes(nodes1: dict,
   Returns:
     string with diffs across all nodes or empty string if there are no diffs.
   """
+    if config is None:
+        config = {}
     if counters is None:
         counters = Counters()
     diff_str = []
     for dcid1 in nodes1.keys():
         if dcid1 not in nodes2:
-            counters.add_counter(f'dcid-missing-in-nodes2', 1,
+            counters.add_counter('dcid-missing-in-nodes2', 1,
                                  f'dcid={dcid1}, PVs={nodes1[dcid1]}')
 
     # Compare PVs across all nodes.
@@ -273,14 +282,14 @@ def diff_mcf_nodes(nodes1: dict,
     dcids2 = set(nodes2.keys())
     diff = dcids2.difference(dcids1)
     for dcid2 in diff:
-        counters.add_counter(f'dcid-missing-in-nodes1', 1,
+        counters.add_counter('dcid-missing-in-nodes1', 1,
                              f'dcid={dcid2}, PVs={nodes2[dcid2]}')
     return '\n'.join(diff_str)
 
 
 def fingerprint_node(pvs: dict,
-                     ignore_props: set = {},
-                     compare_props: set = {}) -> str:
+                     ignore_props: set | None = None,
+                     compare_props: set | None = None) -> str:
     """Returns a fingerprint of all property:values in the pvs dict.
 
   The fingerprint is a concatenated set of PVs sorted by the property.
@@ -294,6 +303,10 @@ def fingerprint_node(pvs: dict,
   Returns:
     fingerprint string representing all PVs
   """
+    if compare_props is None:
+        compare_props = set()
+    if ignore_props is None:
+        ignore_props = set()
     fp = []
     normalized_pvs = normalize_mcf_node(pvs, quantity_range_to_dcid=True)
     for p in sorted(normalized_pvs.keys()):
@@ -304,8 +317,8 @@ def fingerprint_node(pvs: dict,
 
 
 def fingerprint_mcf_nodes(nodes: dict,
-                          ignore_props: list = [],
-                          compare_props: list = []) -> dict:
+                          ignore_props: list | None = None,
+                          compare_props: list | None = None) -> dict:
     """Return a set of nodes with fingerprint as the key.
 
   Args:
@@ -315,6 +328,10 @@ def fingerprint_mcf_nodes(nodes: dict,
   Returns:
     new dictionary with finger print as keys and input nodes as values.
   """
+    if compare_props is None:
+        compare_props = []
+    if ignore_props is None:
+        ignore_props = []
     fp_nodes = {}
     fp_ignore_props = set(['dcid', 'Node', 'value'])
     fp_ignore_props.update(ignore_props)
@@ -328,7 +345,7 @@ def fingerprint_mcf_nodes(nodes: dict,
 
 def diff_mcf_files(file1: str,
                    file2: str,
-                   config: dict = {},
+                   config: dict | None = None,
                    counters: Counters = None) -> str:
     """Compares MCF nodes in two files and returns the diffs.
 
@@ -348,6 +365,8 @@ def diff_mcf_files(file1: str,
   Returns:
     string with differences between nodes.
   """
+    if config is None:
+        config = {}
     if counters is None:
         counters = Counters()
     nodes1 = filter_mcf_nodes(
@@ -382,8 +401,8 @@ def diff_mcf_files(file1: str,
 
 def main(_):
     if not _FLAGS.mcf1 or not _FLAGS.mcf2:
-        print(f'Please provide two MCF files to compare with --mcf1=<file1>'
-              f' --mcf2=<file2>')
+        print('Please provide two MCF files to compare with --mcf1=<file1>'
+              ' --mcf2=<file2>')
     else:
         diff_mcf_files(_FLAGS.mcf1, _FLAGS.mcf2, get_diff_config())
 

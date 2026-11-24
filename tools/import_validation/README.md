@@ -49,7 +49,7 @@ Validators use logical sources loaded from the input artifacts:
 | --- | --- | --- |
 | `stats` | `summary_report.csv` | Date, place, observation, unit, value, golden, and SQL validations |
 | `lint` | GenMCF `report.json` | Empty-import, missing-reference, and lint-error validations |
-| `differ_summary` | `<differ_output>/differ_summary.json` | Deleted-record count and percentage validations |
+| `differ_summary` | `<differ_output>/differ_summary.json` | Deleted-record and deleted-entity validations |
 | `differ` | `<differ_output>/nodes-added.mcf`, `nodes-deleted.mcf`, and `nodes-modified.mcf`, aggregated by StatVar | Added-record, modified-record, and SQL validations |
 
 The import tool owns the complete `summary_report.csv` and `report.json` formats. See `<IMPORT_REPO>/docs/usage.md` for their generation and format. The import differ owns the differ artifacts; see [the import differ documentation](../import_differ/README.md).
@@ -182,6 +182,7 @@ The following validations are currently supported:
 | `LINT_ERROR_COUNT` | Checks that the total number of lint errors is within a threshold. | `lint`; all error counters | `threshold` (number, defaults to 0) |
 | `DELETED_RECORDS_COUNT` | Checks that the total number of deleted observation points is within a threshold. | `differ_summary`; `deleted_obs_count` | `threshold` (number, defaults to 0) |
 | `DELETED_RECORDS_PERCENT` | Checks that the percentage of deleted observation points is within a threshold. | `differ_summary`; `deleted_obs_count`, `previous_obs_count` | `threshold` (number, defaults to 0) |
+| `DELETED_ENTITY_COUNT` | Checks that the total number of deleted non-observation entities is within a threshold. | `differ_summary`; `deleted_schema_count` | `threshold` (number, defaults to 0) |
 | `MODIFIED_RECORDS_COUNT` | Checks that the number of modified points is the same for all StatVars. | `differ`; `StatVar`, `MODIFIED` | None |
 | `ADDED_RECORDS_COUNT` | Checks that the number of added points is the same for all StatVars. | `differ`; `StatVar`, `ADDED` | None |
 | `NUM_PLACES_CONSISTENT` | Checks that the number of places is the same for all StatVars. | `stats`; `StatVar`, `NumPlaces` | None |

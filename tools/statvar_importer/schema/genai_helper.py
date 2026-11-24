@@ -46,11 +46,10 @@ flags.DEFINE_string(
     'Text file where the LLM request text used is copied into.')
 flags.DEFINE_string('genai_response', '', 'Text file with the LLM response')
 
-import file_util
-import process_http_server
-
 from config_map import ConfigMap
 from counters import Counters
+import file_util
+import process_http_server
 
 
 # Class to query GenAI APIs using a given prompt.
@@ -58,7 +57,7 @@ class GenAIHelper:
 
     def __init__(
         self,
-        config_dict: dict = {},
+        config_dict: dict | None = None,
         counters: Counters = None,
     ):
         # Import modules needed for GenAi
@@ -66,6 +65,8 @@ class GenAIHelper:
         # due to statvar processor but doesn't invoke genai
         import google.generativeai as genai
 
+        if config_dict is None:
+            config_dict = {}
         self._config = ConfigMap()
         self._config.update_config(config_dict)
         self._counters = counters
@@ -197,9 +198,11 @@ def generate_content(input_prompt: str,
                      input_file: str = '',
                      input_params_file: str = '',
                      output_file: str = '',
-                     config_dict: dict = {},
+                     config_dict: dict | None = None,
                      counters: Counters = None) -> str:
     """Generate context from generative AI using the input prompt."""
+    if config_dict is None:
+        config_dict = {}
     genai_helper = GenAIHelper(config_dict, counters)
     if input_file:
         genai_helper.load_prompt(input_file)

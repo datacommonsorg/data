@@ -57,16 +57,6 @@
             # S2 level to which data is aggregated.
             's2_level': 10,  # Events are at resolution of level-10 S2 cells.
             'aggregate': 'sum',  # default aggregation for all properties
-            # Per property settings
-            'property_config': {
-                'area': {
-                    'aggregate': 'sum',
-                    'unit': 'SquareKilometer',
-                },
-                'affectedPlace': {
-                    'aggregate': 'list',
-                },
-            },
             # Per property filter params for input data.
             'input_filter_config': {
                 'confidence': {

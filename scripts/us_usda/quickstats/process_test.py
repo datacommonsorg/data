@@ -13,13 +13,15 @@
 # limitations under the License.
 """Tests for process.py"""
 
-import csv
 import io
-import json
 import unittest
 from unittest import mock
+
 from absl.testing import absltest
-from process import to_csv_rows, get_survey_county_data, write_csv, load_svs
+from process import get_survey_county_data
+from process import load_svs
+from process import to_csv_rows
+from process import write_csv
 
 
 class ProcessTest(unittest.TestCase):
@@ -131,8 +133,8 @@ dcs:Area_Farm_WheatForGrain,2024,dcid:geoId/45001,5000,dcs:Acre
     def test_get_data_500_raises_error(self, mock_rate_limit,
                                        mock_requests_get):
         """Tests that get_data raises RequestException after retries on 500 error."""
-        import requests
         from process import get_data
+        import requests
         mock_resp = mock.Mock()
         mock_resp.status_code = 500
         mock_resp.raise_for_status.side_effect = requests.exceptions.HTTPError(

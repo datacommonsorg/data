@@ -1,13 +1,16 @@
 # Copyright 2025 Google LLC
 # Licensed under the Apache License, Version 2.0 (the "License");
 
-import os, sys
-import pandas as pd
-from absl import app, logging
-from pathlib import Path
 import datetime
 import importlib.util
+import os
+from pathlib import Path
 import shutil
+import sys
+
+from absl import app
+from absl import logging
+import pandas as pd
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 util_script_path = os.path.abspath(
@@ -121,7 +124,7 @@ def preprocess_data(filepath: str):
         logging.error(f"Error during Pandas processing: {e}")
         logging.fatal(f"An unexpected error occurred: {e}")
         raise RuntimeError(
-            f"Import job failed An unexpected error occurred: {e}")
+            f"Import job failed An unexpected error occurred: {e}") from e
 
 
 def main(argv):
@@ -139,7 +142,8 @@ def main(argv):
     except Exception as e:
         logging.error(f"Failed during download: {e}")
         logging.fatal(f"Failed to download NNDSS weekly data file,{e}")
-        raise RuntimeError(f"Failed to download NNDSS weekly data file,{e}")
+        raise RuntimeError(
+            f"Failed to download NNDSS weekly data file,{e}") from e
 
     # Check if file actually downloaded and check its size
     if not os.path.exists(INPUT_FILE):

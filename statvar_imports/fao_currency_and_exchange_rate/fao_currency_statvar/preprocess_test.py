@@ -20,7 +20,9 @@ import shutil
 import sys
 import tempfile
 import unittest
-from absl import app, logging
+
+from absl import app
+from absl import logging
 import pandas as pd
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))

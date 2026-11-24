@@ -1,13 +1,16 @@
 # Copyright 2025 Google LLC
-import os
-import sys
 import json
 import logging
+import os
 import shutil
+import sys
 import tempfile
+from urllib.parse import parse_qs
+from urllib.parse import urlparse
 import zipfile
-from urllib.parse import urlparse, parse_qs
+
 import pandas as pd
+
 # --- Constants provided by the user's environment ---
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_MODULE_DIR, '../../../util/'))
@@ -367,7 +370,7 @@ def process_and_save_data(file_paths):
         except Exception as e:
             logging.error(f"Failed to process file {file_path}: {e}")
             raise RuntimeError(
-                f"Critical failure while processing file {file_path}")
+                f"Critical failure while processing file {file_path}") from e
 
 
 def organize_files(download_dir, math_dir, english_dir, math_files,

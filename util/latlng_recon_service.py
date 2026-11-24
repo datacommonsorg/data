@@ -17,8 +17,10 @@ See latlng_recon_service_test.py for usage example.
 """
 
 import concurrent.futures
+from typing import Callable, Dict, List, NewType, Tuple, TypeVar
+
 import requests
-from typing import Callable, Dict, List, NewType, TypeVar, Tuple
+
 from .dc_api_wrapper import dc_api_resolve_latlng
 
 LatLngType = NewType('LatLngType', Tuple[float, float])

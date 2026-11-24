@@ -13,19 +13,20 @@
 # limitations under the License.
 """Module for the Validator class."""
 
-import duckdb
-import pandas as pd
 import os
 import sys
+
+import duckdb
+import pandas as pd
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
 _DATA_DIR = os.path.dirname(os.path.dirname(_SCRIPT_DIR))
 sys.path.append(os.path.join(_DATA_DIR, 'util'))
 
-from result import ValidationResult, ValidationStatus
 from counters import Counters
-from validation_util import DIFFER_COLUMNS
+from result import ValidationResult
+from result import ValidationStatus
 import validator_goldens
 
 
@@ -193,6 +194,45 @@ class Validator:
             'DELETED_RECORDS_COUNT',
             details={
                 'deleted_records_count': int(deleted_records_count),
+                'threshold': threshold
+            })
+
+    def validate_deleted_entity_count(self, summary: dict,
+                                      params: dict) -> ValidationResult:
+        """Checks if the total number of deleted entities is within a threshold.
+
+    Args:
+      summary: A dictionary containing the differ summary.
+      params: A dictionary containing the validation parameters, which may
+        have a 'threshold' key.
+
+    Returns:
+      A ValidationResult object.
+    """
+        threshold = params.get('threshold', 0)
+
+        if not summary or summary.get('deleted_schema_count') is None:
+            # If summary is missing or empty, assume 0 deleted entities.
+            deleted_entity_count = 0
+        else:
+            deleted_entity_count = int(summary['deleted_schema_count'])
+
+        if deleted_entity_count > threshold:
+            return ValidationResult(
+                ValidationStatus.FAILED,
+                'DELETED_ENTITY_COUNT',
+                message=
+                f"Found {deleted_entity_count} deleted entities, which is over the threshold of {threshold}.",
+                details={
+                    'deleted_entity_count': deleted_entity_count,
+                    'threshold': threshold
+                })
+
+        return ValidationResult(
+            ValidationStatus.PASSED,
+            'DELETED_ENTITY_COUNT',
+            details={
+                'deleted_entity_count': deleted_entity_count,
                 'threshold': threshold
             })
 

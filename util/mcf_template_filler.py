@@ -28,9 +28,8 @@ template, and this library will prune unused PVs.
 See `mcf_template_filler_test.py` for example usage.
 """
 
-import re
-
 import logging
+import re
 
 
 class Filler:

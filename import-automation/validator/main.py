@@ -40,10 +40,12 @@ for _p in [
     if _p not in sys.path:
         sys.path.insert(0, _p)
 
+import file_util
+
 from tools.import_differ import bigquery_differ
+from tools.import_differ.import_differ import ImportDiffer
 from tools.import_validation.runner import ValidationRunner
 from tools.import_validation.validation_config import merge_and_save_config
-import file_util
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string(
@@ -56,13 +58,15 @@ flags.DEFINE_string('version', '',
 flags.DEFINE_string('gcs_bucket', '',
                     'GCS bucket name (defaults to env GCS_BUCKET_ID).')
 if 'bq_dataset' not in FLAGS:
-    flags.DEFINE_string(
-        'bq_dataset', 'datcom_import_differ',
-        'BigQuery dataset ID for temporary differ tables.')
+    flags.DEFINE_string('bq_dataset', 'datcom_import_differ',
+                        'BigQuery dataset ID for temporary differ tables.')
 if 'bq_table_ttl_hours' not in FLAGS:
-    flags.DEFINE_integer(
-        'bq_table_ttl_hours', 12,
-        'TTL in hours for temporary BigQuery differ tables.')
+    flags.DEFINE_integer('bq_table_ttl_hours', 12,
+                         'TTL in hours for temporary BigQuery differ tables.')
+if 'run_bq_differ' not in FLAGS:
+    flags.DEFINE_bool(
+        'run_bq_differ', True,
+        'If True, run BigQuery differ instead of native Python differ.')
 
 
 def _read_gcs_text(client: storage.Client, bucket_name: str,
@@ -132,8 +136,8 @@ def _resolve_validation_config(client: storage.Client, bucket_name: str,
             file_util.file_copy(gcs_override_cfg, local_override_cfg)
             logging.info('Downloaded override validation config from GCS: %s',
                          gcs_override_cfg)
-            return merge_and_save_config(default_val_config,
-                                         local_override_cfg, tmpdir)
+            return merge_and_save_config(default_val_config, local_override_cfg,
+                                         tmpdir)
 
         local_repo_cfg = os.path.join(_ROOT_DIR, relative_import_dir,
                                       custom_cfg_rel)
@@ -156,8 +160,9 @@ def run_validation_job(absolute_import_name: str,
                        version_override: str,
                        bucket_name: str,
                        bq_dataset: str,
-                       bq_table_ttl_hours: int = 12) -> int:
-    """Executes BigQuery differ and ValidationRunner for an import version."""
+                       bq_table_ttl_hours: int = 12,
+                       run_bq_differ: bool = True) -> int:
+    """Executes differ (BigQuery by default, or native Python) and ValidationRunner for an import version."""
     start_time = time.time()
     if ':' not in absolute_import_name:
         raise ValueError(
@@ -169,8 +174,7 @@ def run_validation_job(absolute_import_name: str,
     user_config = json.loads(import_config_str) if import_config_str else {}
     if not bucket_name:
         bucket_name = (user_config.get('storage_prod_bucket_name') or
-                       os.environ.get('GCS_BUCKET_ID') or
-                       'datcom-prod-imports')
+                       os.environ.get('GCS_BUCKET_ID') or 'datcom-prod-imports')
     project_id = (user_config.get('gcp_project_id') or
                   os.environ.get('PROJECT_ID') or
                   os.environ.get('GOOGLE_CLOUD_PROJECT', ''))
@@ -183,11 +187,25 @@ def run_validation_job(absolute_import_name: str,
             user_config.get('bq_table_ttl_hours') or env_ttl or
             bq_table_ttl_hours)
 
+    if 'run_bq_differ' in user_config:
+        run_bq_differ = bool(user_config['run_bq_differ'])
+    else:
+        run_bq_differ = bool(run_bq_differ)
+    invoke_import_validation = user_config.get('invoke_import_validation', True)
+    invoke_differ_tool = user_config.get('invoke_differ_tool', True)
     ignore_validation_status = user_config.get('ignore_validation_status',
                                                False)
     enable_skip_status = user_config.get('enable_skip_status', True)
 
+    if not invoke_import_validation:
+        logging.info(
+            'invoke_import_validation is False for %s; skipping validation.',
+            output_dir)
+        return 0
+
     gcs_client = storage.Client(project=project_id or None)
+    if not project_id:
+        project_id = gcs_client.project or ''
 
     version = version_override
     if not version:
@@ -206,9 +224,8 @@ def run_validation_job(absolute_import_name: str,
     logging.info('Running validator for %s version=%s (latest=%s)', output_dir,
                  version, latest_version or 'None')
 
-    summary_raw = _read_gcs_text(
-        gcs_client, bucket_name,
-        f'{output_dir}/{version}/import_summary.json')
+    summary_raw = _read_gcs_text(gcs_client, bucket_name,
+                                 f'{output_dir}/{version}/import_summary.json')
     import_summary: Dict = json.loads(summary_raw) if summary_raw else {
         'import_name': import_name,
         'latest_version': f'gs://{bucket_name}/{output_dir}/{version}',
@@ -242,30 +259,45 @@ def run_validation_job(absolute_import_name: str,
             diff_found = True
             differ_output_dir = ''
 
-            # 1. Run BigQuery Differ if previous version exists
-            if previous_mcf_pattern and file_util.file_get_matching(
+            # 1. Run Differ (native Python by default, or BigQuery) if previous version exists
+            if invoke_differ_tool and previous_mcf_pattern and file_util.file_get_matching(
                     previous_mcf_pattern):
-                logging.info('Running BigQuery differ for %s vs %s',
-                             current_mcf_pattern, previous_mcf_pattern)
-                gcs_temp_dir = (
-                    f'gs://{bucket_name}/{output_dir}/{version}/{input_prefix}/validation/_tmp'
-                )
-                differ_summary = bigquery_differ.run_bigquery_differ(
-                    current_data=current_mcf_pattern,
-                    previous_data=previous_mcf_pattern,
-                    output_location=val_local_dir,
-                    project_id=project_id,
-                    job_name=f'differ_{import_name}_{input_prefix}',
-                    dataset_id=bq_dataset,
-                    gcs_temp_dir=gcs_temp_dir,
-                    expiration_hours=bq_table_ttl_hours,
-                )
+                differ_job_name = f'differ_{import_name}_{input_prefix}'
+                if run_bq_differ:
+                    logging.info('Running BigQuery differ for %s vs %s',
+                                 current_mcf_pattern, previous_mcf_pattern)
+                    gcs_temp_dir = (
+                        f'gs://{bucket_name}/{output_dir}/{version}/{input_prefix}/validation/_tmp'
+                    )
+                    differ_summary = bigquery_differ.run_bigquery_differ(
+                        current_data=current_mcf_pattern,
+                        previous_data=previous_mcf_pattern,
+                        output_location=val_local_dir,
+                        project_id=project_id,
+                        job_name=differ_job_name,
+                        dataset_id=bq_dataset,
+                        gcs_temp_dir=gcs_temp_dir,
+                        expiration_hours=bq_table_ttl_hours,
+                    )
+                else:
+                    logging.info('Running native Python differ for %s vs %s',
+                                 current_mcf_pattern, previous_mcf_pattern)
+                    differ = ImportDiffer(
+                        current_data=current_mcf_pattern,
+                        previous_data=previous_mcf_pattern,
+                        output_location=val_local_dir,
+                        project_id=project_id,
+                        job_name=differ_job_name,
+                        file_format='mcf',
+                        runner_mode='native',
+                    )
+                    differ_summary = differ.run_differ()
                 diff_found = (differ_summary.get('obs_diff_count', 1) != 0 or
                               differ_summary.get('schema_diff_count', 1) != 0)
                 differ_output_dir = val_local_dir
             else:
                 logging.info(
-                    'No previous MCF files found at %s; skipping differ.',
+                    'No previous MCF files found at %s or differ disabled; skipping differ.',
                     previous_mcf_pattern)
 
             if not differ_status:
@@ -345,6 +377,7 @@ def main(_):
         bucket_name=FLAGS.gcs_bucket,
         bq_dataset=FLAGS.bq_dataset,
         bq_table_ttl_hours=FLAGS.bq_table_ttl_hours,
+        run_bq_differ=FLAGS.run_bq_differ,
     )
     sys.exit(code)
 

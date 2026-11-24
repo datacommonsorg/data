@@ -28,33 +28,39 @@ sys.path.append(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)))
 sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)), 'util'))
 
-import earthengine_image
-import file_util
-import raster_to_csv
-
 from config_map import ConfigMap
 from counters import Counters
-from pipeline_stage_runner import StageRunner, register_stage_runner
+import earthengine_image
+import file_util
+from pipeline_stage_runner import StageRunner
+from pipeline_stage_runner import register_stage_runner
+import raster_to_csv
 
 
 class RasterCSVRunner(StageRunner):
     '''Class to generate CSV per input geoTif or CSV with lat/long.'''
 
     def __init__(self,
-                 config_dicts: list = [],
-                 state: dict = {},
+                 config_dicts: list | None = None,
+                 state: dict | None = None,
                  counters=None):
+        if state is None:
+            state = {}
+        if config_dicts is None:
+            config_dicts = []
         self.set_up('raster_csv', config_dicts, state, counters)
 
     def run(self,
             input_files: list = None,
-            config_dict: dict = {},
+            config_dict: dict | None = None,
             counters: Counters = None) -> list:
         '''Returns the csv files with data per geo point generated
         from the input files.
         The input geoTif files are converted to data per-s2 cell grid.
         Input csvs with lat,longs are also converted to data per grid point.
         '''
+        if config_dict is None:
+            config_dict = {}
         output_files = []
 
         for filename in file_util.file_get_matching(input_files):

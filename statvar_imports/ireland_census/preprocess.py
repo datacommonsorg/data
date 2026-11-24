@@ -13,8 +13,10 @@
 # limitations under the License.
 
 import os
+
+from absl import app
+from absl import logging
 import pandas as pd
-from absl import app, logging
 
 INPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                          "input_files")

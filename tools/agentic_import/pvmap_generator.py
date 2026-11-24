@@ -15,21 +15,23 @@
 # limitations under the License.
 
 import copy
+from dataclasses import dataclass
+from dataclasses import field
+from datetime import datetime
 import os
+from pathlib import Path
 import platform
 import random
 import shutil
 import subprocess
 import sys
-from datetime import datetime
-from dataclasses import dataclass, field
-from pathlib import Path
 from typing import List, Optional
 
 from absl import app
 from absl import flags
 from absl import logging
-from jinja2 import Environment, FileSystemLoader
+from jinja2 import Environment
+from jinja2 import FileSystemLoader
 
 _FLAGS = flags.FLAGS
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -211,9 +213,10 @@ class PVMapGenerator:
         working_dir = self._working_dir.resolve()
         try:
             real_path.relative_to(working_dir)
-        except ValueError:
+        except ValueError as e:
             raise ValueError(
-                f"Path '{path}' is outside working directory '{working_dir}'")
+                f"Path '{path}' is outside working directory '{working_dir}'"
+            ) from e
         return real_path
 
     def _resolve_path(self, path: str) -> Path:
@@ -247,9 +250,9 @@ class PVMapGenerator:
 
         try:
             resolved_path.read_text(encoding='utf-8')
-        except UnicodeDecodeError:
+        except UnicodeDecodeError as e:
             raise ValueError(f"Extra instruction file is not valid UTF-8 text: "
-                             f"{resolved_path}")
+                             f"{resolved_path}") from e
 
         return resolved_path
 

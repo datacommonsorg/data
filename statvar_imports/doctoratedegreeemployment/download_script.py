@@ -12,12 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from absl import logging, app
+from io import BytesIO
+import os
+import re
+
+from absl import app
+from absl import logging
 import pandas as pd
 import requests
-from io import BytesIO
-import re
-import os
 
 # Constants
 URL = "https://ncses.nsf.gov/pubs/nsf19304/assets/data/tables/wmpd19-sr-tab09-026.xlsx"
@@ -132,7 +134,8 @@ def main(argv):
         save_to_csv(df, OUTPUT_CSV)
     except Exception as e:
         logging.fatal(f"A error occurred: {e}", exc_info=True)
-        raise RuntimeError(f"Script execution failed due to a error: {e}")
+        raise RuntimeError(
+            f"Script execution failed due to a error: {e}") from e
 
 
 if __name__ == "__main__":

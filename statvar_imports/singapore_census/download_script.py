@@ -13,11 +13,13 @@
 # # limitations under the License.
 
 import json
-import pandas as pd
-from urllib.request import Request, urlopen
 import os
+from urllib.request import Request
+from urllib.request import urlopen
+
 from absl import app
 from absl import logging
+import pandas as pd
 
 logging.set_verbosity(logging.INFO)
 
@@ -35,7 +37,8 @@ def process_singstat_json_to_wide_csv(json_data_str, output_filename):
         data = json.loads(json_data_str)
     except json.JSONDecodeError as e:
         logging.fatal(f"Error decoding JSON: {e}")
-        raise RuntimeError(f"Failed to retrieve data due to an error: {e}")
+        raise RuntimeError(
+            f"Failed to retrieve data due to an error: {e}") from e
         return
 
     records = []
@@ -154,7 +157,8 @@ def main(_):
                 f"An error occurred during data fetching or processing for table {table_id}: {e}"
             )
             raise RuntimeError(
-                f"Failed to process table {table_id} due to an error: {e}")
+                f"Failed to process table {table_id} due to an error: {e}"
+            ) from e
 
         logging.info("-" * 50)
 

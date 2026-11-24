@@ -13,10 +13,12 @@
 # limitations under the License.
 """Storage client for the import helper."""
 
-from datetime import datetime, timezone
+from datetime import datetime
+from datetime import timezone
 import json
 import logging
 import os
+
 import config
 from google.cloud import exceptions
 from google.cloud import storage
@@ -27,6 +29,7 @@ _STAGING_VERSION_FILE = 'staging_version.txt'
 _LATEST_VERSION_FILE = 'latest_version.txt'
 _IMPORT_METADATA_MCF = 'import_metadata_mcf.mcf'
 _IMPORT_SUMMARY_JSON = 'import_summary.json'
+_MANIFEST_JSON = 'manifest.json'
 
 
 class StorageClient:
@@ -68,6 +71,55 @@ class StorageClient:
                 f'Error reading import summary file {summary_file}: {e}')
             raise
 
+    def _read_manifest_for_version(self, output_dir: str,
+                                   version: str) -> dict | None:
+        manifest_file = os.path.join(output_dir, version, _MANIFEST_JSON)
+        try:
+            data = json.loads(
+                self.bucket.blob(manifest_file).download_as_text())
+            if isinstance(data, dict):
+                return data
+        except exceptions.NotFound:
+            return None
+        except Exception as e:
+            logging.warning(f'Error reading manifest file {manifest_file}: {e}')
+        return None
+
+    def get_import_manifest(self,
+                            import_name: str,
+                            version: str | None = None) -> dict | None:
+        """Retrieves the import's manifest.json from GCS if available.
+
+        Checks ``<output_dir>/<version>/manifest.json`` first when ``version``
+        is provided, then falls back to ``staging_version.txt`` and
+        ``latest_version.txt`` pointers in ``<output_dir>``.
+        """
+        output_dir = self._get_output_dir(import_name)
+        checked: set[str] = set()
+        if version:
+            checked.add(version)
+            manifest = self._read_manifest_for_version(output_dir, version)
+            if manifest is not None:
+                return manifest
+
+        for version_file in (_STAGING_VERSION_FILE, _LATEST_VERSION_FILE):
+            try:
+                ver = self.bucket.blob(os.path.join(
+                    output_dir, version_file)).download_as_text().strip()
+            except exceptions.NotFound:
+                continue
+            except Exception as e:
+                logging.warning(
+                    f'Error reading {version_file} for {import_name}: {e}')
+                continue
+            if ver and ver not in checked:
+                checked.add(ver)
+                manifest = self._read_manifest_for_version(output_dir, ver)
+                if manifest is not None:
+                    return manifest
+
+        return None
+
     def update_import_summary(self, import_summary: dict, version: str = None):
         """Updates the import summary in GCS.
 
@@ -81,7 +133,8 @@ class StorageClient:
 
         if import_name and version:
             output_dir = self._get_output_dir(import_name)
-            summary_file = os.path.join(output_dir, version, _IMPORT_SUMMARY_JSON)
+            summary_file = os.path.join(output_dir, version,
+                                        _IMPORT_SUMMARY_JSON)
         else:
             latest_version = import_summary.get('latest_version') or ''
             graph_path = (import_summary.get('graph_path') or '').lstrip('/')
@@ -89,7 +142,8 @@ class StorageClient:
             if graph_path and base_path.endswith(graph_path.rstrip('/')):
                 base_path = base_path[:-len(graph_path.rstrip('/'))].rstrip('/')
             path = base_path.removeprefix('gs://').split('/', 1)
-            summary_file = os.path.join(path[1] if len(path) > 1 else path[0], _IMPORT_SUMMARY_JSON)
+            summary_file = os.path.join(path[1] if len(path) > 1 else path[0],
+                                        _IMPORT_SUMMARY_JSON)
 
         logging.info(
             f'Updating import summary at {summary_file} {import_summary}')
@@ -119,7 +173,8 @@ class StorageClient:
             return blob.download_as_text().strip()
         except exceptions.NotFound:
             logging.error(
-                f"{file_type.capitalize()} version file {version_file} not found")
+                f"{file_type.capitalize()} version file {version_file} not found"
+            )
             raise
 
     def update_version_file(self,
@@ -168,11 +223,9 @@ class StorageClient:
                 f'Generating default metadata for import {import_name}')
             base_name = import_name.split(':')[-1]
             refresh_date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-            default_provenance = (
-                f"Node: dcid:dc/base/{base_name}\n"
-                f"typeOf: dcid:Provenance\n"
-                f'lastDataRefreshDate: "{refresh_date}"\n'
-            )
+            default_provenance = (f"Node: dcid:dc/base/{base_name}\n"
+                                  f"typeOf: dcid:Provenance\n"
+                                  f'lastDataRefreshDate: "{refresh_date}"\n')
             new_blob = self.bucket.blob(
                 os.path.join(output_dir, version, 'provenance', 'genmcf',
                              'import_metadata_mcf.mcf'))

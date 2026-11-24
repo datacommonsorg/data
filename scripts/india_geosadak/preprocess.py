@@ -12,12 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
-import shutil
-import pandas as pd
-from os import path
-import geopandas
 import json
+import os
+from os import path
+
+import geopandas
+import pandas as pd
 
 
 def map_names():

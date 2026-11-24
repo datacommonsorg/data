@@ -15,27 +15,26 @@ import functools
 import io
 import json
 import os
-import shutil
 import sys
 import time
 import zipfile
+
 from absl import app
 from absl import flags
 from absl import logging
 from bs4 import BeautifulSoup
-import requests
-import fetch_ncid
-from download_config import COLUMNS_SELECTOR_URL
 from download_config import COLUMNS_SELECTOR
+from download_config import COLUMNS_SELECTOR_URL
 from download_config import COLUMNS_TO_DOWNLOAD_WITH_SINGLE_API_CALL
-from download_config import COMPRESS_FILE_URL
 from download_config import COMPRESS_FILE
+from download_config import COMPRESS_FILE_URL
 from download_config import DOWNLOAD_URL
 from download_config import HEADERS
 from download_config import MAX_RETRIES
 from download_config import NCES_DOWNLOAD_URL
 from download_config import RETRY_SLEEP_SECS
-from download_config import YEAR_PAYLOAD, YEAR_URL
+from download_config import YEAR_PAYLOAD
+from download_config import YEAR_URL
 from download_files_details import DEFAULT_COLUMNS_SELECTED
 from download_files_details import DISTRICT_COLUMNS
 from download_files_details import KEY_COLUMNS_DISTRICT
@@ -43,6 +42,8 @@ from download_files_details import KEY_COLUMNS_PRIVATE
 from download_files_details import KEY_COLUMNS_PUBLIC
 from download_files_details import PRIVATE_COLUMNS
 from download_files_details import PUBLIC_COLUMNS
+import fetch_ncid
+import requests
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_MODULE_DIR, '../../../util/'))
@@ -51,16 +52,19 @@ import file_util
 
 _FLAGS = flags.FLAGS
 
-flags.DEFINE_enum("import_name", None,
-                  ["PublicSchool", "PrivateSchool", "District"],
-                  "Import name for which input files to be downloaded")
-flags.DEFINE_list("years_to_download", None,
-                  "Years for which file has to be downloaded")
-flags.mark_flag_as_required("import_name")
-flags.DEFINE_string(
-    'config_file',
-    'gs://datcom-prod-imports/scripts/us_nces/demographics/school_id_list.json',
-    'Path to config file')
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_enum("import_name", None,
+                      ["PublicSchool", "PrivateSchool", "District"],
+                      "Import name for which input files to be downloaded")
+    flags.DEFINE_list("years_to_download", None,
+                      "Years for which file has to be downloaded")
+    flags.mark_flag_as_required("import_name")
+    flags.DEFINE_string(
+        'config_file',
+        'gs://datcom-prod-imports/scripts/us_nces/demographics/school_id_list.json',
+        'Path to config file')
 
 
 def _call_export_csv_api(school: str, year: str, columns: list) -> str:
@@ -182,7 +186,8 @@ def _call_compress_api(file_name: str) -> str:
         ) from e
 
 
-def _call_download_api(compressed_src_file: str, year: str) -> int:
+def _call_download_api(compressed_src_file: str, year: str,
+                       import_name: str) -> int:
     """
     Calls the download API to download a compressed file, extracts it to the
     original specified locations (now with year subfolders), and then copies
@@ -203,15 +208,15 @@ def _call_download_api(compressed_src_file: str, year: str) -> int:
         logging.info(f"API success for downloading file for year {year}")
 
         base_extract_parent_dir = ""
-        if _FLAGS.import_name == "PrivateSchool":
+        if import_name == "PrivateSchool":
             base_extract_parent_dir = "private_school/input_files"
-        elif _FLAGS.import_name == "District":
+        elif import_name == "District":
             base_extract_parent_dir = "school_district/input_files"
-        elif _FLAGS.import_name == "PublicSchool":
+        elif import_name == "PublicSchool":
             base_extract_parent_dir = "public_school/input_files"
         else:
             logging.warning(
-                f"Unknown _FLAGS.import_name: {_FLAGS.import_name}. Extracting to current directory."
+                f"Unknown import_name: {import_name}. Extracting to current directory."
             )
         base_extract_path_original = os.path.join(base_extract_parent_dir, year)
         # checking the  target extraction paths existance
@@ -254,14 +259,15 @@ def get_year_list(school):
     return years_to_download
 
 
-def main(_):
-    logging.info(f'Loading config: {_FLAGS.config_file}')
+def run(config_file, import_name, years_to_download) -> None:
+    """Downloads the NCES files for import_name and updates config_file."""
+    logging.info(f'Loading config: {config_file}')
 
-    logging.info(f"Downloading files for import {_FLAGS.import_name}")
-    school = _FLAGS.import_name
+    logging.info(f"Downloading files for import {import_name}")
+    school = import_name
 
-    if _FLAGS.years_to_download:
-        years_to_process = _FLAGS.years_to_download
+    if years_to_download:
+        years_to_process = years_to_download
     else:
         years_to_process = get_year_list(school)
 
@@ -275,9 +281,8 @@ def main(_):
         primary_key = KEY_COLUMNS_DISTRICT
         column_names = DISTRICT_COLUMNS
 
-        data = {}
     try:
-        with file_util.FileIO(_FLAGS.config_file, 'r') as f:
+        with file_util.FileIO(config_file, 'r') as f:
             data = json.load(f)
     except (json.JSONDecodeError, FileNotFoundError) as e:
         logging.warning(
@@ -300,7 +305,7 @@ def main(_):
             id_list = fetch_ncid.fetch_school_ncid(school, year, column_names,
                                                    NCES_DOWNLOAD_URL)
             data[school][year] = id_list
-            with file_util.FileIO(_FLAGS.config_file, 'w') as f:
+            with file_util.FileIO(config_file, 'w') as f:
                 json.dump(data, f, indent=4)
 
         index_columns_selected = 0
@@ -345,10 +350,17 @@ def nces_elsi_file_download(school, year, curr_columns_selected):
             raise Exception(f"Compress file failed for {file_name}")
         else:
             logging.info(f"Downloading the compressed file for {year}")
-            download_ret = _call_download_api(compressed_file_path, year)
+            download_ret = _call_download_api(compressed_file_path, year,
+                                              school)
             if download_ret != 0:
                 raise Exception(f"Download failed for {file_name}")
 
 
+def main(argv):
+    del argv  # Unused.
+    run(_FLAGS.config_file, _FLAGS.import_name, _FLAGS.years_to_download)
+
+
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

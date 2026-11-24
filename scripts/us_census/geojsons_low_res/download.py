@@ -17,15 +17,17 @@ Downloads and saves GeoJson map files from DataCommons.
     python3 download.py
 """
 
-import geojson
 import os
 from pathlib import Path
 import sys
 
+import geojson
+
 REPO_ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO_ROOT))
 
-from util.dc_api_wrapper import dc_api_get_node_property, get_datacommons_client
+from util.dc_api_wrapper import dc_api_get_node_property
+from util.dc_api_wrapper import get_datacommons_client
 
 
 class GeojsonDownloader:

@@ -13,11 +13,10 @@
 # limitations under the License.
 
 import os
-import unittest
-from unittest.mock import patch, MagicMock
-import tempfile
-import json
 import sys
+import tempfile
+import unittest
+from unittest.mock import patch
 
 # Adjust the path to import the script under test
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))

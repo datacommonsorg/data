@@ -12,17 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from datetime import date
 import os
 import re
-import requests
-from bs4 import BeautifulSoup
-import urllib.parse
-import pandas as pd
-import warnings
 import shutil
-from datetime import date
-from absl import logging
+import urllib.parse
+import warnings
+
 from absl import app
+from absl import logging
+from bs4 import BeautifulSoup
+import pandas as pd
+import requests
 
 # Suppress pandas FutureWarnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
@@ -212,7 +213,7 @@ def download_table(url, year, life_stage, save_path):
             logging.warning(f"No tables found on page: {url}")
     except Exception as e:
         logging.fatal(f"Error processing {url}: {e}")
-        raise RuntimeError(e)
+        raise RuntimeError(e) from e
 
 
 def main(_):
