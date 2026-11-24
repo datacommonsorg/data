@@ -119,7 +119,7 @@ BG41,nuts/BG41,South West,Bulgaria
 BG42,nuts/BG42,South Central,Bulgaria
 CAN,country/CAN,Canada,Canada
 CA10,wikidataId/Q2003,Newfoundland and Labrador,Canada
-CA11, wikidataId/Q1979,Prince Edward Island,Canada
+CA11,wikidataId/Q1979,Prince Edward Island,Canada
 CA12,wikidataId/Q1952,Nova Scotia,Canada
 CA13,wikidataId/Q1965,New Brunswick,Canada
 CA24,wikidataId/Q176,Quebec,Canada
@@ -683,6 +683,8 @@ NL31,nuts/NL31,Utrecht,Netherlands
 NL32,nuts/NL32,North Holland,Netherlands
 NL33,nuts/NL33,South Holland,Netherlands
 NL34,nuts/NL34,Zeeland,Netherlands
+NL35,nuts/NL35,Utrecht,Netherlands
+NL36,nuts/NL36,South Holland,Netherlands
 NL41,nuts/NL41,North Brabant,Netherlands
 NL42,nuts/NL42,Limburg,Netherlands
 NZ23,wikidataId/Q657004,Canterbury,New Zealand
@@ -736,6 +738,11 @@ PT15,nuts/PT15,Algarve,Portugal
 PT16,nuts/PT16,Central Portugal,Portugal
 PT17,nuts/PT17,Metropolitan area of Lisbon,Portugal
 PT18,nuts/PT18,Alentejo,Portugal
+PT19,nuts/PT19,Centre,Portugal
+PT1A,nuts/PT1A,Greater Lisbon,Portugal
+PT1B,nuts/PT1B,Setúbal Peninsula,Portugal
+PT1C,nuts/PT1C,Alentejo,Portugal
+PT1D,nuts/PT1D,West and Tagus Valley,Portugal
 PT20,nuts/PT20,Autonomous Region of the Azores,Portugal
 PT30,nuts/PT30,Autonomous Region of Madeira,Portugal
 ROU,country/ROU,Romania,Romania

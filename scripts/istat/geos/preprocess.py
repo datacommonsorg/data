@@ -16,12 +16,12 @@
    respectively.
 """
 
-import zipfile
 import io
 import os
-import requests
-import pandas as pd
+import zipfile
 
+import pandas as pd
+import requests
 
 URL = "https://www.istat.it/storage/codici-unita-amministrative/"+\
     "Elenco-codici-statistici-e-denominazioni-delle-unita-territoriali.zip"

@@ -34,7 +34,7 @@ alias python=python3
 # Bash function to process csv with pandas
 # Usage: pd_csv "<pandas command>" < input.csv > output.csv
 # Example: To extract a specific column, "ColumnA"
-#  pd_csv "cols=['ColumnA'];df.drop(df.columns.difference(cols),inplace=True) " < in.csv > out.csv
+#  pd_csv "cols=['ColumnA'];df=df.drop(df.columns.difference(cols)) " < in.csv > out.csv
 function pd_csv {
   stmt=""
   delim=","
@@ -55,8 +55,8 @@ function pd_csv {
       -d) shift; read_opts="$read_opts, delimiter='$1'";;  # Set delimiter character
       -dt*) shift; dtype="$1";;
       -diff) shift; diff_input="$1";;
-      -dn*) shift; stmt="$stmt;df.dropna(subset='$1', inplace=True)";;
-      -dr*) shift; stmt="$stmt;df.drop(df.columns.difference(['$1']), inplace=True)";;
+      -dn*) shift; stmt="$stmt;df=df.dropna(subset='$1')";;
+      -dr*) shift; stmt="$stmt;df=df.drop(df.columns.difference(['$1']))";;
       -str*) dtype="str";;
       -in*) index=True;; # Enable Index in the output, needed for pivot
       -i) shift; input="$input'$1',";;
@@ -68,7 +68,7 @@ function pd_csv {
       -c) shift; columns="$columns,$1";;  # output specific columns
       -il*) shift; iloc="$1";;
       -m) shift; imports="$imports; import $1";;
-      -dd) stmt="$stmt;df.drop_duplicates(subset=df.columns,inplace=True)";;
+      -dd) stmt="$stmt;df=df.drop_duplicates(subset=df.columns)";;
       -v*) shift; stmt="$stmt;print(df['$1'].value_counts())"; output='';;
       -sum*) stmt="$stmt;print($input)
 print(f'Shape,{df.shape}')
@@ -83,7 +83,7 @@ for s in range(num_shards): df[df['$col']==unique_vals[s]].to_csv(f'{output}-$co
 ";
 output="";;
       -so*) shift; col=$1;
-        stmt="$stmt;df.sort_values(by=['$col'], inplace=True)";;
+        stmt="$stmt;df=df.sort_values(by=['$col'])";;
       -stat*) shift; col=$1;
         stmt="$stmt;c=df['$col'].dropna().to_numpy()"
           stmt="$stmt;print(f'Column: $col, count: {len(c)}, min: {c.min():.2f}, max: {c.max():.2f}, mean: {c.mean():.2f}, median: {np.median(c):.2f}, std: {c.std():.2f}')"
@@ -120,8 +120,8 @@ output="";;
   if [[ -n "$diff_input" ]]; then
     # statement to load diff input and compare.
     stmt="df1=pd.concat([pd.$read_fn(file, nrows=$nrows, dtype=$dtype, skiprows=$skiprows $read_opts) for file in glob.glob('$diff_input')])
-df1.sort_values(by=df.columns.to_list(), inplace=True, ignore_index=True)
-df.sort_values(by=df.columns.to_list(), inplace=True, ignore_index=True)
+df1=df1.sort_values(by=df.columns.to_list(), ignore_index=True)
+df=df.sort_values(by=df.columns.to_list(), ignore_index=True)
 df=df.compare(df1)"
   fi
   # Remove extra ';'
@@ -129,7 +129,7 @@ df=df.compare(df1)"
   if [[ -n "$columns" ]]; then
     columns=$( echo $columns | sed -e 's/^,//;s/^[^"]/"&/;s/,/","/g;s/[^"]$/&"/')
     stmt="$stmt
-df.drop(columns=df.columns.difference([$columns]), inplace=True)"
+df=df.drop(columns=df.columns.difference([$columns]))"
   fi
   if [[ -n "$iloc" ]]; then
     stmt="$stmt

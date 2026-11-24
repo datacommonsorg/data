@@ -49,19 +49,15 @@ Additional processing options:
 """
 
 import csv
-import glob
 import math
-import multiprocessing
 import os
 import re
 import sys
 import time
-from typing import Union
 
 from absl import app
 from absl import flags
 from absl import logging
-from geopy import distance
 import numpy as np
 import rasterio
 import s2sphere
@@ -74,11 +70,11 @@ sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)), 'util'))
 
 import common_flags
+from config_map import ConfigMap
+from counters import CounterOptions
+from counters import Counters
 import file_util
 import utils
-
-from config_map import ConfigMap
-from counters import Counters, CounterOptions
 
 flags.DEFINE_string('input_geotiff', '', 'GeoTIFF file to process')
 flags.DEFINE_string('ignore_geotiff', '',
@@ -242,7 +238,7 @@ def get_raster_data_point(
         (lng, lat) = rasterio.transform.xy(raster.transform, x, y)
     if lat > 90 or lat < -90 or lng > 180 or lng < -180:
         logging.error(f'Invalid lat,lng [{lat},{lng}] for [{x},{y}].')
-        counter.add_counter(f'invalid-lat-lng', 1)
+        counter.add_counter('invalid-lat-lng', 1)
         return None
     data['latitude'] = lat
     data['longitude'] = lng
@@ -428,8 +424,8 @@ def get_parent_s2_cellids(lat: float, lng: float, s2cell_id: str, s2_level: int,
 def add_data_point(
     data_dict: dict,
     data_point: dict,
-    config: ConfigMap = {},
-    filter_params: dict = {},
+    config: ConfigMap | dict | None = None,
+    filter_params: dict | None = None,
     counter: Counters = None,
 ) -> dict:
     """Add a data point to the data_dict dictionary
@@ -449,6 +445,10 @@ def add_data_point(
     such as '#count' in case data is merged,
     and band specific counts, like '#band:0:count' when aggregating as mean.
   """
+    if filter_params is None:
+        filter_params = {}
+    if config is None:
+        config = {}
     counter.add_counter('processed_points', 1)
     rename_data_columns(data_point, config.get('rename_columns', None))
     s2_level = data_point.get(
@@ -497,7 +497,7 @@ def add_data_point(
                     cur_data[f'#{prop}:count'] = cur_num + new_num
             except TypeError as e:
                 logging.error(
-                    f'Error {e} in aggregating: {agr}: prop: {prop}, for new'
+                    f'Error {e} in aggregating: {aggr}: prop: {prop}, for new'
                     f' {data_point} with old: {cur_data}')
 
         # Update lat/long to centroid.
@@ -543,7 +543,7 @@ def write_data_csv(
     data_points: dict,
     filename: str,
     columns: list = None,
-    config: ConfigMap = {},
+    config: ConfigMap | dict | None = None,
     counter: Counters = None,
 ):
     """Output the data points dict into the csv file.
@@ -562,6 +562,8 @@ def write_data_csv(
     counter: dictionary of counter:values.
   """
     # Write to the output.
+    if config is None:
+        config = {}
     if not columns:
         columns = config.get('output_columns', None)
     if not columns:
@@ -616,7 +618,7 @@ def write_data_csv(
 def write_s2place_csv_tmcf(
     data_points: dict,
     output_prefix: str,
-    config: ConfigMap = {},
+    config: ConfigMap | dict | None = None,
     counter: Counters = None,
 ):
     """Generate CSV+tMCF file for S2 places with hierarchy.
@@ -629,6 +631,8 @@ def write_s2place_csv_tmcf(
       output_contained_s2_level: topmost s2 level upto which places are added.
     counter: dictionary of named counters
   """
+    if config is None:
+        config = {}
     s2_places = {}
     contained_levels = config.get('output_contained_s2_level', [10])
     # Collect all S2 cells ids for data points and its parents.
@@ -687,7 +691,7 @@ def process_raster(
     raster_input: str,
     config: ConfigMap,
     data_points: dict = None,
-    counter: Counters = {},
+    counter: Counters | dict | None = None,
 ) -> dict:
     """Read a raster geoTiff and output points with data values.
 
@@ -700,6 +704,8 @@ def process_raster(
   Returns:
     data_points dict with new points from the raster added.
   """
+    if counter is None:
+        counter = {}
     logging.info(
         f'Processing raster {raster_input} with config: {config.get_configs()}')
     counter.add_counter('input_geotiff_files', 1)
@@ -880,7 +886,7 @@ def process_csv_points(
     ignore_csv: str = None,
     allow_csv: str = None,
     data_points: dict = None,
-    config: ConfigMap = {},
+    config: ConfigMap | dict | None = None,
     output_csv: str = None,
     counter: Counters = None,
 ) -> bool:
@@ -900,6 +906,8 @@ def process_csv_points(
   Returns:
     True if data was processed.
   """
+    if config is None:
+        config = {}
     if data_points is None:
         data_points = {}
     if counter is None:
@@ -969,8 +977,8 @@ def process_csv_points(
 def filter_data_points(
     data_points: dict,
     filter_params: dict = None,
-    config: ConfigMap = {},
-    counter: Counters = {},
+    config: ConfigMap | dict | None = None,
+    counter: Counters | dict | None = None,
 ) -> dict:
     """Remove data points that don't meet required criteria, like min area.
 
@@ -985,6 +993,10 @@ def filter_data_points(
   Returns:
     data points dictionary after removing points.
   """
+    if counter is None:
+        counter = {}
+    if config is None:
+        config = {}
     if not filter_params:
         return data_points
     logging.info(
@@ -1066,9 +1078,11 @@ def _get_data_key(data: dict, add_date: bool = True) -> str:
 
 
 def _get_all_columns(data_points: dict,
-                     config: ConfigMap = {},
+                     config: ConfigMap | dict | None = None,
                      ignore_commented: bool = True) -> list:
     """Returns a list of all keys across all data points."""
+    if config is None:
+        config = {}
     cols = set()
     cols.update(config.get('output_columns', []))
     for data in data_points.values():
@@ -1086,8 +1100,11 @@ def _get_numeric_value(value: str) -> float:
     return numeric_value
 
 
-def _set_numeric_data(data: dict, config: ConfigMap = {}) -> dict:
+def _set_numeric_data(data: dict,
+                      config: ConfigMap | dict | None = None) -> dict:
     """Returns dictionary of key:values with values converted from string to number."""
+    if config is None:
+        config = {}
     for k, v in data.items():
         numeric_value = utils.str_get_numeric_value(v)
         if numeric_value:

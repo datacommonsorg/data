@@ -12,12 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os, config
-import requests, io
-from absl import app, logging
+import io
+import os
 from pathlib import Path
-from retry import retry
+
+from absl import app
+from absl import logging
+import config
 import pandas as pd
+import requests
+from retry import retry
 
 Mexico_Census_URL = config.Mexico_Census_URL
 
@@ -109,7 +113,6 @@ def download_and_convert_excel_to_csv():
 
     except requests.exceptions.RequestException as e:
         logging.fatal(f"Failed to download Mexico Census data file: {e}")
-        
 
 
 def main(argv):

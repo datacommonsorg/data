@@ -19,8 +19,9 @@ See latlng_recon_geojson_test.py for usage example.
 import json
 import logging
 from pathlib import Path
-from shapely import geometry
 import sys
+
+from shapely import geometry
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT))

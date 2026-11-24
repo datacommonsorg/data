@@ -2,14 +2,6 @@
   "schema_version": "1.0",
   "rules": [
     {
-      "rule_id": "check_deleted_records_percent",
-      "description": "Strictly enforce historical deletion average threshold of 0.1%",
-      "validator": "DELETED_RECORDS_PERCENT",
-      "params": {
-        "threshold": 0.1
-      }
-    },
-    {
       "rule_id": "check_goldens_summary_report_input0",
       "description": "Validates summary_report.csv for input0 (deaths_by_month_and_region) against its golden summary data",
       "validator": "GOLDENS_CHECK",

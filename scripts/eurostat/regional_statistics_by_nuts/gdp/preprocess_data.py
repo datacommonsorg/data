@@ -20,10 +20,11 @@ Author: jinpz
 
     python3 preprocess_data.py (--input_file) (--output_file) (--sep)
 """
-import pandas as pd
 import argparse
 import gzip
 import shutil
+
+import pandas as pd
 
 # TODO(jinpz): Add comments below to make this script easier to read.
 # TODO(fpernice): Replace with the final submitted code for Jin Zhou's Eurostat import code.

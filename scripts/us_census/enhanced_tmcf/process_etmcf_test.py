@@ -14,10 +14,10 @@
 """Tests for process_etmcf.py"""
 
 import os
+from pathlib import Path
 import sys
 import tempfile
 import unittest
-from pathlib import Path
 from unittest import mock
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -129,7 +129,8 @@ class Process_ETMCF_Test(unittest.TestCase):
         output_tmcf = "no_output"
         output_csv = "no_output"
         with tempfile.TemporaryDirectory() as tmp_dir:
-            with self.assertRaises(Exception):
+            with self.assertRaisesRegex(Exception,
+                                        r"Enhanced TMCF file should exist"):
                 process_etmcf.process_enhanced_tmcf(_INPUT_DIR, tmp_dir,
                                                     input_etmcf, input_csv,
                                                     output_tmcf, output_csv)
@@ -142,7 +143,8 @@ class Process_ETMCF_Test(unittest.TestCase):
         output_tmcf = "no_output"
         output_csv = "no_output"
         with tempfile.TemporaryDirectory() as tmp_dir:
-            with self.assertRaises(Exception):
+            with self.assertRaisesRegex(Exception,
+                                        r"Input CSV file should exist"):
                 process_etmcf.process_enhanced_tmcf(_INPUT_DIR, tmp_dir,
                                                     input_etmcf, input_csv,
                                                     output_tmcf, output_csv)
@@ -157,7 +159,7 @@ class Process_ETMCF_Test(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp_dir:
             with self.assertRaisesRegex(
                     Exception,
-                    "Exactly one '\?' expected in variableMeasured*"):
+                    r"Exactly one '\?' expected in variableMeasured*"):
                 process_etmcf.process_enhanced_tmcf(_INPUT_DIR, tmp_dir,
                                                     input_etmcf, input_csv,
                                                     output_tmcf, output_csv)

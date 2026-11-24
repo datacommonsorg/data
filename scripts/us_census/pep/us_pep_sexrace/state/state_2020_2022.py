@@ -17,10 +17,17 @@ for State 2010-2020 and the file
 is processed as is.
 """
 
-import pandas as pd
 import os
+import sys
+
+import pandas as pd
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
+_SCRIPTS_DIR = os.path.abspath(os.path.join(_CODEDIR, '../../../../'))
+if _SCRIPTS_DIR not in sys.path:
+    sys.path.append(_SCRIPTS_DIR)
+
+from us_census.pep.us_pep_sexrace.preprocess import load_url_or_path
 
 
 def process_state_2020_2022(url: str) -> pd.DataFrame:
@@ -36,7 +43,9 @@ def process_state_2020_2022(url: str) -> pd.DataFrame:
         df.columns (pd.DataFrame) : Coulumn names of cleaned dataframe
     """
     # reading input file to dataframe
-    df = pd.read_csv(url, encoding='ISO-8859-1', low_memory=False)
+    df = pd.read_csv(load_url_or_path(url),
+                     encoding='ISO-8859-1',
+                     low_memory=False)
     df.to_csv(_CODEDIR + "/../input_files/" + 'state_result_2020_2022.csv',
               index=False)
     # years having 1 and 2 value are not requried as estimate is for April Month
@@ -54,9 +63,8 @@ def process_state_2020_2022(url: str) -> pd.DataFrame:
                df.loc[:, 'COUNTY'].map(str)).str.zfill(3)
 
     # drop unwanted columns
-    df.drop(['SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME', 'AGEGRP'],
-            axis=1,
-            inplace=True)
+    df = df.drop(['SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME', 'AGEGRP'],
+                 axis=1)
 
     # dropping unwanted columns
     df = df.drop(columns=[

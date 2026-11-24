@@ -22,7 +22,7 @@ This import utilizes official mortality data from the Tennessee Department of He
 
 ### ⚙️ Workflow
 
-The workflow for this data import involves two main steps: downloading the necessary files and then processing them. The downloader supports TN.gov as the default source and GCS as a semi-manual fallback.
+The workflow for this data import involves two main steps: downloading the necessary files and then processing them. The downloader supports TN.gov as the default source with an automatic fallback to GCS.
 
 #### Step 1: Download the Source Data
 
@@ -50,7 +50,10 @@ All downloaded files will be stored in the directory `input_files`.
 
 ### Autorefresh type
 
-The manifest uses the fully automated TN.gov mode. Set its first script to `download.py --download_source=gcs` to enable the semi-manual GCS mode.
+The manifest runs in fully automated mode (`python3 download.py`). The downloader first attempts to fetch data directly from TN.gov; if TN.gov is unreachable or blocks requests (e.g., AWS WAF 403 Forbidden in Cloud Batch), it automatically falls back to downloading from GCS (`gs://unresolved_mcf/nyu_diabetes/tennessee/latest/input_files/`).
+
+**GCS Pre-staging Requirements**:
+For the automatic fallback to succeed when TN.gov is unavailable or blocked, source files must be pre-staged in the GCS bucket at `gs://unresolved_mcf/nyu_diabetes/tennessee/latest/input_files/` following the naming convention `Diabetes_County_YYYY.xlsx`. Manual execution can also force GCS mode directly by passing `--download_source=gcs`.
 
 -----
 

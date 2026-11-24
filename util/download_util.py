@@ -75,25 +75,24 @@ This contains the following utilities to download data from URLS:
   '''
 
 import gzip
-import json
 import os
-import requests
-import requests_cache
 import time
+from typing import Union
 import urllib
 
 from absl import logging
 from google.cloud import storage
-from typing import Union
+import requests
+import requests_cache
 
 # Response pre-filled for tests.
 _PREFILLED_RESPONSE = {}
 
 
 def request_url(url: str,
-                params: dict = {},
+                params: dict | None = None,
                 method: str = 'GET',
-                headers: dict = {},
+                headers: dict | None = None,
                 output: str = 'text',
                 timeout: int = 30,
                 retries: int = 3,
@@ -118,6 +117,10 @@ def request_url(url: str,
       str, JSON or bytes
     '''
     # Check if the response is pre-filled for tests.
+    if headers is None:
+        headers = {}
+    if params is None:
+        params = {}
     key = _get_prefilled_key(url, params)
     if key in _PREFILLED_RESPONSE:
         return _PREFILLED_RESPONSE[key]
@@ -189,7 +192,7 @@ def request_url(url: str,
     return None
 
 
-def download_gcs_file(url: str, params: dict = {}) -> bytes:
+def download_gcs_file(url: str, params: dict | None = None) -> bytes:
     '''Downloads a GCS file from the given URL.
     Assumes the client is authenticated and has access to the project.
 
@@ -202,6 +205,8 @@ def download_gcs_file(url: str, params: dict = {}) -> bytes:
     Returns:
       The content from the file as bytes.
     '''
+    if params is None:
+        params = {}
     gcs_path_params = url.split('/', 3)
     gcs_project_id = params.get('gcs_project', '')
     gcs_bucket_name = params.get('gcs_bucket', gcs_path_params[2])
@@ -221,7 +226,7 @@ def download_gcs_file(url: str, params: dict = {}) -> bytes:
 
 
 def download_file_from_url(url: str,
-                           params: dict = {},
+                           params: dict | None = None,
                            method: str = 'GET',
                            timeout: int = 30,
                            retries: int = 3,
@@ -246,6 +251,8 @@ def download_file_from_url(url: str,
     Returns:
       filename if the file is downloaded successfully.
     '''
+    if params is None:
+        params = {}
     if output_file is None:
         # Get output file from the URL after stripping any params.
         url_path = url.split('?', maxsplit=1)[0].split('#', maxsplit=1)[0]
@@ -272,7 +279,6 @@ def download_file_from_url(url: str,
         return content
 
     logging.info(f'Saving {len(content)} bytes from {url} into {output_file}')
-    output_dir = os.path.dirname(output_file)
     os.makedirs(os.path.dirname(output_file), exist_ok=True)
     with open(output_file, 'wb') as fp:
         fp.write(content)

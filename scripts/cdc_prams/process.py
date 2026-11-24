@@ -15,12 +15,15 @@
 This Python script processes the CDC PRAMS consolidated MCH Indicators dataset
 (Excel workbook), cleans it, and generates cleaned CSV, MCF, and TMCF files.
 """
+from copy import deepcopy
 import glob
 import os
 import re
 import sys
-from copy import deepcopy
-from absl import app, flags, logging
+
+from absl import app
+from absl import flags
+from absl import logging
 import numpy as np
 import openpyxl
 import pandas as pd
@@ -28,22 +31,33 @@ import pandas as pd
 _CODEDIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(1, _CODEDIR)
 sys.path.insert(1, os.path.join(_CODEDIR, '../../util/'))
-from statvar_dcid_generator import get_statvar_dcid
+from constants import _CIGARETTES
+from constants import _INSURANCE
+from constants import _MCF_TEMPLATE
+from constants import _PROP
+from constants import _TIME
+from constants import _TMCF_TEMPLATE
+from constants import DEFAULT_SV_PROP
 from state_division_to_dcid import _PLACE_MAP
 from statvar import statvar_col
-from constants import (_MCF_TEMPLATE, _TMCF_TEMPLATE, DEFAULT_SV_PROP, _PROP,
-                       _TIME, _INSURANCE, _CIGARETTES)
+from statvar_dcid_generator import get_statvar_dcid
 
 _FLAGS = flags.FLAGS
 default_input_path = os.path.join(_CODEDIR, "input_files")
 
-flags.DEFINE_string("input_path", default_input_path,
-                    "Path to input Excel file or directory containing files")
-flags.DEFINE_string("output_path", None,
-                    "Directory path where output files need to be written")
-flags.DEFINE_list(
-    "input_years", None, "Optional list of years to process (e.g. 2016,2017). "
-    "Defaults to all available numeric sheets in the workbook.")
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        "input_path", default_input_path,
+        "Path to input Excel file or directory containing files")
+    flags.DEFINE_string("output_path", None,
+                        "Directory path where output files need to be written")
+    flags.DEFINE_list(
+        "input_years", None,
+        "Optional list of years to process (e.g. 2016,2017). "
+        "Defaults to all available numeric sheets in the workbook.")
+
 
 # Canonical 42 base Statistical Variable names in workbook column order
 UNIQUE_STATVARS = list(dict.fromkeys(statvar_col.values()))
@@ -591,4 +605,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

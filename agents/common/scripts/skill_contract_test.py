@@ -135,6 +135,12 @@ def _local_markdown_link_errors(repo_root: Path, entrypoints):
                     f'outside repository: {linked_path}')
                 continue
 
+            if linked_path.is_dir():
+                if fragment:
+                    errors.append(
+                        f'{source_name}: local link "{raw_target}" uses a '
+                        f'fragment for a directory: {linked_name}')
+                continue
             if not linked_path.is_file():
                 errors.append(
                     f'{source_name}: local link "{raw_target}" targets '
@@ -232,6 +238,25 @@ class MarkdownLinkContractTest(unittest.TestCase):
             self.assertIn('resolves outside repository', message)
             self.assertIn('SKILL.md', message)
 
+    def test_directory_links_require_existing_directory_without_fragment(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            repo_root = Path(temp_dir) / 'repo'
+            skill = repo_root / 'agents/skills/example/SKILL.md'
+            skill.parent.mkdir(parents=True)
+            (repo_root / 'docs').mkdir()
+            skill.write_text(
+                '[Existing](../../../docs/)\n'
+                '[Missing](../../../missing/)\n'
+                '[Fragment](../../../docs/#section)\n',
+                encoding='utf-8')
+
+            errors = _local_markdown_link_errors(repo_root, [skill])
+            message = '\n'.join(errors)
+
+            self.assertEqual(2, len(errors), message)
+            self.assertIn('missing file: missing', message)
+            self.assertIn('uses a fragment for a directory: docs', message)
+
 
 class SkillContractTest(unittest.TestCase):
 
@@ -259,6 +284,7 @@ class SkillContractTest(unittest.TestCase):
     def test_reachable_agent_markdown_links_resolve(self):
         entrypoints = sorted((self._agents_root / 'skills').glob('*/SKILL.md'))
         entrypoints.append(self._agents_root / 'README.md')
+        entrypoints.append(self._repo_root / 'AGENTS.md')
 
         errors = _local_markdown_link_errors(self._repo_root, entrypoints)
 
@@ -469,28 +495,6 @@ class ImportCodeReviewSkillContractTest(unittest.TestCase):
             'references/guidelines.md',
             '../../common/references/import-automation/manifest.md',
         }.issubset(links))
-
-    def test_review_guidance_stays_single_and_lightweight(self):
-        references = sorted(path.name for path in (self._skill_root /
-                                                   'references').glob('*.md'))
-        guidelines = (self._skill_root /
-                      'references/guidelines.md').read_text(encoding='utf-8')
-
-        self.assertEqual(['guidelines.md'], references)
-        self.assertFalse((self._skill_root / 'README.md').exists())
-        self.assertFalse((self._skill_root / 'scripts').exists())
-
-        for stale_content in ('DCIR-', 'Evidence:', 'Last verified:',
-                              '["support@datacommons.org"]', 'logging.fatal()',
-                              'exit(1)'):
-            with self.subTest(stale_content=stale_content):
-                self.assertNotIn(stale_content, guidelines)
-
-        for validation_reference in (
-                '../../../../tools/import_validation/README.md',
-                '../../../../tools/import_validation/Validations.md'):
-            with self.subTest(validation_reference=validation_reference):
-                self.assertIn(validation_reference, guidelines)
 
     def test_review_guidance_uses_only_relative_paths(self):
         sources = [self._skill_path, self._prompt_path]

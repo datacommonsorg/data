@@ -55,10 +55,8 @@ Usage:
 '''
 
 import ast
-from collections import OrderedDict
 import collections.abc
 import pprint
-import sys
 from typing import Union
 
 from absl import logging
@@ -231,7 +229,7 @@ class ConfigMap:
         """Returns the config dictionary as a pretty string."""
         return pprint.pformat(self._config_dict, indent=4)
 
-    def write_config(filename: str):
+    def write_config(self, filename: str):
         """Write the config dictionary into a file.
 
     Args:

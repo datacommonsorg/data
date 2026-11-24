@@ -12,17 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import time
-import csv
 import copy
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException
-from chromedriver_py import binary_path  # this will get you the path variable for ChromeDriver
+
 # from absl import logging
 import logging
+import time
+
+from chromedriver_py import binary_path  # this will get you the path variable for ChromeDriver
+from selenium import webdriver
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 
 logging.basicConfig(level=logging.DEBUG)
 selenium_logger = logging.getLogger('selenium')
@@ -161,12 +162,11 @@ def fetch_school_ncid(school, year, column_names, NCES_DOWNLOAD_URL):
         # Close the WebDriver in the finally block to ensure it's closed even if an exception occurs
         driver.quit()
 
-        # Prepare to return a list of NCIDs corresponding to the requested columns
-        id_list = []
+    # Prepare to return a list of NCIDs corresponding to the requested columns
+    id_list = []
 
-        # Filter the options by matching the label_header with the provided column names
-        for item in FINAL_LIST:
-            if item['label_header'] in column_names:
-                id_list.append(
-                    item['value'])  # Add the value (NCID) to the list
-        return id_list  # Return the list of NCIDs that match the requested columns
+    # Filter the options by matching the label_header with the provided column names
+    for item in FINAL_LIST:
+        if item['label_header'] in column_names:
+            id_list.append(item['value'])  # Add the value (NCID) to the list
+    return id_list  # Return the list of NCIDs that match the requested columns

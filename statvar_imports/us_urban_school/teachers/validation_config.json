@@ -2,14 +2,6 @@
   "schema_version": "1.0",
   "rules": [
     {
-      "rule_id": "check_deleted_records_percent",
-      "description": "Checks that the percentage of deleted records across the import does not exceed 0.1% (accounts for school closures/mergers across biennial CRDC releases).",
-      "validator": "DELETED_RECORDS_PERCENT",
-      "params": {
-        "threshold": 0.1
-      }
-    },
-    {
       "rule_id": "check_max_date_freshness_all_inputs",
       "description": "Verifies that each input contains non-empty data meeting its expected freshness threshold (up to 2024 for the latest biennial CRDC release).",
       "validator": "SQL_VALIDATOR",

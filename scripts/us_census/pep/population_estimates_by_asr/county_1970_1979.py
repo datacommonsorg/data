@@ -15,9 +15,20 @@
 This Python Script is for County Level Data 1970-1979
 '''
 import os
+import sys
+
 import pandas as pd
-from common_functions import (input_url, replace_age, gender_based_grouping,
-                              race_based_grouping)
+
+_SCRIPTS_DIR = os.path.abspath(
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../'))
+if _SCRIPTS_DIR not in sys.path:
+    sys.path.append(_SCRIPTS_DIR)
+
+from us_census.pep.population_estimates_by_asr.common_functions import gender_based_grouping
+from us_census.pep.population_estimates_by_asr.common_functions import input_url
+from us_census.pep.population_estimates_by_asr.common_functions import race_based_grouping
+from us_census.pep.population_estimates_by_asr.common_functions import replace_age
+from us_census.pep.population_estimates_by_asr.process import load_url_or_path
 
 
 def county1970(url_file: str, output_folder: str):
@@ -33,7 +44,10 @@ def county1970(url_file: str, output_folder: str):
     final_df = pd.DataFrame()
     # Contains aggregated data for age and race.
     df_ar = pd.DataFrame()
-    df = pd.read_csv(_url, names=_cols, low_memory=False, encoding='ISO-8859-1')
+    df = pd.read_csv(load_url_or_path(_url),
+                     names=_cols,
+                     low_memory=False,
+                     encoding='ISO-8859-1')
     #Writing raw data to csv
     df.to_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)),
                            "raw_data", 'raw_data_county_1970_1979.csv'),
@@ -58,7 +72,7 @@ def county1970(url_file: str, output_folder: str):
     df = df.melt(id_vars=['Year','geo_ID' ,'Race'], var_name='sv' ,\
        value_name='observation')
     df['SVs'] = 'Count_Person_' + df['sv'] + '_' + df['Race']
-    df.drop(columns=['Race', 'sv'], inplace=True)
+    df = df.drop(columns=['Race', 'sv'])
     df['geo_ID'] = 'geoId/' + df['geo_ID']
     # Making copies of the current DF to be aggregated upon.
     final_df = pd.concat([final_df, df])

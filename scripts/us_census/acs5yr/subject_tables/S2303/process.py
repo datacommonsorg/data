@@ -31,6 +31,7 @@ sys.path.insert(1, os.path.join(_CODEDIR, '..', 'common'))
 from data_loader import SubjectTableDataLoaderBase
 from generate_col_map import process_zip_file
 from resolve_geo_id import convert_to_place_dcid
+
 # pylint: enable=wrong-import-position
 # pylint: enable=import-error
 
@@ -107,9 +108,7 @@ class S2303SubjectTableDataLoader(SubjectTableDataLoaderBase):
                     obs_df['Place'] = obs_df['Place'].replace('', np.nan)
 
                     # Drop rows with observations for empty (null) values.
-                    obs_df.dropna(subset=['Place', 'Quantity'],
-                                  axis=0,
-                                  inplace=True)
+                    obs_df = obs_df.dropna(subset=['Place', 'Quantity'], axis=0)
 
                     obs_df.to_csv(csv_file,
                                   header=(self.year_count == 0),

@@ -15,8 +15,9 @@
 new .csv file named "cleaned_output.csv" in a new "output/" folder.
 """
 import csv
-import pycountry
 import os
+
+import pycountry
 
 # Create the output directory if it doesn't already exist.
 if not os.path.exists('output'):

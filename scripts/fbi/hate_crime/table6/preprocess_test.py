@@ -13,12 +13,14 @@
 # limitations under the License.
 """Tests for Hate Crime Table 6."""
 
+import json
 import os
 import sys
-import unittest
 import tempfile
-import json
+import unittest
+
 import pandas as pd
+
 from . import preprocess
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -49,7 +51,12 @@ class HateCrimeTable6Test(unittest.TestCase):
             csv_file_path = os.path.join(tmp_dir, '2015.csv')
 
             read_file = pd.read_excel(xls_file_path, **test_config['args'])
-            read_file = preprocess._clean_dataframe(read_file, '2015')
+            with open(os.path.join(_SCRIPT_PATH, '..', 'table_config.json'),
+                      'r',
+                      encoding='utf-8') as f:
+                table_config = json.load(f)['table_config']
+            read_file = preprocess._clean_dataframe(read_file, '2015', '6',
+                                                    table_config)
             read_file.insert(_YEAR_INDEX, 'Year', '2015')
             read_file.to_csv(csv_file_path, header=True, index=False)
             csv_files.append(csv_file_path)

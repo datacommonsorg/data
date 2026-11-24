@@ -59,16 +59,16 @@ flags.DEFINE_string('generated_mcf', '', 'MCF file for new schema nodes.')
 
 _FLAGS = flags.FLAGS
 
-import file_util
-import process_http_server
-
-from config_map import ConfigMap
-from dc_api_wrapper import dc_api_get_node_property_values
-from mcf_file_util import load_mcf_nodes, write_mcf_nodes, normalize_value
-from mcf_file_util import add_namespace, strip_namespace, add_mcf_node
-from mcf_file_util import get_value_list
-
 import config_flags
+from dc_api_wrapper import dc_api_get_node_property_values
+from mcf_file_util import add_mcf_node
+from mcf_file_util import add_namespace
+from mcf_file_util import get_value_list
+from mcf_file_util import load_mcf_nodes
+from mcf_file_util import normalize_value
+from mcf_file_util import strip_namespace
+from mcf_file_util import write_mcf_nodes
+import process_http_server
 
 # Base schema with some basic properties
 # This is excluded in generated schema.
@@ -214,7 +214,7 @@ def get_schema_nodes(nodes: dict,
     return get_schema_nodes(dcid_schema, schema_nodes, config)
 
 
-def get_schema_node(dcid: str, schema: dict = {}) -> dict:
+def get_schema_node(dcid: str, schema: dict | None = None) -> dict:
     """Returns the node for dcid is defined in schema.
 
     Args:
@@ -225,6 +225,8 @@ def get_schema_node(dcid: str, schema: dict = {}) -> dict:
       dictionary of property:values for the node with dcid.
     """
     # lookup without namespace
+    if schema is None:
+        schema = {}
     node = schema.get(strip_namespace(dcid))
     if not node:
         # lookup with namespace
@@ -260,7 +262,7 @@ def get_node_name(node: dict) -> str:
 def is_numeric(value: str) -> bool:
     """Returns True if the value is a number."""
     try:
-        n = float(value)
+        float(value)
         return True
     except ValueError:
         return False
@@ -421,7 +423,7 @@ def generate_schema_nodes(
     nodes: dict,
     schema: dict = None,
     new_schema_mcf: str = None,
-    config: dict = {},
+    config: dict | None = None,
     new_nodes: dict = None,
 ) -> dict:
     """Returns a dictionary with new schema nodes.
@@ -444,6 +446,8 @@ def generate_schema_nodes(
     Dictionary of new nodes: { 'dcid:<dcid>' : { <prop1> : <value1>, <rop2> :
     vlaue> } }
   """
+    if config is None:
+        config = {}
     if isinstance(schema, str):
         # Load the schema from MCF file.
         schema = load_mcf_nodes(schema)
@@ -528,12 +532,9 @@ NAME_IGNORE_PROPS = {
     'dcid': [],
     'typeOf': [],
     'subClassOf': [],
-    'description': [],
     'name': [],
     'nameWithLanguage': [],
     'description': [],
-    'descriptionUrl': [],
-    'alternateName': [],
     'statType': ['measuredValue', 'Value'],
     'keyString': [],
     'DisplayName': [],
@@ -549,8 +550,8 @@ NAME_IGNORE_PROPS = {
 
 
 def generate_statvar_name(pvs: dict,
-                          schema: dict = {},
-                          config: dict = {}) -> str:
+                          schema: dict | None = None,
+                          config: dict | None = None) -> str:
     """Returns a name for the statvar based on the property values.
 
   Args:
@@ -562,6 +563,10 @@ def generate_statvar_name(pvs: dict,
     name as string with the template:
       <measuredProp>: <prop1> <value1>, <prop2> <value2>...
   """
+    if config is None:
+        config = {}
+    if schema is None:
+        schema = {}
     typeof = pvs.get('typeOf', 'StatisticalVariable')
     if strip_namespace(typeof) != 'StatisticalVariable':
         return ''

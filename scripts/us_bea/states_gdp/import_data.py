@@ -25,16 +25,13 @@ import csv
 import io
 import os
 import re
-from urllib.request import urlopen
+
 from absl import app
 from absl import flags
 from absl import logging
 import pandas as pd
 
 logging.set_verbosity(logging.INFO)
-
-# Suppress annoying pandas DF copy warnings.
-pd.options.mode.chained_assignment = None
 
 FLAGS = flags.FLAGS
 flags.DEFINE_integer('latest_year', None,
@@ -140,8 +137,7 @@ class StateGDPDataLoader:
             data = list(reader)
             if data:
                 self.raw_df = pd.DataFrame(data, columns=header)
-                logging.info(
-                    f"Successfully loaded data from provided raw data.")
+                logging.info("Successfully loaded data from provided raw data.")
             else:
                 self.raw_df = None
                 raise ValueError("Error: No data found in provided raw data.")
@@ -168,11 +164,11 @@ class StateGDPDataLoader:
                         raise ValueError(
                             f"Error: No data found in '{self._input_file}'.")
             except FileNotFoundError as e:
-                raise FileNotFoundError(f"Error: {e}")
+                raise FileNotFoundError(f"Error: {e}") from e
             except Exception as e:
                 logging.error(f"An error occurred while reading data: {e}")
                 self.raw_df = None
-                raise ValueError(f"Error loading data: {e}")
+                raise ValueError(f"Error loading data: {e}") from e
 
         if self.raw_df is not None:
             df = self.raw_df.copy()

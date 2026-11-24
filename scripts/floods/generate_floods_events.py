@@ -42,13 +42,10 @@ The events pipeline is setup with the following stages:
 """
 
 import os
-import re
 import sys
-import time
 
 from absl import app
 from absl import flags
-from absl import logging
 
 _SCRIPTS_DIR = os.path.dirname(__file__)
 sys.path.append(_SCRIPTS_DIR)
@@ -68,8 +65,6 @@ flags.DEFINE_list(
     'List of stages in the flood events pipeline config to be run.')
 
 _FLAGS = flags.FLAGS
-
-import file_util
 
 from config_map import ConfigMap
 from events_pipeline import EventPipeline
