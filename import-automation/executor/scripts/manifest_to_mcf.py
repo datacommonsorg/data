@@ -233,7 +233,8 @@ def process_text(input_text, dataset_to_source=None):
             raise ValueError(
                 "No imports or dataset_sources found in the parsed manifest.")
     except Exception as e:
-        raise ValueError(f"Failed to parse input as DataCommonsManifest: {e}")
+        raise ValueError(
+            f"Failed to parse input as DataCommonsManifest: {e}") from e
 
 
 def extract_dataset_source_map(textproto_path):

@@ -11,8 +11,13 @@ import pandas as pd
 
 # The output path should have a default filename.
 _OUT_DEFAULT_NAME = 'cleaned_wdi.csv'
-_OUT_PATH = flags.DEFINE_string('out_path', _OUT_DEFAULT_NAME,
-                                'CNS path to write output.')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('out_path', _OUT_DEFAULT_NAME,
+                        'CNS path to write output.')
+
 
 indicators = [
     'SP.POP.TOTL',
@@ -68,10 +73,10 @@ indicators = [
 ]
 
 
-def DownloadAndParseCsvs() -> None:
+def DownloadAndParseCsvs(out_path: str) -> None:
     """Loops through all indicators and downloads the data for all countries/dates.
 
-  This data is then added to the output which is written to _OUT_PATH
+  This data is then added to the output which is written to out_path.
   """
     dat = []
     for indicator in indicators:
@@ -125,17 +130,18 @@ def DownloadAndParseCsvs() -> None:
             'unit',
         ],
     )
-    # Write to the _OUT_PATH which defaults to the output filename
+    # Write to out_path, which defaults to the output filename
     # if no path is provided.
-    with open(_OUT_PATH.value, 'w+') as f_out:
+    with open(out_path, 'w+') as f_out:
         out_df.to_csv(f_out, index=False)
 
 
 def main(argv: list[str]) -> None:
     if len(argv) > 1:
         raise app.UsageError('Too many command-line arguments.')
-    DownloadAndParseCsvs()
+    DownloadAndParseCsvs(flags.FLAGS.out_path)
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)
