@@ -1,0 +1,9 @@
+Node: E:Mexico_Deaths_Registered_expected->E0
+observationAbout: C:Mexico_Deaths_Registered_expected->observationAbout
+observationDate: C:Mexico_Deaths_Registered_expected->observationDate
+value: C:Mexico_Deaths_Registered_expected->value
+variableMeasured: C:Mexico_Deaths_Registered_expected->variableMeasured
+unit: C:Mexico_Deaths_Registered_expected->unit
+scalingFactor: C:Mexico_Deaths_Registered_expected->scalingFactor
+observationPeriod: C:Mexico_Deaths_Registered_expected->observationPeriod
+typeOf: dcs:StatVarObservation
