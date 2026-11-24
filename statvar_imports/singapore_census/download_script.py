@@ -37,7 +37,8 @@ def process_singstat_json_to_wide_csv(json_data_str, output_filename):
         data = json.loads(json_data_str)
     except json.JSONDecodeError as e:
         logging.fatal(f"Error decoding JSON: {e}")
-        raise RuntimeError(f"Failed to retrieve data due to an error: {e}")
+        raise RuntimeError(
+            f"Failed to retrieve data due to an error: {e}") from e
         return
 
     records = []
@@ -156,7 +157,8 @@ def main(_):
                 f"An error occurred during data fetching or processing for table {table_id}: {e}"
             )
             raise RuntimeError(
-                f"Failed to process table {table_id} due to an error: {e}")
+                f"Failed to process table {table_id} due to an error: {e}"
+            ) from e
 
         logging.info("-" * 50)
 

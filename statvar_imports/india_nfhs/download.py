@@ -64,7 +64,8 @@ except ImportError as e:
     logging.fatal(
         f"Failed to import file_util: {e}. Please ensure data/util/file_util.py exists and is accessible, and that the project root and data/util are correctly set in sys.path.",
         exc_info=True)
-    raise RuntimeError('Import job failed due to Failed to import file_util')
+    raise RuntimeError(
+        'Import job failed due to Failed to import file_util') from e
 
 
 def __load_api_keys():
@@ -91,17 +92,19 @@ def __load_api_keys():
         # Now, load the JSON file from the local path
         with open(local_filepath, 'r') as f:
             return json.load(f)
-    except FileNotFoundError:
+    except FileNotFoundError as e:
         logging.fatal(
             f"API keys file not found: {local_filepath}. Please create this file with your keys."
         )
-        raise RuntimeError('Import job failed due to API keys file not found')
+        raise RuntimeError(
+            'Import job failed due to API keys file not found') from e
 
     except json.JSONDecodeError as json_err:
         logging.fatal(
             f"Error decoding JSON from {local_filepath}: {json_err}. Please check the file's format."
         )
-        raise RuntimeError('Import job failed due to Error decoding JSON')
+        raise RuntimeError(
+            'Import job failed due to Error decoding JSON') from json_err
 
     except Exception as e:
         # A specific error for GCS transfer failure.
@@ -110,7 +113,7 @@ def __load_api_keys():
         )
         raise RuntimeError(
             'Import job failed due to An unexpected error occurred while loading API keys'
-        )
+        ) from e
 
     finally:
         # Clean up the temporary directory
@@ -173,14 +176,14 @@ def __fetch_api_data(api_url):
                 )
                 raise RuntimeError(
                     'Import job failed due to missing user script output files.'
-                )
+                ) from json_err
 
     except Exception as e:
         logging.fatal(
             f"An unexpected error occurred while processing {api_url} response: {e}"
         )
         raise RuntimeError(
-            'Import job failed due to missing user script output files.')
+            'Import job failed due to missing user script output files.') from e
     finally:
         if os.path.exists(temp_dir):
             for file in os.listdir(temp_dir):

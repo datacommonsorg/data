@@ -331,7 +331,7 @@ def main(_):
 
     except Exception as e:
         logging.fatal(f"Unexpected error in the main process: {e}")
-        raise RuntimeError(f"Unexpected error in the main process: {e}")
+        raise RuntimeError(f"Unexpected error in the main process: {e}") from e
 
 
 if __name__ == '__main__':
