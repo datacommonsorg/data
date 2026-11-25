@@ -75,15 +75,22 @@ _HTTP_SESSION_PID = None
 _FLAGS = flags.FLAGS
 
 
+def _define_api_key_flag():
+    if 'api_key' not in _FLAGS:
+        flags.DEFINE_string(
+            'api_key', 'gs://unresolved_mcf/us_usda/ag_survey/api_key.json',
+            'directory where api key exists')
+
+
 def _define_flags():
     if 'mode' not in _FLAGS:
         flags.DEFINE_string('mode', '', 'Options: download or process')
     if 'start_year' not in _FLAGS:
         flags.DEFINE_integer('start_year', 2024, 'start_year')
-    if 'api_key' not in _FLAGS:
-        flags.DEFINE_string(
-            'api_key', 'gs://unresolved_mcf/us_usda/ag_survey/api_key.json',
-            'directory where api key exists')
+    _define_api_key_flag()
+
+
+_define_api_key_flag()
 
 
 class QueryLimitExceededError(Exception):
@@ -174,14 +181,23 @@ def _write_json_atomic(file_path, payload):
     os.replace(tmp_path, file_path)
 
 
-def _run_partition_task(partition_name, year, svs, input_dir, reuse_existing):
+def _init_worker(cached_api_key):
+    """Propagates parent's cached API key to spawned worker processes."""
+    global _CACHED_API_KEY
+    if cached_api_key and not _CACHED_API_KEY:
+        _CACHED_API_KEY = cached_api_key
+
+
+def _run_partition_task(partition_name, year, svs, input_dir, reuse_existing,
+                        mode):
     """Fault-isolated pool worker so one failure never aborts a starmap chunk."""
     try:
         fetch_state_and_write(partition_name,
                               year,
                               svs,
                               input_dir,
-                              reuse_existing=reuse_existing)
+                              reuse_existing=reuse_existing,
+                              mode=mode)
         return (partition_name, True, '')
     except Exception as e:
         err_msg = _redact_secrets(e)
@@ -190,16 +206,19 @@ def _run_partition_task(partition_name, year, svs, input_dir, reuse_existing):
         return (partition_name, False, err_msg)
 
 
-def _execute_partition_batch(partitions, year, svs, input_dir, reuse_existing):
+def _execute_partition_batch(partitions, year, svs, input_dir, reuse_existing,
+                             mode):
     if not partitions:
         return []
     worker_count = min(POOL_SIZE, len(partitions))
     if worker_count <= 1:
         return [
-            _run_partition_task(p, year, svs, input_dir, reuse_existing)
+            _run_partition_task(p, year, svs, input_dir, reuse_existing, mode)
             for p in partitions
         ]
-    with multiprocessing.Pool(worker_count) as pool:
+    with multiprocessing.Pool(worker_count,
+                              initializer=_init_worker,
+                              initargs=(_CACHED_API_KEY,)) as pool:
         return pool.starmap(
             _run_partition_task,
             zip(
@@ -208,12 +227,13 @@ def _execute_partition_batch(partitions, year, svs, input_dir, reuse_existing):
                 repeat(svs),
                 repeat(input_dir),
                 repeat(reuse_existing),
+                repeat(mode),
             ),
             chunksize=1,
         )
 
 
-def process_survey_data(year, svs, input_dir, out_dir, states=None):
+def process_survey_data(year, svs, input_dir, out_dir, states=None, mode=None):
     """
     Processes survey data for the given year and saves the results.
 
@@ -223,6 +243,7 @@ def process_survey_data(year, svs, input_dir, out_dir, states=None):
         input_dir: The output directory to save the processed data.
         out_dir: Directory where aggregated yearly CSV files are written.
         states: Optional pre-fetched list of state_alpha codes.
+        mode: Optional execution mode ('', 'download', or 'process').
 
     Returns:
         None
@@ -240,7 +261,8 @@ def process_survey_data(year, svs, input_dir, out_dir, states=None):
         os.makedirs(get_response_dir(input_dir, year), exist_ok=True)
         os.makedirs(out_dir, exist_ok=True)
 
-        mode = _get_mode()
+        if mode is None:
+            mode = _get_mode()
         if mode in ("", "download", "process"):
             response_dir = get_response_dir(input_dir, year)
             if mode == "process":
@@ -265,7 +287,8 @@ def process_survey_data(year, svs, input_dir, out_dir, states=None):
                                                    year,
                                                    svs,
                                                    input_dir,
-                                                   reuse_existing=False)
+                                                   reuse_existing=False,
+                                                   mode=mode)
                 failed = [(name, err) for name, ok, err in results if not ok]
 
                 if failed and mode != "process":
@@ -276,7 +299,12 @@ def process_survey_data(year, svs, input_dir, out_dir, states=None):
                         f'{SECOND_PASS_COOLDOWN_SECONDS}s before retry pass.')
                     time.sleep(SECOND_PASS_COOLDOWN_SECONDS)
                     retry_results = _execute_partition_batch(
-                        failed_names, year, svs, input_dir, reuse_existing=True)
+                        failed_names,
+                        year,
+                        svs,
+                        input_dir,
+                        reuse_existing=True,
+                        mode=mode)
                     failed = [
                         (name, err) for name, ok, err in retry_results if not ok
                     ]
@@ -365,14 +393,16 @@ def fetch_state_and_write(state_alpha,
                           year,
                           svs,
                           input_dir,
-                          reuse_existing=False):
+                          reuse_existing=False,
+                          mode=None):
     """Fetches county-level survey data for a state (with county fallback) and writes part CSV."""
     logging.info(f"Fetching data for state: {state_alpha} (year: {year})")
     out_file = f"{get_parts_dir(input_dir, year)}/{_sanitize_filename(state_alpha)}.csv"
     api_data = get_survey_state_data(year,
                                      state_alpha,
                                      input_dir,
-                                     reuse_existing=reuse_existing)
+                                     reuse_existing=reuse_existing,
+                                     mode=mode)
     state_csv_rows = to_csv_rows(api_data, svs)
     if state_csv_rows:
         logging.info(
@@ -390,10 +420,15 @@ def fetch_state_and_write(state_alpha,
         )
 
 
-def get_survey_state_data(year, state_alpha, input_dir, reuse_existing=False):
+def get_survey_state_data(year,
+                          state_alpha,
+                          input_dir,
+                          reuse_existing=False,
+                          mode=None):
     """Fetches county-level survey data for a given state and year, splitting by county if needed."""
     response_file = get_response_file_path(input_dir, year, state_alpha)
-    mode = _get_mode()
+    if mode is None:
+        mode = _get_mode()
 
     if mode == "process":
         if not os.path.exists(response_file):
@@ -836,11 +871,17 @@ def get_multiple_years():
     input_dir = os.path.join(_SCRIPT_PATH, 'input')
     out_dir = os.path.join(_SCRIPT_PATH, 'output')
     states = None
-    if _get_mode() != 'process':
+    mode = _get_mode()
+    if mode != 'process':
         logging.info('Getting state_alpha values once for all years')
         states = get_param_values('state_alpha')
     for year in range(start_year, datetime.datetime.now().year + 1):
-        process_survey_data(year, svs, input_dir, out_dir, states=states)
+        process_survey_data(year,
+                            svs,
+                            input_dir,
+                            out_dir,
+                            states=states,
+                            mode=mode)
     end = datetime.datetime.now()
     logging.info(f'End, {end}')
     logging.info(f'Duration, {str(end - start)}')

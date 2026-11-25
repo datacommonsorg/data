@@ -15,6 +15,7 @@
 
 import csv
 import io
+import json
 import os
 import sys
 import tempfile
@@ -104,17 +105,16 @@ dcs:Area_Farm_WheatForGrain,2024,dcid:geoId/45001,5000,dcs:Acre
 """
         self.assertEqual(expected_csv_output, out.getvalue())
 
-    @mock.patch.object(process.requests.Session, 'get')
+    @mock.patch.object(process, '_get_http_session')
     @mock.patch.object(process, 'is_rate_limited', return_value=False)
-    def test_get_data_400_no_data_found(self, mock_rate_limit,
-                                        mock_requests_get):
+    def test_get_data_400_no_data_found(self, mock_rate_limit, mock_session):
         """Tests that get_data returns {'data': []} cleanly when API returns 400 'no data found'."""
         mock_resp = mock.Mock()
         mock_resp.status_code = 400
         mock_resp.json.return_value = {
             "error": ["bad request - unsupported query / no data found"]
         }
-        mock_requests_get.return_value = mock_resp
+        mock_session.return_value.get.return_value = mock_resp
 
         result = get_data({
             'source_desc': 'SURVEY',
@@ -123,15 +123,14 @@ dcs:Area_Farm_WheatForGrain,2024,dcid:geoId/45001,5000,dcs:Acre
         })
         self.assertEqual(result, {'data': []})
 
-    @mock.patch.object(process.requests.Session, 'get')
+    @mock.patch.object(process, '_get_http_session')
     @mock.patch.object(process, 'is_rate_limited', return_value=False)
-    def test_get_data_400_invalid_query(self, mock_rate_limit,
-                                        mock_requests_get):
+    def test_get_data_400_invalid_query(self, mock_rate_limit, mock_session):
         """Tests that get_data returns {'data': []} cleanly when API returns 400 'invalid query' (e.g. WASHABAUGH)."""
         mock_resp = mock.Mock()
         mock_resp.status_code = 400
         mock_resp.json.return_value = {"error": ["bad request - invalid query"]}
-        mock_requests_get.return_value = mock_resp
+        mock_session.return_value.get.return_value = mock_resp
 
         result = get_data({
             'source_desc': 'SURVEY',
@@ -140,10 +139,10 @@ dcs:Area_Farm_WheatForGrain,2024,dcid:geoId/45001,5000,dcs:Acre
         })
         self.assertEqual(result, {'data': []})
 
-    @mock.patch.object(process.requests.Session, 'get')
+    @mock.patch.object(process, '_get_http_session')
     @mock.patch.object(process, 'is_rate_limited', return_value=False)
     def test_get_data_400_exceeds_limit_raises_query_limit_error(
-            self, mock_rate_limit, mock_requests_get):
+            self, mock_rate_limit, mock_session):
         """Tests that 400 'exceeds limit=50000' raises QueryLimitExceededError instead of returning empty data."""
         mock_resp = mock.Mock()
         mock_resp.status_code = 400
@@ -151,7 +150,7 @@ dcs:Area_Farm_WheatForGrain,2024,dcid:geoId/45001,5000,dcs:Acre
         mock_resp.json.return_value = {
             "error": ["bad request - exceeds limit=50000"]
         }
-        mock_requests_get.return_value = mock_resp
+        mock_session.return_value.get.return_value = mock_resp
 
         with self.assertRaises(QueryLimitExceededError):
             get_data({
@@ -163,10 +162,10 @@ dcs:Area_Farm_WheatForGrain,2024,dcid:geoId/45001,5000,dcs:Acre
             })
 
     @mock.patch('retry.api.time.sleep')
-    @mock.patch.object(process.requests.Session, 'get')
+    @mock.patch.object(process, '_get_http_session')
     @mock.patch.object(process, 'is_rate_limited', return_value=False)
     def test_get_data_400_invalid_api_key_raises(self, mock_rate_limit,
-                                                 mock_requests_get,
+                                                 mock_session,
                                                  mock_retry_sleep):
         """Tests that 400 'bad request - invalid api key' raises RequestException instead of returning empty data."""
         secret_key = 'INVALID-SECRET-KEY-999'
@@ -177,7 +176,7 @@ dcs:Area_Farm_WheatForGrain,2024,dcid:geoId/45001,5000,dcs:Acre
         mock_resp.json.return_value = {
             "error": [f"bad request - invalid api key {secret_key}"]
         }
-        mock_requests_get.return_value = mock_resp
+        mock_session.return_value.get.return_value = mock_resp
 
         with self.assertRaises(requests.exceptions.RequestException) as ctx:
             get_data({
@@ -189,10 +188,10 @@ dcs:Area_Farm_WheatForGrain,2024,dcid:geoId/45001,5000,dcs:Acre
         self.assertNotIn(secret_key, str(ctx.exception))
 
     @mock.patch('retry.api.time.sleep')
-    @mock.patch.object(process.requests.Session, 'get')
+    @mock.patch.object(process, '_get_http_session')
     @mock.patch.object(process, 'is_rate_limited', return_value=False)
     def test_get_data_500_raises_error_and_redacts_api_key(
-            self, mock_rate_limit, mock_requests_get, mock_retry_sleep):
+            self, mock_rate_limit, mock_session, mock_retry_sleep):
         """Tests that get_data retries 504/500 errors, raises RequestException, and redacts the API key."""
         secret_key = 'SECRET-USDA-KEY-987654321'
         process._CACHED_API_KEY = secret_key
@@ -202,7 +201,7 @@ dcs:Area_Farm_WheatForGrain,2024,dcid:geoId/45001,5000,dcs:Acre
             f'504 Server Error: Gateway Timeout for url: '
             f'https://quickstats.nass.usda.gov/api/api_GET?key={secret_key}&year=2026'
         )
-        mock_requests_get.return_value = mock_resp
+        mock_session.return_value.get.return_value = mock_resp
 
         with self.assertRaises(requests.exceptions.RequestException) as ctx:
             get_data({
@@ -214,7 +213,8 @@ dcs:Area_Farm_WheatForGrain,2024,dcid:geoId/45001,5000,dcs:Acre
 
         self.assertNotIn(secret_key, str(ctx.exception))
         self.assertIn('[REDACTED]', str(ctx.exception))
-        self.assertEqual(mock_requests_get.call_count, process.RETRY_TRIES)
+        self.assertEqual(mock_session.return_value.get.call_count,
+                         process.RETRY_TRIES)
 
     @mock.patch.object(process, 'get_data', return_value=None)
     @mock.patch.object(process, 'get_usda_api_key', return_value='mock-api-key')
@@ -254,7 +254,8 @@ dcs:Area_Farm_WheatForGrain,2024,dcid:geoId/45001,5000,dcs:Acre
             self, mock_exec_batch, mock_sleep):
         """Tests that a state failing in pass 1 is retried in pass 2 and succeeds."""
 
-        def side_effect(partitions, year, svs, input_dir, reuse_existing):
+        def side_effect(partitions, year, svs, input_dir, reuse_existing, *args,
+                        **kwargs):
             if not reuse_existing:
                 parts_dir = process.get_parts_dir(input_dir, year)
                 with open(f'{parts_dir}/SC.csv', 'w', newline='') as f:
@@ -284,7 +285,8 @@ dcs:Area_Farm_WheatForGrain,2024,dcid:geoId/45001,5000,dcs:Acre
     def test_stale_part_csvs_cleaned_before_run(self, mock_exec_batch):
         """Tests that leftover .csv files in parts/{year} are cleared before a new run."""
 
-        def side_effect(partitions, year, svs, input_dir, reuse_existing):
+        def side_effect(partitions, year, svs, input_dir, reuse_existing, *args,
+                        **kwargs):
             parts_dir = process.get_parts_dir(input_dir, year)
             with open(f'{parts_dir}/SC.csv', 'w', newline='') as f:
                 write_csv(f, [to_csv_rows(self.mock_api_data, svs)[0]])
@@ -343,21 +345,53 @@ dcs:Area_Farm_WheatForGrain,2024,dcid:geoId/45001,5000,dcs:Acre
                                     states=['SC', 'NH'])
 
     @mock.patch('retry.api.time.sleep')
-    @mock.patch.object(process.requests.Session, 'get')
+    @mock.patch.object(process, '_get_http_session')
     @mock.patch.object(process, 'is_rate_limited', return_value=False)
     @mock.patch.object(process, 'get_usda_api_key', return_value='mock-api-key')
     def test_get_param_values_raises_on_504_instead_of_empty_list(
-            self, mock_key, mock_rate_limit, mock_requests_get,
-            mock_retry_sleep):
+            self, mock_key, mock_rate_limit, mock_session, mock_retry_sleep):
         """Tests that get_param_values raises RuntimeError on 504 instead of silently returning []."""
         mock_resp = mock.Mock()
         mock_resp.status_code = 504
         mock_resp.raise_for_status.side_effect = requests.exceptions.HTTPError(
             '504 Gateway Timeout')
-        mock_requests_get.return_value = mock_resp
+        mock_session.return_value.get.return_value = mock_resp
 
         with self.assertRaises(RuntimeError):
             get_param_values('state_alpha')
+
+    def test_process_mode_spawn_workers_read_cached_json_without_api(self):
+        """Tests that mode='process' propagates to spawned pool workers without relying on flags."""
+        svs = load_svs()
+        spawn_ctx = process.multiprocessing.get_context('spawn')
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            in_dir = os.path.join(tmpdir, 'input')
+            out_dir = os.path.join(tmpdir, 'output')
+            resp_dir = process.get_response_dir(in_dir, 2024)
+            os.makedirs(resp_dir, exist_ok=True)
+            with open(os.path.join(resp_dir, 'SC.json'), 'w') as f:
+                json.dump({'data': [self.mock_api_data['data'][0]]}, f)
+            with open(os.path.join(resp_dir, 'NC.json'), 'w') as f:
+                json.dump(
+                    {
+                        'data': [{
+                            **self.mock_api_data['data'][1],
+                            'state_fips_code':
+                                '37',
+                        }]
+                    }, f)
+
+            with mock.patch.object(process.multiprocessing,
+                                   'Pool',
+                                   side_effect=spawn_ctx.Pool):
+                process_survey_data(2024, svs, in_dir, out_dir, mode='process')
+
+            agg_csv = os.path.join(out_dir, 'ag-2024.csv')
+            self.assertTrue(os.path.exists(agg_csv))
+            with open(agg_csv, newline='') as f:
+                rows = list(csv.DictReader(f))
+            self.assertEqual(len(rows), 2)
 
 
 if __name__ == '__main__':
