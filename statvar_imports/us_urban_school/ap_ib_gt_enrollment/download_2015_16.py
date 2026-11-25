@@ -18,6 +18,7 @@ import zipfile
 from absl import app
 from absl import flags
 from absl import logging
+import download_ap_ib_gt
 from download_ap_ib_gt import BASE_URL_TEMPLATE
 
 # reusing configs from the main script
@@ -64,7 +65,7 @@ def download_and_extract_2015_16(data_type, output_dir):
     except Exception as e:
         raise RuntimeError(
             f"Failed to connect/download archive after retries for {config_key}: {e}"
-        )
+        ) from e
 
     logging.info("Download successful. Now extracting...")
 
@@ -127,7 +128,7 @@ def download_and_extract_2015_16(data_type, output_dir):
     except Exception as e:
         raise RuntimeError(
             f"An unhandled error occurred during extraction/processing for {config_key}: {e}"
-        )
+        ) from e
 
 
 def main(_):
@@ -159,4 +160,6 @@ def main(_):
 
 
 if __name__ == '__main__':
+    # Accept --ap, --ib and --gt, which are defined by download_ap_ib_gt.
+    download_ap_ib_gt._define_flags()
     app.run(main)

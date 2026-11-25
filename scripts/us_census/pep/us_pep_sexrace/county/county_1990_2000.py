@@ -61,15 +61,16 @@ def process_county_1990_2000(url: str) -> pd.DataFrame:
             _cols.extend(COLUMNS_TO_SUM)
 
             # reading the input file and converting to dataframe
-            df = pd.read_table(load_url_or_path(_url),
-                               index_col=False,
-                               sep=r'\s+',
-                               skiprows=16,
-                               skipfooter=14,
-                               engine='python',
-                               names=_cols,
-                               encoding='ISO-8859-1',
-                               on_bad_lines=lambda line: line[:len(_cols)])
+            df = pd.read_table(
+                load_url_or_path(_url),
+                index_col=False,
+                sep=r'\s+',
+                skiprows=16,
+                skipfooter=14,
+                engine='python',
+                names=_cols,
+                encoding='ISO-8859-1',
+                on_bad_lines=lambda line, cols=_cols: line[:len(cols)])
             df.to_csv(_CODEDIR + "/../input_files/" +
                       'county_result_1990_2000.csv')
             # dropping the rows which are having broken values

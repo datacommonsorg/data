@@ -71,7 +71,111 @@ select = [
     "F401",
     # Import sorting (isort).
     "I001",
+    # Star imports (`from x import *`) and names that may come from them.
+    "F403",
+    "F405",
+    # Multiple imports or statements on one line.
+    # Note: E402 (late imports after sys.path edits) is deferred until imports are
+    # made root-relative.
+    "E401",
+    "E701",
+    "E702",
+    "E703",
+    # Bare `except:`, which also catches KeyboardInterrupt and SystemExit.
+    "E722",
+    # Lambda assignments and ambiguous names (`l`, `O`, `I`).
+    "E731",
+    "E741",
+    "E742",
+    "E743",
+    # Import shadowing, late/undefined __future__ imports, nested star imports.
+    "F402",
+    "F404",
+    "F406",
+    "F407",
+    # Invalid `%`-format strings.
+    "F501",
+    "F502",
+    "F503",
+    "F504",
+    "F505",
+    "F506",
+    "F507",
+    "F508",
+    "F509",
+    # Invalid `.format()` strings.
+    "F521",
+    "F522",
+    "F523",
+    "F524",
+    "F525",
+    # Repeated dict variable keys, invalid starred unpacking, unused annotations,
+    # and `raise NotImplemented`.
+    "F602",
+    "F621",
+    "F622",
+    "F842",
+    "F901",
+    # Missing newline at end of file.
+    "W292",
+    # Directive, mock, string-concatenation, and deprecated-UTC guards.
+    "RUF100",
+    "PGH003",
+    "PGH004",
+    "PGH005",
+    "ISC001",
+    "DTZ003",
+    "DTZ004",
+    # flake8-bugbear correctness rules (B0xx).
+    "B002",
+    "B003",
+    "B004",
+    "B005",
+    "B006",
+    "B007",
+    "B008",
+    "B009",
+    "B010",
+    "B011",
+    "B012",
+    "B013",
+    "B014",
+    "B015",
+    "B016",
+    "B017",
+    "B019",
+    "B020",
+    "B021",
+    "B022",
+    "B023",
+    "B024",
+    "B025",
+    "B026",
+    "B027",
+    "B028",
+    "B029",
+    "B030",
+    "B031",
+    "B032",
+    "B033",
+    "B034",
+    "B035",
+    "B039",
+    # Exception chaining inside except blocks.
+    "B904",
 ]
+ignore = [
+    # Bare dict literals in `.py` config and PV-map files loaded via
+    # ast.literal_eval().
+    "B018",
+    # Skipped for now: noisy on same-DataFrame zip(df['a'], df['b']) calls and
+    # risky to flip to strict=True on untested legacy CSV scripts.
+    "B905",
+]
+
+[lint.flake8-bugbear]
+# FastAPI route handlers use Depends(...) in default arguments by design.
+extend-immutable-calls = ["fastapi.Depends"]
 
 [lint.isort]
 # Google Python style: one import per line, `import x` and `from x import y`

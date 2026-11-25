@@ -28,6 +28,9 @@
             "source_files": [
                 "ISTAT_code/*"
             ],
+            "config_override": {
+                "disable_import_workflow": true
+            },
             "cron_schedule": "0 18 * * *"
         }
     ]

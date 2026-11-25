@@ -22,7 +22,11 @@ from typing import Any, Union
 
 from absl import app
 from absl import flags
-from census_api_helpers import *
+from census_api_helpers import get_dataset_groups
+from census_api_helpers import get_dataset_groups_years
+from census_api_helpers import get_list_datasets
+from census_api_helpers import get_str_list_required
+from census_api_helpers import get_summary_level_config
 
 from scripts.us_census.api_utils.status_file_utils import sync_status_list
 
@@ -161,7 +165,7 @@ def get_table_url_list(dataset: str,
     # get list of all s levels
     if s_level_list == 'all':
         s_level_list = []
-        for year, year_dict in geo_config.items():
+        for _year, year_dict in geo_config.items():
             for s_level in year_dict['summary_levels']:
                 if s_level not in s_level_list:
                     s_level_list.append(s_level)

@@ -124,7 +124,7 @@ def preprocess_data(filepath: str):
         logging.error(f"Error during Pandas processing: {e}")
         logging.fatal(f"An unexpected error occurred: {e}")
         raise RuntimeError(
-            f"Import job failed An unexpected error occurred: {e}")
+            f"Import job failed An unexpected error occurred: {e}") from e
 
 
 def main(argv):
@@ -142,7 +142,8 @@ def main(argv):
     except Exception as e:
         logging.error(f"Failed during download: {e}")
         logging.fatal(f"Failed to download NNDSS weekly data file,{e}")
-        raise RuntimeError(f"Failed to download NNDSS weekly data file,{e}")
+        raise RuntimeError(
+            f"Failed to download NNDSS weekly data file,{e}") from e
 
     # Check if file actually downloaded and check its size
     if not os.path.exists(INPUT_FILE):

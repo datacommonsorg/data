@@ -10,8 +10,13 @@ from absl import logging
 import pandas as pd
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('process_output_path', 'output',
-                    'The local path to save the output files')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('process_output_path', 'output',
+                        'The local path to save the output files')
+
 
 INPUT_TO_OUTPUT_PATHS = {
     "source_data/NRI_Table_Counties.csv": "nri_counties_table.csv",
@@ -120,4 +125,5 @@ def main(argv):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

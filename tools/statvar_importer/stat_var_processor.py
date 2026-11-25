@@ -233,7 +233,7 @@ class StatVarsMap:
         pv_map: dict,
         duplicate_prop: str = None,
         allow_equal_pvs: bool = True,
-        ignore_props: list = [],
+        ignore_props: list | None = None,
     ) -> bool:
         """Returns true if the key:pvs is added to the pv_map,
 
@@ -250,6 +250,8 @@ class StatVarsMap:
     Returns:
       True if the key:pvs tuple was added to the pv_map.
     """
+        if ignore_props is None:
+            ignore_props = []
         if key in pv_map:
             has_diff, diff_str, added, deleted, modified = diff_mcf_node_pvs(
                 self.get_valid_pvs(pvs),
@@ -438,7 +440,7 @@ class StatVarsMap:
     def remove_undefined_properties(
         self,
         pv_map_dict: dict,
-        ignore_props: list = [],
+        ignore_props: list | None = None,
         comment_removed_props: bool = False,
     ) -> list:
         """Remove any property:value tuples with undefined property or values
@@ -458,10 +460,12 @@ class StatVarsMap:
     Batches property and values to be looked up in the DC API.
     """
         # Collect all property and values to be checked in schema.
+        if ignore_props is None:
+            ignore_props = []
         props_removed = []
         lookup_dcids = set()
-        for namespace, pv_map in pv_map_dict.items():
-            for key, pvs in pv_map.items():
+        for _namespace, pv_map in pv_map_dict.items():
+            for _key, pvs in pv_map.items():
                 # Add Node dcids as defined in cache.
                 dcid = pvs.get('Node', '')
                 dcid = pvs.get('dcid', dcid)
@@ -968,14 +972,14 @@ class StatVarsMap:
         """Drop any Statvars without any observations."""
         # Get statvars with observations
         statvars_with_obs = set()
-        for svobs_key, pvs in self._statvar_obs_map.items():
+        for _svobs_key, pvs in self._statvar_obs_map.items():
             statvar_dcid = strip_namespace(pvs.get('variableMeasured', None))
             if statvar_dcid:
                 statvars_with_obs.add(statvar_dcid)
         # Get any references to other statvars from stavtars with obs.
         for statvar in statvars_with_obs:
             pvs = self._statvars_map.get(statvar, {})
-            for prop, value in pvs.items():
+            for _prop, value in pvs.items():
                 if value in self._statvars_map:
                     statvars_with_obs.add(statvar)
                     break
@@ -1270,7 +1274,7 @@ class StatVarsMap:
             )
             if mode == 'w':
                 csv_writer.writeheader()
-            for key, svobs in self._statvar_obs_map.items():
+            for _key, svobs in self._statvar_obs_map.items():
                 format_svobs = self.format_svobs(svobs)
                 csv_writer.writerow(format_svobs)
                 for p, v in svobs.items():
@@ -1488,8 +1492,10 @@ class StatVarDataProcessor:
     """
         return [pvs]
 
-    def setup_config(self, config_dict: dict = {}):
+    def setup_config(self, config_dict: dict | None = None):
         """Setup the config."""
+        if config_dict is None:
+            config_dict = {}
         self._config = ConfigMap(config_dict=config_dict)
         self._log_every_n = self._config.get('log_every_n', 10)
         # Convert mapped columns from letters to int
@@ -1663,7 +1669,7 @@ class StatVarDataProcessor:
         """Return the last column header."""
         if column_index in self._column_keys:
             col_keys = self._column_keys[column_index]
-            for row_index, column_key in col_keys.items():
+            for _row_index, column_key in col_keys.items():
                 return column_key
         return None
 

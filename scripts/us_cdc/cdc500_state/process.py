@@ -26,13 +26,18 @@ _DEFAULT_OUTPUT_DIR = os.path.join(_MODULE_DIR, 'CDC500State_Output')
 OUTPUT_FILENAME = 'CDC500State_Output.csv'
 DEFAULT_BQ_TIMEOUT_SECONDS = 600
 
-flags.DEFINE_string('output_dir', _DEFAULT_OUTPUT_DIR,
-                    'Directory to write output CSV.')
-flags.DEFINE_string(
-    'project', None,
-    'GCP project ID for BigQuery. Defaults to ambient environment if omitted.')
-flags.DEFINE_integer('timeout', DEFAULT_BQ_TIMEOUT_SECONDS,
-                     'Timeout in seconds for BigQuery query and download.')
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('output_dir', _DEFAULT_OUTPUT_DIR,
+                        'Directory to write output CSV.')
+    flags.DEFINE_string(
+        'project', None,
+        'GCP project ID for BigQuery. Defaults to ambient environment if omitted.'
+    )
+    flags.DEFINE_integer('timeout', DEFAULT_BQ_TIMEOUT_SECONDS,
+                         'Timeout in seconds for BigQuery query and download.')
+
 
 QUERY = """
 WITH cdc_sv AS (
@@ -206,16 +211,33 @@ def run_process(client: bigquery.Client,
     return True
 
 
-def main(argv):
-    """Main entry point for the CDC 500 state aggregation script."""
-    del argv  # Unused.
-    output_file = os.path.join(_FLAGS.output_dir, OUTPUT_FILENAME)
+def run_aggregation(output_dir: str,
+                    project: str | None = None,
+                    timeout: int = DEFAULT_BQ_TIMEOUT_SECONDS) -> None:
+    """Runs the CDC 500 state aggregation and writes the CSV to output_dir.
+
+    Args:
+        output_dir: Directory to write the output CSV to.
+        project: GCP project ID for BigQuery. Uses the ambient environment if
+            None.
+        timeout: Timeout in seconds for the BigQuery query and download.
+    """
+    output_file = os.path.join(output_dir, OUTPUT_FILENAME)
     try:
-        client = bigquery.Client(project=_FLAGS.project)
-        run_process(client, output_file, timeout=_FLAGS.timeout)
+        client = bigquery.Client(project=project)
+        run_process(client, output_file, timeout=timeout)
     except Exception as e:  # pylint: disable=broad-exception-caught
         logging.fatal("CDC 500 state aggregation failed: %s", e, exc_info=True)
 
 
+def main(argv):
+    """Main entry point for the CDC 500 state aggregation script."""
+    del argv  # Unused.
+    run_aggregation(_FLAGS.output_dir,
+                    project=_FLAGS.project,
+                    timeout=_FLAGS.timeout)
+
+
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)
