@@ -3,9 +3,9 @@ Standardized 2025 USGS Containment Linker.
 Generates a separate MCF file matching the 2022 format.
 """
 
-import os
-import glob
 from collections import defaultdict
+import glob
+import os
 
 
 class Config:

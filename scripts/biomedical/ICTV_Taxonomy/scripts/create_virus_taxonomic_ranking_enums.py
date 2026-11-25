@@ -22,8 +22,9 @@ ICTV Virus Metadata Resource.
 """
 
 # load environment
-import pandas as pd
 import sys
+
+import pandas as pd
 
 # declare universal variables
 HEADER = [
@@ -81,7 +82,7 @@ def add_item_to_enums(df):
     list_levels = [i for i in HEADER if i not in LIST_DROP]
     dict_of_dicts = initiate_enum_dict()
     dict_specialization = {}  # keep track of previous top level
-    for index, row in df.iterrows():
+    for _index, row in df.iterrows():
         last_level_dcid = False  # initiate empty value for tracking specialization
         for item in list_levels:
             level = item.capitalize()

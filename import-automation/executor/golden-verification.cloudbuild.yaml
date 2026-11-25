@@ -1,0 +1,127 @@
+# Copyright 2026 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# Cloud Build configuration for staging schema verification gate.
+# Clears Staging Redis cache, runs golden tests in update mode, generates diffs,
+# creates a GitHub PR if changes are detected, and outputs summary for human approval.
+
+substitutions:
+  _GITHUB_ORG: 'datacommonsorg'
+  _GITHUB_REPO: 'website'
+  _GITHUB_BRANCH: 'master'
+  _GITHUB_AUTHOR: 'datacommons-robot-author'
+  _PR_REVIEWER: 'datacommonsorg/website-reviewers'
+  _DIFF_BUCKET: 'datcom-ci-test'
+
+availableSecrets:
+  secretManager:
+  - versionName: projects/879489846695/secrets/GH_PAT/versions/latest
+    env: 'ghsecret'
+
+steps:
+  # 1. Initialize mixer submodule so helm configs for mixer are available
+  - id: 'init-mixer-submodule'
+    name: 'gcr.io/cloud-builders/git'
+    args: ['submodule', 'update', '--init', '--depth', '1', 'mixer']
+
+  # 2. Clear Redis cache on Staging Mixer
+  - id: 'clear-staging-mixer-cache'
+    name: 'gcr.io/datcom-ci/datacommons-script-runner:latest'
+    entrypoint: 'bash'
+    args:
+      - 'tools/clearcache/run.sh'
+      - 'mixer'
+      - 'staging'
+
+  # 3. Run Explore & NL golden tests against staging backend in update mode (-g)
+  - id: 'run-golden-tests'
+    name: 'python:3.11.3'
+    entrypoint: '/bin/sh'
+    args:
+      - '-c'
+      - |
+        pip install uv
+        ./run_test.sh --explore -g || true
+        ./run_test.sh --nl -g || true
+
+  # 4. Detect diffs, create PR if needed, and write diff_summary.json to GCS
+  - id: 'create-pr-and-summary'
+    name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:slim'
+    entrypoint: 'bash'
+    secretEnv: ['ghsecret']
+    args:
+      - '-c'
+      - |
+        apt-get update && apt-get install -y git gh jq
+
+        DIFF_TARGETS="server/integration_tests/test_data/ server/config/nl_page/"
+        BUILD_ID_SAFE=$(echo "${BUILD_ID}" | tr -cd '[:alnum:]-')
+
+        # Check for diffs in golden directories
+        if git diff --exit-code --quiet -- $${DIFF_TARGETS}; then
+          echo "NO_DIFF_DETECTED"
+          cat <<EOF > /workspace/diff_summary.json
+        {
+          "has_diff": false,
+          "pr_url": "",
+          "build_id": "${BUILD_ID}",
+          "message": "No golden diffs detected"
+        }
+        EOF
+        else
+          echo "DIFF_DETECTED: Generating branch and opening PR..."
+          BRANCH_NAME="schema-golden-diff-$${BUILD_ID_SAFE}"
+          PR_URL=""
+
+          if [ -n "$$ghsecret" ]; then
+            git config user.name "${_GITHUB_AUTHOR}"
+            git config user.email "${_GITHUB_AUTHOR}@users.noreply.github.com"
+            git checkout -b "$${BRANCH_NAME}"
+            git add $${DIFF_TARGETS}
+            git commit -m "test(goldens): automated schema staging diff update (build $${BUILD_ID_SAFE})"
+
+            export GH_TOKEN="$$ghsecret"
+            git push "https://${_GITHUB_AUTHOR}:$${ghsecret}@github.com/${_GITHUB_ORG}/${_GITHUB_REPO}.git" "HEAD:$${BRANCH_NAME}" || true
+
+            PR_URL=$(gh pr create \
+              --repo "${_GITHUB_ORG}/${_GITHUB_REPO}" \
+              --title "Staging Schema Golden Diff: Build $${BUILD_ID_SAFE}" \
+              --body "Automated golden diff from staging schema import. Please review and merge. [Build Log](https://console.cloud.google.com/cloud-build/builds/${BUILD_ID}?project=${PROJECT_ID})" \
+              --base "${_GITHUB_BRANCH}" \
+              --reviewer "${_PR_REVIEWER}" \
+              --head "$${BRANCH_NAME}" \
+              --label "golden-diff-gate" 2>/dev/null || echo "")
+            echo "AUTOMATED_PR_URL:$${PR_URL}"
+          else
+            echo "GH_PAT secret not provided; skipped git push/PR creation."
+          fi
+
+          cat <<EOF > /workspace/diff_summary.json
+        {
+          "has_diff": true,
+          "pr_url": "$${PR_URL}",
+          "build_id": "${BUILD_ID}",
+          "branch_name": "$${BRANCH_NAME}",
+          "message": "Golden diff detected"
+        }
+        EOF
+        fi
+
+        echo "Uploading diff_summary.json to gs://${_DIFF_BUCKET}/golden_diffs/${BUILD_ID}/diff_summary.json..."
+        gcloud storage cp /workspace/diff_summary.json "gs://${_DIFF_BUCKET}/golden_diffs/${BUILD_ID}/diff_summary.json" || true
+        cat /workspace/diff_summary.json
+
+options:
+  machineType: 'E2_HIGHCPU_32'
+timeout: '2400s'

@@ -1,0 +1,6 @@
+Node: E:instructional_wifi_devices->E0
+observationAbout: C:instructional_wifi_devices->observationAbout
+observationDate: C:instructional_wifi_devices->observationDate
+variableMeasured: C:instructional_wifi_devices->variableMeasured
+value: C:instructional_wifi_devices->value
+typeOf: dcs:StatVarObservation

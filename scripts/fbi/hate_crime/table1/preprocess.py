@@ -12,35 +12,42 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """A script to process FBI Hate Crime table 1 publications."""
+import csv
+import json
 import os
 import sys
 import tempfile
-import csv
-import json
-import pandas as pd
 
 from absl import app
 from absl import flags
 from absl import logging
+import pandas as pd
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '..'))  # for utils
-
-import utils
+sys.path.append(os.path.join(_SCRIPT_PATH, '../../../../util/'))  # file_util
 
 import file_util
+import utils
 
-flags.DEFINE_string('config_file',
-                    os.path.join(_SCRIPT_PATH, '../table_config.json'),
-                    'Input config file')
-flags.DEFINE_string(
-    'output_dir', _SCRIPT_PATH, 'Directory path to write the cleaned CSV and'
-    'MCF. Default behaviour is to write the artifacts in the current working'
-    'directory.')
-flags.DEFINE_bool(
-    'gen_statvar_mcf', False, 'Generate MCF of StatVars. Default behaviour is'
-    'to not generate the MCF file.')
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('config_file',
+                        os.path.join(_SCRIPT_PATH, '../table_config.json'),
+                        'Input config file')
+    flags.DEFINE_string(
+        'output_dir', _SCRIPT_PATH,
+        'Directory path to write the cleaned CSV and '
+        'MCF. Default behaviour is to write the artifacts in the current working '
+        'directory.')
+    flags.DEFINE_bool(
+        'gen_statvar_mcf', False,
+        'Generate MCF of StatVars. Default behaviour is '
+        'to not generate the MCF file.')
+
+
 _FLAGS = flags.FLAGS
 
 _YEAR_INDEX = 0
@@ -137,12 +144,12 @@ def main(argv):
             f"Error: Key 1 not found in the config. Please ensure the configuration for section {table_num} is present."
         )
     with tempfile.TemporaryDirectory() as tmp_dir:
-        for year, config in config['1'].items():
-            xls_file_path = config['path']
+        for year, year_config in config['1'].items():
+            xls_file_path = year_config['path']
             xls_file_path = os.path.join(_SCRIPT_PATH, '../', xls_file_path)
             logging.info(f"Processing : {xls_file_path}")
             csv_file_path = os.path.join(tmp_dir, year + '.csv')
-            read_file = pd.read_excel(xls_file_path, **config['args'])
+            read_file = pd.read_excel(xls_file_path, **year_config['args'])
             read_file = _clean_dataframe(read_file)
             read_file.insert(_YEAR_INDEX, 'Year', year)
             read_file.to_csv(csv_file_path, index=None, header=True)
@@ -162,4 +169,5 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

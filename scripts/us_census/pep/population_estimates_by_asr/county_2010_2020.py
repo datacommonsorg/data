@@ -15,9 +15,19 @@
 This Python Script is for County Level Data 2010-2020.
 '''
 import os
+import sys
+
 import numpy as np
 import pandas as pd
-from common_functions import input_url, replace_agegrp
+
+_SCRIPTS_DIR = os.path.abspath(
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../'))
+if _SCRIPTS_DIR not in sys.path:
+    sys.path.append(_SCRIPTS_DIR)
+
+from us_census.pep.population_estimates_by_asr.common_functions import input_url
+from us_census.pep.population_estimates_by_asr.common_functions import replace_agegrp
+from us_census.pep.population_estimates_by_asr.process import load_url_or_path
 
 
 def county2010(url_file: str, output_folder: str):
@@ -26,7 +36,9 @@ def county2010(url_file: str, output_folder: str):
     cleans it and create a cleaned csv.
     '''
     _url = input_url(url_file, "2010-20")
-    df = pd.read_csv(_url, encoding='ISO-8859-1', low_memory=False)
+    df = pd.read_csv(load_url_or_path(_url),
+                     encoding='ISO-8859-1',
+                     low_memory=False)
     #Writing raw data to csv
     df.to_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)),
                            "raw_data", 'raw_data_county_2010_2020.csv'),
@@ -58,8 +70,7 @@ def county2010(url_file: str, output_folder: str):
     # Code 0 is sent if AGEGRP starts from 0 and 1 if it starts from 0To4
     df = replace_agegrp(df, 1)
     # Drop unwanted columns.
-    df.drop(columns=['SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME'], \
-        inplace=True)
+    df = df.drop(columns=['SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME'],)
     df = df.drop(columns=[
         'TOT_POP', 'NH_MALE', 'NH_FEMALE', 'NHWA_MALE', 'NHWA_FEMALE',
         'NHBA_MALE', 'NHBA_FEMALE', 'NHIA_MALE', 'NHIA_FEMALE', 'NHAA_MALE',
@@ -69,7 +80,7 @@ def county2010(url_file: str, output_folder: str):
         'HNA_MALE', 'HNA_FEMALE', 'HTOM_MALE', 'HTOM_FEMALE'
     ])
     df['Year'] = df['YEAR']
-    df.drop(columns=['YEAR'], inplace=True)
+    df = df.drop(columns=['YEAR'])
     df['WhiteAloneAgg'] = df['WA_MALE'].astype(int) + df['WA_FEMALE'].astype(
         int)
     df['BlackOrAfricanAmericanAlone'] = df['BA_MALE'].astype(int)\

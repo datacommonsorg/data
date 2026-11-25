@@ -26,13 +26,10 @@ contains the resolved geos.
 """
 
 import re
-import collections
-from typing import Dict, List, Iterable
+from typing import Dict, Iterable, List
 
-import pandas as pd
-import numpy as np
-import requests
 import frozendict
+import pandas as pd
 
 # Data CSV
 CSV_URL = 'https://raw.githubusercontent.com/google-research/open-covid-19-data/master/data/exports/cc_by/aggregated_cc_by.csv'

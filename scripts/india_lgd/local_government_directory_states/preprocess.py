@@ -13,12 +13,8 @@
 # limitations under the License.
 
 import os
-import math
-import json
-import csv
+
 import pandas as pd
-import numpy as np
-import urllib.request
 
 
 class LocalGovermentDirectoryStatesDataLoader:

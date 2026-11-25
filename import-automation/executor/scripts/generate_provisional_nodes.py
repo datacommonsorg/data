@@ -27,13 +27,13 @@ Usage:
         --spanner_instance=dc-graph-staging\
         --spanner_database=dc_graph
 """
-import os
-import re
-import time
-import logging
 import csv
 import io
+import logging
+import os
+import re
 import sys
+import time
 
 from absl import app
 from absl import flags
@@ -207,7 +207,7 @@ def generate_provisional_nodes(scan_dir,
     logging.info(f"Scanning directory: {root_dir}")
 
     # Walk through the directory to process each .mcf file
-    for dirpath, dirnames, filenames in os.walk(root_dir):
+    for dirpath, _dirnames, filenames in os.walk(root_dir):
         for filename in filenames:
             if ".mcf" not in filename:
                 continue

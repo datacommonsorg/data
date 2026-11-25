@@ -12,12 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import unittest
 import os
-from emp_persec_preprocess_gen_tmcf import *
-import pandas as pd
-import tempfile
 import sys
+import unittest
+
+from emp_persec_preprocess_gen_tmcf import preprocess
+from emp_persec_preprocess_gen_tmcf import translate_wide_to_long
 
 MODULE_DIR = os.path.dirname(__file__)
 sys.path.insert(0, MODULE_DIR)

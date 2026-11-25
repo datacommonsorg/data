@@ -12,9 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import unittest
-from .covidmobility import csv_to_mcf
 from os import path
+import unittest
+
+from .covidmobility import csv_to_mcf
 
 
 class TestCovidMobility(unittest.TestCase):

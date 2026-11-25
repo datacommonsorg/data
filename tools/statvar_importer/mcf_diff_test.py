@@ -19,8 +19,6 @@ import sys
 import tempfile
 import unittest
 
-from absl import logging
-
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
 sys.path.append(os.path.dirname(_SCRIPT_DIR))
@@ -29,10 +27,10 @@ sys.path.append(
 
 _TEST_DIR = os.path.join(_SCRIPT_DIR, 'test_data')
 
-import mcf_diff
-
 from counters import Counters
-from mcf_file_util import load_mcf_nodes, write_mcf_nodes
+import mcf_diff
+from mcf_file_util import load_mcf_nodes
+from mcf_file_util import write_mcf_nodes
 
 _SAMPLE_MCF_NODES = """
 # Sample nodes

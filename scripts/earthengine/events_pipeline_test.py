@@ -14,13 +14,13 @@
 """Test for events_pipeline.py"""
 
 import os
-import pandas as pd
 import shutil
 import sys
 import tempfile
 import unittest
 
 from absl import logging
+import pandas as pd
 
 # Allows the following module imports to work when running as a script
 _MODULE_DIR = os.path.dirname(__file__)
@@ -30,12 +30,10 @@ sys.path.append(os.path.dirname(os.path.dirname((_MODULE_DIR))))
 sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname((_MODULE_DIR))), 'util'))
 
-import file_util
-import utils
-import download_util
-
-from events_pipeline import EventPipeline
 from config_map import ConfigMap
+import download_util
+from events_pipeline import EventPipeline
+import file_util
 
 _TESTDIR = os.path.join(os.path.dirname(os.path.realpath(__file__)),
                         'test_data')
@@ -58,30 +56,29 @@ class EventsPipelineTest(unittest.TestCase):
     def compare_csv_files(self,
                           expected_file: str,
                           actual_file: str,
-                          ignore_columns: list = []):
+                          ignore_columns: list | None = None):
         '''Compare CSV files with statvar obsevration data.'''
         # Sort files by columns.
+        if ignore_columns is None:
+            ignore_columns = []
         df_expected = pd.read_csv(expected_file)
         df_actual = pd.read_csv(actual_file)
         self.assertEqual(
             df_expected.columns.to_list(), df_actual.columns.to_list(),
-            f'Found different columns in CSV files:' +
+            'Found different columns in CSV files:' +
             f'expected:{expected_file}:{df_expected.columns.to_list()}, ' +
             f'actual:{actual_file}:{df_actual.columns.to_list()}, ')
         if ignore_columns:
-            df_expected.drop(
-                columns=df_expected.columns.difference(ignore_columns),
-                inplace=True)
-            df_actual.drop(columns=df_actual.columns.difference(ignore_columns),
-                           inplace=True)
-        df_expected.sort_values(by=df_expected.columns.to_list(),
-                                inplace=True,
-                                ignore_index=True)
-        df_actual.sort_values(by=df_expected.columns.to_list(),
-                              inplace=True,
-                              ignore_index=True)
+            df_expected = df_expected.drop(
+                columns=df_expected.columns.difference(ignore_columns))
+            df_actual = df_actual.drop(
+                columns=df_actual.columns.difference(ignore_columns))
+        df_expected = df_expected.sort_values(by=df_expected.columns.to_list(),
+                                              ignore_index=True)
+        df_actual = df_actual.sort_values(by=df_expected.columns.to_list(),
+                                          ignore_index=True)
         self.assertTrue(
-            df_expected.equals(df_actual), f'Found diffs in CSV rows:' +
+            df_expected.equals(df_actual), 'Found diffs in CSV rows:' +
             f'"{actual_file}" vs "{expected_file}":')
 
     def setUp(self):

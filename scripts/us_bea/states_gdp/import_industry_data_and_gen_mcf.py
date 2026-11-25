@@ -25,6 +25,7 @@ import io
 import os
 import re
 import sys
+
 from absl import app
 from absl import flags
 from absl import logging
@@ -35,15 +36,13 @@ logging.set_verbosity(logging.INFO)
 sys.path.append(
     os.path.dirname(os.path.dirname(os.path.dirname(
         os.path.abspath(__file__)))))
-from us_bea.states_gdp import import_data
 import csv
+
+from us_bea.states_gdp import import_data
 
 FLAGS = flags.FLAGS
 flags.DEFINE_integer('latest_year_industry', None,
                      'The latest year to look for in the filename (optional).')
-
-# Suppress annoying pandas DF copy warnings.
-pd.options.mode.chained_assignment = None  # default='warn'
 
 
 class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
@@ -74,8 +73,7 @@ class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
             data = list(reader)
             if data:
                 self.raw_df = pd.DataFrame(data, columns=header)
-                logging.info(
-                    f"Successfully loaded data from provided raw data.")
+                logging.info("Successfully loaded data from provided raw data.")
             else:
                 self.raw_df = None
                 raise ValueError("Error: No data found in provided raw data.")
@@ -103,11 +101,11 @@ class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
                         raise ValueError(
                             f"Error: No data found in '{self._input_file}'.")
             except FileNotFoundError as e:
-                raise FileNotFoundError(f"Error: {e}")
+                raise FileNotFoundError(f"Error: {e}") from e
             except Exception as e:
                 logging.error(f"An error occurred while reading data: {e}")
                 self.raw_df = None
-                raise ValueError(f"Error loading data: {e}")
+                raise ValueError(f"Error loading data: {e}") from e
 
         if self.raw_df is not None:
             df = self.raw_df.copy()

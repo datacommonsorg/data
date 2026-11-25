@@ -14,11 +14,8 @@
 """Unit tests for schema_resolver.py."""
 
 import os
-import sys
 import unittest
 
-from absl import app
-from absl import logging
 import schema_resolver
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -94,7 +91,7 @@ class SchemaResolverTest(unittest.TestCase):
             os.path.join(_SCRIPT_DIR, 'test_data/sample_output.mcf'),
             self._resolver_config,
         )
-        for key, node in self._schema_nodes.items():
+        for _key, node in self._schema_nodes.items():
             self._resolver.add_node(node)
 
     def test_resolve_statvar(self):
@@ -140,3 +137,7 @@ class SchemaResolverTest(unittest.TestCase):
 
         resolved_place = self._resolver.resolve_node({'state': 'geoId/04'})
         self.assertEqual({}, resolved_place)
+
+
+if __name__ == '__main__':
+    unittest.main()

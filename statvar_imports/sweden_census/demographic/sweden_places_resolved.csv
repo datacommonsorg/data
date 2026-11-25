@@ -1,0 +1,322 @@
+place_name,dcid
+SE1 Östra Sverige,nuts/SE1
+SE2 Södra Sverige,nuts/SE2
+SE3 Norra Sverige,nuts/SE3
+SE11 Stockholm,nuts/SE11
+SE12 Östra Mellansverige,nuts/SE12
+SE21 Småland med öarna,nuts/SE21
+SE22 Sydsverige,nuts/SE22
+SE23 Västsverige,nuts/SE23
+SE31 Norra Mellansverige,nuts/SE31
+SE32 Mellersta Norrland,nuts/SE32
+SE33 Övre Norrland,nuts/SE33
+SE110 Stockholms län,nuts/SE110
+SE121 Uppsala län,nuts/SE121
+SE122 Södermanlands län,nuts/SE122
+SE123 Östergötlands län,nuts/SE123
+SE124 Örebro län,nuts/SE124
+SE125 Västmanlands län,nuts/SE125
+SE211 Jönköpings län,nuts/SE211
+SE212 Kronobergs län,nuts/SE212
+SE213 Kalmar län,nuts/SE213
+SE214 Gotlands län,nuts/SE214
+SE221 Blekinge län,nuts/SE221
+SE224 Skåne län,nuts/SE224
+SE231 Hallands län,nuts/SE231
+SE232 Västra Götalands län,nuts/SE232
+SE311 Värmlands län,nuts/SE311
+SE312 Dalarnas län,nuts/SE312
+SE313 Gävleborgs län,nuts/SE313
+SE321 Västernorrlands län,nuts/SE321
+SE322 Jämtlands län,nuts/SE322
+SE331 Västerbottens län,nuts/SE331
+SE332 Norrbottens län,nuts/SE332
+0114 Upplands Väsby,wikidataId/Q499425
+0115 Vallentuna,wikidataId/Q501526
+0117 Österåker,wikidataId/Q117728
+0120 Värmdö,wikidataId/Q493841
+0123 Järfälla,wikidataId/Q301259
+0125 Ekerö,wikidataId/Q492614
+0126 Huddinge,wikidataId/Q492575
+0127 Botkyrka,wikidataId/Q113718
+0128 Salem,wikidataId/Q516080
+0136 Haninge,wikidataId/Q113692
+0138 Tyresö,wikidataId/Q113730
+0139 Upplands-Bro,wikidataId/Q113673
+0140 Nykvarn,wikidataId/Q499460
+0160 Täby,wikidataId/Q493066
+0162 Danderyd,wikidataId/Q113679
+0163 Sollentuna,wikidataId/Q503746
+0180 Stockholm,wikidataId/Q506250
+0181 Södertälje,wikidataId/Q516336
+0182 Nacka,wikidataId/Q946647
+0183 Sundbyberg,wikidataId/Q972564
+0184 Solna,wikidataId/Q109010
+0186 Lidingö,wikidataId/Q3120654
+0187 Vaxholm,wikidataId/Q500090
+0188 Norrtälje,wikidataId/Q214048
+0191 Sigtuna,wikidataId/Q216915
+0192 Nynäshamn,wikidataId/Q505090
+0305 Håbo,wikidataId/Q511253
+0319 Älvkarleby,wikidataId/Q59858
+0330 Knivsta,wikidataId/Q504465
+0331 Heby,wikidataId/Q516308
+0360 Tierp,wikidataId/Q510198
+0380 Uppsala,wikidataId/Q59091
+0381 Enköping,wikidataId/Q509568
+0382 Östhammar,wikidataId/Q59093
+0428 Vingåker,wikidataId/Q249378
+0461 Gnesta,wikidataId/Q239332
+0480 Nyköping,wikidataId/Q500267
+0481 Oxelösund,wikidataId/Q505246
+0482 Flen,wikidataId/Q27982
+0483 Katrineholm,wikidataId/Q508140
+0484 Eskilstuna,wikidataId/Q503144
+0486 Strängnäs,wikidataId/Q501532
+0488 Trosa,wikidataId/Q505064
+0509 Ödeshög,wikidataId/Q293970
+0512 Ydre,wikidataId/Q515699
+0513 Kinda,wikidataId/Q515299
+0560 Boxholm,wikidataId/Q509514
+0561 Åtvidaberg,wikidataId/Q271340
+0562 Finspång,wikidataId/Q503180
+0563 Valdemarsvik,wikidataId/Q509997
+0580 Linköping,wikidataId/Q499410
+0581 Norrköping,wikidataId/Q504676
+0582 Söderköping,wikidataId/Q515680
+0583 Motala,wikidataId/Q508108
+0584 Vadstena,wikidataId/Q515969
+0586 Mjölby,wikidataId/Q267030
+0604 Aneby,wikidataId/Q503167
+0617 Gnosjö,wikidataId/Q509609
+0642 Mullsjö,wikidataId/Q505076
+0643 Habo,wikidataId/Q503198
+0662 Gislaved,wikidataId/Q505259
+0665 Vaggeryd,wikidataId/Q605329
+0680 Jönköping,wikidataId/Q504689
+0682 Nässjö,wikidataId/Q505096
+0683 Värnamo,wikidataId/Q280562
+0684 Sävsjö,wikidataId/Q505239
+0685 Vetlanda,wikidataId/Q505052
+0686 Eksjö,wikidataId/Q512035
+0687 Tranås,wikidataId/Q505071
+0760 Uppvidinge,wikidataId/Q515505
+0761 Lessebo,wikidataId/Q509488
+0763 Tingsryd,wikidataId/Q515491
+0764 Alvesta,wikidataId/Q182007
+0765 Älmhult,wikidataId/Q254799
+0767 Markaryd,wikidataId/Q240574
+0780 Växjö,wikidataId/Q500217
+0781 Ljungby,wikidataId/Q504235
+0821 Högsby,wikidataId/Q510233
+0834 Torsås,wikidataId/Q515551
+0840 Mörbylånga,wikidataId/Q514756
+0860 Hultsfred,wikidataId/Q512002
+0861 Mönsterås,wikidataId/Q515250
+0862 Emmaboda,wikidataId/Q509452
+0880 Kalmar,wikidataId/Q508153
+0881 Nybro,wikidataId/Q515318
+0882 Oskarshamn,wikidataId/Q505006
+0883 Västervik,wikidataId/Q515477
+0884 Vimmerby,wikidataId/Q505057
+0885 Borgholm,wikidataId/Q509546
+0980 Gotland,wikidataId/Q374794
+1060 Olofström,wikidataId/Q504257
+1080 Karlskrona,wikidataId/Q1128384
+1081 Ronneby,wikidataId/Q515373
+1082 Karlshamn,wikidataId/Q510223
+1083 Sölvesborg,wikidataId/Q515409
+1214 Svalöv,wikidataId/Q504227
+1230 Staffanstorp,wikidataId/Q504609
+1231 Burlöv,wikidataId/Q186662
+1233 Vellinge,wikidataId/Q511338
+1256 Östra Göinge,wikidataId/Q307370
+1257 Örkelljunga,wikidataId/Q297936
+1260 Bjuv,wikidataId/Q511310
+1261 Kävlinge,wikidataId/Q513370
+1262 Lomma,wikidataId/Q427991
+1263 Svedala,wikidataId/Q515706
+1264 Skurup,wikidataId/Q515266
+1265 Sjöbo,wikidataId/Q504601
+1266 Hörby,wikidataId/Q504619
+1267 Höör,wikidataId/Q266401
+1270 Tomelilla,wikidataId/Q515519
+1272 Bromölla,wikidataId/Q514830
+1273 Osby,wikidataId/Q504594
+1275 Perstorp,wikidataId/Q504249
+1276 Klippan,wikidataId/Q504614
+1277 Åstorp,wikidataId/Q201813
+1278 Båstad,wikidataId/Q499464
+1280 Malmö,wikidataId/Q503361
+1281 Lund,wikidataId/Q505018
+1282 Landskrona,wikidataId/Q502298
+1283 Helsingborg,wikidataId/Q487648
+1284 Höganäs,wikidataId/Q505013
+1285 Eslöv,wikidataId/Q1130264
+1286 Ystad,wikidataId/Q505102
+1287 Trelleborg,wikidataId/Q504219
+1290 Kristianstad,wikidataId/Q498857
+1291 Simrishamn,wikidataId/Q504626
+1292 Ängelholm,wikidataId/Q255206
+1293 Hässleholm,wikidataId/Q508125
+1315 Hylte,wikidataId/Q498477
+1380 Halmstad,wikidataId/Q504692
+1381 Laholm,wikidataId/Q487502
+1382 Falkenberg,wikidataId/Q508168
+1383 Varberg,wikidataId/Q179180
+1384 Kungsbacka,wikidataId/Q499380
+1401 Härryda,wikidataId/Q500125
+1402 Partille,wikidataId/Q125222
+1407 Öckerö,wikidataId/Q293928
+1415 Stenungsund,wikidataId/Q511438
+1419 Tjörn,wikidataId/Q501448
+1421 Orust,wikidataId/Q338752
+1427 Sotenäs,wikidataId/Q501420
+1430 Munkedal,wikidataId/Q389040
+1435 Tanum,wikidataId/Q511228
+1438 Dals-Ed,wikidataId/Q503132
+1439 Färgelanda,wikidataId/Q499441
+1440 Ale,wikidataId/Q498470
+1441 Lerum,wikidataId/Q503188
+1442 Vårgårda,wikidataId/Q511297
+1443 Bollebygd,wikidataId/Q503102
+1444 Grästorp,wikidataId/Q503148
+1445 Essunga,wikidataId/Q503127
+1446 Karlsborg,wikidataId/Q499435
+1447 Gullspång,wikidataId/Q503193
+1452 Tranemo,wikidataId/Q501479
+1460 Bengtsfors,wikidataId/Q267462
+1461 Mellerud,wikidataId/Q501438
+1462 Lilla Edet,wikidataId/Q511241
+1463 Mark,wikidataId/Q500153
+1465 Svenljunga,wikidataId/Q501487
+1466 Herrljunga,wikidataId/Q503111
+1470 Vara,wikidataId/Q501428
+1471 Götene,wikidataId/Q511281
+1472 Tibro,wikidataId/Q501432
+1473 Töreboda,wikidataId/Q501470
+1480 Göteborg,wikidataId/Q52502
+1481 Mölndal,wikidataId/Q511270
+1482 Kungälv,wikidataId/Q511394
+1484 Lysekil,wikidataId/Q503173
+1485 Uddevalla,wikidataId/Q501442
+1486 Strömstad,wikidataId/Q501424
+1487 Vänersborg,wikidataId/Q511426
+1488 Trollhättan,wikidataId/Q28532
+1489 Alingsås,wikidataId/Q503162
+1490 Borås,wikidataId/Q894327
+1491 Ulricehamn,wikidataId/Q382808
+1492 Åmål,wikidataId/Q271079
+1493 Mariestad,wikidataId/Q427422
+1494 Lidköping,wikidataId/Q515358
+1495 Skara,wikidataId/Q499421
+1496 Skövde,wikidataId/Q501452
+1497 Hjo,wikidataId/Q428749
+1498 Tidaholm,wikidataId/Q501459
+1499 Falköping,wikidataId/Q503214
+1715 Kil,wikidataId/Q499393
+1730 Eda,wikidataId/Q498447
+1737 Torsby,wikidataId/Q510135
+1760 Storfors,wikidataId/Q505936
+1761 Hammarö,wikidataId/Q499359
+1762 Munkfors,wikidataId/Q501494
+1763 Forshaga,wikidataId/Q499385
+1764 Grums,wikidataId/Q503122
+1765 Årjäng,wikidataId/Q2777887
+1766 Sunne,wikidataId/Q501205
+1780 Karlstad,wikidataId/Q498453
+1781 Kristinehamn,wikidataId/Q510364
+1782 Filipstad,wikidataId/Q503204
+1783 Hagfors,wikidataId/Q511407
+1784 Arvika,wikidataId/Q511365
+1785 Säffle,wikidataId/Q511326
+1814 Lekeberg,wikidataId/Q515282
+1860 Laxå,wikidataId/Q515326
+1861 Hallsberg,wikidataId/Q508180
+1862 Degerfors,wikidataId/Q509469
+1863 Hällefors,wikidataId/Q220881
+1864 Ljusnarsberg,wikidataId/Q514739
+1880 Örebro,wikidataId/Q297718
+1881 Kumla,wikidataId/Q504988
+1882 Askersund,wikidataId/Q509501
+1883 Karlskoga,wikidataId/Q509634
+1884 Nora,wikidataId/Q285894
+1885 Lindesberg,wikidataId/Q514858
+1904 Skinnskatteberg,wikidataId/Q37462
+1907 Surahammar,wikidataId/Q34078
+1960 Kungsör,wikidataId/Q47169
+1961 Hallstahammar,wikidataId/Q47019
+1962 Norberg,wikidataId/Q37404
+1980 Västerås,wikidataId/Q34550
+1981 Sala,wikidataId/Q37399
+1982 Fagersta,wikidataId/Q47018
+1983 Köping,wikidataId/Q42009
+1984 Arboga,wikidataId/Q431271
+2021 Vansbro,wikidataId/Q501551
+2023 Malung-Sälen,wikidataId/Q504266
+2026 Gagnef,wikidataId/Q2642771
+2029 Leksand,wikidataId/Q509651
+2031 Rättvik,wikidataId/Q504244
+2034 Orsa,wikidataId/Q504630
+2039 Älvdalen,wikidataId/Q123855
+2061 Smedjebacken,wikidataId/Q505046
+2062 Mora,wikidataId/Q504239
+2080 Falun,wikidataId/Q501545
+2081 Borlänge,wikidataId/Q503209
+2082 Säter,wikidataId/Q1345439
+2083 Hedemora,wikidataId/Q507684
+2084 Avesta,wikidataId/Q500071
+2085 Ludvika,wikidataId/Q503184
+2101 Ockelbo,wikidataId/Q505109
+2104 Hofors,wikidataId/Q62464
+2121 Ovanåker,wikidataId/Q505085
+2132 Nordanstig,wikidataId/Q514805
+2161 Ljusdal,wikidataId/Q515235
+2180 Gävle,wikidataId/Q510010
+2181 Sandviken,wikidataId/Q149539
+2182 Söderhamn,wikidataId/Q145835
+2183 Bollnäs,wikidataId/Q62469
+2184 Hudiksvall,wikidataId/Q29963
+2260 Ånge,wikidataId/Q271107
+2262 Timrå,wikidataId/Q504983
+2280 Härnösand,wikidataId/Q209634
+2281 Sundsvall,wikidataId/Q504994
+2282 Kramfors,wikidataId/Q514815
+2283 Sollefteå,wikidataId/Q221990
+2284 Örnsköldsvik,wikidataId/Q298003
+2303 Ragunda,wikidataId/Q515342
+2305 Bräcke,wikidataId/Q504261
+2309 Krokom,wikidataId/Q514707
+2313 Strömsund,wikidataId/Q514770
+2321 Åre,wikidataId/Q271153
+2326 Berg,wikidataId/Q845930
+2361 Härjedalen,wikidataId/Q513421
+2380 Östersund,wikidataId/Q306789
+2401 Nordmaling,wikidataId/Q514722
+2403 Bjurholm,wikidataId/Q376003
+2404 Vindeln,wikidataId/Q504505
+2409 Robertsfors,wikidataId/Q507670
+2417 Norsjö,wikidataId/Q507644
+2418 Malå,wikidataId/Q501540
+2421 Storuman,wikidataId/Q499415
+2422 Sorsele,wikidataId/Q501463
+2425 Dorotea,wikidataId/Q132334
+2460 Vännäs,wikidataId/Q500210
+2462 Vilhelmina,wikidataId/Q515861
+2480 Umeå,wikidataId/Q507709
+2481 Lycksele,wikidataId/Q948462
+2482 Skellefteå,wikidataId/Q430780
+2505 Arvidsjaur,wikidataId/Q499404
+2506 Arjeplog,wikidataId/Q493855
+2510 Jokkmokk,wikidataId/Q512048
+2513 Överkalix,wikidataId/Q307569
+2514 Kalix,wikidataId/Q117091
+2518 Övertorneå,wikidataId/Q307603
+2521 Pajala,wikidataId/Q186230
+2523 Gällivare,wikidataId/Q493815
+2560 Älvsbyn,wikidataId/Q255025
+2580 Luleå,wikidataId/Q177019
+2581 Piteå,wikidataId/Q507656
+2582 Boden,wikidataId/Q509476
+2583 Haparanda,wikidataId/Q510310
+2584 Kiruna,wikidataId/Q499474

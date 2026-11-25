@@ -13,12 +13,13 @@
 # limitations under the License.
 """Unit tests for the Import Validation framework."""
 
-import unittest
-import os
-import sys
 import json
-import tempfile
+import os
 import subprocess
+import sys
+import tempfile
+import unittest
+
 import pandas as pd
 
 
@@ -33,12 +34,9 @@ class ImportValidationTest(unittest.TestCase):
 
         os.makedirs(self.differ_path, exist_ok=True)
 
-        # Find the project root using the canonical git command
-        result = subprocess.run(['git', 'rev-parse', '--show-toplevel'],
-                                capture_output=True,
-                                text=True,
-                                check=True)
-        self.project_root = result.stdout.strip()
+        # Find the project root relative to this test file
+        self.project_root = os.path.abspath(
+            os.path.join(os.path.dirname(__file__), '..', '..'))
 
         # Create an empty differ summary, as it is required
         with open(os.path.join(self.differ_path, 'differ_summary.json'),
@@ -335,6 +333,94 @@ class ImportValidationTest(unittest.TestCase):
         output_df = pd.read_csv(self.output_path)
         self.assertEqual(len(output_df), 1)
         self.assertEqual(output_df.iloc[0]['Status'], 'PASSED')
+
+    def test_missing_differ_file_passes_deleted_records_percent(self):
+        """
+    Tests that DELETED_RECORDS_PERCENT passes with 0% when --differ_output is
+    not provided.
+    """
+        with open(self.config_path, 'w') as f:
+            json.dump(
+                {
+                    "rules": [{
+                        "rule_id": "check_deleted_records_percent",
+                        "validator": "DELETED_RECORDS_PERCENT",
+                        "scope": {},
+                        "params": {
+                            "threshold": 0
+                        }
+                    }]
+                }, f)
+
+        result = subprocess.run([
+            sys.executable, '-m', 'tools.import_validation.runner',
+            f'--validation_config={self.config_path}',
+            f'--stats_summary={self.stats_path}',
+            f'--validation_output={self.output_path}'
+        ],
+                                capture_output=True,
+                                text=True,
+                                cwd=self.project_root)
+
+        self.assertEqual(result.returncode, 0,
+                         f"Script should have passed. Stderr: {result.stderr}")
+        output_df = pd.read_csv(self.output_path)
+        self.assertEqual(len(output_df), 1)
+        self.assertEqual(output_df.iloc[0]['Status'], 'PASSED')
+
+    def test_deleted_entity_count_end_to_end(self):
+        """Tests DELETED_ENTITY_COUNT fails over threshold and passes when differ_output is omitted."""
+        with open(self.config_path, 'w') as f:
+            json.dump(
+                {
+                    "rules": [{
+                        "rule_id": "check_deleted_entity_count",
+                        "validator": "DELETED_ENTITY_COUNT",
+                        "params": {
+                            "threshold": 0
+                        }
+                    }]
+                }, f)
+
+        with open(os.path.join(self.differ_path, 'differ_summary.json'),
+                  'w') as f:
+            json.dump({"deleted_schema_count": 2}, f)
+
+        fail_result = subprocess.run([
+            sys.executable, '-m', 'tools.import_validation.runner',
+            f'--validation_config={self.config_path}',
+            f'--differ_output={self.differ_path}',
+            f'--validation_output={self.output_path}'
+        ],
+                                     capture_output=True,
+                                     text=True,
+                                     cwd=self.project_root)
+
+        self.assertEqual(fail_result.returncode, 1)
+        output_df = pd.read_csv(self.output_path)
+        self.assertEqual(len(output_df), 1)
+        self.assertEqual(output_df.iloc[0]['Status'], 'FAILED')
+        self.assertEqual(
+            json.loads(output_df.iloc[0]['Details'])['deleted_entity_count'], 2)
+
+        # Missing --differ_output should pass with 0 deleted entities
+        pass_result = subprocess.run([
+            sys.executable, '-m', 'tools.import_validation.runner',
+            f'--validation_config={self.config_path}',
+            f'--validation_output={self.output_path}'
+        ],
+                                     capture_output=True,
+                                     text=True,
+                                     cwd=self.project_root)
+
+        self.assertEqual(
+            pass_result.returncode, 0,
+            f"Script should have passed. Stderr: {pass_result.stderr}")
+        output_df = pd.read_csv(self.output_path)
+        self.assertEqual(len(output_df), 1)
+        self.assertEqual(output_df.iloc[0]['Status'], 'PASSED')
+        self.assertEqual(
+            json.loads(output_df.iloc[0]['Details'])['deleted_entity_count'], 0)
 
 
 if __name__ == '__main__':

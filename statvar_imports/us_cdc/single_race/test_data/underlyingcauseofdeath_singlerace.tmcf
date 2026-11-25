@@ -1,0 +1,7 @@
+Node: E:underlyingcauseofdeath_singlerace->E0
+observationAbout: C:underlyingcauseofdeath_singlerace->observationAbout
+observationDate: C:underlyingcauseofdeath_singlerace->observationDate
+variableMeasured: C:underlyingcauseofdeath_singlerace->variableMeasured
+observationPeriod: C:underlyingcauseofdeath_singlerace->observationPeriod
+value: C:underlyingcauseofdeath_singlerace->value
+typeOf: dcs:StatVarObservation

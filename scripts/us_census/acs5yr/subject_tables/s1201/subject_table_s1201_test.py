@@ -89,7 +89,6 @@ class TestSubjectTableS1201(unittest.TestCase):
             with self.subTest(table=table_dir_path, file_key=file_key):
                 self.assertTrue(file_key in paths)
 
-        # TODO: Look into speeding up this section of the code
         with tempfile.TemporaryDirectory() as tmp_dir:
             # generate CSV, MCF and Column Map
             set_column_map(paths['zip'], paths['spec'], tmp_dir)

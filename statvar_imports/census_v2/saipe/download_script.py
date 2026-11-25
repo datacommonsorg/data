@@ -11,14 +11,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
 This script downloads SAIPE School District Estimates for 2003 to current year.
 URL: https://www.census.gov/programs-surveys/saipe/data/datasets.html
 """
-import sys
 import datetime
 from pathlib import Path
+import sys
 from typing import List
 
 from absl import app
@@ -65,7 +64,7 @@ def _process_xls(filepath: Path, year: int) -> None:
             logging.warning(f"Header not found in {filepath}")
     except Exception as e:
         logging.error(f"Error processing file {filepath}: {e}")
-        raise RuntimeError(f"Error processing file {filepath}: {e}")
+        raise RuntimeError(f"Error processing file {filepath}: {e}") from e
 
 
 def main(_: List[str]) -> None:

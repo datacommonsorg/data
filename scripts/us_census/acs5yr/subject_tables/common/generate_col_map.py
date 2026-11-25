@@ -14,14 +14,15 @@
 """
 Module to generate a column map to their corresponding statistical variable defintions.
 """
-import os
-import io
-import sys
-import logging
-import json
-import csv
-from zipfile import ZipFile
 from collections import OrderedDict
+import csv
+import io
+import json
+import logging
+import os
+import re
+import sys
+from zipfile import ZipFile
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -33,10 +34,8 @@ from statvar_dcid_generator import get_statvar_dcid
 # intitalize the logger
 logging.basicConfig(
     level=logging.ERROR,
-    filename=os.path.join(_SCRIPT_PATH, 'make_column_map.log'),
     format="{asctime} {processName:<12} {message} ({filename}:{lineno})",
-    style="{",
-    filemode='w')
+    style="{")
 logging.StreamHandler(stream=None)
 logger = logging.getLogger(__file__)
 logger.setLevel(logging.CRITICAL)
@@ -60,7 +59,8 @@ def process_zip_file(zip_file_path,
                      write_output=True,
                      output_dir_path='./',
                      delimiter='!!',
-                     header_row=1):
+                     header_row=1,
+                     estimate_period=5):
     """Given a zip file of datasets in csv format, the function builds a column map for each year
   Args:
     zip_file_path: input zip file with data files in csv format, file naming expected to be consistent with data.census.gov
@@ -88,7 +88,6 @@ def process_zip_file(zip_file_path,
     f.close()
 
     column_map = {}
-    counter_dict = {}
 
     with ZipFile(zip_file_path) as zf:
         for filename in zf.namelist():
@@ -97,7 +96,14 @@ def process_zip_file(zip_file_path,
                     csv_reader = csv.reader(csv_file)
                     for index, line in enumerate(csv_reader):
                         if index == header_row:
-                            year = filename.split(f'ACSST5Y')[1][:4]
+                            match = re.search(
+                                rf'ACS[SD]T{estimate_period}Y(\d{{4}})',
+                                os.path.basename(filename))
+                            if not match:
+                                raise ValueError(
+                                    f"Unable to extract year from filename: {filename}"
+                                )
+                            year = match.group(1)
                             column_map[year] = generate_stat_var_map(
                                 spec_dict, line, delimiter)
                             break
@@ -145,8 +151,12 @@ class GenerateColMapBase:
   """
 
     # TODO - add typing hints and document the format.
-    def __init__(self, spec_dict={}, column_list=[], delimiter='!!'):
+    def __init__(self, spec_dict=None, column_list=None, delimiter='!!'):
         """module init"""
+        if column_list is None:
+            column_list = []
+        if spec_dict is None:
+            spec_dict = {}
         self.features = spec_dict
         self.column_list = column_list
         self.column_map = {}
@@ -395,7 +405,7 @@ class GenerateColMapBase:
         # The current implementation of the function removes the statVar node for the base class and keeps the specialization, which is not the desired output
         # In the above example if both 6 to 18 years and Under 19 years appear as tokens in the column name, we remove Under 19 years from the column name and not remove the StatVarNode which describes the population  Under 19 years.
         column_map = self.column_map.copy()
-        for column_name, stat_var in column_map.items():
+        for column_name, _stat_var in column_map.items():
             part_list = column_name.split(self.delimiter)
             ## The assumption of using the last token of the column as the specialization holds for ACS Subject tables.
             # TODO: This assumption might break for other tables, we might need to thing of removing this assumption

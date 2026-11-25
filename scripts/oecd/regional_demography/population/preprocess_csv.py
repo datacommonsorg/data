@@ -12,25 +12,33 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
-import sys
 import csv
 import json
-import pandas as pd
-from absl import flags, logging
+import os
+import sys
+
 from absl import app
-from columns import *
+from absl import flags
+from absl import logging
+from columns import VAR_to_statsvars
+from columns import reindex_column
+import pandas as pd
 
 _FLAGS = flags.FLAGS
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(_MODULE_DIR)
-flags.DEFINE_string('mode', '', 'Options: download or process')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('mode', '', 'Options: download or process')
+
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 sys.path.insert(1, os.path.join(_MODULE_DIR, '../'))
-from utils import multi_index_to_single_index
 from download import download_data_to_file_and_df
+from utils import multi_index_to_single_index
 
 
 def process_data(df, output_file_path):
@@ -72,14 +80,14 @@ def process_data(df, output_file_path):
             f"Unable to pivot the dataframe and retain the column:{e}")
         return None
     # Renaming column headers to SVs
-    df_cleaned.rename(columns=VAR_to_statsvars, inplace=True)
+    df_cleaned = df_cleaned.rename(columns=VAR_to_statsvars)
     drop_cols = []
     csv_columns = {'REG_ID', 'Reference area', 'TIME_PERIOD'}
     csv_columns.update(VAR_to_statsvars.values())
     for col in df_cleaned.columns:
         if col not in csv_columns:
             drop_cols.append(col)
-    df_cleaned.drop(columns=drop_cols, axis=0, inplace=True)
+    df_cleaned = df_cleaned.drop(columns=drop_cols, axis=0)
     # Resetting the columns according to the requirement
     df_cleaned_reset = df_cleaned.reindex(columns=reindex_column)
     logging.info("Writing output to %s", output_file_path)
@@ -133,4 +141,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

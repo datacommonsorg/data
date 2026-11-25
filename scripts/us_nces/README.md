@@ -22,13 +22,13 @@ This dataset has Population Estimates for the National Center for Education Stat
 
  Note: Give one year at a time for District and Public Schools as there are large number of column values.
  
-### upload the files manually to GCP bucket for processing using gsutil command.
+### upload the files manually to GCP bucket for processing using gcloud storage command.
     Ex private :
-        gsutil cp -r /scripts/us_nces/demographics/private_school/input_files gs://unresolved_mcf/us_nces/demographics/private_school/semi_automation_input_files/
+        gcloud storage cp --recursive /scripts/us_nces/demographics/private_school/input_files gs://unresolved_mcf/us_nces/demographics/private_school/semi_automation_input_files/
     Ex public :
-        gsutil cp -r /scripts/us_nces/demographics/public_school/input_files gs://unresolved_mcf/us_nces/demographics/public_school/semi_automation_input_files/
+        gcloud storage cp --recursive /scripts/us_nces/demographics/public_school/input_files gs://unresolved_mcf/us_nces/demographics/public_school/semi_automation_input_files/
     Ex district :
-        gsutil cp -r /scripts/us_nces/demographics/school_district/input_files gs://unresolved_mcf/us_nces/demographics/school_district/semi_automation_input_files/
+        gcloud storage cp --recursive /scripts/us_nces/demographics/school_district/input_files gs://unresolved_mcf/us_nces/demographics/school_district/semi_automation_input_files/
 
 ### Note:
     The only manual part here is after downloading the input files and then uploading them to gcp bucket. Once they're uploaded, Each import requires its own sh command to copy the files from Google Cloud to a local folder called gcs_folder/input_files. From there, a script automatically picks up these files to process them. Finally, it generates the output and saves it in gcs_folder/output_files

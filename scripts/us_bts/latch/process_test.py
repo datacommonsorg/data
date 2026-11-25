@@ -16,14 +16,17 @@ Script to automate the testing for US Tract process script.
 """
 
 import os
-import unittest
 import sys
 import tempfile
+import unittest
+
 # module_dir is the path to where this test is running from.
 _MODULE_DIR = os.path.dirname(__file__)
 sys.path.insert(0, _MODULE_DIR)
 # pylint: disable=wrong-import-position
+from process import _generate_tmcf
 from process import process
+
 # pylint: enable=wrong-import-position
 
 _TEST_DATA_DIR = os.path.join(_MODULE_DIR, "test_data")
@@ -53,7 +56,8 @@ class TestProcess(unittest.TestCase):
                                            "test_census.tmcf")
 
         process(self.ip_data, os.path.join(self.tmp_dir.name, "data.csv"),
-                self.mcf_file_path, self.tmcf_file_path)
+                self.mcf_file_path)
+        _generate_tmcf(self.tmcf_file_path, "us_transportation_household")
 
         with open(self.mcf_file_path, encoding="UTF-8") as mcf_file:
             self._actual_mcf_data = mcf_file.read()

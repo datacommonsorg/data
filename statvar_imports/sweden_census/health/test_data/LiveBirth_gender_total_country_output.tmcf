@@ -1,0 +1,8 @@
+Node: E:LiveBirth_gender_total_country->E0
+observationAbout: C:LiveBirth_gender_total_country->observationAbout
+observationDate: C:LiveBirth_gender_total_country->observationDate
+value: C:LiveBirth_gender_total_country->value
+variableMeasured: C:LiveBirth_gender_total_country->variableMeasured
+unit: C:LiveBirth_gender_total_country->unit
+scalingFactor: C:LiveBirth_gender_total_country->scalingFactor
+typeOf: dcs:StatVarObservation

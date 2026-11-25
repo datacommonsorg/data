@@ -15,16 +15,18 @@
 Function library to make parallel requests and process the response.
 """
 
+import asyncio
 import json
 import logging
 import os
 import time
-import asyncio
-import aiohttp
 from typing import Any, Callable, Union
+
+import aiohttp
 from aiolimiter import AsyncLimiter
 
-from scripts.us_census.api_utils.status_file_utils import get_pending_or_fail_url_list, url_to_download
+from scripts.us_census.api_utils.status_file_utils import get_pending_or_fail_url_list
+from scripts.us_census.api_utils.status_file_utils import url_to_download
 
 
 async def async_save_resp_json(response: Any, filename: str):
@@ -70,7 +72,7 @@ def download_url_list_iterations(url_list: list,
                                  url_filter: Union[Callable[[list], list],
                                                    None] = None,
                                  max_itr: int = 3,
-                                 rate_params: dict = {}) -> int:
+                                 rate_params: dict | None = None) -> int:
     """Attempt to download a list of URLs in multiple iteration.
         Each iteration attempts to download calls that failed in previous iteration.
         NOTE: An extra iteration might occour to attempt failed calls using requests library rather than parallel calls.
@@ -88,6 +90,8 @@ def download_url_list_iterations(url_list: list,
         Returns:
             Count of url requests that failed.
     """
+    if rate_params is None:
+        rate_params = {}
     loop_ctr = 0
     if not url_filter:
         url_filter = default_url_filter
@@ -219,7 +223,9 @@ def download_url_list(url_list: list, url_api_modifier: Callable[[dict], str],
     logging.debug('Downloading url list of size %d', len(url_list))
 
     if not url_api_modifier:
-        url_api_modifier = lambda u, a: u['url']
+
+        def url_api_modifier(u, a):
+            return u['url']
 
     if 'max_parallel_req' not in rate_params:
         rate_params['max_parallel_req'] = 500

@@ -17,11 +17,15 @@ Utility to generate a speculative version of the JSON config required to import 
 
 import json
 import os
+
 from absl import app
 from absl import flags
 
-from .common_util import columns_from_zip_file, token_in_list_ignore_case, get_tokens_list_from_column_list
-from .acs_spec_validator import find_columns_with_no_properties, find_missing_tokens
+from .acs_spec_validator import find_columns_with_no_properties
+from .acs_spec_validator import find_missing_tokens
+from .common_util import columns_from_zip_file
+from .common_util import get_tokens_list_from_column_list
+from .common_util import token_in_list_ignore_case
 from .datacommons_api_wrappers.datacommons_wrappers import fetch_dcid_properties_enums
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))

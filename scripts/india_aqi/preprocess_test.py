@@ -14,7 +14,7 @@
 
 import os
 import unittest
-import zipfile
+
 from india_aqi.preprocess import AQIDataLoader
 
 module_dir_ = os.path.dirname(__file__)

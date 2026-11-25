@@ -1,13 +1,16 @@
-import pandas as pd
-from absl import flags, logging
+import os
+import sys
+
 from absl import app
-import os, sys
+from absl import flags
+from absl import logging
+import pandas as pd
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '../nps'))
 
-import preprocess_data
 import nps_statvar_writer
+import preprocess_data
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 input_files = os.path.join(_MODULE_DIR, 'input_files')
@@ -16,13 +19,18 @@ sys.path.append(os.path.join(_UTIL_DIR, '../../../util/'))
 import file_util
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('input_file',
-                    '38871-0001-Data.tsv',
-                    'file path to tsv file with import data',
-                    short_name='i')
-flags.DEFINE_string("gs_path",
-                    "gs://unresolved_mcf/us_bjs/nps/semiautomation_files/",
-                    "input file path")
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('input_file',
+                        '38871-0001-Data.tsv',
+                        'file path to tsv file with import data',
+                        short_name='i')
+    flags.DEFINE_string("gs_path",
+                        "gs://unresolved_mcf/us_bjs/nps/semiautomation_files/",
+                        "input file path")
+
 
 AGGREGATE_COLUMNS = [
     "dc/lnp5g90fwpct8", "dc/03l0q0wyqrk39", "dc/hxsdmw575en24",
@@ -79,16 +87,16 @@ def save_csv(df, filename):
     df.to_csv(filename + '.csv', index=False)
 
 
-def get_input_file():
+def get_input_file(gs_path: str, input_file: str):
     os.makedirs(input_files, exist_ok=True)
-    file_util.file_copy(f'{FLAGS.gs_path}{FLAGS.input_file}',
-                        f'{input_files}/{FLAGS.input_file}')
+    file_util.file_copy(f'{gs_path}{input_file}', f'{input_files}/{input_file}')
 
 
-def main(args):
-    INPUT_FILE_PATH = os.path.join(input_files, FLAGS.input_file)
+def run(input_file: str, gs_path: str) -> None:
+    """Copies input_file from gs_path, processes it, and writes the outputs."""
+    INPUT_FILE_PATH = os.path.join(input_files, input_file)
     try:
-        get_input_file()
+        get_input_file(gs_path, input_file)
     except Exception as e:
         logging.info(f"Error getting input file: {e}")
     try:
@@ -108,8 +116,8 @@ def main(args):
         processed_df = preprocess_data.preprocess_df(df)
         save_csv(processed_df, FILENAME)
         generate_tmcf(processed_df)
-    except IOError as e:
-        logging.info(f"error during saving processed csv")
+    except IOError:
+        logging.info("error during saving processed csv")
     except Exception as e:
         logging.fatal(f"error during data processing: {e}")
 
@@ -120,5 +128,11 @@ def main(args):
         logging.info(f"Error writing statvar file 'nps_statvars.mcf': {e}")
 
 
+def main(args):
+    del args  # Unused.
+    run(FLAGS.input_file, FLAGS.gs_path)
+
+
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

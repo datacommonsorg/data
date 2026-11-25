@@ -13,8 +13,8 @@
 # limitations under the License.
 """Unit tests for schema_reconciler.py."""
 
-import sys
 import os
+import sys
 import unittest
 from unittest import mock
 
@@ -26,9 +26,15 @@ sys.path.append(os.path.join(
     '../../util'))  # For dc_api_wrapper if needed by schema_reconciler
 
 # Mock dc_api_wrapper before importing schema_reconciler to avoid dependency issues
+_orig_dc_api_wrapper = sys.modules.get('dc_api_wrapper')
 sys.modules['dc_api_wrapper'] = mock.Mock()
 
 import schema_reconciler
+
+if _orig_dc_api_wrapper is not None:
+    sys.modules['dc_api_wrapper'] = _orig_dc_api_wrapper
+else:
+    sys.modules.pop('dc_api_wrapper', None)
 
 
 def _mock_dc_api_get_node_property(node_id, property_id):

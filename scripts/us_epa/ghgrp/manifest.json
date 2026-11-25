@@ -19,7 +19,8 @@
                     "cleaned_csv": "import_data/all_data.csv"
                 }
             ],
-            "cron_schedule": "0 10 1,15 * *",
+            "cron_schedule": "30 5 * * 3",
+            "_comment": "Schedule: Weekly on Wednesday at 05:30 UTC",
             "source_files": [
                 "tmp_data/*"
             ]

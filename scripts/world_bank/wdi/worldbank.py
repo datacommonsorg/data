@@ -15,30 +15,38 @@
     indicator codes provided by the indicatorSchemaFile flag for all years
     and for all countries provided in WorldBankCountries.csv. """
 
-import logging
-import itertools
-import requests
-import zipfile
 import io
-import time
-import re
+import itertools
 import os
-import sys
+import re
+import zipfile
 
 from absl import app
 from absl import flags
 from absl import logging
 import pandas as pd
+import requests
 from retry.api import retry_call
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _FLAGS = flags.FLAGS
-flags.DEFINE_boolean("fetchFromSource", True,
-                     "Whether to bypass cached CSVs and fetch from source.")
-flags.DEFINE_string(
-    "indicatorSchemaFile",
-    os.path.join(_MODULE_DIR, "schema_csvs/WorldBankIndicators_prod.csv"), "")
-flags.DEFINE_string('mode', '', 'Options: download or process')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_boolean(
+        "fetchFromSource", True,
+        "Whether to bypass cached CSVs and fetch from source.")
+    flags.DEFINE_string(
+        "indicatorSchemaFile",
+        os.path.join(_MODULE_DIR, "schema_csvs/WorldBankIndicators_prod.csv"),
+        "")
+    flags.DEFINE_string('mode', '', 'Options: download or process')
+    flags.DEFINE_string(
+        'historical_gcs_path',
+        'gs://unresolved_mcf/world_bank/wdi/deleted_rows_07_2026.csv',
+        'GCS path to the deleted historical data CSV file')
+
 
 # Remaps the columns provided by World Bank API.
 WORLDBANK_COL_REMAP = {
@@ -151,8 +159,6 @@ RESOLUTION_TO_EXISTING_DCID = {
         'Count_Person_Upto4Years_Male_Wasting_AsFractionOf_Count_Person_Upto4Years_Male',
     'dcs:WorldBank/SH_STA_WAST_FE_ZS':
         'Count_Person_Upto4Years_Female_Wasting_AsFractionOf_Count_Person_Upto4Years_Female',
-    'dcs:WorldBank/SH_XPD_CHEX_PC_CD':
-        'Amount_EconomicActivity_ExpenditureActivity_HealthcareExpenditure_AsFractionOf_Count_Person',
     'dcs:WorldBank/SH_ALC_PCAP_LI':
         'Amount_Consumption_Alcohol_15OrMoreYears_AsFractionOf_Count_Person_15OrMoreYears',
     'dcs:WorldBank/SI_POV_GINI':
@@ -416,7 +422,7 @@ def download_indicator_data(worldbank_countries, indicator_codes, mode):
     indicators_to_keep = list(indicator_codes['IndicatorCode'].unique())
 
     country_df_list = []
-    for index, country_code in enumerate(worldbank_countries['ISO3166Alpha3']):
+    for country_code in worldbank_countries['ISO3166Alpha3']:
         country_df = read_worldbank(country_code, mode)
 
         if country_df is None:
@@ -446,7 +452,8 @@ def download_indicator_data(worldbank_countries, indicator_codes, mode):
 def output_csv_and_tmcf_by_grouping(worldbank_dataframe,
                                     tmcfs_for_stat_vars,
                                     indicator_codes,
-                                    saveOutput=True):
+                                    saveOutput=True,
+                                    historical_gcs_path=None):
     """ Outputs TMCFs and CSVs for each grouping of stat vars.
 
         Args:
@@ -472,7 +479,9 @@ def output_csv_and_tmcf_by_grouping(worldbank_dataframe,
         if saveOutput:
             TMCF_PATH = 'output/WorldBank.tmcf'
         else:
-            TMCF_PATH = 'test_data/output/output_generated.tmcf'
+            TMCF_PATH = os.path.join(_MODULE_DIR,
+                                     'test_data/output/output_generated.tmcf')
+        os.makedirs(os.path.dirname(TMCF_PATH), exist_ok=True)
         with open(TMCF_PATH, 'w', newline='') as f_out:
             for index, enum in enumerate(tmcfs_for_stat_vars):
                 tmcf, stat_var_obs_cols, stat_vars_in_group = enum
@@ -504,13 +513,40 @@ def output_csv_and_tmcf_by_grouping(worldbank_dataframe,
         df = df.replace({'StatisticalVariable': RESOLUTION_TO_EXISTING_DCID})
         if saveOutput:
             logging.info("Writing output csv")
-            df.drop('IndicatorCode', axis=1).to_csv('output/WorldBank.csv',
-                                                    float_format='%.10f',
-                                                    index=False)
+            output_file_path = 'output/WorldBank.csv'
+            final_df = merge_historical_data(df.drop('IndicatorCode', axis=1),
+                                             historical_gcs_path)
+            final_df.to_csv(output_file_path, float_format='%.10f', index=False)
         else:
             return df
     except Exception as e:
         logging.fatal(f"Error generating output {e}")
+
+
+def merge_historical_data(df, historical_gcs_path):
+    """Merges and deduplicates historical deleted data from GCS into df."""
+    if not historical_gcs_path:
+        return df
+    try:
+        composite_keys = [
+            'StatisticalVariable', 'ISO3166Alpha3', 'Year', 'observationPeriod',
+            'unit', 'measurementMethod', 'scalingFactor'
+        ]
+        deleted_df = retry_call(
+            pd.read_csv,
+            fargs=[historical_gcs_path],
+            fkwargs={'dtype': {
+                k: str for k in composite_keys
+            }},
+            tries=3,
+            delay=5,
+            backoff=2)
+        df = pd.concat([df, deleted_df], ignore_index=True)
+        for col in composite_keys:
+            df[col] = df[col].fillna('').astype(str).str.removesuffix('.0')
+        return df.drop_duplicates(subset=composite_keys, keep='first')
+    except Exception as e:
+        logging.fatal(f"Could not read historical deleted data from GCS: {e}")
 
 
 def source_scaling_remap(row, scaling_factor_lookup, existing_stat_var_lookup):
@@ -540,9 +576,14 @@ def source_scaling_remap(row, scaling_factor_lookup, existing_stat_var_lookup):
     return row
 
 
-def process(indicator_codes, worldbank_dataframe, saveOutput=True):
+def process(indicator_codes,
+            worldbank_dataframe,
+            saveOutput=True,
+            historical_gcs_path=None):
     logging.info("Processing the input files")
     try:
+        os.makedirs('output', exist_ok=True)
+
         # Add source description to note.
         def add_source_to_description(row):
             if not pd.isna(row['Source']):
@@ -590,8 +631,8 @@ def process(indicator_codes, worldbank_dataframe, saveOutput=True):
             axis=1)
 
         # Convert integer columns.
-        int_cols = (list(indicator_codes[indicator_codes['ConvertToInt'] ==
-                                         True]['IndicatorCode'].unique()))
+        int_cols = (list(indicator_codes[indicator_codes['ConvertToInt'].eq(
+            True)]['IndicatorCode'].unique()))
         worldbank_subset = worldbank_dataframe[
             worldbank_dataframe['IndicatorCode'].isin(int_cols)].index
         worldbank_dataframe.loc[worldbank_subset, "Value"] = (pd.to_numeric(
@@ -604,23 +645,32 @@ def process(indicator_codes, worldbank_dataframe, saveOutput=True):
         # Output final CSVs and variables.
         df = output_csv_and_tmcf_by_grouping(worldbank_dataframe,
                                              tmcfs_for_stat_vars,
-                                             indicator_codes, saveOutput)
+                                             indicator_codes, saveOutput,
+                                             historical_gcs_path)
         if not saveOutput:
             return df
     except Exception as e:
         logging.fatal(f"Error processing input file {e}")
 
 
-def main(_):
-    mode = _FLAGS.mode
+def run(indicator_schema_file, mode, historical_gcs_path) -> None:
+    """Downloads the WDI indicator data and processes it (depending on mode)."""
     # Load statistical variable configuration file.
-    indicator_codes = pd.read_csv(_FLAGS.indicatorSchemaFile, dtype=str)
+    indicator_codes = pd.read_csv(indicator_schema_file, dtype=str)
     worldbank_countries = pd.read_csv("WorldBankCountries.csv")
     worldbank_dataframe = download_indicator_data(worldbank_countries,
-                                                  indicator_codes, _FLAGS.mode)
+                                                  indicator_codes, mode)
     if mode == "" or mode == "process":
-        process(indicator_codes, worldbank_dataframe)
+        process(indicator_codes,
+                worldbank_dataframe,
+                historical_gcs_path=historical_gcs_path)
+
+
+def main(argv):
+    del argv  # Unused.
+    run(_FLAGS.indicatorSchemaFile, _FLAGS.mode, _FLAGS.historical_gcs_path)
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

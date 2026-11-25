@@ -1,0 +1,161 @@
+# Copyright 2026 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import logging
+import os
+
+from clients.bigquery import BigQueryClient
+from clients.storage import StorageClient
+from dependencies import get_bigquery_client
+from dependencies import get_storage_client
+from fastapi import APIRouter
+from fastapi import Depends
+from fastapi import HTTPException
+from routes.models import BaseResponse
+from routes.models import ImportState
+from routes.models import ImportVersionItem
+from routes.models import ResponseStatus
+from routes.models import UpdateImportStatusRequest
+from routes.models import UpdateImportVersionRequest
+from routes.models import UpdateImportVersionResponse
+from utils import imports as import_utils
+
+router = APIRouter(prefix="/imports", tags=["imports"])
+
+
+@router.post("/status", response_model=BaseResponse)
+def update_import_status(
+    req: UpdateImportStatusRequest,
+    bigquery: BigQueryClient = Depends(get_bigquery_client),
+    storage: StorageClient = Depends(get_storage_client)):
+    """Updates status and metadata of import jobs in BigQuery (ImportHistory & ImportSummary view)."""
+    for item in req.imports:
+        logging.info(
+            f"Updating import {item.importName} to status {item.status}")
+
+        import_req = {
+            "importName": item.importName,
+            "status": item.status,
+            "jobId": req.jobId,
+            "workflowId": req.workflowId,
+            "executionTime": req.executionTime,
+            "dataVolume": req.dataVolume,
+            "latestVersion": item.latestVersion,
+            "graphPath": item.graphPath,
+            "nextRefresh": req.nextRefresh,
+        }
+        req_dict = {k: v for k, v in import_req.items() if v is not None}
+        params = import_utils.get_import_params(req_dict)
+
+        staging_version = (os.path.basename(item.latestVersion or '')
+                           if item.status == ImportState.STAGING else None)
+        if item.status == ImportState.INACTIVE:
+            params['next_refresh'] = None
+        elif req.nextRefresh is None:
+            manifest = storage.get_import_manifest(item.importName,
+                                                   version=staging_version or
+                                                   None)
+            params['next_refresh'] = import_utils.get_next_refresh(
+                item.importName, manifest=manifest)
+
+        wf_id = req.workflowId or req.jobId
+        comment = None
+        if item.status == ImportState.STAGING:
+            version = staging_version
+            if not version:
+                raise HTTPException(
+                    status_code=400,
+                    detail=f"Empty version for import {item.importName}")
+            storage.update_version_file(item.importName,
+                                        version,
+                                        is_staging=True)
+            storage.update_provenance_file(item.importName, version)
+            storage.update_import_summary(params, version=version)
+            storage.update_version_file(item.importName,
+                                        version,
+                                        is_staging=False)
+            comment = f"import-workflow:{wf_id or ''}"
+        elif item.status == ImportState.FAILURE:
+            comment = f"import-failure:{wf_id or ''}"
+
+        bigquery.update_import_summary(params, comment=comment)
+    return BaseResponse(status=ResponseStatus.OK)
+
+
+@router.post("/version", response_model=UpdateImportVersionResponse)
+def update_import_version(
+    req: UpdateImportVersionRequest,
+    bigquery: BigQueryClient = Depends(get_bigquery_client),
+    storage: StorageClient = Depends(get_storage_client)):
+    """Updates version and status of multiple imports in BigQuery (ImportHistory & ImportSummary view)."""
+    updated_imports = []
+    import_items = []
+
+    for import_name in req.imports:
+        logging.info(
+            f"Updating import {import_name} to version {req.version} comment: {req.comment}"
+        )
+
+        version = req.version
+        if version == 'STAGING':
+            version = storage.get_import_version(import_name, is_staging=True)
+        candidate_version = version
+
+        summary = storage.get_import_summary(import_name, version)
+        params = import_utils.get_import_params(summary)
+
+        comment = req.comment
+        if req.override:
+            params['status'] = 'STAGING'
+        elif params.get('status') == 'SKIP':
+            version = storage.get_import_version(import_name, is_staging=False)
+            summary = storage.get_import_summary(import_name, version)
+            params['latest_version'] = import_utils.get_import_params(
+                summary).get('latest_version')
+
+        if not params.get('latest_version'):
+            params['latest_version'] = version
+
+        if params.get('status') == 'INACTIVE':
+            params['next_refresh'] = None
+        else:
+            manifest = storage.get_import_manifest(import_name,
+                                                   version=candidate_version)
+            params['next_refresh'] = import_utils.get_next_refresh(
+                import_name,
+                manifest=manifest,
+                fallback=params.get('next_refresh'))
+
+        return_status = params.get('status') or 'FAILURE'
+
+        if params['status'] == 'STAGING':
+            storage.update_provenance_file(import_name, version)
+            storage.update_version_file(import_name, version, is_staging=False)
+            logging.info(f"Updated import {import_name} to version {version}")
+        else:
+            logging.info(f"Skipping {import_name} version update")
+
+        bigquery.update_import_summary(params, comment=comment)
+
+        import_items.append(
+            ImportVersionItem(importName=import_name,
+                              status=return_status,
+                              latestVersion=params.get('latest_version')))
+        updated_imports.append(
+            f"Import: {import_name} Version: {version} Status: {params['status']}"
+        )
+
+    return UpdateImportVersionResponse(status=ResponseStatus.OK,
+                                       message="; ".join(updated_imports),
+                                       imports=import_items)

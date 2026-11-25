@@ -20,8 +20,9 @@ Description: This script contains unit tests for the parse_cdc_places.py script.
 python3 parse_cdc_places_test.py input_file output_file
 '''
 
-import unittest
 import os
+import unittest
+
 from .parse_cdc_places import clean_cdc_places_data
 
 TEST_CASE_FILES = [

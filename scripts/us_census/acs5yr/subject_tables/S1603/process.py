@@ -1,10 +1,12 @@
 """Process data from Census ACS5Year Subject Table S1603."""
+import json
 import os
 import sys
-import pandas as pd
+
+from absl import app
+from absl import flags
 import numpy as np
-from absl import app, flags
-import json
+import pandas as pd
 
 # pylint: disable=missing-module-docstring
 # pylint: disable=missing-class-docstring
@@ -16,34 +18,36 @@ _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 sys.path.insert(1, os.path.join(_CODEDIR, '../', 'common'))
 
 from data_loader import SubjectTableDataLoaderBase  # commit hash - aee443ee
-from resolve_geo_id import convert_to_place_dcid
 from generate_col_map import process_zip_file
+from resolve_geo_id import convert_to_place_dcid
+
 #pylint: enable=wrong-import-position
 #pylint: enable=import-error
 FLAGS = flags.FLAGS
-flags.DEFINE_string(
-    'option', 'all',
-    'Specify how to run the process, colmap -- generates column map, process -- runs processing, all -- runs colmap first and then proessing'
-)
-flags.DEFINE_string(
-    'table_prefix', None,
-    '[for processing]Subject Table ID as a prefix for output files, eg: S2702')
-flags.DEFINE_string('spec_path', None, 'Path to the JSON spec [mandatory]')
-flags.DEFINE_string(
-    'input_path', None,
-    'Path to input directory with (current support only for zip files)')
-flags.DEFINE_string('output_dir', './', 'Path to the output directory')
-# flags.DEFINE_string(
-#     'output_dir',
-#     '/Users/sanikap/Desktop/ACS/data/scripts/us_census/acs5yr/output_files/',
-#     'Path to the output directory')
-flags.DEFINE_boolean(
-    'has_percent', False,
-    '[for processing]Specify the datasets has percentage values that needs to be convered to counts'
-)
-flags.DEFINE_boolean(
-    'debug', False,
-    '[for processing]set the flag to add additional columns to debug')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        'option', 'all',
+        'Specify how to run the process, colmap -- generates column map, process -- runs processing, all -- runs colmap first and then processing'
+    )
+    flags.DEFINE_string(
+        'table_prefix', None,
+        '[for processing]Subject Table ID as a prefix for output files, eg: S2702'
+    )
+    flags.DEFINE_string('spec_path', None, 'Path to the JSON spec [mandatory]')
+    flags.DEFINE_string(
+        'input_path', None,
+        'Path to input directory with (current support only for zip files)')
+    flags.DEFINE_string('output_dir', './', 'Path to the output directory')
+    flags.DEFINE_boolean(
+        'has_percent', False,
+        '[for processing]Specify the datasets has percentage values that needs to be convered to counts'
+    )
+    flags.DEFINE_boolean(
+        'debug', False,
+        '[for processing]set the flag to add additional columns to debug')
 
 
 class S1603SubjectTableDataLoader(SubjectTableDataLoaderBase):
@@ -129,12 +133,10 @@ class S1603SubjectTableDataLoader(SubjectTableDataLoaderBase):
                 obs_df['Column'] = column
 
                 # Replace empty places (unresolved geoIds) as null values
-                obs_df['Place'].replace('', np.nan, inplace=True)
+                obs_df['Place'] = obs_df['Place'].replace('', np.nan)
 
                 # Drop rows with observations for empty (null) values
-                obs_df.dropna(subset=['Place', 'Quantity'],
-                              axis=0,
-                              inplace=True)
+                obs_df = obs_df.dropna(subset=['Place', 'Quantity'], axis=0)
 
                 # Write the processed observations to the clean_csv
                 if self.year_count == 0:
@@ -169,13 +171,9 @@ def set_column_map(input_path, spec_path, output_dir):
 
 
 def main(argv):
-    option = FLAGS.option.lower()
-    table_prefix = FLAGS.table_prefix
     spec_path = FLAGS.spec_path
     input_path = FLAGS.input_path
     output_dir = FLAGS.output_dir
-    has_percent = FLAGS.has_percent
-    debug = FLAGS.debug
 
     set_column_map(input_path, spec_path, output_dir)
     data_loader = S1603SubjectTableDataLoader(table_id='S1603',
@@ -194,6 +192,7 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    _define_flags()
     flags.mark_flags_as_required(
         ['table_prefix', 'spec_path', 'input_path', 'output_dir'])
     app.run(main)

@@ -13,3 +13,18 @@ scripts/*/*/*/*/*/scratch
 */*/*/.env/
 */*/*/*/.env/
 */*/*/*/*/.env/
+
+# Other untracked folders that can contain Python files (virtualenvs and
+# temporary files; see .gitignore). yapf doesn't read .gitignore, so list them
+# here to keep `./run_tests.sh -l` and `-f` from checking or rewriting them.
+# `*` also matches `/`, so `*/name/` covers the folder at any depth.
+.venv/
+*/.venv/
+venv/
+*/venv/
+lib/
+*/lib/
+bin/
+*/bin/
+tmp/
+*/tmp/

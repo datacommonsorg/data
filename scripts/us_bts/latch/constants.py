@@ -18,6 +18,7 @@ found in downloaded files and its corresponding SV name.
 While preprocessing files column names are changed to SV names as used in
 DC import
 """
+import math
 
 INPUT_URLS_CONFIG = "input_urls_config.json"
 
@@ -40,23 +41,53 @@ _HOUSEHOLD_PV = "With{person}Person"
 
 _NUM_OF_VEHICLES_PV = "With{vehicle}AvailableVehicles"
 
-# pylint: disable=unnecessary-lambda-assignment
-# pylint: disable=line-too-long
-_PV_FORMAT = lambda prop_val: f'"{prop_val[0]}": "dcs:{prop_val[1]}"' if 'None' not in prop_val[
-    1] else ""
-_PV_FORMAT_NUMBERS = lambda prop_val: f'"{prop_val[0]}": "{prop_val[1]}"' if 'None' not in prop_val[
-    1] else ""
-SV_NODE_FORMAT = lambda prop_val: f'Node: dcid:{prop_val}'
 
-_MEASURED_PROP = lambda prop: MEASUREDPROP_MAPPER[prop]
+def _is_null_or_none(val):
+    """Checks if a value is null, NaN, None, or empty."""
+    if val is None:
+        return True
+    if isinstance(val, float) and math.isnan(val):
+        return True
+    return str(val).strip().lower() in ('none', 'nan', '<na>', '')
 
-_HOUSEHOLD_PROP = lambda prop: _HOUSEHOLD_PV.format(person=prop)
 
-_NOOFVEHICLES_PROP = lambda prop: _NUM_OF_VEHICLES_PV.format(vehicle=prop)
+def _PV_FORMAT(prop_val):
+    if not _is_null_or_none(prop_val[1]):
+        return f'"{prop_val[0]}": "dcs:{prop_val[1]}"'
+    return ""
 
-_DEFAULT_PROP = lambda prop: prop
-# pylint: enable=unnecessary-lambda-assignment
-# pylint: enable=line-too-long
+
+def _PV_FORMAT_NUMBERS(prop_val):
+    if not _is_null_or_none(prop_val[1]):
+        return f'"{prop_val[0]}": "{prop_val[1]}"'
+    return ""
+
+
+def SV_NODE_FORMAT(prop_val):
+    return f'Node: dcid:{prop_val}'
+
+
+def _MEASURED_PROP(prop):
+    if not _is_null_or_none(prop):
+        return MEASUREDPROP_MAPPER.get(prop, prop)
+    return None
+
+
+def _HOUSEHOLD_PROP(prop):
+    if not _is_null_or_none(prop):
+        return _HOUSEHOLD_PV.format(person=prop)
+    return None
+
+
+def _NOOFVEHICLES_PROP(prop):
+    if not _is_null_or_none(prop):
+        return _NUM_OF_VEHICLES_PV.format(vehicle=prop)
+    return None
+
+
+def _DEFAULT_PROP(prop):
+    return prop
+
 
 URBAN_RURAL_MCF_NODE = (
     "Node: dcid:Place_Type_PlaceofResidenceClassification\n"

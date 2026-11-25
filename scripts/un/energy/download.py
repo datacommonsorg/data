@@ -19,17 +19,14 @@ Run this script in this folder:
 python3 download.py
 """
 
-from un_energy_codes import get_all_energy_source_codes
 import datetime
-import io
 import os
-import requests
 import sys
-import zipfile
 
 from absl import app
 from absl import flags
 from absl import logging
+from un_energy_codes import get_all_energy_source_codes
 
 # Allows the following module imports to work when running as a script
 sys.path.append(
@@ -41,22 +38,28 @@ sys.path.insert(1, os.path.join(_CODEDIR, '../../../util/'))
 from download_util_script import download_file
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('download_data_dir', 'input_data/un_energy',
-                    'Data dir to download into')
-flags.DEFINE_list('datasets', [], 'Datasets to download. Everything, if empty.')
-flags.DEFINE_integer('start_year', 2020,
-                     'Data set downloaded from the start year.')
-flags.DEFINE_integer('end_year',
-                     datetime.datetime.now().year,
-                     'Data set downloaded until the end_year.')
-flags.DEFINE_integer('years_per_batch', 10,
-                     'Data set downloaded in batches of years.')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('download_data_dir', 'input_data/un_energy',
+                        'Data dir to download into')
+    flags.DEFINE_list('datasets', [],
+                      'Datasets to download. Everything, if empty.')
+    flags.DEFINE_integer('start_year', 2020,
+                         'Data set downloaded from the start year.')
+    flags.DEFINE_integer('end_year',
+                         datetime.datetime.now().year,
+                         'Data set downloaded until the end_year.')
+    flags.DEFINE_integer('years_per_batch', 10,
+                         'Data set downloaded in batches of years.')
+
 
 # Template for the UN Energy data set download.
 # Parameters:
 #   energy_code: two-letter code for the energy source
 #   years: comma separated list of years
-_DOWNLOAD_URL = 'https://data.un.org/Handlers/DownloadHandler.ashx?DataFilter=cmID:{energy_code};yr:{years}&DataMartId=EDATA&Format=csv&c=0,1,2,3,4,5,6,7,8&s=_crEngNameOrderBy:asc,_enID:asc,yr:desc'
+_DOWNLOAD_URL = 'https://data.un.org/legacy/Handlers/DownloadHandler.ashx?DataFilter=cmID:{energy_code};yr:{years}&DataMartId=EDATA&Format=csv&c=0,1,2,3,4,5,6,7,8&s=_crEngNameOrderBy:asc,_enID:asc,yr:desc'
 
 
 def download_energy_dataset(
@@ -104,7 +107,11 @@ def download_energy_dataset(
         logging.info(
             f'Downloading UNData energy dataset: {energy_dataset} from {start_year} to {end_year}'
         )
-        download_url = _DOWNLOAD_URL.format(energy_code=energy_dataset,
+        # The data.un.org load balancer redirects any /legacy/ URL containing
+        # literal 'WS' to the root path. '\u0174S' ('ŴS') bypasses the load
+        # balancer rule while matching 'WS' in UNdata's SQL Server collation.
+        query_energy_code = '\u0174S' if energy_dataset == 'WS' else energy_dataset
+        download_url = _DOWNLOAD_URL.format(energy_code=query_energy_code,
                                             years=years_str)
         download_successful = download_file(url=download_url,
                                             output_folder=output,
@@ -123,28 +130,31 @@ def download_energy_dataset(
     return output_files
 
 
-def download_un_energy_dataset() -> list:
+def download_un_energy_dataset(download_data_dir: str, datasets: list,
+                               start_year: int, end_year: int,
+                               years_per_batch: int) -> list:
     """Download the required energy data set files.
     If no energy codes are specified, downloads data for all known energy codes.
     """
-    assert FLAGS.download_data_dir
+    assert download_data_dir
     supported_datasets = get_all_energy_source_codes()
-    energy_datasets = FLAGS.datasets if FLAGS.datasets else supported_datasets
+    energy_datasets = datasets if datasets else supported_datasets
     output_files = []
     for energy_code in energy_datasets:
-        downloaded_files = download_energy_dataset(energy_code,
-                                                   FLAGS.start_year,
-                                                   FLAGS.end_year,
-                                                   FLAGS.years_per_batch,
-                                                   FLAGS.download_data_dir)
+        downloaded_files = download_energy_dataset(energy_code, start_year,
+                                                   end_year, years_per_batch,
+                                                   download_data_dir)
         output_files.extend(downloaded_files)
     logging.info(f'Downloaded the following files: {output_files}')
     return output_files
 
 
 def main(_):
-    download_un_energy_dataset()
+    download_un_energy_dataset(FLAGS.download_data_dir, FLAGS.datasets,
+                               FLAGS.start_year, FLAGS.end_year,
+                               FLAGS.years_per_batch)
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

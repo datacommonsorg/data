@@ -13,7 +13,6 @@
 # limitations under the License.
 """Utility for semantic text search using embeddings."""
 
-import csv
 import os
 import pickle
 import sys
@@ -44,11 +43,10 @@ flags.DEFINE_string('semantic_matcher_model', 'all-MiniLM-L6-v2',
                     'Output file with results per query.')
 flags.DEFINE_bool('semantic_matcher_debug', False, 'Enable debug logs.')
 
-import file_util
-import process_http_server
-
 from config_map import ConfigMap
 from counters import Counters
+import file_util
+import process_http_server
 
 
 # Class to perform semantic search for text strings using embeddings.
@@ -155,7 +153,8 @@ class SemanticMatcher:
         # Import modules needed when running SemanticMatcher
         # This is not imported in import-executor automation
         # that calls stvtar processor, but doesn't need semantic matching.
-        from sentence_transformers import SentenceTransformer, util
+        from sentence_transformers import SentenceTransformer
+        from sentence_transformers import util
 
         model = self._config.get('embeddings_model', 'all-MiniLM-L6-v2')
         logging.info(f'Creating SentenceTransformer with {model}')
@@ -201,7 +200,7 @@ class SemanticMatcher:
         logging.level_debug() and logging.debug(
             f'Got semantic search result for {key}: {matches}')
         if matches is None:
-            self._counters.add_counter(f'semantic_search_lookup_failures', 1)
+            self._counters.add_counter('semantic_search_lookup_failures', 1)
             return []
 
         # Get values for corpus matches
@@ -214,7 +213,7 @@ class SemanticMatcher:
                 results.append((key, value))
 
         # Update counters
-        self._counters.add_counter(f'semantic_search_lookups', 1)
+        self._counters.add_counter('semantic_search_lookups', 1)
         self._counters.add_counter(
             f'semantic_search_lookup_results_{len(results)}', 1)
         query_time = end_time - start_time
@@ -223,7 +222,7 @@ class SemanticMatcher:
         tot_query_time += query_time
         tot_lookups = self._counters.get_counter('semantic_search_lookups')
         avg_time = tot_query_time / tot_lookups
-        self._counters.set_counter(f'semantic_search_avg_lookup_time', avg_time)
+        self._counters.set_counter('semantic_search_avg_lookup_time', avg_time)
         return results
 
     def get_query_embedding(self, key: str) -> str:
@@ -244,9 +243,9 @@ class SemanticMatcher:
         start_time = time.perf_counter()
         embeddings = self._embedder.encode(text, convert_to_tensor=True)
         end_time = time.perf_counter()
-        self._counters.add_counter(f'semantic_matcher_encode_time',
+        self._counters.add_counter('semantic_matcher_encode_time',
                                    end_time - start_time)
-        self._counters.add_counter(f'semantic_matcher_encode_calls', 1)
+        self._counters.add_counter('semantic_matcher_encode_calls', 1)
         return embeddings
 
     # Returns True if sentence transformer is initialized.
@@ -291,7 +290,7 @@ def semantic_matcher_lookup(corpus_file: str,
                 value = str(values)
             semantic_matcher.add_key_value(key, value)
     else:
-        logging.info(f'Using corpus from semantic_matcher_cache')
+        logging.info('Using corpus from semantic_matcher_cache')
 
     # Lookup queries in semantic_matcher
     queries = file_util.file_load_py_dict(input_file)

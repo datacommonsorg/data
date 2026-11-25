@@ -13,23 +13,25 @@
 # limitations under the License.
 """Module for the ValidationRunner class."""
 
+import json
 import os
+import sys
+
 from absl import app
 from absl import flags
 from absl import logging
 import pandas as pd
-import json
-import sys
-from typing import Tuple
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, _SCRIPT_DIR)
 
-from validation_config import ValidationConfig
 from report_generator import ReportGenerator
+from result import ValidationResult
+from result import ValidationStatus
+from validation_config import ValidationConfig
+from validation_util import DIFFER_COLUMNS
+from validation_util import filter_dataframe
 from validator import Validator
-from result import ValidationResult, ValidationStatus
-from validation_util import DIFFER_COLUMNS, filter_dataframe
 
 _FLAGS = flags.FLAGS
 
@@ -65,6 +67,9 @@ class ValidationRunner:
             'DELETED_RECORDS_PERCENT':
                 (self.validator.validate_deleted_records_percent,
                  'differ_summary'),
+            'DELETED_ENTITY_COUNT':
+                (self.validator.validate_deleted_entity_count, 'differ_summary'
+                ),
             'EMPTY_IMPORT_CHECK':
                 (self.validator.validate_empty_import, 'lint'),
             'MISSING_REFS_COUNT':
@@ -154,8 +159,12 @@ class ValidationRunner:
                             lint_report)
 
     def _load_differ_df_from_mcf(self, input_dir: str) -> pd.DataFrame:
-        """Parses MCF diff files and returns a summary DataFrame."""
-        import glob
+        """Parses differ summary CSV or MCF diff files and returns a summary DataFrame."""
+        summary_csv_path = os.path.join(input_dir, 'differ_summary.csv')
+        if os.path.exists(summary_csv_path) and os.path.getsize(
+                summary_csv_path) > 0:
+            return pd.read_csv(summary_csv_path)
+
         from collections import defaultdict
         stats = defaultdict(lambda: {'ADDED': 0, 'DELETED': 0, 'MODIFIED': 0})
 
@@ -258,9 +267,7 @@ class ValidationRunner:
                 result = validation_func(self.data_sources['stats'],
                                          self.data_sources['differ'],
                                          rule_params)
-            elif validator_name in [
-                    'DELETED_RECORDS_PERCENT', 'DELETED_RECORDS_COUNT'
-            ]:
+            elif data_source_key == 'differ_summary':
                 result = validation_func(
                     self.data_sources.get('differ_summary'), rule_params)
             else:

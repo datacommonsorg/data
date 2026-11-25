@@ -20,16 +20,18 @@ dataclasses for representing the JSON structure and functions to extract metadat
 from SDMX objects.
 """
 
+from dataclasses import asdict
+from dataclasses import dataclass
+from dataclasses import field
 import json
 import logging
-from dataclasses import dataclass, field, asdict
-from typing import List, Optional, Literal, Any
+from typing import Any, List, Literal, Optional
 
 from absl import app
 from absl import flags
-
 import sdmx
-from sdmx.model.internationalstring import InternationalString, DEFAULT_LOCALE
+from sdmx.model.internationalstring import DEFAULT_LOCALE
+from sdmx.model.internationalstring import InternationalString
 
 
 def _get_localized_string(obj: Optional[InternationalString]) -> str:
@@ -283,7 +285,7 @@ def process_all_dataflows_in_structure_message(sm: Any) -> MultiDataflowOutput:
     try:
         dataflows = []
 
-        for dataflow_id, dataflow_obj in sm.dataflow.items():
+        for _dataflow_id, dataflow_obj in sm.dataflow.items():
             dsd_obj = dataflow_obj.structure
 
             # Populate DataflowArtefactAttributes

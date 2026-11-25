@@ -19,30 +19,31 @@ Downloads and cleans GDP data from the Eurostat database.
     python3 import_data.py
 """
 
-import sys
-from six.moves import urllib
-import numpy as np
 import json
+import os
+import sys
+
+from absl import app
+from absl import flags
+from absl import logging
 import pandas as pd
 from preprocess_data import preprocess_df
-import sys
-from absl import app
-from absl import logging
-from absl import flags
-import os
+from six.moves import urllib
 
 _FLAGS = flags.FLAGS
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _HISTORICAL_DATA_PATH = os.path.join(_MODULE_DIR, 'historical_deleted.csv')
-flags.DEFINE_string('mode', '', 'Options: download or process')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('mode', '', 'Options: download or process')
+
 
 # Imports country mapping alpha2 country codes to country DCIDs.
 sys.path.insert(1, '../../../../util')
 from alpha2_to_dcid import COUNTRY_MAP
 from nuts_codes_names import NUTS1_CODES_NAMES
-
-# Suppress annoying pandas DF copy warnings.
-pd.options.mode.chained_assignment = None  # default='warn'
 
 
 class EurostatGDPImporter:
@@ -114,7 +115,7 @@ class EurostatGDPImporter:
             logging.info(f'Processing file: {input_file}')
             self.raw_df = pd.read_table(input_file)
             self.raw_df = self.raw_df.rename(columns=({
-                'freq,unit,geo\TIME_PERIOD': 'unit,geo\\time'
+                r'freq,unit,geo\TIME_PERIOD': 'unit,geo\\time'
             }))
             self.raw_df['unit,geo\\time'] = self.raw_df[
                 'unit,geo\\time'].str.slice(2)
@@ -298,4 +299,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

@@ -12,13 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 import os
-import requests
+import shutil
+import zipfile
+
 from absl import app
 from absl import logging
-import zipfile
-import json
-import shutil
 import config
+import requests
 
 
 def download_hate_crime_data(json_api_url, output_folder):
@@ -84,7 +84,7 @@ def download_hate_crime_data(json_api_url, output_folder):
         logging.info(
             f"All contents temporarily unzipped to {temp_extract_folder}")
         #data cleaning and csv folder restructuring
-        for root, dirs, files in os.walk(temp_extract_folder):
+        for root, _dirs, files in os.walk(temp_extract_folder):
             for file in files:
                 file_path = os.path.join(root, file)
                 if file.lower().endswith('.csv'):

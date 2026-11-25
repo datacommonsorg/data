@@ -38,15 +38,12 @@ such as wikidataId, PlaceId, etc.
 Additional candidate places may be filled in columns dcid<N>.
 """
 
-import ast
 import csv
-import glob
 import os
 import pprint as pp
 import re
 import sys
 import time
-from typing import Union
 
 from absl import app
 from absl import flags
@@ -125,17 +122,18 @@ sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(_SCRIPT_DIR))),
                  'util'))
 
-import file_util
-import process_http_server
-import wiki_place_resolver
-
-from counters import Counters
 from config_map import ConfigMap
+from counters import Counters
+from dc_api_wrapper import dc_api_batched_wrapper
+from dc_api_wrapper import dc_api_get_node_property
+from dc_api_wrapper import dc_api_resolve_latlng
+from dc_api_wrapper import dc_api_resolve_placeid
 from download_util import request_url
-from dc_api_wrapper import dc_api_batched_wrapper, dc_api_resolve_placeid
-from dc_api_wrapper import dc_api_resolve_latlng, dc_api_get_node_property
+import file_util
 from place_name_matcher import PlaceNameMatcher
+import process_http_server
 from property_value_cache import PropertyValueCache
+import wiki_place_resolver
 
 # Google Maps API
 # params used: &key=<>&address=<...>&components=country:<CC>|admin_area:<State>
@@ -166,9 +164,11 @@ class PlaceResolver:
     def __init__(
         self,
         maps_api_key: str = None,
-        config_dict: dict = {},
+        config_dict: dict | None = None,
         counters_dict: dict = None,
     ):
+        if config_dict is None:
+            config_dict = {}
         self._maps_api_key = maps_api_key
         self._config = ConfigMap(config_dict)
         self._counters = Counters(counters_dict)
@@ -194,9 +194,9 @@ class PlaceResolver:
 
     def resolve_name(self,
                      places: dict,
-                     place_types: list = [],
-                     places_within: list = [],
-                     filter_pvs: dict = {}) -> dict:
+                     place_types: list | None = None,
+                     places_within: list | None = None,
+                     filter_pvs: dict | None = None) -> dict:
         """Returns a dictionary with dcid and placeId for each place.
 
     Args:
@@ -215,6 +215,12 @@ class PlaceResolver:
         latitude: approximate latitude for the place
         longitude: approximate longitude for the place
     """
+        if filter_pvs is None:
+            filter_pvs = {}
+        if places_within is None:
+            places_within = []
+        if place_types is None:
+            place_types = []
         logging.log_every_n(logging.DEBUG, f'Resolving places: {places}...',
                             self._log_every_n)
         results = {}
@@ -283,7 +289,7 @@ class PlaceResolver:
             self._counters.add_counter('dc-api-resolve-placeid-calls', 1)
             # Extract the dcid for each placeid looked up
             # and add it to the result.
-            for key, result in results.items():
+            for _key, result in results.items():
                 if 'dcid' not in result:
                     # Get all resolved placeIds for each result.
                     place_ids = _get_values_from_dict('placeId', result)
@@ -336,8 +342,7 @@ class PlaceResolver:
         """Returns dictionary with dcids for each place resolved using the DC API."""
         if not self._config.get('dc_api_key', ''):
             logging.log_every_n(
-                logging.DEBUG,
-                f'Skipping DC API resolve as dc_api_key not set.',
+                logging.DEBUG, 'Skipping DC API resolve as dc_api_key not set.',
                 self._log_every_n)
             return {}
 
@@ -461,7 +466,7 @@ class PlaceResolver:
                 cached_place = self._get_cache_value(place_key, 'latitude')
                 if cached_place:
                     self._counters.add_counter(
-                        f'dc-api-resolve-latlng-cache-hits', 1)
+                        'dc-api-resolve-latlng-cache-hits', 1)
                     results[key].update(cached_place)
                 else:
                     resolve_places.append({
@@ -481,9 +486,9 @@ class PlaceResolver:
                 logging.DEBUG,
                 f'Resolving {len(resolve_places)} lat/long places {resolve_places}',
                 self._log_every_n)
-            self._counters.add_counter(f'dc-api-resolve-latlng-places',
+            self._counters.add_counter('dc-api-resolve-latlng-places',
                                        len(resolve_places))
-            self._counters.add_counter(f'dc-api-resolve-latlng-calls', 1)
+            self._counters.add_counter('dc-api-resolve-latlng-calls', 1)
             resolved_place_ids = dc_api_batched_wrapper(
                 function=dc_api_resolve_latlng,
                 dcids=resolve_places,
@@ -509,8 +514,8 @@ class PlaceResolver:
     def lookup_names(
         self,
         places: dict,
-        place_types: list = [],
-        places_within: list = [],
+        place_types: list | None = None,
+        places_within: list | None = None,
         num_results: int = 10,
     ) -> dict:
         """Returns a dictionary with dcid for each place.
@@ -535,6 +540,10 @@ class PlaceResolver:
     """
 
         # Get a list of unresolved places.
+        if places_within is None:
+            places_within = []
+        if place_types is None:
+            place_types = []
         results = {}
         unresolved_places = {}
         self._get_unresolved_places(places, unresolved_places, results)
@@ -574,8 +583,8 @@ class PlaceResolver:
                 results[key] = place
                 results[key].update(place_result)
                 self._set_cache_value(place_name, place_result)
-                self._counters.add_counter(f'place-name-match-results', 1)
-            self._counters.add_counter(f'place-name-match-lookups', 1)
+                self._counters.add_counter('place-name-match-results', 1)
+            self._counters.add_counter('place-name-match-lookups', 1)
         return results
 
     def get_maps_placeid(
@@ -583,7 +592,7 @@ class PlaceResolver:
         name: str,
         country: str = None,
         admin_area: str = '',
-        place_types: list = [],
+        place_types: list | None = None,
     ) -> dict:
         """Returns the Google maps place-id for a place.
 
@@ -599,10 +608,12 @@ class PlaceResolver:
     Returns:
       dictionary with attributes such as placeId, latitude, and longitude.
     """
+        if place_types is None:
+            place_types = []
         if not name:
-            logging.log_every_n(
-                logging.DEBUG, f'Unable to resolve maps place with empty name',
-                self._log_every_n)
+            logging.log_every_n(logging.DEBUG,
+                                'Unable to resolve maps place with empty name',
+                                self._log_every_n)
             return {}
 
         if self._config.get('maps_api_text_search', True):
@@ -619,7 +630,7 @@ class PlaceResolver:
         if not self._maps_api_key:
             logging.log_every_n(
                 logging.ERROR,
-                f'No maps key. Please set --maps_api_key for place lookup.',
+                'No maps key. Please set --maps_api_key for place lookup.',
                 self._log_every_n)
             return {}
         params = {
@@ -668,12 +679,14 @@ class PlaceResolver:
         name: str,
         country: str = None,
         admin_area: str = '',
-        place_types: list = [],
+        place_types: list | None = None,
     ) -> dict:
         """Returns a dictionary with attributes for a place such as placeId,
     latitude, and longitude using the Maps Place API.
     """
         # Check if the place is in the maps cache.
+        if place_types is None:
+            place_types = []
         place_key = self._get_cache_key([name, country, admin_area])
         cached_place = self._get_cache_value(place_key, 'placeId')
         if cached_place:
@@ -683,7 +696,7 @@ class PlaceResolver:
         if not self._maps_api_key:
             logging.log_every_n(
                 logging.ERROR,
-                f'No maps key. Please set --maps_api_key for place lookup.',
+                'No maps key. Please set --maps_api_key for place lookup.',
                 self._log_every_n)
             return {}
         query_tokens = [name]
@@ -743,6 +756,8 @@ class PlaceResolver:
         wiki_props = self._wiki_resolver.get_config_wiki_props()
         if not wiki_props:
             # No properties to lookup. Only resolve place names.
+            unresolved_places = {}
+            results = {}
             self._get_unresolved_places(places, unresolved_places, results)
         else:
             unresolved_places = places
@@ -801,9 +816,9 @@ class PlaceResolver:
     def filter_by_pvs(
         self,
         places: dict,
-        place_types: list = [],
-        places_within: list = [],
-        filter_pvs: dict = {},
+        place_types: list | None = None,
+        places_within: list | None = None,
+        filter_pvs: dict | None = None,
     ) -> dict:
         """Returns a dictionary of places that match the properties in filter_pvs.
 
@@ -814,6 +829,12 @@ class PlaceResolver:
         with property values in the filter_pvs are returned.
     """
         # Convert values for filter properties into a set
+        if filter_pvs is None:
+            filter_pvs = {}
+        if places_within is None:
+            places_within = []
+        if place_types is None:
+            place_types = []
         filter_value_set = {}
         for prop, filter_values in filter_pvs.items():
             value_set = _get_value_set(filter_values)
@@ -973,7 +994,7 @@ class PlaceResolver:
                         # Found a cached dcid for the place.
                         # Copy over the properties to resolved_places.
                         self._counters.add_counter(
-                            f'place-resolver-name-cache-hits', 1)
+                            'place-resolver-name-cache-hits', 1)
                         resolved_place = place
             if resolved_place:
                 resolved_places[key] = resolved_place
@@ -1086,8 +1107,7 @@ class PlaceResolver:
                 config=self._config.get_configs(),
             )
             self._counters.add_counter(
-                f'dc-api-prop-value-containedInPlace-lookups',
-                len(lookup_dcids))
+                'dc-api-prop-value-containedInPlace-lookups', len(lookup_dcids))
             # Cache the property:value for the response.
             for dcid, prop_values in dc_api_resp.items():
                 val = prop_values.get('containedInPlace')
@@ -1224,9 +1244,9 @@ def _get_value_set(values: str) -> set:
 def process(
     input_filenames: list,
     output_filename: str,
-    input_place_names: list = [],
+    input_place_names: list | None = None,
     maps_api_key: str = '',
-    output_columns: list = [],
+    output_columns: list | None = None,
     config: ConfigMap = None,
 ):
     """Resolve the places in a csv file and save in output.
@@ -1248,6 +1268,10 @@ def process(
     place_names: list of place names to resolve.
     config_file: file with dictionary of config parameters for resolution.
   """
+    if output_columns is None:
+        output_columns = []
+    if input_place_names is None:
+        input_place_names = []
     counters = Counters()
     if not config:
         config = ConfigMap()
@@ -1310,8 +1334,6 @@ def process(
         return
 
     output_filename = file_util.file_get_name(output_filename, file_ext='.csv')
-    if output_columns is None:
-        output_columns = []
     for col in columns:
         if col not in output_columns:
             output_columns.append(col)

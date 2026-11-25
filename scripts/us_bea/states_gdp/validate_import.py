@@ -19,10 +19,11 @@ updated in a way that would make the script invalid or obsolete.
 
     python3 validate_import.py
 """
-import unittest
 import re
-import numpy as np
+import unittest
+
 from import_data import StateGDPDataLoader
+import numpy as np
 
 
 class USStateQuarterlyGDPImportVal(unittest.TestCase):

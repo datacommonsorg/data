@@ -20,7 +20,8 @@
       "source_files": [
         "input_files/*.csv"
       ],
-      "cron_schedule": "0 0 20 6 *",
+      "cron_schedule": "30 10 * * 0",
+      "_comment": "Schedule: Weekly on Sunday at 10:30 UTC",
       "resource_limits": {"cpu": 4, "memory": 8, "disk":100}
         }
     ],

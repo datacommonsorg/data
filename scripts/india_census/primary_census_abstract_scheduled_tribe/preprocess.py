@@ -13,7 +13,9 @@
 # limitations under the License.
 
 import os
+
 import pandas as pd
+
 from ..common.base import CensusPrimaryAbstractDataLoaderBase
 
 CENSUS_DATA_COLUMN_START = 5

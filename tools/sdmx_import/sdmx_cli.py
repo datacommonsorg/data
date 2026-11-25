@@ -19,8 +19,8 @@ Provides a simple interface to fetch data and metadata from SDMX REST APIs.
 """
 
 import os
+from typing import Any, Dict, List
 import urllib.parse
-from typing import Dict, Any, List
 
 from absl import app
 from absl import flags
