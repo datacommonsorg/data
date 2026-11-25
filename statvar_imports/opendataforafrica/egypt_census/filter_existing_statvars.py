@@ -41,13 +41,15 @@ def _strip_ns(val: str) -> str:
     return val
 
 
-def _add_node_ids(dcids: set[str], cur_node: str | None,
-                  cur_dcid: str | None) -> None:
+def _resolve_canonical_dcid(cur_node: str | None,
+                            cur_dcid: str | None) -> str | None:
+    """Resolves a block's canonical DCID, letting dcid: override local Node:."""
     if cur_dcid:
-        dcids.add(cur_dcid)
+        return cur_dcid
     if cur_node and not cur_node.startswith(
         ('l:', 'E:')) and '->' not in cur_node:
-        dcids.add(cur_node)
+        return cur_node
+    return None
 
 
 def load_existing_dcids(mcf_path: str) -> set[str]:
@@ -63,12 +65,16 @@ def load_existing_dcids(mcf_path: str) -> set[str]:
             if not line or line.startswith('#'):
                 continue
             if line.startswith('Node:'):
-                _add_node_ids(dcids, cur_node, cur_dcid)
+                canonical_dcid = _resolve_canonical_dcid(cur_node, cur_dcid)
+                if canonical_dcid:
+                    dcids.add(canonical_dcid)
                 cur_node = _strip_ns(line.split(':', 1)[1])
                 cur_dcid = None
             elif line.startswith('dcid:'):
                 cur_dcid = _strip_ns(line.split(':', 1)[1])
-        _add_node_ids(dcids, cur_node, cur_dcid)
+        canonical_dcid = _resolve_canonical_dcid(cur_node, cur_dcid)
+        if canonical_dcid:
+            dcids.add(canonical_dcid)
     dcids.discard('')
     return dcids
 
@@ -77,25 +83,19 @@ def filter_statvar_mcf_file(mcf_path: str,
                             existing_dcids: set[str]) -> tuple[int, int]:
     """Retains only MCF node blocks not present in existing_dcids; removes empty MCFs."""
     header_lines: list[str] = []
-    blocks: list[tuple[tuple[str, ...], list[str]]] = []
+    blocks: list[tuple[str | None, list[str]]] = []
     cur_lines: list[str] = []
     cur_node: str | None = None
     cur_dcid: str | None = None
-
-    def _block_ids(node_id: str | None, dcid_id: str | None) -> tuple[str, ...]:
-        ids = []
-        if dcid_id:
-            ids.append(dcid_id)
-        if node_id and node_id not in ids:
-            ids.append(node_id)
-        return tuple(ids)
 
     with open(mcf_path, encoding='utf-8') as f:
         for raw_line in f:
             stripped = raw_line.strip()
             if stripped.startswith('Node:'):
-                if cur_lines and (cur_dcid or cur_node):
-                    blocks.append((_block_ids(cur_node, cur_dcid), cur_lines))
+                if cur_lines:
+                    blocks.append(
+                        (_resolve_canonical_dcid(cur_node,
+                                                 cur_dcid), cur_lines))
                 cur_lines = [raw_line]
                 cur_node = _strip_ns(stripped.split(':', 1)[1])
                 cur_dcid = None
@@ -106,12 +106,13 @@ def filter_statvar_mcf_file(mcf_path: str,
                 if stripped.startswith('dcid:'):
                     cur_dcid = _strip_ns(stripped.split(':', 1)[1])
                 cur_lines.append(raw_line)
-        if cur_lines and (cur_dcid or cur_node):
-            blocks.append((_block_ids(cur_node, cur_dcid), cur_lines))
+        if cur_lines:
+            blocks.append((_resolve_canonical_dcid(cur_node,
+                                                   cur_dcid), cur_lines))
 
     kept_blocks = [
-        lines for blk_ids, lines in blocks
-        if not any(bid in existing_dcids for bid in blk_ids)
+        lines for canonical_dcid, lines in blocks
+        if not (canonical_dcid and canonical_dcid in existing_dcids)
     ]
     dropped = len(blocks) - len(kept_blocks)
     if not kept_blocks:

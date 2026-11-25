@@ -385,11 +385,18 @@ class ConvertSdmxXmlToCsvTest(unittest.TestCase):
         with open(existing_mcf, 'w', encoding='utf-8') as f:
             f.write('Node: Count_Person # inline comment\n'
                     'typeOf: dcs:StatisticalVariable\n\n'
-                    'Node: dcs:Count_Teacher_PrimarySchool\n'
-                    'dcid: "dc/7hlfs8swh22v3" # legacy dcid\n'
+                    'Node: dcs:LocalOnlyLabel\n'
+                    'dcid: "dc/7hlfs8swh22v3" # dcid overrides local Node\n'
+                    'typeOf: dcs:StatisticalVariable\n\n'
+                    'Node: l:IgnoredLocalWithoutDcid\n'
                     'typeOf: dcs:StatisticalVariable\n\n'
                     'Node: schema:Count_Death\n'
                     'typeOf: dcs:StatisticalVariable\n')
+
+        self.assertSetEqual(
+            egypt_filter.load_existing_dcids(existing_mcf),
+            {'Count_Person', 'dc/7hlfs8swh22v3', 'Count_Death'},
+        )
 
         with self.assertRaises(FileNotFoundError):
             egypt_filter.filter_statvar_mcf_dir(
@@ -404,7 +411,10 @@ class ConvertSdmxXmlToCsvTest(unittest.TestCase):
                     'typeOf: dcs:StatisticalVariable\n\n'
                     'Node: dcid:Count_Death\n'
                     'typeOf: dcs:StatisticalVariable\n\n'
-                    'Node: dcid:Count_Teacher_PrimarySchool\n'
+                    'Node: dcs:AnotherLocalLabel\n'
+                    'dcid: "dc/7hlfs8swh22v3"\n'
+                    'typeOf: dcs:StatisticalVariable\n\n'
+                    'Node: dcid:LocalOnlyLabel\n'
                     'typeOf: dcs:StatisticalVariable\n\n'
                     'Node: dcid:Count_Person_18OrMoreYears_NeverMarried\n'
                     'typeOf: dcs:StatisticalVariable\n')
@@ -418,10 +428,12 @@ class ConvertSdmxXmlToCsvTest(unittest.TestCase):
         self.assertTrue(os.path.isfile(mixed_mcf))
         with open(mixed_mcf, encoding='utf-8') as f:
             filtered_txt = f.read()
+        self.assertIn('Node: dcid:LocalOnlyLabel\n', filtered_txt)
         self.assertIn('Count_Person_18OrMoreYears_NeverMarried', filtered_txt)
         self.assertNotIn('dcid:Count_Person\n', filtered_txt)
         self.assertNotIn('dcid:Count_Death\n', filtered_txt)
-        self.assertNotIn('dcid:Count_Teacher_PrimarySchool\n', filtered_txt)
+        self.assertNotIn('dc/7hlfs8swh22v3', filtered_txt)
+        self.assertNotIn('AnotherLocalLabel', filtered_txt)
 
     def test_egypt_census_manifest_pvmaps_metadata_and_fixtures(self):
         """Verifies manifest wiring, zero #Eval, metadata hygiene, and 17 test_data triplets."""

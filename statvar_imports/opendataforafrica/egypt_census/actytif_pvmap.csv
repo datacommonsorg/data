@@ -47,7 +47,8 @@ KN.S45,populationType,Incident,measuredProperty,count,incidentType,Accident,name
 KN.S46,#ignore,ignore,,,,,,,,
 KN.S47,populationType,MedicalConditionIncident,incidentType,SportsGamesAccidents,name,"""Number of incidences of sports games accidents""",,,,
 KN.S48,#ignore,no mapping in data sheet,,,,,,,,
-KN.S49,populationType,MortalityEvent,measuredProperty,count,name,"""The total number of deaths""",,,,
+"# KN.S49 (Death) is the first casualty outcome under KN.S48 (Damages from accidents), summing with KN.S50..S62, S64 to KN.S63 across all 202/202 place-year pairs."
+KN.S49,populationType,MortalityEvent,measuredProperty,count,causeOfDeath,Accident,name,"""Number of deaths from accidents""",,
 KN.S50,populationType,MedicalConditionIncident,incidentType,Bleeding,name,"""Number of Incidence of bleeding""",,,,
 KN.S51,populationType,MedicalConditionIncident,incidentType,Wounds,name,"""Number of Incidence of wounds""",,,,
 KN.S52,populationType,MedicalConditionIncident,incidentType,LossOfConsciousness,name,"""Number of Incidence of loss of consciousness""",,,,

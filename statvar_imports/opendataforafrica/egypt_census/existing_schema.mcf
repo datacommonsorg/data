@@ -171,6 +171,19 @@ typeOf: dcs:Property
 domainIncludes: dcid:Incident
 rangeIncludes: dcid:AccidentCauseEnum,dcid:MedicalConditionIncidentTypeEnum
 
+Node: dcid:incidentType
+typeOf: dcs:Property
+domainIncludes: dcid:Incident,dcid:MedicalConditionIncident
+rangeIncludes: dcid:MedicalConditionIncidentTypeEnum,dcid:CauseOfDeathEnum,dcid:CauseOfDeathAndDisabilityEnum,dcid:ICD10_113CausesOfDeath
+
+Node: dcid:causeOfDeath
+typeOf: dcs:Property
+domainIncludes: dcid:Person,dcid:MortalityEvent
+rangeIncludes: dcid:CauseOfDeathEnum,dcid:CauseOfDeathAndDisabilityEnum,dcid:ICD10_113CausesOfDeath,dcid:HealthOutcomeEnum,dcid:SDG_CauseOfDeathEnum,dcid:Disease
+
+Node: dcid:Accident
+typeOf: dcid:CauseOfDeathEnum
+
 Node: dcid:Car
 typeOf: dcid:AccidentCauseEnum
 
