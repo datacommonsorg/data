@@ -8,7 +8,7 @@
             "provenance_url": "https://ethiopia.opendataforafrica.org/",
             "provenance_description": "Ethiopia Demographics, Health, Education, and Population statistics from Central Statistical Agency of Ethiopia via Open Data for Africa.",
             "scripts": [
-                "download.py --raw_dir=raw_files --output_dir=input_files",
+                "download.sh",
                 "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/ethiopia_demographics.csv --pv_map=ethiopia-Ethiopia_Demographics_pvmap.csv --config_file=ethiopia-Ethiopia_Demographics_metadata.csv --places_resolved_csv=ethiopia-Ethiopia_Demographics_places_resolved.csv --output_path=output/ethiopia_demographics --output_counters=counters/ethiopia_demographics_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
                 "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/ethiopia_population_all_year.csv --pv_map=ethiopia-Ethiopia_Population_all_year_pvmap.csv --config_file=ethiopia-Ethiopia_Population_all_year_metadata.csv --output_path=output/ethiopia_population_all_year --output_counters=counters/ethiopia_population_all_year_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
                 "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/ethiopia_population_2007.csv --pv_map=ethiopia_population_2007_pvmap.csv --config_file=ethiopia_population_2007_metadata.csv --places_resolved_csv=ethiopia_population_2007_places_resolved.csv --output_path=output/ethiopia_population_2007 --output_counters=counters/ethiopia_population_2007_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
@@ -43,7 +43,6 @@
                 }
             ],
             "source_files": [
-                "raw_files/*",
                 "input_files/*",
                 "counters/*",
                 "validation_config.json"

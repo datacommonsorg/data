@@ -5,13 +5,14 @@
 - **Source**: [Ethiopia Open Data for Africa](https://ethiopia.opendataforafrica.org/)
 - **Publisher**: Central Statistical Agency (CSA) of Ethiopia
 - **Import Name**: `EthiopiaStatistics`
-- **Schedule**: `0 5 * * 1` (Mondays at 05:00 UTC)
+- **Import Type**: `Semi-Automated` (`GCPCloudRunSemiAutomaticRefresh` — input CSVs are refreshed via `download.py` and staged to GCS at `gs://unresolved_mcf/opendataforafrica/ethiopia_statistics/input_files/`, aligned with `Kenya_Census` rather than `auto1w`)
+- **Schedule**: `0 5 * * 1` (Mondays at 05:00 UTC; semi-automated Cloud Batch schedule)
 - **Coverage**: Demographics, Population, Health, Education, and Employment (2000 – 2022)
 - **Place Types**: Country (`country/ETH`), AdministrativeArea1 (Regions / Chartered Cities), and AdministrativeArea2 (Zones in `xtqdbuc`), resolved to Wikidata / Data Commons DCIDs.
 
 ## 2. Datasets
 
-`download.py` fetches all five datasets directly from the `ethiopia.opendataforafrica.org` Knoema REST API (`/api/1.0/meta/dataset/<id>`, `/api/1.0/meta/dataset/<id>/dimension/<dim>`, and paginated `/api/1.0/data/raw`) using `util/download_util.py`:
+Five datasets from `ethiopia.opendataforafrica.org` are fetched and normalized by `download.py` (using `util/download_util.py` against the Knoema REST API `/api/1.0/meta/dataset/<id>`, `/api/1.0/meta/dataset/<id>/dimension/<dim>`, and paginated `/api/1.0/data/raw`) and staged to GCS for `download.sh`:
 
 | Dataset ID | Source Dataset | Output Input CSV | Years |
 | :--- | :--- | :--- | :--- |
@@ -25,9 +26,10 @@
 
 | File / Directory | Purpose |
 | :--- | :--- |
-| `manifest.json` | Import automation manifest declaring `download.py`, `stat_var_processor.py` runs, `import_inputs`, `source_files`, and `validation_config.json` |
+| `manifest.json` | Import automation manifest declaring `download.sh`, `stat_var_processor.py` runs, `import_inputs`, `source_files`, and `validation_config.json` |
 | `validation_config.json` | Scoped SQL freshness validation rules merged with Data Commons default validation rules |
-| `download.py` | Direct API downloader using `util/download_util.py`; saves raw API JSON to `raw_files/` and normalized CSVs to `input_files/` |
+| `download.sh` | Shell script run by Cloud Batch to fetch staged CSVs from `gs://unresolved_mcf/opendataforafrica/ethiopia_statistics/input_files/` into `input_files/` |
+| `download.py` | Operator refresh utility using `util/download_util.py` to fetch raw API JSON into `raw_files/` and normalize CSVs into `input_files/` prior to GCS staging |
 | `download_test.py` | Hermetic unit tests for `download.py` (pagination, filtering, transformations, error handling) |
 | `*_pvmap.csv` | Property-Value mappings for `stat_var_processor.py` |
 | `*_metadata.csv` | Processor configuration files for each dataset |
@@ -35,25 +37,38 @@
 | `test_data/` | Sample input fixtures and expected processor outputs |
 | `raw_files/`, `input_files/`, `output/`, `counters/` | Runtime-generated directories (excluded from Git via `.gitignore`) |
 
-## 4. Prerequisites & Running Locally
+## 4. Ingestion Workflow
 
-Run commands from the repository root (`data/`), or from this import directory with import-relative paths. Ensure Python dependencies from `import-automation/executor/requirements.txt` are installed (e.g. via `./run_tests.sh -r`, which creates `.env/`).
+### 4.1 Upstream Source Data Updates (Operator Refresh)
+When updated statistics are published on Ethiopia Open Data for Africa:
+1. **Download & Normalize CSVs**: Run `download.py` from the repository root (with `.env` dependencies installed via `./run_tests.sh -r`):
+   ```bash
+   .env/bin/python statvar_imports/opendataforafrica/ethiopia_statistics/download.py \
+     --raw_dir=statvar_imports/opendataforafrica/ethiopia_statistics/raw_files \
+     --output_dir=statvar_imports/opendataforafrica/ethiopia_statistics/input_files
+   ```
+   Raw API responses are preserved verbatim under `raw_files/<dataset_id>_raw.json`, and normalized CSVs are written atomically to `input_files/`.
+2. **Stage to GCS**: Upload the refreshed CSV files to Google Cloud Storage:
+   ```bash
+   gcloud storage cp \
+     statvar_imports/opendataforafrica/ethiopia_statistics/input_files/*.csv \
+     gs://unresolved_mcf/opendataforafrica/ethiopia_statistics/input_files/
+   ```
 
-### 4.1 Download Source Data
+### 4.2 Semi-Automated Ingestion Pipeline
+During scheduled import runs (`0 5 * * 1`, Mondays at 05:00 UTC) or on-demand triggers after refreshed CSVs are staged to GCS, the pipeline executes:
+1. **Download (`download.sh`)**: Pulls the staged CSVs from `gs://unresolved_mcf/opendataforafrica/ethiopia_statistics/input_files/` into `input_files/`.
+2. **Transform (`stat_var_processor.py`)**: Processes all five tables, resolving place DCIDs and generating TMCF, CSV, and StatVar MCF outputs.
+3. **Validation**: Enforces scoped freshness rules in `validation_config.json`, `ImportDiffer` checks against the previous baseline, and default lint/existence rules.
 
-```bash
-.env/bin/python statvar_imports/opendataforafrica/ethiopia_statistics/download.py \
-  --raw_dir=statvar_imports/opendataforafrica/ethiopia_statistics/raw_files \
-  --output_dir=statvar_imports/opendataforafrica/ethiopia_statistics/input_files
-```
-
-Raw API responses are preserved verbatim under `raw_files/<dataset_id>_raw.json`, and normalized CSVs are written atomically to `input_files/`.
-
-### 4.2 Run `stat_var_processor.py`
+## 5. Running `stat_var_processor.py` Locally
 
 Run from `statvar_imports/opendataforafrica/ethiopia_statistics/` (matching `manifest.json`):
 
 ```bash
+# Fetch staged input CSVs from GCS
+./download.sh
+
 # 1. Ethiopia Demographics (udghlsf)
 ../../../.env/bin/python ../../../tools/statvar_importer/stat_var_processor.py \
   --input_data=input_files/ethiopia_demographics.csv \
@@ -103,7 +118,7 @@ Run from `statvar_imports/opendataforafrica/ethiopia_statistics/` (matching `man
   --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
 ```
 
-## 5. Testing & Validation
+## 6. Testing & Validation
 
 Run unit tests from the repository root:
 
@@ -114,8 +129,3 @@ Run unit tests from the repository root:
 ```
 
 Validation in `validation_config.json` enforces scoped `MaxDate` freshness checks alongside default Data Commons validation rules (deletion threshold, empty import check, missing references, and lint error count).
-
-## 6. Refresh & Deployment Notes
-
-- All five datasets are downloaded directly from `ethiopia.opendataforafrica.org` APIs without manual staging.
-- Direct HTTP reachability from GCP Cloud Batch (`us-central1`) to `ethiopia.opendataforafrica.org` APIs has been verified without Cloudflare/bot challenges, and `ImportDiffer` against the CNS production baseline passes with 0 deletions across all five datasets.
