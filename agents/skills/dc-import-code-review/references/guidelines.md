@@ -111,6 +111,9 @@ repository contracts and instructions take precedence.
 
 ### PV map configuration (`*_pvmap.csv`)
 
+- Include a comment header row covering all columns in the PV map, such as
+  `#Key,Property1,Value1,Property2,Value2,...`, so the file renders cleanly as a
+  table on GitHub and parses reliably in CSV tools.
 - For pvmap key strings with punctuation (such as commas `,`) that can vary or
   change over time, use normalized keys in lowercase without punctuation (and
   normalize input strings accordingly) to ensure resilient lookups.
