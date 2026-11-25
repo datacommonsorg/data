@@ -17,7 +17,9 @@ import os
 import sys
 import tempfile
 import unittest
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock
+from unittest.mock import patch
+
 import pandas as pd
 import requests
 
@@ -25,10 +27,8 @@ MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.abspath(os.path.join(MODULE_DIR, "..", ".."))
 sys.path.insert(0, PROJECT_ROOT)
 
-from statvar_imports.commerce_eda_usaspending.process import (
-    fetch_usaspending_data,
-    process_data,
-)
+from statvar_imports.commerce_eda_usaspending.process import fetch_usaspending_data
+from statvar_imports.commerce_eda_usaspending.process import process_data
 
 
 class TestProcessUSASpending(unittest.TestCase):
@@ -634,8 +634,8 @@ class TestProcessUSASpending(unittest.TestCase):
 
     def test_get_current_fiscal_year(self):
         import datetime
-        from statvar_imports.commerce_eda_usaspending.process import (
-            get_current_fiscal_year,)
+
+        from statvar_imports.commerce_eda_usaspending.process import get_current_fiscal_year
         self.assertEqual(
             get_current_fiscal_year(datetime.datetime(2026, 9, 30)), 2026)
         self.assertEqual(
@@ -661,8 +661,7 @@ class TestProcessUSASpending(unittest.TestCase):
         pd.testing.assert_frame_equal(df_actual, df_expected)
 
     def test_deduplicate_awards_fallback_across_batches(self):
-        from statvar_imports.commerce_eda_usaspending.process import (
-            _deduplicate_awards,)
+        from statvar_imports.commerce_eda_usaspending.process import _deduplicate_awards
         batch1 = [{
             "Place of Performance State Code": "AL",
             "CFDA Number": "11.300",
