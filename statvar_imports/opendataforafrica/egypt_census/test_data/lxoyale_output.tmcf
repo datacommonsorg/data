@@ -1,0 +1,9 @@
+Node: E:lxoyale_output->E0
+observationAbout: C:lxoyale_output->observationAbout
+observationDate: C:lxoyale_output->observationDate
+variableMeasured: C:lxoyale_output->variableMeasured
+value: C:lxoyale_output->value
+unit: C:lxoyale_output->unit
+scalingFactor: C:lxoyale_output->scalingFactor
+observationPeriod: C:lxoyale_output->observationPeriod
+typeOf: dcs:StatVarObservation

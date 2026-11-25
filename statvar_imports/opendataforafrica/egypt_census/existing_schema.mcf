@@ -1,0 +1,39 @@
+# Existing Data Commons schema definitions referenced by Egypt_Census StatVars
+# so schema_generator.py recognizes metadata properties, updated domainIncludes,
+# and compound disjunction enum values without emitting spurious provisional nodes.
+
+Node: dcid:alternateName
+typeOf: dcs:Property
+domainIncludes: dcid:Thing,dcid:StatisticalVariable,dcid:Person,dcid:Student,dcid:Teacher,dcid:Household,dcid:HealthEstablishment,dcid:Bed,dcid:CriminalIncidents,dcid:Establishment,dcid:Incident,dcid:MedicalConditionIncident,dcid:MortalityEvent,dcid:BirthEvent,dcid:EconomicActivity
+rangeIncludes: dcid:Text
+
+Node: dcid:nameWithLanguage
+typeOf: dcs:Property
+domainIncludes: dcid:Thing,dcid:StatisticalVariable,dcid:Person,dcid:Student,dcid:Teacher,dcid:Household,dcid:HealthEstablishment,dcid:Bed,dcid:CriminalIncidents,dcid:Establishment,dcid:Incident,dcid:MedicalConditionIncident,dcid:MortalityEvent,dcid:BirthEvent,dcid:EconomicActivity
+rangeIncludes: dcid:Text
+
+Node: dcid:descriptionUrl
+typeOf: dcs:Property
+domainIncludes: dcid:Thing,dcid:StatisticalVariable,dcid:Person,dcid:Student,dcid:Teacher,dcid:Household,dcid:HealthEstablishment,dcid:Bed,dcid:CriminalIncidents,dcid:Establishment,dcid:Incident,dcid:MedicalConditionIncident,dcid:MortalityEvent,dcid:BirthEvent,dcid:EconomicActivity
+rangeIncludes: dcid:Text
+
+Node: dcid:institutionType
+typeOf: dcid:Property
+domainIncludes: dcid:Student,dcid:Teacher,dcid:Person
+rangeIncludes: dcid:InstitutionTypeEnum
+
+Node: dcid:AlAzharUniversity__PublicUniversity
+typeOf: dcid:InstitutionTypeEnum
+
+Node: dcid:establishmentOwnership
+typeOf: dcid:Property
+domainIncludes: dcid:Establishment,dcid:HealthEstablishment,dcid:Person
+rangeIncludes: dcid:EstablishmentOwnershipEnum
+
+Node: dcid:PrivatelyOwned__GovernmentOwned
+typeOf: dcid:EstablishmentOwnershipEnum
+
+Node: dcid:schoolGradeLevel
+typeOf: dcs:Property
+domainIncludes: dcid:Student,dcid:Teacher,dcid:Person
+rangeIncludes: dcid:SchoolGradeLevelEnum,dcid:SchoolLevelEnum,dcid:SecondarySchool

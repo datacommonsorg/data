@@ -1,0 +1,9 @@
+Node: E:cjczlcd_output->E0
+observationAbout: C:cjczlcd_output->observationAbout
+observationDate: C:cjczlcd_output->observationDate
+variableMeasured: C:cjczlcd_output->variableMeasured
+value: C:cjczlcd_output->value
+unit: C:cjczlcd_output->unit
+scalingFactor: C:cjczlcd_output->scalingFactor
+observationPeriod: C:cjczlcd_output->observationPeriod
+typeOf: dcs:StatVarObservation

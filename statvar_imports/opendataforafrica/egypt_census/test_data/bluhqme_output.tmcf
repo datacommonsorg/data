@@ -1,0 +1,9 @@
+Node: E:bluhqme_output->E0
+observationAbout: C:bluhqme_output->observationAbout
+observationDate: C:bluhqme_output->observationDate
+variableMeasured: C:bluhqme_output->variableMeasured
+value: C:bluhqme_output->value
+unit: C:bluhqme_output->unit
+scalingFactor: C:bluhqme_output->scalingFactor
+observationPeriod: C:bluhqme_output->observationPeriod
+typeOf: dcs:StatVarObservation

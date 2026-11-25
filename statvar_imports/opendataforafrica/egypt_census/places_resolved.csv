@@ -1,62 +1,4 @@
 place_name,dcid
-1,country/EGY
-2,wikidataId/Q30805
-3,wikidataId/Q29943
-4,wikidataId/Q31079
-5,wikidataId/Q31070
-6,wikidataId/Q30644
-7,wikidataId/Q31068
-8,wikidataId/Q31074
-9,wikidataId/Q31075
-10,wikidataId/Q30946
-11,wikidataId/Q30835
-12,wikidataId/Q30786
-13,wikidataId/Q30630
-14,wikidataId/Q31067
-15,wikidataId/Q30832
-16,wikidataId/Q30683
-17,wikidataId/Q30656
-18,wikidataId/Q30675
-19,wikidataId/Q29965
-20,wikidataId/Q30669
-21,wikidataId/Q31065
-22,wikidataId/Q29937
-23,wikidataId/Q30797
-24,wikidataId/Q30831
-25,wikidataId/Q30650
-26,wikidataId/Q30682
-27,wikidataId/Q30662
-28,wikidataId/Q30815
-KN.L1,country/EGY
-KN.L2,wikidataId/Q30805
-KN.L3,wikidataId/Q29943
-KN.L4,wikidataId/Q31079
-KN.L5,wikidataId/Q31070
-KN.L6,wikidataId/Q771345
-KN.L7,wikidataId/Q335708
-KN.L8,wikidataId/Q30644
-KN.L9,wikidataId/Q31068
-KN.L10,wikidataId/Q31074
-KN.L11,wikidataId/Q31075
-KN.L12,wikidataId/Q30946
-KN.L13,wikidataId/Q30835
-KN.L14,wikidataId/Q30786
-KN.L15,wikidataId/Q30630
-KN.L16,wikidataId/Q31067
-KN.L17,wikidataId/Q30832
-KN.L18,wikidataId/Q30683
-KN.L19,wikidataId/Q30656
-KN.L20,wikidataId/Q30675
-KN.L21,wikidataId/Q29965
-KN.L22,wikidataId/Q30669
-KN.L23,wikidataId/Q31065
-KN.L24,wikidataId/Q29937
-KN.L25,wikidataId/Q30797
-KN.L26,wikidataId/Q30831
-KN.L27,wikidataId/Q30650
-KN.L28,wikidataId/Q30682
-KN.L29,wikidataId/Q30662
-KN.L30,wikidataId/Q30815
 EG,country/EGY
 EG-C,wikidataId/Q30805
 EG-ALX,wikidataId/Q29943
@@ -125,57 +67,68 @@ New Valley,wikidataId/Q30650
 Matrouh,wikidataId/Q30682
 North Sinai,wikidataId/Q30662
 South Sinai,wikidataId/Q30815
+مصر,country/EGY
+إجمالى جمهورية مصر العربية,country/EGY
 إجمالــــــــي الجمهــــورية,country/EGY
+اجمالى الجمهورية,country/EGY
+القاهرة,wikidataId/Q30805
+القاهـرة,wikidataId/Q30805
 القـــــــاهرة,wikidataId/Q30805
 الإسكندرية,wikidataId/Q29943
+الأسكندرية,wikidataId/Q29943
+بورسعيد,wikidataId/Q31079
+بور سعيد,wikidataId/Q31079
+بـورسعيـد,wikidataId/Q31079
 بورسعيـــــد,wikidataId/Q31079
+السويس,wikidataId/Q31070
+السويـس,wikidataId/Q31070
 السويــــــس,wikidataId/Q31070
+دمياط,wikidataId/Q30644
+دميـاط,wikidataId/Q30644
 دميـــــــــاط,wikidataId/Q30644
+الدقهلية,wikidataId/Q31068
 الدقهلـــــية,wikidataId/Q31068
+الشرقية,wikidataId/Q31074
 الشرقيــــــة,wikidataId/Q31074
+القليوبية,wikidataId/Q31075
 القليوبيـــــة,wikidataId/Q31075
+كفر الشيخ,wikidataId/Q30946
+كفرالشيخ,wikidataId/Q30946
 كفر الشيــــخ,wikidataId/Q30946
+الغربية,wikidataId/Q30835
+الغربيـة,wikidataId/Q30835
 الغربيــــــــة,wikidataId/Q30835
+المنوفية,wikidataId/Q30786
+المنوفيـة,wikidataId/Q30786
 المنوفيــــــــة,wikidataId/Q30786
+البحيرة,wikidataId/Q30630
+البحيـرة,wikidataId/Q30630
 البحـــــــــيرة,wikidataId/Q30630
+الإسماعيلية,wikidataId/Q31067
 الإسماعيلـــية,wikidataId/Q31067
+الجيزة,wikidataId/Q30832
 الجيــــــــــزة,wikidataId/Q30832
 بني سويف,wikidataId/Q30683
+بنى سويف,wikidataId/Q30683
 الفيوم,wikidataId/Q30656
+الفيـوم,wikidataId/Q30656
 المنيا,wikidataId/Q30675
+أسيوط,wikidataId/Q29965
 اسيوط,wikidataId/Q29965
 سوهاج,wikidataId/Q30669
 قنا,wikidataId/Q31065
-اسوان,wikidataId/Q29937
-الأقصر,wikidataId/Q30797
-البحر الأحمر,wikidataId/Q30831
-الوادي الجديد,wikidataId/Q30650
-مطروح,wikidataId/Q30682
-شمال سيناء,wikidataId/Q30662
-جنوب سيناء,wikidataId/Q30815
-مصر,country/EGY
-القاهـرة,wikidataId/Q30805
-الأسكندرية,wikidataId/Q29943
-بـورسعيـد,wikidataId/Q31079
-السويـس,wikidataId/Q31070
-دميـاط,wikidataId/Q30644
-الدقهلية,wikidataId/Q31068
-الشرقية,wikidataId/Q31074
-القليوبية,wikidataId/Q31075
-كفرالشيخ,wikidataId/Q30946
-الغربيـة,wikidataId/Q30835
-المنوفيـة,wikidataId/Q30786
-البحيـرة,wikidataId/Q30630
-الإسماعيلية,wikidataId/Q31067
-الجيزة,wikidataId/Q30832
-بنى سويف,wikidataId/Q30683
-الفيـوم,wikidataId/Q30656
-أسيوط,wikidataId/Q29965
 قنــا,wikidataId/Q31065
 أسوان,wikidataId/Q29937
+اسوان,wikidataId/Q29937
+الأقصر,wikidataId/Q30797
 الأقصـر,wikidataId/Q30797
+البحر الأحمر,wikidataId/Q30831
 البحر الحمر,wikidataId/Q30831
+الوادي الجديد,wikidataId/Q30650
 الوادى الجديد,wikidataId/Q30650
+مطروح,wikidataId/Q30682
 مطروح (1),wikidataId/Q30682
+شمال سيناء,wikidataId/Q30662
 شمال سينـاء (2),wikidataId/Q30662
+جنوب سيناء,wikidataId/Q30815
 جنـوب سينـاء,wikidataId/Q30815

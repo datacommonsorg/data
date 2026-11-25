@@ -1,0 +1,9 @@
+key,prop,val,p1,v1
+TIME_PERIOD,#Regex,(?P<Year>[0-9]{4}),observationDate,{@Year}
+TIME_PERIOD:Q1,observationDate,{@Year}-03,,
+TIME_PERIOD:Q2,observationDate,{@Year}-06,,
+TIME_PERIOD:Q3,observationDate,{@Year}-09,,
+TIME_PERIOD:Q4,observationDate,{@Year}-12,,
+OBS_VALUE,value,{Number},#Format,"Comma=,"
+FREQ:A,observationPeriod,P1Y,,
+FREQ:Q,observationPeriod,P3M,,

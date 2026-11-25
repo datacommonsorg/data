@@ -1,9 +1,9 @@
 observationAbout,observationDate,variableMeasured,value,unit,scalingFactor,observationPeriod
-country/EGY,2014,dcid:Count_HealthEstablishment_Employed_HealthFacility,471,,,P1Y
-country/EGY,2014,dcid:Count_Person_Employed_Male_DoctorOccupation,2490,,,P1Y
-country/EGY,2014,dcid:Count_Person_Employed_Female_DoctorOccupation,880,,,P1Y
-country/EGY,2014,dcid:Count_Person_Employed_Male_NurseOccupation,319,,,P1Y
-country/EGY,2014,dcid:Count_Person_Employed_Female_NurseOccupation,1111,,,P1Y
+country/EGY,2014,dcid:Count_HealthEstablishment_HealthFacility,471,,,P1Y
+country/EGY,2014,dcid:Count_Person_Male_DoctorOccupation,2490,,,P1Y
+country/EGY,2014,dcid:Count_Person_Female_DoctorOccupation,880,,,P1Y
+country/EGY,2014,dcid:Count_Person_Male_NurseOccupation,319,,,P1Y
+country/EGY,2014,dcid:Count_Person_Female_NurseOccupation,1111,,,P1Y
 country/EGY,2014,dcid:Count_HealthEstablishment_PrivatelyOwnedOrGovernmentOwnedEstablishment_HealthFacility,17,,,P1Y
 country/EGY,2014,dcid:Count_Person_PrivatelyOwnedOrGovernmentOwnedEstablishment_Male_DoctorOccupation,54,,,P1Y
 country/EGY,2014,dcid:Count_Person_PrivatelyOwnedOrGovernmentOwnedEstablishment_Female_DoctorOccupation,25,,,P1Y

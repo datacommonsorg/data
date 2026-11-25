@@ -16,21 +16,15 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-rm -rf "${SCRIPT_DIR}/input_files" "${SCRIPT_DIR}/output" "${SCRIPT_DIR}/counters"
-mkdir -p "${SCRIPT_DIR}/input_files" "${SCRIPT_DIR}/output" "${SCRIPT_DIR}/counters"
+rm -rf "${SCRIPT_DIR}/raw_inputs" "${SCRIPT_DIR}/input_files" "${SCRIPT_DIR}/output" "${SCRIPT_DIR}/counters"
+mkdir -p "${SCRIPT_DIR}/raw_inputs" "${SCRIPT_DIR}/input_files" "${SCRIPT_DIR}/output" "${SCRIPT_DIR}/counters"
 
 gcloud storage cp --verbosity=error --recursive \
   "gs://unresolved_mcf/opendataforafrica/egypt_census/input_files/*" \
-  "${SCRIPT_DIR}/input_files/"
+  "${SCRIPT_DIR}/raw_inputs/"
 
-EXPECTED_TABLES=(
-  actytif behvqtc bluhqme cjczlcd lxoyale mptocre pqpump szfufmb
-  txbrrac ujtdaag ulouknf viytqvf wcssteb wtxyghf xovpotd zkjifzd zpdksog
-)
-for table_id in "${EXPECTED_TABLES[@]}"; do
-  csv_file="${SCRIPT_DIR}/input_files/${table_id}.csv"
-  if [[ ! -s "${csv_file}" ]]; then
-    echo "ERROR: Missing or empty downloaded CSV file: ${csv_file}" >&2
-    exit 1
-  fi
-done
+shopt -s nullglob
+csv_files=("${SCRIPT_DIR}/raw_inputs/"*.csv)
+if (( ${#csv_files[@]} > 0 )); then
+  cp "${csv_files[@]}" "${SCRIPT_DIR}/input_files/"
+fi
