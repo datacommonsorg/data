@@ -28,6 +28,7 @@ from download_input_data import get_template_map
 from download_input_data import load_template_from_gcs
 from download_input_data import make_request
 from download_input_data import map_units_to_regions
+from download_input_data import parse_retry_after_seconds
 
 
 class DownloadInputDataTest(unittest.TestCase):
@@ -137,7 +138,39 @@ class DownloadInputDataTest(unittest.TestCase):
         self.assertIsNotNone(session)
         adapter = session.adapters['https://']
         self.assertEqual(adapter.max_retries.total, 3)
-        self.assertTrue(adapter.max_retries.respect_retry_after_header)
+        self.assertFalse(adapter.max_retries.respect_retry_after_header)
+        self.assertNotIn(429, adapter.max_retries.status_forcelist)
+
+    def test_parse_polish_retry_after_and_429_recovery(self):
+        self.assertEqual(parse_retry_after_seconds('456 sek'), 457.0)
+        self.assertEqual(parse_retry_after_seconds('30 sek.'), 31.0)
+        self.assertEqual(parse_retry_after_seconds('12'), 13.0)
+        self.assertEqual(parse_retry_after_seconds('', default_seconds=7.5),
+                         7.5)
+        self.assertEqual(
+            parse_retry_after_seconds('99999 sek', max_seconds=1200.0), 1200.0)
+
+        session = MagicMock()
+        r_429 = requests.Response()
+        r_429.status_code = 429
+        r_429.headers['Retry-After'] = '456 sek'
+
+        r_200 = requests.Response()
+        r_200.status_code = 200
+        r_200._content = b'{"results": []}'
+        session.get.side_effect = [r_429, r_200]
+
+        slept = []
+        with self.assertLogs(level='WARNING') as cm:
+            resp = make_request(
+                session,
+                'https://bdl.stat.gov.pl/api/v1/data/by-unit/000000000000',
+                sleep_fn=slept.append,
+            )
+        self.assertIsNotNone(resp)
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(slept, [457.0])
+        self.assertTrue(any('456 sek' in line for line in cm.output))
 
     def test_stems_definitions(self):
         self.assertEqual(AGE_STEMS['0-2'], '0-2')

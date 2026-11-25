@@ -1,4 +1,6 @@
 from datetime import datetime
+from datetime import timezone
+from email.utils import parsedate_to_datetime
 import io
 import logging
 import os
@@ -26,6 +28,7 @@ GCS_TEMPLATE_PATH = os.environ.get("BDL_GCS_TEMPLATE_PATH", "").strip()
 API_BASE_URL = "https://bdl.stat.gov.pl/api/v1"
 SUBJECT_ID = "P3447"
 VAR_BATCH_SIZE = 50
+REQUEST_DELAY_SECS = 0.25
 
 CANONICAL_REGIONS = [
     ('0', 'POLAND'),
@@ -237,17 +240,62 @@ def map_units_to_regions(units, region_map):
     return mapped_units
 
 
+def parse_retry_after_seconds(header_value,
+                              default_seconds=10.0,
+                              max_seconds=1200.0):
+    """Parses RFC and GUS BDL Polish Retry-After headers (e.g. '456 sek')."""
+    raw = str(header_value or "").strip()
+    if not raw:
+        return min(max(1.0, float(default_seconds)), max_seconds)
+
+    direct_match = re.match(
+        r'^\s*(\d+(?:\.\d+)?)\s*(?:s|sec|secs|second|seconds|sek\.?|sekund|sekundy)?\s*$',
+        raw,
+        flags=re.IGNORECASE,
+    )
+    if direct_match:
+        seconds = float(direct_match.group(1)) + 1.0
+        return min(max(1.0, seconds), max_seconds)
+
+    try:
+        retry_dt = parsedate_to_datetime(raw)
+        if retry_dt is not None:
+            if retry_dt.tzinfo is None:
+                retry_dt = retry_dt.replace(tzinfo=timezone.utc)
+            delta = (retry_dt -
+                     datetime.now(timezone.utc)).total_seconds() + 1.0
+            return min(max(1.0, delta), max_seconds)
+    except (TypeError, ValueError, OverflowError):
+        pass
+
+    embedded_match = re.search(
+        r'(\d+(?:\.\d+)?)\s*(?:sek\.?|sekund|sekundy|sec|secs|seconds)\b',
+        raw,
+        flags=re.IGNORECASE,
+    )
+    if embedded_match:
+        seconds = float(embedded_match.group(1)) + 1.0
+        return min(max(1.0, seconds), max_seconds)
+
+    return min(max(1.0, float(default_seconds)), max_seconds)
+
+
 def get_http_session(retries=10, backoff_factor=1.5):
-    """Creates a requests session with automatic HTTP retries and backoff."""
+    """Creates a requests session with automatic HTTP 5xx/network retries.
+
+    Note: respect_retry_after_header MUST be False and HTTP 429 is handled in
+    make_request(), because GUS BDL returns Polish 'Retry-After: <N> sek'
+    headers that cause urllib3 Retry.parse_retry_after() to raise InvalidHeader.
+    """
     session = requests.Session()
     retry_strategy = Retry(total=retries,
                            connect=retries,
                            read=retries,
                            status=retries,
                            backoff_factor=backoff_factor,
-                           status_forcelist=[429, 500, 502, 503, 504],
+                           status_forcelist=[500, 502, 503, 504],
                            allowed_methods=["GET"],
-                           respect_retry_after_header=True,
+                           respect_retry_after_header=False,
                            raise_on_status=False)
     adapter = HTTPAdapter(max_retries=retry_strategy)
     session.mount("https://", adapter)
@@ -255,18 +303,49 @@ def get_http_session(retries=10, backoff_factor=1.5):
     return session
 
 
-def make_request(session, url, headers=None, params=None, timeout=60):
-    """Makes an HTTP GET request using configured retry strategy and outbound logging."""
-    try:
-        sanitized_headers = dict(headers) if headers else {}
-        if 'X-ClientId' in sanitized_headers:
-            sanitized_headers['X-ClientId'] = '***REDACTED***'
-        logging.info(
-            f"HTTP GET {url} params={params} headers={sanitized_headers}")
-        return session.get(url, headers=headers, params=params, timeout=timeout)
-    except Exception as e:  # pylint: disable=broad-exception-caught
-        logging.error(f"HTTP GET failed for {url}: {e}")
-        return None
+def make_request(session,
+                 url,
+                 headers=None,
+                 params=None,
+                 timeout=60,
+                 max_429_retries=6,
+                 sleep_fn=time.sleep):
+    """Makes an HTTP GET request with outbound logging and Polish 429 Retry-After support."""
+    sanitized_headers = dict(headers) if headers else {}
+    if 'X-ClientId' in sanitized_headers:
+        sanitized_headers['X-ClientId'] = '***REDACTED***'
+
+    for attempt in range(max_429_retries + 1):
+        try:
+            logging.info(
+                f"HTTP GET {url} params={params} headers={sanitized_headers}")
+            resp = session.get(url,
+                               headers=headers,
+                               params=params,
+                               timeout=timeout)
+        except Exception as e:  # pylint: disable=broad-exception-caught
+            logging.error(f"HTTP GET failed for {url}: {e}")
+            return None
+
+        if resp.status_code != 429 or attempt == max_429_retries:
+            return resp
+
+        retry_after_raw = (resp.headers or {}).get("Retry-After", "")
+        fallback_backoff = min(120.0, 5.0 * (2**attempt))
+        wait_secs = parse_retry_after_seconds(retry_after_raw,
+                                              default_seconds=fallback_backoff)
+        logging.warning(
+            "HTTP 429 rate-limited on %s (Retry-After=%r); sleeping %.1fs "
+            "before retry %d/%d...",
+            url,
+            retry_after_raw,
+            wait_secs,
+            attempt + 1,
+            max_429_retries,
+        )
+        sleep_fn(wait_secs)
+
+    return None
 
 
 def fetch_variables(session, headers=None):
@@ -301,8 +380,10 @@ def fetch_variables(session, headers=None):
 
         if len(results) < 100 and not (data.get('links') or {}).get('next'):
             break
+        time.sleep(REQUEST_DELAY_SECS)
         page += 1
 
+    time.sleep(REQUEST_DELAY_SECS)
     logging.info(f"Indexed {len(v_map)} variables.")
     return v_map
 
@@ -513,6 +594,7 @@ def download_and_process():
     units = fetch_units(session, headers=headers)
     if not units:
         raise ValueError("Territorial units failed to download.")
+    time.sleep(REQUEST_DELAY_SECS)
 
     mapped_units = map_units_to_regions(units, region_map)
 
@@ -538,7 +620,7 @@ def download_and_process():
                 headers=headers,
             )
             master_data.extend(batch_records)
-            time.sleep(0.1)
+            time.sleep(REQUEST_DELAY_SECS)
 
     if not master_data:
         raise ValueError("No data collected during the download loop.")
