@@ -17,9 +17,9 @@ repository contracts and instructions take precedence.
   data in GCS for debugging and source attribution. In addition (not as a
   replacement for raw source files), include intermediate or partially
   transformed script outputs (e.g., `staged_inputs/*`) and operational
-  artifacts (e.g., counter files from `--output_counters`, `manifest.json`, or
-  configs) in `source_files` or `import_inputs` for troubleshooting; do not
-  confuse source artifacts with import inputs.
+  artifacts (e.g., counter files from `--output_counters` or configs) in
+  `source_files` or `import_inputs` for troubleshooting; do not confuse source
+  artifacts with import inputs.
 - Add `cron_schedule`, `user_script_timeout`, and `resource_limits` only when
   the import needs scheduling or an override, and validate them when present.
 - Semi-automated imports run on their `cron_schedule` like other auto-refresh
@@ -222,13 +222,13 @@ Then apply these rules:
   deletions, but are not mandatory; if golden files are provided, verify that
   they adhere to the rules in "Golden files" below.
 - Place and schema imports must not silently delete entities: require a
-  0-deletion validation override (e.g., `DELETED_ENTITY_COUNT` with threshold
-  `0`, overriding the `0.1%` observation default) alongside a `GOLDENS_CHECK`
-  rule in `validation_config.json` with a sample of place/schema nodes and
-  properties, since the default `DELETED_RECORDS_PERCENT` checks only
-  observation deletion counts. If the script cannot automatically retain
-  entities dropped by the source, require `README.md` to document the manual
-  carry-forward and resume steps.
+  separate `DELETED_ENTITY_COUNT` validator with threshold `0` alongside a
+  `GOLDENS_CHECK` rule in `validation_config.json` with a sample of place/schema
+  nodes and properties, since `DELETED_RECORDS_PERCENT` checks only observation
+  deletion counts (defaulting to `0.1%`) while `DELETED_ENTITY_COUNT` runs in
+  parallel to check non-observation entity deletions. If the script cannot
+  automatically retain entities dropped by the source, require `README.md` to
+  document the manual carry-forward and resume steps.
 
 ### Golden files (`golden_data/`)
 
@@ -353,10 +353,11 @@ Then apply these rules:
   500 KB) and under 100 rows; never check in full raw downloads or
   multi-megabyte production dumps as test fixtures (for golden files, see
   "Golden files").
-- Include a small raw sample of downloaded source data (e.g., raw JSON or CSV
-  with all columns) and representative test inputs and outputs covering every
-  place type produced by the import to verify place-code mappings and confirm
-  no unresolved or missing place references in the final output.
+- Include a small raw sample of downloaded source data, such as raw JSON or CSV
+  with all columns, keeping it within the fixture size limits above—target
+  < 100 KB and under 100 rows—along with representative test inputs and outputs
+  covering every place type produced by the import to verify place-code mappings
+  and confirm no unresolved or missing place references in the final output.
 - [rule-svp-unit-tests] For imports using `stat_var_processor`, ensure
   `test_data/` fixtures with sample inputs and expected outputs exist. Each
   input must have the same format as the files the import passes to
