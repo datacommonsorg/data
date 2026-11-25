@@ -28,10 +28,14 @@ from retry import retry
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_boolean('ap', False, 'Download Advanced Placement data only.')
-flags.DEFINE_boolean('ib', False,
-                     'Download International Baccalaureate data only.')
-flags.DEFINE_boolean('gt', False, 'Download Gifted and Talented data only.')
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_boolean('ap', False, 'Download Advanced Placement data only.')
+    flags.DEFINE_boolean('ib', False,
+                         'Download International Baccalaureate data only.')
+    flags.DEFINE_boolean('gt', False, 'Download Gifted and Talented data only.')
+
 
 BASE_URL_TEMPLATE = "https://civilrightsdata.ed.gov/assets/ocr/docs/{}.zip"
 
@@ -441,4 +445,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

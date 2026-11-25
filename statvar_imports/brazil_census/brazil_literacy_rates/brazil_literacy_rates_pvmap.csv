@@ -1,0 +1,7 @@
+key,prop,val,p1,v1
+observationDate,observationDate,{Number},observationPeriod,P1Y
+observationAbout,observationAbout,{Data},,
+value,value,{Number},,
+unit,unit,{Data},,
+scalingFactor,scalingFactor,{Number},,
+variableMeasured,variableMeasured,{Data},,

@@ -207,8 +207,9 @@ Then apply these rules:
 - Golden files may accompany higher deletion thresholds to validate expected
   deletions, but are not mandatory; if golden files are provided, verify that
   they adhere to the rules in "Golden files" below.
-- For place imports, suggest adding a `GOLDENS_CHECK` rule in
-  `validation_config.json` with a sample of place nodes and properties, since
+- For place imports, suggest adding a `DELETED_ENTITY_COUNT` rule (to catch
+  deleted place entities) and a `GOLDENS_CHECK` rule in `validation_config.json`
+  with a sample of place nodes and properties, since the default
   `DELETED_RECORDS_PERCENT` checks only observation deletion counts.
 
 ### Golden files (`golden_data/`)
