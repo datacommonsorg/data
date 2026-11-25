@@ -316,6 +316,34 @@ dcs:Area_Farm_WheatForGrain,2024,dcid:geoId/45001,5000,dcs:Acre
             self.assertEqual(len(rows), 1)
             self.assertEqual(rows[0]['observationAbout'], 'dcid:geoId/45001')
 
+    @mock.patch.object(process.time, 'sleep')
+    @mock.patch.object(process, 'get_data')
+    @mock.patch.object(process, 'get_usda_api_key', return_value='mock-api-key')
+    def test_stale_response_jsons_cleaned_before_download_run(
+            self, mock_key, mock_get_data, mock_sleep):
+        """Tests that prior-run response JSONs are cleared so Pass 2 retries API instead of reading stale cache."""
+        mock_get_data.side_effect = requests.exceptions.RequestException(
+            '504 Gateway Timeout')
+        svs = load_svs()
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            in_dir = os.path.join(tmpdir, 'input')
+            out_dir = os.path.join(tmpdir, 'output')
+            resp_dir = process.get_response_dir(in_dir, 2024)
+            os.makedirs(resp_dir, exist_ok=True)
+            with open(os.path.join(resp_dir, 'NH.json'), 'w') as f:
+                json.dump(self.mock_api_data, f)
+            with open(os.path.join(resp_dir, 'ORPHAN.json'), 'w') as f:
+                json.dump(self.mock_api_data, f)
+
+            with self.assertRaises(RuntimeError):
+                process_survey_data(2024, svs, in_dir, out_dir, states=['NH'])
+
+            self.assertFalse(os.path.exists(os.path.join(resp_dir, 'NH.json')))
+            self.assertFalse(
+                os.path.exists(os.path.join(resp_dir, 'ORPHAN.json')))
+            self.assertEqual(mock_get_data.call_count, 2)
+
     def test_http_session_reused_within_process_and_reset_on_fork(self):
         """Tests fork-safe per-PID requests.Session caching."""
         s1 = process._get_http_session()

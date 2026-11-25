@@ -252,19 +252,25 @@ def process_survey_data(year, svs, input_dir, out_dir, states=None, mode=None):
     logging.info(f'Start, {year}, =, {start}')
     try:
         logging.info(f"start processing data for the year : {year}")
+        if mode is None:
+            mode = _get_mode()
+
         parts_dir = get_parts_dir(input_dir, year)
         if os.path.exists(parts_dir):
             for fname in os.listdir(parts_dir):
                 if fname.endswith('.csv') or fname.endswith('.tmp'):
                     os.remove(os.path.join(parts_dir, fname))
         os.makedirs(parts_dir, exist_ok=True)
-        os.makedirs(get_response_dir(input_dir, year), exist_ok=True)
+
+        response_dir = get_response_dir(input_dir, year)
+        if mode in ("", "download") and os.path.exists(response_dir):
+            for fname in os.listdir(response_dir):
+                if fname.endswith('.json') or fname.endswith('.tmp'):
+                    os.remove(os.path.join(response_dir, fname))
+        os.makedirs(response_dir, exist_ok=True)
         os.makedirs(out_dir, exist_ok=True)
 
-        if mode is None:
-            mode = _get_mode()
         if mode in ("", "download", "process"):
-            response_dir = get_response_dir(input_dir, year)
             if mode == "process":
                 if os.path.exists(response_dir):
                     partitions = sorted(
