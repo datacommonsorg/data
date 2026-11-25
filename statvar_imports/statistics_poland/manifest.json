@@ -19,7 +19,8 @@
             "import_inputs": [
                 {
                     "template_mcf": "StatisticsPoland_output.tmcf",
-                    "cleaned_csv": "StatisticsPoland_output.csv"
+                    "cleaned_csv": "StatisticsPoland_output.csv",
+                    "node_mcf": "*.mcf"
                 }
             ],
             "cron_schedule": "30 11 * * 3",
