@@ -162,6 +162,40 @@ class DownloadTest(unittest.TestCase):
             with self.assertRaises(KeyError):
                 download.preprocess_csv(in_csv, out_csv)
 
+    def test_preprocess_csv_raises_on_zero_valid_rows(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            in_csv = os.path.join(tmpdir, "export.csv")
+            out_csv = os.path.join(tmpdir, "NNDSS_Weekly_Data.csv")
+            pd.DataFrame([
+                {
+                    "Reporting Area": "ALABAMA",
+                    "Current MMWR Year": "2021",
+                    "MMWR WEEK": "52",
+                    "Label": "Campylobacteriosis",
+                    "Current week": "12",
+                    "Current week, flag": "-",
+                },
+            ]).to_csv(in_csv, index=False)
+            with self.assertRaises(ValueError) as ctx:
+                download.preprocess_csv(in_csv, out_csv)
+            self.assertIn(in_csv, str(ctx.exception))
+            self.assertIn("2022", str(ctx.exception))
+            self.assertFalse(os.path.exists(out_csv))
+
+    def test_preprocess_csv_raises_on_malformed_csv_row(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            in_csv = os.path.join(tmpdir, "export.csv")
+            out_csv = os.path.join(tmpdir, "NNDSS_Weekly_Data.csv")
+            with open(in_csv, "w", encoding="utf-8") as f:
+                f.write(
+                    "Reporting Area,Current MMWR Year,MMWR WEEK,Label,Current week\n"
+                    "ALABAMA,2022,10,Anthrax,5\n"
+                    "BAD,2022,10,Anthrax,5,EXTRA_COL_1,EXTRA_COL_2\n")
+            with self.assertRaises(ValueError) as ctx:
+                download.preprocess_csv(in_csv, out_csv)
+            self.assertIn("malformed", str(ctx.exception))
+            self.assertFalse(os.path.exists(out_csv))
+
     def test_normalize_output_files(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             csv_path = os.path.join(tmpdir, "nndss_weekly_output.csv")
@@ -185,6 +219,24 @@ class DownloadTest(unittest.TestCase):
                 "observationPeriod: C:nndss_weekly_output->observationPeriod",
                 tmcf_text,
             )
+
+    def test_normalize_output_files_raises_on_empty_or_zero_row_csv(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            csv_path = os.path.join(tmpdir, "nndss_weekly_output.csv")
+            tmcf_path = os.path.join(tmpdir, "nndss_weekly_output.tmcf")
+            with open(tmcf_path, "w", encoding="utf-8") as f:
+                f.write("Node: E:nndss_weekly_output->E0\n")
+
+            with open(csv_path, "w", encoding="utf-8") as f:
+                f.write("\n")
+            with self.assertRaises(ValueError):
+                download.normalize_output_files(output_dir=tmpdir)
+
+            with open(csv_path, "w", encoding="utf-8") as f:
+                f.write(
+                    "observationDate,observationAbout,value,variableMeasured\n")
+            with self.assertRaises(ValueError):
+                download.normalize_output_files(output_dir=tmpdir)
 
     def _run_download_source_csv(self, fake_download_file):
         fake_mod = types.ModuleType("download_util_script")

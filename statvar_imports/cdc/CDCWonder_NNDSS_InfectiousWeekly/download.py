@@ -285,10 +285,19 @@ def preprocess_csv(
         } for k in both_ny_keys]
         chunks.append(pd.DataFrame(ny_rows, columns=OUTPUT_COLUMNS))
 
-    out_df = (pd.concat(chunks, ignore_index=True) if chunks else pd.DataFrame(
-        columns=OUTPUT_COLUMNS))
-    if bad_lines_count:
-        logging.warning(f"Skipped {bad_lines_count} malformed CSV rows.")
+    if bad_lines_count > 0:
+        raise ValueError(
+            f"Encountered {bad_lines_count} malformed CSV rows in {filepath} "
+            f"(min_year={min_year}).")
+    if not chunks:
+        raise ValueError(
+            f"No valid rows with Current MMWR Year >= {min_year} found in "
+            f"{filepath} (bad_lines_count={bad_lines_count}).")
+    out_df = pd.concat(chunks, ignore_index=True)
+    if out_df.empty:
+        raise ValueError(
+            f"Preprocessed output is empty for {filepath} "
+            f"(min_year={min_year}, bad_lines_count={bad_lines_count}).")
     tmp_out = f"{out_filepath}.tmp"
     out_df.to_csv(tmp_out, index=False)
     os.replace(tmp_out, out_filepath)
@@ -327,20 +336,41 @@ def normalize_output_files(
     csv_path = os.path.join(output_dir, f"{prefix}.csv")
     tmcf_path = os.path.join(output_dir, f"{prefix}.tmcf")
 
+    required_cols = {
+        "observationDate",
+        "observationAbout",
+        "value",
+        "variableMeasured",
+    }
     tmp_csv = f"{csv_path}.tmp"
     with open(csv_path, "r", encoding="utf-8", newline="") as src:
         reader = csv.reader(src)
-        header = next(reader)
+        header = next(reader, None)
+        if not header or not required_cols.issubset(set(header)):
+            raise ValueError(
+                f"Output CSV {csv_path} is empty or missing required columns "
+                f"{sorted(required_cols)}: header={header}")
         if "observationPeriod" not in header:
+            row_count = 0
             with open(tmp_csv, "w", encoding="utf-8", newline="") as dst:
                 writer = csv.writer(dst)
                 writer.writerow(header + ["observationPeriod"])
                 for row in reader:
                     writer.writerow(row + ["P1W"])
+                    row_count += 1
+            if row_count == 0:
+                os.remove(tmp_csv)
+                raise ValueError(
+                    f"Output CSV {csv_path} contains 0 observation rows.")
             os.replace(tmp_csv, csv_path)
+        elif next(reader, None) is None:
+            raise ValueError(
+                f"Output CSV {csv_path} contains 0 observation rows.")
 
     with open(tmcf_path, "r", encoding="utf-8") as f:
         lines = f.readlines()
+    if not [line.strip() for line in lines if line.strip()]:
+        raise ValueError(f"Output TMCF {tmcf_path} is empty.")
     new_lines = []
     found_period = False
     for line in lines:
