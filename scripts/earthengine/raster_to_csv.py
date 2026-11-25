@@ -603,7 +603,7 @@ def write_data_csv(
         output_date = config.get('output_date', None)
         precision_digits = config.get('output_precision', 6)
         counter.set_counter('total_points', len(data_points))
-        for key, data in data_points.items():
+        for _key, data in data_points.items():
             # Limit decimals for lat/lng
             for col, val in data.items():
                 data[col] = utils.str_format_float(val, precision_digits)

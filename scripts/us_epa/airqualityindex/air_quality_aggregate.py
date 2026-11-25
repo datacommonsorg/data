@@ -138,7 +138,7 @@ def download_url(_INPUT_FILE_PATH, start_year, end_year, CSV_URLS):
         for file_name in file_names:
             logging.info(f'Processing file: {file_name}')
 
-            for series_name, url in CSV_URLS.items():
+            for _series_name, url in CSV_URLS.items():
                 #Retry method is calling
                 url = f"{url}{file_name}.zip"
                 logging.info(f'============url {url}')

@@ -106,7 +106,7 @@ class GeojsonDownloader:
         assert len(geolevel_values) == 1
         geolevel = geolevel_values[0]
 
-        for i in range(level):
+        for _ in range(level):
             if geolevel not in self.LEVEL_MAP:
                 raise ValueError("Desired level does not exist.")
             geolevel = self.LEVEL_MAP[geolevel]

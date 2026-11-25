@@ -285,7 +285,7 @@ def process_all_dataflows_in_structure_message(sm: Any) -> MultiDataflowOutput:
     try:
         dataflows = []
 
-        for dataflow_id, dataflow_obj in sm.dataflow.items():
+        for _dataflow_id, dataflow_obj in sm.dataflow.items():
             dsd_obj = dataflow_obj.structure
 
             # Populate DataflowArtefactAttributes

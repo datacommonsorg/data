@@ -405,7 +405,7 @@ class GenerateColMapBase:
         # The current implementation of the function removes the statVar node for the base class and keeps the specialization, which is not the desired output
         # In the above example if both 6 to 18 years and Under 19 years appear as tokens in the column name, we remove Under 19 years from the column name and not remove the StatVarNode which describes the population  Under 19 years.
         column_map = self.column_map.copy()
-        for column_name, stat_var in column_map.items():
+        for column_name, _stat_var in column_map.items():
             part_list = column_name.split(self.delimiter)
             ## The assumption of using the last token of the column as the specialization holds for ACS Subject tables.
             # TODO: This assumption might break for other tables, we might need to thing of removing this assumption
