@@ -31,10 +31,6 @@ if _REPO_ROOT not in sys.path:
 
 from statvar_imports.australia_statistics import process
 
-for _flag_name in ('input_data', 'output_csv'):
-    if _flag_name in process._FLAGS:
-        delattr(process._FLAGS, _flag_name)
-
 
 class _FakeXlrdSheet:
     """Minimal in-memory xlrd Sheet double for unit testing .xls parsers."""

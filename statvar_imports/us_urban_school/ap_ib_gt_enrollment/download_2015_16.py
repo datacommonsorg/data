@@ -18,6 +18,7 @@ import zipfile
 from absl import app
 from absl import flags
 from absl import logging
+import download_ap_ib_gt
 from download_ap_ib_gt import BASE_URL_TEMPLATE
 
 # reusing configs from the main script
@@ -159,4 +160,6 @@ def main(_):
 
 
 if __name__ == '__main__':
+    # Accept --ap, --ib and --gt, which are defined by download_ap_ib_gt.
+    download_ap_ib_gt._define_flags()
     app.run(main)

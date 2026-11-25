@@ -31,17 +31,22 @@ import xlrd
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 _FLAGS = flags.FLAGS
-flags.DEFINE_string(
-    'input_data',
-    os.path.join(_MODULE_DIR, 'input_files/*'),
-    'Comma-separated list or glob pattern of raw ABS input files.',
-)
-flags.DEFINE_string(
-    'output_csv',
-    os.path.join(_MODULE_DIR,
-                 'staged_files/australia_statistics_staged_input.csv'),
-    'Output path for the unified staged CSV file.',
-)
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        'input_data',
+        os.path.join(_MODULE_DIR, 'input_files/*'),
+        'Comma-separated list or glob pattern of raw ABS input files.',
+    )
+    flags.DEFINE_string(
+        'output_csv',
+        os.path.join(_MODULE_DIR,
+                     'staged_files/australia_statistics_staged_input.csv'),
+        'Output path for the unified staged CSV file.',
+    )
+
 
 CSV_HEADER = [
     'observationDate',
@@ -780,13 +785,13 @@ def _collect_staged_rows(raw_files: list[str]) -> list[dict[str, str]]:
     return rows
 
 
-def _run_pipeline() -> None:
-    raw_files = _expand_input_files(_FLAGS.input_data)
+def _run_pipeline(input_data: str, output_csv: str) -> None:
+    raw_files = _expand_input_files(input_data)
     if not raw_files:
-        raise RuntimeError(f'No input files matched: {_FLAGS.input_data}')
+        raise RuntimeError(f'No input files matched: {input_data}')
 
     rows = _collect_staged_rows(raw_files)
-    output_csv = os.path.abspath(_FLAGS.output_csv)
+    output_csv = os.path.abspath(output_csv)
     _write_staged_csv(output_csv, rows)
     logging.info('Staged %d rows from %d input files into %s', len(rows),
                  len(raw_files), output_csv)
@@ -794,11 +799,12 @@ def _run_pipeline() -> None:
 
 def main(_) -> None:
     try:
-        _run_pipeline()
+        _run_pipeline(_FLAGS.input_data, _FLAGS.output_csv)
     except Exception as e:
         logging.error('%s', e, exc_info=True)
         raise
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)
