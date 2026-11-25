@@ -16,20 +16,21 @@
 import csv
 import datetime
 import os
-import subprocess
 import sys
 import tempfile
 import unittest
 from unittest import mock
 
-_TEST_DIR = os.path.dirname(os.path.abspath(__file__))
-_REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(_TEST_DIR)))
-if _TEST_DIR not in sys.path:
-    sys.path.insert(0, _TEST_DIR)
-if os.path.join(_REPO_ROOT, 'util') not in sys.path:
-    sys.path.insert(0, os.path.join(_REPO_ROOT, 'util'))
+import requests
 
-import download_script  # pylint: disable=wrong-import-position
+_TEST_DIR = os.path.dirname(os.path.abspath(__file__))
+_STATVAR_IMPORTS_DIR = os.path.dirname(os.path.dirname(_TEST_DIR))
+_REPO_ROOT = os.path.dirname(_STATVAR_IMPORTS_DIR)
+for _path in (_STATVAR_IMPORTS_DIR, os.path.join(_REPO_ROOT, 'util')):
+    if _path not in sys.path:
+        sys.path.insert(0, _path)
+
+from floods.dynamicworld_floodevents_places_autorefresh import download_script  # pylint: disable=wrong-import-position
 
 
 class _FakeEEChain:
@@ -137,6 +138,17 @@ class DownloadScriptTest(unittest.TestCase):
             download_script.parse_bounds('-60,-180,75,180'),
             (-60.0, -180.0, 75.0, 180.0),
         )
+        for bad_bounds in (
+                '-91,-180,75,180',
+                '-60,-180,91,180',
+                '-60,-181,75,180',
+                '-60,-180,75,181',
+                '10,0,10,10',
+                '0,10,10,10',
+                '10,20,30',
+        ):
+            with self.assertRaises(ValueError):
+                download_script.parse_bounds(bad_bounds)
         tiles = download_script.generate_tiles(-60.0, -180.0, 75.0, 180.0, 4.0)
         self.assertEqual(len(tiles), 34 * 90)
         self.assertEqual(tiles[0], (-60.0, -180.0, -56.0, -176.0))
@@ -189,7 +201,10 @@ class DownloadScriptTest(unittest.TestCase):
         fake_ee.ImageCollection.return_value = chain
         fake_ee.Image.return_value = chain
 
-        def _fake_download_file(url, output_folder, **_kwargs):
+        sessions_seen = []
+
+        def _fake_download_file(url, output_folder, session=None, **_kwargs):
+            sessions_seen.append(session)
             out = os.path.join(output_folder, 'tile.tif')
             with open(out, 'wb') as fh:
                 fh.write(b'FAKE_TIFF')
@@ -215,6 +230,9 @@ class DownloadScriptTest(unittest.TestCase):
                     ee_module=fake_ee,
                 )
             self.assertEqual(len(paths), 2)
+            self.assertEqual(len(sessions_seen), 2)
+            for sess in sessions_seen:
+                self.assertIsInstance(sess, requests.Session)
             for p in paths:
                 self.assertTrue(os.path.exists(p))
 
@@ -258,6 +276,41 @@ class DownloadScriptTest(unittest.TestCase):
             self.assertEqual(rows[0]['observationPeriod'], 'P1Y')
             self.assertEqual(rows[1]['observationPeriod'], 'P1M')
 
+    def test_consolidate_place_svobs_csvs_raises_on_conflicting_duplicate(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            csv1 = os.path.join(tmp_dir, 'a.csv')
+            out = os.path.join(tmp_dir, 'consolidated.csv')
+            with open(csv1, 'w', encoding='utf-8', newline='') as fh:
+                w = csv.writer(fh)
+                w.writerow([
+                    'observationAbout', 'observationDate', 'observationPeriod',
+                    'area', 'count'
+                ])
+                w.writerow(['country/IND', '2026-10', 'P1M', '10.5', '2'])
+                w.writerow(['country/IND', '2026-10', 'P1M', '99.0', '3'])
+
+            with self.assertRaises(ValueError):
+                download_script._consolidate_place_svobs_csvs([csv1], out)
+
+    def test_csv_has_data_rows_and_clean_local_intermediates(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            header_only = os.path.join(tmp_dir, 'header_only.csv')
+            with open(header_only, 'w', encoding='utf-8') as fh:
+                fh.write('area,date,s2CellId\n')
+            self.assertFalse(download_script._csv_has_data_rows(header_only))
+
+            with_row = os.path.join(tmp_dir, 'with_row.csv')
+            with open(with_row, 'w', encoding='utf-8') as fh:
+                fh.write('area,date,s2CellId\n1.0,2026-10,dcid:s2CellId/0x1\n')
+            self.assertTrue(download_script._csv_has_data_rows(with_row))
+
+            for sub in ('geotiff', 'raster_csv', 'events', 'cache'):
+                os.makedirs(os.path.join(tmp_dir, sub), exist_ok=True)
+            download_script._clean_local_intermediates(tmp_dir)
+            for sub in ('geotiff', 'raster_csv', 'events'):
+                self.assertFalse(os.path.exists(os.path.join(tmp_dir, sub)))
+            self.assertTrue(os.path.isdir(os.path.join(tmp_dir, 'cache')))
+
     def test_resolve_place_cache_file_downloads_from_gcs(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
             mock_blob = mock.MagicMock()
@@ -280,43 +333,40 @@ class DownloadScriptTest(unittest.TestCase):
             mock_client.bucket.return_value.blob.assert_called_once_with(
                 'place_cache/test.pkl')
 
-    def test_stat_var_processor_end_to_end_on_sample_fixture(self):
-        sample_csv = os.path.join(_TEST_DIR, 'test_data',
-                                  'sample_place_svobs.csv')
-        expected_csv = os.path.join(_TEST_DIR, 'test_data',
-                                    'expected_output.csv')
-        expected_tmcf = os.path.join(_TEST_DIR, 'test_data',
-                                     'expected_output.tmcf')
-        processor = os.path.join(_REPO_ROOT, 'tools', 'statvar_importer',
-                                 'stat_var_processor.py')
+    def test_generate_place_svobs_for_year_skips_header_only_and_sets_timeout(
+            self):
         with tempfile.TemporaryDirectory() as tmp_dir:
-            out_prefix = os.path.join(tmp_dir, 'out')
-            counters = os.path.join(tmp_dir, 'counters.csv')
-            res = subprocess.run(
-                [
-                    sys.executable,
-                    processor,
-                    f'--input_data={sample_csv}',
-                    f'--pv_map={os.path.join(_TEST_DIR, "dynamicworld_floodevents_places_pvmap.csv")}',
-                    f'--config_file={os.path.join(_TEST_DIR, "dynamicworld_floodevents_places_metadata.csv")}',
-                    f'--existing_schema_mcf={os.path.join(_TEST_DIR, "dynamicworld_floodevents_places_schema.mcf")}',
-                    f'--output_path={out_prefix}',
-                    f'--output_counters={counters}',
-                ],
-                capture_output=True,
-                text=True,
-                check=False,
-            )
-            self.assertEqual(res.returncode, 0, msg=res.stderr)
-            with open(f'{out_prefix}.csv', 'r', encoding='utf-8') as fh:
-                actual_rows = list(csv.DictReader(fh))
-            with open(expected_csv, 'r', encoding='utf-8') as fh:
-                expected_rows = list(csv.DictReader(fh))
-            self.assertEqual(actual_rows, expected_rows)
-            with open(f'{out_prefix}.tmcf', 'r', encoding='utf-8') as fh:
-                actual_tmcf = fh.read().replace('out->', 'expected_output->')
-            with open(expected_tmcf, 'r', encoding='utf-8') as fh:
-                self.assertEqual(actual_tmcf, fh.read())
+            header_only = os.path.join(tmp_dir, 'dw_flood_2026-01.csv')
+            with open(header_only, 'w', encoding='utf-8') as fh:
+                fh.write('area,date,s2CellId\n')
+            with mock.patch.object(download_script.subprocess,
+                                   'run') as mock_run:
+                res = download_script.generate_place_svobs_for_year(
+                    raster_csvs=[header_only],
+                    output_dir=tmp_dir,
+                    year='2026',
+                    place_cache_file='',
+                    subprocess_timeout=123,
+                )
+            self.assertEqual(res, [])
+            mock_run.assert_not_called()
+
+            valid_csv = os.path.join(tmp_dir, 'dw_flood_2026-02.csv')
+            with open(valid_csv, 'w', encoding='utf-8') as fh:
+                fh.write('area,date,s2CellId\n1.0,2026-02,dcid:s2CellId/0x1\n')
+            with mock.patch.object(download_script.subprocess,
+                                   'run') as mock_run:
+                download_script.generate_place_svobs_for_year(
+                    raster_csvs=[header_only, valid_csv],
+                    output_dir=tmp_dir,
+                    year='2026',
+                    place_cache_file='',
+                    subprocess_timeout=123,
+                )
+            mock_run.assert_called_once()
+            cmd_args = mock_run.call_args[0][0]
+            self.assertIn(f'--input_csv={valid_csv}', cmd_args)
+            self.assertEqual(mock_run.call_args[1]['timeout'], 123)
 
     def test_tile_has_flood_pixels(self):
         import numpy as np

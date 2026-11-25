@@ -9,11 +9,11 @@
         },
         {
             "rule_id": "check_flood_data_freshness",
-            "description": "Ensures flood observations cover the current calendar year (or prior year in January).",
+            "description": "Ensures flood observations are fresh within 2 calendar months of the current date (YYYY-MM).",
             "validator": "SQL_VALIDATOR",
             "params": {
                 "query": "SELECT StatVar, MaxDate FROM stats",
-                "condition": "CAST(SUBSTR(CAST(MaxDate AS VARCHAR), 1, 4) AS INTEGER) >= EXTRACT(YEAR FROM (CURRENT_DATE - INTERVAL '1 month'))"
+                "condition": "CAST(SUBSTR(CAST(MaxDate AS VARCHAR), 1, 7) AS VARCHAR) >= strftime(CURRENT_DATE - INTERVAL '2 months', '%Y-%m')"
             }
         }
     ]

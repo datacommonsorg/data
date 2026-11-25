@@ -41,6 +41,7 @@ from absl import flags
 from absl import logging
 import google.auth
 from google.auth.transport.requests import Request as GoogleAuthRequest
+import requests
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 _REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(_SCRIPT_DIR)))
@@ -78,8 +79,11 @@ _PLACE_SVOBS_HEADER = [
     'count',
 ]
 
+_DEFAULT_SUBPROCESS_TIMEOUT_SECS = 3600
+
 _FLAGS = flags.FLAGS
 _EE_INIT_LOCK = threading.Lock()
+_THREAD_LOCAL = threading.local()
 
 
 def _define_flags():
@@ -176,9 +180,21 @@ def _define_flags():
         'Convert downloaded GeoTIFFs locally into S2 cell CSVs and place SVObs CSVs.',
     )
     flags.DEFINE_bool(
-        'skip_existing',
+        'use_gcs_cache',
         True,
-        'Skip downloading GeoTIFF tiles or monthly raster CSVs that already exist.',
+        'Reuse persistent monthly raster CSVs from --cache_dir (gcs_folder) '
+        'and legacy prod GCS bootstrap when running with global default bounds.',
+    )
+    flags.DEFINE_bool(
+        'skip_existing',
+        False,
+        'Reuse existing local intermediate GeoTIFF/raster_csv files in '
+        '--output_dir instead of cleaning them at startup.',
+    )
+    flags.DEFINE_integer(
+        'subprocess_timeout_secs',
+        _DEFAULT_SUBPROCESS_TIMEOUT_SECS,
+        'Timeout in seconds for raster_to_csv.py and process_events.py subprocesses.',
     )
 
 
@@ -243,10 +259,14 @@ def parse_bounds(bounds_str: str) -> Tuple[float, float, float, float]:
         raise ValueError(
             f'Expected "south,west,north,east" bounds, got: {bounds_str!r}')
     south, west, north, east = (float(p) for p in parts)
-    if south >= north or west >= east:
+    if not (-90.0 <= south < north <= 90.0):
         raise ValueError(
-            f'Invalid bounds (require south < north and west < east): {bounds_str!r}'
-        )
+            f'Invalid latitude bounds (require -90 <= south < north <= 90): '
+            f'{bounds_str!r}')
+    if not (-180.0 <= west < east <= 180.0):
+        raise ValueError(
+            f'Invalid longitude bounds (require -180 <= west < east <= 180): '
+            f'{bounds_str!r}')
     return south, west, north, east
 
 
@@ -339,6 +359,28 @@ def _sanitize_url(url: str) -> str:
     return f'{parsed.scheme}://{parsed.netloc}{parsed.path}'
 
 
+def _get_http_session() -> requests.Session:
+    """Returns a reusable per-thread requests.Session for tile downloads."""
+    session = getattr(_THREAD_LOCAL, 'session', None)
+    if session is None:
+        session = requests.Session()
+        _THREAD_LOCAL.session = session
+    return session
+
+
+def _csv_has_data_rows(csv_path: str) -> bool:
+    """Returns True if csv_path exists and has at least one non-header row."""
+    if not csv_path or not os.path.exists(csv_path) or os.path.getsize(
+            csv_path) == 0:
+        return False
+    with open(csv_path, 'r', encoding='utf-8', newline='') as fh:
+        reader = csv.reader(fh)
+        header = next(reader, None)
+        if not header:
+            return False
+        return next(reader, None) is not None
+
+
 def _download_with_util_atomic(
     url: str,
     target_path: str,
@@ -346,9 +388,11 @@ def _download_with_util_atomic(
     tries: int = 3,
     delay: int = 5,
     backoff: int = 2,
+    session: Optional[requests.Session] = None,
 ) -> bool:
     """Downloads a URL via download_util_script and moves it atomically."""
     os.makedirs(os.path.dirname(target_path), exist_ok=True)
+    http_session = session or _get_http_session()
     with tempfile.TemporaryDirectory(dir=os.path.dirname(target_path),
                                      prefix='.dw_dl_') as tmp_dir:
         ok = download_util_script.download_file(
@@ -359,6 +403,7 @@ def _download_with_util_atomic(
             tries=tries,
             delay=delay,
             backoff=backoff,
+            session=http_session,
         )
         if not ok:
             return False
@@ -502,7 +547,7 @@ def download_earthengine_tiles(
     water_threshold: float = 0.7,
     land_mask_asset: str = _DEFAULT_LAND_MASK_ASSET,
     ee_project: str = '',
-    skip_existing: bool = True,
+    skip_existing: bool = False,
     retry_tries: int = 3,
     retry_delay: int = 5,
     retry_backoff: int = 2,
@@ -641,8 +686,9 @@ def _consolidate_place_svobs_csvs(
 ) -> int:
     """Merges place SVObs CSVs into a deterministic CSV with header."""
     os.makedirs(os.path.dirname(output_csv), exist_ok=True)
-    seen_rows = set()
+    seen_rows: Dict[Tuple[str, str, str], Tuple[str, str]] = {}
     rows_out: List[List[str]] = []
+    duplicate_count = 0
 
     for csv_file in sorted(csv_files):
         if not os.path.exists(csv_file) or os.path.getsize(csv_file) == 0:
@@ -655,16 +701,39 @@ def _consolidate_place_svobs_csvs(
                     row.get('observationDate', ''),
                     row.get('observationPeriod', ''),
                 )
-                if not key[0] or key in seen_rows:
+                if not key[0]:
                     continue
-                seen_rows.add(key)
+                values = (row.get('area', ''), row.get('count', ''))
+                if key in seen_rows:
+                    if seen_rows[key] != values:
+                        logging.error(
+                            'Conflicting duplicate SVObs key %s in %s: '
+                            'existing=%s vs new=%s',
+                            key,
+                            csv_file,
+                            seen_rows[key],
+                            values,
+                        )
+                        raise ValueError(
+                            f'Conflicting duplicate SVObs for key {key}: '
+                            f'{seen_rows[key]} vs {values}')
+                    duplicate_count += 1
+                    continue
+                seen_rows[key] = values
                 rows_out.append([
                     key[0],
                     key[1],
                     key[2],
-                    row.get('area', ''),
-                    row.get('count', ''),
+                    values[0],
+                    values[1],
                 ])
+
+    if duplicate_count:
+        logging.warning(
+            'Skipped %d identical duplicate SVObs row(s) while consolidating %s',
+            duplicate_count,
+            output_csv,
+        )
 
     rows_out.sort(key=lambda r: (r[1], r[0], r[2]))
     tmp_path = f'{output_csv}.tmp'
@@ -680,6 +749,7 @@ def convert_geotiffs_to_raster_csv(
     geotiff_files: List[str],
     output_dir: str,
     start_date: str,
+    subprocess_timeout: int = _DEFAULT_SUBPROCESS_TIMEOUT_SECS,
 ) -> Optional[str]:
     """Converts one month of GeoTIFF tiles into a single S2 Level-13 raster CSV."""
     if not geotiff_files:
@@ -712,9 +782,11 @@ def convert_geotiffs_to_raster_csv(
             '--output_mode=w',
         ],
         check=True,
+        timeout=subprocess_timeout,
     )
-    if os.path.exists(raster_csv) and os.path.getsize(raster_csv) > 0:
+    if _csv_has_data_rows(raster_csv):
         return raster_csv
+    logging.info('Skipping header-only or empty raster CSV: %s', raster_csv)
     return None
 
 
@@ -754,9 +826,11 @@ def generate_place_svobs_for_year(
     output_dir: str,
     year: str,
     place_cache_file: str = _DEFAULT_PLACE_CACHE_FILE,
+    subprocess_timeout: int = _DEFAULT_SUBPROCESS_TIMEOUT_SECS,
 ) -> List[str]:
     """Runs process_events.py across a year's raster CSVs to produce P1M + P1Y place SVObs."""
-    if not raster_csvs:
+    non_empty_csvs = [p for p in sorted(raster_csvs) if _csv_has_data_rows(p)]
+    if not non_empty_csvs:
         return []
     events_dir = os.path.join(output_dir, 'events')
     os.makedirs(events_dir, exist_ok=True)
@@ -771,12 +845,13 @@ def generate_place_svobs_for_year(
         [
             sys.executable,
             events_script,
-            f'--input_csv={",".join(sorted(raster_csvs))}',
+            f'--input_csv={",".join(non_empty_csvs)}',
             f'--output_path={event_prefix}',
             f'--config={base_config}',
             f'--config_string={repr(event_cfg)}',
         ],
         check=True,
+        timeout=subprocess_timeout,
     )
     return sorted(
         glob.glob(
@@ -853,6 +928,15 @@ def _resolve_effective_cache_dir(explicit_cache_dir: str) -> str:
     return ''
 
 
+def _clean_local_intermediates(output_dir: str) -> None:
+    """Removes stale local intermediate directories before a fresh run."""
+    for subdir in ('geotiff', 'raster_csv', 'events'):
+        path = os.path.join(output_dir, subdir)
+        if os.path.isdir(path):
+            logging.info('Cleaning stale intermediate directory: %s', path)
+            shutil.rmtree(path)
+
+
 def resolve_or_download_month_raster_csv(
     output_dir: str,
     start_date: str,
@@ -863,38 +947,40 @@ def resolve_or_download_month_raster_csv(
     water_threshold: float = 0.7,
     land_mask_asset: str = _DEFAULT_LAND_MASK_ASSET,
     ee_project: str = '',
-    skip_existing: bool = True,
+    skip_existing: bool = False,
+    use_gcs_cache: bool = True,
     max_workers: int = 10,
     convert_to_csv: bool = True,
     cache_dir: str = '',
     legacy_raster_gcs_prefix: str = _DEFAULT_LEGACY_RASTER_GCS_PREFIX,
+    subprocess_timeout: int = _DEFAULT_SUBPROCESS_TIMEOUT_SECS,
     ee_module=None,
 ) -> Tuple[Optional[str], object]:
     """Resolves a month's S2-13 raster CSV from local/GCS cache or Earth Engine.
 
-    Lookup order (for global default bounds when skip_existing=True):
-      1. Local <output_dir>/raster_csv/dw_flood_<YYYY-MM>.csv
+    Lookup order:
+      1. Local <output_dir>/raster_csv/dw_flood_<YYYY-MM>.csv (if skip_existing)
       2. Persistent cache <cache_dir>/raster_csv/dw_flood_<YYYY-MM>.csv
-      3. Legacy prod GCS raster CSV (object-only read, written through to cache)
+         (if use_gcs_cache and global default bounds)
+      3. Legacy prod GCS raster CSV (object-only read, written through to cache,
+         if use_gcs_cache and global default bounds)
       4. Direct Earth Engine GeoTIFF download + raster_to_csv conversion
     """
     obs_month = start_date[:7]
     raster_dir = os.path.join(output_dir, 'raster_csv')
     local_raster_csv = os.path.join(raster_dir, f'dw_flood_{obs_month}.csv')
-    use_global_cache = _is_default_global_bounds(bounds_str)
+    use_global_cache = use_gcs_cache and _is_default_global_bounds(bounds_str)
     cached_raster_csv = (os.path.join(cache_dir, 'raster_csv',
                                       f'dw_flood_{obs_month}.csv') if
                          (use_global_cache and cache_dir) else '')
 
-    if convert_to_csv and skip_existing:
-        if os.path.exists(local_raster_csv) and os.path.getsize(
-                local_raster_csv) > 0:
+    if convert_to_csv:
+        if skip_existing and _csv_has_data_rows(local_raster_csv):
             logging.info('Reusing existing local raster CSV for %s: %s',
                          obs_month, local_raster_csv)
             return local_raster_csv, ee_module
 
-        if cached_raster_csv and os.path.exists(
-                cached_raster_csv) and os.path.getsize(cached_raster_csv) > 0:
+        if cached_raster_csv and _csv_has_data_rows(cached_raster_csv):
             logging.info('Reusing cached raster CSV for %s from %s', obs_month,
                          cached_raster_csv)
             _copy_file_atomic(cached_raster_csv, local_raster_csv)
@@ -905,11 +991,13 @@ def resolve_or_download_month_raster_csv(
                 month=obs_month)
             legacy_uri = f'{legacy_raster_gcs_prefix.rstrip("/")}/{legacy_name}'
             if _try_download_gcs_object(legacy_uri, local_raster_csv):
-                logging.info('Bootstrapped raster CSV for %s from %s',
-                             obs_month, legacy_uri)
-                if cached_raster_csv:
-                    _copy_file_atomic(local_raster_csv, cached_raster_csv)
-                return local_raster_csv, ee_module
+                if _csv_has_data_rows(local_raster_csv):
+                    logging.info('Bootstrapped raster CSV for %s from %s',
+                                 obs_month, legacy_uri)
+                    if cached_raster_csv:
+                        _copy_file_atomic(local_raster_csv, cached_raster_csv)
+                    return local_raster_csv, ee_module
+                os.remove(local_raster_csv)
 
     if ee_module is None:
         ee_module = init_earth_engine(ee_project)
@@ -935,6 +1023,7 @@ def resolve_or_download_month_raster_csv(
         geotiff_files=tifs,
         output_dir=output_dir,
         start_date=start_date,
+        subprocess_timeout=subprocess_timeout,
     )
     if raster_csv and cached_raster_csv:
         _copy_file_atomic(raster_csv, cached_raster_csv)
@@ -995,15 +1084,19 @@ def main(_):
 
     month_ranges = iter_month_ranges(start_date, end_date)
     os.makedirs(output_dir, exist_ok=True)
+    if not _FLAGS.skip_existing:
+        _clean_local_intermediates(output_dir)
     logging.info(
         'DynamicWorld_FloodEvents_Places_AutoRefresh download: '
         'start=%s, end=%s (%d months), bounds=%s, cache_dir=%s, '
-        'place_cache=%s, out=%s',
+        'use_gcs_cache=%s, skip_existing=%s, place_cache=%s, out=%s',
         start_date,
         end_date,
         len(month_ranges),
         _FLAGS.bounds,
         cache_dir or '<none>',
+        _FLAGS.use_gcs_cache,
+        _FLAGS.skip_existing,
         _FLAGS.place_cache_file,
         output_dir,
     )
@@ -1024,10 +1117,12 @@ def main(_):
             land_mask_asset=_FLAGS.land_mask_asset,
             ee_project=_FLAGS.ee_project,
             skip_existing=_FLAGS.skip_existing,
+            use_gcs_cache=_FLAGS.use_gcs_cache,
             max_workers=_FLAGS.max_workers,
             convert_to_csv=_FLAGS.convert_to_csv,
             cache_dir=cache_dir,
             legacy_raster_gcs_prefix=_FLAGS.legacy_raster_gcs_prefix,
+            subprocess_timeout=_FLAGS.subprocess_timeout_secs,
             ee_module=ee_module,
         )
         if raster_csv:
@@ -1043,6 +1138,7 @@ def main(_):
                 output_dir=output_dir,
                 year=year,
                 place_cache_file=_FLAGS.place_cache_file,
+                subprocess_timeout=_FLAGS.subprocess_timeout_secs,
             )
             all_place_svobs_csvs.extend(year_place_csvs)
             is_ytd_for_year = any(

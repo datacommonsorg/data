@@ -1,8 +1,5 @@
 parameter,value
 header_rows,1
 output_columns,"observationAbout,observationDate,observationPeriod,variableMeasured,value,unit"
-generate_statvar_name,True
-stat_var_name_prefix,Flood Event
-drop_statvar_without_name,False
 reconcile_nodes,False
 recon_lookup_api,False
