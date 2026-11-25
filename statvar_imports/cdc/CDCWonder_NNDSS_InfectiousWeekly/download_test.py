@@ -54,6 +54,14 @@ class DownloadTest(unittest.TestCase):
                 "Current week, flag": "-",
             },
             {
+                "Reporting Area": "US RESIDENTS",
+                "Current MMWR Year": "2022",
+                "MMWR WEEK": "10",
+                "Label": "Gonorrhea",
+                "Current week": "6,911",
+                "Current week, flag": "-",
+            },
+            {
                 "Reporting Area": "NEW YORK",
                 "Current MMWR Year": "2022",
                 "MMWR WEEK": "10",
@@ -119,7 +127,7 @@ class DownloadTest(unittest.TestCase):
             },
         ]
         with tempfile.TemporaryDirectory() as tmpdir:
-            in_csv = os.path.join(tmpdir, "rows.csv")
+            in_csv = os.path.join(tmpdir, "export.csv")
             out_csv = os.path.join(tmpdir, "NNDSS_Weekly_Data.csv")
             pd.DataFrame(rows).to_csv(in_csv, index=False)
             out_df = download.preprocess_csv(in_csv, out_csv)
@@ -132,6 +140,10 @@ class DownloadTest(unittest.TestCase):
             records.get(("US RESIDENTS", "Chlamydia trachomatis infection")),
             "500",
         )
+        self.assertEqual(
+            records.get(("US RESIDENTS", "Gonorrhea")),
+            "6911",
+        )
         self.assertEqual(records.get(("NEW YORK CITY", "Campylobacteriosis")),
                          "30")
         self.assertEqual(records.get(("NEW YORK", "Campylobacteriosis")), "50")
@@ -139,11 +151,11 @@ class DownloadTest(unittest.TestCase):
                          "1")
         self.assertNotIn(("NEW YORK", "Hansen's disease"), records)
         self.assertNotIn(("NEW YORK", "Anthrax"), records)
-        self.assertEqual(len(records), 4)
+        self.assertEqual(len(records), 5)
 
     def test_preprocess_csv_header_only_missing_columns(self):
         with tempfile.TemporaryDirectory() as tmpdir:
-            in_csv = os.path.join(tmpdir, "rows.csv")
+            in_csv = os.path.join(tmpdir, "export.csv")
             out_csv = os.path.join(tmpdir, "NNDSS_Weekly_Data.csv")
             with open(in_csv, "w", encoding="utf-8") as f:
                 f.write("Reporting Area,Current MMWR Year\n")
@@ -192,13 +204,13 @@ class DownloadTest(unittest.TestCase):
 
     def test_download_source_csv_retries_then_succeeds(self):
         with tempfile.TemporaryDirectory() as tmpdir:
-            raw_path = os.path.join(tmpdir, "rows.csv")
+            raw_path = os.path.join(tmpdir, "export.csv")
             calls = []
 
             def _fake_download(**kwargs):
                 calls.append(kwargs)
                 if len(calls) == 1:
-                    return False
+                    raise OSError("transient socket drop")
                 with open(raw_path, "wb") as f:
                     f.write(b"x" * (200 * 1024))
                 return True
@@ -213,7 +225,7 @@ class DownloadTest(unittest.TestCase):
 
     def test_download_source_csv_raises_ioerror_after_retries(self):
         with tempfile.TemporaryDirectory() as tmpdir:
-            raw_path = os.path.join(tmpdir, "rows.csv")
+            raw_path = os.path.join(tmpdir, "export.csv")
             calls = []
 
             def _always_fail(**kwargs):
@@ -222,14 +234,16 @@ class DownloadTest(unittest.TestCase):
 
             with mock.patch.object(download, "INPUT_DIR", tmpdir), \
                  mock.patch.object(download, "RAW_FILE", raw_path):
-                with self.assertRaises(IOError):
+                with self.assertRaises(IOError) as ctx:
                     self._run_download_source_csv(_always_fail)
 
             self.assertEqual(len(calls), 3)
+            self.assertIn(download.SOURCE_URL, str(ctx.exception))
+            self.assertIn(raw_path, str(ctx.exception))
 
     def test_download_source_csv_raises_valueerror_on_small_file(self):
         with tempfile.TemporaryDirectory() as tmpdir:
-            raw_path = os.path.join(tmpdir, "rows.csv")
+            raw_path = os.path.join(tmpdir, "export.csv")
 
             def _write_tiny(**kwargs):
                 del kwargs
@@ -239,8 +253,12 @@ class DownloadTest(unittest.TestCase):
 
             with mock.patch.object(download, "INPUT_DIR", tmpdir), \
                  mock.patch.object(download, "RAW_FILE", raw_path):
-                with self.assertRaises(ValueError):
+                with self.assertRaises(ValueError) as ctx:
                     self._run_download_source_csv(_write_tiny)
+
+            self.assertIn(download.SOURCE_URL, str(ctx.exception))
+            self.assertIn(raw_path, str(ctx.exception))
+            self.assertIn("MB", str(ctx.exception))
 
     def test_download_historical_files_atomic(self):
         with tempfile.TemporaryDirectory() as tmpdir:

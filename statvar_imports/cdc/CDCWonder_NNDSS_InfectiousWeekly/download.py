@@ -62,10 +62,11 @@ HISTORY_FILES = (
     "cdc_nndss_weekly_tables_historical.csv",
     "cdc_nndss_weekly_tables_historical.tmcf",
 )
-RAW_FILE = os.path.join(INPUT_DIR, "rows.csv")
+RAW_FILE = os.path.join(INPUT_DIR, "export.csv")
 OUTPUT_FILE = os.path.join(INPUT_DIR, "NNDSS_Weekly_Data.csv")
-SOURCE_URL = ("https://data.cdc.gov/api/views/x9gk-5huc/rows.csv"
-              "?accessType=DOWNLOAD&api_foundry=true")
+SOURCE_URL = (
+    "https://data.cdc.gov/api/v3/views/x9gk-5huc/export.csv?accessType=DOWNLOAD"
+)
 SKIP_FLAGS = {"N", "NN", "NP", "NC", "U"}
 
 OUTPUT_COLUMNS = [
@@ -140,20 +141,24 @@ def download_source_csv() -> str:
             logging.warning(
                 f"Download attempt {attempt}/{max_attempts} returned {download_ok}."
             )
-        except Exception as exc:
-            logging.warning(
-                f"Download attempt {attempt}/{max_attempts} raised {exc}.")
+        except (OSError, ValueError) as exc:
+            logging.exception(
+                f"Download attempt {attempt}/{max_attempts} for {SOURCE_URL} "
+                f"raised {exc}.")
         if attempt < max_attempts:
             time.sleep(retry_delay)
             retry_delay *= 2
 
     if not download_ok or not os.path.exists(RAW_FILE):
-        raise IOError("Failed to download rows.csv after all retry attempts.")
+        raise IOError(f"Failed to download {SOURCE_URL} to {RAW_FILE} after "
+                      f"{max_attempts} attempts.")
 
     size_mb = os.path.getsize(RAW_FILE) / (1024 * 1024)
     logging.info(f"Downloaded file size: {size_mb:.2f} MB.")
     if size_mb < 0.1:
-        raise ValueError("Downloaded file is suspiciously small (<0.1 MB).")
+        raise ValueError(
+            f"Downloaded file {RAW_FILE} from {SOURCE_URL} is suspiciously "
+            f"small ({size_mb:.2f} MB < 0.10 MB).")
     return RAW_FILE
 
 
@@ -201,9 +206,22 @@ def preprocess_csv(
             chunk = chunk[~flag_series.isin(SKIP_FLAGS)]
 
         chunk = chunk[chunk["Current week"].notna()].copy()
-        mmwr_year = pd.to_numeric(chunk["Current MMWR Year"], errors="coerce")
-        chunk = chunk[mmwr_year.notna() & (mmwr_year >= min_year)]
-        chunk["val_num"] = pd.to_numeric(chunk["Current week"], errors="coerce")
+        mmwr_year = pd.to_numeric(
+            chunk["Current MMWR Year"].astype(str).str.replace(",",
+                                                               "",
+                                                               regex=False),
+            errors="coerce",
+        )
+        chunk = chunk[mmwr_year.notna() & (mmwr_year >= min_year)].copy()
+        chunk["Current MMWR Year"] = (
+            chunk["Current MMWR Year"].astype(str).str.replace(
+                ",", "", regex=False).str.strip())
+        chunk["MMWR WEEK"] = (chunk["MMWR WEEK"].astype(str).str.replace(
+            ",", "", regex=False).str.strip())
+        chunk["val_num"] = pd.to_numeric(
+            chunk["Current week"].astype(str).str.replace(",", "", regex=False),
+            errors="coerce",
+        )
         chunk = chunk[chunk["val_num"].notna() & (chunk["val_num"] >= 0)]
         if chunk.empty:
             continue
