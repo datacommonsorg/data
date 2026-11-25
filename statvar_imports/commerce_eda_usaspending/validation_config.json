@@ -2,14 +2,6 @@
     "schema_version": "1.0",
     "rules": [
         {
-            "rule_id": "check_deleted_records_percent",
-            "description": "Checks that the percentage of deleted records for the entire import is within 0.1% threshold.",
-            "validator": "DELETED_RECORDS_PERCENT",
-            "params": {
-                "threshold": 0.1
-            }
-        },
-        {
             "rule_id": "active_programs_freshness",
             "description": "Checks that all 12 EDA StatVars are present and meet expected cohort freshness.",
             "validator": "SQL_VALIDATOR",

@@ -162,7 +162,8 @@ def fetch_usaspending_data(start_year,
                     "limit": 100,
                     "page": page
                 }
-                logging.info(f"POST {url} [FY {fy} Page {page}]")
+                logging.info(f"POST {url} [FY {fy} Page {page}] "
+                             f"payload={json.dumps(payload, sort_keys=True)}")
 
                 try:
                     response = session.post(url, json=payload, timeout=45)

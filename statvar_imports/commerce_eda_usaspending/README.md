@@ -22,7 +22,7 @@ This importer fetches and processes U.S. Economic Development Administration (ED
 - `investment_pvmap.csv`: Property-value mappings converting state/territory codes, years, and EDA program names into Data Commons schema observations.
 - `investment_metadata.csv`: Configuration parameters for `stat_var_processor.py`.
 - `investment_schema.mcf`: Schema definitions for new `InvestmentProgramEnum` instances.
-- `validation_config.json`: Validation rules (`check_deleted_records_percent`, `active_programs_freshness`, `non_negative_investment_amounts`).
+- `validation_config.json`: Custom validation rules (`active_programs_freshness`, `non_negative_investment_amounts`), inheriting global defaults from `tools/import_validation/validation_config.json` (including `check_deleted_records_percent`).
 
 ## Pipeline Steps
 

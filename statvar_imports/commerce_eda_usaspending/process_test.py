@@ -41,9 +41,11 @@ class TestProcessUSASpending(unittest.TestCase):
     def tearDown(self):
         self.temp_dir.cleanup()
 
+    @patch("absl.logging.info")
     @patch("time.sleep", return_value=None)
     @patch("requests.Session.post")
-    def test_fetch_usaspending_data_success(self, mock_post, mock_sleep):
+    def test_fetch_usaspending_data_success(self, mock_post, mock_sleep,
+                                            mock_info):
         # Mock a paginated API response (2 pages)
         mock_resp1 = MagicMock()
         mock_resp1.status_code = 200
@@ -93,6 +95,15 @@ class TestProcessUSASpending(unittest.TestCase):
         self.assertIn("Place of Performance Country Code", first_call_fields)
         self.assertEqual(first_call_payload["sort"], "Award ID")
         self.assertEqual(first_call_payload["order"], "asc")
+        post_logs = [
+            call.args[0]
+            for call in mock_info.call_args_list
+            if call.args and str(call.args[0]).startswith("POST ")
+        ]
+        self.assertEqual(len(post_logs), 2)
+        self.assertIn("payload=", post_logs[0])
+        self.assertIn(json.dumps(first_call_payload, sort_keys=True),
+                      post_logs[0])
 
     @patch("time.sleep", return_value=None)
     @patch("requests.Session.post")
