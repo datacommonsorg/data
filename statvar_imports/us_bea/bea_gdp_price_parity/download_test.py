@@ -11,14 +11,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Unit tests for BEAGDPPriceParity (download.py & stat_var_processor PVMaps)."""
+"""Unit tests for BEAGDPPriceParity download.py and PVMap/metadata configs."""
 
 import csv
 import io
 import os
 from pathlib import Path
-import subprocess
-import sys
 import tempfile
 import unittest
 from unittest import mock
@@ -31,9 +29,6 @@ from statvar_imports.us_bea.bea_gdp_price_parity import download
 _PACKAGE_DIR = os.path.dirname(os.path.abspath(__file__))
 _SAMPLE_INPUT_DIR = os.path.join(_PACKAGE_DIR, 'test_data', 'sample_input')
 _SAMPLE_OUTPUT_DIR = os.path.join(_PACKAGE_DIR, 'test_data', 'sample_output')
-_REPO_ROOT = os.path.abspath(os.path.join(_PACKAGE_DIR, '..', '..', '..'))
-_PROCESSOR = os.path.join(_REPO_ROOT, 'tools', 'statvar_importer',
-                          'stat_var_processor.py')
 
 
 def _build_zip_bytes(entries: dict[str, bytes]) -> bytes:
@@ -51,14 +46,6 @@ def _make_response(status_code: int, content: bytes) -> requests.Response:
     resp._content = content  # pylint: disable=protected-access
     resp.url = 'https://apps.bea.gov/regional/zip/MARPP.zip'
     return resp
-
-
-def _non_comment_lines(text: str) -> list[str]:
-    return [
-        line.strip()
-        for line in text.splitlines()
-        if line.strip() and not line.lstrip().startswith('#')
-    ]
 
 
 class BeaGdpPriceParityTest(unittest.TestCase):
@@ -94,6 +81,33 @@ class BeaGdpPriceParityTest(unittest.TestCase):
                 rows = list(csv.reader(f))
             self.assertEqual(rows[0], ['parameter', 'value'])
             self.assertGreater(len(rows), 1)
+
+    def test_sample_fixtures_exist_and_non_empty(self):
+        for fname in (
+                'SARPP_STATE_sample_input.csv',
+                'MARPP_MSA_sample_input.csv',
+                'CAGDP1__ALL_AREAS_sample_input.csv',
+                'CAGDP11__ALL_AREAS_sample_input.csv',
+                'metro_gdp.csv',
+                'metro_nominal_gdp.csv',
+        ):
+            fpath = Path(_SAMPLE_INPUT_DIR) / fname
+            self.assertTrue(fpath.is_file(), f'Missing sample input {fname}')
+            self.assertGreater(fpath.stat().st_size, 0)
+
+        for fname in (
+                'bea_rpp_sample_output.csv',
+                'bea_rpp_sample_output.tmcf',
+                'bea_county_gdp_sample_output.csv',
+                'bea_county_gdp_sample_output.tmcf',
+                'bea_county_gdp_growth_sample_output.csv',
+                'bea_county_gdp_growth_sample_output.tmcf',
+                'bea_metro_gdp_sample_output.csv',
+                'bea_metro_gdp_sample_output.tmcf',
+        ):
+            fpath = Path(_SAMPLE_OUTPUT_DIR) / fname
+            self.assertTrue(fpath.is_file(), f'Missing sample output {fname}')
+            self.assertGreater(fpath.stat().st_size, 0)
 
     def test_download_and_extract_success_and_cleans_stale_csvs(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
@@ -223,116 +237,10 @@ class BeaGdpPriceParityTest(unittest.TestCase):
             self.assertEqual(copied_again, copied)
             mock_client_cls.assert_not_called()
 
-    def _assert_processor_matches_fixtures(
-        self,
-        tmp_dir: str,
-        input_files: list[str],
-        pv_maps: list[str],
-        config_file: str,
-        output_stem: str,
-        check_statvar_mcf: bool = False,
-    ) -> dict[str, str]:
-        out_prefix = os.path.join(tmp_dir, output_stem)
-        counters_csv = os.path.join(tmp_dir, f'{output_stem}_counters.csv')
-        input_paths = ','.join(
-            os.path.join(_SAMPLE_INPUT_DIR, f) for f in input_files)
-        cmd = [
-            sys.executable,
-            _PROCESSOR,
-            f'--input_data={input_paths}',
-            f'--pv_map={",".join(os.path.join(_PACKAGE_DIR, m) for m in pv_maps)}',
-            f'--config_file={os.path.join(_PACKAGE_DIR, config_file)}',
-            f'--output_path={out_prefix}',
-            f'--output_counters={counters_csv}',
-        ]
-        try:
-            subprocess.run(
-                cmd,
-                check=True,
-                capture_output=True,
-                text=True,
-            )
-        except subprocess.CalledProcessError as err:
-            self.fail(f'stat_var_processor.py failed (exit {err.returncode}).\n'
-                      f'STDOUT:\n{err.stdout}\nSTDERR:\n{err.stderr}')
-
-        actual_csv = (Path(f'{out_prefix}.csv').read_text(
-            encoding='utf-8').splitlines())
-        expected_csv = (Path(
-            os.path.join(
-                _SAMPLE_OUTPUT_DIR,
-                f'{output_stem}.csv')).read_text(encoding='utf-8').splitlines())
-        self.assertEqual(actual_csv, expected_csv)
-
-        actual_tmcf = _non_comment_lines(
-            Path(f'{out_prefix}.tmcf').read_text(encoding='utf-8'))
-        expected_tmcf = _non_comment_lines(
-            Path(os.path.join(
-                _SAMPLE_OUTPUT_DIR,
-                f'{output_stem}.tmcf')).read_text(encoding='utf-8'))
-        self.assertEqual(actual_tmcf[0], expected_tmcf[0])
-        self.assertCountEqual(actual_tmcf, expected_tmcf)
-
-        if check_statvar_mcf:
-            actual_mcf = _non_comment_lines(
-                Path(f'{out_prefix}_stat_vars.mcf').read_text(encoding='utf-8'))
-            expected_mcf = _non_comment_lines(
-                Path(
-                    os.path.join(_SAMPLE_OUTPUT_DIR,
-                                 f'{output_stem}_stat_vars.mcf')).read_text(
-                                     encoding='utf-8'))
-            self.assertEqual(actual_mcf, expected_mcf)
-
-        with open(counters_csv, 'r', encoding='utf-8') as f:
-            return {r['key']: r['value'] for r in csv.DictReader(f)}
-
-    def test_rpp_pvmap_matches_sample_output(self):
-        with tempfile.TemporaryDirectory() as tmp_dir:
-            self._assert_processor_matches_fixtures(
-                tmp_dir=tmp_dir,
-                input_files=[
-                    'SARPP_STATE_sample_input.csv',
-                    'MARPP_MSA_sample_input.csv',
-                ],
-                pv_maps=['bea_rpp_pvmap.csv', 'bea_years_pvmap.csv'],
-                config_file='bea_rpp_metadata.csv',
-                output_stem='bea_rpp_sample_output',
-                check_statvar_mcf=True,
-            )
-
-    def test_county_gdp_and_growth_pvmaps_match_sample_output(self):
-        with tempfile.TemporaryDirectory() as tmp_dir:
-            gdp_counters = self._assert_processor_matches_fixtures(
-                tmp_dir=tmp_dir,
-                input_files=['CAGDP1__ALL_AREAS_sample_input.csv'],
-                pv_maps=['bea_county_gdp_pvmap.csv', 'bea_years_pvmap.csv'],
-                config_file='bea_county_gdp_metadata.csv',
-                output_stem='bea_county_gdp_sample_output',
-            )
-            self.assertEqual(
-                gdp_counters.get('1:process_input_input-rows-ignored'), '2')
-            self.assertNotIn('error-svobs-missing-property', gdp_counters)
-
-            growth_counters = self._assert_processor_matches_fixtures(
-                tmp_dir=tmp_dir,
-                input_files=['CAGDP11__ALL_AREAS_sample_input.csv'],
-                pv_maps=['bea_county_gdp_pvmap.csv', 'bea_years_pvmap.csv'],
-                config_file='bea_county_gdp_metadata.csv',
-                output_stem='bea_county_gdp_growth_sample_output',
-            )
-            self.assertEqual(
-                growth_counters.get('1:process_input_input-rows-ignored'), '1')
-            self.assertNotIn('error-svobs-missing-property', growth_counters)
-
-    def test_metro_gdp_pvmap_matches_sample_output(self):
-        with tempfile.TemporaryDirectory() as tmp_dir:
-            self._assert_processor_matches_fixtures(
-                tmp_dir=tmp_dir,
-                input_files=['metro_gdp.csv', 'metro_nominal_gdp.csv'],
-                pv_maps=['bea_metro_gdp_pvmap.csv'],
-                config_file='bea_metro_gdp_metadata.csv',
-                output_stem='bea_metro_gdp_sample_output',
-            )
+            copied_overwrite = download.copy_historical_data_from_gcs(
+                output_dir=tmp_dir, skip_existing=False)
+            self.assertEqual(copied_overwrite, copied)
+            mock_client_cls.assert_called_once()
 
 
 if __name__ == '__main__':

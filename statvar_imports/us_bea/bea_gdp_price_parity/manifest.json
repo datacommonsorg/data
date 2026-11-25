@@ -18,22 +18,22 @@
         {
           "template_mcf": "output_files/bea_rpp_output.tmcf",
           "cleaned_csv": "output_files/bea_rpp_output.csv",
-          "node_mcf": "output_files/bea_rpp_output_*.mcf"
+          "node_mcf": "output_files/bea_rpp_output_stat_var[s].mcf"
         },
         {
           "template_mcf": "output_files/bea_county_gdp_output.tmcf",
           "cleaned_csv": "output_files/bea_county_gdp_output.csv",
-          "node_mcf": "output_files/bea_county_gdp_output_*.mcf"
+          "node_mcf": "output_files/bea_county_gdp_output_stat_var[s].mcf"
         },
         {
           "template_mcf": "output_files/bea_county_gdp_growth_output.tmcf",
           "cleaned_csv": "output_files/bea_county_gdp_growth_output.csv",
-          "node_mcf": "output_files/bea_county_gdp_growth_output_*.mcf"
+          "node_mcf": "output_files/bea_county_gdp_growth_output_stat_var[s].mcf"
         },
         {
           "template_mcf": "output_files/bea_metro_gdp_output.tmcf",
           "cleaned_csv": "output_files/bea_metro_gdp_output.csv",
-          "node_mcf": "output_files/bea_metro_gdp_output_*.mcf"
+          "node_mcf": "output_files/bea_metro_gdp_output_stat_var[s].mcf"
         }
       ],
       "source_files": [

@@ -35,7 +35,7 @@ This import (`BEAGDPPriceParity`) automates US Bureau of Economic Analysis (BEA)
 
 - `manifest.json`: Cloud Batch specification (`BEAGDPPriceParity`), weekly schedule (`0 6 * * 1`), 4 `stat_var_processor.py` runs, wildcard `node_mcf` `import_inputs`, and `source_files` (`input_files/raw/*`, `input_files/baseline/*`, `*_pvmap.csv`, `*_metadata.csv`, `counters/*.csv`, `validation_config.json`).
 - `download.py` / `download_test.py` / `test_data/{sample_input,sample_output}/`: Downloader, representative sample inputs and sample output `.csv`/`.tmcf` fixtures, and unit + PVMap parity tests.
-- `bea_years_pvmap.csv`: Shared wide-format year-column mappings (`2001–2035`).
+- `bea_years_pvmap.csv`: Shared wide-format year-column mappings (`2001–2050`).
 - `bea_rpp_pvmap.csv` / `bea_rpp_metadata.csv`: PVMap and metadata for live Regional Price Parities (`SARPP` & `MARPP`).
 - `bea_county_gdp_pvmap.csv` / `bea_county_gdp_metadata.csv`: PVMap and metadata for live County GDP & Growth (`CAGDP1` & `CAGDP11`).
 - `bea_metro_gdp_pvmap.csv` / `bea_metro_gdp_metadata.csv`: PVMap and metadata for historical MSA GDP baselines (`metro_gdp.csv` & `metro_nominal_gdp.csv`).

@@ -39,21 +39,26 @@ from retry import retry
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string(
-    'bea_raw_dir',
-    os.path.join(_SCRIPT_DIR, 'input_files', 'raw'),
-    'Directory to store downloaded live BEA ZIP archives and extracted CSVs.',
-)
-flags.DEFINE_string(
-    'bea_baseline_dir',
-    os.path.join(_SCRIPT_DIR, 'input_files', 'baseline'),
-    'Directory to store historical MSA GDP baseline CSV files from GCS.',
-)
-flags.DEFINE_boolean(
-    'bea_copy_historical',
-    True,
-    'Whether to fetch historical MSA GDP baseline CSV files from GCS.',
-)
+
+
+def _define_flags() -> None:
+    """Registers CLI flags when running download.py as a script."""
+    flags.DEFINE_string(
+        'bea_raw_dir',
+        os.path.join(_SCRIPT_DIR, 'input_files', 'raw'),
+        'Directory to store downloaded live BEA ZIP archives and extracted CSVs.',
+    )
+    flags.DEFINE_string(
+        'bea_baseline_dir',
+        os.path.join(_SCRIPT_DIR, 'input_files', 'baseline'),
+        'Directory to store historical MSA GDP baseline CSV files from GCS.',
+    )
+    flags.DEFINE_boolean(
+        'bea_copy_historical',
+        True,
+        'Whether to fetch historical MSA GDP baseline CSV files from GCS.',
+    )
+
 
 BEA_LIVE_ZIPS = {
     'MARPP': ('https://apps.bea.gov/regional/zip/MARPP.zip', 'MARPP_MSA_'),
@@ -265,7 +270,8 @@ def download_and_extract(
 def main(argv):
     del argv
     if FLAGS.bea_copy_historical:
-        copy_historical_data_from_gcs(output_dir=FLAGS.bea_baseline_dir)
+        copy_historical_data_from_gcs(output_dir=FLAGS.bea_baseline_dir,
+                                      skip_existing=False)
     with requests.Session() as session:
         for name, (url, prefix) in BEA_LIVE_ZIPS.items():
             logging.info('Downloading live BEA archive %s...', name)
@@ -276,4 +282,5 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)
