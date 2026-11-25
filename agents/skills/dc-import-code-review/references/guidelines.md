@@ -308,8 +308,10 @@ Then apply these rules:
 - Use [sdmx_cli.py](../../../../tools/sdmx_import/sdmx_cli.py) for SDMX
   downloads. When it lacks the required functionality, use the `sdmx1` library
   it is built on instead of custom SDMX requests or parsing.
-- Log each outbound request's method, sanitized URL, query parameters, and
-  request body. Redact credentials and sensitive data.
+- In download scripts, log every downloaded URL along with its HTTP method,
+  query parameters, request body, and download status, such as HTTP status code
+  and success or failure, redacting API keys, credentials, and sensitive data,
+  so URL downloads can be analyzed directly from job logs.
 - Consume every page from paginated sources.
 - Reuse HTTP connections via `requests.Session` when issuing frequent
   availability checks (e.g., repeated `HEAD` requests) to avoid connection
