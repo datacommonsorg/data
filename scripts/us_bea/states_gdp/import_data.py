@@ -34,8 +34,13 @@ import pandas as pd
 logging.set_verbosity(logging.INFO)
 
 FLAGS = flags.FLAGS
-flags.DEFINE_integer('latest_year', None,
-                     'The latest year to look for in the filename (optional).')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_integer(
+        'latest_year', None,
+        'The latest year to look for in the filename (optional).')
 
 
 class StateGDPDataLoader:
@@ -120,7 +125,10 @@ class StateGDPDataLoader:
 
         return max(matching_files, key=matching_files.get)
 
-    def process_data(self, raw_data=None, input_folder='input_data'):
+    def process_data(self,
+                     raw_data=None,
+                     input_folder='input_data',
+                     latest_year=None):
         """Processes the state quarterly GDP data from the input folder.
 
         Args:
@@ -128,6 +136,9 @@ class StateGDPDataLoader:
                       look for the latest file in the input folder).
             input_folder: The folder containing the input CSV files. If None,
                           it defaults to the value of the --input_folder flag.
+            latest_year: The end year to look for in the input file name
+                         (optional). If None, or if no file ends in that
+                         year, the file with the latest end year is used.
         """
         if raw_data is not None:
             logging.info("Processing data from provided raw data.")
@@ -147,7 +158,7 @@ class StateGDPDataLoader:
                 _STATE_QUARTERLY_GDP_FILE_PATTERN = r'SQGDP1__ALL_AREAS_(\d{4})_(\d{4})\.csv'
                 self._input_file = self._find_gdp_file_in_folder(
                     input_folder, _STATE_QUARTERLY_GDP_FILE_PATTERN,
-                    FLAGS.latest_year)
+                    latest_year)
                 file_path = os.path.join(input_folder, self._input_file)
                 logging.info(f"Processing data from file: {file_path}")
                 with open(file_path, 'r', encoding='utf-8') as csvfile:
@@ -272,9 +283,10 @@ class StateGDPDataLoader:
 def main(argv):
     """Runs the program."""
     loader = StateGDPDataLoader()
-    loader.process_data()
+    loader.process_data(latest_year=FLAGS.latest_year)
     loader.save_csv()
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

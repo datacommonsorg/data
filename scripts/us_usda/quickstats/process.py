@@ -58,32 +58,18 @@ SKIPPED_COUNTY_CODES = set([
 ])
 
 _FLAGS = flags.FLAGS
-flags.DEFINE_string('mode', '', 'Options: download or process')
-flags.DEFINE_integer('start_year', 2024, 'start_year')
-flags.DEFINE_string('api_key',
-                    'gs://unresolved_mcf/us_usda/ag_survey/api_key.json',
-                    'directory where api key exists')
 
 
-def _get_mode():
-    if _FLAGS.is_parsed():
-        return _FLAGS.mode
-    return ""
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('mode', '', 'Options: download or process')
+    flags.DEFINE_integer('start_year', 2024, 'start_year')
+    flags.DEFINE_string('api_key',
+                        'gs://unresolved_mcf/us_usda/ag_survey/api_key.json',
+                        'directory where api key exists')
 
 
-def _get_start_year():
-    if _FLAGS.is_parsed():
-        return _FLAGS.start_year
-    return 2024
-
-
-def _get_api_key_path():
-    if _FLAGS.is_parsed():
-        return _FLAGS.api_key
-    return 'gs://unresolved_mcf/us_usda/ag_survey/api_key.json'
-
-
-def process_survey_data(year, svs, input_dir, out_dir):
+def process_survey_data(year, svs, input_dir, out_dir, mode, api_key_path):
     """
     Processes survey data for the given year and saves the results.
 
@@ -91,6 +77,8 @@ def process_survey_data(year, svs, input_dir, out_dir):
         year: The year of the survey data.
         svs: A list of survey variables to process.
         input_dir: The output directory to save the processed data.
+        mode: 'download', 'process', or '' to do both.
+        api_key_path: Path of the file with the USDA API key.
 
     Returns:
         None
@@ -103,7 +91,6 @@ def process_survey_data(year, svs, input_dir, out_dir):
         os.makedirs(get_response_dir(input_dir, year), exist_ok=True)
         os.makedirs(out_dir, exist_ok=True)
 
-        mode = _get_mode()
         if mode == "" or mode == "download" or mode == "process":
             response_dir = get_response_dir(input_dir, year)
             if mode == "process" and os.path.exists(response_dir):
@@ -114,7 +101,7 @@ def process_survey_data(year, svs, input_dir, out_dir):
                 ]
             else:
                 logging.info('Getting county names')
-                county_names = get_param_values('county_name')
+                county_names = get_param_values('county_name', api_key_path)
 
             logging.info(f'# counties =, {len(county_names)}')
 
@@ -124,7 +111,8 @@ def process_survey_data(year, svs, input_dir, out_dir):
                     pool.starmap(
                         fetch_and_write,
                         zip(county_names, repeat(year), repeat(svs),
-                            repeat(input_dir)))
+                            repeat(input_dir), repeat(mode),
+                            repeat(api_key_path)))
 
         if mode == "" or mode == "process":
             write_aggregate_csv(year, input_dir, out_dir)
@@ -194,7 +182,7 @@ def write_aggregate_csv(year, input_dir, out_dir):
         raise
 
 
-def fetch_and_write(county_name, year, svs, input_dir):
+def fetch_and_write(county_name, year, svs, input_dir, mode, api_key_path):
     """
     Fetches survey data for a given county and writes it to a CSV file.
     Args:
@@ -202,6 +190,8 @@ def fetch_and_write(county_name, year, svs, input_dir):
         year: The year of the survey data.
         svs: A list of survey variables to include in the output.
         input_dir: The output directory for the CSV file.
+        mode: 'download', 'process', or '' to do both.
+        api_key_path: Path of the file with the USDA API key.
 
     Raises:
         Exception: If any error occurs during the data fetching or writing process.
@@ -209,7 +199,8 @@ def fetch_and_write(county_name, year, svs, input_dir):
     logging.info(f"Fetching data for county: {county_name}")
     try:
         out_file = f"{get_parts_dir(input_dir, year)}/{county_name.replace('[^a-zA-Z0-9]', '')}.csv"
-        api_data = get_survey_county_data(year, county_name, input_dir)
+        api_data = get_survey_county_data(year, county_name, input_dir, mode,
+                                          api_key_path)
         county_csv_rows = to_csv_rows(api_data, svs)
         if county_csv_rows:
             logging.info(
@@ -227,13 +218,15 @@ def fetch_and_write(county_name, year, svs, input_dir):
         raise
 
 
-def get_survey_county_data(year, county, input_dir):
+def get_survey_county_data(year, county, input_dir, mode, api_key_path):
     """
     Fetches survey data for a given county and year.
     Args:
         year: The year of the survey data.
         county: The name of the county.
         input_dir: The output directory to save the response file.
+        mode: 'download', 'process', or '' to do both.
+        api_key_path: Path of the file with the USDA API key.
     Returns:
         The downloaded survey data.
     Raises:
@@ -243,7 +236,7 @@ def get_survey_county_data(year, county, input_dir):
     logging.info(f"Fetching survey data for county: {county} and year: {year}")
 
     response_file = get_response_file_path(input_dir, year, county)
-    if _get_mode() == "process":
+    if mode == "process":
         try:
             if os.path.exists(response_file):
                 logging.info(f"Reading response from file: {response_file}")
@@ -258,10 +251,10 @@ def get_survey_county_data(year, county, input_dir):
             )
             return {'data': []}
 
-    if _get_mode() == "" or _get_mode() == "download":
+    if mode == "" or mode == "download":
 
         params = {
-            'key': get_usda_api_key(),
+            'key': get_usda_api_key(api_key_path),
             'source_desc': "SURVEY",
             'year': year,
             'county_name': county
@@ -358,12 +351,13 @@ def get_data(params):
         raise
 
 
-def get_param_values(param):
+def get_param_values(param, api_key_path):
     """
     Retrieves possible values for a given parameter from the API.
 
     Args:
         param: The name of the parameter to retrieve values for.
+        api_key_path: Path of the file with the USDA API key.
 
     Returns:
         A list of possible values for the given parameter, or an empty list if 
@@ -372,7 +366,7 @@ def get_param_values(param):
     Raises:
         Exception: If an error occurs during the API request.
     """
-    params = {'key': get_usda_api_key(), 'param': param}
+    params = {'key': get_usda_api_key(api_key_path), 'param': param}
     try:
         response = requests.get(f'{API_BASE}/get_param_values',
                                 params=params).json()
@@ -476,45 +470,45 @@ def eprint(*args, **kwargs):
     print(*args, file=sys.stderr, **kwargs)
 
 
-def get_multiple_years():
+def get_multiple_years(start_year, mode, api_key_path):
     start = datetime.datetime.now()
     logging.info(f'Start, {start}')
     svs = load_svs()
-    start_year = _get_start_year()
     for year in range(start_year, datetime.datetime.now().year + 1):
-        process_survey_data(year, svs, "input", "output")
+        process_survey_data(year, svs, "input", "output", mode, api_key_path)
     end = datetime.datetime.now()
     logging.info(f'End, {end}')
     logging.info(f'Duration, {str(end - start)}')
 
 
-def load_usda_api_key():
+def load_usda_api_key(mode, api_key_path):
     """
     Sets the API key to be used.
     Since we are reading from a config file, this function simply
     ensures the key is available.
     """
-    if _get_mode() == "process":
+    if mode == "process":
         return "mock-key-for-process-mode"
-    api_key = get_usda_api_key()
+    api_key = get_usda_api_key(api_key_path)
     if not api_key:
         raise ValueError("USDA API key not found in bucket path.")
     return api_key
 
 
-def get_usda_api_key():
+def get_usda_api_key(api_key_path):
     """Reads the USDA API key from the bucket path."""
     # This function now correctly returns the key from the config module.
-    file_config = file_util.file_load_py_dict(_get_api_key_path())
+    file_config = file_util.file_load_py_dict(api_key_path)
     api_key = file_config.get('api_key')
     return api_key
 
 
 def main(_):
-    load_usda_api_key()
+    load_usda_api_key(_FLAGS.mode, _FLAGS.api_key)
     logging.info('USDA API key successfully loaded.')
-    get_multiple_years()
+    get_multiple_years(_FLAGS.start_year, _FLAGS.mode, _FLAGS.api_key)
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

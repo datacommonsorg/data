@@ -46,22 +46,26 @@ logging.set_verbosity(logging.INFO)
 
 # --- FLAG DEFINITIONS ---
 FLAGS = flags.FLAGS
-flags.DEFINE_string('project_id', 'datcom', 'GCP Project ID.')
-flags.DEFINE_string('bucket_name', 'datcom-prod-imports',
-                    'GCS Bucket for state storage.')
-flags.DEFINE_string('state_path',
-                    'scripts/noaa_gfs/NOAA_GlobalForecastSystem/state.json',
-                    'Path to state.json in GCS.')
-flags.DEFINE_string('output_gcs_prefix',
-                    'scripts/noaa_gfs/NOAA_GlobalForecastSystem/output/',
-                    'GCS prefix for CSVs.')
 
-flags.DEFINE_string('input', 'input_files',
-                    'Directory containing input GRIB files.')
-flags.DEFINE_string('forecast_hour', '000',
-                    'The forecast hour (e.g., 000, 003).')
-flags.DEFINE_integer('num_workers', cpu_count(),
-                     'Number of parallel processes.')
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('project_id', 'datcom', 'GCP Project ID.')
+    flags.DEFINE_string('bucket_name', 'datcom-prod-imports',
+                        'GCS Bucket for state storage.')
+    flags.DEFINE_string(
+        'state_path', 'scripts/noaa_gfs/NOAA_GlobalForecastSystem/state.json',
+        'Path to state.json in GCS.')
+    flags.DEFINE_string('output_gcs_prefix',
+                        'scripts/noaa_gfs/NOAA_GlobalForecastSystem/output/',
+                        'GCS prefix for CSVs.')
+    flags.DEFINE_string('input', 'input_files',
+                        'Directory containing input GRIB files.')
+    flags.DEFINE_string('forecast_hour', '000',
+                        'The forecast hour (e.g., 000, 003).')
+    flags.DEFINE_integer('num_workers', cpu_count(),
+                         'Number of parallel processes.')
+
 
 # --- PARAMETER & LEVEL MAPPING ---
 # Maps short GRIB names to standardized Data Commons variable names
@@ -336,12 +340,13 @@ def construct_dcid(param_raw, level_raw):
     return dcid
 
 
-def update_state_json(latest_date, latest_cycle):
+def update_state_json(latest_date, latest_cycle, project_id, bucket_name,
+                      state_path):
     """Uploads the newest processed checkpoint to GCS."""
     try:
-        client = storage.Client(project=FLAGS.project_id)
-        bucket = client.bucket(FLAGS.bucket_name)
-        blob = bucket.blob(FLAGS.state_path)
+        client = storage.Client(project=project_id)
+        bucket = client.bucket(bucket_name)
+        blob = bucket.blob(state_path)
 
         # 1. Get existing state to preserve BigQuery progress
         state = {}
@@ -557,7 +562,8 @@ def worker_process(args):
     return temp_path
 
 
-def grib_statvar_processor(input_path, gcs_blob_name):
+def grib_statvar_processor(input_path, gcs_blob_name, forecast_hour,
+                           num_workers, project_id, bucket_name):
     """
     Converts the specified GRIB file into a Data Commons compatible CSV format.
     """
@@ -580,7 +586,7 @@ def grib_statvar_processor(input_path, gcs_blob_name):
                              lons_raw).astype(np.float32)
         grbs.close()
 
-        num_workers = min(FLAGS.num_workers, total_messages)
+        num_workers = min(num_workers, total_messages)
         chunk_size = total_messages // num_workers
         tasks = []
         for i in range(num_workers):
@@ -588,18 +594,18 @@ def grib_statvar_processor(input_path, gcs_blob_name):
             end = total_messages if i == num_workers - 1 else (i +
                                                                1) * chunk_size
             tasks.append((str(input_path), start, end, i, lats_flat, lons_flat,
-                          FLAGS.forecast_hour, str(local_temp_base)))
+                          forecast_hour, str(local_temp_base)))
 
         with Pool(num_workers) as pool:
             temp_files = pool.map(worker_process, tasks)
 
         # Merge and Stream to GCS
-        client = storage.Client(project=FLAGS.project_id)
-        bucket = client.bucket(FLAGS.bucket_name)
+        client = storage.Client(project=project_id)
+        bucket = client.bucket(bucket_name)
         blob = bucket.blob(gcs_blob_name)
 
         logging.info(
-            f"Uploading merged results to gs://{FLAGS.bucket_name}/{gcs_blob_name}..."
+            f"Uploading merged results to gs://{bucket_name}/{gcs_blob_name}..."
         )
         final_local_csv = f"{local_temp_base}.final"
         with open(final_local_csv, 'wb') as f_final:
@@ -623,13 +629,14 @@ def grib_statvar_processor(input_path, gcs_blob_name):
         return False
 
 
-def main(argv):
-    """Entry point for the GRIB processing script."""
-    input_dir = Path(FLAGS.input)
-    files_to_process = sorted(list(input_dir.rglob('gfs.t*')))
+def run(project_id: str, bucket_name: str, state_path: str,
+        output_gcs_prefix: str, input_dir: str, forecast_hour: str,
+        num_workers: int) -> None:
+    """Converts each GRIB file under input_dir to CSV and updates the state."""
+    files_to_process = sorted(list(Path(input_dir).rglob('gfs.t*')))
 
     if not files_to_process:
-        logging.warning(f"No files found in {FLAGS.input}")
+        logging.warning(f"No files found in {input_dir}")
         return
 
     logging.info(f"Found {len(files_to_process)} files to process.")
@@ -643,16 +650,18 @@ def main(argv):
         if date_match and cycle_match:
             date_str = date_match.group(1)
             cycle_str = cycle_match.group(1)
-            f_hour = FLAGS.forecast_hour
+            f_hour = forecast_hour
 
             gcs_filename = f"noaa_gfs_output_{date_str}_{cycle_str}_{f_hour}.csv"
-            gcs_full_path = f"{FLAGS.output_gcs_prefix.strip('/')}/{gcs_filename}"
+            gcs_full_path = f"{output_gcs_prefix.strip('/')}/{gcs_filename}"
 
-            if grib_statvar_processor(input_path, gcs_full_path):
+            if grib_statvar_processor(input_path, gcs_full_path, forecast_hour,
+                                      num_workers, project_id, bucket_name):
                 logging.info(
                     f"Successfully processed {date_str} {cycle_str}z. Updating state..."
                 )
-                update_state_json(date_str, cycle_str)
+                update_state_json(date_str, cycle_str, project_id, bucket_name,
+                                  state_path)
             else:
                 raise RuntimeError(f"Pipeline failed at file: {path_str}")
         else:
@@ -660,5 +669,18 @@ def main(argv):
                 f"Could not extract date/cycle from {path_str}; skipping.")
 
 
+def main(argv):
+    """Entry point for the GRIB processing script."""
+    del argv  # Unused.
+    run(project_id=FLAGS.project_id,
+        bucket_name=FLAGS.bucket_name,
+        state_path=FLAGS.state_path,
+        output_gcs_prefix=FLAGS.output_gcs_prefix,
+        input_dir=FLAGS.input,
+        forecast_hour=FLAGS.forecast_hour,
+        num_workers=FLAGS.num_workers)
+
+
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

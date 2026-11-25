@@ -24,10 +24,6 @@ import tempfile
 import unittest
 import zipfile
 
-from absl import flags
-
-_FLAGS = flags.FLAGS
-
 module_dir_ = os.path.dirname(__file__)
 
 sys.path.append(module_dir_)
@@ -49,7 +45,7 @@ class TestCriteriaGasesTest(unittest.TestCase):
                         'test_data/test_aggregate_import_data_county.csv'),
                     'r') as f:
                 test_csv = os.path.join(tmp_dir, 'test_csv.csv')
-                create_csv(test_csv)
+                create_csv('test_csv.csv', tmp_dir)
 
                 reader = csv.DictReader(f)
                 write_csv(test_csv, reader)
@@ -71,7 +67,7 @@ class TestCriteriaGasesTest(unittest.TestCase):
                         'test_data/test_aggregate_import_data_cbsa.csv'),
                     'r') as f:
                 test_csv = os.path.join(tmp_dir, 'test_csv.csv')
-                create_csv(test_csv)
+                create_csv('test_csv.csv', tmp_dir)
 
                 reader = csv.DictReader(f)
                 write_csv(test_csv, reader)
@@ -84,21 +80,9 @@ class TestCriteriaGasesTest(unittest.TestCase):
                         self.assertEqual(test_str, expected_str)
                 os.remove(test_csv)
 
-    @classmethod
-    def setUpClass(cls):
-        #from absl import flags
-        if not flags.FLAGS.is_parsed():
-            flags.FLAGS(["air_quality_aggregate_test.py"])
-
     def test_process_generates_correct_output(self):
         with tempfile.TemporaryDirectory(
         ) as tmp_input_dir, tempfile.TemporaryDirectory() as tmp_output_dir:
-            # Update FLAGS
-            _FLAGS.input_file_path = tmp_input_dir
-            _FLAGS.output_file_path = tmp_output_dir
-            _FLAGS.aggregate_start_year = 2020
-            _FLAGS.aggregate_end_year = 2021  # only 2020 will be processed
-
             # Sample CSV row
             row = {
                 'Date': '2020-01-01',
@@ -125,7 +109,7 @@ class TestCriteriaGasesTest(unittest.TestCase):
                     zipf.writestr(f"{prefix}.csv", csv_bytes)
 
             # Run the process method
-            process(tmp_input_dir, 2020, 2021)
+            process(tmp_input_dir, 2020, 2021, tmp_output_dir)
 
             # Check if the output files were created
             expected_csv_path = os.path.join(MODULE_DIR, tmp_output_dir,

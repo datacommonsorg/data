@@ -29,40 +29,44 @@ from google.cloud import storage
 
 # --- FLAG DEFINITIONS ---
 FLAGS = flags.FLAGS
-flags.DEFINE_string('project_id', 'datcom-external', 'GCP Project ID.')
-flags.DEFINE_string('bucket_name', 'datcom-prod-imports',
-                    'GCS Bucket containing the CSVs.')
-flags.DEFINE_string('gcs_prefix',
-                    'scripts/noaa_gfs/NOAA_GlobalForecastSystem/output/',
-                    'GCS prefix (folder path).')
-flags.DEFINE_string('state_path',
-                    'scripts/noaa_gfs/NOAA_GlobalForecastSystem/state.json',
-                    'Path to state.json in GCS.')
-flags.DEFINE_string('dataset_id', 'NOAA_GFS_data_commons',
-                    'BigQuery Dataset ID.')
-flags.DEFINE_string('staging_dataset_id', 'NOAA_GFS_Staging',
-                    'BigQuery Staging Dataset ID.')
-flags.DEFINE_string('table_id', 'Observation', 'BigQuery Table ID.')
-flags.DEFINE_string('staging_table_id', 'Observation_Staging',
-                    'Temporary Staging Table ID.')
 
 
-def get_gcs_client():
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('project_id', 'datcom-external', 'GCP Project ID.')
+    flags.DEFINE_string('bucket_name', 'datcom-prod-imports',
+                        'GCS Bucket containing the CSVs.')
+    flags.DEFINE_string('gcs_prefix',
+                        'scripts/noaa_gfs/NOAA_GlobalForecastSystem/output/',
+                        'GCS prefix (folder path).')
+    flags.DEFINE_string(
+        'state_path', 'scripts/noaa_gfs/NOAA_GlobalForecastSystem/state.json',
+        'Path to state.json in GCS.')
+    flags.DEFINE_string('dataset_id', 'NOAA_GFS_data_commons',
+                        'BigQuery Dataset ID.')
+    flags.DEFINE_string('staging_dataset_id', 'NOAA_GFS_Staging',
+                        'BigQuery Staging Dataset ID.')
+    flags.DEFINE_string('table_id', 'Observation', 'BigQuery Table ID.')
+    flags.DEFINE_string('staging_table_id', 'Observation_Staging',
+                        'Temporary Staging Table ID.')
+
+
+def get_gcs_client(project_id):
     """Initializes the GCS client with a specific Project ID."""
-    return storage.Client(project=FLAGS.project_id)
+    return storage.Client(project=project_id)
 
 
-def load_state():
+def load_state(project_id, bucket_name, state_path):
     """Reads state from GCS. Returns default if file doesn't exist."""
-    client = get_gcs_client()
-    bucket = client.bucket(FLAGS.bucket_name)
-    blob = bucket.blob(FLAGS.state_path)
+    client = get_gcs_client(project_id)
+    bucket = client.bucket(bucket_name)
+    blob = bucket.blob(state_path)
 
     try:
         state_data = blob.download_as_text()
         data = json.loads(state_data)
         logging.info(
-            f"Successfully loaded state: {data.get('bq_ingest')} from gs://{FLAGS.bucket_name}/{FLAGS.state_path}"
+            f"Successfully loaded state: {data.get('bq_ingest')} from gs://{bucket_name}/{state_path}"
         )
         return data
     except exceptions.NotFound:
@@ -70,12 +74,13 @@ def load_state():
         return {}
 
 
-def update_bq_state(latest_date, latest_cycle):
+def update_bq_state(latest_date, latest_cycle, project_id, bucket_name,
+                    state_path):
     """Updates the bq_ingest key in the state.json ."""
     try:
-        client = get_gcs_client()
-        bucket = client.bucket(FLAGS.bucket_name)
-        blob = bucket.blob(FLAGS.state_path)
+        client = get_gcs_client(project_id)
+        bucket = client.bucket(bucket_name)
+        blob = bucket.blob(state_path)
 
         # Download existing to preserve 'date' and 'cycle' from grib_statvar_processor.py
         state = {}
@@ -100,14 +105,14 @@ def update_bq_state(latest_date, latest_cycle):
         raise
 
 
-def run_mapping_query(bq_client):
+def run_mapping_query(bq_client, project_id, dataset_id, table_id,
+                      staging_table):
     """
     Executes the SQL transformation to map data from Staging to Final table.
     """
-    final_table = f"{FLAGS.project_id}.{FLAGS.dataset_id}.{FLAGS.table_id}"
-    staging_table = f"{FLAGS.project_id}.{FLAGS.staging_dataset_id}.{FLAGS.staging_table_id}"
-    variable_table = f"{FLAGS.project_id}.{FLAGS.dataset_id}.Variable"
-    place_table = f"{FLAGS.project_id}.{FLAGS.dataset_id}.Place"
+    final_table = f"{project_id}.{dataset_id}.{table_id}"
+    variable_table = f"{project_id}.{dataset_id}.Variable"
+    place_table = f"{project_id}.{dataset_id}.Place"
 
     query = f"""
     INSERT INTO `{final_table}` (
@@ -157,12 +162,10 @@ def run_mapping_query(bq_client):
         return False
 
 
-def upload_gcs_to_staging(bq_client, gcs_uri):
+def upload_gcs_to_staging(bq_client, gcs_uri, table_ref):
     """
     Loads raw CSV data into the Staging table.
     """
-    table_ref = f"{FLAGS.project_id}.{FLAGS.staging_dataset_id}.{FLAGS.staging_table_id}"
-
     job_config = bigquery.LoadJobConfig(
         source_format=bigquery.SourceFormat.CSV,
         skip_leading_rows=1,
@@ -182,20 +185,22 @@ def upload_gcs_to_staging(bq_client, gcs_uri):
         return False
 
 
-def main(argv):
-    """Entry point for the GCS-to-BigQuery ingestion script."""
+def run(project_id: str, bucket_name: str, gcs_prefix: str, state_path: str,
+        dataset_id: str, staging_dataset_id: str, table_id: str,
+        staging_table_id: str) -> None:
+    """Loads new GFS CSVs from GCS into BigQuery and updates the state."""
     # Initialize Clients
-    bq_client = bigquery.Client(project=FLAGS.project_id)
-    storage_client = get_gcs_client()
+    bq_client = bigquery.Client(project=project_id)
+    storage_client = get_gcs_client(project_id)
 
     # 1. Load progress
-    state = load_state()
+    state = load_state(project_id, bucket_name, state_path)
     bq_progress = state.get('bq_ingest', {"date": "00000000", "cycle": "00"})
     last_key = f"{bq_progress['date']}_{bq_progress['cycle']}"
 
     # 2. Filter GCS CSVs
-    bucket = storage_client.bucket(FLAGS.bucket_name)
-    blobs = bucket.list_blobs(prefix=FLAGS.gcs_prefix)
+    bucket = storage_client.bucket(bucket_name)
+    blobs = bucket.list_blobs(prefix=gcs_prefix)
 
     to_ingest = []
     for blob in blobs:
@@ -210,7 +215,7 @@ def main(argv):
             f_date, f_cycle = match.groups()
             if f"{f_date}_{f_cycle}" > last_key:
                 to_ingest.append(
-                    (f"gs://{FLAGS.bucket_name}/{blob.name}", f_date, f_cycle))
+                    (f"gs://{bucket_name}/{blob.name}", f_date, f_cycle))
 
     if not to_ingest:
         logging.info("Everything is up to date in BigQuery.")
@@ -220,7 +225,7 @@ def main(argv):
 
     # 3. Process Batch
     # Ensure staging is clean before starting a new batch
-    staging_table = f"{FLAGS.project_id}.{FLAGS.staging_dataset_id}.{FLAGS.staging_table_id}"
+    staging_table = f"{project_id}.{staging_dataset_id}.{staging_table_id}"
     bq_client.query(f"TRUNCATE TABLE `{staging_table}`").result()
 
     success_count = 0
@@ -228,7 +233,7 @@ def main(argv):
         'cycle']
 
     for uri, f_date, f_cycle in to_ingest:
-        if upload_gcs_to_staging(bq_client, uri):
+        if upload_gcs_to_staging(bq_client, uri, staging_table):
             success_count += 1
             if f"{f_date}_{f_cycle}" > f"{current_max_date}_{current_max_cycle}":
                 current_max_date, current_max_cycle = f_date, f_cycle
@@ -239,11 +244,27 @@ def main(argv):
 
     # 4. Finalize
     if success_count > 0:
-        if not run_mapping_query(bq_client):
+        if not run_mapping_query(bq_client, project_id, dataset_id, table_id,
+                                 staging_table):
             raise RuntimeError("BigQuery ingestion failed. Terminating.")
 
-        update_bq_state(current_max_date, current_max_cycle)
+        update_bq_state(current_max_date, current_max_cycle, project_id,
+                        bucket_name, state_path)
+
+
+def main(argv):
+    """Entry point for the GCS-to-BigQuery ingestion script."""
+    del argv  # Unused.
+    run(project_id=FLAGS.project_id,
+        bucket_name=FLAGS.bucket_name,
+        gcs_prefix=FLAGS.gcs_prefix,
+        state_path=FLAGS.state_path,
+        dataset_id=FLAGS.dataset_id,
+        staging_dataset_id=FLAGS.staging_dataset_id,
+        table_id=FLAGS.table_id,
+        staging_table_id=FLAGS.staging_table_id)
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)
