@@ -23,7 +23,8 @@ BASE_PATH = os.path.dirname(os.path.abspath(__file__))
 # Outputs to source_files to match manifest.json
 OUTPUT_DIR = os.path.join(BASE_PATH, "source_files")
 PVMAP_PATH = os.path.join(BASE_PATH, "StatisticsPoland_pvmap.csv")
-GCS_TEMPLATE_PATH = os.environ.get("BDL_GCS_TEMPLATE_PATH", "").strip()
+_SECRET_RESOURCE_PATTERN = re.compile(
+    r"^projects/[^/]+/secrets/[^/]+/versions/[^/]+$")
 
 API_BASE_URL = "https://bdl.stat.gov.pl/api/v1"
 SUBJECT_ID = "P3447"
@@ -100,6 +101,12 @@ def _fetch_secret_api_key(secret_resource=None):
                 os.environ.get("BDL_API_SECRET_RESOURCE", "")).strip()
     if not resource:
         return ""
+    if not _SECRET_RESOURCE_PATTERN.match(resource):
+        logging.warning(
+            "Invalid Secret Manager resource path in BDL_API_SECRET_RESOURCE; "
+            "expected 'projects/<project>/secrets/<secret>/versions/<version>'. "
+            "Falling back to anonymous access.")
+        return ""
     try:
         from google.cloud import secretmanager  # pylint: disable=import-outside-toplevel
         client = secretmanager.SecretManagerServiceClient()
@@ -108,8 +115,8 @@ def _fetch_secret_api_key(secret_resource=None):
         return response.payload.data.decode("utf-8").strip()
     except Exception as e:  # pylint: disable=broad-exception-caught
         logging.warning(
-            "Failed to read BDL API key from Secret Manager resource '%s': %s",
-            resource,
+            "Failed to read BDL API key from configured Secret Manager resource "
+            "(%s); falling back to anonymous access.",
             type(e).__name__,
         )
         return ""
@@ -140,7 +147,7 @@ def build_canonical_template(reference_year="2024"):
 
 def load_template_from_gcs(gcs_path=None):
     """Loads an optional override template CSV from GCS or returns canonical 108-col template."""
-    target_path = (GCS_TEMPLATE_PATH
+    target_path = (os.environ.get("BDL_GCS_TEMPLATE_PATH", "")
                    if gcs_path is None else str(gcs_path)).strip()
     if not target_path:
         return build_canonical_template()
@@ -548,14 +555,15 @@ def download_and_process():
         expected_non_total_ages.add(str(age))
 
         target_age = AGE_STEMS.get(age, age)
+        target_age_no_space = target_age.replace(" ", "")
+        age_pattern = rf'(?<!\d|-){re.escape(target_age_no_space)}(?!\d|-)'
         sex_stems = SEX_STEMS.get(sex, [])
         loc_stems = LOC_STEMS.get(loc, [])
 
         var_id = None
         for vid, vname in v_metadata.items():
             name_no_space = vname.replace(" ", "")
-            target_age_no_space = target_age.replace(" ", "")
-            if target_age_no_space not in name_no_space:
+            if not re.search(age_pattern, name_no_space):
                 continue
 
             if sex_stems:
@@ -635,6 +643,7 @@ def download_and_process():
         raise RuntimeError(error_msg)
 
     min_age_count = max(1, len(expected_non_total_ages))
+    staged_outputs = {}
 
     for year in sorted(downloaded_years):
         year_df = full_df[full_df['Year'] == year]
@@ -681,12 +690,26 @@ def download_and_process():
             raise RuntimeError(f"Incomplete population matrix for year {year}: "
                                f"{missing_count} missing/NaN cell(s) detected.")
 
-        out_path = os.path.join(OUTPUT_DIR,
-                                f"StatisticsPoland_input_{year}.csv")
+        staged_outputs[year] = final_df
+
+    written_filenames = set()
+    for year, final_df in staged_outputs.items():
+        filename = f"StatisticsPoland_input_{year}.csv"
+        out_path = os.path.join(OUTPUT_DIR, filename)
         temp_out_path = f"{out_path}.tmp"
         final_df.to_csv(temp_out_path)
         os.replace(temp_out_path, out_path)
+        written_filenames.add(filename)
         logging.info(f"Generated: {out_path}")
+
+    for existing_name in os.listdir(OUTPUT_DIR):
+        if not existing_name.startswith("StatisticsPoland_input_"):
+            continue
+        if (existing_name.endswith(".csv") and existing_name
+                not in written_filenames) or existing_name.endswith(".csv.tmp"):
+            stale_path = os.path.join(OUTPUT_DIR, existing_name)
+            os.remove(stale_path)
+            logging.info(f"Removed stale input file: {stale_path}")
 
 
 def main(argv=None):

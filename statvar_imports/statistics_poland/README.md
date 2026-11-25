@@ -36,10 +36,13 @@ Statistical Office of Poland (Główny Urząd Statystyczny - GUS) Bank Danych Lo
   ```
 - **Canonical Output Schema:** `download_input_data.py` constructs the 17 `(Code, Name)` rows and all
   108 `(Age, Sex, Location)` columns directly from canonical constants (optional GCS override via
-  `GCS_TEMPLATE_PATH`), enforcing full batch/unit/age-cohort completeness before writing any annual CSV.
+  `BDL_GCS_TEMPLATE_PATH`), enforcing full batch/unit/age-cohort completeness across all downloaded
+  years before atomically updating `source_files/`.
 - **StatVar Resolution:** All 108 StatVars are pre-registered in Data Commons
-  (`https://github.com/datacommonsorg/schema/blob/main/stat_vars/poland_stat_vars.mcf` and
-  `gs://unresolved_mcf/scripts/statvar/stat_vars.mcf`), resolving with `0` runtime-minted StatVars.
+  (`https://github.com/datacommonsorg/schema/blob/main/stat_vars/poland_stat_vars.mcf` plus base
+  schema): `45 / 108` resolve offline from `gs://unresolved_mcf/scripts/statvar/stat_vars.mcf` and
+  `63 / 108` Polish functional age-cohort StatVars resolve via live `api.datacommons.org`
+  reconciliation, emitting `0` runtime-minted StatVars.
 
 ## Processing Instructions
 
@@ -82,9 +85,13 @@ Run the hermetic unit tests via the repository test runner:
 ```
 
 ## Validation & Quality Rules
-Validation is configured in `validation_config.json` (plus repository defaults):
-1. `check_all_statvars_freshness` (`SQL_VALIDATOR`): Asserts `MaxDate >= '2025' AND total_svs = 108`.
-2. `check_min_date_consistent` (`SQL_VALIDATOR`): Asserts `MinDate = '2003' AND total_svs = 108`.
+Validation is configured in `validation_config.json` (plus repository defaults such as
+`check_deleted_records_percent` at `threshold: 0.1%`):
+1. `check_all_statvars_freshness` (`SQL_VALIDATOR`): Asserts
+   `COALESCE(TRY_CAST(MaxDate AS INTEGER), 0) >= EXTRACT(YEAR FROM CURRENT_DATE - INTERVAL '6 months') - 1 AND total_svs = 108`
+   (with an `EMPTY_STATS_GUARD` row so empty/null `stats` tables fail loudly).
+2. `check_min_date_consistent` (`SQL_VALIDATOR`): Asserts
+   `COALESCE(CAST(MinDate AS VARCHAR), '') = '2003' AND total_svs = 108` (with `EMPTY_STATS_GUARD`).
 3. `check_max_date_consistent` (`MAX_DATE_CONSISTENT`): Enforces uniform `MaxDate` across all 108 StatVars.
 4. `check_num_places_count` (`NUM_PLACES_COUNT`): Enforces `17` places (`country/POL` + 16 `AdministrativeArea1` voivodeships) per StatVar.
 5. `check_num_observations` (`NUM_OBSERVATIONS_CHECK`): Enforces `>= 391` observations per StatVar (`17 places x 23 years`).

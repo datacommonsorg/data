@@ -40,6 +40,19 @@ class DownloadInputDataTest(unittest.TestCase):
                 self.assertEqual(_fetch_secret_api_key(), '')
                 mock_sm.assert_not_called()
 
+        with patch.dict(
+                os.environ,
+            {'BDL_API_SECRET_RESOURCE': 'accidental-raw-secret-uuid-999'},
+                clear=True):
+            with patch('google.cloud.secretmanager.SecretManagerServiceClient'
+                      ) as mock_sm_bad:
+                with self.assertLogs(level='WARNING') as cm_bad:
+                    self.assertEqual(_fetch_secret_api_key(), '')
+                mock_sm_bad.assert_not_called()
+                self.assertFalse(
+                    any('accidental-raw-secret-uuid-999' in line
+                        for line in cm_bad.output))
+
         mock_client = MagicMock()
         mock_resp = MagicMock()
         mock_resp.payload.data = b'  rotated-secret-key \n'
@@ -62,6 +75,7 @@ class DownloadInputDataTest(unittest.TestCase):
                     any('PermissionError' in line for line in cm.output),
                     f'Expected PermissionError warning in logs, got: {cm.output}',
                 )
+                self.assertFalse(any(resource in line for line in cm.output))
 
     def test_get_request_headers_runtime_and_strip(self):
         with patch.dict(os.environ, {}, clear=True):
@@ -197,6 +211,13 @@ class DownloadInputDataTest(unittest.TestCase):
 
         df = load_template_from_gcs("gs://test-bucket/test-template.csv")
         self.assertEqual(len(df.columns), 2)
+
+        with patch.dict(
+                os.environ,
+            {'BDL_GCS_TEMPLATE_PATH': 'gs://test-bucket/env-template.csv'},
+                clear=True):
+            env_df = load_template_from_gcs()
+            self.assertEqual(len(env_df.columns), 2)
 
         mock_storage_client.side_effect = RuntimeError("GCS unreachable")
         fallback_df = load_template_from_gcs(
@@ -430,6 +451,133 @@ class DownloadInputDataTest(unittest.TestCase):
         with self.assertRaises(RuntimeError) as ctx:
             download_and_process()
         self.assertIn("Failed to match variable for slice", str(ctx.exception))
+
+    @patch('download_input_data.fetch_units')
+    @patch('download_input_data.fetch_variables')
+    @patch('download_input_data.load_template_from_gcs')
+    @patch('download_input_data.make_request')
+    def test_age_digit_boundaries_and_atomic_multi_year_staging(
+            self, mock_make_request, mock_load_template, mock_fetch_vars,
+            mock_fetch_units):
+        template_index = pd.MultiIndex.from_tuples([('0', 'POLAND')],
+                                                   names=['Code', 'Name'])
+        template_columns = pd.MultiIndex.from_tuples(
+            [
+                ('0-2', 'total', 'total', '2024'),
+                ('65 and more', 'total', 'total', '2024'),
+            ],
+            names=['Age', 'Sex', 'Location', 'Year'])
+        mock_load_template.return_value = pd.DataFrame(10,
+                                                       index=template_index,
+                                                       columns=template_columns)
+        # List '20-24' BEFORE '0-2' and '15-65' BEFORE '65 i więcej' to ensure
+        # digit/hyphen boundaries prevent false substring matches.
+        mock_fetch_vars.return_value = {
+            '901': 'ludność 20-24 lata',
+            '902': 'ludność 15-65 lat',
+            '101': 'ludność 0-2 lata',
+            '102': 'ludność 65 i więcej',
+        }
+        mock_fetch_units.return_value = [('000000000000', 'POLSKA')]
+
+        def ok_two_years(session, url, headers=None, params=None, timeout=60):
+            r = requests.Response()
+            r.status_code = 200
+            r._content = b'''{
+                "results": [
+                    {"id": 101, "values": [{"year": 2024, "val": 10}, {"year": 2025, "val": 11}]},
+                    {"id": 102, "values": [{"year": 2024, "val": 20}, {"year": 2025, "val": 22}]}
+                ]
+            }'''
+            return r
+
+        mock_make_request.side_effect = ok_two_years
+        with tempfile.TemporaryDirectory() as temp_dir:
+            stale_file = os.path.join(temp_dir,
+                                      "StatisticsPoland_input_1999.csv")
+            with open(stale_file, "w", encoding="utf-8") as f:
+                f.write("stale\n")
+            with patch('download_input_data.OUTPUT_DIR', temp_dir):
+                download_and_process()
+            self.assertFalse(os.path.exists(stale_file))
+            self.assertTrue(
+                os.path.exists(
+                    os.path.join(temp_dir, "StatisticsPoland_input_2024.csv")))
+            self.assertTrue(
+                os.path.exists(
+                    os.path.join(temp_dir, "StatisticsPoland_input_2025.csv")))
+
+        # If 2025 is missing an age cohort, 2024 must NOT be written before aborting.
+        def fail_second_year(session,
+                             url,
+                             headers=None,
+                             params=None,
+                             timeout=60):
+            r = requests.Response()
+            r.status_code = 200
+            r._content = b'''{
+                "results": [
+                    {"id": 101, "values": [{"year": 2024, "val": 10}, {"year": 2025, "val": 11}]},
+                    {"id": 102, "values": [{"year": 2024, "val": 20}]}
+                ]
+            }'''
+            return r
+
+        mock_make_request.side_effect = fail_second_year
+        with tempfile.TemporaryDirectory() as temp_dir:
+            with patch('download_input_data.OUTPUT_DIR', temp_dir):
+                with self.assertRaises(RuntimeError):
+                    download_and_process()
+            self.assertEqual(os.listdir(temp_dir), [])
+
+    def test_stat_var_processor_hermetic_parity_on_test_fixture(self):
+        repo_root = os.path.abspath(os.path.join(CURRENT_DIR, '..', '..'))
+        for rel in ('', 'tools/statvar_importer', 'util'):
+            candidate = os.path.join(repo_root, rel) if rel else repo_root
+            if candidate not in sys.path:
+                sys.path.insert(0, candidate)
+
+        from absl import flags
+        import config_flags
+        import stat_var_processor
+
+        if not flags.FLAGS.is_parsed():
+            flags.FLAGS([sys.argv[0]])
+
+        metadata_path = os.path.join(CURRENT_DIR,
+                                     'StatisticsPoland_metadata.csv')
+        pvmap_path = os.path.join(CURRENT_DIR, 'StatisticsPoland_pvmap.csv')
+        test_input = os.path.join(CURRENT_DIR, 'test',
+                                  'StatisticsPoland_input.csv')
+        expected_csv = os.path.join(CURRENT_DIR, 'test',
+                                    'StatisticsPoland_output.csv')
+        expected_tmcf = os.path.join(CURRENT_DIR, 'test',
+                                     'StatisticsPoland_output.tmcf')
+
+        cfg = config_flags.init_config_from_flags(metadata_path)
+        cfg.add_configs({
+            'recon_lookup_api': False,
+            'generate_statvar_mcf': False,
+            'generate_schema_mcf': False,
+            'existing_statvar_mcf': '',
+        })
+
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            out_prefix = os.path.join(tmp_dir, 'StatisticsPoland_output')
+            ok = stat_var_processor.process(
+                data_processor_class=stat_var_processor.StatVarDataProcessor,
+                input_data=[test_input],
+                output_path=out_prefix,
+                config=cfg.get_configs(),
+                pv_map_files=[pvmap_path],
+            )
+            self.assertTrue(ok)
+            with open(f'{out_prefix}.csv', encoding='utf-8') as f_act, open(
+                    expected_csv, encoding='utf-8') as f_exp:
+                self.assertEqual(f_act.read(), f_exp.read())
+            with open(f'{out_prefix}.tmcf', encoding='utf-8') as f_act, open(
+                    expected_tmcf, encoding='utf-8') as f_exp:
+                self.assertEqual(f_act.read(), f_exp.read())
 
 
 if __name__ == '__main__':
