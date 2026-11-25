@@ -17,19 +17,25 @@ import csv
 import os
 import re
 import tempfile
+import time
 
 from absl import app
 from absl import flags
 from absl import logging
 import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
+DEFAULT_BACKOFF_FACTOR = 1.0
 DEFAULT_INDICATOR_ID = '27D371A'
+DEFAULT_MAX_RETRIES = 3
 DEFAULT_OUTPUT_DIR = os.path.join(_SCRIPT_DIR, 'input_files')
 DEFAULT_TIMEOUT_SECONDS = 300
 OUTPUT_FILENAME = 'adolescent_birth_rate_input.csv'
 RATE_COLUMN = 'RATE_PER_1000_N'
+RETRYABLE_STATUS_CODES = (429, 500, 502, 503, 504)
 SOURCE_URL_TEMPLATE = (
     'https://srhdpeuwpubsa.blob.core.windows.net/whdh/DATADOT/INDICATOR/'
     '{indicator_id}_ALL_LATEST.csv')
@@ -50,7 +56,7 @@ def _define_flags() -> None:
     flags.DEFINE_string(
         'input_url',
         '',
-        'Optional source CSV URL override; defaults to --indicator_id template.',
+        'Optional CSV URL override; defaults to --indicator_id template.',
         allow_override=True,
     )
     flags.DEFINE_string(
@@ -61,8 +67,10 @@ def _define_flags() -> None:
     )
 
 
-def build_source_url(indicator_id: str = DEFAULT_INDICATOR_ID,
-                     input_url: str = '') -> str:
+def build_source_url(
+    indicator_id: str = DEFAULT_INDICATOR_ID,
+    input_url: str = '',
+) -> str:
     """Returns the source CSV URL from --input_url or --indicator_id."""
     explicit_url = input_url.strip()
     if explicit_url:
@@ -72,6 +80,82 @@ def build_source_url(indicator_id: str = DEFAULT_INDICATOR_ID,
         raise ValueError(
             'Either non-empty indicator_id or input_url must be provided.')
     return SOURCE_URL_TEMPLATE.format(indicator_id=clean_indicator)
+
+
+def create_retry_session(
+    max_retries: int = DEFAULT_MAX_RETRIES,
+    backoff_factor: float = DEFAULT_BACKOFF_FACTOR,
+) -> requests.Session:
+    """Creates a requests.Session with retry/backoff for transient errors."""
+    retry_strategy = Retry(
+        total=max_retries,
+        connect=max_retries,
+        read=max_retries,
+        status=max_retries,
+        backoff_factor=backoff_factor,
+        status_forcelist=RETRYABLE_STATUS_CODES,
+        allowed_methods=frozenset(['GET']),
+        respect_retry_after_header=True,
+        raise_on_status=False,
+    )
+    adapter = HTTPAdapter(max_retries=retry_strategy)
+    http_session = requests.Session()
+    http_session.mount('https://', adapter)
+    http_session.mount('http://', adapter)
+    return http_session
+
+
+def _is_permanent_4xx(err: requests.exceptions.RequestException) -> bool:
+    """Returns True for non-429 4xx HTTP errors that must not be retried."""
+    if not isinstance(err, requests.exceptions.HTTPError):
+        return False
+    resp = err.response
+    status = resp.status_code if resp is not None else None
+    return status is not None and 400 <= status < 500 and status != 429
+
+
+def _download_to_path(
+    http_session: requests.Session,
+    source_url: str,
+    dest_path: str,
+    timeout_seconds: int,
+    max_retries: int,
+    backoff_factor: float,
+) -> None:
+    """Streams source_url to dest_path, retrying mid-stream interruptions."""
+    total_attempts = max(max_retries, 0) + 1
+    for attempt in range(total_attempts):
+        headers_received = False
+        resp_ctx = http_session.get(
+            source_url,
+            stream=True,
+            timeout=timeout_seconds,
+        )
+        try:
+            with resp_ctx as resp:
+                resp.raise_for_status()
+                headers_received = True
+                with open(dest_path, 'wb') as out_file:
+                    for chunk in resp.iter_content(chunk_size=8192):
+                        if chunk:
+                            out_file.write(chunk)
+            return
+        except requests.exceptions.RequestException as err:
+            can_retry = headers_received and not _is_permanent_4xx(err)
+            if not can_retry or attempt + 1 >= total_attempts:
+                raise
+            delay = backoff_factor * (2**attempt)
+            logging.warning(
+                'Stream interrupted from %s (attempt %d/%d): %s; '
+                'retrying in %.1fs...',
+                source_url,
+                attempt + 1,
+                total_attempts,
+                err,
+                delay,
+            )
+            if delay > 0:
+                time.sleep(delay)
 
 
 def normalize_rate_value(val: str) -> str:
@@ -121,48 +205,62 @@ def download_full_who_data(
     input_url: str = '',
     output_dir: str = DEFAULT_OUTPUT_DIR,
     timeout_seconds: int = DEFAULT_TIMEOUT_SECONDS,
+    max_retries: int = DEFAULT_MAX_RETRIES,
+    backoff_factor: float = DEFAULT_BACKOFF_FACTOR,
+    session: requests.Session | None = None,
 ) -> str:
     """Downloads, validates, and normalizes the WHO Adolescent Birth Rate CSV."""
+    source_url = build_source_url(
+        indicator_id=indicator_id,
+        input_url=input_url,
+    )
     os.makedirs(output_dir, exist_ok=True)
     filename = os.path.join(output_dir, OUTPUT_FILENAME)
-    source_url = build_source_url(indicator_id=indicator_id,
-                                  input_url=input_url)
 
     logging.info('Requesting full historical CSV from %s...', source_url)
     raw_tmp_path: str | None = None
     norm_tmp_path: str | None = None
+    owned_session: requests.Session | None = None
+    active_session = session
+    if active_session is None:
+        owned_session = create_retry_session(
+            max_retries=max_retries,
+            backoff_factor=backoff_factor,
+        )
+        active_session = owned_session
 
     try:
-        with tempfile.NamedTemporaryFile(
-                mode='wb',
-                dir=output_dir,
-                prefix='.raw_who_',
-                suffix='.csv',
-                delete=False,
-        ) as raw_tmp:
-            raw_tmp_path = raw_tmp.name
-            with requests.get(source_url, stream=True,
-                              timeout=timeout_seconds) as resp:
-                resp.raise_for_status()
-                for chunk in resp.iter_content(chunk_size=8192):
-                    if chunk:
-                        raw_tmp.write(chunk)
+        raw_fd, raw_tmp_path = tempfile.mkstemp(
+            dir=output_dir,
+            prefix='.raw_who_',
+            suffix='.csv',
+        )
+        os.close(raw_fd)
 
-        with tempfile.NamedTemporaryFile(
-                mode='w',
-                encoding='utf-8',
-                dir=output_dir,
-                prefix='.norm_who_',
-                suffix='.csv',
-                delete=False,
-        ) as norm_tmp:
-            norm_tmp_path = norm_tmp.name
+        _download_to_path(
+            http_session=active_session,
+            source_url=source_url,
+            dest_path=raw_tmp_path,
+            timeout_seconds=timeout_seconds,
+            max_retries=max_retries,
+            backoff_factor=backoff_factor,
+        )
+
+        norm_fd, norm_tmp_path = tempfile.mkstemp(
+            dir=output_dir,
+            prefix='.norm_who_',
+            suffix='.csv',
+        )
+        os.close(norm_fd)
 
         data_rows = normalize_who_csv(raw_tmp_path, norm_tmp_path)
         os.replace(norm_tmp_path, filename)
         norm_tmp_path = None
-        logging.info('Successfully saved %d data rows to %s', data_rows,
-                     filename)
+        logging.info(
+            'Successfully saved %d data rows to %s',
+            data_rows,
+            filename,
+        )
         return filename
     except requests.exceptions.RequestException as err:
         logging.error('Error fetching WHO data from %s: %s', source_url, err)
@@ -171,6 +269,8 @@ def download_full_who_data(
     finally:
         _remove_if_exists(raw_tmp_path)
         _remove_if_exists(norm_tmp_path)
+        if owned_session is not None:
+            owned_session.close()
 
 
 def main(argv: list[str]) -> None:

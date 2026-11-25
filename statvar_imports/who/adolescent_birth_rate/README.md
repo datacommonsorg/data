@@ -20,18 +20,23 @@ The data comes from the World Health Organization (WHO). It specifically tracks 
 ## Refresh Type
 Automatic Refresh
 
-For refresh of the data, the import includes a Python script (`data_download.py`) to automatically download the complete historical dataset directly from the WHO's backend Azure Blob storage endpoint.
+For refresh of the data, the import includes a Python script (`data_download.py`) to automatically download the complete historical dataset directly from the WHO's backend Azure Blob storage endpoint (`requests.Session` with `urllib3.util.retry.Retry` exponential backoff on transient HTTP `429`/`5xx` and network/stream errors, failing immediately on permanent `4xx` responses).
 
 ## Data Publish Frequency
 Release Frequency = Annual
 
 ## How To Download Input Data
-To download the data, run the provided script:
+To download the data, run the provided script from the `adolescent_birth_rate` directory:
 ```bash
 python3 data_download.py
 ```
 
-This will fetch the latest full dataset and save it locally as `input_files/adolescent_birth_rate_input.csv`, making it available for processing.
+This fetches the latest full dataset, validates UTF-8 encoding and CSV structure, normalizes integer-mantissa scientific-notation values in `RATE_PER_1000_N` (for example, `4e-09` → `4.0e-09`) so `stat_var_processor.py` (`mcf_file_util.get_numeric_value`) parses them as floating-point values instead of misinterpreting those rows as section headers, and writes the result atomically to `input_files/adolescent_birth_rate_input.csv`.
+
+### Optional CLI Flags
+- `--indicator_id`: WHO indicator ID used to build the default Azure Blob CSV URL (default: `27D371A`).
+- `--input_url`: Explicit source CSV URL override; takes precedence over `--indicator_id` when set (default: `""`).
+- `--output_dir`: Directory where `adolescent_birth_rate_input.csv` is written (default: `input_files`).
 
 ## Processing Instructions
 To process the WHO Adolescent Birth Rate data and generate statistical variables, use the following command from the `adolescent_birth_rate` directory:
@@ -65,7 +70,13 @@ This generates the following output files:
 The report files can be analyzed to check for errors and warnings. Further, linting is performed on the generated output files using the DataCommons import tool.
 
 ## Testing
-Testing is performed using the provided `test_data` directory:
+To run the download unit tests (`data_download_test.py`) from the repository root:
+```bash
+./run_tests.sh -p statvar_imports/who/adolescent_birth_rate/
+```
+*(Repo-wide discovery via `./run_tests.sh -p statvar_imports` also runs this suite.)*
+
+End-to-end processor fixtures are provided in the `test_data` directory:
 - Input: `test_data/adolescent_birth_rate_input.csv`
 - Output (expected): `test_data/adolescent_birth_rate_output.csv`
 - MCF (expected): `test_data/adolescent_birth_rate_output.tmcf`
