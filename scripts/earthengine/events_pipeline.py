@@ -82,9 +82,7 @@ To run a sequence of specific stages, use:
 """
 
 import os
-import re
 import sys
-import time
 
 from absl import app
 from absl import flags
@@ -109,20 +107,22 @@ sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)), 'util'))
 
 import common_flags
-import file_util
-import pipeline_stage_bigquery
-import pipeline_stage_download
-import pipeline_stage_earthengine
-import pipeline_stage_events
-import pipeline_stage_raster_csv
-import pipeline_stage_runner
-import process_events
-import raster_to_csv
-import utils
-
-from counters import Counters
 from config_map import ConfigMap
+from counters import Counters
+import file_util
+
+# Importing the pipeline_stage_* modules registers their stage runners, and
+# process_events/raster_to_csv define flags used by the stages.
+import pipeline_stage_bigquery  # noqa: F401
+import pipeline_stage_download  # noqa: F401
+import pipeline_stage_earthengine  # noqa: F401
+import pipeline_stage_events  # noqa: F401
+import pipeline_stage_raster_csv  # noqa: F401
+import pipeline_stage_runner
 from pipeline_stage_runner import StageRunner
+import process_events  # noqa: F401
+import raster_to_csv  # noqa: F401
+import utils
 
 # Processing state persisted to a file
 # Includes dynamic parameter values for each stage of processing.
@@ -191,8 +191,12 @@ class EventPipeline(StageRunner):
             f'Created pipeline with {len(self.stage_runners)} stages: {stage_names}'
         )
 
-    def run_stage(self, stage_name: str, input_files: list = []) -> list:
+    def run_stage(self,
+                  stage_name: str,
+                  input_files: list | None = None) -> list:
         '''Run a single stage and return the output files generated.'''
+        if input_files is None:
+            input_files = []
         for stage_runner in self.stage_runners:
             if stage_name == stage_runner.get_name():
                 logging.info(f'Running stage {stage_name} with {input_files}')
@@ -201,8 +205,10 @@ class EventPipeline(StageRunner):
             f'No stage runner for {stage_name} with input: {input_files}')
         return []
 
-    def run(self, run_stages: list = []) -> list:
+    def run(self, run_stages: list | None = None) -> list:
         '''Run all the stages in the pipeline.'''
+        if run_stages is None:
+            run_stages = []
         stage_count = 0
         output_files = []
         for stage_runner in self.stage_runners:

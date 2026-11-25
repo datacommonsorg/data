@@ -12,10 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """Common data processing module for ACS Subject Tables"""
-import os
-import sys
 import json
+import os
+import re
+import sys
 from zipfile import ZipFile
+
 from absl import logging
 import numpy as np
 import pandas as pd
@@ -27,6 +29,11 @@ sys.path.append(os.path.join(_SCRIPT_PATH, '.'))  # for resolve_geo_id
 from resolve_geo_id import convert_to_place_dcid
 
 _IGNORED_VALUES = set(['-', '*', '**', '***', '*****', 'N', '(X)', 'null'])
+_TOP_BOTTOM_CODE_MAP = {
+    '100-': '100',
+    '3,500+': '3500',
+    '3500+': '3500',
+}
 _COLUMN_BATCH_SIZE = 100
 
 # TODO: Consider using logs for logging warning messages for debug at a later
@@ -175,7 +182,7 @@ class SubjectTableDataLoaderBase:
             f = open(json_spec, 'r')
             self.json_spec = json.load(f)
             f.close()
-        except:
+        except (OSError, ValueError):
             logging.fatal(
                 "Please ensure that the path to the JSON spec is correct.")
 
@@ -184,7 +191,7 @@ class SubjectTableDataLoaderBase:
             f = open(column_map_path, 'r')
             self.column_map = json.load(f)
             f.close()
-        except:
+        except (OSError, ValueError):
             # TODO: If the module is called from `process.py`, the message needs
             # to be to run with --option=colmap. So rephrasing this message will help.
             logging.fatal(
@@ -252,16 +259,22 @@ class SubjectTableDataLoaderBase:
     def _replace_ignore_values_with_nan(self, df):
         """
         Replaces cells of the dataframe by column with nan if cell has values in
-        _IGNORED_VALUES.
+        _IGNORED_VALUES and normalizes top/bottom-coded values.
         """
         str_cols = df.select_dtypes(include=['object', 'string']).columns
         if len(str_cols) > 0 and not df.empty:
             df[str_cols] = df[str_cols].mask(df[str_cols].isin(_IGNORED_VALUES))
+            df[str_cols] = df[str_cols].replace(_TOP_BOTTOM_CODE_MAP)
         return df
 
     def _process_dataframe(self, df, filename):
         """processes a dataframe read from a csv file"""
-        year = filename.split(f'ACSST{self.estimate_period}Y')[1][:4]
+        match = re.search(rf'ACS[SD]T{self.estimate_period}Y(\d{{4}})',
+                          os.path.basename(filename))
+        if not match:
+            raise ValueError(
+                f"Unable to extract year from filename: {filename}")
+        year = match.group(1)
         logging.info(f"Processing: {filename}")
 
         # if column map is not available generate, will rarely be False
@@ -516,7 +529,7 @@ class SubjectTableDataLoaderBase:
                                      low_memory=False)
                     self._process_dataframe(df, filename)
             self._get_outputs()
-        except:
+        except Exception:
             logging.fatal(
                 """ensure input path is that of directory with dataset files,
                 a zip file or a csv file""")

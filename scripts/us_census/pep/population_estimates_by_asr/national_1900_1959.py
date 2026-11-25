@@ -15,9 +15,16 @@
 This Python Script is for National Level Data 1900-1959
 '''
 import os
+import sys
+
 import pandas as pd
-import requests
-from absl import logging
+
+_SCRIPTS_DIR = os.path.abspath(
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../'))
+if _SCRIPTS_DIR not in sys.path:
+    sys.path.append(_SCRIPTS_DIR)
+
+from us_census.pep.population_estimates_by_asr.process import load_url_or_path
 
 
 def national1900(output_folder: str):
@@ -28,7 +35,6 @@ def national1900(output_folder: str):
     # Used to collect data after every loop for every file's df
     final_df = pd.DataFrame()
     # The numbers 00 to 60 signify the available files as per year numbers
-    session = requests.Session()
     for i in range(00, 60):
         j = f'{i:02}'
         url = 'https://www2.census.gov/programs-surveys/popest/tables/'+\
@@ -44,22 +50,12 @@ def national1900(output_folder: str):
         # 8=Female_NonWhiteAlone
         cols = ['Age', '0', '1', '2', '3', '4', '5', '6', '7', '8']
         # reading the csv format input file and converting it to a dataframe
-        try:
-            # Check if the URL is accessible
-            response = session.head(url, allow_redirects=True, timeout=5)
-            if response.status_code != 200:
-                logging.warning(f"Skipping {url} as it is not accessible.")
-                continue
-
-            df = pd.read_csv(url,
-                             names=cols,
-                             engine='python',
-                             skiprows=9,
-                             skipfooter=15,
-                             encoding='ISO-8859-1')
-        except Exception as e:
-            logging.error(f"Error reading {url}: {e}")
-            continue
+        df = pd.read_csv(load_url_or_path(url),
+                         names=cols,
+                         engine='python',
+                         skiprows=9,
+                         skipfooter=15,
+                         encoding='ISO-8859-1')
         #Writing raw data to csv
         df.to_csv(os.path.join(
             os.path.dirname(os.path.abspath(__file__)), "raw_data",

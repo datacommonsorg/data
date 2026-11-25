@@ -16,8 +16,8 @@ import csv
 import io
 import os
 import ssl
-import urllib.request
 import sys
+import urllib.request
 
 module_dir_ = os.path.dirname(os.path.realpath(__file__))
 sys.path.insert(1, os.path.join(module_dir_, '../../../util'))
@@ -60,7 +60,7 @@ def create_formatted_csv_file(f_in, csv_file_path):
         for row_dict in reader:
             place_dcid = 'country/%s' % row_dict['iso_code']
             # Skip invalid country ISO code.
-            if not place_dcid in country_set:
+            if place_dcid not in country_set:
                 continue
             processed_dict = {
                 'Date':

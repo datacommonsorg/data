@@ -25,9 +25,10 @@ Usage: OPENSSL_CONF=openssl.cnf python3 download.py
 '''
 import csv
 import json
-import requests
 import os
 from xml.etree import ElementTree
+
+import requests
 
 PREFIX = '{http://www.SDMX.org/resources/SDMXML/schemas/v2_0/'
 
@@ -76,7 +77,7 @@ if __name__ == '__main__':
                 with open(f'input/{identifier}.json', 'w') as f_out:
                     try:
                         f_out.write(json.dumps(result.json()))
-                    except:
+                    except ValueError:
                         print('Error parsing:', identifier)
-            except:
+            except Exception:
                 print('Error fetching data for:', identifier)

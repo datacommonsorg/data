@@ -30,11 +30,10 @@ import collections
 import csv
 import math
 import os
-import pandas as pd
 import shutil
 import sys
 
-from string import punctuation
+import pandas as pd
 
 sys.path.append(
     os.path.dirname(os.path.dirname(os.path.dirname(
@@ -142,7 +141,7 @@ def fix_encoding(s):
     '''
     try:
         return s.encode('latin1').decode('utf8')
-    except:
+    except UnicodeError:
         return s.encode('utf8').decode('utf8')
 
 

@@ -12,12 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
-import pandas as pd
-import json
 from datetime import datetime
+import json
+import os
 import zipfile
+
 from india.geo.states import IndiaStatesMapper
+import pandas as pd
 
 module_dir = os.path.dirname(__file__)
 

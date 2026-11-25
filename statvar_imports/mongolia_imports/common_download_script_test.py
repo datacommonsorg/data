@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """Unit tests for common_download_script.py."""
 
 import os
@@ -36,12 +35,10 @@ class CommonDownloadScriptTest(unittest.TestCase):
         self.assertEqual(len(common_download_script.HEALTH_TABLES), 6)
         self.assertEqual(len(common_download_script.EMPLOYMENT_TABLES), 6)
 
-        all_tables = (
-            common_download_script.DEMOGRAPHICS_TABLES
-            + common_download_script.EDUCATION_TABLES
-            + common_download_script.HEALTH_TABLES
-            + common_download_script.EMPLOYMENT_TABLES
-        )
+        all_tables = (common_download_script.DEMOGRAPHICS_TABLES +
+                      common_download_script.EDUCATION_TABLES +
+                      common_download_script.HEALTH_TABLES +
+                      common_download_script.EMPLOYMENT_TABLES)
         self.assertEqual(len(all_tables), 25)
 
         filenames = set()
@@ -81,7 +78,12 @@ class CommonDownloadScriptTest(unittest.TestCase):
 
             mock_download.assert_called_once_with(
                 url=url,
-                params={'query': [], 'response': {'format': 'csv'}},
+                params={
+                    'query': [],
+                    'response': {
+                        'format': 'csv'
+                    }
+                },
                 method='POST',
                 timeout=60,
                 retries=5,
@@ -105,12 +107,25 @@ class CommonDownloadScriptTest(unittest.TestCase):
             mock_download.side_effect = mock_side_effect
 
             url = 'https://data.1212.mn/api/v1/en/NSO/test_query.px'
-            query = [{'code': 'Бүс', 'selection': {'filter': 'item', 'values': ['0']}}]
-            common_download_script.fetch_and_save_data(url, csv_path, query=query)
+            query = [{
+                'code': 'Бүс',
+                'selection': {
+                    'filter': 'item',
+                    'values': ['0']
+                }
+            }]
+            common_download_script.fetch_and_save_data(url,
+                                                       csv_path,
+                                                       query=query)
 
             mock_download.assert_called_once_with(
                 url=url,
-                params={'query': query, 'response': {'format': 'csv'}},
+                params={
+                    'query': query,
+                    'response': {
+                        'format': 'csv'
+                    }
+                },
                 method='POST',
                 timeout=60,
                 retries=5,
@@ -127,8 +142,7 @@ class CommonDownloadScriptTest(unittest.TestCase):
             csv_path = os.path.join(tmp_dir, 'failed.csv')
             with self.assertRaises(RuntimeError):
                 common_download_script.fetch_and_save_data(
-                    'https://data.1212.mn/api/v1/en/NSO/fail.px', csv_path
-                )
+                    'https://data.1212.mn/api/v1/en/NSO/fail.px', csv_path)
 
     @mock.patch('common_download_script.download_util.download_file_from_url')
     def test_fetch_and_save_data_empty_file_raises_error(self, mock_download):
@@ -145,8 +159,7 @@ class CommonDownloadScriptTest(unittest.TestCase):
 
             with self.assertRaises(RuntimeError):
                 common_download_script.fetch_and_save_data(
-                    'https://data.1212.mn/api/v1/en/NSO/empty.px', csv_path
-                )
+                    'https://data.1212.mn/api/v1/en/NSO/empty.px', csv_path)
 
     @mock.patch('common_download_script.fetch_and_save_data')
     @mock.patch('os.makedirs')
@@ -158,10 +171,9 @@ class CommonDownloadScriptTest(unittest.TestCase):
     def test_registered_unemployed_query_excludes_duplicate_ulaanbaatar(self):
         """Verifies registered unemployed table defines query excluding code 511."""
         target_table = [
-            t
-            for t in common_download_script.EMPLOYMENT_TABLES
-            if t['filename']
-            == 'registered_unemployed_by_education_level_region_gender_month.csv'
+            t for t in common_download_script.EMPLOYMENT_TABLES
+            if t['filename'] ==
+            'registered_unemployed_by_education_level_region_gender_month.csv'
         ][0]
         self.assertIn('query', target_table)
         query = target_table['query']
@@ -170,26 +182,21 @@ class CommonDownloadScriptTest(unittest.TestCase):
         self.assertIn('5', values)
         self.assertNotIn('511', values)
         expected_values = [
-            "0",
-            "1", "181", "182", "183", "184", "185",
-            "2", "261", "262", "263", "264", "265", "267",
-            "3", "341", "342", "343", "344", "345", "346", "348",
-            "4", "421", "422", "423",
-            "5"
+            "0", "1", "181", "182", "183", "184", "185", "2", "261", "262",
+            "263", "264", "265", "267", "3", "341", "342", "343", "344", "345",
+            "346", "348", "4", "421", "422", "423", "5"
         ]
         self.assertEqual(values, expected_values)
 
     @mock.patch('common_download_script.fetch_and_save_data')
     @mock.patch('os.makedirs')
     def test_main_passes_query_for_registered_unemployed(
-        self, mock_makedirs, mock_fetch
-    ):
+            self, mock_makedirs, mock_fetch):
         """Verifies that main() forwards query filter for registered unemployed."""
         common_download_script.main(None)
         unemployed_calls = [
-            c
-            for c in mock_fetch.call_args_list
-            if 'registered_unemployed_by_education_level_region_gender_month.csv'
+            c for c in mock_fetch.call_args_list if
+            'registered_unemployed_by_education_level_region_gender_month.csv'
             in c[0][1]
         ]
         self.assertEqual(len(unemployed_calls), 1)
@@ -202,4 +209,3 @@ class CommonDownloadScriptTest(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-

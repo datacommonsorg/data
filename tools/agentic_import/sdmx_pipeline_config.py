@@ -15,7 +15,8 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
+from dataclasses import field
 
 # SDMX flag names shared across pipeline modules.
 FLAG_SDMX_ENDPOINT = "sdmx.endpoint"

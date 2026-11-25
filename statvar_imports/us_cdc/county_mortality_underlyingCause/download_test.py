@@ -24,7 +24,10 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 import requests
 
-import download
+try:
+    from statvar_imports.us_cdc.county_mortality_underlyingCause import download
+except ModuleNotFoundError:
+    import download
 
 
 class DownloadTest(unittest.TestCase):

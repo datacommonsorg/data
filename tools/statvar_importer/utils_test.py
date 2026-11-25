@@ -12,16 +12,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import unittest
 import os
+import unittest
 from unittest.mock import patch
-import pandas as pd
 
-from utils import (capitalize_first_char, str_from_number, pvs_has_any_prop,
-                   is_place_dcid, get_observation_period_for_date,
-                   get_observation_date_format, get_filename_for_url,
-                   download_csv_from_url, shard_csv_data, convert_xls_to_csv,
-                   prepare_input_data)
+import pandas as pd
+from utils import capitalize_first_char
+from utils import convert_xls_to_csv
+from utils import download_csv_from_url
+from utils import get_filename_for_url
+from utils import get_observation_date_format
+from utils import get_observation_period_for_date
+from utils import is_place_dcid
+from utils import prepare_input_data
+from utils import pvs_has_any_prop
+from utils import shard_csv_data
+from utils import str_from_number
 
 
 class TestCapitalizeFirstChar(unittest.TestCase):

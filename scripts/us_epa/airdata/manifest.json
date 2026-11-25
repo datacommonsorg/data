@@ -29,7 +29,8 @@
                 "disk": 512
             },
             "config_override": {
-                "invoke_differ_tool": false
+                "invoke_differ_tool": false,
+                "skip_prod_ingestion": true
             }
         }
     ]

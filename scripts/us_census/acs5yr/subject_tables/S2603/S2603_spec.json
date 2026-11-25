@@ -207,7 +207,8 @@
       "Civilian veteran": "Civilian"
     },
     "abilityToSpeakEnglish": {
-      "Speak English less than very well\"\"": "SpeakEnglishLessThanVeryWell"
+      "Speak English less than very well\"\"": "SpeakEnglishLessThanVeryWell",
+      "Speak English less than \"very well\"": "SpeakEnglishLessThanVeryWell"
     },
     "benefitsStatus": {
       "With Food Stamp/SNAP benefits": "WithFoodStampsInThePast12Months"
@@ -362,6 +363,7 @@
     }
   ],
   "ignoreColumns": [
+    "id",
     "Geography",
     "Geographic Area Name",
     "Per capita income (dollars)",
@@ -578,7 +580,35 @@
     "Margin of Error!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
     "Margin of Error!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
     "Margin of Error!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
-    "Margin of Error!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female"
+    "Margin of Error!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Adult correctional facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Adult correctional facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Adult correctional facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Adult correctional facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Nursing facilities/skilled nursing facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Nursing facilities/skilled nursing facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Nursing facilities/skilled nursing facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Nursing facilities/skilled nursing facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Juvenile Facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Juvenile Facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Juvenile Facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Juvenile Facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!College/university housing!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!College/university housing!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!College/university housing!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!College/university housing!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female"
   ],
   "denominators": {
     "Estimate!!Adult correctional facilities!!DISABILITY STATUS!!Population 18 to 64 years": [
@@ -634,6 +664,9 @@
       "Estimate!!Adult correctional facilities!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
       "Margin of Error!!Adult correctional facilities!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
       "Margin of Error!!Adult correctional facilities MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
+      "Estimate!!Adult correctional facilities!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"",
+      "Margin of Error!!Adult correctional facilities!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"",
+      "Margin of Error!!Adult correctional facilities MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"",
       "Estimate!!Adult correctional facilities!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
       "Margin of Error!!Adult correctional facilities!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
       "Margin of Error!!Adult correctional facilities MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English"
@@ -896,6 +929,9 @@
       "Estimate!!College/university housing!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
       "Margin of Error!!College/university housing!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
       "Margin of Error!!College/university housing MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
+      "Estimate!!College/university housing!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"",
+      "Margin of Error!!College/university housing!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"",
+      "Margin of Error!!College/university housing MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"",
       "Estimate!!College/university housing!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!English only",
       "Margin of Error!!College/university housing!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!English only",
       "Margin of Error!!College/university housing MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!English only"
@@ -1158,6 +1194,9 @@
       "Estimate!!Juvenile Facilities!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
       "Margin of Error!!Juvenile Facilities!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
       "Margin of Error!!Juvenile Facilities MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
+      "Estimate!!Juvenile Facilities!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"",
+      "Margin of Error!!Juvenile Facilities!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"",
+      "Margin of Error!!Juvenile Facilities MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"",
       "Estimate!!Juvenile Facilities!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
       "Margin of Error!!Juvenile Facilities!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
       "Margin of Error!!Juvenile Facilities MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English"
@@ -1420,6 +1459,9 @@
       "Estimate!!Military quarters/military ships!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
       "Margin of Error!!Military quarters/military ships!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
       "Margin of Error!!Military quarters/military ships MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
+      "Estimate!!Military quarters/military ships!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"",
+      "Margin of Error!!Military quarters/military ships!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"",
+      "Margin of Error!!Military quarters/military ships MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"",
       "Estimate!!Military quarters/military ships!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
       "Margin of Error!!Military quarters/military ships!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
       "Margin of Error!!Military quarters/military ships MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English"
@@ -1679,6 +1721,9 @@
       "Estimate!!Nursing facilities/skilled nursing facilities!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
       "Margin of Error!!Nursing facilities/skilled nursing facilities!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
       "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
+      "Estimate!!Nursing facilities/skilled nursing facilities!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"",
+      "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"",
       "Estimate!!Nursing facilities/skilled nursing facilities!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
       "Margin of Error!!Nursing facilities/skilled nursing facilities!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
       "Margin of Error!!Nursing facilities/skilled nursing facilities MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
@@ -1946,7 +1991,10 @@
       "Margin of Error!!Total group quarters population MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
       "Estimate!!Total group quarters population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
       "Margin of Error!!Total group quarters population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
-      "Margin of Error!!Total group quarters population MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\""
+      "Margin of Error!!Total group quarters population MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
+      "Estimate!!Total group quarters population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"",
+      "Margin of Error!!Total group quarters population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"",
+      "Margin of Error!!Total group quarters population MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\""
     ],
     "Estimate!!Total group quarters population!!MARITAL STATUS!!Population 15 years and over": [
       "Estimate!!Total group quarters population!!MARITAL STATUS!!Population 15 years and over!!Never married",
@@ -2203,6 +2251,9 @@
       "Estimate!!Total population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
       "Margin of Error!!Total population MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
       "Margin of Error!!Total population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than very well\"\"",
+      "Estimate!!Total population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"",
+      "Margin of Error!!Total population MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"",
+      "Margin of Error!!Total population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"",
       "Estimate!!Total population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
       "Margin of Error!!Total population MOE!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
       "Margin of Error!!Total population!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English",
@@ -2426,12 +2477,14 @@
     "WORLD REGION OF BIRTH OF FOREIGN BORN",
     "SCHOOL ENROLLMENT",
     "EMPLOYMENT STATUS",
+    "INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2017 INFLATION-ADJUSTED DOLLARS)",
     "INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)",
     "INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)",
     "INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)",
     "INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)",
     "INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)",
     "INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)",
+    "INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2024 INFLATION-ADJUSTED DOLLARS)",
     "RESIDENCE 1 YEAR AGO",
     "PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY",
     "SEX AND AGE",

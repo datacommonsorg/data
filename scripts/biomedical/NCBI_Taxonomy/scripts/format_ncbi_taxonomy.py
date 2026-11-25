@@ -25,24 +25,22 @@ Description: cleaning the NCBI Taxonomy data.
 
 # import the required packages
 import copy
+import os
+from os.path import abspath
+from os.path import dirname
+from os.path import join
 import re
 import string
-import sys
-import os
-from os.path import dirname, abspath, join
-import pandas as pd
+from urllib.parse import urlparse
+
 from absl import app
 from absl import flags
 from absl import logging
 from google.cloud import storage
-from urllib.parse import urlparse
+import pandas as pd
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string(
-    'tax_id_dcid_mapping',
-    'gs://datcom-prod-imports/scripts/biomedical/NCBI_tax_id_dcid_mapping/tax_id_dcid_mappings.txt',
-    'Input directory where .txt files downloaded.')
 SOURCE_FILE_PATH = 'input/'
 OUTPUT_FILE_PATH = 'output/'
 OUTPUT_MCF_FILE = 'ncbi_taxonomy_schema_enum.mcf'
@@ -199,13 +197,18 @@ CATEGORIES_DICT = {
     "U": "dcs:TaxonTopLevelCategoryUnclassified"
 }
 
-_FLAGS = flags.FLAGS
 
-flags.DEFINE_string('output_dir', 'output',
-                    'Output directory for generated files.')
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        'tax_id_dcid_mapping',
+        'gs://datcom-prod-imports/scripts/biomedical/NCBI_tax_id_dcid_mapping/tax_id_dcid_mappings.txt',
+        'Input directory where .txt files downloaded.')
+    flags.DEFINE_string('output_dir', 'output',
+                        'Output directory for generated files.')
+    flags.DEFINE_string('input_dir', 'input',
+                        'Input directory where .dmp files downloaded.')
 
-flags.DEFINE_string('input_dir', 'input',
-                    'Input directory where .dmp files downloaded.')
 
 MODULE_DIR = dirname(dirname(abspath(__file__)))
 
@@ -374,7 +377,7 @@ class NamesCls:
                         property_list.append(
                             char_replace(
                                 row['unique_name'].split('<')[1].split('>')[0]))
-                    except:
+                    except (AttributeError, IndexError):
                         logging.error(f"Error in split {property_value}")
                 else:
                     property_list.append(char_replace(row['name_txt']))
@@ -402,7 +405,7 @@ class NamesCls:
                         current_node[mapping_ncbi[
                             'property_type']] = char_replace(property_value)
 
-            except Exception as e:
+            except Exception:
                 logging.error(
                     f"Error resolving name_class - {row['name_class']}")
 
@@ -483,7 +486,7 @@ class HostCls:
             try:
                 current_node = FINAL_NCBI_TAXONOMY[row['tax_id']]
                 current_node['host'] = row['DC_host_enum']
-            except:
+            except KeyError:
                 logging.error(
                     f"Host tax_id -  {row['tax_id']} is missing in FINAL_NCBI_TAXONOMY"
                 )
@@ -540,7 +543,7 @@ class NodesCls:
                 current_node['division'] = DIVISION_DICT[row["division_code"]]
                 current_node['hasInheritedDivision'] = True if row[
                     'inherited_division'] == 1 else False
-            except:
+            except Exception:
                 logging.error(
                     f"Unable to get Nodes tax_id -  {row['tax_id']} in FINAL_NCBI_TAXONOMY"
                 )
@@ -575,7 +578,7 @@ class CategoriesCls:
                 current_node = FINAL_NCBI_TAXONOMY[row['tax_id']]
                 current_node['taxonTopLevelCategory'] = row[
                     'taxonTopLevelCategory']
-            except:
+            except KeyError:
                 # do nothing if Categories tax_id not available in FINAL_NCBI_TAXONOMY
                 pass
 
@@ -628,13 +631,13 @@ def char_replace(s: str) -> str:
     return s.replace('[', "").replace(']', "").replace('"', "")
 
 
-def set_flages() -> None:
+def _set_paths(input_dir: str, output_dir: str) -> None:
+    """Sets the source and output paths, creating the output directory."""
     global OUTPUT_FILE_PATH, SOURCE_FILE_PATH
-    _FLAGS(sys.argv)
-    OUTPUT_FILE_PATH = path_join(MODULE_DIR, _FLAGS.output_dir)
-    if not os.path.exists(join(MODULE_DIR, _FLAGS.output_dir)):
+    OUTPUT_FILE_PATH = path_join(MODULE_DIR, output_dir)
+    if not os.path.exists(join(MODULE_DIR, output_dir)):
         os.mkdir(OUTPUT_FILE_PATH)
-    SOURCE_FILE_PATH = path_join(MODULE_DIR, _FLAGS.input_dir)
+    SOURCE_FILE_PATH = path_join(MODULE_DIR, input_dir)
 
 
 def path_join(path: str, filename: str) -> str:
@@ -650,12 +653,17 @@ def path_join(path: str, filename: str) -> str:
     return join(path, filename)
 
 
-def main(_):
-    """Main method
+def run(input_dir: str, output_dir: str, tax_id_dcid_mapping: str) -> None:
+    """Formats the NCBI Taxonomy dump files and uploads the tax ID mapping.
+
+    Args:
+        input_dir: Directory (relative to this script) with the .dmp files.
+        output_dir: Directory (relative to this script) for generated files.
+        tax_id_dcid_mapping: GCS path to upload the tax ID to DCID mapping to.
     """
     global OUTPUT_FILE_PATH, SOURCE_FILE_PATH
     logging.info("Start format NCBI Taxonomy")
-    set_flages()
+    _set_paths(input_dir, output_dir)
     logging.info("Processing Division dataframe")
     division_df = DivisionCls().create_dataframe(SOURCE_FILE_PATH)
     DivisionCls().append_mcf_data(division_df,
@@ -670,7 +678,7 @@ def main(_):
     try:
         with open(local_file_path, 'rb') as f:
             data_to_upload = f.read()
-        gcs_output_path = FLAGS.tax_id_dcid_mapping
+        gcs_output_path = tax_id_dcid_mapping
         parsed_url = urlparse(gcs_output_path)
         bucket_name = parsed_url.netloc
         blob_name = parsed_url.path.lstrip('/')
@@ -706,5 +714,12 @@ def main(_):
     logging.info("NCBI Taxonomy processing completed")
 
 
+def main(_):
+    """Main method
+    """
+    run(FLAGS.input_dir, FLAGS.output_dir, FLAGS.tax_id_dcid_mapping)
+
+
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

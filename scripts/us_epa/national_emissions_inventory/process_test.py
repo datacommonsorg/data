@@ -27,7 +27,8 @@ _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, _MODULE_DIR)
 
 from config import df_columns
-from process import USAirEmissionTrends, process_files
+from process import USAirEmissionTrends
+from process import process_files
 
 
 class ProcessEnhancedTest(unittest.TestCase):
@@ -488,7 +489,7 @@ class RegularizeColumnsTest(unittest.TestCase):
             bad_file = os.path.join(temp_in, '1999_emissions.csv')
             with open(bad_file, 'w') as f:
                 f.write("col1,col2\n1,2\n")
-            with self.assertRaises(Exception):
+            with self.assertRaises(ValueError):
                 process_files(temp_in, temp_out, inter_dir)
         finally:
             shutil.rmtree(temp_in)

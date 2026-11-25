@@ -14,15 +14,14 @@
 
 # Code for processing CMIP6 Sea-level rise projections in netcdf4 format.
 
-import csv
 import glob
 import os
 import sys
 
-import numpy as np
-import xarray
 from absl import app
 from absl import flags
+import numpy as np
+import xarray
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -32,10 +31,14 @@ import latlng_recon_geojson
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string('in_pattern', '', 'Input NetCDF4 file(s).')
-flags.DEFINE_string('out_dir', '/tmp', 'Output directory path.')
-flags.DEFINE_string('generate_what', 'stat',
-                    'What to generate: place, sv, stat')
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('in_pattern', '', 'Input NetCDF4 file(s).')
+    flags.DEFINE_string('out_dir', '/tmp', 'Output directory path.')
+    flags.DEFINE_string('generate_what', 'stat',
+                        'What to generate: place, sv, stat')
+
 
 ###
 ### Potentially general NetCDF4 processing config/code
@@ -290,7 +293,7 @@ def process_places(in_file, out_dir):
     # Collect lat/lng
     id2cip = {}
     ll2p = latlng_recon_geojson.LatLng2Places()
-    for index, row in df.iterrows():
+    for _index, row in df.iterrows():
         id2cip[row['dcid']] = ll2p.resolve(row['latitude'], row['longitude'])
         if len(id2cip) % 1000 == 0:
             print('Mapped', len(id2cip), 'lat/lngs')
@@ -328,4 +331,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

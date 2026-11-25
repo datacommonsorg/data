@@ -16,7 +16,7 @@
 import os
 import sys
 import unittest
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 
 # Set up paths as in validator_goldens.py
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -27,8 +27,8 @@ sys.path.append(_DATA_DIR)
 sys.path.append(os.path.join(_DATA_DIR, 'util'))
 sys.path.append(os.path.join(_DATA_DIR, 'tools', 'statvar_importer'))
 
-import validator_goldens
 from counters import Counters
+import validator_goldens
 
 
 class TestValidatorGoldens(unittest.TestCase):

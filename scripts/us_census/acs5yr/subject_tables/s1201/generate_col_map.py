@@ -14,15 +14,11 @@
 """
 Module to generate a column map to their corresponding statistical variable defintions.
 """
-import os
-import io
-import sys
-import logging
 import json
-import re
-import csv
+import os
+import sys
 from zipfile import ZipFile
-from collections import OrderedDict
+
 import pandas as pd
 
 # Allows the sibling/parent module imports to work when running as a script or module
@@ -70,7 +66,6 @@ def process_zip_file(zip_file_path,
     f.close()
 
     column_map = {}
-    counter_dict = {}
 
     with ZipFile(zip_file_path) as zf:
         for filename in zf.namelist():
@@ -80,7 +75,7 @@ def process_zip_file(zip_file_path,
                 df = pd.read_csv(zf.open(filename, 'r'),
                                  header=header_row,
                                  low_memory=False)
-                year = filename.split(f'ACSST5Y')[1][:4]
+                year = filename.split('ACSST5Y')[1][:4]
                 column_map[year] = generate_stat_var_map(
                     spec_dict, df.columns.tolist(), delimiter)
 

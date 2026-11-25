@@ -16,6 +16,7 @@ import json
 import os
 import tempfile
 import unittest
+from xml.parsers.expat import ExpatError
 
 import xml_to_json
 
@@ -87,7 +88,7 @@ class XMLToJsonConverterTest(unittest.TestCase):
 
     def test_invalid_xml_raises_exception(self):
         self._create_xml_file("<html><body>Not valid XML for SDMX</body")
-        with self.assertRaises(Exception):
+        with self.assertRaises(ExpatError):
             xml_to_json.convert_xml_to_json(self.input_xml_path,
                                             self.output_json_path)
 

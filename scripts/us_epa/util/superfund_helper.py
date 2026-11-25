@@ -13,12 +13,11 @@
 # limitations under the License.
 """Helper functions used in the superfund data processing"""
 
-import numpy as np
-import pandas as pd
 import json
-import requests
 import os
 import sys
+
+import numpy as np
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -62,7 +61,7 @@ def resolve_with_recon(output_path: str,
                 resolved_geos_map[(
                     str(response_elem["latitude"]) + ',' +
                     str(response_elem["longitude"]))] = place_dcid
-            except:
+            except (KeyError, TypeError):
                 print("This coordinate pair needs to be manually resolved: ",
                       response_elem)
                 resolved_geos_map[(str(response_elem["latitude"]) + ',' +

@@ -30,6 +30,7 @@ if current_dir not in sys.path:
     sys.path.insert(0, current_dir)
 
 import importlib
+
 import golden_verification as _golden_verification
 import import_automation_workflow as _import_automation_workflow
 
@@ -92,7 +93,6 @@ def load_catalog_and_register_dags(target_globals: dict[str, Any]) -> int:
                 "scheduled" if cron else "manual",
                 entry.get("category", "data-commons")
             ],
-            is_paused_upon_creation=True,
             golden_test_allowlist=golden_allowlist,
         )
         count += 1

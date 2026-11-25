@@ -2,9 +2,9 @@
 # measures, we consider it as different units measuring the same
 # StatisticalVariable
 import json
-import pandas as pd
-import numpy as np
 import logging
+
+import pandas as pd
 
 IGNORED_FIELDS = [
     "OBJECTID", "Shape", "Shape_Length", "Shape_Area", "STATE", "STATEABBRV",
@@ -87,16 +87,16 @@ DATACOMMONS_ALIASES = {
 }
 
 
-def prune_list_dupes(l):
+def prune_list_dupes(items):
     """
-    Given a list L, computes a new list K where the duplicate
-    items in L are omitted, but all other items keep their
+    Given a list items, computes a new list K where the duplicate
+    items are omitted, but all other items keep their
     initial ordering.
 
     Returns the new list K
     """
     k = []
-    for el in l:
+    for el in items:
         if el not in k:
             k.append(el)
     return k
@@ -273,9 +273,9 @@ def format_human_readable_name_from_properties(properties, is_composite):
     measured_property = properties["measured_property"]
 
     if measured_property == "expectedLoss":
-        statvar_name = f"Annual Expected Loss from Natural Hazard Impact"
+        statvar_name = "Annual Expected Loss from Natural Hazard Impact"
     elif measured_property == "femaNaturalHazardRiskIndex":
-        statvar_name = f"FEMA National Risk Index for Natural Hazard Impact"
+        statvar_name = "FEMA National Risk Index for Natural Hazard Impact"
     else:  # community resilience, social vulnerability
         m_prop_with_spaces = add_spaces_before_capital_letters(
             measured_property)
@@ -401,7 +401,6 @@ def format_ind_hazard_field_properties_to_schema(properties):
     measured_property = properties["measured_property"]
     measurement_qualifier = properties["measurement_qualifier"]
     impacted_thing = properties["impacted_thing"]
-    unit = properties["unit"]
 
     # create a list of names that might go on the dcid
     dcid_list = [
@@ -472,7 +471,7 @@ def generate_schema_and_tmcf_from_file(input_data_dictionary,
     dd = dd.reset_index()
 
     extracted_properties = []
-    for index, row in dd.iterrows():
+    for _index, row in dd.iterrows():
 
         should_skip_component = any([
             eal_comp in row["Field Alias"]

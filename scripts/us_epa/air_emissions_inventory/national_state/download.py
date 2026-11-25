@@ -16,20 +16,28 @@ This Python Script downloads the EPA files, into the input_files folder to be
 made available for further processing.
 """
 
-import os
 import json
+import os
 import re
 import urllib.parse
+
+from absl import app  # Use absl for flag handling
+from absl import flags  # Use absl for flag handling
+from absl import logging  # Use absl for flag handling
+from google.cloud import storage  # For GCS integration
 import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
-from google.cloud import storage  # For GCS integration
-from absl import flags, app, logging  # Use absl for flag handling
 
 # Define flags
 _FLAGS = flags.FLAGS
-flags.DEFINE_string('config_path', '',
-                    'Path to the configuration file in the GCS bucket.')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('config_path', '',
+                        'Path to the configuration file in the GCS bucket.')
+
 
 # EPA Air Pollutant Emissions Trends Data provenance page
 EPA_TRENDS_PAGE_URL = ("https://www.epa.gov/air-emissions-inventories/"
@@ -314,4 +322,5 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

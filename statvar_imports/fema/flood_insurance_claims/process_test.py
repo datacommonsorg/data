@@ -107,8 +107,8 @@ class ProcessTest(unittest.TestCase):
         df = pd.read_csv(csv_file)
         self.assertEqual(len(df), 346)
         self.assertEqual(list(df.columns), [
-            'observationDate', 'observationAbout', 'value',
-            'observationPeriod', 'unit', 'variableMeasured'
+            'observationDate', 'observationAbout', 'value', 'observationPeriod',
+            'unit', 'variableMeasured'
         ])
 
         with open(self.counters_path, 'r', encoding='utf-8') as f:
@@ -184,7 +184,6 @@ class ProcessTest(unittest.TestCase):
         df_v3 = pd.read_csv(f"{v3_out}.csv")
         pd.testing.assert_frame_equal(df_v2, df_v3)
 
-
     def test_empty_input_raises_runtime_error(self):
         empty_csv = os.path.join(self.test_dir, 'empty.csv')
         with open(empty_csv, 'w', encoding='utf-8') as f:
@@ -233,8 +232,8 @@ class ProcessTest(unittest.TestCase):
         df = pd.read_csv(f"{self.output_prefix}.csv")
 
         def _get_val(place, date, period, sv):
-            match = df[(df['observationAbout'] == place)
-                       & (df['observationDate'] == str(date)) &
+            match = df[(df['observationAbout'] == place) &
+                       (df['observationDate'] == str(date)) &
                        (df['observationPeriod'] == period) &
                        (df['variableMeasured'] == sv)]
             return match['value'].iloc[0] if len(match) > 0 else None

@@ -16,13 +16,14 @@ Script to automate the testing for EuroStat Physical Activity process script.
 """
 
 import os
-import unittest
 import sys
 import tempfile
-from unittest.mock import MagicMock, patch
+import unittest
+from unittest.mock import MagicMock
+from unittest.mock import patch
+
 import numpy as np
 import pandas as pd
-from absl import flags
 
 # module_dir is the path to where this test is running from.
 MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -32,13 +33,12 @@ for path in (_SCRIPTS_DIR, MODULE_DIR):
         sys.path.append(path)
 
 # pylint: disable=wrong-import-position
-from us_census.pep.us_pep_sex.process import (
-    PopulationEstimateBySex,
-    _state_latest,
-    _download_single_file,
-    is_valid_url,
-)
 import us_census.pep.us_pep_sex.process as sex_proc
+from us_census.pep.us_pep_sex.process import PopulationEstimateBySex
+from us_census.pep.us_pep_sex.process import _download_single_file
+from us_census.pep.us_pep_sex.process import _state_latest
+from us_census.pep.us_pep_sex.process import is_valid_url
+
 # pylint: enable=wrong-import-position
 
 TEST_DATASET_DIR = os.path.join(MODULE_DIR, "test_data", "datasets")

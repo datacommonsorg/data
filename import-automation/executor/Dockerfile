@@ -58,11 +58,12 @@ ENV GOOGLE_CLOUD_LOGGING_MAX_LATENCY=5.0
 ENV GOOGLE_CLOUD_LOGGING_GRACE_PERIOD=30.0
 ENV GRPC_VERBOSITY=ERROR
 
-ARG CACHE_BUSTER=1
-ADD https://storage.googleapis.com/datacommons_public/import_tools/import-tool.jar?cb=${CACHE_BUSTER} /import-tool.jar
 COPY requirements.txt .
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 RUN uv pip install --system -r requirements.txt
+
+ARG CACHE_BUSTER=1
+ADD https://storage.googleapis.com/datacommons_public/import_tools/import-tool.jar?cb=${CACHE_BUSTER} /import-tool.jar
 
 # build_type: local (copy local data repo)
 FROM base AS local
@@ -71,7 +72,10 @@ COPY --from=data . /data
 # build_type: cloud (clone github data repo) 
 FROM base AS cloud
 ARG CACHE_BUSTER=1
-RUN echo "Cache buster: $CACHE_BUSTER" && git clone https://github.com/datacommonsorg/data.git
+# Nothing in the image uses git history, so it is not shipped.
+RUN echo "Cache buster: $CACHE_BUSTER" && \
+    git clone --depth 1 --single-branch https://github.com/datacommonsorg/data.git /data && \
+    rm -rf /data/.git
 
 # build the final image
 FROM ${build_type} AS final

@@ -15,22 +15,19 @@
 """
 
 import csv
-import datetime
+from datetime import timedelta
 import json
 import os
-import pickle
 import sys
 import time
 
 from absl import app
 from absl import flags
 from absl import logging
-from datetime import timedelta
 from dateutil import parser
-from geopy import distance
-from s2sphere import LatLng, CellId
-from shapely.geometry import Polygon, mapping
-from typing import Union
+from s2sphere import CellId
+from shapely.geometry import Polygon
+from shapely.geometry import mapping
 
 # Setup pprof
 #os.environ['PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION'] = 'python'
@@ -64,17 +61,16 @@ sys.path.append(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)))
 sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)), 'util'))
 
-import common_flags
-import file_util
-import statvar_dcid_generator
-import utils
-
 from aggregation_util import aggregate_dict
-from counters import Counters
-from latlng_recon_geojson import LatLng2Places
+import common_flags
 from config_map import ConfigMap
+from counters import Counters
 from dc_api_wrapper import dc_api_batched_wrapper
 from dc_api_wrapper import get_datacommons_client
+import file_util
+from latlng_recon_geojson import LatLng2Places
+import statvar_dcid_generator
+import utils
 
 # List of place types in increasing order of preference for name.
 # This is used to pick the name of the place from the list of affectedPlaces
@@ -228,8 +224,10 @@ class GeoEvent:
                 dates.add(date)
         return sorted(list(dates))
 
-    def get_event_places(self, dates: set = {}) -> list:
+    def get_event_places(self, dates: set | None = None) -> list:
         '''Returns a list of places for the event on the given dates.'''
+        if dates is None:
+            dates = set()
         place_ids = set()
         for place_id, date_pvs in self.get_places().items():
             for date, pvs in date_pvs.items():
@@ -238,15 +236,17 @@ class GeoEvent:
                 place_ids.update(_get_list(pvs.get('affectedPlace', '')))
         return sorted(list(place_ids))
 
-    def get_event_properties(self, dates: set = {}) -> dict:
+    def get_event_properties(self, dates: set | None = None) -> dict:
         '''Returns the properties aggregated across all places for the dates.'''
+        if dates is None:
+            dates = set()
         pvs = dict()
-        for place_id, date_pvs in self.get_places().items():
+        for _place_id, date_pvs in self.get_places().items():
             per_place_pvs = {}
-            for date, date_pvs in date_pvs.items():
+            for date, pvs_for_date in date_pvs.items():
                 if not dates or date in dates:
                     aggregate_dict(
-                        date_pvs, per_place_pvs,
+                        pvs_for_date, per_place_pvs,
                         self._config.get(
                             'property_config_across_dates',
                             self._config.get('property_config', {})))
@@ -274,7 +274,7 @@ class GeoEvent:
     def get_event_properties_by_dates(self) -> dict:
         '''Returns the properties aggregated by dates across all S2Cells'''
         pvs_by_dates = dict()
-        for place_id, date_pvs in self.get_places().items():
+        for _place_id, date_pvs in self.get_places().items():
             for date, pvs in date_pvs.items():
                 if date not in pvs_by_dates:
                     pvs_by_dates[date] = dict()
@@ -425,7 +425,7 @@ class GeoEventsProcessor:
             if max_distance_km:
                 place_distance_km = utils.place_distance(
                     place_id, _first(new_neighbours))
-                if place_distance == 0 or place_distance_km > max_distance:
+                if place_distance_km == 0 or place_distance_km > max_distance_km:
                     # Neighbours are too far. Ignore them
                     break
             for n in new_neighbours:
@@ -610,7 +610,7 @@ class GeoEventsProcessor:
         # the earliest date.
         root_event = self.merge_events(event_ids)
         if not root_event:
-            logging.debug(f'Unable to find event for {root_event_id}')
+            logging.debug(f'Unable to find event for {event_ids}')
             return None
         root_event_id = root_event.event_id()
         root_event.add_place_pvs(place_id, date, pvs)
@@ -635,7 +635,7 @@ class GeoEventsProcessor:
     def cache_event_place_property(self, event_ids: list = None):
         '''Batch lookup properties for places in events.'''
         if not self._config.get('dc_api_enabled', True):
-            logging.info(f'Skipping lookup for place properties.')
+            logging.info('Skipping lookup for place properties.')
             return
         _set_counter_stage(self._counters, 'prefetch_place_property_')
         if event_ids is None:
@@ -671,7 +671,7 @@ class GeoEventsProcessor:
         if self._config.get('lookup_place_names', True):
             contained_place_dict = self._place_property_cache.get(
                 'containedInPlace', {})
-            for place_id, contained_place_ids in contained_place_dict.items():
+            for _place_id, contained_place_ids in contained_place_dict.items():
                 if contained_place_ids:
                     lookup_names.update(_get_list(contained_place_ids))
             self._counters.add_counter('total', len(lookup_places))
@@ -1346,7 +1346,7 @@ class GeoEventsProcessor:
             # Generate the tMCF node for the statvar referring to the prop
             node = []
             node.append(f'Node: E:{tmcf_prefix}->E{len(tmcf_nodes)}')
-            node.append(f'typeOf: dcs:StatVarObservation')
+            node.append('typeOf: dcs:StatVarObservation')
             node.append(f'variableMeasured: dcs:{statvar_dcid}')
             node.append(f'observationAbout: C:{tmcf_prefix}->observationAbout')
             node.append(f'observationDate: C:{tmcf_prefix}->observationDate')
@@ -1367,12 +1367,11 @@ class GeoEventsProcessor:
             tmcf_file.write('\n\n'.join(tmcf_nodes))
         return output_tmcf
 
-    def write_events_place_svobs(
-            self,
-            output_path: str,
-            event_ids: list = None,
-            event_props: list = ['area', 'count'],
-            date_formats: list = ['YYYY-MM-DD', 'YYYY-MM', 'YYYY']) -> list:
+    def write_events_place_svobs(self,
+                                 output_path: str,
+                                 event_ids: list = None,
+                                 event_props: list | None = None,
+                                 date_formats: list | None = None) -> list:
         '''Returns a list of generated CSV/tMCF files with SVObs for
         the affected places of events.
 
@@ -1402,6 +1401,10 @@ class GeoEventsProcessor:
         Returns:
          a list of filenames for CSV and tMCF generated.
         '''
+        if date_formats is None:
+            date_formats = ['YYYY-MM-DD', 'YYYY-MM', 'YYYY']
+        if event_props is None:
+            event_props = ['area', 'count']
         if not event_ids:
             event_ids = self.get_all_event_ids()
         logging.info(
@@ -1515,7 +1518,6 @@ class GeoEventsProcessor:
             self._counters.add_counter('error_input_rows_date_out_of_order', 1)
             logging.error(f'Old date in row:{filename}:{row_index}:{row}')
             return False
-        prev_date = date
         for p in self._event_props:
             if p in row:
                 data = utils.str_get_numeric_value(row[p])
@@ -1555,16 +1557,16 @@ class GeoEventsProcessor:
                         == 'grid_1') and (not utils.is_grid_id(place_id)):
                     grid_id = utils.grid_id_from_lat_lng(1, lat, lng)
                     place_id = grid_id
-                    self._counters.add_counter(f'place_converted_to_grid_1', 1)
+                    self._counters.add_counter('place_converted_to_grid_1', 1)
                 elif (output_place_type
                       == 's2_10') and (not utils.is_s2_cell_id(place_id)):
                     s2cell_id = utils.s2_cell_to_dcid(
                         utils.s2_cell_from_latlng(lat, lng, 10))
                     place_id = s2cell_id
-                    self._counters.add_counter(f'place_converted_to_s2_level10',
+                    self._counters.add_counter('place_converted_to_s2_level10',
                                                1)
             else:
-                self._counters.add_counter(f'place_without_lat_lng', 1)
+                self._counters.add_counter('place_without_lat_lng', 1)
         if utils.is_s2_cell_id(place_id):
             # Place is an s2 cell. Convert to the right s2 level.
             s2_cell = utils.s2_cell_from_dcid(place_id)
@@ -1729,8 +1731,6 @@ class GeoEventsProcessor:
         typeof = event_pvs.get('typeOf',
                                self._config.get('event_type', 'FloodEvent'))
         start_date = event_pvs.get('startDate')
-        # Get a named location for the event
-        start_location = event_pvs.get('startLocation')
         if not locations:
             locations = _get_list(event_pvs.get('affectedPlace', ''))
         location_name = self._get_smallest_place_name(locations)
@@ -1816,15 +1816,15 @@ def _rename_dict_keys(pvs: dict, rename_keys: dict) -> dict:
 
 
 def _first(s: set):
-    for item in s:
-        break
-    return item
+    return next(iter(s), None)
 
 
 def _format_property_values(pvs: dict,
-                            config: dict = {},
+                            config: dict | None = None,
                             digits: int = 5) -> dict:
     '''Returns a set of properties with formatted values.'''
+    if config is None:
+        config = {}
     fmt_pvs = {}
     for prop, value in pvs.items():
         fmt_value = value

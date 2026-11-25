@@ -8,7 +8,6 @@ import os
 import sys
 import tempfile
 import unittest
-import json
 
 #pylint: disable=wrong-import-position
 #pylint: disable=import-error
@@ -16,11 +15,12 @@ _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
 sys.path.insert(1, _CODEDIR)
 sys.path.insert(1, os.path.join(_CODEDIR, '..', 'common'))
-from generate_col_map import process_zip_file
 try:
-    from .process import S2303SubjectTableDataLoader, process_subject_tables, set_column_map
+    from .process import process_subject_tables
+    from .process import set_column_map
 except ImportError:
-    from process import S2303SubjectTableDataLoader, process_subject_tables, set_column_map
+    from process import process_subject_tables
+    from process import set_column_map
 #pylint: enable=wrong-import-position
 #pylint: enable=import-error
 

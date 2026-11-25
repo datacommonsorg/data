@@ -23,6 +23,7 @@ python3 parse_precipitation_index.py input_file output_file
 '''
 
 import sys
+
 import pandas as pd
 
 

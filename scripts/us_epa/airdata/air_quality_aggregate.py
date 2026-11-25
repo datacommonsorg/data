@@ -17,21 +17,30 @@ This includes aggregate API measurements at the county/CSBA level.
 
 Usage: python3 air_quality_aggregate.py <end_year>
 '''
-import csv, os, sys, requests, io, zipfile
+import csv
+from datetime import datetime
+import io
+import os
+import zipfile
 
 from absl import app
 from absl import flags
 from absl import logging
-from datetime import datetime
+import requests
 
 _FLAGS = flags.FLAGS
 
-flags.DEFINE_integer('aggregate_start_year', os.getenv('START_YEAR', '1980'),
-                     'Process data starting from this year.')
-flags.DEFINE_integer('aggregate_end_year',
-                     os.getenv('END_YEAR',
-                               datetime.now().year),
-                     'Process data upto this year.')
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_integer('aggregate_start_year',
+                         int(os.getenv('START_YEAR', '1980')),
+                         'Process data starting from this year.')
+    flags.DEFINE_integer('aggregate_end_year',
+                         int(os.getenv('END_YEAR',
+                                       datetime.now().year)),
+                         'Process data upto this year.')
+
 
 POLLUTANTS = {
     'Ozone': 'Ozone',
@@ -130,4 +139,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

@@ -12,11 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
-import pandas as pd
 import json
+import os
 import re
+
 from india.geo.districts import IndiaDistrictsMapper
+import pandas as pd
 
 
 class WaterQualityBase():
@@ -110,7 +111,7 @@ class WaterQualityBase():
         self.df['dcid'] = self.df.apply(lambda x: ''.join([
             'indiaWris/',
             str(x['DistrictCode']), '_', ''.join(
-                re.split('\W+', x['Station Name']))
+                re.split(r'\W+', x['Station Name']))
         ]),
                                         axis=1)
 

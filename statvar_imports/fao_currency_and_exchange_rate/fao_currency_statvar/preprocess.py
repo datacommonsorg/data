@@ -12,9 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import pandas as pd
 import os
-from absl import app, logging
+
+from absl import app
+from absl import logging
+import pandas as pd
 
 input_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                          "input_data/")

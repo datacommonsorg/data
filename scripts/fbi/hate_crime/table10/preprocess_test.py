@@ -13,12 +13,14 @@
 # limitations under the License.
 """Tests for Hate Crime Table 10."""
 
+import json
 import os
 import sys
-import unittest
 import tempfile
-import json
+import unittest
+
 import pandas as pd
+
 from . import preprocess
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -49,7 +51,16 @@ class HateCrimeTable10Test(unittest.TestCase):
             csv_file_path = os.path.join(tmp_dir, '2011.csv')
 
             read_file = pd.read_excel(xls_file_path, **test_config['args'])
-            read_file = preprocess._clean_dataframe(read_file, '2011')
+            # 2011.xls has 8 columns (pre-2013 schema without gender/gender
+            # identity); table_config.json lists the 9-column 2020+ schema.
+            table_config = {
+                '10': [
+                    'location', 'total', 'race', 'religion',
+                    'sexual orientation', 'ethnicity', 'disability', 'multiple'
+                ]
+            }
+            read_file = preprocess._clean_dataframe(read_file, '2011', '10',
+                                                    table_config)
             read_file.insert(_YEAR_INDEX, 'Year', '2011')
             read_file.to_csv(csv_file_path, header=True, index=False)
             csv_files.append(csv_file_path)
@@ -70,3 +81,13 @@ class HateCrimeTable10Test(unittest.TestCase):
                           encoding='utf-8') as f_expected:
                     expected_result = f_expected.read()
                 self.assertEqual(test_result, expected_result)
+
+    def test_clean_dataframe_current_table_config(self):
+        with open(os.path.join(_SCRIPT_PATH, '..', 'table_config.json'),
+                  'r',
+                  encoding='utf-8') as f:
+            table_config = json.load(f)['table_config']
+        df = pd.DataFrame([['Total1', 10, 4, 2, 1, 1, 1, 0, 1]])
+        cleaned = preprocess._clean_dataframe(df, '2023', '10', table_config)
+        self.assertEqual(list(cleaned.columns), table_config['10'])
+        self.assertEqual(cleaned['location'].tolist(), ['total'])
