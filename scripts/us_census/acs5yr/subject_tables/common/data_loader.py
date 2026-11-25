@@ -14,6 +14,7 @@
 """Common data processing module for ACS Subject Tables"""
 import json
 import os
+import re
 import sys
 from zipfile import ZipFile
 
@@ -28,6 +29,11 @@ sys.path.append(os.path.join(_SCRIPT_PATH, '.'))  # for resolve_geo_id
 from resolve_geo_id import convert_to_place_dcid
 
 _IGNORED_VALUES = set(['-', '*', '**', '***', '*****', 'N', '(X)', 'null'])
+_TOP_BOTTOM_CODE_MAP = {
+    '100-': '100',
+    '3,500+': '3500',
+    '3500+': '3500',
+}
 _COLUMN_BATCH_SIZE = 100
 
 # TODO: Consider using logs for logging warning messages for debug at a later
@@ -253,16 +259,22 @@ class SubjectTableDataLoaderBase:
     def _replace_ignore_values_with_nan(self, df):
         """
         Replaces cells of the dataframe by column with nan if cell has values in
-        _IGNORED_VALUES.
+        _IGNORED_VALUES and normalizes top/bottom-coded values.
         """
         str_cols = df.select_dtypes(include=['object', 'string']).columns
         if len(str_cols) > 0 and not df.empty:
             df[str_cols] = df[str_cols].mask(df[str_cols].isin(_IGNORED_VALUES))
+            df[str_cols] = df[str_cols].replace(_TOP_BOTTOM_CODE_MAP)
         return df
 
     def _process_dataframe(self, df, filename):
         """processes a dataframe read from a csv file"""
-        year = filename.split(f'ACSST{self.estimate_period}Y')[1][:4]
+        match = re.search(rf'ACS[SD]T{self.estimate_period}Y(\d{{4}})',
+                          os.path.basename(filename))
+        if not match:
+            raise ValueError(
+                f"Unable to extract year from filename: {filename}")
+        year = match.group(1)
         logging.info(f"Processing: {filename}")
 
         # if column map is not available generate, will rarely be False
