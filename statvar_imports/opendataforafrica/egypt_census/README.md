@@ -4,9 +4,9 @@
 
 - **Source**: [Egypt Open Data for Africa](https://egypt.opendataforafrica.org/)
 - **Publisher**: Central Agency for Public Mobilization and Statistics (CAPMAS), Egypt
-- **Import Type**: `Semi-Automated` (`GCPCloudRunSemiAutomaticRefresh` — Cloudflare anti-bot challenges on `egypt.opendataforafrica.org` require semi-automated SDMX XML/CSV staging to GCS, followed by automated Cloud Batch execution and `auto1w` ingestion)
-- **Schedule**: Weekly (Every Monday at 05:00 UTC — `0 5 * * 1`)
-- **Coverage**: Demographics, Economy, Labor Force, Education, Health, and Vital Statistics at country and governorate level (1988+)
+- **Import Type**: `Semi-Automated` (`GCPCloudRunSemiAutomaticRefresh` — Cloudflare anti-bot challenges on `egypt.opendataforafrica.org` require semi-automated SDMX XML downloads converted locally to CSVs and staged to GCS rather than `auto1w`, matching `Kenya_Census`)
+- **Schedule**: `0 5 * * 1` (Mondays at 05:00 UTC; semi-automated Cloud Batch schedule)
+- **Coverage**: Demographics, Economy, Labor Force, Education, Health, and Vital Statistics at country and governorate level (1988 – present)
 - **Entity Resolution**:
   - National level: `country/EGY`
   - Governorate / Sub-national level: `AdministrativeArea1` (27 active governorates + 2 historical governorates: Helwan `wikidataId/Q771345` and 6th of October `wikidataId/Q335708`) pre-resolved via `places_resolved.csv` (`NoEntityResolution` at KG load time).
@@ -15,17 +15,20 @@
 
 | File / Directory | Purpose |
 | :--- | :--- |
-| `manifest.json` | Import manifest declaring download, XML conversion, processor scripts, inputs, and validation |
-| `validation_config.json` | Scoped SQL freshness validation rules complementing default pipeline checks |
-| `download.sh` | Shell script fetching staged raw inputs from GCS into `raw_inputs/` and copying staged CSVs to `input_files/` |
-| `convert_sdmx_xml_to_csv.py` | Python utility converting Open Data for Africa SDMX XML files in `raw_inputs/` to normalized CSVs in `input_files/` |
-| `convert_sdmx_xml_to_csv_test.py` | Hermetic unit tests for `convert_sdmx_xml_to_csv.py` |
+| `manifest.json` | Import manifest declaring `download.sh`, 17 `stat_var_processor.py` runs, `filter_existing_statvars.py`, `import_inputs`, and validation config |
+| `validation_config.json` | Scoped SQL freshness rules and primary vs. pre-primary invariant check complementing default pipeline checks |
+| `download.sh` | Shell script fetching pre-converted census CSVs from GCS into `input_files/` and caching `stat_vars.mcf` once at `/tmp/egypt_census_stat_vars.mcf` |
+| `convert_sdmx_xml_to_csv.py` | Python utility for converting Open Data for Africa SDMX XML files (`xml/*.xml`) into normalized CSVs (`input_files/*.csv`) using `sdmx1` |
+| `filter_existing_statvars.py` | Python post-filter stripping existing KG StatVars from `output/*_stat_vars.mcf` locally against `/tmp/egypt_census_stat_vars.mcf` |
+| `convert_sdmx_xml_to_csv_test.py` | Hermetic unit tests for `convert_sdmx_xml_to_csv.py`, `filter_existing_statvars.py`, manifest wiring, PVMaps, and `test_data/` fixtures |
 | `common_pvmap.csv` | Shared PVMap handling dynamic annual/quarterly `TIME_PERIOD`, `OBS_VALUE`, and `FREQ` mappings |
 | `*_pvmap.csv` | Per-table Property-Value schema mappings for `stat_var_processor.py` |
-| `*_metadata.csv` | Per-table processor configuration files (`generate_statvar_mcf` and `generate_schema_mcf` enabled) |
-| `places_resolved.csv` | Unified place resolver mapping ISO region codes, English names, and Arabic governorate names to DCIDs |
+| `*_metadata.csv` | Per-table processor configurations (`generate_statvar_mcf,True`, `generate_schema_mcf,False`, `recon_lookup_api,False`, `output_only_new_statvars,False`) |
+| `places_resolved.csv` | Unified place resolver mapping ISO region codes, English names, and Arabic governorate names (including tatweel/footnote variants) to DCIDs |
 | `statvar_remap.csv` | StatVar DCID remap table resolving collisions with legacy US BLS/Census StatVars in `mptocre`, `szfufmb`, and `wtxyghf` |
-| `existing_schema.mcf` | Existing Data Commons schema declarations passed via `--existing_schema_mcf` so processor schema generation recognizes metadata properties and compound enum values |
+| `existing_schema.mcf` | Existing Data Commons schema declarations passed via `--existing_schema_mcf` so even manual `schema_generator.py` runs emit `0` `Property` redefinitions |
+| `input_files/` | Normalized input CSVs staged in GCS and synced to `source_files/` (`.gitignore` excluded from Git) |
+| `counters/` | Runtime processor counter CSVs uploaded under `source_files/` (`.gitignore` excluded from Git) |
 | `test_data/` | Representative hermetic input/output CSV and TMCF fixtures (`<table>_input.csv`, `<table>_output.csv`, `<table>_output.tmcf`) |
 
 ## 3. Dataset Mapping Index
@@ -52,24 +55,36 @@ The import processes 17 tables from CAPMAS Egypt Open Data:
 
 ## 4. Ingestion Workflow
 
-### 4.1 Upstream Source Data Staging
-When updated data is published on Egypt Open Data for Africa:
-1. Stage refreshed SDMX `.xml` or `.csv` files to `gs://unresolved_mcf/opendataforafrica/egypt_census/input_files/`:
+### 4.1 Upstream Source Data Updates
+When updated census or statistical data is published on Egypt Open Data for Africa:
+1. **Download SDMX XML**: Save the SDMX `.xml` file locally for each dataset into an `xml/` directory (e.g., `xml/actytif.xml`, `xml/behvqtc.xml`, ..., `xml/zpdksog.xml`).
+2. **Convert XML to CSV**: Execute `convert_sdmx_xml_to_csv.py` locally to convert the raw SDMX XML files into normalized CSV files in `input_files/`:
    ```bash
-   gcloud storage cp xml/*.xml gs://unresolved_mcf/opendataforafrica/egypt_census/input_files/
+   python3 convert_sdmx_xml_to_csv.py --xml_dir xml/ --output_dir input_files/ --verify_expected_tables
+   ```
+3. **Stage to GCS**: Upload the refreshed CSV files to Google Cloud Storage:
+   ```bash
+   gcloud storage cp input_files/*.csv gs://unresolved_mcf/opendataforafrica/egypt_census/input_files/
    ```
 
-### 4.2 Automated Pipeline Execution
-During scheduled runs (`0 5 * * 1`), `manifest.json` executes:
-1. **`download.sh`**: Downloads staged files from GCS into `raw_inputs/` (preserving raw downloads untouched) and copies any pre-staged CSVs into `input_files/`.
-2. **`convert_sdmx_xml_to_csv.py`**: Converts any `.xml` files in `raw_inputs/` into normalized `.csv` files in `input_files/` and verifies all 17 table CSVs are present and non-empty.
-3. **`stat_var_processor.py`**: Processes all 17 tables using `--pv_map=common_pvmap.csv,<table>_pvmap.csv`, generating `.csv`, `.tmcf`, `_stat_vars.mcf`, and `_stat_vars_schema.mcf` in `output/`.
-4. **Validation**: Runs default pipeline checks (`DELETED_RECORDS_PERCENT`, `EMPTY_IMPORT`, `MISSING_REFS_COUNT`, `LINT_ERROR_COUNT`) plus the scoped freshness SQL rules in `validation_config.json`.
+### 4.2 Automated Ingestion Pipeline
+During scheduled import runs (`0 5 * * 1`, Mondays at 05:00 UTC) or on-demand triggers after refreshed CSVs are staged to GCS, `manifest.json` executes:
+1. **Download (`download.sh`)**: Copies staged CSV files from `gs://unresolved_mcf/opendataforafrica/egypt_census/input_files/*.csv` directly into `input_files/` and downloads `gs://unresolved_mcf/scripts/statvar/stat_vars.mcf` once to `/tmp/egypt_census_stat_vars.mcf`.
+2. **Transform (`stat_var_processor.py` + `filter_existing_statvars.py`)**: Processes all 17 tables against `--existing_statvar_mcf=/tmp/egypt_census_stat_vars.mcf`, writing `.csv`, `.tmcf`, and `_stat_vars.mcf` into `output/`, then filters `output/*_stat_vars.mcf` locally so `"node_mcf": "output/<table>*_stat_vars.mcf"` ingests only genuinely new StatVars without DC API `/v2/node` `429` errors or `definition` merge-conflict counters.
+3. **Validation**: Runs default pipeline checks (`DELETED_RECORDS_PERCENT`, `EMPTY_IMPORT_CHECK`, `MISSING_REFS_COUNT`, `LINT_ERROR_COUNT`) plus the 4 `SQL_VALIDATOR` rules in `validation_config.json`.
 
-## 5. Running Locally & Testing
+## 5. Upstream Source Data Caveats
+
+- **`szfufmb` (`NeverMarried` `18+` legal marriage age domain)**: CAPMAS 2017 Census tabulates `MARITAL_STATUS=5` (`لم يتزوج`, `NeverMarried`) strictly for ages `18+` (while `37,842,662` unmarried minors `<18` are tabulated separately in `MARITAL_STATUS=3` `اقل من السن`). `szfufmb_pvmap.csv` suppresses the `36` `<18` (`أقل من 15 سنة`, `15 سنة`, `16 سنة`, `17 سنة`) literal `0` rows for `لم يتزوج` via `#IgnoreRow,{@IgnoreUnder18}` (retaining `<18` early-marriage rows for `عقد قران`, `متزوج`, `مطلق`, `ارمل` and legitimate `60+` `0` rows for `عقد قران`, `855 -> 819` SVObs) and maps `لم يتزوج`'s age-total row (`"اجمالى:  فئـــــــات الســــــن"`) to `age,[18 - Years]` (`Count_Person_18OrMoreYears_*NeverMarried*`).
+- **`wcssteb` (`ID=1`/`ID=2` stage-label swap + SQL invariant)**: Upstream OpenDataForAfrica `wcssteb` inverted the stage labels on `ID=1` (`قبل الابتدائي` / `Before primary school`) and `ID=2` (`الابتدائي` / `Primary`), verified against official Egypt MOETE/CAPMAS statistics (`11,074,835` primary vs. `1,244,052` pre-primary KG students and `99.5%` female KG staffing in `2016`). `wcssteb_pvmap.csv` maps `ID=1` -> `PrimarySchool` and `ID=2` -> `PrePrimarySchool`, guarded against future upstream un-swapping by `check_wcssteb_primary_exceeds_preprimary_enrollment_and_teachers` (`PrimaryMin > PrePrimaryMax`) in `validation_config.json`.
+- **`wtxyghf` (`2016` university faculty outlier suppression)**: Upstream `wtxyghf.csv` (`2016`) drops public/Al-Azhar university teaching staff by `92.9%` (`97,949 -> 6,991`) and spikes private university teaching staff by `+189%` (`8,745 -> 25,271`, matching the `25,271` male student count in `txbrrac.csv`). `wtxyghf_pvmap.csv` (`TIME_PERIOD:2016` `EmptyRef` suppression on the two university series, while keeping dynamic `2017+` years open) paired with `wtxyghf_metadata.csv` (`filter_data_max_yearly_change_ratio,1.5` and `filter_data_keep_recent,False`) drops only those `2` corrupted `2016` rows (`30 -> 28` SVObs), with `MaxDate >= '2015'` enforced in `validation_config.json`.
+- **`cjczlcd` (`ID_SECTORS=2` `GovernmentOwned`)**: CAPMAS `ID_SECTORS=2` represents governmental and public-business sector health facilities and staff (`17` facilities + `454` private = `471` total in `2014`) and is mapped to `establishmentOwnership,GovernmentOwned` (`Count_HealthEstablishment_GovernmentOwnedEstablishment_HealthFacility` and `Count_Person_GovernmentOwnedEstablishment_{Female,Male}_{Doctor,Nurse}Occupation`).
+- **`zpdksog` (14-governorate `Total == Urban` IMR and `Port Said`/`Suez` `0` Rural IMR)**: In upstream CAPMAS/Knoema `zpdksog.csv` (matching the `20250312` baseline `.xlsx`), 14 of 27 governorates publish `ID_AREA=1` (Total IMR) equal to `ID_AREA=2` (Urban IMR) and predominantly urban governorates `Port Said` and `Suez` publish `Rural IMR = 0` despite small rural infant death counts (`8` and `22`); these observations are retained as-published for fidelity with the official CAPMAS/OpenDataForAfrica source and `20250312` KG baseline.
+
+## 6. Running Locally & Testing
 
 ```bash
-# Run unit tests
+# Run hermetic unit tests from repo root
 ./run_tests.sh -p statvar_imports/opendataforafrica/egypt_census
 
 # Example single-table processor run from repo root
@@ -80,6 +95,16 @@ During scheduled runs (`0 5 * * 1`), `manifest.json` executes:
   --places_resolved_csv=statvar_imports/opendataforafrica/egypt_census/places_resolved.csv \
   --output_path=statvar_imports/opendataforafrica/egypt_census/output/behvqtc \
   --output_counters=statvar_imports/opendataforafrica/egypt_census/counters/behvqtc_counters.csv \
-  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+  --existing_statvar_mcf=/tmp/egypt_census_stat_vars.mcf \
   --existing_schema_mcf=statvar_imports/opendataforafrica/egypt_census/existing_schema.mcf
 ```
+
+## 7. Production Deployment & Post-Merge Runbook
+
+Execute the initial production cutover and future refreshes in the following strict order:
+
+1. **Merge GitHub PR `#2394`** into `datacommonsorg/data` `master` first so `Egypt_Census.mcf` `dataTransformationLogic` (`https://github.com/datacommonsorg/data/blob/master/statvar_imports/opendataforafrica/egypt_census/README.md`) resolves HTTP `200 OK`.
+2. **Verify Staged GCS Artifacts**: Confirm the vetted Cloud Batch run `<version>` is staged in `gs://unresolved_mcf/country/egypt/latest/`, `gs://resolved_mcf/country/egypt/latest/`, and `gs://datcom-prod-imports/statvar_imports/opendataforafrica/egypt_census/Egypt_Census/<version>/`.
+3. **Run CNS `AutoCopy`**: Copy staged CSVs, TMCF, and resolved `nodes.mcf@17` shards into `/cns/jv-d/home/datcom/v3_mcf/country/egypt/latest/` and `/cns/jv-d/home/datcom/v3_resolved_mcf/country/egypt/latest/`.
+4. **Submit Google3 `cl/1018979293`**: Land the `egypt_common_schema.mcf`, `egypt_stat_var.mcf`, `Egypt_Census.mcf` provenance, and `Egypt_Census.textproto` (`import_groups: "country"`) manifest updates after CNS artifacts and GitHub `README.md` are live.
+5. **Promote `latest_version.txt`**: Update `latest_version.txt` in both `gs://datcom-import-test/statvar_imports/opendataforafrica/egypt_census/Egypt_Census/` and `gs://datcom-prod-imports/statvar_imports/opendataforafrica/egypt_census/Egypt_Census/` to `<version>` so future weekly `0 5 * * 1` semi-automated runs diff and validate against the refreshed baseline.

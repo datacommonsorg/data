@@ -1,6 +1,7 @@
 # Existing Data Commons schema definitions referenced by Egypt_Census StatVars
 # so schema_generator.py recognizes metadata properties, updated domainIncludes,
-# and compound disjunction enum values without emitting spurious provisional nodes.
+# single-type enum values, and compound disjunction enum values without emitting
+# spurious provisional Property redefinitions (such as rangeIncludes: dcid:Class).
 
 Node: dcid:alternateName
 typeOf: dcs:Property
@@ -17,6 +18,11 @@ typeOf: dcs:Property
 domainIncludes: dcid:Thing,dcid:StatisticalVariable,dcid:Person,dcid:Student,dcid:Teacher,dcid:Household,dcid:HealthEstablishment,dcid:Bed,dcid:CriminalIncidents,dcid:Establishment,dcid:Incident,dcid:MedicalConditionIncident,dcid:MortalityEvent,dcid:BirthEvent,dcid:EconomicActivity
 rangeIncludes: dcid:Text
 
+Node: dcid:gender
+typeOf: dcs:Property
+domainIncludes: dcid:Person,dcid:Student,dcid:Teacher
+rangeIncludes: dcid:GenderType
+
 Node: dcid:institutionType
 typeOf: dcid:Property
 domainIncludes: dcid:Student,dcid:Teacher,dcid:Person
@@ -30,6 +36,9 @@ typeOf: dcid:Property
 domainIncludes: dcid:Establishment,dcid:HealthEstablishment,dcid:Person
 rangeIncludes: dcid:EstablishmentOwnershipEnum
 
+Node: dcid:GovernmentOwned
+typeOf: dcid:EstablishmentOwnershipEnum
+
 Node: dcid:PrivatelyOwned__GovernmentOwned
 typeOf: dcid:EstablishmentOwnershipEnum
 
@@ -37,3 +46,149 @@ Node: dcid:schoolGradeLevel
 typeOf: dcs:Property
 domainIncludes: dcid:Student,dcid:Teacher,dcid:Person
 rangeIncludes: dcid:SchoolGradeLevelEnum,dcid:SchoolLevelEnum,dcid:SecondarySchool
+
+Node: dcid:MiddleSchool
+typeOf: dcid:SchoolLevelEnum
+
+Node: dcid:Infant
+typeOf: dcid:AgeGroupClassificationEnum
+
+Node: dcid:Rural
+typeOf: dcid:HumanSettlementClassificationEnum
+
+Node: dcid:Urban
+typeOf: dcid:HumanSettlementClassificationEnum
+
+Node: dcid:Doctor
+typeOf: dcid:OccupationEnum
+
+Node: dcid:Nurse
+typeOf: dcid:OccupationEnum
+
+Node: dcid:Graduate
+typeOf: dcid:EducationalAttainmentEnum
+
+Node: dcid:age
+typeOf: dcs:Property
+domainIncludes: dcid:Person,dcid:Student,dcid:Teacher,dcid:MortalityEvent,dcid:MedicalConditionIncident
+rangeIncludes: dcid:QuantityRange,dcid:Quantity
+
+Node: dcid:educationalAttainment
+typeOf: dcs:Property
+domainIncludes: dcid:Person,dcid:Student,dcid:Teacher
+rangeIncludes: dcid:EducationalAttainmentEnum,dcid:SchoolGradeLevelEnum,dcid:DegreeEnum
+
+Node: dcid:economicSector
+typeOf: dcs:Property
+domainIncludes: dcid:Person,dcid:EconomicActivity,dcid:Establishment
+rangeIncludes: dcid:EconomicSectorEnum
+
+Node: dcid:AdministrativeAndSupportServiceActivities
+typeOf: dcid:EconomicSectorEnum
+
+Node: dcid:AgricultureHuntingForestryCuttingTrees
+typeOf: dcid:EconomicSectorEnum
+
+Node: dcid:ArtsEntertainmentAndRecreation
+typeOf: dcid:EconomicSectorEnum
+
+Node: dcid:CommoditySector
+typeOf: dcid:EconomicSectorEnum
+
+Node: dcid:ConstructionAndBuilding
+typeOf: dcid:EconomicSectorEnum
+
+Node: dcid:DomesticAndPersonnelServicesForPrivateFamilies
+typeOf: dcid:EconomicSectorEnum
+
+Node: dcid:EconomicActivity
+typeOf: dcid:EconomicSectorEnum
+
+Node: dcid:EducationSector
+typeOf: dcid:EconomicSectorEnum
+
+Node: dcid:ElectricityGasSteamAirConditionSupplies
+typeOf: dcid:EconomicSectorEnum
+
+Node: dcid:FoodResidenceServices
+typeOf: dcid:EconomicSectorEnum
+
+Node: dcid:HumanHealthAndSocialWorkActivities
+typeOf: dcid:EconomicSectorEnum
+
+Node: dcid:IncompletelyDescribedActivities
+typeOf: dcid:EconomicSectorEnum
+
+Node: dcid:InformationAndTelecommunication
+typeOf: dcid:EconomicSectorEnum
+
+Node: dcid:InsuranceFinancialIntermediation
+typeOf: dcid:EconomicSectorEnum
+
+Node: dcid:InternationalAndRegionalOrganizations
+typeOf: dcid:EconomicSectorEnum
+
+Node: dcid:Manufacturing
+typeOf: dcid:EconomicSectorEnum
+
+Node: dcid:MiningAndQuarryingIndustry
+typeOf: dcid:EconomicSectorEnum
+
+Node: dcid:OtherServiceActivities
+typeOf: dcid:EconomicSectorEnum
+
+Node: dcid:ProductiveSocialServicesSector
+typeOf: dcid:EconomicSectorEnum
+
+Node: dcid:PublicAdministrationAndDefence
+typeOf: dcid:EconomicSectorEnum
+
+Node: dcid:RealEstateRenting
+typeOf: dcid:EconomicSectorEnum
+
+Node: dcid:SpecializedScientificAndTechnicalActivities
+typeOf: dcid:EconomicSectorEnum
+
+Node: dcid:TransportStorageSector
+typeOf: dcid:EconomicSectorEnum
+
+Node: dcid:VehicleTradeRepair
+typeOf: dcid:EconomicSectorEnum
+
+Node: dcid:WaterSupportDrainRecycling
+typeOf: dcid:EconomicSectorEnum
+
+Node: dcid:residenceType
+typeOf: dcs:Property
+domainIncludes: dcid:Person,dcid:Household
+rangeIncludes: dcid:USC_ResidenceTypeEnum,dcid:ResidenceTypeEnum
+
+Node: dcid:Household
+typeOf: dcid:USC_ResidenceTypeEnum
+
+Node: dcid:accidentCause
+typeOf: dcs:Property
+domainIncludes: dcid:Incident
+rangeIncludes: dcid:AccidentCauseEnum,dcid:MedicalConditionIncidentTypeEnum
+
+Node: dcid:Car
+typeOf: dcid:AccidentCauseEnum
+
+Node: dcid:Other
+typeOf: dcid:AccidentCauseEnum
+
+Node: dcid:numberOfBeds
+typeOf: dcs:Property
+domainIncludes: dcid:Hospital,dcid:HealthEstablishment,dcid:Bed
+rangeIncludes: dcid:Number,dcid:QuantityRange
+
+Node: dcid:placeType
+typeOf: dcs:Property
+domainIncludes: dcid:Place,dcid:Person,dcid:Household,dcid:Establishment
+rangeIncludes: dcid:HumanSettlementClassificationEnum,dcid:LocationClassificationEnum
+
+Node: dcid:City
+typeOf: dcid:LocationClassificationEnum
+
+Node: dcid:Village
+typeOf: dcid:LocationClassificationEnum

@@ -11,9 +11,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Hermetic unit tests for convert_sdmx_xml_to_csv.py."""
+"""Hermetic unit tests for Egypt Census SDMX converter, filter, and configs."""
 
+import csv
+import glob
+import json
 import os
+import re
 import sys
 import tempfile
 import unittest
@@ -25,14 +29,17 @@ CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 try:
     from opendataforafrica.egypt_census import convert_sdmx_xml_to_csv as egypt_converter
+    from opendataforafrica.egypt_census import filter_existing_statvars as egypt_filter
 except ModuleNotFoundError:
     REPO_ROOT = os.path.abspath(os.path.join(CURRENT_DIR, '..', '..', '..'))
     if REPO_ROOT not in sys.path:
         sys.path.insert(0, REPO_ROOT)
     from statvar_imports.opendataforafrica.egypt_census import convert_sdmx_xml_to_csv as egypt_converter
+    from statvar_imports.opendataforafrica.egypt_census import filter_existing_statvars as egypt_filter
 
 EXPECTED_TABLES = egypt_converter.EXPECTED_TABLES
 _normalize_obs_column = egypt_converter._normalize_obs_column
+_to_normalized_df = egypt_converter._to_normalized_df
 convert_sdmx_xml_to_csv = egypt_converter.convert_sdmx_xml_to_csv
 convert_sdmx_xml_to_dataframe = egypt_converter.convert_sdmx_xml_to_dataframe
 main = egypt_converter.main
@@ -75,7 +82,7 @@ class ConvertSdmxXmlToCsvTest(unittest.TestCase):
 </message:StructureSpecificData>
 """
         xml_file = os.path.join(self.test_dir.name, 'sample_sdmx.xml')
-        with open(xml_file, 'w') as f:
+        with open(xml_file, 'w', encoding='utf-8') as f:
             f.write(sample_sdmx_xml)
 
         df = convert_sdmx_xml_to_dataframe(xml_file)
@@ -86,10 +93,38 @@ class ConvertSdmxXmlToCsvTest(unittest.TestCase):
         self.assertIn('TIME_PERIOD', df.columns)
         self.assertIn('OBS_VALUE', df.columns)
 
+    def test_to_normalized_df_unnamed_range_index_series(self):
+        """Tests unnamed RangeIndex pd.Series avoids spurious INDEX column."""
+        unnamed_series = pd.Series([10, 20])
+        df = _to_normalized_df(unnamed_series)
+        self.assertIsNotNone(df)
+        self.assertListEqual(list(df.columns), ['OBS_VALUE'])
+        self.assertListEqual(list(df['OBS_VALUE']), [10, 20])
+
+        for blank_name in ('', '   '):
+            blank_named_series = pd.Series([30, 40], name=blank_name)
+            df_blank = _to_normalized_df(blank_named_series)
+            self.assertListEqual(list(df_blank.columns), ['OBS_VALUE'])
+            self.assertListEqual(list(df_blank['OBS_VALUE']), [30, 40])
+
+        named_val_series = pd.Series(['1E-4', '2E-4'], name='value')
+        df_named = _to_normalized_df(named_val_series)
+        self.assertListEqual(list(df_named.columns), ['OBS_VALUE'])
+        self.assertListEqual(list(df_named['OBS_VALUE']), ['0.0001', '0.0002'])
+
+        idx_series = pd.Series(
+            [42],
+            index=pd.Index(['2017'], name='time_period'),
+            name='value',
+        )
+        df_idx = _to_normalized_df(idx_series)
+        self.assertListEqual(list(df_idx.columns), ['TIME_PERIOD', 'OBS_VALUE'])
+        self.assertEqual(df_idx.iloc[0]['OBS_VALUE'], 42)
+
     def test_convert_sdmx_xml_to_dataframe_sdmx_branches(self):
         """Tests sdmx1 branches for DataFrame, MultiIndex, Series, and dict."""
         xml_file = os.path.join(self.test_dir.name, 'mock_sdmx.xml')
-        with open(xml_file, 'w') as f:
+        with open(xml_file, 'w', encoding='utf-8') as f:
             f.write('<StructureSpecificData/>')
 
         # 1. DataFrame with default RangeIndex and 'value' column (non-mutating)
@@ -194,7 +229,7 @@ class ConvertSdmxXmlToCsvTest(unittest.TestCase):
 </StructureSpecificData>
 """
         xml_file = os.path.join(self.test_dir.name, 'sample_fallback.xml')
-        with open(xml_file, 'w') as f:
+        with open(xml_file, 'w', encoding='utf-8') as f:
             f.write(sample_fallback_xml)
 
         df = convert_sdmx_xml_to_dataframe(xml_file)
@@ -216,7 +251,7 @@ class ConvertSdmxXmlToCsvTest(unittest.TestCase):
 </StructureSpecificData>
 """
         xml_file = os.path.join(self.test_dir.name, 'sample_sci.xml')
-        with open(xml_file, 'w') as f:
+        with open(xml_file, 'w', encoding='utf-8') as f:
             f.write(sample_sci_xml)
 
         df = convert_sdmx_xml_to_dataframe(xml_file)
@@ -232,7 +267,7 @@ class ConvertSdmxXmlToCsvTest(unittest.TestCase):
 
     def test_convert_sdmx_xml_to_dataframe_invalid_xml(self):
         xml_file = os.path.join(self.test_dir.name, 'invalid.xml')
-        with open(xml_file, 'w') as f:
+        with open(xml_file, 'w', encoding='utf-8') as f:
             f.write('This is not valid XML <tag>')
 
         with self.assertRaises(ValueError) as ctx:
@@ -249,7 +284,7 @@ class ConvertSdmxXmlToCsvTest(unittest.TestCase):
 </message:StructureSpecificData>
 """
         xml_file = os.path.join(self.test_dir.name, 'empty.xml')
-        with open(xml_file, 'w') as f:
+        with open(xml_file, 'w', encoding='utf-8') as f:
             f.write(empty_xml)
 
         with self.assertRaises(ValueError) as ctx:
@@ -267,7 +302,7 @@ class ConvertSdmxXmlToCsvTest(unittest.TestCase):
 </StructureSpecificData>
 """
         xml_file = os.path.join(self.test_dir.name, 'test_table.xml')
-        with open(xml_file, 'w') as f:
+        with open(xml_file, 'w', encoding='utf-8') as f:
             f.write(sample_xml)
 
         out_csv = os.path.join(self.test_dir.name, 'output_subdir',
@@ -320,7 +355,9 @@ class ConvertSdmxXmlToCsvTest(unittest.TestCase):
 
         # Populate all 17 CSVs -> succeeds
         for tid in EXPECTED_TABLES:
-            with open(os.path.join(out_dir, f'{tid}.csv'), 'w') as f:
+            with open(os.path.join(out_dir, f'{tid}.csv'),
+                      'w',
+                      encoding='utf-8') as f:
                 f.write('TIME_PERIOD,OBS_VALUE\n2017,1\n')
         with patch.object(
                 sys,
@@ -343,12 +380,51 @@ class ConvertSdmxXmlToCsvTest(unittest.TestCase):
                 main()
             self.assertEqual(ctx.exception.code, 2)
 
+    def test_filter_existing_statvars_drops_existing_and_removes_empty(self):
+        existing_mcf = os.path.join(self.test_dir.name, 'existing.mcf')
+        with open(existing_mcf, 'w', encoding='utf-8') as f:
+            f.write('Node: Count_Person # inline comment\n'
+                    'typeOf: dcs:StatisticalVariable\n\n'
+                    'Node: dcs:Count_Teacher_PrimarySchool\n'
+                    'dcid: "dc/7hlfs8swh22v3" # legacy dcid\n'
+                    'typeOf: dcs:StatisticalVariable\n\n'
+                    'Node: schema:Count_Death\n'
+                    'typeOf: dcs:StatisticalVariable\n')
+
+        with self.assertRaises(FileNotFoundError):
+            egypt_filter.filter_statvar_mcf_dir(
+                os.path.join(self.test_dir.name, 'missing_dir'), existing_mcf)
+
+        out_dir = os.path.join(self.test_dir.name, 'output')
+        os.makedirs(out_dir, exist_ok=True)
+        mixed_mcf = os.path.join(out_dir, 'szfufmb_stat_vars.mcf')
+        with open(mixed_mcf, 'w', encoding='utf-8') as f:
+            f.write('# Auto generated\n'
+                    'Node: dcid:Count_Person\n'
+                    'typeOf: dcs:StatisticalVariable\n\n'
+                    'Node: dcid:Count_Death\n'
+                    'typeOf: dcs:StatisticalVariable\n\n'
+                    'Node: dcid:Count_Teacher_PrimarySchool\n'
+                    'typeOf: dcs:StatisticalVariable\n\n'
+                    'Node: dcid:Count_Person_18OrMoreYears_NeverMarried\n'
+                    'typeOf: dcs:StatisticalVariable\n')
+        only_existing_mcf = os.path.join(out_dir, 'actytif_stat_vars.mcf')
+        with open(only_existing_mcf, 'w', encoding='utf-8') as f:
+            f.write('Node: dcid:dc/7hlfs8swh22v3\n'
+                    'typeOf: dcs:StatisticalVariable\n')
+
+        egypt_filter.filter_statvar_mcf_dir(out_dir, existing_mcf)
+        self.assertFalse(os.path.exists(only_existing_mcf))
+        self.assertTrue(os.path.isfile(mixed_mcf))
+        with open(mixed_mcf, encoding='utf-8') as f:
+            filtered_txt = f.read()
+        self.assertIn('Count_Person_18OrMoreYears_NeverMarried', filtered_txt)
+        self.assertNotIn('dcid:Count_Person\n', filtered_txt)
+        self.assertNotIn('dcid:Count_Death\n', filtered_txt)
+        self.assertNotIn('dcid:Count_Teacher_PrimarySchool\n', filtered_txt)
+
     def test_egypt_census_manifest_pvmaps_metadata_and_fixtures(self):
         """Verifies manifest wiring, zero #Eval, metadata hygiene, and 17 test_data triplets."""
-        import csv
-        import glob
-        import json
-
         self.assertTrue(
             egypt_converter.__name__.endswith(
                 '.egypt_census.convert_sdmx_xml_to_csv'))
@@ -361,24 +437,43 @@ class ConvertSdmxXmlToCsvTest(unittest.TestCase):
         spec = manifest['import_specifications'][0]
         self.assertIn('governorate', spec['provenance_description'])
         self.assertNotIn('district', spec['provenance_description'])
-        self.assertTrue(
+        self.assertFalse(
             any('convert_sdmx_xml_to_csv.py' in cmd for cmd in spec['scripts']))
+        self.assertTrue(
+            any('filter_existing_statvars.py' in cmd
+                for cmd in spec['scripts']))
 
         for pv_path in glob.glob(os.path.join(CURRENT_DIR, '*pvmap.csv')):
             with open(pv_path, encoding='utf-8') as f:
                 content = f.read()
             self.assertNotIn('#eval', content.lower(), pv_path)
-            self.assertNotIn('#Ignore', content, pv_path)
+            self.assertIsNone(re.search(r'#Ignore(?!Row\b)', content), pv_path)
+            with open(pv_path, encoding='utf-8') as f:
+                rows = [
+                    r for r in csv.reader(f)
+                    if r and not r[0].strip().startswith('#')
+                ]
+            header_len = len(rows[0])
+            for idx, r in enumerate(rows[1:], start=2):
+                self.assertEqual(
+                    len(r), header_len,
+                    f'{pv_path} row {idx} has {len(r)} cols != {header_len}')
 
         for meta_path in glob.glob(os.path.join(CURRENT_DIR, '*_metadata.csv')):
             with open(meta_path, encoding='utf-8') as f:
                 meta_txt = f.read()
+            self.assertNotIn('#eval', meta_txt.lower(), meta_path)
             self.assertNotIn('end_date,', meta_txt, meta_path)
-            self.assertNotIn('generate_statvar_mcf,False', meta_txt, meta_path)
-            self.assertNotIn('generate_schema_mcf,False', meta_txt, meta_path)
+            self.assertIn('generate_statvar_mcf,True', meta_txt, meta_path)
+            self.assertIn('generate_schema_mcf,False', meta_txt, meta_path)
+            self.assertIn('recon_lookup_api,False', meta_txt, meta_path)
+            self.assertIn('output_only_new_statvars,False', meta_txt, meta_path)
 
+        self.assertNotIn('raw_inputs/*', spec['source_files'])
+        self.assertNotIn('validation_config.json', spec['source_files'])
         self.assertIn('statvar_remap.csv', spec['source_files'])
         self.assertIn('existing_schema.mcf', spec['source_files'])
+        self.assertIn('filter_existing_statvars.py', spec['source_files'])
         self.assertTrue(
             os.path.isfile(os.path.join(CURRENT_DIR, 'existing_schema.mcf')))
         svp_cmds = [
@@ -386,7 +481,11 @@ class ConvertSdmxXmlToCsvTest(unittest.TestCase):
         ]
         self.assertEqual(len(svp_cmds), 17)
         for cmd in svp_cmds:
+            self.assertIn(
+                '--existing_statvar_mcf=/tmp/egypt_census_stat_vars.mcf', cmd)
             self.assertIn('--existing_schema_mcf=existing_schema.mcf', cmd)
+        for inp, tid in zip(spec['import_inputs'], EXPECTED_TABLES):
+            self.assertEqual(inp['node_mcf'], f'output/{tid}*_stat_vars.mcf')
         for remap_tid in ('mptocre', 'szfufmb', 'wtxyghf'):
             self.assertTrue(
                 any(f'--input_data=input_files/{remap_tid}.csv' in cmd and
@@ -397,8 +496,8 @@ class ConvertSdmxXmlToCsvTest(unittest.TestCase):
 
         with open(os.path.join(CURRENT_DIR, 'validation_config.json'),
                   encoding='utf-8') as f:
-            val_txt = f.read()
-        self.assertNotIn('EXISTS (', val_txt)
+            val_cfg = json.load(f)
+        self.assertEqual(len(val_cfg['rules']), 4)
 
         td_dir = os.path.join(CURRENT_DIR, 'test_data')
         for tid in EXPECTED_TABLES:
@@ -408,18 +507,31 @@ class ConvertSdmxXmlToCsvTest(unittest.TestCase):
                 self.assertGreater(os.path.getsize(fpath), 0, fpath)
                 if suffix in ('_input.csv', '_output.csv'):
                     with open(fpath, encoding='utf-8') as tf:
+                        line_cnt = sum(1 for _ in tf)
                         self.assertGreaterEqual(
-                            sum(1 for _ in tf), 2,
+                            line_cnt, 2,
                             f'{fpath} must contain header + >=1 data row')
+                        if suffix == '_input.csv':
+                            bound = 95 if tid in ('actytif', 'behvqtc') else 101
+                            self.assertLess(
+                                line_cnt, bound,
+                                f'{fpath} exceeds {bound}-line fixture bound')
                 if suffix == '_output.csv':
+                    places = set()
                     with open(fpath, encoding='utf-8') as tf:
                         for row in csv.DictReader(tf):
+                            places.add(row['observationAbout'])
                             self.assertTrue(
                                 row['variableMeasured'].startswith(
                                     ('dcid:', 'dcs:')),
                                 f'{fpath} has unprefixed variableMeasured: '
                                 f"{row['variableMeasured']}",
                             )
+                    if tid in ('actytif', 'behvqtc'):
+                        self.assertGreaterEqual(
+                            len(places), 3,
+                            f'{fpath} must exercise national + governorate places'
+                        )
 
 
 if __name__ == '__main__':

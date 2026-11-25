@@ -10,6 +10,7 @@ KN.L7,variableMeasured,dcid:Count_Person_InLaborForce_Female,#Multiply,1000000,,
 KN.L8,variableMeasured,dcid:Count_Person_Workers,#Multiply,1000000,,,,,,,,,,
 KN.L9,populationType,Person,workStatus,Worker,gender,Male,#Multiply,1000000,name,"""Total Number of Male Workers""",,,,
 KN.L10,populationType,Person,workStatus,Worker,gender,Female,#Multiply,1000000,name,"""Total Number of Female Workers""",,,,
+"# KN.L11 uses workerStatus,NonWorker to reuse canonical dcid:Count_Person_NonWorker (manual_india_census_primary.mcf); KN.L12-L13 use workStatus,NonWorker to match dcid:Count_Person_{Male,Female}_NonWorker in egypt_stat_var.mcf."
 KN.L11,populationType,Person,workerStatus,NonWorker,#Multiply,1000000,name,"""Total Number of Non-Workers""",,,,,,
 KN.L12,populationType,Person,workStatus,NonWorker,gender,Male,#Multiply,1000000,name,"""Total Number of Male Non-Workers""",,,,
 KN.L13,populationType,Person,workStatus,NonWorker,gender,Female,#Multiply,1000000,name,"""Total Number of Female Non-Workers""",,,,

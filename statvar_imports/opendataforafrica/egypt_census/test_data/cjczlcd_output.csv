@@ -4,11 +4,11 @@ country/EGY,2014,dcid:Count_Person_Male_DoctorOccupation,2490,,,P1Y
 country/EGY,2014,dcid:Count_Person_Female_DoctorOccupation,880,,,P1Y
 country/EGY,2014,dcid:Count_Person_Male_NurseOccupation,319,,,P1Y
 country/EGY,2014,dcid:Count_Person_Female_NurseOccupation,1111,,,P1Y
-country/EGY,2014,dcid:Count_HealthEstablishment_PrivatelyOwnedOrGovernmentOwnedEstablishment_HealthFacility,17,,,P1Y
-country/EGY,2014,dcid:Count_Person_PrivatelyOwnedOrGovernmentOwnedEstablishment_Male_DoctorOccupation,54,,,P1Y
-country/EGY,2014,dcid:Count_Person_PrivatelyOwnedOrGovernmentOwnedEstablishment_Female_DoctorOccupation,25,,,P1Y
-country/EGY,2014,dcid:Count_Person_PrivatelyOwnedOrGovernmentOwnedEstablishment_Male_NurseOccupation,70,,,P1Y
-country/EGY,2014,dcid:Count_Person_PrivatelyOwnedOrGovernmentOwnedEstablishment_Female_NurseOccupation,43,,,P1Y
+country/EGY,2014,dcid:Count_HealthEstablishment_GovernmentOwnedEstablishment_HealthFacility,17,,,P1Y
+country/EGY,2014,dcid:Count_Person_GovernmentOwnedEstablishment_Male_DoctorOccupation,54,,,P1Y
+country/EGY,2014,dcid:Count_Person_GovernmentOwnedEstablishment_Female_DoctorOccupation,25,,,P1Y
+country/EGY,2014,dcid:Count_Person_GovernmentOwnedEstablishment_Male_NurseOccupation,70,,,P1Y
+country/EGY,2014,dcid:Count_Person_GovernmentOwnedEstablishment_Female_NurseOccupation,43,,,P1Y
 country/EGY,2014,dcid:Count_HealthEstablishment_PrivatelyOwnedEstablishment_HealthFacility,454,,,P1Y
 country/EGY,2014,dcid:Count_Person_PrivatelyOwnedEstablishment_Male_DoctorOccupation,2436,,,P1Y
 country/EGY,2014,dcid:Count_Person_PrivatelyOwnedEstablishment_Female_DoctorOccupation,855,,,P1Y

@@ -1,27 +1,30 @@
 key,prop,val,p1,v1,p2,v2
 OBS_VALUE,value,{Number},observationAbout,country/EGY,name,"""{Name1}{Name2}"""
-GENDER:1,gender,"""""",Name2,""""""
-GENDER:2,gender,Male,Name2,"{Comma} Male"
-GENDER:3,gender,Female,Name2,"{Comma} Female"
-Before primary school,schoolGradeLevel,PrePrimarySchool,Name1,Number of {POP} in pre-primary school
-Primary,schoolGradeLevel,PrimarySchool,Name1,Number of {POP} in primary school
-Community education,educationalAttainment,CommunityEducation,Name1,Number of {POP} participating in community education
-Preparatory school,schoolGradeLevel,MiddleSchool,Name1,Number of {POP} in preparatory school
-General secondary school,schoolGradeLevel,SecondarySchool,Name1,Number of {POP} in general secondary school
-Commercial secondary school,schoolGradeLevel,CommercialSecondarySchool,Name1,Number of {POP} in commercial secondary school
-Industrial secondary school,schoolGradeLevel,IndustrialSecondarySchool,Name1,Number of {POP} in industrial secondary school
-Agricultural secondary school,schoolGradeLevel,AgriculturalSecondarySchool,Name1,Number of {POP} in agricultural secondary school
-Special education,educationalAttainment,SpecialEducation,Name1,Number of {POP} in special education
-Students,populationType,Student,POP,students
-Teachers,populationType,Teacher,POP,teachers
-قبل الابتدائي,schoolGradeLevel,PrePrimarySchool,Name1,Number of {POP} in pre-primary school
-الابتدائي,schoolGradeLevel,PrimarySchool,Name1,Number of {POP} in primary school
-التعليم المجتمعي,educationalAttainment,CommunityEducation,Name1,Number of {POP} participating in community education
-الاعدادي,schoolGradeLevel,MiddleSchool,Name1,Number of {POP} in preparatory school
-الثانوي العام,schoolGradeLevel,SecondarySchool,Name1,Number of {POP} in general secondary school
-الثانوي التجاري,schoolGradeLevel,CommercialSecondarySchool,Name1,Number of {POP} in commercial secondary school
-الثانوي الصناعي,schoolGradeLevel,IndustrialSecondarySchool,Name1,Number of {POP} in industrial secondary school
-الثانوي الزراعي,schoolGradeLevel,AgriculturalSecondarySchool,Name1,Number of {POP} in agricultural secondary school
-التربية الخاصة,educationalAttainment,SpecialEducation,Name1,Number of {POP} in special education
-الطلاب,populationType,Student,POP,students
-المدرسين,populationType,Teacher,POP,teachers
+GENDER:1,gender,"""""",Name2,"""""",,
+GENDER:2,gender,Male,Name2,"{Comma} Male",,
+GENDER:3,gender,Female,Name2,"{Comma} Female",,
+"# OpenDataForAfrica wcssteb inverted the stage labels on ID=1 (قبل الابتدائي / Before primary school) and ID=2 (الابتدائي / Primary),"
+"# verified against official MOETE/CAPMAS statistics (11,074,835 primary vs 1,244,052 KG students and 99.5% female KG staffing in 2016)."
+# Guarded against future upstream un-swapping by check_wcssteb_primary_exceeds_preprimary_enrollment_and_teachers in validation_config.json.
+Before primary school,schoolGradeLevel,PrimarySchool,Name1,Number of {POP} in primary school,,
+Primary,schoolGradeLevel,PrePrimarySchool,Name1,Number of {POP} in pre-primary school,,
+Community education,educationalAttainment,CommunityEducation,Name1,Number of {POP} participating in community education,,
+Preparatory school,schoolGradeLevel,MiddleSchool,Name1,Number of {POP} in preparatory school,,
+General secondary school,schoolGradeLevel,SecondarySchool,Name1,Number of {POP} in general secondary school,,
+Commercial secondary school,schoolGradeLevel,CommercialSecondarySchool,Name1,Number of {POP} in commercial secondary school,,
+Industrial secondary school,schoolGradeLevel,IndustrialSecondarySchool,Name1,Number of {POP} in industrial secondary school,,
+Agricultural secondary school,schoolGradeLevel,AgriculturalSecondarySchool,Name1,Number of {POP} in agricultural secondary school,,
+Special education,educationalAttainment,SpecialEducation,Name1,Number of {POP} in special education,,
+Students,populationType,Student,POP,students,,
+Teachers,populationType,Teacher,POP,teachers,,
+قبل الابتدائي,schoolGradeLevel,PrimarySchool,Name1,Number of {POP} in primary school,,
+الابتدائي,schoolGradeLevel,PrePrimarySchool,Name1,Number of {POP} in pre-primary school,,
+التعليم المجتمعي,educationalAttainment,CommunityEducation,Name1,Number of {POP} participating in community education,,
+الاعدادي,schoolGradeLevel,MiddleSchool,Name1,Number of {POP} in preparatory school,,
+الثانوي العام,schoolGradeLevel,SecondarySchool,Name1,Number of {POP} in general secondary school,,
+الثانوي التجاري,schoolGradeLevel,CommercialSecondarySchool,Name1,Number of {POP} in commercial secondary school,,
+الثانوي الصناعي,schoolGradeLevel,IndustrialSecondarySchool,Name1,Number of {POP} in industrial secondary school,,
+الثانوي الزراعي,schoolGradeLevel,AgriculturalSecondarySchool,Name1,Number of {POP} in agricultural secondary school,,
+التربية الخاصة,educationalAttainment,SpecialEducation,Name1,Number of {POP} in special education,,
+الطلاب,populationType,Student,POP,students,,
+المدرسين,populationType,Teacher,POP,teachers,,

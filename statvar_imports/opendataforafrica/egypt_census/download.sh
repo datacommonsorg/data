@@ -16,15 +16,9 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-rm -rf "${SCRIPT_DIR}/raw_inputs" "${SCRIPT_DIR}/input_files" "${SCRIPT_DIR}/output" "${SCRIPT_DIR}/counters"
-mkdir -p "${SCRIPT_DIR}/raw_inputs" "${SCRIPT_DIR}/input_files" "${SCRIPT_DIR}/output" "${SCRIPT_DIR}/counters"
+rm -rf "${SCRIPT_DIR}/input_files" "${SCRIPT_DIR}/output" "${SCRIPT_DIR}/counters"
+mkdir -p "${SCRIPT_DIR}/input_files" "${SCRIPT_DIR}/output" "${SCRIPT_DIR}/counters"
 
-gcloud storage cp --verbosity=error --recursive \
-  "gs://unresolved_mcf/opendataforafrica/egypt_census/input_files/*" \
-  "${SCRIPT_DIR}/raw_inputs/"
+gcloud storage cp --verbosity=error   "gs://unresolved_mcf/opendataforafrica/egypt_census/input_files/*.csv"   "${SCRIPT_DIR}/input_files/"
 
-shopt -s nullglob
-csv_files=("${SCRIPT_DIR}/raw_inputs/"*.csv)
-if (( ${#csv_files[@]} > 0 )); then
-  cp "${csv_files[@]}" "${SCRIPT_DIR}/input_files/"
-fi
+gcloud storage cp --verbosity=error   "gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"   "/tmp/egypt_census_stat_vars.mcf"

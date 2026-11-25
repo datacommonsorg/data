@@ -9,3 +9,11 @@ output_columns,"observationAbout,observationDate,variableMeasured,value,unit,sca
 header_rows,1
 mapped_columns,9
 mapped_rows,1
+# All schema enums/properties are checked into third_party/datacommons/schema/core/egypt_common_schema.mcf;
+# resolving locally against --existing_statvar_mcf (and filtering via filter_existing_statvars.py) avoids
+# bogus rangeIncludes: dcid:Class Property redefinitions, /v2/node definition error-node-merge-conflict
+# counters, and unauthenticated DC API /v2/node HTTP 429 rate limits across 17 sequential runs.
+generate_statvar_mcf,True
+generate_schema_mcf,False
+recon_lookup_api,False
+output_only_new_statvars,False

@@ -1,10 +1,11 @@
-key,prop,val,p1,v1,p2,v2,p3,v3
-OBS_VALUE,value,{Number},observationAbout,country/EGY,name,"""{Name1}{Name2}""",,
-ID_ESTABLESHEMENTS:1,populationType,HealthEstablishment,healthEstablishmentType,HealthFacility,Name1,Number of treatment facilities,,
-ID_ESTABLESHEMENTS:2,populationType,Person,occupation,Doctor,gender,Male,Name1,Number of male doctors
-ID_ESTABLESHEMENTS:3,populationType,Person,occupation,Doctor,gender,Female,Name1,Number of female doctors
-ID_ESTABLESHEMENTS:4,populationType,Person,occupation,Nurse,gender,Male,Name1,Number of male nursing staff members
-ID_ESTABLESHEMENTS:5,populationType,Person,occupation,Nurse,gender,Female,Name1,Number of female nursing staff members
-ID_SECTORS:1,establishmentOwnership,"""""",Name2,"""""",,,,
-ID_SECTORS:2,establishmentOwnership,PrivatelyOwned__GovernmentOwned,#Format,Name2= in government and public sector,,,
-ID_SECTORS:3,establishmentOwnership,PrivatelyOwned,#Format,Name2= in private sector,,,
+key,prop,val,p1,v1,p2,v2,p3,v3,p4,v4
+OBS_VALUE,value,{Number},observationAbout,country/EGY,name,"""{Name1}{Name2}""",alternateName,"""{AlternateName1}{AlternateName2}@ar""",,
+ID_ESTABLESHEMENTS:1,populationType,HealthEstablishment,healthEstablishmentType,HealthFacility,Name1,Number of treatment facilities,AlternateName1,المنشآت العلاجية,,
+ID_ESTABLESHEMENTS:2,populationType,Person,occupation,Doctor,gender,Male,Name1,Number of male doctors,AlternateName1,"الأطباء{Comma} ذكور"
+ID_ESTABLESHEMENTS:3,populationType,Person,occupation,Doctor,gender,Female,Name1,Number of female doctors,AlternateName1,"الأطباء{Comma} اناث"
+ID_ESTABLESHEMENTS:4,populationType,Person,occupation,Nurse,gender,Male,Name1,Number of male nursing staff members,AlternateName1,"هيئة التمريض{Comma} ذكور"
+ID_ESTABLESHEMENTS:5,populationType,Person,occupation,Nurse,gender,Female,Name1,Number of female nursing staff members,AlternateName1,"هيئة التمريض{Comma} اناث"
+ID_SECTORS:1,establishmentOwnership,"""""",Name2,"""""",AlternateName2,"""""",,,,
+# CAPMAS ID_SECTORS=2 represents governmental + public-business sector health facilities and staff (17 government/public + 454 private = 471 total).
+ID_SECTORS:2,establishmentOwnership,GovernmentOwned,#Format,Name2= in government and public sector,AlternateName2,"{Comma} حكومى وعام/اعمال عام",,,,
+ID_SECTORS:3,establishmentOwnership,PrivatelyOwned,#Format,Name2= in private sector,AlternateName2,"{Comma} خاص",,,,

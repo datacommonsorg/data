@@ -30,3 +30,11 @@ dcid:country/EGY,2002,dcid:Count_MedicalConditionIncident_HardBirthAndBleeding,5
 dcid:country/EGY,2002,dcid:Count_MedicalConditionIncident_Burns,8356,,,P1Y
 dcid:country/EGY,2002,dcid:Count_MedicalConditionIncident_Poisoning,22510,,,P1Y
 dcid:country/EGY,2004,dcid:Count_MedicalConditionIncident_Drowning,4693,,,P1Y
+dcid:wikidataId/Q31074,2009,dcid:Count_HealthEstablishment_PublicHospital_200OrMoreBeds,3,,,P1Y
+dcid:wikidataId/Q31074,2009,dcid:Count_Bed_PublicHospital_200OrMoreBeds,574,,,P1Y
+dcid:wikidataId/Q31074,2002,dcid:Count_Incident_Car_TrafficAccident,5377,,,P1Y
+dcid:wikidataId/Q31074,2004,dcid:Count_Death,391,,,P1Y
+dcid:wikidataId/Q30835,2009,dcid:Count_HealthEstablishment_CentralHospital_100To200Beds,4,,,P1Y
+dcid:wikidataId/Q30835,2008,dcid:Count_CriminalIncidents,420,,,P1Y
+dcid:wikidataId/Q30835,2002,dcid:Count_Incident_TrafficAccident,5228,,,P1Y
+dcid:wikidataId/Q30835,2007,dcid:Count_Establishment_AthleticEstablishment,341,,,P1Y

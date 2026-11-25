@@ -29,3 +29,11 @@ dcid:country/EGY,2017,dcid:Count_Person_80To84Years_Urban,117152,,,P1Y
 dcid:country/EGY,2017,dcid:Count_Person_80To84Years_Rural_Male,80071,,,P1Y
 dcid:country/EGY,2017,dcid:Count_Person_80To84Years_Rural_Female,84963,,,P1Y
 dcid:country/EGY,2017,dcid:Count_Person_80To84Years_Rural,165034,,,P1Y
+dcid:wikidataId/Q30630,2017,dcid:Count_Person_1OrLessYears_Male_Urban,15483,,,P1Y
+dcid:wikidataId/Q30630,2017,dcid:Count_Person_1OrLessYears_Female_Urban,14935,,,P1Y
+dcid:wikidataId/Q30630,2017,dcid:Count_Person_1OrLessYears_Male_Rural,76587,,,P1Y
+dcid:wikidataId/Q30630,2017,dcid:Count_Person_1OrLessYears_Female_Rural,71735,,,P1Y
+dcid:wikidataId/Q30662,2017,dcid:Count_Person_1OrLessYears_Male_Urban,5237,,,P1Y
+dcid:wikidataId/Q30662,2017,dcid:Count_Person_1OrLessYears_Female_Urban,4737,,,P1Y
+dcid:wikidataId/Q30662,2017,dcid:Count_Person_1OrLessYears_Male_Rural,2002,,,P1Y
+dcid:wikidataId/Q30662,2017,dcid:Count_Person_1OrLessYears_Female_Rural,1934,,,P1Y

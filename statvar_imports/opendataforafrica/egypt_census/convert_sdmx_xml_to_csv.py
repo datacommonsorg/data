@@ -101,6 +101,13 @@ def _to_normalized_df(obj: object) -> pd.DataFrame | None:
             df = obj.reset_index()
         else:
             df = obj.copy()
+    elif isinstance(obj, pd.Series):
+        if isinstance(obj.index, pd.MultiIndex) or obj.index.name is not None:
+            df = obj.reset_index()
+        else:
+            series_name = (obj.name if obj.name is not None and
+                           str(obj.name).strip() else 'OBS_VALUE')
+            df = obj.to_frame(name=series_name)
     elif hasattr(obj, 'reset_index'):
         df = obj.reset_index()
     else:

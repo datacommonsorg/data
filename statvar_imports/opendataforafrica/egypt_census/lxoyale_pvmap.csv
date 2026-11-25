@@ -12,6 +12,6 @@ KN.N11,populationType,Person,residenceType,Household,gender,Male,Name1,Total mal
 KN.N12,populationType,Person,Name1,Total population,,,,
 KN.N13,populationType,Person,gender,Female,Name1,Total female population,,
 KN.N14,populationType,Person,gender,Male,Name1,Total male population,,
-KN.AN1,placeOfResidenceClassification,Urban,Name2,"{Comma} urban",,,
-KN.AN3,placeOfResidenceClassification,Rural,Name2,"{Comma} rural",,,
+KN.AN1,placeOfResidenceClassification,Urban,Name2,"{Comma} urban",,,,
+KN.AN3,placeOfResidenceClassification,Rural,Name2,"{Comma} rural",,,,
 KN.AN2,Name2,"""""",,,,,,
