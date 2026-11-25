@@ -3,11 +3,11 @@
     "rules": [
         {
             "rule_id": "check_all_statvars_freshness",
-            "description": "Verify all 108 active StatVars meet the freshness boundary (>= 2025).",
+            "description": "Verify all 108 active StatVars meet the rolling annual publication lag (GUS BDL publishes year Y-1 in May of year Y).",
             "validator": "SQL_VALIDATOR",
             "params": {
-                "query": "SELECT StatVar, MaxDate, COUNT(*) OVER () AS total_svs FROM stats",
-                "condition": "MaxDate >= '2025' AND total_svs = 108"
+                "query": "SELECT COALESCE(StatVar, 'MISSING') AS StatVar, MaxDate, COUNT(*) OVER () AS total_svs FROM stats UNION ALL SELECT 'EMPTY_STATS_GUARD', NULL, 0 WHERE NOT EXISTS (SELECT 1 FROM stats)",
+                "condition": "COALESCE(TRY_CAST(MaxDate AS INTEGER), 0) >= EXTRACT(YEAR FROM CURRENT_DATE - INTERVAL '6 months') - 1 AND total_svs = 108"
             }
         },
         {
@@ -15,8 +15,8 @@
             "description": "Verify all 108 StatVars retain full historical coverage starting at 2003.",
             "validator": "SQL_VALIDATOR",
             "params": {
-                "query": "SELECT StatVar, MinDate, COUNT(*) OVER () AS total_svs FROM stats",
-                "condition": "MinDate = '2003' AND total_svs = 108"
+                "query": "SELECT COALESCE(StatVar, 'MISSING') AS StatVar, MinDate, COUNT(*) OVER () AS total_svs FROM stats UNION ALL SELECT 'EMPTY_STATS_GUARD', NULL, 0 WHERE NOT EXISTS (SELECT 1 FROM stats)",
+                "condition": "COALESCE(CAST(MinDate AS VARCHAR), '') = '2003' AND total_svs = 108"
             }
         },
         {

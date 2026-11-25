@@ -20,24 +20,26 @@ Statistical Office of Poland (Główny Urząd Statystyczny - GUS) Bank Danych Lo
     `55-64`, `65 and more`, `total`
   - Gender: `males`, `females`, `total`
   - Residence Classification: `in urban areas`, `in rural areas`, `total`
-- **Temporal Coverage:** Dynamic from 2003 through `current_year + 1` (currently 2025).
+- **Temporal Coverage:** Queries `2003` through `current_year + 1` (currently `2025`); `StatisticsPoland_pvmap.csv` pre-maps years `2003–2050` and `download_input_data.py` asserts every downloaded year is mapped in the PVMap.
 
 ## Configuration & Credentials
 - **API Quota & Secret Manager:** `download_input_data.py` queries `/api/v1/data/by-unit/{unit_id}` in
   50-variable batches (~37 HTTP GET requests per full run), staying well under GUS BDL's anonymous
   `100 req / 15m` limit without requiring credentials. In Cloud Batch, if higher quota is desired,
-  provision the key in GCP Secret Manager (`projects/datcom-import-automation-prod/secrets/statistics-poland-bdl-api-key/versions/latest`
-  or override the resource name via `BDL_API_SECRET_RESOURCE`). **Do NOT pass `BDL_API_KEY` via
-  `ExecutorConfig.user_script_env`**, because `import-automation/executor/main.py` logs `Import config`
-  in cleartext to Cloud Logging. For local CLI runs only, `BDL_API_KEY` may be exported:
+  provision the key in GCP Secret Manager and set `BDL_API_SECRET_RESOURCE` (e.g.
+  `projects/datcom-import-automation-prod/secrets/statistics-poland-bdl-api-key/versions/latest`).
+  **Do NOT pass `BDL_API_KEY` via `ExecutorConfig.user_script_env`**, because
+  `import-automation/executor/main.py` logs `Import config` in cleartext to Cloud Logging. For local
+  CLI runs only, `BDL_API_KEY` may be exported:
   ```bash
   export BDL_API_KEY="<your-gus-bdl-api-key>"
   ```
-- **Template CSV:** Download script loads the reference column structure from GCS:
-  `gs://datcom-prod-imports/statvar_imports/statistics_poland/poland_data_sample/`
-  `StatisticsPoland_input.csv`
-  with an automatic offline fallback to `test/StatisticsPoland_input.csv`.
-- **StatVar Resolution:** All 108 StatVars are pre-registered in Data Commons (`//depot/google3/third_party/datacommons/schema/stat_vars/poland_stat_vars.mcf` and `gs://unresolved_mcf/scripts/statvar/stat_vars.mcf`), resolving with `0` runtime-minted StatVars.
+- **Canonical Output Schema:** `download_input_data.py` constructs the 17 `(Code, Name)` rows and all
+  108 `(Age, Sex, Location)` columns directly from canonical constants (optional GCS override via
+  `GCS_TEMPLATE_PATH`), enforcing full batch/unit/age-cohort completeness before writing any annual CSV.
+- **StatVar Resolution:** All 108 StatVars are pre-registered in Data Commons
+  (`https://github.com/datacommonsorg/schema/blob/main/stat_vars/poland_stat_vars.mcf` and
+  `gs://unresolved_mcf/scripts/statvar/stat_vars.mcf`), resolving with `0` runtime-minted StatVars.
 
 ## Processing Instructions
 
