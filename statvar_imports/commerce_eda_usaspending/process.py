@@ -168,6 +168,8 @@ def fetch_usaspending_data(start_year,
 
                 try:
                     response = session.post(url, json=payload, timeout=45)
+                    logging.info(f"Response POST {url} [FY {fy} Page {page}] "
+                                 f"status={response.status_code}")
                     response.raise_for_status()
                     data = response.json()
                 except Exception as err:

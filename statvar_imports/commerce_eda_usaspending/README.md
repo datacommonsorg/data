@@ -21,7 +21,6 @@ This importer fetches and processes U.S. Economic Development Administration (ED
 - `test_data/`: Hermetic sample input (`sample_awards.json`), expected intermediate output (`sample_output.csv`), and expected `stat_var_processor.py` outputs (`sample_output_expected.csv`, `sample_output_expected.tmcf`) for unit testing.
 - `investment_pvmap.csv`: Property-value mappings converting state/territory codes, years, and EDA program names into Data Commons schema observations.
 - `investment_metadata.csv`: Configuration parameters for `stat_var_processor.py`.
-- `investment_schema.mcf`: Schema definitions for new `InvestmentProgramEnum` instances.
 - `validation_config.json`: Custom validation rules (`active_programs_freshness`, `non_negative_investment_amounts`), inheriting global defaults from `tools/import_validation/validation_config.json` (including `check_deleted_records_percent`).
 
 ## Pipeline Steps
@@ -49,7 +48,6 @@ python3 ../../tools/statvar_importer/stat_var_processor.py \
   --input_data=input_files/investment_cleaned.csv \
   --pv_map=investment_pvmap.csv \
   --config_file=investment_metadata.csv \
-  --existing_schema_mcf=investment_schema.mcf \
   --output_path=output/investment_output \
   --output_counters=counters/investment_counters.csv
 ```
@@ -57,6 +55,7 @@ Outputs produced:
 - `output/investment_output.csv`: Cleaned CSV mapped to Data Commons schema.
 - `output/investment_output.tmcf`: Template MCF mapping observation properties.
 - `output/investment_output_stat_vars.mcf`: Node MCF for new `StatisticalVariable` entities.
+- `output/investment_output_stat_vars_schema.mcf`: Node MCF for any new schema enum instances not yet present in Data Commons (omitted once canonical schema definitions are ingested).
 - `counters/investment_counters.csv`: Processing counters and diff statistics.
 
 ### 4. Refresh & Validation Procedure
