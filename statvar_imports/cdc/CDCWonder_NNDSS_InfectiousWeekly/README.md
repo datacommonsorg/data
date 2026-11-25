@@ -4,7 +4,7 @@
 Notifiable Infectious Diseases Data: Weekly tables from CDC WONDER containing incident counts of infectious diseases reported by US states, New York City, the District of Columbia, US territories, and US Census divisions.
 
 This `stat_var_processor` + `pvmap` pipeline uses the two-input (`history/` + `live`) architecture:
-1. `download.py` syncs the frozen `2006–2021` historical archive (`cdc_nndss_weekly_tables_historical.csv` & `.tmcf`) from `gs://unresolved_mcf/cdc/nndss_infectious_diseasesweekly/history/` into `history/`, and downloads/preprocesses `2022+` data from the CDC Socrata SODA3 `x9gk-5huc` endpoint (`export.csv?accessType=DOWNLOAD`: comma-stripped `Current week` numeric values, `observationDate`, complete-pair NY+NYC sum) into `input_files/NNDSS_Weekly_Data.csv`.
+1. `download.py` syncs the frozen `2006–2021` historical archive (`cdc_nndss_weekly_tables_historical.csv` & `.tmcf`) from `gs://unresolved_mcf/cdc/nndss_infectious_diseasesweekly/history/` into `history/`, and downloads/preprocesses `2022+` data from the CDC Socrata SODA3 `x9gk-5huc` endpoint (`export.csv?accessType=DOWNLOAD`: comma-stripped `Current week` numeric values, `observationDate`, and complete-pair NY+NYC sum into `geoId/36`, retaining `measurementMethod: CDC_NNDSS_Diseases_WeeklyTables` for unbroken `2006–2026` time-series continuity with the historical archive) into `input_files/NNDSS_Weekly_Data.csv`.
 2. `stat_var_processor.py` maps `2022+` observations to canonical StatVars via `nndss_weekly_pvmap.csv` into `output/nndss_weekly_output.{csv,tmcf}`.
 3. `download.py --normalize_output` exposes `observationPeriod` as a column in `output/nndss_weekly_output.{csv,tmcf}` and `manifest.json` passes both `history/` and `output/` in a single `import_inputs` entry, so `genmcf`, differ, and validation evaluate both together (emitting `table_mcf_nodes_cdc_nndss_weekly_tables_historical.mcf` and `table_mcf_nodes_nndss_weekly_output.mcf`, served as `history/nodes.mcf@1` and `latest/nodes.mcf@1`).
 4. **Post-2023 Case-Status Split Hepatitis Series**: Five post-2023 case-status split labels (`"Hepatitis A, Confirmed"`, `"Hepatitis B, acute, Confirmed"`, `"Hepatitis B, acute, Probable"`, `"Hepatitis B, perinatal, Confirmed"`, `"Hepatitis C, perinatal, Confirmed"`) are currently `#ignore`d in `nndss_weekly_pvmap.csv` (leaving the unsplit `ConditionHepatitisA_AcuteCondition`, `ConditionHepatitisB_AcuteCondition`, and perinatal Hepatitis B/C series ending in December 2023) until canonical `ConfirmedCase` / `ProbableCase` StatVars are added to `cdc_nndss_weekly.mcf` and synced to `stat_vars.mcf` prior to retiring `CDCWonder_NNDSS_Infectious_Weekly`.
@@ -29,7 +29,7 @@ python3 download.py --normalize_output
 ```
 
 ## Using `test_data/`
-Sample preprocessed input and expected output fixtures are in `test_data/`:
+Sample raw SODA3 source data (`test_data/sample_export.csv`), preprocessed input (`test_data/NNDSS_Weekly_Data.csv`), and expected output fixtures covering country (`country/USA`), US Census division (`usc/NewEnglandDivision`), state (`geoId/06`, `geoId/36`), territory (`geoId/72`), and city (`geoId/3651000`) place types are in `test_data/`:
 ```bash
 python3 ../../../tools/statvar_importer/stat_var_processor.py \
   --input_data=test_data/NNDSS_Weekly_Data.csv \

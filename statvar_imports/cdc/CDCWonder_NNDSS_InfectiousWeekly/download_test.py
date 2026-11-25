@@ -196,6 +196,19 @@ class DownloadTest(unittest.TestCase):
             self.assertIn("malformed", str(ctx.exception))
             self.assertFalse(os.path.exists(out_csv))
 
+    def test_sample_export_fixture_matches_test_data(self):
+        test_data_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                     "test_data")
+        sample_raw = os.path.join(test_data_dir, "sample_export.csv")
+        expected_preprocessed = os.path.join(test_data_dir,
+                                             "NNDSS_Weekly_Data.csv")
+        with tempfile.TemporaryDirectory() as tmpdir:
+            out_csv = os.path.join(tmpdir, "NNDSS_Weekly_Data.csv")
+            download.preprocess_csv(sample_raw, out_csv)
+            with open(out_csv, "r", encoding="utf-8") as got_f, open(
+                    expected_preprocessed, "r", encoding="utf-8") as exp_f:
+                self.assertEqual(got_f.read(), exp_f.read())
+
     def test_normalize_output_files(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             csv_path = os.path.join(tmpdir, "nndss_weekly_output.csv")

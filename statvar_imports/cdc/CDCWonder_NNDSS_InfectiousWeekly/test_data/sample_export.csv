@@ -1,0 +1,8 @@
+"Reporting Area","Current MMWR Year","MMWR WEEK","Label","Current week","Current week, flag","Previous 52 week Max","Previous 52 weeks Max, flag","Cumulative YTD Current MMWR Year","Cumulative YTD Current MMWR Year, flag","Cumulative YTD Previous MMWR Year","Cumulative YTD Previous MMWR Year, flag","LOCATION1","LOCATION2","sort_order","geocode"
+"US RESIDENTS","2024","10","Haemophilus influenzae, invasive disease, Age <5 years, Non-b serotype","3","-","10","-","25","-","20","-",,"US RESIDENTS","20241000001",
+"NEW ENGLAND","2024","10","Campylobacteriosis","1,234","-","1,500","-","9,000","-","8,500","-",,"NEW ENGLAND","20241000002",
+"CALIFORNIA","2024","10","Leprosy (Hansen's disease)","4","-","6","-","15","-","12","-","CALIFORNIA",,"20241000003","POINT (-119.662127 37.211164)"
+"NEW YORK","2024","10","Anthrax","1","-","2","-","3","-","1","-","NEW YORK",,"20241000004","POINT (-75.59655 42.921241)"
+"NEW YORK CITY","2024","10","Anthrax","2","-","3","-","5","-","2","-","NEW YORK CITY",,"20241000005","POINT (-73.9562 40.7689)"
+"PUERTO RICO","2024","10","Campylobacteriosis","9","-","15","-","60","-","55","-","PUERTO RICO",,"20241000006","POINT (-66.414655 18.215692)"
+"US RESIDENTS","2024","10","Haemophilus influenzae, invasive disease, Age <5 years, Nontypeable","7","-","12","-","40","-","35","-",,"US RESIDENTS","20241000007",

@@ -2,7 +2,7 @@ Node: E:nndss_weekly_output->E0
 observationAbout: C:nndss_weekly_output->observationAbout
 value: C:nndss_weekly_output->value
 variableMeasured: C:nndss_weekly_output->variableMeasured
-observationPeriod: P1W
-measurementMethod: CDC_NNDSS_Diseases_WeeklyTables
-typeOf: dcs:StatVarObservation
 observationDate: 2024-03-03
+observationPeriod: P1W
+typeOf: dcs:StatVarObservation
+measurementMethod: CDC_NNDSS_Diseases_WeeklyTables

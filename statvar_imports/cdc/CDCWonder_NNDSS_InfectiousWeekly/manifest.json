@@ -27,6 +27,7 @@
             ],
             "source_files": [
                 "input_files/export.csv",
+                "input_files/NNDSS_Weekly_Data.csv",
                 "nndss_weekly_pvmap.csv",
                 "nndss_weekly_metadata.csv",
                 "statvar_dcid_remap.csv",

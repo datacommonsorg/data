@@ -1,4 +1,4 @@
-key,prop,val,,,,,,,,
+#Key,Property1,Value1,Property2,Value2,Property3,Value3,Property4,Value4,Property5,Value5
 #Reporting Area,,,,,,,,,,
 observationDate,observationDate,{Data},,,,,,,,
 Current week,value,{Number},,,populationType,MedicalConditionIncident,measurementMethod,CDC_NNDSS_Diseases_WeeklyTables,observationPeriod,P1W

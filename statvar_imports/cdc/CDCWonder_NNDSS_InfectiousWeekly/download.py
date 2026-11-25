@@ -123,7 +123,8 @@ def download_source_csv() -> str:
     download_ok = False
     for attempt in range(1, max_attempts + 1):
         try:
-            logging.info(f"Download attempt {attempt}/{max_attempts}...")
+            logging.info(f"Download attempt {attempt}/{max_attempts}: "
+                         f"GET {SOURCE_URL} (body=None)")
             if os.path.exists(RAW_FILE):
                 os.remove(RAW_FILE)
             download_ok = download_file(
@@ -136,11 +137,13 @@ def download_source_csv() -> str:
                 backoff=1,
             )
             if download_ok and os.path.exists(RAW_FILE):
-                logging.info("Download completed successfully.")
+                logging.info(
+                    f"Download status=SUCCESS for GET {SOURCE_URL} -> {RAW_FILE}."
+                )
                 break
             logging.warning(
-                f"Download attempt {attempt}/{max_attempts} returned {download_ok}."
-            )
+                f"Download status=FAILURE on attempt {attempt}/{max_attempts} "
+                f"for GET {SOURCE_URL} (download_ok={download_ok}).")
         except (OSError, ValueError) as exc:
             logging.exception(
                 f"Download attempt {attempt}/{max_attempts} for {SOURCE_URL} "
