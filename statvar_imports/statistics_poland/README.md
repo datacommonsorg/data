@@ -12,19 +12,24 @@ Statistical Office of Poland (Główny Urząd Statystyczny - GUS) Bank Danych Lo
 - **Source Portal:** https://bdl.stat.gov.pl/bdl/dane/podgrup/tablica
 - **API Endpoint:** `https://bdl.stat.gov.pl/api/v1`
 - **Subject ID:** `P3447` (Ludność wg grup wieku / Population by age group)
-- **Place Types Covered:**
+- **Place Types Covered (17 entities):**
   - Country level: `country/POL`
-  - Voivodship (province) level: `nuts/PL*` (16 voivodships)
-- **Variables Covered:**
+  - Voivodeship (`AdministrativeArea1`) level: 16 voivodeships (`14` `wikidataId/Q*` + `nuts/PL71` + `nuts/PL72`)
+- **Variables Covered (108 StatVars):**
   - Age groups: `0-2`, `3-6`, `7-12`, `13-15`, `16-19`, `20-24`, `25-34`, `35-44`, `45-54`,
-    `55-64`, `65 and more`
+    `55-64`, `65 and more`, `total`
   - Gender: `males`, `females`, `total`
   - Residence Classification: `in urban areas`, `in rural areas`, `total`
 - **Temporal Coverage:** Dynamic from 2003 through `current_year + 1` (currently 2025).
 
 ## Configuration & Credentials
-- **API Key:** Optional GUS BDL API key can be provided via the `BDL_API_KEY` environment variable
-  (anonymous requests are used if unset):
+- **API Quota & Secret Manager:** `download_input_data.py` queries `/api/v1/data/by-unit/{unit_id}` in
+  50-variable batches (~37 HTTP GET requests per full run), staying well under GUS BDL's anonymous
+  `100 req / 15m` limit without requiring credentials. In Cloud Batch, if higher quota is desired,
+  provision the key in GCP Secret Manager (`projects/datcom-import-automation-prod/secrets/statistics-poland-bdl-api-key/versions/latest`
+  or override the resource name via `BDL_API_SECRET_RESOURCE`). **Do NOT pass `BDL_API_KEY` via
+  `ExecutorConfig.user_script_env`**, because `import-automation/executor/main.py` logs `Import config`
+  in cleartext to Cloud Logging. For local CLI runs only, `BDL_API_KEY` may be exported:
   ```bash
   export BDL_API_KEY="<your-gus-bdl-api-key>"
   ```
@@ -32,8 +37,8 @@ Statistical Office of Poland (Główny Urząd Statystyczny - GUS) Bank Danych Lo
   `gs://datcom-prod-imports/statvar_imports/statistics_poland/poland_data_sample/`
   `StatisticsPoland_input.csv`
   with an automatic offline fallback to `test/StatisticsPoland_input.csv`.
-- **StatVar MCF:** Canonical StatVars are resolved against:
-  `gs://unresolved_mcf/scripts/statvar/stat_vars.mcf`
+- **StatVar MCF:** All 108 canonical StatVars resolve against:
+  `gs://unresolved_mcf/scripts/statvar/stat_vars.mcf` and `poland_stat_vars.mcf` (`0` runtime-minted StatVars).
 
 ## Processing Instructions
 
@@ -54,7 +59,7 @@ python3 tools/statvar_importer/stat_var_processor.py \
   --config_file=statvar_imports/statistics_poland/StatisticsPoland_metadata.csv \
   --output_counters=\
 statvar_imports/statistics_poland/counters/StatisticsPoland_output_counters.csv \
-  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
+  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf,statvar_imports/statistics_poland/poland_stat_vars.mcf
 ```
 
 ### 3. Run StatVarProcessor on Test Data
@@ -66,7 +71,7 @@ python3 tools/statvar_importer/stat_var_processor.py \
   --config_file=statvar_imports/statistics_poland/StatisticsPoland_metadata.csv \
   --output_counters=\
 statvar_imports/statistics_poland/test/StatisticsPoland_output_counters.csv \
-  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
+  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf,statvar_imports/statistics_poland/poland_stat_vars.mcf
 ```
 
 ## Testing
@@ -76,22 +81,9 @@ Run the hermetic unit tests via the repository test runner:
 ```
 
 ## Validation & Quality Rules
-Validation is configured in `validation_config.json`:
-1. `check_all_statvars_freshness` (`SQL_VALIDATOR`): Asserts `MaxDate >= '2025'` across all active
-   statistical variables in `stats`.
-2. `check_max_date_consistent` (`MAX_DATE_CONSISTENT`): Enforces uniform MaxDate across all
-   StatVars.
-3. `check_deleted_records_percent` (`DELETED_RECORDS_PERCENT`): Enforces that deleted observations
-   do not exceed `0.1%`.
-4. `check_goldens_summary_report` (`GOLDENS_CHECK`): Validates `summary_report.csv` against
-   `golden_data/golden_summary_report.csv` (108 StatVars).
-5. `check_goldens_observations` (`GOLDENS_CHECK`): Validates `StatisticsPoland_output.csv` against
-   `golden_data/golden_observations.csv` (17 Polish geographic entities).
-
-## Troubleshooting & Operations
-- **HTTP 429 / Rate Limiting:** The script uses `requests.Session` with `urllib3.util.Retry`
-  (backoff factor 1.5, status forcelist 429, 500, 502, 503, 504, 10 retries).
-- **API Key Expiration:** If the API key expires, register for a new key on GUS BDL and export it
-  via `export BDL_API_KEY="..."`.
-- **GCS Offline Access:** If executing in an environment without GCS access, the download script
-  automatically falls back to `test/StatisticsPoland_input.csv` for column structure.
+Validation is configured in `validation_config.json` (plus repository defaults):
+1. `check_all_statvars_freshness` (`SQL_VALIDATOR`): Asserts `MaxDate >= '2025' AND total_svs = 108`.
+2. `check_min_date_consistent` (`SQL_VALIDATOR`): Asserts `MinDate = '2003' AND total_svs = 108`.
+3. `check_max_date_consistent` (`MAX_DATE_CONSISTENT`): Enforces uniform `MaxDate` across all 108 StatVars.
+4. `check_num_places_count` (`NUM_PLACES_COUNT`): Enforces `17` places (`country/POL` + 16 `AdministrativeArea1` voivodeships) per StatVar.
+5. `check_num_observations` (`NUM_OBSERVATIONS_CHECK`): Enforces `>= 391` observations per StatVar (`17 places x 23 years`).

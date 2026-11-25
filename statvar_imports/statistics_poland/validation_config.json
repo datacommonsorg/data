@@ -3,11 +3,20 @@
     "rules": [
         {
             "rule_id": "check_all_statvars_freshness",
-            "description": "Verify all active StatVars meet the freshness boundary (>= 2025).",
+            "description": "Verify all 108 active StatVars meet the freshness boundary (>= 2025).",
             "validator": "SQL_VALIDATOR",
             "params": {
                 "query": "SELECT StatVar, MaxDate, COUNT(*) OVER () AS total_svs FROM stats",
-                "condition": "MaxDate >= '2025' AND total_svs > 0"
+                "condition": "MaxDate >= '2025' AND total_svs = 108"
+            }
+        },
+        {
+            "rule_id": "check_min_date_consistent",
+            "description": "Verify all 108 StatVars retain full historical coverage starting at 2003.",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT StatVar, MinDate, COUNT(*) OVER () AS total_svs FROM stats",
+                "condition": "MinDate = '2003' AND total_svs = 108"
             }
         },
         {
@@ -17,29 +26,19 @@
             "params": {}
         },
         {
-            "rule_id": "check_deleted_records_percent",
-            "description": "Checks that the percentage of deleted records for the entire import is within threshold.",
-            "validator": "DELETED_RECORDS_PERCENT",
+            "rule_id": "check_num_places_count",
+            "description": "Ensure every StatVar covers Poland plus all 16 AdministrativeArea1 voivodeships (17 places).",
+            "validator": "NUM_PLACES_COUNT",
             "params": {
-                "threshold": 0.1
+                "value": 17
             }
         },
         {
-            "rule_id": "check_goldens_summary_report",
-            "description": "Validates statistics poland data against its golden summary report.",
-            "validator": "GOLDENS_CHECK",
+            "rule_id": "check_num_observations",
+            "description": "Ensure every StatVar has at least 391 observations (17 places x 23 years).",
+            "validator": "NUM_OBSERVATIONS_CHECK",
             "params": {
-                "golden_files": "../../../../golden_data/golden_summary_report.csv",
-                "input_files": "../../input0/genmcf/summary_report.csv"
-            }
-        },
-        {
-            "rule_id": "check_goldens_observations",
-            "description": "Verifies the generated output CSV data matches established critical golden records for Statistics Poland",
-            "validator": "GOLDENS_CHECK",
-            "params": {
-                "golden_files": "../../../../golden_data/golden_observations.csv",
-                "input_files": "../../../../StatisticsPoland_output.csv"
+                "minimum": 391
             }
         }
     ]

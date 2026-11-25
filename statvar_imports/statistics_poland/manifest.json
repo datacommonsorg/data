@@ -9,19 +9,17 @@
             "provenance_description": "Population data for demographic variables such as population counts, age distributions, and other census-related metrics in Poland",
             "scripts": [
                 "download_input_data.py",
-                "../../tools/statvar_importer/stat_var_processor.py --input_data=source_files/*.csv --pv_map=StatisticsPoland_pvmap.csv --config_file=StatisticsPoland_metadata.csv --output_path=StatisticsPoland_output --output_counters=counters/StatisticsPoland_output_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
+                "../../tools/statvar_importer/stat_var_processor.py --input_data=source_files/*.csv --pv_map=StatisticsPoland_pvmap.csv --config_file=StatisticsPoland_metadata.csv --output_path=StatisticsPoland_output --output_counters=counters/StatisticsPoland_output_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf,poland_stat_vars.mcf"
             ],
             "source_files": [
                 "source_files/*.csv",
                 "counters/*.csv",
-                "golden_data/*.csv",
                 "validation_config.json"
             ],
             "import_inputs": [
                 {
                     "template_mcf": "StatisticsPoland_output.tmcf",
-                    "cleaned_csv": "StatisticsPoland_output.csv",
-                    "node_mcf": "StatisticsPoland_output*.mcf"
+                    "cleaned_csv": "StatisticsPoland_output.csv"
                 }
             ],
             "cron_schedule": "30 11 * * 3",

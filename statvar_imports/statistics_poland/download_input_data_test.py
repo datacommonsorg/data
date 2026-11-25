@@ -16,14 +16,45 @@ from download_input_data import AGE_STEMS
 from download_input_data import LOC_STEMS
 from download_input_data import SEX_STEMS
 from download_input_data import download_and_process
+from download_input_data import fetch_units
 from download_input_data import fetch_variables
 from download_input_data import get_http_session
+from download_input_data import get_request_headers
 from download_input_data import get_template_map
 from download_input_data import load_template_from_gcs
 from download_input_data import make_request
 
 
 class DownloadInputDataTest(unittest.TestCase):
+
+    def setUp(self):
+        super().setUp()
+        self._secret_patcher = patch(
+            'download_input_data._fetch_secret_api_key', return_value='')
+        self.mock_fetch_secret = self._secret_patcher.start()
+        self.addCleanup(self._secret_patcher.stop)
+
+    def test_get_request_headers_runtime_and_strip(self):
+        with patch.dict(os.environ, {}, clear=True):
+            self.assertEqual(get_request_headers(), {})
+            self.mock_fetch_secret.assert_called_once()
+
+        with patch.dict(os.environ, {'BDL_API_KEY': '   '}, clear=True):
+            self.assertEqual(get_request_headers(), {})
+
+        self.mock_fetch_secret.return_value = '  secret-mgr-key  '
+        with patch.dict(os.environ, {}, clear=True):
+            self.assertEqual(get_request_headers(),
+                             {'X-ClientId': 'secret-mgr-key'})
+        self.mock_fetch_secret.return_value = ''
+
+        with patch.dict(os.environ, {'BDL_API_KEY': '  my-key-456 \n'},
+                        clear=True):
+            self.assertEqual(get_request_headers(),
+                             {'X-ClientId': 'my-key-456'})
+
+        self.assertEqual(get_request_headers(api_key='  explicit-key  '),
+                         {'X-ClientId': 'explicit-key'})
 
     def test_get_template_map(self):
         index = pd.MultiIndex.from_tuples([('0000000', 'POLAND'),
@@ -42,6 +73,7 @@ class DownloadInputDataTest(unittest.TestCase):
         self.assertIn('https://', session.adapters)
         adapter = session.adapters['https://']
         self.assertEqual(adapter.max_retries.total, 3)
+        self.assertTrue(adapter.max_retries.respect_retry_after_header)
 
     def test_stems_definitions(self):
         self.assertEqual(AGE_STEMS['0-2'], '0-2')
@@ -53,7 +85,6 @@ class DownloadInputDataTest(unittest.TestCase):
 
     @patch('download_input_data.storage.Client')
     def test_load_template_from_gcs_success(self, mock_storage_client):
-        # Hermetic test: GCS client returns valid template CSV
         mock_blob = MagicMock()
         sample_csv = ("Age,,0-2,0-2\n"
                       "Sex,,total,males\n"
@@ -74,7 +105,6 @@ class DownloadInputDataTest(unittest.TestCase):
 
     @patch('download_input_data.storage.Client')
     def test_load_template_from_gcs_fallback(self, mock_storage_client):
-        # Hermetic test: GCS failure triggers local fallback without live network calls
         mock_storage_client.side_effect = RuntimeError(
             "GCS Unreachable in offline CI")
 
@@ -95,13 +125,11 @@ class DownloadInputDataTest(unittest.TestCase):
         self.assertIsNotNone(resp)
         self.assertEqual(resp.status_code, 200)
 
-        # Exception during request returns None
         session.get.side_effect = requests.RequestException("Connection error")
         failed_resp = make_request(session, 'https://example.com/api')
         self.assertIsNone(failed_resp)
 
     def test_response_status_code_logging_not_none_on_http_error(self):
-        # Verify that non-200 responses log their integer status code and raise RuntimeError
         session = MagicMock()
         mock_resp = requests.Response()
         mock_resp.status_code = 403
@@ -109,7 +137,7 @@ class DownloadInputDataTest(unittest.TestCase):
 
         with self.assertLogs(level='ERROR') as cm:
             with self.assertRaises(RuntimeError):
-                fetch_variables(session)
+                fetch_variables(session, headers={})
             self.assertTrue(any("status 403" in log for log in cm.output),
                             f"Expected 'status 403' in logs, got: {cm.output}")
 
@@ -120,17 +148,31 @@ class DownloadInputDataTest(unittest.TestCase):
         mock_resp._content = b'{"results": [{"id": 101, "n1": "ludnosc", "n2": "0-2 mezczyzni"}]}'
         session.get.return_value = mock_resp
 
-        v_map = fetch_variables(session)
+        v_map = fetch_variables(session, headers={})
         self.assertEqual(len(v_map), 1)
         self.assertIn("101", v_map)
         self.assertEqual(v_map["101"], "ludnosc 0-2 mezczyzni")
 
+    def test_fetch_units_mocked(self):
+        session = MagicMock()
+        mock_resp = requests.Response()
+        mock_resp.status_code = 200
+        mock_resp._content = (
+            b'{"results": [{"id": "000000000000", "name": "POLSKA"}, '
+            b'{"id": "030200000000", "name": "DOLNO\xc5\x9aL\xc4\x84SKIE"}]}')
+        session.get.return_value = mock_resp
+
+        units = fetch_units(session, headers={})
+        self.assertEqual(units, [('000000000000', 'POLSKA'),
+                                 ('030200000000', 'DOLNOŚLĄSKIE')])
+
+    @patch('download_input_data.fetch_units')
     @patch('download_input_data.fetch_variables')
     @patch('download_input_data.load_template_from_gcs')
     @patch('download_input_data.make_request')
     def test_download_and_process_mocked(self, mock_make_request,
-                                         mock_load_template, mock_fetch):
-        # Hermetic end-to-end processing test using mocked GUS API data and local tempdir
+                                         mock_load_template, mock_fetch_vars,
+                                         mock_fetch_units):
         template_index = pd.MultiIndex.from_tuples(
             [('0000000', 'POLAND'), ('0200000', 'DOLNOŚLĄSKIE')],
             names=['Code', 'Name'])
@@ -146,34 +188,28 @@ class DownloadInputDataTest(unittest.TestCase):
                                    columns=template_columns)
         mock_load_template.return_value = template_df
 
-        # Variable 101: 0-2 males, Variable 102: 0-2 total
-        mock_fetch.return_value = {
+        mock_fetch_vars.return_value = {
             '101': 'ludność 0-2 męż',
             '102': 'ludność 0-2'
         }
+        mock_fetch_units.return_value = [('000000000000', 'POLSKA'),
+                                         ('030200000000', 'DOLNOŚLĄSKIE')]
 
-        # Mock data API responses for variable 101 and 102
         def side_effect(session, url, headers=None, params=None, timeout=60):
             r = requests.Response()
             r.status_code = 200
-            if '101' in url:
+            if '000000000000' in url:
                 r._content = b'''{
                     "results": [
-                        {"name": "POLSKA", "values": [{"year": 2024, "val": 50}]},
-                        {
-                            "name": "DOLNO\xc5\x9aL\xc4\x84SKIE",
-                            "values": [{"year": 2024, "val": 20}]
-                        }
+                        {"id": 101, "values": [{"year": 2024, "val": 50}]},
+                        {"id": 102, "values": [{"year": 2024, "val": 100}]}
                     ]
                 }'''
-            elif '102' in url:
+            elif '030200000000' in url:
                 r._content = b'''{
                     "results": [
-                        {"name": "POLSKA", "values": [{"year": 2024, "val": 100}]},
-                        {
-                            "name": "DOLNO\xc5\x9aL\xc4\x84SKIE",
-                            "values": [{"year": 2024, "val": 40}]
-                        }
+                        {"id": 101, "values": [{"year": 2024, "val": 20}]},
+                        {"id": 102, "values": [{"year": 2024, "val": 40}]}
                     ]
                 }'''
             else:
@@ -213,18 +249,19 @@ class DownloadInputDataTest(unittest.TestCase):
         mock_load_template.return_value = pd.DataFrame(10,
                                                        index=template_index,
                                                        columns=template_columns)
-        # Slices present in template but unmatched in metadata
         mock_fetch.return_value = {'999': 'unrelated_variable'}
 
         with self.assertRaises(RuntimeError) as ctx:
             download_and_process()
         self.assertIn("Failed to match variable for slice", str(ctx.exception))
 
+    @patch('download_input_data.fetch_units')
     @patch('download_input_data.fetch_variables')
     @patch('download_input_data.load_template_from_gcs')
     @patch('download_input_data.make_request')
     def test_download_and_process_raises_on_download_failure(
-            self, mock_make_request, mock_load_template, mock_fetch):
+            self, mock_make_request, mock_load_template, mock_fetch_vars,
+            mock_fetch_units):
         template_index = pd.MultiIndex.from_tuples([('0000000', 'POLAND')],
                                                    names=['Code', 'Name'])
         template_columns = pd.MultiIndex.from_tuples(
@@ -233,9 +270,9 @@ class DownloadInputDataTest(unittest.TestCase):
         mock_load_template.return_value = pd.DataFrame(10,
                                                        index=template_index,
                                                        columns=template_columns)
-        mock_fetch.return_value = {'102': 'ludność 0-2'}
+        mock_fetch_vars.return_value = {'102': 'ludność 0-2'}
+        mock_fetch_units.return_value = [('000000000000', 'POLSKA')]
 
-        # Mock download returning 500 error
         mock_resp = requests.Response()
         mock_resp.status_code = 500
         mock_make_request.return_value = mock_resp
@@ -244,11 +281,13 @@ class DownloadInputDataTest(unittest.TestCase):
             download_and_process()
         self.assertIn("Download failed with status 500", str(ctx.exception))
 
+    @patch('download_input_data.fetch_units')
     @patch('download_input_data.fetch_variables')
     @patch('download_input_data.load_template_from_gcs')
     @patch('download_input_data.make_request')
     def test_download_and_process_logs_warning_on_unmapped_region(
-            self, mock_make_request, mock_load_template, mock_fetch):
+            self, mock_make_request, mock_load_template, mock_fetch_vars,
+            mock_fetch_units):
         template_index = pd.MultiIndex.from_tuples([('0000000', 'POLAND')],
                                                    names=['Code', 'Name'])
         template_columns = pd.MultiIndex.from_tuples(
@@ -257,15 +296,15 @@ class DownloadInputDataTest(unittest.TestCase):
         mock_load_template.return_value = pd.DataFrame(10,
                                                        index=template_index,
                                                        columns=template_columns)
-        mock_fetch.return_value = {'102': 'ludność 0-2'}
+        mock_fetch_vars.return_value = {'102': 'ludność 0-2'}
+        mock_fetch_units.return_value = [('000000000000', 'POLSKA'),
+                                         ('999999999999', 'NIEZNANY_REGION')]
 
-        # Mock download returning an unmapped region alongside POLAND
         mock_resp = requests.Response()
         mock_resp.status_code = 200
         mock_resp._content = b'''{
             "results": [
-                {"name": "POLSKA", "values": [{"year": 2024, "val": 100}]},
-                {"name": "NIEZNANY_REGION", "values": [{"year": 2024, "val": 10}]}
+                {"id": 102, "values": [{"year": 2024, "val": 100}]}
             ]
         }'''
         mock_make_request.return_value = mock_resp

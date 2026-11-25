@@ -17,7 +17,7 @@ logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
 # --- CONFIGURATION ---
 BASE_PATH = os.path.dirname(os.path.abspath(__file__))
 
-# Outputs exactly to source_files to match your manifest.json
+# Outputs to source_files to match manifest.json
 OUTPUT_DIR = os.path.join(BASE_PATH, "source_files")
 
 GCS_TEMPLATE_PATH = (
@@ -25,10 +25,10 @@ GCS_TEMPLATE_PATH = (
     "poland_data_sample/StatisticsPoland_input.csv")
 
 API_BASE_URL = "https://bdl.stat.gov.pl/api/v1"
-API_KEY = os.environ.get("BDL_API_KEY")
-HEADERS = {'X-ClientId': API_KEY} if API_KEY else {}
-
 SUBJECT_ID = "P3447"
+VAR_BATCH_SIZE = 50
+DEFAULT_BDL_SECRET_RESOURCE = ("projects/datcom-import-automation-prod/secrets/"
+                               "statistics-poland-bdl-api-key/versions/latest")
 
 SEX_STEMS = {'total': [], 'males': ['męż'], 'females': ['kob']}
 LOC_STEMS = {
@@ -51,6 +51,37 @@ AGE_STEMS = {
     '55-64': '55-64',
     '65 and more': '65'
 }
+
+
+def _fetch_secret_api_key(secret_resource=None):
+    """Reads optional BDL API key from GCP Secret Manager without logging it.
+
+    SECURITY: Never pass BDL_API_KEY via ExecutorConfig.user_script_env, because
+    import-automation/executor/main.py logs Import config in cleartext.
+    """
+    resource = (secret_resource if secret_resource is not None else
+                os.environ.get("BDL_API_SECRET_RESOURCE",
+                               DEFAULT_BDL_SECRET_RESOURCE)).strip()
+    if not resource:
+        return ""
+    try:
+        from google.cloud import secretmanager  # pylint: disable=import-outside-toplevel
+        client = secretmanager.SecretManagerServiceClient()
+        response = client.access_secret_version(request={"name": resource})
+        return response.payload.data.decode("utf-8").strip()
+    except Exception:
+        return ""
+
+
+def get_request_headers(api_key=None, use_secret_manager=True):
+    """Builds outbound HTTP headers at call time, stripping whitespace."""
+    raw_key = os.environ.get("BDL_API_KEY") if api_key is None else api_key
+    cleaned_key = str(raw_key).strip() if raw_key is not None else ""
+    if not cleaned_key and api_key is None and use_secret_manager:
+        cleaned_key = str(_fetch_secret_api_key() or "").strip()
+    if cleaned_key:
+        return {'X-ClientId': cleaned_key}
+    return {}
 
 
 def load_template_from_gcs(gcs_path):
@@ -104,6 +135,7 @@ def get_http_session(retries=10, backoff_factor=1.5):
                            backoff_factor=backoff_factor,
                            status_forcelist=[429, 500, 502, 503, 504],
                            allowed_methods=["GET"],
+                           respect_retry_after_header=True,
                            raise_on_status=False)
     adapter = HTTPAdapter(max_retries=retry_strategy)
     session.mount("https://", adapter)
@@ -125,9 +157,10 @@ def make_request(session, url, headers=None, params=None, timeout=60):
         return None
 
 
-def fetch_variables(session):
+def fetch_variables(session, headers=None):
     """Fetches all variables for Subject P3447 with retries."""
     logging.info(f"Downloading variable list for Subject {SUBJECT_ID}...")
+    req_headers = get_request_headers() if headers is None else headers
     v_map = {}
     page = 0
 
@@ -135,7 +168,7 @@ def fetch_variables(session):
         url = (
             f"{API_BASE_URL}/variables?subject-id={SUBJECT_ID}&page-size=100&lang=pl&page={page}"
         )
-        resp = make_request(session, url, headers=HEADERS, timeout=60)
+        resp = make_request(session, url, headers=req_headers, timeout=60)
         if resp is None or resp.status_code != 200:
             status = resp.status_code if resp is not None else "None"
             error_msg = f"Metadata page {page} failed with status {status}"
@@ -162,6 +195,49 @@ def fetch_variables(session):
     return v_map
 
 
+def fetch_units(session, headers=None):
+    """Fetches country (level=0) and voivodeship (level=2) units from BDL API."""
+    logging.info("Downloading level 0 and level 2 territorial units...")
+    req_headers = get_request_headers() if headers is None else headers
+    units = []
+    page = 0
+
+    while True:
+        url = f"{API_BASE_URL}/units"
+        params = [('level', '0'), ('level', '2'), ('page-size', '100'),
+                  ('format', 'json'), ('page', str(page))]
+        resp = make_request(session,
+                            url,
+                            headers=req_headers,
+                            params=params,
+                            timeout=60)
+        if resp is None or resp.status_code != 200:
+            status = resp.status_code if resp is not None else "None"
+            error_msg = f"Units page {page} failed with status {status}"
+            logging.error(error_msg)
+            raise RuntimeError(error_msg)
+
+        results = resp.json().get('results', [])
+        if not results:
+            break
+
+        for item in results:
+            name_key = next((k for k in ['name', 'n', 'unitName'] if k in item),
+                            None)
+            if not name_key or 'id' not in item:
+                error_msg = f"Malformed unit entry on page {page}: {item}"
+                logging.error(error_msg)
+                raise RuntimeError(error_msg)
+            units.append((str(item['id']), str(item[name_key])))
+
+        if len(results) < 100:
+            break
+        page += 1
+
+    logging.info(f"Indexed {len(units)} territorial units.")
+    return units
+
+
 def download_and_process():
     # Safely create output directory
     os.makedirs(OUTPUT_DIR, exist_ok=True)
@@ -175,16 +251,18 @@ def download_and_process():
         template_df.index.levels[1].astype(str)
     ])
 
+    headers = get_request_headers()
     session = get_http_session()
     region_map = get_template_map(template_df)
-    v_metadata = fetch_variables(session)
+    v_metadata = fetch_variables(session, headers=headers)
     if not v_metadata:
         raise ValueError("Variable metadata failed to download.")
 
-    master_data = []
     unique_cols = template_df.columns.droplevel('Year').unique()
     current_year = datetime.now().year
 
+    var_id_to_slice = {}
+    ordered_var_ids = []
     for age, sex, loc in unique_cols:
         if pd.isna(age) or str(age).strip() == '' or str(
                 age).lower() == 'total':
@@ -225,70 +303,79 @@ def download_and_process():
             raise RuntimeError(error_msg)
 
         logging.info(f"MATCH: {age}|{sex}|{loc} -> ID {var_id}")
+        var_id_to_slice[str(var_id)] = (age, sex, loc)
+        ordered_var_ids.append(str(var_id))
 
-        for lv in ["0", "2"]:
-            api_url = f"{API_BASE_URL}/data/by-variable/{var_id}"
-            params = [('unit-level', lv), ('page-size', '100')]
+    units = fetch_units(session, headers=headers)
+    if not units:
+        raise ValueError("Territorial units failed to download.")
 
-            for y in range(2003, current_year + 2):
-                params.append(('year', str(y)))
+    mapped_units = []
+    for unit_id, raw_name in units:
+        api_name = raw_name.upper().strip()
+        if api_name == "POLSKA":
+            api_name = "POLAND"
 
+        matched_code = region_map.get(api_name)
+        matched_name = api_name
+        if not matched_code:
+            for t_name, t_code in region_map.items():
+                if t_name in api_name:
+                    matched_code = t_code
+                    matched_name = t_name
+                    break
+
+        if matched_code is not None:
+            mapped_units.append((unit_id, str(matched_code), matched_name))
+        else:
+            logging.warning(
+                f"Region '{api_name}' from API could not be mapped to any "
+                f"template code; skipping.")
+
+    var_batches = [
+        ordered_var_ids[i:i + VAR_BATCH_SIZE]
+        for i in range(0, len(ordered_var_ids), VAR_BATCH_SIZE)
+    ]
+    year_params = [('year', str(y)) for y in range(2003, current_year + 2)]
+
+    # Querying by-unit in batches of 50 variables takes ~34 data requests total
+    # (17 units x 2 batches), well within BDL's 100 req / 15m anonymous quota.
+    master_data = []
+    for unit_id, matched_code, matched_name in mapped_units:
+        api_url = f"{API_BASE_URL}/data/by-unit/{unit_id}"
+        for batch in var_batches:
+            params = ([('page-size', '100'), ('format', 'json')] +
+                      [('var-id', vid) for vid in batch] + year_params)
             resp = make_request(session,
                                 api_url,
-                                headers=HEADERS,
+                                headers=headers,
                                 params=params,
                                 timeout=60)
             if resp is None or resp.status_code != 200:
                 status = resp.status_code if resp is not None else "None"
                 error_msg = (
-                    f"Download failed with status {status} for var {var_id} level {lv}"
-                )
+                    f"Download failed with status {status} for unit {unit_id}")
                 logging.error(error_msg)
                 raise RuntimeError(error_msg)
 
             results = resp.json().get('results', [])
-            if not results:
-                continue
-
-            sample_res = results[0]
-            api_name_key = next(
-                (k for k in ['name', 'n', 'unitName'] if k in sample_res), None)
-            if not api_name_key:
-                error_msg = f"Could not determine region name key for var {var_id} level {lv}"
-                logging.error(error_msg)
-                raise RuntimeError(error_msg)
-
-            for res in results:
-                api_name = res[api_name_key].upper().strip()
-                if api_name == "POLSKA":
-                    api_name = "POLAND"
-
-                matched_code = region_map.get(api_name)
-                matched_name = api_name
-                if not matched_code:
-                    for t_name, t_code in region_map.items():
-                        if t_name in api_name:
-                            matched_code = t_code
-                            matched_name = t_name
-                            break
-
-                if matched_code is not None:
-                    for val in res['values']:
-                        master_data.append({
-                            'Code': str(matched_code),
-                            'Name': matched_name,
-                            'Year': str(val['year']),
-                            'Value': val['val'],
-                            'Age': age,
-                            'Sex': sex,
-                            'Location': loc
-                        })
-                else:
-                    logging.warning(
-                        f"Region '{api_name}' from API could not be mapped to any "
-                        f"template code; skipping.")
+            for item in results:
+                vid = str(item.get('id', ''))
+                slice_info = var_id_to_slice.get(vid)
+                if not slice_info:
+                    continue
+                age, sex, loc = slice_info
+                for val in item.get('values', []):
+                    master_data.append({
+                        'Code': matched_code,
+                        'Name': matched_name,
+                        'Year': str(val['year']),
+                        'Value': val['val'],
+                        'Age': age,
+                        'Sex': sex,
+                        'Location': loc
+                    })
             time.sleep(0.1)
-        time.sleep(0.1)
 
     if not master_data:
         raise ValueError("No data collected during the download loop.")
