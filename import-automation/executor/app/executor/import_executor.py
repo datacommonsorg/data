@@ -1230,7 +1230,8 @@ def _run_with_timeout(args: List[str],
                                  text=True,
                                  timeout=timeout,
                                  cwd=cwd,
-                                 env=env)
+                                 env=env,
+                                 check=False)
         logging.info(
             f'Completed command: {args}, retcode: {process.returncode}')
 
