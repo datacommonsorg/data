@@ -1,4 +1,5 @@
 import os
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -532,18 +533,8 @@ class DownloadInputDataTest(unittest.TestCase):
 
     def test_stat_var_processor_hermetic_parity_on_test_fixture(self):
         repo_root = os.path.abspath(os.path.join(CURRENT_DIR, '..', '..'))
-        for rel in ('', 'tools/statvar_importer', 'util'):
-            candidate = os.path.join(repo_root, rel) if rel else repo_root
-            if candidate not in sys.path:
-                sys.path.insert(0, candidate)
-
-        from absl import flags
-        import config_flags
-        import stat_var_processor
-
-        if not flags.FLAGS.is_parsed():
-            flags.FLAGS([sys.argv[0]])
-
+        svp_dir = os.path.join(repo_root, 'tools', 'statvar_importer')
+        util_dir = os.path.join(repo_root, 'util')
         metadata_path = os.path.join(CURRENT_DIR,
                                      'StatisticsPoland_metadata.csv')
         pvmap_path = os.path.join(CURRENT_DIR, 'StatisticsPoland_pvmap.csv')
@@ -554,24 +545,34 @@ class DownloadInputDataTest(unittest.TestCase):
         expected_tmcf = os.path.join(CURRENT_DIR, 'test',
                                      'StatisticsPoland_output.tmcf')
 
-        cfg = config_flags.init_config_from_flags(metadata_path)
-        cfg.add_configs({
-            'recon_lookup_api': False,
-            'generate_statvar_mcf': False,
-            'generate_schema_mcf': False,
-            'existing_statvar_mcf': '',
-        })
-
         with tempfile.TemporaryDirectory() as tmp_dir:
             out_prefix = os.path.join(tmp_dir, 'StatisticsPoland_output')
-            ok = stat_var_processor.process(
-                data_processor_class=stat_var_processor.StatVarDataProcessor,
-                input_data=[test_input],
-                output_path=out_prefix,
-                config=cfg.get_configs(),
-                pv_map_files=[pvmap_path],
+            runner_code = (
+                'import sys; '
+                'from absl import flags; '
+                f'sys.path[:0] = [{repo_root!r}, {svp_dir!r}, {util_dir!r}]; '
+                'import config_flags, stat_var_processor; '
+                'flags.FLAGS([sys.argv[0]]); '
+                f'cfg = config_flags.init_config_from_flags({metadata_path!r}); '
+                'cfg.add_configs({'
+                '"recon_lookup_api": False, '
+                '"generate_statvar_mcf": False, '
+                '"generate_schema_mcf": False, '
+                '"existing_statvar_mcf": ""}); '
+                'ok = stat_var_processor.process('
+                'stat_var_processor.StatVarDataProcessor, '
+                f'[{test_input!r}], {out_prefix!r}, cfg.get_configs(), '
+                f'[{pvmap_path!r}]); '
+                'sys.exit(0 if ok else 1)')
+            res = subprocess.run([sys.executable, '-c', runner_code],
+                                 capture_output=True,
+                                 text=True,
+                                 check=False)
+            self.assertEqual(
+                res.returncode,
+                0,
+                f'stat_var_processor failed (rc={res.returncode}):\n{res.stderr}',
             )
-            self.assertTrue(ok)
             with open(f'{out_prefix}.csv', encoding='utf-8') as f_act, open(
                     expected_csv, encoding='utf-8') as f_exp:
                 self.assertEqual(f_act.read(), f_exp.read())
