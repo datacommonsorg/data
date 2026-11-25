@@ -1,0 +1,8 @@
+Node: E:tuberculosis_rifampicin_resistant->E0
+observationDate: C:tuberculosis_rifampicin_resistant->observationDate
+observationAbout: C:tuberculosis_rifampicin_resistant->observationAbout
+variableMeasured: C:tuberculosis_rifampicin_resistant->variableMeasured
+value: C:tuberculosis_rifampicin_resistant->value
+unit: C:tuberculosis_rifampicin_resistant->unit
+scalingFactor: C:tuberculosis_rifampicin_resistant->scalingFactor
+typeOf: dcs:StatVarObservation
