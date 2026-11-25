@@ -241,12 +241,12 @@ class GeoEvent:
         if dates is None:
             dates = set()
         pvs = dict()
-        for place_id, date_pvs in self.get_places().items():
+        for _place_id, date_pvs in self.get_places().items():
             per_place_pvs = {}
-            for date, date_pvs in date_pvs.items():
+            for date, pvs_for_date in date_pvs.items():
                 if not dates or date in dates:
                     aggregate_dict(
-                        date_pvs, per_place_pvs,
+                        pvs_for_date, per_place_pvs,
                         self._config.get(
                             'property_config_across_dates',
                             self._config.get('property_config', {})))
@@ -274,7 +274,7 @@ class GeoEvent:
     def get_event_properties_by_dates(self) -> dict:
         '''Returns the properties aggregated by dates across all S2Cells'''
         pvs_by_dates = dict()
-        for place_id, date_pvs in self.get_places().items():
+        for _place_id, date_pvs in self.get_places().items():
             for date, pvs in date_pvs.items():
                 if date not in pvs_by_dates:
                     pvs_by_dates[date] = dict()
@@ -671,7 +671,7 @@ class GeoEventsProcessor:
         if self._config.get('lookup_place_names', True):
             contained_place_dict = self._place_property_cache.get(
                 'containedInPlace', {})
-            for place_id, contained_place_ids in contained_place_dict.items():
+            for _place_id, contained_place_ids in contained_place_dict.items():
                 if contained_place_ids:
                     lookup_names.update(_get_list(contained_place_ids))
             self._counters.add_counter('total', len(lookup_places))
@@ -1816,9 +1816,7 @@ def _rename_dict_keys(pvs: dict, rename_keys: dict) -> dict:
 
 
 def _first(s: set):
-    for item in s:
-        break
-    return item
+    return next(iter(s), None)
 
 
 def _format_property_values(pvs: dict,

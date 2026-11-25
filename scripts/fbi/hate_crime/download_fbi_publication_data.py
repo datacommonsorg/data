@@ -91,7 +91,7 @@ def process_zip_file(download_path, output_folder, extracted_year):
 
         table_year_pattern = re.compile(
             rf"^Table_.*?{(str(extracted_year))}\.[^.]+$", re.IGNORECASE)
-        for root, dirs, files in os.walk(temp_extract_folder):
+        for root, _dirs, files in os.walk(temp_extract_folder):
             for file in files:
                 file_path = os.path.join(root, file)
                 if table_year_pattern.search(os.path.basename(file).lower()):

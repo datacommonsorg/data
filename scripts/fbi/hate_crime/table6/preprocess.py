@@ -148,13 +148,13 @@ def main(argv):
         )
     config = _YEARWISE_CONFIG['year_config']
     with tempfile.TemporaryDirectory() as tmp_dir:
-        for year, config in config[table_num].items():
-            xls_file_path = config['path']
+        for year, year_config in config[table_num].items():
+            xls_file_path = year_config['path']
             xls_file_path = os.path.join(_SCRIPT_PATH, '../', xls_file_path)
             csv_file_path = os.path.join(tmp_dir, year + '.csv')
             logging.info(f"Processing : {xls_file_path}")
             read_file = pd.read_excel(xls_file_path,
-                                      **config['args'],
+                                      **year_config['args'],
                                       usecols=[0, 1, 2, 3, 4, 5, 6, 7])
             read_file = _clean_dataframe(read_file, year, table_num,
                                          _YEARWISE_CONFIG['table_config'])

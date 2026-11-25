@@ -127,12 +127,12 @@ select = [
     "DTZ003",
     "DTZ004",
     # flake8-bugbear correctness rules (B0xx).
-    # Note: B007 and B020 are deferred to follow-up PRs.
     "B002",
     "B003",
     "B004",
     "B005",
     "B006",
+    "B007",
     "B008",
     "B009",
     "B010",
@@ -144,6 +144,7 @@ select = [
     "B016",
     "B017",
     "B019",
+    "B020",
     "B021",
     "B022",
     "B023",

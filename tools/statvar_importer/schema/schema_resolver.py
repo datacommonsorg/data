@@ -135,7 +135,7 @@ class SchemaResolver:
         """Load nodes from schema MCF files and add to the index."""
         mcf_nodes = load_mcf_nodes(schema_mcf_files, {})
         if mcf_nodes:
-            for dcid, node in mcf_nodes.items():
+            for _dcid, node in mcf_nodes.items():
                 self.add_node(node)
         logging.info(
             f'Loaded {len(self._schema_nodes)} schema MCF nodes: {schema_mcf_files}'

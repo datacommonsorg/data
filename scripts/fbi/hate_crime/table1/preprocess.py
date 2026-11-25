@@ -144,12 +144,12 @@ def main(argv):
             f"Error: Key 1 not found in the config. Please ensure the configuration for section {table_num} is present."
         )
     with tempfile.TemporaryDirectory() as tmp_dir:
-        for year, config in config['1'].items():
-            xls_file_path = config['path']
+        for year, year_config in config['1'].items():
+            xls_file_path = year_config['path']
             xls_file_path = os.path.join(_SCRIPT_PATH, '../', xls_file_path)
             logging.info(f"Processing : {xls_file_path}")
             csv_file_path = os.path.join(tmp_dir, year + '.csv')
-            read_file = pd.read_excel(xls_file_path, **config['args'])
+            read_file = pd.read_excel(xls_file_path, **year_config['args'])
             read_file = _clean_dataframe(read_file)
             read_file.insert(_YEAR_INDEX, 'Year', year)
             read_file.to_csv(csv_file_path, index=None, header=True)

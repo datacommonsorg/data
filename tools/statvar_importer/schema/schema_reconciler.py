@@ -295,7 +295,7 @@ class SchemaReconciler:
 
         # Get a list of new dcids to be looked up from both properties and values.
         lookup_dcids = set()
-        for dcid, pvs in nodes.items():
+        for _dcid, pvs in nodes.items():
             for prop, value in pvs.items():
                 # Check if reconciliation is restricted to specific properties.
                 if recon_props and prop not in recon_props:
