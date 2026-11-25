@@ -825,12 +825,21 @@ def process_health_complaint_static_table(grid: list[list[str]],
 
     year_row = ['P R O V I N S I'
                ] + [format_year_header(c.strip()) for c in grid[year_idx][1:]]
-    gender_row = [''] + [
+    raw_genders = [
         c.strip().replace('LAKI-LAKI', 'LAKILAKI')
         for c in grid[year_idx + 1][1:]
     ]
-    area_row = [''] + [
+    raw_areas = [
         re.sub(r'\s*\+\s*', '+', c.strip()) for c in grid[year_idx + 2][1:]
+    ]
+    if len(raw_genders) != len(raw_areas):
+        raise RuntimeError(
+            'Mismatched gender/area header column counts in Health Complaint '
+            f'static table 1617: {len(raw_genders)} genders vs '
+            f'{len(raw_areas)} areas')
+    metric_row = [''] + [
+        f'{gender} {area}'.strip()
+        for gender, area in zip(raw_genders, raw_areas)
     ]
 
     data_rows = []
@@ -846,7 +855,7 @@ def process_health_complaint_static_table(grid: list[list[str]],
         if any(cleaned_vals):
             data_rows.append([first_col] + cleaned_vals)
 
-    _write_csv_rows(output_path, [year_row, gender_row, area_row] + data_rows)
+    _write_csv_rows(output_path, [year_row, metric_row] + data_rows)
     logging.info('Wrote %s (%d rows)', output_path, len(data_rows))
 
 

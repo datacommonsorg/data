@@ -2,7 +2,7 @@ key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6,p7,v7,p8,v8,p9,v9
 # --- Place / Row Dimension Headers ---
 Province,observationAbout,{Data}
 Provinsi,observationAbout,{Data}
-P R O V I N S I,observationAbout,{Data},Gender,,Place,,#End,#value
+P R O V I N S I,observationAbout,{Data}
 Classification,observationAbout,dcid:country/IDN
 Sex,observationAbout,dcid:country/IDN
 # --- 1. Mortality ---
@@ -27,11 +27,12 @@ Kasus Kumulatif,populationType,MedicalConditionIncident,measurementQualifier,Ann
 Meninggal,populationType,MedicalConditionIncident,measuredProperty,count,measurementQualifier,Annual,incidentType,AIDS,medicalStatus,PatientDeceased,alternateName,"""AIDS Meninggal@id"""
 Angka Kumulatif Kasus,populationType,MedicalConditionIncident,measuredProperty,count,measurementQualifier,Annual,incidentType,AIDS,medicalStatus,ConfirmedCase,alternateName,"""AIDS Angka Kumulatif Kasus@id""",measurementDenominator,Count_Person,scalingFactor,100000
 Kasus Baru,populationType,MedicalConditionIncident,measuredProperty,count,measurementQualifier,Annual,incidentType,AIDS,medicalStatus,NewlyConfirmedCase,alternateName,"""AIDS Kasus Baru@id"""
-LAKILAKI,populationType,Person,gender,Male,medicalCondition,DiseasedPerson,measurementDenominator,Count_Person,measuredProperty,count,Gender,LAKILAKI
-PEREMPUAN,populationType,Person,gender,Female,medicalCondition,DiseasedPerson,measurementDenominator,Count_Person,measuredProperty,count,Gender,PEREMPUAN
-Perkotaan,populationType,Person,placeOfResidenceClassification,Urban,medicalCondition,DiseasedPerson,measurementDenominator,Count_Person,measuredProperty,count,Place,Perkotaan,alternateName,"""Persentase di {Gender} Perkotaan yang Melaporkan Masalah Kesehatan@id""",#Header,"populationType,placeOfResidenceClassification,medicalCondition,measurementDenominator,measuredProperty,Place,alternateName"
-Perdesaan,populationType,Person,placeOfResidenceClassification,Rural,medicalCondition,DiseasedPerson,measurementDenominator,Count_Person,measuredProperty,count,Place,Perdesaan,alternateName,"""Persentase di {Gender} Perdesaan yang Melaporkan Masalah Kesehatan@id""",#Header,"populationType,placeOfResidenceClassification,medicalCondition,measurementDenominator,measuredProperty,Place,alternateName"
-Perkotaan+Perdesaan,populationType,Person,medicalCondition,DiseasedPerson,measurementDenominator,Count_Person,measuredProperty,count,alternateName,"""Persentase di {Gender} yang Melaporkan Masalah Kesehatan@id""",#Header,"populationType,medicalCondition,measurementDenominator,measuredProperty,alternateName"
+LAKILAKI Perkotaan,populationType,Person,gender,Male,placeOfResidenceClassification,Urban,medicalCondition,DiseasedPerson,measurementDenominator,Count_Person,measuredProperty,count,alternateName,"""Persentase di LAKILAKI Perkotaan yang Melaporkan Masalah Kesehatan@id"""
+LAKILAKI Perdesaan,populationType,Person,gender,Male,placeOfResidenceClassification,Rural,medicalCondition,DiseasedPerson,measurementDenominator,Count_Person,measuredProperty,count,alternateName,"""Persentase di LAKILAKI Perdesaan yang Melaporkan Masalah Kesehatan@id"""
+LAKILAKI Perkotaan+Perdesaan,populationType,Person,gender,Male,medicalCondition,DiseasedPerson,measurementDenominator,Count_Person,measuredProperty,count,alternateName,"""Persentase di LAKILAKI yang Melaporkan Masalah Kesehatan@id"""
+PEREMPUAN Perkotaan,populationType,Person,gender,Female,placeOfResidenceClassification,Urban,medicalCondition,DiseasedPerson,measurementDenominator,Count_Person,measuredProperty,count,alternateName,"""Persentase di PEREMPUAN Perkotaan yang Melaporkan Masalah Kesehatan@id"""
+PEREMPUAN Perdesaan,populationType,Person,gender,Female,placeOfResidenceClassification,Rural,medicalCondition,DiseasedPerson,measurementDenominator,Count_Person,measuredProperty,count,alternateName,"""Persentase di PEREMPUAN Perdesaan yang Melaporkan Masalah Kesehatan@id"""
+PEREMPUAN Perkotaan+Perdesaan,populationType,Person,gender,Female,medicalCondition,DiseasedPerson,measurementDenominator,Count_Person,measuredProperty,count,alternateName,"""Persentase di PEREMPUAN yang Melaporkan Masalah Kesehatan@id"""
 # --- 3. Risk Factors ---
 Percentage of Population Aged 15 Years and Older Who Smoked Tobacco by Province (Percent),populationType,Person,measuredProperty,count,age,Years15Onwards,healthBehavior,Smoking,measurementDenominator,Count_Person_15OrMoreYears
 Prevalence of Obesity Among Population Aged 18 Years and Older,populationType,Person,healthBehavior,Obesity

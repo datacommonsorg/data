@@ -687,6 +687,46 @@ class DownloadHealthTest(unittest.TestCase):
                     os.path.join(tmpdir, 'female.csv'),
                 )
 
+    def test_health_complaint_static_table_two_header_rows_and_mismatch(self):
+        grid = [
+            ['Title'],
+            ['Provinsi', '2025', '2025', '2025'],
+            ['', 'LAKI-LAKI', 'LAKI-LAKI', 'PEREMPUAN'],
+            ['', 'Perkotaan', 'Perkotaan + Perdesaan', 'Perdesaan'],
+            ['Aceh', '21,34', '22,00', '27,78'],
+            ['Catatan: source note', '', '', ''],
+        ]
+        with tempfile.TemporaryDirectory() as tmpdir:
+            out_file = os.path.join(tmpdir, 'health_complaint.csv')
+            download.process_health_complaint_static_table(grid, out_file)
+            with open(out_file, 'r', encoding='utf-8') as f:
+                rows = list(csv.reader(f))
+            self.assertEqual(
+                rows,
+                [
+                    ['P R O V I N S I', 'Year 2025', 'Year 2025', 'Year 2025'],
+                    [
+                        '',
+                        'LAKILAKI Perkotaan',
+                        'LAKILAKI Perkotaan+Perdesaan',
+                        'PEREMPUAN Perdesaan',
+                    ],
+                    ['Aceh', '21.34', '22.00', '27.78'],
+                ],
+            )
+
+            bad_grid = [
+                ['Title'],
+                ['Provinsi', '2025', '2025'],
+                ['', 'LAKI-LAKI', 'PEREMPUAN'],
+                ['', 'Perkotaan'],
+                ['Aceh', '21,34', '27,78'],
+            ]
+            with self.assertRaisesRegex(RuntimeError,
+                                        'Mismatched gender/area header'):
+                download.process_health_complaint_static_table(
+                    bad_grid, out_file)
+
 
 if __name__ == '__main__':
     unittest.main()
