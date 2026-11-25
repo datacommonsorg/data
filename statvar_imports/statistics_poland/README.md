@@ -37,8 +37,7 @@ Statistical Office of Poland (Główny Urząd Statystyczny - GUS) Bank Danych Lo
   `gs://datcom-prod-imports/statvar_imports/statistics_poland/poland_data_sample/`
   `StatisticsPoland_input.csv`
   with an automatic offline fallback to `test/StatisticsPoland_input.csv`.
-- **StatVar MCF:** All 108 canonical StatVars resolve against:
-  `gs://unresolved_mcf/scripts/statvar/stat_vars.mcf` and `poland_stat_vars.mcf` (`0` runtime-minted StatVars).
+- **StatVar Resolution:** All 108 StatVars are pre-registered in Data Commons (`//depot/google3/third_party/datacommons/schema/stat_vars/poland_stat_vars.mcf` and `gs://unresolved_mcf/scripts/statvar/stat_vars.mcf`), resolving with `0` runtime-minted StatVars.
 
 ## Processing Instructions
 
@@ -59,7 +58,7 @@ python3 tools/statvar_importer/stat_var_processor.py \
   --config_file=statvar_imports/statistics_poland/StatisticsPoland_metadata.csv \
   --output_counters=\
 statvar_imports/statistics_poland/counters/StatisticsPoland_output_counters.csv \
-  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf,statvar_imports/statistics_poland/poland_stat_vars.mcf
+  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
 ```
 
 ### 3. Run StatVarProcessor on Test Data
@@ -71,7 +70,7 @@ python3 tools/statvar_importer/stat_var_processor.py \
   --config_file=statvar_imports/statistics_poland/StatisticsPoland_metadata.csv \
   --output_counters=\
 statvar_imports/statistics_poland/test/StatisticsPoland_output_counters.csv \
-  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf,statvar_imports/statistics_poland/poland_stat_vars.mcf
+  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
 ```
 
 ## Testing
