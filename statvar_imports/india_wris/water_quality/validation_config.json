@@ -11,20 +11,20 @@
         },
         {
             "rule_id": "check_statvar_count_non_empty",
-            "description": "Verify each input table generates all expected StatVars (>= 21) with non-zero observations.",
+            "description": "Verify exact StatVar completeness per input table (27 for Ground Water and Surface Water; 21 for Retained Ground Water) with non-zero observations.",
             "validator": "SQL_VALIDATOR",
             "params": {
-                "query": "SELECT COUNT(*) AS total_svs, MIN(NumObservations) AS min_obs FROM stats",
-                "condition": "total_svs >= 21 AND min_obs > 0"
+                "query": "SELECT COUNT(*) AS total_svs, MIN(NumObservations) AS min_obs, MAX(CASE WHEN StatVar = 'Concentration_Fluorine_BodyOfWater_GroundWater' THEN 1 ELSE 0 END) AS is_retained FROM stats",
+                "condition": "((is_retained = 1 AND total_svs >= 21) OR (is_retained = 0 AND total_svs >= 27)) AND min_obs > 0"
             }
         },
         {
             "rule_id": "check_ground_water_freshness",
-            "description": "Verify active Ground Water StatVars meet their scoped freshness boundaries (2023-04 for primary ions, 2022-04 for trace metals/field properties, 2020-10 for historical trace elements, and 2018 for retained historical series).",
+            "description": "Verify active Ground Water StatVars meet their scoped freshness boundaries (2023-04 for primary ions, 2022-04 for trace metals/field properties, 2020-10 for historical trace elements; 2018 for the retained historical input table).",
             "validator": "SQL_VALIDATOR",
             "params": {
-                "query": "SELECT StatVar, MaxDate, MinDate FROM stats WHERE regexp_matches(StatVar, '_GroundWater$')",
-                "condition": "CASE WHEN StatVar IN ('Concentration_Fluorine_BodyOfWater_GroundWater', 'Concentration_HydrogenCarbonate_BodyOfWater_GroundWater', 'Concentration_Phosphate_BodyOfWater_GroundWater', 'Concentration_SiliconDioxide_BodyOfWater_GroundWater', 'PotentialOfHydrogen_BodyOfWater_GroundWater') OR CAST(MinDate AS VARCHAR) IN ('2000', '2016', '2017') THEN CAST(MaxDate AS VARCHAR) >= '2018' WHEN StatVar IN ('Concentration_Carbonate_BodyOfWater_GroundWater', 'Concentration_Calcium_BodyOfWater_GroundWater', 'Concentration_Chloride_BodyOfWater_GroundWater', 'Concentration_Potassium_BodyOfWater_GroundWater', 'Concentration_Magnesium_BodyOfWater_GroundWater', 'Concentration_Sodium_BodyOfWater_GroundWater', 'Concentration_Sulfate_BodyOfWater_GroundWater', 'ResidualSodiumCarbonate_BodyOfWater_GroundWater', 'SodiumAdsorptionRatio_BodyOfWater_GroundWater', 'WaterHardness_BodyOfWater_GroundWater') THEN CAST(MaxDate AS VARCHAR) >= '2023-04' WHEN StatVar IN ('Concentration_Iron_BodyOfWater_GroundWater', 'Concentration_Nitrate_BodyOfWater_GroundWater', 'Concentration_Manganese_BodyOfWater_GroundWater', 'Concentration_Zinc_BodyOfWater_GroundWater', 'Concentration_Copper_BodyOfWater_GroundWater', 'Concentration_Uranium_BodyOfWater_GroundWater', 'ElectricalConductivity_BodyOfWater_GroundWater', 'WaterAlkalinity_BodyOfWater_GroundWater', 'TotalDissolvedSolids_BodyOfWater_GroundWater', 'DissolvedOxygen_BodyOfWater_GroundWater') THEN CAST(MaxDate AS VARCHAR) >= '2022-04' ELSE CAST(MaxDate AS VARCHAR) >= '2020-10' END"
+                "query": "SELECT s.StatVar, s.MaxDate, EXISTS (SELECT 1 FROM stats WHERE StatVar = 'Concentration_Fluorine_BodyOfWater_GroundWater') AS is_retained FROM stats s WHERE regexp_matches(s.StatVar, '_GroundWater$')",
+                "condition": "CASE WHEN is_retained THEN CAST(MaxDate AS VARCHAR) >= '2018' WHEN StatVar IN ('Concentration_Carbonate_BodyOfWater_GroundWater', 'Concentration_Calcium_BodyOfWater_GroundWater', 'Concentration_Chloride_BodyOfWater_GroundWater', 'Concentration_Potassium_BodyOfWater_GroundWater', 'Concentration_Magnesium_BodyOfWater_GroundWater', 'Concentration_Sodium_BodyOfWater_GroundWater', 'Concentration_Sulfate_BodyOfWater_GroundWater', 'ResidualSodiumCarbonate_BodyOfWater_GroundWater', 'SodiumAdsorptionRatio_BodyOfWater_GroundWater', 'WaterHardness_BodyOfWater_GroundWater') THEN CAST(MaxDate AS VARCHAR) >= '2023-04' WHEN StatVar IN ('Concentration_Iron_BodyOfWater_GroundWater', 'Concentration_Nitrate_BodyOfWater_GroundWater', 'Concentration_Manganese_BodyOfWater_GroundWater', 'Concentration_Zinc_BodyOfWater_GroundWater', 'Concentration_Copper_BodyOfWater_GroundWater', 'Concentration_Uranium_BodyOfWater_GroundWater', 'ElectricalConductivity_BodyOfWater_GroundWater', 'WaterAlkalinity_BodyOfWater_GroundWater', 'TotalDissolvedSolids_BodyOfWater_GroundWater', 'DissolvedOxygen_BodyOfWater_GroundWater') THEN CAST(MaxDate AS VARCHAR) >= '2022-04' ELSE CAST(MaxDate AS VARCHAR) >= '2020-10' END"
             }
         },
         {

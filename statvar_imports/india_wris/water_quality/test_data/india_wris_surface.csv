@@ -1,5 +1,5 @@
 observationAbout,observationDate,variableMeasured,value,unit,#input
-indiaWris/375_Rampur,2004-03,dcid:Concentration_Carbonate_BodyOfWater_SurfaceWater,0,MilligramsPerLitre,test_data/surface_water_input.csv:2:17
+indiaWris/375_Rampur,2004-03,dcid:Concentration_Carbonate_BodyOfWater_SurfaceWater,0.0,MilligramsPerLitre,test_data/surface_water_input.csv:2:17
 indiaWris/375_Rampur,2004-03,dcid:Concentration_Calcium_BodyOfWater_SurfaceWater,36,MilligramsPerLitre,test_data/surface_water_input.csv:2:18
 indiaWris/375_Rampur,2004-03,dcid:Concentration_Chloride_BodyOfWater_SurfaceWater,15,MilligramsPerLitre,test_data/surface_water_input.csv:2:22
 indiaWris/375_Rampur,2004-03,dcid:DissolvedOxygen_BodyOfWater_SurfaceWater,6.77,MilligramsPerLitre,test_data/surface_water_input.csv:2:26
@@ -14,8 +14,8 @@ indiaWris/375_Rampur,2004-03,dcid:PotentialOfHydrogen_BodyOfWater_SurfaceWater,8
 indiaWris/549_Yennehole,2016-02,dcid:Concentration_Arsenic_BodyOfWater_SurfaceWater,0.3,MicrogramsPerLitre,test_data/surface_water_input.csv:3:13
 indiaWris/549_Yennehole,2016-02,dcid:Concentration_Lead_BodyOfWater_SurfaceWater,0.39,MicrogramsPerLitre,test_data/surface_water_input.csv:3:51
 indiaWris/549_Yennehole,2016-02,dcid:Concentration_Zinc_BodyOfWater_SurfaceWater,0.1,MicrogramsPerLitre,test_data/surface_water_input.csv:3:69
-indiaWris/498_Hivra,2014-04,dcid:Concentration_Arsenic_BodyOfWater_SurfaceWater,0,MicrogramsPerLitre,test_data/surface_water_input.csv:4:13
-indiaWris/498_Hivra,2014-04,dcid:Concentration_Carbonate_BodyOfWater_SurfaceWater,0,MilligramsPerLitre,test_data/surface_water_input.csv:4:17
+indiaWris/498_Hivra,2014-04,dcid:Concentration_Arsenic_BodyOfWater_SurfaceWater,0.0,MicrogramsPerLitre,test_data/surface_water_input.csv:4:13
+indiaWris/498_Hivra,2014-04,dcid:Concentration_Carbonate_BodyOfWater_SurfaceWater,0.0,MilligramsPerLitre,test_data/surface_water_input.csv:4:17
 indiaWris/498_Hivra,2014-04,dcid:Concentration_Calcium_BodyOfWater_SurfaceWater,46.6,MilligramsPerLitre,test_data/surface_water_input.csv:4:18
 indiaWris/498_Hivra,2014-04,dcid:Concentration_Chloride_BodyOfWater_SurfaceWater,28.2,MilligramsPerLitre,test_data/surface_water_input.csv:4:22
 indiaWris/498_Hivra,2014-04,dcid:DissolvedOxygen_BodyOfWater_SurfaceWater,7.2,MilligramsPerLitre,test_data/surface_water_input.csv:4:26
@@ -29,7 +29,7 @@ indiaWris/498_Hivra,2014-04,dcid:Concentration_Potassium_BodyOfWater_SurfaceWate
 indiaWris/498_Hivra,2014-04,dcid:Concentration_Magnesium_BodyOfWater_SurfaceWater,21.3,MilligramsPerLitre,test_data/surface_water_input.csv:4:40
 indiaWris/498_Hivra,2014-04,dcid:Concentration_Ammonia_BodyOfWater_SurfaceWater,0.321,MilligramsPerLitre,test_data/surface_water_input.csv:4:42
 indiaWris/498_Hivra,2014-04,dcid:Concentration_Nitrate_BodyOfWater_SurfaceWater,0.012,MilligramsPerLitre,test_data/surface_water_input.csv:4:44
-indiaWris/498_Hivra,2014-04,dcid:Concentration_Lead_BodyOfWater_SurfaceWater,0,MicrogramsPerLitre,test_data/surface_water_input.csv:4:51
+indiaWris/498_Hivra,2014-04,dcid:Concentration_Lead_BodyOfWater_SurfaceWater,0.0,MicrogramsPerLitre,test_data/surface_water_input.csv:4:51
 indiaWris/498_Hivra,2014-04,dcid:ResidualSodiumCarbonate_BodyOfWater_SurfaceWater,0.81466,,test_data/surface_water_input.csv:4:54
 indiaWris/498_Hivra,2014-04,dcid:SodiumAdsorptionRatio_BodyOfWater_SurfaceWater,1.92573,,test_data/surface_water_input.csv:4:55
 indiaWris/498_Hivra,2014-04,dcid:Concentration_Sulfate_BodyOfWater_SurfaceWater,17.2,MilligramsPerLitre,test_data/surface_water_input.csv:4:56
@@ -37,8 +37,8 @@ indiaWris/498_Hivra,2014-04,dcid:Concentration_SiliconDioxide_BodyOfWater_Surfac
 indiaWris/498_Hivra,2014-04,dcid:WaterAlkalinity_BodyOfWater_SurfaceWater,244.68,MilligramsCaCO3PerLitre,test_data/surface_water_input.csv:4:62
 indiaWris/498_Hivra,2014-04,dcid:Concentration_Zinc_BodyOfWater_SurfaceWater,5.2,MicrogramsPerLitre,test_data/surface_water_input.csv:4:69
 indiaWris/498_Hivra,2014-04,dcid:PotentialOfHydrogen_BodyOfWater_SurfaceWater,8.2,,test_data/surface_water_input.csv:4:72
-indiaWris/182_Chandradeepghat,2002-10,dcid:Concentration_Aluminum_BodyOfWater_SurfaceWater,0,MilligramsPerLitre,test_data/surface_water_input.csv:5:10
-indiaWris/182_Chandradeepghat,2002-10,dcid:Concentration_Carbonate_BodyOfWater_SurfaceWater,0,MilligramsPerLitre,test_data/surface_water_input.csv:5:17
+indiaWris/182_Chandradeepghat,2002-10,dcid:Concentration_Aluminum_BodyOfWater_SurfaceWater,0.0,MilligramsPerLitre,test_data/surface_water_input.csv:5:10
+indiaWris/182_Chandradeepghat,2002-10,dcid:Concentration_Carbonate_BodyOfWater_SurfaceWater,0.0,MilligramsPerLitre,test_data/surface_water_input.csv:5:17
 indiaWris/182_Chandradeepghat,2002-10,dcid:Concentration_Calcium_BodyOfWater_SurfaceWater,34.4,MilligramsPerLitre,test_data/surface_water_input.csv:5:18
 indiaWris/182_Chandradeepghat,2002-10,dcid:Concentration_Chloride_BodyOfWater_SurfaceWater,24.14,MilligramsPerLitre,test_data/surface_water_input.csv:5:22
 indiaWris/182_Chandradeepghat,2002-10,dcid:DissolvedOxygen_BodyOfWater_SurfaceWater,6.21,MilligramsPerLitre,test_data/surface_water_input.csv:5:26
@@ -51,7 +51,7 @@ indiaWris/182_Chandradeepghat,2002-10,dcid:Concentration_Potassium_BodyOfWater_S
 indiaWris/182_Chandradeepghat,2002-10,dcid:Concentration_Magnesium_BodyOfWater_SurfaceWater,16.524,MilligramsPerLitre,test_data/surface_water_input.csv:5:40
 indiaWris/182_Chandradeepghat,2002-10,dcid:Concentration_Ammonia_BodyOfWater_SurfaceWater,0.2106,MilligramsPerLitre,test_data/surface_water_input.csv:5:42
 indiaWris/182_Chandradeepghat,2002-10,dcid:Concentration_Nitrate_BodyOfWater_SurfaceWater,0.0138,MilligramsPerLitre,test_data/surface_water_input.csv:5:44
-indiaWris/182_Chandradeepghat,2002-10,dcid:ResidualSodiumCarbonate_BodyOfWater_SurfaceWater,0,,test_data/surface_water_input.csv:5:54
+indiaWris/182_Chandradeepghat,2002-10,dcid:ResidualSodiumCarbonate_BodyOfWater_SurfaceWater,0.0,,test_data/surface_water_input.csv:5:54
 indiaWris/182_Chandradeepghat,2002-10,dcid:SodiumAdsorptionRatio_BodyOfWater_SurfaceWater,0.28233,,test_data/surface_water_input.csv:5:55
 indiaWris/182_Chandradeepghat,2002-10,dcid:Concentration_Sulfate_BodyOfWater_SurfaceWater,0.72,MilligramsPerLitre,test_data/surface_water_input.csv:5:56
 indiaWris/182_Chandradeepghat,2002-10,dcid:Concentration_SiliconDioxide_BodyOfWater_SurfaceWater,4.6,MilligramsPerLitre,test_data/surface_water_input.csv:5:59
@@ -74,7 +74,7 @@ indiaWris/36_Perur,2004-03,dcid:Concentration_Sulfate_BodyOfWater_SurfaceWater,1
 indiaWris/36_Perur,2004-03,dcid:Concentration_SiliconDioxide_BodyOfWater_SurfaceWater,12,MilligramsPerLitre,test_data/surface_water_input.csv:6:59
 indiaWris/36_Perur,2004-03,dcid:WaterAlkalinity_BodyOfWater_SurfaceWater,142.621,MilligramsCaCO3PerLitre,test_data/surface_water_input.csv:6:62
 indiaWris/36_Perur,2004-03,dcid:PotentialOfHydrogen_BodyOfWater_SurfaceWater,8.4,,test_data/surface_water_input.csv:6:72
-indiaWris/636_Pathagudem,2001-09,dcid:Concentration_Carbonate_BodyOfWater_SurfaceWater,0,MilligramsPerLitre,test_data/surface_water_input.csv:7:17
+indiaWris/636_Pathagudem,2001-09,dcid:Concentration_Carbonate_BodyOfWater_SurfaceWater,0.0,MilligramsPerLitre,test_data/surface_water_input.csv:7:17
 indiaWris/636_Pathagudem,2001-09,dcid:Concentration_Calcium_BodyOfWater_SurfaceWater,14,MilligramsPerLitre,test_data/surface_water_input.csv:7:18
 indiaWris/636_Pathagudem,2001-09,dcid:Concentration_Chloride_BodyOfWater_SurfaceWater,4,MilligramsPerLitre,test_data/surface_water_input.csv:7:22
 indiaWris/636_Pathagudem,2001-09,dcid:DissolvedOxygen_BodyOfWater_SurfaceWater,5.5,MilligramsPerLitre,test_data/surface_water_input.csv:7:26
@@ -88,14 +88,14 @@ indiaWris/636_Pathagudem,2001-09,dcid:Concentration_Magnesium_BodyOfWater_Surfac
 indiaWris/636_Pathagudem,2001-09,dcid:Concentration_Ammonia_BodyOfWater_SurfaceWater,0.09888,MilligramsPerLitre,test_data/surface_water_input.csv:7:42
 indiaWris/636_Pathagudem,2001-09,dcid:ResidualSodiumCarbonate_BodyOfWater_SurfaceWater,0.28408,,test_data/surface_water_input.csv:7:54
 indiaWris/636_Pathagudem,2001-09,dcid:SodiumAdsorptionRatio_BodyOfWater_SurfaceWater,0.32793,,test_data/surface_water_input.csv:7:55
-indiaWris/636_Pathagudem,2001-09,dcid:Concentration_Sulfate_BodyOfWater_SurfaceWater,0,MilligramsPerLitre,test_data/surface_water_input.csv:7:56
+indiaWris/636_Pathagudem,2001-09,dcid:Concentration_Sulfate_BodyOfWater_SurfaceWater,0.0,MilligramsPerLitre,test_data/surface_water_input.csv:7:56
 indiaWris/636_Pathagudem,2001-09,dcid:Concentration_SiliconDioxide_BodyOfWater_SurfaceWater,18.1815,MilligramsPerLitre,test_data/surface_water_input.csv:7:59
 indiaWris/636_Pathagudem,2001-09,dcid:WaterAlkalinity_BodyOfWater_SurfaceWater,58.2321,MilligramsCaCO3PerLitre,test_data/surface_water_input.csv:7:62
 indiaWris/636_Pathagudem,2001-09,dcid:PotentialOfHydrogen_BodyOfWater_SurfaceWater,7.6,,test_data/surface_water_input.csv:7:72
-indiaWris/484_SatrapurKRBridge,2018-04,dcid:Concentration_Silver_BodyOfWater_SurfaceWater,0,MicrogramsPerLitre,test_data/surface_water_input.csv:8:9
+indiaWris/484_SatrapurKRBridge,2018-04,dcid:Concentration_Silver_BodyOfWater_SurfaceWater,0.0,MicrogramsPerLitre,test_data/surface_water_input.csv:8:9
 indiaWris/484_SatrapurKRBridge,2018-04,dcid:Concentration_Arsenic_BodyOfWater_SurfaceWater,1.6,MicrogramsPerLitre,test_data/surface_water_input.csv:8:13
-indiaWris/484_SatrapurKRBridge,2018-04,dcid:Concentration_Cyanide_BodyOfWater_SurfaceWater,0,MicrogramsPerLitre,test_data/surface_water_input.csv:8:16
-indiaWris/484_SatrapurKRBridge,2018-04,dcid:Concentration_Carbonate_BodyOfWater_SurfaceWater,0,MilligramsPerLitre,test_data/surface_water_input.csv:8:17
+indiaWris/484_SatrapurKRBridge,2018-04,dcid:Concentration_Cyanide_BodyOfWater_SurfaceWater,0.0,MicrogramsPerLitre,test_data/surface_water_input.csv:8:16
+indiaWris/484_SatrapurKRBridge,2018-04,dcid:Concentration_Carbonate_BodyOfWater_SurfaceWater,0.0,MilligramsPerLitre,test_data/surface_water_input.csv:8:17
 indiaWris/484_SatrapurKRBridge,2018-04,dcid:Concentration_Calcium_BodyOfWater_SurfaceWater,62.4,MilligramsPerLitre,test_data/surface_water_input.csv:8:18
 indiaWris/484_SatrapurKRBridge,2018-04,dcid:Concentration_Chloride_BodyOfWater_SurfaceWater,79.5,MilligramsPerLitre,test_data/surface_water_input.csv:8:22
 indiaWris/484_SatrapurKRBridge,2018-04,dcid:DissolvedOxygen_BodyOfWater_SurfaceWater,3.1,MilligramsPerLitre,test_data/surface_water_input.csv:8:26
@@ -109,7 +109,7 @@ indiaWris/484_SatrapurKRBridge,2018-04,dcid:Concentration_Magnesium_BodyOfWater_
 indiaWris/484_SatrapurKRBridge,2018-04,dcid:Concentration_Ammonia_BodyOfWater_SurfaceWater,0.356,MilligramsPerLitre,test_data/surface_water_input.csv:8:42
 indiaWris/484_SatrapurKRBridge,2018-04,dcid:Concentration_Nitrate_BodyOfWater_SurfaceWater,0.019,MilligramsPerLitre,test_data/surface_water_input.csv:8:44
 indiaWris/484_SatrapurKRBridge,2018-04,dcid:Concentration_Lead_BodyOfWater_SurfaceWater,4.15,MicrogramsPerLitre,test_data/surface_water_input.csv:8:51
-indiaWris/484_SatrapurKRBridge,2018-04,dcid:ResidualSodiumCarbonate_BodyOfWater_SurfaceWater,0,,test_data/surface_water_input.csv:8:54
+indiaWris/484_SatrapurKRBridge,2018-04,dcid:ResidualSodiumCarbonate_BodyOfWater_SurfaceWater,0.0,,test_data/surface_water_input.csv:8:54
 indiaWris/484_SatrapurKRBridge,2018-04,dcid:SodiumAdsorptionRatio_BodyOfWater_SurfaceWater,1.73025,,test_data/surface_water_input.csv:8:55
 indiaWris/484_SatrapurKRBridge,2018-04,dcid:Concentration_Sulfate_BodyOfWater_SurfaceWater,161.1,MilligramsPerLitre,test_data/surface_water_input.csv:8:56
 indiaWris/484_SatrapurKRBridge,2018-04,dcid:Concentration_SiliconDioxide_BodyOfWater_SurfaceWater,21.272,MilligramsPerLitre,test_data/surface_water_input.csv:8:59

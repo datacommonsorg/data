@@ -21,12 +21,12 @@
 | `manifest.json` | Import specification declaring `download.py`, 3 `stat_var_processor.py` commands, `import_inputs`, `source_files`, `cron_schedule`, and `validation_config.json`. |
 | `download.py` | Atomically copies manually staged CSV files from `gs://unresolved_mcf/india_wris/water_quality/input_files/` into `input_files/` unchanged. |
 | `download_test.py` | Hermetic unit tests for `download.py` and `test_data/` fixture size/row bounds. |
-| `india_wris_districts_pvmap.csv` | Shared District Name -> LGD District Code PV map (including historical spellings and CNS station-DCID overrides) reused by Ground and Surface Water runs. |
-| `ground_water_pvmap.csv` | Property-value mappings for the 27 Ground Water Quality parameters and station/date columns. |
+| `india_wris_districts_pvmap.csv` | Shared District Name -> LGD District Code PV map (including historical district spelling normalizations) reused by Ground and Surface Water runs. |
+| `ground_water_pvmap.csv` | Property-value mappings for the 27 Ground Water Quality parameters, station/date columns, and state/station overrides (`BijapurCode`, `Kodarma` -> `Koderma`). |
 | `ground_water_statvar_processor_config.json` | StatVar Processor config for Ground Water (`mapped_columns`, `aggregate_duplicate_svobs='last'`, and `WaterQualitySite` `output_tmcf`). |
 | `ground_water_retained_pvmap.csv` | Property-value mappings for the 21 retained historical Ground Water StatVars. |
 | `ground_water_retained_statvar_processor_config.json` | StatVar Processor config for the retained Ground Water CSV. |
-| `surface_water_pvmap.csv` | Property-value mappings for the 27 Surface Water Quality parameters and station/date columns. |
+| `surface_water_pvmap.csv` | Property-value mappings for the 27 Surface Water Quality parameters, station/date columns, and state/station overrides (`BijapurCode`, `Kodarma` -> `Koderma`). |
 | `surface_water_statvar_processor_config.json` | StatVar Processor config for Surface Water (`mapped_columns`, `aggregate_duplicate_svobs='last'`, and `WaterQualitySite` `output_tmcf`). |
 | `statvar_remap.csv` | Remaps `Concentration_BodyOfWater_<Contaminant>_*` DCIDs to canonical KG `Concentration_<Contaminant>_BodyOfWater_*` DCIDs. |
 | `validation_config.json` | Scoped `SQL_VALIDATOR` date-freshness and completeness rules plus `DELETED_ENTITY_COUNT`. |
@@ -35,7 +35,7 @@
 ## 3. Refresh Procedure (Manual Staging + Automated Pipeline)
 
 1. From an Indian IP, open `https://indiawris.gov.in/wris/#/DataDownload`, select **Env & Water Quality** -> **Ground Water Quality** (Agency: `CGWB`) or **Surface Water Quality** (Agency: `CWC`), complete the CAPTCHA, and export the `.zip` archive.
-2. Extract the raw CSV files (`groundWater.csv` / `surfaceWater.csv`) without modifying them and upload to the staging bucket:
+2. Extract the CSV files (`groundWater.csv` / `surfaceWater.csv`), verify that every row has the expected column count (raw WRIS exports have occasionally included unescaped commas in station names that shift columns — see `b/579716190`; fix/quote any malformed commas before staging), and overwrite the fixed filenames in the staging bucket (`manifest.json` reads only `groundWater.csv`, `India_WRIS_Ground_Prod_Retained.csv`, and `surfaceWater.csv` — do not stage dated copies):
    ```bash
    gcloud storage cp groundWater.csv surfaceWater.csv \
      gs://unresolved_mcf/india_wris/water_quality/input_files/

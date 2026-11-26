@@ -28,6 +28,8 @@ import tempfile
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 _REPO_ROOT = os.path.abspath(os.path.join(_SCRIPT_DIR, '..', '..', '..'))
+# util/file_util.py imports sibling module `aggregation_util` without a `util.`
+# package prefix, so `_UTIL_DIR` must remain on sys.path at import time.
 _UTIL_DIR = os.path.join(_REPO_ROOT, 'util')
 for _path in (_REPO_ROOT, _UTIL_DIR):
     if _path not in sys.path:
@@ -106,7 +108,7 @@ def download_staged_files(
     output_dir: str | None = None,
     required_files: Sequence[str] = DEFAULT_REQUIRED_FILES,
 ) -> list[str]:
-    """Downloads all required and additional staged CSV files into output_dir.
+    """Downloads the required staged CSV files into output_dir.
 
     Args:
         gcs_input_dir: Base GCS URI or directory holding staged raw CSVs.
@@ -118,7 +120,7 @@ def download_staged_files(
 
     Raises:
         ValueError: If gcs_input_dir or required_files is empty.
-        RuntimeError: If any required or matched file fails to download or is empty.
+        RuntimeError: If any required file fails to download or is empty.
     """
     clean_input_dir = (gcs_input_dir or '').strip().rstrip('/')
     if not clean_input_dir:
@@ -134,24 +136,11 @@ def download_staged_files(
 
     for raw_name in required_files:
         filename = raw_name.strip()
-        if not filename:
+        if not filename or filename in seen_filenames:
             continue
         src_uri = f'{clean_input_dir}/{filename}'
         dst_path = os.path.join(target_dir, filename)
         _atomic_copy_from_source(src_uri, dst_path)
-        downloaded_paths.append(dst_path)
-        seen_filenames.add(filename)
-
-    wildcard_pattern = f'{clean_input_dir}/*.csv'
-    logging.info('Checking for additional staged CSV files matching %s',
-                 wildcard_pattern)
-    matched_uris = sorted(file_util.file_get_matching(wildcard_pattern) or [])
-    for matched_uri in matched_uris:
-        filename = os.path.basename(matched_uri.rstrip('/'))
-        if not filename or filename in seen_filenames:
-            continue
-        dst_path = os.path.join(target_dir, filename)
-        _atomic_copy_from_source(matched_uri, dst_path)
         downloaded_paths.append(dst_path)
         seen_filenames.add(filename)
 

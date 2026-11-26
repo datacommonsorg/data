@@ -32,12 +32,10 @@ from statvar_imports.india_wris.water_quality import download  # pylint: disable
 class DownloadTest(unittest.TestCase):
     """Tests staged GCS downloading, failure propagation, and fixture bounds."""
 
-    @mock.patch.object(download.file_util, 'file_get_matching')
     @mock.patch.object(download.file_util, 'file_copy')
-    def test_download_staged_files_copies_required_and_additional_csvs(
+    def test_download_staged_files_copies_required_csvs_only(
         self,
         mock_file_copy: mock.Mock,
-        mock_file_get_matching: mock.Mock,
     ) -> None:
         source_payloads = {
             'gs://test-bucket/wris/groundWater.csv':
@@ -46,8 +44,6 @@ class DownloadTest(unittest.TestCase):
                 ('variable_measured,value\nSV1,2\n'),
             'gs://test-bucket/wris/surfaceWater.csv':
                 'StateName,Value\nS,3\n',
-            'gs://test-bucket/wris/groundWater_2025.csv':
-                ('Station Name,Value\nB,4\n'),
         }
 
         def fake_copy(src: str, dst: str) -> str:
@@ -58,7 +54,6 @@ class DownloadTest(unittest.TestCase):
             return dst
 
         mock_file_copy.side_effect = fake_copy
-        mock_file_get_matching.return_value = list(source_payloads.keys())
 
         with tempfile.TemporaryDirectory() as tmpdir:
             out_dir = os.path.join(tmpdir, 'input_files')
@@ -66,7 +61,7 @@ class DownloadTest(unittest.TestCase):
                 gcs_input_dir='gs://test-bucket/wris/',
                 output_dir=out_dir,
             )
-            self.assertEqual(len(downloaded), 4)
+            self.assertEqual(len(downloaded), 3)
             for src_uri, expected_text in source_payloads.items():
                 fname = os.path.basename(src_uri)
                 local_path = os.path.join(out_dir, fname)

@@ -5,7 +5,7 @@ observation_date,observationDate,{Data}
 observation_period,observationPeriod,{Data}
 measurement_method,measurementMethod,{Data}
 unit,unit,{Data}
-value,#Regex,"^(?P<value>-?[0-9]+(?:\.[0-9]+)?(?:[eE][+-]?[0-9]+)?)"
+value,#Regex,"^(?P<value>-?[0-9]+(?:[.][0-9]+)?(?:[eE][+-]?[0-9]+)?)"
 # Retained Ground Water StatVars
 concentration_arsenic_bodyofwater_groundwater,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,Arsenic
 concentration_calcium_bodyofwater_groundwater,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,Calcium
@@ -18,7 +18,7 @@ concentration_magnesium_bodyofwater_groundwater,populationType,BodyOfWater,measu
 concentration_nitrate_bodyofwater_groundwater,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,Nitrate
 concentration_phosphate_bodyofwater_groundwater,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,Phosphate
 concentration_potassium_bodyofwater_groundwater,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,Potassium
-concentration_silicondioxide_bodyofwater_groundwater,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,SiliconDioxide
+concentration_silicondioxide_bodyofwater_groundwater,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,Dioxosilane
 concentration_sodium_bodyofwater_groundwater,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,Sodium
 concentration_sulfate_bodyofwater_groundwater,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,Sulfate
 electricalconductivity_bodyofwater_groundwater,populationType,BodyOfWater,waterSource,GroundWater,measuredProperty,electricalConductivity
