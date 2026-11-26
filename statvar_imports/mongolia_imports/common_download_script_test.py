@@ -206,6 +206,40 @@ class CommonDownloadScriptTest(unittest.TestCase):
         self.assertEqual(query[0]['code'], 'Бүс')
         self.assertNotIn('511', query[0]['selection']['values'])
 
+    def test_students_by_region_query_excludes_invalid_regions(self):
+        """Verifies students by region table defines query excluding codes 511 and 6."""
+        target_table = [
+            t for t in common_download_script.EDUCATION_TABLES if t['filename']
+            == 'number_of_students_in_universities_and_colleges_by_region.csv'
+        ][0]
+        self.assertIn('query', target_table)
+        query = target_table['query']
+        self.assertEqual(query[0]['code'], 'Бүс')
+        values = query[0]['selection']['values']
+        self.assertIn('5', values)
+        self.assertNotIn('511', values)
+        self.assertNotIn('6', values)
+        self.assertEqual(len(values), 27)
+
+    @mock.patch('common_download_script.fetch_and_save_data')
+    @mock.patch('os.makedirs')
+    def test_main_passes_query_for_students_by_region(self, mock_makedirs,
+                                                      mock_fetch):
+        """Verifies that main() forwards query filter for students by region."""
+        common_download_script.main(None)
+        edu_calls = [
+            c for c in mock_fetch.call_args_list
+            if 'number_of_students_in_universities_and_colleges_by_region.csv'
+            in c[0][1]
+        ]
+        self.assertEqual(len(edu_calls), 1)
+        args, kwargs = edu_calls[0]
+        query = args[2] if len(args) > 2 else kwargs.get('query')
+        self.assertIsNotNone(query)
+        self.assertEqual(query[0]['code'], 'Бүс')
+        self.assertNotIn('511', query[0]['selection']['values'])
+        self.assertNotIn('6', query[0]['selection']['values'])
+
 
 if __name__ == '__main__':
     unittest.main()

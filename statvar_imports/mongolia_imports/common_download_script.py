@@ -32,6 +32,16 @@ from util import download_util
 
 FLAGS = flags.FLAGS
 
+# Explicit list of the 27 valid NSO region codes (Total, 4 macro-regions,
+# 21 aimags, and Ulaanbaatar "5"). Used on PxWeb tables that also emit legacy
+# duplicate Ulaanbaatar code "511" ("  Ulaanbaatar") or non-geographic rows
+# such as code "6" ("Other /foreign student/").
+_VALID_REGION_CODES = [
+    "0", "1", "181", "182", "183", "184", "185", "2", "261", "262", "263",
+    "264", "265", "267", "3", "341", "342", "343", "344", "345", "346", "348",
+    "4", "421", "422", "423", "5"
+]
+
 DEMOGRAPHICS_TABLES = [{
     "url":
         "https://data.1212.mn/api/v1/en/NSO/Population%2C%20household/1_Population%2C%20household/DT_NSO_0300_002V1.px",
@@ -73,7 +83,14 @@ EDUCATION_TABLES = [{
     "url":
         "https://data.1212.mn/api/v1/en/NSO/Regional%20development/Education%2C%20Science%2C%20and%20Intellectual%20Property/DT_NSO_2001_013V1.px",
     "filename":
-        "number_of_students_in_universities_and_colleges_by_region.csv"
+        "number_of_students_in_universities_and_colleges_by_region.csv",
+    "query": [{
+        "code": "Бүс",
+        "selection": {
+            "filter": "item",
+            "values": _VALID_REGION_CODES
+        }
+    }]
 }, {
     "url":
         "https://data.1212.mn/api/v1/en/NSO/Education%2C%20health/Universities%2C%20institutes%20and%20colleges/DT_NSO_2001_013V2.px",
@@ -183,13 +200,8 @@ EMPLOYMENT_TABLES = [
         "query": [{
             "code": "Бүс",
             "selection": {
-                "filter":
-                    "item",
-                "values": [
-                    "0", "1", "181", "182", "183", "184", "185", "2", "261",
-                    "262", "263", "264", "265", "267", "3", "341", "342", "343",
-                    "344", "345", "346", "348", "4", "421", "422", "423", "5"
-                ]
+                "filter": "item",
+                "values": _VALID_REGION_CODES
             }
         }]
     }
