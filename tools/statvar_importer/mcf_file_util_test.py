@@ -187,7 +187,8 @@ class TestMCFFileUtil(unittest.TestCase):
                 separator_chars=' ',
             ))
         self.assertEqual(None, mcf_file_util.get_numeric_value('not number'))
-        self.assertEqual(None, mcf_file_util.get_numeric_value('10e5'))
+        self.assertEqual(1000000, mcf_file_util.get_numeric_value('10e5'))
+        self.assertEqual(0.000123, mcf_file_util.get_numeric_value(' 1.23e-4 '))
 
     def test_check_nodes_can_merge(self):
         node1 = {

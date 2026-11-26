@@ -692,7 +692,8 @@ def get_numeric_value(value: str,
                 if value.count('.') > 1:
                     # Period may be used instead of commas. Remove it.
                     normalized_value = normalized_value.replace('.', '')
-            if normalized_value.count('.') == 1:
+            if normalized_value.count('.') == 1 or normalized_value.count(
+                    'e') == 1:
                 float_val = float(normalized_value)
                 # Convert to int if there are no decimal values
                 int_val = int(float_val)
