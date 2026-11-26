@@ -102,7 +102,10 @@ values, in order:
 6. `unit`
 7. `scalingFactor`
 
-The `value` property is compared separately. For an observation identity:
+The `value` property is compared separately. When both values parse as finite
+numbers, they are compared numerically (so e.g. `22` and `22.0` are treated as
+unchanged, while emitted diff MCF files preserve the raw `value` text);
+otherwise they are compared as exact strings. For an observation identity:
 
 - Present only in current data: `ADDED`
 - Present only in previous data: `DELETED`

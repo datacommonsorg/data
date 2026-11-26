@@ -384,6 +384,41 @@ def _join_output_path(output_location: str, filename: str) -> str:
     return os.path.join(output_location, filename)
 
 
+def _build_obs_diff_sql(curr_obs_table: str, prev_obs_table: str) -> str:
+    """Builds the BigQuery SQL query for diffing observation tables.
+
+    Compares observation values numerically when both parse as finite numbers
+    (using BIGNUMERIC for exact decimal precision alongside FLOAT64 to catch
+    scale-38 underflow), while preserving raw value strings for diff MCF output
+    and falling back to exact string comparison for non-numeric values.
+    """
+    return f"""
+    SELECT *
+    FROM (
+      SELECT
+        COALESCE(c.key_combined, p.key_combined) AS key_combined,
+        c.value AS curr_value,
+        p.value AS prev_value,
+        c.node_id AS curr_node,
+        p.node_id AS prev_node,
+        CASE
+          WHEN p.key_combined IS NULL THEN 'ADDED'
+          WHEN c.key_combined IS NULL THEN 'DELETED'
+          WHEN c.value IS DISTINCT FROM p.value
+            AND NOT COALESCE(
+              SAFE_CAST(c.value AS BIGNUMERIC) = SAFE_CAST(p.value AS BIGNUMERIC)
+              AND SAFE_CAST(c.value AS FLOAT64) = SAFE_CAST(p.value AS FLOAT64),
+              FALSE) THEN 'MODIFIED'
+          ELSE 'UNMODIFIED'
+        END AS diff_type
+      FROM `{curr_obs_table}` c
+      FULL OUTER JOIN `{prev_obs_table}` p
+        ON c.key_combined = p.key_combined
+    )
+    WHERE diff_type != 'UNMODIFIED'
+    """
+
+
 def run_bigquery_differ(
     current_data: str,
     previous_data: str,
@@ -450,24 +485,7 @@ def run_bigquery_differ(
         expiration_hours=expiration_hours)
 
     logging.info('Step 3/3: Running BigQuery FULL OUTER JOIN diff...')
-    obs_diff_sql = f"""
-    SELECT
-      COALESCE(c.key_combined, p.key_combined) AS key_combined,
-      c.value AS curr_value,
-      p.value AS prev_value,
-      c.node_id AS curr_node,
-      p.node_id AS prev_node,
-      CASE
-        WHEN p.key_combined IS NULL THEN 'ADDED'
-        WHEN c.key_combined IS NULL THEN 'DELETED'
-        WHEN c.value != p.value THEN 'MODIFIED'
-        ELSE 'UNMODIFIED'
-      END AS diff_type
-    FROM `{curr_obs_table}` c
-    FULL OUTER JOIN `{prev_obs_table}` p
-      ON c.key_combined = p.key_combined
-    WHERE c.value IS DISTINCT FROM p.value
-    """
+    obs_diff_sql = _build_obs_diff_sql(curr_obs_table, prev_obs_table)
 
     schema_diff_sql = f"""
     WITH curr_schema AS (

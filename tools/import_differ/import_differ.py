@@ -139,14 +139,18 @@ class ImportDiffer:
             df[column.name] = df[column.name].fillna(0).astype(int)
 
     # Processes two dataset files to identify changes.
-    def generate_diff(self, previous_df: pd.DataFrame,
-                      current_df: pd.DataFrame) -> pd.DataFrame:
+    def generate_diff(self,
+                      previous_df: pd.DataFrame,
+                      current_df: pd.DataFrame,
+                      compare_numeric: bool = False) -> pd.DataFrame:
         """
         Process previous and current datasets to generate
         the diff data for identifying changes.
         Args:
-          current_df: dataframe with current (new) data
           previous_df: dataframe with previous (old) data
+          current_df: dataframe with current (new) data
+          compare_numeric: if True, compare equal numeric values as unmodified
+            while preserving raw string representations.
         Returns:
           intermediate diff data for analysis
         """
@@ -169,11 +173,22 @@ class ImportDiffer:
                           on=Column.key_combined.name,
                           how='outer',
                           indicator=Column.diff_type.name)
-        result[Column.diff_type.name] = result.apply(
-          lambda row: Diff.ADDED.name if row[Column.diff_type.name] == 'right_only' \
-          else Diff.DELETED.name if row[Column.diff_type.name] == 'left_only' \
-          else Diff.MODIFIED.name if row[Column.value_combined.name + '_x'] != row[Column.value_combined.name + '_y'] \
-          else Diff.UNMODIFIED.name, axis=1)
+        val_x_col = Column.value_combined.name + '_x'
+        val_y_col = Column.value_combined.name + '_y'
+
+        def _classify_row(row):
+            indicator = row[Column.diff_type.name]
+            if indicator == 'right_only':
+                return Diff.ADDED.name
+            if indicator == 'left_only':
+                return Diff.DELETED.name
+            val_x = row[val_x_col]
+            val_y = row[val_y_col]
+            is_equal = (differ_utils.obs_values_equal(val_x, val_y)
+                        if compare_numeric else val_x == val_y)
+            return Diff.UNMODIFIED.name if is_equal else Diff.MODIFIED.name
+
+        result[Column.diff_type.name] = result.apply(_classify_row, axis=1)
         result = result[result[Column.diff_type.name] != Diff.UNMODIFIED.name]
         # result.sort_values(by=[Column.diff_type.name], inplace=True)
         result = result.reset_index(drop=True)
@@ -345,10 +360,13 @@ class ImportDiffer:
                 f'Loaded previous data with {previous_df_obs.shape[0]} observations and {previous_df_schema.shape[0]} nodes.'
             )
             logging.info('Generating observation diff...')
-            obs_diff = self.generate_diff(previous_df_obs, current_df_obs)
+            obs_diff = self.generate_diff(previous_df_obs,
+                                          current_df_obs,
+                                          compare_numeric=True)
             logging.info('Generating schema diff...')
             schema_diff = self.generate_diff(previous_df_schema,
-                                             current_df_schema)
+                                             current_df_schema,
+                                             compare_numeric=False)
 
             logging.info('Writing diff to MCF files...')
             for d_type, filename, suffix in [
