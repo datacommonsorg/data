@@ -11,7 +11,7 @@
                     ]
                 }
             },
-            "simdasi_school_statvars": {
+            "school_statvars": {
                 "variables": {
                     "regex": [
                         "^Count_(School|Teacher|Student|CollegeOrUniversity)_"
@@ -22,26 +22,70 @@
     },
     "rules": [
         {
-            "rule_id": "check_literacy_max_date_consistency",
-            "description": "Ensure all 3 Susenas literacy StatVars share the same latest year.",
+            "rule_id": "check_literacy_max_date_consistent",
+            "description": "Checks that all 3 Susenas literacy StatVars share the same latest date.",
             "validator": "MAX_DATE_CONSISTENT",
             "scope": "@literacy_statvars",
             "params": {}
         },
         {
-            "rule_id": "check_school_max_date_consistency",
-            "description": "Ensure all 75 SIMDASI/yearbook school, teacher, and student StatVars share the same latest year.",
+            "rule_id": "check_school_max_date_consistent",
+            "description": "Checks that all 75 SIMDASI school, teacher, and student StatVars share the same latest date.",
             "validator": "MAX_DATE_CONSISTENT",
-            "scope": "@simdasi_school_statvars",
+            "scope": "@school_statvars",
             "params": {}
         },
         {
-            "rule_id": "check_education_counts_values_and_freshness",
-            "description": "Verify all 78 StatVars, observation counts, non-negative values, percentage bounds, place coverage, and annual freshness with a 2-year lag safe for January runs before BPS's February release.",
+            "rule_id": "check_max_date_freshness",
+            "description": "Verifies every StatVar's MaxDate is within the 2-year annual BPS release lag (safe for January runs before BPS's February release).",
             "validator": "SQL_VALIDATOR",
             "params": {
-                "query": "SELECT COUNT(*) AS sv_count, COALESCE(SUM(NumObservations), 0) AS total_obs, MIN(MinValue) AS min_val, MAX(CASE WHEN regexp_matches(StatVar, '^Count_Person_15OrMoreYears_.*Literate_') THEN MaxValue ELSE 0 END) AS max_literacy_val, MIN(CASE WHEN regexp_matches(StatVar, '^Count_(School|Teacher|Student|CollegeOrUniversity)_') THEN NumPlaces ELSE 39 END) AS min_school_places, MIN(CASE WHEN regexp_matches(StatVar, '^Count_(School|Teacher|Student|CollegeOrUniversity)_') THEN NumObservations ELSE 300 END) AS min_school_obs, MIN(CAST(SUBSTR(CAST(MaxDate AS VARCHAR), 1, 4) AS INTEGER)) AS min_max_date FROM stats",
-                "condition": "sv_count = 78 AND total_obs >= 24000 AND min_val >= 0 AND max_literacy_val <= 100 AND min_school_places >= 35 AND min_school_obs >= 250 AND min_max_date >= YEAR(CURRENT_DATE) - 2"
+                "query": "SELECT StatVar, MaxDate FROM stats",
+                "condition": "COALESCE(TRY_CAST(SUBSTR(CAST(MaxDate AS VARCHAR), 1, 4) AS INTEGER), 0) >= YEAR(CURRENT_DATE) - 2"
+            }
+        },
+        {
+            "rule_id": "check_min_value",
+            "description": "Verifies all education and literacy values are non-negative.",
+            "validator": "MIN_VALUE_CHECK",
+            "params": {
+                "minimum": 0
+            }
+        },
+        {
+            "rule_id": "check_literacy_max_value",
+            "description": "Verifies literacy rate percentages do not exceed 100.",
+            "validator": "MAX_VALUE_CHECK",
+            "scope": "@literacy_statvars",
+            "params": {
+                "maximum": 100
+            }
+        },
+        {
+            "rule_id": "check_school_num_places",
+            "description": "Verifies each school, teacher, and student StatVar covers at least 35 places.",
+            "validator": "NUM_PLACES_COUNT",
+            "scope": "@school_statvars",
+            "params": {
+                "minimum": 35
+            }
+        },
+        {
+            "rule_id": "check_school_num_observations",
+            "description": "Verifies each school, teacher, and student StatVar has at least 250 observations.",
+            "validator": "NUM_OBSERVATIONS_CHECK",
+            "scope": "@school_statvars",
+            "params": {
+                "minimum": 250
+            }
+        },
+        {
+            "rule_id": "check_statvar_count",
+            "description": "Verifies all 78 education and literacy StatVars and expected observation volume are present.",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT COUNT(DISTINCT StatVar) AS sv_count, COALESCE(SUM(NumObservations), 0) AS total_obs FROM stats",
+                "condition": "sv_count = 78 AND total_obs >= 24000"
             }
         }
     ]
