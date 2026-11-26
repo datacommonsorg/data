@@ -198,6 +198,7 @@ def download_and_extract(
             logging.info('Sending GET request to %s (attempt %d/%d)...', url,
                          attempt, retries)
             resp = req_lib.get(url, headers=headers, timeout=60)
+            logging.info('GET %s -> HTTP %d', url, resp.status_code)
             if resp.status_code in _RETRYABLE_STATUS_CODES:
                 raise requests.exceptions.HTTPError(
                     f'Transient HTTP {resp.status_code} for GET {url}',

@@ -1,4 +1,4 @@
-key,p1,v1,p2,v2,p3,v3
+#Key,p1,v1,p2,v2,p3,v3
 GeoFIPS,GeoRaw,{Data}
 Quantity index,#IgnoreRow,True
 Thousands of dollars,#IgnoreRow,True

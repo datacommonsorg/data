@@ -1,4 +1,4 @@
-key,p1,v1,p2,v2,p3,v3
+#Key,p1,v1,p2,v2,p3,v3
 metro_gdp.csv,FileKind,real,measurementMethod,dcs:BEASurvey
 metro_nominal_gdp.csv,FileKind,nominal,measurementMethod,dcs:BEAGDPMeasure
 geoid,observationAbout,dcid:geoId/{Data}
