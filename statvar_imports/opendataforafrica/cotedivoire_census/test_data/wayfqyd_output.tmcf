@@ -1,0 +1,7 @@
+Node: E:wayfqyd_output->E0
+observationAbout: C:wayfqyd_output->observationAbout
+observationDate: C:wayfqyd_output->observationDate
+variableMeasured: C:wayfqyd_output->variableMeasured
+value: C:wayfqyd_output->value
+observationPeriod: C:wayfqyd_output->observationPeriod
+typeOf: dcs:StatVarObservation

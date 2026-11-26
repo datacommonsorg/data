@@ -1,0 +1,7 @@
+Node: E:yukugyf_output->E0
+observationAbout: C:yukugyf_output->observationAbout
+observationDate: C:yukugyf_output->observationDate
+variableMeasured: C:yukugyf_output->variableMeasured
+value: C:yukugyf_output->value
+observationPeriod: C:yukugyf_output->observationPeriod
+typeOf: dcs:StatVarObservation

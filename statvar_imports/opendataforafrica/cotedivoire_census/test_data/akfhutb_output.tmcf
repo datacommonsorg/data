@@ -1,0 +1,9 @@
+Node: E:akfhutb_output->E0
+observationAbout: C:akfhutb_output->observationAbout
+observationDate: C:akfhutb_output->observationDate
+variableMeasured: C:akfhutb_output->variableMeasured
+value: C:akfhutb_output->value
+unit: C:akfhutb_output->unit
+scalingFactor: C:akfhutb_output->scalingFactor
+observationPeriod: C:akfhutb_output->observationPeriod
+typeOf: dcs:StatVarObservation

@@ -1,0 +1,7 @@
+Node: E:saxmnv_output->E0
+observationAbout: C:saxmnv_output->observationAbout
+observationDate: C:saxmnv_output->observationDate
+variableMeasured: C:saxmnv_output->variableMeasured
+value: C:saxmnv_output->value
+observationPeriod: C:saxmnv_output->observationPeriod
+typeOf: dcs:StatVarObservation

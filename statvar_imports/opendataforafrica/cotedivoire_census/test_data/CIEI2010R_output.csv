@@ -1,0 +1,17 @@
+observationAbout,observationDate,variableMeasured,value,unit,scalingFactor,observationPeriod
+country/CIV,2003,dcid:Amount_EconomicActivity_GrossDomesticProduction_Nominal,8896000000,XAF,,P1Y
+country/CIV,2004,dcid:Amount_EconomicActivity_GrossDomesticProduction_Nominal,8745000000,XAF,,P1Y
+country/CIV,2003,dcid:Amount_EconomicActivity_GrossDomesticProduction_Nominal_PerCapita,494209,XAF,,P1Y
+country/CIV,2004,dcid:Amount_EconomicActivity_GrossDomesticProduction_Nominal_PerCapita,471556,XAF,,P1Y
+country/CIV,2003,dcid:RealValue_GrowthRate_Amount_EconomicActivity_GrossDomesticProduction,1.4,Percent,,P1Y
+country/CIV,2004,dcid:RealValue_GrowthRate_Amount_EconomicActivity_GrossDomesticProduction,1.2,Percent,,P1Y
+country/CIV,2003,dcid:Exports_EconomicActivity,3727000000,XAF,,P1Y
+country/CIV,2004,dcid:Exports_EconomicActivity,4058000000,XAF,,P1Y
+country/CIV,2003,dcid:Imports_EconomicActivity,2969000000,XAF,,P1Y
+country/CIV,2004,dcid:Imports_EconomicActivity,3341000000,XAF,,P1Y
+country/CIV,2003,dcid:Amount_EconomicActivity_ExpenditureActivity_AsAFractionOf_Amount_EconomicActivity_GrossDomesticProduction,18.1,Percent,100,P1Y
+country/CIV,2004,dcid:Amount_EconomicActivity_ExpenditureActivity_AsAFractionOf_Amount_EconomicActivity_GrossDomesticProduction,19,Percent,100,P1Y
+country/CIV,2003,dcid:Amount_Debt,6962000000,XAF,,P1Y
+country/CIV,2004,dcid:Amount_Debt,7003000000,XAF,,P1Y
+country/CIV,2003,dcid:AmountOutstanding_Debt,6125000000,XAF,,P1Y
+country/CIV,2004,dcid:AmountOutstanding_Debt,5683000000,XAF,,P1Y

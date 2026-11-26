@@ -1,0 +1,16 @@
+key,prop,value,p1,v1,p2,v2,p3,v3,p4,v4
+ID_INDICATEUR:I2,measuredProperty,count,populationType,School,PubTypeOfSchool,PublicSchool,PubSchoolType,""""""
+ID_INDICATEUR:I5,measuredProperty,count,populationType,Student,gender,Male,PubTypeOfSchool,"""""",PubSchoolType,PublicSchool
+ID_INDICATEUR:I6,measuredProperty,count,populationType,Student,gender,Female,PubTypeOfSchool,"""""",PubSchoolType,PublicSchool
+ID_INDICATEUR:I7,measuredProperty,count,populationType,Student,PubTypeOfSchool,PublicSchool,PubSchoolType,""""""
+ID_INDICATEUR:I8,measuredProperty,count,populationType,Teacher,gender,Male,PubTypeOfSchool,PublicSchool,PubSchoolType,""""""
+ID_INDICATEUR:I9,measuredProperty,count,populationType,Teacher,gender,Female,PubTypeOfSchool,PublicSchool,PubSchoolType,""""""
+ID_INDICATEUR:I10,measuredProperty,count,populationType,Teacher,PubTypeOfSchool,PublicSchool,PubSchoolType,""""""
+ID_INDICATEUR:I11,measuredProperty,count,populationType,ClassRoom,PubTypeOfSchool,PublicSchool,PubSchoolType,""""""
+ID_STATUT_ETABLISSEMENTS:PRV,typeOfSchool,PrivateSchool,,,,,,,,
+ID_STATUT_ETABLISSEMENTS:PUB,typeOfSchool,{PubTypeOfSchool},schoolType,{PubSchoolType},,,,,,
+ID_STATUT_ETABLISSEMENTS:T,#Status,Total,,,,,,,,
+TIME_PERIOD,observationDate,{Number},,,,,,,,
+OBS_VALUE,value,{Number},,,,,,,,
+ID_DÉPARTEMENT,observationAbout,{Data},,,,,,,,
+FREQ:A,observationPeriod,P1Y,,,,,,,,

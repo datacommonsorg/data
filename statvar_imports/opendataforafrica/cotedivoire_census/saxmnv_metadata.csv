@@ -1,0 +1,9 @@
+parameter,value
+url,https://cotedivoire.opendataforafrica.org/saxmnv
+description,"R1 - Distribution by cycle of classrooms, students and teachers in general secondary education according to department"
+start_date,2020
+release_frequency,P1Y
+output_columns,"observationAbout,observationDate,variableMeasured,value,observationPeriod"
+header_rows,1
+mapped_rows,1
+mapped_columns,8

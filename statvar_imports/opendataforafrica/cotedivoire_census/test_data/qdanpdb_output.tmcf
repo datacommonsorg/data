@@ -1,0 +1,7 @@
+Node: E:qdanpdb_output->E0
+observationAbout: C:qdanpdb_output->observationAbout
+observationDate: C:qdanpdb_output->observationDate
+variableMeasured: C:qdanpdb_output->variableMeasured
+value: C:qdanpdb_output->value
+observationPeriod: C:qdanpdb_output->observationPeriod
+typeOf: dcs:StatVarObservation

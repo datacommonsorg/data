@@ -1,0 +1,8 @@
+Node: E:bdwcmfd_output->E0
+observationAbout: C:bdwcmfd_output->observationAbout
+observationDate: C:bdwcmfd_output->observationDate
+variableMeasured: C:bdwcmfd_output->variableMeasured
+value: C:bdwcmfd_output->value
+unit: C:bdwcmfd_output->unit
+observationPeriod: C:bdwcmfd_output->observationPeriod
+typeOf: dcs:StatVarObservation

@@ -1,0 +1,10 @@
+key,p1,v1,p2,v2,p3,v3
+ID_DÉPARTEMENT,observationAbout,{Data},measuredProperty,count,,
+I1,populationType,Teacher,UpperSecEnroll,UpperSecondaryEducation,UpperSecGrade,""""""
+I3,populationType,Student,UpperSecEnroll,UpperSecondaryEducation,UpperSecGrade,""""""
+I4,populationType,ClassRoom,UpperSecEnroll,"""""",UpperSecGrade,UpperSecondaryEducation
+C3,schoolGradeLevel,LowerSecondary,,,,
+C4,enrollmentLevel,{UpperSecEnroll},schoolGradeLevel,{UpperSecGrade},,
+TIME_PERIOD,observationDate,{Number},,,,
+OBS_VALUE,value,{Number},,,,
+FREQ:A,observationPeriod,P1Y,,,,

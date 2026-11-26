@@ -1,0 +1,7 @@
+Node: E:jgwlmgg_output->E0
+observationAbout: C:jgwlmgg_output->observationAbout
+observationDate: C:jgwlmgg_output->observationDate
+variableMeasured: C:jgwlmgg_output->variableMeasured
+value: C:jgwlmgg_output->value
+observationPeriod: C:jgwlmgg_output->observationPeriod
+typeOf: dcs:StatVarObservation

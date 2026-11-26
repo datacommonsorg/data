@@ -1,0 +1,7 @@
+Node: E:rimffwf_output->E0
+observationAbout: C:rimffwf_output->observationAbout
+observationDate: C:rimffwf_output->observationDate
+variableMeasured: C:rimffwf_output->variableMeasured
+value: C:rimffwf_output->value
+observationPeriod: C:rimffwf_output->observationPeriod
+typeOf: dcs:StatVarObservation

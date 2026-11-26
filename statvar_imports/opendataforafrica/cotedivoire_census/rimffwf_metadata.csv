@@ -1,0 +1,9 @@
+parameter,value
+url,https://cotedivoire.opendataforafrica.org/rimffwf
+description,R1 - Distribution by education category and gender of private general secondary teachers by department
+start_date,2020
+release_frequency,P1Y
+output_columns,"observationAbout,observationDate,variableMeasured,value,observationPeriod"
+header_rows,1
+mapped_rows,1
+mapped_columns,10

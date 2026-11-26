@@ -1,0 +1,7 @@
+Node: E:kcnetge_output->E0
+observationAbout: C:kcnetge_output->observationAbout
+observationDate: C:kcnetge_output->observationDate
+variableMeasured: C:kcnetge_output->variableMeasured
+value: C:kcnetge_output->value
+observationPeriod: C:kcnetge_output->observationPeriod
+typeOf: dcs:StatVarObservation

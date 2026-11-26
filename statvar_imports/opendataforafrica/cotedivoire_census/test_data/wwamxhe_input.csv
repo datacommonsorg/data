@@ -1,0 +1,39 @@
+INDICATOR,ID_INDICATOR,NOM_INDICATOR,REGION,ID_REGION,NOM_REGION,SEXE,ID_SEXE,NOM_SEXE,FREQ,TIME_PERIOD,OBS_VALUE
+I1,I1,Effectif de Population,R1,R1,DISTRICT AUTONOME D'ABIDJAN,S1,S1,Masculin,A,2024,3501393
+I1,I1,Effectif de Population,R1,R1,DISTRICT AUTONOME D'ABIDJAN,S2,S2,Féminin,A,2024,3363912
+I1,I1,Effectif de Population,R1,R1,DISTRICT AUTONOME D'ABIDJAN,S3,S3,Total,A,2024,6865305
+I1,I1,Effectif de Population,R2,R2,HAUT-SASSANDRA,S1,S1,Masculin,A,2024,973171
+I1,I1,Effectif de Population,R3,R3,PORO,S1,S1,Masculin,A,2013,415236
+I1,I1,Effectif de Population,R4,R4,GBEKE,S1,S1,Masculin,A,2024,740073
+I1,I1,Effectif de Population,R5,R5,INDENIE-DJUABLIN,S1,S1,Masculin,A,2024,409374
+I1,I1,Effectif de Population,R6,R6,TONKPI,S1,S1,Masculin,A,2024,804485
+I1,I1,Effectif de Population,R7,R7,DISTRICT AUTONOME DE YAMOUSSOUKRO,S1,S1,Masculin,A,2024,230749
+I1,I1,Effectif de Population,R8,R8,GONTOUGO,S1,S1,Masculin,A,2024,504106
+I1,I1,Effectif de Population,R9,R9,SAN-PEDRO,S1,S1,Masculin,A,2013,451697
+I1,I1,Effectif de Population,R10,R10,KABADOUGOU,S1,S1,Masculin,A,2024,162399
+I1,I1,Effectif de Population,R11,R11,N'ZI,S1,S1,Masculin,A,2024,134997
+I1,I1,Effectif de Population,R12,R12,MARAHOUE,S1,S1,Masculin,A,2024,557123
+I1,I1,Effectif de Population,R13,R13,SUD-COMOE,S1,S1,Masculin,A,2024,434463
+I1,I1,Effectif de Population,R14,R14,WORODOUGOU,S1,S1,Masculin,A,2024,252293
+I1,I1,Effectif de Population,R15,R15,LOH-DJIBOUA,S1,S1,Masculin,A,2024,621318
+I1,I1,Effectif de Population,R16,R16,AGNEBY-TIASSA,S1,S1,Masculin,A,2024,491800
+I1,I1,Effectif de Population,R17,R17,GOH,S1,S1,Masculin,A,2013,408540
+I1,I1,Effectif de Population,R18,R18,CAVALLY,S1,S1,Masculin,A,2024,436610
+I1,I1,Effectif de Population,R19,R19,BAFING,S1,S1,Masculin,A,2024,147652
+I1,I1,Effectif de Population,R20,R20,BAGOUE,S1,S1,Masculin,A,2024,292625
+I1,I1,Effectif de Population,R21,R21,BELIER,S1,S1,Masculin,A,2024,227940
+I1,I1,Effectif de Population,R22,R22,BERE,S1,S1,Masculin,A,2013,203754
+I1,I1,Effectif de Population,R23,R23,BOUNKANI,S1,S1,Masculin,A,2024,240710
+I1,I1,Effectif de Population,R24,R24,FOLON,S1,S1,Masculin,A,2024,83516
+I1,I1,Effectif de Population,R25,R25,GBOKLE,S1,S1,Masculin,A,2024,271654
+I1,I1,Effectif de Population,R26,R26,GRANDS-PONTS,S1,S1,Masculin,A,2024,249067
+I1,I1,Effectif de Population,R27,R27,GUEMON,S1,S1,Masculin,A,2024,551831
+I1,I1,Effectif de Population,R28,R28,HAMBOL,S1,S1,Masculin,A,2024,354859
+I1,I1,Effectif de Population,R29,R29,IFFOU,S1,S1,Masculin,A,2024,208452
+I1,I1,Effectif de Population,R30,R30,LA ME,S1,S1,Masculin,A,2013,302455
+I1,I1,Effectif de Population,R31,R31,NAWA,S1,S1,Masculin,A,2013,492375
+I1,I1,Effectif de Population,R32,R32,TCHOLOGO,S1,S1,Masculin,A,2024,344060
+I1,I1,Effectif de Population,R33,R33,MORONOU,S1,S1,Masculin,A,2013,187160
+I1,I1,Effectif de Population,R34,R34,Total,S1,S1,Masculin,A,2013,12134414
+I1,I1,Effectif de Population,R32,R32,TCHOLOGO,S2,S2,Féminin,A,2024,326342
+I1,I1,Effectif de Population,R32,R32,TCHOLOGO,S3,S3,Total,A,2024,670402

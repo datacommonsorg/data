@@ -1,0 +1,23 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "non_empty_table_svs",
+            "description": "Verify each table emits at least one StatVar in summary_report.csv.",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT COUNT(*) AS total_svs FROM stats",
+                "condition": "total_svs > 0"
+            }
+        },
+        {
+            "rule_id": "max_date_freshness",
+            "description": "Verify every StatVar across all 16 Côte d'Ivoire datasets meets its expected MaxDate freshness boundary.",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT StatVar, NumPlaces, CAST(MinDate AS VARCHAR) AS MinDate, CAST(MaxDate AS VARCHAR) AS MaxDate FROM stats",
+                "condition": "CASE WHEN StatVar LIKE 'IndustrialProductionIndex_EconomicActivity%' THEN MaxDate >= '2024-12' WHEN StatVar LIKE 'TurnoverIndex_EconomicActivity%' THEN MaxDate >= '2021-12' WHEN StatVar IN ('Count_Person', 'Count_Person_Male', 'Count_Person_Female') THEN CASE WHEN MinDate = '2013' OR NumPlaces BETWEEN 20 AND 35 THEN MaxDate >= '2024' WHEN NumPlaces = 1 THEN MaxDate >= '2023' WHEN MinDate = '2014' THEN MaxDate >= '2014' ELSE MaxDate >= '2021' END WHEN StatVar IN ('Count_Household', 'Count_Person_Male_AsAFractionOf_Count_Person_Female', 'Count_Person_AsAFractionOf_Count_Household') THEN CASE WHEN MinDate = '2014' THEN MaxDate >= '2014' ELSE MaxDate >= '2021' END WHEN StatVar IN ('Amount_Debt', 'AmountOutstanding_Debt', 'Amount_EconomicActivity_ExpenditureActivity_AsAFractionOf_Amount_EconomicActivity_GrossDomesticProduction') THEN MaxDate >= '2010' WHEN StatVar IN ('Amount_EconomicActivity_GrossDomesticProduction_Nominal', 'Amount_EconomicActivity_GrossDomesticProduction_Nominal_PerCapita', 'Exports_EconomicActivity', 'Imports_EconomicActivity', 'RealValue_GrowthRate_Amount_EconomicActivity_GrossDomesticProduction') THEN MaxDate >= '2013' WHEN StatVar IN ('Count_HospitalBed', 'Count_ClassRoom_LowerSecondary', 'Count_ClassRoom_UpperSecondaryEducation', 'Count_Death_AsAFractionOfCount_Person', 'Count_MortalityEvent_5OrMoreYears_AsAFractionOf_Count_BirthEvent_LiveBirth', 'Count_MortalityEvent_Infant_AsAFractionOf_Count_BirthEvent_LiveBirth', 'GrowthRate_Count_Person', 'LifeExpectancy_Person', 'LifeExpectancy_Person_Female', 'LifeExpectancy_Person_Male', 'MeanMothersAge_BirthEvent') THEN MaxDate >= '2020' ELSE MaxDate >= '2021' END"
+            }
+        }
+    ]
+}

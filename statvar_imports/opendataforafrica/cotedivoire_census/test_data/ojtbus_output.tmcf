@@ -1,0 +1,7 @@
+Node: E:ojtbus_output->E0
+observationAbout: C:ojtbus_output->observationAbout
+observationDate: C:ojtbus_output->observationDate
+variableMeasured: C:ojtbus_output->variableMeasured
+value: C:ojtbus_output->value
+observationPeriod: C:ojtbus_output->observationPeriod
+typeOf: dcs:StatVarObservation

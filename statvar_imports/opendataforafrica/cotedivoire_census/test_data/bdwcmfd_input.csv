@@ -1,0 +1,73 @@
+INDICATOR,ID_INDICATOR,NOM_INDICATOR,UNITS_INDICATOR,RUBRIQUE,ID_RUBRIQUE,NOM_RUBRIQUE,FREQ,TIME_PERIOD,OBS_VALUE
+I1,I1,Indice Synthétique de Fécondité (ISF),Pourcentage,R1,R1,Fécondité,A,2015,4.73
+I1,I1,Indice Synthétique de Fécondité (ISF),Pourcentage,R1,R1,Fécondité,A,2016,4.67
+I1,I1,Indice Synthétique de Fécondité (ISF),Pourcentage,R1,R1,Fécondité,A,2017,4.61
+I1,I1,Indice Synthétique de Fécondité (ISF),Pourcentage,R1,R1,Fécondité,A,2018,4.55
+I1,I1,Indice Synthétique de Fécondité (ISF),Pourcentage,R1,R1,Fécondité,A,2019,4.49
+I1,I1,Indice Synthétique de Fécondité (ISF),Pourcentage,R1,R1,Fécondité,A,2020,4.43
+I2,I2,Taux Brut de Reproduction (TBR),Pourcentage,R1,R1,Fécondité,A,2015,2.32
+I2,I2,Taux Brut de Reproduction (TBR),Pourcentage,R1,R1,Fécondité,A,2016,2.29
+I2,I2,Taux Brut de Reproduction (TBR),Pourcentage,R1,R1,Fécondité,A,2017,2.26
+I2,I2,Taux Brut de Reproduction (TBR),Pourcentage,R1,R1,Fécondité,A,2018,2.23
+I2,I2,Taux Brut de Reproduction (TBR),Pourcentage,R1,R1,Fécondité,A,2019,2.2
+I2,I2,Taux Brut de Reproduction (TBR),Pourcentage,R1,R1,Fécondité,A,2020,2.18
+I3,I3,Taux Net de Reproduction (TNR),Pourcentage,R1,R1,Fécondité,A,2015,1.95
+I3,I3,Taux Net de Reproduction (TNR),Pourcentage,R1,R1,Fécondité,A,2016,1.93
+I3,I3,Taux Net de Reproduction (TNR),Pourcentage,R1,R1,Fécondité,A,2017,1.91
+I3,I3,Taux Net de Reproduction (TNR),Pourcentage,R1,R1,Fécondité,A,2018,1.89
+I3,I3,Taux Net de Reproduction (TNR),Pourcentage,R1,R1,Fécondité,A,2019,1.87
+I3,I3,Taux Net de Reproduction (TNR),Pourcentage,R1,R1,Fécondité,A,2020,1.85
+I4,I4,Age moyen de procréation,Pourcentage,R1,R1,Fécondité,A,2015,29
+I4,I4,Age moyen de procréation,Pourcentage,R1,R1,Fécondité,A,2016,28.9
+I4,I4,Age moyen de procréation,Pourcentage,R1,R1,Fécondité,A,2017,28.9
+I4,I4,Age moyen de procréation,Pourcentage,R1,R1,Fécondité,A,2018,28.8
+I4,I4,Age moyen de procréation,Pourcentage,R1,R1,Fécondité,A,2019,28.8
+I4,I4,Age moyen de procréation,Pourcentage,R1,R1,Fécondité,A,2020,28.7
+I5,I5,Espérance de Vie hommes,Pourcentage,R2,R2,Mortalité,A,2015,54.7
+I5,I5,Espérance de Vie hommes,Pourcentage,R2,R2,Mortalité,A,2016,54.9
+I5,I5,Espérance de Vie hommes,Pourcentage,R2,R2,Mortalité,A,2017,55.1
+I5,I5,Espérance de Vie hommes,Pourcentage,R2,R2,Mortalité,A,2018,55.3
+I5,I5,Espérance de Vie hommes,Pourcentage,R2,R2,Mortalité,A,2019,55.5
+I5,I5,Espérance de Vie hommes,Pourcentage,R2,R2,Mortalité,A,2020,55.6
+I6,I6,Espérance de Vie femmes,Pourcentage,R2,R2,Mortalité,A,2015,57.3
+I6,I6,Espérance de Vie femmes,Pourcentage,R2,R2,Mortalité,A,2016,57.5
+I6,I6,Espérance de Vie femmes,Pourcentage,R2,R2,Mortalité,A,2017,57.7
+I6,I6,Espérance de Vie femmes,Pourcentage,R2,R2,Mortalité,A,2018,57.9
+I6,I6,Espérance de Vie femmes,Pourcentage,R2,R2,Mortalité,A,2019,58
+I6,I6,Espérance de Vie femmes,Pourcentage,R2,R2,Mortalité,A,2020,58.2
+I7,I7,Espérance de Vie totale,Pourcentage,R2,R2,Mortalité,A,2015,55.9
+I7,I7,Espérance de Vie totale,Pourcentage,R2,R2,Mortalité,A,2016,56.2
+I7,I7,Espérance de Vie totale,Pourcentage,R2,R2,Mortalité,A,2017,56.4
+I7,I7,Espérance de Vie totale,Pourcentage,R2,R2,Mortalité,A,2018,56.6
+I7,I7,Espérance de Vie totale,Pourcentage,R2,R2,Mortalité,A,2019,56.7
+I7,I7,Espérance de Vie totale,Pourcentage,R2,R2,Mortalité,A,2020,56.8
+I8,I8,Taux de mortalité Infantile (TMI),Pourcentage,R2,R2,Mortalité,A,2015,68.3
+I8,I8,Taux de mortalité Infantile (TMI),Pourcentage,R2,R2,Mortalité,A,2016,67.6
+I8,I8,Taux de mortalité Infantile (TMI),Pourcentage,R2,R2,Mortalité,A,2017,66.9
+I8,I8,Taux de mortalité Infantile (TMI),Pourcentage,R2,R2,Mortalité,A,2018,66.2
+I8,I8,Taux de mortalité Infantile (TMI),Pourcentage,R2,R2,Mortalité,A,2019,65.7
+I8,I8,Taux de mortalité Infantile (TMI),Pourcentage,R2,R2,Mortalité,A,2020,65.2
+I9,I9,Taux de Mortalité des populations de moins de 5 ans,Pourcentage,R2,R2,Mortalité,A,2015,94.4
+I9,I9,Taux de Mortalité des populations de moins de 5 ans,Pourcentage,R2,R2,Mortalité,A,2016,93.2
+I9,I9,Taux de Mortalité des populations de moins de 5 ans,Pourcentage,R2,R2,Mortalité,A,2017,92.1
+I9,I9,Taux de Mortalité des populations de moins de 5 ans,Pourcentage,R2,R2,Mortalité,A,2018,91
+I9,I9,Taux de Mortalité des populations de moins de 5 ans,Pourcentage,R2,R2,Mortalité,A,2019,90.2
+I9,I9,Taux de Mortalité des populations de moins de 5 ans,Pourcentage,R2,R2,Mortalité,A,2020,89.4
+I10,I10,Taux Brut de Natalité (TBN) pour 1000 femmes,Pour mille,R3,R3,Taux vitaux,A,2015,36.9
+I10,I10,Taux Brut de Natalité (TBN) pour 1000 femmes,Pour mille,R3,R3,Taux vitaux,A,2016,36.3
+I10,I10,Taux Brut de Natalité (TBN) pour 1000 femmes,Pour mille,R3,R3,Taux vitaux,A,2017,35.6
+I10,I10,Taux Brut de Natalité (TBN) pour 1000 femmes,Pour mille,R3,R3,Taux vitaux,A,2018,35
+I10,I10,Taux Brut de Natalité (TBN) pour 1000 femmes,Pour mille,R3,R3,Taux vitaux,A,2019,34.3
+I10,I10,Taux Brut de Natalité (TBN) pour 1000 femmes,Pour mille,R3,R3,Taux vitaux,A,2020,33.7
+I11,I11,Taux Brut de Mortalité (TBM) pour 1000 individus,Pour mille,R3,R3,Taux vitaux,A,2015,10.7
+I11,I11,Taux Brut de Mortalité (TBM) pour 1000 individus,Pour mille,R3,R3,Taux vitaux,A,2016,10.5
+I11,I11,Taux Brut de Mortalité (TBM) pour 1000 individus,Pour mille,R3,R3,Taux vitaux,A,2017,10.4
+I11,I11,Taux Brut de Mortalité (TBM) pour 1000 individus,Pour mille,R3,R3,Taux vitaux,A,2018,10.2
+I11,I11,Taux Brut de Mortalité (TBM) pour 1000 individus,Pour mille,R3,R3,Taux vitaux,A,2019,10
+I11,I11,Taux Brut de Mortalité (TBM) pour 1000 individus,Pour mille,R3,R3,Taux vitaux,A,2020,9.9
+I12,I12,Taux de Croissance (TC),Pourcentage,R3,R3,Taux vitaux,A,2015,2.62
+I12,I12,Taux de Croissance (TC),Pourcentage,R3,R3,Taux vitaux,A,2016,2.57
+I12,I12,Taux de Croissance (TC),Pourcentage,R3,R3,Taux vitaux,A,2017,2.53
+I12,I12,Taux de Croissance (TC),Pourcentage,R3,R3,Taux vitaux,A,2018,2.48
+I12,I12,Taux de Croissance (TC),Pourcentage,R3,R3,Taux vitaux,A,2019,2.43
+I12,I12,Taux de Croissance (TC),Pourcentage,R3,R3,Taux vitaux,A,2020,2.38

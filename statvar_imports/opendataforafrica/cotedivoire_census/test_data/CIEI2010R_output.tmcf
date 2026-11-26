@@ -1,0 +1,9 @@
+Node: E:CIEI2010R_output->E0
+observationAbout: C:CIEI2010R_output->observationAbout
+observationDate: C:CIEI2010R_output->observationDate
+variableMeasured: C:CIEI2010R_output->variableMeasured
+value: C:CIEI2010R_output->value
+unit: C:CIEI2010R_output->unit
+scalingFactor: C:CIEI2010R_output->scalingFactor
+observationPeriod: C:CIEI2010R_output->observationPeriod
+typeOf: dcs:StatVarObservation

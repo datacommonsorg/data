@@ -1,0 +1,131 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "Cotedivoire_Census",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://cotedivoire.opendataforafrica.org/",
+            "provenance_description": "Ivory Coast demographics, economy, education and health data from statistics Ivory Coast at country and district level.",
+            "scripts": [
+                "download.sh",
+                "convert_sdmx_xml_to_csv.py --xml_dir=raw_inputs --output_dir=input_files --allow_empty_xml_dir --verify_expected_tables",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/CIEI2010R.csv --pv_map=CIEI2010R_pvmap.csv --config_file=CIEI2010R_metadata.csv --output_path=output/CIEI2010R --output_counters=counters/CIEI2010R_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/akfhutb.csv --pv_map=akfhutb_pvmap.csv --config_file=akfhutb_metadata.csv --output_path=output/akfhutb --output_counters=counters/akfhutb_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/bdwcmfd.csv --pv_map=bdwcmfd_pvmap.csv --config_file=bdwcmfd_metadata.csv --output_path=output/bdwcmfd --output_counters=counters/bdwcmfd_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/hxghsjf.csv --pv_map=hxghsjf_pvmap.csv,rgph_ignored_places_pvmap.csv --config_file=hxghsjf_metadata.csv --places_resolved_csv=places_resolved.csv --output_path=output/hxghsjf --output_counters=counters/hxghsjf_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/hznvdtd.csv --pv_map=hznvdtd_pvmap.csv,rgph_ignored_places_pvmap.csv --config_file=hznvdtd_metadata.csv --places_resolved_csv=places_resolved.csv --output_path=output/hznvdtd --output_counters=counters/hznvdtd_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/jgwlmgg.csv --pv_map=jgwlmgg_pvmap.csv --config_file=jgwlmgg_metadata.csv --output_path=output/jgwlmgg --output_counters=counters/jgwlmgg_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/jynwpug.csv --pv_map=jynwpug_pvmap.csv --config_file=jynwpug_metadata.csv --output_path=output/jynwpug --output_counters=counters/jynwpug_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/kcnetge.csv --pv_map=kcnetge_pvmap.csv --config_file=kcnetge_metadata.csv --places_resolved_csv=places_resolved.csv --output_path=output/kcnetge --output_counters=counters/kcnetge_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/ojtbus.csv --pv_map=ojtbus_pvmap.csv --config_file=ojtbus_metadata.csv --output_path=output/ojtbus --output_counters=counters/ojtbus_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/qdanpdb.csv --pv_map=qdanpdb_pvmap.csv --config_file=qdanpdb_metadata.csv --output_path=output/qdanpdb --output_counters=counters/qdanpdb_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/rimffwf.csv --pv_map=rimffwf_pvmap.csv --config_file=rimffwf_metadata.csv --places_resolved_csv=places_resolved.csv --output_path=output/rimffwf --output_counters=counters/rimffwf_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/saxmnv.csv --pv_map=saxmnv_pvmap.csv --config_file=saxmnv_metadata.csv --places_resolved_csv=places_resolved.csv --output_path=output/saxmnv --output_counters=counters/saxmnv_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/wayfqyd.csv --pv_map=wayfqyd_pvmap.csv --config_file=wayfqyd_metadata.csv --places_resolved_csv=places_resolved.csv --output_path=output/wayfqyd --output_counters=counters/wayfqyd_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/wwamxhe.csv --pv_map=wwamxhe_pvmap.csv --config_file=wwamxhe_metadata.csv --places_resolved_csv=places_resolved.csv --output_path=output/wwamxhe --output_counters=counters/wwamxhe_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/yukugyf.csv --pv_map=yukugyf_pvmap.csv --config_file=yukugyf_metadata.csv --output_path=output/yukugyf --output_counters=counters/yukugyf_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/yxrzxug.csv --pv_map=yxrzxug_pvmap.csv --config_file=yxrzxug_metadata.csv --output_path=output/yxrzxug --output_counters=counters/yxrzxug_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output/CIEI2010R.tmcf",
+                    "cleaned_csv": "output/CIEI2010R.csv",
+                    "node_mcf": "output/CIEI2010R*.mcf"
+                },
+                {
+                    "template_mcf": "output/akfhutb.tmcf",
+                    "cleaned_csv": "output/akfhutb.csv",
+                    "node_mcf": "output/akfhutb*.mcf"
+                },
+                {
+                    "template_mcf": "output/bdwcmfd.tmcf",
+                    "cleaned_csv": "output/bdwcmfd.csv",
+                    "node_mcf": "output/bdwcmfd*.mcf"
+                },
+                {
+                    "template_mcf": "output/hxghsjf.tmcf",
+                    "cleaned_csv": "output/hxghsjf.csv",
+                    "node_mcf": "output/hxghsjf*.mcf"
+                },
+                {
+                    "template_mcf": "output/hznvdtd.tmcf",
+                    "cleaned_csv": "output/hznvdtd.csv",
+                    "node_mcf": "output/hznvdtd*.mcf"
+                },
+                {
+                    "template_mcf": "output/jgwlmgg.tmcf",
+                    "cleaned_csv": "output/jgwlmgg.csv",
+                    "node_mcf": "output/jgwlmgg*.mcf"
+                },
+                {
+                    "template_mcf": "output/jynwpug.tmcf",
+                    "cleaned_csv": "output/jynwpug.csv",
+                    "node_mcf": "output/jynwpug*.mcf"
+                },
+                {
+                    "template_mcf": "output/kcnetge.tmcf",
+                    "cleaned_csv": "output/kcnetge.csv",
+                    "node_mcf": "output/kcnetge*.mcf"
+                },
+                {
+                    "template_mcf": "output/ojtbus.tmcf",
+                    "cleaned_csv": "output/ojtbus.csv",
+                    "node_mcf": "output/ojtbus*.mcf"
+                },
+                {
+                    "template_mcf": "output/qdanpdb.tmcf",
+                    "cleaned_csv": "output/qdanpdb.csv",
+                    "node_mcf": "output/qdanpdb*.mcf"
+                },
+                {
+                    "template_mcf": "output/rimffwf.tmcf",
+                    "cleaned_csv": "output/rimffwf.csv",
+                    "node_mcf": "output/rimffwf*.mcf"
+                },
+                {
+                    "template_mcf": "output/saxmnv.tmcf",
+                    "cleaned_csv": "output/saxmnv.csv",
+                    "node_mcf": "output/saxmnv*.mcf"
+                },
+                {
+                    "template_mcf": "output/wayfqyd.tmcf",
+                    "cleaned_csv": "output/wayfqyd.csv",
+                    "node_mcf": "output/wayfqyd*.mcf"
+                },
+                {
+                    "template_mcf": "output/wwamxhe.tmcf",
+                    "cleaned_csv": "output/wwamxhe.csv",
+                    "node_mcf": "output/wwamxhe*.mcf"
+                },
+                {
+                    "template_mcf": "output/yukugyf.tmcf",
+                    "cleaned_csv": "output/yukugyf.csv",
+                    "node_mcf": "output/yukugyf*.mcf"
+                },
+                {
+                    "template_mcf": "output/yxrzxug.tmcf",
+                    "cleaned_csv": "output/yxrzxug.csv",
+                    "node_mcf": "output/yxrzxug*.mcf"
+                }
+            ],
+            "source_files": [
+                "raw_inputs/*",
+                "input_files/*.csv",
+                "counters/*",
+                "*_pvmap.csv",
+                "*_metadata.csv",
+                "places_resolved.csv",
+                "convert_sdmx_xml_to_csv.py",
+                "validation_config.json"
+            ],
+            "cron_schedule": "30 05 * * 1",
+            "validation_config_file": "validation_config.json",
+            "resource_limits": {
+                "cpu": 2,
+                "memory": 4,
+                "disk": 30
+            }
+        }
+    ]
+}
