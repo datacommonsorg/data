@@ -1,0 +1,673 @@
+# Auto generated using command: "../../../tools/statvar_importer/stat_var_processor.py --input_data=test_data/county_tier1_input.csv --pv_map=pvmap.csv --config_file=metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=test_data/county_tier1_output" on 2026-10-22 07:32:58.134585
+
+Node: dcid:Annual_Amount_Emissions_EPAFuelCombustionOther_NonBiogenicEmissionSource_Ammonia
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: EPA_Fuel Combustion Other, Non Biogenic Emission Source, Ammonia"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:EPA_FuelCombustionOther
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:Ammonia
+
+Node: dcid:Annual_Amount_Emissions_EPAFuelCombustionOther_NonBiogenicEmissionSource_CarbonMonoxide
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: EPA_Fuel Combustion Other, Non Biogenic Emission Source, Carbon Monoxide"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:EPA_FuelCombustionOther
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:CarbonMonoxide
+
+Node: dcid:Annual_Amount_Emissions_EPAFuelCombustionOther_NonBiogenicEmissionSource_OxidesOfNitrogen
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: EPA_Fuel Combustion Other, Non Biogenic Emission Source, Oxides of Nitrogen"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:EPA_FuelCombustionOther
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:OxidesOfNitrogen
+
+Node: dcid:Annual_Amount_Emissions_EPAFuelCombustionOther_NonBiogenicEmissionSource_PM10
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: EPA_Fuel Combustion Other, Non Biogenic Emission Source, PM 10"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:EPA_FuelCombustionOther
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:PM10
+
+Node: dcid:Annual_Amount_Emissions_EPAFuelCombustionOther_NonBiogenicEmissionSource_PM2.5
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: EPA_Fuel Combustion Other, Non Biogenic Emission Source, PM 2.5"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:EPA_FuelCombustionOther
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:PM2.5
+
+Node: dcid:Annual_Amount_Emissions_EPAFuelCombustionOther_NonBiogenicEmissionSource_SulfurDioxide
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: EPA_Fuel Combustion Other, Non Biogenic Emission Source, Sulfur Dioxide"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:EPA_FuelCombustionOther
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:SulfurDioxide
+
+Node: dcid:Annual_Amount_Emissions_EPAFuelCombustionOther_NonBiogenicEmissionSource_VolatileOrganicCompound
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: EPA_Fuel Combustion Other, Non Biogenic Emission Source, Volatile Organic Compound"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:EPA_FuelCombustionOther
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:VolatileOrganicCompound
+
+Node: dcid:Annual_Amount_Emissions_EPAMiscellaneousEmissionSource_NonBiogenicEmissionSource_Ammonia
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: EPA_Miscellaneous Emission Source, Non Biogenic Emission Source, Ammonia"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:EPA_MiscellaneousEmissionSource
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:Ammonia
+
+Node: dcid:Annual_Amount_Emissions_EPAMiscellaneousEmissionSource_NonBiogenicEmissionSource_CarbonMonoxide
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: EPA_Miscellaneous Emission Source, Non Biogenic Emission Source, Carbon Monoxide"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:EPA_MiscellaneousEmissionSource
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:CarbonMonoxide
+
+Node: dcid:Annual_Amount_Emissions_EPAMiscellaneousEmissionSource_NonBiogenicEmissionSource_OxidesOfNitrogen
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: EPA_Miscellaneous Emission Source, Non Biogenic Emission Source, Oxides of Nitrogen"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:EPA_MiscellaneousEmissionSource
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:OxidesOfNitrogen
+
+Node: dcid:Annual_Amount_Emissions_EPAMiscellaneousEmissionSource_NonBiogenicEmissionSource_PM10
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: EPA_Miscellaneous Emission Source, Non Biogenic Emission Source, PM 10"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:EPA_MiscellaneousEmissionSource
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:PM10
+
+Node: dcid:Annual_Amount_Emissions_EPAMiscellaneousEmissionSource_NonBiogenicEmissionSource_PM2.5
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: EPA_Miscellaneous Emission Source, Non Biogenic Emission Source, PM 2.5"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:EPA_MiscellaneousEmissionSource
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:PM2.5
+
+Node: dcid:Annual_Amount_Emissions_EPAMiscellaneousEmissionSource_NonBiogenicEmissionSource_SulfurDioxide
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: EPA_Miscellaneous Emission Source, Non Biogenic Emission Source, Sulfur Dioxide"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:EPA_MiscellaneousEmissionSource
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:SulfurDioxide
+
+Node: dcid:Annual_Amount_Emissions_EPAMiscellaneousEmissionSource_NonBiogenicEmissionSource_VolatileOrganicCompound
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: EPA_Miscellaneous Emission Source, Non Biogenic Emission Source, Volatile Organic Compound"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:EPA_MiscellaneousEmissionSource
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:VolatileOrganicCompound
+
+Node: dcid:Annual_Amount_Emissions_EPAOtherIndustrialProcesses_NonBiogenicEmissionSource_Ammonia
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: EPA_Other Industrial Processes, Non Biogenic Emission Source, Ammonia"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:EPA_OtherIndustrialProcesses
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:Ammonia
+
+Node: dcid:Annual_Amount_Emissions_EPAOtherIndustrialProcesses_NonBiogenicEmissionSource_CarbonMonoxide
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: EPA_Other Industrial Processes, Non Biogenic Emission Source, Carbon Monoxide"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:EPA_OtherIndustrialProcesses
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:CarbonMonoxide
+
+Node: dcid:Annual_Amount_Emissions_EPAOtherIndustrialProcesses_NonBiogenicEmissionSource_OxidesOfNitrogen
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: EPA_Other Industrial Processes, Non Biogenic Emission Source, Oxides of Nitrogen"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:EPA_OtherIndustrialProcesses
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:OxidesOfNitrogen
+
+Node: dcid:Annual_Amount_Emissions_EPAOtherIndustrialProcesses_NonBiogenicEmissionSource_PM10
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: EPA_Other Industrial Processes, Non Biogenic Emission Source, PM 10"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:EPA_OtherIndustrialProcesses
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:PM10
+
+Node: dcid:Annual_Amount_Emissions_EPAOtherIndustrialProcesses_NonBiogenicEmissionSource_PM2.5
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: EPA_Other Industrial Processes, Non Biogenic Emission Source, PM 2.5"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:EPA_OtherIndustrialProcesses
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:PM2.5
+
+Node: dcid:Annual_Amount_Emissions_EPAOtherIndustrialProcesses_NonBiogenicEmissionSource_SulfurDioxide
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: EPA_Other Industrial Processes, Non Biogenic Emission Source, Sulfur Dioxide"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:EPA_OtherIndustrialProcesses
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:SulfurDioxide
+
+Node: dcid:Annual_Amount_Emissions_EPAOtherIndustrialProcesses_NonBiogenicEmissionSource_VolatileOrganicCompound
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: EPA_Other Industrial Processes, Non Biogenic Emission Source, Volatile Organic Compound"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:EPA_OtherIndustrialProcesses
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:VolatileOrganicCompound
+
+Node: dcid:Annual_Amount_Emissions_FuelCombustionElectricUtility_NonBiogenicEmissionSource_Ammonia
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: Fuel Combustion Electric Utility, Non Biogenic Emission Source, Ammonia"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:FuelCombustionElectricUtility
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:Ammonia
+
+Node: dcid:Annual_Amount_Emissions_FuelCombustionElectricUtility_NonBiogenicEmissionSource_CarbonMonoxide
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: Fuel Combustion Electric Utility, Non Biogenic Emission Source, Carbon Monoxide"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:FuelCombustionElectricUtility
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:CarbonMonoxide
+
+Node: dcid:Annual_Amount_Emissions_FuelCombustionElectricUtility_NonBiogenicEmissionSource_OxidesOfNitrogen
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: Fuel Combustion Electric Utility, Non Biogenic Emission Source, Oxides of Nitrogen"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:FuelCombustionElectricUtility
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:OxidesOfNitrogen
+
+Node: dcid:Annual_Amount_Emissions_FuelCombustionElectricUtility_NonBiogenicEmissionSource_PM10
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: Fuel Combustion Electric Utility, Non Biogenic Emission Source, PM 10"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:FuelCombustionElectricUtility
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:PM10
+
+Node: dcid:Annual_Amount_Emissions_FuelCombustionElectricUtility_NonBiogenicEmissionSource_PM2.5
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: Fuel Combustion Electric Utility, Non Biogenic Emission Source, PM 2.5"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:FuelCombustionElectricUtility
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:PM2.5
+
+Node: dcid:Annual_Amount_Emissions_FuelCombustionElectricUtility_NonBiogenicEmissionSource_SulfurDioxide
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: Fuel Combustion Electric Utility, Non Biogenic Emission Source, Sulfur Dioxide"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:FuelCombustionElectricUtility
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:SulfurDioxide
+
+Node: dcid:Annual_Amount_Emissions_FuelCombustionElectricUtility_NonBiogenicEmissionSource_VolatileOrganicCompound
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: Fuel Combustion Electric Utility, Non Biogenic Emission Source, Volatile Organic Compound"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:FuelCombustionElectricUtility
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:VolatileOrganicCompound
+
+Node: dcid:Annual_Amount_Emissions_FuelCombustionIndustrial_NonBiogenicEmissionSource_Ammonia
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: Fuel Combustion Industrial, Non Biogenic Emission Source, Ammonia"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:FuelCombustionIndustrial
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:Ammonia
+
+Node: dcid:Annual_Amount_Emissions_FuelCombustionIndustrial_NonBiogenicEmissionSource_CarbonMonoxide
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: Fuel Combustion Industrial, Non Biogenic Emission Source, Carbon Monoxide"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:FuelCombustionIndustrial
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:CarbonMonoxide
+
+Node: dcid:Annual_Amount_Emissions_FuelCombustionIndustrial_NonBiogenicEmissionSource_OxidesOfNitrogen
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: Fuel Combustion Industrial, Non Biogenic Emission Source, Oxides of Nitrogen"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:FuelCombustionIndustrial
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:OxidesOfNitrogen
+
+Node: dcid:Annual_Amount_Emissions_FuelCombustionIndustrial_NonBiogenicEmissionSource_PM10
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: Fuel Combustion Industrial, Non Biogenic Emission Source, PM 10"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:FuelCombustionIndustrial
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:PM10
+
+Node: dcid:Annual_Amount_Emissions_FuelCombustionIndustrial_NonBiogenicEmissionSource_PM2.5
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: Fuel Combustion Industrial, Non Biogenic Emission Source, PM 2.5"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:FuelCombustionIndustrial
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:PM2.5
+
+Node: dcid:Annual_Amount_Emissions_FuelCombustionIndustrial_NonBiogenicEmissionSource_SulfurDioxide
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: Fuel Combustion Industrial, Non Biogenic Emission Source, Sulfur Dioxide"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:FuelCombustionIndustrial
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:SulfurDioxide
+
+Node: dcid:Annual_Amount_Emissions_FuelCombustionIndustrial_NonBiogenicEmissionSource_VolatileOrganicCompound
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: Fuel Combustion Industrial, Non Biogenic Emission Source, Volatile Organic Compound"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:FuelCombustionIndustrial
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:VolatileOrganicCompound
+
+Node: dcid:Annual_Amount_Emissions_NaturalResource_BiogenicEmissionSource_CarbonMonoxide
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: Natural Resource, Biogenic Emission Source, Carbon Monoxide"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:NaturalResource
+emissionSourceType: dcid:BiogenicEmissionSource
+emittedThing: dcid:CarbonMonoxide
+
+Node: dcid:Annual_Amount_Emissions_NaturalResource_BiogenicEmissionSource_OxidesOfNitrogen
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: Natural Resource, Biogenic Emission Source, Oxides of Nitrogen"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:NaturalResource
+emissionSourceType: dcid:BiogenicEmissionSource
+emittedThing: dcid:OxidesOfNitrogen
+
+Node: dcid:Annual_Amount_Emissions_NaturalResource_BiogenicEmissionSource_VolatileOrganicCompound
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: Natural Resource, Biogenic Emission Source, Volatile Organic Compound"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:NaturalResource
+emissionSourceType: dcid:BiogenicEmissionSource
+emittedThing: dcid:VolatileOrganicCompound
+
+Node: dcid:Annual_Amount_Emissions_NonRoadEnginesAndVehicles_NonBiogenicEmissionSource_Ammonia
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: Non Road Engines And Vehicles, Non Biogenic Emission Source, Ammonia"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:NonRoadEnginesAndVehicles
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:Ammonia
+
+Node: dcid:Annual_Amount_Emissions_NonRoadEnginesAndVehicles_NonBiogenicEmissionSource_CarbonMonoxide
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: Non Road Engines And Vehicles, Non Biogenic Emission Source, Carbon Monoxide"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:NonRoadEnginesAndVehicles
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:CarbonMonoxide
+
+Node: dcid:Annual_Amount_Emissions_NonRoadEnginesAndVehicles_NonBiogenicEmissionSource_OxidesOfNitrogen
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: Non Road Engines And Vehicles, Non Biogenic Emission Source, Oxides of Nitrogen"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:NonRoadEnginesAndVehicles
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:OxidesOfNitrogen
+
+Node: dcid:Annual_Amount_Emissions_NonRoadEnginesAndVehicles_NonBiogenicEmissionSource_PM10
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: Non Road Engines And Vehicles, Non Biogenic Emission Source, PM 10"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:NonRoadEnginesAndVehicles
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:PM10
+
+Node: dcid:Annual_Amount_Emissions_NonRoadEnginesAndVehicles_NonBiogenicEmissionSource_PM2.5
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: Non Road Engines And Vehicles, Non Biogenic Emission Source, PM 2.5"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:NonRoadEnginesAndVehicles
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:PM2.5
+
+Node: dcid:Annual_Amount_Emissions_NonRoadEnginesAndVehicles_NonBiogenicEmissionSource_SulfurDioxide
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: Non Road Engines And Vehicles, Non Biogenic Emission Source, Sulfur Dioxide"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:NonRoadEnginesAndVehicles
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:SulfurDioxide
+
+Node: dcid:Annual_Amount_Emissions_NonRoadEnginesAndVehicles_NonBiogenicEmissionSource_VolatileOrganicCompound
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: Non Road Engines And Vehicles, Non Biogenic Emission Source, Volatile Organic Compound"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:NonRoadEnginesAndVehicles
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:VolatileOrganicCompound
+
+Node: dcid:Annual_Amount_Emissions_OnRoadVehicles_NonBiogenicEmissionSource_Ammonia
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: on Road Vehicles, Non Biogenic Emission Source, Ammonia"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:OnRoadVehicles
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:Ammonia
+
+Node: dcid:Annual_Amount_Emissions_OnRoadVehicles_NonBiogenicEmissionSource_CarbonMonoxide
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: on Road Vehicles, Non Biogenic Emission Source, Carbon Monoxide"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:OnRoadVehicles
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:CarbonMonoxide
+
+Node: dcid:Annual_Amount_Emissions_OnRoadVehicles_NonBiogenicEmissionSource_OxidesOfNitrogen
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: on Road Vehicles, Non Biogenic Emission Source, Oxides of Nitrogen"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:OnRoadVehicles
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:OxidesOfNitrogen
+
+Node: dcid:Annual_Amount_Emissions_OnRoadVehicles_NonBiogenicEmissionSource_PM10
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: on Road Vehicles, Non Biogenic Emission Source, PM 10"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:OnRoadVehicles
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:PM10
+
+Node: dcid:Annual_Amount_Emissions_OnRoadVehicles_NonBiogenicEmissionSource_PM2.5
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: on Road Vehicles, Non Biogenic Emission Source, PM 2.5"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:OnRoadVehicles
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:PM2.5
+
+Node: dcid:Annual_Amount_Emissions_OnRoadVehicles_NonBiogenicEmissionSource_SulfurDioxide
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: on Road Vehicles, Non Biogenic Emission Source, Sulfur Dioxide"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:OnRoadVehicles
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:SulfurDioxide
+
+Node: dcid:Annual_Amount_Emissions_OnRoadVehicles_NonBiogenicEmissionSource_VolatileOrganicCompound
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: on Road Vehicles, Non Biogenic Emission Source, Volatile Organic Compound"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:OnRoadVehicles
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:VolatileOrganicCompound
+
+Node: dcid:Annual_Amount_Emissions_SolventUtilization_NonBiogenicEmissionSource_VolatileOrganicCompound
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: Solvent Utilization, Non Biogenic Emission Source, Volatile Organic Compound"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:SolventUtilization
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:VolatileOrganicCompound
+
+Node: dcid:Annual_Amount_Emissions_StorageAndTransport_NonBiogenicEmissionSource_VolatileOrganicCompound
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: Storage And Transport, Non Biogenic Emission Source, Volatile Organic Compound"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:StorageAndTransport
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:VolatileOrganicCompound
+
+Node: dcid:Annual_Amount_Emissions_WasteDisposalAndRecycling_NonBiogenicEmissionSource_Ammonia
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: Waste Disposal And Recycling, Non Biogenic Emission Source, Ammonia"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:WasteDisposalAndRecycling
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:Ammonia
+
+Node: dcid:Annual_Amount_Emissions_WasteDisposalAndRecycling_NonBiogenicEmissionSource_CarbonMonoxide
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: Waste Disposal And Recycling, Non Biogenic Emission Source, Carbon Monoxide"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:WasteDisposalAndRecycling
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:CarbonMonoxide
+
+Node: dcid:Annual_Amount_Emissions_WasteDisposalAndRecycling_NonBiogenicEmissionSource_OxidesOfNitrogen
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: Waste Disposal And Recycling, Non Biogenic Emission Source, Oxides of Nitrogen"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:WasteDisposalAndRecycling
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:OxidesOfNitrogen
+
+Node: dcid:Annual_Amount_Emissions_WasteDisposalAndRecycling_NonBiogenicEmissionSource_PM10
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: Waste Disposal And Recycling, Non Biogenic Emission Source, PM 10"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:WasteDisposalAndRecycling
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:PM10
+
+Node: dcid:Annual_Amount_Emissions_WasteDisposalAndRecycling_NonBiogenicEmissionSource_PM2.5
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: Waste Disposal And Recycling, Non Biogenic Emission Source, PM 2.5"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:WasteDisposalAndRecycling
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:PM2.5
+
+Node: dcid:Annual_Amount_Emissions_WasteDisposalAndRecycling_NonBiogenicEmissionSource_SulfurDioxide
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: Waste Disposal And Recycling, Non Biogenic Emission Source, Sulfur Dioxide"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:WasteDisposalAndRecycling
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:SulfurDioxide
+
+Node: dcid:Annual_Amount_Emissions_WasteDisposalAndRecycling_NonBiogenicEmissionSource_VolatileOrganicCompound
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: Waste Disposal And Recycling, Non Biogenic Emission Source, Volatile Organic Compound"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:WasteDisposalAndRecycling
+emissionSourceType: dcid:NonBiogenicEmissionSource
+emittedThing: dcid:VolatileOrganicCompound
+
