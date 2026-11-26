@@ -335,10 +335,25 @@ function get_import_config {
     sed -i "s|^ *   }|    , \"$param\": $val\n&|;s/'/\"/g;" $config_file
   done
 
-  IMPORT_CONFIG=$(echo $(cat $config_file) | \
-    sed -e 's/.*"configs" *: *//;s/"/\\"/g;s/} *$//;s/ //g')
+  jq '.' "$config_file" > "${config_file}.tmp" || echo_fatal "Invalid JSON in config file: $config_file"
+  mv "${config_file}.tmp" "$config_file"
+  IMPORT_CONFIG_JSON=$(jq -c '.configs // {}' "$config_file")
+  BATCH_IMPORT_CONFIG_JSON=$(jq -c '(.configs // {}) + {"invoke_import_validation": false, "invoke_differ_tool": false}' "$config_file")
+  SKIP_VALIDATION=$(jq -r '((.configs // {}).invoke_import_validation | if . == null then true else . end | tostring | ascii_downcase) == "false"' "$config_file")
+  SKIP_GCS_UPLOAD=$(jq -r '((.configs // {}).skip_gcs_upload | if . == null then false else . end | tostring | ascii_downcase) == "true"' "$config_file")
+  if [[ "$SKIP_VALIDATION" == "true" || "$SKIP_GCS_UPLOAD" == "true" ]]; then
+    RUN_SEPARATE_VALIDATOR="false"
+    EXECUTOR_IMPORT_CONFIG_JSON="$IMPORT_CONFIG_JSON"
+  else
+    RUN_SEPARATE_VALIDATOR="true"
+    EXECUTOR_IMPORT_CONFIG_JSON="$BATCH_IMPORT_CONFIG_JSON"
+  fi
+  IMPORT_CONFIG=$(echo "$IMPORT_CONFIG_JSON" | sed -e 's/"/\\"/g')
   IMPORT_CONFIG_FILE=$config_file
-  echo_log  "Using import config: $IMPORT_CONFIG" 
+  echo_log "Using import config: $IMPORT_CONFIG_JSON"
+  if [[ "$RUN_SEPARATE_VALIDATOR" == "true" ]]; then
+    echo_log "Executor import config (inline validation disabled): $EXECUTOR_IMPORT_CONFIG_JSON"
+  fi
 }
 
 # Add a unit to the value if it doesn't have it.
@@ -358,20 +373,19 @@ function run_import_cloud {
   job_name=$(sed -e 's/[^A-Za-z0-9-]/-/g' <<< "$NAME" | tr '[:upper:]' '[:lower:]' | \
     cut -c1-60 | sed -e 's/-*$//')
   echo_log "Creating cloud run job $job_name for $IMPORT_DIR:$IMPORT_NAME on project:$GCP_PROJECT using docker:$DOCKER_REMOTE"
-  existing_jobs=$(gcloud --project=$GCP_PROJECT run jobs list --region=$REGION | \
-    grep "\<$job_name\>")
+  existing_jobs=$(gcloud --project=$GCP_PROJECT run jobs list --region=$REGION \
+    --filter="metadata.name=$job_name" --format="value(metadata.name)")
   if [[ -n "$existing_jobs" ]]; then
     run_cmd gcloud --project=$GCP_PROJECT run jobs delete "$job_name" --region=$REGION --quiet
   fi
 
   get_import_config
-  IMPORT_CONFIG=${IMPORT_CONFIG//\\/}
   run_cmd gcloud --project=$GCP_PROJECT run jobs create $job_name \
     --add-volume name=datcom-volume,type=cloud-storage,bucket=$GCS_BUCKET \
     --add-volume-mount volume=datcom-volume,mount-path=$GCS_MOUNT_PATH \
     --region=$REGION \
     --image $DOCKER_REMOTE:latest \
-    --args="^|^--import_name=$IMPORT_DIR:$IMPORT_NAME|--import_config=$IMPORT_CONFIG|--enable_cloud_logging" \
+    --args="^|^--import_name=$IMPORT_DIR:$IMPORT_NAME|--import_config=$EXECUTOR_IMPORT_CONFIG_JSON|--enable_cloud_logging" \
     --cpu=$CPU --memory=$(add_value_unit $MEMORY "Gi") \
     --task-timeout=$TIMEOUT --max-retries=1
   [[ $? != 0 ]] && echo_fatal "Failed to create cloud run job: $job_name"
@@ -379,8 +393,35 @@ function run_import_cloud {
   echo_log "Executing cloud run job $job_name"
   run_cmd gcloud --project=$GCP_PROJECT run jobs execute "$job_name" $CLOUD_JOB_WAIT --region=$REGION
 
+  if [[ "$RUN_SEPARATE_VALIDATOR" == "true" ]]; then
+    if [[ -z "$CLOUD_JOB_WAIT" ]]; then
+      echo_log "Skipping Cloud Run validation job because -nw (no-wait) was specified."
+    else
+      val_job_name="$(cut -c1-59 <<< "$job_name" | sed -e 's/-*$//')-val"
+      echo_log "Creating cloud run validation job $val_job_name (BQ differ) for $IMPORT_DIR:$IMPORT_NAME"
+      existing_val_jobs=$(gcloud --project=$GCP_PROJECT run jobs list --region=$REGION \
+        --filter="metadata.name=$val_job_name" --format="value(metadata.name)")
+      if [[ -n "$existing_val_jobs" ]]; then
+        run_cmd gcloud --project=$GCP_PROJECT run jobs delete "$val_job_name" --region=$REGION --quiet
+      fi
+      run_cmd gcloud --project=$GCP_PROJECT run jobs create $val_job_name \
+        --add-volume name=datcom-volume,type=cloud-storage,bucket=$GCS_BUCKET \
+        --add-volume-mount volume=datcom-volume,mount-path=$GCS_MOUNT_PATH \
+        --region=$REGION \
+        --image $DOCKER_REMOTE:latest \
+        --command=python \
+        --args="^|^/data/import-automation/validator/main.py|--import_name=$IMPORT_DIR:$IMPORT_NAME|--import_config=$IMPORT_CONFIG_JSON|--run_bq_differ" \
+        --cpu=$CPU --memory=$(add_value_unit $MEMORY "Gi") \
+        --task-timeout=$TIMEOUT --max-retries=1
+      [[ $? != 0 ]] && echo_fatal "Failed to create cloud run validation job: $val_job_name"
+
+      echo_log "Executing cloud run validation job $val_job_name"
+      run_cmd gcloud --project=$GCP_PROJECT run jobs execute "$val_job_name" $CLOUD_JOB_WAIT --region=$REGION
+    fi
+  fi
+
   gcloud --project=$GCP_PROJECT run jobs list --region=$REGION | \
-    egrep "$job_name|JOB"
+    egrep "$job_name|${val_job_name:-$job_name}|JOB"
 
   echo_log "View cloud run job at: https://pantheon.corp.google.com/run/jobs?project=$GCP_PROJECT"
   get_latest_gcs_import_output
@@ -425,11 +466,21 @@ function run_import_docker {
   # Run the import within docker container
   export GCLOUD_CONFIG_DIR=$HOME/.config/gcloud
   get_import_config
-  IMPORT_CONFIG=${IMPORT_CONFIG//\\/}
   run_cmd docker run --mount type=bind,source=$GCLOUD_CONFIG_DIR,target=/root/.config/gcloud \
     --cpus=$CPU --memory=$(add_value_unit $MEMORY "G") $img \
     --import_name=$IMPORT_DIR:$IMPORT_NAME \
-    --import_config="$IMPORT_CONFIG"
+    --import_config="$EXECUTOR_IMPORT_CONFIG_JSON"
+
+  if [[ "$RUN_SEPARATE_VALIDATOR" == "true" ]]; then
+    echo_log "Running validator (BQ differ) for $IMPORT_DIR:$IMPORT_NAME on docker locally..."
+    run_cmd docker run --mount type=bind,source=$GCLOUD_CONFIG_DIR,target=/root/.config/gcloud \
+      --cpus=$CPU --memory=$(add_value_unit $MEMORY "G") \
+      --entrypoint python $img \
+      /data/import-automation/validator/main.py \
+      --import_name=$IMPORT_DIR:$IMPORT_NAME \
+      --import_config="$IMPORT_CONFIG_JSON" \
+      --run_bq_differ
+  fi
 
   echo_log "Completed docker run for $IMPORT_DIR:$IMPORT_NAME"
   echo_log "To view logs, see 'docker ps -a; docker log <container>'"
@@ -440,68 +491,113 @@ function run_import_docker {
 
 # Generate the json config for cloud batch job
 function get_cloud_batch_config {
-  local config_file="$1"; shift
+  local batch_config_file="$1"
 
   cpu_milli=$(($CPU * 1000))
   memory_mib=$(( $(grep -o "[0-9]*" <<< $MEMORY) * 1024 ))
-  disk_gib=${DISK:-"$(($memory_mib / 1000 * 5))"}
+  disk_gib=$(( 10#$(grep -o "[0-9]*" <<< "${DISK:-$(($memory_mib / 1000 * 5))}" | head -1) ))
 
-  config_file=${config_file:-"$TMP_DIR/cloud-batch-config-$IMPORT_NAME.json"}
+  batch_config_file=${batch_config_file:-"$TMP_DIR/cloud-batch-config-$IMPORT_NAME.json"}
   get_import_config
-  cat > $config_file  <<EOF
-{
-  "taskGroups": [
-    {
-      "taskSpec": {
-        "runnables": [
-          {
-            "container": {
-              "imageUri": "${DOCKER_REMOTE}:latest",
-              "commands": [
-                "--import_name=${IMPORT_DIR}:${IMPORT_NAME}",
-                "--import_config=$IMPORT_CONFIG"
-              ]
-            }
+
+  local runnables_json
+  if [[ "$RUN_SEPARATE_VALIDATOR" == "true" ]]; then
+    runnables_json=$(jq -n \
+      --arg image "${DOCKER_REMOTE}:latest" \
+      --arg import_name "${IMPORT_DIR}:${IMPORT_NAME}" \
+      --arg exec_config "${EXECUTOR_IMPORT_CONFIG_JSON}" \
+      --arg val_config "${IMPORT_CONFIG_JSON}" \
+      '[
+        {
+          "container": {
+            "imageUri": $image,
+            "commands": [
+              "--import_name=\($import_name)",
+              "--import_config=\($exec_config)"
+            ]
           }
-        ],
-        "computeResource": {
-          "cpuMilli": "${cpu_milli}",
-          "memoryMib": "${memory_mib}"
         },
-        "volumes": [
-          {
-            "gcs": {
-              "remotePath": "${GCS_BUCKET}"
+        {
+          "container": {
+            "imageUri": $image,
+            "entrypoint": "python",
+            "commands": [
+              "/data/import-automation/validator/main.py",
+              "--import_name=\($import_name)",
+              "--import_config=\($val_config)",
+              "--run_bq_differ"
+            ]
+          }
+        }
+      ]')
+  else
+    runnables_json=$(jq -n \
+      --arg image "${DOCKER_REMOTE}:latest" \
+      --arg import_name "${IMPORT_DIR}:${IMPORT_NAME}" \
+      --arg exec_config "${EXECUTOR_IMPORT_CONFIG_JSON}" \
+      '[
+        {
+          "container": {
+            "imageUri": $image,
+            "commands": [
+              "--import_name=\($import_name)",
+              "--import_config=\($exec_config)"
+            ]
+          }
+        }
+      ]')
+  fi
+
+  jq -n \
+    --argjson runnables "$runnables_json" \
+    --argjson cpu_milli "${cpu_milli}" \
+    --argjson memory_mib "${memory_mib}" \
+    --arg gcs_bucket "${GCS_BUCKET}" \
+    --arg gcs_mount_path "${GCS_MOUNT_PATH}" \
+    --arg machine_type "${MACHINE_TYPE}" \
+    --argjson disk_gib "${disk_gib}" \
+    '{
+      "taskGroups": [
+        {
+          "taskSpec": {
+            "runnables": $runnables,
+            "computeResource": {
+              "cpuMilli": $cpu_milli,
+              "memoryMib": $memory_mib
             },
-            "mountPath": "${GCS_MOUNT_PATH}"
+            "volumes": [
+              {
+                "gcs": {
+                  "remotePath": $gcs_bucket
+                },
+                "mountPath": $gcs_mount_path
+              }
+            ]
+          },
+          "taskCount": 1,
+          "parallelism": 1
+        }
+      ],
+      "allocationPolicy": {
+        "instances": [
+          {
+            "policy": {
+              "machineType": $machine_type,
+              "provisioningModel": "STANDARD",
+              "bootDisk": {
+                "image": "projects/debian-cloud/global/images/family/debian-12",
+                "size_gb": $disk_gib
+              }
+            },
+            "installOpsAgent": true
           }
         ]
       },
-      "taskCount": 1,
-      "parallelism": 1
-    }
-  ],
-  "allocationPolicy": {
-    "instances": [
-      {
-        "policy": {
-          "machineType": "${MACHINE_TYPE}",
-          "provisioningModel": "STANDARD",
-          "bootDisk": {
-            "image": "projects/debian-cloud/global/images/family/debian-12",
-            "size_gb": "${disk_gib}"
-          }
-        },
-        "installOpsAgent": true
+      "logsPolicy": {
+        "destination": "CLOUD_LOGGING"
       }
-    ]
-  },
-  "logsPolicy": {
-    "destination": "CLOUD_LOGGING"
-  }
-}
-EOF
-  echo $config_file
+    }' > "$batch_config_file"
+  echo "$batch_config_file"
 }
 
 # Run an import as a cloud batch job
