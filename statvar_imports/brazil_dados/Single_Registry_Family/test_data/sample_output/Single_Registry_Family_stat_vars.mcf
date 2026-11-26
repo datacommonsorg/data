@@ -1,0 +1,8 @@
+Node: dcid:Count_Household_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+name: "Total number of families registered in the single registry"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+registeredIn: dcid:Brazil_SingleRegistry
+

@@ -1,0 +1,9 @@
+Node: E:Updated_Single_Registry_Families->E0
+observationAbout: C:Updated_Single_Registry_Families->observationAbout
+observationDate: C:Updated_Single_Registry_Families->observationDate
+observationPeriod: C:Updated_Single_Registry_Families->observationPeriod
+value: C:Updated_Single_Registry_Families->value
+unit: C:Updated_Single_Registry_Families->unit
+scalingFactor: C:Updated_Single_Registry_Families->scalingFactor
+variableMeasured: C:Updated_Single_Registry_Families->variableMeasured
+typeOf: dcs:StatVarObservation
