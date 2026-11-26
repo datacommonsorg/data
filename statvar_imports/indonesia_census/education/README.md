@@ -12,7 +12,7 @@
   * `https://webapi.bps.go.id/v1/api/interoperabilitas/datasource/simdasi/id/25/tahun/{year}/id_tabel/{table_id}/wilayah/0000000/`
 * **Release Frequency / Refresh Schedule:** Weekly check (`0 05 * * 1`, `P1Y` source release frequency)
 * **Date Range in KG:** `2011` – `2025`
-* **Total Observations:** `24,342` observations across `78` `StatisticalVariable` nodes and `39` places (`country/IDN` and `38` Provinces `wikidataId/Q...`).
+* **Total Observations:** `25,636` observations across `78` `StatisticalVariable` nodes and `39` places (`country/IDN` and `38` Provinces `wikidataId/Q...`).
 
 ---
 
@@ -51,14 +51,14 @@
 
 ## 3. Data Diffs & Refresh Summary (`differ_summary.json`)
 
-Comparison against the legacy `20240402` Education & Literacy CSVs (`gs://unresolved_mcf/country/indonesia/20240402/`):
+Comparison against the legacy production Education (`gs://unresolved_mcf/country/indonesia/20240402/`, 53 CSVs) & Literacy (`gs://unresolved_mcf/country/indonesia/idn_literacyrate_*.csv`, 7 CSVs) files:
 
 | Metric | Count | Explanation |
 |---|---|---|
 | **Previous Observations** | `15,453` | Legacy manual import across 60 Education and Literacy CSV files covering `2013–2022` (`35` places, `78` StatVars) |
-| **Current Observations** | `24,342` | Automated pipeline covering `2011–2025` across all `39` places and `78` StatVars |
-| **Added Observations** | `+8,889` | `2023–2025` annual education/literacy updates, `2011–2012` national literacy by sex, and 4 new Papua provinces (`wikidataId/Q115253263`, `wikidataId/Q112810104`, `wikidataId/Q61439296`, `wikidataId/Q12486766`) |
-| **Modified Observations** | `8` | Official BPS SIMDASI historical revisions in `2021–2022` for `Count_School_LocalGovernmentOwnedEstablishment_RaudatulAthfal_UnderMinistryOfReligion` |
+| **Current Observations** | `25,636` | Automated pipeline covering `2011–2025` across all `39` places and `78` StatVars |
+| **Added Observations** | `+10,183` | `2023–2025` annual updates (`+8,600`, including `644` observations for the 4 new Papua provinces `Q115253263`, `Q112810104`, `Q61439296`, `Q12486766`), missing legacy school years (`2017` `MI`/`MTs`/`MA`: `+945`; `2018` `SMA`/`SMK`: `+630` where legacy `SMA_2.csv` was empty), and `2011–2013` national literacy by sex (`+8`) |
+| **Modified Observations** | `1,261` | `0` diffs across all `45` Kemendikbud (`SD`/`SMP`/`SMA`/`SMK`/`Univ`) StatVars and `2014–2022` literacy; `1` fix for a legacy `2013` manual bug where `country/IDN` Total literacy (`93.92`) had been populated with the Male rate (`96.47`); `1,260` official BPS finalized yearbook revisions for Kemenag (`RA`/`MI`/`MTs`/`MA`) in `2017` (`26`), `2018` (`24`), `2021` (`818`), and `2022` (`392`) |
 | **Deleted Observations** | `0` (`0.0%`) | Zero deletions |
 | **Schema Diffs** | `0` | 100% exact DCID match across all `78` StatisticalVariables |
 
