@@ -1,7 +1,4 @@
 parameter,val
-mapped_rows,1
-mapped_columns,5
 header_rows,1
-#places_resolved_csv,
-input_columns,6
-#input_rows,1000
+mapped_columns,5
+output_columns,"observationDate,observationAbout,value,variableMeasured,measurementMethod,observationPeriod"

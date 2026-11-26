@@ -45,12 +45,6 @@ def _define_flags() -> None:
         False,
         "If true, skips downloading 2006-2021 historical files from GCS.",
     )
-    flags.DEFINE_bool(
-        "normalize_output",
-        False,
-        "If true, ensures output/nndss_weekly_output.{csv,tmcf} exposes "
-        "observationPeriod as a column so genmcf matches the historical TMCF.",
-    )
 
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -68,6 +62,8 @@ SOURCE_URL = (
     "https://data.cdc.gov/api/v3/views/x9gk-5huc/export.csv?accessType=DOWNLOAD"
 )
 SKIP_FLAGS = {"N", "NN", "NP", "NC", "U"}
+RAW_MEASUREMENT_METHOD = "CDC_NNDSS_Diseases_WeeklyTables"
+AGGREGATE_MEASUREMENT_METHOD = "dcAggregate/CDC_NNDSS_Diseases_WeeklyTables"
 
 OUTPUT_COLUMNS = [
     "Reporting Area",
@@ -75,6 +71,7 @@ OUTPUT_COLUMNS = [
     "MMWR WEEK",
     "observationDate",
     "Label",
+    "measurementMethod",
     "Current week",
 ]
 
@@ -273,6 +270,7 @@ def preprocess_csv(
             nyc_vals[key] = nyc_vals.get(key, 0.0) + float(rec["val_num"])
 
         kept = chunk[~is_ny_ex_nyc].copy()
+        kept["measurementMethod"] = RAW_MEASUREMENT_METHOD
         kept["Current week"] = kept["val_num"].map(_format_number)
         chunks.append(kept[OUTPUT_COLUMNS])
 
@@ -284,6 +282,7 @@ def preprocess_csv(
             "MMWR WEEK": k[1],
             "observationDate": k[2],
             "Label": k[3],
+            "measurementMethod": AGGREGATE_MEASUREMENT_METHOD,
             "Current week": _format_number(ny_ex_nyc_vals[k] + nyc_vals[k]),
         } for k in both_ny_keys]
         chunks.append(pd.DataFrame(ny_rows, columns=OUTPUT_COLUMNS))
@@ -329,73 +328,8 @@ def download_historical_files(
         os.replace(tmp_dest, dest_path)
 
 
-def normalize_output_files(
-    output_dir: str = os.path.join(SCRIPT_DIR, "output"),
-    prefix: str = "nndss_weekly_output",
-) -> None:
-    """Ensure output CSV/TMCF exposes observationPeriod as a column."""
-    import csv
-
-    csv_path = os.path.join(output_dir, f"{prefix}.csv")
-    tmcf_path = os.path.join(output_dir, f"{prefix}.tmcf")
-
-    required_cols = {
-        "observationDate",
-        "observationAbout",
-        "value",
-        "variableMeasured",
-    }
-    tmp_csv = f"{csv_path}.tmp"
-    with open(csv_path, "r", encoding="utf-8", newline="") as src:
-        reader = csv.reader(src)
-        header = next(reader, None)
-        if not header or not required_cols.issubset(set(header)):
-            raise ValueError(
-                f"Output CSV {csv_path} is empty or missing required columns "
-                f"{sorted(required_cols)}: header={header}")
-        if "observationPeriod" not in header:
-            row_count = 0
-            with open(tmp_csv, "w", encoding="utf-8", newline="") as dst:
-                writer = csv.writer(dst)
-                writer.writerow(header + ["observationPeriod"])
-                for row in reader:
-                    writer.writerow(row + ["P1W"])
-                    row_count += 1
-            if row_count == 0:
-                os.remove(tmp_csv)
-                raise ValueError(
-                    f"Output CSV {csv_path} contains 0 observation rows.")
-            os.replace(tmp_csv, csv_path)
-        elif next(reader, None) is None:
-            raise ValueError(
-                f"Output CSV {csv_path} contains 0 observation rows.")
-
-    with open(tmcf_path, "r", encoding="utf-8") as f:
-        lines = f.readlines()
-    if not [line.strip() for line in lines if line.strip()]:
-        raise ValueError(f"Output TMCF {tmcf_path} is empty.")
-    new_lines = []
-    found_period = False
-    for line in lines:
-        if line.startswith("observationPeriod:"):
-            new_lines.append(
-                f"observationPeriod: C:{prefix}->observationPeriod\n")
-            found_period = True
-        else:
-            new_lines.append(line)
-    if not found_period:
-        new_lines.append(f"observationPeriod: C:{prefix}->observationPeriod\n")
-    tmp_tmcf = f"{tmcf_path}.tmp"
-    with open(tmp_tmcf, "w", encoding="utf-8") as f:
-        f.writelines(new_lines)
-    os.replace(tmp_tmcf, tmcf_path)
-
-
 def main(argv):
     del argv
-    if _FLAGS.normalize_output:
-        normalize_output_files()
-        return
     Path(INPUT_DIR).mkdir(parents=True, exist_ok=True)
     if not _FLAGS.skip_gcs_history:
         download_historical_files()

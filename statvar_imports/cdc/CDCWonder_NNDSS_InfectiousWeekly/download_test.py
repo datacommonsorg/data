@@ -133,22 +133,30 @@ class DownloadTest(unittest.TestCase):
             out_df = download.preprocess_csv(in_csv, out_csv)
 
         records = {
-            (r["Reporting Area"], r["Label"]): r["Current week"]
+            (r["Reporting Area"], r["Label"]):
+                (r["Current week"], r["measurementMethod"])
             for _, r in out_df.iterrows()
         }
         self.assertEqual(
             records.get(("US RESIDENTS", "Chlamydia trachomatis infection")),
-            "500",
+            ("500", download.RAW_MEASUREMENT_METHOD),
         )
         self.assertEqual(
             records.get(("US RESIDENTS", "Gonorrhea")),
-            "6911",
+            ("6911", download.RAW_MEASUREMENT_METHOD),
         )
-        self.assertEqual(records.get(("NEW YORK CITY", "Campylobacteriosis")),
-                         "30")
-        self.assertEqual(records.get(("NEW YORK", "Campylobacteriosis")), "50")
-        self.assertEqual(records.get(("NEW YORK CITY", "Hansen's disease")),
-                         "1")
+        self.assertEqual(
+            records.get(("NEW YORK CITY", "Campylobacteriosis")),
+            ("30", download.RAW_MEASUREMENT_METHOD),
+        )
+        self.assertEqual(
+            records.get(("NEW YORK", "Campylobacteriosis")),
+            ("50", download.AGGREGATE_MEASUREMENT_METHOD),
+        )
+        self.assertEqual(
+            records.get(("NEW YORK CITY", "Hansen's disease")),
+            ("1", download.RAW_MEASUREMENT_METHOD),
+        )
         self.assertNotIn(("NEW YORK", "Hansen's disease"), records)
         self.assertNotIn(("NEW YORK", "Anthrax"), records)
         self.assertEqual(len(records), 5)
@@ -208,48 +216,6 @@ class DownloadTest(unittest.TestCase):
             with open(out_csv, "r", encoding="utf-8") as got_f, open(
                     expected_preprocessed, "r", encoding="utf-8") as exp_f:
                 self.assertEqual(got_f.read(), exp_f.read())
-
-    def test_normalize_output_files(self):
-        with tempfile.TemporaryDirectory() as tmpdir:
-            csv_path = os.path.join(tmpdir, "nndss_weekly_output.csv")
-            tmcf_path = os.path.join(tmpdir, "nndss_weekly_output.tmcf")
-            with open(csv_path, "w", encoding="utf-8") as f:
-                f.write(
-                    "observationDate,observationAbout,value,variableMeasured\n"
-                    "2024-03-03,country/USA,3,StatVar1\n")
-            with open(tmcf_path, "w", encoding="utf-8") as f:
-                f.write("Node: E:nndss_weekly_output->E0\n"
-                        "observationPeriod: P1W\n"
-                        "typeOf: dcs:StatVarObservation\n")
-            download.normalize_output_files(output_dir=tmpdir)
-            with open(csv_path, "r", encoding="utf-8") as f:
-                csv_text = f.read()
-            with open(tmcf_path, "r", encoding="utf-8") as f:
-                tmcf_text = f.read()
-            self.assertIn("observationPeriod", csv_text.splitlines()[0])
-            self.assertIn("2024-03-03,country/USA,3,StatVar1,P1W", csv_text)
-            self.assertIn(
-                "observationPeriod: C:nndss_weekly_output->observationPeriod",
-                tmcf_text,
-            )
-
-    def test_normalize_output_files_raises_on_empty_or_zero_row_csv(self):
-        with tempfile.TemporaryDirectory() as tmpdir:
-            csv_path = os.path.join(tmpdir, "nndss_weekly_output.csv")
-            tmcf_path = os.path.join(tmpdir, "nndss_weekly_output.tmcf")
-            with open(tmcf_path, "w", encoding="utf-8") as f:
-                f.write("Node: E:nndss_weekly_output->E0\n")
-
-            with open(csv_path, "w", encoding="utf-8") as f:
-                f.write("\n")
-            with self.assertRaises(ValueError):
-                download.normalize_output_files(output_dir=tmpdir)
-
-            with open(csv_path, "w", encoding="utf-8") as f:
-                f.write(
-                    "observationDate,observationAbout,value,variableMeasured\n")
-            with self.assertRaises(ValueError):
-                download.normalize_output_files(output_dir=tmpdir)
 
     def _run_download_source_csv(self, fake_download_file):
         fake_mod = types.ModuleType("download_util_script")
