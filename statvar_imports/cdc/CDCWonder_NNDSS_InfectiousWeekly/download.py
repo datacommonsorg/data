@@ -52,10 +52,7 @@ INPUT_DIR = os.path.join(SCRIPT_DIR, "input_files")
 HISTORY_DIR = os.path.join(SCRIPT_DIR, "history")
 HISTORY_GCS_BUCKET = "unresolved_mcf"
 HISTORY_GCS_PREFIX = "cdc/nndss_infectious_diseasesweekly/history"
-HISTORY_FILES = (
-    "cdc_nndss_weekly_tables_historical.csv",
-    "cdc_nndss_weekly_tables_historical.tmcf",
-)
+HISTORY_FILES = ("cdc_nndss_weekly_tables_historical.csv",)
 RAW_FILE = os.path.join(INPUT_DIR, "export.csv")
 OUTPUT_FILE = os.path.join(INPUT_DIR, "NNDSS_Weekly_Data.csv")
 SOURCE_URL = (
@@ -312,7 +309,7 @@ def download_historical_files(
     bucket_name: str = HISTORY_GCS_BUCKET,
     prefix: str = HISTORY_GCS_PREFIX,
 ) -> None:
-    """Download frozen 2006-2021 historical CSV and TMCF from GCS."""
+    """Download frozen 2006-2021 historical CSV from GCS."""
     from google.cloud import storage
 
     Path(history_dir).mkdir(parents=True, exist_ok=True)

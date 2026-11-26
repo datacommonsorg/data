@@ -13,10 +13,7 @@
             ],
             "import_inputs": [
                 {
-                    "template_mcf": [
-                        "history/cdc_nndss_weekly_tables_historical.tmcf",
-                        "output/nndss_weekly_output.tmcf"
-                    ],
+                    "template_mcf": "output/nndss_weekly_output.tmcf",
                     "node_mcf": "output/*.mcf",
                     "cleaned_csv": [
                         "history/cdc_nndss_weekly_tables_historical.csv",
