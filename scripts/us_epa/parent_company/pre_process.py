@@ -145,7 +145,7 @@ def _insert_overlaps(loc_map, company_id_count, disallowed_pairs=None):
             disallowed_adj.setdefault(c1, set()).add(c2)
             disallowed_adj.setdefault(c2, set()).add(c1)
 
-    for a, v in loc_map.items():
+    for _a, v in loc_map.items():
         v = sorted(v)
         if len(v) > 1:
             count_dupe_loc += 1

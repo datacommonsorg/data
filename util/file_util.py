@@ -701,7 +701,7 @@ def file_write_csv_dict(py_dict: dict,
             columns.append(key_column_name)
     if len(columns) <= 1:
         # Get columns across all entries.
-        for key, value in py_dict.items():
+        for _key, value in py_dict.items():
             if isinstance(value, dict):
                 for col in value.keys():
                     if col not in columns:

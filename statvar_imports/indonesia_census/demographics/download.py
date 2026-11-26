@@ -36,67 +36,72 @@ from google.cloud import storage
 DEFAULT_API_KEY_GCS_PATH = ('gs://unresolved_mcf/country/indonesia/config.json')
 
 _FLAGS = flags.FLAGS
-flags.DEFINE_string(
-    'output_dir',
-    os.path.join(_CODEDIR, 'input_files'),
-    'Directory path to save the downloaded input CSV files.',
-)
-flags.DEFINE_string(
-    'historical_gcs_dir',
-    'gs://unresolved_mcf/country/indonesia/demographics/historical',
-    'GCS directory containing the consolidated historical CSV files.',
-)
-flags.DEFINE_string(
-    'historical_output_dir',
-    os.path.join(_CODEDIR, 'output_files'),
-    'Directory path to copy the historical CSV and TMCF files into.',
-)
-flags.DEFINE_string(
-    'population_filename',
-    'idn_population.csv',
-    'Filename for the total population CSV table.',
-)
-flags.DEFINE_string(
-    'age_gender_filename',
-    'idn_age_gender.csv',
-    'Filename for the age and gender population CSV table.',
-)
-flags.DEFINE_string(
-    'domain',
-    '0000',
-    'BPS domain code (0000 for national/all-province/regency tables).',
-)
-flags.DEFINE_integer(
-    'total_var_id',
-    2790,
-    'BPS variable ID for Total Population by Regency/City and Age Group.',
-)
-flags.DEFINE_integer(
-    'male_var_id',
-    2791,
-    'BPS variable ID for Male Population by Regency/City and Age Group.',
-)
-flags.DEFINE_integer(
-    'female_var_id',
-    2792,
-    'BPS variable ID for Female Population by Regency/City and Age Group.',
-)
-flags.DEFINE_integer(
-    'start_year',
-    2023,
-    'Minimum observation year to include in the downloaded CSV files.',
-)
-flags.DEFINE_string(
-    'api_key',
-    os.environ.get('BPS_API_KEY', ''),
-    'BPS WebAPI key (defaults to BPS_API_KEY environment variable).',
-)
-flags.DEFINE_string(
-    'api_key_gcs_path',
-    DEFAULT_API_KEY_GCS_PATH,
-    'GCS or local JSON path containing {"bps_api_key": "..."} (or '
-    '{"api_key": "..."}) used when --api_key / BPS_API_KEY is not set.',
-)
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        'output_dir',
+        os.path.join(_CODEDIR, 'input_files'),
+        'Directory path to save the downloaded input CSV files.',
+    )
+    flags.DEFINE_string(
+        'historical_gcs_dir',
+        'gs://unresolved_mcf/country/indonesia/demographics/historical',
+        'GCS directory containing the consolidated historical CSV files.',
+    )
+    flags.DEFINE_string(
+        'historical_output_dir',
+        os.path.join(_CODEDIR, 'output_files'),
+        'Directory path to copy the historical CSV and TMCF files into.',
+    )
+    flags.DEFINE_string(
+        'population_filename',
+        'idn_population.csv',
+        'Filename for the total population CSV table.',
+    )
+    flags.DEFINE_string(
+        'age_gender_filename',
+        'idn_age_gender.csv',
+        'Filename for the age and gender population CSV table.',
+    )
+    flags.DEFINE_string(
+        'domain',
+        '0000',
+        'BPS domain code (0000 for national/all-province/regency tables).',
+    )
+    flags.DEFINE_integer(
+        'total_var_id',
+        2790,
+        'BPS variable ID for Total Population by Regency/City and Age Group.',
+    )
+    flags.DEFINE_integer(
+        'male_var_id',
+        2791,
+        'BPS variable ID for Male Population by Regency/City and Age Group.',
+    )
+    flags.DEFINE_integer(
+        'female_var_id',
+        2792,
+        'BPS variable ID for Female Population by Regency/City and Age Group.',
+    )
+    flags.DEFINE_integer(
+        'start_year',
+        2023,
+        'Minimum observation year to include in the downloaded CSV files.',
+    )
+    flags.DEFINE_string(
+        'api_key',
+        os.environ.get('BPS_API_KEY', ''),
+        'BPS WebAPI key (defaults to BPS_API_KEY environment variable).',
+    )
+    flags.DEFINE_string(
+        'api_key_gcs_path',
+        DEFAULT_API_KEY_GCS_PATH,
+        'GCS or local JSON path containing {"bps_api_key": "..."} (or '
+        '{"api_key": "..."}) used when --api_key / BPS_API_KEY is not set.',
+    )
+
 
 BPS_API_BASE_URL = 'https://webapi.bps.go.id/v1/api/list'
 MAX_YEARS_PER_REQUEST = 3
@@ -677,4 +682,5 @@ def main(_) -> None:
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

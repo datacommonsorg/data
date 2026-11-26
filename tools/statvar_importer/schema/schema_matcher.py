@@ -143,7 +143,7 @@ class SchemaMatcher:
             self._log_every_n)
         self._counters.set_prefix('matcher-load-schema:')
         self._counters.add_counter('total', len(nodes))
-        for dcid, node in nodes.items():
+        for _dcid, node in nodes.items():
             # Add all the node PVs as key for lookup
             node_str = str(node)
             self._node_matcher.add_key_value(node_str, node)
@@ -185,7 +185,7 @@ class SchemaMatcher:
                 self._log_every_n)
             nodes.extend(semantic_nodes)
         types_set = _get_set(types)
-        for key, node in nodes:
+        for _key, node in nodes:
             if not isinstance(node, dict):
                 logging.log_every_n(
                     logging.ERROR,
@@ -422,7 +422,7 @@ def search_pvs(
             columns.append(f'v_{index}')
         file_util.file_write_csv_dict(output_pvs, output_file, columns)
     else:
-        for index, pvs in output_pvs.items():
+        for _index, pvs in output_pvs.items():
             print(f'{pvs}')
     counters.print_counters()
     return output_pvs

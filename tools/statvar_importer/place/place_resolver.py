@@ -289,7 +289,7 @@ class PlaceResolver:
             self._counters.add_counter('dc-api-resolve-placeid-calls', 1)
             # Extract the dcid for each placeid looked up
             # and add it to the result.
-            for key, result in results.items():
+            for _key, result in results.items():
                 if 'dcid' not in result:
                     # Get all resolved placeIds for each result.
                     place_ids = _get_values_from_dict('placeId', result)

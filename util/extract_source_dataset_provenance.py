@@ -186,7 +186,7 @@ def fetch_all_provenances(api_key: str, output_file: str) -> None:
     # 5. Assemble final hierarchy
     logging.info("Assembling final hierarchy...")
     final_output = []
-    for prov_dcid, prov in provenance_data_map.items():
+    for _prov_dcid, prov in provenance_data_map.items():
         ds_dcid = prov.pop("dataset_dcid")
         dataset_info = None
 

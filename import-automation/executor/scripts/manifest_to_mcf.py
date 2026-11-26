@@ -268,7 +268,7 @@ def build_dataset_to_source_map(directory):
 
 def process_directory(path):
     dataset_to_source = build_dataset_to_source_map(path)
-    for root, dirs, files in os.walk(path):
+    for root, _dirs, files in os.walk(path):
         for file in files:
             if file.endswith(".textproto"):
                 textproto_path = os.path.join(root, file)

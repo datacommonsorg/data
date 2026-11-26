@@ -422,7 +422,7 @@ def download_indicator_data(worldbank_countries, indicator_codes, mode):
     indicators_to_keep = list(indicator_codes['IndicatorCode'].unique())
 
     country_df_list = []
-    for index, country_code in enumerate(worldbank_countries['ISO3166Alpha3']):
+    for country_code in worldbank_countries['ISO3166Alpha3']:
         country_df = read_worldbank(country_code, mode)
 
         if country_df is None:

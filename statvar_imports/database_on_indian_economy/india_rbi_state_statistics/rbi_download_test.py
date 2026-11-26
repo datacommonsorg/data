@@ -21,7 +21,6 @@ from unittest import mock
 
 from absl import app
 from absl.testing import absltest
-from absl.testing import flagsaver
 import pandas as pd
 import requests
 
@@ -180,23 +179,19 @@ class ReadsConfigFileTest(absltest.TestCase):
                 }, f)
             temp_path = f.name
         try:
-            with flagsaver.flagsaver(config_file_path=temp_path):
-                configs = rbi_download.reads_config_file()
-                self.assertIn('URLS_CONFIG', configs)
-                self.assertEqual(len(configs['URLS_CONFIG']), 1)
-                self.assertEqual(configs['URLS_CONFIG'][0]['filename'],
-                                 'test.xlsx')
+            configs = rbi_download.reads_config_file(temp_path)
+            self.assertIn('URLS_CONFIG', configs)
+            self.assertEqual(len(configs['URLS_CONFIG']), 1)
+            self.assertEqual(configs['URLS_CONFIG'][0]['filename'], 'test.xlsx')
         finally:
             os.remove(temp_path)
 
     def test_falls_back_to_local_configs_json(self):
-        with flagsaver.flagsaver(
-                config_file_path='gs://nonexistent_bucket/configs.json'), \
-             mock.patch.object(
-                rbi_download.storage,
-                'Client',
-                side_effect=Exception('GCS unavailable')):
-            configs = rbi_download.reads_config_file()
+        with mock.patch.object(rbi_download.storage,
+                               'Client',
+                               side_effect=Exception('GCS unavailable')):
+            configs = rbi_download.reads_config_file(
+                'gs://nonexistent_bucket/configs.json')
             self.assertIn('URLS_CONFIG', configs)
             self.assertGreater(len(configs['URLS_CONFIG']), 0)
 
@@ -210,13 +205,12 @@ class ReadsConfigFileTest(absltest.TestCase):
         mock_client = mock.MagicMock()
         mock_client.bucket.return_value = mock_bucket
 
-        with flagsaver.flagsaver(
-                config_file_path='gs://bucket/legacy_configs.py'), \
-             mock.patch.object(
+        with mock.patch.object(
                 rbi_download.storage, 'Client', return_value=mock_client), \
              mock.patch.object(
                 rbi_download.logging, 'warning') as mock_warning:
-            configs = rbi_download.reads_config_file()
+            configs = rbi_download.reads_config_file(
+                'gs://bucket/legacy_configs.py')
             self.assertIn('URLS_CONFIG', configs)
             deprecation_logged = any('DEPRECATION WARNING' in str(call[0][0])
                                      for call in mock_warning.call_args_list)
@@ -358,18 +352,18 @@ class DownloadFilesTest(absltest.TestCase):
 
 class MainExecutionTest(absltest.TestCase):
 
-    def test_main_fatal_when_download_fails(self):
+    def test_run_fatal_when_download_fails(self):
         with mock.patch.object(
                 rbi_download, 'reads_config_file', return_value={'URLS_CONFIG': []}), \
              mock.patch.object(
                 rbi_download, 'download_files', return_value=['failed_table.xlsx']), \
              mock.patch.object(rbi_download.logging, 'fatal', side_effect=SystemExit) as mock_fatal:
             with self.assertRaises(SystemExit):
-                rbi_download.main(['rbi_download'])
+                rbi_download.run(rbi_download.DEFAULT_CONFIG_JSON, False)
             mock_fatal.assert_called_once()
             self.assertIn('failed_table.xlsx', mock_fatal.call_args[0][0])
 
-    def test_main_fatal_when_preprocessing_fails(self):
+    def test_run_fatal_when_preprocessing_fails(self):
         with mock.patch.object(
                 rbi_download, 'reads_config_file', return_value={'URLS_CONFIG': []}), \
              mock.patch.object(
@@ -378,7 +372,7 @@ class MainExecutionTest(absltest.TestCase):
                 rbi_download, 'preprocess_files', side_effect=[['broken.xlsx'], [], [], []]), \
              mock.patch.object(rbi_download.logging, 'fatal', side_effect=SystemExit) as mock_fatal:
             with self.assertRaises(SystemExit):
-                rbi_download.main(['rbi_download'])
+                rbi_download.run(rbi_download.DEFAULT_CONFIG_JSON, False)
             mock_fatal.assert_called_once()
             self.assertIn('broken.xlsx', mock_fatal.call_args[0][0])
 
