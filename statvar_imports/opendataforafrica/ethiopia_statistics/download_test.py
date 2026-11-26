@@ -146,6 +146,13 @@ class DownloadTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             download.transform_xtqdbuc([{**series[0], 'scale': 100}])
 
+        with self.assertRaisesRegex(ValueError, 'tsKey=7'):
+            download.transform_xtqdbuc([{
+                **series[0],
+                'tsKey': 7,
+                'values': ['-', 62012.725],
+            }])
+
     def test_transform_teakvke(self):
         series = [
             {
@@ -501,6 +508,85 @@ class DownloadTest(unittest.TestCase):
         self.assertEqual(stub['region'], [1, 2])
         self.assertEqual(stub['variable'], [10])
         self.assertEqual(stub['residence'], [20])
+
+        # Also exercise xtqdbuc indicator filtering (matching + empty-filter error).
+        xtq_meta = {
+            'dimensions': [
+                {
+                    'id': 'region',
+                    'name': 'Region'
+                },
+                {
+                    'id': 'indicator',
+                    'name': 'Indicator'
+                },
+            ],
+        }
+        xtq_reg = {
+            'items': [{
+                'key': 1,
+                'name': 'Ethiopia',
+                'hasData': True
+            }],
+        }
+        xtq_ind = {
+            'items': [
+                {
+                    'key': 101,
+                    'name': 'Rural population',
+                    'hasData': True
+                },
+                {
+                    'key': 102,
+                    'name': 'Unrelated CPI indicator',
+                    'hasData': True
+                },
+                {
+                    'key': 103,
+                    'name': 'Total Population - Both sexes',
+                    'hasData': True
+                },
+            ],
+        }
+        xtq_data = {
+            'continuationToken':
+                None,
+            'data': [{
+                'region': {
+                    'name': 'Ethiopia'
+                },
+                'indicator': {
+                    'name': 'Rural population'
+                },
+                'frequency': 'A',
+                'startDate': '2011-01-01T00:00:00',
+                'endDate': '2011-01-01T00:00:00',
+                'unit': 'thousands',
+                'scale': 1000,
+                'values': [65000.0],
+            }],
+        }
+        mock_request_url.reset_mock()
+        mock_request_url.side_effect = [xtq_meta, xtq_reg, xtq_ind, xtq_data]
+        xtq_result = download.fetch_dataset_raw('xtqdbuc')
+        self.assertEqual(len(xtq_result['series']), 1)
+        xtq_stub = {
+            d['DimensionId']: d['Members']
+            for d in mock_request_url.call_args_list[3].kwargs['params']['Stub']
+        }
+        self.assertEqual(xtq_stub['indicator'], [101, 103])
+
+        with self.assertRaisesRegex(RuntimeError,
+                                    'No matching population indicators'):
+            download._filter_dimension_items(
+                'xtqdbuc',
+                'indicator',
+                [{
+                    'key': 999,
+                    'name': 'Unrelated indicator',
+                    'hasData': True
+                }],
+            )
 
     @mock.patch.object(download.download_util, 'request_url')
     def test_request_json_error_handling(self, mock_request_url):

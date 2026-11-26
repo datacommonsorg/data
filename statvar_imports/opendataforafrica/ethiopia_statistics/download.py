@@ -475,7 +475,13 @@ def transform_xtqdbuc(
         year_vals = _extract_annual_values(series)
         if not year_vals:
             continue
-        scaled_vals = {y: val / divisor for y, val in year_vals.items()}
+        scaled_vals: dict[int, float] = {}
+        for y, val in year_vals.items():
+            if not isinstance(val, (int, float)) or isinstance(val, bool):
+                raise ValueError(f'Non-numeric value {val!r} for xtqdbuc '
+                                 f'{region_name}/{ind_name} year={y} '
+                                 f'(tsKey={series.get("tsKey")})')
+            scaled_vals[y] = val / divisor
         all_years.update(scaled_vals.keys())
         records.append((region_name, ind_name, unit, scale_label, scaled_vals))
 
