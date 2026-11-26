@@ -195,10 +195,13 @@ TABLE_CODE_TO_COLUMNS['Univ'] = (
     'Jumlah Mahasiswa di Bawah Kementerian Riset, Teknologi dan Pendidikan Tinggi - Negeri + Swasta',
 )
 
-ORDERED_VALUE_COLUMNS: tuple[str, ...] = (
+LITERACY_VALUE_COLUMNS: tuple[str, ...] = (
     'Literacy Rate (Total)',
     'Literacy Rate (Male)',
     'Literacy Rate (Female)',
+)
+
+SCHOOL_VALUE_COLUMNS: tuple[str, ...] = (
     'Jumlah Sekolah MTs (Negeri)',
     'Jumlah Sekolah MTs (Swasta)',
     'Jumlah Sekolah MTs (Negeri+Swasta)',
@@ -275,6 +278,9 @@ ORDERED_VALUE_COLUMNS: tuple[str, ...] = (
     'Jumlah Mahasiswa di Bawah Kementerian Riset, Teknologi dan Pendidikan Tinggi - Swasta',
     'Jumlah Mahasiswa di Bawah Kementerian Riset, Teknologi dan Pendidikan Tinggi - Negeri + Swasta',
 )
+
+ORDERED_VALUE_COLUMNS: tuple[str, ...] = (LITERACY_VALUE_COLUMNS +
+                                          SCHOOL_VALUE_COLUMNS)
 
 
 def redact_api_key(text: Any) -> str:
@@ -1007,18 +1013,20 @@ def write_education_csv(
     table_data: dict[tuple[str, str], dict[str, str]],
     value_columns: tuple[str, ...] = ORDERED_VALUE_COLUMNS,
 ) -> None:
-    """Writes the combined Indonesia Education CSV compatible with stat_var_processor.py."""
+    """Writes an Indonesia Education CSV compatible with stat_var_processor.py."""
+    written_rows = 0
     with open(output_path, 'w', newline='', encoding='utf-8') as fp:
         writer = csv.writer(fp)
         writer.writerow(['Provinsi', 'observationDate'] + list(value_columns))
         for (place, year_str), col_values in sorted(table_data.items()):
-            row = [place, year_str]
-            for col in value_columns:
-                row.append(col_values.get(col, ''))
-            writer.writerow(row)
+            vals = [col_values.get(col, '') for col in value_columns]
+            if not any(vals):
+                continue
+            writer.writerow([place, year_str] + vals)
+            written_rows += 1
     logging.info(
         'Wrote %d (place, year) rows across %d columns to %s',
-        len(table_data),
+        written_rows,
         len(value_columns),
         output_path,
     )
@@ -1085,10 +1093,15 @@ def main(_) -> None:
         )
     validate_school_tables_populated(table_data)
     os.makedirs(_FLAGS.output_dir, exist_ok=True)
-    output_path = os.path.join(_FLAGS.output_dir, _FLAGS.output_filename)
     write_education_csv(
-        output_path=output_path,
+        output_path=os.path.join(_FLAGS.output_dir, _FLAGS.literacy_filename),
         table_data=table_data,
+        value_columns=LITERACY_VALUE_COLUMNS,
+    )
+    write_education_csv(
+        output_path=os.path.join(_FLAGS.output_dir, _FLAGS.schools_filename),
+        table_data=table_data,
+        value_columns=SCHOOL_VALUE_COLUMNS,
     )
 
 
@@ -1097,12 +1110,17 @@ def _define_flags() -> None:
     flags.DEFINE_string(
         'output_dir',
         os.path.join(_CODEDIR, 'input_files'),
-        'Directory path to save the downloaded input CSV file.',
+        'Directory path to save the downloaded input CSV files.',
     )
     flags.DEFINE_string(
-        'output_filename',
-        'indonesia_education_input.csv',
-        'Filename for the combined Indonesia Education CSV table.',
+        'literacy_filename',
+        'indonesia_literacy_input.csv',
+        'Filename for the Indonesia Literacy Rate CSV table.',
+    )
+    flags.DEFINE_string(
+        'schools_filename',
+        'indonesia_schools_input.csv',
+        'Filename for the Indonesia Schools/Teachers/Students CSV table.',
     )
     flags.DEFINE_string(
         'domain',

@@ -277,24 +277,35 @@ class DownloadTest(unittest.TestCase):
             '95.26')
 
         with tempfile.TemporaryDirectory() as tmp_dir:
-            out_csv = os.path.join(tmp_dir, 'edu.csv')
-            cols = (
-                'Literacy Rate (Total)',
-                'Literacy Rate (Male)',
-                'Literacy Rate (Female)',
+            lit_csv = os.path.join(tmp_dir, 'lit.csv')
+            download.write_education_csv(lit_csv, table_data,
+                                         download.LITERACY_VALUE_COLUMNS)
+            with open(lit_csv, 'r', encoding='utf-8') as fp:
+                lit_rows = list(csv.reader(fp))
+            self.assertEqual(
+                lit_rows,
+                [
+                    ['Provinsi', 'observationDate'] +
+                    list(download.LITERACY_VALUE_COLUMNS),
+                    ['ACEH', '2022', '98.25', '', ''],
+                    ['INDONESIA', '2011', '92.81', '95.58', '90.02'],
+                    ['INDONESIA', '2022', '96.35', '97.42', '95.26'],
+                ],
+            )
+
+            school_cols = (
                 'Jumlah Sekolah MTs (Negeri)',
                 'Jumlah Guru MTs (Negeri)',
             )
-            download.write_education_csv(out_csv, table_data, cols)
-            with open(out_csv, 'r', encoding='utf-8') as fp:
-                rows = list(csv.reader(fp))
+            sch_csv = os.path.join(tmp_dir, 'schools.csv')
+            download.write_education_csv(sch_csv, table_data, school_cols)
+            with open(sch_csv, 'r', encoding='utf-8') as fp:
+                sch_rows = list(csv.reader(fp))
             self.assertEqual(
-                rows,
+                sch_rows,
                 [
-                    ['Provinsi', 'observationDate'] + list(cols),
-                    ['ACEH', '2022', '98.25', '', '', '109', '4478'],
-                    ['INDONESIA', '2011', '92.81', '95.58', '90.02', '', ''],
-                    ['INDONESIA', '2022', '96.35', '97.42', '95.26', '', ''],
+                    ['Provinsi', 'observationDate'] + list(school_cols),
+                    ['ACEH', '2022', '109', '4478'],
                 ],
             )
 

@@ -66,43 +66,56 @@ Comparison against the legacy `20240402` Education & Literacy CSVs (`gs://unreso
 
 ## 4. Explanations for `genmcf` Data Warnings (`report.json`)
 
-* **Fatal / Error Count:** `0` fatal, `0` errors (`24,342` `NumRowSuccesses`, `24,417` `NumNodeSuccesses`).
-* **Warnings Breakdown:**
-  * `StatsCheck_MaxPercentFluctuationGreaterThan100` (`18`) & `StatsCheck_MaxPercentFluctuationGreaterThan500` (`39`): Expected year-over-year variations in provincial school, teacher, and student counts (particularly around the 2022–2024 Papua province administrative split).
-  * `StatsCheck_Data_Holes` (`1,014`): Expected 1-year gap in BPS SIMDASI Vocational High School (`SMK`) reporting for `2018` across provinces.
-  * `StrSplit_EmptyToken_unit` (`23,882`) & `StrSplit_EmptyToken_scalingFactor` (`23,882`): Expected empty `unit` and `scalingFactor` columns on integer school/teacher/student count rows in the shared output CSV (where only the `460` literacy percentage rows populate `unit: Percent` and `scalingFactor: 100`).
+* **Fatal / Error Count:** `0` fatal, `0` errors (`460` literacy + `25,176` school `NumRowSuccesses`).
+* **Missing Reference / Empty Token Warnings:** `0` (`indonesia_education_schema.mcf` defines the 8 provisional enum values, and splitting literacy vs. schools eliminates empty `unit`/`scalingFactor` cells).
+* **Remaining Source-Data Warnings (`indonesia_schools_output`):**
+  * `StatsCheck_MaxPercentFluctuationGreaterThan100` (`11`) & `StatsCheck_MaxPercentFluctuationGreaterThan500` (`1`): Authentic BPS source jumps — primarily Banten public university students (`2018: 18,512` → `2019: 1,036,054` when Universitas Terbuka was included under Banten in SIMDASI) and small provincial Kemenag counts in Papua, North Kalimantan, and North Maluku.
+  * `StatsCheck_Data_Holes` (`30`): Authentic 1-year `NA` gap in BPS/Ministry of Religious Affairs (EMIS) `2023/2024` reporting for Papua (`wikidataId/Q5095`) across `RA`, `MI`, `MTs`, and `MA` tables.
 
 ---
 
 ## 5. Pipeline Files & How to Run
 
 ### Pipeline Files
-- `download.py`: Queries the BPS WebAPI (`var_id=1458` and `var_id=1460`) and the BPS SIMDASI API (`id/25`) across all available years for the 9 school/university tables, writing `input_files/indonesia_education_input.csv`.
-- `download_test.py`: Unit tests verifying API key redaction, place name normalization, Indonesian dot-separated integer cleaning, multi-table downloading, CSV output formatting, and error handling.
+- `download.py`: Queries the BPS WebAPI (`var_id=1458` and `var_id=1460`) and the BPS SIMDASI API (`id/25`, with fallback to BPS `Statistik Indonesia` yearbook PDFs), writing `input_files/indonesia_literacy_input.csv` and `input_files/indonesia_schools_input.csv`.
+- `download_test.py`: Unit tests verifying API key redaction, place name normalization, Indonesian dot-separated integer cleaning, multi-table downloading, yearbook PDF fallback parsing, split CSV output formatting, and error handling.
 - `indonesia_education_pvmap.csv`: Property-Value mappings for all 78 education and literacy indicators.
 - `indonesia_education_metadata.csv`: Configuration parameters for `stat_var_processor.py`.
 - `indonesia_education_places_resolved.csv`: Place name to Data Commons DCID mapping covering Indonesia (`country/IDN`) and all 38 provinces (`AdministrativeArea1`).
+- `indonesia_education_schema.mcf`: Provisional schema definitions for the 8 Indonesia education enum values referenced by the school StatVars.
 - `manifest.json`: Import automation specification for `Indonesia_Census_Education`.
+- `requirements.txt`: Per-import dependency (`pymupdf`) for the BPS yearbook PDF fallback.
 - `validation_config.json`: Validation rules enforcing `MAX_DATE_CONSISTENT` and `SQL_VALIDATOR` checks on StatVar count, total observation count, non-negative values, and date freshness.
-- `test_data/`: Sample input (`indonesia_education_input.csv`) and expected processor outputs (`indonesia_education_output.csv`, `indonesia_education_output.tmcf`).
+- `test_data/`: Sample literacy and school inputs (`indonesia_literacy_input.csv`, `indonesia_schools_input.csv`) and expected processor outputs (`indonesia_literacy_output.{csv,tmcf}`, `indonesia_schools_output.{csv,tmcf}`).
 
 ### Running Locally
 
-1. **Download and preprocess the source data into `input_files/indonesia_education_input.csv`:**
+1. **Install the per-import requirement (for BPS yearbook PDF fallback) and download the source data into `input_files/`:**
    ```bash
+   pip install -r statvar_imports/indonesia_census/education/requirements.txt
    python3 statvar_imports/indonesia_census/education/download.py \
      --output_dir=statvar_imports/indonesia_census/education/input_files
    ```
 
-2. **Run `stat_var_processor.py` to generate `output_files/indonesia_education_output.csv`, `output_files/indonesia_education_output.tmcf`, and `output_files/indonesia_education_output_stat_vars.mcf`:**
+2. **Run `stat_var_processor.py` for literacy and schools:**
    ```bash
    python3 tools/statvar_importer/stat_var_processor.py \
-     --input_data=statvar_imports/indonesia_census/education/input_files/indonesia_education_input.csv \
+     --input_data=statvar_imports/indonesia_census/education/input_files/indonesia_literacy_input.csv \
      --pv_map=statvar_imports/indonesia_census/education/indonesia_education_pvmap.csv \
      --config_file=statvar_imports/indonesia_census/education/indonesia_education_metadata.csv \
      --places_resolved_csv=statvar_imports/indonesia_census/education/indonesia_education_places_resolved.csv \
-     --output_path=statvar_imports/indonesia_census/education/output_files/indonesia_education_output \
-     --output_counters=statvar_imports/indonesia_census/education/counters/indonesia_education_counters.csv
+     --output_columns=observationAbout,observationDate,value,variableMeasured,unit,scalingFactor \
+     --output_path=statvar_imports/indonesia_census/education/output_files/indonesia_literacy_output \
+     --output_counters=statvar_imports/indonesia_census/education/counters/indonesia_literacy_counters.csv
+
+   python3 tools/statvar_importer/stat_var_processor.py \
+     --input_data=statvar_imports/indonesia_census/education/input_files/indonesia_schools_input.csv \
+     --pv_map=statvar_imports/indonesia_census/education/indonesia_education_pvmap.csv \
+     --config_file=statvar_imports/indonesia_census/education/indonesia_education_metadata.csv \
+     --places_resolved_csv=statvar_imports/indonesia_census/education/indonesia_education_places_resolved.csv \
+     --output_columns=observationAbout,observationDate,value,variableMeasured \
+     --output_path=statvar_imports/indonesia_census/education/output_files/indonesia_schools_output \
+     --output_counters=statvar_imports/indonesia_census/education/counters/indonesia_schools_counters.csv
    ```
 
 3. **Run unit tests:**
