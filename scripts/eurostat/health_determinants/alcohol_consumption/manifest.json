@@ -1,0 +1,18 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "EuroStatHealth_PhysicalActivity",
+      "curator_emails": ["shamimansari@google.com"],
+      "provenance_url": "https://ec.europa.eu/eurostat/web/health/data/database",
+      "provenance_description": "Health statistics measure both objective and subjective aspects of people's health. They cover different kinds of health-related aspects, including key indicators on the functioning of the health care systems and health and safety at work.",
+      "scripts": ["process.py"],
+      "import_inputs": [
+        {
+          "template_mcf": "eurostat_population_alcoholconsumption.tmcf",
+          "cleaned_csv": "eurostat_population_alcoholconsumption.csv"
+        }
+      ],
+      "cron_schedule": "15 22 10 1,7 *"
+    }
+  ]
+}
