@@ -43,6 +43,7 @@ python3 mcf_file_util.py --input_mcf=test_data/*.mcf
 from collections import OrderedDict
 import csv
 import hashlib
+import math
 import os
 import re
 import sys
@@ -659,51 +660,78 @@ def filter_mcf_nodes(
     return filtered_nodes
 
 
+def _parse_number(normalized_value: str,
+                  raw_value: str) -> Union[int, float, None]:
+    """Parses a normalized numeric string into a finite int or float, or None."""
+    if not normalized_value or '_' in normalized_value:
+        return None
+    try:
+        if (normalized_value.count('.') == 1 or
+                normalized_value.lower().count('e') == 1):
+            float_val = float(normalized_value)
+            if not math.isfinite(float_val):
+                logging.error(f'Numeric overflow for value: {raw_value}')
+                return None
+            # Convert to int if there are no decimal values
+            int_val = int(float_val)
+            if int_val == float_val:
+                return int_val
+            return float_val
+        return int(normalized_value)
+    except OverflowError:
+        logging.error(f'Numeric overflow for value: {raw_value}')
+        return None
+    except ValueError:
+        # Value is not a number. Ignore it.
+        return None
+
+
 def get_numeric_value(value: str,
                       decimal_char: str = '.',
-                      separator_chars: str = ' ,$%') -> Union[int, float, None]:
-    """Returns the float value from string or None.
+                      separator_chars: str = ' ,%') -> Union[int, float, None]:
+    """Returns the float or int value from string or None.
 
   Args:
-    value: string to be converted into a number. It can have comma separted
-      digits with decimal points, for eg: NN,NNN.NNN
-    decimal_char: character used for decimal place seperator, default: '.'
-    seperator_char: seperator characters for 1000s or 100s for example:
-      NNN,NNN,NNN
+    value: string to be converted into a number. It can have comma separated
+      digits with decimal points, for eg: NN,NNN.NNN, or scientific notation
+      with e/E, for eg: 1.23e-4, 10E5.
+    decimal_char: character used for decimal place separator, default: '.'
+    separator_chars: separator characters for 1000s or 100s for example:
+      NNN,NNN,NNN. Default: ' ,%' (does not strip '$' or '_').
 
   Returns:
-    number as a float or int if the value is a number, None otherwise
+    number as a float or int if the value is a finite number, None otherwise.
   """
-    if isinstance(value, int) or isinstance(value, float):
+    if isinstance(value, bool):
+        return None
+    if isinstance(value, int):
+        return value
+    if isinstance(value, float):
+        if math.isinf(value):
+            logging.error(f'Numeric overflow for value: {value}')
+            return None
+        if math.isnan(value):
+            return None
         return value
     if value and isinstance(value, str):
-        try:
-            # Strip separator characters from the numeric string
-            normalized_value = value.strip()
-            if (normalized_value[0].isdigit() or normalized_value[0] == '.' or
-                    normalized_value[0] == '-' or normalized_value[0] == '+'):
-                # Input looks like a number. Remove allowed extra characters.
+        # Strip leading/trailing whitespace.
+        normalized_value = value.strip()
+        if not normalized_value:
+            return None
+        if (normalized_value[0].isdigit() or normalized_value[0] == '.' or
+                normalized_value[0] == '-' or normalized_value[0] == '+'):
+            # Input looks like a number. Remove allowed extra characters.
+            if separator_chars:
                 normalized_value = ''.join(
                     [c for c in normalized_value if c not in separator_chars])
-                # Replace decimal characters with period '.'
-                if decimal_char != '.':
-                    normalized_value = '.'.join(
-                        normalized_value.split(decimal_char))
-                if value.count('.') > 1:
-                    # Period may be used instead of commas. Remove it.
-                    normalized_value = normalized_value.replace('.', '')
-            if normalized_value.count('.') == 1 or normalized_value.count(
-                    'e') == 1:
-                float_val = float(normalized_value)
-                # Convert to int if there are no decimal values
-                int_val = int(float_val)
-                if int_val == float_val:
-                    return int_val
-                return float_val
-            return int(normalized_value)
-        except ValueError:
-            # Value is not a number. Ignore it.
-            return None
+            # Replace decimal characters with period '.'
+            if decimal_char != '.':
+                normalized_value = '.'.join(
+                    normalized_value.split(decimal_char))
+            if normalized_value.count('.') > 1:
+                # Period may be used instead of commas. Remove it.
+                normalized_value = normalized_value.replace('.', '')
+        return _parse_number(normalized_value, value)
     return None
 
 
@@ -768,13 +796,20 @@ def get_value_list(value: str) -> list:
     return value_list
 
 
-def is_number(value: str) -> bool:
-    """Returns true if the value is a number."""
-    if isinstance(value, int) or isinstance(value, float):
+def is_number(value: Union[str, int, float]) -> bool:
+    """Returns True if the value is a finite number."""
+    if isinstance(value, bool):
+        return False
+    if isinstance(value, int):
         return True
+    if isinstance(value, float):
+        if math.isinf(value):
+            logging.error(f'Numeric overflow for value: {value}')
+            return False
+        return math.isfinite(value)
     if not isinstance(value, str):
         return False
-    return value and (value.isdigit() or value.replace('.', '', 1).isdigit())
+    return _parse_number(value.strip(), value) is not None
 
 
 def is_leaf_object(value: str) -> bool:
