@@ -165,7 +165,7 @@ class PlaceNameMatcher:
         """Add the place names to the ngram matcher."""
         count = 0
         self._ngram_matcher = NgramMatcher(self._config)
-        for place_dcid, pvs in self._places_dict.items():
+        for place_dcid, _pvs in self._places_dict.items():
             place_names = self._get_full_place_names(place_dcid)
             for place_name in place_names:
                 self._ngram_matcher.add_key_value(place_name, place_dcid)

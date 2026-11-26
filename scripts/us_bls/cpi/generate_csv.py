@@ -118,7 +118,7 @@ def process(_INPUT_FILE_PATH, _OUTOUT_FILE_PATH, date_from_start_processing):
     # "year" is of the form "YYYY".
     # "period" is the months of the observations and is of the form "MM"
     # preceded by char 'M', e.g. "M05".
-    for series_name, url in CSV_URLS.items():
+    for series_name, _url in CSV_URLS.items():
         series_id = SERIES_IDS[series_name]
         try:
             #in_df = pd.read_csv(buffer, sep=r"\s+", dtype="str")

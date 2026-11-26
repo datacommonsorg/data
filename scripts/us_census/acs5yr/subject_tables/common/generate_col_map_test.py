@@ -15,7 +15,9 @@
 import csv
 import json
 import os
+import tempfile
 import unittest
+import zipfile
 
 from .generate_col_map import generate_stat_var_map
 from .generate_col_map import process_zip_file
@@ -72,6 +74,18 @@ class GenerateColMapTest(unittest.TestCase):
         f.close()
 
         self.assertEqual(expected_map, generated_col_map)
+
+    def test_invalid_filename_in_zip_raises_value_error(self):
+        base_path = os.path.dirname(__file__)
+        spec_path = os.path.join(base_path, "./testdata/spec_s2702.json")
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            bad_zip_path = os.path.join(tmp_dir, "invalid.zip")
+            with zipfile.ZipFile(bad_zip_path, "w") as zf:
+                zf.writestr("invalid_data_with_overlays.csv",
+                            "GEO_ID,NAME\nGeography,Geographic Area Name\n")
+            with self.assertRaisesRegex(ValueError,
+                                        "Unable to extract year from filename"):
+                process_zip_file(bad_zip_path, spec_path, write_output=False)
 
 
 if __name__ == '__main__':

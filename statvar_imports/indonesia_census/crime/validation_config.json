@@ -1,0 +1,13 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_crime_min_observations_and_freshness",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT COUNT(*) AS sv_count, MIN(NumPlaces) AS min_places, MIN(NumObservations) AS min_obs, MIN(CAST(MaxDate AS INTEGER)) AS latest_date FROM stats WHERE StatVar = 'Count_CriminalActivities'",
+                "condition": "sv_count = 1 AND min_places >= 35 AND min_obs >= 800 AND latest_date >= YEAR(CURRENT_DATE) - 2"
+            }
+        }
+    ]
+}

@@ -209,7 +209,7 @@ def validator_compare_nodes(input_nodes: dict,
     golden_key_sets = {}
     golden_matches = dict()
     logging.debug(f'Extracting properties for {len(golden_nodes)} goldens')
-    for node_key, node in golden_nodes.items():
+    for _node_key, node in golden_nodes.items():
         node_props = set()
         for prop in node.keys():
             if not prop:

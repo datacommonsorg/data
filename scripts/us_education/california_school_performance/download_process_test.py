@@ -20,46 +20,14 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-from absl import flags
-
 # Ensure repository root is in sys.path
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 _REPO_ROOT = os.path.abspath(os.path.join(_SCRIPT_DIR, '../../../'))
 if _REPO_ROOT not in sys.path:
     sys.path.insert(0, _REPO_ROOT)
 
-_CONFLICTING_FLAGS = (
-    'years',
-    'data_mode',
-    'output_dir',
-    'raw_dir',
-    'test_mode',
-    'clean',
-    'keep_all_entities',
-    'school_code_mapping',
-    'input_data',
-    'pv_map',
-    'drop_unmapped_places',
-    'output_path',
-    'output_counters',
-    'num_workers',
-)
-_SAVED_FLAGS = {
-    _name: flags.FLAGS[_name]
-    for _name in _CONFLICTING_FLAGS
-    if _name in flags.FLAGS
-}
-for _flag_name in _SAVED_FLAGS:
-    delattr(flags.FLAGS, _flag_name)
-
 from scripts.us_education.california_school_performance import download
 from scripts.us_education.california_school_performance import process
-
-for _flag_name in _CONFLICTING_FLAGS:
-    if _flag_name in flags.FLAGS:
-        delattr(flags.FLAGS, _flag_name)
-for _flag_name, _flag_obj in _SAVED_FLAGS.items():
-    flags.FLAGS[_flag_name] = _flag_obj
 
 _SAMPLE_SCHOOL_MAP = os.path.join(_SCRIPT_DIR, 'test_data',
                                   'sample_school_code_mapping.json')
@@ -460,7 +428,7 @@ class CaliforniaSchoolPerformanceTest(unittest.TestCase):
                 self.assertEqual(f_actual.read(), f_exp.read())
 
     def test_single_year_download_updates_master_file(self):
-        """Verify single-year download.main() writes both sb_ca<year>_normalized.txt and sb_ca_all_years_normalized.txt."""
+        """Verify single-year download.run() writes both sb_ca<year>_normalized.txt and sb_ca_all_years_normalized.txt."""
         with tempfile.TemporaryDirectory() as tmp_dir:
             single_path = os.path.join(tmp_dir, 'sb_ca2024_normalized.txt')
 
@@ -478,17 +446,19 @@ class CaliforniaSchoolPerformanceTest(unittest.TestCase):
                     )
                 return single_path
 
-            with patch.object(download, 'FLAGS') as mock_flags, \
-                 patch.object(download, 'download_and_process_year', side_effect=fake_download_year):
-                mock_flags.output_dir = tmp_dir
-                mock_flags.raw_dir = os.path.join(tmp_dir, 'raw')
-                mock_flags.clean = False
-                mock_flags.test_mode = False
-                mock_flags.years = '2024'
-                mock_flags.data_mode = 'all_groups'
-                mock_flags.keep_all_entities = True
-                mock_flags.school_code_mapping = _SAMPLE_SCHOOL_MAP
-                download.main([])
+            with patch.object(download,
+                              'download_and_process_year',
+                              side_effect=fake_download_year):
+                download.run(
+                    years_str='2024',
+                    data_mode='all_groups',
+                    output_dir=tmp_dir,
+                    raw_dir=os.path.join(tmp_dir, 'raw'),
+                    test_mode=False,
+                    clean=False,
+                    keep_all_entities=True,
+                    school_code_mapping=_SAMPLE_SCHOOL_MAP,
+                )
 
             master_path = os.path.join(tmp_dir,
                                        'sb_ca_all_years_normalized.txt')
@@ -499,33 +469,34 @@ class CaliforniaSchoolPerformanceTest(unittest.TestCase):
                 self.assertEqual(f1.read(), f2.read())
 
     def test_error_paths_raise_exceptions(self):
-        """Verify download.main() and process.main() raise exceptions instead of logging.fatal()."""
+        """Verify download.run() and process.process_files() raise exceptions instead of logging.fatal()."""
         with tempfile.TemporaryDirectory() as tmp_dir:
-            with patch.object(download, 'FLAGS') as mock_flags, \
-                 patch.object(download, 'download_and_process_year', side_effect=RuntimeError('network failure')):
-                mock_flags.output_dir = tmp_dir
-                mock_flags.raw_dir = os.path.join(tmp_dir, 'raw')
-                mock_flags.clean = False
-                mock_flags.test_mode = False
-                mock_flags.years = '2024'
-                mock_flags.data_mode = 'all_groups'
-                mock_flags.keep_all_entities = True
-                mock_flags.school_code_mapping = _SAMPLE_SCHOOL_MAP
+            with patch.object(download,
+                              'download_and_process_year',
+                              side_effect=RuntimeError('network failure')):
                 with self.assertRaises(RuntimeError):
-                    download.main([])
+                    download.run(
+                        years_str='2024',
+                        data_mode='all_groups',
+                        output_dir=tmp_dir,
+                        raw_dir=os.path.join(tmp_dir, 'raw'),
+                        test_mode=False,
+                        clean=False,
+                        keep_all_entities=True,
+                        school_code_mapping=_SAMPLE_SCHOOL_MAP,
+                    )
 
-            with patch.object(process, 'FLAGS') as mock_pflags:
-                mock_pflags.input_data = os.path.join(tmp_dir,
-                                                      'nonexistent.txt')
-                mock_pflags.pv_map = os.path.join(
-                    _SCRIPT_DIR, 'config',
-                    'california_school_performance_pvmap.csv')
-                mock_pflags.school_code_mapping = _SAMPLE_SCHOOL_MAP
-                mock_pflags.drop_unmapped_places = True
-                mock_pflags.output_path = os.path.join(tmp_dir, 'out')
-                mock_pflags.output_counters = ''
-                with self.assertRaises(FileNotFoundError):
-                    process.main([])
+            with self.assertRaises(FileNotFoundError):
+                process.process_files(
+                    input_pattern=os.path.join(tmp_dir, 'nonexistent.txt'),
+                    pv_map_path=os.path.join(
+                        _SCRIPT_DIR, 'config',
+                        'california_school_performance_pvmap.csv'),
+                    school_map_path=_SAMPLE_SCHOOL_MAP,
+                    output_prefix=os.path.join(tmp_dir, 'out'),
+                    counters_path='',
+                    drop_unmapped_places=True,
+                )
 
 
 if __name__ == '__main__':
