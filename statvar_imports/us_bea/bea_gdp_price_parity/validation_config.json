@@ -15,20 +15,20 @@
     },
     {
       "rule_id": "check_freshness_and_future_dates",
-      "description": "Verifies active BEA RPP and County GDP series advance with future releases (within 3-year BEA publication lag) while preserving static 2012-2017 MSA GDP baselines.",
+      "description": "Verifies active BEA RPP and County GDP series advance with future releases (within 3-year BEA publication lag) and fail closed on unexpected StatVars.",
       "validator": "SQL_VALIDATOR",
       "params": {
-        "query": "SELECT StatVar, MinDate, MaxDate, NumPlaces, Units FROM stats",
-        "condition": "(CASE WHEN StatVar = 'grossDomesticProduct' AND NumPlaces < 1000 THEN CAST(MaxDate AS INTEGER) = 2012 AND CAST(MinDate AS INTEGER) = 2012 WHEN StatVar = 'nominalGrossDomesticProduct' THEN CAST(MaxDate AS INTEGER) = 2017 AND CAST(MinDate AS INTEGER) = 2012 WHEN StatVar = 'dc/c3wwfwyx45v5h' OR (StatVar = 'dc/p9w3tzjzyqrr' AND Units = '[USDollar]') THEN CAST(MaxDate AS INTEGER) = 2017 AND CAST(MinDate AS INTEGER) = 2013 WHEN StatVar LIKE '%RegionalPriceParity%' THEN CAST(MinDate AS INTEGER) = 2008 AND CAST(MaxDate AS INTEGER) >= 2024 AND CAST(MaxDate AS INTEGER) BETWEEN (EXTRACT(YEAR FROM CURRENT_DATE) - 3) AND EXTRACT(YEAR FROM CURRENT_DATE) WHEN StatVar = 'grossDomesticProduct' THEN CAST(MinDate AS INTEGER) = 2001 AND CAST(MaxDate AS INTEGER) >= 2024 AND CAST(MaxDate AS INTEGER) BETWEEN (EXTRACT(YEAR FROM CURRENT_DATE) - 3) AND EXTRACT(YEAR FROM CURRENT_DATE) WHEN StatVar = 'dc/p9w3tzjzyqrr' THEN CAST(MinDate AS INTEGER) = 2002 AND CAST(MaxDate AS INTEGER) >= 2024 AND CAST(MaxDate AS INTEGER) BETWEEN (EXTRACT(YEAR FROM CURRENT_DATE) - 3) AND EXTRACT(YEAR FROM CURRENT_DATE) ELSE FALSE END)"
+        "query": "SELECT StatVar, MinDate, MaxDate FROM stats",
+        "condition": "(CASE WHEN StatVar LIKE '%RegionalPriceParity%' THEN CAST(MinDate AS INTEGER) = 2008 AND CAST(MaxDate AS INTEGER) >= 2024 AND CAST(MaxDate AS INTEGER) BETWEEN (EXTRACT(YEAR FROM CURRENT_DATE) - 3) AND EXTRACT(YEAR FROM CURRENT_DATE) WHEN StatVar = 'grossDomesticProduct' THEN CAST(MinDate AS INTEGER) = 2001 AND CAST(MaxDate AS INTEGER) >= 2024 AND CAST(MaxDate AS INTEGER) BETWEEN (EXTRACT(YEAR FROM CURRENT_DATE) - 3) AND EXTRACT(YEAR FROM CURRENT_DATE) WHEN StatVar = 'dc/p9w3tzjzyqrr' THEN CAST(MinDate AS INTEGER) = 2002 AND CAST(MaxDate AS INTEGER) >= 2024 AND CAST(MaxDate AS INTEGER) BETWEEN (EXTRACT(YEAR FROM CURRENT_DATE) - 3) AND EXTRACT(YEAR FROM CURRENT_DATE) ELSE FALSE END)"
       }
     },
     {
       "rule_id": "check_min_observations_and_places",
-      "description": "Verifies each StatVar meets minimum place and observation thresholds across active and legacy inputs.",
+      "description": "Verifies each active BEA StatVar meets minimum place, observation, and date-coverage thresholds.",
       "validator": "SQL_VALIDATOR",
       "params": {
         "query": "SELECT StatVar, NumPlaces, NumObservations, NumObservationsDates FROM stats",
-        "condition": "NumPlaces >= 380 AND (CASE WHEN StatVar = 'grossDomesticProduct' AND NumPlaces < 1000 THEN NumObservations >= 380 AND NumObservationsDates >= 1 ELSE NumObservations >= 1900 AND NumObservationsDates >= 5 END)"
+        "condition": "NumPlaces >= 400 AND NumObservations >= 7000 AND NumObservationsDates >= 15"
       }
     },
     {

@@ -55,7 +55,6 @@ class BeaGdpPriceParityTest(unittest.TestCase):
                 'bea_years_pvmap.csv',
                 'bea_rpp_pvmap.csv',
                 'bea_county_gdp_pvmap.csv',
-                'bea_metro_gdp_pvmap.csv',
         ):
             fpath = os.path.join(_PACKAGE_DIR, fname)
             with open(fpath, 'r', encoding='utf-8') as f:
@@ -74,7 +73,6 @@ class BeaGdpPriceParityTest(unittest.TestCase):
         for fname in (
                 'bea_rpp_metadata.csv',
                 'bea_county_gdp_metadata.csv',
-                'bea_metro_gdp_metadata.csv',
         ):
             fpath = os.path.join(_PACKAGE_DIR, fname)
             with open(fpath, 'r', encoding='utf-8') as f:
@@ -88,8 +86,6 @@ class BeaGdpPriceParityTest(unittest.TestCase):
                 'MARPP_MSA_sample_input.csv',
                 'CAGDP1__ALL_AREAS_sample_input.csv',
                 'CAGDP11__ALL_AREAS_sample_input.csv',
-                'metro_gdp.csv',
-                'metro_nominal_gdp.csv',
         ):
             fpath = Path(_SAMPLE_INPUT_DIR) / fname
             self.assertTrue(fpath.is_file(), f'Missing sample input {fname}')
@@ -102,8 +98,6 @@ class BeaGdpPriceParityTest(unittest.TestCase):
                 'bea_county_gdp_sample_output.tmcf',
                 'bea_county_gdp_growth_sample_output.csv',
                 'bea_county_gdp_growth_sample_output.tmcf',
-                'bea_metro_gdp_sample_output.csv',
-                'bea_metro_gdp_sample_output.tmcf',
         ):
             fpath = Path(_SAMPLE_OUTPUT_DIR) / fname
             self.assertTrue(fpath.is_file(), f'Missing sample output {fname}')
@@ -205,42 +199,6 @@ class BeaGdpPriceParityTest(unittest.TestCase):
                     session=session,
                 )
             self.assertEqual(session.get.call_count, 1)
-
-    @mock.patch.object(download.storage, 'Client')
-    def test_copy_historical_data_from_gcs(self, mock_client_cls):
-        with tempfile.TemporaryDirectory() as tmp_dir:
-            mock_client = mock.MagicMock()
-            mock_client_cls.return_value = mock_client
-            mock_bucket = mock.MagicMock()
-            mock_client.bucket.return_value = mock_bucket
-            mock_blob = mock.MagicMock()
-            mock_bucket.blob.return_value = mock_blob
-
-            def fake_download(dest_filename, timeout=300):
-                del timeout
-                Path(dest_filename).write_text(
-                    'geoid\tyear\tgrossDomesticProduct\nC10180\t2012\t6397000000\n',
-                    encoding='utf-8',
-                )
-
-            mock_blob.download_to_filename.side_effect = fake_download
-
-            copied = download.copy_historical_data_from_gcs(output_dir=tmp_dir,
-                                                            skip_existing=True)
-            self.assertEqual(len(copied), len(download.HISTORICAL_FILENAMES))
-            for fname in download.HISTORICAL_FILENAMES:
-                self.assertTrue((Path(tmp_dir) / fname).exists())
-
-            mock_client_cls.reset_mock()
-            copied_again = download.copy_historical_data_from_gcs(
-                output_dir=tmp_dir, skip_existing=True)
-            self.assertEqual(copied_again, copied)
-            mock_client_cls.assert_not_called()
-
-            copied_overwrite = download.copy_historical_data_from_gcs(
-                output_dir=tmp_dir, skip_existing=False)
-            self.assertEqual(copied_overwrite, copied)
-            mock_client_cls.assert_called_once()
 
 
 if __name__ == '__main__':

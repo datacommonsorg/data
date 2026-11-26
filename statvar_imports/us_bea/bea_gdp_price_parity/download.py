@@ -11,19 +11,20 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Downloads live BEA Regional ZIP archives and historical MSA GDP GCS baselines.
+"""Downloads live BEA Regional ZIP archives (MARPP, SARPP, CAGDP1, CAGDP11).
 
 Uses a dedicated downloader rather than util/download_util_script.py so that
 corrupted or soft-404 HTML responses fail via explicit exceptions (instead of
 boolean return values / logging.fatal), raw .zip archives and extracted CSVs
 are published atomically, and superseded year-ranged CSVs are cleaned up.
 All downloaded source files are preserved untouched for stat_var_processor.py.
+Historical MSA GDP (2012-2017) is preserved as pre-generated node MCF under the
+import's GCS `historic/` folder and ingested automatically by the executor.
 """
 
 import glob
 import io
 import os
-from pathlib import Path
 import time
 from urllib.parse import urlparse
 import zipfile
@@ -31,10 +32,7 @@ import zipfile
 from absl import app
 from absl import flags
 from absl import logging
-from google.api_core import exceptions as google_exceptions
-from google.cloud import storage
 import requests
-from retry import retry
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -47,16 +45,6 @@ def _define_flags() -> None:
         'bea_raw_dir',
         os.path.join(_SCRIPT_DIR, 'input_files', 'raw'),
         'Directory to store downloaded live BEA ZIP archives and extracted CSVs.',
-    )
-    flags.DEFINE_string(
-        'bea_baseline_dir',
-        os.path.join(_SCRIPT_DIR, 'input_files', 'baseline'),
-        'Directory to store historical MSA GDP baseline CSV files from GCS.',
-    )
-    flags.DEFINE_boolean(
-        'bea_copy_historical',
-        True,
-        'Whether to fetch historical MSA GDP baseline CSV files from GCS.',
     )
 
 
@@ -73,24 +61,7 @@ BEA_LIVE_ZIPS = {
     ),
 }
 
-GCS_BUCKET_NAME = 'datacommons_public'
-GCS_HISTORICAL_PREFIX = 'unresolved_mcf/bea'
-HISTORICAL_FILENAMES = (
-    'metro_gdp.csv',
-    'metro_nominal_gdp.csv',
-)
-
 _RETRYABLE_STATUS_CODES = frozenset({408, 429, 500, 502, 503, 504})
-_TRANSIENT_GCS_EXCEPTIONS = (
-    google_exceptions.GatewayTimeout,
-    google_exceptions.InternalServerError,
-    google_exceptions.RetryError,
-    google_exceptions.ServiceUnavailable,
-    google_exceptions.TooManyRequests,
-    requests.exceptions.ConnectionError,
-    requests.exceptions.Timeout,
-    TimeoutError,
-)
 
 
 def _write_bytes_atomic(target_path: str, payload: bytes) -> None:
@@ -104,78 +75,6 @@ def _write_bytes_atomic(target_path: str, payload: bytes) -> None:
         if os.path.exists(tmp_path):
             os.unlink(tmp_path)
         raise
-
-
-def _has_data_rows(filepath: Path) -> bool:
-    """Returns True if filepath exists and has at least one data row after header."""
-    if not filepath.exists() or filepath.stat().st_size == 0:
-        return False
-    try:
-        with open(filepath, 'r', encoding='utf-8', errors='replace') as f:
-            header = f.readline()
-            if not header:
-                return False
-            for line in f:
-                if line.strip():
-                    return True
-    except OSError:
-        return False
-    return False
-
-
-@retry(tries=3, delay=5, backoff=2, exceptions=_TRANSIENT_GCS_EXCEPTIONS)
-def copy_historical_data_from_gcs(
-    output_dir: str,
-    gcs_bucket: str = GCS_BUCKET_NAME,
-    gcs_prefix: str = GCS_HISTORICAL_PREFIX,
-    skip_existing: bool = True,
-) -> list[str]:
-    """Copies historical MSA GDP baseline CSVs untouched from GCS to output_dir."""
-    os.makedirs(output_dir, exist_ok=True)
-    prefix = gcs_prefix.rstrip('/')
-    copied_files: list[str] = []
-    client = None
-
-    for filename in HISTORICAL_FILENAMES:
-        dest_path = Path(output_dir) / filename
-        if skip_existing and _has_data_rows(dest_path):
-            logging.info(
-                'Skipping GCS copy for historical BEA baseline: %s already exists in %s.',
-                filename,
-                output_dir,
-            )
-            copied_files.append(str(dest_path))
-            continue
-
-        blob_path = f'{prefix}/{filename}'
-        logging.info(
-            'Copying historical BEA baseline from gs://%s/%s to %s...',
-            gcs_bucket,
-            blob_path,
-            dest_path,
-        )
-        temp_path = Path(f'{dest_path}.tmp')
-        try:
-            if client is None:
-                client = storage.Client()
-            bucket = client.bucket(gcs_bucket)
-            blob = bucket.blob(blob_path)
-            blob.download_to_filename(str(temp_path), timeout=300)
-            if not _has_data_rows(temp_path):
-                raise ValueError(
-                    f'Downloaded GCS file gs://{gcs_bucket}/{blob_path} contains no observation data.'
-                )
-            os.replace(temp_path, dest_path)
-        except Exception:
-            if temp_path.exists():
-                temp_path.unlink()
-            raise
-
-        logging.info('Copied gs://%s/%s -> %s', gcs_bucket, blob_path,
-                     dest_path)
-        copied_files.append(str(dest_path))
-
-    return copied_files
 
 
 def download_and_extract(
@@ -270,9 +169,6 @@ def download_and_extract(
 
 def main(argv):
     del argv
-    if FLAGS.bea_copy_historical:
-        copy_historical_data_from_gcs(output_dir=FLAGS.bea_baseline_dir,
-                                      skip_existing=False)
     with requests.Session() as session:
         for name, (url, prefix) in BEA_LIVE_ZIPS.items():
             logging.info('Downloading live BEA archive %s...', name)
