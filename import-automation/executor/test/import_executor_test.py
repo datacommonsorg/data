@@ -116,7 +116,8 @@ class ImportExecutorTest(unittest.TestCase):
                     proc = subprocess.run([interpreter_path, script.name],
                                           capture_output=True,
                                           text=True,
-                                          timeout=2)
+                                          timeout=2,
+                                          check=False)
                     self.assertEqual(0, proc.returncode)
                     self.assertEqual('123\n', proc.stdout)
 
@@ -136,7 +137,8 @@ class ImportExecutorTest(unittest.TestCase):
         process = subprocess.run('printf "out" & >&2 printf "err" & exit 1',
                                  shell=True,
                                  text=True,
-                                 capture_output=True)
+                                 capture_output=True,
+                                 check=False)
         message = import_executor._construct_process_message('message', process)
         expected = (
             'message\n'
@@ -150,7 +152,8 @@ class ImportExecutorTest(unittest.TestCase):
         process = subprocess.run('exit 0',
                                  shell=True,
                                  text=True,
-                                 capture_output=True)
+                                 capture_output=True,
+                                 check=False)
         message = import_executor._construct_process_message('message', process)
         expected = ('message\n'
                     '[Subprocess command]: exit 0\n'
