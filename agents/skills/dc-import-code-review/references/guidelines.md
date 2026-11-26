@@ -189,6 +189,13 @@ Then apply these rules:
   `validation_config_file` on its import specification in `manifest.json`, and
   that the path exists relative to the import directory; otherwise auto-refresh
   runs only the default validations.
+- Omit rules in `validation_config.json` that repeat the global defaults in
+  `tools/import_validation/validation_config.json` without changing `params`,
+  `scope`, or `enabled`.
+- For place and schema imports, verify that `deleted_schema_count` is `0` in
+  `differ_summary.json`; for place imports, suggest adding a `GOLDENS_CHECK`
+  rule in `validation_config.json` with a sample of place nodes and properties,
+  since `DELETED_RECORDS_PERCENT` checks only observation deletion counts.
 - Resolve local `GOLDENS_CHECK` paths relative to the validation config file
   passed to the runner, and verify that every `golden_files` path or glob
   matches at least one intended golden file.
