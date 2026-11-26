@@ -290,7 +290,7 @@ def _deduplicate_facility_rows(table, rows):
         rows_by_id.setdefault(ghg_id, []).append((year, idx, dict(row)))
 
     deduped = []
-    for ghg_id, entries in rows_by_id.items():
+    for _ghg_id, entries in rows_by_id.items():
         entries.sort(key=lambda item: (item[0], item[1]), reverse=True)
         merged = dict(entries[0][2])
         for _, _, older_row in entries[1:]:

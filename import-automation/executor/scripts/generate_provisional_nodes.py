@@ -207,7 +207,7 @@ def generate_provisional_nodes(scan_dir,
     logging.info(f"Scanning directory: {root_dir}")
 
     # Walk through the directory to process each .mcf file
-    for dirpath, dirnames, filenames in os.walk(root_dir):
+    for dirpath, _dirnames, filenames in os.walk(root_dir):
         for filename in filenames:
             if ".mcf" not in filename:
                 continue

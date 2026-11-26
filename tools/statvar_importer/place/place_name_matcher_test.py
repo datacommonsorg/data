@@ -40,7 +40,7 @@ class PlaceNameMatcherTest(unittest.TestCase):
         matches = p.lookup('Delhi')
         # Expect multiple matches for the name
         self.assertTrue(len(matches) > 1)
-        for name, dcid in matches:
+        for name, _dcid in matches:
             self.assertIn('Delhi', name)
         self.assertIn(('Delhi, Texas Texas', 'wikidataId/Q48851198'), matches)
         self.assertIn(('Delhi', 'wikidataId/Q1353'), matches)
@@ -76,7 +76,7 @@ class PlaceNameMatcherTest(unittest.TestCase):
         matches = p.lookup('Delhi')
         # Expect multiple matches for the name
         self.assertTrue(len(matches) > 1)
-        for name, dcid in matches:
+        for name, _dcid in matches:
             self.assertIn('Delhi', name)
         self.assertIn(('Delhi', 'wikidataId/Q1353'), matches)
         self.assertIn(

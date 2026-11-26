@@ -187,7 +187,7 @@ class CountryBoundariesMcfGenerator:
             mcf_path = MCF_PATH.format(MCF_OUT_FOLDER=self.mcf_dir,
                                        dp_level=dp_level)
             with open(mcf_path, 'w') as mcf_fp:
-                for col, country_codes in col_to_code.items():
+                for _col, country_codes in col_to_code.items():
                     for country_code in country_codes:
                         fname = self._geojson_filename(country_code, dp_level)
                         with open(fname) as geo_fp:

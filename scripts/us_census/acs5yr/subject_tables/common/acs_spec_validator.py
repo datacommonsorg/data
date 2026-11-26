@@ -706,7 +706,7 @@ def test_CSVfile_list(csv_path_list: list,
 
     # assume data overlays file if insufficient information is present
     if len(is_metadata) < len(csv_path_list):
-        for i in range(0, (len(csv_path_list) - len(is_metadata))):
+        for _ in range(0, (len(csv_path_list) - len(is_metadata))):
             is_metadata.append(False)
 
     print('Testing ', csv_path_list, 'against spec at', spec_path)
