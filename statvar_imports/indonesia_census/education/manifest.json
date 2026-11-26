@@ -9,8 +9,8 @@
             "provenance_description": "Statistics Indonesia (Badan Pusat Statistik - BPS) - Literacy Rate and Schools, Teachers, and Students by Province.",
             "scripts": [
                 "download.py --output_dir=input_files",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/indonesia_literacy_input.csv --pv_map=indonesia_education_pvmap.csv --config_file=indonesia_education_metadata.csv --places_resolved_csv=indonesia_education_places_resolved.csv --output_columns=observationAbout,observationDate,value,variableMeasured,unit,scalingFactor --output_path=output_files/indonesia_literacy_output --output_counters=counters/indonesia_literacy_counters.csv",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/indonesia_schools_input.csv --pv_map=indonesia_education_pvmap.csv --config_file=indonesia_education_metadata.csv --places_resolved_csv=indonesia_education_places_resolved.csv --output_columns=observationAbout,observationDate,value,variableMeasured --output_path=output_files/indonesia_schools_output --output_counters=counters/indonesia_schools_counters.csv"
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/indonesia_literacy_input.csv --pv_map=indonesia_education_pvmap.csv --config_file=indonesia_education_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_columns=observationAbout,observationDate,value,variableMeasured,unit,scalingFactor --output_path=output_files/indonesia_literacy_output --output_counters=counters/indonesia_literacy_counters.csv",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/indonesia_schools_input.csv --pv_map=indonesia_education_pvmap.csv --config_file=indonesia_education_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_columns=observationAbout,observationDate,value,variableMeasured --output_path=output_files/indonesia_schools_output --output_counters=counters/indonesia_schools_counters.csv"
             ],
             "import_inputs": [
                 {
@@ -20,10 +20,7 @@
                 {
                     "template_mcf": "output_files/indonesia_schools_output.tmcf",
                     "cleaned_csv": "output_files/indonesia_schools_output.csv",
-                    "node_mcf": [
-                        "indonesia_education_schema.mcf",
-                        "output_files/indonesia_schools_output*.mcf"
-                    ]
+                    "node_mcf": "output_files/indonesia_schools_output*.mcf"
                 }
             ],
             "source_files": [

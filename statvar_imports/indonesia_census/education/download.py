@@ -555,17 +555,19 @@ def request_bps_bytes(
         f'Failed to download {redacted_url}: {redact_api_key(last_error)}')
 
 
-def _load_valid_places(places_csv: str | None = None) -> set[str]:
-    """Loads normalized valid Indonesian province/country names."""
-    csv_path = places_csv or os.path.join(
-        _CODEDIR, 'indonesia_education_places_resolved.csv')
+def _load_valid_places(pvmap_csv: str | None = None) -> set[str]:
+    """Loads normalized valid Indonesian province/country names from PV map."""
+    csv_path = pvmap_csv or os.path.join(_CODEDIR,
+                                         'indonesia_education_pvmap.csv')
     valid: set[str] = set()
     if os.path.exists(csv_path):
         with open(csv_path, mode='r', encoding='utf-8') as fp:
             for row in csv.DictReader(fp):
-                place = normalize_place_label(row.get('place_name', ''))
-                if place:
-                    valid.add(place)
+                key = (row.get('key') or '').strip()
+                if key.startswith('observationAbout:'):
+                    place = normalize_place_label(key.split(':', 1)[1])
+                    if place:
+                        valid.add(place)
     return valid
 
 

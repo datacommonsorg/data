@@ -79,3 +79,42 @@ Jumlah Murid SMK (Negeri+Swasta),measuredProperty,count,schoolManagement,UnderMi
 "Jumlah Mahasiswa di Bawah Kementerian Riset, Teknologi dan Pendidikan Tinggi - Negeri",measuredProperty,count,schoolManagement,UnderMinistryOfResearchTechnologyAndHigherEducation,populationType,Student,establishmentOwnership,LocalGovernmentOwned,value,{Number},alternateName,"""Jumlah Mahasiswa di Bawah Kementerian Riset, Teknologi dan Pendidikan Tinggi - Negeri@id"""
 "Jumlah Mahasiswa di Bawah Kementerian Riset, Teknologi dan Pendidikan Tinggi - Swasta",measuredProperty,count,schoolManagement,UnderMinistryOfResearchTechnologyAndHigherEducation,populationType,Student,establishmentOwnership,PrivatelyOwned,value,{Number},alternateName,"""Jumlah Mahasiswa di Bawah Kementerian Riset, Teknologi dan Pendidikan Tinggi - Swasta@id"""
 "Jumlah Mahasiswa di Bawah Kementerian Riset, Teknologi dan Pendidikan Tinggi - Negeri + Swasta",measuredProperty,count,schoolManagement,UnderMinistryOfResearchTechnologyAndHigherEducation,populationType,Student,establishmentOwnership,LocalGovernmentOwned__PrivatelyOwned,value,{Number},alternateName,"""Jumlah Mahasiswa di Bawah Kementerian Riset, Teknologi dan Pendidikan Tinggi - Negeri + Swasta@id"""
+observationAbout:ACEH,observationAbout,dcid:wikidataId/Q1823
+observationAbout:BALI,observationAbout,dcid:wikidataId/Q3125978
+observationAbout:BANTEN,observationAbout,dcid:wikidataId/Q3540
+observationAbout:BENGKULU,observationAbout,dcid:wikidataId/Q1890
+observationAbout:DI YOGYAKARTA,observationAbout,dcid:wikidataId/Q3741
+observationAbout:DKI JAKARTA,observationAbout,dcid:wikidataId/Q3630
+observationAbout:GORONTALO,observationAbout,dcid:wikidataId/Q5067
+observationAbout:INDONESIA,observationAbout,dcid:country/IDN
+observationAbout:JAMBI,observationAbout,dcid:wikidataId/Q2051
+observationAbout:JAWA BARAT,observationAbout,dcid:wikidataId/Q3724
+observationAbout:JAWA TENGAH,observationAbout,dcid:wikidataId/Q3557
+observationAbout:JAWA TIMUR,observationAbout,dcid:wikidataId/Q3586
+observationAbout:KALIMANTAN BARAT,observationAbout,dcid:wikidataId/Q3916
+observationAbout:KALIMANTAN SELATAN,observationAbout,dcid:wikidataId/Q3906
+observationAbout:KALIMANTAN TENGAH,observationAbout,dcid:wikidataId/Q3891
+observationAbout:KALIMANTAN TIMUR,observationAbout,dcid:wikidataId/Q3899
+observationAbout:KALIMANTAN UTARA,observationAbout,dcid:wikidataId/Q3903
+observationAbout:KEPULAUAN BANGKA BELITUNG,observationAbout,dcid:wikidataId/Q1866
+observationAbout:KEPULAUAN RIAU,observationAbout,dcid:wikidataId/Q2223
+observationAbout:LAMPUNG,observationAbout,dcid:wikidataId/Q2110
+observationAbout:MALUKU,observationAbout,dcid:wikidataId/Q5093
+observationAbout:MALUKU UTARA,observationAbout,dcid:wikidataId/Q5094
+observationAbout:NUSA TENGGARA BARAT,observationAbout,dcid:wikidataId/Q5062
+observationAbout:NUSA TENGGARA TIMUR,observationAbout,dcid:wikidataId/Q5061
+observationAbout:PAPUA,observationAbout,dcid:wikidataId/Q5095
+observationAbout:PAPUA BARAT,observationAbout,dcid:wikidataId/Q5096
+observationAbout:PAPUA BARAT DAYA,observationAbout,dcid:wikidataId/Q115253263
+observationAbout:PAPUA PEGUNUNGAN,observationAbout,dcid:wikidataId/Q112810104
+observationAbout:PAPUA SELATAN,observationAbout,dcid:wikidataId/Q61439296
+observationAbout:PAPUA TENGAH,observationAbout,dcid:wikidataId/Q12486766
+observationAbout:RIAU,observationAbout,dcid:wikidataId/Q2175
+observationAbout:SULAWESI BARAT,observationAbout,dcid:wikidataId/Q5082
+observationAbout:SULAWESI SELATAN,observationAbout,dcid:wikidataId/Q5078
+observationAbout:SULAWESI TENGAH,observationAbout,dcid:wikidataId/Q5065
+observationAbout:SULAWESI TENGGARA,observationAbout,dcid:wikidataId/Q5075
+observationAbout:SULAWESI UTARA,observationAbout,dcid:wikidataId/Q5068
+observationAbout:SUMATERA BARAT,observationAbout,dcid:wikidataId/Q2772
+observationAbout:SUMATERA SELATAN,observationAbout,dcid:wikidataId/Q2271
+observationAbout:SUMATERA UTARA,observationAbout,dcid:wikidataId/Q2140

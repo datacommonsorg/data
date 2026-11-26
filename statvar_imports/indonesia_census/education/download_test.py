@@ -591,6 +591,14 @@ class DownloadTest(unittest.TestCase):
             )
         self.assertIn('MTs', str(ctx.exception))
 
+    def test_load_valid_places_reads_pvmap(self):
+        valid_places = download._load_valid_places()
+        self.assertEqual(len(valid_places), 39)
+        self.assertIn('INDONESIA', valid_places)
+        self.assertIn('ACEH', valid_places)
+        self.assertIn('DI YOGYAKARTA', valid_places)
+        self.assertIn('PAPUA BARAT DAYA', valid_places)
+
 
 if __name__ == '__main__':
     unittest.main()
