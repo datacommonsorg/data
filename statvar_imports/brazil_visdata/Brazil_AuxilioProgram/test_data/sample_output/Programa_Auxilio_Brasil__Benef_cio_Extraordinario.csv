@@ -1,0 +1,8 @@
+observationAbout,observationDate,value,variableMeasured,scalingFactor,observationPeriod,measurementQualifier,unit
+country/BRA,2021-12,206.1,dcid:Mean_Amount_HouseHold_BrazilAuxilioBrasilProgram_ExtraordinaryBenefit,,P1M,Monthly,BRL
+country/BRA,2022-01,216.4,dcid:Mean_Amount_HouseHold_BrazilAuxilioBrasilProgram_ExtraordinaryBenefit,,P1M,Monthly,BRL
+country/BRA,2022-02,213.93,dcid:Mean_Amount_HouseHold_BrazilAuxilioBrasilProgram_ExtraordinaryBenefit,,P1M,Monthly,BRL
+country/BRA,2022-03,214.65,dcid:Mean_Amount_HouseHold_BrazilAuxilioBrasilProgram_ExtraordinaryBenefit,,P1M,Monthly,BRL
+country/BRA,2022-04,215.25,dcid:Mean_Amount_HouseHold_BrazilAuxilioBrasilProgram_ExtraordinaryBenefit,,P1M,Monthly,BRL
+country/BRA,2022-05,216.29,dcid:Mean_Amount_HouseHold_BrazilAuxilioBrasilProgram_ExtraordinaryBenefit,,P1M,Monthly,BRL
+country/BRA,2022-06,219.32,dcid:Mean_Amount_HouseHold_BrazilAuxilioBrasilProgram_ExtraordinaryBenefit,,P1M,Monthly,BRL

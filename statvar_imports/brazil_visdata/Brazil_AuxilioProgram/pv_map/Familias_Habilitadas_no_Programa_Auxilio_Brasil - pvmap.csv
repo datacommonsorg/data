@@ -1,0 +1,5 @@
+key,prop,val,p1,v1,p2,v2,p3,v3,p4,v4
+Referência,observationDate,{Data},observationAbout,country/BRA,benefitProgram,Brazil_AuxilioBrasilProgram,populationType,HouseHold,observationPeriod,P1M
+Total de famílias habilitadas ao Programa Auxílio Brasil,value,{Number},householdType,QualifiedFamily,,,name,"""Total number of families eligible for the Auxilio Brasil Program""",alternateName,"""Número total de famílias elegíveis ao Programa Auxilio Brasil@pt"""
+Concessões do Programa Auxílio Brasil,value,{Number},,,discount,Concessions,name,"""Total number of families got conscessions from Auxilio Brasil Program""",alternateName,"""Total de famílias que receberam concessões do Programa Auxilio Brasil@pt"""
+Saldo de famílias habilitadas ao Programa Auxílio Brasil pós-concessão,value,{Number},householdType,QualifiedFamily,discount,PostConcessions,name,"""Total number of remaining families after conscessions from Auxilio Brasil Program""",alternateName,"""Número total de famílias remanescentes após concessões do Programa Auxilio Brasil@pt"""

@@ -1,0 +1,8 @@
+key,prop,val,p1,v1,p2,v2,p3,v3,p4,v4
+Referência,observationDate,{Data},,,benefitProgram,Brazil_AuxilioBrasilProgram,populationType,Household,observationPeriod,P1M
+Código,observationAbout,{Data},,,,,,,,
+Bloqueio,value,{Number},benefitsStatus,Blocked,name,"""The total number of families blocked within the Auxílio Brasil program""",alternateName,"""O total de famílias bloqueadas dentro do programa Auxílio Brasil@pt""",,
+Cancelamento,value,{Number},benefitsStatus,Canceled,name,"""The total number of families canceled within the Auxílio Brasil program""",alternateName,"""O total de famílias canceladas dentro do programa Auxílio Brasil@pt""",,
+Liberação,value,{Number},benefitsStatus,Released,name,"""The total number of families released from the Auxílio Brasil program""",alternateName,"""O total de famílias liberadas do programa Auxílio Brasil@pt""",,
+Suspensão,value,{Number},benefitsStatus,Suspended,name,"""The total number of families suspended within the Auxílio Brasil program""",alternateName,"""O total de famílias suspensas dentro do programa Auxílio Brasil@pt""",,
+Concessões (novas),value,{Number},benefitsStatus,Concessions,name,"""The total number of families got concessions within the Auxílio Brasil program""",alternateName,"""O total de famílias que receberam concessões do programa Auxílio Brasil@pt""",,
