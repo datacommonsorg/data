@@ -83,7 +83,8 @@ class ImportValidationTest(unittest.TestCase):
         ],
                                 capture_output=True,
                                 text=True,
-                                cwd=self.project_root)
+                                cwd=self.project_root,
+                                check=False)
 
         # 3. Assert success
         self.assertEqual(result.returncode, 0,
@@ -120,7 +121,8 @@ class ImportValidationTest(unittest.TestCase):
         ],
                                 capture_output=True,
                                 text=True,
-                                cwd=self.project_root)
+                                cwd=self.project_root,
+                                check=False)
 
         # 3. Assert failure
         self.assertEqual(result.returncode, 1,
@@ -151,7 +153,8 @@ class ImportValidationTest(unittest.TestCase):
         ],
                                 capture_output=True,
                                 text=True,
-                                cwd=self.project_root)
+                                cwd=self.project_root,
+                                check=False)
 
         # 3. Assert that the script exits with an error
         self.assertNotEqual(result.returncode, 0,
@@ -193,7 +196,8 @@ class ImportValidationTest(unittest.TestCase):
         ],
                                 capture_output=True,
                                 text=True,
-                                cwd=self.project_root)
+                                cwd=self.project_root,
+                                check=False)
 
         # 4. Assert success, because the failing StatVars were filtered out
         self.assertEqual(result.returncode, 0,
@@ -238,7 +242,8 @@ class ImportValidationTest(unittest.TestCase):
         ],
                                 capture_output=True,
                                 text=True,
-                                cwd=self.project_root)
+                                cwd=self.project_root,
+                                check=False)
 
         # 4. Assert failure and check the output
         self.assertEqual(result.returncode, 1,
@@ -282,7 +287,8 @@ class ImportValidationTest(unittest.TestCase):
         ],
                                 capture_output=True,
                                 text=True,
-                                cwd=self.project_root)
+                                cwd=self.project_root,
+                                check=False)
 
         # 4. Assert that the validation PASSED, because the check ran and 0 > -1
         self.assertEqual(
@@ -321,7 +327,8 @@ class ImportValidationTest(unittest.TestCase):
         ],
                                 capture_output=True,
                                 text=True,
-                                cwd=self.project_root)
+                                cwd=self.project_root,
+                                check=False)
 
         # 3. Assert that the script does not exit with a fatal error
         # It should pass because an empty (missing) differ file has 0 deleted
@@ -360,7 +367,8 @@ class ImportValidationTest(unittest.TestCase):
         ],
                                 capture_output=True,
                                 text=True,
-                                cwd=self.project_root)
+                                cwd=self.project_root,
+                                check=False)
 
         self.assertEqual(result.returncode, 0,
                          f"Script should have passed. Stderr: {result.stderr}")
@@ -394,7 +402,8 @@ class ImportValidationTest(unittest.TestCase):
         ],
                                      capture_output=True,
                                      text=True,
-                                     cwd=self.project_root)
+                                     cwd=self.project_root,
+                                     check=False)
 
         self.assertEqual(fail_result.returncode, 1)
         output_df = pd.read_csv(self.output_path)
@@ -411,7 +420,8 @@ class ImportValidationTest(unittest.TestCase):
         ],
                                      capture_output=True,
                                      text=True,
-                                     cwd=self.project_root)
+                                     cwd=self.project_root,
+                                     check=False)
 
         self.assertEqual(
             pass_result.returncode, 0,
