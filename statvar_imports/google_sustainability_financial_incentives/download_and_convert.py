@@ -35,17 +35,20 @@ from json_to_csv import file_json_to_csv
 _URL_HASH_DIGEST_SIZE = 8
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string('gcs_bucket', 'datacommons_public',
-                    'GCS bucket name containing the data')
-flags.DEFINE_string('gcs_base_path',
-                    'source_csv/sustainability_financial_incentives',
-                    'Base path in GCS bucket')
-flags.DEFINE_string('input_files', 'input_files',
-                    'Local directory to store downloaded files')
-flags.DEFINE_string('output_csv', 'financial_incentives_data.csv',
-                    'Output CSV file name')
-flags.DEFINE_string('json_filename', 'financial_incentives_prod_data.json',
-                    'JSON file name to download')
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('gcs_bucket', 'datacommons_public',
+                        'GCS bucket name containing the data')
+    flags.DEFINE_string('gcs_base_path',
+                        'source_csv/sustainability_financial_incentives',
+                        'Base path in GCS bucket')
+    flags.DEFINE_string('input_files', 'input_files',
+                        'Local directory to store downloaded files')
+    flags.DEFINE_string('output_csv', 'financial_incentives_data.csv',
+                        'Output CSV file name')
+    flags.DEFINE_string('json_filename', 'financial_incentives_prod_data.json',
+                        'JSON file name to download')
 
 
 def find_latest_dated_folder(bucket_name: str, base_path: str) -> Optional[str]:
@@ -258,4 +261,5 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

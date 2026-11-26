@@ -320,7 +320,7 @@ def _validate_ast_safety(node: ast.AST, allowed_callables: set):
 
 
 def evaluate_statement(eval_str: str,
-                       variables: dict = {},
+                       variables: dict | None = None,
                        functions: dict = EVAL_GLOBALS) -> (str, str):
     """Evaluates a Python expression and returns the result safely.
 
@@ -360,6 +360,8 @@ def evaluate_statement(eval_str: str,
         >>> evaluate_statement('name = 1 + "2"')
         ('name', None)
     """
+    if variables is None:
+        variables = {}
     eval_str = eval_str.strip() if eval_str else ''
     if not eval_str:
         return ('', None)

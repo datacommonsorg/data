@@ -25,20 +25,22 @@ from absl import app
 from absl import flags
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('database',
-                    'speclist.txt',
-                    'database file path.',
-                    short_name='f')
 
-flags.DEFINE_string('old_mcf',
-                    'Species.mcf',
-                    'Old species file path.',
-                    short_name='p')
 
-flags.DEFINE_string('output_mcf',
-                    'newSpecies.mcf',
-                    'The output data mcf file path.',
-                    short_name='m')
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('database',
+                        'speclist.txt',
+                        'database file path.',
+                        short_name='f')
+    flags.DEFINE_string('old_mcf',
+                        'Species.mcf',
+                        'Old species file path.',
+                        short_name='p')
+    flags.DEFINE_string('output_mcf',
+                        'newSpecies.mcf',
+                        'The output data mcf file path.',
+                        short_name='m')
 
 
 def get_mcf_piece(code, info, seen_name_to_dcid):
@@ -208,4 +210,5 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

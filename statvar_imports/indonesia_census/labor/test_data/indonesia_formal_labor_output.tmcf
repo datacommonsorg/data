@@ -1,0 +1,7 @@
+Node: E:indonesia_formal_labor_output->E0
+observationAbout: C:indonesia_formal_labor_output->observationAbout
+observationDate: C:indonesia_formal_labor_output->observationDate
+value: C:indonesia_formal_labor_output->value
+variableMeasured: C:indonesia_formal_labor_output->variableMeasured
+unit: C:indonesia_formal_labor_output->unit
+typeOf: dcs:StatVarObservation

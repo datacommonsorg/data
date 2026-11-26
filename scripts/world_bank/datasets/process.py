@@ -27,16 +27,21 @@ import file_util
 MEASUREMENT_METHOD = "WorldBank_WDI_CSV"
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string(
-    "gs_path",
-    "gs://unresolved_mcf/world_bank/datasets/observations/historical_retained/",
-    "historical file path")
-flags.DEFINE_string("historical_file", "bq-results-20250423.csv",
-                    "historical file name")
-flags.DEFINE_string(
-    'historical_gcs_path',
-    'gs://unresolved_mcf/world_bank/datasets/deleted_historical_data_06_2026.csv',
-    'GCS path to the deleted historical data CSV file')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        "gs_path",
+        "gs://unresolved_mcf/world_bank/datasets/observations/historical_retained/",
+        "historical file path")
+    flags.DEFINE_string("historical_file", "bq-results-20250423.csv",
+                        "historical file name")
+    flags.DEFINE_string(
+        'historical_gcs_path',
+        'gs://unresolved_mcf/world_bank/datasets/deleted_historical_data_06_2026.csv',
+        'GCS path to the deleted historical data CSV file')
+
 
 DCID_MAP = {}
 IGNORE_DCIDS = set()
@@ -252,4 +257,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

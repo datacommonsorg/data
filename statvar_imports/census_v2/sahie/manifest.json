@@ -9,18 +9,23 @@
             "provenance_description": "The Small Area Health Insurance Estimates (SAHIE) program provides the only up-to-date, state-based estimates of health insurance coverage for all counties in the United States.",
             "scripts": [
                 "download_script.py",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/*.csv --pv_map=census_sahie_pv_map.csv --config_file=census_sahie_metadata.csv --output_path=output_files/census_sahie --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/*.csv --pv_map=census_sahie_pv_map.csv --config_file=census_sahie_metadata.csv --output_path=output_files/census_sahie --output_counters=output_files/census_sahie_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
             ],
             "import_inputs": [
                 {
                     "template_mcf": "output_files/census_sahie.tmcf",
+                    "node_mcf": "output_files/*.mcf",
                     "cleaned_csv": "output_files/census_sahie.csv"
                 }
             ],
             "source_files": [
-                "input_files/*.csv"
+                "raw_files/*.csv",
+                "input_files/*.csv",
+                "output_files/census_sahie_counters.csv",
+                "validation_config.json"
             ],
             "cron_schedule": "0 11 * * 4",
+            "validation_config_file": "validation_config.json",
             "_comment": "Schedule: Weekly on Thursday at 11:00 UTC",
             "resource_limits": {
                 "cpu": 16,

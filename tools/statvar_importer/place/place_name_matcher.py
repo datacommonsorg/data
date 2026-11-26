@@ -105,8 +105,12 @@ class PlaceNameMatcher:
 
     def __init__(self,
                  place_file: str = '',
-                 places_within: list = [],
-                 config: dict = {}):
+                 places_within: list | None = None,
+                 config: dict | None = None):
+        if config is None:
+            config = {}
+        if places_within is None:
+            places_within = []
         self._config = dict(_DEFAULT_CONFIG)
         if config:
             self._config.update(config)
@@ -161,7 +165,7 @@ class PlaceNameMatcher:
         """Add the place names to the ngram matcher."""
         count = 0
         self._ngram_matcher = NgramMatcher(self._config)
-        for place_dcid, pvs in self._places_dict.items():
+        for place_dcid, _pvs in self._places_dict.items():
             place_names = self._get_full_place_names(place_dcid)
             for place_name in place_names:
                 self._ngram_matcher.add_key_value(place_name, place_dcid)
@@ -181,9 +185,11 @@ class PlaceNameMatcher:
         self,
         place_name: str,
         num_results: int = None,
-        property_filters: dict = {},
+        property_filters: dict | None = None,
     ) -> list:
         """Returns dcids that match the place name."""
+        if property_filters is None:
+            property_filters = {}
         if num_results is None:
             num_results = self._config.get('num_results', 10)
         matches = self._ngram_matcher.lookup(key=place_name,

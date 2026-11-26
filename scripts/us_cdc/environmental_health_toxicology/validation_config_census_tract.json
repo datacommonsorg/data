@@ -14,11 +14,6 @@
                 "query": "SELECT MAX(MaxDate) AS latest_date FROM stats",
                 "condition": "latest_date >= '2005-01-01'"
             }
-        },
-        {
-            "rule_id": "check_deleted_records_percent",
-            "description": "Disable deleted records check because differ is decoupled for high-scale Census Tracts.",
-            "enabled": false
         }
     ]
 }

@@ -12,6 +12,8 @@ key,prop,value,,,,,,
 2027-28,Year,2028,,,,,,
 2028-29,Year,2029,,,,,,
 2029-30,Year,2030,,,,,,
+Calendar Year,observationPeriod,P1Y,,,,,,
+year,#Regex,^(?P<observationDate>[0-9]{4})$,,,,,,
 indicator,measuredProperty,wagesDaily,populationType,Person,statType,meanValue,occupation,WorkerOtherThanPublicWorker
 male,gender,Male,,,,,,
 female,gender,Female,,,,,,
@@ -23,6 +25,10 @@ APR-JUN,Month1,5,observationPeriod,P3M,#Eval,Year1=int(Year)-1,observationDate,{
 OCT-DEC,Month2,11,observationPeriod,P3M,#Eval,Year1=int(Year)-1,observationDate,{Year1}-{Month2}
 JUL-SEP,Month3,8,observationPeriod,P3M,#Eval,Year1=int(Year)-1,observationDate,{Year1}-{Month3}
 JAN-MAR,Month4,2,observationPeriod,P3M,observationDate,{Year}-{Month4},,
+apr-jun,Month1,5,observationPeriod,P3M,#Eval,Year1=int(Year)-1,observationDate,{Year1}-{Month1}
+oct-dec,Month2,11,observationPeriod,P3M,#Eval,Year1=int(Year)-1,observationDate,{Year1}-{Month2}
+jul-sep,Month3,8,observationPeriod,P3M,#Eval,Year1=int(Year)-1,observationDate,{Year1}-{Month3}
+jan-mar,Month4,2,observationPeriod,P3M,observationDate,{Year}-{Month4},,
 value,value,{Number},,,,,,
 unit,unit,INR,,,,,,
 state,observationAbout,{Data},,,,,,

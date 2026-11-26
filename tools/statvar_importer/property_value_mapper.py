@@ -90,10 +90,12 @@ class PropertyValueMapper:
 
     def __init__(
         self,
-        pv_map_files: list = [],
+        pv_map_files: list | None = None,
         config_dict: dict = None,
         counters_dict: dict = None,
     ):
+        if pv_map_files is None:
+            pv_map_files = []
         self._config = ConfigMap(config_dict=config_dict)
         self._counters = Counters(
             counters_dict=counters_dict,
@@ -608,8 +610,8 @@ def _get_variable_expr(stmt: str, default_var: str = 'Data') -> (str, str):
 def load_pv_map(file: str) -> dict:
     """Returns a PV map loaded from a file."""
     pvmap = PropertyValueMapper()
-    for file in file_util.file_get_matching(file):
-        pvmap.load_pvs_from_file(file)
+    for file_path in file_util.file_get_matching(file):
+        pvmap.load_pvs_from_file(file_path)
     pvs = pvmap.get_pv_map()
     # Return the pvmap for the first namespace
     if pvs:

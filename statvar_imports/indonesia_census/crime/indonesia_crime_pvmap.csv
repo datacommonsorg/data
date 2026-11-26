@@ -1,0 +1,4 @@
+key,prop,value,p1,v1,p2,v2,p3,v3
+Police Territorial Jurisdiction,observationAbout,{Data},,,,,,
+Year,observationDate,{Data},,,,,,
+Number Of Crime According To Police Territorial Jurisdiction,populationType,CriminalActivities,measuredProperty,count,statType,measuredValue,value,{Number}

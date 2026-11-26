@@ -150,6 +150,17 @@ class FileUtilsTest(unittest.TestCase):
                 self.assertTrue(
                     math.isclose(num_lines, estimate_rows, rel_tol=1))
 
+    def test_file_get_estimate_num_rows_non_utf8(self):
+        # latin-1 bytes within the first 4K bytes must not raise
+        # UnicodeDecodeError.
+        path = os.path.join(self._test_dir, 'latin1.dat')
+        with open(path, 'wb') as f:
+            f.write(b'GEO_ID|GEOGRAPHY\n')
+            f.write('05000US66075|Hagåtña District, GU\n'.encode('latin-1') *
+                    200)
+        estimate_rows = file_util.file_estimate_num_rows(path)
+        self.assertTrue(math.isclose(201, estimate_rows, rel_tol=0.1))
+
     def test_file_load_csv_dict(self):
         csv_dict = file_util.file_load_csv_dict(
             os.path.join(self._test_dir, 'sample_output.csv'), 's2CellId')
