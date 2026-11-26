@@ -11,20 +11,15 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Unit tests for NAEP custom processor helpers in process.py.
+"""Unit and end-to-end tests for NAEP processing in process.py."""
 
-Per [rule-svp-unit-tests], these tests exercise NaepEduPerformance's custom
-filtering, denominator registration, memoization fast-path, and output helpers
-with lightweight fakes without running stat_var_processor.process().
-"""
-
-import collections
+import ast
 import csv
 import os
+import subprocess
 import sys
 import tempfile
 import unittest
-from unittest import mock
 
 MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 REPO_ROOT = os.path.abspath(os.path.join(MODULE_DIR, '..', '..'))
@@ -87,77 +82,45 @@ def _make_row_list(year='2024',
     return [row_dict[col] for col in _CSV_COLUMNS]
 
 
-class _FakeCounters:
-    """Lightweight counter sink for unit-testing NaepEduPerformance."""
-
-    def __init__(self):
-        self.counts = collections.Counter()
-
-    def add_counter(self, name: str, count: int = 1, _context: str = ''):
-        self.counts[name] += count
-
-
-class _FakeStatVarsMap:
-    """Lightweight observation store for unit-testing memoized process_row."""
-
-    def __init__(self):
-        self._statvar_obs_map = collections.OrderedDict()
-        self.accept_obs = True
-
-    def add_statvar_obs(self, svobs_pvs: dict) -> bool:
-        if not self.accept_obs:
-            return False
-        key = (
-            svobs_pvs['variableMeasured'],
-            svobs_pvs['observationAbout'],
-            svobs_pvs['observationDate'],
-        )
-        self._statvar_obs_map[key] = dict(svobs_pvs)
-        return True
-
-
-def _build_lightweight_processor(
-        config_overrides: dict | None = None
-) -> naep_process.NaepEduPerformance:
-    """Creates a NaepEduPerformance instance without initializing StatVarDataProcessor."""
-    proc = naep_process.NaepEduPerformance.__new__(
-        naep_process.NaepEduPerformance)
-    proc._header_map = None
-    proc._fast_cols = None
-    proc._sv_template_cache = {}
-    proc._place_cache = {}
-    proc._date_cache = {}
-    proc._denom_dcid_cache = {}
-    proc._config = {
-        'enable_naep_fast_path': True,
-        'input_reference_column': '#input',
-        'default_svobs_pvs': {
-            'typeOf': 'dcs:StatVarObservation',
-            'observationDate': '',
-            'observationAbout': '',
-            'value': '',
-            'measurementMethod': '',
-            'unit': '',
-            'scalingFactor': '',
-            'variableMeasured': '',
-        },
-        'schemaless': False,
-        'generate_statvar_mcf': True,
-    }
-    if config_overrides:
-        proc._config.update(config_overrides)
-    proc._counters = _FakeCounters()
-    proc._statvars_map = _FakeStatVarsMap()
-    proc._pv_mapper = mock.MagicMock()
-    proc._context = {'__FILE__': 'naep_sample.csv'}
-    proc._section_svobs = 0
-    proc._internal_reference_keys = {'#ignore', '#input'}
-    proc.get_current_filename = lambda: 'naep_sample.csv'
-    return proc
-
-
 class ProcessTest(unittest.TestCase):
-    """Tests NaepEduPerformance helpers without running stat_var_processor."""
+    """Tests NAEP filtering helpers and end-to-end CLI execution."""
+
+    def test_import_has_no_colliding_global_flags(self):
+        self.assertNotIn('config_flags', sys.modules)
+        self.assertNotIn('schema_matcher', sys.modules)
+        check_code = ('import sys; '
+                      'from absl import flags; '
+                      'from scripts.nces_nationsreportcard import process; '
+                      'assert not {'
+                      '"config_flags", "schema_matcher", "mcf_file_util", '
+                      '"stat_var_processor"'
+                      '} & set(sys.modules); '
+                      'assert not {"output_path", "input_file", "debug"} & '
+                      'set(flags.FLAGS)')
+        env = os.environ.copy()
+        env['PYTHONDONTWRITEBYTECODE'] = '1'
+        result = subprocess.run(
+            [sys.executable, '-c', check_code],
+            cwd=REPO_ROOT,
+            env=env,
+            capture_output=True,
+            text=True,
+        )
+        self.assertEqual(
+            result.returncode,
+            0,
+            msg=f'stdout={result.stdout}\nstderr={result.stderr}',
+        )
+
+    def test_naep_conf_keeps_schema_and_reconcile_defaults(self):
+        conf_path = os.path.join(MODULE_DIR, 'config', 'naep_conf.py')
+        with open(conf_path, encoding='utf-8') as f:
+            conf = ast.literal_eval(f.read())
+        self.assertNotIn('generate_schema_mcf', conf)
+        self.assertNotIn('reconcile_nodes', conf)
+        self.assertFalse(conf['drop_statvars_without_svobs'])
+        self.assertFalse(conf['output_only_new_statvars'])
+        self.assertFalse(conf['skip_constant_csv_columns'])
 
     def test_is_redundant_naep_row(self):
         # 1. NP/NR/NL x SCHTYPE double-tags schoolType and schoolManagement.
@@ -187,53 +150,59 @@ class ProcessTest(unittest.TestCase):
         self.assertFalse(
             naep_process.is_redundant_naep_row('NT', 'TOTAL', 'MN:MN'))
 
-    def test_should_drop_data_row_and_preprocess_row(self):
-        proc = _build_lightweight_processor({'enable_naep_fast_path': False})
-        proc._header_map = {col: idx for idx, col in enumerate(_CSV_COLUMNS)}
+    def test_should_drop_naep_row(self):
+        header_map = {col: idx for idx, col in enumerate(_CSV_COLUMNS)}
 
+        self.assertFalse(naep_process.should_drop_naep_row([], None))
         valid_row = _make_row_list(value='238.5', displayable='1')
-        self.assertFalse(proc._should_drop_data_row(valid_row))
-        self.assertEqual(proc.preprocess_row(valid_row, 2), valid_row)
-        # Header row (row_index == 1) is never dropped by preprocess_row.
-        self.assertEqual(proc.preprocess_row(_CSV_COLUMNS, 1), _CSV_COLUMNS)
+        self.assertFalse(
+            naep_process.should_drop_naep_row(valid_row, header_map))
 
         for suppressed_val in ('', '999', '999.0'):
             bad_val_row = _make_row_list(value=suppressed_val, displayable='1')
-            self.assertTrue(proc._should_drop_data_row(bad_val_row))
-            self.assertEqual(proc.preprocess_row(bad_val_row, 2), [])
+            self.assertTrue(
+                naep_process.should_drop_naep_row(bad_val_row, header_map))
 
         undisplayable_row = _make_row_list(value='255.0', displayable='0')
-        self.assertTrue(proc._should_drop_data_row(undisplayable_row))
-        self.assertEqual(proc.preprocess_row(undisplayable_row, 2), [])
+        self.assertTrue(
+            naep_process.should_drop_naep_row(undisplayable_row, header_map))
 
         redundant_row = _make_row_list(jurisdiction='NP', variable='SCHTYPE')
-        self.assertTrue(proc._should_drop_data_row(redundant_row))
-        self.assertEqual(proc.preprocess_row(redundant_row, 2), [])
-
-    def test_preprocess_stat_var_obs_pvs_denominators_and_filters(self):
-        proc = _build_lightweight_processor()
-        proc.process_stat_var_pvs = mock.MagicMock(
-            return_value='dcid:Count_Student_Female_SchoolGrade4_Mathematics_'
-            'PublicSchool')
-
-        # Suppressed and redundant PVs are marked with #ignore.
         self.assertTrue(
-            proc.preprocess_stat_var_obs_pvs({'value': '999.0'
-                                             })[0].get('#ignore'))
+            naep_process.should_drop_naep_row(redundant_row, header_map))
+
+    def test_should_ignore_naep_pvs_and_build_denominator_pvs(self):
+        self.assertTrue(naep_process.should_ignore_naep_pvs({'value': '999.0'}))
         self.assertTrue(
-            proc.preprocess_stat_var_obs_pvs({
+            naep_process.should_ignore_naep_pvs({
                 'value': '240.0',
                 'schoolType': 'dcs:NCES_PublicSchool',
                 'schoolManagement': 'dcs:PublicSchool',
-            })[0].get('#ignore'))
+            }))
         self.assertTrue(
-            proc.preprocess_stat_var_obs_pvs({
+            naep_process.should_ignore_naep_pvs({
                 'value': '240.0',
                 'schoolType': 'dcs:NCES_PrivateSchool',
                 'charterStatus': 'dcs:NCES_CharterNo',
-            })[0].get('#ignore'))
+            }))
+        self.assertFalse(
+            naep_process.should_ignore_naep_pvs({
+                'value': '240.0',
+                'schoolType': 'dcs:NCES_PublicSchool',
+                'charterStatus': 'dcs:NCES_CharterYes',
+            }))
 
-        # Achievement-level PVs synthesize and cache Count_Student_* denominator.
+        default_svobs = {
+            'typeOf': 'dcs:StatVarObservation',
+            'observationDate': '',
+            'observationAbout': '',
+            'value': '',
+            'measurementMethod': '',
+            'unit': '',
+            'scalingFactor': '',
+            'variableMeasured': '',
+        }
+        internal_keys = {'#ignore', '#input'}
         alc_pvs = {
             'value':
                 '41.12345678',
@@ -261,126 +230,160 @@ class ProcessTest(unittest.TestCase):
                 '4',
             '#input':
                 'naep_sample.csv:2:15',
+            'unresolved':
+                '{Placeholder}',
         }
-        out_first = proc.preprocess_stat_var_obs_pvs(dict(alc_pvs))[0]
+        denom = naep_process.build_denominator_pvs(alc_pvs, default_svobs,
+                                                   internal_keys)
         self.assertEqual(
-            out_first['measurementDenominator'],
-            'dcid:Count_Student_Female_SchoolGrade4_Mathematics_PublicSchool',
+            denom,
+            {
+                'populationType': 'dcs:Student',
+                'measuredProperty': 'dcs:count',
+                'statType': 'dcs:measuredValue',
+                'gender': 'dcs:Female',
+                'schoolGradeLevel': 'dcs:SchoolGrade4',
+                'schoolSubject': 'dcs:Mathematics',
+                'schoolType': 'dcs:NCES_PublicSchool',
+            },
         )
-        # Second call with another achievement level for same subgroup hits cache.
-        alc_pvs_second = dict(
-            alc_pvs,
-            educationalAchievementLevel='dcs:NAEP_DiscreteAtAdvanced',
-        )
-        out_second = proc.preprocess_stat_var_obs_pvs(alc_pvs_second)[0]
         self.assertEqual(
-            out_second['measurementDenominator'],
-            'dcid:Count_Student_Female_SchoolGrade4_Mathematics_PublicSchool',
+            naep_process.build_denominator_pvs({'value': '240.0'},
+                                               default_svobs, internal_keys),
+            {},
         )
-        self.assertEqual(proc.process_stat_var_pvs.call_count, 1)
-        called_denom_pvs = proc.process_stat_var_pvs.call_args[0][0]
-        self.assertNotIn('educationalAchievementLevel', called_denom_pvs)
-        self.assertNotIn('GradeVale', called_denom_pvs)
-        self.assertEqual(called_denom_pvs['measuredProperty'], 'dcs:count')
-        self.assertEqual(called_denom_pvs['populationType'], 'dcs:Student')
 
-        # Failure to register denominator raises RuntimeError rather than silent drop.
-        proc_fail = _build_lightweight_processor()
-        proc_fail.process_stat_var_pvs = mock.MagicMock(return_value='')
-        with self.assertRaises(RuntimeError):
-            proc_fail.preprocess_stat_var_obs_pvs(dict(alc_pvs))
+    def test_percent_domain_includes_config_and_idempotency(self):
+        self.assertFalse(
+            naep_process.should_emit_percent_student_domain(
+                {'emit_percent_student_domain': False}))
+        self.assertTrue(
+            naep_process.should_emit_percent_student_domain(
+                {'emit_percent_student_domain': True}))
 
-    def test_process_row_memoization_fast_path(self):
-        proc = _build_lightweight_processor()
-        proc._pv_mapper.get_all_pvs_for_value.side_effect = (
-            lambda juris, _ns: [{
-                'observationAbout': f'dcs:geoId/{juris}'
-            }])
-        proc.resolve_value_references = (lambda pvs_list: dict(pvs_list[0])
-                                         if pvs_list else {})
-        proc.resolve_svobs_place = lambda pvs: bool(pvs.get('observationAbout'))
-        proc.resolve_svobs_date = lambda pvs: bool(pvs.get('observationDate'))
+        # When DC API already reports Student in domainIncludes, skip emission.
+        self.assertFalse(
+            naep_process.should_emit_percent_student_domain(
+                {},
+                lookup_fn=lambda _dcids, _cfg: {
+                    'dcid:percent': {
+                        'domainIncludes': 'Person,StatisticalPopulation,Student'
+                    }
+                },
+            ))
+        # When Student is absent, emit fallback node.
+        self.assertTrue(
+            naep_process.should_emit_percent_student_domain(
+                {},
+                lookup_fn=lambda _dcids, _cfg: {
+                    'dcid:percent': {
+                        'domainIncludes': 'Person,StatisticalPopulation'
+                    }
+                },
+            ))
 
-        def fake_super_process_row(row: list, row_index: int):
-            if row_index == 1:
-                return
-            proc._statvars_map.add_statvar_obs({
-                'typeOf':
-                    'dcs:StatVarObservation',
-                'observationDate':
-                    row[0],
-                'observationAbout':
-                    'dcs:country/USA',
-                'value':
-                    row[14],
-                'measurementMethod':
-                    'dcs:NCES_NationalAssessmentOfEducationalProgress',
-                'variableMeasured':
-                    'dcid:Mean_AssessmentScore_Student_SchoolGrade4_Mathematics',
-                '#input':
-                    f'naep_sample.csv:{row_index}:15',
-            })
+        # When DC API lookup fails, fall back to emitting.
+        def fail_lookup(_dcids, _cfg):
+            raise RuntimeError('API unavailable')
 
-        with mock.patch.object(
-                naep_process.StatVarDataProcessor,
-                'process_row',
-                side_effect=fake_super_process_row) as mock_super:
-            # Row 1: header initializes _fast_cols.
-            proc.process_row(_CSV_COLUMNS, 1)
-            self.assertIsNotNone(proc._fast_cols)
+        self.assertTrue(
+            naep_process.should_emit_percent_student_domain(
+                {}, lookup_fn=fail_lookup))
 
-            # Row 2: cache miss delegates to super().process_row and caches template.
-            proc.process_row(
-                _make_row_list(year='2022',
-                               jurisdiction='NT',
-                               value='236.543219876543'), 2)
-            self.assertEqual(mock_super.call_count, 2)
-
-            # Row 3: same StatVar on a new state & year hits memoized fast-path
-            # without calling super().process_row again.
-            proc.process_row(
-                _make_row_list(year='2024',
-                               jurisdiction='06',
-                               value='238.123456789123'), 3)
-            self.assertEqual(mock_super.call_count, 2)
-
-            # Suppressed and redundant rows increment ignored-preprocess counter.
-            proc.process_row(_make_row_list(value='999.0', displayable='0'), 4)
-            proc.process_row(
-                _make_row_list(stattype='RP:RP',
-                               jurisdiction='NT',
-                               variable='TOTAL',
-                               value='100.0'), 5)
-            self.assertEqual(mock_super.call_count, 2)
-
-        obs_values = list(proc._statvars_map._statvar_obs_map.values())
-        self.assertEqual(len(obs_values), 2)
-        self.assertEqual(obs_values[1]['observationAbout'], 'dcs:geoId/06')
-        self.assertEqual(obs_values[1]['observationDate'], '2024')
-        self.assertEqual(obs_values[1]['value'], '238.123456789123')
-        self.assertEqual(obs_values[1]['#input'], 'naep_sample.csv:3:15')
-        self.assertEqual(proc._counters.counts['input-rows-ignored-preprocess'],
-                         2)
-        self.assertEqual(proc._counters.counts['generated-svobs'], 1)
-
-    def test_write_outputs_appends_percent_domain_includes_idempotently(self):
         with tempfile.TemporaryDirectory() as tmpdir:
-            out_prefix = os.path.join(tmpdir, 'naep_performance')
-            mcf_path = f'{out_prefix}_stat_vars.mcf'
+            mcf_path = os.path.join(tmpdir, 'naep_performance_stat_vars.mcf')
             with open(mcf_path, 'w', encoding='utf-8') as f:
                 f.write('Node: dcid:Percent_Student_Male_SchoolGrade4_Reading\n'
                         'typeOf: dcid:StatisticalVariable\n')
 
-            proc = _build_lightweight_processor()
-            with mock.patch.object(naep_process.StatVarDataProcessor,
-                                   'write_outputs'):
-                proc.write_outputs(out_prefix)
-                proc.write_outputs(out_prefix)
+            emitted = naep_process.append_percent_domain_includes(
+                mcf_path, {'emit_percent_student_domain': True})
+            self.assertTrue(emitted)
+            emitted_again = naep_process.append_percent_domain_includes(
+                mcf_path, {'emit_percent_student_domain': True})
+            self.assertFalse(emitted_again)
 
             with open(mcf_path, encoding='utf-8') as f:
                 content = f.read()
             self.assertEqual(content.count('Node: dcid:percent'), 1)
-            self.assertIn('domainIncludes: dcid:Student', content)
+            self.assertIn('typeOf: schema:Property', content)
+            self.assertIn('domainIncludes: dcs:Student', content)
+
+    def test_end_to_end_subprocess_on_sample_fixture(self):
+        test_data_dir = os.path.join(MODULE_DIR, 'test_data')
+        in_csv = os.path.join(test_data_dir, 'naep_input.csv')
+        expected_csv = os.path.join(test_data_dir, 'naep_output.csv')
+        expected_tmcf = os.path.join(test_data_dir, 'naep_output.tmcf')
+        base_conf_path = os.path.join(MODULE_DIR, 'config', 'naep_conf.py')
+        pv_map = (
+            f"{os.path.join(MODULE_DIR, 'config', 'pv_map.py')},"
+            f"jurisdiction:{os.path.join(MODULE_DIR, 'config', 'jurisdiction_map.py')}"
+        )
+
+        with open(base_conf_path, encoding='utf-8') as f:
+            conf = ast.literal_eval(f.read())
+        # Keep the subprocess test offline/hermetic while exercising full CLI.
+        conf['generate_schema_mcf'] = False
+        conf['reconcile_nodes'] = False
+        conf['emit_percent_student_domain'] = True
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            conf_path = os.path.join(tmpdir, 'test_naep_conf.py')
+            with open(conf_path, 'w', encoding='utf-8') as f:
+                f.write(repr(conf))
+            out_prefix = os.path.join(tmpdir, 'naep_output')
+            counters_path = os.path.join(tmpdir, 'counters.csv')
+
+            proc_result = subprocess.run(
+                [
+                    sys.executable,
+                    os.path.join(MODULE_DIR, 'process.py'),
+                    f'--input_data={in_csv}',
+                    f'--pv_map={pv_map}',
+                    f'--config_file={conf_path}',
+                    f'--output_path={out_prefix}',
+                    f'--output_counters={counters_path}',
+                ],
+                cwd=tmpdir,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            self.assertEqual(
+                proc_result.returncode,
+                0,
+                msg=f'process.py failed:\n{proc_result.stderr}',
+            )
+
+            with open(f'{out_prefix}.csv', encoding='utf-8') as f:
+                actual_rows = list(csv.DictReader(f))
+            with open(expected_csv, encoding='utf-8') as f:
+                expected_rows = list(csv.DictReader(f))
+            self.assertEqual(actual_rows, expected_rows)
+
+            with open(f'{out_prefix}.tmcf', encoding='utf-8') as f:
+                actual_tmcf = f.read().strip()
+            with open(expected_tmcf, encoding='utf-8') as f:
+                expected_tmcf_text = f.read().strip()
+            self.assertEqual(actual_tmcf, expected_tmcf_text)
+
+            with open(f'{out_prefix}_stat_vars.mcf', encoding='utf-8') as f:
+                mcf_text = f.read()
+            self.assertIn(
+                'Node: dcid:Count_Student_SchoolGrade4_Mathematics',
+                mcf_text,
+            )
+            self.assertIn(
+                'Node: dcid:Count_Student_Male_SchoolGrade4_Mathematics_PublicSchool',
+                mcf_text,
+            )
+            self.assertNotIn(
+                'Node: dcid:Percent_Student_SchoolGrade4_Mathematics\n',
+                mcf_text,
+            )
+            self.assertIn('Node: dcid:percent', mcf_text)
+            self.assertIn('typeOf: schema:Property', mcf_text)
+            self.assertIn('domainIncludes: dcs:Student', mcf_text)
 
     def test_checked_in_fixtures_structure_and_invariants(self):
         test_data_dir = os.path.join(MODULE_DIR, 'test_data')

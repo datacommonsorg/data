@@ -461,6 +461,8 @@ def _query_naep_once(
     session = _get_session()
     for attempt in range(max_attempts):
         try:
+            logging.debug('GET %s params=%s (attempt %d/%d)', NAEP_API_URL,
+                          params, attempt + 1, max_attempts)
             resp = session.get(
                 NAEP_API_URL,
                 params=params,
@@ -586,6 +588,21 @@ def _fetch_state_batches_fallback(params: Dict[str, str], read_timeout: int,
         batch_rows, batch_status = _query_naep_once(batch_params,
                                                     read_timeout=read_timeout,
                                                     max_attempts=max_attempts)
+        if batch_status == 'dependent_info_error' and 'Year' not in batch_params:
+            years_desc = _get_descending_years(batch_params['subject'],
+                                               int(batch_params['grade']),
+                                               batch, read_timeout,
+                                               max_attempts)
+            if years_desc:
+                batch_params = dict(batch_params, Year=years_desc)
+                batch_rows, batch_status = _query_naep_once(
+                    batch_params,
+                    read_timeout=read_timeout,
+                    max_attempts=max_attempts)
+        if batch_status == 'dependent_info_error':
+            raise RuntimeError(
+                'NAEP API returned GetDependentInfo error during batch '
+                f'fallback for NAEP query: {batch_params}')
         if batch_status == 'transient_error':
             raise RuntimeError(
                 f'Failed fallback batch after {max_attempts} attempts for '
@@ -664,7 +681,8 @@ def fetch_naep_rows(subject: str,
         return rows
 
     # If omitting 'Year' triggered NCES's GetDependentInfo() HTTP 400 bug on a
-    # legacy R2 cycle, retry with all discovered descending R3 years.
+    # legacy R2 cycle, retry with all discovered descending R3 years and keep
+    # Year in params for any downstream pilot or 7-batch fallbacks.
     if status == 'dependent_info_error' and 'Year' not in params:
         if jurisdiction == NATIONAL_JURISDICTION:
             with _YEAR_CACHE_LOCK:
@@ -672,6 +690,7 @@ def fetch_naep_rows(subject: str,
         years_desc = _get_descending_years(subject, grade, jurisdiction,
                                            timeout_secs, max_attempts)
         if years_desc:
+            params = dict(params, Year=years_desc)
             rows, status = _query_explicit_years(scale_key, params, years_desc,
                                                  timeout_secs, max_attempts)
             if status == 'ok':
@@ -697,10 +716,10 @@ def fetch_naep_rows(subject: str,
     if status in ('transient_error', 'client_error') and is_all_states:
         return _fetch_state_batches_fallback(params, timeout_secs, max_attempts)
 
-    if status == 'transient_error':
+    if status in ('transient_error', 'dependent_info_error'):
         raise RuntimeError(
-            f'Failed to fetch NAEP data after {max_attempts} attempts: {params}'
-        )
+            f'Failed to fetch NAEP data ({status}) after {max_attempts} '
+            f'attempts: {params}')
     return []
 
 

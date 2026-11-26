@@ -273,6 +273,167 @@ class DownloadInputFilesTest(unittest.TestCase):
             ]
             self.assertEqual([r['year'] for r in rows], expected_order)
 
+    def test_query_naep_once_logs_outbound_get_at_debug(self):
+        mock_session = mock.MagicMock()
+        mock_session.get.return_value = _mock_response(200, {
+            'status': 200,
+            'result': []
+        })
+        params = {'type': 'data', 'subject': 'MAT', 'grade': '4'}
+        with mock.patch.object(dl, '_get_session',
+                               return_value=mock_session), mock.patch.object(
+                                   dl.logging, 'debug') as mock_debug:
+            rows, status = dl._query_naep_once(params,
+                                               read_timeout=10,
+                                               max_attempts=1)
+        self.assertEqual(rows, [])
+        self.assertEqual(status, 'ok')
+        self.assertTrue(
+            any('GET %s params=%s' in str(c.args[0]) and
+                c.args[1] == dl.NAEP_API_URL and c.args[2] == params
+                for c in mock_debug.call_args_list))
+
+    def test_year_propagated_to_state_batch_fallback_after_dependent_info(self):
+        calls = []
+
+        def fake_get(_, params=None, timeout=None):
+            del timeout
+            calls.append(dict(params))
+            juris = params['jurisdiction']
+            if params['subscale'] == 'MRPCM':
+                return _mock_response(
+                    200, {
+                        'status':
+                            200,
+                        'result': [{
+                            'year': 2024,
+                            'sample': 'R3',
+                            'yearSampleLabel': '2024',
+                            'value': 240.0,
+                        }, {
+                            'year': 2022,
+                            'sample': 'R3',
+                            'yearSampleLabel': '2022',
+                            'value': 236.0,
+                        }],
+                    })
+            if juris == dl.ALL_STATE_JURISDICTIONS:
+                if 'Year' not in params:
+                    return _mock_response(400, text='GetDependentInfo error')
+                return _mock_response(400, text='Unsupported state in 55-list')
+            return _mock_response(
+                200, {
+                    'status':
+                        200,
+                    'result': [{
+                        'year': 2024,
+                        'sample': 'R3',
+                        'yearSampleLabel': '2024',
+                        'jurisdiction': juris.split(',')[0],
+                        'value': '241.0',
+                    }],
+                })
+
+        mock_session = mock.MagicMock()
+        mock_session.get.side_effect = fake_get
+        with mock.patch.object(dl, '_get_session', return_value=mock_session):
+            rows = dl.fetch_naep_rows('MAT',
+                                      4,
+                                      'MRPS4',
+                                      'TOTAL',
+                                      dl.ALL_STATE_JURISDICTIONS,
+                                      'MN:MN',
+                                      read_timeout=10)
+
+        self.assertEqual(len(rows), len(dl.STATE_JURISDICTION_BATCHES))
+        batch_calls = [
+            c for c in calls
+            if c['jurisdiction'] in dl.STATE_JURISDICTION_BATCHES
+        ]
+        self.assertEqual(len(batch_calls), len(dl.STATE_JURISDICTION_BATCHES))
+        for batch_call in batch_calls:
+            self.assertEqual(batch_call.get('Year'), '2024,2022')
+
+    def test_year_propagated_to_red_g12_pilot_fallback_after_dependent_info(
+            self):
+        calls = []
+
+        def fake_get(_, params=None, timeout=None):
+            del timeout
+            calls.append(dict(params))
+            juris = params['jurisdiction']
+            if params['subscale'] == 'RRPCM':
+                if juris == dl.ALL_STATE_JURISDICTIONS:
+                    return _mock_response(400, text='Unsupported state')
+                return _mock_response(
+                    200, {
+                        'status':
+                            200,
+                        'result': [{
+                            'year': 2013,
+                            'sample': 'R3',
+                            'yearSampleLabel': '2013',
+                            'value': 288.0,
+                        }],
+                    })
+            if juris == dl.ALL_STATE_JURISDICTIONS:
+                if 'Year' not in params:
+                    return _mock_response(400, text='GetDependentInfo error')
+                return _mock_response(400, text='Non-pilot state rejected')
+            if juris == dl.RED_G12_PILOT_STATES:
+                return _mock_response(
+                    200, {
+                        'status':
+                            200,
+                        'result': [{
+                            'year': 2013,
+                            'sample': 'R3',
+                            'yearSampleLabel': '2013',
+                            'jurisdiction': 'MI',
+                            'value': '289.5',
+                        }],
+                    })
+            return _mock_response(400, text='Unexpected')
+
+        mock_session = mock.MagicMock()
+        mock_session.get.side_effect = fake_get
+        with mock.patch.object(dl, '_get_session', return_value=mock_session):
+            rows = dl.fetch_naep_rows('RED',
+                                      12,
+                                      'RRPS4',
+                                      'TOTAL',
+                                      dl.ALL_STATE_JURISDICTIONS,
+                                      'MN:MN',
+                                      read_timeout=10)
+
+        self.assertEqual(len(rows), 1)
+        pilot_data_calls = [
+            c for c in calls if c['jurisdiction'] == dl.RED_G12_PILOT_STATES and
+            c['subscale'] == 'RRPS4'
+        ]
+        self.assertEqual(len(pilot_data_calls), 1)
+        self.assertEqual(pilot_data_calls[0].get('Year'), '2013')
+
+    def test_state_batch_fallback_raises_on_dependent_info_error(self):
+        mock_session = mock.MagicMock()
+        mock_session.get.return_value = _mock_response(
+            400, text='GetDependentInfo error')
+        params_with_year = {
+            'type': 'data',
+            'subject': 'MAT',
+            'grade': '4',
+            'subscale': 'MRPS4',
+            'variable': 'TOTAL',
+            'jurisdiction': dl.ALL_STATE_JURISDICTIONS,
+            'stattype': 'MN:MN',
+            'Year': '2024,2022',
+        }
+        with mock.patch.object(dl, '_get_session', return_value=mock_session):
+            with self.assertRaises(RuntimeError):
+                dl._fetch_state_batches_fallback(params_with_year,
+                                                 read_timeout=10,
+                                                 max_attempts=1)
+
 
 if __name__ == '__main__':
     unittest.main()
