@@ -1,0 +1,8 @@
+Node: E:nnds_weekly_output->E0
+observationAbout: C:nnds_weekly_output->observationAbout
+value: C:nnds_weekly_output->value
+variableMeasured: C:nnds_weekly_output->variableMeasured
+observationDate: 2022-03-06
+measurementMethod: CDC_NNDSS_Diseases_WeeklyTables
+observationPeriod: P1W
+typeOf: dcs:StatVarObservation
