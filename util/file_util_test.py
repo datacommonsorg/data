@@ -13,11 +13,15 @@
 # limitations under the License.
 """Tests for file_util.py"""
 
+import io
 import math
 import os
 import sys
 import tempfile
 import unittest
+from unittest import mock
+
+from google.api_core import exceptions as gcp_exceptions
 
 # Allows the following module imports to work when running as a script
 _SCRIPTS_DIR = os.path.dirname(__file__)
@@ -97,6 +101,60 @@ class FileIOTest(unittest.TestCase):
 
         with file_util.FileIO(target, mode='r') as f:
             self.assertEqual('original content', f.read())
+
+    @mock.patch('file_util.storage.fileio.BlobReader')
+    @mock.patch('file_util.file_get_gcs_blob')
+    def test_gcs_streaming_text_read_and_binary_read(self, mock_get_blob,
+                                                     mock_blob_reader_cls):
+        mock_blob = mock.MagicMock()
+        mock_get_blob.return_value = mock_blob
+        mock_blob_reader_cls.side_effect = [
+            io.BytesIO('line1\nSão Paulo\n'.encode('utf-8')),
+            io.BytesIO(b'raw-bytes'),
+        ]
+
+        with file_util.FileIO('gs://test-bucket/data.mcf',
+                              mode='r',
+                              use_tempfile=False) as f:
+            self.assertEqual('line1\nSão Paulo\n', f.read())
+
+        with file_util.FileIO('gs://test-bucket/data.mcf',
+                              mode='rb',
+                              use_tempfile=False) as f:
+            self.assertEqual(b'raw-bytes', f.read())
+
+        self.assertEqual(2, mock_blob_reader_cls.call_count)
+        for call in mock_blob_reader_cls.call_args_list:
+            self.assertEqual(call.args[0], mock_blob)
+            self.assertGreater(call.kwargs['chunk_size'], 0)
+
+    @mock.patch('file_util.file_get_gcs_blob', return_value=None)
+    def test_gcs_streaming_read_missing_blob_raises(self, _):
+        with self.assertRaises(FileNotFoundError):
+            file_util.FileIO('gs://test-bucket/missing.mcf',
+                             mode='r',
+                             use_tempfile=False)
+
+    @mock.patch('file_util.storage.fileio.BlobWriter')
+    @mock.patch('file_util.file_get_gcs_blob')
+    def test_gcs_streaming_text_write_ignores_flush(self, mock_get_blob,
+                                                    mock_blob_writer_cls):
+        mock_blob = mock.MagicMock()
+        mock_get_blob.return_value = mock_blob
+        raw_buf = io.BytesIO()
+        raw_buf.close = mock.MagicMock()
+        mock_blob_writer_cls.return_value = raw_buf
+
+        with file_util.FileIO('gs://test-bucket/out.jsonl',
+                              mode='w',
+                              use_tempfile=False) as f:
+            f.write('{"a":"1"}\n')
+
+        mock_blob_writer_cls.assert_called_once()
+        self.assertEqual(mock_blob_writer_cls.call_args.args[0], mock_blob)
+        self.assertTrue(mock_blob_writer_cls.call_args.kwargs['ignore_flush'])
+        raw_buf.close.assert_called_once()
+        self.assertEqual(b'{"a":"1"}\n', raw_buf.getvalue())
 
 
 class FileUtilsTest(unittest.TestCase):
@@ -188,6 +246,54 @@ class FileUtilsTest(unittest.TestCase):
         self.assertTrue(
             file_util.file_get_size(tmp_pkl_filename) !=
             file_util.file_get_size(tmp_py_filename))
+
+    def test_file_list_with_sizes_and_remove(self):
+        items = file_util.file_list_with_sizes(
+            os.path.join(self._test_dir, 'sample_*.csv'))
+        self.assertEqual(3, len(items))
+        for path, size in items:
+            self.assertEqual(os.path.getsize(path), size)
+
+        target = items[0][0]
+        file_util.file_remove(target)
+        self.assertFalse(os.path.exists(target))
+        # Removing a non-existent file is a safe no-op.
+        file_util.file_remove(target)
+
+    @mock.patch('file_util.file_get_gcs_bucket')
+    def test_file_list_with_sizes_gcs_wildcard(self, mock_get_bucket):
+        mock_bucket = mock.MagicMock()
+        mock_bucket.name = 'my-bucket'
+        blob1 = mock.MagicMock()
+        blob1.name = 'dir/a.mcf'
+        blob1.size = 100
+        blob2 = mock.MagicMock()
+        blob2.name = 'dir/b.txt'
+        blob2.size = 50
+        blob3 = mock.MagicMock()
+        blob3.name = 'dir/c.mcf'
+        blob3.size = 250
+        mock_bucket.list_blobs.return_value = [blob3, blob2, blob1]
+        mock_get_bucket.return_value = mock_bucket
+
+        items = file_util.file_list_with_sizes('gs://my-bucket/dir/*.mcf')
+        self.assertEqual(
+            [
+                ('gs://my-bucket/dir/a.mcf', 100),
+                ('gs://my-bucket/dir/c.mcf', 250),
+            ],
+            items,
+        )
+        mock_bucket.list_blobs.assert_called_once_with(prefix='dir/')
+
+    @mock.patch('file_util.file_get_gcs_blob')
+    def test_file_remove_gcs_ignores_not_found(self, mock_get_blob):
+        mock_blob = mock.MagicMock()
+        mock_blob.delete.side_effect = gcp_exceptions.NotFound('missing')
+        mock_get_blob.return_value = mock_blob
+
+        file_util.file_remove('gs://my-bucket/tmp/part.jsonl')
+        mock_blob.delete.assert_called_once()
 
 
 if __name__ == '__main__':

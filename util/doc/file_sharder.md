@@ -109,6 +109,9 @@ The table below lists all configuration options. Each option can be passed as a 
 | `shard_generate_dcid` | `--shard_generate_dcid` | `bool` | `False` | When True (or automatically when writing `.mcf` outputs or when an output record has an empty `dcid`/`Node` column), generates deterministic DCIDs via `util/dcid_generator.py` (`DcidGenerator.java` FarmHash64 `dc/o/<id>` for `StatVarObservation`, assignable IDs for `Place`, human-readable `statvar_dcid_generator` DCIDs for `StatisticalVariable`, and SHA-256 base32 `dc/<id>` for general nodes). |
 | `shard_dcid_ignore_props`| `--shard_dcid_ignore_props` | `list` | `[]` | Extra property names to exclude when building node DCID keys (e.g. `'value'` to compute value-independent observation DCIDs). |
 | `shard_encoding` | `--shard_encoding` | `str` | `None` | Optional character encoding when reading text-based input files. |
+| `shard_routing` | `--shard_routing` | `str` | `'hash'` | Output routing strategy: `'hash'` partitions records by key hash across shared shards; `'task'` writes each parallel work unit directly to its own shard without cross-worker locks or key hashing. |
+| `shard_use_processes` | `--shard_use_processes` | `bool` | `False` | When `True` with `shard_routing='task'`, runs parallel work units in a `ProcessPoolExecutor` (`forkserver`/`spawn`) to bypass the Python GIL. |
+| `shard_record_transform` | Python config only | `callable \| str` | `None` | Optional per-record transform `fn(record) -> dict \| None` or `fn(record, stats) -> dict \| None` (or `'module:func'` string) executed in workers before writing. |
 
 ## Progress counters
 

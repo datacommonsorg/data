@@ -23,6 +23,31 @@ from file_sharder import FileSharder
 from file_sharder import shard_file
 
 
+def _sample_mcf_to_jsonl_transform(record: dict, stats: dict) -> dict | None:
+    """Top-level pickleable transform for testing task-routed multiprocess sharding."""
+    type_of = str(record.get('typeOf', ''))
+    if 'StatVarObservation' in type_of:
+        stats['custom-obs-count'] = stats.get('custom-obs-count', 0) + 1
+    else:
+        stats['custom-schema-count'] = stats.get('custom-schema-count', 0) + 1
+    return {
+        'dcid': record.get('dcid') or record.get('Node', ''),
+        'typeOf': type_of,
+        'properties': {
+            k: v
+            for k, v in record.items()
+            if k not in ('Node', 'dcid',
+                         'typeOf') and not str(k).startswith('#')
+        },
+    }
+
+
+def _drop_all_transform(record: dict) -> dict | None:
+    """Top-level transform that drops every record to verify lazy shard creation."""
+    del record
+    return None
+
+
 class TestFileSharder(unittest.TestCase):
 
     def setUp(self):
@@ -885,11 +910,20 @@ class TestFileSharder(unittest.TestCase):
         self.assertTrue(file_sharder.is_seekable_file('data.tmcf'))
         self.assertTrue(file_sharder.is_seekable_file('data.avro'))
 
+        self.assertTrue(file_sharder.is_seekable_file('gs://bucket/data.csv'))
+        self.assertTrue(file_sharder.is_seekable_file('gs://bucket/data.mcf'))
+        self.assertTrue(file_sharder.is_seekable_file('gs://bucket/data.jsonl'))
+
         self.assertFalse(file_sharder.is_seekable_file('data.csv.gz'))
+        self.assertFalse(
+            file_sharder.is_seekable_file('gs://bucket/data.csv.gz'))
         self.assertFalse(file_sharder.is_seekable_file('data.tar.gz'))
         self.assertFalse(file_sharder.is_seekable_file('data.zip'))
         self.assertFalse(file_sharder.is_seekable_file('data.json'))
-        self.assertFalse(file_sharder.is_seekable_file('gs://bucket/data.csv'))
+        self.assertFalse(file_sharder.is_seekable_file('gs://bucket/data.json'))
+        self.assertFalse(
+            file_sharder.is_seekable_file(
+                'https://docs.google.com/spreadsheets/d/abc/edit'))
         self.assertFalse(file_sharder.is_seekable_file(None))
 
         # Backward compatibility alias
@@ -1506,6 +1540,105 @@ class TestFileSharder(unittest.TestCase):
             self.assertEqual(rows[2:], reader.readlines())
         with open_dict_file(output_pattern, 'r') as reader:
             self.assertCountEqual(rows, reader.readlines())
+
+    def test_task_routing_multiprocess_mcf_to_jsonl_with_transform(self):
+        mcf_path = os.path.join(self.test_dir.name, 'mixed.mcf')
+        mcf_content = ('# Header comment\n'
+                       'Node: dcid:obs1\n'
+                       'typeOf: dcs:StatVarObservation\n'
+                       'variableMeasured: dcid:Count_Person\n'
+                       'observationAbout: dcid:country/USA\n'
+                       'observationDate: "2024"\n'
+                       'value: 100\n'
+                       'Node: dcid:obs2\n'
+                       'typeOf: dcs:StatVarObservation\n'
+                       'variableMeasured: dcid:Count_Person\n'
+                       'observationAbout: dcid:country/CAN\n'
+                       'observationDate: "2024"\n'
+                       'value: 200\n'
+                       '\n'
+                       'dcid: Count_Person\n'
+                       'typeOf: dcs:StatisticalVariable\n'
+                       'populationType: dcs:Person\n'
+                       'measuredProperty: dcs:count\n'
+                       '\n'
+                       '# Comment before second dcid-only node\n'
+                       'dcid: Count_Household\n'
+                       'typeOf: dcs:StatisticalVariable\n'
+                       'name: "Zürich Households"\n')
+        with open(mcf_path, 'w', encoding='utf-8') as f:
+            f.write(mcf_content)
+
+        out_pattern = os.path.join(self.test_dir.name, 'out*.jsonl')
+        counters = counters_lib.Counters()
+        output_shards = shard_file(
+            mcf_path,
+            out_pattern,
+            {
+                'shard_routing': 'task',
+                'shard_use_processes': True,
+                'shard_threads': 2,
+                'shard_min_chunk_size': 64,
+                'shard_record_transform': _sample_mcf_to_jsonl_transform,
+            },
+            counters=counters,
+        )
+        self.assertGreater(len(output_shards), 1)
+        all_rows = []
+        for shard_path in output_shards:
+            with open_dict_file(shard_path, 'r') as reader:
+                all_rows.extend(reader.readlines())
+        self.assertEqual(4, len(all_rows))
+        self.assertEqual(
+            {'dcid:obs1', 'dcid:obs2', 'Count_Person', 'Count_Household'},
+            {r['dcid'] for r in all_rows},
+        )
+        self.assertEqual(2, counters.get_counter('custom-obs-count'))
+        self.assertEqual(2, counters.get_counter('custom-schema-count'))
+        self.assertEqual(4, counters.get_counter('shard-input-records'))
+        self.assertEqual(4, counters.get_counter('shard-output-records'))
+
+    def test_task_routing_skips_empty_shards_and_validates_config(self):
+        self._create_mcf_file([
+            {
+                'Node': 'dcid:n1',
+                'typeOf': 'dcs:Place'
+            },
+            {
+                'Node': 'dcid:n2',
+                'typeOf': 'dcs:Place'
+            },
+        ])
+        out_pattern = os.path.join(self.test_dir.name, 'empty*.jsonl')
+        counters = counters_lib.Counters()
+        output_shards = shard_file(
+            self.mcf_input_file_path,
+            out_pattern,
+            {
+                'shard_routing': 'task',
+                'shard_use_processes': False,
+                'shard_threads': 2,
+                'shard_record_transform': _drop_all_transform,
+            },
+            counters=counters,
+        )
+        self.assertEqual([], output_shards)
+        self.assertEqual(0, counters.get_counter('shard-output-records'))
+
+        with self.assertRaises(ValueError):
+            FileSharder(self.mcf_input_file_path, out_pattern,
+                        {'shard_routing': 'invalid'})
+
+        with self.assertRaises(ValueError):
+            sharder = FileSharder(
+                self.mcf_input_file_path,
+                out_pattern,
+                {
+                    'shard_routing': 'task',
+                    'shard_skip_duplicates': True,
+                },
+            )
+            sharder.process()
 
 
 if __name__ == '__main__':

@@ -13,11 +13,13 @@
 # limitations under the License.
 """Unit tests for `FileDictIO` registry, `open_dict_file`, and all format handlers."""
 
+from io import BytesIO
 from io import UnsupportedOperation
 import os
 import sys
 import tempfile
 import unittest
+from unittest import mock
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 _UTIL_DIR = os.path.dirname(_SCRIPT_DIR)
@@ -586,6 +588,91 @@ class FileDictIORegistryAndFactoryTest(unittest.TestCase):
         # 4. Tuple of files passed to open_dict_file dispatches to ShardedFileDictIO
         with open_dict_file((bom_csv, bom_jsonl), 'r') as tuple_reader:
             self.assertEqual(4, len(tuple_reader.readlines()))
+
+    def test_mcf_dcid_only_and_back_to_back_exact_splits(self):
+        mcf_path = os.path.join(self.test_dir.name, 'complex.mcf')
+        content = ('# Header comment\n'
+                   'Node: dcid:obs_1\n'
+                   'typeOf: dcs:StatVarObservation\n'
+                   'value: 100\n'
+                   'Node: dcid:obs_2\n'
+                   'typeOf: dcs:StatVarObservation\n'
+                   'value: 200\n'
+                   '\n'
+                   'dcid: schema_no_node_1\n'
+                   'typeOf: dcs:StatisticalVariable\n'
+                   '# inline comment inside node\n'
+                   'measuredProperty: dcs:count\n'
+                   '\n'
+                   '# Comment between blank-line-separated dcid-only nodes\n'
+                   'dcid: schema_no_node_2\n'
+                   'typeOf: dcs:StatisticalVariable\n'
+                   'name: "Zürich"\n')
+        with open(mcf_path, 'w', encoding='utf-8') as f:
+            f.write(content)
+
+        with open_dict_file(mcf_path, 'r') as reader:
+            expected = reader.readlines()
+        self.assertEqual(4, len(expected))
+        self.assertEqual('schema_no_node_1', expected[2]['dcid'])
+        self.assertEqual('schema_no_node_2', expected[3]['dcid'])
+
+        # 2-way split at every single byte offset.
+        self._assert_exact_split_at_every_byte(mcf_path, expected)
+
+        # 3-way splits covering middle-chunk blank-line + comment + dcid-only boundaries.
+        file_size = os.path.getsize(mcf_path)
+        for step in (19, 37, 64):
+            offsets = list(range(0, file_size, step)) + [None]
+            combined = []
+            for start, end in zip(offsets[:-1], offsets[1:]):
+                with open_dict_file(mcf_path,
+                                    'r',
+                                    start_offset=start,
+                                    end_offset=end) as reader:
+                    combined.extend(reader.readlines())
+            self.assertEqual(expected,
+                             combined,
+                             msg=f'3+-way mismatch for step={step}')
+
+    @mock.patch('file_util.storage.fileio.BlobReader')
+    @mock.patch('file_util.file_get_gcs_blob')
+    def test_mcf_gcs_streams_without_tempfile_and_seeks(self, mock_get_blob,
+                                                        mock_blob_reader_cls):
+        mcf_bytes = (b'Node: dcid:n1\ntypeOf: dcs:Place\n\n'
+                     b'Node: dcid:n2\ntypeOf: dcs:Place\n')
+        mock_get_blob.return_value = mock.MagicMock()
+        mock_blob_reader_cls.side_effect = [
+            BytesIO(mcf_bytes),
+            BytesIO(mcf_bytes),
+        ]
+        split = len(b'Node: dcid:n1\ntypeOf:')
+
+        with open_dict_file('gs://bucket/data.mcf',
+                            'r',
+                            start_offset=0,
+                            end_offset=split) as r1:
+            part1 = r1.readlines()
+        with open_dict_file('gs://bucket/data.mcf',
+                            'r',
+                            start_offset=split,
+                            end_offset=None) as r2:
+            part2 = r2.readlines()
+
+        self.assertEqual(
+            [
+                {
+                    'Node': 'dcid:n1',
+                    'typeOf': 'dcs:Place'
+                },
+                {
+                    'Node': 'dcid:n2',
+                    'typeOf': 'dcs:Place'
+                },
+            ],
+            part1 + part2,
+        )
+        self.assertEqual(2, mock_blob_reader_cls.call_count)
 
 
 if __name__ == '__main__':

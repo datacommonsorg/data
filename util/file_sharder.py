@@ -70,6 +70,9 @@ Example usage within a Python script:
 import concurrent.futures
 import functools
 import hashlib
+import importlib
+import inspect
+import multiprocessing
 import os
 import re
 import sys
@@ -115,12 +118,14 @@ _DEFAULT_RECORDS_PER_SHARD = 100000
 _DEFAULT_SHARD_FILENAME = 'shard-{index:05}-of-{shard_count:05d}'
 _DEFAULT_MIN_CHUNK_SIZE = 32 * 1024 * 1024
 _DEFAULT_SHARD_THREADS = max(1, (os.cpu_count() or 1) // 2)
+_MAX_AUTO_TASK_SHARDS = 256
 _NUM_DEDUP_BUCKETS = 64
 # Number of input records between updates to the global progress counters.
 _PROGRESS_BATCH_SIZE = 100000
 # Separator between property-value items in `shard_default_pvs` and
 # `shard_output_columns`. Not ',', since a value can be a comma separated list.
 _PV_ITEM_SEPARATOR = ';'
+_VALID_SHARD_ROUTING = frozenset({'hash', 'task'})
 
 # Counters specific to a `Counters` instance (timestamps, rates, and totals set
 # separately) that must not be summed when merging counters.
@@ -192,6 +197,15 @@ flags.DEFINE_list(
 flags.DEFINE_string(
     'shard_encoding', None,
     'Optional character encoding for reading text-based input files.')
+flags.DEFINE_string(
+    'shard_routing', 'hash',
+    'Output shard routing strategy: "hash" routes records by shard key hash '
+    'through ShardedFileDictIO; "task" writes each parallel work unit directly '
+    'to its own output shard without cross-worker locks or key hashing.')
+flags.DEFINE_bool(
+    'shard_use_processes', False,
+    'When True with shard_routing="task", executes parallel work units in a '
+    'ProcessPoolExecutor (forkserver/spawn) to avoid Python GIL contention.')
 
 _FORMAT_PLACEHOLDER_RE = re.compile(r'\{([A-Za-z_][A-Za-z0-9_]*)\}')
 _IDENTIFIER_RE = re.compile(r'^[A-Za-z_][A-Za-z0-9_]*$')
@@ -346,8 +360,15 @@ def _merge_counters(source: Counters, *targets: Counters):
 
 
 def is_seekable_file(filename: str) -> bool:
-    """Returns True if the file format supports parallel chunk reading via seek()."""
-    if not isinstance(filename, str) or not file_util.file_is_local(filename):
+    """Returns True if the file format supports parallel chunk reading via seek().
+
+    Supports uncompressed local files and `gs://` objects (streamed via
+    `BlobReader` ranged reads) for Avro, MCF/TMCF, JSONL/NDJSON, and CSV/TSV.
+    """
+    if not isinstance(filename, str):
+        return False
+    if not (file_util.file_is_local(filename) or
+            file_util.file_is_gcs(filename)):
         return False
     lower = filename.lower()
     if lower.endswith(('.gz', '.bz2', '.zst', '.xz', '.zip', '.tgz', '.tar')):
@@ -362,10 +383,369 @@ def is_seekable_file(filename: str) -> bool:
 is_splittable_file = is_seekable_file
 
 
+def _ensure_worker_pythonpath() -> None:
+    """Ensures forkserver/spawn worker processes can import repo modules."""
+    data_dir = os.path.dirname(_SCRIPT_DIR)
+    required = [
+        data_dir,
+        _SCRIPT_DIR,
+        os.path.join(data_dir, 'tools', 'statvar_importer'),
+    ]
+    existing = os.environ.get('PYTHONPATH', '')
+    existing_parts = [p for p in existing.split(os.pathsep) if p]
+    missing = [p for p in required if p not in existing_parts]
+    if missing:
+        os.environ['PYTHONPATH'] = os.pathsep.join(missing + existing_parts)
+
+
+def _get_mp_context() -> multiprocessing.context.BaseContext:
+    """Returns a forkserver context on Linux or spawn elsewhere."""
+    _ensure_worker_pythonpath()
+    available = multiprocessing.get_all_start_methods()
+    if 'forkserver' in available:
+        return multiprocessing.get_context('forkserver')
+    return multiprocessing.get_context('spawn')
+
+
+def _resolve_record_transform(transform):
+    """Resolves `shard_record_transform` from a callable or `'module:func'` string."""
+    if transform is None:
+        return None
+    if callable(transform):
+        return transform
+    if isinstance(transform, str):
+        if ':' in transform:
+            mod_name, attr_name = transform.split(':', 1)
+        elif '.' in transform:
+            mod_name, attr_name = transform.rsplit('.', 1)
+        else:
+            raise ValueError(
+                f'Invalid shard_record_transform {transform!r}: expected '
+                '"module:function" or callable.')
+        mod = importlib.import_module(mod_name)
+        fn = getattr(mod, attr_name)
+        if not callable(fn):
+            raise TypeError(
+                f'Resolved shard_record_transform {transform!r} is not callable.'
+            )
+        return fn
+    raise TypeError(
+        f'shard_record_transform must be a callable or module:func string, '
+        f'got {type(transform).__name__}')
+
+
+def _transform_accepts_stats(transform_fn) -> bool:
+    """Returns True if `transform_fn` accepts a second positional stats dict argument."""
+    if transform_fn is None:
+        return False
+    try:
+        sig = inspect.signature(transform_fn)
+    except (TypeError, ValueError):
+        return False
+    positional = [
+        p for p in sig.parameters.values()
+        if p.kind in (inspect.Parameter.POSITIONAL_ONLY,
+                      inspect.Parameter.POSITIONAL_OR_KEYWORD)
+    ]
+    has_varargs = any(p.kind == inspect.Parameter.VAR_POSITIONAL
+                      for p in sig.parameters.values())
+    return has_varargs or len(positional) >= 2
+
+
+def _format_task_shard_path(output_path: str, index: int,
+                            shard_count: int) -> str:
+    """Formats the output path for task shard `index` of `shard_count`."""
+    is_gcs = file_util.file_is_gcs(output_path)
+    if is_gcs:
+        dirname, basename = output_path.rsplit('/', 1)
+    else:
+        dirname = os.path.dirname(output_path)
+        basename = os.path.basename(output_path)
+
+    if '@' in basename:
+        prefix, shard_spec = basename.rsplit('@', 1)
+        suffix = ''
+        if '.' in shard_spec:
+            _, suffix_part = shard_spec.split('.', 1)
+            suffix = '.' + suffix_part
+        formatted = f'{prefix}-{index:05d}-of-{shard_count:05d}{suffix}'
+    elif '*' in basename:
+        prefix, suffix = basename.split('*', 1)
+        formatted = f'{prefix}{index:05d}-of-{shard_count:05d}{suffix}'
+    elif '{index' in basename:
+        formatted = basename.format(index=index, shard_count=shard_count)
+    else:
+        base, suffix = os.path.splitext(basename)
+        if not base:
+            base = 'shard'
+        formatted = f'{base}-{index:05d}-of-{shard_count:05d}{suffix}'
+
+    if not dirname:
+        return formatted
+    if is_gcs:
+        return f'{dirname}/{formatted}'
+    return os.path.join(dirname, formatted)
+
+
+def _plan_task_work_units(
+    files_with_sizes: list[tuple[str, int]],
+    max_workers: int,
+    min_chunk_size: int = _DEFAULT_MIN_CHUNK_SIZE,
+    explicit_shard_count: int = 0,
+    max_auto_shards: int = _MAX_AUTO_TASK_SHARDS,
+) -> list[list[tuple[str, int, int | None]]]:
+    """Splits large seekable files into byte slices and packs small files into work units."""
+    if not files_with_sizes:
+        return []
+
+    workers = max(1, int(max_workers or 1))
+    total_bytes = sum(max(0, size) for _, size in files_with_sizes)
+
+    if workers == 1 and explicit_shard_count <= 1:
+        return [[(path, 0, None) for path, _ in files_with_sizes]]
+
+    if explicit_shard_count > 0:
+        target_shards = explicit_shard_count
+    else:
+        target_shards = min(max_auto_shards, max(workers * 4, 16))
+
+    min_chunk = max(1, int(min_chunk_size or _DEFAULT_MIN_CHUNK_SIZE))
+    effective_chunk = max(min_chunk,
+                          (total_bytes + target_shards - 1) // target_shards)
+
+    work_units: list[list[tuple[str, int, int | None]]] = []
+    small_bundle: list[tuple[str, int, int | None]] = []
+    small_bundle_bytes = 0
+
+    for path, size in files_with_sizes:
+        seekable = is_seekable_file(path)
+        if not seekable or size <= 0 or size <= effective_chunk:
+            if small_bundle and size > 0 and (small_bundle_bytes + size
+                                              > effective_chunk):
+                work_units.append(small_bundle)
+                small_bundle = []
+                small_bundle_bytes = 0
+            small_bundle.append((path, 0, None))
+            small_bundle_bytes += max(0, size)
+        else:
+            if small_bundle:
+                work_units.append(small_bundle)
+                small_bundle = []
+                small_bundle_bytes = 0
+            offset = 0
+            while offset < size:
+                next_offset = offset + effective_chunk
+                if next_offset >= size:
+                    work_units.append([(path, offset, None)])
+                    break
+                work_units.append([(path, offset, next_offset)])
+                offset = next_offset
+
+    if small_bundle:
+        work_units.append(small_bundle)
+
+    return work_units
+
+
+def _run_task_shard_worker(
+    slices: list[tuple[str, int, int | None]],
+    output_shard_path: str,
+    worker_config: dict,
+) -> tuple[int, int, str | None, dict[str, int]]:
+    """Worker entrypoint that transforms one work unit directly into its own output shard."""
+    encoding = worker_config.get('encoding')
+    headers = list(worker_config.get('headers') or [])
+    default_pvs = worker_config.get('default_pvs') or {}
+    add_pvs = worker_config.get('add_pvs') or {}
+    output_pvs = worker_config.get('output_pvs') or {}
+    ignore_patterns = [
+        re.compile(p) for p in (worker_config.get('ignore_patterns') or [])
+    ]
+    explicit_output_cols = frozenset(
+        worker_config.get('explicit_output_cols') or [])
+    generate_dcid = bool(worker_config.get('generate_dcid', False))
+    dcid_ignore_props = frozenset(
+        worker_config.get('dcid_ignore_props') or _DCID_IGNORE_PROPS)
+    sample_rate = float(worker_config.get('sample_rate', 1.0))
+    shard_key = worker_config.get('shard_key')
+    shard_key_prefix_length = int(
+        worker_config.get('shard_key_prefix_length', 0))
+    max_records = int(worker_config.get('max_records', sys.maxsize))
+    transform_fn = _resolve_record_transform(
+        worker_config.get('record_transform'))
+    transform_takes_stats = _transform_accepts_stats(transform_fn)
+    is_mcf_out = is_mcf_file(output_shard_path)
+
+    stats: dict[str, int] = {}
+    input_records = 0
+    output_records = 0
+
+    helper_sharder = None
+    if add_pvs or output_pvs:
+        # Lightweight helper for expression evaluation when column expressions are configured.
+        helper_sharder = FileSharder.__new__(FileSharder)
+        helper_sharder._default_pvs = default_pvs
+        helper_sharder._add_pvs = add_pvs
+        helper_sharder._output_pvs = output_pvs
+        helper_sharder._input_headers = headers
+        helper_sharder._explicit_output_cols = explicit_output_cols
+        helper_sharder._ignore_column_regexes = ignore_patterns
+        helper_sharder._output_path = output_shard_path
+        helper_sharder._headers = headers
+        helper_sharder._dcid_ignore_props = dcid_ignore_props
+
+    def _is_ignored(col) -> bool:
+        if col is None or not ignore_patterns:
+            return False
+        col_str = str(col)
+        if col_str in explicit_output_cols:
+            return False
+        return any(rx.fullmatch(col_str) for rx in ignore_patterns)
+
+    writer = None
+    created_path: str | None = None
+    try:
+        for input_file, start_offset, end_offset in slices:
+            if input_records >= max_records:
+                break
+            with open_dict_file(
+                    input_file,
+                    mode='r',
+                    encoding=encoding,
+                    start_offset=start_offset,
+                    end_offset=end_offset,
+            ) as reader:
+                if start_offset == 0:
+                    stats['shard-input-files'] = stats.get(
+                        'shard-input-files', 0) + 1
+                for record in reader:
+                    if input_records >= max_records:
+                        break
+                    input_records += 1
+
+                    if default_pvs:
+                        for prop, default_val in default_pvs.items():
+                            if prop not in record or record[prop] in (None, ''):
+                                record[prop] = default_val
+                        stats['shard-default-pvs-applied'] = stats.get(
+                            'shard-default-pvs-applied', 0) + 1
+
+                    if add_pvs and helper_sharder is not None:
+                        helper_sharder.apply_add_columns(record)
+                        stats['shard-add-columns-applied'] = stats.get(
+                            'shard-add-columns-applied', 0) + 1
+
+                    if output_pvs and helper_sharder is not None:
+                        record = helper_sharder.get_output_record(record)
+                    elif ignore_patterns:
+                        record = {
+                            col: val
+                            for col, val in record.items()
+                            if not _is_ignored(col)
+                        }
+
+                    if generate_dcid or (
+                            transform_fn is None and
+                        ('dcid' in record or 'Node' in record) and
+                            not FileSharder._has_valid_dcid(record)):
+                        if not FileSharder._has_valid_dcid(record):
+                            generated = generate_node_dcid(
+                                record, dcid_ignore_props)
+                            if generated:
+                                if ('Node' in record or is_mcf_out or
+                                    (headers and 'Node' in headers)):
+                                    record['Node'] = (
+                                        mcf_file_util.add_namespace(generated))
+                                else:
+                                    record['dcid'] = generated
+                                stats['shard-dcid-generated'] = stats.get(
+                                    'shard-dcid-generated', 0) + 1
+
+                    if transform_fn is not None:
+                        record = (transform_fn(record, stats)
+                                  if transform_takes_stats else
+                                  transform_fn(record))
+                        if record is None:
+                            stats['shard-transform-dropped'] = stats.get(
+                                'shard-transform-dropped', 0) + 1
+                            continue
+
+                    if sample_rate < 1.0:
+                        if shard_key and '{' in shard_key:
+                            try:
+                                key = shard_key.format(**record)
+                            except KeyError:
+                                key = ''
+                        elif shard_key and shard_key not in ('dcid', 'Node'):
+                            val = record.get(shard_key)
+                            key = '' if val is None else str(val)
+                        else:
+                            key = get_record_dcid(
+                                record) or record_to_canonical_str(record)
+                        if shard_key_prefix_length > 0:
+                            key = key[:shard_key_prefix_length]
+                        if _get_sample_fraction(key) >= sample_rate:
+                            stats['shard-sampled-dropped'] = stats.get(
+                                'shard-sampled-dropped', 0) + 1
+                            continue
+
+                    if writer is None:
+                        shard_headers = headers
+                        if not shard_headers and not (
+                                is_mcf_out or is_json_file(output_shard_path)):
+                            shard_headers = [
+                                prop for prop in record.keys()
+                                if prop is not None and
+                                not str(prop).startswith('#')
+                            ]
+                        writer = open_dict_file(
+                            output_shard_path,
+                            mode='w',
+                            headers=shard_headers or None,
+                            encoding=encoding,
+                        )
+                        created_path = output_shard_path
+                        stats['shard-output-files'] = stats.get(
+                            'shard-output-files', 0) + 1
+
+                    writer.write_record(record)
+                    output_records += 1
+    finally:
+        if writer is not None:
+            writer.close()
+
+    stats['shard-output-records'] = stats.get('shard-output-records',
+                                              0) + output_records
+    return input_records, output_records, created_path, stats
+
+
 def _get_flag_value(name: str):
     """Returns the flag value for `name` without mutating global parsed state."""
     flag = _FLAGS[name]
     return flag.value if _FLAGS.is_parsed() else flag._value
+
+
+def _resolve_input_files_with_sizes(
+        input_files: str | list) -> list[tuple[str, int]]:
+    """Resolves input patterns into sorted `(path, size_bytes)` pairs."""
+    if not input_files:
+        return []
+    raw_items = ([input_files]
+                 if isinstance(input_files, str) else list(input_files))
+    has_shard_syntax = any(
+        isinstance(item, str) and ('@' in os.path.basename(item) or (
+            '{' in os.path.basename(item) and '}' in os.path.basename(item)))
+        for item in raw_items)
+    if not has_shard_syntax:
+        return file_util.file_list_with_sizes(input_files)
+    matched = ShardedFileDictIO.resolve_input_files(input_files)
+    results: list[tuple[str, int]] = []
+    for path in matched:
+        if file_util.file_is_local(path) and os.path.exists(path):
+            results.append((path, os.path.getsize(path)))
+        else:
+            results.append((path, file_util.file_get_size(path)))
+    return results
 
 
 def get_default_shard_config() -> dict:
@@ -389,6 +769,10 @@ def get_default_shard_config() -> dict:
         'shard_add_columns': _get_flag_value('shard_add_columns'),
         'shard_ignore_columns': _get_flag_value('shard_ignore_columns'),
         'shard_encoding': _get_flag_value('shard_encoding'),
+        'shard_routing': _get_flag_value('shard_routing'),
+        'shard_use_processes': _get_flag_value('shard_use_processes'),
+        'shard_record_transform': None,
+        'shard_process_pool': None,
     })
     return config
 
@@ -431,6 +815,21 @@ class FileSharder:
             self._config.update(config)
         # Validate before creating any state so invalid configs fail cleanly.
         self.setup_sample_rate()
+        self._routing = str(self._config.get('shard_routing') or
+                            'hash').strip().lower()
+        if self._routing not in _VALID_SHARD_ROUTING:
+            raise ValueError(
+                f'Invalid shard_routing {self._routing!r}: expected one of '
+                f'{sorted(_VALID_SHARD_ROUTING)}')
+        self._use_processes = bool(
+            self._config.get('shard_use_processes', False))
+        self._external_process_pool = self._config.get('shard_process_pool')
+        self._raw_record_transform = self._config.get('shard_record_transform')
+        self._record_transform = _resolve_record_transform(
+            self._raw_record_transform)
+        self._record_transform_takes_stats = _transform_accepts_stats(
+            self._record_transform)
+
         self._counters = counters if counters is not None else Counters()
         self._reader_counters = Counters(options=CounterOptions(
             show_every_n_sec=0))
@@ -449,7 +848,11 @@ class FileSharder:
         ]
         self._num_input_records: int = 0
         self._num_workers: int = 1
-        self._input_files = ShardedFileDictIO.resolve_input_files(input_files)
+        self._output_files: list[str] = []
+        self._input_files_with_sizes = _resolve_input_files_with_sizes(
+            input_files)
+        self._input_files = [p for p, _ in self._input_files_with_sizes]
+        self._input_file_sizes = dict(self._input_files_with_sizes)
         if not self._output_path and self._input_files:
             self._output_path = self._input_files[0]
 
@@ -478,7 +881,13 @@ class FileSharder:
         configured_headers = list(self._config.get('shard_headers') or [])
         self._headers = list(configured_headers)
         self._shard_key = self._config.get('shard_key') or None
-        if self._input_files and not self._headers:
+        need_preview_headers = (bool(self._input_files) and
+                                not self._headers and
+                                self._record_transform is None and
+                                not (self._routing == 'task' and
+                                     (is_mcf_file(self._output_path) or
+                                      is_json_file(self._output_path))))
+        if need_preview_headers:
             with open_dict_file(self._input_files[0],
                                 mode='r',
                                 encoding=self._encoding) as preview_reader:
@@ -512,36 +921,51 @@ class FileSharder:
         if self._headers or self._output_pvs or self._add_pvs:
             self._headers = self._get_output_headers(self._headers)
 
-        raw_estimate = self.get_input_records_estimate()
-        max_records = int(self._config.get('shard_input_records', sys.maxsize))
-        if 0 <= max_records < sys.maxsize:
-            raw_estimate = min(raw_estimate, max_records)
+        self._writer = None
+        if self._routing == 'hash':
+            raw_estimate = self.get_input_records_estimate()
+            max_records = int(
+                self._config.get('shard_input_records', sys.maxsize))
+            if 0 <= max_records < sys.maxsize:
+                raw_estimate = min(raw_estimate, max_records)
 
-        writer_config = {
-            'shard_key':
-                self._shard_key,
-            'shard_key_prefix_length':
-                self._config.get('shard_key_prefix_length', 0),
-            'shard_count':
-                self._config.get('shard_count', 0),
-            'records_per_shard':
-                self._config.get('records_per_shard',
-                                 _DEFAULT_RECORDS_PER_SHARD),
-            'shard_headers':
-                self._headers,
-            # Used to derive shard_count from records_per_shard, so size the
-            # shards for the expected number of records after limits & sampling.
-            'estimated_num_records':
-                round(raw_estimate * self._sample_rate),
-        }
+            writer_config = {
+                'shard_key':
+                    self._shard_key,
+                'shard_key_prefix_length':
+                    self._config.get('shard_key_prefix_length', 0),
+                'shard_count':
+                    self._config.get('shard_count', 0),
+                'records_per_shard':
+                    self._config.get('records_per_shard',
+                                     _DEFAULT_RECORDS_PER_SHARD),
+                'shard_headers':
+                    self._headers,
+                # Used to derive shard_count from records_per_shard, so size the
+                # shards for the expected number of records after limits & sampling.
+                'estimated_num_records':
+                    round(raw_estimate * self._sample_rate),
+            }
 
-        self._writer = ShardedFileDictIO(
-            self._output_path,
-            mode='w',
-            headers=self._headers,
-            config=writer_config,
-            counters=self._writer_counters,
-        )
+            self._writer = ShardedFileDictIO(
+                self._output_path,
+                mode='w',
+                headers=self._headers,
+                config=writer_config,
+                counters=self._writer_counters,
+            )
+
+    def output_files(self) -> list[str]:
+        """Returns the list of output shard files written by this sharder."""
+        if self._routing == 'task':
+            return list(self._output_files)
+        if self._writer is not None:
+            return self._writer.files()
+        return []
+
+    def counters(self) -> Counters:
+        """Returns the `Counters` instance tracking sharding statistics."""
+        return self._counters
 
     def __del__(self):
         self.close()
@@ -931,7 +1355,9 @@ class FileSharder:
                 tasks.append((input_file, 0, None))
                 continue
 
-            file_size = file_util.file_get_size(input_file)
+            file_size = self._input_file_sizes.get(input_file)
+            if file_size is None:
+                file_size = file_util.file_get_size(input_file)
             if file_size is None or file_size < min_chunk_size * 2:
                 tasks.append((input_file, 0, None))
                 continue
@@ -1034,7 +1460,8 @@ class FileSharder:
                 elif self._ignore_column_regexes:
                     record = self.filter_ignored_columns(record)
 
-                if generate_dcid or (('dcid' in record or 'Node' in record) and
+                if generate_dcid or (self._record_transform is None and
+                                     ('dcid' in record or 'Node' in record) and
                                      not self._has_valid_dcid(record)):
                     had_valid_dcid = self._has_valid_dcid(record)
                     prev_dcid = get_record_dcid(record)
@@ -1042,6 +1469,18 @@ class FileSharder:
                     if new_dcid and (not had_valid_dcid or
                                      new_dcid != prev_dcid):
                         file_counters.add_counter('shard-dcid-generated', 1)
+
+                if self._record_transform is not None:
+                    if self._record_transform_takes_stats:
+                        local_stats: dict[str, int] = {}
+                        record = self._record_transform(record, local_stats)
+                        for stat_k, stat_v in local_stats.items():
+                            file_counters.add_counter(stat_k, stat_v)
+                    else:
+                        record = self._record_transform(record)
+                    if record is None:
+                        file_counters.add_counter('shard-transform-dropped', 1)
+                        continue
 
                 if skip_duplicates and self.is_duplicate_record(record):
                     file_counters.add_counter('shard-duplicate-dropped', 1)
@@ -1106,12 +1545,168 @@ class FileSharder:
             self._reader_counters.add_counter('processed', count)
             self._counters.add_counter('processed', count)
 
+    def _process_task_routed(self):
+        """Executes 1:1 per-task output sharding across threads or worker processes."""
+        if bool(self._config.get('shard_skip_duplicates', False)):
+            raise ValueError(
+                'shard_skip_duplicates=True is not supported with '
+                'shard_routing="task" because tasks write independent shards.')
+
+        shard_workers = int(
+            self._config.get('shard_threads') or _DEFAULT_SHARD_THREADS)
+        min_chunk_size = int(
+            self._config.get('shard_min_chunk_size') or _DEFAULT_MIN_CHUNK_SIZE)
+        explicit_shard_count = int(self._config.get('shard_count') or 0)
+
+        seekable_count = sum(
+            1 for f in self._input_files if is_seekable_file(f))
+        non_seekable_count = len(self._input_files) - seekable_count
+        self._counters.set_counter('shard-seekable-files', seekable_count)
+        self._reader_counters.set_counter('shard-seekable-files',
+                                          seekable_count)
+        self._counters.set_counter('shard-non-seekable-files',
+                                   non_seekable_count)
+        self._reader_counters.set_counter('shard-non-seekable-files',
+                                          non_seekable_count)
+
+        work_units = _plan_task_work_units(
+            self._input_files_with_sizes,
+            max_workers=shard_workers,
+            min_chunk_size=min_chunk_size,
+            explicit_shard_count=explicit_shard_count,
+        )
+        num_tasks = len(work_units)
+        max_workers = max(1, min(num_tasks, shard_workers))
+        self._num_workers = max_workers
+
+        self._counters.set_counter('shard-chunks', num_tasks)
+        self._reader_counters.set_counter('shard-chunks', num_tasks)
+        self._counters.set_counter('shard-workers', max_workers)
+        self._counters.set_counter('workers', max_workers)
+        self._reader_counters.set_counter('shard-workers', max_workers)
+        self._reader_counters.set_counter('workers', max_workers)
+        self._counters.set_counter('shard-tasks', num_tasks)
+        self._reader_counters.set_counter('shard-tasks', num_tasks)
+        self._counters.set_counter('shard-tasks-completed', 0)
+        self._reader_counters.set_counter('shard-tasks-completed', 0)
+
+        worker_config = {
+            'encoding':
+                self._encoding,
+            'headers':
+                list(self._headers),
+            'default_pvs':
+                dict(self._default_pvs),
+            'add_pvs':
+                dict(self._add_pvs),
+            'output_pvs':
+                dict(self._output_pvs),
+            'ignore_patterns': [
+                rx.pattern for rx in self._ignore_column_regexes
+            ],
+            'explicit_output_cols':
+                list(self._explicit_output_cols),
+            'generate_dcid':
+                self._generate_dcid,
+            'dcid_ignore_props':
+                list(self._dcid_ignore_props),
+            'sample_rate':
+                self._sample_rate,
+            'shard_key':
+                self._shard_key,
+            'shard_key_prefix_length':
+                int(self._config.get('shard_key_prefix_length', 0)),
+            'max_records':
+                int(self._config.get('shard_input_records', sys.maxsize)),
+            'record_transform':
+                self._raw_record_transform,
+        }
+
+        shard_paths = [
+            _format_task_shard_path(self._output_path, idx, num_tasks)
+            for idx in range(num_tasks)
+        ]
+
+        num_input_records = 0
+        num_output_records = 0
+        created_shards: list[str] = []
+
+        def _absorb_result(res):
+            nonlocal num_input_records, num_output_records
+            in_cnt, out_cnt, created_path, stats = res
+            num_input_records += in_cnt
+            num_output_records += out_cnt
+            if created_path:
+                created_shards.append(created_path)
+            for stat_k, stat_v in stats.items():
+                self._counters.add_counter(stat_k, stat_v)
+                self._reader_counters.add_counter(stat_k, stat_v)
+            self._counters.add_counter('shard-tasks-completed', 1)
+            self._reader_counters.add_counter('shard-tasks-completed', 1)
+
+        if max_workers == 1 or num_tasks == 1:
+            for slices, out_path in zip(work_units, shard_paths):
+                _absorb_result(
+                    _run_task_shard_worker(slices, out_path, worker_config))
+        elif self._use_processes:
+            owned_pool = self._external_process_pool is None
+            pool = (self._external_process_pool if self._external_process_pool
+                    is not None else concurrent.futures.ProcessPoolExecutor(
+                        max_workers=max_workers,
+                        mp_context=_get_mp_context(),
+                    ))
+            try:
+                futures = [
+                    pool.submit(_run_task_shard_worker, slices, out_path,
+                                worker_config)
+                    for slices, out_path in zip(work_units, shard_paths)
+                ]
+                for future in futures:
+                    _absorb_result(future.result())
+            finally:
+                if owned_pool:
+                    pool.shutdown(wait=True)
+        else:
+            with concurrent.futures.ThreadPoolExecutor(
+                    max_workers=max_workers) as executor:
+                futures = [
+                    executor.submit(_run_task_shard_worker, slices, out_path,
+                                    worker_config)
+                    for slices, out_path in zip(work_units, shard_paths)
+                ]
+                for future in futures:
+                    _absorb_result(future.result())
+
+        self._output_files = created_shards
+        self._counters.set_counter('total', num_input_records)
+        self._reader_counters.set_counter('total', num_input_records)
+        self._counters.set_counter('processed', num_input_records)
+        self._reader_counters.set_counter('processed', num_input_records)
+        self._counters.set_counter('shard-input-records', num_input_records)
+        self._reader_counters.set_counter('shard-input-records',
+                                          num_input_records)
+        self.close()
+        logging.info(
+            f'Sharded {num_input_records} records from {len(self._input_files)} files '
+            f'({num_tasks} tasks, {max_workers} {"processes" if self._use_processes and max_workers > 1 else "workers"}) '
+            f'into {len(self._output_files)} shards with {num_output_records} records.'
+        )
+
     def process(self):
         """Reads all input files in parallel with separate `FileDictIO` readers and writes output shards."""
         if not self._input_files:
             logging.error(f'No files to process for {self._input_files}')
             self.close()
             return
+
+        if self._routing == 'task':
+            self._process_task_routed()
+            return
+
+        if self._use_processes:
+            logging.warning(
+                'shard_use_processes=True requires shard_routing="task"; '
+                'falling back to ThreadPoolExecutor for hash-routed sharding.')
 
         total_estimate = self.get_input_records_estimate()
         self._counters.set_counter('total', total_estimate)
@@ -1195,7 +1790,7 @@ class FileSharder:
 def shard_file(input_file: str,
                output_path: str,
                config: dict = None,
-               counters: Counters = None):
+               counters: Counters = None) -> list[str]:
     """Shards `input_file` into multiple output shard files at `output_path`.
 
     Args:
@@ -1203,10 +1798,14 @@ def shard_file(input_file: str,
       output_path: Path pattern for the output shard files (e.g. `'output@10.csv'`).
       config: Optional dictionary of config parameters for sharding.
       counters: Optional `Counters` object to track stats.
+
+    Returns:
+      List of output shard file paths written.
     """
     file_sharder = FileSharder(input_file, output_path, config, counters)
     try:
         file_sharder.process()
+        return file_sharder.output_files()
     finally:
         file_sharder.close()
 
