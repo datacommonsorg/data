@@ -18,6 +18,7 @@ import os
 import sys
 import tempfile
 import unittest
+from unittest import mock
 
 import pandas as pd
 
@@ -51,7 +52,13 @@ class HateCrimeTable3Test(unittest.TestCase):
             csv_file_path = os.path.join(tmp_dir, '2018.csv')
 
             read_file = pd.read_excel(xls_file_path, **test_config['args'])
-            read_file = preprocess._clean_dataframe(read_file, '2018')
+            with open(os.path.join(_SCRIPT_PATH, '..', 'table_config.json'),
+                      'r',
+                      encoding='utf-8') as f:
+                table_config = json.load(f)
+            with mock.patch.object(preprocess, '_YEARWISE_CONFIG',
+                                   table_config):
+                read_file = preprocess._clean_dataframe(read_file, '2018', '3')
             read_file.insert(_YEAR_INDEX, 'Year', '2018')
             read_file.to_csv(csv_file_path, header=True)
             csv_files.append(csv_file_path)

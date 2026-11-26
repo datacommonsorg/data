@@ -65,51 +65,55 @@ else:
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string(
-    'years',
-    '2023-present',
-    'Years to download: "2023-present" (post-2022 active years; 2015-2022 are retained in the historical production import), "all" (2015-present, skipping 2020), range e.g. "2015-2024", or comma-separated "2023,2024".',
-)
-flags.DEFINE_enum(
-    'data_mode',
-    'all_groups',
-    ['all_students', 'all_groups'],
-    'Data scope: "all_groups" downloads all 55 demographic subgroups (~100MB/yr); "all_students" downloads group 1 only (~5MB/yr).',
-)
-flags.DEFINE_string(
-    'output_dir',
-    '',
-    'Directory to extract files into. Defaults to input_files/ under the script directory.',
-)
-flags.DEFINE_string(
-    'raw_dir',
-    '',
-    'Directory to store downloaded raw zip files. Defaults to raw_files/ under the script directory.',
-)
-flags.DEFINE_boolean(
-    'test_mode',
-    False,
-    'If true, downloads a small test sample for pipeline verification.',
-)
-flags.DEFINE_boolean(
-    'clean',
-    False,
-    'If true, deletes existing files in output_dir before downloading.',
-)
 DEFAULT_SCHOOL_CODE_MAPPING = (
     'gs://unresolved_mcf/scripts/us_education/'
     'california_school_performance/config/school_code_mapping.json')
 
-flags.DEFINE_boolean(
-    'keep_all_entities',
-    True,
-    'If true, keeps all entities (State, Counties, School Districts, and Schools). Defaults to True.',
-)
-flags.DEFINE_string(
-    'school_code_mapping',
-    DEFAULT_SCHOOL_CODE_MAPPING,
-    'Local file path or gs:// GCS URI to the CDS-to-DCID school code mapping JSON file.',
-)
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        'years',
+        '2023-present',
+        'Years to download: "2023-present" (post-2022 active years; 2015-2022 are retained in the historical production import), "all" (2015-present, skipping 2020), range e.g. "2015-2024", or comma-separated "2023,2024".',
+    )
+    flags.DEFINE_enum(
+        'data_mode',
+        'all_groups',
+        ['all_students', 'all_groups'],
+        'Data scope: "all_groups" downloads all 55 demographic subgroups (~100MB/yr); "all_students" downloads group 1 only (~5MB/yr).',
+    )
+    flags.DEFINE_string(
+        'output_dir',
+        '',
+        'Directory to extract files into. Defaults to input_files/ under the script directory.',
+    )
+    flags.DEFINE_string(
+        'raw_dir',
+        '',
+        'Directory to store downloaded raw zip files. Defaults to raw_files/ under the script directory.',
+    )
+    flags.DEFINE_boolean(
+        'test_mode',
+        False,
+        'If true, downloads a small test sample for pipeline verification.',
+    )
+    flags.DEFINE_boolean(
+        'clean',
+        False,
+        'If true, deletes existing files in output_dir before downloading.',
+    )
+    flags.DEFINE_boolean(
+        'keep_all_entities',
+        True,
+        'If true, keeps all entities (State, Counties, School Districts, and Schools). Defaults to True.',
+    )
+    flags.DEFINE_string(
+        'school_code_mapping',
+        DEFAULT_SCHOOL_CODE_MAPPING,
+        'Local file path or gs:// GCS URI to the CDS-to-DCID school code mapping JSON file.',
+    )
+
 
 BASE_URL = 'https://caaspp-elpac.ets.org/caaspp/researchfiles/'
 USER_AGENT = 'Mozilla/5.0 (DataCommons Ingestion Bot)'
@@ -152,9 +156,7 @@ def get_school_code_map(map_path: str = '') -> dict[str, str]:
         _SCHOOL_CODE_MAP = load_school_code_map(map_path)
         return _SCHOOL_CODE_MAP
     if _SCHOOL_CODE_MAP is None:
-        resolved_path = (FLAGS.school_code_mapping
-                         if FLAGS.is_parsed() else DEFAULT_SCHOOL_CODE_MAPPING)
-        _SCHOOL_CODE_MAP = load_school_code_map(resolved_path)
+        _SCHOOL_CODE_MAP = load_school_code_map(DEFAULT_SCHOOL_CODE_MAPPING)
     return _SCHOOL_CODE_MAP
 
 
@@ -588,16 +590,24 @@ def download_and_process_year(
     return out_file
 
 
-def main(argv):
-    del argv  # Unused.
-
+def run(
+    years_str: str,
+    data_mode: str,
+    output_dir: str,
+    raw_dir: str,
+    test_mode: bool,
+    clean: bool,
+    keep_all_entities: bool,
+    school_code_mapping: str,
+) -> None:
+    """Downloads and normalizes the given years and writes the master file."""
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    output_dir = FLAGS.output_dir or os.path.join(script_dir, 'input_files')
-    raw_dir = FLAGS.raw_dir or os.path.join(script_dir, 'raw_files')
+    output_dir = output_dir or os.path.join(script_dir, 'input_files')
+    raw_dir = raw_dir or os.path.join(script_dir, 'raw_files')
     os.makedirs(output_dir, exist_ok=True)
     os.makedirs(raw_dir, exist_ok=True)
 
-    if FLAGS.clean:
+    if clean:
         logging.info('Cleaning output directory: %s', output_dir)
         for item in os.listdir(output_dir):
             p = os.path.join(output_dir, item)
@@ -606,16 +616,16 @@ def main(argv):
             elif os.path.isdir(p):
                 shutil.rmtree(p)
 
-    school_map = get_school_code_map(FLAGS.school_code_mapping)
+    school_map = get_school_code_map(school_code_mapping)
 
-    if FLAGS.test_mode:
+    if test_mode:
         logging.info('Test mode: downloading 2024 sample...')
         try:
             test_file = download_and_process_year(
                 2024,
                 'all_students',
                 output_dir,
-                FLAGS.keep_all_entities,
+                keep_all_entities,
                 raw_dir=raw_dir,
                 out_filename='sb_ca_test_normalized.txt',
                 school_map=school_map,
@@ -626,7 +636,7 @@ def main(argv):
         logging.info('Master all-years file was not modified in test mode.')
         return
 
-    years = parse_years(FLAGS.years, data_mode=FLAGS.data_mode)
+    years = parse_years(years_str, data_mode=data_mode)
     logging.info('Target years to download and process: %s', years)
 
     year_to_file: dict[int, str] = {}
@@ -637,9 +647,9 @@ def main(argv):
             executor.submit(
                 download_and_process_year,
                 year,
-                FLAGS.data_mode,
+                data_mode,
                 output_dir,
-                FLAGS.keep_all_entities,
+                keep_all_entities,
                 raw_dir,
                 '',
                 school_map,
@@ -669,7 +679,7 @@ def main(argv):
             'No files were successfully downloaded and processed.')
 
     master_file = os.path.join(output_dir, 'sb_ca_all_years_normalized.txt')
-    if (FLAGS.years.strip().lower() in ('all', '*') or '-' in FLAGS.years or
+    if (years_str.strip().lower() in ('all', '*') or '-' in years_str or
             len(all_normalized_files) > 1):
         temp_master = tempfile.NamedTemporaryFile('w',
                                                   dir=output_dir,
@@ -721,5 +731,20 @@ def main(argv):
         )
 
 
+def main(argv):
+    del argv  # Unused.
+    run(
+        years_str=FLAGS.years,
+        data_mode=FLAGS.data_mode,
+        output_dir=FLAGS.output_dir,
+        raw_dir=FLAGS.raw_dir,
+        test_mode=FLAGS.test_mode,
+        clean=FLAGS.clean,
+        keep_all_entities=FLAGS.keep_all_entities,
+        school_code_mapping=FLAGS.school_code_mapping,
+    )
+
+
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

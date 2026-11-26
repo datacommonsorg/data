@@ -45,44 +45,49 @@ except ModuleNotFoundError:
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string(
-    'input_data',
-    os.path.join(_SCRIPT_DIR, 'input_files', 'sb_ca_all_years_normalized.txt'),
-    'Path or glob pattern to input CAASPP data file(s).',
-)
-flags.DEFINE_string(
-    'pv_map',
-    os.path.join(_SCRIPT_DIR, 'config',
-                 'california_school_performance_pvmap.csv'),
-    'Path to the PV map CSV file.',
-)
-if 'school_code_mapping' not in FLAGS:
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        'input_data',
+        os.path.join(_SCRIPT_DIR, 'input_files',
+                     'sb_ca_all_years_normalized.txt'),
+        'Path or glob pattern to input CAASPP data file(s).',
+    )
+    flags.DEFINE_string(
+        'pv_map',
+        os.path.join(_SCRIPT_DIR, 'config',
+                     'california_school_performance_pvmap.csv'),
+        'Path to the PV map CSV file.',
+    )
     flags.DEFINE_string(
         'school_code_mapping',
         download.DEFAULT_SCHOOL_CODE_MAPPING,
         'Local file path or gs:// GCS URI to the CDS-to-DCID school code mapping JSON file.',
     )
-# TODO(b/545470159): Onboard newly opened California schools and districts with
-# standard nces/... DCIDs in a separate Place import instead of generating
-# provisional CA-... place identifiers alongside StatVarObservations.
-flags.DEFINE_boolean(
-    'drop_unmapped_places',
-    True,
-    'If true, filters out rows whose resolved place is an unmapped CA-... '
-    'fallback identifier so Place nodes and stats are not mixed in one import.',
-)
-flags.DEFINE_string(
-    'output_path',
-    os.path.join(_SCRIPT_DIR, 'output_files',
-                 'california_school_performance_all_years_output'),
-    'Output prefix path for generated .csv and .tmcf files (and _places.mcf when --drop_unmapped_places=False).',
-)
-flags.DEFINE_string(
-    'output_counters',
-    os.path.join(_SCRIPT_DIR, 'counters',
-                 'california_school_performance_counters.csv'),
-    'Output path for processing counters CSV.',
-)
+    # TODO(b/545470159): Onboard newly opened California schools and districts
+    # with standard nces/... DCIDs in a separate Place import instead of
+    # generating provisional CA-... place identifiers alongside
+    # StatVarObservations.
+    flags.DEFINE_boolean(
+        'drop_unmapped_places',
+        True,
+        'If true, filters out rows whose resolved place is an unmapped CA-... '
+        'fallback identifier so Place nodes and stats are not mixed in one import.',
+    )
+    flags.DEFINE_string(
+        'output_path',
+        os.path.join(_SCRIPT_DIR, 'output_files',
+                     'california_school_performance_all_years_output'),
+        'Output prefix path for generated .csv and .tmcf files (and _places.mcf when --drop_unmapped_places=False).',
+    )
+    flags.DEFINE_string(
+        'output_counters',
+        os.path.join(_SCRIPT_DIR, 'counters',
+                     'california_school_performance_counters.csv'),
+        'Output path for processing counters CSV.',
+    )
+
 
 OUTPUT_COLUMNS = [
     'typeOf',
@@ -621,4 +626,5 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

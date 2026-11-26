@@ -42,23 +42,28 @@ sys.path.append(os.path.join(_SCRIPT_PATH, '../..'))
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string(
-    'data_directory', 'data',
-    'Data directory (full path OR path relative to current working directory)')
-flags.DEFINE_string(
-    'zip_download_path', 'zip_download',
-    'Zip file download directory (contained in the data_directory)')
-flags.DEFINE_string('input_directory', 'input',
-                    'Inputs directory (contained in the data_directory)')
-flags.DEFINE_string('output_directory', 'output',
-                    'Inputs directory (contained in the data_directory)')
-flags.DEFINE_string('mappings_file', 'mappings.txt', 'Mappings File.')
-flags.DEFINE_string('input_etmcf_filename', 'input_etmcf',
-                    'Enhanced TMCF filename.')
-flags.DEFINE_string(
-    'data_csv_file_unique_substring', 'Data.csv',
-    'The unique substring in the name of the data CSV file, e.g. Data.csv for ABC_Data.csv This is used to keep only the relevant CSV file from the zip download.'
-)
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        'data_directory', 'data',
+        'Data directory (full path OR path relative to current working directory)'
+    )
+    flags.DEFINE_string(
+        'zip_download_path', 'zip_download',
+        'Zip file download directory (contained in the data_directory)')
+    flags.DEFINE_string('input_directory', 'input',
+                        'Inputs directory (contained in the data_directory)')
+    flags.DEFINE_string('output_directory', 'output',
+                        'Inputs directory (contained in the data_directory)')
+    flags.DEFINE_string('mappings_file', 'mappings.txt', 'Mappings File.')
+    flags.DEFINE_string('input_etmcf_filename', 'input_etmcf',
+                        'Enhanced TMCF filename.')
+    flags.DEFINE_string(
+        'data_csv_file_unique_substring', 'Data.csv',
+        'The unique substring in the name of the data CSV file, e.g. Data.csv for ABC_Data.csv This is used to keep only the relevant CSV file from the zip download.'
+    )
+
 
 NUM_RETRIES = 10
 
@@ -81,8 +86,8 @@ def _download_zip(url: str, filepath: str) -> None:
     ZipFile(filepath, 'r')
 
 
-def _read_write_files_from_zip(zip_filepath, unzipped_data_path,
-                               csv_filename) -> None:
+def _read_write_files_from_zip(zip_filepath, unzipped_data_path, csv_filename,
+                               data_csv_file_unique_substring) -> None:
     unzip_files = False
 
     with ZipFile(zip_filepath, 'r') as z:
@@ -90,17 +95,17 @@ def _read_write_files_from_zip(zip_filepath, unzipped_data_path,
         for zip_file in z.namelist():
             if not os.path.exists(os.path.join(unzipped_data_path,
                                                csv_filename)):
-                if FLAGS.data_csv_file_unique_substring in zip_file:
+                if data_csv_file_unique_substring in zip_file:
                     unzip_files = True
                     csv_files.append(zip_file)
 
         if len(csv_files) > 1:
             raise Exception(
-                f"Zip archive file cannot have more than one file with name containing {FLAGS.data_csv_file_unique_substring}"
+                f"Zip archive file cannot have more than one file with name containing {data_csv_file_unique_substring}"
             )
         if unzip_files and not csv_files:
             raise Exception(
-                f"No CSV files (with names containing {FLAGS.data_csv_file_unique_substring}) were found to download. Check zip file: {zip_filepath}"
+                f"No CSV files (with names containing {data_csv_file_unique_substring}) were found to download. Check zip file: {zip_filepath}"
             )
         if unzip_files:
             print(f"Unzipping/Extracting files from: {zip_filepath}")
@@ -139,7 +144,8 @@ def _get_post_requests_from_file(post_requests_filename: str) -> List[Dict]:
 
 
 def _download_mapping_file(post_req: Dict, data_path: str,
-                           zip_download_path: str):
+                           zip_download_path: str,
+                           data_csv_file_unique_substring: str):
     print(f"Starting to process the post_req: {post_req}")
     url = post_req["url"]
     json_params = post_req["json_params"]
@@ -174,32 +180,35 @@ def _download_mapping_file(post_req: Dict, data_path: str,
             f"Zip file ({zip_file_name}) already downloaded. Not re-downloading."
         )
 
-    _read_write_files_from_zip(zipped_filepath, data_path, csv_file_name)
+    _read_write_files_from_zip(zipped_filepath, data_path, csv_file_name,
+                               data_csv_file_unique_substring)
 
 
-def main(_):
+def run(data_directory, zip_download_path, input_directory, output_directory,
+        data_csv_file_unique_substring, mappings_file,
+        input_etmcf_filename) -> None:
+    """Validates the inputs, downloads the mapping files, and processes them."""
     # Validate the Flags.
-    assert FLAGS.data_directory
-    assert FLAGS.zip_download_path
-    assert FLAGS.input_directory
-    assert FLAGS.output_directory
-    assert FLAGS.data_csv_file_unique_substring
+    assert data_directory
+    assert zip_download_path
+    assert input_directory
+    assert output_directory
+    assert data_csv_file_unique_substring
 
     # Check that the data_directory and input_path are valid.
-    if not os.path.exists(FLAGS.data_directory):
+    if not os.path.exists(data_directory):
         raise Exception(
-            f"data_directory must exist. Provided: {FLAGS.data_directory}")
+            f"data_directory must exist. Provided: {data_directory}")
 
-    input_path = os.path.join(FLAGS.data_directory, FLAGS.input_directory)
+    input_path = os.path.join(data_directory, input_directory)
     if not os.path.exists(input_path):
         raise Exception(
-            f"input_directory must exist. Provided: {FLAGS.input_directory}. Resolved to path: {input_path}"
+            f"input_directory must exist. Provided: {input_directory}. Resolved to path: {input_path}"
         )
 
     # If the zip directory or output directory are not found, create them.
-    zip_download_path = os.path.join(FLAGS.data_directory,
-                                     FLAGS.zip_download_path)
-    output_path = os.path.join(FLAGS.data_directory, FLAGS.output_directory)
+    zip_download_path = os.path.join(data_directory, zip_download_path)
+    output_path = os.path.join(data_directory, output_directory)
 
     if not os.path.exists(zip_download_path):
         print(
@@ -212,17 +221,17 @@ def main(_):
         os.mkdir(output_path)
 
     # Check that the mappings and TMCF files (after resolving the paths) are valid.
-    mappings_filepath = os.path.join(input_path, FLAGS.mappings_file)
+    mappings_filepath = os.path.join(input_path, mappings_file)
     if not os.path.exists(mappings_filepath):
         raise Exception(
-            f"mappings_file must exist. Provided: {FLAGS.mappings_file}. Resolved to path: {mappings_filepath}"
+            f"mappings_file must exist. Provided: {mappings_file}. Resolved to path: {mappings_filepath}"
         )
 
     input_etmcf_filepath = os.path.join(input_path,
-                                        FLAGS.input_etmcf_filename + ".tmcf")
+                                        input_etmcf_filename + ".tmcf")
     if not os.path.exists(input_etmcf_filepath):
         raise Exception(
-            f"input_etmcf_filename (.tmcf) must exist. Provided: {FLAGS.input_etmcf_filename}. Resolved to path: {input_etmcf_filepath}"
+            f"input_etmcf_filename (.tmcf) must exist. Provided: {input_etmcf_filename}. Resolved to path: {input_etmcf_filepath}"
         )
 
     # Reading the post reqs file.
@@ -233,7 +242,8 @@ def main(_):
     count = 1
     for req in reqs:
         print(f"*********** Downloading {count}  **********")
-        _download_mapping_file(req, input_path, zip_download_path)
+        _download_mapping_file(req, input_path, zip_download_path,
+                               data_csv_file_unique_substring)
         count += 1
     print("Done downloading zip archives and data CSV files.")
 
@@ -245,17 +255,23 @@ def main(_):
             continue
 
         print("**************************************************")
-        print(
-            f"   Processing: {count} - {filename} and {FLAGS.input_etmcf_filename}"
-        )
+        print(f"   Processing: {count} - {filename} and {input_etmcf_filename}")
         csv_filename = filename.replace(".csv", "")
         process_etmcf.process_enhanced_tmcf(
-            input_path, output_path, FLAGS.input_etmcf_filename, csv_filename,
-            FLAGS.input_etmcf_filename + "_processed",
+            input_path, output_path, input_etmcf_filename, csv_filename,
+            input_etmcf_filename + "_processed",
             csv_filename.replace("$", "_") + "_processed")
         print("**************************************************")
         count += 1
 
 
+def main(argv):
+    del argv  # Unused.
+    run(FLAGS.data_directory, FLAGS.zip_download_path, FLAGS.input_directory,
+        FLAGS.output_directory, FLAGS.data_csv_file_unique_substring,
+        FLAGS.mappings_file, FLAGS.input_etmcf_filename)
+
+
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

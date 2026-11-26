@@ -350,7 +350,7 @@ def _output_mcf(outfile, geoids):
                 if prop in lines:
                     mcf_block += lines.pop(prop)
 
-            for prop, line in sorted(lines.items()):
+            for _prop, line in sorted(lines.items()):
                 mcf_block += line
 
             f.write(mcf_block)

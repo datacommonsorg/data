@@ -233,7 +233,7 @@ class DataTypeAnnotator:
         matches = []
         if self._ngram_matcher:
             ngram_matches = self._ngram_matcher.lookup(value)
-            for key, data_type in ngram_matches:
+            for key, _data_type in ngram_matches:
                 matches.append(key)
                 self._counters.add_counter('ngram-matches', 1)
             self._counters.add_counter('ngram-lookups', 1)
@@ -530,7 +530,7 @@ class DataAnnotator:
         max_columns = max(self._col_pv_counts.keys())
         for col_index in range(1, max_columns + 1):
             col_pvs = self._col_pv_counts.get(col_index, {})
-            for pv, count in col_pvs.items():
+            for _pv, count in col_pvs.items():
                 max_col_pv_count = max(max_col_pv_count, count)
 
         # Get columns with majority PVs.
@@ -571,7 +571,7 @@ class DataAnnotator:
         # Add remaining strings from header rows
         for row_index in range(1, self._header_rows + 1):
             row_str_counts = self._row_str_counts.get(row_index, {})
-            for row_str, count in row_str_counts.items():
+            for row_str, _count in row_str_counts.items():
                 if row_str not in pv_map:
                     _add_pv(row_str, '#Row', row_index, pv_map)
 

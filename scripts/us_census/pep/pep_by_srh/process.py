@@ -1850,7 +1850,7 @@ def process(data_directory, output_path):
     """
     input_files = []
     # Walk through the directory and its subdirectories
-    for root, dirs, files in os.walk(_INPUT_FILE_PATH):
+    for root, _dirs, files in os.walk(_INPUT_FILE_PATH):
         for file in sorted(files):  # Sort the files alphabetically
             file_path = os.path.join(root, file)
             input_files.append(file_path)

@@ -20,6 +20,7 @@ import os
 import sys
 
 from absl import app
+from absl import flags
 from absl import logging
 import pandas as pd
 
@@ -31,6 +32,7 @@ sys.path.append(os.path.join(_DATA_DIR, '/data/util'))
 sys.path.append(os.path.abspath(os.path.join(_SCRIPT_PATH, '../../../util')))
 
 from alpha2_to_dcid import USSTATE_MAP
+import clean_data
 from clean_data import reads_config_file
 from name_to_alpha2 import USSTATE_MAP_SPACE
 from statvar_dcid_generator import get_statvar_dcid
@@ -50,9 +52,9 @@ for _path_key in ('INPUT_HTML_FILES', 'INPUT_CSV_FILES',
             os.path.join(_SCRIPT_PATH, _CONFIG[_path_key]))
 
 
-def generate_tmcf():
+def generate_tmcf(config_file_path):
     # Writing Generated TMCF to local path.
-    configs = reads_config_file()
+    configs = reads_config_file(config_file_path)
     tmcf_template = configs['TMCF_TEMPLATE'].rstrip('\n')
     output_path = _CONFIG.get("OUTPUT_PATH")
     # The manifest specifies two parts.
@@ -214,7 +216,7 @@ def main(_):
             raise
         process(cleaned_csv_path, output_mcf_path,
                 _CONFIG.get('COMBINED_INPUT_CSV_FILE'))
-        generate_tmcf()
+        generate_tmcf(flags.FLAGS.config_file_path)
         aggregate()
         logging.info("Processing completed!")
     except Exception as e:
@@ -222,4 +224,6 @@ def main(_):
 
 
 if __name__ == "__main__":
+    # Accept --config_file_path, which is defined by clean_data.
+    clean_data._define_flags()
     app.run(main)

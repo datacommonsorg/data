@@ -98,7 +98,7 @@ def process_excel_data(df):
     result = []
     current_prefix = None
 
-    for index, row in df.iterrows():
+    for _index, row in df.iterrows():
         row_values = row.tolist()
         if pd.isna(row_values[1]) and pd.isna(row_values[2]) and pd.isna(
                 row_values[3]) and not pd.isna(row_values[0]):

@@ -555,7 +555,7 @@ def process_svobs(svobs_path, facility_company_ownership, facility_sv_map,
         writer.writeheader()
 
         num_rows = 0
-        for k, v in company_svo_dict.items():
+        for _k, v in company_svo_dict.items():
             if num_rows % 1000 == 0:
                 print("processed %d rows" % num_rows)
             out_row = {
@@ -582,7 +582,7 @@ def generate_svobs_helper(ownership_relationships_filepath, svobs_path_info):
         ownership_relationships_filepath)
 
     facilities = set()
-    for (facility_id, year) in facility_company_ownership:
+    for (facility_id, _year) in facility_company_ownership:
         facilities.add(facility_id)
 
     facilities = sorted(facilities)

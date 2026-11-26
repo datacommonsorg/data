@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "max_date_consistent",
+      "description": "Checks that the latest date is the same for all StatVars.",
+      "validator": "MAX_DATE_CONSISTENT",
+      "params": {}
+    },
+    {
+      "rule_id": "min_expected_max_date",
+      "description": "Verifies that all 18 StatVars are present and MaxDate is within the expected 3-year CDC release lag.",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT StatVar, MaxDate, COUNT(*) OVER () AS total_svs FROM stats",
+        "condition": "CAST(MaxDate AS INTEGER) >= (EXTRACT(YEAR FROM CURRENT_DATE) - 3) AND total_svs = 18"
+      }
+    }
+  ]
+}
