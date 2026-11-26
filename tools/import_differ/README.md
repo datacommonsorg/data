@@ -34,11 +34,15 @@ python3 import_differ.py \
 
 ### Running the BigQuery Differ Manually (`bigquery_differ.py`)
 
-For large MCF datasets, [`bigquery_differ.py`](bigquery_differ.py) streams
-current and previous `.mcf` files in constant (O(1)) memory into temporary
-BigQuery tables (which auto-expire after `--bq_table_ttl_hours`), runs a SQL
-`FULL OUTER JOIN` diff, and streams the detailed `nodes-*.mcf` files along with
-`differ_summary.json` and `differ_summary.csv`.
+For large MCF datasets, [`bigquery_differ.py`](bigquery_differ.py) converts
+current and previous `.mcf` files in parallel via
+[`util/file_sharder.py`](../../util/file_sharder.py) and
+[`util/bq_loader.py`](../../util/bq_loader.py) into sharded JSONL and loads
+each dataset into a combined temporary BigQuery table (`dcid`, `typeOf`,
+`properties JSON`, auto-expiring after `--bq_table_ttl_hours`). Core diffing
+runs inside BigQuery via SQL `FULL OUTER JOIN` queries so only changed nodes are
+downloaded and streamed into `nodes-*.mcf`, `differ_summary.json`, and
+`differ_summary.csv`.
 
 > Quote wildcard paths so your shell does not expand `*` locally. Both inputs
 > and `--output_location` can be local paths or `gs://` URIs in any combination.
@@ -83,8 +87,12 @@ python3 import_differ.py \
 - `bq_table_ttl_hours`: Expiration time in hours for temporary BigQuery tables
   (default: `12`).
 - `gcs_temp_dir` (`bigquery_differ.py` only): Optional local or `gs://`
-  directory for staging intermediate normalized CSVs before loading into
+  directory for staging intermediate normalized JSONL shards before loading into
   BigQuery (defaults to a local temporary directory).
+- `max_workers`: Maximum parallel worker processes for MCF-to-JSONL conversion
+  in BigQuery mode (default: `0`, which uses all available CPU cores).
+- `chunk_size_mb` (`bigquery_differ.py` only): Minimum byte-range chunk size in
+  MiB when splitting large MCF files across workers (default: `8`).
 
 ## Comparison rules
 
