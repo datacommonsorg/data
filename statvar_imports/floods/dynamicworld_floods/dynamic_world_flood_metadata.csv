@@ -1,0 +1,6 @@
+parameter,value
+header_rows,1
+output_columns,"observationAbout,observationDate,observationPeriod,variableMeasured,value,unit,measurementMethod"
+output_precision_digits,6
+reconcile_nodes,False
+recon_lookup_api,False

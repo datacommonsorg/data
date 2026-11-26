@@ -1,0 +1,4 @@
+observationAbout,observationDate,observationPeriod,variableMeasured,value,unit,measurementMethod
+dcid:s2CellId/0x5b267c8c00000000,2026-09,P1M,dcs:Area_FloodEvent,0.214031,dcs:SquareKilometer,dcs:DataCommonsAggregate
+dcid:s2CellId/0x5b267cec00000000,2026-09,P1M,dcs:Area_FloodEvent,0.439754,dcs:SquareKilometer,dcs:DataCommonsAggregate
+dcid:s2CellId/0x5b267c8c00000000,2026-10,P1M,dcs:Area_FloodEvent,0.512345,dcs:SquareKilometer,dcs:DataCommonsAggregate

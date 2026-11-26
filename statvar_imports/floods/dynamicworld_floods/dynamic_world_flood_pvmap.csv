@@ -1,0 +1,5 @@
+key,property,value,p2,v2,p3,v3,p4,v4
+observationAbout,observationAbout,{Data},,,,,,
+observationDate,observationDate,{Data},,,,,,
+observationPeriod,observationPeriod,{Data},,,,,,
+area,value,{Number},variableMeasured,dcs:Area_FloodEvent,unit,dcs:SquareKilometer,measurementMethod,dcs:DataCommonsAggregate
