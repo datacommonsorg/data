@@ -1,0 +1,38 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "DynamicWorld_FloodEvents_Places_AutoRefresh",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_DYNAMICWORLD_V1",
+            "provenance_description": "Statistics for places with flood events inferred from areas marked with high probability of water outside the permanent water bodies.",
+            "scripts": [
+                "download_script.py",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/dynamicworld_floodevents_places_svobs.csv --pv_map=dynamicworld_floodevents_places_pvmap.csv --config_file=dynamicworld_floodevents_places_metadata.csv --output_path=output/dynamicworld_floodevents_places_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_counters=counters/dynamicworld_floodevents_places_counters.csv"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output/dynamicworld_floodevents_places_output.tmcf",
+                    "cleaned_csv": "output/dynamicworld_floodevents_places_output.csv",
+                    "node_mcf": "output/*.mcf"
+                }
+            ],
+            "source_files": [
+                "input_files/dynamicworld_floodevents_places_svobs.csv",
+                "counters/*.csv",
+                "dynamicworld_floodevents_places_pvmap.csv",
+                "dynamicworld_floodevents_places_metadata.csv",
+                "validation_config.json"
+            ],
+            "validation_config_file": "validation_config.json",
+            "cron_schedule": "0 5 1 * *",
+            "user_script_timeout": 10800,
+            "resource_limits": {
+                "cpu": 8,
+                "memory": 32,
+                "disk": 100
+            }
+        }
+    ]
+}

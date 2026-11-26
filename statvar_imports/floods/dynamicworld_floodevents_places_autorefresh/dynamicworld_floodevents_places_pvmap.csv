@@ -1,0 +1,14 @@
+key,property,value,p2,v2,p3,v3
+observationAbout,observationAbout,{Data},,,,
+Earth,observationAbout,dcid:Earth,,,,
+africa,observationAbout,dcid:africa,,,,
+antarctica,observationAbout,dcid:antarctica,,,,
+asia,observationAbout,dcid:asia,,,,
+europe,observationAbout,dcid:europe,,,,
+northamerica,observationAbout,dcid:northamerica,,,,
+southamerica,observationAbout,dcid:southamerica,,,,
+oceania,observationAbout,dcid:oceania,,,,
+observationDate,observationDate,{Data},,,,
+observationPeriod,observationPeriod,{Data},,,,
+area,value,{Number},variableMeasured,dcs:Area_FloodEvent,unit,dcs:SquareKilometer
+count,value,{Number},variableMeasured,dcs:Count_FloodEvent,,

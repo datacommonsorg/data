@@ -1,0 +1,17 @@
+observationAbout,observationDate,observationPeriod,variableMeasured,value,unit
+dcid:Earth,2026-10,P1M,dcs:Area_FloodEvent,224214.58,dcs:SquareKilometer
+dcid:Earth,2026-10,P1M,dcs:Count_FloodEvent,5958,
+dcid:Earth,2026,P1Y,dcs:Area_FloodEvent,224214.58,dcs:SquareKilometer
+dcid:Earth,2026,P1Y,dcs:Count_FloodEvent,5958,
+dcid:asia,2026-10,P1M,dcs:Area_FloodEvent,54715.045,dcs:SquareKilometer
+dcid:asia,2026-10,P1M,dcs:Count_FloodEvent,2215,
+dcid:asia,2026,P1Y,dcs:Area_FloodEvent,54715.045,dcs:SquareKilometer
+dcid:asia,2026,P1Y,dcs:Count_FloodEvent,2215,
+country/IND,2026-10,P1M,dcs:Area_FloodEvent,18361.71,dcs:SquareKilometer
+country/IND,2026-10,P1M,dcs:Count_FloodEvent,298,
+country/IND,2026,P1Y,dcs:Area_FloodEvent,18361.71,dcs:SquareKilometer
+country/IND,2026,P1Y,dcs:Count_FloodEvent,298,
+s2CellId/0x39f1070000000000,2026-10,P1M,dcs:Area_FloodEvent,3.614,dcs:SquareKilometer
+s2CellId/0x39f1070000000000,2026-10,P1M,dcs:Count_FloodEvent,1,
+s2CellId/0x39f1070000000000,2026,P1Y,dcs:Area_FloodEvent,3.614,dcs:SquareKilometer
+s2CellId/0x39f1070000000000,2026,P1Y,dcs:Count_FloodEvent,1,
