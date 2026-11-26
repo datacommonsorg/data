@@ -378,7 +378,7 @@ def _enrich_series_from_codelists(
                    'VALUE') or dim.startswith(('ID_', 'NOM_', 'LIBELLE_')):
             continue
         id_col, nom_col = _target_id_and_nom_cols(dim)
-        if dim == 'D_PARTEMENT' and id_col not in upper_keys:
+        if dim in ('D_PARTEMENT', 'DÉPARTEMENT') and id_col not in upper_keys:
             enriched[id_col] = val
             upper_keys.add(id_col)
         if not codelists:
@@ -402,8 +402,10 @@ def _enrich_dataframe_from_codelists(
 ) -> pd.DataFrame:
     """Enriches a normalized DataFrame with ID_* / NOM_* columns if missing."""
     df = df.copy()
-    if 'D_PARTEMENT' in df.columns and 'ID_DÉPARTEMENT' not in df.columns:
-        df['ID_DÉPARTEMENT'] = df['D_PARTEMENT']
+    for col in ('D_PARTEMENT', 'DÉPARTEMENT'):
+        if col in df.columns and 'ID_DÉPARTEMENT' not in df.columns:
+            df['ID_DÉPARTEMENT'] = df[col]
+            break
 
     if not codelists:
         ordered = [c for c in df.columns if c != 'OBS_VALUE'] + ['OBS_VALUE']
@@ -567,8 +569,7 @@ def convert_sdmx_xml_to_dataframe(xml_path: str) -> pd.DataFrame:
     for elem in root.iter():
         tag = _local_tag(elem.tag)
         if tag == 'Series':
-            series_attrib = _enrich_series_from_codelists(
-                _extract_series_dict(elem), codelists)
+            series_attrib = _extract_series_dict(elem)
             for child in elem:
                 if _local_tag(child.tag) == 'Obs':
                     obs_attrib = _extract_obs_dict(child)

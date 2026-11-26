@@ -39,6 +39,8 @@ except ModuleNotFoundError:
     from statvar_imports.opendataforafrica.cotedivoire_census import convert_sdmx_xml_to_csv as civ_converter
 
 EXPECTED_TABLES = civ_converter.EXPECTED_TABLES
+_enrich_dataframe_from_codelists = (
+    civ_converter._enrich_dataframe_from_codelists)
 _format_obs_value = civ_converter._format_obs_value
 _normalize_obs_column = civ_converter._normalize_obs_column
 _to_normalized_df = civ_converter._to_normalized_df
@@ -261,6 +263,25 @@ class ConvertSdmxXmlToCsvTest(unittest.TestCase):
         self.assertListEqual(list(out_df['ID_DÉPARTEMENT']), ['D1', 'D2_ALT'])
         self.assertListEqual(list(out_df['OBS_VALUE']), ['0.0001', '250'])
 
+        # Accented DÉPARTEMENT synthesizes ID_DÉPARTEMENT when missing, while
+        # unaccented ASCII DEPARTEMENT/ID_DEPARTEMENT (jgwlmgg/ojtbus) stays
+        # unaccented.
+        accented_df = _enrich_dataframe_from_codelists(
+            pd.DataFrame({
+                'DÉPARTEMENT': ['D1'],
+                'OBS_VALUE': ['10'],
+            }), {})
+        self.assertEqual(accented_df.iloc[0]['ID_DÉPARTEMENT'], 'D1')
+        ascii_df = _normalize_obs_column(
+            pd.DataFrame({
+                'DEPARTEMENT': ['D5'],
+                'ID_DEPARTEMENT': ['D5'],
+                'OBS_VALUE': ['42'],
+            }))
+        self.assertIn('DEPARTEMENT', ascii_df.columns)
+        self.assertIn('ID_DEPARTEMENT', ascii_df.columns)
+        self.assertNotIn('ID_DÉPARTEMENT', ascii_df.columns)
+
     def test_fallback_series_flat_codelists_and_generic_data(self) -> None:
         """Tests ElementTree fallback for Series, flat Obs, and GenericData."""
         sample_fallback_xml = """<?xml version="1.0" encoding="utf-8"?>
@@ -298,6 +319,24 @@ class ConvertSdmxXmlToCsvTest(unittest.TestCase):
         self.assertEqual(df.iloc[0]['ID_DÉPARTEMENT'], 'D1')
         self.assertEqual(df.iloc[0]['NOM_INDICATOR'], 'Nombre de medecins')
         self.assertListEqual(list(df['OBS_VALUE']), ['12300', '-'])
+
+        # Hex-escaped D_x00C9_PARTEMENT (decoded to DÉPARTEMENT) without
+        # Codelists + Obs-level override derives ID_DÉPARTEMENT post-merge.
+        override_xml = """<?xml version="1.0" encoding="utf-8"?>
+<StructureSpecificData>
+  <DataSet>
+    <Series D_x00C9_PARTEMENT="D1" FREQ="A">
+      <Obs TIME_PERIOD="2020" OBS_VALUE="10"/>
+      <Obs D_x00C9_PARTEMENT="D2" TIME_PERIOD="2021" OBS_VALUE="20"/>
+    </Series>
+  </DataSet>
+</StructureSpecificData>
+"""
+        override_file = os.path.join(self.test_dir.name, 'override.xml')
+        with open(override_file, 'w', encoding='utf-8') as f:
+            f.write(override_xml)
+        override_df = convert_sdmx_xml_to_dataframe(override_file)
+        self.assertListEqual(list(override_df['ID_DÉPARTEMENT']), ['D1', 'D2'])
 
         # Flat <DataSet>/<Obs> with Codelist enrichment.
         flat_xml = """<?xml version="1.0" encoding="utf-8"?>
