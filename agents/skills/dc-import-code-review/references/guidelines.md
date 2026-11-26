@@ -111,10 +111,10 @@ repository contracts and instructions take precedence.
   must be overridden to a different StatVar, even one with a different
   definition, remap it with `--statvar_dcid_remap_csv`:
   1. Create a remap CSV (e.g., `statvar_remap.csv`) with the header
-     `statvar,dcid`:
+     `key,dcid`:
 
      ```csv
-     statvar,dcid
+     key,dcid
      RealValue_Amount_EconomicActivity_NetDomesticProduction_PerCapita,RealValue_Amount_EconomicActivity_NetDomesticProduction_AsAFractionOf_Count_Person
      ```
 
