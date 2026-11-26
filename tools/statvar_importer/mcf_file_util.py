@@ -688,7 +688,7 @@ def _parse_number(normalized_value: str,
 
 def get_numeric_value(value: str,
                       decimal_char: str = '.',
-                      separator_chars: str = ' ,%') -> Union[int, float, None]:
+                      separator_chars: str = ' ,$%') -> Union[int, float, None]:
     """Returns the float or int value from string or None.
 
   Args:
@@ -697,7 +697,7 @@ def get_numeric_value(value: str,
       with e/E, for eg: 1.23e-4, 10E5.
     decimal_char: character used for decimal place separator, default: '.'
     separator_chars: separator characters for 1000s or 100s for example:
-      NNN,NNN,NNN. Default: ' ,%' (does not strip '$' or '_').
+      NNN,NNN,NNN. Default: ' ,$%'
 
   Returns:
     number as a float or int if the value is a finite number, None otherwise.
@@ -718,8 +718,10 @@ def get_numeric_value(value: str,
         normalized_value = value.strip()
         if not normalized_value:
             return None
-        if (normalized_value[0].isdigit() or normalized_value[0] == '.' or
-                normalized_value[0] == '-' or normalized_value[0] == '+'):
+        if (normalized_value[0].isdigit() or
+                normalized_value[0] in ['.', '+', '-'] or
+                normalized_value[0] in decimal_char or
+                normalized_value[0] in separator_chars):
             # Input looks like a number. Remove allowed extra characters.
             if separator_chars:
                 normalized_value = ''.join(

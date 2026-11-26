@@ -201,15 +201,17 @@ class TestMCFFileUtil(unittest.TestCase):
         # Extra whitespace, empty, and negative numbers
         self.assertEqual(-42, mcf_file_util.get_numeric_value('  -42  '))
         self.assertEqual(-1.23, mcf_file_util.get_numeric_value('\t -1.23 \n'))
+        # Parse '$' prefix or suffix
+        self.assertEqual(100, mcf_file_util.get_numeric_value('$100'))
+        self.assertEqual(-100, mcf_file_util.get_numeric_value('-$100'))
+        self.assertEqual(100, mcf_file_util.get_numeric_value('100$'))
+
         self.assertIsNone(mcf_file_util.get_numeric_value(''))
         self.assertIsNone(mcf_file_util.get_numeric_value('   '))
         self.assertIsNone(mcf_file_util.get_numeric_value('\t\n'))
         self.assertIsNone(mcf_file_util.get_numeric_value('-'))
         self.assertIsNone(mcf_file_util.get_numeric_value(' - '))
-        # Do not parse '$' or '_' into numbers
-        self.assertIsNone(mcf_file_util.get_numeric_value('$100'))
-        self.assertIsNone(mcf_file_util.get_numeric_value('-$100'))
-        self.assertIsNone(mcf_file_util.get_numeric_value('100$'))
+        # Do not parse '_' into numbers
         self.assertIsNone(mcf_file_util.get_numeric_value('1_000'))
         self.assertIsNone(mcf_file_util.get_numeric_value('2020_01'))
         self.assertIsNone(mcf_file_util.get_numeric_value('1_000.5'))
