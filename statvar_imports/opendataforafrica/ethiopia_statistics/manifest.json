@@ -43,6 +43,7 @@
                 }
             ],
             "source_files": [
+                "raw_files/*",
                 "input_files/*",
                 "counters/*",
                 "validation_config.json"

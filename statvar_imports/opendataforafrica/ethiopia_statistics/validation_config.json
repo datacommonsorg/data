@@ -3,11 +3,11 @@
     "rules": [
         {
             "rule_id": "check_all_statvars_freshness",
-            "description": "Verify all active StatVars meet scoped freshness boundaries (>= 2022 for 2022 population projections, >= 2007 for 2007 census breakdowns, and >= 2011 for 2011-2014 demographics, DHS, and annual population series).",
+            "description": "Verify all active StatVars meet non-tautological freshness boundaries (>= 2022 for 2022 population projections with 3 StatVars, >= 2007 for 2007 census breakdowns, >= 2011 with >= 144 StatVars at >= 2014 for DHS 2014, and >= 2011 for demographics and annual population series).",
             "validator": "SQL_VALIDATOR",
             "params": {
-                "query": "SELECT StatVar, MinDate, MaxDate, COUNT(*) OVER () AS total_svs FROM stats",
-                "condition": "CASE WHEN StatVar IN ('Count_Person', 'Count_Person_Female', 'Count_Person_Male') AND CAST(MinDate AS VARCHAR) >= '2022' THEN CAST(MaxDate AS VARCHAR) >= '2022' WHEN regexp_matches(StatVar, '^Count_Person_(Rural|Urban)_(Female|Male)$') THEN CAST(MaxDate AS VARCHAR) >= '2007' ELSE CAST(MaxDate AS VARCHAR) >= '2011' END AND total_svs > 0"
+                "query": "SELECT StatVar, MinDate, MaxDate, COUNT(*) OVER () AS total_svs, SUM(CASE WHEN CAST(MaxDate AS VARCHAR) >= '2014' THEN 1 ELSE 0 END) OVER () AS svs_ge_2014 FROM stats",
+                "condition": "CASE WHEN total_svs = 3 AND StatVar IN ('Count_Person', 'Count_Person_Female', 'Count_Person_Male') THEN CAST(MaxDate AS VARCHAR) >= '2022' WHEN regexp_matches(StatVar, '^Count_Person_(Rural|Urban)_(Female|Male)$') THEN CAST(MaxDate AS VARCHAR) >= '2007' WHEN total_svs > 100 THEN CAST(MaxDate AS VARCHAR) >= '2011' AND svs_ge_2014 >= 144 ELSE CAST(MaxDate AS VARCHAR) >= '2011' END AND total_svs > 0"
             }
         }
     ]

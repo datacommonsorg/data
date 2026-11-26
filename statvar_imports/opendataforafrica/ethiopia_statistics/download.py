@@ -170,7 +170,12 @@ def _request_json(
     retries: int = 3,
     retry_secs: int = 5,
 ) -> dict[str, Any]:
-    """Issues an HTTP request via download_util and validates JSON dict output."""
+    """Issues an HTTP request via download_util and validates JSON dict output.
+
+    Note: util/download_util.request_url checks response.ok (HTTP 2xx)
+    internally, logs the raw requests.Response object at DEBUG level, and
+    returns parsed JSON only on HTTP 2xx success.
+    """
     log_payload = (f'query_params={params}' if method.upper() == 'GET' else
                    f'body_keys={sorted((params or {}).keys())}, '
                    f'dataset={(params or {}).get("Dataset")}')
@@ -189,12 +194,14 @@ def _request_json(
     )
     if response is None:
         raise RuntimeError(
-            f'HTTP {method.upper()} request failed or returned empty response '
+            f'HTTP {method.upper()} request failed (non-2xx or empty response) '
             f'for URL {url} ({log_payload}).')
     if not isinstance(response, dict):
         raise RuntimeError(
             f'Unexpected non-object JSON response from {url} ({log_payload}): '
             f'{str(response)[:200]!r}')
+    logging.info('HTTP %s %s -> 2xx OK (response_keys=%s)', method.upper(), url,
+                 sorted(response.keys()))
     return response
 
 
@@ -225,7 +232,11 @@ def _filter_dimension_items(
             return filtered
         if dim_id == 'region':
             # Keep country (level 0) and AdministrativeArea1 regions (level 1).
-            filtered = [item for item in items if item.get('level', 0) <= 1]
+            filtered = [
+                item for item in items
+                if (item.get('level') if item.get('level') is not None else 0
+                   ) <= 1
+            ]
             if not filtered:
                 raise RuntimeError(
                     'No level <= 1 regions found in teakvke metadata.')
@@ -301,7 +312,12 @@ def fetch_dataset_raw(
     )
 
     pages: list[dict[str, Any]] = [first_page]
-    all_series: list[dict[str, Any]] = list(first_page.get('data', []))
+    first_data = first_page.get('data') or []
+    if not isinstance(first_data, list):
+        raise RuntimeError(
+            f'Dataset {dataset_id} page 1 returned non-list data field: '
+            f'{type(first_data).__name__}')
+    all_series: list[dict[str, Any]] = list(first_data)
     token = first_page.get('continuationToken')
     page_num = 1
 
@@ -320,7 +336,12 @@ def fetch_dataset_raw(
             retry_secs=retry_secs,
         )
         pages.append(next_page)
-        all_series.extend(next_page.get('data', []))
+        next_data = next_page.get('data') or []
+        if not isinstance(next_data, list):
+            raise RuntimeError(
+                f'Dataset {dataset_id} page {page_num} returned non-list data '
+                f'field: {type(next_data).__name__}')
+        all_series.extend(next_data)
         token = next_page.get('continuationToken')
 
     if not all_series:
@@ -343,6 +364,30 @@ def fetch_dataset_raw(
     }
 
 
+def _require_dim_dict(series: dict[str, Any], dim_key: str,
+                      dataset_id: str) -> dict[str, Any]:
+    """Validates and returns a required dimension object from a series entry."""
+    dim = series.get(dim_key)
+    if not isinstance(dim, dict):
+        raise ValueError(
+            f'Dataset {dataset_id} series tsKey={series.get("tsKey")} is '
+            f'missing required dimension dict {dim_key!r} (got {dim!r}).')
+    return dim
+
+
+def _require_dim_name(series: dict[str, Any], dim_key: str,
+                      dataset_id: str) -> str:
+    """Validates and returns a non-empty dimension name string."""
+    dim = _require_dim_dict(series, dim_key, dataset_id)
+    name = dim.get('name')
+    if not isinstance(name, str) or not name.strip():
+        raise ValueError(
+            f'Dataset {dataset_id} series tsKey={series.get("tsKey")} has '
+            f'missing or invalid name for dimension {dim_key!r} (got {name!r}).'
+        )
+    return name
+
+
 def _extract_annual_values(series: dict[str, Any]) -> dict[int, Any]:
     """Maps annual series values to integer years using startDate/endDate."""
     freq = series.get('frequency', 'A')
@@ -350,13 +395,19 @@ def _extract_annual_values(series: dict[str, Any]) -> dict[int, Any]:
         raise ValueError(
             f'Unsupported frequency {freq!r} in series tsKey={series.get("tsKey")}'
         )
-    start_date = series.get('startDate', '')
-    end_date = series.get('endDate', '')
-    values = series.get('values', [])
-    if len(start_date) < 4 or len(end_date) < 4:
+    start_date = series.get('startDate') or ''
+    end_date = series.get('endDate') or ''
+    values = series.get('values')
+    if values is None:
+        values = []
+    if (not isinstance(start_date, str) or not isinstance(end_date, str) or
+            len(start_date) < 4 or len(end_date) < 4):
         raise ValueError(
             f'Invalid startDate/endDate ({start_date!r}, {end_date!r}) '
             f'in series tsKey={series.get("tsKey")}')
+    if not isinstance(values, list):
+        raise ValueError(f'Invalid values type ({type(values).__name__}) '
+                         f'in series tsKey={series.get("tsKey")}')
     start_year = int(start_date[:4])
     end_year = int(end_date[:4])
     expected_len = end_year - start_year + 1
@@ -378,8 +429,8 @@ def transform_udghlsf(
     all_years: set[int] = set()
     records: list[tuple[str, str, str, dict[int, Any]]] = []
     for series in series_list:
-        region_name = series['region']['name']
-        var_name = series['variable']['name']
+        region_name = _require_dim_name(series, 'region', 'udghlsf')
+        var_name = _require_dim_name(series, 'variable', 'udghlsf')
         unit = series.get('unit') or ''
         year_vals = _extract_annual_values(series)
         if not year_vals:
@@ -409,10 +460,12 @@ def transform_xtqdbuc(
     all_years: set[int] = set()
     records: list[tuple[str, str, str, str, dict[int, Any]]] = []
     for series in series_list:
-        region_name = series['region']['name']
-        ind_name = series['indicator']['name']
+        region_name = _require_dim_name(series, 'region', 'xtqdbuc')
+        ind_name = _require_dim_name(series, 'indicator', 'xtqdbuc')
         unit = series.get('unit') or ''
-        scale = series.get('scale', 1)
+        scale = series.get('scale')
+        if scale is None:
+            scale = 1
         if scale not in (1, 1000):
             raise ValueError(
                 f'Unexpected scale {scale!r} for xtqdbuc {region_name}/{ind_name}'
@@ -443,9 +496,9 @@ def transform_teakvke(
     all_years: set[int] = set()
     records: list[tuple[str, str, str, str, str, dict[int, Any]]] = []
     for series in series_list:
-        region_name = series['region']['name']
-        var_name = series['variable']['name']
-        residence = series['residence']['name']
+        region_name = _require_dim_name(series, 'region', 'teakvke')
+        var_name = _require_dim_name(series, 'variable', 'teakvke')
+        residence = _require_dim_name(series, 'residence', 'teakvke')
         mapper = f'{var_name} {residence}'
         unit = series.get('unit') or 'Persons'
         year_vals = _extract_annual_values(series)
@@ -475,8 +528,8 @@ def transform_xpcyhcf(
     table: dict[tuple[str, str], Any] = {}
 
     for series in series_list:
-        sex_name = series['sex']['name']
-        area_name = series['area']['name']
+        sex_name = _require_dim_name(series, 'sex', 'xpcyhcf')
+        area_name = _require_dim_name(series, 'area', 'xpcyhcf')
         year_vals = _extract_annual_values(series)
         if not year_vals:
             continue
@@ -532,20 +585,20 @@ def transform_yusibcg(
     ]
     rows: list[list[str]] = []
     for series in series_list:
-        region = series['region']
-        variable = series['variable']
-        wealth = series['wealth-index']
-        age = series['age']
-        sex = series['sex']
+        region = _require_dim_dict(series, 'region', 'yusibcg')
+        variable = _require_dim_dict(series, 'variable', 'yusibcg')
+        wealth = _require_dim_dict(series, 'wealth-index', 'yusibcg')
+        age = _require_dim_dict(series, 'age', 'yusibcg')
+        sex = _require_dim_dict(series, 'sex', 'yusibcg')
 
-        region_id = region.get('id', '')
-        region_iso = region.get('RegionId', '')
-        var_id = variable.get('id', '')
+        region_id = region.get('id') or ''
+        region_iso = region.get('RegionId') or ''
+        var_id = variable.get('id') or ''
         unit = variable.get('unit') or series.get('unit') or ''
-        wealth_id = wealth.get('id', '')
-        age_id = age.get('id', '')
-        sex_id = sex.get('id', '')
-        freq = series.get('frequency', 'A')
+        wealth_id = wealth.get('id') or ''
+        age_id = age.get('id') or ''
+        sex_id = sex.get('id') or ''
+        freq = series.get('frequency') or 'A'
 
         year_vals = _extract_annual_values(series)
         for year in sorted(year_vals.keys()):

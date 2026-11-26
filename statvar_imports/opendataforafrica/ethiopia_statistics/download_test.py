@@ -518,6 +518,106 @@ class DownloadTest(unittest.TestCase):
                 download.download_and_transform_dataset('unknown_id', tmp_dir,
                                                         tmp_dir)
 
+    def test_extract_annual_values_null_fields_raise_value_error(self):
+        base = {
+            'tsKey': 42,
+            'frequency': 'A',
+            'startDate': '2011-01-01T00:00:00',
+            'endDate': '2011-01-01T00:00:00',
+            'values': [10.0],
+        }
+        with self.assertRaisesRegex(ValueError, 'tsKey=42'):
+            download._extract_annual_values({**base, 'startDate': None})
+        with self.assertRaisesRegex(ValueError, 'tsKey=42'):
+            download._extract_annual_values({**base, 'endDate': None})
+        with self.assertRaisesRegex(ValueError, 'tsKey=42'):
+            download._extract_annual_values({**base, 'values': None})
+        with self.assertRaisesRegex(ValueError, 'tsKey=42'):
+            download._extract_annual_values({**base, 'values': 'bad'})
+
+    def test_transforms_missing_or_null_dimensions_raise_value_error(self):
+        common = {
+            'tsKey': 99,
+            'frequency': 'A',
+            'startDate': '2011-01-01T00:00:00',
+            'endDate': '2011-01-01T00:00:00',
+            'values': [1.0],
+        }
+        with self.assertRaisesRegex(ValueError, 'udghlsf.*tsKey=99'):
+            download.transform_udghlsf([{**common, 'region': None}])
+        with self.assertRaisesRegex(ValueError, 'xtqdbuc.*tsKey=99'):
+            download.transform_xtqdbuc([{
+                **common,
+                'region': {
+                    'name': 'Ethiopia'
+                },
+                'indicator': {
+                    'name': None
+                },
+            }])
+        with self.assertRaisesRegex(ValueError, 'teakvke.*tsKey=99'):
+            download.transform_teakvke([{
+                **common,
+                'region': {
+                    'name': 'Ethiopia'
+                },
+                'variable': {
+                    'name': 'Population, Male'
+                },
+            }])
+        with self.assertRaisesRegex(ValueError, 'xpcyhcf.*tsKey=99'):
+            download.transform_xpcyhcf([{**common, 'sex': None}])
+        with self.assertRaisesRegex(ValueError, 'yusibcg.*tsKey=99'):
+            download.transform_yusibcg([{
+                **common,
+                'region': {
+                    'id': 'KN.A1'
+                },
+                'variable': {
+                    'id': 'KN.B1'
+                },
+                'wealth-index': None,
+                'age': {
+                    'id': 'KN.C1'
+                },
+                'sex': {
+                    'id': 'KN.D1'
+                },
+            }])
+
+    @mock.patch.object(download.download_util, 'request_url')
+    def test_fetch_dataset_raw_handles_null_data_pages(self, mock_request_url):
+        meta_resp = {'dimensions': [{'id': 'region', 'name': 'Region'}]}
+        reg_resp = {'items': [{'key': 1, 'name': 'Ethiopia', 'hasData': True}]}
+        page1 = {'continuationToken': 'tok-2', 'data': None}
+        page2 = {
+            'continuationToken':
+                None,
+            'data': [{
+                'region': {
+                    'name': 'Ethiopia'
+                },
+                'frequency': 'A',
+                'startDate': '2011-01-01T00:00:00',
+                'endDate': '2011-01-01T00:00:00',
+                'values': [10.0],
+            }],
+        }
+        mock_request_url.side_effect = [meta_resp, reg_resp, page1, page2]
+        result = download.fetch_dataset_raw('udghlsf')
+        self.assertEqual(len(result['series']), 1)
+
+        mock_request_url.side_effect = [
+            meta_resp,
+            reg_resp,
+            {
+                'continuationToken': None,
+                'data': None
+            },
+        ]
+        with self.assertRaisesRegex(RuntimeError, 'zero data series'):
+            download.fetch_dataset_raw('udghlsf')
+
 
 if __name__ == '__main__':
     unittest.main()
