@@ -26,6 +26,7 @@ import pandas as pd
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '..'))  # for utils
+sys.path.append(os.path.join(_SCRIPT_PATH, '../../../../util/'))  # file_util
 
 import file_util
 import utils
