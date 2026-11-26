@@ -8,19 +8,29 @@
             "provenance_url": "https://www.bps.go.id/en/statistics-table?subject=521",
             "provenance_description": "Statistics Indonesia (Badan Pusat Statistik - BPS) - Literacy Rate and Schools, Teachers, and Students by Province.",
             "scripts": [
-                "download.py --output_dir=input_files",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/indonesia_education_input.csv --pv_map=indonesia_education_pvmap.csv --config_file=indonesia_education_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/indonesia_education_output --output_counters=counters/indonesia_education_counters.csv"
+                "download.py --output_dir=input_files --raw_output_dir=raw_files",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/indonesia_education_input.csv --pv_map=indonesia_education_pvmap.csv --config_file=indonesia_education_metadata.csv --existing_schema_mcf=indonesia_education_schema.mcf --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/indonesia_education_output --output_counters=counters/indonesia_education_counters.csv"
             ],
             "import_inputs": [
                 {
                     "template_mcf": "output_files/indonesia_education_output.tmcf",
                     "cleaned_csv": "output_files/indonesia_education_output.csv",
-                    "node_mcf": "output_files/*.mcf"
+                    "node_mcf": [
+                        "indonesia_education_schema.mcf",
+                        "output_files/*_stat_vars.mcf"
+                    ]
                 }
             ],
             "source_files": [
-                "input_files/*.csv"
+                "raw_files/*",
+                "input_files/*.csv",
+                "counters/*.csv",
+                "*_pvmap.csv",
+                "*_metadata.csv",
+                "validation_config.json",
+                "indonesia_education_schema.mcf"
             ],
+            "validation_config_file": "validation_config.json",
             "cron_schedule": "0 05 * * 1",
             "resource_limits": {
                 "cpu": 4,

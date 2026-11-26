@@ -282,6 +282,45 @@ def redact_api_key(text: Any) -> str:
     return re.sub(r'/key/[^/\s]+/?', '/key/REDACTED/', str(text))
 
 
+def _redact_payload(obj: Any) -> Any:
+    """Recursively redacts API keys from JSON-compatible structures."""
+    if isinstance(obj, str):
+        return redact_api_key(obj)
+    if isinstance(obj, list):
+        return [_redact_payload(item) for item in obj]
+    if isinstance(obj, dict):
+        return {k: _redact_payload(v) for k, v in obj.items()}
+    return obj
+
+
+def _save_raw_json(
+    raw_output_dir: str | None,
+    filename: str,
+    payload: Any,
+) -> None:
+    """Saves an API JSON payload (with API keys redacted) to raw_output_dir."""
+    if not raw_output_dir:
+        return
+    os.makedirs(raw_output_dir, exist_ok=True)
+    out_path = os.path.join(raw_output_dir, filename)
+    with open(out_path, 'w', encoding='utf-8') as fp:
+        json.dump(_redact_payload(payload), fp, ensure_ascii=False)
+
+
+def _save_raw_bytes(
+    raw_output_dir: str | None,
+    filename: str,
+    content: bytes,
+) -> None:
+    """Saves downloaded binary content (e.g., yearbook PDF) to raw_output_dir."""
+    if not raw_output_dir:
+        return
+    os.makedirs(raw_output_dir, exist_ok=True)
+    out_path = os.path.join(raw_output_dir, filename)
+    with open(out_path, 'wb') as fp:
+        fp.write(content)
+
+
 def request_bps_json(
     url: str,
     timeout: int = 30,
@@ -290,16 +329,23 @@ def request_bps_json(
 ) -> Any:
     """Fetches JSON from BPS WebAPI while redacting the API key from logs."""
     redacted_url = redact_api_key(url)
-    logging.info('Downloading URL: %s', redacted_url)
+    logging.info('HTTP GET %s', redacted_url)
     last_error: Exception | None = None
     for attempt in range(max(1, retries)):
         try:
             response = requests.get(url, timeout=timeout)
             if response.ok:
+                logging.info('HTTP GET %s -> %d (success)', redacted_url,
+                             response.status_code)
                 return response.json()
+            logging.warning('HTTP GET %s -> %d (attempt %d/%d)', redacted_url,
+                            response.status_code, attempt + 1, max(1, retries))
             last_error = RuntimeError(
                 f'HTTP {response.status_code} from {redacted_url}')
         except (requests.RequestException, ValueError) as exc:
+            logging.warning('HTTP GET %s failed (attempt %d/%d): %s',
+                            redacted_url, attempt + 1, max(1, retries),
+                            redact_api_key(exc))
             last_error = exc
         if attempt + 1 < max(1, retries):
             time.sleep(retry_secs)
@@ -340,6 +386,7 @@ def fetch_available_years(
     domain: str,
     var_id: int,
     api_key: str,
+    raw_output_dir: str | None = None,
 ) -> list[dict[str, Any]]:
     """Fetches all available year definitions (th_id, th) for a BPS dynamic table."""
     years: list[dict[str, Any]] = []
@@ -348,6 +395,8 @@ def fetch_available_years(
         url = (f'{BPS_API_BASE_URL}/list/model/th/lang/eng/domain/{domain}'
                f'/var/{var_id}/page/{page}/key/{api_key}/')
         resp = request_bps_json(url)
+        _save_raw_json(raw_output_dir, f'bps_var_{var_id}_years_p{page}.json',
+                       resp)
         if not isinstance(resp, dict) or resp.get('status') != 'OK':
             raise RuntimeError(
                 f'Failed to fetch available years from BPS WebAPI (var={var_id}, page={page}): '
@@ -377,15 +426,24 @@ def fetch_literacy_by_province(
     var_id: int,
     api_key: str,
     table_data: dict[tuple[str, str], dict[str, str]],
+    raw_output_dir: str | None = None,
 ) -> None:
     """Downloads Literacy Rate of Population Aged 15+ by Province (var_id=1458)."""
-    years = fetch_available_years(domain=domain, var_id=var_id, api_key=api_key)
+    years = fetch_available_years(
+        domain=domain,
+        var_id=var_id,
+        api_key=api_key,
+        raw_output_dir=raw_output_dir,
+    )
     for idx in range(0, len(years), MAX_YEARS_PER_REQUEST):
         chunk = years[idx:idx + MAX_YEARS_PER_REQUEST]
         th_param = ';'.join(str(y['th_id']) for y in chunk)
         url = (f'{BPS_API_BASE_URL}/list/model/data/lang/eng/domain/{domain}'
                f'/var/{var_id}/th/{th_param}/key/{api_key}/')
         resp = request_bps_json(url)
+        safe_th = th_param.replace(';', '_')
+        _save_raw_json(raw_output_dir, f'bps_var_{var_id}_th_{safe_th}.json',
+                       resp)
         if not isinstance(resp, dict) or resp.get('status') != 'OK':
             raise RuntimeError(
                 f'Failed to fetch BPS literacy province data for th={th_param}: '
@@ -427,9 +485,15 @@ def fetch_literacy_by_sex(
     var_id: int,
     api_key: str,
     table_data: dict[tuple[str, str], dict[str, str]],
+    raw_output_dir: str | None = None,
 ) -> None:
     """Downloads National Literacy Rate of Population Aged 15+ by Sex (var_id=1460)."""
-    years = fetch_available_years(domain=domain, var_id=var_id, api_key=api_key)
+    years = fetch_available_years(
+        domain=domain,
+        var_id=var_id,
+        api_key=api_key,
+        raw_output_dir=raw_output_dir,
+    )
     sex_col_map = {
         'Male': 'Literacy Rate (Male)',
         'Female': 'Literacy Rate (Female)',
@@ -441,6 +505,9 @@ def fetch_literacy_by_sex(
         url = (f'{BPS_API_BASE_URL}/list/model/data/lang/eng/domain/{domain}'
                f'/var/{var_id}/th/{th_param}/key/{api_key}/')
         resp = request_bps_json(url)
+        safe_th = th_param.replace(';', '_')
+        _save_raw_json(raw_output_dir, f'bps_var_{var_id}_th_{safe_th}.json',
+                       resp)
         if not isinstance(resp, dict) or resp.get('status') != 'OK':
             raise RuntimeError(
                 f'Failed to fetch BPS literacy sex data for th={th_param}: '
@@ -532,16 +599,25 @@ def request_bps_bytes(
 ) -> bytes:
     """Downloads binary content (e.g. BPS yearbook PDF) with retries."""
     redacted_url = redact_api_key(url)
-    logging.info('Downloading binary URL: %s', redacted_url)
+    logging.info('HTTP GET (binary) %s', redacted_url)
     last_error: Exception | None = None
     for attempt in range(max(1, retries)):
         try:
             response = requests.get(url, timeout=timeout)
             if response.ok and response.content:
+                logging.info('HTTP GET (binary) %s -> %d (success, %d bytes)',
+                             redacted_url, response.status_code,
+                             len(response.content))
                 return response.content
+            logging.warning('HTTP GET (binary) %s -> %d (attempt %d/%d)',
+                            redacted_url, response.status_code, attempt + 1,
+                            max(1, retries))
             last_error = RuntimeError(
                 f'HTTP {response.status_code} from {redacted_url}')
         except requests.RequestException as exc:
+            logging.warning('HTTP GET (binary) %s failed (attempt %d/%d): %s',
+                            redacted_url, attempt + 1, max(1, retries),
+                            redact_api_key(exc))
             last_error = exc
         if attempt + 1 < max(1, retries):
             time.sleep(retry_secs)
@@ -556,8 +632,12 @@ def _load_valid_places(pvmap_csv: str | None = None) -> set[str]:
     valid: set[str] = set()
     if os.path.exists(csv_path):
         with open(csv_path, mode='r', encoding='utf-8') as fp:
-            for row in csv.DictReader(fp):
-                key = (row.get('key') or '').strip()
+            for row in csv.reader(fp):
+                if not row:
+                    continue
+                key = (row[0] or '').strip()
+                if not key or key.startswith('#'):
+                    continue
                 if key.startswith('observationAbout:'):
                     place = normalize_place_label(key.split(':', 1)[1])
                     if place:
@@ -580,39 +660,82 @@ def _count_table_year_values(
     return count
 
 
+def _extract_simdasi_years(payload: Any) -> list[int]:
+    """Extracts sorted list_tahun_data integers from a SIMDASI JSON response."""
+    if not isinstance(payload, dict) or payload.get('status') != 'OK':
+        return []
+    data = payload.get('data') or []
+    if not isinstance(data, list) or len(data) < 2 or not isinstance(
+            data[1], dict):
+        return []
+    return sorted(int(y) for y in (data[1].get('list_tahun_data') or []))
+
+
 def fetch_simdasi_school_tables(
     api_key: str,
     table_data: dict[tuple[str, str], dict[str, str]],
     tables: tuple[tuple[str, str], ...] = SIMDASI_TABLES,
     delay_sec: float = 0.0,
+    raw_output_dir: str | None = None,
+    max_seed_year: int | None = None,
+    min_seed_year: int = 2016,
 ) -> dict[str, set[str]]:
     """Downloads available academic years across the 9 BPS SIMDASI school tables.
+
+    Probes downward from the current year (or max_seed_year) to discover
+    list_tahun_data without relying on a single hardcoded seed year.
 
     Returns a mapping of table_code -> set of year strings for which SIMDASI
     returned no populated values (e.g. when BPS returns `"variables": []`).
     """
-    seed_year = 2022
+    start_year = (max_seed_year
+                  if max_seed_year is not None else time.gmtime().tm_year)
     missing_by_code: dict[str, set[str]] = {}
     for code, table_id in tables:
         code_cols = set(TABLE_CODE_TO_COLUMNS.get(code, ()))
-        seed_url = (
-            f'{BPS_API_BASE_URL}/interoperabilitas/datasource/simdasi/id/25/'
-            f'tahun/{seed_year}/id_tabel/{table_id}/wilayah/0000000/key/{api_key}/'
-        )
-        seed_resp = request_bps_json(seed_url)
-        if not isinstance(seed_resp, dict) or seed_resp.get('status') != 'OK':
-            raise RuntimeError(
-                f'Failed to fetch SIMDASI table {code} (id={table_id}) seed year {seed_year}: '
-                f'{redact_api_key(seed_resp)}')
-        years = _parse_simdasi_payload(seed_resp, str(seed_year), table_data)
-        if not years:
-            raise RuntimeError(
-                f'No available years returned for SIMDASI table {code} (id={table_id}).'
+        seed_year: int | None = None
+        seed_resp: dict[str, Any] | None = None
+        years: list[int] = []
+        last_seed_err: str = ''
+        for probe_yr in range(start_year, min_seed_year - 1, -1):
+            probe_url = (
+                f'{BPS_API_BASE_URL}/interoperabilitas/datasource/simdasi/id/25/'
+                f'tahun/{probe_yr}/id_tabel/{table_id}/wilayah/0000000/key/{api_key}/'
             )
-        if _count_table_year_values(table_data, str(seed_year), code_cols) == 0:
-            missing_by_code.setdefault(code, set()).add(str(seed_year))
+            try:
+                resp = request_bps_json(probe_url)
+            except RuntimeError as exc:
+                last_seed_err = str(exc)
+                logging.warning(
+                    'SIMDASI seed probe failed for %s year %d: %s',
+                    code,
+                    probe_yr,
+                    redact_api_key(exc),
+                )
+                continue
+            probe_years = _extract_simdasi_years(resp)
+            if probe_years:
+                seed_year = probe_yr
+                seed_resp = resp
+                years = probe_years
+                break
+            last_seed_err = redact_api_key(resp)
+        if not years or seed_year is None or seed_resp is None:
+            raise RuntimeError(
+                f'Failed to discover available years for SIMDASI table {code} '
+                f'(id={table_id}) probing {start_year}..{min_seed_year}: '
+                f'{last_seed_err}')
+        parsed_seed = False
+        if seed_year in years:
+            _save_raw_json(raw_output_dir, f'simdasi_{code}_{seed_year}.json',
+                           seed_resp)
+            _parse_simdasi_payload(seed_resp, str(seed_year), table_data)
+            parsed_seed = True
+            if _count_table_year_values(table_data, str(seed_year),
+                                        code_cols) == 0:
+                missing_by_code.setdefault(code, set()).add(str(seed_year))
         for yr in years:
-            if yr == seed_year:
+            if parsed_seed and yr == seed_year:
                 continue
             if delay_sec > 0:
                 time.sleep(delay_sec)
@@ -621,6 +744,7 @@ def fetch_simdasi_school_tables(
                 f'tahun/{yr}/id_tabel/{table_id}/wilayah/0000000/key/{api_key}/'
             )
             yr_resp = request_bps_json(yr_url)
+            _save_raw_json(raw_output_dir, f'simdasi_{code}_{yr}.json', yr_resp)
             if not isinstance(yr_resp, dict) or yr_resp.get('status') != 'OK':
                 raise RuntimeError(
                     f'Failed to fetch SIMDASI table {code} (id={table_id}) year {yr}: '
@@ -752,6 +876,76 @@ def _extract_horizontal_pdf_spans(
     return spans
 
 
+YEARBOOK_TABLE_TITLE_KEYWORDS: dict[str, tuple[str, ...]] = {
+    'RA': ('raudatul', '(ra)'),
+    'SD': ('sekolah dasar', '(sd)', 'primary schools', 'elementary schools'),
+    'MI': ('ibtidaiyah', '(mi)'),
+    'SMP': ('menengah pertama', '(smp)', 'junior high'),
+    'MTs': ('tsanawiyah', '(mts)'),
+    'SMA': ('menengah atas', '(sma)', 'senior high'),
+    'SMK': ('kejuruan', '(smk)', 'vocational'),
+    'MA': ('aliyah', '(ma)'),
+}
+
+
+def _yearbook_page_header_from_spans(
+    spans: list[tuple[float, float, float, float, str]],) -> str:
+    """Returns visually sorted header text above the first province row ('Aceh')."""
+    aceh_ys = [
+        y0 for _, y0, _, _, txt in spans if re.search(r'\baceh\b', txt, re.I)
+    ]
+    if aceh_ys:
+        cutoff_y = min(aceh_ys) - 2.0
+        header_spans = [sp for sp in spans if sp[1] < cutoff_y]
+    else:
+        header_spans = spans
+    rows = _cluster_spans_into_rows(header_spans)
+    return '\n'.join(' '.join(sp[4] for sp in row) for row in rows)
+
+
+def _page_matches_yearbook_spec(
+    header_text: str,
+    table_num: str,
+    code: str,
+    group_idx: int,
+    total_groups: int,
+) -> bool:
+    """Verifies a PDF page header matches the expected BPS table number and indicator."""
+    if not re.search(rf'(?<!\d){re.escape(table_num)}(?!\d)', header_text):
+        return False
+    hdr_lower = header_text.lower()
+    is_continuation = ('lanjutan' in hdr_lower or 'continued' in hdr_lower)
+    keywords = YEARBOOK_TABLE_TITLE_KEYWORDS.get(code, ())
+
+    if total_groups == 1:
+        has_kw = not keywords or any(kw in hdr_lower for kw in keywords)
+        has_indicator = any(tok in hdr_lower for tok in (
+            'schools',
+            'sekolah',
+            'satuan pendidikan',
+            'teachers',
+            'guru',
+            'pupils',
+            'murid',
+        ))
+        return has_kw and has_indicator
+
+    if group_idx == 0:
+        has_kw = not keywords or any(kw in hdr_lower for kw in keywords)
+        has_schools = any(tok in hdr_lower for tok in ('schools', 'sekolah',
+                                                       'satuan pendidikan'))
+        return (not is_continuation) and has_kw and has_schools
+    if group_idx == 1:
+        has_teachers = any(
+            tok in hdr_lower for tok in ('teachers', 'guru', 'pendidik'))
+        return is_continuation and has_teachers
+    if group_idx == 2:
+        has_pupils = any(
+            tok in hdr_lower for tok in ('pupils', 'murid', 'peserta didik'))
+        return is_continuation and has_pupils
+    return False
+
+
 def extract_yearbook_pdf_tables(
     pdf_bytes: bytes,
     needed_codes: set[str],
@@ -771,7 +965,10 @@ def extract_yearbook_pdf_tables(
     doc = pymupdf.open(stream=pdf_bytes, filetype='pdf')
     try:
         npages = len(doc)
-        lo, hi = int(npages * 0.12), min(npages, int(npages * 0.50))
+        if npages < 50:
+            lo, hi = 0, npages
+        else:
+            lo, hi = int(npages * 0.12), min(npages, int(npages * 0.50))
         start_idx: int | None = None
         for idx in range(lo, hi):
             txt = doc[idx].get_text('text')
@@ -784,16 +981,42 @@ def extract_yearbook_pdf_tables(
             )
             return extracted
 
-        offset = 0
-        for _, code, groups in YEARBOOK_TABLE_SPECS:
-            for g_cols in groups:
-                page_idx = start_idx + offset
-                offset += 1
-                if code not in needed_codes or page_idx >= npages:
+        span_cache: dict[int, list[tuple[float, float, float, float, str]]] = {}
+
+        def _get_page_spans(
+            idx: int,) -> list[tuple[float, float, float, float, str]]:
+            if idx not in span_cache:
+                span_cache[idx] = _extract_horizontal_pdf_spans(doc[idx])
+            return span_cache[idx]
+
+        cursor = start_idx
+        max_page = min(npages, start_idx + 45)
+        for table_num, code, groups in YEARBOOK_TABLE_SPECS:
+            total_groups = len(groups)
+            for group_idx, g_cols in enumerate(groups):
+                matched_idx: int | None = None
+                scan_end = min(max_page, cursor + 15)
+                for cand_idx in range(cursor, scan_end):
+                    cand_spans = _get_page_spans(cand_idx)
+                    cand_hdr = (_yearbook_page_header_from_spans(cand_spans) if
+                                cand_spans else doc[cand_idx].get_text('text'))
+                    if _page_matches_yearbook_spec(cand_hdr, table_num, code,
+                                                   group_idx, total_groups):
+                        matched_idx = cand_idx
+                        break
+                if matched_idx is None:
+                    if code in needed_codes:
+                        raise RuntimeError(
+                            f'Could not verify BPS yearbook header for Table '
+                            f'{table_num} ({code}, group {group_idx + 1}/'
+                            f'{total_groups}) starting at PDF page {cursor + 1}.'
+                        )
                     continue
-                spans = _extract_horizontal_pdf_spans(doc[page_idx])
-                page_data = parse_yearbook_page_spans(spans, g_cols,
-                                                      valid_places)
+                cursor = matched_idx + 1
+                if code not in needed_codes:
+                    continue
+                page_data = parse_yearbook_page_spans(
+                    _get_page_spans(matched_idx), g_cols, valid_places)
                 for key, col_vals in page_data.items():
                     extracted.setdefault(key, {}).update(col_vals)
     finally:
@@ -807,6 +1030,7 @@ def fetch_yearbook_publications(
     candidate_editions: list[int] | None = None,
     min_edition: int = MIN_YEARBOOK_EDITION,
     max_pages_per_year: int = 3,
+    raw_output_dir: str | None = None,
 ) -> list[tuple[int, str]]:
     """Discovers annual BPS 'Statistik Indonesia YYYY' publications via BPS WebAPI."""
     editions: dict[int, str] = {}
@@ -823,6 +1047,11 @@ def fetch_yearbook_publications(
                 f'domain/{domain}/keyword/Statistik+Indonesia/year/{edition_yr}'
                 f'/page/{page}/key/{api_key}/')
             resp = request_bps_json(url)
+            _save_raw_json(
+                raw_output_dir,
+                f'bps_publications_{edition_yr}_p{page}.json',
+                resp,
+            )
             if not isinstance(resp, dict) or resp.get('status') != 'OK':
                 raise RuntimeError(
                     f'Failed to list BPS Statistik Indonesia {edition_yr} '
@@ -879,6 +1108,7 @@ def fetch_yearbook_school_tables_fallback(
     missing_by_code: dict[str, set[str]],
     table_data: dict[tuple[str, str], dict[str, str]],
     delay_sec: float = 0.0,
+    raw_output_dir: str | None = None,
 ) -> None:
     """Fills missing SIMDASI school data from BPS Statistik Indonesia PDFs."""
     supported_codes = {code for _, code, _ in YEARBOOK_TABLE_SPECS}
@@ -908,6 +1138,7 @@ def fetch_yearbook_school_tables_fallback(
         domain=domain,
         api_key=api_key,
         candidate_editions=candidate_editions,
+        raw_output_dir=raw_output_dir,
     )
     selected = select_yearbook_editions(editions, missing_years)
     if not selected:
@@ -933,6 +1164,11 @@ def fetch_yearbook_school_tables_fallback(
                 f'{BPS_API_BASE_URL}/view/domain/{domain}/model/publication/'
                 f'lang/ind/id/{pub_id}/key/{api_key}/')
             view_resp = request_bps_json(view_url)
+            _save_raw_json(
+                raw_output_dir,
+                f'bps_publication_view_{ed}_{pub_id}.json',
+                view_resp,
+            )
             pub_obj = (view_resp.get('data')
                        if isinstance(view_resp, dict) else None)
             pdf_url = (pub_obj.get('pdf')
@@ -942,6 +1178,11 @@ def fetch_yearbook_school_tables_fallback(
                     f'Missing PDF URL for Statistik Indonesia {ed} (pub_id={pub_id}).'
                 )
             pdf_bytes = request_bps_bytes(pdf_url)
+            _save_raw_bytes(
+                raw_output_dir,
+                f'statistik_indonesia_{ed}.pdf',
+                pdf_bytes,
+            )
             ed_data = extract_yearbook_pdf_tables(pdf_bytes, needed_codes,
                                                   valid_places)
             for key, col_vals in ed_data.items():
@@ -1059,23 +1300,27 @@ def get_bps_api_key(flag_key: str = '') -> str:
 def main(_) -> None:
     logging.set_verbosity(logging.INFO)
     api_key = get_bps_api_key(_FLAGS.api_key)
+    raw_output_dir = _FLAGS.raw_output_dir or None
     table_data: dict[tuple[str, str], dict[str, str]] = {}
     fetch_literacy_by_province(
         domain=_FLAGS.domain,
         var_id=_FLAGS.literacy_province_var_id,
         api_key=api_key,
         table_data=table_data,
+        raw_output_dir=raw_output_dir,
     )
     fetch_literacy_by_sex(
         domain=_FLAGS.domain,
         var_id=_FLAGS.literacy_sex_var_id,
         api_key=api_key,
         table_data=table_data,
+        raw_output_dir=raw_output_dir,
     )
     missing_by_code = fetch_simdasi_school_tables(
         api_key=api_key,
         table_data=table_data,
         delay_sec=_FLAGS.request_delay_sec,
+        raw_output_dir=raw_output_dir,
     )
     if missing_by_code and _FLAGS.enable_yearbook_fallback:
         fetch_yearbook_school_tables_fallback(
@@ -1084,6 +1329,7 @@ def main(_) -> None:
             missing_by_code=missing_by_code,
             table_data=table_data,
             delay_sec=_FLAGS.request_delay_sec,
+            raw_output_dir=raw_output_dir,
         )
     validate_school_tables_populated(table_data)
     os.makedirs(_FLAGS.output_dir, exist_ok=True)
@@ -1100,6 +1346,12 @@ def _define_flags() -> None:
         'output_dir',
         os.path.join(_CODEDIR, 'input_files'),
         'Directory path to save the downloaded input CSV file.',
+    )
+    flags.DEFINE_string(
+        'raw_output_dir',
+        '',
+        'Optional directory path to retain raw BPS API JSONs (key-redacted) '
+        'and downloaded Statistik Indonesia yearbook PDFs.',
     )
     flags.DEFINE_string(
         'output_filename',

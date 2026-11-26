@@ -5,8 +5,9 @@
 * **Import Name:** `Indonesia_Census_Education`
 * **Import Group:** `international_stats`
 * **Source Agency:** Badan Pusat Statistik (BPS - Statistics Indonesia)
-* **Provenance URL:** `https://www.bps.go.id/en/statistics-table?subject=521`
+* **Provenance URL (human-facing):** `https://www.bps.go.id/en/statistics-table?subject=521` *(Note: `www.bps.go.id` enforces a Cloudflare bot challenge returning HTTP 403 to automated GCP clients; programmatic downloads use `https://webapi.bps.go.id/v1/api/...`, with developer portal `https://webapi.bps.go.id/developer/` reachable directly from GCP.)*
 * **Data Download URL (BPS WebAPI & SIMDASI API):**
+  * Portal: `https://webapi.bps.go.id/developer/`
   * `https://webapi.bps.go.id/v1/api/list/model/th/lang/eng/domain/0000/var/{var_id}/`
   * `https://webapi.bps.go.id/v1/api/list/model/data/lang/eng/domain/0000/var/{var_id}/`
   * `https://webapi.bps.go.id/v1/api/interoperabilitas/datasource/simdasi/id/25/tahun/{year}/id_tabel/{table_id}/wilayah/0000000/`
@@ -57,17 +58,17 @@ Comparison against the legacy production Education (`gs://unresolved_mcf/country
 |---|---|---|
 | **Previous Observations** | `15,453` | Legacy manual import across 60 Education and Literacy CSV files covering `2013–2022` (`35` places, `78` StatVars) |
 | **Current Observations** | `25,636` | Automated pipeline covering `2011–2025` across all `39` places and `78` StatVars |
-| **Added Observations** | `+10,183` | `2023–2025` annual updates (`+8,600`, including `644` observations for the 4 new Papua provinces `Q115253263`, `Q112810104`, `Q61439296`, `Q12486766`), missing legacy school years (`2017` `MI`/`MTs`/`MA`: `+945`; `2018` `SMA`/`SMK`: `+630` where legacy `SMA_2.csv` was empty), and `2011–2013` national literacy by sex (`+8`) |
-| **Modified Observations** | `1,261` | `0` diffs across all `45` Kemendikbud (`SD`/`SMP`/`SMA`/`SMK`/`Univ`) StatVars and `2014–2022` literacy; `1` fix for a legacy `2013` manual bug where `country/IDN` Total literacy (`93.92`) had been populated with the Male rate (`96.47`); `1,260` official BPS finalized yearbook revisions for Kemenag (`RA`/`MI`/`MTs`/`MA`) in `2017` (`26`), `2018` (`24`), `2021` (`818`), and `2022` (`392`) |
-| **Deleted Observations** | `0` (`0.0%`) | Zero deletions |
-| **Schema Diffs** | `0` | 100% exact DCID match across all `78` StatisticalVariables |
+| **Added Observations** | `+10,603` | `+10,183` net new observations (`2023–2025` annual updates `+8,600` including `644` for the 4 new Papua provinces `Q115253263`, `Q112810104`, `Q61439296`, `Q12486766`; missing legacy school years `2017` `MI`/`MTs`/`MA` `+945` and `2018` `SMA`/`SMK` `+630`; `2011–2013` national literacy by sex `+8`) plus `+420` Raudatul Athfal School/Teacher observations migrated to corrected `LocalGovernmentOwned__PrivatelyOwned` DCIDs |
+| **Modified Observations** | `1,153` | `0` diffs across all `45` Kemendikbud (`SD`/`SMP`/`SMA`/`SMK`/`Univ`) StatVars and `2014–2022` literacy; `1` fix for a legacy `2013` manual bug where `country/IDN` Total literacy (`93.92`) had been populated with the Male rate (`96.47`); `1,152` official BPS finalized yearbook revisions for Kemenag (`RA`/`MI`/`MTs`/`MA`) in `2017`, `2018`, `2021`, and `2022` |
+| **Deleted Observations** | `420` (`2.72%`) | One-time schema bugfix: exclusively `210` obs each from the 2 un-ingested legacy Raudatul Athfal staging StatVars that had mismatched `establishmentOwnership` (`LocalGovernmentOwned` for Schools, `PrivatelyOwned` for Teachers), now unified under `LocalGovernmentOwned__PrivatelyOwned` (`0` rows exist in production KG; the default `0.1%` deletion threshold is intentionally kept unchanged) |
+| **Schema Diffs** | `+10` / `-2` / `73` mod | `+8` provisional enum nodes (`indonesia_education_schema.mcf`) and `+2` / `-2` corrected Raudatul Athfal StatVar DCIDs; `73` unchanged school StatVar DCIDs updated with sentence-cased English `name` properties |
 
 ---
 
 ## 4. Explanations for `genmcf` Data Warnings (`report.json`)
 
-* **Fatal / Error Count:** `0` fatal, `0` errors (`25,636` `NumRowSuccesses`, `25,724` `NumNodeSuccesses`, `180,372` `NumPVSuccesses`).
-* **Existence / Missing Reference Warnings:** `0` across `182,393` live KG existence checks (`Existence_NumChecks: 182,393`; `stat_var_processor.py` auto-generates `output_files/indonesia_education_output_stat_vars_schema.mcf` for the 8 provisional enum values).
+* **Fatal / Error Count:** `0` fatal, `0` errors (`25,636` `NumRowSuccesses`, `25,719` `NumNodeSuccesses`, `180,372` `NumPVSuccesses`).
+* **Existence / Missing Reference Warnings:** `0` across `182,436` live KG existence checks (`Existence_NumChecks: 182,436`; provisional enum definitions are provided consistently via `indonesia_education_schema.mcf` matching `Provisional_Indonesia_Census_Education_Schema.mcf` in the companion schema CL).
 * **Expected / Source-Data Warnings (`indonesia_education_output`):**
   * `StrSplit_EmptyToken_unit` (`25,176`) & `StrSplit_EmptyToken_scalingFactor` (`25,176`): Expected on the `25,176` non-percentage school/teacher/student count rows in the combined CSV (only the `460` literacy rate rows populate `unit=Percent` and `scalingFactor=100`).
   * `StatsCheck_MaxPercentFluctuationGreaterThan100` (`11`) & `StatsCheck_MaxPercentFluctuationGreaterThan500` (`1`): Authentic BPS source jumps — primarily Banten (`wikidataId/Q3540`) public university students (`2018: 18,512` → `2019: 1,036,054`, `+5,496.66%` when Universitas Terbuka was included under Banten in SIMDASI) and teachers (`689` → `1,461`, `+112.05%`), public university students in Papua (`30,781` → `65,473`) and Maluku (`17,875` → `41,415`), and small-base provincial Kemenag counts in Papua, North Kalimantan (`wikidataId/Q3903`), and North Maluku (`wikidataId/Q5094`).
@@ -81,25 +82,28 @@ Comparison against the legacy production Education (`gs://unresolved_mcf/country
 ## 5. Pipeline Files & How to Run
 
 ### Pipeline Files
-- `download.py`: Queries the BPS WebAPI (`var_id=1458` and `var_id=1460`) and the BPS SIMDASI API (`id/25`, with fallback to BPS `Statistik Indonesia` yearbook PDFs), writing `input_files/indonesia_education_input.csv`.
-- `download_test.py`: Unit tests verifying API key redaction, place name normalization, Indonesian dot-separated integer cleaning, multi-table downloading, yearbook PDF fallback parsing, CSV output formatting, and error handling.
-- `indonesia_education_pvmap.csv`: Property-Value mappings for all 78 education and literacy indicators and the 39 Indonesia country/province DCIDs (`observationAbout:*`, also used as the province allowlist by `download.py`'s yearbook PDF parser).
-- `indonesia_education_metadata.csv`: Configuration parameters for `stat_var_processor.py`.
+- `download.py`: Queries the BPS WebAPI (`var_id=1458` and `var_id=1460`) and the BPS SIMDASI API (`id/25`, with header-verified fallback to BPS `Statistik Indonesia` yearbook PDFs), saving raw key-redacted JSONs and PDFs to `raw_files/` and writing `input_files/indonesia_education_input.csv`.
+- `download_test.py`: Unit tests verifying API key redaction, HTTP method/status logging, downward seed-year probing, raw payload retention, place name normalization, Indonesian dot-separated integer cleaning, multi-table downloading, header-verified yearbook PDF fallback parsing, CSV output formatting, and error handling.
+- `indonesia_education_pvmap.csv`: Property-Value mappings with sentence-cased English `name` and Indonesian `alternateName` for all 78 education and literacy indicators and the 39 Indonesia country/province DCIDs (`observationAbout:*`, also used as the province allowlist by `download.py`'s yearbook PDF parser).
+- `indonesia_education_metadata.csv`: Configuration parameters for `stat_var_processor.py` (retaining default `reconcile_nodes`, `drop_statvars_without_svobs`, and `spell_check` with allowlisted Indonesian school proper nouns).
+- `indonesia_education_schema.mcf`: Provisional enum schema definitions (`isProvisional: dcs:True`) for the 8 new `SchoolLevelEnum`, `SchoolManagementEnum`, and `EstablishmentOwnershipEnum` values, matching `Provisional_Indonesia_Census_Education_Schema.mcf` in the companion schema CL and passed to `--existing_schema_mcf`.
 - `manifest.json`: Import automation specification for `Indonesia_Census_Education`.
 - `requirements.txt`: Per-import dependency (`pymupdf`) for the BPS yearbook PDF fallback.
-- `validation_config.json`: Validation rules enforcing `MAX_DATE_CONSISTENT` and `SQL_VALIDATOR` checks on StatVar count, total observation count, non-negative values, and date freshness.
+- `validation_config.json`: Validation rules enforcing separately scoped `MAX_DATE_CONSISTENT` checks (Susenas literacy vs. SIMDASI school StatVars) and a January-safe `SQL_VALIDATOR` checking StatVar count (`= 78`), observation count (`>= 24,000`), non-negative values, percentage bounds (`<= 100`), place coverage (`>= 35`), and annual freshness (`>= YEAR(CURRENT_DATE) - 2`).
 - `test_data/`: Sample input (`indonesia_education_input.csv`) and expected processor outputs (`indonesia_education_output.csv`, `indonesia_education_output.tmcf`).
 
 ### Running Locally
 
-1. **Install the per-import requirement (for BPS yearbook PDF fallback) and download the source data into `input_files/indonesia_education_input.csv`:**
+1. **Install the per-import requirement (for BPS yearbook PDF fallback), set your BPS API key, and download the source data into `input_files/indonesia_education_input.csv` (and raw payloads into `raw_files/`):**
    ```bash
+   export BPS_API_KEY=<your-bps-api-key>  # or pass --api_key=<your-bps-api-key>
    pip install -r statvar_imports/indonesia_census/education/requirements.txt
    python3 statvar_imports/indonesia_census/education/download.py \
-     --output_dir=statvar_imports/indonesia_census/education/input_files
+     --output_dir=statvar_imports/indonesia_census/education/input_files \
+     --raw_output_dir=statvar_imports/indonesia_census/education/raw_files
    ```
 
-2. **Run `stat_var_processor.py` to generate `output_files/indonesia_education_output.{csv,tmcf}`, `_stat_vars.mcf`, and `_stat_vars_schema.mcf`:**
+2. **Run `stat_var_processor.py` to generate `output_files/indonesia_education_output.{csv,tmcf}` and `_stat_vars.mcf`:**
    ```bash
    export DC_API_KEY=<your-dc-api-key>
 
@@ -107,6 +111,7 @@ Comparison against the legacy production Education (`gs://unresolved_mcf/country
      --input_data=statvar_imports/indonesia_census/education/input_files/indonesia_education_input.csv \
      --pv_map=statvar_imports/indonesia_census/education/indonesia_education_pvmap.csv \
      --config_file=statvar_imports/indonesia_census/education/indonesia_education_metadata.csv \
+     --existing_schema_mcf=statvar_imports/indonesia_census/education/indonesia_education_schema.mcf \
      --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
      --output_path=statvar_imports/indonesia_census/education/output_files/indonesia_education_output \
      --output_counters=statvar_imports/indonesia_census/education/counters/indonesia_education_counters.csv

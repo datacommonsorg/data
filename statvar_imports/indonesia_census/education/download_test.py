@@ -258,6 +258,7 @@ class DownloadTest(unittest.TestCase):
                 api_key=api_key,
                 table_data=table_data,
                 tables=(('MTs', test_table_id),),
+                max_seed_year=2022,
             )
 
         self.assertEqual(table_data[('ACEH', '2022')]['Literacy Rate (Total)'],
@@ -536,6 +537,7 @@ class DownloadTest(unittest.TestCase):
                 api_key=api_key,
                 table_data=table_data,
                 tables=(('MTs', test_table_id),),
+                max_seed_year=2022,
             )
             # Because table_data already has a live MTs 2022 value, test empty detection on fresh dict:
             fresh_data = {}
@@ -543,32 +545,386 @@ class DownloadTest(unittest.TestCase):
                 api_key=api_key,
                 table_data=fresh_data,
                 tables=(('MTs', test_table_id),),
+                max_seed_year=2022,
             )
             self.assertEqual(missing, {})
             self.assertEqual(missing_fresh, {'MTs': {'2022'}})
 
-            with mock.patch.object(
-                    download,
-                    'extract_yearbook_pdf_tables',
-                    return_value={
-                        ('ACEH', '2022'): {
-                            'Jumlah Sekolah MTs (Negeri)': '109',
-                            'Jumlah Guru MTs (Negeri)': '4478',
-                        }
-                    },
-            ):
-                download.fetch_yearbook_school_tables_fallback(
-                    domain='0000',
-                    api_key=api_key,
-                    missing_by_code=missing_fresh,
-                    table_data=table_data,
-                )
+            with tempfile.TemporaryDirectory() as raw_dir:
+                with mock.patch.object(
+                        download,
+                        'extract_yearbook_pdf_tables',
+                        return_value={
+                            ('ACEH', '2022'): {
+                                'Jumlah Sekolah MTs (Negeri)': '109',
+                                'Jumlah Guru MTs (Negeri)': '4478',
+                            }
+                        },
+                ):
+                    download.fetch_yearbook_school_tables_fallback(
+                        domain='0000',
+                        api_key=api_key,
+                        missing_by_code=missing_fresh,
+                        table_data=table_data,
+                        raw_output_dir=raw_dir,
+                    )
+                self.assertTrue(
+                    os.path.exists(
+                        os.path.join(raw_dir, 'statistik_indonesia_2024.pdf')))
+                self.assertTrue(
+                    os.path.exists(
+                        os.path.join(raw_dir,
+                                     'bps_publication_view_2024_pub2024.json')))
 
         # Fallback fills missing column while preserving existing live SIMDASI value.
         self.assertEqual(
             table_data[('ACEH', '2022')]['Jumlah Sekolah MTs (Negeri)'], '109')
         self.assertEqual(
             table_data[('ACEH', '2022')]['Jumlah Guru MTs (Negeri)'], '9999')
+
+    def test_fetch_simdasi_probes_downward_and_saves_raw_json(self):
+        api_key = 'probe_secret_key'
+        table_id = 'UkJNaEl6ZHRVYXNaMzZhZG9BbS9ZZz09'
+        url_2026 = (
+            'https://webapi.bps.go.id/v1/api/interoperabilitas/datasource/'
+            f'simdasi/id/25/tahun/2026/id_tabel/{table_id}/'
+            f'wilayah/0000000/key/{api_key}/')
+        url_2025 = (
+            'https://webapi.bps.go.id/v1/api/interoperabilitas/datasource/'
+            f'simdasi/id/25/tahun/2025/id_tabel/{table_id}/'
+            f'wilayah/0000000/key/{api_key}/')
+        url_2024 = (
+            'https://webapi.bps.go.id/v1/api/interoperabilitas/datasource/'
+            f'simdasi/id/25/tahun/2024/id_tabel/{table_id}/'
+            f'wilayah/0000000/key/{api_key}/')
+
+        mock_responses = {
+            url_2026: {
+                'status': 'OK',
+                'data': [{}, {
+                    'list_tahun_data': [],
+                    'data': []
+                }],
+            },
+            url_2025: {
+                'status':
+                    'OK',
+                'note':
+                    f'debug /key/{api_key}/',
+                'data': [
+                    {},
+                    {
+                        'list_tahun_data': [2024, 2025],
+                        'kolom': {
+                            'c1': {
+                                'nama_variabel': 'Jumlah Sekolah SD (Negeri)'
+                            },
+                        },
+                        'data': [{
+                            'label_raw': 'Aceh',
+                            'variables': {
+                                'c1': {
+                                    'value_raw': '3.336'
+                                }
+                            },
+                        }],
+                    },
+                ],
+            },
+            url_2024: {
+                'status':
+                    'OK',
+                'data': [
+                    {},
+                    {
+                        'list_tahun_data': [2024, 2025],
+                        'kolom': {
+                            'c1': {
+                                'nama_variabel': 'Jumlah Sekolah SD (Negeri)'
+                            },
+                        },
+                        'data': [{
+                            'label_raw': 'Aceh',
+                            'variables': {
+                                'c1': {
+                                    'value_raw': '3.300'
+                                }
+                            },
+                        }],
+                    },
+                ],
+            },
+        }
+        table_data = {}
+        with tempfile.TemporaryDirectory() as raw_dir:
+            with mock.patch.object(download.requests,
+                                   'get',
+                                   side_effect=_make_mock_get(mock_responses)):
+                missing = download.fetch_simdasi_school_tables(
+                    api_key=api_key,
+                    table_data=table_data,
+                    tables=(('SD', table_id),),
+                    raw_output_dir=raw_dir,
+                    max_seed_year=2026,
+                    min_seed_year=2024,
+                )
+            self.assertEqual(missing, {})
+            self.assertEqual(
+                table_data[('ACEH', '2025')]['Jumlah Sekolah SD (Negeri)'],
+                '3336')
+            self.assertEqual(
+                table_data[('ACEH', '2024')]['Jumlah Sekolah SD (Negeri)'],
+                '3300')
+            raw_2025 = os.path.join(raw_dir, 'simdasi_SD_2025.json')
+            self.assertTrue(os.path.exists(raw_2025))
+            with open(raw_2025, 'r', encoding='utf-8') as fp:
+                raw_text = fp.read()
+            self.assertNotIn(api_key, raw_text)
+            self.assertIn('/key/REDACTED/', raw_text)
+
+    def test_request_bps_logging_includes_method_and_status(self):
+        api_key = 'log_secret_key'
+        url = f'https://webapi.bps.go.id/v1/api/test/key/{api_key}/'
+        resp = mock.MagicMock()
+        resp.ok = True
+        resp.status_code = 200
+        resp.json.return_value = {'status': 'OK'}
+        resp.content = b'%PDF-1.4'
+        with mock.patch.object(download.requests, 'get', return_value=resp):
+            with mock.patch.object(download.logging, 'info') as mock_log:
+                download.request_bps_json(url, retries=1)
+                download.request_bps_bytes(url, retries=1)
+        messages = [
+            call.args[0] % call.args[1:] for call in mock_log.call_args_list
+        ]
+        self.assertTrue(
+            any('HTTP GET' in m and '200' in m and '/key/REDACTED/' in m
+                for m in messages))
+        self.assertTrue(
+            any('HTTP GET (binary)' in m and '200' in m and '8 bytes' in m
+                for m in messages))
+        self.assertTrue(all(api_key not in m for m in messages))
+
+    def test_extract_horizontal_pdf_spans_filters_watermarks_and_superscripts(
+        self,):
+        mock_page = mock.MagicMock()
+        mock_page.get_text.return_value = {
+            'blocks': [{
+                'lines': [
+                    {
+                        'dir': (0.707, -0.707),
+                        'spans': [{
+                            'size': 24.0,
+                            'text': 'https://www.bps.go.id',
+                            'bbox': (50.0, 100.0, 300.0, 120.0),
+                        }],
+                    },
+                    {
+                        'dir': (1.0, 0.0),
+                        'spans': [
+                            {
+                                'size': 4.2,
+                                'text': '1',
+                                'bbox': (70.0, 188.0, 74.0, 193.0),
+                            },
+                            {
+                                'size': 7.5,
+                                'text': 'Aceh',
+                                'bbox': (48.0, 190.0, 68.0, 200.0),
+                            },
+                            {
+                                'size': 7.5,
+                                'text': '   ',
+                                'bbox': (80.0, 190.0, 90.0, 200.0),
+                            },
+                        ],
+                    },
+                ],
+            }],
+        }
+        spans = download._extract_horizontal_pdf_spans(mock_page)
+        self.assertEqual(spans, [(48.0, 190.0, 68.0, 200.0, 'Aceh')])
+
+    def test_extract_yearbook_pdf_tables_verifies_headers_and_skips_inserted_page(
+        self,):
+
+        class _FakePdfPage:
+
+            def __init__(self, header_lines, values_6=None):
+                self._header_lines = header_lines
+                self._values_6 = values_6
+
+            def get_text(self, mode='text'):
+                if mode == 'text':
+                    lines = list(self._header_lines)
+                    if self._values_6 is not None:
+                        lines.append('Aceh ' + ' '.join(self._values_6))
+                    return '\n'.join(lines)
+                if mode == 'dict':
+                    spans = []
+                    y = 60.0
+                    for ln in self._header_lines:
+                        spans.append({
+                            'size': 9.0,
+                            'text': ln,
+                            'bbox': (48.0, y, 450.0, y + 10.0),
+                        })
+                        y += 14.0
+                    xs = [150.0, 205.0, 260.0, 315.0, 370.0, 425.0]
+                    yr_labels = [
+                        '2024/2025',
+                        '2025/2026',
+                        '2024/2025',
+                        '2025/2026',
+                        '2024/2025',
+                        '2025/2026',
+                    ]
+                    if self._values_6 is not None:
+                        for x, lbl in zip(xs, yr_labels):
+                            spans.append({
+                                'size': 8.0,
+                                'text': lbl,
+                                'bbox': (x, 160.0, x + 40.0, 170.0),
+                            })
+                        spans.append({
+                            'size': 8.0,
+                            'text': 'Aceh',
+                            'bbox': (48.0, 190.0, 70.0, 200.0),
+                        })
+                        for x, val in zip(xs, self._values_6):
+                            spans.append({
+                                'size': 8.0,
+                                'text': val,
+                                'bbox': (x, 190.0, x + 35.0, 200.0),
+                            })
+                        spans.append({
+                            'size':
+                                6.5,
+                            'text':
+                                'Footnote: total teachers including headmaster',
+                            'bbox': (48.0, 700.0, 350.0, 710.0),
+                        })
+                    return {
+                        'blocks': [{
+                            'lines': [{
+                                'dir': (1.0, 0.0),
+                                'spans': spans,
+                            }],
+                        }],
+                    }
+                raise ValueError(mode)
+
+        class _FakePdfDoc:
+
+            def __init__(self, pages):
+                self._pages = pages
+                self.closed = False
+
+            def __len__(self):
+                return len(self._pages)
+
+            def __getitem__(self, idx):
+                return self._pages[idx]
+
+            def close(self):
+                self.closed = True
+
+        pages = [
+            # Page 0: Table 4.1.2 (Raudatul Athfal)
+            _FakePdfPage(
+                [
+                    'Tabel 4.1.2 Jumlah Sekolah, Guru, dan Murid Raudatul Athfal (RA)',
+                    'Table 4.1.2 Number of Schools, Teachers, and Pupils in Raudatul Athfal (RA)',
+                    'Sekolah/Schools   Guru/Teachers   Murid/Pupils',
+                ],
+                ['300', '324', '1.500', '1.555', '14.000', '14.167'],
+            ),
+            # Page 1: Inserted unrelated chart/note page that blind offsets would misparse
+            _FakePdfPage(['Gambar 4.1 Grafik Pendidikan / Education Chart']),
+            # Pages 2-4: Table 4.1.3 (SD) using 2026 BPS terminology
+            _FakePdfPage(
+                [
+                    'Tabel 4.1.3 Jumlah Satuan Pendidikan Sekolah Dasar (SD)',
+                    'Table 4.1.3 Number of Schools in Elementary Schools',
+                    'Satuan Pendidikan/Schools',
+                ],
+                ['3.300', '3.336', '210', '221', '3.510', '3.557'],
+            ),
+            _FakePdfPage(
+                [
+                    'Lanjutan Tabel/Continued Table 4.1.3',
+                    'Kepala Sekolah dan Pendidik/Headmasters and Teachers',
+                ],
+                ['47.000', '47.413', '3.200', '3.358', '50.200', '50.771'],
+            ),
+            _FakePdfPage(
+                [
+                    'Lanjutan Tabel/Continued Table 4.1.3',
+                    'Peserta Didik/Pupils',
+                ],
+                [
+                    '450.000', '455.000', '35.000', '36.000', '485.000',
+                    '491.000'
+                ],
+            ),
+        ]
+        fake_doc = _FakePdfDoc(pages)
+        fake_pymupdf = mock.MagicMock()
+        fake_pymupdf.open.return_value = fake_doc
+
+        with mock.patch.dict(sys.modules, {'pymupdf': fake_pymupdf}):
+            extracted = download.extract_yearbook_pdf_tables(
+                pdf_bytes=b'%PDF-fake',
+                needed_codes={'RA', 'SD'},
+                valid_places={'ACEH'},
+            )
+        self.assertTrue(fake_doc.closed)
+        self.assertEqual(
+            extracted[('ACEH', '2025')]['Jumlah Sekolah Raudatul Athfal'],
+            '324')
+        self.assertEqual(
+            extracted[('ACEH', '2025')]['Jumlah Guru Raudatul Athfal'], '1555')
+        self.assertEqual(
+            extracted[('ACEH', '2025')]['Jumlah Murid Raudatul Athfal'],
+            '14167')
+        self.assertEqual(
+            extracted[('ACEH', '2025')]['Jumlah Sekolah SD (Negeri)'], '3336')
+        self.assertEqual(extracted[('ACEH', '2025')]['Jumlah Guru SD (Swasta)'],
+                         '3358')
+        self.assertEqual(
+            extracted[('ACEH', '2025')]['Jumlah Murid SD (Negeri+Swasta)'],
+            '491000')
+
+    def test_extract_yearbook_pdf_tables_raises_on_missing_expected_header(
+        self,):
+        p0 = mock.MagicMock()
+        p0.get_text.side_effect = (
+            lambda mode='text':
+            'Tabel 4.1.2 Raudatul Athfal (RA) Sekolah/Schools\nAceh 300'
+            if mode == 'text' else {
+                'blocks': []
+            })
+        p1 = mock.MagicMock()
+        p1.get_text.side_effect = (
+            lambda mode='text': 'Tabel 9.9.9 Unrelated Health Table'
+            if mode == 'text' else {
+                'blocks': []
+            })
+        fake_doc = mock.MagicMock()
+        fake_doc.__len__.return_value = 2
+        fake_doc.__getitem__.side_effect = [p0, p1].__getitem__
+        fake_pymupdf = mock.MagicMock()
+        fake_pymupdf.open.return_value = fake_doc
+
+        with mock.patch.dict(sys.modules, {'pymupdf': fake_pymupdf}):
+            with self.assertRaises(RuntimeError) as ctx:
+                download.extract_yearbook_pdf_tables(
+                    pdf_bytes=b'%PDF-fake',
+                    needed_codes={'SD'},
+                    valid_places={'ACEH'},
+                )
+        self.assertIn('4.1.3', str(ctx.exception))
+        fake_doc.close.assert_called_once()
 
     def test_validate_school_tables_populated_raises_on_empty_table(self):
         with self.assertRaises(RuntimeError) as ctx:
