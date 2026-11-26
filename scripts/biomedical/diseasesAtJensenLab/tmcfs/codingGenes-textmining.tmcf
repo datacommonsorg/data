@@ -1,0 +1,28 @@
+Node: E:codingGenes-textMining->E1
+typeOf: dcs:Disease
+dcid: C:codingGenes-textMining->DOID_dcid
+name: C:codingGenes-textMining->Disease_Name
+diseaseOntologyID: C:codingGenes-textMining->DOID
+
+Node: E:codingGenes-textMining->E2
+typeOf: dcs:ICD10Code
+dcid: C:codingGenes-textMining->ICD10_dcid
+name: C:codingGenes-textMining->Disease_Name
+identifier: C:codingGenes-textMining->ICD10
+
+Node: E:codingGenes-textMining->E3
+typeOf: dcs:Gene
+dcid: C:codingGenes-textMining->Gene_dcid
+name: C:codingGenes-textMining->Gene
+ensemblID: C:codingGenes-textMining->ensemblID
+
+Node: E:codingGenes-textMining->E4
+typeOf: dcs:DiseaseGeneAssociation
+dcid: C:codingGenes-textMining->dcid
+name: C:codingGenes-textMining->name
+associationType: C:codingGenes-textMining->associationType
+confidence: C:codingGenes-textMining->confidence
+diseaseID: C:codingGenes-textMining->Disease_dcid
+geneID: E:codingGenes-textMining->E3
+url: C:codingGenes-textMining->url
+zScore: C:codingGenes-textMining->z-score
