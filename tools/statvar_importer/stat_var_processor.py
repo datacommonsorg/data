@@ -464,8 +464,8 @@ class StatVarsMap:
             ignore_props = []
         props_removed = []
         lookup_dcids = set()
-        for namespace, pv_map in pv_map_dict.items():
-            for key, pvs in pv_map.items():
+        for _namespace, pv_map in pv_map_dict.items():
+            for _key, pvs in pv_map.items():
                 # Add Node dcids as defined in cache.
                 dcid = pvs.get('Node', '')
                 dcid = pvs.get('dcid', dcid)
@@ -972,14 +972,14 @@ class StatVarsMap:
         """Drop any Statvars without any observations."""
         # Get statvars with observations
         statvars_with_obs = set()
-        for svobs_key, pvs in self._statvar_obs_map.items():
+        for _svobs_key, pvs in self._statvar_obs_map.items():
             statvar_dcid = strip_namespace(pvs.get('variableMeasured', None))
             if statvar_dcid:
                 statvars_with_obs.add(statvar_dcid)
         # Get any references to other statvars from stavtars with obs.
         for statvar in statvars_with_obs:
             pvs = self._statvars_map.get(statvar, {})
-            for prop, value in pvs.items():
+            for _prop, value in pvs.items():
                 if value in self._statvars_map:
                     statvars_with_obs.add(statvar)
                     break
@@ -1274,7 +1274,7 @@ class StatVarsMap:
             )
             if mode == 'w':
                 csv_writer.writeheader()
-            for key, svobs in self._statvar_obs_map.items():
+            for _key, svobs in self._statvar_obs_map.items():
                 format_svobs = self.format_svobs(svobs)
                 csv_writer.writerow(format_svobs)
                 for p, v in svobs.items():
@@ -1669,7 +1669,7 @@ class StatVarDataProcessor:
         """Return the last column header."""
         if column_index in self._column_keys:
             col_keys = self._column_keys[column_index]
-            for row_index, column_key in col_keys.items():
+            for _row_index, column_key in col_keys.items():
                 return column_key
         return None
 
@@ -1901,6 +1901,8 @@ class StatVarDataProcessor:
                 if dialect:
                     csv_reader_options['dialect'] = dialect
                 delimiter = self._config.get('input_delimiter', ',')
+                if delimiter and delimiter.strip().lower() in ('tab', '\\t'):
+                    delimiter = '\t'
                 if delimiter:
                     csv_reader_options['delimiter'] = delimiter
                 reader = csv.reader(csvfile,

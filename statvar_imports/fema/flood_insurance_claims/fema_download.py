@@ -142,12 +142,12 @@ def get_total_records(api_url):
         return total_count
     except requests.exceptions.RequestException as e:
         logging.error("Failed to get total record count: %s", e)
-        raise RuntimeError('Failed to get total record count.')
+        raise RuntimeError('Failed to get total record count.') from e
     except (ValueError, KeyError, TypeError) as e:
         logging.error(
             "Failed to parse the total record count from the response: %s", e)
         raise RuntimeError(
-            'Failed to parse the total record count from the response.')
+            'Failed to parse the total record count from the response.') from e
 
 
 def download_data(api_url: str,

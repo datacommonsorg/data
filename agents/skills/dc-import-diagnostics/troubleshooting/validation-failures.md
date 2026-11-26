@@ -62,6 +62,14 @@ observations exceeded its configured threshold. Continue with
 A `DATA_ERROR` from either validator indicates missing or invalid differ data;
 handle it as a validation data error instead of a confirmed deletion failure.
 
+## Deleted entity failures
+
+If a `FAILED` rule maps to `DELETED_ENTITY_COUNT`, the validation row confirms
+that `deleted_schema_count` in `differ_summary.json` exceeded its configured
+threshold. Inspect `differ_summary.json` and the non-observation nodes in
+`input<N>/validation/nodes-deleted.mcf` to identify which entities or schema
+nodes were deleted.
+
 ## When no cause is established
 
 Report the validation failure as unclassified and return to the parent

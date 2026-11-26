@@ -76,9 +76,9 @@ def run_test():
             raise AssertionError(
                 f"Import summary job_id mismatch: expected {job.uid}, got {import_summary.get('job_id')}"
             )
-    except json.JSONDecodeError:
+    except json.JSONDecodeError as e:
         raise AssertionError(
-            f"Failed to decode JSON from {import_summary_path}")
+            f"Failed to decode JSON from {import_summary_path}") from e
     logging.info("Verified job name in import summary: %s", job.uid)
 
     file_path = gcs_path + staging_version + '/' + 'treasury_constant_maturity_rates.mcf'

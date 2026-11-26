@@ -293,7 +293,7 @@ def process_places(in_file, out_dir):
     # Collect lat/lng
     id2cip = {}
     ll2p = latlng_recon_geojson.LatLng2Places()
-    for index, row in df.iterrows():
+    for _index, row in df.iterrows():
         id2cip[row['dcid']] = ll2p.resolve(row['latitude'], row['longitude'])
         if len(id2cip) % 1000 == 0:
             print('Mapped', len(id2cip), 'lat/lngs')

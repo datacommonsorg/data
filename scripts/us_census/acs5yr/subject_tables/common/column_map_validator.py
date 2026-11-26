@@ -104,7 +104,7 @@ def check_column_map(column_map_path: str,
                 cmp_statvar.pop('statType')
 
                 temp_flag = True
-                for column_name2, stat_var in column_map[year].items():
+                for _column_name2, stat_var in column_map[year].items():
                     if stat_var['statType'] != 'dcid:marginOfError':
                         temp_statvar = stat_var.copy()
                         temp_statvar.pop('Node')

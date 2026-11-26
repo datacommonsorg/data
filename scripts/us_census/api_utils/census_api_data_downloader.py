@@ -262,7 +262,7 @@ def consolidate_files(dataset: str,
     for year in year_list:
         identifier_dict[year] = get_identifier(dataset, year)
 
-    for (dirpath, dirnames, filenames) in os.walk(output_path):
+    for (_dirpath, _dirnames, filenames) in os.walk(output_path):
         for file in filenames:
             if file.endswith('.csv'):
                 for year in year_list:

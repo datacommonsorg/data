@@ -165,7 +165,7 @@ def get_table_url_list(dataset: str,
     # get list of all s levels
     if s_level_list == 'all':
         s_level_list = []
-        for year, year_dict in geo_config.items():
+        for _year, year_dict in geo_config.items():
             for s_level in year_dict['summary_levels']:
                 if s_level not in s_level_list:
                     s_level_list.append(s_level)
