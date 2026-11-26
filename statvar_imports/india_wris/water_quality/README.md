@@ -28,19 +28,26 @@
 | `ground_water_retained_statvar_processor_config.json` | StatVar Processor config for the retained Ground Water CSV. |
 | `surface_water_pvmap.csv` | Property-value mappings for the 27 Surface Water Quality parameters, station/date columns, and state/station overrides (`BijapurCode`, `Kodarma` -> `Koderma`). |
 | `surface_water_statvar_processor_config.json` | StatVar Processor config for Surface Water (`mapped_columns`, `aggregate_duplicate_svobs='last'`, and `WaterQualitySite` `output_tmcf`). |
-| `statvar_remap.csv` | Remaps `Concentration_BodyOfWater_<Contaminant>_*` DCIDs to canonical KG `Concentration_<Contaminant>_BodyOfWater_*` DCIDs. |
+| `statvar_remap.csv` | Remaps 44 generated StatVar DCIDs to canonical KG DCIDs: 43 `Concentration_BodyOfWater_<Contaminant>_*` -> `Concentration_<Contaminant>_BodyOfWater_*` mappings (including `Dioxosilane` -> `SiliconDioxide` and `ZincElement` -> `Zinc`) plus `Concentration_BodyOfWater_Oxygen_Water_SurfaceWater` -> `DissolvedOxygen_BodyOfWater_SurfaceWater`. |
 | `validation_config.json` | Scoped `SQL_VALIDATOR` date-freshness and completeness rules plus `DELETED_ENTITY_COUNT`. |
 | `test_data/` | Representative `< 100 KB`, `< 100` row sample inputs and expected `.csv`/`.tmcf` outputs for all 3 processor runs. |
 
 ## 3. Refresh Procedure (Manual Staging + Automated Pipeline)
 
 1. From an Indian IP, open `https://indiawris.gov.in/wris/#/DataDownload`, select **Env & Water Quality** -> **Ground Water Quality** (Agency: `CGWB`) or **Surface Water Quality** (Agency: `CWC`), complete the CAPTCHA, and export the `.zip` archive.
-2. Extract the CSV files (`groundWater.csv` / `surfaceWater.csv`), verify that every row has the expected column count (raw WRIS exports have occasionally included unescaped commas in station names that shift columns — see `b/579716190`; fix/quote any malformed commas before staging), and overwrite the fixed filenames in the staging bucket (`manifest.json` reads only `groundWater.csv`, `India_WRIS_Ground_Prod_Retained.csv`, and `surfaceWater.csv` — do not stage dated copies):
+2. Prepare and validate the staged CSV files against their expected column schemas (`manifest.json` reads only the fixed filenames `groundWater.csv`, `India_WRIS_Ground_Prod_Retained.csv`, and `surfaceWater.csv` — overwrite them in place; do not stage dated copies):
+   - **`groundWater.csv`** (raw WRIS Ground Water export schema): expects raw WRIS headers (`State Name`, `District Name`, `Station Name`, `Date Collection` in `YYYY-MM`, and the 27 spaced parameter headers such as `Calcium (mg/L)`, `Mercury (mg/L)`, `Total Hardness (mg/L)`). Verify every row has the expected column count — raw WRIS exports have occasionally included unescaped commas in station names that shift columns (`b/579716190`); fix or quote any malformed commas before staging.
+   - **`surfaceWater.csv`** (compact/preprocessed Surface Water schema, matching legacy CNS `India_WRIS_Surface.csv`): expects spaceless headers consumed by `manifest.json` (`DistrictName:india_wris_districts_pvmap.csv`) and `surface_water_pvmap.csv`:
+     - Metadata columns: `StateName`, `DistrictName`, `Month` (`YYYY-MM`), `StationName`.
+     - Parameter columns (27): `Aluminium(Al)`, `Arsenic(As)`, `cyanides(CN)`, `Carbonate(CO3)`, `Calcium(Ca)`, `Chloride(Cl)`, `Fluorine(F)`, `Iron(Fe)`, `Hydrogencarbonate(HCO3)`, `Mercury(Hg)`, `Potassium(K)`, `Magnesium(Mg)`, `ammonia(NH3)`, `Nitrate(NO3)`, `Lead(Pb)`, `Silver(Ag)`, `Sulfate(SO4)`, `Silicondioxide(SiO2)`, `Zinc(Zn)`, `DisolvedOxygen(DO)`, `ElectricalConductivity`, `HardnessTotal`, `AlkalinityTotal`, `ResidualSodiumCarbonate`, `Sodiumabsorptionratio(SAR)`, `TotalDissolvedSolids`, `PotentialofHydrogen(pH)`.
+     - If refreshing `surfaceWater.csv` from a raw WRIS export with spaced headers (e.g., `District Name`, `Station Name`, `Hardness Total`, `Aluminium (Al)`), strip spaces from the header row and populate `Month` (`YYYY-MM`) to match the schema above before uploading.
+   - **`India_WRIS_Ground_Prod_Retained.csv`** (frozen historical Ground Water 2000–2018 baseline): long-format columns (`variable_measured`, `observation_about`, `observation_date`, `observation_period`, `measurement_method`, `unit`, `value`); leave unchanged during routine refreshes.
+3. Upload the refreshed files to the staging bucket:
    ```bash
    gcloud storage cp groundWater.csv surfaceWater.csv \
      gs://unresolved_mcf/india_wris/water_quality/input_files/
    ```
-3. The scheduled pipeline (`0 4 * * 1`) automatically runs `download.py`, processes all three CSVs with `stat_var_processor.py`, validates against `validation_config.json`, and publishes the refreshed import version.
+4. The scheduled pipeline (`0 4 * * 1`) automatically runs `download.py`, processes all three CSVs with `stat_var_processor.py`, validates against `validation_config.json`, and publishes the refreshed import version.
 
 ## 4. Running Locally & Testing
 
