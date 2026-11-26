@@ -29,12 +29,17 @@ import download_util
 from file_util import FileIO
 
 _FLAGS = flags.FLAGS
-flags.DEFINE_string(
-    'output_path',
-    None,
-    'Local or GCS path to save the downloaded CSV.',
-    required=True,
-)
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        'output_path',
+        None,
+        'Local or GCS path to save the downloaded CSV.',
+        required=True,
+    )
+
 
 API_URL = 'https://pxdata.stat.fi/PXWeb/api/v1/en/StatFin/vaerak/11ra.px'
 
@@ -171,4 +176,5 @@ def main(_) -> None:
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

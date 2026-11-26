@@ -45,19 +45,21 @@ FLAGS = flags.FLAGS
 
 _DEFAULT_OUTPUT_DIR = os.path.join(_SCRIPT_DIR, 'input_files')
 
-if 'output_dir' not in FLAGS:
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
     flags.DEFINE_string(
         'output_dir',
         _DEFAULT_OUTPUT_DIR,
         'Directory to save downloaded raw input CSV files.',
     )
-if 'end_year' not in FLAGS:
     flags.DEFINE_integer(
         'end_year',
         None,
         'Optional end year. Defaults to None (automatically fetches up to the '
         'latest available year in SCB API, e.g. 2025+ in future runs).',
     )
+
 
 # SCB PxWeb REST API endpoints for Category 2 (Health & Vital Statistics)
 SCB_DEATHS_URL = (
@@ -327,15 +329,17 @@ def write_deaths_wide_csv(
     return rows_written
 
 
-def download_deaths(session: requests.Session, out_dir: str) -> None:
+def download_deaths(session: requests.Session,
+                    out_dir: str,
+                    end_year: int | None = None) -> None:
     """Downloads 1968-latest Deaths data and writes all 11 Death CSVs."""
     meta_hist = fetch_metadata(session, SCB_DEATHS_URL)
     var_hist = {v['code']: v for v in meta_hist['variables']}
 
     hist_years = sorted(
         [
-            y for y in var_hist['Tid']['values'] if int(y) >= 1968 and
-            (FLAGS.end_year is None or int(y) <= FLAGS.end_year)
+            y for y in var_hist['Tid']['values']
+            if int(y) >= 1968 and (end_year is None or int(y) <= end_year)
         ],
         key=int,
     )
@@ -348,7 +352,7 @@ def download_deaths(session: requests.Session, out_dir: str) -> None:
         [
             y for y in var_ckm['Tid']['values']
             if y not in hist_years and int(y) >= 1968 and
-            (FLAGS.end_year is None or int(y) <= FLAGS.end_year)
+            (end_year is None or int(y) <= end_year)
         ],
         key=int,
     )
@@ -743,14 +747,16 @@ def _format_fertility_val(val_str: str) -> str:
         return val_str
 
 
-def download_fertility(session: requests.Session, out_dir: str) -> None:
+def download_fertility(session: requests.Session,
+                       out_dir: str,
+                       end_year: int | None = None) -> None:
     """Downloads 2000-latest Municipal Fertility Rate and writes 1 raw CSV."""
     meta = fetch_metadata(session, SCB_FERTILITY_URL)
     var_map = {v['code']: v for v in meta['variables']}
     all_years = sorted(
         [
-            y for y in var_map['Tid']['values'] if int(y) >= 2000 and
-            (FLAGS.end_year is None or int(y) <= FLAGS.end_year)
+            y for y in var_map['Tid']['values']
+            if int(y) >= 2000 and (end_year is None or int(y) <= end_year)
         ],
         key=int,
     )
@@ -834,14 +840,16 @@ def download_fertility(session: requests.Session, out_dir: str) -> None:
     logging.info('Wrote %d data rows to %s', rows_written, filepath)
 
 
-def download_livebirths(session: requests.Session, out_dir: str) -> None:
+def download_livebirths(session: requests.Session,
+                        out_dir: str,
+                        end_year: int | None = None) -> None:
     """Downloads 1749-latest National Live Births and writes 1 raw CSV."""
     meta = fetch_metadata(session, SCB_LIVEBIRTH_URL)
     var_map = {v['code']: v for v in meta['variables']}
     all_years = sorted(
         [
-            y for y in var_map['Tid']['values'] if int(y) >= 1749 and
-            (FLAGS.end_year is None or int(y) <= FLAGS.end_year)
+            y for y in var_map['Tid']['values']
+            if int(y) >= 1749 and (end_year is None or int(y) <= end_year)
         ],
         key=int,
     )
@@ -915,15 +923,16 @@ def download_livebirths(session: requests.Session, out_dir: str) -> None:
 def main(argv):
     del argv
     out_dir = FLAGS.output_dir
+    end_year = FLAGS.end_year
     os.makedirs(out_dir, exist_ok=True)
     for existing_file in os.listdir(out_dir):
         if existing_file.endswith(('.csv', '.tmp')):
             os.remove(os.path.join(out_dir, existing_file))
 
     session = _create_retry_session()
-    download_deaths(session, out_dir)
-    download_fertility(session, out_dir)
-    download_livebirths(session, out_dir)
+    download_deaths(session, out_dir, end_year)
+    download_fertility(session, out_dir, end_year)
+    download_livebirths(session, out_dir, end_year)
     logging.info(
         'Successfully generated all 13 Sweden Health & Vital Statistics raw CSVs'
         ' in %s',
@@ -932,4 +941,5 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

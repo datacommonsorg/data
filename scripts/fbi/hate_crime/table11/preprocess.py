@@ -34,16 +34,23 @@ import file_util
 from name_to_alpha2 import USSTATE_MAP_SPACE
 import utils
 
-flags.DEFINE_string('config_file',
-                    os.path.join(_SCRIPT_PATH, '../table_config.json'),
-                    'Input config file')
-flags.DEFINE_string(
-    'output_dir', _SCRIPT_PATH, 'Directory path to write the cleaned CSV and'
-    'MCF. Default behaviour is to write the artifacts in the current working'
-    'directory.')
-flags.DEFINE_bool(
-    'gen_statvar_mcf', False, 'Generate MCF of StatVars. Default behaviour is'
-    'to not generate the MCF file.')
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('config_file',
+                        os.path.join(_SCRIPT_PATH, '../table_config.json'),
+                        'Input config file')
+    flags.DEFINE_string(
+        'output_dir', _SCRIPT_PATH,
+        'Directory path to write the cleaned CSV and '
+        'MCF. Default behaviour is to write the artifacts in the current working '
+        'directory.')
+    flags.DEFINE_bool(
+        'gen_statvar_mcf', False,
+        'Generate MCF of StatVars. Default behaviour is '
+        'to not generate the MCF file.')
+
+
 _FLAGS = flags.FLAGS
 
 _YEAR_INDEX = 0
@@ -142,12 +149,12 @@ def main(argv):
             f"Error: Key {table_num} not found in the config. Please ensure the configuration for section {table_num} is present."
         )
     with tempfile.TemporaryDirectory() as tmp_dir:
-        for year, config in config[table_num].items():
-            xls_file_path = config['path']
+        for year, year_config in config[table_num].items():
+            xls_file_path = year_config['path']
             xls_file_path = os.path.join(_SCRIPT_PATH, '../', xls_file_path)
             csv_file_path = os.path.join(tmp_dir, year + '.csv')
             logging.info(f"Processing : {xls_file_path}")
-            read_file = pd.read_excel(xls_file_path, **config['args'])
+            read_file = pd.read_excel(xls_file_path, **year_config['args'])
             read_file = _clean_dataframe(read_file, year, table_num)
             read_file.insert(_YEAR_INDEX, 'Year', year)
             read_file.to_csv(csv_file_path, header=True, index=False)
@@ -167,4 +174,5 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

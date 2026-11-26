@@ -83,10 +83,12 @@ class BigQueryDifferTest(unittest.TestCase):
             with open(obs_csv, 'r', encoding='utf-8') as f:
                 rows = list(csv.DictReader(f))
                 self.assertEqual(len(rows), 2)
-                self.assertEqual(rows[0]['variableMeasured'],
-                                 'dcid:Count_Person')
+                self.assertEqual(list(rows[0].keys()),
+                                 ['key_combined', 'value', 'node_id'])
                 self.assertEqual(rows[0]['value'], '335000000')
                 self.assertEqual(rows[0]['node_id'], 'dcid:obs1')
+                self.assertTrue(
+                    rows[0]['key_combined'].startswith('dcid:Count_Person;'))
                 self.assertIn('dcid:country/USA', rows[0]['key_combined'])
 
             with open(schema_csv, 'r', encoding='utf-8') as f:
@@ -107,24 +109,18 @@ class BigQueryDifferTest(unittest.TestCase):
         mock_obs_query_job.result.return_value = [
             {
                 'key_combined': 'dcid:Count_Person;dcid:country/CAN;"2024";;;;',
-                'StatVar': 'Count_Person',
                 'curr_value': '40000000',
                 'prev_value': None,
                 'curr_node': 'dcid:obs2',
                 'prev_node': None,
-                'curr_dcid': '',
-                'prev_dcid': None,
                 'diff_type': 'ADDED',
             },
             {
                 'key_combined': 'dcid:Count_Person;dcid:country/USA;"2024";;;;',
-                'StatVar': 'Count_Person',
                 'curr_value': '335000000',
                 'prev_value': '330000000',
                 'curr_node': 'dcid:obs1',
                 'prev_node': 'dcid:obs1',
-                'curr_dcid': '',
-                'prev_dcid': '',
                 'diff_type': 'MODIFIED',
             },
         ]
@@ -189,7 +185,8 @@ class BigQueryDifferTest(unittest.TestCase):
                 saved_json = json.load(f)
                 self.assertEqual(saved_json['obs_diff_count'], 2)
 
-            self.assertEqual(mock_client.delete_table.call_count, 4)
+            self.assertEqual(mock_client.update_table.call_count, 4)
+            mock_client.delete_table.assert_not_called()
 
     @mock.patch('bigquery_differ.storage.fileio.BlobWriter')
     @mock.patch('bigquery_differ.file_get_gcs_blob')

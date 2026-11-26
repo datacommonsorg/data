@@ -147,6 +147,48 @@ class TestStatVarProcessor(unittest.TestCase):
             logging.info(f'Testing file {test_file}...')
             self.process_file(test_file)
 
+    def test_input_delimiter_tab(self):
+        """Tests tab-separated input with 'tab', '\\t', and literal tab."""
+        for delimiter in ['tab', '\\t', '\t']:
+            with self.subTest(delimiter=delimiter):
+                with tempfile.TemporaryDirectory() as tmp_dir:
+                    input_file = os.path.join(tmp_dir, 'input.tsv')
+                    with open(input_file, 'w') as f:
+                        f.write('Place\tYear\tPopulation\n'
+                                'country/USA\t2020\t100\n'
+                                'country/CAN\t2021\t200\n')
+                    pvmap_file = os.path.join(tmp_dir, 'pvmap.csv')
+                    with open(pvmap_file, 'w') as f:
+                        f.write(
+                            'key,property,value,property2,value2,property3,value3\n'
+                            'Place,observationAbout,{Data},,,,\n'
+                            'Year,observationDate,{Number},,,,\n'
+                            'Population,populationType,Person,'
+                            'measuredProperty,count,value,{Number}\n')
+                    config_file = os.path.join(tmp_dir, 'config.csv')
+                    with open(config_file, 'w') as f:
+                        f.write('parameter,value\n'
+                                'header_rows,1\n'
+                                'reconcile_nodes,0\n'
+                                'output_only_new_statvars,0\n'
+                                f'input_delimiter,{delimiter}\n')
+                    output_prefix = os.path.join(tmp_dir, 'output')
+                    self.assertTrue(
+                        process(
+                            data_processor_class=self.data_processor_class,
+                            input_data=[input_file],
+                            output_path=output_prefix,
+                            config=config_file,
+                            pv_map_files=[pvmap_file],
+                        ))
+                    df = pd.read_csv(f'{output_prefix}.csv')
+                    df = df.sort_values(by='observationDate', ignore_index=True)
+                    self.assertEqual(df['observationAbout'].tolist(),
+                                     ['country/USA', 'country/CAN'])
+                    self.assertEqual(df['observationDate'].tolist(),
+                                     [2020, 2021])
+                    self.assertEqual(df['value'].tolist(), [100, 200])
+
 
 if __name__ == '__main__':
     app.run()

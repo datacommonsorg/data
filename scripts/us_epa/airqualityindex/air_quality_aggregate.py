@@ -138,7 +138,7 @@ def download_url(_INPUT_FILE_PATH, start_year, end_year, CSV_URLS):
         for file_name in file_names:
             logging.info(f'Processing file: {file_name}')
 
-            for series_name, url in CSV_URLS.items():
+            for _series_name, url in CSV_URLS.items():
                 #Retry method is calling
                 url = f"{url}{file_name}.zip"
                 logging.info(f'============url {url}')
@@ -217,10 +217,10 @@ def process(_INPUT_FILE_PATH, start_year, end_year):
                                 reader = csv.DictReader(
                                     io.TextIOWrapper(infile, 'utf-8'))
                                 write_csv(output_file_path, reader)
-                        except FileNotFoundError:
+                        except FileNotFoundError as e:
                             raise FileNotFoundError(
                                 f"CSV file '{file_name}.csv' not found in the ZIP archive"
-                            )
+                            ) from e
 
             except Exception as e:
                 logging.fatal(

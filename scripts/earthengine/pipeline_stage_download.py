@@ -39,15 +39,19 @@ class DownloadRunner(StageRunner):
     """Class to download data files from URL source."""
 
     def __init__(self,
-                 config_dicts: list = [],
-                 state: dict = {},
+                 config_dicts: list | None = None,
+                 state: dict | None = None,
                  counters=None):
+        if state is None:
+            state = {}
+        if config_dicts is None:
+            config_dicts = []
         self.set_up('download', config_dicts, state, counters)
 
     def run(
         self,
         input_files: list = None,
-        config_dict: dict = {},
+        config_dict: dict | None = None,
         counters: Counters = None,
     ) -> list:
         """Returns the list of files downloaded from the URL in the config.
@@ -56,6 +60,8 @@ class DownloadRunner(StageRunner):
     """
         # Download data from start_date up to end_date
         # advancing date by the time_period.
+        if config_dict is None:
+            config_dict = {}
         start_date = self.get_config('start_date', '', config_dict)
         yesterday = utils.date_yesterday()
         end_date = self.get_config('end_date', yesterday, config_dict)
@@ -78,8 +84,11 @@ class DownloadRunner(StageRunner):
                 self.set_config_dates(start_date=start_date)
         return data_files
 
-    def download_file_with_config(self, config_dict: dict = {}) -> list:
+    def download_file_with_config(self,
+                                  config_dict: dict | None = None) -> list:
         """Returns list of files downloaded for config."""
+        if config_dict is None:
+            config_dict = {}
         logging.info(f'Downloading data for config: {config_dict}')
         downloaded_files = []
         urls = config_dict.get('url', [])

@@ -24,7 +24,13 @@ from absl import logging
 import pandas as pd
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('output_folder', 'download_folder', 'download folder name')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('output_folder', 'download_folder',
+                        'download folder name')
+
 
 # --- GCS Configuration ---
 GCS_BUCKET_NAME = "unresolved_mcf"
@@ -41,7 +47,7 @@ try:
     from data.util import file_util
 except ImportError as e:
     logging.fatal(f"Failed to import file_util: {e}.")
-    raise RuntimeError('Failed to import file_util')
+    raise RuntimeError('Failed to import file_util') from e
 
 STATE_COLUMN = 0
 CITY_COLUMN = 1
@@ -75,13 +81,13 @@ def copy_and_process_files_from_gcs(gcs_bucket, gcs_prefix, local_base_dir):
     except subprocess.CalledProcessError as e:
         logging.fatal(
             f"Error listing files from GCS with gcloud storage: {e.stderr}")
-        raise RuntimeError('Error listing files from GCS')
+        raise RuntimeError('Error listing files from GCS') from e
         return
-    except FileNotFoundError:
+    except FileNotFoundError as e:
         logging.fatal(
             "gcloud storage command not found. Please ensure the Google Cloud SDK is installed and in your PATH."
         )
-        raise RuntimeError('gcloud storage command not found')
+        raise RuntimeError('gcloud storage command not found') from e
         return
 
     logging.info(f"Found {len(gcs_files)} xlsx files to copy and process.")
@@ -104,7 +110,7 @@ def copy_and_process_files_from_gcs(gcs_bucket, gcs_prefix, local_base_dir):
         except Exception as e:
             logging.fatal(
                 f"Error copying or processing '{gcs_source_path}': {e}")
-            raise RuntimeError('Error copying or processing')
+            raise RuntimeError('Error copying or processing') from e
 
     logging.info("--- GCS File Transfers and Processing Complete ---\n")
 
@@ -124,18 +130,18 @@ def clean_headers(file_to_access):
                 ]
                 df.iloc[i] = cleaned_headers
         df.to_excel(file_to_access, index=False, header=False)
-    except FileNotFoundError:
+    except FileNotFoundError as e:
         logging.fatal(f"Error: File '{file_to_access}' not found.")
-        raise RuntimeError('Error File not found')
+        raise RuntimeError('Error File not found') from e
     except ValueError as e:
         logging.fatal(f"Error: {e}")
-        raise RuntimeError('Error')
-    except IndexError:
+        raise RuntimeError('Error') from e
+    except IndexError as e:
         logging.fatal("Error: headers not found or file is empty.")
-        raise RuntimeError('Error')
+        raise RuntimeError('Error') from e
     except Exception as e:
         logging.fatal(f"An unexpected error occurred: {e}")
-        raise RuntimeError('Error')
+        raise RuntimeError('Error') from e
 
 
 def clean_state_column(file_path):
@@ -179,19 +185,19 @@ def clean_state_column(file_path):
             [df_new.iloc[:city_row_index + 1], df_below_header.iloc[1:]],
             ignore_index=True)
         df_new.to_excel(file_path, index=False, header=False)
-    except FileNotFoundError:
+    except FileNotFoundError as e:
         logging.fatal(f"Error: File '{file_path}' not found.")
-        raise RuntimeError('Error File not found')
+        raise RuntimeError('Error File not found') from e
     except ValueError as e:
         logging.fatal(f"Error: {e}")
-        raise RuntimeError('Error')
-    except IndexError:
+        raise RuntimeError('Error') from e
+    except IndexError as e:
         logging.fatal(
             "Error: 'State' or 'City' header not found or file is empty.")
-        raise RuntimeError('Error')
+        raise RuntimeError('Error') from e
     except Exception as e:
         logging.fatal(f"An unexpected error occurred: {e}")
-        raise RuntimeError('Error')
+        raise RuntimeError('Error') from e
 
 
 def main(unused_argv):
@@ -208,4 +214,5 @@ def main(unused_argv):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

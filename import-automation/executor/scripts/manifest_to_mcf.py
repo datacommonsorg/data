@@ -32,10 +32,15 @@ import dc_manifest_pb2
 from google.protobuf import text_format
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string("directory",
-                    os.getcwd(),
-                    "Directory to scan for .textproto files.",
-                    allow_override=True)
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string("directory",
+                        os.getcwd(),
+                        "Directory to scan for .textproto files.",
+                        allow_override=True)
+
 
 DEFAULT_CURATOR_DCID = "dcid:dc/cjj7vp"
 DC_BASE_PREFIX = "dc/base"
@@ -228,7 +233,8 @@ def process_text(input_text, dataset_to_source=None):
             raise ValueError(
                 "No imports or dataset_sources found in the parsed manifest.")
     except Exception as e:
-        raise ValueError(f"Failed to parse input as DataCommonsManifest: {e}")
+        raise ValueError(
+            f"Failed to parse input as DataCommonsManifest: {e}") from e
 
 
 def extract_dataset_source_map(textproto_path):
@@ -262,7 +268,7 @@ def build_dataset_to_source_map(directory):
 
 def process_directory(path):
     dataset_to_source = build_dataset_to_source_map(path)
-    for root, dirs, files in os.walk(path):
+    for root, _dirs, files in os.walk(path):
         for file in files:
             if file.endswith(".textproto"):
                 textproto_path = os.path.join(root, file)
@@ -286,4 +292,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

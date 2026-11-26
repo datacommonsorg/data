@@ -38,13 +38,17 @@ logging.set_verbosity(logging.INFO)
 
 _FLAGS = flags.FLAGS
 
-flags.DEFINE_string('config_path',
-                    'gs://unresolved_mcf/epa/ejscreen/download_config.json',
-                    'Path to config file')
-flags.DEFINE_string(
-    'mode', '',
-    'Mode of operation: "download" to only download, "process" to only process, leave empty for both.'
-)
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        'config_path', 'gs://unresolved_mcf/epa/ejscreen/download_config.json',
+        'Path to config file')
+    flags.DEFINE_string(
+        'mode', '',
+        'Mode of operation: "download" to only download, "process" to only process, leave empty for both.'
+    )
+
 
 # Define the  path for output files.
 
@@ -327,8 +331,9 @@ def main(_):
 
     except Exception as e:
         logging.fatal(f"Unexpected error in the main process: {e}")
-        raise RuntimeError(f"Unexpected error in the main process: {e}")
+        raise RuntimeError(f"Unexpected error in the main process: {e}") from e
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)
