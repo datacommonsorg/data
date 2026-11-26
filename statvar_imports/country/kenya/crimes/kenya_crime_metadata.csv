@@ -1,0 +1,14 @@
+parameter,value
+url,https://kenya.opendataforafrica.org/
+description,Kenya crimes
+#place_type,Country
+#places_within,country/KEN
+start_date,2016
+end_date,2020
+release_frequency,
+process,
+comments,
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,#input"
+header_rows,1
+drop_statvars_without_svobs,0
+#existing_statvar_mcf,""""""
