@@ -1901,6 +1901,8 @@ class StatVarDataProcessor:
                 if dialect:
                     csv_reader_options['dialect'] = dialect
                 delimiter = self._config.get('input_delimiter', ',')
+                if delimiter and delimiter.strip().lower() in ('tab', '\\t'):
+                    delimiter = '\t'
                 if delimiter:
                     csv_reader_options['delimiter'] = delimiter
                 reader = csv.reader(csvfile,
