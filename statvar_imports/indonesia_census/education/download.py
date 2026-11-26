@@ -17,9 +17,11 @@
 from collections import defaultdict
 import csv
 import html
+import io
 import json
 import os
 import re
+import shutil
 import time
 from typing import Any
 
@@ -307,18 +309,21 @@ def _save_raw_json(
         json.dump(_redact_payload(payload), fp, ensure_ascii=False)
 
 
-def _save_raw_bytes(
+def _save_raw_pdf(
     raw_output_dir: str | None,
     filename: str,
     content: bytes,
 ) -> None:
-    """Saves downloaded binary content (e.g., yearbook PDF) to raw_output_dir."""
+    """Saves a verified public BPS yearbook PDF to raw_output_dir."""
     if not raw_output_dir:
         return
+    if not content.startswith(b'%PDF-'):
+        raise ValueError(f'Refusing to save non-PDF payload to {filename} '
+                         f'(unexpected header: {content[:8]!r}).')
     os.makedirs(raw_output_dir, exist_ok=True)
     out_path = os.path.join(raw_output_dir, filename)
     with open(out_path, 'wb') as fp:
-        fp.write(content)
+        shutil.copyfileobj(io.BytesIO(content), fp)
 
 
 def request_bps_json(
@@ -1173,12 +1178,12 @@ def fetch_yearbook_school_tables_fallback(
                        if isinstance(view_resp, dict) else None)
             pdf_url = (pub_obj.get('pdf')
                        if isinstance(pub_obj, dict) else None)
-            if not pdf_url:
+            if not pdf_url or '/key/' in str(pdf_url):
                 raise RuntimeError(
-                    f'Missing PDF URL for Statistik Indonesia {ed} (pub_id={pub_id}).'
-                )
+                    f'Missing or invalid PDF URL for Statistik Indonesia {ed} '
+                    f'(pub_id={pub_id}).')
             pdf_bytes = request_bps_bytes(pdf_url)
-            _save_raw_bytes(
+            _save_raw_pdf(
                 raw_output_dir,
                 f'statistik_indonesia_{ed}.pdf',
                 pdf_bytes,
