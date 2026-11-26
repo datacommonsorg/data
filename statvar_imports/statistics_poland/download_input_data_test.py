@@ -332,13 +332,14 @@ class DownloadInputDataTest(unittest.TestCase):
             )
         self.assertIn('missing 1 variable IDs', str(ctx.exception))
 
+    @patch('download_input_data.get_request_headers', return_value={})
     @patch('download_input_data.fetch_units')
     @patch('download_input_data.fetch_variables')
     @patch('download_input_data.load_template_from_gcs')
     @patch('download_input_data.make_request')
     def test_download_and_process_mocked_and_partial_sum_guard(
             self, mock_make_request, mock_load_template, mock_fetch_vars,
-            mock_fetch_units):
+            mock_fetch_units, _mock_headers):
         template_index = pd.MultiIndex.from_tuples([('0', 'POLAND'),
                                                     ('200000', 'DOLNOŚLĄSKIE')],
                                                    names=['Code', 'Name'])
@@ -435,10 +436,11 @@ class DownloadInputDataTest(unittest.TestCase):
                 self.assertIn('Incomplete population matrix',
                               str(ctx.exception))
 
+    @patch('download_input_data.get_request_headers', return_value={})
     @patch('download_input_data.fetch_variables')
     @patch('download_input_data.load_template_from_gcs')
     def test_download_and_process_raises_on_unmapped_slice(
-            self, mock_load_template, mock_fetch):
+            self, mock_load_template, mock_fetch, _mock_headers):
         template_index = pd.MultiIndex.from_tuples([('0', 'POLAND')],
                                                    names=['Code', 'Name'])
         template_columns = pd.MultiIndex.from_tuples(
@@ -449,17 +451,20 @@ class DownloadInputDataTest(unittest.TestCase):
                                                        columns=template_columns)
         mock_fetch.return_value = {'999': 'unrelated_variable'}
 
-        with self.assertRaises(RuntimeError) as ctx:
-            download_and_process()
+        with tempfile.TemporaryDirectory() as temp_dir:
+            with patch('download_input_data.OUTPUT_DIR', temp_dir):
+                with self.assertRaises(RuntimeError) as ctx:
+                    download_and_process()
         self.assertIn("Failed to match variable for slice", str(ctx.exception))
 
+    @patch('download_input_data.get_request_headers', return_value={})
     @patch('download_input_data.fetch_units')
     @patch('download_input_data.fetch_variables')
     @patch('download_input_data.load_template_from_gcs')
     @patch('download_input_data.make_request')
     def test_age_digit_boundaries_and_atomic_multi_year_staging(
             self, mock_make_request, mock_load_template, mock_fetch_vars,
-            mock_fetch_units):
+            mock_fetch_units, _mock_headers):
         template_index = pd.MultiIndex.from_tuples([('0', 'POLAND')],
                                                    names=['Code', 'Name'])
         template_columns = pd.MultiIndex.from_tuples(
