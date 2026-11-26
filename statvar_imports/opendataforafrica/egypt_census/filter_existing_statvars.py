@@ -17,9 +17,14 @@ import argparse
 import glob
 import logging
 import os
+import re
 import tempfile
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+_SINGLE_VALUED_SV_PROPS = frozenset(
+    ('name', 'alternateName', 'measurementDenominator', 'description'))
+_MULTI_QUOTED_RE = re.compile(r'"\s*,\s*"')
+_UNEXPANDED_REF_RE = re.compile(r'\{@?[A-Za-z0-9_]+\}')
 
 
 def _strip_inline_comment(val: str) -> str:
@@ -79,6 +84,39 @@ def load_existing_dcids(mcf_path: str) -> set[str]:
     return dcids
 
 
+def _validate_statvar_block(canonical_dcid: str | None, lines: list[str],
+                            mcf_path: str) -> None:
+    """Rejects duplicated or unexpanded metadata in a kept StatVar block."""
+    seen_props: set[str] = set()
+    node_label = canonical_dcid or '<unknown>'
+    for raw_line in lines:
+        stripped = raw_line.strip()
+        if not stripped or stripped.startswith('#') or ':' not in stripped:
+            continue
+        prop, raw_val = stripped.split(':', 1)
+        prop = prop.strip()
+        if prop not in _SINGLE_VALUED_SV_PROPS:
+            continue
+        val = _strip_inline_comment(raw_val).strip()
+        if prop in seen_props:
+            raise ValueError(
+                f'{mcf_path}: StatVar {node_label} has repeated {prop}: property'
+            )
+        seen_props.add(prop)
+        if _MULTI_QUOTED_RE.search(val):
+            raise ValueError(
+                f'{mcf_path}: StatVar {node_label} has multi-valued {prop}: {val}'
+            )
+        if prop == 'measurementDenominator' and ',' in val:
+            raise ValueError(
+                f'{mcf_path}: StatVar {node_label} has multi-valued '
+                f'measurementDenominator: {val}')
+        if _UNEXPANDED_REF_RE.search(val):
+            raise ValueError(
+                f'{mcf_path}: StatVar {node_label} has unexpanded placeholder '
+                f'in {prop}: {val}')
+
+
 def filter_statvar_mcf_file(mcf_path: str,
                             existing_dcids: set[str]) -> tuple[int, int]:
     """Retains only MCF node blocks not present in existing_dcids; removes empty MCFs."""
@@ -110,10 +148,12 @@ def filter_statvar_mcf_file(mcf_path: str,
             blocks.append((_resolve_canonical_dcid(cur_node,
                                                    cur_dcid), cur_lines))
 
-    kept_blocks = [
-        lines for canonical_dcid, lines in blocks
-        if not (canonical_dcid and canonical_dcid in existing_dcids)
-    ]
+    kept_blocks: list[list[str]] = []
+    for canonical_dcid, lines in blocks:
+        if canonical_dcid and canonical_dcid in existing_dcids:
+            continue
+        _validate_statvar_block(canonical_dcid, lines, mcf_path)
+        kept_blocks.append(lines)
     dropped = len(blocks) - len(kept_blocks)
     if not kept_blocks:
         os.remove(mcf_path)

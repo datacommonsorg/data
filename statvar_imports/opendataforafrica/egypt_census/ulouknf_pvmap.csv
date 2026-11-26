@@ -1,9 +1,9 @@
 key,prop,val,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6,p7,v7
-OBS_VALUE,value,{Number},observationAbout,country/EGY,,,,,,,,,,,,
+OBS_VALUE,value,{Number},observationAbout,country/EGY,measurementDenominator,{@RateDenom},name,{@RateNameOut},,,,,,,,
 GENDER:1,GenderVal,Male,LaborForceDCID,Count_Person_InLaborForce_Male,WorkerDCID,Count_Person_Male_Worker,UnemployedDCID,Count_Person_Unemployed_Male,RateDCID,Count_Person_Unemployed_Male_AsAFractionOf_Count_Person_InLaborForce_Male,RateName,Unemployment Rate Among Persons in Labor Force (Male),,,,
 GENDER:2,GenderVal,Female,LaborForceDCID,Count_Person_InLaborForce_Female,WorkerDCID,Count_Person_Female_Worker,UnemployedDCID,Count_Person_Unemployed_Female,RateDCID,Count_Person_Unemployed_Female_AsAFractionOf_Count_Person_InLaborForce_Female,RateName,Unemployment Rate Among Persons in Labor Force (Female),,,,
 GENDER:3,GenderVal,"""""",LaborForceDCID,Count_Person_InLaborForce,WorkerDCID,Count_Person_Workers,UnemployedDCID,Count_Person_Unemployed,RateDCID,Count_Person_Unemployed_AsAFractionOf_Count_Person_InLaborForce,RateName,Unemployment Rate Among Persons in Labor Force,,,,
-ID_INDICATORS:1,variableMeasured,dcid:{@LaborForceDCID},#Multiply,1000,,,,,,,,,,,,
-ID_INDICATORS:2,variableMeasured,dcid:{@WorkerDCID},#Multiply,1000,,,,,,,,,,,,
-ID_INDICATORS:3,variableMeasured,dcid:{@UnemployedDCID},#Multiply,1000,,,,,,,,,,,,
-ID_INDICATORS:4,dcid,{@RateDCID},populationType,Person,gender,{@GenderVal},employmentStatus,Unemployed,measurementDenominator,dcid:{@LaborForceDCID},unit,Percent,scalingFactor,100,name,"""{@RateName}"""
+ID_INDICATORS:1,variableMeasured,dcid:{@LaborForceDCID},#Multiply,1000,RateDenom,"""""",RateNameOut,"""""",,,,,,,,
+ID_INDICATORS:2,variableMeasured,dcid:{@WorkerDCID},#Multiply,1000,RateDenom,"""""",RateNameOut,"""""",,,,,,,,
+ID_INDICATORS:3,variableMeasured,dcid:{@UnemployedDCID},#Multiply,1000,RateDenom,"""""",RateNameOut,"""""",,,,,,,,
+ID_INDICATORS:4,dcid,{@RateDCID},populationType,Person,gender,{@GenderVal},employmentStatus,Unemployed,unit,Percent,scalingFactor,100,RateDenom,dcid:{@LaborForceDCID},RateNameOut,"""{@RateName}"""

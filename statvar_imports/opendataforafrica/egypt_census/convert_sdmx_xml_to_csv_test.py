@@ -539,11 +539,214 @@ class ConvertSdmxXmlToCsvTest(unittest.TestCase):
                                 f'{fpath} has unprefixed variableMeasured: '
                                 f"{row['variableMeasured']}",
                             )
+                    if tid in ('actytif', 'behvqtc', 'bluhqme', 'lxoyale',
+                               'pqpump', 'zpdksog'):
+                        for place in places:
+                            self.assertTrue(
+                                place.startswith(('dcid:', 'dcs:')),
+                                f'{fpath} has unprefixed observationAbout: '
+                                f'{place}',
+                            )
                     if tid in ('actytif', 'behvqtc'):
                         self.assertGreaterEqual(
                             len(places), 3,
                             f'{fpath} must exercise national + governorate places'
                         )
+
+    def test_filter_existing_statvars_rejects_duplicated_metadata(self):
+        """Ensures filter_existing_statvars catches duplicated or unexpanded metadata."""
+        # Valid single-quoted Arabic alternateName with internal comma passes,
+        # and malformed existing blocks are dropped before validation.
+        valid_mcf = os.path.join(self.test_dir.name, 'valid_stat_vars.mcf')
+        with open(valid_mcf, 'w', encoding='utf-8') as f:
+            f.write('Node: dcid:Count_Person\n'
+                    'typeOf: dcid:StatisticalVariable\n'
+                    'name: "Ignored Dup","Ignored Dup"\n\n'
+                    'Node: dcid:Count_Person_Female_DoctorOccupation\n'
+                    'typeOf: dcid:StatisticalVariable\n'
+                    'name: "Number of female doctors"\n'
+                    'alternateName: "الأطباء, اناث@ar"\n'
+                    'measurementDenominator: dcid:Count_Person_InLaborForce\n')
+        kept, dropped = egypt_filter.filter_statvar_mcf_file(
+            valid_mcf, {'Count_Person'})
+        self.assertEqual((kept, dropped), (1, 1))
+
+        bad_cases = [
+            ('duplicated_name',
+             'name: "Unemployment Rate (Female)","Unemployment Rate (Female)"\n'
+            ),
+            ('duplicated_altname', 'alternateName: "معدل@ar","معدل@ar"\n'),
+            ('duplicated_denom',
+             'measurementDenominator: dcid:Count_A,dcid:Count_A\n'),
+            ('repeated_name_line', 'name: "First"\nname: "Second"\n'),
+            ('unexpanded_ref', 'name: "{@RateName}"\n'),
+        ]
+        for label, bad_props in bad_cases:
+            with self.subTest(case=label):
+                bad_mcf = os.path.join(self.test_dir.name,
+                                       f'{label}_stat_vars.mcf')
+                with open(bad_mcf, 'w', encoding='utf-8') as f:
+                    f.write('Node: dcid:Count_Test_StatVar\n'
+                            'typeOf: dcid:StatisticalVariable\n' + bad_props)
+                with self.assertRaises(ValueError):
+                    egypt_filter.filter_statvar_mcf_file(bad_mcf, set())
+
+    def test_pvmap_column_order_and_behvqtc_alexandria_rural_retention(self):
+        """Guards all 18 PVMaps against metadata duplication and behvqtc Alexandria drop."""
+        # 1. Check all 18 PVMaps: no multi-value schema property (name,
+        # alternateName, measurementDenominator, description) may reference a
+        # placeholder defined in a later CSV column (causes double expansion).
+        multi_val_props = {
+            'name',
+            'alternateName',
+            'measurementDenominator',
+            'description',
+        }
+        builtin_refs = {'Data', 'Number', 'Comma'}
+        with open(os.path.join(CURRENT_DIR, 'common_pvmap.csv'),
+                  encoding='utf-8') as f:
+            common_rows = [
+                r for r in csv.reader(f)
+                if r and not r[0].strip().startswith('#')
+            ][1:]
+        for row in common_rows:
+            for prop in row[1::2]:
+                self.assertNotIn(prop, multi_val_props, 'common_pvmap.csv')
+
+        for tid in EXPECTED_TABLES:
+            in_path = os.path.join(CURRENT_DIR, 'test_data', f'{tid}_input.csv')
+            with open(in_path, encoding='utf-8') as f:
+                rdr = csv.reader(f)
+                header = next(rdr)
+                col_idx = {c: idx for idx, c in enumerate(header)}
+                val_to_cols: dict[str, set[int]] = {}
+                for data_row in rdr:
+                    for idx, cell in enumerate(data_row):
+                        val_to_cols.setdefault(cell, set()).add(idx)
+
+            pv_path = os.path.join(CURRENT_DIR, f'{tid}_pvmap.csv')
+            rules = []
+            def_cols: dict[str, set[int]] = {}
+            with open(pv_path, encoding='utf-8') as f:
+                pv_rows = [
+                    r for r in csv.reader(f)
+                    if r and not r[0].strip().startswith('#')
+                ][1:]
+            for row in pv_rows:
+                key = row[0]
+                pairs = [(row[j], row[j + 1])
+                         for j in range(1,
+                                        len(row) - 1, 2)
+                         if row[j]]
+                mcols: set[int] = set()
+                if ':' in key and key.split(':', 1)[0] in col_idx:
+                    mcols.add(col_idx[key.split(':', 1)[0]])
+                elif key in col_idx:
+                    mcols.add(col_idx[key])
+                elif key in val_to_cols:
+                    mcols |= val_to_cols[key]
+                rules.append((key, mcols, pairs))
+                for prop, val in pairs:
+                    if prop == '#Format' and '=' in val:
+                        var = val.split('=', 1)[0].strip()
+                        def_cols.setdefault(var, set()).update(mcols)
+                    elif not prop.startswith('#'):
+                        def_cols.setdefault(prop, set()).update(mcols)
+
+            for key, mcols, pairs in rules:
+                if not mcols:
+                    continue
+                min_c = min(mcols)
+                for prop, val in pairs:
+                    if prop not in multi_val_props:
+                        continue
+                    for ref in re.findall(r'\{@?([A-Za-z0-9_]+)\}', val):
+                        if ref in builtin_refs:
+                            continue
+                        dcols = def_cols.get(ref, set())
+                        if dcols:
+                            self.assertLessEqual(
+                                max(dcols),
+                                min_c,
+                                f'{tid}_pvmap.csv key {key!r} (col {min_c}) '
+                                f'sets {prop}={val!r} referencing {ref} '
+                                f'defined in later col(s) {sorted(dcols)}',
+                            )
+
+        # 2. ulouknf_pvmap.csv must emit measurementDenominator/name on OBS_VALUE
+        # (last column, after GENDER) and clear RateDenom/RateNameOut on 1..3.
+        with open(os.path.join(CURRENT_DIR, 'ulouknf_pvmap.csv'),
+                  encoding='utf-8') as f:
+            ulouknf_rows = {
+                r[0]: r[1:]
+                for r in csv.reader(f)
+                if r and not r[0].strip().startswith('#')
+            }
+        obs_props = ulouknf_rows['OBS_VALUE'][0::2]
+        self.assertIn('measurementDenominator', obs_props)
+        self.assertIn('name', obs_props)
+        for ind in ('ID_INDICATORS:1', 'ID_INDICATORS:2', 'ID_INDICATORS:3'):
+            ind_pvs = dict(zip(ulouknf_rows[ind][0::2],
+                               ulouknf_rows[ind][1::2]))
+            self.assertEqual(ind_pvs.get('RateDenom'), '""')
+            self.assertEqual(ind_pvs.get('RateNameOut'), '""')
+        ind4_props = ulouknf_rows['ID_INDICATORS:4'][0::2]
+        self.assertNotIn('measurementDenominator', ind4_props)
+        self.assertNotIn('name', ind4_props)
+        self.assertIn('RateDenom', ind4_props)
+        self.assertIn('RateNameOut', ind4_props)
+
+        # 3. behvqtc_pvmap.csv must fail closed on unknown/blank NAMEARAB_REGION,
+        # retain only Alexandria Rural age-total rows across Arabic hamza variants,
+        # and emit dcid:-prefixed observationAbout.
+        with open(os.path.join(CURRENT_DIR, 'behvqtc_pvmap.csv'),
+                  encoding='utf-8') as f:
+            beh_rows = {
+                r[0]: r[1:]
+                for r in csv.reader(f)
+                if r and not r[0].strip().startswith('#')
+            }
+        with open(os.path.join(CURRENT_DIR, 'places_resolved.csv'),
+                  encoding='utf-8') as f:
+            places_map = {r['place_name']: r['dcid'] for r in csv.DictReader(f)}
+        reg_default = dict(
+            zip(beh_rows['NAMEARAB_REGION'][0::2],
+                beh_rows['NAMEARAB_REGION'][1::2]))
+        self.assertEqual(reg_default.get('IgnoreAgeTotal'), 'True')
+        for alex_ar in ('الإسكندرية', 'الأسكندرية', 'الاسكندرية'):
+            self.assertEqual(places_map.get(alex_ar), 'wikidataId/Q29943')
+            alex_pvs = dict(
+                zip(beh_rows[f'NAMEARAB_GOVERNORATES:{alex_ar}'][0::2],
+                    beh_rows[f'NAMEARAB_GOVERNORATES:{alex_ar}'][1::2]))
+            self.assertEqual(alex_pvs.get('observationAbout'),
+                             'dcid:wikidataId/Q29943')
+            self.assertEqual(alex_pvs.get('IgnoreRuralTotal'), 'False')
+        age_total_pvs = dict(
+            zip(beh_rows['اجمالى:  فئـــــــات الســــــن'][0::2],
+                beh_rows['اجمالى:  فئـــــــات الســــــن'][1::2]))
+        self.assertEqual(age_total_pvs.get('#IgnoreRow'), '{@IgnoreAgeTotal}')
+
+        # 4. Verify behvqtc_output.csv retains the 3 Alexandria Rural totals
+        # while dropping Alexandria Urban/Total and non-Alexandria age totals.
+        with open(os.path.join(CURRENT_DIR, 'test_data', 'behvqtc_output.csv'),
+                  encoding='utf-8') as f:
+            beh_out = list(csv.DictReader(f))
+        non_aged = {
+            (r['observationAbout'], r['variableMeasured']): r['value']
+            for r in beh_out
+            if 'Years' not in r['variableMeasured']
+        }
+        self.assertEqual(
+            non_aged,
+            {
+                ('dcid:wikidataId/Q29943', 'dcid:Count_Person_Rural_Male'):
+                    '35825',
+                ('dcid:wikidataId/Q29943', 'dcid:Count_Person_Rural_Female'):
+                    '32468',
+                ('dcid:wikidataId/Q29943', 'dcid:Count_Person_Rural'):
+                    '68293',
+            },
+        )
 
 
 if __name__ == '__main__':

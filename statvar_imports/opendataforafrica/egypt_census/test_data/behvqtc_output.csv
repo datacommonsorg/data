@@ -37,3 +37,6 @@ dcid:wikidataId/Q30662,2017,dcid:Count_Person_1OrLessYears_Male_Urban,5237,,,P1Y
 dcid:wikidataId/Q30662,2017,dcid:Count_Person_1OrLessYears_Female_Urban,4737,,,P1Y
 dcid:wikidataId/Q30662,2017,dcid:Count_Person_1OrLessYears_Male_Rural,2002,,,P1Y
 dcid:wikidataId/Q30662,2017,dcid:Count_Person_1OrLessYears_Female_Rural,1934,,,P1Y
+dcid:wikidataId/Q29943,2017,dcid:Count_Person_Rural_Male,35825,,,P1Y
+dcid:wikidataId/Q29943,2017,dcid:Count_Person_Rural_Female,32468,,,P1Y
+dcid:wikidataId/Q29943,2017,dcid:Count_Person_Rural,68293,,,P1Y
