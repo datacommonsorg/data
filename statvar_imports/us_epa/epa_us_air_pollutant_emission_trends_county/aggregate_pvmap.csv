@@ -1,0 +1,72 @@
+key,prop,value,,,,,,,,
+year,measuredProperty,amount,populationType,Emissions,measurementQualifier,Annual,observationDate,{Data},unit,Ton
+state_and_county_fips_code,#Regex,(?P<Fips>[0-9]+),observationAbout,geoId/{Fips},,,,,,
+stfips,StateCode,{Data},,,,,,,,
+ctyfips,CountyCode,{Data},observationAbout,geoId/{StateCode}{CountyCode},,,,,,
+fips code,#Regex,(?P<Fips>[0-9]+),observationAbout,geoId/{Fips},,,,,,
+total_emissions,value,{Number},#Aggregate,sum,measurementMethod,dcAggregate/EPA_NationalEmissionInventory_Tier1Summary,,,,
+SumOftotal emissions,value,{Number},#Aggregate,sum,measurementMethod,dcAggregate/EPA_NationalEmissionInventory_Tier1Summary,,,,
+Fuel Comb. Industrial,emissionSource,StationaryFuelCombustion,emissionSourceType,NonBiogenicEmissionSource,,,,,,
+Petroleum & Related Industries,emissionSource,IndustrialAndOtherProcesses,emissionSourceType,NonBiogenicEmissionSource,,,,,,
+Other Industrial Processes,emissionSource,IndustrialAndOtherProcesses,emissionSourceType,NonBiogenicEmissionSource,,,,,,
+Storage & Transport,emissionSource,IndustrialAndOtherProcesses,emissionSourceType,NonBiogenicEmissionSource,,,,,,
+Fuel Comb. Elec. Util.,emissionSource,StationaryFuelCombustion,emissionSourceType,NonBiogenicEmissionSource,,,,,,
+Fuel Comb. Other,emissionSource,StationaryFuelCombustion,emissionSourceType,NonBiogenicEmissionSource,,,,,,
+Chemical & Allied Product Mfg,emissionSource,IndustrialAndOtherProcesses,emissionSourceType,NonBiogenicEmissionSource,,,,,,
+Solvent Utilization,emissionSource,IndustrialAndOtherProcesses,emissionSourceType,NonBiogenicEmissionSource,,,,,,
+Waste Disposal & Recycling,emissionSource,IndustrialAndOtherProcesses,emissionSourceType,NonBiogenicEmissionSource,,,,,,
+Highway Vehicles,emissionSource,Transportation,emissionSourceType,NonBiogenicEmissionSource,,,,,,
+Off-Highway,emissionSource,Transportation,emissionSourceType,NonBiogenicEmissionSource,,,,,,
+Miscellaneous,#ignore,skip,,,,,,,,
+Natural Resources,#ignore,skip,,,,,,,,
+Metals Processing,emissionSource,IndustrialAndOtherProcesses,emissionSourceType,NonBiogenicEmissionSource,,,,,,
+FUEL COMB. ELEC. UTIL.,emissionSource,StationaryFuelCombustion,emissionSourceType,NonBiogenicEmissionSource,,,,,,
+FUEL COMB. INDUSTRIAL,emissionSource,StationaryFuelCombustion,emissionSourceType,NonBiogenicEmissionSource,,,,,,
+FUEL COMB. OTHER,emissionSource,StationaryFuelCombustion,emissionSourceType,NonBiogenicEmissionSource,,,,,,
+OTHER INDUSTRIAL PROCESSES,emissionSource,IndustrialAndOtherProcesses,emissionSourceType,NonBiogenicEmissionSource,,,,,,
+SOLVENT UTILIZATION,emissionSource,IndustrialAndOtherProcesses,emissionSourceType,NonBiogenicEmissionSource,,,,,,
+STORAGE & TRANSPORT,emissionSource,IndustrialAndOtherProcesses,emissionSourceType,NonBiogenicEmissionSource,,,,,,
+WASTE DISPOSAL & RECYCLING,emissionSource,IndustrialAndOtherProcesses,emissionSourceType,NonBiogenicEmissionSource,,,,,,
+HIGHWAY VEHICLES,emissionSource,Transportation,emissionSourceType,NonBiogenicEmissionSource,,,,,,
+OFF-HIGHWAY,emissionSource,Transportation,emissionSourceType,NonBiogenicEmissionSource,,,,,,
+NATURAL RESOURCES,#ignore,skip,,,,,,,,
+MISCELLANEOUS,#ignore,skip,,,,,,,,
+METALS PROCESSING,emissionSource,IndustrialAndOtherProcesses,emissionSourceType,NonBiogenicEmissionSource,,,,,,
+PETROLEUM & RELATED INDUSTRIES,emissionSource,IndustrialAndOtherProcesses,emissionSourceType,NonBiogenicEmissionSource,,,,,,
+CHEMICAL & ALLIED PRODUCT MFG,emissionSource,IndustrialAndOtherProcesses,emissionSourceType,NonBiogenicEmissionSource,,,,,,
+CO,emittedThing,CarbonMonoxide,,,,,,,,
+NOX,emittedThing,OxidesOfNitrogen,,,,,,,,
+PM10-PRI,emittedThing,PM10,,,,,,,,
+PM25-PRI,emittedThing,PM2.5,,,,,,,,
+SO2,emittedThing,SulfurDioxide,,,,,,,,
+VOC,emittedThing,VolatileOrganicCompound,,,,,,,,
+NH3,emittedThing,Ammonia,,,,,,,,
+PM10-FIL,#ignore,skip,,,,,,,,
+PM25-FIL,#ignore,skip,,,,,,,,
+"Confederated Tribes of the Colville Reservation, Washington",observationAbout,geoId/88101
+"Confederated Tribes and Bands of the Yakama Nation, Washington",observationAbout,geoId/88124
+Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,observationAbout,geoId/88180
+"Coeur d'Alene Tribe of the Coeur d'Alene Reservation, Idaho",observationAbout,geoId/88181
+Nez Perce Tribe of Idaho,observationAbout,geoId/88182
+Kootenai Tribe of Idaho,observationAbout,geoId/88183
+"Assiniboine and Sioux Tribes of the Fort Peck Indian Reservation, Montana",observationAbout,geoId/88206
+"Northern Cheyenne Tribe of the Northern Cheyenne Indian Reservation, Montana",observationAbout,geoId/88207
+Omaha Tribe of Nebraska,observationAbout,geoId/88380
+Fond du Lac Band of the Minnesota Chippewa Tribe,observationAbout,geoId/88405
+"Morongo Band of Cahuilla Mission Indians of the Morongo Reservation, California",observationAbout,geoId/88582
+Tohono O'Odham Nation of Arizona,observationAbout,geoId/88610
+"Ute Indian Tribe of the Uintah & Ouray Reservation, Utah",observationAbout,geoId/88687
+Southern Ute Indian Tribe,observationAbout,geoId/88750
+"Navajo Nation, Arizona, New Mexico & Utah",observationAbout,geoId/88780
+Sac & Fox Nation of Missouri in Kansas and Nebraska,observationAbout,geoId/88863
+United Keetoowah Band of Cherokee Indians in Oklahoma,observationAbout,geoId/88904
+Kickapoo Tribe of Indians of the Kickapoo Reservation in Kansas,observationAbout,geoId/88861
+"Ute Mountain Tribe of the Ute Mountain Reservation, Colorado, New Mexico & Utah",observationAbout,geoId/88751
+Eastern Band of Cherokee Indians,observationAbout,geoId/88001
+"Santee Sioux Nation, Nebraska",observationAbout,geoId/88382
+"Paiute-Shoshone Indians of the Bishop Community of the Bishop Colony, California",observationAbout,geoId/88549
+Washoe Tribe of California and Nevada,observationAbout,geoId/88672
+Prairie Band Potawatomi Nation,observationAbout,geoId/88862
+
+
+
