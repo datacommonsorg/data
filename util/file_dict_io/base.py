@@ -47,6 +47,8 @@ for _path in (
 import file_util
 
 _COMPRESSION_EXTS = frozenset({'.gz', '.bz2', '.zst', '.xz', '.zip'})
+_NON_STREAMING_GCS_EXTS = frozenset(
+    {'.gz', '.bz2', '.zst', '.xz', '.zip', '.tgz', '.tar'})
 _SHARD_SUFFIX_RE = re.compile(r'-(?:\d+|\*|\[0-9\]\*)-of-(?:\d+|\*|\[0-9\]\*)$')
 
 
@@ -97,6 +99,7 @@ class FileDictIO(ABC):
                  encoding: str = None,
                  start_offset: int = 0,
                  end_offset: int = None,
+                 use_tempfile: bool = None,
                  **kwargs):
         """Initializes a FileDictIO instance.
 
@@ -110,6 +113,10 @@ class FileDictIO(ABC):
             first complete record starting at or after this offset.
           end_offset: Optional ending byte offset. If set, reading stops before
             any record whose start offset is >= `end_offset`.
+          use_tempfile: Optional override for `file_util.FileIO(use_tempfile=...)`.
+            When `None` (default), uncompressed `gs://` files stream directly
+            via `BlobReader`/`BlobWriter` (`use_tempfile=False`) while local
+            files and spreadsheets keep `use_tempfile=True`.
           **kwargs: Optional format-specific keyword arguments.
         """
         if 'seek' in kwargs and not start_offset:
@@ -122,6 +129,7 @@ class FileDictIO(ABC):
         self._filename = filename
         self._mode = mode
         self._encoding = encoding
+        self._use_tempfile = use_tempfile
         self._headers = list(headers) if headers else []
         self._start_offset = int(
             start_offset) if start_offset is not None else 0
@@ -247,6 +255,15 @@ class FileDictIO(ABC):
         """Returns True if the file is opened in read mode."""
         return self._mode.startswith('r')
 
+    def _should_use_tempfile(self) -> bool:
+        """Returns whether `FileIO` should stage this file via a local tempfile."""
+        if self._use_tempfile is not None:
+            return bool(self._use_tempfile)
+        if file_util.file_is_gcs(self._filename):
+            lower = self._filename.lower()
+            return lower.endswith(tuple(_NON_STREAMING_GCS_EXTS))
+        return True
+
     def open(self):
         """Opens the underlying file for reading or writing using `FileIO`.
 
@@ -263,7 +280,8 @@ class FileDictIO(ABC):
             file_util.file_makedirs(self._filename)
         self._fp = file_util.FileIO(filename=self._filename,
                                     mode=self._mode,
-                                    encoding=self._encoding)
+                                    encoding=self._encoding,
+                                    use_tempfile=self._should_use_tempfile())
         self._record_index = 0
         self._header_written = False
 

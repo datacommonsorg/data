@@ -163,10 +163,14 @@ class JsonFileDictIO(FileDictIO):
                 f'Cannot write record to JSON file {self.filename()} opened in read mode {self._mode}'
             )
         fp = self.get_file_handle()
-        serialized = json.dumps(record)
         if self._is_jsonl:
+            serialized = json.dumps(record,
+                                    separators=(',', ':'),
+                                    ensure_ascii=False)
             self._record_index += 1
             return fp.write(serialized + '\n')
+
+        serialized = json.dumps(record)
 
         # Standard .json array format: stream records inside '[' ... ']'
         if self._record_index == 0:

@@ -1,6 +1,10 @@
+from decimal import Decimal
+from decimal import InvalidOperation
 import json
+import math
 import os
 import sys
+from typing import Optional
 
 import pandas as pd
 
@@ -69,6 +73,51 @@ def write_mcf_nodes(nodes: list, dest: str, file: str, tmp_dir: str):
                     continue
                 out_file.write(f'{key}: {value}\n')
             out_file.write('\n')
+
+
+def _is_missing_value(val) -> bool:
+    """Returns True if val represents a missing/NA observation value."""
+    return (val is None or val is pd.NA or
+            (isinstance(val, float) and math.isnan(val)))
+
+
+def _parse_finite_decimal(val) -> Optional[Decimal]:
+    """Parses an observation value into a finite Decimal, or returns None."""
+    if isinstance(val, bool) or _is_missing_value(val):
+        return None
+    if isinstance(val, int):
+        return Decimal(val)
+    if isinstance(val, float):
+        return Decimal(str(val)) if math.isfinite(val) else None
+    if not isinstance(val, str):
+        return None
+    s = val.strip()
+    if not s or '_' in s or not s.isascii():
+        return None
+    try:
+        num = Decimal(s)
+    except InvalidOperation:
+        return None
+    return num if num.is_finite() else None
+
+
+def obs_values_equal(val1, val2) -> bool:
+    """Compares two observation values numerically when both are finite numbers.
+
+    Falls back to exact equality for non-numeric values (such as quoted strings,
+    dcid references, NaN/Inf, or empty values).
+    """
+    if _is_missing_value(val1) or _is_missing_value(val2):
+        return _is_missing_value(val1) and _is_missing_value(val2)
+    if val1 == val2:
+        return True
+    num1 = _parse_finite_decimal(val1)
+    if num1 is None:
+        return False
+    num2 = _parse_finite_decimal(val2)
+    if num2 is None:
+        return False
+    return num1 == num2
 
 
 def load_data(path: str, tmp_dir: str) -> list:

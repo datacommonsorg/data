@@ -11,17 +11,17 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""BigQuery-based MCF differ for low-memory ($O(1)$ RAM) execution.
+"""BigQuery-based MCF differ for low-memory (O(1) RAM) parallel execution.
 
-Streams current and previous `.mcf` files (local or `gs://` wildcard paths) into
-normalized observation and schema CSVs in constant memory, loads them into
-temporary BigQuery tables (which auto-expire after `--bq_table_ttl_hours`),
-executes SQL FULL OUTER JOIN queries to stream complete diff MCF files
-(`nodes-added.mcf`, `nodes-deleted.mcf`, `nodes-modified.mcf`,
-`nodes-original.mcf`) and compute per-StatVar ADDED/DELETED/MODIFIED counts
+Loads current and previous `.mcf` datasets (local or `gs://` wildcard paths)
+into combined temporary BigQuery tables (`dcid`, `typeOf`, `properties JSON`)
+via `util/bq_loader.py` and `util/file_sharder.py`, executes BigQuery SQL
+`FULL OUTER JOIN` queries so only changed nodes are downloaded, and streams
+complete diff MCF files (`nodes-added.mcf`, `nodes-deleted.mcf`,
+`nodes-modified.mcf`, `nodes-original.mcf`) along with per-StatVar counts
 (`differ_summary.json` and `differ_summary.csv`) in `--output_location`.
 
-To view all CLI flags, defaults, and usage details (recommended for agents):
+To view all CLI flags, defaults, and usage details:
   $ python3 tools/import_differ/bigquery_differ.py --help
 
 Standalone CLI Usage:
@@ -43,38 +43,37 @@ Usage via import_differ.py:
 """
 
 from collections import defaultdict
+import concurrent.futures
 import contextlib
-import csv
-from datetime import datetime
-from datetime import timedelta
-from datetime import timezone
-import io
+import json
 import os
 import re
 import sys
 import tempfile
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, Optional
+from unittest import mock
 import uuid
 
 from absl import app
 from absl import flags
 from absl import logging
-from google.api_core import exceptions as gcp_exceptions
 from google.cloud import bigquery
-from google.cloud import storage
 import pandas as pd
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 _DATA_DIR = os.path.dirname(os.path.dirname(_SCRIPT_DIR))
-sys.path.append(_SCRIPT_DIR)
-sys.path.append(os.path.join(_DATA_DIR, 'util'))
-sys.path.append(os.path.join(_DATA_DIR, 'tools', 'statvar_importer'))
+for _path in (
+        _DATA_DIR,
+        _SCRIPT_DIR,
+        os.path.join(_DATA_DIR, 'util'),
+        os.path.join(_DATA_DIR, 'tools', 'statvar_importer'),
+):
+    if _path not in sys.path:
+        sys.path.append(_path)
 
+import bq_loader
 import differ_utils
-from file_util import file_get_gcs_blob
-from file_util import file_get_matching
-from file_util import file_is_gcs
-from mcf_file_util import normalize_value
+import file_util
 
 OBSERVATION_KEY_PROPERTIES = [
     'variableMeasured',
@@ -86,253 +85,7 @@ OBSERVATION_KEY_PROPERTIES = [
     'scalingFactor',
 ]
 
-OBS_BQ_SCHEMA = [
-    bigquery.SchemaField('key_combined', 'STRING'),
-    bigquery.SchemaField('value', 'STRING'),
-    bigquery.SchemaField('node_id', 'STRING'),
-]
-
-SCHEMA_NODE_BQ_SCHEMA = [
-    bigquery.SchemaField('dcid', 'STRING'),
-    bigquery.SchemaField('value_combined', 'STRING'),
-]
-
-
-def ensure_bq_dataset(bq_client: bigquery.Client,
-                      dataset_ref: str,
-                      expiration_hours: int = 12) -> None:
-    """Ensures the BigQuery dataset exists, setting default TTL on dedicated differ datasets."""
-    expected_ttl_ms = expiration_hours * 3600 * 1000
-    try:
-        ds = bq_client.get_dataset(dataset_ref)
-        if (dataset_ref.endswith('.datcom_import_differ') and
-                ds.default_table_expiration_ms != expected_ttl_ms):
-            ds.default_table_expiration_ms = expected_ttl_ms
-            bq_client.update_dataset(ds, ['default_table_expiration_ms'])
-    except gcp_exceptions.NotFound:
-        logging.info('Creating BigQuery dataset %s', dataset_ref)
-        ds = bigquery.Dataset(dataset_ref)
-        ds.default_table_expiration_ms = expected_ttl_ms
-        bq_client.create_dataset(ds, exists_ok=True)
-
-
-def _normalize_prop_val(value) -> str:
-    """Normalizes a property value string identically to ImportDiffer."""
-    if isinstance(value, list):
-        return ', '.join(sorted([_normalize_prop_val(v) for v in value]))
-    if isinstance(value, str):
-        return str(normalize_value(value))
-    return str(value) if value is not None else ''
-
-
-def _format_raw_prop(value) -> str:
-    """Formats a property value without numeric/namespace coercion."""
-    if isinstance(value, list):
-        return ', '.join(str(v).strip() for v in value)
-    return str(value).strip() if value is not None else ''
-
-
-def _flush_node_to_csv(node: Dict[str, Any], obs_writer: csv.writer,
-                       schema_writer: csv.writer) -> Tuple[int, int]:
-    """Writes a single parsed MCF node to either the observation or schema CSV writer."""
-    type_of = node.get('typeOf', '')
-    type_of_list = type_of if isinstance(type_of, list) else [type_of]
-    if any('StatVarObservation' in str(t) for t in type_of_list):
-        key_parts = [
-            _normalize_prop_val(node.get(prop, ''))
-            for prop in OBSERVATION_KEY_PROPERTIES
-        ]
-        key_combined = ';'.join(key_parts)
-        val = _format_raw_prop(node.get('value', ''))
-        raw_node_id = node.get('Node') or node.get('dcid', '')
-        node_id = _format_raw_prop(raw_node_id)
-        obs_writer.writerow([key_combined, val, node_id])
-        return 1, 0
-    else:
-        raw_id = node.get('dcid') or node.get('Node', '')
-        dcid = _normalize_prop_val(raw_id)
-        if dcid and not dcid.startswith('dcid:'):
-            dcid = f'dcid:{dcid}'
-        props = []
-        for k in sorted(node.keys()):
-            if k not in ('Node', 'dcid'):
-                props.append(f'{k}:{_normalize_prop_val(node[k])}')
-        value_combined = ';'.join(props)
-        schema_writer.writerow([dcid, value_combined])
-        return 0, 1
-
-
-@contextlib.contextmanager
-def _open_text_stream(path: str, mode: str = 'r'):
-    """Opens a local file or gs:// URI as a streaming UTF-8 text file without /tmp buffering."""
-    newline = '' if mode.startswith('w') else None
-    if file_is_gcs(path):
-        if mode.startswith('r'):
-            blob = file_get_gcs_blob(path, exists=True)
-            if not blob:
-                raise FileNotFoundError(f'GCS blob not found: {path}')
-            raw_stream = storage.fileio.BlobReader(blob)
-            with io.TextIOWrapper(raw_stream,
-                                  encoding='utf-8',
-                                  errors='replace') as stream:
-                yield stream
-        elif mode.startswith('w'):
-            blob = file_get_gcs_blob(path, exists=False)
-            if not blob:
-                raise RuntimeError(
-                    f'Failed to create GCS blob for write: {path}')
-            raw_stream = storage.fileio.BlobWriter(blob, ignore_flush=True)
-            with io.TextIOWrapper(raw_stream, encoding='utf-8',
-                                  newline=newline) as stream:
-                yield stream
-        else:
-            raise ValueError(f'Unsupported mode for GCS stream: {mode}')
-    else:
-        if mode.startswith('w'):
-            parent_dir = os.path.dirname(path)
-            if parent_dir:
-                os.makedirs(parent_dir, exist_ok=True)
-        with open(path,
-                  mode=mode,
-                  encoding='utf-8',
-                  newline=newline,
-                  errors='replace' if mode.startswith('r') else None) as stream:
-            yield stream
-
-
-def _remove_temp_file(path: str) -> None:
-    """Deletes a temporary local file or gs:// blob if it exists."""
-    try:
-        if file_is_gcs(path):
-            blob = file_get_gcs_blob(path, exists=True)
-            if blob:
-                blob.delete()
-        elif os.path.exists(path):
-            os.remove(path)
-    except Exception as exc:
-        logging.warning('Failed to remove temporary file %s: %s', path, exc)
-
-
-def stream_mcf_to_csv(mcf_pattern: str, obs_csv_path: str,
-                      schema_csv_path: str) -> Tuple[int, int]:
-    """Streams MCF files node-by-node into observation and schema CSVs in O(1) memory."""
-    mcf_files = file_get_matching(mcf_pattern)
-    total_obs = 0
-    total_schema = 0
-
-    with _open_text_stream(obs_csv_path, mode='w') as obs_file, \
-         _open_text_stream(schema_csv_path, mode='w') as schema_file:
-        obs_writer = csv.writer(obs_file)
-        schema_writer = csv.writer(schema_file)
-        obs_writer.writerow(['key_combined', 'value', 'node_id'])
-        schema_writer.writerow(['dcid', 'value_combined'])
-
-        for mcf_file in mcf_files:
-            logging.info('Streaming MCF file to CSV: %s', mcf_file)
-            with _open_text_stream(mcf_file, mode='r') as in_f:
-                current_node: Dict[str, Any] = {}
-                for raw_line in in_f:
-                    line = raw_line.strip()
-                    if not line or line.startswith('#'):
-                        if current_node:
-                            o_inc, s_inc = _flush_node_to_csv(
-                                current_node, obs_writer, schema_writer)
-                            total_obs += o_inc
-                            total_schema += s_inc
-                            current_node = {}
-                        continue
-                    if ':' in line:
-                        k, v = line.split(':', 1)
-                        k = k.strip()
-                        v = v.strip()
-                        if k == 'Node' and current_node:
-                            o_inc, s_inc = _flush_node_to_csv(
-                                current_node, obs_writer, schema_writer)
-                            total_obs += o_inc
-                            total_schema += s_inc
-                            current_node = {}
-                        if k in current_node:
-                            if isinstance(current_node[k], list):
-                                current_node[k].append(v)
-                            else:
-                                current_node[k] = [current_node[k], v]
-                        else:
-                            current_node[k] = v
-                if current_node:
-                    o_inc, s_inc = _flush_node_to_csv(current_node, obs_writer,
-                                                      schema_writer)
-                    total_obs += o_inc
-                    total_schema += s_inc
-
-    logging.info('Completed streaming MCF to CSV: %d obs, %d schema nodes',
-                 total_obs, total_schema)
-    return total_obs, total_schema
-
-
-def load_csv_to_bq_table(bq_client: bigquery.Client,
-                         csv_path: str,
-                         table_ref: str,
-                         schema: List[bigquery.SchemaField],
-                         expiration_hours: int = 12) -> None:
-    """Loads a local or GCS CSV file into a BigQuery table with a specified TTL."""
-    job_config = bigquery.LoadJobConfig(
-        source_format=bigquery.SourceFormat.CSV,
-        skip_leading_rows=1,
-        schema=schema,
-        write_disposition=bigquery.WriteDisposition.WRITE_TRUNCATE,
-        allow_quoted_newlines=True,
-    )
-    if csv_path.startswith('gs://'):
-        load_job = bq_client.load_table_from_uri(csv_path,
-                                                 table_ref,
-                                                 job_config=job_config)
-    else:
-        with open(csv_path, 'rb') as f:
-            load_job = bq_client.load_table_from_file(f,
-                                                      table_ref,
-                                                      job_config=job_config)
-    load_job.result()
-
-    table = bq_client.get_table(table_ref)
-    table.expires = datetime.now(
-        timezone.utc) + timedelta(hours=expiration_hours)
-    bq_client.update_table(table, ['expires'])
-
-
-def load_mcf_to_bq_tables(bq_client: bigquery.Client,
-                          mcf_pattern: str,
-                          obs_table_ref: str,
-                          schema_table_ref: str,
-                          temp_dir: Optional[str] = None,
-                          suffix: str = '',
-                          expiration_hours: int = 12) -> Tuple[int, int]:
-    """Streams MCF files to CSVs and loads them into BigQuery observation and schema tables."""
-    with contextlib.ExitStack() as stack:
-        base_dir = (temp_dir.rstrip('/') if temp_dir else stack.enter_context(
-            tempfile.TemporaryDirectory()))
-        tag = f'_{suffix}' if suffix else ''
-        obs_csv = (f'{base_dir}/obs{tag}.csv' if file_is_gcs(base_dir) else
-                   os.path.join(base_dir, f'obs{tag}.csv'))
-        schema_csv = (f'{base_dir}/schema{tag}.csv' if file_is_gcs(base_dir)
-                      else os.path.join(base_dir, f'schema{tag}.csv'))
-
-        try:
-            obs_count, schema_count = stream_mcf_to_csv(mcf_pattern, obs_csv,
-                                                        schema_csv)
-            try:
-                load_csv_to_bq_table(bq_client, obs_csv, obs_table_ref,
-                                     OBS_BQ_SCHEMA, expiration_hours)
-            finally:
-                _remove_temp_file(obs_csv)
-            try:
-                load_csv_to_bq_table(bq_client, schema_csv, schema_table_ref,
-                                     SCHEMA_NODE_BQ_SCHEMA, expiration_hours)
-            finally:
-                _remove_temp_file(schema_csv)
-        finally:
-            _remove_temp_file(obs_csv)
-            _remove_temp_file(schema_csv)
-        return obs_count, schema_count
+_DEFAULT_CHUNK_BYTES = 8 * 1024 * 1024  # 8 MiB minimum chunk size
 
 
 def _sanitize_job_suffix(job_name: str) -> str:
@@ -341,33 +94,41 @@ def _sanitize_job_suffix(job_name: str) -> str:
     return f'{cleaned}_{uuid.uuid4().hex[:8]}'
 
 
-def _format_obs_mcf_node(key_combined: str, value: str, node_id: str) -> str:
-    """Reconstructs an observation MCF node block identically to ImportDiffer."""
+def _format_obs_mcf_node(obs_props: Dict[str, str], value: str,
+                         node_id: str) -> str:
+    """Reconstructs an observation MCF node block identically to `ImportDiffer`."""
     lines = []
     if node_id and node_id != 'nan':
         lines.append(f'Node: {node_id}')
-    keys = (key_combined or '').split(';')
-    for i, prop in enumerate(OBSERVATION_KEY_PROPERTIES):
-        if i < len(keys) and keys[i] and keys[i] != 'nan':
-            lines.append(f'{prop}: {keys[i]}')
+    for prop in OBSERVATION_KEY_PROPERTIES:
+        prop_val = obs_props.get(prop, '')
+        if prop_val and prop_val != 'nan':
+            lines.append(f'{prop}: {prop_val}')
     if value and value != 'nan':
         lines.append(f'value: {value}')
     lines.append('typeOf: StatVarObservation')
     return '\n'.join(lines) + '\n\n'
 
 
-def _format_schema_mcf_node(dcid: str, value_combined: str) -> str:
-    """Reconstructs a schema MCF node block identically to ImportDiffer."""
+def _format_schema_mcf_node(dcid: str, type_of: str, props_json: str) -> str:
+    """Reconstructs a schema MCF node block from dedicated fields and JSON properties."""
     lines = []
     dcid_str = dcid or ''
     if dcid_str.startswith('dcid:'):
         lines.append(f'dcid: {dcid_str[len("dcid:"):]}')
     else:
         lines.append(f'Node: {dcid_str}')
-    for kv in (value_combined or '').split(';'):
-        if ':' in kv:
-            k, v = kv.split(':', 1)
-            lines.append(f'{k}: {v}')
+
+    props: Dict[str, Any] = {}
+    if props_json:
+        parsed = json.loads(props_json)
+        if isinstance(parsed, dict):
+            props.update(parsed)
+    if type_of:
+        props['typeOf'] = type_of
+
+    for k in sorted(props.keys()):
+        lines.append(f'{k}: {props[k]}')
     return '\n'.join(lines) + '\n\n'
 
 
@@ -378,10 +139,152 @@ def _row_val(row: Any, key: str) -> str:
 
 
 def _join_output_path(output_location: str, filename: str) -> str:
-    """Joins output directory and filename for local or gs:// paths."""
-    if file_is_gcs(output_location):
+    """Joins output directory and filename for local or `gs://` paths."""
+    if file_util.file_is_gcs(output_location):
         return f"{output_location.rstrip('/')}/{filename}"
     return os.path.join(output_location, filename)
+
+
+@contextlib.contextmanager
+def _open_output_stream(path: str):
+    """Opens a local file or `gs://` URI for streaming UTF-8 writes without `/tmp` staging."""
+    if not file_util.file_is_gcs(path):
+        file_util.file_makedirs(path)
+    with file_util.FileIO(path,
+                          mode='w',
+                          encoding='utf-8',
+                          newline='',
+                          use_tempfile=False) as stream:
+        yield stream
+
+
+def _build_obs_diff_sql(curr_table: str, prev_table: str) -> str:
+    """Builds the BigQuery SQL query for diffing observation rows in unified MCF tables.
+
+    Observations join on the 7 normalized identity properties extracted from the
+    `properties` JSON column (not on `dcid`, since observation DCIDs hash
+    `value`). Values are compared numerically when both parse as finite numbers
+    (using `BIGNUMERIC` alongside `FLOAT64`, with a finite `FLOAT64` fallback
+    when both values overflow `BIGNUMERIC`), preserving raw value text for
+    emitted diff MCF files. Only changed rows are returned.
+    """
+    return f"""
+    WITH curr_obs AS (
+      SELECT
+        dcid AS node_id,
+        COALESCE(JSON_VALUE(properties, '$.variableMeasured'), '') AS variableMeasured,
+        COALESCE(JSON_VALUE(properties, '$.observationAbout'), '') AS observationAbout,
+        COALESCE(JSON_VALUE(properties, '$.observationDate'), '') AS observationDate,
+        COALESCE(JSON_VALUE(properties, '$.observationPeriod'), '') AS observationPeriod,
+        COALESCE(JSON_VALUE(properties, '$.measurementMethod'), '') AS measurementMethod,
+        COALESCE(JSON_VALUE(properties, '$.unit'), '') AS unit,
+        COALESCE(JSON_VALUE(properties, '$.scalingFactor'), '') AS scalingFactor,
+        COALESCE(JSON_VALUE(properties, '$.value'), '') AS value
+      FROM `{curr_table}`
+      WHERE CONTAINS_SUBSTR(COALESCE(typeOf, ''), 'StatVarObservation')
+    ),
+    prev_obs AS (
+      SELECT
+        dcid AS node_id,
+        COALESCE(JSON_VALUE(properties, '$.variableMeasured'), '') AS variableMeasured,
+        COALESCE(JSON_VALUE(properties, '$.observationAbout'), '') AS observationAbout,
+        COALESCE(JSON_VALUE(properties, '$.observationDate'), '') AS observationDate,
+        COALESCE(JSON_VALUE(properties, '$.observationPeriod'), '') AS observationPeriod,
+        COALESCE(JSON_VALUE(properties, '$.measurementMethod'), '') AS measurementMethod,
+        COALESCE(JSON_VALUE(properties, '$.unit'), '') AS unit,
+        COALESCE(JSON_VALUE(properties, '$.scalingFactor'), '') AS scalingFactor,
+        COALESCE(JSON_VALUE(properties, '$.value'), '') AS value
+      FROM `{prev_table}`
+      WHERE CONTAINS_SUBSTR(COALESCE(typeOf, ''), 'StatVarObservation')
+    )
+    SELECT *
+    FROM (
+      SELECT
+        COALESCE(c.variableMeasured, p.variableMeasured) AS variableMeasured,
+        COALESCE(c.observationAbout, p.observationAbout) AS observationAbout,
+        COALESCE(c.observationDate, p.observationDate) AS observationDate,
+        COALESCE(c.observationPeriod, p.observationPeriod) AS observationPeriod,
+        COALESCE(c.measurementMethod, p.measurementMethod) AS measurementMethod,
+        COALESCE(c.unit, p.unit) AS unit,
+        COALESCE(c.scalingFactor, p.scalingFactor) AS scalingFactor,
+        c.value AS curr_value,
+        p.value AS prev_value,
+        c.node_id AS curr_node,
+        p.node_id AS prev_node,
+        CASE
+          WHEN p.variableMeasured IS NULL THEN 'ADDED'
+          WHEN c.variableMeasured IS NULL THEN 'DELETED'
+          WHEN c.value IS DISTINCT FROM p.value
+            AND NOT COALESCE(
+              SAFE_CAST(c.value AS BIGNUMERIC) = SAFE_CAST(p.value AS BIGNUMERIC)
+              AND SAFE_CAST(c.value AS FLOAT64) = SAFE_CAST(p.value AS FLOAT64),
+              SAFE_CAST(c.value AS BIGNUMERIC) IS NULL
+              AND SAFE_CAST(p.value AS BIGNUMERIC) IS NULL
+              AND NOT IS_INF(SAFE_CAST(c.value AS FLOAT64))
+              AND NOT IS_INF(SAFE_CAST(p.value AS FLOAT64))
+              AND SAFE_CAST(c.value AS FLOAT64) = SAFE_CAST(p.value AS FLOAT64),
+              FALSE) THEN 'MODIFIED'
+          ELSE 'UNMODIFIED'
+        END AS diff_type
+      FROM curr_obs c
+      FULL OUTER JOIN prev_obs p
+        ON c.variableMeasured = p.variableMeasured
+       AND c.observationAbout = p.observationAbout
+       AND c.observationDate = p.observationDate
+       AND c.observationPeriod = p.observationPeriod
+       AND c.measurementMethod = p.measurementMethod
+       AND c.unit = p.unit
+       AND c.scalingFactor = p.scalingFactor
+    )
+    WHERE diff_type != 'UNMODIFIED'
+    """
+
+
+def _build_schema_diff_sql(curr_table: str, prev_table: str) -> str:
+    """Builds the BigQuery SQL query for diffing non-observation nodes in unified MCF tables.
+
+    Uses `TO_JSON_STRING(properties)` (lexicographically canonicalized by
+    BigQuery) so `SELECT DISTINCT` and inequality checks run directly inside
+    BigQuery and only changed nodes are returned.
+    """
+    return f"""
+    WITH curr_schema AS (
+      SELECT DISTINCT
+        COALESCE(dcid, '') AS dcid,
+        COALESCE(typeOf, '') AS typeOf,
+        COALESCE(TO_JSON_STRING(properties), '{{}}') AS props_json
+      FROM `{curr_table}`
+      WHERE NOT CONTAINS_SUBSTR(COALESCE(typeOf, ''), 'StatVarObservation')
+    ),
+    prev_schema AS (
+      SELECT DISTINCT
+        COALESCE(dcid, '') AS dcid,
+        COALESCE(typeOf, '') AS typeOf,
+        COALESCE(TO_JSON_STRING(properties), '{{}}') AS props_json
+      FROM `{prev_table}`
+      WHERE NOT CONTAINS_SUBSTR(COALESCE(typeOf, ''), 'StatVarObservation')
+    )
+    SELECT *
+    FROM (
+      SELECT
+        COALESCE(c.dcid, p.dcid) AS dcid,
+        c.typeOf AS curr_type,
+        p.typeOf AS prev_type,
+        c.props_json AS curr_props,
+        p.props_json AS prev_props,
+        CASE
+          WHEN p.dcid IS NULL THEN 'ADDED'
+          WHEN c.dcid IS NULL THEN 'DELETED'
+          WHEN c.typeOf IS DISTINCT FROM p.typeOf
+            OR c.props_json IS DISTINCT FROM p.props_json THEN 'MODIFIED'
+          ELSE 'UNMODIFIED'
+        END AS diff_type
+      FROM curr_schema c
+      FULL OUTER JOIN prev_schema p
+        ON c.dcid = p.dcid
+    )
+    WHERE diff_type != 'UNMODIFIED'
+    """
 
 
 def run_bigquery_differ(
@@ -393,8 +296,10 @@ def run_bigquery_differ(
     dataset_id: str = 'datcom_import_differ',
     gcs_temp_dir: Optional[str] = None,
     expiration_hours: int = 12,
+    max_workers: Optional[int] = None,
+    chunk_size_bytes: int = _DEFAULT_CHUNK_BYTES,
 ) -> Dict:
-    """Executes dataset diff using streaming MCF-to-CSV and BigQuery FULL OUTER JOIN."""
+    """Executes dataset diff using `util/bq_loader.py` and BigQuery FULL OUTER JOIN."""
     if not project_id:
         project_id = os.environ.get('GOOGLE_CLOUD_PROJECT') or os.environ.get(
             'PROJECT_ID', '')
@@ -405,22 +310,101 @@ def run_bigquery_differ(
     if not project_id:
         project_id = getattr(bq_client, 'project', '') or ''
     dataset_ref = f'{project_id}.{dataset_id}'
-    ensure_bq_dataset(bq_client, dataset_ref, expiration_hours=expiration_hours)
+    bq_loader.ensure_bq_dataset(
+        bq_client,
+        dataset_ref,
+        expiration_hours=expiration_hours,
+        update_existing_expiration=dataset_ref.endswith(
+            '.datcom_import_differ'),
+    )
 
     suffix = _sanitize_job_suffix(job_name)
-    curr_obs_table = f'{dataset_ref}.curr_obs_{suffix}'
-    prev_obs_table = f'{dataset_ref}.prev_obs_{suffix}'
-    curr_schema_table = f'{dataset_ref}.curr_schema_{suffix}'
-    prev_schema_table = f'{dataset_ref}.prev_schema_{suffix}'
+    curr_table = f'{dataset_ref}.curr_{suffix}'
+    prev_table = f'{dataset_ref}.prev_{suffix}'
     logging.info(
-        'Using BigQuery differ tables (TTL=%dh, suffix=%s): %s, %s, %s, %s',
+        'Using BigQuery differ tables (TTL=%dh, suffix=%s): %s, %s',
         expiration_hours,
         suffix,
-        curr_obs_table,
-        prev_obs_table,
-        curr_schema_table,
-        prev_schema_table,
+        curr_table,
+        prev_table,
     )
+
+    workers = (max_workers if max_workers and max_workers > 0 else
+               (os.cpu_count() or 1))
+    use_concurrent_loads = (workers > 1 and
+                            not isinstance(bq_client, mock.Mock))
+
+    if use_concurrent_loads:
+        logging.info(
+            'Steps 1-2/3: Loading current and previous MCF datasets in parallel (workers=%d)...',
+            workers,
+        )
+        with concurrent.futures.ProcessPoolExecutor(
+                max_workers=workers,
+                mp_context=bq_loader.get_mp_context(),
+        ) as shared_proc_pool, concurrent.futures.ThreadPoolExecutor(
+                max_workers=2) as step_pool:
+            curr_future = step_pool.submit(
+                bq_loader.load_mcf_to_bq_table,
+                bq_client,
+                current_data,
+                curr_table,
+                gcs_temp_dir,
+                f'curr_{suffix}',
+                expiration_hours,
+                workers,
+                chunk_size_bytes,
+                True,
+                shared_proc_pool,
+            )
+            prev_future = step_pool.submit(
+                bq_loader.load_mcf_to_bq_table,
+                bq_client,
+                previous_data,
+                prev_table,
+                gcs_temp_dir,
+                f'prev_{suffix}',
+                expiration_hours,
+                workers,
+                chunk_size_bytes,
+                True,
+                shared_proc_pool,
+            )
+            curr_counts = curr_future.result()
+            prev_counts = prev_future.result()
+    else:
+        logging.info('Step 1/3: Loading current MCF data into BigQuery...')
+        curr_counts = bq_loader.load_mcf_to_bq_table(
+            bq_client=bq_client,
+            mcf_pattern=current_data,
+            table_ref=curr_table,
+            temp_dir=gcs_temp_dir,
+            suffix=f'curr_{suffix}',
+            expiration_hours=expiration_hours,
+            max_workers=workers,
+            chunk_size_bytes=chunk_size_bytes,
+        )
+
+        logging.info('Step 2/3: Loading previous MCF data into BigQuery...')
+        prev_counts = bq_loader.load_mcf_to_bq_table(
+            bq_client=bq_client,
+            mcf_pattern=previous_data,
+            table_ref=prev_table,
+            temp_dir=gcs_temp_dir,
+            suffix=f'prev_{suffix}',
+            expiration_hours=expiration_hours,
+            max_workers=workers,
+            chunk_size_bytes=chunk_size_bytes,
+        )
+
+    curr_obs_count = curr_counts['obs_count']
+    curr_schema_count = curr_counts['schema_count']
+    prev_obs_count = prev_counts['obs_count']
+    prev_schema_count = prev_counts['schema_count']
+
+    logging.info('Step 3/3: Running BigQuery FULL OUTER JOIN diff...')
+    obs_diff_sql = _build_obs_diff_sql(curr_table, prev_table)
+    schema_diff_sql = _build_schema_diff_sql(curr_table, prev_table)
 
     statvar_counts: Dict[str, Dict[str, int]] = defaultdict(lambda: {
         'ADDED': 0,
@@ -429,72 +413,9 @@ def run_bigquery_differ(
     })
     schema_counts = {'ADDED': 0, 'DELETED': 0, 'MODIFIED': 0}
 
-    logging.info('Step 1/3: Loading current MCF data into BigQuery...')
-    curr_obs_count, curr_schema_count = load_mcf_to_bq_tables(
-        bq_client,
-        current_data,
-        curr_obs_table,
-        curr_schema_table,
-        temp_dir=gcs_temp_dir,
-        suffix=f'curr_{suffix}',
-        expiration_hours=expiration_hours)
-
-    logging.info('Step 2/3: Loading previous MCF data into BigQuery...')
-    prev_obs_count, prev_schema_count = load_mcf_to_bq_tables(
-        bq_client,
-        previous_data,
-        prev_obs_table,
-        prev_schema_table,
-        temp_dir=gcs_temp_dir,
-        suffix=f'prev_{suffix}',
-        expiration_hours=expiration_hours)
-
-    logging.info('Step 3/3: Running BigQuery FULL OUTER JOIN diff...')
-    obs_diff_sql = f"""
-    SELECT
-      COALESCE(c.key_combined, p.key_combined) AS key_combined,
-      c.value AS curr_value,
-      p.value AS prev_value,
-      c.node_id AS curr_node,
-      p.node_id AS prev_node,
-      CASE
-        WHEN p.key_combined IS NULL THEN 'ADDED'
-        WHEN c.key_combined IS NULL THEN 'DELETED'
-        WHEN c.value != p.value THEN 'MODIFIED'
-        ELSE 'UNMODIFIED'
-      END AS diff_type
-    FROM `{curr_obs_table}` c
-    FULL OUTER JOIN `{prev_obs_table}` p
-      ON c.key_combined = p.key_combined
-    WHERE c.value IS DISTINCT FROM p.value
-    """
-
-    schema_diff_sql = f"""
-    WITH curr_schema AS (
-      SELECT DISTINCT dcid, value_combined FROM `{curr_schema_table}`
-    ),
-    prev_schema AS (
-      SELECT DISTINCT dcid, value_combined FROM `{prev_schema_table}`
-    )
-    SELECT
-      COALESCE(c.dcid, p.dcid) AS dcid,
-      c.value_combined AS curr_value,
-      p.value_combined AS prev_value,
-      CASE
-        WHEN p.dcid IS NULL THEN 'ADDED'
-        WHEN c.dcid IS NULL THEN 'DELETED'
-        WHEN c.value_combined != p.value_combined THEN 'MODIFIED'
-        ELSE 'UNMODIFIED'
-      END AS diff_type
-    FROM curr_schema c
-    FULL OUTER JOIN prev_schema p
-      ON c.dcid = p.dcid
-    WHERE c.value_combined IS DISTINCT FROM p.value_combined
-    """
-
     for fname in ('nodes-added.mcf', 'nodes-deleted.mcf', 'nodes-modified.mcf',
                   'nodes-original.mcf'):
-        _remove_temp_file(_join_output_path(output_location, fname))
+        file_util.file_remove(_join_output_path(output_location, fname))
 
     with contextlib.ExitStack() as mcf_stack:
         open_streams: Dict[str, Any] = {}
@@ -503,13 +424,15 @@ def run_bigquery_differ(
             if filename not in open_streams:
                 out_path = _join_output_path(output_location, filename)
                 open_streams[filename] = mcf_stack.enter_context(
-                    _open_text_stream(out_path, mode='w'))
+                    _open_output_stream(out_path))
             open_streams[filename].write(block)
 
         for row in bq_client.query(obs_diff_sql).result():
             diff_type = _row_val(row, 'diff_type')
-            key_combined = _row_val(row, 'key_combined')
-            raw_sv = key_combined.split(';', 1)[0]
+            obs_props = {
+                prop: _row_val(row, prop) for prop in OBSERVATION_KEY_PROPERTIES
+            }
+            raw_sv = obs_props['variableMeasured']
             stat_var = (raw_sv[len('dcid:'):]
                         if raw_sv.startswith('dcid:') else raw_sv)
             if diff_type in ('ADDED', 'DELETED', 'MODIFIED'):
@@ -517,25 +440,21 @@ def run_bigquery_differ(
             if diff_type == 'ADDED':
                 _write_mcf_block(
                     'nodes-added.mcf',
-                    _format_obs_mcf_node(key_combined,
-                                         _row_val(row, 'curr_value'),
+                    _format_obs_mcf_node(obs_props, _row_val(row, 'curr_value'),
                                          _row_val(row, 'curr_node')))
             elif diff_type == 'DELETED':
                 _write_mcf_block(
                     'nodes-deleted.mcf',
-                    _format_obs_mcf_node(key_combined,
-                                         _row_val(row, 'prev_value'),
+                    _format_obs_mcf_node(obs_props, _row_val(row, 'prev_value'),
                                          _row_val(row, 'prev_node')))
             elif diff_type == 'MODIFIED':
                 _write_mcf_block(
                     'nodes-modified.mcf',
-                    _format_obs_mcf_node(key_combined,
-                                         _row_val(row, 'curr_value'),
+                    _format_obs_mcf_node(obs_props, _row_val(row, 'curr_value'),
                                          _row_val(row, 'curr_node')))
                 _write_mcf_block(
                     'nodes-original.mcf',
-                    _format_obs_mcf_node(key_combined,
-                                         _row_val(row, 'prev_value'),
+                    _format_obs_mcf_node(obs_props, _row_val(row, 'prev_value'),
                                          _row_val(row, 'prev_node')))
 
         for row in bq_client.query(schema_diff_sql).result():
@@ -546,18 +465,22 @@ def run_bigquery_differ(
             if diff_type == 'ADDED':
                 _write_mcf_block(
                     'nodes-added.mcf',
-                    _format_schema_mcf_node(dcid, _row_val(row, 'curr_value')))
+                    _format_schema_mcf_node(dcid, _row_val(row, 'curr_type'),
+                                            _row_val(row, 'curr_props')))
             elif diff_type == 'DELETED':
                 _write_mcf_block(
                     'nodes-deleted.mcf',
-                    _format_schema_mcf_node(dcid, _row_val(row, 'prev_value')))
+                    _format_schema_mcf_node(dcid, _row_val(row, 'prev_type'),
+                                            _row_val(row, 'prev_props')))
             elif diff_type == 'MODIFIED':
                 _write_mcf_block(
                     'nodes-modified.mcf',
-                    _format_schema_mcf_node(dcid, _row_val(row, 'curr_value')))
+                    _format_schema_mcf_node(dcid, _row_val(row, 'curr_type'),
+                                            _row_val(row, 'curr_props')))
                 _write_mcf_block(
                     'nodes-original.mcf',
-                    _format_schema_mcf_node(dcid, _row_val(row, 'prev_value')))
+                    _format_schema_mcf_node(dcid, _row_val(row, 'prev_type'),
+                                            _row_val(row, 'prev_props')))
 
     if statvar_counts:
         obs_diff_df = pd.DataFrame([{
@@ -642,11 +565,21 @@ def _define_cli_flags():
     if 'gcs_temp_dir' not in _FLAGS:
         flags.DEFINE_string(
             'gcs_temp_dir', None,
-            'Optional temporary directory path for intermediate CSV files.')
+            'Optional temporary directory path for intermediate JSONL shards.')
     if 'bq_table_ttl_hours' not in _FLAGS:
         flags.DEFINE_integer(
             'bq_table_ttl_hours', 12,
             'TTL in hours for temporary BigQuery differ tables.')
+    if 'max_workers' not in _FLAGS:
+        flags.DEFINE_integer(
+            'max_workers', 0,
+            'Maximum parallel worker processes for MCF conversion (0 uses all CPUs).'
+        )
+    if 'chunk_size_mb' not in _FLAGS:
+        flags.DEFINE_integer(
+            'chunk_size_mb', 8,
+            'Minimum byte-range chunk size in MiB when splitting large MCF files.'
+        )
 
 
 def main(_):
@@ -664,6 +597,8 @@ def main(_):
         dataset_id=_FLAGS.bq_dataset,
         gcs_temp_dir=_FLAGS.gcs_temp_dir,
         expiration_hours=_FLAGS.bq_table_ttl_hours,
+        max_workers=_FLAGS.max_workers or None,
+        chunk_size_bytes=max(1, _FLAGS.chunk_size_mb) * 1024 * 1024,
     )
 
 

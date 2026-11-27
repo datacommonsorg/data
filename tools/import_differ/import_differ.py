@@ -72,6 +72,11 @@ if 'bq_dataset' not in _FLAGS:
 if 'bq_table_ttl_hours' not in _FLAGS:
     flags.DEFINE_integer('bq_table_ttl_hours', 12,
                          'TTL in hours for temporary BigQuery differ tables.')
+if 'max_workers' not in _FLAGS:
+    flags.DEFINE_integer(
+        'max_workers', 0,
+        'Maximum parallel worker processes for BigQuery differ MCF conversion (0 uses all CPUs).'
+    )
 
 
 def val_str(value) -> str:
@@ -122,7 +127,8 @@ class ImportDiffer:
                  file_format='mcf',
                  runner_mode='native',
                  bq_dataset='datcom_import_differ',
-                 bq_table_ttl_hours=12):
+                 bq_table_ttl_hours=12,
+                 max_workers=None):
         self.current_data = current_data
         self.previous_data = previous_data
         self.output_path = output_location
@@ -132,6 +138,7 @@ class ImportDiffer:
         self.runner_mode = runner_mode
         self.bq_dataset = bq_dataset
         self.bq_table_ttl_hours = bq_table_ttl_hours
+        self.max_workers = max_workers
 
     def _cleanup_data(self, df: pd.DataFrame):
         for column in [Diff.ADDED, Diff.DELETED, Diff.MODIFIED]:
@@ -139,14 +146,18 @@ class ImportDiffer:
             df[column.name] = df[column.name].fillna(0).astype(int)
 
     # Processes two dataset files to identify changes.
-    def generate_diff(self, previous_df: pd.DataFrame,
-                      current_df: pd.DataFrame) -> pd.DataFrame:
+    def generate_diff(self,
+                      previous_df: pd.DataFrame,
+                      current_df: pd.DataFrame,
+                      compare_numeric: bool = False) -> pd.DataFrame:
         """
         Process previous and current datasets to generate
         the diff data for identifying changes.
         Args:
-          current_df: dataframe with current (new) data
           previous_df: dataframe with previous (old) data
+          current_df: dataframe with current (new) data
+          compare_numeric: if True, compare equal numeric values as unmodified
+            while preserving raw string representations.
         Returns:
           intermediate diff data for analysis
         """
@@ -169,11 +180,22 @@ class ImportDiffer:
                           on=Column.key_combined.name,
                           how='outer',
                           indicator=Column.diff_type.name)
-        result[Column.diff_type.name] = result.apply(
-          lambda row: Diff.ADDED.name if row[Column.diff_type.name] == 'right_only' \
-          else Diff.DELETED.name if row[Column.diff_type.name] == 'left_only' \
-          else Diff.MODIFIED.name if row[Column.value_combined.name + '_x'] != row[Column.value_combined.name + '_y'] \
-          else Diff.UNMODIFIED.name, axis=1)
+        val_x_col = Column.value_combined.name + '_x'
+        val_y_col = Column.value_combined.name + '_y'
+
+        def _classify_row(row):
+            indicator = row[Column.diff_type.name]
+            if indicator == 'right_only':
+                return Diff.ADDED.name
+            if indicator == 'left_only':
+                return Diff.DELETED.name
+            val_x = row[val_x_col]
+            val_y = row[val_y_col]
+            is_equal = (differ_utils.obs_values_equal(val_x, val_y)
+                        if compare_numeric else val_x == val_y)
+            return Diff.UNMODIFIED.name if is_equal else Diff.MODIFIED.name
+
+        result[Column.diff_type.name] = result.apply(_classify_row, axis=1)
         result = result[result[Column.diff_type.name] != Diff.UNMODIFIED.name]
         # result.sort_values(by=[Column.diff_type.name], inplace=True)
         result = result.reset_index(drop=True)
@@ -327,6 +349,7 @@ class ImportDiffer:
                 job_name=self.job_name,
                 dataset_id=self.bq_dataset,
                 expiration_hours=self.bq_table_ttl_hours,
+                max_workers=self.max_workers,
             )
         else:
             # Runs native Python differ.
@@ -345,10 +368,13 @@ class ImportDiffer:
                 f'Loaded previous data with {previous_df_obs.shape[0]} observations and {previous_df_schema.shape[0]} nodes.'
             )
             logging.info('Generating observation diff...')
-            obs_diff = self.generate_diff(previous_df_obs, current_df_obs)
+            obs_diff = self.generate_diff(previous_df_obs,
+                                          current_df_obs,
+                                          compare_numeric=True)
             logging.info('Generating schema diff...')
             schema_diff = self.generate_diff(previous_df_schema,
-                                             current_df_schema)
+                                             current_df_schema,
+                                             compare_numeric=False)
 
             logging.info('Writing diff to MCF files...')
             for d_type, filename, suffix in [
@@ -417,7 +443,7 @@ def main(_):
                           _FLAGS.output_location, _FLAGS.project_id,
                           _FLAGS.job_name, _FLAGS.file_format,
                           _FLAGS.runner_mode, _FLAGS.bq_dataset,
-                          _FLAGS.bq_table_ttl_hours)
+                          _FLAGS.bq_table_ttl_hours, _FLAGS.max_workers or None)
     differ.run_differ()
 
 

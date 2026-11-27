@@ -36,10 +36,15 @@ from absl import logging
 from aggregation_util import aggregate_dict
 from aggregation_util import aggregate_value
 import chardet
+from google.api_core import exceptions as gcp_exceptions
 from google.cloud import storage
 import gspread
 import numpy as np
 from retry.api import retry_call
+
+# Default chunk size (16 MiB) for streaming GCS BlobReader / BlobWriter.
+_GCS_STREAM_CHUNK_SIZE = 16 * 1024 * 1024
+_GCS_WILDCARD_CHARS = ('*', '?', '[')
 
 
 class FileIO:
@@ -180,10 +185,38 @@ class FileIO:
             logging.debug(f'Opening GCSFile:{filename} mode:{self._mode}')
             if self._mode.startswith('r'):
                 blob = file_get_gcs_blob(filename, exists=True)
-                self._fd = storage.fileio.BlobReader(blob)
+                if not blob:
+                    raise FileNotFoundError(f'GCS blob not found: {filename}')
+                raw_stream = storage.fileio.BlobReader(
+                    blob, chunk_size=_GCS_STREAM_CHUNK_SIZE)
+                if 'b' in self._mode:
+                    self._fd = raw_stream
+                else:
+                    self._fd = io.TextIOWrapper(
+                        raw_stream,
+                        encoding=self._encoding or 'utf-8',
+                        newline=self._newline,
+                        errors=self._errors or 'replace',
+                    )
             else:
                 blob = file_get_gcs_blob(filename, exists=False)
-                self._fd = storage.fileio.BlobWriter(blob)
+                if not blob:
+                    raise RuntimeError(
+                        f'Failed to create GCS blob for write: {filename}')
+                raw_stream = storage.fileio.BlobWriter(
+                    blob,
+                    chunk_size=_GCS_STREAM_CHUNK_SIZE,
+                    ignore_flush=True,
+                )
+                if 'b' in self._mode:
+                    self._fd = raw_stream
+                else:
+                    self._fd = io.TextIOWrapper(
+                        raw_stream,
+                        encoding=self._encoding or 'utf-8',
+                        newline=self._newline,
+                        errors=self._errors,
+                    )
         else:
             logging.debug(f'Opening file:{filename} mode:{self._mode}')
             self._fd = open(
@@ -326,8 +359,7 @@ def file_get_gcs_bucket(filename: str) -> storage.bucket.Bucket:
             global _GCS_CLIENT
             if not _GCS_CLIENT:
                 _GCS_CLIENT = storage.Client()
-            bucket = _GCS_CLIENT.get_bucket(bucket_name)
-            return bucket
+            return _GCS_CLIENT.bucket(bucket_name)
     return None
 
 
@@ -390,12 +422,21 @@ def file_get_matching(filepat: Union[str, list]) -> list:
                     # Get a list of all files in the GCS folder
                     # Match the file name against the file pattern
                     # Wildcard in GCS path will match any sequence of directories and files.
-                    file_pat = file.split(bucket.name, 1)[1][1:]
-                    dirname = os.path.dirname(file_pat)
-                    for blob in bucket.list_blobs(prefix=dirname):
-                        if fnmatch.fnmatch(blob.name, file_pat):
-                            f = f'gs://{bucket.name}/{blob.name}'
-                            files.add(f)
+                    file_pat = file[len('gs://'):].split('/', 1)[1]
+                    if any(ch in file_pat for ch in _GCS_WILDCARD_CHARS):
+                        wildcard_pos = min(
+                            file_pat.find(ch)
+                            for ch in _GCS_WILDCARD_CHARS
+                            if ch in file_pat)
+                        prefix = file_pat[:wildcard_pos]
+                        for blob in bucket.list_blobs(prefix=prefix):
+                            if fnmatch.fnmatchcase(blob.name, file_pat):
+                                f = f'gs://{bucket.name}/{blob.name}'
+                                files.add(f)
+                    else:
+                        blob = bucket.get_blob(file_pat)
+                        if blob is not None:
+                            files.add(f'gs://{bucket.name}/{blob.name}')
             elif file_is_google_spreadsheet(file):
                 # Check if worksheet is accessible.
                 ws = file_get_gspread_worksheet(file)
@@ -417,16 +458,90 @@ def file_get_size(filename: Union[str, list]) -> int:
     file size in bytes if the file exists.
     else 0.
   """
-    files = file_get_matching(filename)
-    size = 0
-    for filename in files:
-        if file_is_local(filename):
-            size += os.path.getsize(filename)
-        elif file_is_gcs(filename):
-            blob = file_get_gcs_blob(filename, exists=True)
-            if blob:
-                size += blob.size
-    return size
+    return sum(size for _, size in file_list_with_sizes(filename))
+
+
+def file_list_with_sizes(filepat: Union[str, list]) -> list[tuple[str, int]]:
+    """Returns sorted `(filename, size_bytes)` pairs matching `filepat` in one pass.
+
+  For GCS wildcards, blob sizes are read directly from `list_blobs()` metadata
+  without extra per-blob `get_blob()` RPCs.
+  """
+    if not filepat:
+        return []
+    input_files = [filepat] if isinstance(filepat, str) else list(filepat)
+    expanded: list[str] = []
+    for item in input_files:
+        if isinstance(item, str):
+            for part in item.split(','):
+                part = part.strip()
+                if part and part not in expanded:
+                    expanded.append(part)
+        elif isinstance(item, list):
+            for sub in item:
+                if sub and sub not in expanded:
+                    expanded.append(sub)
+
+    results: list[tuple[str, int]] = []
+    seen: set[str] = set()
+    for file in expanded:
+        pattern_matches: list[tuple[str, int]] = []
+        if file_is_local(file):
+            for f in sorted(glob.glob(file, recursive=True)):
+                if os.path.isfile(f):
+                    pattern_matches.append((f, os.path.getsize(f)))
+        elif file_is_gcs(file):
+            bucket = file_get_gcs_bucket(file)
+            if bucket:
+                file_pat = file[len('gs://'):].split('/', 1)[1]
+                if any(ch in file_pat for ch in _GCS_WILDCARD_CHARS):
+                    wildcard_pos = min(
+                        file_pat.find(ch)
+                        for ch in _GCS_WILDCARD_CHARS
+                        if ch in file_pat)
+                    prefix = file_pat[:wildcard_pos]
+                    gcs_matches = []
+                    for blob in bucket.list_blobs(prefix=prefix):
+                        if fnmatch.fnmatchcase(blob.name, file_pat):
+                            uri = f'gs://{bucket.name}/{blob.name}'
+                            gcs_matches.append((uri, int(blob.size or 0)))
+                    pattern_matches.extend(
+                        sorted(gcs_matches, key=lambda kv: kv[0]))
+                else:
+                    blob = bucket.get_blob(file_pat)
+                    if blob is not None:
+                        uri = f'gs://{bucket.name}/{blob.name}'
+                        pattern_matches.append((uri, int(blob.size or 0)))
+        elif file_is_google_spreadsheet(file):
+            ws = file_get_gspread_worksheet(file)
+            if ws:
+                pattern_matches.append((file, 0))
+        elif file:
+            pattern_matches.append((file, 0))
+
+        for path, size in pattern_matches:
+            if path not in seen:
+                seen.add(path)
+                results.append((path, size))
+    return results
+
+
+def file_remove(filename: str) -> None:
+    """Deletes a local file or GCS blob if it exists."""
+    if not filename:
+        return
+    try:
+        if file_is_gcs(filename):
+            blob = file_get_gcs_blob(filename, exists=False)
+            if blob is not None:
+                try:
+                    blob.delete()
+                except gcp_exceptions.NotFound:
+                    pass
+        elif os.path.exists(filename):
+            os.remove(filename)
+    except Exception as exc:
+        logging.warning('Failed to remove file %s: %s', filename, exc)
 
 
 def file_estimate_num_rows(filename: Union[str, list]) -> int:

@@ -13,7 +13,7 @@
 # limitations under the License.
 """Unit tests for bigquery_differ.py."""
 
-import csv
+import io
 import json
 import os
 import sys
@@ -23,8 +23,14 @@ from unittest import mock
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 _DATA_DIR = os.path.dirname(os.path.dirname(_SCRIPT_DIR))
-sys.path.append(_DATA_DIR)
-sys.path.append(_SCRIPT_DIR)
+for _p in (
+        _DATA_DIR,
+        _SCRIPT_DIR,
+        os.path.join(_DATA_DIR, 'util'),
+        os.path.join(_DATA_DIR, 'tools', 'statvar_importer'),
+):
+    if _p not in sys.path:
+        sys.path.append(_p)
 
 import bigquery_differ
 
@@ -47,6 +53,7 @@ Node: dcid:Count_Person
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measuredProperty: dcs:count
+description: "Total count; updated: 2024"
 """
 
 _SAMPLE_PREV_MCF = """
@@ -61,42 +68,46 @@ Node: dcid:Count_Person
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 measuredProperty: dcs:count
+description: "Total count; old: 2023"
 """
 
 
 class BigQueryDifferTest(unittest.TestCase):
 
-    def test_stream_mcf_to_csv(self):
-        with tempfile.TemporaryDirectory() as tmpdir:
-            mcf_path = os.path.join(tmpdir, 'test.mcf')
-            obs_csv = os.path.join(tmpdir, 'obs.csv')
-            schema_csv = os.path.join(tmpdir, 'schema.csv')
-            with open(mcf_path, 'w', encoding='utf-8') as f:
-                f.write(_SAMPLE_CURR_MCF)
+    def test_build_obs_diff_sql_uses_json_properties_and_numeric_compare(self):
+        sql = bigquery_differ._build_obs_diff_sql('p.d.curr', 'p.d.prev')
+        for prop in bigquery_differ.OBSERVATION_KEY_PROPERTIES:
+            self.assertIn(f"JSON_VALUE(properties, '$.{prop}')", sql)
+        self.assertIn("JSON_VALUE(properties, '$.value')", sql)
+        self.assertIn('SAFE_CAST(c.value AS BIGNUMERIC)', sql)
+        self.assertIn('SAFE_CAST(c.value AS FLOAT64)', sql)
+        self.assertIn('SAFE_CAST(c.value AS BIGNUMERIC) IS NULL', sql)
+        self.assertIn('NOT IS_INF(SAFE_CAST(c.value AS FLOAT64))', sql)
+        self.assertIn("WHERE diff_type != 'UNMODIFIED'", sql)
 
-            obs_count, schema_count = bigquery_differ.stream_mcf_to_csv(
-                mcf_path, obs_csv, schema_csv)
+    def test_build_schema_diff_sql_uses_to_json_string_and_distinct(self):
+        sql = bigquery_differ._build_schema_diff_sql('p.d.curr', 'p.d.prev')
+        self.assertIn('SELECT DISTINCT', sql)
+        self.assertIn('TO_JSON_STRING(properties)', sql)
+        self.assertIn('ON c.dcid = p.dcid', sql)
+        self.assertIn("WHERE diff_type != 'UNMODIFIED'", sql)
 
-            self.assertEqual(obs_count, 2)
-            self.assertEqual(schema_count, 1)
-
-            with open(obs_csv, 'r', encoding='utf-8') as f:
-                rows = list(csv.DictReader(f))
-                self.assertEqual(len(rows), 2)
-                self.assertEqual(list(rows[0].keys()),
-                                 ['key_combined', 'value', 'node_id'])
-                self.assertEqual(rows[0]['value'], '335000000')
-                self.assertEqual(rows[0]['node_id'], 'dcid:obs1')
-                self.assertTrue(
-                    rows[0]['key_combined'].startswith('dcid:Count_Person;'))
-                self.assertIn('dcid:country/USA', rows[0]['key_combined'])
-
-            with open(schema_csv, 'r', encoding='utf-8') as f:
-                rows = list(csv.DictReader(f))
-                self.assertEqual(len(rows), 1)
-                self.assertEqual(rows[0]['dcid'], 'dcid:Count_Person')
-                self.assertIn('populationType:dcid:Person',
-                              rows[0]['value_combined'])
+    def test_format_schema_mcf_node_preserves_semicolons_and_colons(self):
+        block = bigquery_differ._format_schema_mcf_node(
+            'dcid:Count_Person',
+            'dcid:StatisticalVariable',
+            json.dumps({
+                'description': '"Has ; semicolon and : colon"',
+                'populationType': 'dcid:Person',
+            }),
+        )
+        self.assertEqual(
+            block,
+            'dcid: Count_Person\n'
+            'description: "Has ; semicolon and : colon"\n'
+            'populationType: dcid:Person\n'
+            'typeOf: dcid:StatisticalVariable\n\n',
+        )
 
     @mock.patch('bigquery_differ.bigquery.Client')
     def test_run_bigquery_differ_mocked(self, mock_bq_client_cls):
@@ -108,7 +119,13 @@ class BigQueryDifferTest(unittest.TestCase):
         mock_obs_query_job = mock.MagicMock()
         mock_obs_query_job.result.return_value = [
             {
-                'key_combined': 'dcid:Count_Person;dcid:country/CAN;"2024";;;;',
+                'variableMeasured': 'dcid:Count_Person',
+                'observationAbout': 'dcid:country/CAN',
+                'observationDate': '"2024"',
+                'observationPeriod': '',
+                'measurementMethod': '',
+                'unit': '',
+                'scalingFactor': '',
                 'curr_value': '40000000',
                 'prev_value': None,
                 'curr_node': 'dcid:obs2',
@@ -116,7 +133,13 @@ class BigQueryDifferTest(unittest.TestCase):
                 'diff_type': 'ADDED',
             },
             {
-                'key_combined': 'dcid:Count_Person;dcid:country/USA;"2024";;;;',
+                'variableMeasured': 'dcid:Count_Person',
+                'observationAbout': 'dcid:country/USA',
+                'observationDate': '"2024"',
+                'observationPeriod': '',
+                'measurementMethod': '',
+                'unit': '',
+                'scalingFactor': '',
                 'curr_value': '335000000',
                 'prev_value': '330000000',
                 'curr_node': 'dcid:obs1',
@@ -126,7 +149,30 @@ class BigQueryDifferTest(unittest.TestCase):
         ]
 
         mock_schema_query_job = mock.MagicMock()
-        mock_schema_query_job.result.return_value = []
+        mock_schema_query_job.result.return_value = [
+            {
+                'dcid':
+                    'dcid:Count_Person',
+                'curr_type':
+                    'dcid:StatisticalVariable',
+                'prev_type':
+                    'dcid:StatisticalVariable',
+                'curr_props':
+                    json.dumps({
+                        'description': '"Total count; updated: 2024"',
+                        'measuredProperty': 'dcid:count',
+                        'populationType': 'dcid:Person',
+                    }),
+                'prev_props':
+                    json.dumps({
+                        'description': '"Total count; old: 2023"',
+                        'measuredProperty': 'dcid:count',
+                        'populationType': 'dcid:Person',
+                    }),
+                'diff_type':
+                    'MODIFIED',
+            },
+        ]
 
         mock_client.query.side_effect = [
             mock_obs_query_job, mock_schema_query_job
@@ -147,14 +193,20 @@ class BigQueryDifferTest(unittest.TestCase):
                 output_location=out_dir,
                 project_id='test-project',
                 job_name='test_job',
-                dataset_id='test_dataset')
+                dataset_id='test_dataset',
+                expiration_hours=6,
+                max_workers=1,
+            )
 
             self.assertEqual(summary['current_obs_count'], 2)
             self.assertEqual(summary['previous_obs_count'], 1)
+            self.assertEqual(summary['current_schema_count'], 1)
+            self.assertEqual(summary['previous_schema_count'], 1)
             self.assertEqual(summary['added_obs_count'], 1)
             self.assertEqual(summary['modified_obs_count'], 1)
             self.assertEqual(summary['obs_diff_count'], 2)
-            self.assertEqual(summary['schema_diff_count'], 0)
+            self.assertEqual(summary['modified_schema_count'], 1)
+            self.assertEqual(summary['schema_diff_count'], 1)
 
             summary_json_path = os.path.join(out_dir, 'differ_summary.json')
             summary_csv_path = os.path.join(out_dir, 'differ_summary.csv')
@@ -176,35 +228,44 @@ class BigQueryDifferTest(unittest.TestCase):
                 self.assertIn('value: 40000000', added_text)
 
             with open(modified_mcf_path, 'r', encoding='utf-8') as f:
-                self.assertIn('value: 335000000', f.read())
+                mod_text = f.read()
+                self.assertIn('value: 335000000', mod_text)
+                self.assertIn('description: "Total count; updated: 2024"',
+                              mod_text)
 
             with open(original_mcf_path, 'r', encoding='utf-8') as f:
-                self.assertIn('value: 330000000', f.read())
+                orig_text = f.read()
+                self.assertIn('value: 330000000', orig_text)
+                self.assertIn('description: "Total count; old: 2023"',
+                              orig_text)
 
             with open(summary_json_path, 'r', encoding='utf-8') as f:
                 saved_json = json.load(f)
                 self.assertEqual(saved_json['obs_diff_count'], 2)
+                self.assertEqual(saved_json['schema_diff_count'], 1)
 
-            self.assertEqual(mock_client.update_table.call_count, 4)
+            # Combined table loads once per version (curr + prev = 2 tables).
+            self.assertEqual(mock_client.load_table_from_file.call_count, 2)
+            self.assertEqual(mock_client.update_table.call_count, 2)
             mock_client.delete_table.assert_not_called()
 
-    @mock.patch('bigquery_differ.storage.fileio.BlobWriter')
-    @mock.patch('bigquery_differ.file_get_gcs_blob')
-    def test_open_text_stream_gcs_write_ignores_flush(self, mock_get_blob,
-                                                      mock_blob_writer_cls):
-        import io
+    @mock.patch('file_util.storage.fileio.BlobWriter')
+    @mock.patch('file_util.file_get_gcs_blob')
+    def test_open_output_stream_gcs_write_ignores_flush(self, mock_get_blob,
+                                                        mock_blob_writer_cls):
         mock_blob = mock.MagicMock()
         mock_get_blob.return_value = mock_blob
         raw_buf = io.BytesIO()
         raw_buf.close = mock.MagicMock()
         mock_blob_writer_cls.return_value = raw_buf
 
-        with bigquery_differ._open_text_stream('gs://test-bucket/out.csv',
-                                               mode='w') as stream:
-            stream.write('col1,col2\n1,2\n')
+        with bigquery_differ._open_output_stream(
+                'gs://test-bucket/nodes-added.mcf') as stream:
+            stream.write('Node: dcid:obs1\nvalue: 1\n\n')
 
-        mock_blob_writer_cls.assert_called_once_with(mock_blob,
-                                                     ignore_flush=True)
+        mock_blob_writer_cls.assert_called_once()
+        self.assertEqual(mock_blob_writer_cls.call_args.args[0], mock_blob)
+        self.assertTrue(mock_blob_writer_cls.call_args.kwargs['ignore_flush'])
         raw_buf.close.assert_called_once()
 
 

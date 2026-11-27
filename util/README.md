@@ -24,6 +24,11 @@ To date, all our util libraries cater to writing MCF.
 -   `alpha2_to_dcid`: This library contains mappings from 2-character country
     and US state codes to their unique Data Commons IDs.
 
+-   `bq_loader`: Loads MCF (converted in parallel via `file_sharder` into
+    unified-schema `dcid` / `typeOf` / `properties JSON` JSONL shards), JSONL,
+    CSV, or Avro files from local paths or GCS into BigQuery tables with
+    configurable TTL.
+
 -   `file_dict_io`: Reads and writes structured records (CSV, TSV, JSON,
     JSON Lines, MCF, Avro, and sharded file collections) as Python dictionaries,
     with seekable byte-range chunking for parallel workers. See the
