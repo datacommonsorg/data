@@ -8,75 +8,45 @@ Ethiopia,"Population, Male",Urban,"Population, Male Urban",Persons,5895916
 Ethiopia,"Population, Female",Total,"Population, Female Total",Persons,36533802
 Ethiopia,"Population, Female",Rural,"Population, Female Rural",Persons,30566897
 Ethiopia,"Population, Female",Urban,"Population, Female Urban",Persons,5966905
-Afar-Region,"Population, Both Sexes",Total,"Population, Both Sexes Total",Persons,1390273
-Afar-Region,"Population, Both Sexes",Rural,"Population, Both Sexes Rural",Persons,1205138
-Afar-Region,"Population, Both Sexes",Urban,"Population, Both Sexes Urban",Persons,185135
-Afar-Region,"Population, Male",Total,"Population, Male Total",Persons,775117
 Afar-Region,"Population, Male",Rural,"Population, Male Rural",Persons,676432
 Afar-Region,"Population, Male",Urban,"Population, Male Urban",Persons,98685
-Afar-Region,"Population, Female",Total,"Population, Female Total",Persons,615156
 Afar-Region,"Population, Female",Rural,"Population, Female Rural",Persons,528706
 Afar-Region,"Population, Female",Urban,"Population, Female Urban",Persons,86450
-Amhara-Region,"Population, Both Sexes",Total,"Population, Both Sexes Total",Persons,17221976
-Amhara-Region,"Population, Both Sexes",Rural,"Population, Both Sexes Rural",Persons,15109381
-Amhara-Region,"Population, Both Sexes",Urban,"Population, Both Sexes Urban",Persons,2112595
-Amhara-Region,"Population, Male",Total,"Population, Male Total",Persons,8641580
 Amhara-Region,"Population, Male",Rural,"Population, Male Rural",Persons,7617000
 Amhara-Region,"Population, Male",Urban,"Population, Male Urban",Persons,1024580
-Amhara-Region,"Population, Female",Total,"Population, Female Total",Persons,8580396
 Amhara-Region,"Population, Female",Rural,"Population, Female Rural",Persons,7492381
 Amhara-Region,"Population, Female",Urban,"Population, Female Urban",Persons,1088015
-Benishangul Gumz-Region,"Population, Both Sexes",Total,"Population, Both Sexes Total",Persons,784345
-Benishangul Gumz-Region,"Population, Both Sexes",Rural,"Population, Both Sexes Rural",Persons,678419
-Benishangul Gumz-Region,"Population, Both Sexes",Urban,"Population, Both Sexes Urban",Persons,105926
-Benishangul Gumz-Region,"Population, Male",Total,"Population, Male Total",Persons,398655
 Benishangul Gumz-Region,"Population, Male",Rural,"Population, Male Rural",Persons,344687
 Benishangul Gumz-Region,"Population, Male",Urban,"Population, Male Urban",Persons,53968
-Benishangul Gumz-Region,"Population, Female",Total,"Population, Female Total",Persons,385690
 Benishangul Gumz-Region,"Population, Female",Rural,"Population, Female Rural",Persons,333732
 Benishangul Gumz-Region,"Population, Female",Urban,"Population, Female Urban",Persons,51958
-Gambella-Region,"Population, Both Sexes",Total,"Population, Both Sexes Total",Persons,307096
-Gambella-Region,"Population, Both Sexes",Rural,"Population, Both Sexes Rural",Persons,229171
-Gambella-Region,"Population, Both Sexes",Urban,"Population, Both Sexes Urban",Persons,77925
-Gambella-Region,"Population, Male",Total,"Population, Male Total",Persons,159787
 Gambella-Region,"Population, Male",Rural,"Population, Male Rural",Persons,118853
 Gambella-Region,"Population, Male",Urban,"Population, Male Urban",Persons,40934
-Gambella-Region,"Population, Female",Total,"Population, Female Total",Persons,147309
 Gambella-Region,"Population, Female",Rural,"Population, Female Rural",Persons,110318
 Gambella-Region,"Population, Female",Urban,"Population, Female Urban",Persons,36991
-Oromiya-Region,"Population, Both Sexes",Total,"Population, Both Sexes Total",Persons,26993933
-Oromiya-Region,"Population, Both Sexes",Rural,"Population, Both Sexes Rural",Persons,23676473
-Oromiya-Region,"Population, Both Sexes",Urban,"Population, Both Sexes Urban",Persons,3317460
-Oromiya-Region,"Population, Male",Total,"Population, Male Total",Persons,13595006
 Oromiya-Region,"Population, Male",Rural,"Population, Male Rural",Persons,11915853
 Oromiya-Region,"Population, Male",Urban,"Population, Male Urban",Persons,1679153
-Oromiya-Region,"Population, Female",Total,"Population, Female Total",Persons,13398927
 Oromiya-Region,"Population, Female",Rural,"Population, Female Rural",Persons,11760620
 Oromiya-Region,"Population, Female",Urban,"Population, Female Urban",Persons,1638307
-"Southern Nations, Nationalities, and People's Region","Population, Both Sexes",Total,"Population, Both Sexes Total",Persons,14929548
-"Southern Nations, Nationalities, and People's Region","Population, Both Sexes",Rural,"Population, Both Sexes Rural",Persons,13433991
-"Southern Nations, Nationalities, and People's Region","Population, Both Sexes",Urban,"Population, Both Sexes Urban",Persons,1495557
-"Southern Nations, Nationalities, and People's Region","Population, Male",Total,"Population, Male Total",Persons,7425918
 "Southern Nations, Nationalities, and People's Region","Population, Male",Rural,"Population, Male Rural",Persons,6653633
 "Southern Nations, Nationalities, and People's Region","Population, Male",Urban,"Population, Male Urban",Persons,772285
-"Southern Nations, Nationalities, and People's Region","Population, Female",Total,"Population, Female Total",Persons,7503630
 "Southern Nations, Nationalities, and People's Region","Population, Female",Rural,"Population, Female Rural",Persons,6780358
 "Southern Nations, Nationalities, and People's Region","Population, Female",Urban,"Population, Female Urban",Persons,723272
-Somali-Region,"Population, Both Sexes",Total,"Population, Both Sexes Total",Persons,4445219
-Somali-Region,"Population, Both Sexes",Rural,"Population, Both Sexes Rural",Persons,3822215
-Somali-Region,"Population, Both Sexes",Urban,"Population, Both Sexes Urban",Persons,623004
-Somali-Region,"Population, Male",Total,"Population, Male Total",Persons,2472490
 Somali-Region,"Population, Male",Rural,"Population, Male Rural",Persons,2132033
 Somali-Region,"Population, Male",Urban,"Population, Male Urban",Persons,340457
-Somali-Region,"Population, Female",Total,"Population, Female Total",Persons,1972729
 Somali-Region,"Population, Female",Rural,"Population, Female Rural",Persons,1690182
 Somali-Region,"Population, Female",Urban,"Population, Female Urban",Persons,282547
-Tigray-Region,"Population, Both Sexes",Total,"Population, Both Sexes Total",Persons,4316988
-Tigray-Region,"Population, Both Sexes",Rural,"Population, Both Sexes Rural",Persons,3472948
-Tigray-Region,"Population, Both Sexes",Urban,"Population, Both Sexes Urban",Persons,844040
-Tigray-Region,"Population, Male",Total,"Population, Male Total",Persons,2126465
 Tigray-Region,"Population, Male",Rural,"Population, Male Rural",Persons,1727670
 Tigray-Region,"Population, Male",Urban,"Population, Male Urban",Persons,398795
-Tigray-Region,"Population, Female",Total,"Population, Female Total",Persons,2190523
 Tigray-Region,"Population, Female",Rural,"Population, Female Rural",Persons,1745278
 Tigray-Region,"Population, Female",Urban,"Population, Female Urban",Persons,445245
+Addis Ababa,"Population, Male",Urban,"Population, Male Urban",Persons,1305387
+Addis Ababa,"Population, Female",Urban,"Population, Female Urban",Persons,1434164
+Dire Dawa City Administration,"Population, Male",Rural,"Population, Male Rural",Persons,55229
+Dire Dawa City Administration,"Population, Male",Urban,"Population, Male Urban",Persons,116232
+Dire Dawa City Administration,"Population, Female",Rural,"Population, Female Rural",Persons,53381
+Dire Dawa City Administration,"Population, Female",Urban,"Population, Female Urban",Persons,116992
+Harari-Region,"Population, Male",Rural,"Population, Male Rural",Persons,42589
+Harari-Region,"Population, Male",Urban,"Population, Male Urban",Persons,49727
+Harari-Region,"Population, Female",Rural,"Population, Female Rural",Persons,41458
+Harari-Region,"Population, Female",Urban,"Population, Female Urban",Persons,49641

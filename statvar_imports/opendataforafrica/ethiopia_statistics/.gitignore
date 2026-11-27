@@ -1,0 +1,11 @@
+# Temporary / caches
+__pycache__/
+*.pyc
+*.sqlite
+.pytest_cache/
+
+# Local run artifacts & raw downloaded data
+raw_files/
+input_files/
+output/
+counters/
