@@ -107,6 +107,11 @@ _FLAGS = flags.FLAGS
 # Environment variables with API keys removed for the statvar processor.
 _API_KEY_ENV_VARS = ['DC_API_KEY', 'MAPS_API_KEY']
 
+# Statvar processor counters that fail a test, as the start of the counter
+# name after the prefix for the processing stage. A source string or place
+# that is dropped on purpose should be mapped to '#ignore' in the PV map.
+_ERROR_COUNTER_PREFIXES = ['error-', 'dropped-svobs-unresolved-place']
+
 # Default statvar processor configs for all tests.
 # These turn off lookups in external services, such as the Data Commons API,
 # so that tests don't depend on the network or the API quota.
@@ -501,6 +506,8 @@ def get_error_counters(counters_file: str,
   The statvar processor counts errors, such as 'error-unresolved-place', in
   counters with a name that starts with 'error-' after an optional prefix for
   the processing stage, such as '1:process_input_error-unresolved-place'.
+  Observations dropped for an unresolved place, counted in
+  'dropped-svobs-unresolved-place', are also errors.
 
   Args:
     counters_file: csv file with the counters saved by the statvar processor
@@ -525,8 +532,13 @@ def get_error_counters(counters_file: str,
                                             key_column='key',
                                             value_column='value')
     for name, counter_value in counters.items():
-        error_pos = name.find('error-')
-        if error_pos < 0 or (error_pos > 0 and name[error_pos - 1] != '_'):
+        error_pos = -1
+        for error_prefix in _ERROR_COUNTER_PREFIXES:
+            pos = name.find(error_prefix)
+            if pos == 0 or (pos > 0 and name[pos - 1] == '_'):
+                error_pos = pos
+                break
+        if error_pos < 0:
             continue
         if name[error_pos:] in expected:
             continue

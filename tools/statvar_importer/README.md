@@ -259,7 +259,8 @@ dates with `#Eval`; see [Parse dates](docs/advanced_processing.md#parse-dates).
 
 Drop a whole row by mapping a label in the row to `#ignore` with a reason, for
 example `tot,#ignore,total is computed in Data Commons`. Write `#ignore` in
-lowercase.
+lowercase. For places that the import leaves out, see
+[Ignore places and source text](#ignore-places-and-source-text).
 
 A column without a `value` mapping produces no observations, so a value column
 you don't map is skipped.
@@ -378,9 +379,36 @@ The rows follow these rules:
 - Map place names with one lowercase row per name.
 - For an ambiguous name, keep the best candidate as the active row and list the
   other candidates as commented rows, with a short note on the choice.
+- Map a place or other source text that the import leaves out to `#ignore` with
+  a reason, as in [Ignore places and source text](#ignore-places-and-source-text).
 
 To resolve many place names automatically, see the
 [place tools](place/README.md).
+
+### Ignore places and source text
+
+The processor drops an observation when it can't resolve the place, and counts
+it in `error-unresolved-place` or `dropped-svobs-unresolved-place`. An
+[import test](docs/import_tests.md) fails on either counter, so that a new
+place in the source isn't dropped unnoticed.
+
+For each place or other text in the source that the import leaves out on
+purpose, add a row to the PV map that maps it to `#ignore`, with the reason as
+the value:
+
+```csv
+#key,property-1,value-1
+total,#ignore,total is computed in Data Commons
+unknown county,#ignore,source has no county for these rows
+atlantis,#ignore,not a place in Data Commons
+```
+
+The processor then skips every value in a row that has the text, counts it in
+`ignored-svobs-pvs`, and counts no error. Quote a reason that has a comma, such
+as `total,#ignore,"total, computed in Data Commons"`.
+
+Use `#ignore` only for text you checked and chose to leave out. For a place
+that should be in the output, add a row that maps it to its dcid.
 
 ## Add the processor to an import
 

@@ -2443,7 +2443,9 @@ class StatVarDataProcessor:
 
     def process_stat_var_obs(self, pvs: dict) -> bool:
         """Process PV for a statvar obs."""
-        self.resolve_svobs_place(pvs)
+        if not self.should_ignore_stat_var_obs_pvs(pvs):
+            # Don't count an unresolved place as an error for ignored PVs.
+            self.resolve_svobs_place(pvs)
         svobs_pvs_list = self.preprocess_stat_var_obs_pvs(pvs)
         if not svobs_pvs_list:
             logging.level_debug() and logging.log_every_n(

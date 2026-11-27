@@ -292,17 +292,21 @@ class StatVarTestRunnerTest(unittest.TestCase):
             '"2:prepare_output_error-duplicate-statvars",0\n'
             '"error-svobs-missing-property",2\n'
             '"warning-missing-property-key",48792\n'
-            '"dropped-svobs-unresolved-place",5\n',
+            '"dropped-svobs-unresolved-place",5\n'
+            '"1:process_input_dropped-svobs-unresolved-date",4\n'
+            '"dc-api-unresolved-places",7\n',
         )
         self.assertEqual(
             stat_var_test_runner.get_error_counters(counters_file), {
                 '1:process_input_error-unresolved-place': 3,
                 'error-svobs-missing-property': 2,
+                'dropped-svobs-unresolved-place': 5,
             })
         # Expected error counters are ignored.
         self.assertEqual(
-            stat_var_test_runner.get_error_counters(counters_file,
-                                                    ['error-unresolved-place']),
+            stat_var_test_runner.get_error_counters(
+                counters_file,
+                ['error-unresolved-place', 'dropped-svobs-unresolved-place']),
             {'error-svobs-missing-property': 2})
         # A counters file that doesn't exist has no error counters.
         self.assertEqual(

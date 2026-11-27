@@ -231,15 +231,22 @@ A test passes only when every output is `MATCHED`.
 
 The processor counts problems that it continues past in counters named
 `error-*`, such as `error-unresolved-place`. A test fails when a run has an
-error counter above 0, even if every output matches. The result lists the
-counters in `error_counters`.
+error counter above 0, even if every output matches. A test also fails on
+`dropped-svobs-unresolved-place`, which counts observations dropped for a place
+that the processor can't resolve. The result lists the counters in
+`error_counters`.
 
-Fix the PV map or the config to remove the error. If the import produces the
-error on purpose, list the counter in `expected_error_counters` of the entry,
-without the stage prefix that the counters file adds:
+Fix the PV map or the config to remove the error. For a place or other source
+text that the import leaves out on purpose, map it to `#ignore` in the PV map;
+see
+[Ignore places and source text](../README.md#ignore-places-and-source-text).
+
+If the import produces another error on purpose, list the counter in
+`expected_error_counters` of the entry, without the stage prefix that the
+counters file adds:
 
 ```json
-"expected_error_counters": ["error-unresolved-place"]
+"expected_error_counters": ["error-duplicate-statvars"]
 ```
 
 ### Processor settings for tests
