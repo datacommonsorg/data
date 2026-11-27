@@ -1,0 +1,10 @@
+Node: E:yukugyf_output->E0
+observationAbout: C:yukugyf_output->observationAbout
+observationDate: C:yukugyf_output->observationDate
+variableMeasured: C:yukugyf_output->variableMeasured
+value: C:yukugyf_output->value
+unit: C:yukugyf_output->unit
+scalingFactor: C:yukugyf_output->scalingFactor
+observationPeriod: C:yukugyf_output->observationPeriod
+measurementMethod: C:yukugyf_output->measurementMethod
+typeOf: dcs:StatVarObservation

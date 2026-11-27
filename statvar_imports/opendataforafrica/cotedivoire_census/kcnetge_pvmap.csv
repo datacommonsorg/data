@@ -1,0 +1,13 @@
+key,p1,v1,p2,v2,p3,v3
+ID_DÉPARTEMENT,observationAbout,{Data},populationType,Teacher,measuredProperty,count
+# TODO(b/587181425): Remap CEN6 lower-secondary teachers from UniversityAndCollegeTeacher in a follow-up PR; kept unchanged here for Phase 1 baseline parity.
+CEN6,facultyType,UniversityAndCollegeTeacher,,,,
+CEN7,facultyType,{HighSchoolFaculty},schoolGradeLevel,{HighSchoolGrade},,
+CEN8,facultyType,ContractTeacher,,,,
+CEN9,#ignore,ignore,,,,
+G1,gender,Male,HighSchoolFaculty,HighSchool,HighSchoolGrade,""""""
+G2,gender,Female,HighSchoolFaculty,HighSchool,HighSchoolGrade,""""""
+G3,populationType,Teacher,HighSchoolFaculty,"""""",HighSchoolGrade,HighSchool
+TIME_PERIOD,observationDate,{Number},,,,
+OBS_VALUE,value,{Number},,,,
+FREQ:A,observationPeriod,P1Y,,,,

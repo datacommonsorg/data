@@ -1,0 +1,11 @@
+parameter,value
+url,https://cotedivoire.opendataforafrica.org/qdanpdb
+description,Turnover Index in Commerce and Services Reference 2008
+start_date,2015
+release_frequency,P3M
+output_columns,"observationAbout,observationDate,variableMeasured,value,unit,scalingFactor,observationPeriod,measurementMethod"
+header_rows,1
+mapped_rows,1
+mapped_columns,6
+# Split hyphenated quarterly TIME_PERIOD values (such as 2020-Q3) as well as spaces.
+word_delimiter,"[ -]"

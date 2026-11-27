@@ -1,0 +1,10 @@
+Node: E:hznvdtd_output->E0
+observationAbout: C:hznvdtd_output->observationAbout
+observationDate: C:hznvdtd_output->observationDate
+variableMeasured: C:hznvdtd_output->variableMeasured
+value: C:hznvdtd_output->value
+unit: C:hznvdtd_output->unit
+scalingFactor: C:hznvdtd_output->scalingFactor
+observationPeriod: C:hznvdtd_output->observationPeriod
+measurementMethod: C:hznvdtd_output->measurementMethod
+typeOf: dcs:StatVarObservation

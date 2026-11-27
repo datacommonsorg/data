@@ -1,0 +1,10 @@
+Node: E:wwamxhe_output->E0
+observationAbout: C:wwamxhe_output->observationAbout
+observationDate: C:wwamxhe_output->observationDate
+variableMeasured: C:wwamxhe_output->variableMeasured
+value: C:wwamxhe_output->value
+unit: C:wwamxhe_output->unit
+scalingFactor: C:wwamxhe_output->scalingFactor
+observationPeriod: C:wwamxhe_output->observationPeriod
+measurementMethod: C:wwamxhe_output->measurementMethod
+typeOf: dcs:StatVarObservation

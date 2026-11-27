@@ -1,0 +1,17 @@
+key,prop,value,p1,v1
+NOM_INDICATOR,measuredProperty,count,populationType,Person
+NOM_REGION,observationAbout,{Data},,
+NOM_SEXE:Masculin,gender,Male,,
+NOM_SEXE:Féminin,gender,Female,,
+NOM_SEXE:Total,populationType,Person,,
+NOM_REGION:PORO,#IgnoreRow,True,,
+NOM_REGION:SAN-PEDRO,#IgnoreRow,True,,
+NOM_REGION:GOH,#IgnoreRow,True,,
+NOM_REGION:BERE,#IgnoreRow,True,,
+NOM_REGION:LA ME,#IgnoreRow,True,,
+NOM_REGION:NAWA,#IgnoreRow,True,,
+NOM_REGION:MORONOU,#IgnoreRow,True,,
+NOM_REGION:Total,#IgnoreRow,True,,
+TIME_PERIOD,observationDate,{Number},,
+OBS_VALUE,value,{Number},,
+FREQ:A,observationPeriod,P1Y,,

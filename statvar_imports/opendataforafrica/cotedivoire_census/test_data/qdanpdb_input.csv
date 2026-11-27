@@ -1,0 +1,61 @@
+INDICATOR,ID_INDICATOR,NOM_INDICATOR,SDMX-CODE_INDICATOR,FREQ,TIME_PERIOD,OBS_VALUE
+ICA1,ICA1,COMMERCE ET RÉPARATION D'AUTOMOBILES ET DE MOTOCYCLES,,Q,2020-Q1,106.4
+ICA1,ICA1,COMMERCE ET RÉPARATION D'AUTOMOBILES ET DE MOTOCYCLES,,Q,2020-Q2,80.2
+ICA1,ICA1,COMMERCE ET RÉPARATION D'AUTOMOBILES ET DE MOTOCYCLES,,Q,2020-Q3,102
+ICA1,ICA1,COMMERCE ET RÉPARATION D'AUTOMOBILES ET DE MOTOCYCLES,,Q,2021-Q4,122
+ICA2,ICA2,Commerce de véhicules automobiles,,Q,2020-Q1,108
+ICA2,ICA2,Commerce de véhicules automobiles,,Q,2020-Q2,74
+ICA2,ICA2,Commerce de véhicules automobiles,,Q,2020-Q3,104.2
+ICA2,ICA2,Commerce de véhicules automobiles,,Q,2021-Q4,138.8
+ICA3,ICA3,Entretien et réparation de véhicules automobiles,,Q,2020-Q1,100.2
+ICA3,ICA3,Entretien et réparation de véhicules automobiles,,Q,2020-Q2,79.5
+ICA3,ICA3,Entretien et réparation de véhicules automobiles,,Q,2020-Q3,101.2
+ICA3,ICA3,Entretien et réparation de véhicules automobiles,,Q,2021-Q4,104.5
+ICA4,ICA4,Commerce de pièces détachées et d'accessoires automobiles,,Q,2020-Q1,105.8
+ICA4,ICA4,Commerce de pièces détachées et d'accessoires automobiles,,Q,2020-Q2,91.5
+ICA4,ICA4,Commerce de pièces détachées et d'accessoires automobiles,,Q,2020-Q3,97.5
+ICA4,ICA4,Commerce de pièces détachées et d'accessoires automobiles,,Q,2021-Q4,98.8
+ICA5,ICA5,Commerce et réparation de motocycles,,Q,2020-Q1,106.3
+ICA5,ICA5,Commerce et réparation de motocycles,,Q,2020-Q2,75
+ICA5,ICA5,Commerce et réparation de motocycles,,Q,2020-Q3,113.7
+ICA5,ICA5,Commerce et réparation de motocycles,,Q,2021-Q4,128.7
+ICA6,ICA6,COMMERCE DE GROS ET ACTIVITES DES INTERMEDIAIRES,,Q,2020-Q1,112.8
+ICA6,ICA6,COMMERCE DE GROS ET ACTIVITES DES INTERMEDIAIRES,,Q,2020-Q2,86.3
+ICA6,ICA6,COMMERCE DE GROS ET ACTIVITES DES INTERMEDIAIRES,,Q,2020-Q3,78.6
+ICA6,ICA6,COMMERCE DE GROS ET ACTIVITES DES INTERMEDIAIRES,,Q,2021-Q4,113.1
+ICA7,ICA7,"Commerce de gros de produits agricoles bruts, d'animaux vivants, produits alimentaires, boissons et tabac",,Q,2020-Q1,111.8
+ICA7,ICA7,"Commerce de gros de produits agricoles bruts, d'animaux vivants, produits alimentaires, boissons et tabac",,Q,2020-Q2,86.4
+ICA7,ICA7,"Commerce de gros de produits agricoles bruts, d'animaux vivants, produits alimentaires, boissons et tabac",,Q,2020-Q3,68.1
+ICA7,ICA7,"Commerce de gros de produits agricoles bruts, d'animaux vivants, produits alimentaires, boissons et tabac",,Q,2021-Q4,117.2
+ICA8,ICA8,Commerce de gros de biens de consommation non alimentaires,,Q,2020-Q1,103.5
+ICA8,ICA8,Commerce de gros de biens de consommation non alimentaires,,Q,2020-Q2,86.5
+ICA8,ICA8,Commerce de gros de biens de consommation non alimentaires,,Q,2020-Q3,102.9
+ICA8,ICA8,Commerce de gros de biens de consommation non alimentaires,,Q,2021-Q4,120.3
+ICA9,ICA9,Commerce de gros de produits intermédiaires non agricoles,,Q,2020-Q1,112.5
+ICA9,ICA9,Commerce de gros de produits intermédiaires non agricoles,,Q,2020-Q2,86.7
+ICA9,ICA9,Commerce de gros de produits intermédiaires non agricoles,,Q,2020-Q3,98.6
+ICA9,ICA9,Commerce de gros de produits intermédiaires non agricoles,,Q,2021-Q4,102.3
+ICA10,ICA10,"Commerce de gros de machines, d'équipements et fournitures",,Q,2020-Q1,147.1
+ICA10,ICA10,"Commerce de gros de machines, d'équipements et fournitures",,Q,2020-Q2,79.1
+ICA10,ICA10,"Commerce de gros de machines, d'équipements et fournitures",,Q,2020-Q3,84.5
+ICA10,ICA10,"Commerce de gros de machines, d'équipements et fournitures",,Q,2021-Q4,111.4
+ICA11,ICA11,Commerce de gros non spécialisé,,Q,2020-Q1,99.5
+ICA11,ICA11,Commerce de gros non spécialisé,,Q,2020-Q2,91.3
+ICA11,ICA11,Commerce de gros non spécialisé,,Q,2020-Q3,100.1
+ICA11,ICA11,Commerce de gros non spécialisé,,Q,2021-Q4,128.7
+ICA12,ICA12,COMMERCE DE DETAIL,,Q,2020-Q1,103.7
+ICA12,ICA12,COMMERCE DE DETAIL,,Q,2020-Q2,92.1
+ICA12,ICA12,COMMERCE DE DETAIL,,Q,2020-Q3,97.6
+ICA12,ICA12,COMMERCE DE DETAIL,,Q,2021-Q4,123.4
+ICA13,ICA13,Commerce de détail en magasin non spécialisé,,Q,2020-Q1,95.5
+ICA13,ICA13,Commerce de détail en magasin non spécialisé,,Q,2020-Q2,90.6
+ICA13,ICA13,Commerce de détail en magasin non spécialisé,,Q,2020-Q3,102.5
+ICA13,ICA13,Commerce de détail en magasin non spécialisé,,Q,2021-Q4,33.8
+ICA14,ICA14,Commerce de détail en magasin spécialisé,,Q,2020-Q1,104.9
+ICA14,ICA14,Commerce de détail en magasin spécialisé,,Q,2020-Q2,88.5
+ICA14,ICA14,Commerce de détail en magasin spécialisé,,Q,2020-Q3,92.5
+ICA14,ICA14,Commerce de détail en magasin spécialisé,,Q,2021-Q4,122.5
+ICA15,ICA15,TOTAL COMMERCE,,Q,2020-Q1,188.9
+ICA15,ICA15,TOTAL COMMERCE,,Q,2020-Q2,0.8
+ICA15,ICA15,TOTAL COMMERCE,,Q,2020-Q3,99.2
+ICA15,ICA15,TOTAL COMMERCE,,Q,2021-Q4,210.7

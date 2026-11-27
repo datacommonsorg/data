@@ -1,0 +1,10 @@
+Node: E:hxghsjf_output->E0
+observationAbout: C:hxghsjf_output->observationAbout
+observationDate: C:hxghsjf_output->observationDate
+variableMeasured: C:hxghsjf_output->variableMeasured
+value: C:hxghsjf_output->value
+unit: C:hxghsjf_output->unit
+scalingFactor: C:hxghsjf_output->scalingFactor
+observationPeriod: C:hxghsjf_output->observationPeriod
+measurementMethod: C:hxghsjf_output->measurementMethod
+typeOf: dcs:StatVarObservation

@@ -1,0 +1,7 @@
+key,prop,val,p1,v1,p2,v2
+OBS_VALUE,value,{Number},observationAbout,country/CIV,,
+FREQ:A,observationPeriod,P1Y,,,,
+Population Masculine,gender,Male,populationType,Person,measuredProperty,count
+Population Féminine,gender,Female,populationType,Person,measuredProperty,count
+Population Totale,populationType,Person,measuredProperty,count,,
+TIME_PERIOD,observationDate,{Number},,,,

@@ -1,0 +1,17 @@
+key,prop,value
+ID_INDICATEUR:I1,variableMeasured,{LaborForceSV}
+ID_GENRE:GEN1,LaborForceSV,dcid:Count_Person_InLaborForce_Male
+ID_GENRE:GEN2,LaborForceSV,dcid:Count_Person_InLaborForce_Female
+ID_GENRE:GEN3,LaborForceSV,dcid:Count_Person_InLaborForce
+ID_GENRE:GEN4,#ignore,skip
+ID_GENRE:GEN5,#ignore,skip
+ID_DEPARTEMENT:D5,observationAbout,dcid:wikidataId/Q1588249
+ID_DEPARTEMENT:D6,observationAbout,dcid:wikidataId/Q5594719
+ID_DEPARTEMENT:D7,observationAbout,dcid:wikidataId/Q3160383
+ID_DEPARTEMENT:D9,observationAbout,dcid:wikidataId/Q4738854
+ID_DEPARTEMENT:D10,observationAbout,dcid:wikidataId/Q263616
+ID_DEPARTEMENT:D11,observationAbout,dcid:wikidataId/Q4701559
+ID_DEPARTEMENT:D12,observationAbout,dcid:wikidataId/Q8047054
+TIME_PERIOD,observationDate,{Number}
+OBS_VALUE,value,{Number}
+FREQ:A,observationPeriod,P1Y

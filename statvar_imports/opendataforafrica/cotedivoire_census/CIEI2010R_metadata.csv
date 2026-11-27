@@ -1,0 +1,9 @@
+parameter,value
+url,https://cotedivoire.opendataforafrica.org/CIEI2010R
+description,"Economic Indicators 2003 to 2013, Ivory Coast"
+start_date,2002
+release_frequency,P1Y
+output_columns,"observationAbout,observationDate,variableMeasured,value,unit,scalingFactor,observationPeriod,measurementMethod"
+header_rows,1
+mapped_rows,1
+mapped_columns,4

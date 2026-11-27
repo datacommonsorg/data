@@ -1,0 +1,6 @@
+raw_inputs/
+xml/
+input_files/
+output/
+counters/
+__pycache__/

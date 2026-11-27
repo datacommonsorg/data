@@ -1,0 +1,10 @@
+Node: E:yxrzxug_output->E0
+observationAbout: C:yxrzxug_output->observationAbout
+observationDate: C:yxrzxug_output->observationDate
+variableMeasured: C:yxrzxug_output->variableMeasured
+value: C:yxrzxug_output->value
+unit: C:yxrzxug_output->unit
+scalingFactor: C:yxrzxug_output->scalingFactor
+observationPeriod: C:yxrzxug_output->observationPeriod
+measurementMethod: C:yxrzxug_output->measurementMethod
+typeOf: dcs:StatVarObservation

@@ -1,0 +1,47 @@
+INDICATOR,ID_INDICATOR,NOM_INDICATOR,REGION_INDICATOR,SDMX-CODE_INDICATOR,RGION_INDICATOR,REGION,ID_REGION,FREQ,TIME_PERIOD,OBS_VALUE
+SANTE1,SANTE1,Nombre de formations sanitaires/établissements de santé par type/taille de capacité,,,CI,CI,CI,A,2007,1467
+SANTE1,SANTE1,Nombre de formations sanitaires/établissements de santé par type/taille de capacité,,,CI,CI,CI,A,2009,1781
+SANTE2,SANTE2,Nombre de Centres Hospitaliers Universitaires,,,CI,CI,CI,A,2013,4
+SANTE2,SANTE2,Nombre de Centres Hospitaliers Universitaires,,,CI,CI,CI,A,2015,4
+SANTE3,SANTE3,Nombre de Centres Hospitaliers Régionaux,,,CI,CI,CI,A,2013,17
+SANTE3,SANTE3,Nombre de Centres Hospitaliers Régionaux,,,CI,CI,CI,A,2015,17
+SANTE4,SANTE4,Nombre d'Institut Nationaux d'Hygienne Publique,,,CI,CI,CI,A,2020,32
+SANTE4,SANTE4,Nombre d'Institut Nationaux d'Hygienne Publique,,,CI,CI,CI,A,2021,31
+SANTE5,SANTE5,Nombre d'Hopitaux Généraux,,,CI,CI,CI,A,2013,84
+SANTE5,SANTE5,Nombre d'Hopitaux Généraux,,,CI,CI,CI,A,2015,84
+SANTE6,SANTE6,Nombre de Centre de Santé Urbains Communautaires,,,CI,CI,CI,A,2020,30
+SANTE6,SANTE6,Nombre de Centre de Santé Urbains Communautaires,,,CI,CI,CI,A,2021,37
+SANTE7,SANTE7,Nombre de Pharmacie Publique,,,CI,CI,CI,A,2013,308
+SANTE7,SANTE7,Nombre de Pharmacie Publique,,,CI,CI,CI,A,2015,370
+SANTE8,SANTE8,Nombre d'officine de Pharmacies privées,,,CI,CI,CI,A,2013,574
+SANTE8,SANTE8,Nombre d'officine de Pharmacies privées,,,CI,CI,CI,A,2015,631
+SANTE9,SANTE9,Nombre de Service de Maternité,,,CI,CI,CI,A,2013,943
+SANTE9,SANTE9,Nombre de Service de Maternité,,,CI,CI,CI,A,2015,1137
+SANTE10,SANTE10,Nombre de Centres Médicaux d'Entreprises,,,CI,CI,CI,A,2020,54
+SANTE10,SANTE10,Nombre de Centres Médicaux d'Entreprises,,,CI,CI,CI,A,2021,80
+SANTE11,SANTE11,Nombre de Polycliniques,,,CI,CI,CI,A,2020,17
+SANTE11,SANTE11,Nombre de Polycliniques,,,CI,CI,CI,A,2021,20
+SANTE12,SANTE12,Nombre de Cliniques,,,CI,CI,CI,A,2020,269
+SANTE12,SANTE12,Nombre de Cliniques,,,CI,CI,CI,A,2021,423
+SANTE13,SANTE13,Nombre de lits,,,CI,CI,CI,A,2013,4385
+SANTE13,SANTE13,Nombre de lits,,,CI,CI,CI,A,2015,8389
+SANTE14,SANTE14,Nombre de medecins,,,CI,CI,CI,A,2007,1135
+SANTE14,SANTE14,Nombre de medecins,,,CI,CI,CI,A,2008,1244
+SANTE15,SANTE15,Nombre d'infirmiers,,,CI,CI,CI,A,2007,2852
+SANTE15,SANTE15,Nombre d'infirmiers,,,CI,CI,CI,A,2008,2955
+SANTE16,SANTE16,Nombre de sages femmes,,,CI,CI,CI,A,2007,1320
+SANTE16,SANTE16,Nombre de sages femmes,,,CI,CI,CI,A,2008,1429
+SANTE17,SANTE17,Nombre de techniciens de laboratoires,,,CI,CI,CI,A,2007,168
+SANTE17,SANTE17,Nombre de techniciens de laboratoires,,,CI,CI,CI,A,2008,198
+SANTE18,SANTE18,Nombre de pharmaciens,,,CI,CI,CI,A,2007,230
+SANTE18,SANTE18,Nombre de pharmaciens,,,CI,CI,CI,A,2008,257
+SANTE19,SANTE19,Dépenses publiques de santé,,,CI,CI,CI,A,2000,98.558
+SANTE19,SANTE19,Dépenses publiques de santé,,,CI,CI,CI,A,2001,74.044
+SANTE20,SANTE20,Taux de vaccination (BCG),,,CI,CI,CI,A,2000,74
+SANTE20,SANTE20,Taux de vaccination (BCG),,,CI,CI,CI,A,2001,72
+SANTE21,SANTE21,Incidence des maladies (Paludisme),,,CI,CI,CI,A,2000,83.6
+SANTE21,SANTE21,Incidence des maladies (Paludisme),,,CI,CI,CI,A,2001,80.4
+SANTE23,SANTE23,Nombre de mères ayant fourni au mois un soin prénatal (%),,,CI,CI,CI,A,2012,535958
+SANTE23,SANTE23,Nombre de mères ayant fourni au mois un soin prénatal (%),,,CI,CI,CI,A,2015,833281
+SANTE24,SANTE24,Pourcentage d'accouchemnts assistés par du personnel de santé,,,CI,CI,CI,A,2000,35
+SANTE24,SANTE24,Pourcentage d'accouchemnts assistés par du personnel de santé,,,CI,CI,CI,A,2001,37.71

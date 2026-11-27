@@ -1,0 +1,10 @@
+Node: E:jynwpug_output->E0
+observationAbout: C:jynwpug_output->observationAbout
+observationDate: C:jynwpug_output->observationDate
+variableMeasured: C:jynwpug_output->variableMeasured
+value: C:jynwpug_output->value
+unit: C:jynwpug_output->unit
+scalingFactor: C:jynwpug_output->scalingFactor
+observationPeriod: C:jynwpug_output->observationPeriod
+measurementMethod: C:jynwpug_output->measurementMethod
+typeOf: dcs:StatVarObservation

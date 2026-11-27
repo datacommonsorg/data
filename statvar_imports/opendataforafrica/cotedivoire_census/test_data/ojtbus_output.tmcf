@@ -1,0 +1,10 @@
+Node: E:ojtbus_output->E0
+observationAbout: C:ojtbus_output->observationAbout
+observationDate: C:ojtbus_output->observationDate
+variableMeasured: C:ojtbus_output->variableMeasured
+value: C:ojtbus_output->value
+unit: C:ojtbus_output->unit
+scalingFactor: C:ojtbus_output->scalingFactor
+observationPeriod: C:ojtbus_output->observationPeriod
+measurementMethod: C:ojtbus_output->measurementMethod
+typeOf: dcs:StatVarObservation
