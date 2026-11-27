@@ -1164,14 +1164,17 @@ def build_dag(
     is_paused_upon_creation: bool | None = None,
     pre_prod_gate_factory: Callable[[], Any] | None = None,
     golden_test_allowlist: set[str] | None = None,
-) -> DAG:
+) -> DAG | None:
     """Builds and returns an Airflow DAG instance for import automation."""
+    cfg_override = config_override if isinstance(config_override, dict) else {}
+    if _is_true(cfg_override.get("exclude_import_workflow", False)):
+        return None
+
     allowlist = golden_test_allowlist if golden_test_allowlist is not None else get_golden_test_imports(
     )
     has_golden_check = (is_golden_test_import(import_name, allowlist=allowlist)
                         or is_golden_test_import(dag_id, allowlist=allowlist))
 
-    cfg_override = config_override if isinstance(config_override, dict) else {}
     skip_staging_default = _is_true(
         cfg_override.get("skip_staging_ingestion", False))
     skip_prod_default = _is_true(cfg_override.get("skip_prod_ingestion", False))

@@ -88,7 +88,7 @@ def load_catalog_and_register_dags(target_globals: dict[str, Any]) -> int:
                 "cannot overwrite an already registered DAG.")
         seen_dag_ids.add(dag_id)
         cron = entry.get("cron_schedule")
-        target_globals[dag_id] = build_dag(
+        dag = build_dag(
             dag_id=dag_id,
             schedule=cron,
             import_name=full_name,
@@ -101,6 +101,9 @@ def load_catalog_and_register_dags(target_globals: dict[str, Any]) -> int:
             ],
             golden_test_allowlist=golden_allowlist,
         )
+        if dag is None:
+            continue
+        target_globals[dag_id] = dag
         count += 1
 
     logging.info("Registered %d import DAGs from %s", count, catalog_path)

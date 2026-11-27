@@ -188,6 +188,8 @@ class ExecutorConfig:
     skip_prod_ingestion: bool = False
     # Disable import workflow and pause the Airflow DAG for this import.
     disable_import_workflow: bool = False
+    # Exclude import workflow and skip creating an Airflow DAG for this import.
+    exclude_import_workflow: bool = False
     # Ingest historic data from GCS.
     ingest_historic_data: bool = True
     # Maximum time a blocking call to the importer to
