@@ -11,10 +11,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Regression tests for all statvar imports with a test_config.json.
+"""Regression tests for all statvar imports with a statvar_test_config.json.
 
 Scans the import folders under statvar_imports/ for files named
-test_config.json and runs the statvar processor regression test for each one
+statvar_test_config.json, or statvar_test_config_<name>.json for an import
+with more than one test config, and runs the statvar processor regression
+test for each one
 with tools/statvar_importer/stat_var_test_runner.py.
 
 Each config is run in its own child process as the test runner changes the
@@ -34,6 +36,7 @@ To run the tests for a single import or a folder of imports:
 
 import argparse
 from concurrent import futures
+import fnmatch
 import json
 import os
 import signal
@@ -51,7 +54,9 @@ sys.path.append(os.path.join(_REPO_DIR, 'tools', 'statvar_importer'))
 
 import stat_var_test_runner
 
-_TEST_CONFIG_NAME = 'test_config.json'
+# Test config files such as statvar_test_config.json and
+# statvar_test_config_<name>.json.
+_TEST_CONFIG_PATTERN = 'statvar_test_config*.json'
 _ENV_WORKERS = 'STATVAR_IMPORTS_TEST_WORKERS'
 _ENV_TIMEOUT = 'STATVAR_IMPORTS_TEST_TIMEOUT'
 # Fraction of CPUs used by default to run tests in parallel.
@@ -99,8 +104,8 @@ def find_test_configs(root_dir: str) -> list[str]:
         dirnames[:] = [
             d for d in dirnames if not d.startswith('.') and d != '__pycache__'
         ]
-        if _TEST_CONFIG_NAME in filenames:
-            configs.append(os.path.join(dirpath, _TEST_CONFIG_NAME))
+        for filename in fnmatch.filter(filenames, _TEST_CONFIG_PATTERN):
+            configs.append(os.path.join(dirpath, filename))
     return sorted(configs)
 
 
@@ -131,7 +136,7 @@ def run_test_config(test_config: str, timeout: float = None) -> dict:
     """Runs the tests in a test config in a child process.
 
     Args:
-      test_config: path to the test_config.json file.
+      test_config: path to the statvar_test_config.json file.
       timeout: seconds to wait for the test to complete.
 
     Returns:
@@ -215,7 +220,7 @@ def run_test_configs(test_configs: list[str],
     """Runs the test configs in parallel.
 
     Args:
-      test_configs: list of test_config.json files.
+      test_configs: list of statvar_test_config.json files.
       num_workers: number of test configs to run in parallel.
       timeout: seconds to wait for each test config.
 
@@ -284,7 +289,7 @@ class StatVarImportsTest(unittest.TestCase):
         root_dir = get_test_root()
         test_configs = find_test_configs(root_dir)
         if not test_configs:
-            self.skipTest(f'No {_TEST_CONFIG_NAME} found under {root_dir}')
+            self.skipTest(f'No {_TEST_CONFIG_PATTERN} found under {root_dir}')
         timeout = _get_env_number(_ENV_TIMEOUT, _DEFAULT_TIMEOUT_SECS, float)
         results = run_test_configs(test_configs, timeout=timeout)
         failures = [

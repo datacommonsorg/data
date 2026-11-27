@@ -16,16 +16,19 @@
 StatVar imports use a JSON test config for regression tests that invoke
 statvar processor with a specified set of configs on a test input and
 verifies the expected output files.
+The test config is a file named statvar_test_config.json in the import folder,
+or statvar_test_config_<name>.json for an import with more than one.
 The test config is a list of statvar processor command line invocation
-settings with each invocation as a dictionary with the following sections:a
+settings with each invocation as a dictionary with the following sections:
   test_name: name of the test for logs
   env_file: a file with environment variables such as API keys
   statvar_processor_args: dictionary with the command line arguments
     for statvar processor configs.
   statvar_processor_config: (optional) dictionary of statvar processor
-    configs for the test that are not command line arguments, such as
-    'reconcile_nodes'. These override the configs in the import's config_file
-    and the default configs for tests in _DEFAULT_TEST_PROCESSOR_CONFIG.
+    configs for the test, such as 'reconcile_nodes'. Unlike command line
+    arguments, these override the configs in the import's config_file. They
+    also override the default configs for tests in
+    _DEFAULT_TEST_PROCESSOR_CONFIG.
   expected_outputs:
     A dictionary of expected output files mapped to output files.
 
