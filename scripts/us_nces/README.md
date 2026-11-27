@@ -1,9 +1,8 @@
 # US: National Center for Education Statistics
 ## Import Overview:
 This dataset has Population Estimates for the National Center for Education Statistics in US for 
-- Private School - 1997-98 to 2019-20
-- School District -2010-11 to 2023-24
-- Public Schools - 2010-11 to 2023-24
+- School District - 2010-11 to 2024-25
+- Public Schools - 2010-11 to 2024-25
 
 ## Source URL:
   https://nces.ed.gov/ccd/elsi/tableGenerator.aspx 
@@ -14,7 +13,7 @@ This dataset has Population Estimates for the National Center for Education Stat
 ## Source Data Availability: P1Y 
   
 ## Autorefresh Type: Semi-Autorefresh 
-  - `/bin/python3 download.py --import_name={"PrivateSchool"(or)"District"(or)"PublicSchool"} --years_to_download= "{select the available years       mentioned under each school type}"`
+  - `/bin/python3 download.py --import_name={"District"(or)"PublicSchool"} --years_to_download= "{select the available years       mentioned under each school type}"`
 
    For Example:  `/bin/python3 download.py --import_name="PublicSchool" --years_to_download="2023"`.
     - The input_files folder containing all the files will be present in: 
@@ -22,9 +21,7 @@ This dataset has Population Estimates for the National Center for Education Stat
 
  Note: Give one year at a time for District and Public Schools as there are large number of column values.
  
-### upload the files manually to GCP bucket for processing using gcloud storage command.
-    Ex private :
-        gcloud storage cp --recursive /scripts/us_nces/demographics/private_school/input_files gs://unresolved_mcf/us_nces/demographics/private_school/semi_automation_input_files/
+### upload the files manually to GCP bucket for processing using gsutil command.
     Ex public :
         gcloud storage cp --recursive /scripts/us_nces/demographics/public_school/input_files gs://unresolved_mcf/us_nces/demographics/public_school/semi_automation_input_files/
     Ex district :
@@ -34,10 +31,53 @@ This dataset has Population Estimates for the National Center for Education Stat
     The only manual part here is after downloading the input files and then uploading them to gcp bucket. Once they're uploaded, Each import requires its own sh command to copy the files from Google Cloud to a local folder called gcs_folder/input_files. From there, a script automatically picks up these files to process them. Finally, it generates the output and saves it in gcs_folder/output_files
 
 ### Script Execution Details
-    private    :  python3 private_school/process.py
-    public   :  python3 public_school/process.py
-    district  :  python3 school_district/process.py
+`public_school/process.py` and `school_district/process.py` support the `--mode` flag (`place`, `stats`, or `all`, default: `all`):
 
+```bash
+# Public School
+python3 public_school/process.py --mode=place  # Place data only
+python3 public_school/process.py --mode=stats  # Statistical observations only
+python3 public_school/process.py --mode=all    # Both place and stats (default)
+
+# School District
+python3 school_district/process.py --mode=place
+python3 school_district/process.py --mode=stats
+python3 school_district/process.py --mode=all
+```
+
+### Import Architecture & Staggered Cron Scheduling
+Each domain is split into independent Cloud Batch imports in `manifest.json`. Because newer NCES data introduces newly defined places (such as brand-new school districts and public schools) that are referenced across imports (e.g., `NCES_PublicSchool` places reference parent school districts via `schoolDistrict: dcs:geoId/sch...`, and Stats imports reference places via `observationAbout`), jobs are organized into **three staggered weekly tiers spaced 2 days apart (Monday → Wednesday → Friday)**.
+
+This buffer ensures that Data Commons ingests and indexes the newly defined Place nodes from Tier $N$ before Tier $N+1$ jobs execute, preventing missing reference warnings (`check_missing_refs_count: PASSED`).
+
+#### Execution Tiers & Dependencies
+
+```text
+[TIER 1: Monday (08:00 UTC)]           [TIER 2: Wednesday (+2d)]                  [TIER 3: Friday (+4d)]
+============================           =========================                  ======================
+
+NCES_SchoolDistrict (Place) ─────────► NCES_SchoolDistrictStats (Stats)
+(Defines: dcid:geoId/sch...)     │     (Refs: observationAbout: dcs:geoId/sch...)
+                                 │
+                                 └───► NCES_PublicSchool (Place) ───────────────► NCES_PublicSchoolStats (Stats)
+                                       (Defines: dcid:nces/... [Public])          (Refs: observationAbout: dcs:nces/...)
+                                       (Refs: schoolDistrict: dcs:geoId/sch...)
+```
+
+#### Staggered Weekly Cron Schedule (`manifest.json`)
+
+| Execution Tier | Import Name | Domain | Manifest Path | Staggered `cron_schedule` |
+| :--- | :--- | :--- | :--- | :--- |
+| **Tier 1 (Monday, 08:00 UTC)** | `NCES_SchoolDistrict` | School District (Place) | `school_district/manifest.json` | `"0 8 * * 1"` |
+| **Tier 2 (Wednesday, 08:00 UTC)** | `NCES_SchoolDistrictStats` | School District (Stats) | `school_district/manifest.json` | `"0 8 * * 3"` |
+| **Tier 2 (Wednesday, 10:00 UTC)** | `NCES_PublicSchool` | Public School (Place) | `public_school/manifest.json` | `"0 10 * * 3"` |
+| **Tier 3 (Friday, 08:00 UTC)** | `NCES_PublicSchoolStats` | Public School (Stats) | `public_school/manifest.json` | `"0 8 * * 5"` |
+
+---
+
+### Differ & Validation (`NCES_PublicSchoolStats`)
+Differ and validation (`check_deleted_records_percent`, `check_max_date_consistent`, and `check_max_date_freshness`) are enabled by default in `public_school/manifest.json` and `public_school/validation_config.json`.
+In production, the workflow runs the BigQuery differ (`validator/main.py --run_bq_differ`) automatically; for standalone dev checks on large MCFs, run `tools/import_differ/bigquery_differ.py` on the GCS paths.
 
 #### Cleaned Data
     import_name consists of the school name being used 
@@ -183,7 +223,7 @@ step 1 :
 
 step 2 : Use the command-line tool to do genmcf using the CSV and TMCF files.
 
-`java -jar '/usr/local/google/home/spateriya/Downloads/datacommons-import-tool-0.1-alpha.1-jar-with-dependencies.jar' genmcf -r FULL <place csv path> <place tmcf path>`
+`java -jar <path_to_datacommons_import_tool>/datacommons-import-tool-jar-with-dependencies.jar genmcf -r FULL <place csv path> <place tmcf path>`
 
 step 3 : Update the file path in the textproto files for NCES_PrivateSchool, NCES_PublicSchool, and NCES_SchoolDistrict.
 
