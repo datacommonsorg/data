@@ -98,7 +98,7 @@ from mcf_file_util import get_value_list
 
 _FLAGS = flags.FLAGS
 
-# Environment variables with API keys removed for offline tests.
+# Environment variables with API keys removed for the statvar processor.
 _API_KEY_ENV_VARS = ['DC_API_KEY', 'MAPS_API_KEY']
 
 # Default statvar processor configs for all tests.
@@ -113,6 +113,11 @@ _DEFAULT_TEST_PROCESSOR_CONFIG = {
     # Don't resolve places with APIs. The statvar processor still resolves
     # places with the test's places_resolved_csv, if any.
     'resolve_places': False,
+    # Don't look up generated statvars in the DC API to drop existing ones.
+    # The statvar MCF output has all statvars instead of only the new ones.
+    'output_only_new_statvars': False,
+    # Don't generate the schema MCF, which looks up schema in the DC API.
+    'generate_schema_mcf': False,
 }
 
 
@@ -130,10 +135,12 @@ def _define_flags():
         'Quiet mode that hides child script stdout/stderr logs.',
     )
     flags.DEFINE_bool(
-        'offline',
+        'strip_api_keys',
         True,
-        'Run statvar processor without the API keys in the environment so'
-        ' that tests give the same results locally and in CI.',
+        'Remove the API keys from the environment of the statvar processor.'
+        ' This does not turn off lookups in APIs, which is done with the'
+        ' default statvar processor configs for tests. Without a key, the'
+        ' statvar processor skips resolving places with the API.',
     )
 
 
@@ -146,10 +153,10 @@ class StatVarProcessorTestRunner:
                  test_config: list | dict = None,
                  keep_temp_dir: bool = False,
                  quiet: bool = False,
-                 offline: bool = True):
+                 strip_api_keys: bool = True):
         self._keep_temp_dir = keep_temp_dir
         self._quiet = quiet
-        self._offline = offline
+        self._strip_api_keys = strip_api_keys
         if self._keep_temp_dir:
             self._temp_dir = None
             self._temp_dir_name = tempfile.mkdtemp(prefix='statvar_test_')
@@ -318,7 +325,7 @@ class StatVarProcessorTestRunner:
             output_dir=output_dir,
             log_dir=os.path.join(output_dir, 'debug'),
             quiet=self._quiet,
-            unset_env=_API_KEY_ENV_VARS if self._offline else None,
+            unset_env=_API_KEY_ENV_VARS if self._strip_api_keys else None,
         )
         script_status['output_dir'] = output_dir
         script_status['test_dir'] = test_dir
@@ -687,7 +694,7 @@ def main(_):
         test_config_file=_FLAGS.test_config,
         keep_temp_dir=_FLAGS.keep_temp_dir,
         quiet=_FLAGS.quiet,
-        offline=_FLAGS.offline,
+        strip_api_keys=_FLAGS.strip_api_keys,
     )
     test_result = statvar_processor_tester.run_tests(_FLAGS.test_output)
     logging.info(f'Test result: {test_result}')

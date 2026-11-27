@@ -278,8 +278,26 @@ class StatVarTestRunnerTest(unittest.TestCase):
         # Default configs for tests override the import's config.
         self.assertIs(processor_config['reconcile_nodes'], False)
         self.assertIs(processor_config['resolve_places'], False)
+        self.assertIs(processor_config['output_only_new_statvars'], False)
+        self.assertIs(processor_config['generate_schema_mcf'], False)
         # Configs in the test override the defaults.
         self.assertIs(processor_config['recon_lookup_api'], True)
+
+    def test_strip_api_keys_off_keeps_api_keys(self):
+        runner = stat_var_test_runner.StatVarProcessorTestRunner(
+            test_config={'test_name': 'keys_test'}, strip_api_keys=False)
+
+        captured = {}
+
+        def fake_run_script(**kwargs):
+            captured.update(kwargs)
+            return {'returncode': 0}
+
+        with mock.patch.object(stat_var_test_runner,
+                               'run_script',
+                               side_effect=fake_run_script):
+            runner.run_statvar_processor(runner.get_config()[0])
+        self.assertIsNone(captured['unset_env'])
 
     def test_run_script_unset_env_removes_variables(self):
         script_path = self._write_file(
