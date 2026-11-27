@@ -3,5 +3,8 @@ observationAbout: C:rimffwf_output->observationAbout
 observationDate: C:rimffwf_output->observationDate
 variableMeasured: C:rimffwf_output->variableMeasured
 value: C:rimffwf_output->value
+unit: C:rimffwf_output->unit
+scalingFactor: C:rimffwf_output->scalingFactor
 observationPeriod: C:rimffwf_output->observationPeriod
+measurementMethod: C:rimffwf_output->measurementMethod
 typeOf: dcs:StatVarObservation

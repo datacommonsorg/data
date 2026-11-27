@@ -3,5 +3,8 @@ observationAbout: C:saxmnv_output->observationAbout
 observationDate: C:saxmnv_output->observationDate
 variableMeasured: C:saxmnv_output->variableMeasured
 value: C:saxmnv_output->value
+unit: C:saxmnv_output->unit
+scalingFactor: C:saxmnv_output->scalingFactor
 observationPeriod: C:saxmnv_output->observationPeriod
+measurementMethod: C:saxmnv_output->measurementMethod
 typeOf: dcs:StatVarObservation

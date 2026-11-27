@@ -3,5 +3,8 @@ observationAbout: C:qdanpdb_output->observationAbout
 observationDate: C:qdanpdb_output->observationDate
 variableMeasured: C:qdanpdb_output->variableMeasured
 value: C:qdanpdb_output->value
+unit: C:qdanpdb_output->unit
+scalingFactor: C:qdanpdb_output->scalingFactor
 observationPeriod: C:qdanpdb_output->observationPeriod
+measurementMethod: C:qdanpdb_output->measurementMethod
 typeOf: dcs:StatVarObservation

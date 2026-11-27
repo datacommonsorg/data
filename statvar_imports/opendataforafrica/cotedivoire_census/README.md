@@ -5,7 +5,7 @@
 - **Source**: [Côte d'Ivoire Open Data for Africa](https://cotedivoire.opendataforafrica.org/)
 - **Publisher**: National Institute of Statistics / National Agency of Statistics (ANStat), Côte d'Ivoire
 - **License**: Creative Commons Attribution 4.0 ([Terms of Use](https://cotedivoire.opendataforafrica.org/legal/termsofuse), `dcid:CreativeCommonsAttributionLicense`)
-- **Import Type**: `Semi-Automated` (`GCPCloudRunSemiAutomaticRefresh` — Cloudflare anti-bot challenges on `cotedivoire.opendataforafrica.org` return `HTTP 403` to headless GCP VMs, requiring manual browser SDMX XML/CSV staging to GCS followed by automated Cloud Batch conversion, processing, validation, and `auto1w` ingestion)
+- **Import Type**: `Semi-Automated` (`GCPCloudRunSemiAutomaticRefresh` — Cloudflare anti-bot challenges on `cotedivoire.opendataforafrica.org` return `HTTP 403` to headless GCP VMs, requiring manual browser SDMX XML/CSV staging to GCS followed by automated Cloud Batch conversion, processing, validation, and `country` import-group CNS promotion matching `Kenya_Census`)
 - **Schedule**: Weekly (Every Monday at 05:30 UTC — `30 05 * * 1`)
 - **Coverage**: Demographics, Census (RGPH 2014 & RGPH 2021), Economy, Industrial Production, Commercial Turnover, Labor Force, Education, Health, and Vital Statistics at country, autonomous district, region, department, and sub-prefecture levels (1988+)
 - **Entity Resolution**:
@@ -91,3 +91,11 @@ All commands below assume working directory is the repository root (`data/`):
   --output_counters=statvar_imports/opendataforafrica/cotedivoire_census/counters/hxghsjf_counters.csv \
   --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
 ```
+
+## 6. Known Pre-Existing KG Issues (Deferred for Phase 1 Baseline Parity)
+
+To preserve 1:1 StatVar parity (`0%` deletions against the existing Knowledge Graph baseline) during this semi-automation migration, the following three pre-existing live-KG mappings are intentionally kept unchanged and annotated with `TODO(b/587181425)` comments for a coordinated follow-up schema/data PR and CL:
+
+1. **`CIEI2010R_pvmap.csv`**: Monetary indicators (`KN.B1`, `KN.B8`, `KN.B9`, `KN.B25`, `KN.B26`) use `#Multiply,1000000` (`10^6`) instead of `1000000000` (`10^9`), and `KN.B1`, `KN.B2`, `KN.B8`, `KN.B9`, `KN.B25`, `KN.B26` use `unit,XAF` instead of `unit,XOF`.
+2. **`bdwcmfd_pvmap.csv`**: Under-5 mortality (`Taux de Mortalité des populations de moins de 5 ans`) maps to `age,Years5Onwards` (`Count_MortalityEvent_5OrMoreYears_AsAFractionOf_Count_BirthEvent_LiveBirth`).
+3. **`kcnetge_pvmap.csv`**: Lower-secondary teachers (`CEN6`, *Professeur de Collège (1er Cycle)*) map to `facultyType,UniversityAndCollegeTeacher`.

@@ -3,5 +3,8 @@ observationAbout: C:wayfqyd_output->observationAbout
 observationDate: C:wayfqyd_output->observationDate
 variableMeasured: C:wayfqyd_output->variableMeasured
 value: C:wayfqyd_output->value
+unit: C:wayfqyd_output->unit
+scalingFactor: C:wayfqyd_output->scalingFactor
 observationPeriod: C:wayfqyd_output->observationPeriod
+measurementMethod: C:wayfqyd_output->measurementMethod
 typeOf: dcs:StatVarObservation

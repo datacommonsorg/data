@@ -3,5 +3,8 @@ observationAbout: C:kcnetge_output->observationAbout
 observationDate: C:kcnetge_output->observationDate
 variableMeasured: C:kcnetge_output->variableMeasured
 value: C:kcnetge_output->value
+unit: C:kcnetge_output->unit
+scalingFactor: C:kcnetge_output->scalingFactor
 observationPeriod: C:kcnetge_output->observationPeriod
+measurementMethod: C:kcnetge_output->measurementMethod
 typeOf: dcs:StatVarObservation

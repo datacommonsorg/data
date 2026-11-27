@@ -599,6 +599,10 @@ class ConvertSdmxXmlToCsvTest(unittest.TestCase):
                 )
 
         # Metadata checks.
+        expected_output_cols = (
+            'observationAbout,observationDate,variableMeasured,value,'
+            'unit,scalingFactor,observationPeriod,measurementMethod')
+        expected_output_col_list = expected_output_cols.split(',')
         meta_paths = sorted(
             glob.glob(os.path.join(CURRENT_DIR, '*_metadata.csv')))
         self.assertEqual(len(meta_paths), 16)
@@ -610,6 +614,8 @@ class ConvertSdmxXmlToCsvTest(unittest.TestCase):
             self.assertNotIn('drop_statvars_without_svobs', meta_txt, meta_path)
             self.assertNotIn('docs.google.com', meta_txt, meta_path)
             self.assertNotIn('measurementQualifier', meta_txt, meta_path)
+            self.assertIn(f'output_columns,"{expected_output_cols}"', meta_txt,
+                          meta_path)
             for line in meta_txt.splitlines():
                 if line.startswith('#'):
                     self.assertNotIn(',', line, meta_path)
@@ -626,6 +632,9 @@ class ConvertSdmxXmlToCsvTest(unittest.TestCase):
                 pv_txt = f.read()
             self.assertNotIn('\r', pv_txt, pv_path)
             self.assertNotIn('#eval', pv_txt.lower(), pv_path)
+            for line in pv_txt.splitlines():
+                if line.startswith('#'):
+                    self.assertNotIn(',', line, pv_path)
         with open(os.path.join(CURRENT_DIR, 'jynwpug_pvmap.csv'),
                   encoding='utf-8') as f:
             jyn_txt = f.read()
@@ -655,6 +664,8 @@ class ConvertSdmxXmlToCsvTest(unittest.TestCase):
             val_cfg = json.loads(val_txt)
         self.assertNotIn('EXISTS (', val_txt)
         self.assertNotIn('NumPlaces = 26', val_txt)
+        self.assertIn("MaxDate >= '2026-09'", val_txt)
+        self.assertNotIn("MaxDate >= '2024-12'", val_txt)
         for base_validator in (
                 'DELETED_RECORDS_PERCENT',
                 'EMPTY_IMPORT_CHECK',
@@ -685,7 +696,10 @@ class ConvertSdmxXmlToCsvTest(unittest.TestCase):
                     self.assertFalse(lines[0].endswith(','), fpath)
                 elif suffix == '_output.csv':
                     with open(fpath, encoding='utf-8') as tf:
-                        out_rows = list(csv.DictReader(tf))
+                        reader = csv.DictReader(tf)
+                        self.assertEqual(reader.fieldnames,
+                                         expected_output_col_list, fpath)
+                        out_rows = list(reader)
                     self.assertGreaterEqual(len(out_rows), 1, fpath)
                     for row in out_rows:
                         self.assertTrue(
@@ -693,6 +707,12 @@ class ConvertSdmxXmlToCsvTest(unittest.TestCase):
                                 ('dcid:', 'dcs:')),
                             f"{fpath}: {row['variableMeasured']}",
                         )
+                elif suffix == '_output.tmcf':
+                    with open(fpath, encoding='utf-8') as tf:
+                        tmcf_txt = tf.read()
+                    for col in expected_output_col_list:
+                        self.assertIn(f'{col}: C:{tid}_output->{col}', tmcf_txt,
+                                      fpath)
 
 
 if __name__ == '__main__':

@@ -1,4 +1,5 @@
 key,prop,value,p1,v1,,,,,,,,
+# TODO(b/587181425): Fix 10^6 vs 10^9 scaling and XAF vs XOF currency in a follow-up PR; kept unchanged here for Phase 1 baseline parity.
 ID_INDICATOR:KN.B1,measuredProperty,amount,populationType,EconomicActivity,activitySource,GrossDomesticProduction,measurementQualifier,Nominal,#Multiply,1000000,unit,XAF
 ID_INDICATOR:KN.B2,measuredProperty,amount,populationType,EconomicActivity,activitySource,GrossDomesticProduction,measurementQualifier,Nominal,measurementDenominator,PerCapita,unit,XAF
 ID_INDICATOR:KN.B3,measuredProperty,amount,populationType,EconomicActivity,activitySource,GrossDomesticProduction,measurementQualifier,RealValue,statType,growthRate,unit,Percent

@@ -6,4 +6,5 @@ value: C:akfhutb_output->value
 unit: C:akfhutb_output->unit
 scalingFactor: C:akfhutb_output->scalingFactor
 observationPeriod: C:akfhutb_output->observationPeriod
+measurementMethod: C:akfhutb_output->measurementMethod
 typeOf: dcs:StatVarObservation

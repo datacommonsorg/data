@@ -6,4 +6,5 @@ value: C:CIEI2010R_output->value
 unit: C:CIEI2010R_output->unit
 scalingFactor: C:CIEI2010R_output->scalingFactor
 observationPeriod: C:CIEI2010R_output->observationPeriod
+measurementMethod: C:CIEI2010R_output->measurementMethod
 typeOf: dcs:StatVarObservation
