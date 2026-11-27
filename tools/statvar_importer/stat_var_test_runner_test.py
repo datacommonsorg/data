@@ -308,6 +308,14 @@ class StatVarTestRunnerTest(unittest.TestCase):
         self.assertEqual(
             stat_var_test_runner.get_error_counters(
                 os.path.join(self._test_dir, 'no_counters.csv')), {})
+        # Counters are loaded as csv for other file extensions too.
+        counters_txt = self._write_file(
+            'counters.txt',
+            '"key","value"\n'
+            '"error-unresolved-place",1\n',
+        )
+        self.assertEqual(stat_var_test_runner.get_error_counters(counters_txt),
+                         {'error-unresolved-place': 1})
 
     def test_run_tests_fails_on_error_counters(self):
         test_config = {

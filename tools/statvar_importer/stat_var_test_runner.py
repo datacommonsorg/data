@@ -76,7 +76,6 @@ Example:
 """
 
 import ast
-import csv
 import json
 import os
 import pprint
@@ -519,20 +518,24 @@ def get_error_counters(counters_file: str,
         # The statvar processor failed before it saved the counters.
         return error_counters
     expected = set(get_value_list(expected_counters or []))
-    with file_util.FileIO(counters_files[0]) as csv_file:
-        for row in csv.DictReader(csv_file):
-            name = row.get('key') or ''
-            error_pos = name.find('error-')
-            if error_pos < 0 or (error_pos > 0 and name[error_pos - 1] != '_'):
-                continue
-            if name[error_pos:] in expected:
-                continue
-            try:
-                value = float(row.get('value') or 0)
-            except ValueError:
-                continue
-            if value > 0:
-                error_counters[name] = value
+    # The statvar processor saves counters as csv for any file extension,
+    # so load the file as csv instead of with file_load_py_dict(), which
+    # picks the format by the file extension.
+    counters = file_util.file_load_csv_dict(counters_files[0],
+                                            key_column='key',
+                                            value_column='value')
+    for name, counter_value in counters.items():
+        error_pos = name.find('error-')
+        if error_pos < 0 or (error_pos > 0 and name[error_pos - 1] != '_'):
+            continue
+        if name[error_pos:] in expected:
+            continue
+        try:
+            value = float(counter_value or 0)
+        except ValueError:
+            continue
+        if value > 0:
+            error_counters[name] = value
     return error_counters
 
 
