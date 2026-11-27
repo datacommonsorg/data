@@ -92,9 +92,15 @@ def _define_flags():
 
 _define_api_key_flag()
 
+RETRYABLE_4XX_STATUS_CODES = frozenset({408, 429})
+
 
 class QueryLimitExceededError(Exception):
     """Raised when a QuickStats query exceeds the 50,000-row API limit."""
+
+
+class QuickStatsClientError(RuntimeError):
+    """Raised on non-retryable HTTP 4xx errors from the QuickStats API."""
 
 
 def _get_mode():
@@ -198,12 +204,36 @@ def _run_partition_task(partition_name, year, svs, input_dir, reuse_existing,
                               input_dir,
                               reuse_existing=reuse_existing,
                               mode=mode)
-        return (partition_name, True, '')
+        return (partition_name, True, '', False)
+    except QuickStatsClientError as e:
+        err_msg = _redact_secrets(e)
+        logging.error(
+            f'Partition {partition_name} failed with non-retryable error for '
+            f'year {year}: {err_msg}')
+        return (partition_name, False, err_msg, False)
     except Exception as e:
         err_msg = _redact_secrets(e)
         logging.error(
             f'Partition {partition_name} failed for year {year}: {err_msg}')
-        return (partition_name, False, err_msg)
+        return (partition_name, False, err_msg, True)
+
+
+def _partition_failures(results):
+    """Splits partition results into retryable and permanent failure lists."""
+    retryable_failed = []
+    permanent_failed = []
+    for item in results:
+        if len(item) == 4:
+            name, ok, err, retryable = item
+        else:
+            name, ok, err = item
+            retryable = True
+        if not ok:
+            if retryable:
+                retryable_failed.append((name, err))
+            else:
+                permanent_failed.append((name, err))
+    return retryable_failed, permanent_failed
 
 
 def _execute_partition_batch(partitions, year, svs, input_dir, reuse_existing,
@@ -295,10 +325,12 @@ def process_survey_data(year, svs, input_dir, out_dir, states=None, mode=None):
                                                    input_dir,
                                                    reuse_existing=False,
                                                    mode=mode)
-                failed = [(name, err) for name, ok, err in results if not ok]
+                retryable_failed, permanent_failed = _partition_failures(
+                    results)
 
-                if failed and mode != "process":
-                    failed_names = [name for name, _ in failed]
+                if (retryable_failed and not permanent_failed and
+                        mode != "process"):
+                    failed_names = [name for name, _ in retryable_failed]
                     logging.warning(
                         f'{len(failed_names)} partitions failed in pass 1 for '
                         f'year {year} ({failed_names}); waiting '
@@ -311,10 +343,10 @@ def process_survey_data(year, svs, input_dir, out_dir, states=None, mode=None):
                         input_dir,
                         reuse_existing=True,
                         mode=mode)
-                    failed = [
-                        (name, err) for name, ok, err in retry_results if not ok
-                    ]
+                    retryable_failed, permanent_failed = _partition_failures(
+                        retry_results)
 
+                failed = permanent_failed + retryable_failed
                 if failed:
                     summary = '; '.join(
                         f'{name}: {err}' for name, err in failed[:5])
@@ -490,6 +522,8 @@ def get_survey_state_data(year,
                                             state_alpha,
                                             input_dir,
                                             reuse_existing=reuse_existing)
+        except QuickStatsClientError:
+            raise
         except Exception as e:
             redacted = _redact_secrets(e)
             logging.error(
@@ -507,9 +541,15 @@ def _fetch_state_by_counties(year,
                              input_dir,
                              reuse_existing=False):
     """Fallback when a single state's COUNTY survey rows exceed QuickStats' 50,000-row cap."""
+    # QuickStats /api/get_param_values honors query filter parameters (verified
+    # live against TX 2024: returns 255 exact matching counties vs 1,795
+    # nationwide). Scoping by source_desc and year limits fallback requests to
+    # counties that actually have SURVEY data in the target year.
     counties = get_param_values('county_name',
-                                state_alpha=state_alpha,
-                                agg_level_desc='COUNTY')
+                                source_desc='SURVEY',
+                                agg_level_desc='COUNTY',
+                                year=year,
+                                state_alpha=state_alpha)
     if not counties:
         raise RuntimeError(
             f"County fallback returned no counties for state {state_alpha} (year {year})."
@@ -545,6 +585,8 @@ def _fetch_state_by_counties(year,
                     f"get_data() returned None for {state_alpha}/{county}")
             _write_json_atomic(county_file, resp)
             combined_rows.extend(resp.get('data', []))
+        except QuickStatsClientError:
+            raise
         except Exception as e:
             failed_counties.append((county, _redact_secrets(e)))
 
@@ -688,11 +730,14 @@ def get_data(params):
                 request_times.append(time.time())
                 return {'data': []}
 
-            redacted_body = _redact_secrets(response.text)
-            logging.warning(
-                f"API returned 400 status code with error: {redacted_body}")
-            raise requests.exceptions.RequestException(
-                f"Status 400 error: {redacted_body}")
+        if (400 <= response.status_code < 500 and
+                response.status_code not in RETRYABLE_4XX_STATUS_CODES):
+            redacted_body = _redact_secrets(getattr(response, 'text', ''))
+            logging.error(
+                f"API returned permanent {response.status_code} error for "
+                f"{safe_params}: {redacted_body}")
+            raise QuickStatsClientError(
+                f"Status {response.status_code} error: {redacted_body}")
 
         response.raise_for_status()
 
@@ -706,7 +751,7 @@ def get_data(params):
         request_times.append(time.time())
         return response.json()
 
-    except QueryLimitExceededError:
+    except (QueryLimitExceededError, QuickStatsClientError):
         raise
     except requests.exceptions.RequestException as e:
         redacted_err = _redact_secrets(e)
@@ -746,9 +791,29 @@ def _fetch_param_values_json(params):
             if _is_empty_query_400(err_text):
                 request_times.append(time.time())
                 return {}
+
+        if (400 <= resp.status_code < 500 and
+                resp.status_code not in RETRYABLE_4XX_STATUS_CODES):
+            redacted_body = _redact_secrets(getattr(resp, 'text', ''))
+            logging.error(
+                f"API returned permanent {resp.status_code} error fetching "
+                f"param values for {safe_params}: {redacted_body}")
+            raise QuickStatsClientError(
+                f"Status {resp.status_code} error: {redacted_body}")
+
         resp.raise_for_status()
+
+        if resp.status_code != 200:
+            logging.warning(
+                f"API returned non-200 status code for param values: "
+                f"{resp.status_code}. Retrying...")
+            raise requests.exceptions.RequestException(
+                f"Non-200 status code: {resp.status_code}")
+
         request_times.append(time.time())
         return resp.json()
+    except QuickStatsClientError:
+        raise
     except requests.exceptions.RequestException as e:
         redacted_err = _redact_secrets(e)
         logging.error(
@@ -784,6 +849,13 @@ def get_param_values(param, **extra_filters):
         raise RuntimeError(
             f"Parameter '{param}' missing or empty in API response for "
             f"{_redact_params(params)}")
+    except QuickStatsClientError as e:
+        redacted_err = _redact_secrets(e)
+        logging.error(f"Permanent client error retrieving parameter values for "
+                      f"'{param}': {redacted_err}")
+        raise QuickStatsClientError(
+            f"Failed to retrieve parameter values for '{param}': {redacted_err}"
+        ) from None
     except Exception as e:
         redacted_err = _redact_secrets(e)
         logging.error(

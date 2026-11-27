@@ -32,6 +32,7 @@ if _REPO_ROOT not in sys.path:
 
 from scripts.us_usda.quickstats import process
 from scripts.us_usda.quickstats.process import QueryLimitExceededError
+from scripts.us_usda.quickstats.process import QuickStatsClientError
 from scripts.us_usda.quickstats.process import get_data
 from scripts.us_usda.quickstats.process import get_param_values
 from scripts.us_usda.quickstats.process import get_survey_county_data
@@ -167,7 +168,7 @@ dcs:Area_Farm_WheatForGrain,2024,dcid:geoId/45001,5000,dcs:Acre
     def test_get_data_400_invalid_api_key_raises(self, mock_rate_limit,
                                                  mock_session,
                                                  mock_retry_sleep):
-        """Tests that 400 'bad request - invalid api key' raises RequestException instead of returning empty data."""
+        """Tests that 400 'bad request - invalid api key' raises QuickStatsClientError without retrying."""
         secret_key = 'INVALID-SECRET-KEY-999'
         process._CACHED_API_KEY = secret_key
         mock_resp = mock.Mock()
@@ -178,7 +179,7 @@ dcs:Area_Farm_WheatForGrain,2024,dcid:geoId/45001,5000,dcs:Acre
         }
         mock_session.return_value.get.return_value = mock_resp
 
-        with self.assertRaises(requests.exceptions.RequestException) as ctx:
+        with self.assertRaises(QuickStatsClientError) as ctx:
             get_data({
                 'key': secret_key,
                 'source_desc': 'SURVEY',
@@ -186,6 +187,58 @@ dcs:Area_Farm_WheatForGrain,2024,dcid:geoId/45001,5000,dcs:Acre
                 'state_alpha': 'SC',
             })
         self.assertNotIn(secret_key, str(ctx.exception))
+        self.assertEqual(mock_session.return_value.get.call_count, 1)
+        mock_retry_sleep.assert_not_called()
+
+    @mock.patch('retry.api.time.sleep')
+    @mock.patch.object(process, '_get_http_session')
+    @mock.patch.object(process, 'is_rate_limited', return_value=False)
+    def test_get_data_permanent_4xx_raises_without_retry(
+            self, mock_rate_limit, mock_session, mock_retry_sleep):
+        """Tests that HTTP 401/403/404 responses raise QuickStatsClientError without retrying."""
+        secret_key = 'SECRET-KEY-4XX-TEST'
+        process._CACHED_API_KEY = secret_key
+        for status_code in (401, 403, 404):
+            with self.subTest(status_code=status_code):
+                mock_session.return_value.get.reset_mock()
+                mock_retry_sleep.reset_mock()
+                mock_resp = mock.Mock()
+                mock_resp.status_code = status_code
+                mock_resp.text = f'{{"error": ["status {status_code} {secret_key}"]}}'
+                mock_session.return_value.get.return_value = mock_resp
+
+                with self.assertRaises(QuickStatsClientError) as ctx:
+                    get_data({
+                        'key': secret_key,
+                        'source_desc': 'SURVEY',
+                        'year': 2024,
+                        'state_alpha': 'SC',
+                    })
+                self.assertNotIn(secret_key, str(ctx.exception))
+                self.assertEqual(mock_session.return_value.get.call_count, 1)
+                mock_retry_sleep.assert_not_called()
+
+    @mock.patch('retry.api.time.sleep')
+    @mock.patch.object(process, '_get_http_session')
+    @mock.patch.object(process, 'is_rate_limited', return_value=False)
+    def test_get_data_429_retries_as_transient(self, mock_rate_limit,
+                                               mock_session, mock_retry_sleep):
+        """Tests that HTTP 429 Too Many Requests is retried as a transient RequestException."""
+        mock_resp = mock.Mock()
+        mock_resp.status_code = 429
+        mock_resp.raise_for_status.side_effect = requests.exceptions.HTTPError(
+            '429 Client Error: Too Many Requests')
+        mock_session.return_value.get.return_value = mock_resp
+
+        with self.assertRaises(requests.exceptions.RequestException):
+            get_data({
+                'key': 'mock-api-key',
+                'source_desc': 'SURVEY',
+                'year': 2024,
+                'state_alpha': 'SC',
+            })
+        self.assertEqual(mock_session.return_value.get.call_count,
+                         process.RETRY_TRIES)
 
     @mock.patch('retry.api.time.sleep')
     @mock.patch.object(process, '_get_http_session')
@@ -245,8 +298,10 @@ dcs:Area_Farm_WheatForGrain,2024,dcid:geoId/45001,5000,dcs:Acre
             result = get_survey_state_data(2024, 'SC', tmpdir)
             self.assertEqual(len(result['data']), 2)
             mock_param_values.assert_called_once_with('county_name',
-                                                      state_alpha='SC',
-                                                      agg_level_desc='COUNTY')
+                                                      source_desc='SURVEY',
+                                                      agg_level_desc='COUNTY',
+                                                      year=2024,
+                                                      state_alpha='SC')
 
     @mock.patch.object(process.time, 'sleep')
     @mock.patch.object(process, '_execute_partition_batch')
@@ -387,6 +442,97 @@ dcs:Area_Farm_WheatForGrain,2024,dcid:geoId/45001,5000,dcs:Acre
 
         with self.assertRaises(RuntimeError):
             get_param_values('state_alpha')
+
+    @mock.patch('retry.api.time.sleep')
+    @mock.patch.object(process, '_get_http_session')
+    @mock.patch.object(process, 'is_rate_limited', return_value=False)
+    @mock.patch.object(process,
+                       'get_usda_api_key',
+                       return_value='SECRET-PARAM-KEY')
+    def test_get_param_values_permanent_4xx_raises_without_retry(
+            self, mock_key, mock_rate_limit, mock_session, mock_retry_sleep):
+        """Tests that get_param_values raises QuickStatsClientError without retrying on 400/401/403/404."""
+        secret_key = 'SECRET-PARAM-KEY'
+        process._CACHED_API_KEY = secret_key
+        cases = [
+            (400, f'{{"bad_param": ["no value {secret_key}"]}}', {
+                'bad_param': [f'no value {secret_key}']
+            }),
+            (401, f'{{"error": ["unauthorized {secret_key}"]}}', {
+                'error': [f'unauthorized {secret_key}']
+            }),
+            (403, f'{{"error": ["forbidden {secret_key}"]}}', {
+                'error': [f'forbidden {secret_key}']
+            }),
+            (404, f'{{"error": ["Page Not Found {secret_key}"]}}', {
+                'error': [f'Page Not Found {secret_key}']
+            }),
+        ]
+        for status_code, body_text, body_json in cases:
+            with self.subTest(status_code=status_code):
+                mock_session.return_value.get.reset_mock()
+                mock_retry_sleep.reset_mock()
+                mock_resp = mock.Mock()
+                mock_resp.status_code = status_code
+                mock_resp.text = body_text
+                mock_resp.json.return_value = body_json
+                mock_session.return_value.get.return_value = mock_resp
+
+                with self.assertRaises(QuickStatsClientError) as ctx:
+                    get_param_values('state_alpha')
+                self.assertNotIn(secret_key, str(ctx.exception))
+                self.assertEqual(mock_session.return_value.get.call_count, 1)
+                mock_retry_sleep.assert_not_called()
+
+    @mock.patch('retry.api.time.sleep')
+    @mock.patch.object(process, '_get_http_session')
+    @mock.patch.object(process, 'is_rate_limited', return_value=False)
+    @mock.patch.object(process, 'get_usda_api_key', return_value='mock-api-key')
+    def test_get_param_values_429_retries_as_transient(self, mock_key,
+                                                       mock_rate_limit,
+                                                       mock_session,
+                                                       mock_retry_sleep):
+        """Tests that get_param_values retries HTTP 429 as a transient failure."""
+        mock_resp = mock.Mock()
+        mock_resp.status_code = 429
+        mock_resp.raise_for_status.side_effect = requests.exceptions.HTTPError(
+            '429 Client Error: Too Many Requests')
+        mock_session.return_value.get.return_value = mock_resp
+
+        with self.assertRaises(RuntimeError) as ctx:
+            get_param_values('state_alpha')
+        self.assertNotIsInstance(ctx.exception, QuickStatsClientError)
+        self.assertEqual(mock_session.return_value.get.call_count,
+                         process.RETRY_TRIES)
+
+    @mock.patch('retry.api.time.sleep')
+    @mock.patch.object(process.time, 'sleep')
+    @mock.patch.object(process, '_get_http_session')
+    @mock.patch.object(process, 'is_rate_limited', return_value=False)
+    @mock.patch.object(process,
+                       'get_usda_api_key',
+                       return_value='INVALID-KEY-401')
+    def test_permanent_client_error_skips_second_pass_retry(
+            self, mock_key, mock_rate_limit, mock_session, mock_cooldown_sleep,
+            mock_retry_sleep):
+        """Tests that permanent 4xx client errors fail fast without Pass 1 retries or Pass 2 cooldown."""
+        mock_resp = mock.Mock()
+        mock_resp.status_code = 401
+        mock_resp.text = '{"error": ["unauthorized"]}'
+        mock_session.return_value.get.return_value = mock_resp
+        svs = load_svs()
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            with self.assertRaises(RuntimeError):
+                process_survey_data(2024,
+                                    svs,
+                                    os.path.join(tmpdir, 'input'),
+                                    os.path.join(tmpdir, 'output'),
+                                    states=['SC'])
+
+        self.assertEqual(mock_session.return_value.get.call_count, 1)
+        mock_retry_sleep.assert_not_called()
+        mock_cooldown_sleep.assert_not_called()
 
     def test_process_mode_spawn_workers_read_cached_json_without_api(self):
         """Tests that mode='process' propagates to spawned pool workers without relying on flags."""
