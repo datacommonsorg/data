@@ -60,6 +60,7 @@ Example:
 
 """
 
+import json
 import os
 import re
 import subprocess
@@ -135,11 +136,6 @@ class StatVarProcessorTestRunner:
         if test_config:
             self.load_config(test_config)
         self.load_config(test_config_file)
-
-    def __del__(self):
-        """Cleanup local files unless keep_temp_dir is enabled."""
-        if self._temp_dir and not self._keep_temp_dir:
-            self._temp_dir.cleanup()
 
     def load_config(self, test_config_file: str | dict | list):
         """Loads a test config from a JSON file, dict, or list of dicts."""
@@ -227,7 +223,8 @@ class StatVarProcessorTestRunner:
                 logging.info(
                     f'Retaining temp dir for debugging: {self._temp_dir_name}')
             if test_output:
-                file_util.file_write_py_dict(return_status, test_output)
+                with file_util.FileIO(test_output, 'w') as output_file:
+                    json.dump(return_status, output_file, indent=2)
             return return_status
         finally:
             os.chdir(orig_cwd)
@@ -499,7 +496,8 @@ def run_script(interpreter: str,
                 for line in stream:
                     f_log.write(line)
                     if not quiet:
-                        logging.info(f'{stream_name}: {line}')
+                        text = line.decode('utf-8', errors='replace')
+                        logging.info(f'{stream_name}: {text.rstrip()}')
         finally:
             stream.close()
 

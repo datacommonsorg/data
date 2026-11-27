@@ -33,8 +33,8 @@ To run the tests for a single import or a folder of imports:
 """
 
 import argparse
-import ast
 from concurrent import futures
+import json
 import os
 import signal
 import subprocess
@@ -117,6 +117,10 @@ def _list_files(root_dir: str) -> set[str]:
 
 def _kill_process_group(process: subprocess.Popen):
     """Kills the process and the statvar processor it started."""
+    if not hasattr(os, 'killpg'):
+        # Process groups are not supported on this platform.
+        process.kill()
+        return
     try:
         os.killpg(process.pid, signal.SIGKILL)
     except (ProcessLookupError, PermissionError):
@@ -174,11 +178,11 @@ def run_test_config(test_config: str, timeout: float = None) -> dict:
 
         result = {}
         if os.path.exists(test_output):
-            # The test runner saves the summary as a python dictionary.
+            # The test runner saves the summary as a JSON dictionary.
             try:
-                with open(test_output) as output:
-                    result = ast.literal_eval(output.read())
-            except (OSError, SyntaxError, ValueError) as e:
+                with open(test_output, encoding='utf-8') as output:
+                    result = json.load(output)
+            except (OSError, ValueError) as e:
                 result = {'error': f'Unable to load test summary: {e}'}
         if not isinstance(result, dict):
             result = {'error': f'Unexpected test summary: {result!r}'}

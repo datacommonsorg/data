@@ -306,8 +306,13 @@ class StatVarTestRunnerTest(unittest.TestCase):
 
             self.assertEqual(result['status'], 'PASS')
             self.assertEqual(os.getcwd(), os.path.realpath(caller_dir))
-            self.assertTrue(
-                os.path.exists(os.path.join(caller_dir, 'summary.json')))
+            # The test summary is saved as JSON relative to the caller's dir.
+            with open(os.path.join(caller_dir, 'summary.json')) as f:
+                summary = json.load(f)
+            self.assertEqual(summary['status'], 'PASS')
+            self.assertEqual(
+                summary['cwd_test']['output_status']['csv_out']['diff_status'],
+                'MATCHED')
         finally:
             os.chdir(orig_cwd)
 
