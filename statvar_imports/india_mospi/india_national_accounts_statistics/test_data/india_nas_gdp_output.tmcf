@@ -1,0 +1,9 @@
+Node: E:india_nas_gdp_output->E0
+observationDate: C:india_nas_gdp_output->observationDate
+observationAbout: C:india_nas_gdp_output->observationAbout
+variableMeasured: C:india_nas_gdp_output->variableMeasured
+value: C:india_nas_gdp_output->value
+unit: C:india_nas_gdp_output->unit
+measurementMethod: C:india_nas_gdp_output->measurementMethod
+observationPeriod: C:india_nas_gdp_output->observationPeriod
+typeOf: dcs:StatVarObservation

@@ -1,0 +1,8 @@
+#Key,Property1,Value1,Property2,Value2
+year,#Regex,^(?P<StartYear>[0-9]{4})-[0-9]{2}$,#Eval,"observationDate=str(int(StartYear) + 1)"
+frequency,observationPeriod,P1Y,,
+first advance estimates,measurementMethod,MOSPIFirstAdvanceEstimates,,
+second advance estimates,measurementMethod,MOSPISecondAdvanceEstimates,,
+provisional estimates,measurementMethod,MOSPIProvisionalEstimates,,
+second revised estimates,measurementMethod,MOSPISecondRevisedEstimates,,
+third revised estimates,measurementMethod,MOSPIThirdRevisedEstimates,,

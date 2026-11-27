@@ -1,0 +1,5 @@
+#Key,Property1,Value1,Property2,Value2,Property3,Value3,Property4,Value4
+indicator,populationType,EconomicActivity,measuredProperty,amount,activitySource,GrossDomesticProduction,observationAbout,country/IND
+current_price,value,{Number},measurementQualifier,Nominal,#Multiply,10000000,,
+constant_price,value,{Number},measurementQualifier,RealValue,#Multiply,10000000,,
+unit,unit,INR,,,,,,
