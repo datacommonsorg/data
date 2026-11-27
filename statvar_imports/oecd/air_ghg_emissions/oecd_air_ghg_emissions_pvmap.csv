@@ -1,0 +1,17 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6
+LOCATION,observationAbout,{@Data},,,,,,,,,,
+CO2,populationType,Emissions,measuredProperty,amount,emittedThing,CarbonDioxide,measurementQualifier,Annual,,,,
+CO,populationType,Emissions,measuredProperty,amount,emittedThing,CarbonMonoxide,measurementQualifier,Annual,,,,
+NOX,populationType,Emissions,measuredProperty,amount,emittedThing,OxidesOfNitrogen,measurementQualifier,Annual,,,,
+SOX,populationType,Emissions,measuredProperty,amount,emittedThing,OxidesOfSulfur,measurementQualifier,Annual,,,,
+VOC,populationType,Emissions,measuredProperty,amount,emittedThing,VolatileOrganicCompound,measurementQualifier,Annual,,,,
+GHG,populationType,Emissions,measuredProperty,amount,emittedThing,GreenhouseGas,measurementQualifier,Annual,,,,
+CO2_PBPROD,populationType,EconomicActivity,activitySource,GrossDomesticProduction,measuredProperty,amount,measurementQualifier,RealValue,measurementDenominator,dcs:Annual_Amount_Emissions_CarbonDioxide,name,"""Production-based CO2 productivity, GDP per unit of energy-related CO2 emissions"""
+MLN_TONNE,#Multiply,1000000,unit,MetricTon,,,,,,,,
+THND_TONNE,#Multiply,1000,unit,MetricTon,,,,,,,,
+TONNE_CAP,measurementDenominator,Count_Person,unit,MetricTon,,,,,,,,
+THND_TONNECO2,#Multiply,1000,unit,MetricTonCO2e,,,,,,,,
+KG_CAP,measurementDenominator,Count_Person,unit,Kilogram,,,,,,,,
+USD_CO2,unit,USDollarPerKilogram,,,,,,,,,,
+TIME,observationDate,{@Data},,,,,,,,,,
+Value,value,{@Number},,,,,,,,,,
