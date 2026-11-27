@@ -84,6 +84,13 @@ def build_catalog(
             if not import_name:
                 continue
 
+            config_override = spec.get("config_override", {})
+            if isinstance(config_override, dict):
+                raw_exclude = config_override.get("exclude_import_workflow",
+                                                  False)
+                if raw_exclude is True or str(raw_exclude).lower() == "true":
+                    continue
+
             dag_id = import_name
             if allowlist_set and (dag_id not in allowlist_set and
                                   import_name not in allowlist_set):
