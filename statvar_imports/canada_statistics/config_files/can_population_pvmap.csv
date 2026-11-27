@@ -1,0 +1,4 @@
+#Key,Property1,Value1,Property2,Value2,Property3,Value3,Property4,Value4
+GEO,observationAbout,{Data},populationType,Person,measuredProperty,count,statType,measuredValue
+"Population and dwelling counts (11): Population, 2021 [1]",value,{Number},observationDate,2021,,,,
+"Population and dwelling counts (11): Population, 2016 [2]",value,{Number},observationDate,2016,,,,

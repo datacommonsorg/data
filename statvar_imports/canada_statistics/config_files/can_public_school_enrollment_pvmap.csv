@@ -1,0 +1,30 @@
+
+
+
+
+
+#Key,Property1,Value1,Property2,Value2,Property3,Value3,Property4,Value4,Property5,Value5
+REF_DATE,#Regex,([0-9]+)/(?P<EndYear>[0-9]+),observationDate,{@EndYear},,,,,,
+GEO,observationAbout,{Data},populationType,Student,measuredProperty,count,statType,measuredValue,,
+"Grade:Total, grade",GradeKey,Total,,,,,,,,
+Grade:Junior Kindergarten,GradeKey,PreK,,,,,,,,
+Grade:Kindergarten,GradeKey,Other,schoolGradeLevel,Kindergarten,schoolType,PublicSchool,,,,
+Grade:Grade 1,GradeKey,Other,schoolGradeLevel,SchoolGrade1,schoolType,PublicSchool,,,,
+Grade:Grade 2,GradeKey,Other,schoolGradeLevel,SchoolGrade2,schoolType,PublicSchool,,,,
+Grade:Grade 3,GradeKey,Other,schoolGradeLevel,SchoolGrade3,schoolType,PublicSchool,,,,
+Grade:Grade 4,GradeKey,Other,schoolGradeLevel,SchoolGrade4,schoolType,PublicSchool,,,,
+Grade:Grade 5,GradeKey,Other,schoolGradeLevel,SchoolGrade5,schoolType,PublicSchool,,,,
+Grade:Grade 6,GradeKey,Other,schoolGradeLevel,SchoolGrade6,schoolType,PublicSchool,,,,
+Grade:Grade 7,GradeKey,Other,schoolGradeLevel,SchoolGrade7,schoolType,PublicSchool,,,,
+Grade:Grade 8,GradeKey,Other,schoolGradeLevel,SchoolGrade8,schoolType,PublicSchool,,,,
+Grade:Grade 9,GradeKey,Other,schoolGradeLevel,SchoolGrade9,schoolType,PublicSchool,,,,
+Grade:Grade 10,GradeKey,Other,schoolGradeLevel,SchoolGrade10,schoolType,PublicSchool,,,,
+Grade:Grade 11,GradeKey,Other,schoolGradeLevel,SchoolGrade11,schoolType,PublicSchool,,,,
+Grade:Grade 12,GradeKey,Other,schoolGradeLevel,SchoolGrade12,schoolType,PublicSchool,,,,
+Grade:Grade 13,GradeKey,Other,schoolGradeLevel,SchoolGrade13,schoolType,PublicSchool,,,,
+Grade:Grade not reported,#IgnoreRow,True,,,,,,,,
+"Sex:Total, sex",SexKey,Total,#Eval,"typeOfSchool = 'PublicSchool' if GradeKey in ('Total', 'PreK') else ''",,,,,,
+Sex:Male,gender,Male,SexKey,Other,schoolType,PublicSchool,#Eval,"schoolGradeLevel = 'PreKindergarten' if GradeKey == 'PreK' else (schoolGradeLevel if GradeKey == 'Other' else '')",,
+Sex:Female,gender,Female,SexKey,Other,schoolType,PublicSchool,#Eval,"schoolGradeLevel = 'PreKindergarten' if GradeKey == 'PreK' else (schoolGradeLevel if GradeKey == 'Other' else '')",,
+Sex:Sex not reported,gender,GenderUnknownOrNotStated,SexKey,Other,schoolType,PublicSchool,#Eval,"schoolGradeLevel = 'PreKindergarten' if GradeKey == 'PreK' else (schoolGradeLevel if GradeKey == 'Other' else '')",,
+VALUE,value,{Number},#Eval,"enrollmentLevel = 'PreKindergarten' if (SexKey == 'Total' and GradeKey == 'PreK') else ''",,,,,,

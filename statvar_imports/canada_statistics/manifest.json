@@ -1,0 +1,44 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "CanadaStatistics",
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
+      "provenance_url": "https://www150.statcan.gc.ca/n1/en/type/data?MM=1",
+      "provenance_description": "Canada Demographics, Health, Economy, and Education Statistics at Country, Province, Territory, and Municipality levels from Statistics Canada.",
+      "scripts": [
+        "run.sh gs://unresolved_mcf/country/canada/input_files/latest/",
+        "../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Population.csv --pv_map=GEO:config_files/can_places_pvmap.csv,config_files/can_population_pvmap.csv --config_file=config_files/common_metadata.csv --input_columns=7 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/can_population --output_counters=counters/can_population_counters.csv",
+        "../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/can_agri_producer_deliveries_major_grains.csv --pv_map=GEO:config_files/can_places_pvmap.csv,config_files/can_agri_producer_deliveries_major_grains_pvmap.csv --config_file=config_files/common_metadata.csv --input_columns=11 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/can_agri_producer_deliveries_major_grains --output_counters=counters/can_agri_producer_deliveries_major_grains_counters.csv",
+        "../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/can_infant_mortality.csv --pv_map=GEO:config_files/can_places_pvmap.csv,config_files/can_infant_mortality_pvmap.csv --config_file=config_files/common_metadata.csv --input_columns=12 --statvar_dcid_remap_csv=config_files/can_sv_remap.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/can_infant_mortality --output_counters=counters/can_infant_mortality_counters.csv",
+        "../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/can_life_expectancy.csv --pv_map=GEO:config_files/can_places_pvmap.csv,config_files/can_life_expectancy_pvmap.csv --config_file=config_files/common_metadata.csv --input_columns=13 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/can_life_expectancy --output_counters=counters/can_life_expectancy_counters.csv",
+        "../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/can_mortality_rate.csv --pv_map=GEO:config_files/can_places_pvmap.csv,config_files/can_mortality_rate_pvmap.csv --config_file=config_files/common_metadata.csv --input_columns=13 --statvar_dcid_remap_csv=config_files/can_sv_remap.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/can_mortality_rate --output_counters=counters/can_mortality_rate_counters.csv",
+        "../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/can_pop_age_gender.csv --pv_map=GEO:config_files/can_places_pvmap.csv,config_files/can_pop_age_gender_pvmap.csv --config_file=config_files/common_metadata.csv --input_columns=37 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/can_pop_age_gender --output_counters=counters/can_pop_age_gender_counters.csv",
+        "../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/can_public_school_enrollment.csv --pv_map=GEO:config_files/can_places_pvmap.csv,config_files/can_public_school_enrollment_pvmap.csv --config_file=config_files/common_metadata.csv --input_columns=12 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/can_public_school_enrollment --output_counters=counters/can_public_school_enrollment_counters.csv",
+        "../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/can_unemployment_rate_above15.csv --pv_map=GEO:config_files/can_places_pvmap.csv,config_files/can_unemployment_rate_above15_pvmap.csv --config_file=config_files/common_metadata.csv --input_columns=13 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/can_unemployment_rate_above15 --output_counters=counters/can_unemployment_rate_above15_counters.csv"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "output/can_population.tmcf",
+          "cleaned_csv": "output/*.csv",
+          "node_mcf": "output/*.mcf"
+        }
+      ],
+      "source_files": [
+        "input_files/*.csv",
+        "counters/*.csv",
+        "config_files/can_sv_remap.csv",
+        "validation_config.json"
+      ],
+      "validation_config_file": "validation_config.json",
+      "cron_schedule": "0 6 * * 3",
+      "_comment": "Schedule: Weekly on Wednesday at 06:00 UTC",
+      "resource_limits": {
+        "cpu": 8,
+        "memory": 32,
+        "disk": 100
+      }
+    }
+  ]
+}

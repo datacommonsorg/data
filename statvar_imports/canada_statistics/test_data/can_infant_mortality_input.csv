@@ -1,0 +1,13 @@
+REF_DATE,GEO,DGUID,Age at time of death,Characteristics,UOM,UOM_ID,SCALAR_FACTOR,SCALAR_ID,VECTOR,COORDINATE,VALUE,STATUS,SYMBOL,TERMINATED,DECIMALS
+2020,"Canada, place of residence",2016A000011124,"Total infant deaths, age at time of death, under 1 year",Number of deaths,Number,223,units,0,v21226970,1.1.1,1622,,,,0
+2020,"Canada, place of residence",2016A000011124,"Total infant deaths, age at time of death, under 1 year","Mortality rate per 1,000 live births","Rate per 1,000 live births",261,units,0,v21226971,1.1.2,4.5,,,,1
+2020,"Canada, place of residence",2016A000011124,"Neonatal, age at time of death, 0 to 27 days",Number of deaths,Number,223,units,0,v21226972,1.2.1,1241,,,,0
+2020,"Canada, place of residence",2016A000011124,"Neonatal, age at time of death, 0 to 27 days","Mortality rate per 1,000 live births","Rate per 1,000 live births",261,units,0,v21226973,1.2.2,3.5,,,,1
+2020,"Canada, place of residence",2016A000011124,"Post-neonatal, age at time of death, 1 to 11 months",Number of deaths,Number,223,units,0,v21226980,1.6.1,381,,,,0
+2020,"Canada, place of residence",2016A000011124,"Post-neonatal, age at time of death, 1 to 11 months","Mortality rate per 1,000 live births","Rate per 1,000 live births",261,units,0,v21226981,1.6.2,1.1,,,,1
+2020,"Ontario, place of residence",2016A000235,"Total infant deaths, age at time of death, under 1 year",Number of deaths,Number,223,units,0,v21227078,7.1.1,575,,,,0
+2020,"Ontario, place of residence",2016A000235,"Total infant deaths, age at time of death, under 1 year","Mortality rate per 1,000 live births","Rate per 1,000 live births",261,units,0,v21227079,7.1.2,4.2,,,,1
+2020,"Ontario, place of residence",2016A000235,"Neonatal, age at time of death, 0 to 27 days",Number of deaths,Number,223,units,0,v21227080,7.2.1,442,,,,0
+2020,"Ontario, place of residence",2016A000235,"Neonatal, age at time of death, 0 to 27 days","Mortality rate per 1,000 live births","Rate per 1,000 live births",261,units,0,v21227081,7.2.2,3.2,,,,1
+2020,"Ontario, place of residence",2016A000235,"Post-neonatal, age at time of death, 1 to 11 months",Number of deaths,Number,223,units,0,v21227088,7.6.1,133,,,,0
+2020,"Ontario, place of residence",2016A000235,"Post-neonatal, age at time of death, 1 to 11 months","Mortality rate per 1,000 live births","Rate per 1,000 live births",261,units,0,v21227089,7.6.2,1,,,,1

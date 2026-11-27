@@ -1,0 +1,9 @@
+Node: E:can_unemployment_rate_above15_output->E0
+observationAbout: C:can_unemployment_rate_above15_output->observationAbout
+observationDate: C:can_unemployment_rate_above15_output->observationDate
+value: C:can_unemployment_rate_above15_output->value
+variableMeasured: C:can_unemployment_rate_above15_output->variableMeasured
+unit: C:can_unemployment_rate_above15_output->unit
+scalingFactor: C:can_unemployment_rate_above15_output->scalingFactor
+observationPeriod: C:can_unemployment_rate_above15_output->observationPeriod
+typeOf: dcs:StatVarObservation

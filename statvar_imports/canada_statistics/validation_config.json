@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "check_max_date_consistent",
+      "description": "Verifies that all StatVars within each homogeneous dataset cohort (grains, life expectancy, mortality rates, infant mortality, historical death counts, 2021 Census age/gender, and active public school enrollment excluding retired Grade 13) share the exact same MaxDate.",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT cohort, COUNT(*) AS sv_count, MIN(CAST(MaxDate AS VARCHAR)) AS min_max_date, MAX(CAST(MaxDate AS VARCHAR)) AS max_max_date FROM (SELECT StatVar, MaxDate, CASE WHEN regexp_matches(StatVar, '^Amount_FarmInventory_') THEN 'grains' WHEN regexp_matches(StatVar, '^LifeExpectancy_Person') THEN 'life_expectancy' WHEN regexp_matches(StatVar, '^Count_Death_(.*_)?AsAFractionOf_?Count_Person') THEN 'mortality_rates' WHEN regexp_matches(StatVar, '^Count_Death_(0To1Day|0To1Years|0To27Day|1To11Month|1To2Month|1To6Day|3To5Month|6To11Month|7To27Day)') THEN 'infant_mortality' WHEN regexp_matches(StatVar, '^Count_Death') THEN 'mortality_deaths' WHEN regexp_matches(StatVar, '^Count_Person_') AND NOT regexp_matches(StatVar, 'Unemployed') THEN 'pop_age_gender' WHEN regexp_matches(StatVar, '^Count_Student_(.*_)?PublicSchool$') AND NOT regexp_matches(StatVar, 'SchoolGrade13') THEN 'active_school_enrollment' ELSE NULL END AS cohort FROM stats) WHERE cohort IS NOT NULL GROUP BY cohort",
+        "condition": "min_max_date = max_max_date"
+      }
+    },
+    {
+      "rule_id": "check_max_date_freshness",
+      "description": "Verifies every StatVar meets its StatCan cadence freshness threshold (grains <= 1y, school/unemployment <= 2y, vital stats <= 3y, 2021 Census >= 2021, infant mortality baseline >= 2020, terminated death counts >= 2018, retired Grade 13 >= 2010).",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT StatVar, MaxDate, CAST(SUBSTR(CAST(MaxDate AS VARCHAR), 1, 4) AS INTEGER) AS max_year, CASE WHEN regexp_matches(StatVar, '^Amount_FarmInventory_') THEN YEAR(CURRENT_DATE) - 1 WHEN StatVar = 'Count_Person_15Years_Unemployed_AsAFractionOf_Count_Person_15Years' OR (regexp_matches(StatVar, '^Count_Student_(.*_)?PublicSchool$') AND NOT regexp_matches(StatVar, 'SchoolGrade13')) THEN YEAR(CURRENT_DATE) - 2 WHEN regexp_matches(StatVar, '^LifeExpectancy_Person|^Count_Death_(.*_)?AsAFractionOf_?Count_Person') THEN YEAR(CURRENT_DATE) - 3 WHEN StatVar = 'Count_Person' OR regexp_matches(StatVar, '^Count_Person_') THEN 2021 WHEN regexp_matches(StatVar, '^Count_Death_(0To1Day|0To1Years|0To27Day|1To11Month|1To2Month|1To6Day|3To5Month|6To11Month|7To27Day)') THEN 2020 WHEN regexp_matches(StatVar, '^Count_Death') THEN 2018 ELSE 2010 END AS min_expected_year FROM stats",
+        "condition": "max_year >= min_expected_year"
+      }
+    },
+    {
+      "rule_id": "check_coverage_and_value_bounds",
+      "description": "Verifies all 1,169 StatVars are present with expected place coverage and valid value bounds (non-negative counts/rates, unemployment <= 100%, positive grain delivery maxima).",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT StatVar, MinValue, MaxValue, NumPlaces, COUNT(*) OVER () AS total_svs FROM stats",
+        "condition": "total_svs >= 1169 AND CASE WHEN regexp_matches(StatVar, '^Amount_FarmInventory_') THEN MaxValue > 0 AND NumPlaces >= 5 WHEN StatVar = 'Count_Person_15Years_Unemployed_AsAFractionOf_Count_Person_15Years' THEN MinValue >= 0 AND MaxValue <= 100 AND NumPlaces >= 11 WHEN regexp_matches(StatVar, '^LifeExpectancy_Person') THEN MinValue >= 0 AND NumPlaces >= 10 WHEN regexp_matches(StatVar, '^Count_Person_') THEN MinValue >= 0 AND NumPlaces >= 640 WHEN regexp_matches(StatVar, '^Count_Student_') THEN MinValue >= 0 AND NumPlaces >= 1 ELSE MinValue >= 0 AND NumPlaces >= 14 END"
+      }
+    }
+  ]
+}

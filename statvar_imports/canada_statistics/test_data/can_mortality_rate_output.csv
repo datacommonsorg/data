@@ -1,0 +1,13 @@
+observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,observationPeriod
+country/CAN,2018,283706,dcid:Count_Death,,,
+country/CAN,2018,0.0077,dcid:Count_Death_AsAFractionOfCount_Person,,,
+country/CAN,2018,139223,dcid:Count_Death_Female,,,
+country/CAN,2018,0.0075,dcid:Count_Death_Female_AsAFractionOf_Count_Person_Female,,,
+country/CAN,2018,46123,dcid:Count_Death_85To89Years,,,
+country/CAN,2018,0.0923,dcid:Count_Death_85To89Years_AsAFractionOf_Count_Person_85To89Years,,,
+country/CAN,2018,24386,dcid:Count_Death_85To89Years_Female,,,
+country/CAN,2018,0.0804,dcid:Count_Death_85To89Years_Female_AsAFractionOf_Count_Person_85To89Years_Female,,,
+country/CAN,2018,60402,dcid:Count_Death_90OrMoreYears,,,
+country/CAN,2018,0.1961,dcid:Count_Death_90OrMoreYears_AsAFractionOf_Count_Person_90OrMoreYears,,,
+country/CAN,2018,40151,dcid:Count_Death_90OrMoreYears_Female,,,
+country/CAN,2018,0.1858,dcid:Count_Death_90OrMoreYears_Female_AsAFractionOf_Count_Person_90OrMoreYears_Female,,,

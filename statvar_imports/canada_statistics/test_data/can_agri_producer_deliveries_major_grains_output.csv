@@ -1,0 +1,7 @@
+observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,observationPeriod
+country/CAN,2026-09,8051044,dcid:Amount_FarmInventory_Grain,MetricTon,,P1M
+country/CAN,2026-09,4115082,dcid:Amount_FarmInventory_WheatForGrain,MetricTon,,P1M
+country/CAN,2026-09,274835,dcid:Amount_FarmInventory_OatsForGrain,MetricTon,,P1M
+country/CAN,2026-09,2750711,dcid:Amount_FarmInventory_Rapeseed,MetricTon,,P1M
+wikidataId/Q1989,2026-09,3759826,dcid:Amount_FarmInventory_Grain,MetricTon,,P1M
+wikidataId/Q1989,2026-09,1729587,dcid:Amount_FarmInventory_WheatForGrain,MetricTon,,P1M

@@ -1,0 +1,7 @@
+parameter,value
+output_columns,"observationAbout, observationDate, value, variableMeasured, unit, scalingFactor, observationPeriod"
+header_rows,1
+mapped_columns,"2,4,5,6"
+input_encoding,utf-8-sig
+# All places, StatVars, and units use canonical DCIDs; schema_reconciler otherwise queries the DC API for every unique numeric observation value.
+reconcile_nodes,False

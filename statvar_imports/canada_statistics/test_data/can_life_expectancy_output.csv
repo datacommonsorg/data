@@ -1,0 +1,6 @@
+observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,observationPeriod
+country/CAN,2024,82.16,dcid:LifeExpectancy_Person_0Years,Year,,
+country/CAN,2024,80.03,dcid:LifeExpectancy_Person_0Years_Male,Year,,
+country/CAN,2024,84.29,dcid:LifeExpectancy_Person_0Years_Female,Year,,
+wikidataId/Q1904,2024,82.21,dcid:LifeExpectancy_Person_1Years,Year,,
+wikidataId/Q1904,2024,1.48,dcid:LifeExpectancy_Person_110OrMoreYears_Female,Year,,

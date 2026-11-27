@@ -1,0 +1,13 @@
+#Key,Property1,Value1,Property2,Value2,Property3,Value3,Property4,Value4
+REF_DATE,observationDate,{Data},populationType,FarmInventory,measuredProperty,amount,observationPeriod,P1M
+GEO,observationAbout,{Data},,,,,,
+"Type of grain:Wheat, total",farmInventoryType,WheatForGrain,,,,,,
+Type of grain:Oats,farmInventoryType,OatsForGrain,,,,,,
+Type of grain:Barley,farmInventoryType,BarleyForGrain,,,,,,
+Type of grain:Rye,farmInventoryType,Rye,,,,,,
+Type of grain:Flaxseed,farmInventoryType,Flaxseed,,,,,,
+Type of grain:Canola (rapeseed),farmInventoryType,Rapeseed,,,,,,
+"Type of grain:Wheat, excluding durum",farmInventoryType,WheatExcludingDurum,,,,,,
+Type of grain:Durum wheat,farmInventoryType,DurumWheatForGrain,,,,,,
+"Type of grain:All grains, total",farmInventoryType,Grain,,,,,,
+VALUE,value,{Number},unit,MetricTon,,,,

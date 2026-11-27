@@ -1,0 +1,13 @@
+observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,observationPeriod
+country/CAN,2011,4746624,dcid:Count_Student_PublicSchool,,,
+country/CAN,2011,2438961,dcid:Count_Student_Male_PublicSchool,,,
+country/CAN,2011,142827,dcid:Count_Student_PreKindergarten_PublicSchool,,,
+country/CAN,2011,72789,dcid:Count_Student_Male_PreKindergarten_PublicSchool,,,
+country/CAN,2011,333357,dcid:Count_Student_SchoolGrade1_PublicSchool,,,
+country/CAN,2011,171372,dcid:Count_Student_Male_SchoolGrade1_PublicSchool,,,
+country/CAN,2011,24,dcid:Count_Student_SchoolGrade13_PublicSchool,,,
+country/CAN,2011,12,dcid:Count_Student_Male_SchoolGrade13_PublicSchool,,,
+wikidataId/Q1904,2011,2051865,dcid:Count_Student_PublicSchool,,,
+wikidataId/Q1904,2011,1057083,dcid:Count_Student_Male_PublicSchool,,,
+wikidataId/Q1904,2011,121899,dcid:Count_Student_PreKindergarten_PublicSchool,,,
+wikidataId/Q1904,2011,62046,dcid:Count_Student_Male_PreKindergarten_PublicSchool,,,

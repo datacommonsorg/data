@@ -1,0 +1,9 @@
+Node: E:can_pop_age_gender_output->E0
+observationAbout: C:can_pop_age_gender_output->observationAbout
+observationDate: C:can_pop_age_gender_output->observationDate
+value: C:can_pop_age_gender_output->value
+variableMeasured: C:can_pop_age_gender_output->variableMeasured
+unit: C:can_pop_age_gender_output->unit
+scalingFactor: C:can_pop_age_gender_output->scalingFactor
+observationPeriod: C:can_pop_age_gender_output->observationPeriod
+typeOf: dcs:StatVarObservation

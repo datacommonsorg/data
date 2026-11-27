@@ -1,0 +1,8 @@
+REF_DATE,GEO,DGUID,Age group,Sex,Element,UOM,UOM_ID,SCALAR_FACTOR,SCALAR_ID,VECTOR,COORDINATE,VALUE,STATUS,SYMBOL,TERMINATED,DECIMALS
+2024,Canada,2021A000011124,0 years,Both sexes,Life expectancy (in years) at age x (ex),Number,223,units,0,v1300144478,1.1.1.8,82.16,,,,2
+2024,Canada,2021A000011124,0 years,Males,Life expectancy (in years) at age x (ex),Number,223,units,0,v1300144487,1.1.2.8,80.03,,,,2
+2024,Canada,2021A000011124,0 years,Females,Life expectancy (in years) at age x (ex),Number,223,units,0,v1300144496,1.1.3.8,84.29,,,,2
+2024,Ontario,2021A000235,1 year,Both sexes,Life expectancy (in years) at age x (ex),Number,223,units,0,v1300159490,6.2.1.8,82.21,,,,2
+2024,Ontario,2021A000235,110 years and over,Females,Life expectancy (in years) at age x (ex),Number,223,units,0,v1300162451,6.111.3.8,1.48,,,,2
+2024,Canada,2021A000011124,0 years,Both sexes,Number of survivors at age x (lx),Number,223,units,0,v1300144471,1.1.1.1,100000,,,,0
+2024,Canada,2021A000011124,0 years,Both sexes,Death probability between age x and x+1 (qx),Number,223,units,0,v1300144473,1.1.1.3,0.00454,,,,5
