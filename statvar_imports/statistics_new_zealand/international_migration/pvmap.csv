@@ -1,0 +1,263 @@
+key,property,value,p2,v2,p3,v3,p4,v4
+year_month,observationDate,{Data}
+passenger_type,observationAbout,country/NZL
+estimate,value,{Number},populationType,Person,measuredProperty,count,statType,measuredValue
+TOTAL,#total,Total
+Long-term migrant,passengerType,LongTermMigrant
+Arrivals,migrationDirection,Arrivals
+NZ,citizenship,NZCitizen
+non-NZ,citizenship,NonNZCitizen
+NZ and Australian citizens,visaType,NZAndAustralianCitizenVisa
+Resident,visaType,ResidentVisa
+Student,visaType,StudentVisa
+Visitor,visaType,VisitorVisa
+Work,visaType,WorkVisa
+Other,visaType,OtherVisa
+Afghanistan,countryOfResidence,country/AFG
+Africa and the Middle East,countryOfResidence,AfricaAndTheMiddleEast
+Albania,countryOfResidence,country/ALB
+Algeria,countryOfResidence,country/DZA
+Andorra,countryOfResidence,country/AND
+Angola,countryOfResidence,country/AGO
+Anguilla,countryOfResidence,country/AIA
+Antarctica,countryOfResidence,antarctica
+Antigua and Barbuda,countryOfResidence,country/ATG
+Argentina,countryOfResidence,country/ARG
+Armenia,countryOfResidence,country/ARM
+Aruba,countryOfResidence,country/ABW
+Asia,countryOfResidence,asia
+Australia,countryOfResidence,country/AUS
+Austria,countryOfResidence,country/AUT
+Azerbaijan,countryOfResidence,country/AZE
+Bahamas,countryOfResidence,country/BHS
+Bahrain,countryOfResidence,country/BHR
+Bangladesh,countryOfResidence,country/BGD
+Barbados,countryOfResidence,country/BRB
+Belarus,countryOfResidence,country/BLR
+Belgium,countryOfResidence,country/BEL
+Belize,countryOfResidence,country/BLZ
+Benin,countryOfResidence,country/BEN
+Bermuda,countryOfResidence,country/BMU
+Bhutan,countryOfResidence,country/BTN
+Bolivia,countryOfResidence,country/BOL
+Bosnia and Herzegovina,countryOfResidence,country/BIH
+Botswana,countryOfResidence,country/BWA
+Brazil,countryOfResidence,country/BRA
+British Indian Ocean Territory,countryOfResidence,country/IOT
+Brunei Darussalam,countryOfResidence,country/BRN
+Bulgaria,countryOfResidence,country/BGR
+Burkina Faso,countryOfResidence,country/BFA
+Burundi,countryOfResidence,country/BDI
+Cabo Verde,countryOfResidence,country/CPV
+Cambodia,countryOfResidence,country/KHM
+Cameroon,countryOfResidence,country/CMR
+Canada,countryOfResidence,country/CAN
+Cayman Islands,countryOfResidence,country/CYM
+Central African Republic,countryOfResidence,country/CAF
+Chad,countryOfResidence,country/TCD
+Chile,countryOfResidence,country/CHL
+"China, People's Republic of",countryOfResidence,country/CHN
+Christmas Island,countryOfResidence,country/CXR
+Cocos (Keeling) Islands,countryOfResidence,country/CCK
+Colombia,countryOfResidence,country/COL
+Comoros,countryOfResidence,country/COM
+Congo,countryOfResidence,country/COG
+"Congo, the Democratic Republic of the",countryOfResidence,country/COD
+Cook Islands,countryOfResidence,country/COK
+Costa Rica,countryOfResidence,country/CRI
+Cote d'Ivoire,countryOfResidence,country/CIV
+Croatia,countryOfResidence,country/HRV
+Cuba,countryOfResidence,country/CUB
+Curacao,countryOfResidence,country/CUW
+Cyprus,countryOfResidence,country/CYP
+"Czech Republic (to Sep 2018), Czechia (from Oct 2018)",countryOfResidence,country/CZE
+Czechoslovakia,countryOfResidence,country/CSK
+Denmark,countryOfResidence,country/DNK
+Djibouti,countryOfResidence,country/DJI
+Dominica,countryOfResidence,country/DMA
+Dominican Republic,countryOfResidence,country/DOM
+East Timor,countryOfResidence,country/TLS,#Aggregate,sum
+Ecuador,countryOfResidence,country/ECU
+Egypt,countryOfResidence,country/EGY
+El Salvador,countryOfResidence,country/SLV
+Equatorial Guinea,countryOfResidence,country/GNQ
+Eritrea,countryOfResidence,country/ERI
+Estonia,countryOfResidence,country/EST
+Ethiopia,countryOfResidence,country/ETH
+Europe,countryOfResidence,europe
+Faeroe Islands,countryOfResidence,country/FRO
+Falkland Islands,countryOfResidence,country/FLK
+Fiji,countryOfResidence,country/FJI
+Finland,countryOfResidence,country/FIN
+France,countryOfResidence,country/FRA
+French Guiana,countryOfResidence,country/GUF
+French Polynesia,countryOfResidence,country/PYF
+Gabon,countryOfResidence,country/GAB
+Gambia,countryOfResidence,country/GMB
+Gaza Strip/Palestine/West Bank,countryOfResidence,country/PSE
+Georgia,countryOfResidence,country/GEO
+Germany,countryOfResidence,country/DEU
+Ghana,countryOfResidence,country/GHA
+Gibraltar,countryOfResidence,country/GIB
+Greece,countryOfResidence,country/GRC
+Greenland,countryOfResidence,country/GRL
+Grenada,countryOfResidence,country/GRD
+Guadeloupe,countryOfResidence,country/GLP
+Guam,countryOfResidence,country/GUM
+Guatemala,countryOfResidence,country/GTM
+Guinea,countryOfResidence,country/GIN
+Guyana,countryOfResidence,country/GUY
+Haiti,countryOfResidence,country/HTI
+Honduras,countryOfResidence,country/HND
+Hong Kong (Special Administrative Region),countryOfResidence,country/HKG
+Hungary,countryOfResidence,country/HUN
+Iceland,countryOfResidence,country/ISL
+India,countryOfResidence,country/IND
+Indonesia,countryOfResidence,country/IDN
+Iran,countryOfResidence,country/IRN
+Iraq,countryOfResidence,country/IRQ
+Ireland,countryOfResidence,country/IRL
+Israel,countryOfResidence,country/ISR
+Italy,countryOfResidence,country/ITA
+Jamaica,countryOfResidence,country/JAM
+Japan,countryOfResidence,country/JPN
+Jordan,countryOfResidence,country/JOR
+Kazakhstan,countryOfResidence,country/KAZ
+Kenya,countryOfResidence,country/KEN
+Kiribati,countryOfResidence,country/KIR
+"Korea, Democratic People's Republic of",countryOfResidence,country/PRK
+"Korea, Republic of",countryOfResidence,country/KOR
+Kosovo,countryOfResidence,country/XKX
+Kuwait,countryOfResidence,country/KWT
+Kyrgyzstan,countryOfResidence,country/KGZ
+Laos,countryOfResidence,country/LAO
+Latvia,countryOfResidence,country/LVA
+Lebanon,countryOfResidence,country/LBN
+Lesotho,countryOfResidence,country/LSO
+Liberia,countryOfResidence,country/LBR
+Libya,countryOfResidence,country/LBY
+Liechtenstein,countryOfResidence,country/LIE
+Lithuania,countryOfResidence,country/LTU
+Luxembourg,countryOfResidence,country/LUX
+Macau (Special Administrative Region),countryOfResidence,country/MAC
+Madagascar,countryOfResidence,country/MDG
+Malawi,countryOfResidence,country/MWI
+Malaysia,countryOfResidence,country/MYS
+Maldives,countryOfResidence,country/MDV
+Mali,countryOfResidence,country/MLI
+Malta,countryOfResidence,country/MLT
+Marshall Islands,countryOfResidence,country/MHL
+Martinique,countryOfResidence,country/MTQ
+Mauritania,countryOfResidence,country/MRT
+Mauritius,countryOfResidence,country/MUS
+Mayotte,countryOfResidence,country/MYT
+Mexico,countryOfResidence,country/MEX
+"Micronesia, Federated States of",countryOfResidence,country/FSM
+Moldova,countryOfResidence,country/MDA
+Monaco,countryOfResidence,country/MCO
+Mongolia,countryOfResidence,country/MNG
+Montenegro,countryOfResidence,country/MNE
+Montserrat,countryOfResidence,country/MSR
+Morocco,countryOfResidence,country/MAR
+Mozambique,countryOfResidence,country/MOZ
+Myanmar,countryOfResidence,country/MMR
+Namibia,countryOfResidence,country/NAM
+Nauru,countryOfResidence,country/NRU
+Nepal,countryOfResidence,country/NPL
+Netherlands,countryOfResidence,country/NLD
+Netherlands Antilles,countryOfResidence,country/ANT
+New Caledonia,countryOfResidence,country/NCL
+New Zealand,countryOfResidence,country/NZL
+Nicaragua,countryOfResidence,country/NIC
+Niger,countryOfResidence,country/NER
+Nigeria,countryOfResidence,country/NGA
+Niue,countryOfResidence,country/NIU
+Norfolk Island,countryOfResidence,country/NFK
+North Macedonia,countryOfResidence,country/MKD
+Northern Mariana Islands,countryOfResidence,country/MNP
+Norway,countryOfResidence,country/NOR
+Not stated,countryOfResidence,NotStated
+Oceania and Antarctica,countryOfResidence,OceaniaAndAntarctica
+Oman,countryOfResidence,country/OMN
+Pakistan,countryOfResidence,country/PAK
+Palau,countryOfResidence,country/PLW
+Panama,countryOfResidence,country/PAN
+Papua New Guinea,countryOfResidence,country/PNG
+Paraguay,countryOfResidence,country/PRY
+Peru,countryOfResidence,country/PER
+Philippines,countryOfResidence,country/PHL
+Pitcairn,countryOfResidence,country/PCN
+Poland,countryOfResidence,country/POL
+Portugal,countryOfResidence,country/PRT
+Puerto Rico,countryOfResidence,country/PRI
+Qatar,countryOfResidence,country/QAT
+Reunion,countryOfResidence,country/REU
+Romania,countryOfResidence,country/ROU
+Russia,countryOfResidence,country/RUS
+Rwanda,countryOfResidence,country/RWA
+Samoa,countryOfResidence,country/WSM
+"Samoa, American",countryOfResidence,country/ASM
+San Marino,countryOfResidence,country/SMR
+Sao Tome and Principe,countryOfResidence,country/STP
+Saudi Arabia,countryOfResidence,country/SAU
+Senegal,countryOfResidence,country/SEN
+Serbia,countryOfResidence,country/SRB
+Seychelles,countryOfResidence,country/SYC
+Sierra Leone,countryOfResidence,country/SLE
+Singapore,countryOfResidence,country/SGP
+Slovakia,countryOfResidence,country/SVK
+Slovenia,countryOfResidence,country/SVN
+Solomon Islands,countryOfResidence,country/SLB
+Somalia,countryOfResidence,country/SOM
+South Africa,countryOfResidence,country/ZAF
+South Georgia and the South Sandwich Islands,countryOfResidence,country/SGS
+South Sudan,countryOfResidence,country/SSD
+Spain,countryOfResidence,country/ESP
+Sri Lanka,countryOfResidence,country/LKA
+St Helena,countryOfResidence,country/SHN
+St Kitts and Nevis,countryOfResidence,country/KNA
+St Lucia,countryOfResidence,country/LCA
+St Maarten (Dutch Part),countryOfResidence,country/SXM
+St Pierre and Miquelon,countryOfResidence,country/SPM
+St Vincent and the Grenadines,countryOfResidence,country/VCT
+Sudan,countryOfResidence,country/SDN
+Suriname,countryOfResidence,country/SUR
+"Swaziland (to Sep 2018), Eswatini (from Oct 2018)",countryOfResidence,country/SWZ
+Sweden,countryOfResidence,country/SWE
+Switzerland,countryOfResidence,country/CHE
+Syria,countryOfResidence,country/SYR
+Taiwan,countryOfResidence,country/TWN
+Tajikistan,countryOfResidence,country/TJK
+Tanzania,countryOfResidence,country/TZA
+Thailand,countryOfResidence,country/THA
+The Americas,countryOfResidence,TheAmericas
+Timor-Leste,countryOfResidence,country/TLS,#Aggregate,sum
+Togo,countryOfResidence,country/TGO
+Tokelau,countryOfResidence,country/TKL
+Tonga,countryOfResidence,country/TON
+Trinidad and Tobago,countryOfResidence,country/TTO
+Tunisia,countryOfResidence,country/TUN
+Turkey,countryOfResidence,country/TUR
+Turkmenistan,countryOfResidence,country/TKM
+Turks and Caicos Islands,countryOfResidence,country/TCA
+Tuvalu,countryOfResidence,country/TUV
+Uganda,countryOfResidence,country/UGA
+Ukraine,countryOfResidence,country/UKR
+United Arab Emirates,countryOfResidence,country/ARE
+United Kingdom,countryOfResidence,country/GBR
+United States Minor Outlying Islands,countryOfResidence,country/UMI
+United States of America,countryOfResidence,country/USA
+Uruguay,countryOfResidence,country/URY
+Uzbekistan,countryOfResidence,country/UZB
+Vanuatu,countryOfResidence,country/VUT
+Vatican City State,countryOfResidence,country/VAT
+Venezuela,countryOfResidence,country/VEN
+Viet Nam,countryOfResidence,country/VNM
+"Virgin Islands, British",countryOfResidence,country/VGB
+"Virgin Islands, United States",countryOfResidence,country/VIR
+Wallis and Futuna,countryOfResidence,country/WLF
+Western Sahara,countryOfResidence,country/ESH
+Yemen,countryOfResidence,country/YEM
+Yugoslavia/Serbia and Montenegro,countryOfResidence,YugoslaviaOrSerbiaAndMontenegro
+Zambia,countryOfResidence,country/ZMB
+Zimbabwe,countryOfResidence,country/ZWE
