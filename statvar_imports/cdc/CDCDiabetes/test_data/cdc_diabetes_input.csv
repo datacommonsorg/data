@@ -1,0 +1,3 @@
+observationAbout,observationDate,diabetes_total_pct,diabetes_total_stderr,diabetes_male_pct,diabetes_male_stderr,diabetes_female_pct,diabetes_female_stderr,obesity_total_pct,obesity_total_stderr,obesity_male_pct,obesity_male_stderr,obesity_female_pct,obesity_female_stderr,inactivity_total_pct,inactivity_total_stderr,inactivity_male_pct,inactivity_male_stderr,inactivity_female_pct,inactivity_female_stderr
+01001,2022,9.8,1.22449,10.4,1.32653,9.2,1.12245,36.5,2.04082,35.8,2.14286,37.2,1.93878,24.1,1.53061,22.5,1.63265,25.6,1.42857
+56039,2024,4.5,1.02041,5.1,1.12245,3.9,0.91837,18.2,1.53061,19,1.63265,17.4,1.42857,12.5,1.22449,11.8,1.32653,13.2,1.12245

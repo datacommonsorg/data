@@ -270,8 +270,8 @@ def _get_bbox_coordinates(bounds: str) -> ee.Geometry.BBox:
         return None
     # Extract all coordinates.
     coords = list(filter(None, re.split(r'[^0-9\.+-]', bounds)))
-    latitudes = [float(coords[l]) for l in range(0, len(coords), 2)]
-    longitudes = [float(coords[l]) for l in range(1, len(coords), 2)]
+    latitudes = [float(coords[idx]) for idx in range(0, len(coords), 2)]
+    longitudes = [float(coords[idx]) for idx in range(1, len(coords), 2)]
     # Return the min/max latitude,longitude
     return {
         'west': min(longitudes),
@@ -282,7 +282,7 @@ def _get_bbox_coordinates(bounds: str) -> ee.Geometry.BBox:
 
 
 def ee_filter_bounds(col: ee.ImageCollection,
-                     config: dict = {}) -> ee.ImageCollection:
+                     config: dict | None = None) -> ee.ImageCollection:
     '''Retruns image or image collection filtered by the bounds
     in config[ee_bounds].
     Args:
@@ -291,6 +291,8 @@ def ee_filter_bounds(col: ee.ImageCollection,
     Returns:
       filtered image collection.
     '''
+    if config is None:
+        config = {}
     bbox_coords = _get_bbox_coordinates(config.get('ee_bounds', None))
     if bbox_coords:
         logging.info(f'Filtering image by bounds: {bbox_coords}')
@@ -300,7 +302,7 @@ def ee_filter_bounds(col: ee.ImageCollection,
 
 
 def ee_filter_date(col: ee.ImageCollection,
-                   config: dict = {}) -> ee.ImageCollection:
+                   config: dict | None = None) -> ee.ImageCollection:
     '''Returns the image collection filtered for the date range.
     Args:
       col: image collection
@@ -310,6 +312,8 @@ def ee_filter_date(col: ee.ImageCollection,
       filtered image collection.
     '''
     # Get start date or last week.
+    if config is None:
+        config = {}
     start_date = config.get('start_date', None)
     end_date = config.get('end_date', None)
     if start_date is None and end_date is None:
@@ -337,7 +341,7 @@ def ee_filter_date(col: ee.ImageCollection,
 
 
 def ee_reduce_image_collection(col: ee.ImageCollection,
-                               config: dict = {}) -> ee.Image:
+                               config: dict | None = None) -> ee.Image:
     '''Returns the image reduced from the image collection.
     Args:
       col: image collection
@@ -349,6 +353,8 @@ def ee_reduce_image_collection(col: ee.ImageCollection,
     Returns:
       image with bands changed to '<band>_<reducer>', eg: 'water_max'
     '''
+    if config is None:
+        config = {}
     if not isinstance(col, ee.ImageCollection):
         logging.error(f'Cannot reduce image: {col.id()} with config: {config}')
         return col
@@ -554,7 +560,8 @@ def ee_generate_image(config: dict) -> ee.Image:
     return img
 
 
-def export_ee_image_to_gcs(ee_image: ee.Image, config: dict = {}) -> str:
+def export_ee_image_to_gcs(ee_image: ee.Image,
+                           config: dict | None = None) -> str:
     '''Launch a task to export an EE image and returns the task id.
     View task status on https://code.earthengine.google.com/tasks.
     Assumes ee.Authenticate() has been run and user has access to the gcs_project.
@@ -568,6 +575,8 @@ def export_ee_image_to_gcs(ee_image: ee.Image, config: dict = {}) -> str:
       Once complete, the GCS folder will have multiple files with the name prefix.
     '''
     # Get the image region to export.
+    if config is None:
+        config = {}
     region_bbox = None
     bbox_coords = None
     if config.get('ee_bounds'):

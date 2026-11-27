@@ -597,7 +597,9 @@ def main(_):
     csv_data_files = FLAGS.csv_data_files
     if len(csv_data_files) == 0:
         logging.info('Downloading energy data set files')
-        csv_data_files = download.download_un_energy_dataset()
+        csv_data_files = download.download_un_energy_dataset(
+            FLAGS.download_data_dir, FLAGS.datasets, FLAGS.start_year,
+            FLAGS.end_year, FLAGS.years_per_batch)
 
     if len(csv_data_files) > 0 and FLAGS.output_path != '':
         process(csv_data_files, FLAGS.output_path, FLAGS.debug_lines,
@@ -609,5 +611,7 @@ def main(_):
 
 if __name__ == '__main__':
     _define_flags()
+    # Also accept the download flags, used when --csv_data_files is empty.
+    download._define_flags()
     logging.info('running main')
     app.run(main)

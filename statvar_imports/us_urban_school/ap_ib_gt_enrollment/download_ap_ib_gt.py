@@ -28,10 +28,14 @@ from retry import retry
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_boolean('ap', False, 'Download Advanced Placement data only.')
-flags.DEFINE_boolean('ib', False,
-                     'Download International Baccalaureate data only.')
-flags.DEFINE_boolean('gt', False, 'Download Gifted and Talented data only.')
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_boolean('ap', False, 'Download Advanced Placement data only.')
+    flags.DEFINE_boolean('ib', False,
+                         'Download International Baccalaureate data only.')
+    flags.DEFINE_boolean('gt', False, 'Download Gifted and Talented data only.')
+
 
 BASE_URL_TEMPLATE = "https://civilrightsdata.ed.gov/assets/ocr/docs/{}.zip"
 
@@ -184,7 +188,7 @@ def add_year_column(file_path, year):
             )
 
         raise RuntimeError(
-            f"Failed to add year/ncesid column to {file_path.name}: {e}")
+            f"Failed to add year/ncesid column to {file_path.name}: {e}") from e
 
 
 def generate_future_configs(start_year):
@@ -290,7 +294,7 @@ def download_and_extract(config_key, config_data, data_type, output_dir):
     except Exception as e:
         raise RuntimeError(
             f"Failed to connect/download archive after retries for {config_key}: {e}"
-        )
+        ) from e
 
     logging.info("Download successful. Now extracting...")
 
@@ -398,7 +402,7 @@ def download_and_extract(config_key, config_data, data_type, output_dir):
     except Exception as e:
         raise RuntimeError(
             f"An unhandled error occurred during extraction/processing for {config_key}: {e}"
-        )
+        ) from e
 
 
 def main(_):
@@ -441,4 +445,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

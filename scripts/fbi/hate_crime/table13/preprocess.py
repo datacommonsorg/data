@@ -77,9 +77,9 @@ def _write_row(year: int, geo: str, statvar_dcid: str, obs_date: str,
     writer.writerow(processed_dict)
 
 
-def _remove_from_list(l: list, e: str):
+def _remove_from_list(items: list, e: str):
     try:
-        l.remove(e)
+        items.remove(e)
     except ValueError:
         print(f"{e} not in list")
 
@@ -222,12 +222,12 @@ def main(argv):
         )
 
     with tempfile.TemporaryDirectory() as tmp_dir:
-        for year, config in config[table_num].items():
-            xls_file_path = config['path']
+        for year, year_config in config[table_num].items():
+            xls_file_path = year_config['path']
             xls_file_path = os.path.join(_SCRIPT_PATH, '../', xls_file_path)
             csv_file_path = os.path.join(tmp_dir, year + '.csv')
             logging.info(f"Processing : {xls_file_path}")
-            read_file = pd.read_excel(xls_file_path, **config['args'])
+            read_file = pd.read_excel(xls_file_path, **year_config['args'])
             read_file = _clean_dataframe(read_file, year, table_num)
             read_file.insert(_YEAR_INDEX, 'Year', year)
             read_file.to_csv(csv_file_path, header=True, index=False)

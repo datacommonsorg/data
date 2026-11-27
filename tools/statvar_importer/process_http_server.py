@@ -186,8 +186,10 @@ class ProcessHandler(server.SimpleHTTPRequestHandler):
         self.wfile.write(bytes(end_msg, 'utf-8'))
         logging.info(end_msg)
 
-    def get_html_form(self, form_config: dict = {}) -> str:
+    def get_html_form(self, form_config: dict | None = None) -> str:
         """Returns the HTML form for the config."""
+        if form_config is None:
+            form_config = {}
         form_title = form_config.get('form_title', '')
         if not form_title:
             script = _HTTP_CONFIG.get('script', sys.argv[0])
@@ -229,11 +231,13 @@ class ProcessHandler(server.SimpleHTTPRequestHandler):
 </html>"""
         return form_html
 
-    def parse_form_data(self, form_config: dict = {}):
+    def parse_form_data(self, form_config: dict | None = None):
         """Returns a dictionary with form input name as key and value from POST data
 
     for all the form inputs in the form_config.
     """
+        if form_config is None:
+            form_config = {}
         form = cgi.FieldStorage(fp=self.rfile,
                                 headers=self.headers,
                                 environ={'REQUEST_METHOD': 'POST'})
@@ -325,12 +329,14 @@ def run_http_server(
     http_port: int = 0,
     script: str = '',
     module: str = '__main__',
-    config: dict = {},
+    config: dict | None = None,
 ):
     """Runs a HTTP server that accepts a form for the given config.
 
   This is a blocking call that doesn't return to the caller.
   """
+    if config is None:
+        config = {}
     if http_port <= 0:
         http_port = _FLAGS.http_port
         if http_port <= 0:

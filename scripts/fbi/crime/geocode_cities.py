@@ -35,7 +35,7 @@ def _init_geocodes_from_file(csv_reader, city):
     count_lines = 0
     for a in csv_reader:
         if a[0] in city.keys():
-            assert False, 'Duplicate city found {}'.format(a)
+            raise AssertionError('Duplicate city found {}'.format(a))
         city[a[0]] = a[1]
         count_lines += 1
     logging.info('Lines read from geocode file {}'.format(count_lines))
@@ -95,8 +95,9 @@ def update_crime_geocode(crime, geo_codes, found_set, cities_not_found_set):
         # In case of duplicate, assert.
         # Found the duplicate rows and update preprocess._shouldSkipSpecialLine.
         if city_state in found_set:
-            assert False, 'duplicate city state {} for {}'.format(
-                city_state, crime['Year'].lower().strip())
+            raise AssertionError('duplicate city state {} for {}'.format(
+                city_state,
+                str(crime['Year']).lower().strip()))
         found_set.add(city_state)
     except KeyError:
         cities_not_found_set.add('{}, {}, {}'.format(state, city,

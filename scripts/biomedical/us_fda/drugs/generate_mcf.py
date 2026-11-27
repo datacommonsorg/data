@@ -147,7 +147,7 @@ def zip_ingred_semi_sep(mcf_file, strength_format_map, row):
         strength_list_comma_sep = strength_list.split(',')
         strength_lists.append(strength_list_comma_sep)
 
-    for index, stren in enumerate(strength_lists[0]):
+    for index, _stren in enumerate(strength_lists[0]):
         strength_dcids.append(base_dcid + '_' + str(index))
         active_ingred_dcids = []
         for ingred_index, ingred_pair_list in enumerate(strength_lists):
