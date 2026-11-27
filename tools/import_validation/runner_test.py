@@ -316,6 +316,62 @@ class TestValidationRunner(unittest.TestCase):
         self.assertEqual(output_df.iloc[0]['ValidationName'], 'check_percent')
         self.assertEqual(output_df.iloc[0]['Status'], 'PASSED')
 
+    @patch('tools.import_validation.runner.Validator')
+    def test_runner_deleted_entity_count(self, MockValidator):
+        mock_validator_instance = MockValidator.return_value
+        expected_result = ValidationResult(
+            ValidationStatus.FAILED,
+            'DELETED_ENTITY_COUNT',
+            message=
+            'Found 3 deleted entities, which is over the threshold of 0.',
+            details={
+                'deleted_entity_count': 3,
+                'threshold': 0
+            })
+        mock_validator_instance.validate_deleted_entity_count.return_value = (
+            expected_result)
+
+        differ_dir = os.path.join(self.test_dir.name, 'differ_entity_out')
+        os.makedirs(differ_dir, exist_ok=True)
+        differ_json = os.path.join(differ_dir, 'differ_summary.json')
+        with open(differ_json, 'w') as f:
+            json.dump({
+                'previous_schema_count': 50,
+                'deleted_schema_count': 3
+            }, f)
+
+        with open(self.config_path, 'w') as f:
+            json.dump(
+                {
+                    'rules': [{
+                        'rule_id': 'check_deleted_entity_count',
+                        'validator': 'DELETED_ENTITY_COUNT',
+                        'params': {
+                            'threshold': 0
+                        }
+                    }]
+                }, f)
+
+        runner = ValidationRunner(validation_config_path=self.config_path,
+                                  stats_summary=self.stats_path,
+                                  differ_output=differ_dir,
+                                  lint_report=self.report_path,
+                                  validation_output=self.output_path)
+        overall_status, _ = runner.run_validations()
+
+        self.assertFalse(overall_status)
+        call_args, _ = (
+            mock_validator_instance.validate_deleted_entity_count.call_args)
+        self.assertEqual(call_args[0]['previous_schema_count'], 50)
+        self.assertEqual(call_args[0]['deleted_schema_count'], 3)
+        self.assertEqual(call_args[1]['threshold'], 0)
+
+        output_df = pd.read_csv(self.output_path)
+        self.assertEqual(len(output_df), 1)
+        self.assertEqual(output_df.iloc[0]['ValidationName'],
+                         'check_deleted_entity_count')
+        self.assertEqual(output_df.iloc[0]['Status'], 'FAILED')
+
     @patch('tools.import_validation.runner.logging')
     @patch('tools.import_validation.runner.Validator')
     def test_runner_handles_unknown_validation(self, MockValidator,

@@ -676,7 +676,7 @@ def test_CSVfile_list(csv_path_list: list,
                       output_path: str = '../output/',
                       filewise: bool = False,
                       show_summary: bool = False,
-                      is_metadata: list = [False],
+                      is_metadata: list | None = None,
                       delimiter: str = '!!') -> None:
     """Runs requested list of tests on a list of csvs and spec and returns their combined result.
 
@@ -691,6 +691,8 @@ def test_CSVfile_list(csv_path_list: list,
         delimiter: delimiter seperating tokens within single column name string.
   """
     # clean the file paths
+    if is_metadata is None:
+        is_metadata = [False]
     spec_path = os.path.expanduser(spec_path)
     output_path = os.path.expanduser(output_path)
     if not os.path.exists(output_path):
@@ -704,7 +706,7 @@ def test_CSVfile_list(csv_path_list: list,
 
     # assume data overlays file if insufficient information is present
     if len(is_metadata) < len(csv_path_list):
-        for i in range(0, (len(csv_path_list) - len(is_metadata))):
+        for _ in range(0, (len(csv_path_list) - len(is_metadata))):
             is_metadata.append(False)
 
     print('Testing ', csv_path_list, 'against spec at', spec_path)

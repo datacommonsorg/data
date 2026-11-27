@@ -1,0 +1,9 @@
+parameter,value
+#places_within,country/MNG
+output_columns,"observationAbout,observationDate,value,variableMeasured"
+url,https://data.1212.mn/api/v1/en/NSO/Regional%20development/Education%2C%20Science%2C%20and%20Intellectual%20Property/DT_NSO_2001_013V1.px
+input_encoding,utf-8-sig
+header_rows,1
+header_columns,2
+mapped_rows,1
+mapped_columns,2

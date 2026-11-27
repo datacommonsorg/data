@@ -94,7 +94,7 @@ def get_geoId(row: str, geo_map: dict) -> str:
     loc = f"{str(row['Latitude'])},{str(row['Longitude'])}"
     try:
         return ', '.join(geo_map[loc])
-    except:
+    except KeyError:
         print(f"{loc} -- does not exist in the map")
 
 

@@ -12,16 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from fastapi import FastAPI
-from routes import imports, events, database
-from utils.logging import log_requests
 from __init__ import __version__
+from fastapi import FastAPI
+from routes import database
+from routes import events
+from routes import imports
+from utils.logging import log_requests
 
 app = FastAPI(
     title="Data Commons Import Helper",
-    description="FastAPI service providing helper routines for Import Automation workflow.",
-    version=__version__
-)
+    description=
+    "FastAPI service providing helper routines for Import Automation workflow.",
+    version=__version__)
 
 # Register the centralized HTTP request/response logging middleware
 app.middleware("http")(log_requests)

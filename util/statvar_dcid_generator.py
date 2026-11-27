@@ -530,7 +530,7 @@ def _generate_boolean_value_name(prop: str, value: str) -> str:
             pop = prop[2:]
             prefix = 'Is' if constraint_value else 'Not'
         else:
-            assert False, f'Unhandled prefix {prop}'
+            raise AssertionError(f'Unhandled prefix {prop}')
         return prefix + pop
     return None
 

@@ -81,10 +81,10 @@ def get_default_filter_data_config() -> dict:
     }
 
 
-def filter_data_get_series_key(pvs: dict,
-                               ignore_props={'observationDate',
-                                             'value'}) -> str:
+def filter_data_get_series_key(pvs: dict, ignore_props=None) -> str:
     '''Returns the key for timeseries for the pvs without date and value.'''
+    if ignore_props is None:
+        ignore_props = {'observationDate', 'value'}
     key_tokens = []
     for prop in sorted(pvs.keys()):
         val = pvs[prop]
@@ -94,8 +94,10 @@ def filter_data_get_series_key(pvs: dict,
 
 
 def filter_data_get_date_key(pvs: dict,
-                             select_props: list = ['observationDate']) -> str:
+                             select_props: list | None = None) -> str:
     '''Return the value of the prop in the order of selected props.'''
+    if select_props is None:
+        select_props = ['observationDate']
     for prop in select_props:
         val = pvs.get(prop)
         if val is not None:
@@ -103,8 +105,10 @@ def filter_data_get_date_key(pvs: dict,
     return ''
 
 
-def filter_data_get_value(pvs: dict, value_props: list = ['value']) -> float:
+def filter_data_get_value(pvs: dict, value_props: list | None = None) -> float:
     '''Returns the numeric value from the pvs.'''
+    if value_props is None:
+        value_props = ['value']
     value = None
     for prop in value_props:
         value = pvs.get(prop)
@@ -120,7 +124,7 @@ def filter_data_series(data: dict,
                        max_yearly_change: float = None,
                        keep_recent: bool = True,
                        counters: Counters = None,
-                       value_props: list = ['value']) -> dict:
+                       value_props: list | None = None) -> dict:
     '''Returns filtered values from series that pass thresholds.
     Scans data values in decreasing order of series key like date
     and compares the change in value against thresholds.
@@ -140,6 +144,8 @@ def filter_data_series(data: dict,
     Returns:
       data dictionary with entries with values not matching filter thresholds removed.
     '''
+    if value_props is None:
+        value_props = ['value']
     if counters is None:
         counters = Counters()
     data_dropped = False
@@ -264,7 +270,7 @@ def filter_data_svobs(svobs: dict,
         filter_data_series(series, filter_min, filter_max, filter_max_change,
                            filter_max_yearly_change, filter_keep_recent,
                            counters, value_props)
-        for date, pvs in series.items():
+        for _date, pvs in series.items():
             # Add the svobs PVs keyed by the input key.
             key = pvs.pop('#Key')
             filtered_series[key] = pvs

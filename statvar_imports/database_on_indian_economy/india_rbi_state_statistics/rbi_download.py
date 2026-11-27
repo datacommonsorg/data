@@ -31,11 +31,15 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 INPUT_DIR = os.path.join(SCRIPT_DIR, "input_files")
 DEFAULT_CONFIG_JSON = os.path.join(SCRIPT_DIR, 'configs.json')
 
-flags.DEFINE_string('config_file_path', DEFAULT_CONFIG_JSON,
-                    'Config file path (local json or gs:// path)')
-flags.DEFINE_bool(
-    'force_download', False,
-    'If true, redownload files even if valid local copies exist.')
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('config_file_path', DEFAULT_CONFIG_JSON,
+                        'Config file path (local json or gs:// path)')
+    flags.DEFINE_bool(
+        'force_download', False,
+        'If true, redownload files even if valid local copies exist.')
+
 
 DEFAULT_HEADERS = {
     'User-Agent': ('Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
@@ -89,16 +93,7 @@ def _load_local_config(file_path):
     return None
 
 
-def reads_config_file():
-    _FLAGS = flags.FLAGS
-    try:
-        config_file_path = _FLAGS.config_file_path
-    except (flags.UnparsedFlagAccessError, AttributeError):
-        try:
-            config_file_path = _FLAGS['config_file_path'].value
-        except Exception:
-            config_file_path = DEFAULT_CONFIG_JSON
-
+def reads_config_file(config_file_path: str):
     # 1. If it's a local file path (or doesn't start with gs://), try loading it
     if config_file_path and not config_file_path.startswith('gs://'):
         config = _load_local_config(config_file_path)
@@ -146,7 +141,7 @@ def reads_config_file():
         "Cannot extract url and related configs: all sources failed.")
 
 
-def download_files(URL_CONFIG, session=None, delay=0.5):
+def download_files(URL_CONFIG, session=None, delay=0.5, force_download=False):
     if not URL_CONFIG:
         logging.warning("No URL configurations provided to download.")
         return []
@@ -176,12 +171,6 @@ def download_files(URL_CONFIG, session=None, delay=0.5):
         target_dir = os.path.join(INPUT_DIR, category_name)
         os.makedirs(target_dir, exist_ok=True)
         file_path = os.path.join(target_dir, file_name)
-
-        force_download = False
-        try:
-            force_download = flags.FLAGS.force_download
-        except (flags.UnparsedFlagAccessError, AttributeError):
-            pass
 
         if os.path.exists(file_path):
             if not force_download and os.path.getsize(file_path) > 0:
@@ -362,12 +351,11 @@ def preprocess_files(directory_path):
     return []
 
 
-def main(argv):
-    if len(argv) > 1:
-        raise app.UsageError('Too many command-line arguments.')
-    configs = reads_config_file()
+def run(config_file_path: str, force_download: bool) -> None:
+    """Downloads the RBI tables listed in the config and preprocesses them."""
+    configs = reads_config_file(config_file_path)
     RBI_URL = configs['URLS_CONFIG']
-    failed_downloads = download_files(RBI_URL)
+    failed_downloads = download_files(RBI_URL, force_download=force_download)
     if failed_downloads:
         logging.fatal(
             f"Download failed for {len(failed_downloads)} table(s): {failed_downloads}"
@@ -388,5 +376,12 @@ def main(argv):
     logging.info("Pre-process Completed successfully")
 
 
+def main(argv):
+    if len(argv) > 1:
+        raise app.UsageError('Too many command-line arguments.')
+    run(flags.FLAGS.config_file_path, flags.FLAGS.force_download)
+
+
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

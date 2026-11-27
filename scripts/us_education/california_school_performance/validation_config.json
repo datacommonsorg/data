@@ -1,0 +1,23 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_max_date_freshness",
+            "description": "Ensure latest observation year is within allowable annual release lag",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT StatVar, CAST(MaxDate AS INTEGER) AS max_year FROM stats",
+                "condition": "max_year >= YEAR(CURRENT_DATE) - 2"
+            }
+        },
+        {
+            "rule_id": "check_max_date_consistent_across_statvars",
+            "description": "Ensure all core StatVars (excluding sparse ToBeDetermined subgroup) advance to the dataset's latest observation year",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT StatVar, CAST(MaxDate AS INTEGER) AS max_year, (SELECT MAX(CAST(MaxDate AS INTEGER)) FROM stats) AS dataset_max_year FROM stats WHERE StatVar NOT LIKE '%ToBeDetermined%'",
+                "condition": "max_year = dataset_max_year"
+            }
+        }
+    ]
+}

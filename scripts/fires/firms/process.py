@@ -61,7 +61,7 @@ def _download_fires_csv(urls: list, output_csv: str):
     for url in urls:
         # Download CSV from one url.
         csv_data = ''
-        for retry in range(10):
+        for _ in range(10):
             csv_data = download_util.request_url(url=url,
                                                  method='GET',
                                                  output='text',
