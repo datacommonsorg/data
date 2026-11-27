@@ -24,23 +24,11 @@ import tempfile
 import unittest
 from unittest import mock
 
-from absl import flags
-
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 if SCRIPT_DIR not in sys.path:
     sys.path.insert(0, SCRIPT_DIR)
 
-FLAGS = flags.FLAGS
-_SAVED_OUTPUT_DIR_FLAG = (FLAGS['output_dir']
-                          if 'output_dir' in FLAGS else None)
-
 import download_demographic  # pylint: disable=g-import-not-at-top
-
-if _SAVED_OUTPUT_DIR_FLAG is not None:
-    delattr(FLAGS, 'output_dir')
-    FLAGS['output_dir'] = _SAVED_OUTPUT_DIR_FLAG
-if not FLAGS.is_parsed():
-    FLAGS.mark_as_parsed()
 
 TEST_DATA_DIR = os.path.join(SCRIPT_DIR, 'test_data')
 SV_PROCESSOR = os.environ.get(

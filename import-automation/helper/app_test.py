@@ -13,15 +13,17 @@
 # limitations under the License.
 
 import base64
-import json
 import unittest
-from unittest.mock import MagicMock, patch
-from fastapi.testclient import TestClient
-from google.api_core import exceptions as gcp_exceptions
+from unittest.mock import MagicMock
+from unittest.mock import patch
+
 from app import app
 from clients.bigquery import BigQueryClient as HelperBigQueryClient
 import config
-from dependencies import get_bigquery_client, get_storage_client
+from dependencies import get_bigquery_client
+from dependencies import get_storage_client
+from fastapi.testclient import TestClient
+from google.api_core import exceptions as gcp_exceptions
 from utils import imports as import_utils
 
 client = TestClient(app)
@@ -42,19 +44,16 @@ class AppTest(unittest.TestCase):
         app.dependency_overrides[get_storage_client] = lambda: mock_storage
 
         payload = {
-            "imports": [
-                {
-                    "importName": "import1",
-                    "status": "STAGING",
-                    "latestVersion": "gs://bucket/import1/version1/graph",
-                    "graphPath": "graph"
-                },
-                {
-                    "importName": "import2",
-                    "status": "FAILURE",
-                    "latestVersion": "gs://bucket/import2/version2/graph"
-                }
-            ],
+            "imports": [{
+                "importName": "import1",
+                "status": "STAGING",
+                "latestVersion": "gs://bucket/import1/version1/graph",
+                "graphPath": "graph"
+            }, {
+                "importName": "import2",
+                "status": "FAILURE",
+                "latestVersion": "gs://bucket/import2/version2/graph"
+            }],
             "jobId": "job123",
             "executionTime": 120,
             "dataVolume": 1024
@@ -65,17 +64,24 @@ class AppTest(unittest.TestCase):
         self.assertEqual(response.json()["status"], "OK")
 
         # Storage should only be updated for the STAGING import
-        mock_storage.update_version_file.assert_any_call("import1", "graph", is_staging=True)
-        mock_storage.update_version_file.assert_any_call("import1", "graph", is_staging=False)
-        mock_storage.update_provenance_file.assert_called_once_with("import1", "graph")
+        mock_storage.update_version_file.assert_any_call("import1",
+                                                         "graph",
+                                                         is_staging=True)
+        mock_storage.update_version_file.assert_any_call("import1",
+                                                         "graph",
+                                                         is_staging=False)
+        mock_storage.update_provenance_file.assert_called_once_with(
+            "import1", "graph")
         self.assertEqual(mock_storage.update_import_summary.call_count, 1)
 
         # BigQuery update_import_summary should be called once per import (updating ImportHistory & ImportSummary view)
         self.assertEqual(mock_bigquery.update_import_summary.call_count, 2)
         first_call = mock_bigquery.update_import_summary.call_args_list[0]
         second_call = mock_bigquery.update_import_summary.call_args_list[1]
-        self.assertEqual(first_call.kwargs.get("comment"), "import-workflow:job123")
-        self.assertEqual(second_call.kwargs.get("comment"), "import-failure:job123")
+        self.assertEqual(first_call.kwargs.get("comment"),
+                         "import-workflow:job123")
+        self.assertEqual(second_call.kwargs.get("comment"),
+                         "import-failure:job123")
 
     def test_update_import_version_success(self):
         mock_bigquery = MagicMock()
@@ -100,7 +106,8 @@ class AppTest(unittest.TestCase):
         response = client.post("/imports/version", json=payload)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json()["status"], "OK")
-        self.assertIn("Import: import1 Version: ver_import1 Status: STAGING", response.json()["message"])
+        self.assertIn("Import: import1 Version: ver_import1 Status: STAGING",
+                      response.json()["message"])
 
         self.assertEqual(mock_storage.update_provenance_file.call_count, 2)
         self.assertEqual(mock_storage.update_version_file.call_count, 2)
@@ -134,14 +141,16 @@ class AppTest(unittest.TestCase):
         called_params, called_kwargs = mock_bigquery.update_import_summary.call_args
         self.assertEqual(called_params[0]["import_name"], "import1")
         self.assertEqual(called_params[0]["status"], "STAGING")
-        self.assertEqual(called_params[0]["latest_version"], "gs://bucket/import1/ver_import1.csv")
+        self.assertEqual(called_params[0]["latest_version"],
+                         "gs://bucket/import1/ver_import1.csv")
         self.assertEqual(called_kwargs.get("comment"), "release-comment")
 
     @patch('routes.events.import_utils.invoke_import_automation_workflow')
     @patch('routes.events.import_utils.check_duplicate', return_value=False)
     @patch('routes.events.config.PROJECT_ID', 'test-project')
     @patch('routes.events.config.LOCATION', 'us-central1')
-    def test_handle_feed_event_spanner_ingestion(self, mock_check_dup, mock_invoke):
+    def test_handle_feed_event_spanner_ingestion(self, mock_check_dup,
+                                                 mock_invoke):
         mock_bigquery = MagicMock()
         mock_storage = MagicMock()
         app.dependency_overrides[get_bigquery_client] = lambda: mock_bigquery
@@ -180,7 +189,8 @@ class AppTest(unittest.TestCase):
 
     @patch('routes.events.import_utils.invoke_import_automation_airflow')
     @patch('routes.events.import_utils.check_duplicate', return_value=False)
-    def test_handle_feed_event_import_automation_airflow(self, mock_check_dup, mock_invoke):
+    def test_handle_feed_event_import_automation_airflow(
+            self, mock_check_dup, mock_invoke):
         mock_bigquery = MagicMock()
         mock_storage = MagicMock()
         app.dependency_overrides[get_bigquery_client] = lambda: mock_bigquery
@@ -219,7 +229,8 @@ class AppTest(unittest.TestCase):
 
     @patch('routes.events.import_utils.invoke_import_automation_airflow')
     @patch('routes.events.import_utils.check_duplicate', return_value=False)
-    def test_handle_feed_event_import_automation_airflow_with_dag_id(self, mock_check_dup, mock_invoke):
+    def test_handle_feed_event_import_automation_airflow_with_dag_id(
+            self, mock_check_dup, mock_invoke):
         mock_bigquery = MagicMock()
         mock_storage = MagicMock()
         app.dependency_overrides[get_bigquery_client] = lambda: mock_bigquery
@@ -259,7 +270,8 @@ class AppTest(unittest.TestCase):
     @patch('utils.imports.id_token.fetch_id_token', return_value="iap-id-token")
     @patch('utils.imports.requests.post')
     @patch('utils.imports.google.auth.default')
-    def test_invoke_import_automation_airflow_generic_and_fallback(self, mock_auth, mock_post, mock_fetch_id_token):
+    def test_invoke_import_automation_airflow_generic_and_fallback(
+            self, mock_auth, mock_post, mock_fetch_id_token):
         # 0. Raise ValueError when AIRFLOW_WEB_SERVER_URL is not configured
         with patch('utils.imports.config.AIRFLOW_WEB_SERVER_URL', ''):
             with self.assertRaises(ValueError):
@@ -285,8 +297,11 @@ class AppTest(unittest.TestCase):
                 dag_id=None,
             )
         called_url = mock_post.call_args[0][0]
-        self.assertEqual(called_url, "https://airflow.example.com/api/v2/dags/ManualRefresh/dagRuns")
-        self.assertEqual(mock_post.call_args[1]["headers"]["Authorization"], "Bearer fake-token")
+        self.assertEqual(
+            called_url,
+            "https://airflow.example.com/api/v2/dags/ManualRefresh/dagRuns")
+        self.assertEqual(mock_post.call_args[1]["headers"]["Authorization"],
+                         "Bearer fake-token")
 
         # 2. When AIRFLOW_IAP_CLIENT_ID is configured -> uses id_token.fetch_id_token
         with patch('utils.imports.config.AIRFLOW_WEB_SERVER_URL', 'https://airflow.example.com'), \
@@ -297,8 +312,10 @@ class AppTest(unittest.TestCase):
                 dag_id=None,
             )
         mock_fetch_id_token.assert_called_once()
-        self.assertEqual(mock_fetch_id_token.call_args[0][1], 'test-iap-client-id.apps.googleusercontent.com')
-        self.assertEqual(mock_post.call_args[1]["headers"]["Authorization"], "Bearer iap-id-token")
+        self.assertEqual(mock_fetch_id_token.call_args[0][1],
+                         'test-iap-client-id.apps.googleusercontent.com')
+        self.assertEqual(mock_post.call_args[1]["headers"]["Authorization"],
+                         "Bearer iap-id-token")
 
         # 3. When dag_id is specified -> invokes that specific DAG
         with patch('utils.imports.config.AIRFLOW_WEB_SERVER_URL', 'https://airflow.example.com'), \
@@ -310,7 +327,9 @@ class AppTest(unittest.TestCase):
             )
         self.assertEqual(mock_post.call_count, 3)
         custom_url = mock_post.call_args_list[2][0][0]
-        self.assertEqual(custom_url, "https://airflow.example.com/api/v2/dags/CustomImport_DAG/dagRuns")
+        self.assertEqual(
+            custom_url,
+            "https://airflow.example.com/api/v2/dags/CustomImport_DAG/dagRuns")
 
     def test_database_initialize_endpoint(self):
         mock_bigquery = MagicMock()
@@ -332,35 +351,42 @@ class AppTest(unittest.TestCase):
         mock_bq_instance.create_dataset.assert_called_once()
         mock_bq_instance.query.assert_called_once()
         executed_query = mock_bq_instance.query.call_args.args[0]
-        self.assertIn("CREATE TABLE IF NOT EXISTS `test-project.import_automation.ImportHistory`", executed_query)
-        self.assertIn("CREATE OR REPLACE VIEW `test-project.import_automation.ImportSummary`", executed_query)
+        self.assertIn(
+            "CREATE TABLE IF NOT EXISTS `test-project.import_automation.ImportHistory`",
+            executed_query)
+        self.assertIn(
+            "CREATE OR REPLACE VIEW `test-project.import_automation.ImportSummary`",
+            executed_query)
 
     @patch('clients.bigquery.bigquery.Client')
-    def test_bigquery_client_update_and_auto_initialize(self, mock_bq_client_cls):
+    def test_bigquery_client_update_and_auto_initialize(self,
+                                                        mock_bq_client_cls):
         mock_bq_instance = MagicMock()
         mock_bq_client_cls.return_value = mock_bq_instance
         # First call raises NotFound, triggering initialize_database(), second call succeeds
         mock_bq_instance.insert_rows_json.side_effect = [
-            gcp_exceptions.NotFound("Table not found"),
-            []
+            gcp_exceptions.NotFound("Table not found"), []
         ]
 
         bq_client = HelperBigQueryClient("test-project", "import_automation")
-        bq_client.update_import_summary({
-            "import_name": "scripts/us_fed:Rates",
-            "status": "STAGING",
-            "job_id": "job-1",
-            "workflow_id": "wf-1",
-            "execution_time": 42,
-            "data_volume": 2048,
-            "latest_version": "gs://bucket/Rates/v1",
-            "graph_path": "/**/*.mcf*",
-            "next_refresh": "2026-09-24T00:00:00Z",
-        }, comment="import-workflow:wf-1")
+        bq_client.update_import_summary(
+            {
+                "import_name": "scripts/us_fed:Rates",
+                "status": "STAGING",
+                "job_id": "job-1",
+                "workflow_id": "wf-1",
+                "execution_time": 42,
+                "data_volume": 2048,
+                "latest_version": "gs://bucket/Rates/v1",
+                "graph_path": "/**/*.mcf*",
+                "next_refresh": "2026-09-24T00:00:00Z",
+            },
+            comment="import-workflow:wf-1")
 
         self.assertEqual(mock_bq_instance.insert_rows_json.call_count, 2)
         mock_bq_instance.create_dataset.assert_called_once()
-        inserted_row = mock_bq_instance.insert_rows_json.call_args_list[1].args[1][0]
+        inserted_row = mock_bq_instance.insert_rows_json.call_args_list[1].args[
+            1][0]
         self.assertEqual(inserted_row["ImportName"], "Rates")
         self.assertEqual(inserted_row["Status"], "STAGING")
         self.assertEqual(inserted_row["Version"], "gs://bucket/Rates/v1")

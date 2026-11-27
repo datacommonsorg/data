@@ -91,7 +91,7 @@ class SchemaResolverTest(unittest.TestCase):
             os.path.join(_SCRIPT_DIR, 'test_data/sample_output.mcf'),
             self._resolver_config,
         )
-        for key, node in self._schema_nodes.items():
+        for _key, node in self._schema_nodes.items():
             self._resolver.add_node(node)
 
     def test_resolve_statvar(self):

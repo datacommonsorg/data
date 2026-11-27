@@ -382,7 +382,7 @@ def columns_from_CSVfile_list(
         is_metadata = list(is_metadata)
 
     if len(is_metadata) < len(csv_path_list):
-        for i in range(0, (len(csv_path_list) - len(is_metadata))):
+        for _ in range(0, (len(csv_path_list) - len(is_metadata))):
             is_metadata.append(False)
 
     for i, cur_file in enumerate(csv_path_list):

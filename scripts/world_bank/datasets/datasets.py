@@ -546,7 +546,7 @@ def is_numeric(value):
     try:
         float(value)
         return True
-    except:
+    except (TypeError, ValueError):
         return False
 
 

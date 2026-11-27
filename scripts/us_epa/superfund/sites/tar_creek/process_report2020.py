@@ -92,7 +92,7 @@ def get_table_data_from_pdf(input_path: str, page_str: str) -> list:
                                stream=True,
                                guess=True,
                                pages=page_str)
-    except:
+    except Exception:
         print(
             f"ERROR: An error was encountered while extracting tables in {input_path} for {page_str}.\n Please check if the page numbers and files are correct. Also, please note table in images are not extracted."
         )

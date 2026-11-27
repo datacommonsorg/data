@@ -1,0 +1,9 @@
+Node: E:greenhousegas_output->E0
+observationAbout: C:greenhousegas_output->observationAbout
+observationDate: C:greenhousegas_output->observationDate
+variableMeasured: C:greenhousegas_output->variableMeasured
+value: C:greenhousegas_output->value
+unit: C:greenhousegas_output->unit
+measurementMethod: C:greenhousegas_output->measurementMethod
+observationPeriod: C:greenhousegas_output->observationPeriod
+typeOf: dcs:StatVarObservation

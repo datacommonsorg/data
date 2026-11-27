@@ -20,16 +20,16 @@ The import process is divided into two main stages: downloading the raw data and
   * `download_script.py`: Downloads and performs initial cleaning of the raw data.
   * `census_sahie_metadata.csv`: Configuration file for the data processing script.
   * `census_sahie_pv_map.csv`: Property-value mapping file used by the processor.
-  * `census_sahie_schema.mcf`: Statistical variable definitions.
+  * `validation_config.json`: Validation rules for consistency and date freshness checks.
 
 * **Transformation pipeline**:
-  1. `download_script.py` downloads the annual data releases for all years from 2018 to the current year. It then unzips the files and cleans the CSV headers, saving the results in the `input_files/` directory.
+  1. `download_script.py` downloads and unzips the annual data releases for all available years from 2018 to the current year into `raw_files/`, and writes the header-cleaned CSV files to the `input_files/` directory.
   2. After the download is complete, the `stat_var_processor.py` tool is run on all cleaned CSV files.
-  3. The processor uses the `census_sahie_metadata.csv` and `census_sahie_pv_map.csv` files to generate the final `census_sahie.csv` and `census_sahie.tmcf` files, placing them in the `output_files/` directory.
+  3. The processor uses the `census_sahie_metadata.csv` and `census_sahie_pv_map.csv` files to generate the final `census_sahie.csv`, `census_sahie.tmcf`, `census_sahie_stat_vars.mcf`, and `census_sahie_counters.csv` files, placing them in the `output_files/` directory.
 
 * **Data Quality Checks**:
   * Linting is performed on the generated output files using the DataCommons import tool.
-  * There are no known warnings or errors.
+  * Automated import validation checks `MAX_DATE_CONSISTENT` and date freshness via `validation_config.json`.
 
 ---
 
@@ -38,8 +38,8 @@ The import process is divided into two main stages: downloading the raw data and
 This import is designed to be autorefreshed.
 
 * **Steps**:
-  1. A Cloud Scheduler job, defined in `manifest.json`, runs annually at 00:00 on December 15th.
-  2. The job first executes `download_script.py` to automatically download the latest annual data release.
+  1. A Cloud Scheduler job, defined in `manifest.json`, runs weekly on Thursday at 11:00 UTC (`0 11 * * 4`).
+  2. The job first executes `download_script.py` to automatically download all available annual data releases.
   3. It then runs the `stat_var_processor.py` tool, which processes all the yearly files and generates the final artifacts.
   4. The final, validated output files are uploaded to a GCS bucket for ingestion into the Data Commons Knowledge Graph.
 
@@ -64,7 +64,7 @@ The cleaned source files will be located in `input_files/`.
 
 ### Step 2: Process the Data
 
-This script processes all cleaned input files to generate the final `census_sahie.csv` and `census_sahie.tmcf`.
+This script processes all cleaned input files to generate `census_sahie.csv`, `census_sahie.tmcf`, and `census_sahie_stat_vars.mcf` in `output_files/`.
 
 **Usage**:
 ```bash
@@ -72,7 +72,9 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
   --input_data='input_files/*.csv' \
   --pv_map='census_sahie_pv_map.csv' \
   --config_file='census_sahie_metadata.csv' \
-  --output_path='output_files/census_sahie'
+  --output_path='output_files/census_sahie' \
+  --output_counters='output_files/census_sahie_counters.csv' \
+  --existing_statvar_mcf='gs://unresolved_mcf/scripts/statvar/stat_vars.mcf'
 ```
 
 ---
@@ -84,11 +86,11 @@ This command validates the generated files for formatting and semantic consisten
 
 **Usage**:
 
-Lint takes one TMCF with its CSV files per run; `-o` sets the folder for the report (`report.json` and `summary_report.html`).
+Lint takes the generated TMCF, MCF, and CSV files per run; `-o` sets the folder for the report (`report.json` and `summary_report.html`).
 
 ```bash
 java -jar /path/to/datacommons-import-tool.jar lint -o lint_report \
-  output_files/census_sahie.csv output_files/census_sahie.tmcf
+  output_files/census_sahie.csv output_files/census_sahie.tmcf output_files/*.mcf
 ```
 This step ensures that the generated artifacts are ready for ingestion into Data Commons.
 

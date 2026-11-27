@@ -63,7 +63,7 @@ from mcf_file_util import write_mcf_nodes
 def drop_mcf_nodes(
     input_nodes: dict,
     ignore_nodes: dict,
-    config: dict = {},
+    config: dict | None = None,
     counters: Counters = None,
 ) -> dict:
     """Function to filter MCF nodes removing any nodes in ignore_nodes.
@@ -79,6 +79,8 @@ def drop_mcf_nodes(
     A dictionary of node property:values keyed by dcid from input_nodes that
     are not dropped.
   """
+    if config is None:
+        config = {}
     if not counters:
         counters = Counters()
     output_nodes = OrderedDict()
@@ -117,7 +119,7 @@ def drop_mcf_nodes(
 
 
 def drop_existing_mcf_nodes(input_nodes: dict,
-                            config: dict = {},
+                            config: dict | None = None,
                             counters: Counters = None) -> dict:
     """Function to drop existing MCF nodes and return new nodes.
 
@@ -131,6 +133,8 @@ def drop_existing_mcf_nodes(input_nodes: dict,
     A dictionary of node property:values keyed by dcid from input_nodes that
     are not dropped.
   """
+    if config is None:
+        config = {}
     if not counters:
         counters = Counters()
     # Get the property-values from DC API for all nodes

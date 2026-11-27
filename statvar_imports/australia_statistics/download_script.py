@@ -30,16 +30,21 @@ import urllib3.util.connection
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 _FLAGS = flags.FLAGS
-flags.DEFINE_string(
-    'output_dir',
-    os.path.join(_MODULE_DIR, 'input_files'),
-    'Output directory for raw downloaded ABS files.',
-)
-flags.DEFINE_integer(
-    'max_workers',
-    5,
-    'Maximum number of concurrent dataset download workers.',
-)
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        'output_dir',
+        os.path.join(_MODULE_DIR, 'input_files'),
+        'Output directory for raw downloaded ABS files.',
+    )
+    flags.DEFINE_integer(
+        'max_workers',
+        5,
+        'Maximum number of concurrent dataset download workers.',
+    )
+
 
 _THREAD_LOCAL = threading.local()
 
@@ -285,4 +290,5 @@ def main(argv: list[str]) -> None:
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

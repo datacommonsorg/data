@@ -348,6 +348,32 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
                 self.assertIn('ManualRefresh', target)
                 schema_dag = target['Schema']
                 self.assertIsNotNone(schema_dag)
+                self.assertFalse(
+                    schema_dag.params['skipStagingIngestion'].default)
+                self.assertFalse(schema_dag.params['skipProdIngestion'].default)
+
+                noaa_dag = target['NOAA_GlobalForecastSystem']
+                self.assertTrue(noaa_dag.params['skipStagingIngestion'].default)
+                self.assertTrue(noaa_dag.params['skipProdIngestion'].default)
+
+                for prod_skipped in (
+                        'CDC_OzoneCensusTract',
+                        'CDC_OzoneCounty',
+                        'CDC_PM25CensusTract',
+                        'CDC_PM25County',
+                        'EPACriteriaAirPollutants',
+                        'USFed_ConstantMaturityRates_Test',
+                ):
+                    self.assertFalse(
+                        target[prod_skipped].params['skipStagingIngestion'].
+                        default,
+                        prod_skipped,
+                    )
+                    self.assertTrue(
+                        target[prod_skipped].params['skipProdIngestion'].
+                        default,
+                        prod_skipped,
+                    )
 
     def test_build_dag_pipeline_wiring(self):
         dag = import_automation_workflow.build_dag(dag_id='test_dag',
@@ -745,34 +771,131 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
         self.assertEqual(mock_report_failure.call_args[1].get('status'),
                          'VALIDATION')
 
-    def test_staging_and_prod_denylist_skips_ingestion(self):
-        with patch.object(import_automation_workflow, 'STAGING_DENYLIST',
-                          frozenset({'DenylistedImport'})), patch.object(
-                              import_automation_workflow, 'PROD_DENYLIST',
-                              frozenset({'DenylistedImport'})):
-            dag = import_automation_workflow.build_dag(
-                dag_id='DenylistedImport',
-                import_name='scripts/test:DenylistedImport',
-            )
-            self.assertTrue(dag.params['skipStagingIngestion'].default)
-            self.assertTrue(dag.params['skipProdIngestion'].default)
+    def test_config_override_skips_staging_and_prod_ingestion(self):
+        dag = import_automation_workflow.build_dag(
+            dag_id='SkippedIngestionImport',
+            import_name='scripts/test:SkippedIngestionImport',
+            config_override={
+                'skip_staging_ingestion': True,
+                'skip_prod_ingestion': True,
+            },
+        )
+        self.assertTrue(dag.params['skipStagingIngestion'].default)
+        self.assertTrue(dag.params['skipProdIngestion'].default)
 
-            cfg = import_automation_workflow.resolve_workflow_context(
-                {'dag': dag})
-            self.assertTrue(cfg['skipStagingIngestion'])
-            self.assertTrue(cfg['skipProdIngestion'])
+        cfg = import_automation_workflow.resolve_workflow_context({'dag': dag})
+        self.assertTrue(cfg['skipStagingIngestion'])
+        self.assertTrue(cfg['skipProdIngestion'])
 
-            ti_mock = MagicMock()
-            with self.assertRaises(MockAirflowSkipException):
-                import_automation_workflow.trigger_staging_ingestion.function(
-                    dag=dag, ti=ti_mock)
-            ti_mock.xcom_push.assert_called_once_with(
-                key='return_value',
-                value={
-                    'status': 'SKIPPED',
-                    'message': 'Staging ingestion skipped',
-                },
-            )
+        ti_mock = MagicMock()
+        with self.assertRaises(MockAirflowSkipException):
+            import_automation_workflow.trigger_staging_ingestion.function(
+                dag=dag, ti=ti_mock)
+        ti_mock.xcom_push.assert_called_once_with(
+            key='return_value',
+            value={
+                'status': 'SKIPPED',
+                'message': 'Staging ingestion skipped',
+            },
+        )
+
+        # Verify dag_run.conf can explicitly override manifest skip defaults
+        dag_run = MagicMock()
+        dag_run.conf = {
+            'skipStagingIngestion': False,
+            'skipProdIngestion': False,
+        }
+        dag_run.run_id = 'override_run'
+        override_cfg = import_automation_workflow.resolve_workflow_context({
+            'dag': dag,
+            'dag_run': dag_run
+        })
+        self.assertFalse(override_cfg['skipStagingIngestion'])
+        self.assertFalse(override_cfg['skipProdIngestion'])
+
+    def test_disable_import_workflow_pauses_dag(self):
+        active_dag = import_automation_workflow.build_dag(
+            dag_id='ActiveImport',
+            import_name='scripts/test:ActiveImport',
+            config_override={},
+        )
+        self.assertFalse(active_dag.is_paused_upon_creation)
+
+        paused_dag = import_automation_workflow.build_dag(
+            dag_id='PausedImport',
+            import_name='scripts/test:PausedImport',
+            config_override={'disable_import_workflow': True},
+        )
+        self.assertTrue(paused_dag.is_paused_upon_creation)
+
+    def test_exclude_import_workflow_skips_dag_creation(self):
+        excluded_dag = import_automation_workflow.build_dag(
+            dag_id='ExcludedImport',
+            import_name='scripts/test:ExcludedImport',
+            config_override={'exclude_import_workflow': True},
+        )
+        self.assertIsNone(excluded_dag)
+
+        included_dag = import_automation_workflow.build_dag(
+            dag_id='IncludedImport',
+            import_name='scripts/test:IncludedImport',
+            config_override={'exclude_import_workflow': False},
+        )
+        self.assertIsNotNone(included_dag)
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            manifest_dir = os.path.join(tmpdir, 'scripts', 'sample')
+            os.makedirs(manifest_dir)
+            with open(os.path.join(manifest_dir, 'manifest.json'),
+                      'w',
+                      encoding='utf-8') as f:
+                json.dump(
+                    {
+                        'import_specifications': [
+                            {
+                                'import_name': 'IncludedCatalogImport',
+                                'config_override': {},
+                            },
+                            {
+                                'import_name': 'ExcludedCatalogImport',
+                                'config_override': {
+                                    'exclude_import_workflow': True
+                                },
+                            },
+                        ]
+                    },
+                    f,
+                )
+            catalog = build_manifest_catalog.build_catalog(data_dir=tmpdir)
+            self.assertEqual([e['dag_id'] for e in catalog],
+                             ['IncludedCatalogImport'])
+
+            catalog_path = os.path.join(tmpdir, 'imports_catalog.json')
+            with open(catalog_path, 'w', encoding='utf-8') as f:
+                json.dump(
+                    [
+                        {
+                            'dag_id': 'ActiveImport',
+                            'full_import_name': 'scripts/test:ActiveImport',
+                            'config_override': {},
+                        },
+                        {
+                            'dag_id': 'ExcludedImport',
+                            'full_import_name': 'scripts/test:ExcludedImport',
+                            'config_override': {
+                                'exclude_import_workflow': True
+                            },
+                        },
+                    ],
+                    f,
+                )
+            with patch.dict(os.environ, {'IMPORTS_CATALOG_PATH': catalog_path}):
+                target = {}
+                count = import_dags_factory.load_catalog_and_register_dags(
+                    target)
+                self.assertEqual(count, 1)
+                self.assertIn('ActiveImport', target)
+                self.assertNotIn('ExcludedImport', target)
 
 
 class E2EDagRunnerTest(unittest.TestCase):

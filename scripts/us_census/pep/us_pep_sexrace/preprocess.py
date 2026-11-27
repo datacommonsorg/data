@@ -40,7 +40,7 @@ if __name__ == '__main__':
     import us_census.pep.us_pep_sexrace as _sexrace_pkg
     sys.modules.setdefault('us_census.pep.us_pep_sexrace.preprocess',
                            sys.modules['__main__'])
-    setattr(_sexrace_pkg, 'preprocess', sys.modules['__main__'])
+    _sexrace_pkg.preprocess = sys.modules['__main__']
 
 _LAST_FETCHED_URL = (None, None)
 _SESSION = None
@@ -364,7 +364,7 @@ def process(config_files: list, test=False):
 
     input_files = []
     # Walk through the directory and its subdirectories
-    for root, dirs, files in os.walk(_INPUT_FILE_PATH):
+    for root, _dirs, files in os.walk(_INPUT_FILE_PATH):
         for file in sorted(files):  # Sort the files alphabetically
             file_path = os.path.join(root, file)
             input_files.append(file_path)

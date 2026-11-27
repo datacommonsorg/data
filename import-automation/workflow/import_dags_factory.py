@@ -28,12 +28,18 @@ from typing import Any
 current_dir = os.path.dirname(os.path.abspath(__file__))
 if current_dir not in sys.path:
     sys.path.insert(0, current_dir)
+executor_dir = os.path.abspath(
+    os.path.join(current_dir, "..", "executor", "app", "executor"))
+if os.path.isdir(executor_dir) and executor_dir not in sys.path:
+    sys.path.append(executor_dir)
 
 import importlib
 
+import cloud_batch as _cloud_batch
 import golden_verification as _golden_verification
 import import_automation_workflow as _import_automation_workflow
 
+importlib.reload(_cloud_batch)
 importlib.reload(_golden_verification)
 importlib.reload(_import_automation_workflow)
 
@@ -82,7 +88,7 @@ def load_catalog_and_register_dags(target_globals: dict[str, Any]) -> int:
                 "cannot overwrite an already registered DAG.")
         seen_dag_ids.add(dag_id)
         cron = entry.get("cron_schedule")
-        target_globals[dag_id] = build_dag(
+        dag = build_dag(
             dag_id=dag_id,
             schedule=cron,
             import_name=full_name,
@@ -93,9 +99,11 @@ def load_catalog_and_register_dags(target_globals: dict[str, Any]) -> int:
                 "scheduled" if cron else "manual",
                 entry.get("category", "data-commons")
             ],
-            is_paused_upon_creation=True,
             golden_test_allowlist=golden_allowlist,
         )
+        if dag is None:
+            continue
+        target_globals[dag_id] = dag
         count += 1
 
     logging.info("Registered %d import DAGs from %s", count, catalog_path)
