@@ -1,0 +1,4 @@
+Node: E:ncbi_gene_ortholog->E1
+typeOf: dcs:Gene
+dcid: C:ncbi_gene_ortholog->GeneID
+geneOrtholog: C:ncbi_gene_ortholog->ortholog
