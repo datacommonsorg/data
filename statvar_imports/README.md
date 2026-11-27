@@ -55,17 +55,17 @@ other `*_test.py` files in this folder, such as tests of download scripts.
 
 ## Related docs
 
-| Task                                            | Where                                                                              |
-| ----------------------------------------------- | ---------------------------------------------------------------------------------- |
-| Write a PV map and a config, run the processor  | [StatVar processor](../tools/statvar_importer/README.md)                           |
-| PV map reference                                | [PV map guide](../tools/statvar_importer/docs/pv_map.md)                           |
-| Make a small test input                         | [Data sampler](../tools/statvar_importer/docs/data_sampler.md)                     |
-| Add or update an import test                    | [Import tests](../tools/statvar_importer/docs/import_tests.md)                     |
-| A run produced fewer rows than expected         | [Troubleshooting](../tools/statvar_importer/docs/troubleshooting.md)               |
-| Fields of `manifest.json`                       | [Manifest reference](../agents/common/references/import-automation/manifest.md)    |
-| Automated refresh of imports                    | [Import automation](../import-automation/README.md)                                |
-| Validation rules for each refresh               | [Import validation](../tools/import_validation/README.md)                          |
-| Generate a PV map automatically                 | [Agentic import](../tools/agentic_import/README.md)                                |
-| Data model, MCF format, and import workflow     | [Docs](../docs/README.md)                                                          |
-| Review an import change before a pull request   | [dc-import-code-review skill](../agents/skills/dc-import-code-review/SKILL.md)     |
-| Diagnose a failed or changed refresh            | [dc-import-diagnostics skill](../agents/skills/dc-import-diagnostics/SKILL.md)     |
+| Task                                            | Where                                                                                           |
+| ----------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| Write a PV map and a config, run the processor  | [StatVar processor](../tools/statvar_importer/README.md)                                        |
+| PV map reference                                | [PV map guide](../tools/statvar_importer/docs/pv_map.md)                                        |
+| Make a small test input                         | [Data sampler](../tools/statvar_importer/docs/data_sampler.md)                                  |
+| Add or update an import test                    | [Import tests](../tools/statvar_importer/docs/import_tests.md)                                  |
+| A run produced fewer rows than expected         | [Troubleshooting](../tools/statvar_importer/docs/troubleshooting.md)                            |
+| Fields of `manifest.json`                       | [Manifest reference](../agents/common/references/import-automation/manifest.md)                 |
+| Automated refresh of imports                    | [Import automation](../import-automation/README.md)                                             |
+| Validation rules for each refresh               | [Import validation](../tools/import_validation/README.md)                                       |
+| Generate a PV map automatically                 | [tools/agentic_import](https://github.com/datacommonsorg/data/tree/master/tools/agentic_import) |
+| Data model, MCF format, and import workflow     | [Docs](../docs/README.md)                                                                       |
+| Review an import change before a pull request   | [dc-import-code-review skill](../agents/skills/dc-import-code-review/SKILL.md)                  |
+| Diagnose a failed or changed refresh            | [dc-import-diagnostics skill](../agents/skills/dc-import-diagnostics/SKILL.md)                  |
