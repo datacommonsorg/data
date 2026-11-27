@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "check_max_date_consistent",
+      "description": "Verifies that both adolescent birth rate StatVars share the same latest observation year.",
+      "validator": "MAX_DATE_CONSISTENT",
+      "params": {}
+    },
+    {
+      "rule_id": "check_max_date_freshness",
+      "description": "Verifies that the latest observation year for every StatVar is within an allowable 3-year reporting lag of the current year.",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT StatVar, MaxDate FROM stats",
+        "condition": "COALESCE(TRY_CAST(SUBSTR(TRIM(CAST(MaxDate AS VARCHAR)), 1, 4) AS INTEGER) >= EXTRACT(YEAR FROM CURRENT_DATE) - 3, FALSE)"
+      }
+    }
+  ]
+}
