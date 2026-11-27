@@ -1,0 +1,32 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "Florida_Education",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://www.flbog.edu/resources/data-analytics/dashboards/",
+            "provenance_description": "The Office of Data & Analytics (ODA) collects, analyzes and reports data concerning the State University System of Florida. .",
+            "scripts": [
+                "download_script.py",
+                "../../../tools/statvar_importer/stat_var_processor.py  --input_data=input_files/degrees_summary.csv --pv_map=pvmap_degree.csv --config_file=metadata_degree.csv --output_path=output_path/degree_output",
+                "../../../tools/statvar_importer/stat_var_processor.py  --input_data=input_files/enrollment_summary.csv --pv_map=pvmap_enrollment.csv --config_file=metadata_enrollment.csv --output_path=output_path/enrollment_output"
+                
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output_path/degree_output.tmcf",
+                    "cleaned_csv": "output_path/degree_output.csv"
+                },
+                {
+                    "template_mcf": "output_path/enrollment_output.tmcf",
+                    "cleaned_csv": "output_path/enrollment_output.csv"
+                }
+            ],
+            "source_files": [
+                "input_files/*"
+            ],
+            "cron_schedule": "30 05 14,28 * *"
+        }
+    ]
+}
