@@ -442,12 +442,9 @@ def file_estimate_num_rows(filename: Union[str, list]) -> int:
     filesize = file_get_size(files)
     if filesize > 0:
         # Get the average line size in the first 4K bytes.
-        with FileIO(files[0], use_tempfile=False) as fp:
-            lines = fp.read(4000)
-        if isinstance(lines, bytes):
-            # Convert bytes to str
-            lines = lines.decode()
-        line_size = max(len(lines) / (lines.count('\n') + 1), 1)
+        with FileIO(files[0], mode='rb', use_tempfile=False) as fp:
+            sample = fp.read(4000)
+        line_size = max(len(sample) / (sample.count(b'\n') + 1), 1)
         return int(filesize / line_size)
     return 0
 
@@ -704,7 +701,7 @@ def file_write_csv_dict(py_dict: dict,
             columns.append(key_column_name)
     if len(columns) <= 1:
         # Get columns across all entries.
-        for key, value in py_dict.items():
+        for _key, value in py_dict.items():
             if isinstance(value, dict):
                 for col in value.keys():
                     if col not in columns:

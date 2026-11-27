@@ -142,7 +142,7 @@ class PropertyValueCache:
               with one row per entry.
         """
         for file in file_util.file_get_matching(filename):
-            with file_util.FileIO(filename) as csv_file:
+            with file_util.FileIO(file) as csv_file:
                 csv_reader = csv.DictReader(csv_file)
                 # Add columns as properties in order of input.
                 self._add_props(props=csv_reader.fieldnames)
@@ -153,7 +153,7 @@ class PropertyValueCache:
                     num_rows += 1
                     self.add(row)
             logging.info(
-                f'Loaded {num_rows} with columns: {self._props} from {filename} into'
+                f'Loaded {num_rows} with columns: {self._props} from {file} into'
                 ' cache')
 
     def get_entry(self, value: str, prop: str = '') -> dict:
