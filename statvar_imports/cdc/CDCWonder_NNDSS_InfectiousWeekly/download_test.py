@@ -128,7 +128,7 @@ class DownloadTest(unittest.TestCase):
         ]
         with tempfile.TemporaryDirectory() as tmpdir:
             in_csv = os.path.join(tmpdir, "export.csv")
-            out_csv = os.path.join(tmpdir, "NNDSS_Weekly_Data.csv")
+            out_csv = os.path.join(tmpdir, "nndss_weekly_input.csv")
             pd.DataFrame(rows).to_csv(in_csv, index=False)
             out_df = download.preprocess_csv(in_csv, out_csv)
 
@@ -164,7 +164,7 @@ class DownloadTest(unittest.TestCase):
     def test_preprocess_csv_header_only_missing_columns(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             in_csv = os.path.join(tmpdir, "export.csv")
-            out_csv = os.path.join(tmpdir, "NNDSS_Weekly_Data.csv")
+            out_csv = os.path.join(tmpdir, "nndss_weekly_input.csv")
             with open(in_csv, "w", encoding="utf-8") as f:
                 f.write("Reporting Area,Current MMWR Year\n")
             with self.assertRaises(KeyError):
@@ -173,7 +173,7 @@ class DownloadTest(unittest.TestCase):
     def test_preprocess_csv_raises_on_zero_valid_rows(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             in_csv = os.path.join(tmpdir, "export.csv")
-            out_csv = os.path.join(tmpdir, "NNDSS_Weekly_Data.csv")
+            out_csv = os.path.join(tmpdir, "nndss_weekly_input.csv")
             pd.DataFrame([
                 {
                     "Reporting Area": "ALABAMA",
@@ -193,7 +193,7 @@ class DownloadTest(unittest.TestCase):
     def test_preprocess_csv_raises_on_malformed_csv_row(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             in_csv = os.path.join(tmpdir, "export.csv")
-            out_csv = os.path.join(tmpdir, "NNDSS_Weekly_Data.csv")
+            out_csv = os.path.join(tmpdir, "nndss_weekly_input.csv")
             with open(in_csv, "w", encoding="utf-8") as f:
                 f.write(
                     "Reporting Area,Current MMWR Year,MMWR WEEK,Label,Current week\n"
@@ -209,9 +209,9 @@ class DownloadTest(unittest.TestCase):
                                      "test_data")
         sample_raw = os.path.join(test_data_dir, "sample_export.csv")
         expected_preprocessed = os.path.join(test_data_dir,
-                                             "NNDSS_Weekly_Data.csv")
+                                             "nndss_weekly_input.csv")
         with tempfile.TemporaryDirectory() as tmpdir:
-            out_csv = os.path.join(tmpdir, "NNDSS_Weekly_Data.csv")
+            out_csv = os.path.join(tmpdir, "nndss_weekly_input.csv")
             download.preprocess_csv(sample_raw, out_csv)
             with open(out_csv, "r", encoding="utf-8") as got_f, open(
                     expected_preprocessed, "r", encoding="utf-8") as exp_f:
@@ -272,12 +272,34 @@ class DownloadTest(unittest.TestCase):
             self.assertIn(download.SOURCE_URL, str(ctx.exception))
             self.assertIn(raw_path, str(ctx.exception))
 
+    def test_download_source_csv_retries_small_file_then_succeeds(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            raw_path = os.path.join(tmpdir, "export.csv")
+            calls = []
+
+            def _tiny_then_valid(**kwargs):
+                calls.append(kwargs)
+                with open(raw_path, "wb") as f:
+                    if len(calls) == 1:
+                        f.write(b"tiny")
+                    else:
+                        f.write(b"x" * (200 * 1024))
+                return True
+
+            with mock.patch.object(download, "INPUT_DIR", tmpdir), \
+                 mock.patch.object(download, "RAW_FILE", raw_path):
+                out = self._run_download_source_csv(_tiny_then_valid)
+
+            self.assertEqual(out, raw_path)
+            self.assertEqual(len(calls), 2)
+
     def test_download_source_csv_raises_valueerror_on_small_file(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             raw_path = os.path.join(tmpdir, "export.csv")
+            calls = []
 
             def _write_tiny(**kwargs):
-                del kwargs
+                calls.append(kwargs)
                 with open(raw_path, "wb") as f:
                     f.write(b"tiny")
                 return True
@@ -287,6 +309,8 @@ class DownloadTest(unittest.TestCase):
                 with self.assertRaises(ValueError) as ctx:
                     self._run_download_source_csv(_write_tiny)
 
+            self.assertEqual(len(calls), 3)
+            self.assertFalse(os.path.exists(raw_path))
             self.assertIn(download.SOURCE_URL, str(ctx.exception))
             self.assertIn(raw_path, str(ctx.exception))
             self.assertIn("MB", str(ctx.exception))

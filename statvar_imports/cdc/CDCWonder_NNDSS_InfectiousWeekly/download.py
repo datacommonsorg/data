@@ -38,7 +38,7 @@ def _define_flags() -> None:
     flags.DEFINE_string(
         "output_csv",
         "",
-        "Optional output CSV path (defaults to input_files/NNDSS_Weekly_Data.csv).",
+        "Optional output CSV path (defaults to input_files/nndss_weekly_input.csv).",
     )
     flags.DEFINE_bool(
         "skip_gcs_history",
@@ -54,7 +54,7 @@ HISTORY_GCS_BUCKET = "unresolved_mcf"
 HISTORY_GCS_PREFIX = "cdc/nndss_infectious_diseasesweekly/history"
 HISTORY_FILES = ("cdc_nndss_weekly_tables_historical.csv",)
 RAW_FILE = os.path.join(INPUT_DIR, "export.csv")
-OUTPUT_FILE = os.path.join(INPUT_DIR, "NNDSS_Weekly_Data.csv")
+OUTPUT_FILE = os.path.join(INPUT_DIR, "nndss_weekly_input.csv")
 SOURCE_URL = (
     "https://data.cdc.gov/api/v3/views/x9gk-5huc/export.csv?accessType=DOWNLOAD"
 )
@@ -114,7 +114,7 @@ def download_source_csv() -> str:
 
     max_attempts = 3
     retry_delay = 5
-    download_ok = False
+    last_small_size_mb: Optional[float] = None
     for attempt in range(1, max_attempts + 1):
         try:
             logging.info(f"Download attempt {attempt}/{max_attempts}: "
@@ -131,13 +131,25 @@ def download_source_csv() -> str:
                 backoff=1,
             )
             if download_ok and os.path.exists(RAW_FILE):
-                logging.info(
-                    f"Download status=SUCCESS for GET {SOURCE_URL} -> {RAW_FILE}."
-                )
-                break
-            logging.warning(
-                f"Download status=FAILURE on attempt {attempt}/{max_attempts} "
-                f"for GET {SOURCE_URL} (download_ok={download_ok}).")
+                size_mb = os.path.getsize(RAW_FILE) / (1024 * 1024)
+                if size_mb < 0.1:
+                    last_small_size_mb = size_mb
+                    logging.warning(
+                        f"Download status=FAILURE on attempt "
+                        f"{attempt}/{max_attempts} for GET {SOURCE_URL}: "
+                        f"file {RAW_FILE} is suspiciously small "
+                        f"({size_mb:.2f} MB < 0.10 MB); removing and retrying.")
+                    os.remove(RAW_FILE)
+                else:
+                    logging.info(
+                        f"Download status=SUCCESS for GET {SOURCE_URL} -> "
+                        f"{RAW_FILE} ({size_mb:.2f} MB).")
+                    return RAW_FILE
+            else:
+                logging.warning(
+                    f"Download status=FAILURE on attempt "
+                    f"{attempt}/{max_attempts} for GET {SOURCE_URL} "
+                    f"(download_ok={download_ok}).")
         except (OSError, ValueError) as exc:
             logging.exception(
                 f"Download attempt {attempt}/{max_attempts} for {SOURCE_URL} "
@@ -146,17 +158,13 @@ def download_source_csv() -> str:
             time.sleep(retry_delay)
             retry_delay *= 2
 
-    if not download_ok or not os.path.exists(RAW_FILE):
-        raise IOError(f"Failed to download {SOURCE_URL} to {RAW_FILE} after "
-                      f"{max_attempts} attempts.")
-
-    size_mb = os.path.getsize(RAW_FILE) / (1024 * 1024)
-    logging.info(f"Downloaded file size: {size_mb:.2f} MB.")
-    if size_mb < 0.1:
+    if last_small_size_mb is not None:
         raise ValueError(
             f"Downloaded file {RAW_FILE} from {SOURCE_URL} is suspiciously "
-            f"small ({size_mb:.2f} MB < 0.10 MB).")
-    return RAW_FILE
+            f"small ({last_small_size_mb:.2f} MB < 0.10 MB) after "
+            f"{max_attempts} attempts.")
+    raise IOError(f"Failed to download {SOURCE_URL} to {RAW_FILE} after "
+                  f"{max_attempts} attempts.")
 
 
 def preprocess_csv(
@@ -181,95 +189,97 @@ def preprocess_csv(
     if missing_cols:
         raise KeyError(f"Missing required columns in input CSV: {missing_cols}")
 
-    bad_lines_count = 0
-
-    def _handle_bad_line(bad_line):
-        nonlocal bad_lines_count
-        bad_lines_count += 1
-        return None
-
     reader = pd.read_csv(
         filepath,
         chunksize=100000,
         dtype=str,
-        engine="python",
-        on_bad_lines=_handle_bad_line,
+        engine="c",
+        on_bad_lines="error",
     )
-    for chunk_idx, chunk in enumerate(reader, start=1):
-        logging.info(f"Processing chunk {chunk_idx}...")
+    try:
+        for chunk_idx, chunk in enumerate(reader, start=1):
+            logging.info(f"Processing chunk {chunk_idx}...")
 
-        if "Current week, flag" in chunk.columns:
-            flag_series = chunk["Current week, flag"].fillna("").str.strip()
-            chunk = chunk[~flag_series.isin(SKIP_FLAGS)]
+            if "Current week, flag" in chunk.columns:
+                flag_series = chunk["Current week, flag"].fillna("").str.strip()
+                chunk = chunk[~flag_series.isin(SKIP_FLAGS)]
 
-        chunk = chunk[chunk["Current week"].notna()].copy()
-        mmwr_year = pd.to_numeric(
-            chunk["Current MMWR Year"].astype(str).str.replace(",",
-                                                               "",
-                                                               regex=False),
-            errors="coerce",
-        )
-        chunk = chunk[mmwr_year.notna() & (mmwr_year >= min_year)].copy()
-        chunk["Current MMWR Year"] = (
-            chunk["Current MMWR Year"].astype(str).str.replace(
+            chunk = chunk[chunk["Current week"].notna()].copy()
+            mmwr_year = pd.to_numeric(
+                chunk["Current MMWR Year"].astype(str).str.replace(",",
+                                                                   "",
+                                                                   regex=False),
+                errors="coerce",
+            )
+            chunk = chunk[mmwr_year.notna() & (mmwr_year >= min_year)].copy()
+            chunk["Current MMWR Year"] = (
+                chunk["Current MMWR Year"].astype(str).str.replace(
+                    ",", "", regex=False).str.strip())
+            chunk["MMWR WEEK"] = (chunk["MMWR WEEK"].astype(str).str.replace(
                 ",", "", regex=False).str.strip())
-        chunk["MMWR WEEK"] = (chunk["MMWR WEEK"].astype(str).str.replace(
-            ",", "", regex=False).str.strip())
-        chunk["val_num"] = pd.to_numeric(
-            chunk["Current week"].astype(str).str.replace(",", "", regex=False),
-            errors="coerce",
-        )
-        chunk = chunk[chunk["val_num"].notna() & (chunk["val_num"] >= 0)]
-        if chunk.empty:
-            continue
-
-        yw_pairs = chunk[["Current MMWR Year", "MMWR WEEK"]].drop_duplicates()
-        date_lookup = {
-            (r["Current MMWR Year"], r["MMWR WEEK"]):
-                get_mmwr_week_start_date(r["Current MMWR Year"], r["MMWR WEEK"])
-            for _, r in yw_pairs.iterrows()
-        }
-        chunk["observationDate"] = [
-            date_lookup.get((y, w))
-            for y, w in zip(chunk["Current MMWR Year"], chunk["MMWR WEEK"])
-        ]
-        chunk = chunk[chunk["observationDate"].notna()]
-        if chunk.empty:
-            continue
-
-        area_upper = chunk["Reporting Area"].astype(str).str.strip().str.upper()
-        is_ny_ex_nyc = area_upper == "NEW YORK"
-        is_nyc = area_upper == "NEW YORK CITY"
-
-        for rec in chunk[is_ny_ex_nyc][[
-                "Current MMWR Year", "MMWR WEEK", "observationDate", "Label",
-                "val_num"
-        ]].to_dict("records"):
-            key = (
-                rec["Current MMWR Year"],
-                rec["MMWR WEEK"],
-                rec["observationDate"],
-                rec["Label"],
+            chunk["val_num"] = pd.to_numeric(
+                chunk["Current week"].astype(str).str.replace(",",
+                                                              "",
+                                                              regex=False),
+                errors="coerce",
             )
-            ny_ex_nyc_vals[key] = ny_ex_nyc_vals.get(key, 0.0) + float(
-                rec["val_num"])
+            chunk = chunk[chunk["val_num"].notna() & (chunk["val_num"] >= 0)]
+            if chunk.empty:
+                continue
 
-        for rec in chunk[is_nyc][[
-                "Current MMWR Year", "MMWR WEEK", "observationDate", "Label",
-                "val_num"
-        ]].to_dict("records"):
-            key = (
-                rec["Current MMWR Year"],
-                rec["MMWR WEEK"],
-                rec["observationDate"],
-                rec["Label"],
-            )
-            nyc_vals[key] = nyc_vals.get(key, 0.0) + float(rec["val_num"])
+            yw_pairs = chunk[["Current MMWR Year",
+                              "MMWR WEEK"]].drop_duplicates()
+            date_lookup = {
+                (r["Current MMWR Year"], r["MMWR WEEK"]):
+                    get_mmwr_week_start_date(r["Current MMWR Year"],
+                                             r["MMWR WEEK"])
+                for _, r in yw_pairs.iterrows()
+            }
+            chunk["observationDate"] = [
+                date_lookup.get((y, w))
+                for y, w in zip(chunk["Current MMWR Year"], chunk["MMWR WEEK"])
+            ]
+            chunk = chunk[chunk["observationDate"].notna()]
+            if chunk.empty:
+                continue
 
-        kept = chunk[~is_ny_ex_nyc].copy()
-        kept["measurementMethod"] = RAW_MEASUREMENT_METHOD
-        kept["Current week"] = kept["val_num"].map(_format_number)
-        chunks.append(kept[OUTPUT_COLUMNS])
+            area_upper = chunk["Reporting Area"].astype(
+                str).str.strip().str.upper()
+            is_ny_ex_nyc = area_upper == "NEW YORK"
+            is_nyc = area_upper == "NEW YORK CITY"
+
+            for rec in chunk[is_ny_ex_nyc][[
+                    "Current MMWR Year", "MMWR WEEK", "observationDate",
+                    "Label", "val_num"
+            ]].to_dict("records"):
+                key = (
+                    rec["Current MMWR Year"],
+                    rec["MMWR WEEK"],
+                    rec["observationDate"],
+                    rec["Label"],
+                )
+                ny_ex_nyc_vals[key] = ny_ex_nyc_vals.get(key, 0.0) + float(
+                    rec["val_num"])
+
+            for rec in chunk[is_nyc][[
+                    "Current MMWR Year", "MMWR WEEK", "observationDate",
+                    "Label", "val_num"
+            ]].to_dict("records"):
+                key = (
+                    rec["Current MMWR Year"],
+                    rec["MMWR WEEK"],
+                    rec["observationDate"],
+                    rec["Label"],
+                )
+                nyc_vals[key] = nyc_vals.get(key, 0.0) + float(rec["val_num"])
+
+            kept = chunk[~is_ny_ex_nyc].copy()
+            kept["measurementMethod"] = RAW_MEASUREMENT_METHOD
+            kept["Current week"] = kept["val_num"].map(_format_number)
+            chunks.append(kept[OUTPUT_COLUMNS])
+    except pd.errors.ParserError as exc:
+        raise ValueError(f"Encountered malformed CSV row in {filepath} "
+                         f"(min_year={min_year}): {exc}") from exc
 
     both_ny_keys = sorted(ny_ex_nyc_vals.keys() & nyc_vals.keys())
     if both_ny_keys:
@@ -284,19 +294,14 @@ def preprocess_csv(
         } for k in both_ny_keys]
         chunks.append(pd.DataFrame(ny_rows, columns=OUTPUT_COLUMNS))
 
-    if bad_lines_count > 0:
-        raise ValueError(
-            f"Encountered {bad_lines_count} malformed CSV rows in {filepath} "
-            f"(min_year={min_year}).")
     if not chunks:
         raise ValueError(
             f"No valid rows with Current MMWR Year >= {min_year} found in "
-            f"{filepath} (bad_lines_count={bad_lines_count}).")
+            f"{filepath}.")
     out_df = pd.concat(chunks, ignore_index=True)
     if out_df.empty:
-        raise ValueError(
-            f"Preprocessed output is empty for {filepath} "
-            f"(min_year={min_year}, bad_lines_count={bad_lines_count}).")
+        raise ValueError(f"Preprocessed output is empty for {filepath} "
+                         f"(min_year={min_year}).")
     tmp_out = f"{out_filepath}.tmp"
     out_df.to_csv(tmp_out, index=False)
     os.replace(tmp_out, out_filepath)
