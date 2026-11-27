@@ -1,0 +1,449 @@
+I1212 15:08:26.120842 139688065086336 stat_var_processor.py:2977] Not running under Cloud
+I1212 15:08:26.127768 139688065086336 file_util.py:580] Loading dict from file: statvar_imports/IPEDS/2012_2015/metadata.csv with key: config, value: value
+I1212 15:08:26.128020 139688065086336 file_util.py:613] Loaded 10 rows from statvar_imports/IPEDS/2012_2015/metadata.csv into dict
+I1212 15:08:26.128186 139688065086336 config_flags.py:479] Logging verbosity 0
+I1212 15:08:26.128412 139688065086336 stat_var_processor.py:2920] Processing data ['statvar_imports/IPEDS/2012_2015/input.csv'] into statvar_imports/IPEDS/2012_2015/output using config: {'ignore_numeric_commas': True, 'input_reference_column': '#input', 'input_min_columns_per_row': 2, 'input_data': ['statvar_imports/IPEDS/2012_2015/input.csv'], 'data_url': [], 'input_encoding': 'utf-8', 'input_xls': [], 'pv_map_drop_undefined_nodes': False, 'duplicate_svobs_key': '#ErrorDuplicateSVObs', 'duplicate_statvars_key': '#ErrorDuplicateStatVar', 'drop_statvars_without_svobs': 1, 'aggregate_key': '#Aggregate', 'aggregate_duplicate_svobs': None, 'merged_pvs_property': '#MergedSVObs', 'multi_value_properties': ['name', 'alternateName', 'measurementDenominator'], 'schemaless': False, 'schemaless_statvar_comment_undefined_pvs': False, 'default_statvar_pvs': OrderedDict({'typeOf': 'dcs:StatisticalVariable', 'measurementQualifier': '', 'statType': 'dcs:measuredValue', 'measuredProperty': 'dcs:count', 'populationType': '', 'memberOf': '', 'name': '', 'nameWithLanguage': '', 'alternateName': '', 'description': '', 'descriptionUrl': ''}), 'statvar_dcid_ignore_properties': ['description', 'name', 'nameWithLanguage', 'descriptionUrl', 'alternateName'], 'statvar_dcid_ignore_values': ['measuredValue', 'StatisticalVariable'], 'default_svobs_pvs': OrderedDict({'typeOf': 'dcs:StatVarObservation', 'observationDate': '', 'observationAbout': '', 'value': '', 'observationPeriod': '', 'measurementMethod': '', 'unit': '', 'scalingFactor': '', 'variableMeasured': '', 'measurementResult': '', '#Aggregate': ''}), 'required_statvar_properties': ['measuredProperty', 'populationType'], 'required_statvarobs_properties': ['variableMeasured', 'observationAbout', 'observationDate', 'value'], 'existing_statvar_mcf': '', 'existing_schema_mcf': '', 'statvar_fingerprint_ignore_props': ['Node', 'dcid', 'name', 'nameWithLanguage', 'alternateName', 'description', 'descriptionUrl', 'provenance', 'memberOf', 'member', 'relevantVariable'], 'statvar_fingerprint_include_props': [], 'statvar_dcid_remap_csv': '', 'use_all_numeric_data_values': False, 'number_decimal': '.', 'number_separator': ', ', 'word_delimiter': ' ', 'merged_cells': 9223372036854775807, 'default_pv_maps': ['GLOBAL'], 'mapped_rows': 0, 'mapped_columns': [], 'show_counters_every_n': 0, 'show_counters_every_sec': 30, 'dc_api_key': '', 'maps_api_key': '', 'resolve_places': False, 'places_csv': [], 'places_resolved_csv': '', 'place_type': [], 'places_within': [], 'filter_data_min_value': None, 'filter_data_max_value': None, 'filter_data_max_change_ratio': None, 'filter_data_max_yearly_change_ratio': None, 'output_path': 'statvar_imports/IPEDS/2012_2015/output', 'generate_statvar_mcf': True, 'generate_csv': True, 'output_csv_mode': 'w', 'output_columns': ['observationDate', 'observationAbout', 'value', 'variableMeasured'], 'generate_tmcf': True, 'skip_constant_csv_columns': True, 'output_only_new_statvars': True, 'output_precision_digits': 5, 'generate_schema_mcf': True, 'generate_provisional_schema': True, 'dc_api_root': 'http://autopush.api.datacommons.org', 'dc_api_use_cache': False, 'dc_api_batch_size': 100, 'pv_map': ['statvar_imports/IPEDS/2012_2015/pvmap.csv'], 'input_rows': 9223372036854775807, 'input_columns': 9223372036854775807, 'skip_rows': 2, 'ignore_rows': [0], 'header_rows': 42, 'header_columns': 2, 'process_rows': [0], 'parallelism': 0, 'output_counters': '', 'spell_check': True, 'spell_allowlist': '/usr/local/google/home/susmitakumari/data/tools/statvar_importer/words_allowlist.txt', 'spell_allow_words': [], 'output_sanity_check': '', 'spell_check_text_only': False, 'spell_check_ignore_props': None, 'debug': False, 'log_level': 0, 'log_every_n': 1, 'generate_pvmap': True, 'google_api_key': '', 'sample_pvmap': '/usr/local/google/home/susmitakumari/data/tools/statvar_importer/sample_pvmap.csv', 'sample_statvars': '/usr/local/google/home/susmitakumari/data/tools/statvar_importer/sample_statvars.mcf', 'data_context': '', 'llm_data_annotation': True, 'generate_statvar_name': False, 'llm_generate_statvar_name': False, 'provenance_url': 'https://nces.ed.gov/ipeds/Search?query=&query2=&resultType=all&page=1&sortBy=date_desc&overlayTableId=36417', '#places_within': 'country/USA', '#place_types': 'AdministrativeArea,AdministrativeArea1,AdministrativeArea2,State', '#debug': '1', '#input_rows': '100', '#word_delimiter': ''}...
+I1212 15:08:26.128601 139688065086336 utils.py:470] Converting statvar_imports/IPEDS/2012_2015/input.csv into csv for []
+I1212 15:08:26.128695 139688065086336 stat_var_processor.py:2929] Creating output directory: statvar_imports/IPEDS/2012_2015
+I1212 15:08:26.128809 139688065086336 stat_var_processor.py:2933] Processing data ['statvar_imports/IPEDS/2012_2015/input.csv'] into statvar_imports/IPEDS/2012_2015/output...
+I1212 15:08:26.129568 139688065086336 property_value_mapper.py:143] Loading PV maps for GLOBAL from csv file: statvar_imports/IPEDS/2012_2015/pvmap.csv
+I1212 15:08:26.130373 139688065086336 property_value_mapper.py:241] Loaded 30 property-value mappings for "GLOBAL"
+I1212 15:08:26.130593 139688065086336 schema_resolver.py:136] Loaded 0 schema MCF nodes: 
+I1212 15:08:26.130654 139688065086336 stat_var_processor.py:181] Loaded 0 remapped statvar dcids: {}
+I1212 15:08:26.130851 139688065086336 place_name_matcher.py:134] Setting up PlaceNameMatcher with config: {'parent_place_types': ['Country', 'State', 'AdministrativeArea', 'AdministrativeArea1', 'EurostatNUTS1', 'District', 'AdministrativeArea2', 'EurostatNUTS2', 'County', 'AdministrativeArea3', 'EurostatNUTS3', 'AdministrativeArea4', 'AdministrativeArea5', 'City', 'Village', 'Place', 'Neighborhood'], 'ngram_size': 4, 'ignore_non_alphanum': True, 'min_match_fraction': 0.1, 'num_results': 10, 'ignore_numeric_commas': True, 'input_reference_column': '#input', 'input_min_columns_per_row': 2, 'input_data': ['statvar_imports/IPEDS/2012_2015/input.csv'], 'data_url': [], 'input_encoding': 'utf-8', 'input_xls': [], 'pv_map_drop_undefined_nodes': False, 'duplicate_svobs_key': '#ErrorDuplicateSVObs', 'duplicate_statvars_key': '#ErrorDuplicateStatVar', 'drop_statvars_without_svobs': 1, 'aggregate_key': '#Aggregate', 'aggregate_duplicate_svobs': None, 'merged_pvs_property': '#MergedSVObs', 'multi_value_properties': ['name', 'alternateName', 'measurementDenominator'], 'schemaless': False, 'schemaless_statvar_comment_undefined_pvs': False, 'default_statvar_pvs': OrderedDict({'typeOf': 'dcs:StatisticalVariable', 'measurementQualifier': '', 'statType': 'dcs:measuredValue', 'measuredProperty': 'dcs:count', 'populationType': '', 'memberOf': '', 'name': '', 'nameWithLanguage': '', 'alternateName': '', 'description': '', 'descriptionUrl': ''}), 'statvar_dcid_ignore_properties': ['description', 'name', 'nameWithLanguage', 'descriptionUrl', 'alternateName'], 'statvar_dcid_ignore_values': ['measuredValue', 'StatisticalVariable'], 'default_svobs_pvs': OrderedDict({'typeOf': 'dcs:StatVarObservation', 'observationDate': '', 'observationAbout': '', 'value': '', 'observationPeriod': '', 'measurementMethod': '', 'unit': '', 'scalingFactor': '', 'variableMeasured': '', 'measurementResult': '', '#Aggregate': ''}), 'required_statvar_properties': ['measuredProperty', 'populationType'], 'required_statvarobs_properties': ['variableMeasured', 'observationAbout', 'observationDate', 'value'], 'existing_statvar_mcf': '', 'existing_schema_mcf': '', 'statvar_fingerprint_ignore_props': ['Node', 'dcid', 'name', 'nameWithLanguage', 'alternateName', 'description', 'descriptionUrl', 'provenance', 'memberOf', 'member', 'relevantVariable'], 'statvar_fingerprint_include_props': [], 'statvar_dcid_remap_csv': '', 'use_all_numeric_data_values': False, 'number_decimal': '.', 'number_separator': ', ', 'word_delimiter': ' ', 'merged_cells': 9223372036854775807, 'default_pv_maps': ['GLOBAL'], 'mapped_rows': 0, 'mapped_columns': [], 'show_counters_every_n': 0, 'show_counters_every_sec': 30, 'dc_api_key': '', 'maps_api_key': '', 'resolve_places': False, 'places_csv': [], 'places_resolved_csv': '', 'place_type': [], 'places_within': [], 'filter_data_min_value': None, 'filter_data_max_value': None, 'filter_data_max_change_ratio': None, 'filter_data_max_yearly_change_ratio': None, 'output_path': 'statvar_imports/IPEDS/2012_2015/output', 'generate_statvar_mcf': True, 'generate_csv': True, 'output_csv_mode': 'w', 'output_columns': ['observationDate', 'observationAbout', 'value', 'variableMeasured'], 'generate_tmcf': True, 'skip_constant_csv_columns': True, 'output_only_new_statvars': True, 'output_precision_digits': 5, 'generate_schema_mcf': True, 'generate_provisional_schema': True, 'dc_api_root': 'http://autopush.api.datacommons.org', 'dc_api_use_cache': False, 'dc_api_batch_size': 100, 'pv_map': ['statvar_imports/IPEDS/2012_2015/pvmap.csv'], 'input_rows': 9223372036854775807, 'input_columns': 9223372036854775807, 'skip_rows': 2, 'ignore_rows': [0], 'header_rows': 42, 'header_columns': 2, 'process_rows': [0], 'parallelism': 0, 'output_counters': '', 'spell_check': True, 'spell_allowlist': '/usr/local/google/home/susmitakumari/data/tools/statvar_importer/words_allowlist.txt', 'spell_allow_words': [], 'output_sanity_check': '', 'spell_check_text_only': False, 'spell_check_ignore_props': None, 'debug': False, 'log_level': 0, 'log_every_n': 1, 'generate_pvmap': True, 'google_api_key': '', 'sample_pvmap': '/usr/local/google/home/susmitakumari/data/tools/statvar_importer/sample_pvmap.csv', 'sample_statvars': '/usr/local/google/home/susmitakumari/data/tools/statvar_importer/sample_statvars.mcf', 'data_context': '', 'llm_data_annotation': True, 'generate_statvar_name': False, 'llm_generate_statvar_name': False, 'provenance_url': 'https://nces.ed.gov/ipeds/Search?query=&query2=&resultType=all&page=1&sortBy=date_desc&overlayTableId=36417', '#places_within': 'country/USA', '#place_types': 'AdministrativeArea,AdministrativeArea1,AdministrativeArea2,State', '#debug': '1', '#input_rows': '100', '#word_delimiter': ''}
+I1212 15:08:26.130965 139688065086336 place_name_matcher.py:177] Loaded 0 places from [''] within []
+I1212 15:08:26.131048 139688065086336 place_name_matcher.py:191] Loaded 0 names into ngram matcher with 0 ngrams
+I1212 15:08:26.132439 139688065086336 counters.py:381] Counters:
+                         1:process_input_processed =          0
+                        1:process_input_start_time =  892887.18
+                                       process-mem =  561618944
+                                   process-mem-rss =  128843776
+                             process-time-sys-secs =       0.73
+                            process-time-user-secs =       1.91
+                              process_elapsed_time =       0.00
+                                         processed =          0
+                                        start_time =  892887.18
+I1212 15:08:26.132996 139688065086336 counters.py:346] Counters:
+                       1:process_input_process-mem =  561618944
+                   1:process_input_process-mem-rss =  128847872
+             1:process_input_process-time-sys-secs =       0.73
+            1:process_input_process-time-user-secs =       1.91
+              1:process_input_process_elapsed_time =       0.00
+            1:process_input_process_remaining_time =  480000.00
+                         1:process_input_processed =          0
+                        1:process_input_start_time =  892887.18
+                             1:process_input_total =         48
+                                       process-mem =  561618944
+                                   process-mem-rss =  128843776
+                             process-time-sys-secs =       0.73
+                            process-time-user-secs =       1.91
+                              process_elapsed_time =       0.00
+                                         processed =          0
+                                        start_time =  892887.18
+I1212 15:08:26.133068 139688065086336 stat_var_processor.py:1846] Processing input data file statvar_imports/IPEDS/2012_2015/input.csv with encoding:utf-8...
+I1212 15:08:26.133679 139688065086336 counters.py:346] Counters:
+             1:process_input_input-files-processed =          1
+1:process_input_num-rows-statvar_imports/IPEDS/2012_2015/input.csv =         48
+                       1:process_input_process-mem =  561618944
+                   1:process_input_process-mem-rss =  128847872
+             1:process_input_process-time-sys-secs =       0.73
+            1:process_input_process-time-user-secs =       1.91
+              1:process_input_process_elapsed_time =       0.00
+            1:process_input_process_remaining_time =  480000.00
+                         1:process_input_processed =          0
+                        1:process_input_start_time =  892887.18
+                             1:process_input_total =         96
+                                       process-mem =  561618944
+                                   process-mem-rss =  128856064
+                             process-time-sys-secs =       0.73
+                            process-time-user-secs =       1.91
+                              process_elapsed_time =       0.00
+                                         processed =          0
+                                        start_time =  892887.18
+                      warning-missing-property-key =          1
+I1212 15:08:26.187205 139688065086336 counters.py:346] Counters:
+                                       process-mem =  561618944
+                                   process-mem-rss =  128909312
+                             process-time-sys-secs =       0.73
+                            process-time-user-secs =       1.96
+                              process_elapsed_time =       0.06
+                                         processed =          0
+                                      resolve-miss =          1
+                                        start_time =  892887.17
+I1212 15:08:26.187850 139688065086336 counters.py:346] Counters:
+             1:process_input_input-files-processed =          1
+                 1:process_input_input-header-rows =          3
+                1:process_input_input-rows-ignored =         37
+              1:process_input_input-rows-processed =          3
+                1:process_input_input-rows-skipped =          2
+                    1:process_input_input-sections =          1
+1:process_input_num-rows-statvar_imports/IPEDS/2012_2015/input.csv =         48
+                       1:process_input_process-mem =  561618944
+                   1:process_input_process-mem-rss =  128847872
+             1:process_input_process-time-sys-secs =       0.73
+            1:process_input_process-time-user-secs =       1.91
+              1:process_input_process_elapsed_time =       0.00
+            1:process_input_process_remaining_time =  480000.00
+                         1:process_input_processed =         43
+                        1:process_input_start_time =  892887.18
+                             1:process_input_total =         96
+      1:process_input_warning-unresolved-value-ref =         78
+                                generated-statvars =          1
+                                       process-mem =  561618944
+                                   process-mem-rss =  128909312
+                             process-time-sys-secs =       0.73
+                            process-time-user-secs =       1.96
+                              process_elapsed_time =       0.06
+                                         processed =          0
+                                        start_time =  892887.18
+                      warning-missing-property-key =      12306
+I1212 15:08:26.223906 139688065086336 counters.py:346] Counters:
+                   1:process_input_generated-svobs =         48
+         1:process_input_generated-svobs-input.csv =         48
+                   1:process_input_input-data-rows =          4
+             1:process_input_input-files-processed =          1
+                 1:process_input_input-header-rows =          3
+                1:process_input_input-rows-ignored =         39
+              1:process_input_input-rows-processed =          7
+                1:process_input_input-rows-skipped =          2
+                    1:process_input_input-sections =          1
+1:process_input_num-rows-statvar_imports/IPEDS/2012_2015/input.csv =         48
+                       1:process_input_process-mem =  561618944
+                   1:process_input_process-mem-rss =  128978944
+             1:process_input_process-time-sys-secs =       0.73
+            1:process_input_process-time-user-secs =       1.99
+              1:process_input_process_elapsed_time =       0.09
+            1:process_input_process_remaining_time =       0.09
+                         1:process_input_processed =         48
+           1:process_input_processing-time-seconds =       0.09
+1:process_input_processing-time-seconds_statvar_imports/IPEDS/2012_2015/input.csv =       0.09
+                   1:process_input_processing_rate =     526.37
+                        1:process_input_start_time =  892887.18
+                             1:process_input_total =         96
+      1:process_input_warning-unresolved-value-ref =        108
+                                generated-statvars =         48
+                         generated-unique-statvars =         48
+                                       process-mem =  561618944
+                                   process-mem-rss =  128909312
+                             process-time-sys-secs =       0.73
+                            process-time-user-secs =       1.96
+                              process_elapsed_time =       0.06
+                                         processed =          0
+                                        start_time =  892887.18
+                                       svobs-added =         48
+                      warning-missing-property-key =      14313
+I1212 15:08:26.224077 139688065086336 stat_var_processor.py:1920] Processed 48 lines from statvar_imports/IPEDS/2012_2015/input.csv @ 531.07 lines/sec.
+I1212 15:08:26.224177 139688065086336 stat_var_processor.py:1934] Processed 7 rows from 1 files @ 76.38 rows/sec.
+I1212 15:08:26.224258 139688065086336 stat_var_processor.py:2789] Generating output: statvar_imports/IPEDS/2012_2015/output
+I1212 15:08:26.224675 139688065086336 counters.py:381] Counters:
+                   1:process_input_generated-svobs =         48
+         1:process_input_generated-svobs-input.csv =         48
+                   1:process_input_input-data-rows =          4
+             1:process_input_input-files-processed =          1
+                 1:process_input_input-header-rows =          3
+                1:process_input_input-rows-ignored =         39
+              1:process_input_input-rows-processed =          7
+                1:process_input_input-rows-skipped =          2
+                    1:process_input_input-sections =          1
+1:process_input_num-rows-statvar_imports/IPEDS/2012_2015/input.csv =         48
+                       1:process_input_process-mem =  561618944
+                   1:process_input_process-mem-rss =  128983040
+             1:process_input_process-time-sys-secs =       0.73
+            1:process_input_process-time-user-secs =       1.99
+              1:process_input_process_elapsed_time =       0.09
+            1:process_input_process_remaining_time =       0.09
+                         1:process_input_processed =         48
+        1:process_input_processing-input-rows-rate =      76.38
+1:process_input_processing-input-rows-rate_statvar_imports/IPEDS/2012_2015/input.csv =     531.07
+           1:process_input_processing-time-seconds =       0.09
+1:process_input_processing-time-seconds_statvar_imports/IPEDS/2012_2015/input.csv =       0.09
+                   1:process_input_processing_rate =     521.62
+                        1:process_input_start_time =  892887.18
+                             1:process_input_total =         96
+      1:process_input_warning-unresolved-value-ref =        108
+                        2:prepare_output_processed =          0
+                       2:prepare_output_start_time =  892887.27
+                                generated-statvars =         48
+                         generated-unique-statvars =         48
+                                       process-mem =  561618944
+                                   process-mem-rss =  128909312
+                             process-time-sys-secs =       0.73
+                            process-time-user-secs =       1.96
+                              process_elapsed_time =       0.06
+                                         processed =          0
+                                        start_time =  892887.18
+                                       svobs-added =         48
+                      warning-missing-property-key =      14313
+I1212 15:08:26.225556 139688065086336 counters.py:381] Counters:
+                   1:process_input_generated-svobs =         48
+         1:process_input_generated-svobs-input.csv =         48
+                   1:process_input_input-data-rows =          4
+             1:process_input_input-files-processed =          1
+                 1:process_input_input-header-rows =          3
+                1:process_input_input-rows-ignored =         39
+              1:process_input_input-rows-processed =          7
+                1:process_input_input-rows-skipped =          2
+                    1:process_input_input-sections =          1
+1:process_input_num-rows-statvar_imports/IPEDS/2012_2015/input.csv =         48
+                       1:process_input_process-mem =  561618944
+                   1:process_input_process-mem-rss =  128983040
+             1:process_input_process-time-sys-secs =       0.73
+            1:process_input_process-time-user-secs =       1.99
+              1:process_input_process_elapsed_time =       0.09
+            1:process_input_process_remaining_time =       0.09
+                         1:process_input_processed =         48
+        1:process_input_processing-input-rows-rate =      76.38
+1:process_input_processing-input-rows-rate_statvar_imports/IPEDS/2012_2015/input.csv =     531.07
+           1:process_input_processing-time-seconds =       0.09
+1:process_input_processing-time-seconds_statvar_imports/IPEDS/2012_2015/input.csv =       0.09
+                   1:process_input_processing_rate =     521.62
+                        1:process_input_start_time =  892887.18
+                             1:process_input_total =         96
+      1:process_input_warning-unresolved-value-ref =        108
+                      2:prepare_output_process-mem =  561618944
+                  2:prepare_output_process-mem-rss =  128983040
+            2:prepare_output_process-time-sys-secs =       0.73
+           2:prepare_output_process-time-user-secs =       1.99
+             2:prepare_output_process_elapsed_time =       0.00
+                        2:prepare_output_processed =          0
+                       2:prepare_output_start_time =  892887.27
+                     3:write_statvar_mcf_processed =          0
+                    3:write_statvar_mcf_start_time =  892887.27
+                                generated-statvars =         48
+                         generated-unique-statvars =         48
+                                       process-mem =  561618944
+                                   process-mem-rss =  128909312
+                             process-time-sys-secs =       0.73
+                            process-time-user-secs =       1.96
+                              process_elapsed_time =       0.06
+                                         processed =          0
+                                        start_time =  892887.18
+                                       svobs-added =         48
+                      warning-missing-property-key =      14313
+I1212 15:08:26.541516 139688065086336 mcf_filter.py:86] Filtering 48 nodes with 0 ignored nodes
+I1212 15:08:26.541732 139688065086336 stat_var_processor.py:1057] Removed 0 existing nodes from 48 statvars
+I1212 15:08:26.541835 139688065086336 stat_var_processor.py:1085] Generating 48 statvars into statvar_imports/IPEDS/2012_2015/output_stat_vars.mcf
+I1212 15:08:26.781735 139688065086336 schema_spell_checker.py:349] Loading allowed words from /usr/local/google/home/susmitakumari/data/tools/statvar_importer/words_allowlist.txt
+I1212 15:08:26.811169 139688065086336 schema_spell_checker.py:360] Spell checker loaded with 24 words from /usr/local/google/home/susmitakumari/data/tools/statvar_importer/words_allowlist.txt
+I1212 15:08:26.811570 139688065086336 schema_checker.py:182] Loaded 0 urls from 
+E1212 15:08:26.812921 139688065086336 schema_spell_checker.py:230] SpellError: Count_Student_AllStudents_InstitutionAll_AdjustedChort:institutionType:{'chort'}
+E1212 15:08:26.813112 139688065086336 schema_spell_checker.py:273] SpellError: Count_Student_AllStudents_InstitutionAll_AdjustedChort: {'institutionType': 'chort'}
+E1212 15:08:26.814176 139688065086336 schema_spell_checker.py:230] SpellError: Count_Student_AllStudents_InstitutionControlPublic_AdjustedChort:institutionType:{'chort'}
+E1212 15:08:26.815954 139688065086336 schema_spell_checker.py:273] SpellError: Count_Student_AllStudents_InstitutionControlPublic_AdjustedChort: {'institutionType': 'chort'}
+E1212 15:08:26.816843 139688065086336 schema_spell_checker.py:230] SpellError: Count_Student_AllStudents_InstitutionControlPrivateNonProfit_AdjustedChort:institutionType:{'chort'}
+E1212 15:08:26.817203 139688065086336 schema_spell_checker.py:273] SpellError: Count_Student_AllStudents_InstitutionControlPrivateNonProfit_AdjustedChort: {'institutionType': 'chort'}
+E1212 15:08:26.817951 139688065086336 schema_spell_checker.py:230] SpellError: Count_Student_AllStudents_InstitutionControlPrivateForProfit_AdjustedChort:institutionType:{'chort'}
+E1212 15:08:26.818336 139688065086336 schema_spell_checker.py:273] SpellError: Count_Student_AllStudents_InstitutionControlPrivateForProfit_AdjustedChort: {'institutionType': 'chort'}
+E1212 15:08:26.819009 139688065086336 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionAll_AdjustedChort:institutionType:{'chort'}
+E1212 15:08:26.819105 139688065086336 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionAll_AdjustedChort:educationAid:{'pell'}
+E1212 15:08:26.819201 139688065086336 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionAll_AdjustedChort: {'institutionType': 'chort', 'educationAid': 'pell'}
+E1212 15:08:26.819416 139688065086336 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionAll_Received:educationAid:{'pell'}
+E1212 15:08:26.819524 139688065086336 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionAll_Received: {'educationAid': 'pell'}
+E1212 15:08:26.819757 139688065086336 schema_spell_checker.py:230] SpellError: Percent_Student_PellGrant_InstitutionAll_GraduationRate:educationAid:{'pell'}
+E1212 15:08:26.819864 139688065086336 schema_spell_checker.py:273] SpellError: Percent_Student_PellGrant_InstitutionAll_GraduationRate: {'educationAid': 'pell'}
+E1212 15:08:26.820056 139688065086336 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionControlPublic_AdjustedChort:institutionType:{'chort'}
+E1212 15:08:26.820142 139688065086336 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionControlPublic_AdjustedChort:educationAid:{'pell'}
+E1212 15:08:26.820235 139688065086336 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionControlPublic_AdjustedChort: {'institutionType': 'chort', 'educationAid': 'pell'}
+E1212 15:08:26.820450 139688065086336 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionControlPublic_Received:educationAid:{'pell'}
+E1212 15:08:26.820801 139688065086336 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionControlPublic_Received: {'educationAid': 'pell'}
+E1212 15:08:26.821282 139688065086336 schema_spell_checker.py:230] SpellError: Percent_Student_PellGrant_InstitutionControlPublic_GraduationRate:educationAid:{'pell'}
+E1212 15:08:26.821684 139688065086336 schema_spell_checker.py:273] SpellError: Percent_Student_PellGrant_InstitutionControlPublic_GraduationRate: {'educationAid': 'pell'}
+E1212 15:08:26.822092 139688065086336 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionControlPrivateNonProfit_AdjustedChort:institutionType:{'chort'}
+E1212 15:08:26.822398 139688065086336 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionControlPrivateNonProfit_AdjustedChort:educationAid:{'pell'}
+E1212 15:08:26.822509 139688065086336 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionControlPrivateNonProfit_AdjustedChort: {'institutionType': 'chort', 'educationAid': 'pell'}
+E1212 15:08:26.822721 139688065086336 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionControlPrivateNonProfit_Received:educationAid:{'pell'}
+E1212 15:08:26.822888 139688065086336 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionControlPrivateNonProfit_Received: {'educationAid': 'pell'}
+E1212 15:08:26.823108 139688065086336 schema_spell_checker.py:230] SpellError: Percent_Student_PellGrant_InstitutionControlPrivateNonProfit_GraduationRate:educationAid:{'pell'}
+E1212 15:08:26.823256 139688065086336 schema_spell_checker.py:273] SpellError: Percent_Student_PellGrant_InstitutionControlPrivateNonProfit_GraduationRate: {'educationAid': 'pell'}
+E1212 15:08:26.823467 139688065086336 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionControlPrivateForProfit_AdjustedChort:institutionType:{'chort'}
+E1212 15:08:26.823564 139688065086336 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionControlPrivateForProfit_AdjustedChort:educationAid:{'pell'}
+E1212 15:08:26.823686 139688065086336 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionControlPrivateForProfit_AdjustedChort: {'institutionType': 'chort', 'educationAid': 'pell'}
+E1212 15:08:26.823914 139688065086336 schema_spell_checker.py:230] SpellError: Count_Student_PellGrant_InstitutionControlPrivateForProfit_Received:educationAid:{'pell'}
+E1212 15:08:26.824033 139688065086336 schema_spell_checker.py:273] SpellError: Count_Student_PellGrant_InstitutionControlPrivateForProfit_Received: {'educationAid': 'pell'}
+E1212 15:08:26.824259 139688065086336 schema_spell_checker.py:230] SpellError: Percent_Student_PellGrant_InstitutionControlPrivateForProfit_GraduationRate:educationAid:{'pell'}
+E1212 15:08:26.824381 139688065086336 schema_spell_checker.py:273] SpellError: Percent_Student_PellGrant_InstitutionControlPrivateForProfit_GraduationRate: {'educationAid': 'pell'}
+E1212 15:08:26.824733 139688065086336 schema_spell_checker.py:230] SpellError: Count_Student_SubsidizedLoan_InstitutionAll_AdjustedChort:institutionType:{'chort'}
+E1212 15:08:26.824986 139688065086336 schema_spell_checker.py:273] SpellError: Count_Student_SubsidizedLoan_InstitutionAll_AdjustedChort: {'institutionType': 'chort'}
+E1212 15:08:26.825699 139688065086336 schema_spell_checker.py:230] SpellError: Count_Student_SubsidizedLoan_InstitutionControlPublic_AdjustedChort:institutionType:{'chort'}
+E1212 15:08:26.825946 139688065086336 schema_spell_checker.py:273] SpellError: Count_Student_SubsidizedLoan_InstitutionControlPublic_AdjustedChort: {'institutionType': 'chort'}
+E1212 15:08:26.826647 139688065086336 schema_spell_checker.py:230] SpellError: Count_Student_SubsidizedLoan_InstitutionControlPrivateNonProfit_AdjustedChort:institutionType:{'chort'}
+E1212 15:08:26.826817 139688065086336 schema_spell_checker.py:273] SpellError: Count_Student_SubsidizedLoan_InstitutionControlPrivateNonProfit_AdjustedChort: {'institutionType': 'chort'}
+E1212 15:08:26.827517 139688065086336 schema_spell_checker.py:230] SpellError: Count_Student_SubsidizedLoan_InstitutionControlPrivateForProfit_AdjustedChort:institutionType:{'chort'}
+E1212 15:08:26.827684 139688065086336 schema_spell_checker.py:273] SpellError: Count_Student_SubsidizedLoan_InstitutionControlPrivateForProfit_AdjustedChort: {'institutionType': 'chort'}
+E1212 15:08:26.828326 139688065086336 schema_spell_checker.py:230] SpellError: Count_Student_InstitutionAll_AdjustedChort:institutionType:{'chort'}
+E1212 15:08:26.828450 139688065086336 schema_spell_checker.py:273] SpellError: Count_Student_InstitutionAll_AdjustedChort: {'institutionType': 'chort'}
+E1212 15:08:26.829128 139688065086336 schema_spell_checker.py:230] SpellError: Count_Student_InstitutionControlPublic_AdjustedChort:institutionType:{'chort'}
+E1212 15:08:26.829336 139688065086336 schema_spell_checker.py:273] SpellError: Count_Student_InstitutionControlPublic_AdjustedChort: {'institutionType': 'chort'}
+E1212 15:08:26.829964 139688065086336 schema_spell_checker.py:230] SpellError: Count_Student_InstitutionControlPrivateNonProfit_AdjustedChort:institutionType:{'chort'}
+E1212 15:08:26.830127 139688065086336 schema_spell_checker.py:273] SpellError: Count_Student_InstitutionControlPrivateNonProfit_AdjustedChort: {'institutionType': 'chort'}
+E1212 15:08:26.830747 139688065086336 schema_spell_checker.py:230] SpellError: Count_Student_InstitutionControlPrivateForProfit_AdjustedChort:institutionType:{'chort'}
+E1212 15:08:26.830925 139688065086336 schema_spell_checker.py:273] SpellError: Count_Student_InstitutionControlPrivateForProfit_AdjustedChort: {'institutionType': 'chort'}
+E1212 15:08:26.831475 139688065086336 schema_spell_checker.py:278] Words with spell errors: {'pell', 'chort'}
+I1212 15:08:26.832808 139688065086336 schema_checker.py:360] Sanity checked: nodes: 48, spell errors: 24, URL errors: 0
+I1212 15:08:27.247476 139688065086336 schema_generator.py:210] Got schema for 7 dcids out of 16
+I1212 15:08:29.989928 139688065086336 schema_generator.py:210] Got schema for 18 dcids out of 18
+I1212 15:08:30.746527 139688065086336 schema_generator.py:210] Got schema for 24 dcids out of 36
+I1212 15:08:31.766383 139688065086336 schema_generator.py:210] Got schema for 15 dcids out of 18
+I1212 15:08:32.153483 139688065086336 schema_generator.py:210] Got schema for 3 dcids out of 10
+I1212 15:08:32.153810 139688065086336 schema_generator.py:210] Got schema for 0 dcids out of 0
+I1212 15:08:32.160444 139688065086336 schema_generator.py:495] Generated 10 new nodes with 2 new properties and 8 new values.
+I1212 15:08:32.160756 139688065086336 stat_var_processor.py:1123] Generating new schema for 10 nodes into statvar_imports/IPEDS/2012_2015/output_stat_vars_schema.mcf
+I1212 15:08:32.340234 139688065086336 schema_spell_checker.py:349] Loading allowed words from /usr/local/google/home/susmitakumari/data/tools/statvar_importer/words_allowlist.txt
+I1212 15:08:32.372209 139688065086336 schema_spell_checker.py:360] Spell checker loaded with 24 words from /usr/local/google/home/susmitakumari/data/tools/statvar_importer/words_allowlist.txt
+I1212 15:08:32.372493 139688065086336 schema_checker.py:182] Loaded 0 urls from 
+E1212 15:08:32.372992 139688065086336 schema_spell_checker.py:230] SpellError: dcid:AdjustedChort:name:{'chort'}
+E1212 15:08:32.373096 139688065086336 schema_spell_checker.py:273] SpellError: dcid:AdjustedChort: {'name': 'chort'}
+E1212 15:08:32.373719 139688065086336 schema_spell_checker.py:230] SpellError: dcid:PellGrant:name:{'pell'}
+E1212 15:08:32.373810 139688065086336 schema_spell_checker.py:273] SpellError: dcid:PellGrant: {'name': 'pell'}
+E1212 15:08:32.373959 139688065086336 schema_spell_checker.py:278] Words with spell errors: {'pell', 'chort'}
+I1212 15:08:32.374126 139688065086336 schema_checker.py:360] Sanity checked: nodes: 10, spell errors: 2, URL errors: 0
+I1212 15:08:32.379284 139688065086336 stat_var_processor.py:1148] Got 30 errors: {0: {'check': 'SPELL', 'dcid': 'Count_Student_AllStudents_InstitutionAll_AdjustedChort', 'property': 'institutionType', 'error': 'chort'}, 1: {'check': 'SPELL', 'dcid': 'Count_Student_AllStudents_InstitutionControlPublic_AdjustedChort', 'property': 'institutionType', 'error': 'chort'}, 2: {'check': 'SPELL', 'dcid': 'Count_Student_AllStudents_InstitutionControlPrivateNonProfit_AdjustedChort', 'property': 'institutionType', 'error': 'chort'}, 3: {'check': 'SPELL', 'dcid': 'Count_Student_AllStudents_InstitutionControlPrivateForProfit_AdjustedChort', 'property': 'institutionType', 'error': 'chort'}, 4: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionAll_AdjustedChort', 'property': 'institutionType', 'error': 'chort'}, 5: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionAll_AdjustedChort', 'property': 'educationAid', 'error': 'pell'}, 6: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionAll_Received', 'property': 'educationAid', 'error': 'pell'}, 7: {'check': 'SPELL', 'dcid': 'Percent_Student_PellGrant_InstitutionAll_GraduationRate', 'property': 'educationAid', 'error': 'pell'}, 8: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionControlPublic_AdjustedChort', 'property': 'institutionType', 'error': 'chort'}, 9: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionControlPublic_AdjustedChort', 'property': 'educationAid', 'error': 'pell'}, 10: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionControlPublic_Received', 'property': 'educationAid', 'error': 'pell'}, 11: {'check': 'SPELL', 'dcid': 'Percent_Student_PellGrant_InstitutionControlPublic_GraduationRate', 'property': 'educationAid', 'error': 'pell'}, 12: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionControlPrivateNonProfit_AdjustedChort', 'property': 'institutionType', 'error': 'chort'}, 13: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionControlPrivateNonProfit_AdjustedChort', 'property': 'educationAid', 'error': 'pell'}, 14: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionControlPrivateNonProfit_Received', 'property': 'educationAid', 'error': 'pell'}, 15: {'check': 'SPELL', 'dcid': 'Percent_Student_PellGrant_InstitutionControlPrivateNonProfit_GraduationRate', 'property': 'educationAid', 'error': 'pell'}, 16: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionControlPrivateForProfit_AdjustedChort', 'property': 'institutionType', 'error': 'chort'}, 17: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionControlPrivateForProfit_AdjustedChort', 'property': 'educationAid', 'error': 'pell'}, 18: {'check': 'SPELL', 'dcid': 'Count_Student_PellGrant_InstitutionControlPrivateForProfit_Received', 'property': 'educationAid', 'error': 'pell'}, 19: {'check': 'SPELL', 'dcid': 'Percent_Student_PellGrant_InstitutionControlPrivateForProfit_GraduationRate', 'property': 'educationAid', 'error': 'pell'}, 20: {'check': 'SPELL', 'dcid': 'Count_Student_SubsidizedLoan_InstitutionAll_AdjustedChort', 'property': 'institutionType', 'error': 'chort'}, 21: {'check': 'SPELL', 'dcid': 'Count_Student_SubsidizedLoan_InstitutionControlPublic_AdjustedChort', 'property': 'institutionType', 'error': 'chort'}, 22: {'check': 'SPELL', 'dcid': 'Count_Student_SubsidizedLoan_InstitutionControlPrivateNonProfit_AdjustedChort', 'property': 'institutionType', 'error': 'chort'}, 23: {'check': 'SPELL', 'dcid': 'Count_Student_SubsidizedLoan_InstitutionControlPrivateForProfit_AdjustedChort', 'property': 'institutionType', 'error': 'chort'}, 24: {'check': 'SPELL', 'dcid': 'Count_Student_InstitutionAll_AdjustedChort', 'property': 'institutionType', 'error': 'chort'}, 25: {'check': 'SPELL', 'dcid': 'Count_Student_InstitutionControlPublic_AdjustedChort', 'property': 'institutionType', 'error': 'chort'}, 26: {'check': 'SPELL', 'dcid': 'Count_Student_InstitutionControlPrivateNonProfit_AdjustedChort', 'property': 'institutionType', 'error': 'chort'}, 27: {'check': 'SPELL', 'dcid': 'Count_Student_InstitutionControlPrivateForProfit_AdjustedChort', 'property': 'institutionType', 'error': 'chort'}, 28: {'check': 'SPELL', 'dcid': 'dcid:AdjustedChort', 'property': 'name', 'error': 'chort'}, 29: {'check': 'SPELL', 'dcid': 'dcid:PellGrant', 'property': 'name', 'error': 'pell'}}
+I1212 15:08:32.380471 139688065086336 counters.py:381] Counters:
+                   1:process_input_generated-svobs =         48
+         1:process_input_generated-svobs-input.csv =         48
+                   1:process_input_input-data-rows =          4
+             1:process_input_input-files-processed =          1
+                 1:process_input_input-header-rows =          3
+                1:process_input_input-rows-ignored =         39
+              1:process_input_input-rows-processed =          7
+                1:process_input_input-rows-skipped =          2
+                    1:process_input_input-sections =          1
+1:process_input_num-rows-statvar_imports/IPEDS/2012_2015/input.csv =         48
+                       1:process_input_process-mem =  561618944
+                   1:process_input_process-mem-rss =  128983040
+             1:process_input_process-time-sys-secs =       0.73
+            1:process_input_process-time-user-secs =       1.99
+              1:process_input_process_elapsed_time =       0.09
+            1:process_input_process_remaining_time =       0.09
+                         1:process_input_processed =         48
+        1:process_input_processing-input-rows-rate =      76.38
+1:process_input_processing-input-rows-rate_statvar_imports/IPEDS/2012_2015/input.csv =     531.07
+           1:process_input_processing-time-seconds =       0.09
+1:process_input_processing-time-seconds_statvar_imports/IPEDS/2012_2015/input.csv =       0.09
+                   1:process_input_processing_rate =     521.62
+                        1:process_input_start_time =  892887.18
+                             1:process_input_total =         96
+      1:process_input_warning-unresolved-value-ref =        108
+                      2:prepare_output_process-mem =  561618944
+                  2:prepare_output_process-mem-rss =  128983040
+            2:prepare_output_process-time-sys-secs =       0.73
+           2:prepare_output_process-time-user-secs =       1.99
+             2:prepare_output_process_elapsed_time =       0.00
+                        2:prepare_output_processed =          0
+                       2:prepare_output_start_time =  892887.27
+                   3:write_statvar_mcf_process-mem =  568041472
+               3:write_statvar_mcf_process-mem-rss =  137474048
+         3:write_statvar_mcf_process-time-sys-secs =       0.94
+        3:write_statvar_mcf_process-time-user-secs =       2.46
+          3:write_statvar_mcf_process_elapsed_time =       6.15
+                     3:write_statvar_mcf_processed =          0
+                    3:write_statvar_mcf_start_time =  892887.27
+                       4:write_svobs_csv_processed =          0
+                      4:write_svobs_csv_start_time =  892893.42
+                       dropped-output-statvars-mcf =          0
+                                 error-spell-words =          4
+                           existing-nodes-from-api =          0
+                                generated-statvars =         48
+                         generated-unique-statvars =         48
+                             output-new-schema-mcf =         10
+                               output-statvars-mcf =         48
+                                       process-mem =  561618944
+                                   process-mem-rss =  128909312
+                             process-time-sys-secs =       0.73
+                            process-time-user-secs =       1.96
+                              process_elapsed_time =       0.06
+                                         processed =         58
+                              spell-allowlist-file =          2
+                             spell-allowlist-words =         48
+                           spell-check-ignored-pvs =         58
+                                 spell-check-nodes =         58
+                          spell-check-nodes-errors =         26
+                                   spell-check-pvs =        359
+                            spell-check-pvs-errors =         30
+                                        start_time =  892887.18
+                                       svobs-added =         48
+                                             total =         58
+                                    urls-allowlist =          0
+                      warning-missing-property-key =      14313
+I1212 15:08:32.380602 139688065086336 stat_var_processor.py:1243] Writing 48 SVObs  into statvar_imports/IPEDS/2012_2015/output.csv with ['observationDate', 'observationAbout', 'value', 'variableMeasured']
+I1212 15:08:32.383828 139688065086336 stat_var_processor.py:1300] Writing SVObs tmcf statvar_imports/IPEDS/2012_2015/output.tmcf with ['observationDate', 'observationAbout', 'value', 'variableMeasured'] into statvar_imports/IPEDS/2012_2015/output.tmcf.
+I1212 15:08:32.386159 139688065086336 counters.py:346] Counters:
+                   1:process_input_generated-svobs =         48
+         1:process_input_generated-svobs-input.csv =         48
+                   1:process_input_input-data-rows =          4
+             1:process_input_input-files-processed =          1
+                 1:process_input_input-header-rows =          3
+                1:process_input_input-rows-ignored =         39
+              1:process_input_input-rows-processed =          7
+                1:process_input_input-rows-skipped =          2
+                    1:process_input_input-sections =          1
+1:process_input_num-rows-statvar_imports/IPEDS/2012_2015/input.csv =         48
+                       1:process_input_process-mem =  561618944
+                   1:process_input_process-mem-rss =  128983040
+             1:process_input_process-time-sys-secs =       0.73
+            1:process_input_process-time-user-secs =       1.99
+              1:process_input_process_elapsed_time =       0.09
+            1:process_input_process_remaining_time =       0.09
+                         1:process_input_processed =         48
+        1:process_input_processing-input-rows-rate =      76.38
+1:process_input_processing-input-rows-rate_statvar_imports/IPEDS/2012_2015/input.csv =     531.07
+           1:process_input_processing-time-seconds =       0.09
+1:process_input_processing-time-seconds_statvar_imports/IPEDS/2012_2015/input.csv =       0.09
+                   1:process_input_processing_rate =     521.62
+                        1:process_input_start_time =  892887.18
+                             1:process_input_total =         96
+      1:process_input_warning-unresolved-value-ref =        108
+                      2:prepare_output_process-mem =  561618944
+                  2:prepare_output_process-mem-rss =  128983040
+            2:prepare_output_process-time-sys-secs =       0.73
+           2:prepare_output_process-time-user-secs =       1.99
+             2:prepare_output_process_elapsed_time =       0.00
+                        2:prepare_output_processed =          0
+                       2:prepare_output_start_time =  892887.27
+                   3:write_statvar_mcf_process-mem =  568041472
+               3:write_statvar_mcf_process-mem-rss =  137474048
+         3:write_statvar_mcf_process-time-sys-secs =       0.94
+        3:write_statvar_mcf_process-time-user-secs =       2.46
+          3:write_statvar_mcf_process_elapsed_time =       6.15
+                     3:write_statvar_mcf_processed =          0
+                    3:write_statvar_mcf_start_time =  892887.27
+                     4:write_svobs_csv_process-mem =  568041472
+                 4:write_svobs_csv_process-mem-rss =  137474048
+           4:write_svobs_csv_process-time-sys-secs =       0.94
+          4:write_svobs_csv_process-time-user-secs =       2.46
+            4:write_svobs_csv_process_elapsed_time =       0.01
+                       4:write_svobs_csv_processed =          0
+                      4:write_svobs_csv_start_time =  892893.42
+                       dropped-output-statvars-mcf =          0
+                                 error-spell-words =          4
+                           existing-nodes-from-api =          0
+                                generated-statvars =         48
+                         generated-unique-statvars =         48
+                             output-new-schema-mcf =         10
+                               output-statvars-mcf =         48
+                             output-svobs-csv-rows =         48
+              output-svobs-unique-observationAbout =          1
+               output-svobs-unique-observationDate =          1
+                        output-svobs-unique-typeOf =          1
+                         output-svobs-unique-value =         48
+              output-svobs-unique-variableMeasured =         48
+                                       process-mem =  561618944
+                                   process-mem-rss =  128909312
+                             process-time-sys-secs =       0.73
+                            process-time-user-secs =       1.96
+                              process_elapsed_time =       0.06
+                                         processed =         58
+                              spell-allowlist-file =          2
+                             spell-allowlist-words =         48
+                           spell-check-ignored-pvs =         58
+                                 spell-check-nodes =         58
+                          spell-check-nodes-errors =         26
+                                   spell-check-pvs =        359
+                            spell-check-pvs-errors =         30
+                                        start_time =  892887.18
+                                       svobs-added =         48
+                                             total =         58
+                                    urls-allowlist =          0
+                      warning-missing-property-key =      14313
+I1212 15:08:32.386399 139688065086336 stat_var_processor.py:2814] Writing counters to 
+I1212 15:08:32.386584 139688065086336 stat_var_processor.py:2950] Error Counters: ['error-spell-words=4']
