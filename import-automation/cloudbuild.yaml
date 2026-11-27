@@ -77,7 +77,7 @@ steps:
         if echo "$${CHANGED}" | grep -qE '^import-automation/helper/'; then
           echo "BUILD_HELPER=true" >> /workspace/targets.env
         fi
-        if echo "$${CHANGED}" | grep -qE '^(import-automation/workflow/|.*manifest\.json$)'; then
+        if echo "$${CHANGED}" | grep -qE '^(import-automation/workflow/|import-automation/executor/app/executor/cloud_batch\.py$|.*manifest\.json$)'; then
           echo "BUILD_WORKFLOW=true" >> /workspace/targets.env
         fi
 
