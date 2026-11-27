@@ -48,7 +48,14 @@ WorkflowExecutionSensor.template_fields = (
 current_dir = os.path.dirname(os.path.abspath(__file__))
 if current_dir not in sys.path:
     sys.path.insert(0, current_dir)
+executor_dir = os.path.abspath(
+    os.path.join(current_dir, "..", "executor", "app", "executor"))
+if os.path.isdir(executor_dir) and executor_dir not in sys.path:
+    sys.path.append(executor_dir)
 
+from cloud_batch import DEFAULT_RESOURCES
+from cloud_batch import get_gce_instance as get_gce_instance
+from cloud_batch import normalize_batch_resources
 from golden_verification import HumanApprovalSensor
 from golden_verification import get_golden_test_imports
 from golden_verification import is_golden_test_import
@@ -60,147 +67,6 @@ from golden_verification import verify_golden_tests
 
 DAG_ID = os.environ.get("IMPORT_AUTOMATION_DAG_ID", "ManualRefresh")
 DEFAULT_IMAGE_URI = "us-docker.pkg.dev/datcom-ci/gcr.io/dc-import-executor:stable"
-DEFAULT_RESOURCES = {
-    "machine": "n2-standard-8",
-    "cpu": 8000,
-    "memory": 32768,
-    "disk": 100
-}
-
-_GCE_MACHINE_TYPES = [
-    {
-        "name": "n2-standard-2",
-        "cpus": 2,
-        "memory_gib": 8
-    },
-    {
-        "name": "n2-standard-4",
-        "cpus": 4,
-        "memory_gib": 16
-    },
-    {
-        "name": "n2-standard-8",
-        "cpus": 8,
-        "memory_gib": 32
-    },
-    {
-        "name": "n2-standard-16",
-        "cpus": 16,
-        "memory_gib": 64
-    },
-    {
-        "name": "n2-standard-32",
-        "cpus": 32,
-        "memory_gib": 128
-    },
-    {
-        "name": "n2-standard-48",
-        "cpus": 48,
-        "memory_gib": 192
-    },
-    {
-        "name": "n2-standard-64",
-        "cpus": 64,
-        "memory_gib": 256
-    },
-    {
-        "name": "n2-highmem-2",
-        "cpus": 2,
-        "memory_gib": 16
-    },
-    {
-        "name": "n2-highmem-4",
-        "cpus": 4,
-        "memory_gib": 32
-    },
-    {
-        "name": "n2-highmem-8",
-        "cpus": 8,
-        "memory_gib": 64
-    },
-    {
-        "name": "n2-highmem-16",
-        "cpus": 16,
-        "memory_gib": 128
-    },
-    {
-        "name": "n2-highmem-32",
-        "cpus": 32,
-        "memory_gib": 256
-    },
-    {
-        "name": "n2-highmem-48",
-        "cpus": 48,
-        "memory_gib": 384
-    },
-    {
-        "name": "n2-highmem-64",
-        "cpus": 64,
-        "memory_gib": 512
-    },
-    {
-        "name": "n2-highcpu-2",
-        "cpus": 2,
-        "memory_gib": 2
-    },
-    {
-        "name": "n2-highcpu-4",
-        "cpus": 4,
-        "memory_gib": 4
-    },
-    {
-        "name": "n2-highcpu-8",
-        "cpus": 8,
-        "memory_gib": 8
-    },
-    {
-        "name": "n2-highcpu-16",
-        "cpus": 16,
-        "memory_gib": 16
-    },
-    {
-        "name": "n2-highcpu-32",
-        "cpus": 32,
-        "memory_gib": 32
-    },
-]
-
-
-def get_gce_instance(required_cpu: float,
-                     required_memory_gib: float) -> str | None:
-    """Finds the smallest GCE machine type meeting the CPU and memory (GiB) requirements."""
-    suitable = [
-        m for m in _GCE_MACHINE_TYPES
-        if m["cpus"] >= required_cpu and m["memory_gib"] >= required_memory_gib
-    ]
-    if not suitable:
-        return None
-    suitable.sort(key=lambda x: (x["cpus"], x["memory_gib"]))
-    return suitable[0]["name"]
-
-
-def normalize_batch_resources(
-        resource_limits: dict[str, Any] | None) -> dict[str, Any]:
-    """Converts manifest resource_limits (cpu in vCPUs, memory in GiB, disk in GB) into Cloud Batch resources."""
-    if not isinstance(resource_limits, dict) or not resource_limits:
-        return dict(DEFAULT_RESOURCES)
-
-    cpu_vcpu = (float(resource_limits["cpu"]) if "cpu" in resource_limits else
-                DEFAULT_RESOURCES["cpu"] / 1000.0)
-    mem_gib = (float(resource_limits["memory"]) if "memory" in resource_limits
-               else DEFAULT_RESOURCES["memory"] / 1024.0)
-    disk = int(resource_limits.get("disk", DEFAULT_RESOURCES["disk"]))
-
-    explicit_machine = resource_limits.get("machine")
-    machine = str(explicit_machine) if explicit_machine else (
-        get_gce_instance(cpu_vcpu, mem_gib) or DEFAULT_RESOURCES["machine"])
-
-    return {
-        "machine": machine,
-        "cpu": int(cpu_vcpu * 1000),
-        "memory": int(mem_gib * 1024),
-        "disk": disk,
-    }
 
 
 def get_config_var(key: str, default: str = "") -> str:
@@ -1298,14 +1164,17 @@ def build_dag(
     is_paused_upon_creation: bool | None = None,
     pre_prod_gate_factory: Callable[[], Any] | None = None,
     golden_test_allowlist: set[str] | None = None,
-) -> DAG:
+) -> DAG | None:
     """Builds and returns an Airflow DAG instance for import automation."""
+    cfg_override = config_override if isinstance(config_override, dict) else {}
+    if _is_true(cfg_override.get("exclude_import_workflow", False)):
+        return None
+
     allowlist = golden_test_allowlist if golden_test_allowlist is not None else get_golden_test_imports(
     )
     has_golden_check = (is_golden_test_import(import_name, allowlist=allowlist)
                         or is_golden_test_import(dag_id, allowlist=allowlist))
 
-    cfg_override = config_override if isinstance(config_override, dict) else {}
     skip_staging_default = _is_true(
         cfg_override.get("skip_staging_ingestion", False))
     skip_prod_default = _is_true(cfg_override.get("skip_prod_ingestion", False))
@@ -1341,7 +1210,8 @@ def build_dag(
         } if config_override else {}),
         **({
             "resources":
-                Param(normalize_batch_resources(resource_limits),
+                Param(normalize_batch_resources(resource_limits,
+                                                context=import_name or dag_id),
                       type="object",
                       description="Batch job resources")
         } if resource_limits else {}),
