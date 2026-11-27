@@ -173,6 +173,23 @@ flags.DEFINE_bool('llm_generate_statvar_name', False,
 flags.DEFINE_bool('enable_cloud_logging', False,
                   'Enable cloud logging when running on cloud.')
 
+# Flags for lookups in external services such as the Data Commons API.
+# A config file can also set these with the flag name as the parameter.
+flags.DEFINE_bool('reconcile_nodes', True,
+                  'Reconcile generated nodes with the Data Commons schema.')
+flags.DEFINE_bool('recon_lookup_api', True,
+                  'Look up schema in the DC API for reconciliation.')
+flags.DEFINE_bool(
+    'resolve_places', False,
+    'Resolve place names into dcids. Enabled if an API key or a places csv'
+    ' is set.')
+flags.DEFINE_bool('check_url', True, 'Check URLs in generated nodes.')
+flags.DEFINE_bool(
+    'output_only_new_statvars', True,
+    'Drop statvars that exist in the DC API from the statvar MCF output.')
+flags.DEFINE_bool('generate_schema_mcf', True,
+                  'Generate MCF file with schema for new statvars.')
+
 
 def get_default_config() -> dict:
     """Returns the default config as dictionary of config parameters and values."""
@@ -187,7 +204,8 @@ def get_default_config() -> dict:
         'match_substring_word_boundary':
             True,  # Partial key matches must be whole words.
         'reconcile_nodes':
-            True,  # Reconcile generated nodes with the Data Commons schema.
+            _FLAGS.
+            reconcile_nodes,  # Reconcile generated nodes with the DC schema.
         'drop_statvars_with_dup_svobs':
             True,  # Drop StatVars that have duplicate observations.
         'resume':
@@ -199,7 +217,7 @@ def get_default_config() -> dict:
         # Boolean settings read by modules the processor calls, with the
         # defaults used in their code.
         'check_url':
-            True,  # Check URLs in generated nodes.
+            _FLAGS.check_url,  # Check URLs in generated nodes.
         'ignore_non_alphanum':
             True,  # Ignore non-alphanumeric characters in n-gram matches.
         'maps_api_text_search':
@@ -209,7 +227,7 @@ def get_default_config() -> dict:
         'use_place_names':
             True,  # Also match the place name without its parent names.
         'recon_lookup_api':
-            True,  # Look up schema in the DC API for reconciliation.
+            _FLAGS.recon_lookup_api,  # Look up schema in the DC API for recon.
         'llm_response_drop_extra_output':
             True,  # Drop LLM output outside the expected format.
         'output_nodes_with_additions':
@@ -362,7 +380,7 @@ def get_default_config() -> dict:
         'maps_api_key':
             _FLAGS.maps_api_key,
         'resolve_places':
-            False,
+            _FLAGS.resolve_places,
         'places_csv':
             _FLAGS.places_csv,
         'places_resolved_csv':
@@ -398,11 +416,11 @@ def get_default_config() -> dict:
         'skip_constant_csv_columns':
             _FLAGS.skip_constant_csv_columns,
         'output_only_new_statvars':
-            True,  # Drop existing statvars from output
+            _FLAGS.output_only_new_statvars,  # Drop existing statvars.
         'output_precision_digits':
             5,  # Round floating values to 5 decimal digits.
         'generate_schema_mcf':
-            True,
+            _FLAGS.generate_schema_mcf,
         'generate_provisional_schema':
             True,
         # Settings for DC API.
