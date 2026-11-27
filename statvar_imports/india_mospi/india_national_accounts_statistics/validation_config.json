@@ -1,0 +1,68 @@
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_headline_max_date_freshness",
+            "description": "Ensure headline GDP, GVA, and state GSDP StatVars do not regress below 2026 and stay within MoSPI NAS annual publication lag.",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT StatVar, CAST(MaxDate AS VARCHAR) AS max_date_str FROM stats WHERE StatVar IN ('Amount_EconomicActivity_GrossDomesticProduction_Nominal', 'Amount_EconomicActivity_GrossDomesticProduction_RealValue', 'Nominal_GrowthRate_Amount_EconomicActivity_GrossDomesticProduction', 'RealValue_GrowthRate_Amount_EconomicActivity_GrossDomesticProduction', 'Amount_EconomicActivity_GrossValueAdded_RealValue')",
+                "condition": "max_date_str >= '2026' AND CAST(SUBSTR(max_date_str, 1, 4) AS INTEGER) >= EXTRACT(YEAR FROM CURRENT_DATE) - 2"
+            }
+        },
+        {
+            "rule_id": "check_statvar_count",
+            "description": "Ensure all 34 production India NAS StatisticalVariables are emitted.",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT COUNT(DISTINCT StatVar) AS sv_count FROM stats",
+                "condition": "sv_count >= 34"
+            }
+        },
+        {
+            "rule_id": "check_gdp_nominal_place_coverage",
+            "description": "Ensure nominal GDP/GSDP retains country/IND plus all 34 Indian states and union territories.",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT StatVar, NumPlaces FROM stats WHERE StatVar = 'Amount_EconomicActivity_GrossDomesticProduction_Nominal'",
+                "condition": "NumPlaces >= 35"
+            }
+        },
+        {
+            "rule_id": "check_gdp_real_place_coverage",
+            "description": "Ensure constant-price GDP/GSDP retains country/IND plus all 33 reporting states and union territories (including Puducherry).",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT StatVar, NumPlaces FROM stats WHERE StatVar = 'Amount_EconomicActivity_GrossDomesticProduction_RealValue'",
+                "condition": "NumPlaces >= 34"
+            }
+        },
+        {
+            "rule_id": "check_gsdp_growth_place_coverage",
+            "description": "Ensure state GSDP growth rates retain all 33 reporting states and union territories.",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT StatVar, NumPlaces FROM stats WHERE StatVar IN ('Nominal_GrowthRate_Amount_EconomicActivity_GrossDomesticProduction', 'RealValue_GrowthRate_Amount_EconomicActivity_GrossDomesticProduction')",
+                "condition": "NumPlaces >= 33"
+            }
+        },
+        {
+            "rule_id": "check_inr_amounts_non_negative",
+            "description": "Ensure GDP, GVA, and GSDP monetary amounts in INR are non-negative (growth rates in Percent may be negative).",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT StatVar, MinValue FROM stats WHERE Units = 'INR'",
+                "condition": "MinValue >= 0"
+            }
+        },
+        {
+            "rule_id": "check_total_observation_floor",
+            "description": "Ensure total emitted observations stay at or above the 2,825-row 2026-02-02 production baseline.",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT SUM(NumObservations) AS total_obs FROM stats",
+                "condition": "total_obs >= 2825"
+            }
+        }
+    ]
+}

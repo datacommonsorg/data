@@ -1,0 +1,9 @@
+Node: E:india_nas_gsdp_growth_output->E0
+observationDate: C:india_nas_gsdp_growth_output->observationDate
+observationAbout: C:india_nas_gsdp_growth_output->observationAbout
+variableMeasured: C:india_nas_gsdp_growth_output->variableMeasured
+value: C:india_nas_gsdp_growth_output->value
+unit: C:india_nas_gsdp_growth_output->unit
+measurementMethod: C:india_nas_gsdp_growth_output->measurementMethod
+observationPeriod: C:india_nas_gsdp_growth_output->observationPeriod
+typeOf: dcs:StatVarObservation

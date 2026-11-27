@@ -1,0 +1,6 @@
+#Key,Property1,Value1,Property2,Value2,Property3,Value3,Property4,Value4
+indicator,populationType,EconomicActivity,measuredProperty,amount,activitySource,GrossDomesticProduction,statType,growthRate
+state,observationAbout,{Data},,,,,,
+current_price,value,{Number},measurementQualifier,Nominal,measurementMethod,CurrentPrice_WithBaseYear2011_12,,
+constant_price,value,{Number},measurementQualifier,RealValue,measurementMethod,ConstantPrice_WithBaseYear2011_12,,
+unit,unit,Percent,,,,,,

@@ -1,0 +1,37 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "India_NationalAccountsStatistics",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://esankhyiki.mospi.gov.in/macroindicators?product=nas",
+            "provenance_description": "India National Accounts Statistics (annual GDP, sectoral Gross Value Added, and state-level Gross State Domestic Product and growth rates) from the Ministry of Statistics and Programme Implementation (MoSPI).",
+            "scripts": [
+                "download.py",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/india_nas_gdp.csv --pv_map=india_nas_common_pvmap.csv,india_nas_gdp_pvmap.csv --config_file=india_nas_common_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/india_nas_gdp --output_counters=counters/india_nas_gdp_counters.csv",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/india_nas_gva.csv --pv_map=india_nas_common_pvmap.csv,india_nas_gva_pvmap.csv --config_file=india_nas_common_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/india_nas_gva --output_counters=counters/india_nas_gva_counters.csv",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/india_nas_gva_third_revised.csv --pv_map=india_nas_common_pvmap.csv,india_nas_gva_pvmap.csv,india_nas_gva_third_revised_pvmap.csv --config_file=india_nas_common_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/india_nas_gva_third_revised --output_counters=counters/india_nas_gva_third_revised_counters.csv",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/india_nas_gsdp.csv --pv_map=india_nas_common_pvmap.csv,india_nas_gsdp_pvmap.csv --config_file=india_nas_common_metadata.csv --places_resolved_csv=india_nas_places.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/india_nas_gsdp --output_counters=counters/india_nas_gsdp_counters.csv",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/india_nas_gsdp_growth.csv --pv_map=india_nas_common_pvmap.csv,india_nas_gsdp_growth_pvmap.csv --config_file=india_nas_common_metadata.csv --places_resolved_csv=india_nas_places.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/india_nas_gsdp_growth --output_counters=counters/india_nas_gsdp_growth_counters.csv"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output/india_nas_gdp.tmcf",
+                    "cleaned_csv": "output/india_nas_*.csv",
+                    "node_mcf": "output/india_nas_*.mcf"
+                }
+            ],
+            "source_files": [
+                "raw_source/*.json",
+                "input_files/*.csv",
+                "counters/*.csv",
+                "india_nas_*_pvmap.csv",
+                "india_nas_common_metadata.csv",
+                "india_nas_places.csv"
+            ],
+            "cron_schedule": "0 3 * * 1",
+            "validation_config_file": "validation_config.json"
+        }
+    ]
+}

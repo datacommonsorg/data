@@ -1,0 +1,45 @@
+{
+  "endpoint": "https://api.mospi.gov.in/api/nas/getNasData",
+  "query_params": {
+    "series": "Current",
+    "base_year": "2011-12",
+    "frequency_code": 1,
+    "indicator_code": 23
+  },
+  "pages": [
+    {
+      "data": [
+        {
+          "base_year": "2011-12",
+          "series": "Current",
+          "year": "2025-26",
+          "indicator": "Gross State Domestic Product",
+          "frequency": "Annual",
+          "state": "Andhra Pradesh",
+          "current_price": "1762357",
+          "constant_price": "952261",
+          "unit": "₹ Crore"
+        },
+        {
+          "base_year": "2011-12",
+          "series": "Current",
+          "year": "2024-25",
+          "indicator": "Gross State Domestic Product",
+          "frequency": "Annual",
+          "state": "Puducherry",
+          "current_price": "52163",
+          "constant_price": "29316",
+          "unit": "₹ Crore"
+        }
+      ],
+      "meta_data": {
+        "page": 1,
+        "totalRecords": 2,
+        "totalPages": 1,
+        "recordPerPage": 200
+      },
+      "msg": "Data fetched successfully",
+      "statusCode": true
+    }
+  ]
+}
