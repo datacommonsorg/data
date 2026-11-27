@@ -468,18 +468,13 @@ and still works.
 
 ## Create test data
 
-For an import under `statvar_imports/`, add an import test. The test runs the
-processor on the test input and compares the output with the expected files in
-the repository's unit tests. Follow [Import tests](docs/import_tests.md) to add
-a test to a new import, or to update a test when a change to the PV map, the
-config, or the processor changes the output. The rest of this section is for an
-import without a test.
-
 Keep a small input and its expected output in the import's `test_data/` folder.
 Reviewers and later refreshes use them to check that the PV map and config still
-produce the same output. Name the files after the import's output:
+produce the same output. Name the files with `_input` and `_output` suffixes so
+inputs and expected outputs are easy to tell apart:
 
-- `test_data/<name>_input.csv`: a few rows in the same format as the source.
+- `test_data/<name>_input.<ext>`: a few rows in the same format as the source
+  (such as `<name>_input.csv` or `<name>_input.xlsx`).
 - `test_data/<name>_output.csv`, `<name>_output.tmcf`, and
   `<name>_output_stat_vars.mcf`: the processor's output for that input, plus
   `<name>_output_stat_vars_schema.mcf` if the run writes it.
@@ -487,6 +482,13 @@ produce the same output. Name the files after the import's output:
 For example, `statvar_imports/zurich/bev_3903_all/test_data/` has
 `bev_3903_wiki_input.csv` and `zurich_population_bev_3903_wiki_output.csv`, with
 the matching TMCF and MCF files.
+
+For an import under `statvar_imports/`, add an import test that runs the
+processor on the test input and compares the output with the expected files in
+the repository's unit tests. Follow [Import tests](docs/import_tests.md) to add
+a test to a new import, or to update a test when a change to the PV map, the
+config, or the processor changes the output. The rest of this section is for an
+import without a test.
 
 To create the test data, follow these steps:
 

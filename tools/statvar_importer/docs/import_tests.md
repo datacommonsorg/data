@@ -22,18 +22,19 @@ output is correct. Review the expected files before you commit them.
 Run the commands from the repository root with the repository environment
 active (`source .env/bin/activate`). In the commands, `<import-dir>` is the
 import's folder, such as `statvar_imports/uae_bayanat/uae_population`, and
-`<output>` is the file name in the import's `--output_path`, such as
+`<output>` is the file name in the test config's `output_path`, such as
 `uae_population_output`.
 
 Follow these steps. Each step ends with a check that tells you it is done:
 
-1. **Create the test input.** Follow
+1. **Create the test input.** If `<import-dir>/test_data/` already has a test
+   input, you can reuse it. Otherwise, follow
    [A test input that covers every StatVar](data_sampler.md#a-test-input-that-covers-every-statvar)
-   and save the sample in `<import-dir>/test_data/`. An import that runs the
-   processor several times needs one input for each command. *Done when* the
-   sample's output has the same StatVars and property combinations as the full
-   output, and the sample meets the limit in
-   [Keep test data small](#keep-test-data-small).
+   and save the sample in `<import-dir>/test_data/` with an `_input` suffix,
+   such as `<name>_input.csv`. An import that runs the processor several times
+   needs one input for each command. *Done when* the sample's output has the
+   same StatVars and property combinations as the full output, and the sample
+   meets the limit in [Keep test data small](#keep-test-data-small).
 
 1. **Write the test config.** Create `<import-dir>/statvar_test_config.json`
    with one entry for each `stat_var_processor.py` command in the import's
@@ -62,9 +63,9 @@ Follow these steps. Each step ends with a check that tells you it is done:
      <output_dir>/<output>_stat_vars.mcf <import-dir>/test_data/
    ```
 
-   If `test_data/` has older expected files with other names, such as
-   `<name>_output.csv`, delete them. Keep the names of the copied files: the
-   TMCF has the name of the output file in it.
+   If `test_data/` has older expected files with other names, delete them.
+   Keep the names of the copied files: the TMCF has the name of the output
+   file in it.
 
    *Done when* every `expected_output_file` in the test config exists.
 
@@ -80,7 +81,7 @@ Follow these steps. Each step ends with a check that tells you it is done:
    ```
 
    *Done when* both runs print `OK` and `git status` shows only the test config
-   and the files in `test_data/` as new.
+   and changes in `test_data/`.
 
 ## Update a test
 
@@ -138,7 +139,7 @@ with an entry added for the StatVar MCF:
       "pv_map": "uae_population_pvmap.csv",
       "config_file": "uae_population_metadata.csv",
       "places_resolved_csv": "uae_population_places_resolved_csv.csv",
-      "input_data": "test_data/uae_populationbyemiratesnationalityandgender.xlsx",
+      "input_data": "test_data/uae_population_input.xlsx",
       "output_path": "output/uae_population_output"
     },
     "statvar_processor_outputs": [
@@ -183,11 +184,16 @@ leading `--`. The test runs the processor in the import folder, so write paths
 relative to that folder. Copy the flags from the import's command, with these
 changes:
 
-- **`input_data`.** Use the test input in `test_data/`. An Excel file works.
-  The test writes the CSV files converted from it outside the import folder.
-- **`output_path`.** Keep the relative value of the import's command, such as
-  `output/<output>`. The test writes the output to a temporary folder. It uses
-  an absolute path or a `gs://` path as given, so keep the path relative.
+- **`input_data`.** Use the test input in `test_data/`, named
+  `<name>_input.<ext>` (such as `test_data/<name>_input.csv`). An Excel file
+  works. The test writes the CSV files converted from it outside the import
+  folder.
+- **`output_path`.** Use a relative path ending in `_output`, such as
+  `output/<name>_output`, so the expected files copied to `test_data/` are
+  clearly outputs (`<name>_output.csv`, `<name>_output.tmcf`,
+  `<name>_output_stat_vars.mcf`). The test writes the output to a temporary
+  folder. It uses an absolute path or a `gs://` path as given, so keep the path
+  relative.
 - **`existing_statvar_mcf`.** Replace a `gs://` path with a local file in
   `test_data/`; see [Existing StatVars](#existing-statvars). A test reads only
   files in the repository.
@@ -204,18 +210,22 @@ in that file. The file in `gs://unresolved_mcf` has every existing StatVar, and
 a test can't read it. Give the test a local file with only the StatVars that
 the test input produces:
 
-1. From the import folder, run the import's command on the test input. Keep
-   the `gs://` path, and add `--output_only_new_statvars=false`, so that the
+1. Set `DATA_ROOT` to the repository root, then run the import's command on the
+   test input, keeping its other flags (such as `--places_resolved_csv`) and
+   the `gs://` path. Add `--output_only_new_statvars=false` so that the
    processor writes every StatVar of the test input, with its existing dcid,
-   to the StatVar MCF:
+   to the StatVar MCF, and set `--intermediate_dir` so temporary files stay
+   outside the import folder:
 
    ```bash
-   python3 ../../tools/statvar_importer/stat_var_processor.py \
-     --input_data=test_data/<name>_input.csv \
-     --pv_map=<import>_pvmap.csv \
-     --config_file=<import>_statvar_processor_config.csv \
+   export DATA_ROOT=$(git rev-parse --show-toplevel)
+   python3 $DATA_ROOT/tools/statvar_importer/stat_var_processor.py \
+     --input_data=$DATA_ROOT/<import-dir>/test_data/<name>_input.csv \
+     --pv_map=$DATA_ROOT/<import-dir>/<import>_pvmap.csv \
+     --config_file=$DATA_ROOT/<import-dir>/<import>_statvar_processor_config.csv \
      --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
      --output_only_new_statvars=false \
+     --intermediate_dir=/tmp/<output>_existing \
      --output_path=/tmp/<output>_existing/<output> \
      --output_counters=/tmp/<output>_existing/counters.csv
    ```
@@ -227,7 +237,7 @@ the test input produces:
 
    ```bash
    cp /tmp/<output>_existing/<output>_stat_vars.mcf \
-     test_data/existing_stat_vars.mcf
+     $DATA_ROOT/<import-dir>/test_data/existing_stat_vars.mcf
    ```
 
 1. Set the file in `statvar_processor_args` of the test config:
@@ -252,7 +262,7 @@ expected file:
 | `diff_config`          | Settings for the comparison.                                                                |
 
 Compare the CSV, the TMCF, and the StatVar MCF. The comparison reads each file
-as a set of nodes and ignores the order of nodes and properties.
+as a set of nodes and ignores comments and the order of nodes and properties.
 
 Set `"fingerprint_dcid": 1` in the `diff_config` of a CSV output. The
 comparison then pairs each row with the expected row that has the same

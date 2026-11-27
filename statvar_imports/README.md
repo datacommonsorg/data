@@ -19,7 +19,7 @@ several imports. An import folder has these files:
 | `<import>_statvar_processor_config.csv` | Settings for the processor. Existing imports name this file `*_metadata.csv`.                     |
 | `*_places_resolved.csv`                 | Place names and their dcids, for an import that resolves places.                                  |
 | Download or run script                  | Fetches or prepares the source data, or runs the processor several times.                         |
-| `test_data/`                            | A small input and its expected output.                                                            |
+| `test_data/`                            | Small test input (`*_input.*`) and expected output (`*_output.*`) files.                          |
 | `statvar_test_config.json`              | Test of the import with the files in `test_data/`.                                                |
 | `README.md`                             | Source, license, and how to refresh the import.                                                   |
 

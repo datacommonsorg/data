@@ -5,7 +5,7 @@
             "pv_map": "uae_population_pvmap.csv",
             "config_file": "uae_population_metadata.csv",
             "places_resolved_csv": "uae_population_places_resolved_csv.csv",
-            "input_data": "test_data/uae_populationbyemiratesnationalityandgender.xlsx",
+            "input_data": "test_data/uae_population_input.xlsx",
             "output_path": "output/uae_population_output"
         },
         "statvar_processor_outputs": [
