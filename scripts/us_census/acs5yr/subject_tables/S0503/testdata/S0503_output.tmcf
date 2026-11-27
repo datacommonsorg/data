@@ -1,0 +1,7 @@
+Node: E:SubjectTable->E0
+typeOf: dcs:StatVarObservation
+measurementMethod: dcs:CensusACS5yrSurveySubjectTable
+observationAbout: C:SubjectTable->Place
+observationDate: C:SubjectTable->Year
+variableMeasured: C:SubjectTable->StatVar
+value: C:SubjectTable->Quantity
