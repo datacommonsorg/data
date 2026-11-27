@@ -389,13 +389,20 @@ def diff_mcf_files(file1: str,
         compare_props = config.get('compare_property', [])
         nodes1 = fingerprint_mcf_nodes(nodes1, ignore_props, compare_props)
         nodes2 = fingerprint_mcf_nodes(nodes2, ignore_props, compare_props)
+        # Nodes are paired by fingerprint, so don't compare the node ids
+        # that can differ across files, such as row index for csv rows.
+        config = dict(config)
+        config['ignore_property'] = list(ignore_props) + ['Node', 'dcid']
 
     logging.info(
         f'Comparing {len(nodes1)} nodes from {file1} with {len(nodes2)} nodes'
-        f' from {file2}')
+        f' from {file2} with config:{config}')
     diff_str = diff_mcf_nodes(nodes1, nodes2, config, counters)
     counters.print_counters()
-    print(f'Diff:{file1} vs {file2}:\n{diff_str}')
+    if diff_str:
+        logging.info(
+            f'Found diffs for {file1} vs {file2}\nSample diffs:{diff_str[:1000]}'
+        )
     return diff_str
 
 
@@ -404,7 +411,7 @@ def main(_):
         print('Please provide two MCF files to compare with --mcf1=<file1>'
               ' --mcf2=<file2>')
     else:
-        diff_mcf_files(_FLAGS.mcf1, _FLAGS.mcf2, get_diff_config())
+        print(diff_mcf_files(_FLAGS.mcf1, _FLAGS.mcf2, get_diff_config()))
 
 
 if __name__ == '__main__':

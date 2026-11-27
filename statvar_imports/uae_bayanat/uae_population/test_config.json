@@ -1,0 +1,27 @@
+[
+    {
+        "test_name": "Test_UAE_population",
+        "statvar_processor_args": {
+            "pv_map": "uae_population_pvmap.csv",
+            "config_file": "uae_population_metadata.csv",
+            "places_resolved_csv": "uae_population_places_resolved_csv.csv",
+            "input_data": "test_data/uae_populationbyemiratesnationalityandgender.xlsx",
+            "output_path": "output/uae_population_output"
+        },
+        "statvar_processor_outputs": [
+            {
+                "output_name": "UAE_population_output_csv",
+                "output_file": "output/uae_population_output.csv",
+                "expected_output_file": "test_data/uae_population_output.csv",
+                "diff_config": {
+                    "fingerprint_dcid": 1
+                }
+            },
+            {
+                "output_name": "UAE_population_output_tmcf",
+                "output_file": "output/uae_population_output.tmcf",
+                "expected_output_file": "test_data/uae_population_output.tmcf"
+            }
+        ]
+    }
+]

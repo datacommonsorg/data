@@ -54,6 +54,12 @@ flags.DEFINE_list(
     [],
     'Comma separated list of sheet names within input_data xls files to be processed.',
 )
+flags.DEFINE_string(
+    'intermediate_dir',
+    '',
+    'Folder for intermediate files such as csv files converted from xls input'
+    ' and the http request cache. Uses the current folder if not set.',
+)
 flags.DEFINE_integer('input_rows', sys.maxsize,
                      'Number of rows per input file to process.')
 flags.DEFINE_integer('input_columns', sys.maxsize,
@@ -220,6 +226,8 @@ def get_default_config() -> dict:
             _FLAGS.input_encoding,
         'input_xls':
             _FLAGS.input_xls_sheets,
+        'intermediate_dir':
+            _FLAGS.intermediate_dir,
         'pv_map_drop_undefined_nodes':
             (False),  # Don't drop undefined PVs in the column PV Map.
         'duplicate_svobs_key':

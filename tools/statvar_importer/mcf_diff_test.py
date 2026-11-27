@@ -155,3 +155,36 @@ class TestMCFDiff(unittest.TestCase):
         self.assertEqual(counters.get_counter('nodes-matched'), 2)
         self.assertEqual(counters.get_counter('PVs-matched'), 9)
         self.assertEqual(counters.get_counter('dcid-missing-in-nodes1'), 1)
+
+    def test_diff_mcf_files_fingerprint_ignores_node_ids(self):
+        """Test rows in a different order match with fingerprint_dcid."""
+        header = 'observationAbout,variableMeasured,observationDate,value\n'
+        rows = [
+            'country/ARE,Count_Person,2000,100\n',
+            'country/ARE,Count_Person,2001,200\n',
+            'country/ARE,Count_Person_Male,2000,60\n',
+        ]
+        csv_file1 = os.path.join(self._tmp_dir, 'rows1.csv')
+        with open(csv_file1, 'w') as file:
+            file.write(header + ''.join(rows))
+        csv_file2 = os.path.join(self._tmp_dir, 'rows2.csv')
+        with open(csv_file2, 'w') as file:
+            file.write(header + ''.join(reversed(rows)))
+
+        counters = Counters()
+        diff_str = mcf_diff.diff_mcf_files(csv_file1, csv_file2,
+                                           {'fingerprint_dcid': True}, counters)
+        self.assertEqual(diff_str, '')
+        self.assertEqual(counters.get_counter('nodes-matched'), 3)
+        self.assertFalse(counters.get_counter('nodes-with-diff'))
+
+        # A different value for the same observation is still a diff.
+        csv_file3 = os.path.join(self._tmp_dir, 'rows3.csv')
+        with open(csv_file3, 'w') as file:
+            file.write(header +
+                       ''.join(reversed(rows)).replace(',200\n', ',999\n'))
+        counters = Counters()
+        diff_str = mcf_diff.diff_mcf_files(csv_file1, csv_file3,
+                                           {'fingerprint_dcid': True}, counters)
+        self.assertIn('999', diff_str)
+        self.assertEqual(counters.get_counter('nodes-with-diff'), 1)
