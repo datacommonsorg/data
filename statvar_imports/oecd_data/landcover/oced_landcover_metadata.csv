@@ -1,0 +1,13 @@
+parameter,value
+url,
+description,Area of built-up covered in different countries
+#place_type,country
+#places_within,
+start_date,1992
+end_date,2018
+release_frequency,
+process,
+comments,
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,#input"
+header_rows,1
+drop_statvars_without_svobs,0

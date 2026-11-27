@@ -1,0 +1,137 @@
+# Auto generated using command: "stat_var_processor.py --existing_statvar_mcf=stat_vars.mcf --input_data=/usr/local/google/home/kuru/DC_July09_2024/data/statvar_imports/oecd_data/landcover/testdata/sample_input/oced_landcover_data.csv --pv_map=/usr/local/google/home/kuru/DC_July09_2024/data/statvar_imports/oecd_data/landcover/testdata/sample_input/oced_landcover_pvmap.csv --config=/usr/local/google/home/kuru/DC_July09_2024/data/statvar_imports/oecd_data/landcover/testdata/sample_input/oced_landcover_metadata.csv --output_path=/usr/local/google/home/kuru/DC_July09_2024/data/statvar_imports/oecd_data/landcover/testdata/sample_output/oecd_landcover" on 2024-07-08 18:55:16.545936
+
+Node: dcid:LandArea_LandCover_ArtificialSurfaces
+typeOf: dcid:StatisticalVariable
+populationType: dcid:LandCover
+measuredProperty: dcid:landArea
+statType: dcid:measuredValue
+landCoverType: dcid:ArtificialSurfaces
+
+Node: dcid:LandArea_LandCover_ArtificialSurfaces_PerLandArea
+typeOf: dcid:StatisticalVariable
+populationType: dcid:LandCover
+measuredProperty: dcid:landArea
+statType: dcid:measuredValue
+measurementDenominator: dcid:landArea
+landCoverType: dcid:ArtificialSurfaces
+
+Node: dcid:LandArea_LandCover_BareArea
+typeOf: dcid:StatisticalVariable
+populationType: dcid:LandCover
+measuredProperty: dcid:landArea
+statType: dcid:measuredValue
+landCoverType: dcid:BareArea
+
+Node: dcid:LandArea_LandCover_BareArea_PerLandArea
+typeOf: dcid:StatisticalVariable
+populationType: dcid:LandCover
+measuredProperty: dcid:landArea
+statType: dcid:measuredValue
+measurementDenominator: dcid:landArea
+landCoverType: dcid:BareArea
+
+Node: dcid:LandArea_LandCover_Cropland
+typeOf: dcid:StatisticalVariable
+populationType: dcid:LandCover
+measuredProperty: dcid:landArea
+statType: dcid:measuredValue
+landCoverType: dcid:Cropland
+
+Node: dcid:LandArea_LandCover_Cropland_PerLandArea
+typeOf: dcid:StatisticalVariable
+populationType: dcid:LandCover
+measuredProperty: dcid:landArea
+statType: dcid:measuredValue
+measurementDenominator: dcid:landArea
+landCoverType: dcid:Cropland
+
+Node: dcid:LandArea_LandCover_GrassLand
+typeOf: dcid:StatisticalVariable
+populationType: dcid:LandCover
+measuredProperty: dcid:landArea
+statType: dcid:measuredValue
+landCoverType: dcid:GrassLand
+
+Node: dcid:LandArea_LandCover_GrassLand_PerLandArea
+typeOf: dcid:StatisticalVariable
+populationType: dcid:LandCover
+measuredProperty: dcid:landArea
+statType: dcid:measuredValue
+measurementDenominator: dcid:landArea
+landCoverType: dcid:GrassLand
+
+Node: dcid:LandArea_LandCover_InlandWater
+typeOf: dcid:StatisticalVariable
+populationType: dcid:LandCover
+measuredProperty: dcid:landArea
+statType: dcid:measuredValue
+landCoverType: dcid:InlandWater
+
+Node: dcid:LandArea_LandCover_InlandWater_PerLandArea
+typeOf: dcid:StatisticalVariable
+populationType: dcid:LandCover
+measuredProperty: dcid:landArea
+statType: dcid:measuredValue
+measurementDenominator: dcid:landArea
+landCoverType: dcid:InlandWater
+
+Node: dcid:LandArea_LandCover_Shrubland
+typeOf: dcid:StatisticalVariable
+populationType: dcid:LandCover
+measuredProperty: dcid:landArea
+statType: dcid:measuredValue
+landCoverType: dcid:Shrubland
+
+Node: dcid:LandArea_LandCover_Shrubland_PerLandArea
+typeOf: dcid:StatisticalVariable
+populationType: dcid:LandCover
+measuredProperty: dcid:landArea
+statType: dcid:measuredValue
+measurementDenominator: dcid:landArea
+landCoverType: dcid:Shrubland
+
+Node: dcid:LandArea_LandCover_SparseVegetation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:LandCover
+measuredProperty: dcid:landArea
+statType: dcid:measuredValue
+landCoverType: dcid:SparseVegetation
+
+Node: dcid:LandArea_LandCover_SparseVegetation_PerLandArea
+typeOf: dcid:StatisticalVariable
+populationType: dcid:LandCover
+measuredProperty: dcid:landArea
+statType: dcid:measuredValue
+measurementDenominator: dcid:landArea
+landCoverType: dcid:SparseVegetation
+
+Node: dcid:LandArea_LandCover_TreeCover
+typeOf: dcid:StatisticalVariable
+populationType: dcid:LandCover
+measuredProperty: dcid:landArea
+statType: dcid:measuredValue
+landCoverType: dcid:TreeCover
+
+Node: dcid:LandArea_LandCover_TreeCover_PerLandArea
+typeOf: dcid:StatisticalVariable
+populationType: dcid:LandCover
+measuredProperty: dcid:landArea
+statType: dcid:measuredValue
+measurementDenominator: dcid:landArea
+landCoverType: dcid:TreeCover
+
+Node: dcid:LandArea_LandCover_Wetland
+typeOf: dcid:StatisticalVariable
+populationType: dcid:LandCover
+measuredProperty: dcid:landArea
+statType: dcid:measuredValue
+landCoverType: dcid:Wetland
+
+Node: dcid:LandArea_LandCover_Wetland_PerLandArea
+typeOf: dcid:StatisticalVariable
+populationType: dcid:LandCover
+measuredProperty: dcid:landArea
+statType: dcid:measuredValue
+measurementDenominator: dcid:landArea
+landCoverType: dcid:Wetland
+
