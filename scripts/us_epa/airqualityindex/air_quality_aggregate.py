@@ -33,15 +33,21 @@ from retry import retry
 
 _FLAGS = flags.FLAGS
 
-flags.DEFINE_integer('aggregate_start_year', os.getenv('START_YEAR', '1980'),
-                     'Process data starting from this year.')
-flags.DEFINE_integer('aggregate_end_year',
-                     os.getenv('END_YEAR',
-                               datetime.now().year),
-                     'Process data upto this year.')
-flags.DEFINE_string('input_file_path', 'input_files', 'Input files path')
-flags.DEFINE_string('output_file_path', 'output', 'Output files path')
-flags.DEFINE_string('mode', '', 'Options: download or process')
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_integer('aggregate_start_year',
+                         int(os.getenv('START_YEAR', '1980')),
+                         'Process data starting from this year.')
+    flags.DEFINE_integer('aggregate_end_year',
+                         int(os.getenv('END_YEAR',
+                                       datetime.now().year)),
+                         'Process data upto this year.')
+    flags.DEFINE_string('input_file_path', 'input_files', 'Input files path')
+    flags.DEFINE_string('output_file_path', 'output', 'Output files path')
+    flags.DEFINE_string('mode', '', 'Options: download or process')
+
+
 MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
@@ -72,10 +78,9 @@ def get_place(observation):
         return None
 
 
-def create_csv(csv_file_path):
+def create_csv(csv_file_path, output_dir):
     logging.info(f'Inside create csv value of {csv_file_path}')
-    output_file_path = os.path.join(MODULE_DIR, _FLAGS.output_file_path)
-    file_path = os.path.join(output_file_path, csv_file_path)
+    file_path = os.path.join(output_dir, csv_file_path)
     logging.info(f'file_path {file_path}')
     with open(file_path, 'w', newline='') as f_out:
         writer = csv.DictWriter(f_out,
@@ -170,7 +175,7 @@ def download_url(_INPUT_FILE_PATH, start_year, end_year, CSV_URLS):
                         f.write(response.content)
 
 
-def process(_INPUT_FILE_PATH, start_year, end_year):
+def process(_INPUT_FILE_PATH, start_year, end_year, output_dir):
     """
     Processes downloaded EPA AirData zip files, extracts, transforms, and
     consolidates the data into a single output CSV file.
@@ -188,10 +193,11 @@ def process(_INPUT_FILE_PATH, start_year, end_year):
                           processing data.
         end_year (int): The ending year (exclusive) for which to process data.
                         Processing will stop at `end_year - 1`.
+        output_dir (str): The directory where 'EPA_AQI.csv' is written.
     """
     output_file_name = 'EPA_AQI.csv'
     #Creating the output csv file beofre
-    create_csv(output_file_name)
+    create_csv(output_file_name, output_dir)
     for year in range(start_year, int(end_year)):
         logging.info(f'year: {year}')
         file_names = [
@@ -203,9 +209,7 @@ def process(_INPUT_FILE_PATH, start_year, end_year):
 
             try:
                 file_path = os.path.join(_INPUT_FILE_PATH, file_name)
-                output_file_path = os.path.join(MODULE_DIR,
-                                                _FLAGS.output_file_path,
-                                                output_file_name)
+                output_file_path = os.path.join(output_dir, output_file_name)
                 logging.info(
                     f'csv_file_path, output_file_path from request_and_write_csv  {output_file_name} {output_file_path}'
                 )
@@ -247,8 +251,9 @@ def main(_):
 
     if mode == "" or mode == "process":
         logging.info(f'inside mode {mode}')
-        process(input_file_path, start_year, end_year)
+        process(input_file_path, start_year, end_year, output_file_path)
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

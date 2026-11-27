@@ -26,30 +26,28 @@ from absl import app
 from absl import flags
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('database', None, 'database file path.', short_name='f')
 
-flags.DEFINE_string('psimi_to_dcid',
-                    'psimi2dcid.txt',
-                    'psimi2dcid.txt file path.',
-                    short_name='p')
 
-flags.DEFINE_string('output_mcf',
-                    'BioMINTData.mcf',
-                    'The output data mcf file path.',
-                    short_name='m')
-
-flags.DEFINE_string('new_source', "new_source.txt", 'new source file path.')
-
-flags.DEFINE_boolean('output_failed',
-                     False,
-                     'If output the files containing failed cases or not.',
-                     short_name='o')
-
-flags.DEFINE_string('no_uniprot', 'no_uniprot_cases.txt',
-                    'The cases which don\'t have uniprot.')
-
-flags.DEFINE_string('wrong_dcid', 'wrong_dcid_cases.txt',
-                    'The cases with incorrect dcid format.')
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('database', None, 'database file path.', short_name='f')
+    flags.DEFINE_string('psimi_to_dcid',
+                        'psimi2dcid.txt',
+                        'psimi2dcid.txt file path.',
+                        short_name='p')
+    flags.DEFINE_string('output_mcf',
+                        'BioMINTData.mcf',
+                        'The output data mcf file path.',
+                        short_name='m')
+    flags.DEFINE_string('new_source', "new_source.txt", 'new source file path.')
+    flags.DEFINE_boolean('output_failed',
+                         False,
+                         'If output the files containing failed cases or not.',
+                         short_name='o')
+    flags.DEFINE_string('no_uniprot', 'no_uniprot_cases.txt',
+                        'The cases which don\'t have uniprot.')
+    flags.DEFINE_string('wrong_dcid', 'wrong_dcid_cases.txt',
+                        'The cases with incorrect dcid format.')
 
 
 def get_references(term):
@@ -397,7 +395,6 @@ def main(argv):
     new_source_map = {'references': {}, 'identifier': {}, 'confidence': {}}
     mcf_list = []
     wrong_dcid_cases = []
-    failed_cases = []
     no_uniprot_cases = []
     for line in lines:
         if len(line) == 0:
@@ -430,7 +427,7 @@ def main(argv):
 
     # the number of records we didn't import
     not_import_count = 0
-    for alist in [wrong_dcid_cases, no_uniprot_cases, failed_cases]:
+    for alist in [wrong_dcid_cases, no_uniprot_cases]:
         not_import_count += len(alist)
 
     output_path = FLAGS.output_mcf
@@ -445,9 +442,6 @@ def main(argv):
         if no_uniprot_cases:
             with open(FLAGS.no_uniprot, 'w') as file_object:
                 file_object.write("\n".join(no_uniprot_cases))
-        if failed_cases:
-            with open(FLAGS.failed_input, 'w') as file_object:
-                file_object.write("\n".join(failed_cases))
 
     write_list = []
     for source_type in new_source_map:
@@ -470,4 +464,5 @@ def main(argv):
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

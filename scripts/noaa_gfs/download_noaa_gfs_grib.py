@@ -32,30 +32,33 @@ import requests
 
 # --- FLAG DEFINITIONS ---
 FLAGS = flags.FLAGS
-flags.DEFINE_string('project_id', 'datcom', 'The GCP Project ID.')
-flags.DEFINE_string('bucket_name', 'datcom-prod-imports',
-                    'The GCS bucket name.')
-flags.DEFINE_string('state_path',
-                    'scripts/noaa_gfs/NOAA_GlobalForecastSystem/state.json',
-                    'The path within the bucket for state.json.')
 
 
-def get_gcs_client():
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string('project_id', 'datcom', 'The GCP Project ID.')
+    flags.DEFINE_string('bucket_name', 'datcom-prod-imports',
+                        'The GCS bucket name.')
+    flags.DEFINE_string(
+        'state_path', 'scripts/noaa_gfs/NOAA_GlobalForecastSystem/state.json',
+        'The path within the bucket for state.json.')
+
+
+def get_gcs_client(project_id):
     """Initializes the GCS client with a specific Project ID."""
-    return storage.Client(project=FLAGS.project_id)
+    return storage.Client(project=project_id)
 
 
-def load_state():
+def load_state(project_id, bucket_name, state_path):
     """Reads state from GCS. Returns default if file doesn't exist."""
-    client = get_gcs_client()
-    bucket = client.bucket(FLAGS.bucket_name)
-    blob = bucket.blob(FLAGS.state_path)
+    client = get_gcs_client(project_id)
+    bucket = client.bucket(bucket_name)
+    blob = bucket.blob(state_path)
 
     try:
         state_data = blob.download_as_text()
         logging.info(
-            f"Successfully loaded state from gs://{FLAGS.bucket_name}/{FLAGS.state_path}"
-        )
+            f"Successfully loaded state from gs://{bucket_name}/{state_path}")
         return json.loads(state_data)
     except exceptions.NotFound:
         logging.warning(
@@ -118,9 +121,9 @@ def download_gfs_file(date_stamp, cycle, fhour="000"):
     return None
 
 
-def main(argv):
-    """Entry point for the download script."""
-    state = load_state()
+def run(project_id: str, bucket_name: str, state_path: str) -> None:
+    """Downloads the GFS cycles posted since the GCS checkpoint."""
+    state = load_state(project_id, bucket_name, state_path)
     current_date = state['date']
     current_cycle = state['cycle']
 
@@ -152,5 +155,12 @@ def main(argv):
             break
 
 
+def main(argv):
+    """Entry point for the download script."""
+    del argv  # Unused.
+    run(FLAGS.project_id, FLAGS.bucket_name, FLAGS.state_path)
+
+
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

@@ -41,8 +41,13 @@ import csv
 from us_bea.states_gdp import import_data
 
 FLAGS = flags.FLAGS
-flags.DEFINE_integer('latest_year_industry', None,
-                     'The latest year to look for in the filename (optional).')
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_integer(
+        'latest_year_industry', None,
+        'The latest year to look for in the filename (optional).')
 
 
 class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
@@ -52,7 +57,10 @@ class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
         df: DataFrame (DF) with the cleaned data.
     """
 
-    def process_data(self, raw_data=None, input_folder='input_data'):
+    def process_data(self,
+                     raw_data=None,
+                     input_folder='input_data',
+                     latest_year=None):
         """Cleans data from a specified CSV file in the input folder
         and converts it from wide to long format.
 
@@ -60,6 +68,10 @@ class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
             raw_data (optional): raw data frame to be used as starting point.
             input_folder (str, optional): The folder containing the CSV file.
                                         Defaults to the value of the --input_folder flag.
+            latest_year (int, optional): The end year to look for in the file
+                                         name. If None, or if no file ends in
+                                         that year, the file with the latest
+                                         end year is used.
 
         Raises:
             FileNotFoundError: If the specified CSV file is not found.
@@ -84,7 +96,7 @@ class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
                 _STATE_QUARTERLY_GDP_FILE_PATTERN1 = r'SQGDP2__ALL_AREAS_(\d{4})_(\d{4})\.csv'
                 self._input_file = self._find_gdp_file_in_folder(
                     input_folder, _STATE_QUARTERLY_GDP_FILE_PATTERN1,
-                    FLAGS.latest_year_industry)
+                    latest_year)
                 file_path = os.path.join(input_folder, self._input_file)
                 logging.info(f"Processing data from file: {file_path}")
                 with open(file_path, 'r', encoding='utf-8') as csvfile:
@@ -219,11 +231,11 @@ class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
 def main(_):
     """Runs the program."""
     loader = StateGDPIndustryDataLoader()
-    # loader.download_data()
-    loader.process_data()
+    loader.process_data(latest_year=FLAGS.latest_year_industry)
     loader.save_csv()
     loader.generate_mcf()
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

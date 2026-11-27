@@ -71,7 +71,11 @@ class ProcessTest(unittest.TestCase):
             'value': 5000,
             'unit': 'dcs:Acre'
         }]
-        api_data = get_survey_county_data(2025, 'ABBEVILLE', 'testdata')
+        api_data = get_survey_county_data(2025,
+                                          'ABBEVILLE',
+                                          'testdata',
+                                          mode='',
+                                          api_key_path='mock-api-key-path')
 
         # Verify that the mocked data is being used correctly
         self.assertEqual(len(api_data['data']), 2)
@@ -153,7 +157,11 @@ dcs:Area_Farm_WheatForGrain,2024,dcid:geoId/45001,5000,dcs:Acre
     def test_get_survey_county_data_none_raises(self, mock_key, mock_get_data):
         """Tests that get_survey_county_data raises RuntimeError if get_data returns None."""
         with self.assertRaises(RuntimeError):
-            get_survey_county_data(2025, 'FAKECOUNTY', 'testdata')
+            get_survey_county_data(2025,
+                                   'FAKECOUNTY',
+                                   'testdata',
+                                   mode='',
+                                   api_key_path='mock-api-key-path')
 
 
 if __name__ == '__main__':
