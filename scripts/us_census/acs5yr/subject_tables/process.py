@@ -55,6 +55,10 @@ def _define_flags() -> None:
     flags.DEFINE_boolean(
         'debug', False,
         '[for processing]set the flag to add additional columns to debug')
+    flags.DEFINE_boolean(
+        'clean_numeric_values', False,
+        '[for processing]If set, strips commas and trailing +/- from value columns'
+    )
 
 
 def set_column_map(input_path, spec_path, output_dir):
@@ -75,6 +79,7 @@ def main(argv):
     output_dir = FLAGS.output_dir
     has_percent = FLAGS.has_percent
     debug = FLAGS.debug
+    clean_numeric_values = FLAGS.clean_numeric_values
 
     # TODO: remove the constraint of inputs being only zip file
     # context: the current implementation of the column map generator accepts
@@ -94,7 +99,8 @@ def main(argv):
                                    spec_path=spec_path,
                                    debug=debug,
                                    delimiter='!!',
-                                   has_percent=has_percent)
+                                   has_percent=has_percent,
+                                   clean_numeric_values=clean_numeric_values)
 
         if option == 'all':
             set_column_map(input_path, spec_path, output_dir)
@@ -106,7 +112,8 @@ def main(argv):
                                    spec_path=spec_path,
                                    debug=debug,
                                    delimiter='!!',
-                                   has_percent=has_percent)
+                                   has_percent=has_percent,
+                                   clean_numeric_values=clean_numeric_values)
     else:
         print("At the moment, we support only zip files.")
 

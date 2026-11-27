@@ -38,32 +38,37 @@ sys.path.insert(1, os.path.join(_SCRIPT_DIR, "../../../util"))
 import download_util  # pylint: disable=g-import-not-at-top
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string(
-    "output_dir",
-    os.path.join(_SCRIPT_DIR, "input_files"),
-    "Output directory for generated raw wide-format CSV files.",
-    allow_override=True,
-)
-flags.DEFINE_string(
-    "places_resolved_csv",
-    os.path.join(_SCRIPT_DIR, "sweden_places_resolved.csv"),
-    "Path to sweden_places_resolved.csv used to derive NUTS1/NUTS2/NUTS3 hierarchy.",
-)
-flags.DEFINE_integer(
-    "start_year_national",
-    1860,
-    "First year to include for National BefolkningR1860N files.",
-)
-flags.DEFINE_integer(
-    "start_year_subnational",
-    1968,
-    "First year to include for Sub-National BefolkningNy files.",
-)
-flags.DEFINE_integer(
-    "end_year",
-    None,
-    "Optional last year to include (defaults to latest available year in SCB API).",
-)
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
+    flags.DEFINE_string(
+        "output_dir",
+        os.path.join(_SCRIPT_DIR, "input_files"),
+        "Output directory for generated raw wide-format CSV files.",
+        allow_override=True,
+    )
+    flags.DEFINE_string(
+        "places_resolved_csv",
+        os.path.join(_SCRIPT_DIR, "sweden_places_resolved.csv"),
+        "Path to sweden_places_resolved.csv used to derive NUTS1/NUTS2/NUTS3 hierarchy.",
+    )
+    flags.DEFINE_integer(
+        "start_year_national",
+        1860,
+        "First year to include for National BefolkningR1860N files.",
+    )
+    flags.DEFINE_integer(
+        "start_year_subnational",
+        1968,
+        "First year to include for Sub-National BefolkningNy files.",
+    )
+    flags.DEFINE_integer(
+        "end_year",
+        None,
+        "Optional last year to include (defaults to latest available year in SCB API).",
+    )
+
 
 NATIONAL_API_URL = (
     "https://api.scb.se/OV0104/v1/doris/sv/ssd/START/BE/BE0101/BE0101A/BefolkningR1860N"
@@ -771,4 +776,5 @@ def main(argv: List[str]) -> None:
 
 
 if __name__ == "__main__":
+    _define_flags()
     app.run(main)

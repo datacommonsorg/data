@@ -15,7 +15,10 @@
 
 import unittest
 
-from . import geo_id_resolver
+if __package__:
+    from . import geo_id_resolver
+else:
+    import geo_id_resolver
 
 
 class GeoIdResolverTest(unittest.TestCase):

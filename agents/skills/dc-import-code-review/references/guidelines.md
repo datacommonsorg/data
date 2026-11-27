@@ -8,12 +8,18 @@ repository contracts and instructions take precedence.
 - Validate the selected manifest specification against the current shared
   manifest contract, and verify that every referenced script and input exists.
 - Write place, StatVar, and schema nodes to separate MCF files.
+- Ensure `import_name` in `manifest.json` is visible and readable to external
+  users: match the source dataset or page title closely and avoid internal
+  terms.
 - Verify that `source_files` patterns cover every original file downloaded from
-  the source, including non-data files like HTML and PDF, rather than
-  sanitized copies, so each version keeps its raw source data in GCS for
-  debugging and source attribution. List other operational artifacts there too
-  (e.g., counter files from `--output_counters`, `manifest.json`, or configs);
-  do not confuse source artifacts with import inputs.
+  the source without modification (including API JSON responses saved locally
+  and non-data files like HTML and PDF) so each version keeps its raw source
+  data in GCS for debugging and source attribution. In addition (not as a
+  replacement for raw source files), include intermediate or partially
+  transformed script outputs (e.g., `staged_inputs/*`) and operational
+  artifacts (e.g., counter files from `--output_counters` or configs) in
+  `source_files` or `import_inputs` for troubleshooting; do not confuse source
+  artifacts with import inputs.
 - Add `cron_schedule`, `user_script_timeout`, and `resource_limits` only when
   the import needs scheduling or an override, and validate them when present.
 - Semi-automated imports run on their `cron_schedule` like other auto-refresh
@@ -25,19 +31,23 @@ repository contracts and instructions take precedence.
 ## Documentation and organization
 
 - Document the source, dataset coverage, prerequisites, working directory,
-  download and processing steps (including any custom preprocessing or
-  validation outside `stat_var_processor` and `validation_config.json`),
-  important files, testing, and refresh procedure in the import's
-  `README.md`, and update it when the change alters these steps.
+  download and processing steps (explicitly calling out any additional
+  processing beyond schema mapping—such as transformations, filtering,
+  aggregations, or custom validation outside `stat_var_processor` and
+  `validation_config.json`), important files, testing, and refresh procedure in
+  the import's `README.md`, and update it when the change alters these steps.
 - Preserve downloaded source files unchanged, and write transformed data to
   separate files.
 - Use consistent, descriptive names for new import files; prefer lowercase
   unless source naming or an established import convention requires otherwise.
 - [rule-statvar-imports-dir] Put an import under `statvar_imports/` only when
-  it runs `stat_var_processor`. Keep its PV map, processor config, and
-  `test_data/` fixtures in the import directory, as [rule-svp-unit-tests]
-  describes. Put imports whose custom scripts write the output without
-  `stat_var_processor` under `scripts/`, together with their configs.
+  `stat_var_processor` performs the core transformation (note that
+  `stat_var_processor` supports JSON directly, and
+  `tools/statvar_importer/json_to_csv.py` converts JSON to CSV). Keep its PV
+  map, processor config, and `test_data/` fixtures in the import directory, as
+  [rule-svp-unit-tests] describes. Put imports whose custom scripts perform the
+  core processing—including when `stat_var_processor` is effectively a no-op
+  and a `.tmcf` file suffices—under `scripts/`, together with their configs.
 - Declare new dependencies in the repository-supported dependency file.
 - [rule-binary-files] Commit text files only; keep archives of any format,
   pickles, and other binary files out of the PR unless they are stored
@@ -79,6 +89,10 @@ repository contracts and instructions take precedence.
   StatisticalVariables and avoid creating duplicate statvar definitions.
 - Make aggregation, filtering, outlier handling, and date-range decisions
   explicit and testable; avoid arbitrary future-year cutoffs.
+- For any computed or derived observations not originally present in the source
+  (such as aggregations), set `measurementMethod` to `dcid:DataCommonsAggregate`
+  or add the `dcAggregate/` prefix to an existing `measurementMethod` value
+  (e.g., `dcid:dcAggregate/<ExistingMethod>`).
 - Retain non-numeric source placeholders (such as `-`) so `stat_var_processor`
   can drop them, or filter out those observations explicitly; convert them to `0`
   only when the source defines them as zero.
@@ -97,6 +111,9 @@ repository contracts and instructions take precedence.
 
 ### PV map configuration (`*_pvmap.csv`)
 
+- Include a comment header row covering all columns in the PV map, such as
+  `#Key,Property1,Value1,Property2,Value2,...`, so the file renders cleanly as a
+  table on GitHub and parses reliably in CSV tools.
 - For pvmap key strings with punctuation (such as commas `,`) that can vary or
   change over time, use normalized keys in lowercase without punctuation (and
   normalize input strings accordingly) to ensure resilient lookups.
@@ -111,10 +128,10 @@ repository contracts and instructions take precedence.
   must be overridden to a different StatVar, even one with a different
   definition, remap it with `--statvar_dcid_remap_csv`:
   1. Create a remap CSV (e.g., `statvar_remap.csv`) with the header
-     `statvar,dcid`:
+     `key,dcid`:
 
      ```csv
-     statvar,dcid
+     key,dcid
      RealValue_Amount_EconomicActivity_NetDomesticProduction_PerCapita,RealValue_Amount_EconomicActivity_NetDomesticProduction_AsAFractionOf_Count_Person
      ```
 
@@ -207,10 +224,14 @@ Then apply these rules:
 - Golden files may accompany higher deletion thresholds to validate expected
   deletions, but are not mandatory; if golden files are provided, verify that
   they adhere to the rules in "Golden files" below.
-- For place imports, suggest adding a `DELETED_ENTITY_COUNT` rule (to catch
-  deleted place entities) and a `GOLDENS_CHECK` rule in `validation_config.json`
-  with a sample of place nodes and properties, since the default
-  `DELETED_RECORDS_PERCENT` checks only observation deletion counts.
+- Place and schema imports must not silently delete entities: require a
+  separate `DELETED_ENTITY_COUNT` validator with threshold `0` alongside a
+  `GOLDENS_CHECK` rule in `validation_config.json` with a sample of place/schema
+  nodes and properties, since `DELETED_RECORDS_PERCENT` checks only observation
+  deletion counts (defaulting to `0.1%`) while `DELETED_ENTITY_COUNT` runs in
+  parallel to check non-observation entity deletions. If the script cannot
+  automatically retain entities dropped by the source, require `README.md` to
+  document the manual carry-forward and resume steps.
 
 ### Golden files (`golden_data/`)
 
@@ -287,8 +308,10 @@ Then apply these rules:
 - Use [sdmx_cli.py](../../../../tools/sdmx_import/sdmx_cli.py) for SDMX
   downloads. When it lacks the required functionality, use the `sdmx1` library
   it is built on instead of custom SDMX requests or parsing.
-- Log each outbound request's method, sanitized URL, query parameters, and
-  request body. Redact credentials and sensitive data.
+- In download scripts, log every downloaded URL along with its HTTP method,
+  query parameters, request body, and download status, such as HTTP status code
+  and success or failure, redacting API keys, credentials, and sensitive data,
+  so URL downloads can be analyzed directly from job logs.
 - Consume every page from paginated sources.
 - Reuse HTTP connections via `requests.Session` when issuing frequent
   availability checks (e.g., repeated `HEAD` requests) to avoid connection
@@ -335,6 +358,11 @@ Then apply these rules:
   500 KB) and under 100 rows; never check in full raw downloads or
   multi-megabyte production dumps as test fixtures (for golden files, see
   "Golden files").
+- Include a small raw sample of downloaded source data, such as raw JSON or CSV
+  with all columns, keeping it within the fixture size limits above—target
+  < 100 KB and under 100 rows—along with representative test inputs and outputs
+  covering every place type produced by the import to verify place-code mappings
+  and confirm no unresolved or missing place references in the final output.
 - [rule-svp-unit-tests] For imports using `stat_var_processor`, ensure
   `test_data/` fixtures with sample inputs and expected outputs exist. Each
   input must have the same format as the files the import passes to

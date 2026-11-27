@@ -30,13 +30,17 @@ import pandas as pd
 import requests
 
 FLAGS = flags.FLAGS
-if 'force_download' not in FLAGS:
+
+
+def _define_flags() -> None:
+    """Defines command-line flags for this script."""
     flags.DEFINE_bool(
         'force_download',
         False,
         'Re-download and overwrite existing files in input_files/ without '
         'checking upstream ETag or Last-Modified headers.',
     )
+
 
 # Base URL template
 BASE_URL_TEMPLATE = (
@@ -481,4 +485,5 @@ def main(_) -> None:
 
 
 if __name__ == '__main__':
+    _define_flags()
     app.run(main)

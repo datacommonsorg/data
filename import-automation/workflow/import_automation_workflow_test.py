@@ -828,6 +828,75 @@ class ImportAutomationWorkflowTest(unittest.TestCase):
         )
         self.assertTrue(paused_dag.is_paused_upon_creation)
 
+    def test_exclude_import_workflow_skips_dag_creation(self):
+        excluded_dag = import_automation_workflow.build_dag(
+            dag_id='ExcludedImport',
+            import_name='scripts/test:ExcludedImport',
+            config_override={'exclude_import_workflow': True},
+        )
+        self.assertIsNone(excluded_dag)
+
+        included_dag = import_automation_workflow.build_dag(
+            dag_id='IncludedImport',
+            import_name='scripts/test:IncludedImport',
+            config_override={'exclude_import_workflow': False},
+        )
+        self.assertIsNotNone(included_dag)
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            manifest_dir = os.path.join(tmpdir, 'scripts', 'sample')
+            os.makedirs(manifest_dir)
+            with open(os.path.join(manifest_dir, 'manifest.json'),
+                      'w',
+                      encoding='utf-8') as f:
+                json.dump(
+                    {
+                        'import_specifications': [
+                            {
+                                'import_name': 'IncludedCatalogImport',
+                                'config_override': {},
+                            },
+                            {
+                                'import_name': 'ExcludedCatalogImport',
+                                'config_override': {
+                                    'exclude_import_workflow': True
+                                },
+                            },
+                        ]
+                    },
+                    f,
+                )
+            catalog = build_manifest_catalog.build_catalog(data_dir=tmpdir)
+            self.assertEqual([e['dag_id'] for e in catalog],
+                             ['IncludedCatalogImport'])
+
+            catalog_path = os.path.join(tmpdir, 'imports_catalog.json')
+            with open(catalog_path, 'w', encoding='utf-8') as f:
+                json.dump(
+                    [
+                        {
+                            'dag_id': 'ActiveImport',
+                            'full_import_name': 'scripts/test:ActiveImport',
+                            'config_override': {},
+                        },
+                        {
+                            'dag_id': 'ExcludedImport',
+                            'full_import_name': 'scripts/test:ExcludedImport',
+                            'config_override': {
+                                'exclude_import_workflow': True
+                            },
+                        },
+                    ],
+                    f,
+                )
+            with patch.dict(os.environ, {'IMPORTS_CATALOG_PATH': catalog_path}):
+                target = {}
+                count = import_dags_factory.load_catalog_and_register_dags(
+                    target)
+                self.assertEqual(count, 1)
+                self.assertIn('ActiveImport', target)
+                self.assertNotIn('ExcludedImport', target)
+
 
 class E2EDagRunnerTest(unittest.TestCase):
 
