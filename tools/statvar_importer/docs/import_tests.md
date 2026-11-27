@@ -53,13 +53,18 @@ Follow these steps. Each step ends with a check that tells you it is done:
    ```
 
    This first run exits with code 1 and status `MISSING_EXPECTED`, because the
-   expected files don't exist yet. The `temp_dir` value in
-   `/tmp/<output>_test.json` is the folder with the output. Copy the output
-   files into `test_data/`:
+   expected files don't exist yet. In `/tmp/<output>_test.json`, the
+   `output_dir` value of the test is the folder with the output. Copy the CSV,
+   the TMCF, and the StatVar MCF into `test_data/`:
 
    ```bash
-   cp <temp_dir>/<test_name>/output/<output>* <import-dir>/test_data/
+   cp <output_dir>/<output>.csv <output_dir>/<output>.tmcf \
+     <output_dir>/<output>_stat_vars.mcf <import-dir>/test_data/
    ```
+
+   If `test_data/` has older expected files with other names, such as
+   `<name>_output.csv`, delete them. Keep the names of the copied files: the
+   TMCF has the name of the output file in it.
 
    *Done when* every `expected_output_file` in the test config exists.
 
@@ -82,8 +87,8 @@ Follow these steps. Each step ends with a check that tells you it is done:
 A test fails when the output differs from the expected files. To find the
 difference, run the command of step 3 in [Add a test](#add-a-test) and read
 `/tmp/<output>_test.json`. Each output has a `diff_status` from
-[Diff status](#diff-status) and a `diff_sample`. The full difference is in
-`<temp_dir>/<test_name>/output/<output_name>.diff`.
+[Diff status](#diff-status) and a `diff_sample`. The `diff_output` value is the
+file with the full difference.
 
 Then take one of these actions:
 
