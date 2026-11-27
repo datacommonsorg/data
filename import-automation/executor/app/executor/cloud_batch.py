@@ -14,11 +14,22 @@
 """
 This module contains utilities to help set up cloud batch jobs.
 """
-import json
-import time
+from __future__ import annotations
 
-from absl import logging
-from google.cloud import batch_v1
+import json
+import logging
+import time
+from typing import TYPE_CHECKING, Any
+
+if TYPE_CHECKING:
+    from google.cloud import batch_v1
+
+DEFAULT_RESOURCES: dict[str, Any] = {
+    'machine': 'n2-standard-8',
+    'cpu': 8000,
+    'memory': 32768,
+    'disk': 100,
+}
 
 _GCE_MACHINE_TYPES = [
     {
@@ -118,6 +129,15 @@ _GCE_MACHINE_TYPES = [
     },
 ]
 
+_MAX_GCE_CPUS = max(instance['cpus'] for instance in _GCE_MACHINE_TYPES)
+_MAX_GCE_MEMORY_GIB = max(
+    instance['memory_gib'] for instance in _GCE_MACHINE_TYPES)
+
+
+def _format_resource_value(value: int | float) -> int | float:
+    return (int(value)
+            if isinstance(value, float) and value.is_integer() else value)
+
 
 def get_gce_instance(required_cpu: float,
                      required_memory_gib: float) -> str | None:
@@ -141,17 +161,59 @@ def get_gce_instance(required_cpu: float,
     return suitable_instances[0]['name']
 
 
+def normalize_batch_resources(
+    resource_limits: dict[str, Any] | None,
+    context: str | None = None,
+) -> dict[str, Any]:
+    """Converts manifest resource_limits (cpu in vCPUs, memory in GiB, disk in GB) into Cloud Batch resources."""
+    if not resource_limits:
+        return dict(DEFAULT_RESOURCES)
+    if not isinstance(resource_limits, dict):
+        ctx = f' for {context}' if context else ''
+        raise ValueError(f'Invalid resource_limits{ctx}: expected an object, '
+                         f'got {type(resource_limits).__name__}.')
+
+    try:
+        cpu_vcpu = (float(resource_limits['cpu']) if 'cpu' in resource_limits
+                    else DEFAULT_RESOURCES['cpu'] / 1000.0)
+        mem_gib = (float(resource_limits['memory']) if 'memory'
+                   in resource_limits else DEFAULT_RESOURCES['memory'] / 1024.0)
+        disk = int(resource_limits.get('disk', DEFAULT_RESOURCES['disk']))
+    except (TypeError, ValueError) as exc:
+        ctx = f' for {context}' if context else ''
+        raise ValueError(
+            f'Invalid resource_limits{ctx}: cpu, memory, and disk must be numeric.'
+        ) from exc
+
+    explicit_machine = resource_limits.get('machine')
+    if explicit_machine:
+        machine = str(explicit_machine)
+    else:
+        machine = get_gce_instance(cpu_vcpu, mem_gib)
+        if machine is None:
+            ctx = f' for {context}' if context else ''
+            raise ValueError(
+                f'No supported GCE machine type satisfies requested '
+                f'resource_limits{ctx} '
+                f'(cpu={_format_resource_value(cpu_vcpu)} vCPU, '
+                f'memory={_format_resource_value(mem_gib)} GiB); '
+                f'maximum supported is {_MAX_GCE_CPUS} vCPU, '
+                f'{_MAX_GCE_MEMORY_GIB} GiB.')
+
+    return {
+        'machine': machine,
+        'cpu': int(cpu_vcpu * 1000),
+        'memory': int(mem_gib * 1024),
+        'disk': disk,
+    }
+
+
 def create_job_request(import_name: str, import_config: dict,
                        import_spec: dict) -> str:
     resources = {}
-    if 'resource_limits' in import_spec:
-        resources = import_spec.get('resource_limits', {})
-        machine_type = get_gce_instance(resources.get('cpu', 0),
-                                        resources.get('memory', 0))
-        resources[
-            "machine"] = machine_type if machine_type is not None else 'n2-standard-8'
-        resources["cpu"] = resources["cpu"] * 1000
-        resources["memory"] = resources["memory"] * 1024
+    if import_spec.get('resource_limits'):
+        resources = normalize_batch_resources(import_spec['resource_limits'],
+                                              context=import_name)
 
     import_config_string = json.dumps(import_config)
     argument_payload = {
@@ -181,6 +243,8 @@ def execute_cloud_batch_job(project_id: str, location: str, job_name: str,
     Returns:
         The job object if successful, otherwise None.
     """
+    from google.cloud import batch_v1
+
     client = batch_v1.BatchServiceClient()
 
     # Define what will be done as part of the job.

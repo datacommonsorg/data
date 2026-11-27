@@ -28,12 +28,18 @@ from typing import Any
 current_dir = os.path.dirname(os.path.abspath(__file__))
 if current_dir not in sys.path:
     sys.path.insert(0, current_dir)
+executor_dir = os.path.abspath(
+    os.path.join(current_dir, "..", "executor", "app", "executor"))
+if os.path.isdir(executor_dir) and executor_dir not in sys.path:
+    sys.path.append(executor_dir)
 
 import importlib
 
+import cloud_batch as _cloud_batch
 import golden_verification as _golden_verification
 import import_automation_workflow as _import_automation_workflow
 
+importlib.reload(_cloud_batch)
 importlib.reload(_golden_verification)
 importlib.reload(_import_automation_workflow)
 
