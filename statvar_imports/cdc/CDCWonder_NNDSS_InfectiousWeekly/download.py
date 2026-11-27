@@ -1,0 +1,345 @@
+# Copyright 2026 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+"""Download and preprocess CDC NNDSS Weekly Socrata CSV for stat_var_processor."""
+
+import datetime
+import importlib.util
+import os
+from pathlib import Path
+import time
+from typing import Dict, Optional, Tuple
+
+from absl import app
+from absl import flags
+from absl import logging
+import pandas as pd
+
+_FLAGS = flags.FLAGS
+
+
+def _define_flags() -> None:
+    """Define CLI flags when running as a script."""
+    flags.DEFINE_string(
+        "input_csv",
+        "",
+        "Optional local path to NNDSS Socrata CSV (skips CDC download).",
+    )
+    flags.DEFINE_string(
+        "output_csv",
+        "",
+        "Optional output CSV path (defaults to input_files/nndss_weekly_input.csv).",
+    )
+    flags.DEFINE_bool(
+        "skip_gcs_history",
+        False,
+        "If true, skips downloading 2006-2021 historical files from GCS.",
+    )
+
+
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+INPUT_DIR = os.path.join(SCRIPT_DIR, "input_files")
+HISTORY_DIR = os.path.join(SCRIPT_DIR, "history")
+HISTORY_GCS_BUCKET = "unresolved_mcf"
+HISTORY_GCS_PREFIX = "cdc/nndss_infectious_diseasesweekly/history"
+HISTORY_FILES = ("cdc_nndss_weekly_tables_historical.csv",)
+RAW_FILE = os.path.join(INPUT_DIR, "export.csv")
+OUTPUT_FILE = os.path.join(INPUT_DIR, "nndss_weekly_input.csv")
+SOURCE_URL = (
+    "https://data.cdc.gov/api/v3/views/x9gk-5huc/export.csv?accessType=DOWNLOAD"
+)
+SKIP_FLAGS = {"N", "NN", "NP", "NC", "U"}
+RAW_MEASUREMENT_METHOD = "CDC_NNDSS_Diseases_WeeklyTables"
+AGGREGATE_MEASUREMENT_METHOD = "dcAggregate/CDC_NNDSS_Diseases_WeeklyTables"
+
+OUTPUT_COLUMNS = [
+    "Reporting Area",
+    "Current MMWR Year",
+    "MMWR WEEK",
+    "observationDate",
+    "Label",
+    "measurementMethod",
+    "Current week",
+]
+
+
+def _start_date_of_year(year: int) -> datetime.date:
+    """Return the first day of the first MMWR week for a given year."""
+    jan_one = datetime.date(year, 1, 1)
+    diff = 7 * (jan_one.isoweekday() > 3) - jan_one.isoweekday()
+    return jan_one + datetime.timedelta(days=diff)
+
+
+def get_mmwr_week_start_date(year, week) -> Optional[str]:
+    """Compute ISO YYYY-MM-DD start date for a given MMWR year and week."""
+    try:
+        y = int(year)
+        w = int(week)
+    except (ValueError, TypeError):
+        return None
+    if not (1 <= w <= 53):
+        logging.warning(f"Invalid MMWR WEEK found: {w}. Skipping.")
+        return None
+    day_one = _start_date_of_year(y)
+    return (day_one + datetime.timedelta(days=7 * (w - 1))).isoformat()
+
+
+def _format_number(val: float) -> str:
+    """Format integer-valued floats without trailing .0."""
+    return str(int(val)) if val.is_integer() else str(val)
+
+
+def download_source_csv() -> str:
+    """Download x9gk-5huc CSV from CDC with exponential backoff retry."""
+    util_script_path = os.path.abspath(
+        os.path.join(SCRIPT_DIR, "../../../util/download_util_script.py"))
+    spec = importlib.util.spec_from_file_location("download_util_script",
+                                                  util_script_path)
+    if spec is None or spec.loader is None:
+        raise ImportError(
+            f"Could not load download_util_script from {util_script_path}")
+    download_util_script = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(download_util_script)
+    download_file = download_util_script.download_file
+
+    max_attempts = 3
+    retry_delay = 5
+    last_small_size_mb: Optional[float] = None
+    for attempt in range(1, max_attempts + 1):
+        try:
+            logging.info(f"Download attempt {attempt}/{max_attempts}: "
+                         f"GET {SOURCE_URL} (body=None)")
+            if os.path.exists(RAW_FILE):
+                os.remove(RAW_FILE)
+            download_ok = download_file(
+                url=SOURCE_URL,
+                output_folder=INPUT_DIR,
+                unzip=False,
+                headers=None,
+                tries=1,
+                delay=0,
+                backoff=1,
+            )
+            if download_ok and os.path.exists(RAW_FILE):
+                size_mb = os.path.getsize(RAW_FILE) / (1024 * 1024)
+                if size_mb < 0.1:
+                    last_small_size_mb = size_mb
+                    logging.warning(
+                        f"Download status=FAILURE on attempt "
+                        f"{attempt}/{max_attempts} for GET {SOURCE_URL}: "
+                        f"file {RAW_FILE} is suspiciously small "
+                        f"({size_mb:.2f} MB < 0.10 MB); removing and retrying.")
+                    os.remove(RAW_FILE)
+                else:
+                    logging.info(
+                        f"Download status=SUCCESS for GET {SOURCE_URL} -> "
+                        f"{RAW_FILE} ({size_mb:.2f} MB).")
+                    return RAW_FILE
+            else:
+                logging.warning(
+                    f"Download status=FAILURE on attempt "
+                    f"{attempt}/{max_attempts} for GET {SOURCE_URL} "
+                    f"(download_ok={download_ok}).")
+        except (OSError, ValueError) as exc:
+            logging.exception(
+                f"Download attempt {attempt}/{max_attempts} for {SOURCE_URL} "
+                f"raised {exc}.")
+        if attempt < max_attempts:
+            time.sleep(retry_delay)
+            retry_delay *= 2
+
+    if last_small_size_mb is not None:
+        raise ValueError(
+            f"Downloaded file {RAW_FILE} from {SOURCE_URL} is suspiciously "
+            f"small ({last_small_size_mb:.2f} MB < 0.10 MB) after "
+            f"{max_attempts} attempts.")
+    raise IOError(f"Failed to download {SOURCE_URL} to {RAW_FILE} after "
+                  f"{max_attempts} attempts.")
+
+
+def preprocess_csv(
+    filepath: str,
+    out_filepath: str,
+    min_year: int = 2022,
+) -> pd.DataFrame:
+    """Filter x9gk-5huc to valid Current week rows (>= min_year), add observationDate, and sum NY+NYC."""
+    chunks = []
+    ny_ex_nyc_vals: Dict[Tuple[str, str, str, str], float] = {}
+    nyc_vals: Dict[Tuple[str, str, str, str], float] = {}
+    required_cols = [
+        "Current week",
+        "Current MMWR Year",
+        "MMWR WEEK",
+        "Reporting Area",
+        "Label",
+    ]
+
+    header_cols = pd.read_csv(filepath, nrows=0).columns
+    missing_cols = [col for col in required_cols if col not in header_cols]
+    if missing_cols:
+        raise KeyError(f"Missing required columns in input CSV: {missing_cols}")
+
+    reader = pd.read_csv(
+        filepath,
+        chunksize=100000,
+        dtype=str,
+        engine="c",
+        on_bad_lines="error",
+    )
+    try:
+        for chunk_idx, chunk in enumerate(reader, start=1):
+            logging.info(f"Processing chunk {chunk_idx}...")
+
+            if "Current week, flag" in chunk.columns:
+                flag_series = chunk["Current week, flag"].fillna("").str.strip()
+                chunk = chunk[~flag_series.isin(SKIP_FLAGS)]
+
+            chunk = chunk[chunk["Current week"].notna()].copy()
+            mmwr_year = pd.to_numeric(
+                chunk["Current MMWR Year"].astype(str).str.replace(",",
+                                                                   "",
+                                                                   regex=False),
+                errors="coerce",
+            )
+            chunk = chunk[mmwr_year.notna() & (mmwr_year >= min_year)].copy()
+            chunk["Current MMWR Year"] = (
+                chunk["Current MMWR Year"].astype(str).str.replace(
+                    ",", "", regex=False).str.strip())
+            chunk["MMWR WEEK"] = (chunk["MMWR WEEK"].astype(str).str.replace(
+                ",", "", regex=False).str.strip())
+            chunk["val_num"] = pd.to_numeric(
+                chunk["Current week"].astype(str).str.replace(",",
+                                                              "",
+                                                              regex=False),
+                errors="coerce",
+            )
+            chunk = chunk[chunk["val_num"].notna() & (chunk["val_num"] >= 0)]
+            if chunk.empty:
+                continue
+
+            yw_pairs = chunk[["Current MMWR Year",
+                              "MMWR WEEK"]].drop_duplicates()
+            date_lookup = {
+                (r["Current MMWR Year"], r["MMWR WEEK"]):
+                    get_mmwr_week_start_date(r["Current MMWR Year"],
+                                             r["MMWR WEEK"])
+                for _, r in yw_pairs.iterrows()
+            }
+            chunk["observationDate"] = [
+                date_lookup.get((y, w))
+                for y, w in zip(chunk["Current MMWR Year"], chunk["MMWR WEEK"])
+            ]
+            chunk = chunk[chunk["observationDate"].notna()]
+            if chunk.empty:
+                continue
+
+            area_upper = chunk["Reporting Area"].astype(
+                str).str.strip().str.upper()
+            is_ny_ex_nyc = area_upper == "NEW YORK"
+            is_nyc = area_upper == "NEW YORK CITY"
+
+            for rec in chunk[is_ny_ex_nyc][[
+                    "Current MMWR Year", "MMWR WEEK", "observationDate",
+                    "Label", "val_num"
+            ]].to_dict("records"):
+                key = (
+                    rec["Current MMWR Year"],
+                    rec["MMWR WEEK"],
+                    rec["observationDate"],
+                    rec["Label"],
+                )
+                ny_ex_nyc_vals[key] = ny_ex_nyc_vals.get(key, 0.0) + float(
+                    rec["val_num"])
+
+            for rec in chunk[is_nyc][[
+                    "Current MMWR Year", "MMWR WEEK", "observationDate",
+                    "Label", "val_num"
+            ]].to_dict("records"):
+                key = (
+                    rec["Current MMWR Year"],
+                    rec["MMWR WEEK"],
+                    rec["observationDate"],
+                    rec["Label"],
+                )
+                nyc_vals[key] = nyc_vals.get(key, 0.0) + float(rec["val_num"])
+
+            kept = chunk[~is_ny_ex_nyc].copy()
+            kept["measurementMethod"] = RAW_MEASUREMENT_METHOD
+            kept["Current week"] = kept["val_num"].map(_format_number)
+            chunks.append(kept[OUTPUT_COLUMNS])
+    except pd.errors.ParserError as exc:
+        raise ValueError(f"Encountered malformed CSV row in {filepath} "
+                         f"(min_year={min_year}): {exc}") from exc
+
+    both_ny_keys = sorted(ny_ex_nyc_vals.keys() & nyc_vals.keys())
+    if both_ny_keys:
+        ny_rows = [{
+            "Reporting Area": "NEW YORK",
+            "Current MMWR Year": k[0],
+            "MMWR WEEK": k[1],
+            "observationDate": k[2],
+            "Label": k[3],
+            "measurementMethod": AGGREGATE_MEASUREMENT_METHOD,
+            "Current week": _format_number(ny_ex_nyc_vals[k] + nyc_vals[k]),
+        } for k in both_ny_keys]
+        chunks.append(pd.DataFrame(ny_rows, columns=OUTPUT_COLUMNS))
+
+    if not chunks:
+        raise ValueError(
+            f"No valid rows with Current MMWR Year >= {min_year} found in "
+            f"{filepath}.")
+    out_df = pd.concat(chunks, ignore_index=True)
+    if out_df.empty:
+        raise ValueError(f"Preprocessed output is empty for {filepath} "
+                         f"(min_year={min_year}).")
+    tmp_out = f"{out_filepath}.tmp"
+    out_df.to_csv(tmp_out, index=False)
+    os.replace(tmp_out, out_filepath)
+    logging.info(f"Wrote {len(out_df)} preprocessed rows to {out_filepath}.")
+    return out_df
+
+
+def download_historical_files(
+    history_dir: str = HISTORY_DIR,
+    bucket_name: str = HISTORY_GCS_BUCKET,
+    prefix: str = HISTORY_GCS_PREFIX,
+) -> None:
+    """Download frozen 2006-2021 historical CSV from GCS."""
+    from google.cloud import storage
+
+    Path(history_dir).mkdir(parents=True, exist_ok=True)
+    client = storage.Client()
+    bucket = client.bucket(bucket_name)
+    for filename in HISTORY_FILES:
+        blob_path = f"{prefix}/{filename}"
+        dest_path = os.path.join(history_dir, filename)
+        tmp_dest = f"{dest_path}.tmp"
+        logging.info(
+            f"Downloading gs://{bucket_name}/{blob_path} to {dest_path}...")
+        bucket.blob(blob_path).download_to_filename(tmp_dest)
+        os.replace(tmp_dest, dest_path)
+
+
+def main(argv):
+    del argv
+    Path(INPUT_DIR).mkdir(parents=True, exist_ok=True)
+    if not _FLAGS.skip_gcs_history:
+        download_historical_files()
+    source_csv = _FLAGS.input_csv or download_source_csv()
+    out_csv = _FLAGS.output_csv or OUTPUT_FILE
+    preprocess_csv(source_csv, out_csv)
+
+
+if __name__ == "__main__":
+    _define_flags()
+    app.run(main)

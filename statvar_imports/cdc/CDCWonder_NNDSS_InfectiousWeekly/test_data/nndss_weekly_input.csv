@@ -1,0 +1,10 @@
+Reporting Area,Current MMWR Year,MMWR WEEK,observationDate,Label,measurementMethod,Current week
+US RESIDENTS,2024,10,2024-03-03,"Haemophilus influenzae, invasive disease, Age <5 years, Non-b serotype",CDC_NNDSS_Diseases_WeeklyTables,3
+NEW ENGLAND,2024,10,2024-03-03,Campylobacteriosis,CDC_NNDSS_Diseases_WeeklyTables,1234
+CALIFORNIA,2024,10,2024-03-03,Leprosy (Hansen's disease),CDC_NNDSS_Diseases_WeeklyTables,4
+NEW YORK CITY,2024,10,2024-03-03,Anthrax,CDC_NNDSS_Diseases_WeeklyTables,2
+PUERTO RICO,2024,10,2024-03-03,Campylobacteriosis,CDC_NNDSS_Diseases_WeeklyTables,9
+US RESIDENTS,2024,10,2024-03-03,"Haemophilus influenzae, invasive disease, Age <5 years, Nontypeable",CDC_NNDSS_Diseases_WeeklyTables,7
+CALIFORNIA,2024,10,2024-03-03,Salmonella Typhi infection,CDC_NNDSS_Diseases_WeeklyTables,2
+US RESIDENTS,2024,10,2024-03-03,Salmonella Paratyphi infection,CDC_NNDSS_Diseases_WeeklyTables,1
+NEW YORK,2024,10,2024-03-03,Anthrax,dcAggregate/CDC_NNDSS_Diseases_WeeklyTables,3
