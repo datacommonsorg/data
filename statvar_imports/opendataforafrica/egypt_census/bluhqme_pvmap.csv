@@ -24,6 +24,7 @@ NAMEARAB_GOVERNORATES,observationAbout,{Data},,,,,,,,,,,,
 خدمات أفراد الخدمة المنزلية لألسر الخاصة,economicSector,DomesticAndPersonnelServicesForPrivateFamilies,Name1,The total number of 15 or more year old employed in the Domestic and personnel services sector,AlternateName1,خدمات أفراد الخدمة المنزلية لألسر الخاصة,,,,,,,,
 المنظمات و الهيئات الدولية واإلقليمية,economicSector,InternationalAndRegionalOrganizations,Name1,The total number of 15 or more year old employed in the International and regional organizations sector,AlternateName1,المنظمات و الهيئات الدولية واإلقليمية,,,,,,,,
 أنشطة غير كاملة التوصيف,economicSector,IncompletelyDescribedActivities,Name1,The total number of 15 or more year old employed in the Incompletely described activities sector,AlternateName1,أنشطة غير كاملة التوصيف,,,,,,,,
+# Omission of {Comma} before Arabic gender intentionally preserves the 69 pre-existing Google3 HEAD egypt_stat_var.mcf alternateName strings.
 ذكور,gender,Male,Name2,"{Comma} male",AlternateName2,ذكور,,,,,,,,
 إناث,gender,Female,Name2,"{Comma} female",AlternateName2,إناث,,,,,,,,
 NAMEARAB_SEX:جملة,Name2,"""""",AlternateName2,"""""",,,,,,,,,,

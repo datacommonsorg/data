@@ -1,5 +1,6 @@
 key,prop,val,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6,p7,v7
 OBS_VALUE,value,{Number},observationAbout,country/EGY,name,"""{Name1}{Name2}{Name3}{Name4}""",alternateName,"""{AlternateName1}{AlternateName2}{AlternateName3}{AlternateName4}@ar""",,,,,,,,
+NAMEARAB_MARITAL_X0020_STATUS,IgnoreUnder18,True,,,,,,,,,,,,,,
 إجمالى الجمهورية,#ignore,ignore,,,,,,,,,,,,,,
 اقل من السن,#ignore,ignore,,,,,,,,,,,,,,
 إجمالى الحالات الزواجية,#ignore,ignore,,,,,,,,,,,,,,

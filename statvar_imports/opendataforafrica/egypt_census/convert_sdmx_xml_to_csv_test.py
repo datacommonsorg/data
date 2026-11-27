@@ -748,6 +748,100 @@ class ConvertSdmxXmlToCsvTest(unittest.TestCase):
             },
         )
 
+        # 5. szfufmb_pvmap.csv must fail closed on IgnoreUnder18 via header default
+        # so #ignore marital rows do not emit Invalid boolean logs on <18 ages.
+        with open(os.path.join(CURRENT_DIR, 'szfufmb_pvmap.csv'),
+                  encoding='utf-8') as f:
+            sz_rows = {
+                r[0]: r[1:]
+                for r in csv.reader(f)
+                if r and not r[0].strip().startswith('#')
+            }
+        sz_default = dict(
+            zip(sz_rows['NAMEARAB_MARITAL_X0020_STATUS'][0::2],
+                sz_rows['NAMEARAB_MARITAL_X0020_STATUS'][1::2]))
+        self.assertEqual(sz_default.get('IgnoreUnder18'), 'True')
+
+        # 6. xovpotd_pvmap.csv must guard OBS_VALUE with a backslash-free
+        # plain-decimal #Regex (immune to property_value_mapper.py's
+        # csv.reader(..., escapechar='\\') stripping single backslashes) and
+        # map KN.L11-KN.L13 to Count_Person_Unemployed{,_Male,_Female}.
+        for pv_path in glob.glob(os.path.join(CURRENT_DIR, '*pvmap.csv')):
+            with open(pv_path, encoding='utf-8') as f:
+                for row in csv.reader(f):
+                    if not row or row[0].strip().startswith('#'):
+                        continue
+                    for j in range(1, len(row) - 1, 2):
+                        if row[j] == '#Regex':
+                            self.assertNotIn(
+                                '\\',
+                                row[j + 1],
+                                f'{pv_path} #Regex contains backslash that '
+                                'property_value_mapper.py escapechar="\\\\" '
+                                'would strip',
+                            )
+        with open(os.path.join(CURRENT_DIR, 'xovpotd_pvmap.csv'),
+                  encoding='utf-8') as f:
+            xov_txt = f.read()
+        self.assertNotIn('NonWorker', xov_txt)
+        with open(os.path.join(CURRENT_DIR, 'xovpotd_pvmap.csv'),
+                  encoding='utf-8') as f:
+            xov_rows = {
+                r[0]: r[1:]
+                for r in csv.reader(f, escapechar='\\')
+                if r and not r[0].strip().startswith('#')
+            }
+        xov_obs = dict(
+            zip(xov_rows['OBS_VALUE'][0::2], xov_rows['OBS_VALUE'][1::2]))
+        expected_regex = (
+            r'^(?P<PlainNum>[+-]?(?:(?:[0-9]{1,3}(?:,[0-9]{3})+|[0-9]+)'
+            r'(?:[.][0-9]+)?|[.][0-9]+))$')
+        self.assertEqual(xov_obs.get('#Regex'), expected_regex)
+        compiled_regex = re.compile(xov_obs['#Regex'])
+        for valid_num in ('0', '-1.5', '+2.5', '.5', '-.5', '1,234',
+                          '1,234,567.89', '0.00009', '0.000002', '1234567'):
+            m = compiled_regex.match(valid_num)
+            self.assertIsNotNone(m, f'Expected match for {valid_num!r}')
+            self.assertEqual(m.group('PlainNum'), valid_num)
+        for bad_val in ('-', '..', 'N/A', '', '1a2', 'a5', '$5', '1/2', '5E5',
+                        '1-2', 'N5', '1,', '1,,2', '1,2', '5.71E-05', '1.'):
+            self.assertIsNone(
+                compiled_regex.match(bad_val),
+                f'Expected rejection for {bad_val!r}',
+            )
+        self.assertEqual(xov_obs.get('value'), '{@PlainNum}')
+        self.assertEqual(xov_obs.get('observationAbout'), 'country/EGY')
+        for code, expected_sv in (
+            ('KN.L11', 'dcid:Count_Person_Unemployed'),
+            ('KN.L12', 'dcid:Count_Person_Unemployed_Male'),
+            ('KN.L13', 'dcid:Count_Person_Unemployed_Female'),
+        ):
+            pvs = dict(zip(xov_rows[code][0::2], xov_rows[code][1::2]))
+            self.assertEqual(pvs.get('variableMeasured'), expected_sv)
+            self.assertEqual(pvs.get('#Multiply'), '1000000')
+        with open(os.path.join(CURRENT_DIR, 'test_data', 'xovpotd_output.csv'),
+                  encoding='utf-8') as f:
+            xov_out = list(csv.DictReader(f))
+        xov_svs = {r['variableMeasured'] for r in xov_out}
+        self.assertFalse(any('NonWorker' in sv for sv in xov_svs))
+        self.assertIn('dcid:Count_Person_Unemployed', xov_svs)
+        self.assertIn('dcid:Count_Person_Unemployed_Male', xov_svs)
+        self.assertIn('dcid:Count_Person_Unemployed_Female', xov_svs)
+
+        # 7. validation_config.json must exclude NonWorker, include
+        # Count_Person_Unemployed{,_Female,_Male}, and harden Rule 4 via
+        # LEFT JOIN + NOT NULL checks.
+        with open(os.path.join(CURRENT_DIR, 'validation_config.json'),
+                  encoding='utf-8') as f:
+            vc_txt = f.read()
+        self.assertNotIn('NonWorker', vc_txt)
+        self.assertIn('_Unemployed(_Female|_Male)?$', vc_txt)
+        val_cfg = json.loads(vc_txt)
+        rule4 = val_cfg['rules'][3]
+        self.assertIn('LEFT JOIN', rule4['params']['query'])
+        self.assertIn('PrimaryMin IS NOT NULL AND PrePrimaryMax IS NOT NULL',
+                      rule4['params']['condition'])
+
 
 if __name__ == '__main__':
     unittest.main()

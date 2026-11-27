@@ -1,5 +1,5 @@
 key,prop,val,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6
-OBS_VALUE,value,{Data},observationAbout,country/EGY,,,,,,,,,,
+OBS_VALUE,#Regex,"^(?P<PlainNum>[+-]?(?:(?:[0-9]{1,3}(?:,[0-9]{3})+|[0-9]+)(?:[.][0-9]+)?|[.][0-9]+))$",value,{@PlainNum},observationAbout,country/EGY,,,,,,,,
 KN.L1,populationType,Person,#Multiply,1000000000000,name,"""Total Population""",,,,,,,,
 KN.L2,#ignore,population residing outside country/EGY,,,,,,,,,,,,
 KN.L3,populationType,Person,residentStatus,Resident,#Multiply,1000000000000,name,"""Total Resident Population in Egypt""",,,,,,
@@ -10,10 +10,10 @@ KN.L7,variableMeasured,dcid:Count_Person_InLaborForce_Female,#Multiply,1000000,,
 KN.L8,variableMeasured,dcid:Count_Person_Workers,#Multiply,1000000,,,,,,,,,,
 KN.L9,populationType,Person,workStatus,Worker,gender,Male,#Multiply,1000000,name,"""Total Number of Male Workers""",,,,
 KN.L10,populationType,Person,workStatus,Worker,gender,Female,#Multiply,1000000,name,"""Total Number of Female Workers""",,,,
-"# KN.L11 uses workerStatus,NonWorker to reuse canonical dcid:Count_Person_NonWorker (manual_india_census_primary.mcf); KN.L12-L13 use workStatus,NonWorker to match dcid:Count_Person_{Male,Female}_NonWorker in egypt_stat_var.mcf."
-KN.L11,populationType,Person,workerStatus,NonWorker,#Multiply,1000000,name,"""Total Number of Non-Workers""",,,,,,
-KN.L12,populationType,Person,workStatus,NonWorker,gender,Male,#Multiply,1000000,name,"""Total Number of Male Non-Workers""",,,,
-KN.L13,populationType,Person,workStatus,NonWorker,gender,Female,#Multiply,1000000,name,"""Total Number of Female Non-Workers""",,,,
+"# KN.L11-L13 sit under CAPMAS Labour Force section KN.L4 (KN.L8 + KN.L11 == KN.L5 and 100 * KN.L11 / KN.L5 == KN.L18 across all 19 quarters, continuing into ulouknf) and represent unemployed persons in the labor force, not total non-working population."
+KN.L11,variableMeasured,dcid:Count_Person_Unemployed,#Multiply,1000000,,,,,,,,,,
+KN.L12,variableMeasured,dcid:Count_Person_Unemployed_Male,#Multiply,1000000,,,,,,,,,,
+KN.L13,variableMeasured,dcid:Count_Person_Unemployed_Female,#Multiply,1000000,,,,,,,,,,
 KN.L14,variableMeasured,dcid:Count_Person_Employed,#Multiply,1000000000000,,,,,,,,,,
 KN.L15,economicSector,CommoditySector,populationType,Person,#Multiply,1000000000000,name,"""Total Number of Persons in Commodity Sector""",,,,,,
 KN.L16,economicSector,ProductiveSocialServicesSector,populationType,Person,#Multiply,1000000000000,name,"""Total Number of Persons in Productive Social Services Sector""",,,,,,
