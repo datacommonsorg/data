@@ -12,7 +12,8 @@ StatisticalVariables and observations, ready for the Data Commons import tool.
   [Write PV maps that survive auto-refresh](#write-pv-maps-that-survive-auto-refresh)
   · [Map places](#map-places) ·
   [Add the processor to an import](#add-the-processor-to-an-import) ·
-  [Create test data](#create-test-data)
+  [Create test data](#create-test-data) ·
+  [Add an import test](docs/import_tests.md)
 - **Check and fix:** [Check the results](#check-the-results) ·
   [Common problems](#common-problems)
 - **More:** [Related tools and docs](#related-tools-and-docs), including the
@@ -439,6 +440,13 @@ and still works.
 
 ## Create test data
 
+For an import under `statvar_imports/`, add an import test. The test runs the
+processor on the test input and compares the output with the expected files in
+the repository's unit tests. Follow [Import tests](docs/import_tests.md) to add
+a test to a new import, or to update a test when a change to the PV map, the
+config, or the processor changes the output. The rest of this section is for an
+import without a test.
+
 Keep a small input and its expected output in the import's `test_data/` folder.
 Reviewers and later refreshes use them to check that the PV map and config still
 produce the same output. Name the files after the import's output:
@@ -486,8 +494,8 @@ NOTE: If the test files have more than about 1,000 lines, store them with Git
 LFS. Run `git lfs track "<import-dir>/test_data/*.csv"` from the repository
 root, and commit the updated `.gitattributes`.
 
-To check that the test data is current, write a new output to a temporary folder
-and compare it with the committed files:
+To check that the test data of an import without a test is current, write a new
+output to a temporary folder and compare it with the committed files:
 
 ```bash
 python3 ../../tools/statvar_importer/stat_var_processor.py \
@@ -607,6 +615,7 @@ For more, see [Troubleshooting](docs/troubleshooting.md).
 | Resolve many place names                                    | [Place tools](place/README.md)                                                                  |
 | Find existing schema, draft PV maps, generate StatVar names | [Schema tools](schema/README.md)                                                                |
 | Make a test sample with every indicator and place           | [Data sampler](docs/data_sampler.md)                                                            |
+| Add or update an import's regression test                   | [Import tests](docs/import_tests.md)                                                            |
 | Compare or merge MCF                                        | [Tools](docs/tools.md)                                                                          |
 | Generate a PV map automatically                             | [tools/agentic_import](https://github.com/datacommonsorg/data/tree/master/tools/agentic_import) |
 | Review an import change before a pull request               | [dc-import-code-review skill](../../agents/skills/dc-import-code-review/SKILL.md)               |
