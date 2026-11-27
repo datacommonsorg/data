@@ -1,0 +1,69 @@
+Node: E:Weather->E0
+variableMeasured: dcs:Min_Temperature
+value: C:Weather->minimum_2m_air_temperature
+observationAbout: C:Weather->dcid
+observationDate: C:Weather->date
+typeOf: dcs:StatVarObservation
+unit: dcs:Celsius
+measurementMethod: dcid:dcAggregate/ERA5Monthly
+observationPeriod: "P1M"
+
+Node: E:Weather->E1
+variableMeasured: dcs:Max_Temperature
+value: C:Weather->maximum_2m_air_temperature
+observationAbout: C:Weather->dcid
+observationDate: C:Weather->date
+typeOf: dcs:StatVarObservation
+unit: dcs:Celsius
+measurementMethod: dcid:dcAggregate/ERA5Monthly
+observationPeriod: "P1M"
+
+Node: E:Weather->E2
+variableMeasured: dcs:Mean_Temperature
+value: C:Weather->mean_2m_air_temperature
+observationAbout: C:Weather->dcid
+observationDate: C:Weather->date
+typeOf: dcs:StatVarObservation
+unit: dcs:Celsius
+measurementMethod: dcid:dcAggregate/ERA5Monthly
+observationPeriod: "P1M"
+
+Node: E:Weather->E3
+variableMeasured: dcs:DewPointTemperature_SurfaceLevel
+value: C:Weather->dewpoint_2m_temperature
+observationAbout: C:Weather->dcid
+observationDate: C:Weather->date
+typeOf: dcs:StatVarObservation
+unit: dcs:Millimeter
+measurementMethod: dcid:dcAggregate/ERA5Monthly
+observationPeriod: "P1M"
+
+Node: E:Weather->E4
+variableMeasured: dcs:AtmosphericPressure_SurfaceLevel
+value: C:Weather->surface_pressure
+observationAbout: C:Weather->dcid
+observationDate: C:Weather->date
+typeOf: dcs:StatVarObservation
+unit: dcs:Pascal
+measurementMethod: dcid:dcAggregate/ERA5Monthly
+observationPeriod: "P1M"
+
+Node: E:Weather->E5
+variableMeasured: dcs:WindSpeed_UComponent_Height10Meters
+value: C:Weather->u_component_of_wind_10m
+observationAbout: C:Weather->dcid
+observationDate: C:Weather->date
+typeOf: dcs:StatVarObservation
+unit: dcs:MetersPerSecond
+measurementMethod: dcid:dcAggregate/ERA5Monthly
+observationPeriod: "P1M"
+
+Node: E:Weather->E6
+variableMeasured: dcs:WindSpeed_VComponent_Height10Meters
+value: C:Weather->v_component_of_wind_10m
+observationAbout: C:Weather->dcid
+observationDate: C:Weather->date
+typeOf: dcs:StatVarObservation
+unit: dcs:MetersPerSecond
+measurementMethod: dcid:dcAggregate/ERA5Monthly
+observationPeriod: "P1M"

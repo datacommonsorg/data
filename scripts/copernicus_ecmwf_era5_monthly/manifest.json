@@ -1,0 +1,34 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "Copernicus_ECMWF_ERA5_Monthly",
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
+      "provenance_url": "https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels",
+      "provenance_description": "Generated using Copernicus Climate Change Service information (2022)",
+      "scripts": [
+        "download_and_process.py --strict_ee=true"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "era5_monthly.tmcf",
+          "cleaned_csv": "input_files/*.celsius.csv"
+        }
+      ],
+      "source_files": [
+        "raw_files/*.csv",
+        "input_files/*.csv",
+        "validation_config.json"
+      ],
+      "cron_schedule": "0 6 * * 0",
+      "validation_config_file": "validation_config.json",
+      "user_script_timeout": 43200,
+      "resource_limits": {
+        "cpu": 32,
+        "memory": 256,
+        "disk": 200
+      }
+    }
+  ]
+}
