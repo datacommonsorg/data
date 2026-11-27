@@ -13,6 +13,7 @@
 # limitations under the License.
 """Unit tests for stat_var_test_runner.py."""
 
+import ast
 import json
 import os
 import shutil
@@ -230,6 +231,55 @@ class StatVarTestRunnerTest(unittest.TestCase):
         self.assertTrue(intermediate_args[0].startswith(
             f'--intermediate_dir={runner._temp_dir_name}'))
         self.assertEqual(captured['unset_env'], ['DC_API_KEY', 'MAPS_API_KEY'])
+
+    def test_run_statvar_processor_applies_default_test_configs(self):
+        self._write_file(
+            'metadata.csv',
+            'parameter,value\n'
+            'header_rows,1\n'
+            'reconcile_nodes,1\n',
+        )
+        config_path = self._write_file(
+            'test_config.json',
+            json.dumps([{
+                'test_name': 'config_test',
+                'statvar_processor_args': {
+                    'config_file': 'metadata.csv',
+                },
+                'statvar_processor_config': {
+                    'recon_lookup_api': True,
+                },
+            }]),
+        )
+        runner = stat_var_test_runner.StatVarProcessorTestRunner(
+            test_config_file=config_path)
+
+        captured = {}
+
+        def fake_run_script(**kwargs):
+            captured.update(kwargs)
+            return {'returncode': 0}
+
+        with mock.patch.object(stat_var_test_runner,
+                               'run_script',
+                               side_effect=fake_run_script):
+            runner.run_statvar_processor(runner.get_config()[0])
+
+        config_args = [
+            a for a in captured['args'] if a.startswith('--config_file=')
+        ]
+        self.assertEqual(len(config_args), 1)
+        config_file = config_args[0].split('=', 1)[1]
+        self.assertTrue(config_file.startswith(runner._temp_dir_name))
+        with open(config_file) as f:
+            processor_config = ast.literal_eval(f.read())
+        # Configs from the import's config file are retained.
+        self.assertEqual(processor_config['header_rows'], '1')
+        # Default configs for tests override the import's config.
+        self.assertIs(processor_config['reconcile_nodes'], False)
+        self.assertIs(processor_config['resolve_places'], False)
+        # Configs in the test override the defaults.
+        self.assertIs(processor_config['recon_lookup_api'], True)
 
     def test_run_script_unset_env_removes_variables(self):
         script_path = self._write_file(

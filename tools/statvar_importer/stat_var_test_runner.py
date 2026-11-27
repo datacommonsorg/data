@@ -22,6 +22,10 @@ settings with each invocation as a dictionary with the following sections:a
   env_file: a file with environment variables such as API keys
   statvar_processor_args: dictionary with the command line arguments
     for statvar processor configs.
+  statvar_processor_config: (optional) dictionary of statvar processor
+    configs for the test that are not command line arguments, such as
+    'reconcile_nodes'. These override the configs in the import's config_file
+    and the default configs for tests in _DEFAULT_TEST_PROCESSOR_CONFIG.
   expected_outputs:
     A dictionary of expected output files mapped to output files.
 
@@ -47,6 +51,11 @@ Example:
       "existing_statvar_mcf": "gs://datcom-imports-test/Test_Import/statvars.mcf",
     },
 
+    # Statvar processor configs for the test that override the defaults
+    "statvar_processor_config": {
+      "reconcile_nodes": true,
+    },
+
     # Statvar processor output files with expected outputs to compare with
     "statvar_processor_outputs": [
       {
@@ -60,8 +69,10 @@ Example:
 
 """
 
+import ast
 import json
 import os
+import pprint
 import re
 import subprocess
 import sys
@@ -89,6 +100,20 @@ _FLAGS = flags.FLAGS
 
 # Environment variables with API keys removed for offline tests.
 _API_KEY_ENV_VARS = ['DC_API_KEY', 'MAPS_API_KEY']
+
+# Default statvar processor configs for all tests.
+# These turn off lookups in external services, such as the Data Commons API,
+# so that tests don't depend on the network or the API quota.
+# A test can override these in its 'statvar_processor_config' section.
+_DEFAULT_TEST_PROCESSOR_CONFIG = {
+    # Don't look up schema in the DC API for reconciliation.
+    'recon_lookup_api': False,
+    # Don't reconcile generated nodes with the Data Commons schema.
+    'reconcile_nodes': False,
+    # Don't resolve places with APIs. The statvar processor still resolves
+    # places with the test's places_resolved_csv, if any.
+    'resolve_places': False,
+}
 
 
 def _define_flags():
@@ -274,6 +299,14 @@ class StatVarProcessorTestRunner:
             args_dict['intermediate_dir'] = os.path.join(
                 test_dir, 'intermediate')
 
+        # Apply the default statvar processor configs for tests and any
+        # overrides for the test over the import's config file.
+        processor_config = dict(_DEFAULT_TEST_PROCESSOR_CONFIG)
+        processor_config.update(config.get('statvar_processor_config', {}))
+        if processor_config:
+            args_dict['config_file'] = self._write_processor_config(
+                args_dict.get('config_file'), processor_config, test_dir)
+
         cmd_args = [f'--{arg}={val}' for arg, val in args_dict.items()]
         cwd = self.get_local_dir()
         script_status = run_script(
@@ -290,6 +323,57 @@ class StatVarProcessorTestRunner:
         script_status['output_dir'] = output_dir
         script_status['test_dir'] = test_dir
         return script_status
+
+    def _write_processor_config(self, config_file: str, test_config: dict,
+                                test_dir: str) -> str:
+        """Returns a config file with the import's configs and test configs.
+
+        Statvar processor configs such as 'reconcile_nodes' are not command
+        line flags and can only be set in the config file. So the configs in
+        the import's config file are saved along with the configs for the test
+        into a new config file in the test folder.
+
+        Args:
+          config_file: config file for the import, relative to the import
+            folder, or a dictionary of configs as a string.
+          test_config: dictionary of configs for the test that override the
+            configs in config_file.
+          test_dir: folder for the new config file.
+
+        Returns:
+          the new config file with the configs for the test.
+        """
+        merged_config = {}
+        if config_file:
+            config_file = str(config_file)
+            local_dir = self.get_local_dir()
+            config_files = file_util.file_get_matching([
+                file if not file_util.file_is_local(file) or os.path.isabs(file)
+                else os.path.join(local_dir, file)
+                for file in config_file.split(',')
+            ])
+            if config_files:
+                merged_config.update(file_util.file_load_py_dict(config_files))
+            else:
+                # Config is a dictionary instead of a file.
+                try:
+                    dict_config = ast.literal_eval(config_file)
+                except (SyntaxError, ValueError):
+                    dict_config = None
+                if isinstance(dict_config, dict):
+                    merged_config.update(dict_config)
+                else:
+                    logging.warning(
+                        f'Ignoring config file not found: {config_file}')
+        merged_config.update(test_config)
+        os.makedirs(test_dir, exist_ok=True)
+        test_config_file = os.path.join(test_dir, 'statvar_processor_config.py')
+        with file_util.FileIO(test_config_file, 'w') as output_file:
+            output_file.write(pprint.pformat(merged_config, indent=4))
+        logging.info(
+            f'Saved statvar processor configs {config_file} with test configs:'
+            f' {test_config} into {test_config_file}')
+        return test_config_file
 
     def verify_outputs(self,
                        outputs: list[dict],
