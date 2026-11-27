@@ -1,0 +1,13 @@
+Node: E:india_wris_ground_retained->E0
+dcid: C:india_wris_ground_retained->observationAbout
+typeOf: dcs:WaterQualitySite
+
+Node: E:india_wris_ground_retained->E1
+typeOf: dcs:StatVarObservation
+observationAbout: E:india_wris_ground_retained->E0
+observationDate: C:india_wris_ground_retained->observationDate
+variableMeasured: C:india_wris_ground_retained->variableMeasured
+value: C:india_wris_ground_retained->value
+unit: C:india_wris_ground_retained->unit
+observationPeriod: "P1Y"
+measurementMethod: dcs:IndiaWRIS

@@ -1,0 +1,20 @@
+{
+    "import_name": "IndiaWRISWaterQuality_Surface",
+    "url": "https://indiawris.gov.in/wris/#/DataDownload",
+    "description": "India WRIS Surface Water Quality station observations.",
+    "release_frequency": "monthly",
+    "start_date": "2001-01",
+    "header_rows": 1,
+    "mapped_columns": ["1", "2", "3", "5"],
+    "word_delimiter": "",
+    "aggregate_duplicate_svobs": "last",
+    "output_columns": [
+        "observationAbout",
+        "observationDate",
+        "variableMeasured",
+        "value",
+        "unit",
+        "#input"
+    ],
+    "output_tmcf": "Node: E:india_wris_surface->E0\ndcid: C:india_wris_surface->observationAbout\ntypeOf: dcs:WaterQualitySite\n\nNode: E:india_wris_surface->E1\ntypeOf: dcs:StatVarObservation\nobservationAbout: E:india_wris_surface->E0\nobservationDate: C:india_wris_surface->observationDate\nvariableMeasured: C:india_wris_surface->variableMeasured\nvalue: C:india_wris_surface->value\nunit: C:india_wris_surface->unit\nobservationPeriod: \"P1M\"\nmeasurementMethod: dcs:IndiaWRIS\n"
+}

@@ -1,0 +1,878 @@
+#key,property-1,value-1
+24 paraganas north,DistrictCode,303
+24 paraganas south,DistrictCode,304
+adilabad,DistrictCode,501
+agar malwa,DistrictCode,667
+agra,DistrictCode,118
+ahmadabad,DistrictCode,438
+ahmedabad,DistrictCode,438
+ahmednagar,DistrictCode,466
+aizawl,DistrictCode,261
+ajmer,DistrictCode,086
+akola,DistrictCode,467
+alappuzha,DistrictCode,554
+aligarh,DistrictCode,119
+alipurduar,DistrictCode,664
+alirajpur,DistrictCode,639
+allahabad,DistrictCode,120
+alluri sitharama raju,DistrictCode,745
+almora,DistrictCode,045
+alwar,DistrictCode,087
+ambala,DistrictCode,058
+ambedkar nagar,DistrictCode,121
+amethi,DistrictCode,640
+amravati,DistrictCode,468
+amreli,DistrictCode,439
+amritsar,DistrictCode,027
+amroha,DistrictCode,154
+anakapalli,DistrictCode,744
+anand,DistrictCode,440
+anantapur,DistrictCode,502
+anantnag,DistrictCode,001
+angul,DistrictCode,344
+anjaw,DistrictCode,628
+annamayya,DistrictCode,753
+anugul,DistrictCode,344
+anuppur,DistrictCode,390
+araria,DistrictCode,188
+aravalli,DistrictCode,672
+ariyalur,DistrictCode,610
+arvalli,DistrictCode,672
+arwal,DistrictCode,611
+ashoknagar,DistrictCode,391
+auraiya,DistrictCode,122
+aurangabad,DistrictCode,189
+ayodhya,DistrictCode,140
+azamgarh,DistrictCode,123
+bagalkot,DistrictCode,524
+bagalkote,DistrictCode,524
+bageshwar,DistrictCode,046
+baghpat,DistrictCode,124
+bagpat,DistrictCode,124
+bahraich,DistrictCode,125
+bajali,DistrictCode,739
+baksa,DistrictCode,616
+balaghat,DistrictCode,392
+balangir,DistrictCode,345
+balasore,DistrictCode,346
+baleshwar,DistrictCode,346
+ballari,DistrictCode,528
+ballia,DistrictCode,126
+balod,DistrictCode,646
+baloda bazar,DistrictCode,644
+baloda bazar - bhatapara,DistrictCode,644
+balrampur,DistrictCode,127
+banas kantha,DistrictCode,441
+banaskantha,DistrictCode,441
+banda,DistrictCode,128
+bandipora,DistrictCode,623
+bandipore,DistrictCode,623
+banka,DistrictCode,190
+bankura,DistrictCode,305
+banswara,DistrictCode,088
+bapatla,DistrictCode,750
+barabanki,DistrictCode,129
+baramula,DistrictCode,003
+baramulla,DistrictCode,003
+baran,DistrictCode,089
+bareilly,DistrictCode,130
+bargarh,DistrictCode,347
+barmer,DistrictCode,090
+barnala,DistrictCode,605
+barpeta,DistrictCode,280
+barwani,DistrictCode,393
+bastar,DistrictCode,374
+basti,DistrictCode,131
+bathinda,DistrictCode,028
+beed,DistrictCode,470
+begusarai,DistrictCode,191
+belagavi,DistrictCode,527
+bemetara,DistrictCode,650
+bengaluru rural,DistrictCode,526
+bengaluru urban,DistrictCode,525
+betul,DistrictCode,394
+bhadohi,DistrictCode,179
+bhadradri kothagudem,DistrictCode,690
+bhadrak,DistrictCode,348
+bhagalpur,DistrictCode,192
+bhandara,DistrictCode,471
+bharatpur,DistrictCode,091
+bharuch,DistrictCode,442
+bhavnagar,DistrictCode,443
+bhilwara,DistrictCode,092
+bhind,DistrictCode,395
+bhiwani,DistrictCode,059
+bhojpur,DistrictCode,193
+bhopal,DistrictCode,396
+bidar,DistrictCode,529
+bijapur,DistrictCode,{BijapurCode}
+bijnor,DistrictCode,132
+bikaner,DistrictCode,093
+bilaspur,DistrictCode,375
+birbhum,DistrictCode,307
+bishnupur,DistrictCode,252
+biswanath,DistrictCode,705
+bokaro,DistrictCode,322
+bongaigaon,DistrictCode,281
+botad,DistrictCode,676
+boudh,DistrictCode,349
+budaun,DistrictCode,133
+budgam,DistrictCode,002
+bulandshahr,DistrictCode,134
+buldhana,DistrictCode,472
+bundi,DistrictCode,094
+burhanpur,DistrictCode,397
+buxar,DistrictCode,194
+cachar,DistrictCode,282
+central,DistrictCode,077
+central delhi,DistrictCode,077
+chamarajanagar,DistrictCode,531
+chamarajanagara,DistrictCode,531
+chamba,DistrictCode,016
+chamoli,DistrictCode,047
+champawat,DistrictCode,048
+champhai,DistrictCode,262
+chandauli,DistrictCode,135
+chandel,DistrictCode,253
+chandigarh,DistrictCode,044
+chandrapur,DistrictCode,473
+changlang,DistrictCode,229
+charaideo,DistrictCode,708
+charkhi dadri,DistrictCode,701
+charki dadri,DistrictCode,701
+chatra,DistrictCode,323
+chengalpattu,DistrictCode,730
+chennai,DistrictCode,568
+chhatarpur,DistrictCode,398
+chhindwara,DistrictCode,399
+chhota udaipur,DistrictCode,668
+chhotaudepur,DistrictCode,668
+chikkaballapura,DistrictCode,630
+chikkamagaluru,DistrictCode,532
+chirang,DistrictCode,612
+chitradurga,DistrictCode,533
+chitrakoot,DistrictCode,136
+chittoor,DistrictCode,503
+chittorgarh,DistrictCode,095
+churachandpur,DistrictCode,254
+churu,DistrictCode,096
+coimbatore,DistrictCode,569
+cooch behar,DistrictCode,308
+coochbehar,DistrictCode,308
+cuddalore,DistrictCode,570
+cuttack,DistrictCode,350
+dadra and nagar haveli,DistrictCode,465
+dahod,DistrictCode,445
+dakshin dinajpur,DistrictCode,310
+dakshina kannada,DistrictCode,534
+daman,DistrictCode,463
+damoh,DistrictCode,400
+dang,DistrictCode,444
+dantewada,DistrictCode,376
+darbhanga,DistrictCode,195
+darjeeling,DistrictCode,309
+darjiling,DistrictCode,309
+darrang,DistrictCode,283
+datia,DistrictCode,401
+dausa,DistrictCode,097
+davanagere,DistrictCode,535
+davangere,DistrictCode,535
+debagarh,DistrictCode,351
+dehradun,DistrictCode,049
+deogarh,DistrictCode,351
+deoghar,DistrictCode,324
+deoria,DistrictCode,137
+devbhoomi dwarka,DistrictCode,674
+devbhumi dwarka,DistrictCode,674
+dewas,DistrictCode,402
+dhalai,DistrictCode,269
+dhamtari,DistrictCode,377
+dhanbad,DistrictCode,325
+dhar,DistrictCode,403
+dharmapuri,DistrictCode,571
+dharwad,DistrictCode,536
+dhemaji,DistrictCode,284
+dhenkanal,DistrictCode,352
+dholpur,DistrictCode,098
+dhubri,DistrictCode,285
+dhule,DistrictCode,474
+dibang valley,DistrictCode,230
+dibrugarh,DistrictCode,286
+dima hasao,DistrictCode,299
+dimapur,DistrictCode,244
+dinajpur dakshin,DistrictCode,310
+dinajpur uttar,DistrictCode,311
+dindigul,DistrictCode,572
+dindori,DistrictCode,404
+diu,DistrictCode,464
+doda,DistrictCode,004
+dohad,DistrictCode,445
+dumka,DistrictCode,326
+dungarpur,DistrictCode,099
+durg,DistrictCode,378
+east,DistrictCode,078
+east champaran,DistrictCode,213
+east delhi,DistrictCode,078
+east district,DistrictCode,225
+east garo hills,DistrictCode,273
+east godavari,DistrictCode,505
+east jaintia hills,DistrictCode,657
+east kameng,DistrictCode,231
+east karbi anglong,DistrictCode,292
+east khasi hills,DistrictCode,274
+east nimar,DistrictCode,405
+east siang,DistrictCode,232
+east sikkim,DistrictCode,225
+east singhbhum,DistrictCode,327
+east singhbum,DistrictCode,327
+eastern west khasi hills,DistrictCode,740
+eluru,DistrictCode,748
+ernakulam,DistrictCode,555
+erode,DistrictCode,573
+etah,DistrictCode,138
+etawah,DistrictCode,139
+faridabad,DistrictCode,060
+faridkot,DistrictCode,029
+farrukhabad,DistrictCode,141
+fatehabad,DistrictCode,061
+fatehgarh sahib,DistrictCode,030
+fatehpur,DistrictCode,142
+fazilka,DistrictCode,651
+ferozepore,DistrictCode,031
+ferozepur,DistrictCode,031
+firozabad,DistrictCode,143
+firozepur,DistrictCode,031
+firozpur,DistrictCode,031
+gadag,DistrictCode,537
+gadchiroli,DistrictCode,475
+gajapati,DistrictCode,353
+ganderbal,DistrictCode,626
+gandhinagar,DistrictCode,446
+ganganagar,DistrictCode,100
+gangtok,DistrictCode,225
+ganjam,DistrictCode,354
+garhwa,DistrictCode,328
+gariaband,DistrictCode,645
+gariyaband,DistrictCode,645
+gaurela-pendra-marwahi,DistrictCode,734
+gaurella pendra marwahi,DistrictCode,734
+gautam buddh nagar,DistrictCode,144
+gautam buddha nagar,DistrictCode,144
+gaya,DistrictCode,196
+ghaziabad,DistrictCode,145
+ghazipur,DistrictCode,146
+gir somnath,DistrictCode,675
+giridih,DistrictCode,329
+goalpara,DistrictCode,287
+godda,DistrictCode,330
+golaghat,DistrictCode,288
+gomati,DistrictCode,654
+gonda,DistrictCode,147
+gondia,DistrictCode,476
+gopalganj,DistrictCode,197
+gorakhpur,DistrictCode,148
+gumla,DistrictCode,331
+guna,DistrictCode,406
+guntur,DistrictCode,506
+gurdaspur,DistrictCode,032
+gurugram,DistrictCode,062
+gwalior,DistrictCode,407
+gyalshing,DistrictCode,228
+hailakandi,DistrictCode,289
+hamirpur,DistrictCode,149
+hanamkonda,DistrictCode,686
+hanumakonda,DistrictCode,686
+hanumangarh,DistrictCode,101
+hapur,DistrictCode,661
+harda,DistrictCode,408
+hardoi,DistrictCode,150
+haridwar,DistrictCode,050
+hassan,DistrictCode,539
+hathras,DistrictCode,163
+haveri,DistrictCode,540
+hazaribagh,DistrictCode,332
+hingoli,DistrictCode,477
+hisar,DistrictCode,063
+hnahthial,DistrictCode,726
+hojai,DistrictCode,709
+hooghly,DistrictCode,312
+hoshangabad,DistrictCode,409
+hoshiarpur,DistrictCode,033
+howrah,DistrictCode,313
+hugli,DistrictCode,312
+hyderabad,DistrictCode,507
+idukki,DistrictCode,556
+imphal east,DistrictCode,255
+imphal west,DistrictCode,256
+indore,DistrictCode,410
+jabalpur,DistrictCode,411
+jagatsinghapur,DistrictCode,355
+jagatsinghpur,DistrictCode,355
+jagitial,DistrictCode,681
+jagtial,DistrictCode,681
+jaipur,DistrictCode,102
+jaisalmer,DistrictCode,103
+jajapur,DistrictCode,356
+jajpur,DistrictCode,356
+jalandhar,DistrictCode,034
+jalaun,DistrictCode,151
+jalgaon,DistrictCode,478
+jalna,DistrictCode,479
+jalore,DistrictCode,104
+jalpaiguri,DistrictCode,314
+jammu,DistrictCode,005
+jamnagar,DistrictCode,447
+jamtara,DistrictCode,333
+jamui,DistrictCode,198
+jangaon,DistrictCode,689
+jangoan,DistrictCode,689
+janjgir - champa,DistrictCode,379
+janjgir-champa,DistrictCode,379
+janjgir–champa,DistrictCode,379
+jashpur,DistrictCode,380
+jaunpur,DistrictCode,152
+jayashankar bhupalapally,DistrictCode,687
+jayashankar bhupalpally,DistrictCode,687
+jehanabad,DistrictCode,199
+jhabua,DistrictCode,412
+jhajjar,DistrictCode,064
+jhalawar,DistrictCode,105
+jhansi,DistrictCode,153
+jhargram,DistrictCode,703
+jharsuguda,DistrictCode,357
+jhunjhunu,DistrictCode,106
+jind,DistrictCode,065
+jiribam,DistrictCode,713
+jodhpur,DistrictCode,107
+jogulamba gadwal,DistrictCode,695
+jorhat,DistrictCode,290
+junagadh,DistrictCode,448
+kabirdham,DistrictCode,382
+kachchh,DistrictCode,449
+kaimur,DistrictCode,200
+kaimur (bhabua),DistrictCode,200
+kaithal,DistrictCode,066
+kakching,DistrictCode,711
+kakinada,DistrictCode,746
+kalaburagi,DistrictCode,538
+kalaburgi,DistrictCode,538
+kalahandi,DistrictCode,358
+kalimpong,DistrictCode,702
+kallakurichi,DistrictCode,729
+kamareddy,DistrictCode,685
+kamjong,DistrictCode,717
+kamle,DistrictCode,718
+kamrup,DistrictCode,291
+kamrup metro,DistrictCode,618
+kamrup metropolitan,DistrictCode,618
+kanchipuram,DistrictCode,574
+kandhamal,DistrictCode,359
+kangpokpi,DistrictCode,712
+kangra,DistrictCode,018
+kanker,DistrictCode,381
+kannauj,DistrictCode,155
+kanniyakumari,DistrictCode,575
+kannur,DistrictCode,557
+kanpur dehat,DistrictCode,156
+kanpur nagar,DistrictCode,157
+kanyakumari,DistrictCode,575
+kapurthala,DistrictCode,035
+karaikal,DistrictCode,598
+karauli,DistrictCode,108
+karbi anglong,DistrictCode,292
+kargil,DistrictCode,006
+karimganj,DistrictCode,293
+karimnagar,DistrictCode,508
+karnal,DistrictCode,067
+karur,DistrictCode,576
+kasaragod,DistrictCode,558
+kasganj,DistrictCode,633
+kathua,DistrictCode,007
+katihar,DistrictCode,201
+katni,DistrictCode,413
+kaushambi,DistrictCode,158
+kendrapara,DistrictCode,360
+kendujhar,DistrictCode,361
+khagaria,DistrictCode,202
+khammam,DistrictCode,509
+khandwa,DistrictCode,405
+khargone,DistrictCode,414
+khawzawl,DistrictCode,728
+kheda,DistrictCode,450
+kheri,DistrictCode,159
+khordha,DistrictCode,362
+khowai,DistrictCode,652
+khunti,DistrictCode,606
+kinnaur,DistrictCode,019
+kiphire,DistrictCode,614
+kishanganj,DistrictCode,203
+kishtwar,DistrictCode,620
+kodagu,DistrictCode,541
+kodarma,DistrictCode,334
+koderma,DistrictCode,334
+kohima,DistrictCode,245
+kokrajhar,DistrictCode,294
+kolar,DistrictCode,542
+kolasib,DistrictCode,263
+kolhapur,DistrictCode,480
+kolkata,DistrictCode,315
+kollam,DistrictCode,559
+konaseema,DistrictCode,747
+kondagaon,DistrictCode,643
+koppal,DistrictCode,543
+koraput,DistrictCode,363
+korba,DistrictCode,383
+korea,DistrictCode,384
+koriya,DistrictCode,384
+kota,DistrictCode,109
+kottayam,DistrictCode,560
+kozhikode,DistrictCode,561
+kra daadi,DistrictCode,677
+krishna,DistrictCode,510
+krishnagiri,DistrictCode,577
+kulgam,DistrictCode,622
+kullu,DistrictCode,020
+kumaram bheem asifabad,DistrictCode,699
+kumuram bheem,DistrictCode,699
+kumuram bheem asifabad,DistrictCode,699
+kupwara,DistrictCode,008
+kurnool,DistrictCode,511
+kurukshetra,DistrictCode,068
+kurung kumey,DistrictCode,233
+kushi nagar,DistrictCode,160
+kushinagar,DistrictCode,160
+kutch,DistrictCode,449
+lahaul and spiti,DistrictCode,021
+lahul and spiti,DistrictCode,021
+lakhimpur,DistrictCode,295
+lakhimpur kheri,DistrictCode,159
+lakhisarai,DistrictCode,204
+lakshadweep,DistrictCode,553
+lakshadweep district,DistrictCode,553
+lalitpur,DistrictCode,161
+latehar,DistrictCode,335
+latur,DistrictCode,481
+lawngtlai,DistrictCode,264
+leh,DistrictCode,009
+leh ladakh,DistrictCode,009
+lepa rada,DistrictCode,724
+leparada,DistrictCode,724
+lohardaga,DistrictCode,336
+lohit,DistrictCode,234
+longding,DistrictCode,666
+longleng,DistrictCode,615
+lower dibang valley,DistrictCode,235
+lower siang,DistrictCode,719
+lower subansiri,DistrictCode,236
+lucknow,DistrictCode,162
+ludhiana,DistrictCode,036
+lunglei,DistrictCode,265
+madhepura,DistrictCode,205
+madhubani,DistrictCode,206
+madurai,DistrictCode,578
+mahabubabad,DistrictCode,688
+mahabubnagar,DistrictCode,512
+maharajganj,DistrictCode,164
+mahasamund,DistrictCode,385
+mahbubnagar,DistrictCode,512
+mahe,DistrictCode,599
+mahendragarh,DistrictCode,069
+mahesana,DistrictCode,451
+mahisagar,DistrictCode,669
+mahoba,DistrictCode,165
+mahé,DistrictCode,599
+mainpuri,DistrictCode,166
+majuli,DistrictCode,706
+malappuram,DistrictCode,562
+malda,DistrictCode,316
+maldah,DistrictCode,316
+malerkotla,DistrictCode,737
+malkangiri,DistrictCode,364
+mamit,DistrictCode,266
+mancherial,DistrictCode,684
+mandi,DistrictCode,022
+mandla,DistrictCode,415
+mandsaur,DistrictCode,416
+mandya,DistrictCode,544
+mangan,DistrictCode,226
+mansa,DistrictCode,037
+marigaon,DistrictCode,296
+mathura,DistrictCode,167
+mau,DistrictCode,168
+mayiladuthurai,DistrictCode,735
+mayurbhanj,DistrictCode,365
+medak,DistrictCode,513
+medchal malkajgiri,DistrictCode,700
+medchal–malkajgiri,DistrictCode,700
+medinipur east,DistrictCode,317
+medinipur west,DistrictCode,318
+meerut,DistrictCode,169
+mehsana,DistrictCode,451
+mirzapur,DistrictCode,170
+moga,DistrictCode,038
+mohali,DistrictCode,608
+mokokchung,DistrictCode,246
+mon,DistrictCode,247
+moradabad,DistrictCode,171
+morbi,DistrictCode,673
+morena,DistrictCode,417
+morigaon,DistrictCode,296
+mulugu,DistrictCode,720
+mumbai,DistrictCode,482
+mumbai city,DistrictCode,482
+mumbai suburban,DistrictCode,483
+mungeli,DistrictCode,647
+munger,DistrictCode,207
+murshidabad,DistrictCode,319
+muzaffarnagar,DistrictCode,172
+muzaffarpur,DistrictCode,208
+mysore,DistrictCode,545
+mysuru,DistrictCode,545
+nabarangapur,DistrictCode,366
+nabarangpur,DistrictCode,366
+nadia,DistrictCode,320
+nagaon,DistrictCode,297
+nagapattinam,DistrictCode,579
+nagarkurnool,DistrictCode,694
+nagaur,DistrictCode,110
+nagpur,DistrictCode,484
+nainital,DistrictCode,051
+nalanda,DistrictCode,209
+nalbari,DistrictCode,298
+nalgonda,DistrictCode,514
+namakkal,DistrictCode,580
+namchi,DistrictCode,227
+namsai,DistrictCode,678
+nanded,DistrictCode,485
+nandurbar,DistrictCode,486
+nandyal,DistrictCode,755
+narayanpet,DistrictCode,721
+narayanpur,DistrictCode,637
+narmada,DistrictCode,452
+narmadapuram,DistrictCode,409
+narsinghpur,DistrictCode,418
+nashik,DistrictCode,487
+navsari,DistrictCode,453
+nawada,DistrictCode,210
+nayagarh,DistrictCode,367
+neemuch,DistrictCode,419
+new delhi,DistrictCode,079
+nicobar,DistrictCode,603
+nicobars,DistrictCode,603
+nilgiris,DistrictCode,587
+nirmal,DistrictCode,680
+niwari,DistrictCode,722
+nizamabad,DistrictCode,516
+noklak,DistrictCode,736
+noney,DistrictCode,714
+north,DistrictCode,080
+north 24 parganas,DistrictCode,303
+north and middle andaman,DistrictCode,632
+north delhi,DistrictCode,080
+north district,DistrictCode,226
+north east,DistrictCode,081
+north east delhi,DistrictCode,081
+north garo hills,DistrictCode,656
+north goa,DistrictCode,551
+north sikkim,DistrictCode,226
+north tripura,DistrictCode,270
+north west,DistrictCode,082
+north west delhi,DistrictCode,082
+ntr,DistrictCode,749
+nuapada,DistrictCode,368
+nuh,DistrictCode,604
+osmanabad,DistrictCode,488
+pakke kessang,DistrictCode,723
+pakke-kessang,DistrictCode,723
+pakur,DistrictCode,337
+pakyong,DistrictCode,741
+palakkad,DistrictCode,563
+palamu,DistrictCode,338
+palghar,DistrictCode,665
+pali,DistrictCode,111
+palnadu,DistrictCode,751
+palwal,DistrictCode,619
+panch mahals,DistrictCode,454
+panchkula,DistrictCode,070
+panchmahal,DistrictCode,454
+panipat,DistrictCode,071
+panna,DistrictCode,420
+papum pare,DistrictCode,237
+parbhani,DistrictCode,489
+parvathipuram manyam,DistrictCode,743
+paschim bardhaman,DistrictCode,704
+paschim medinipur,DistrictCode,318
+pashchim champaran,DistrictCode,211
+patan,DistrictCode,455
+pathanamthitta,DistrictCode,564
+pathankot,DistrictCode,662
+patiala,DistrictCode,041
+patna,DistrictCode,212
+pauri garhwal,DistrictCode,052
+peddapalli,DistrictCode,682
+perambalur,DistrictCode,581
+peren,DistrictCode,613
+phek,DistrictCode,248
+pherzawl,DistrictCode,715
+pilibhit,DistrictCode,173
+pithoragarh,DistrictCode,053
+pondicherry,DistrictCode,600
+poonch,DistrictCode,010
+porbandar,DistrictCode,456
+prakasam,DistrictCode,517
+pratapgarh,DistrictCode,174
+prayagraj,DistrictCode,120
+puducherry,DistrictCode,600
+pudukkottai,DistrictCode,582
+pulwama,DistrictCode,011
+pune,DistrictCode,490
+purba bardhaman,DistrictCode,306
+purba medinipur,DistrictCode,317
+purbi champaran,DistrictCode,213
+puri,DistrictCode,369
+purnia,DistrictCode,214
+purulia,DistrictCode,321
+puruliya,DistrictCode,321
+rae bareli,DistrictCode,175
+raebareli,DistrictCode,175
+raichur,DistrictCode,546
+raigad,DistrictCode,491
+raigarh,DistrictCode,386
+raipur,DistrictCode,387
+raisen,DistrictCode,421
+rajanna sircilla,DistrictCode,683
+rajauri,DistrictCode,012
+rajgarh,DistrictCode,422
+rajkot,DistrictCode,457
+rajnandgaon,DistrictCode,388
+rajouri,DistrictCode,012
+rajsamand,DistrictCode,112
+ramanagara,DistrictCode,631
+ramanathapuram,DistrictCode,583
+ramban,DistrictCode,621
+ramgarh,DistrictCode,607
+rampur,DistrictCode,176
+ranchi,DistrictCode,339
+ranga reddy,DistrictCode,518
+rangareddy,DistrictCode,518
+ranipet,DistrictCode,731
+ratlam,DistrictCode,423
+ratnagiri,DistrictCode,492
+rayagada,DistrictCode,370
+reasi,DistrictCode,627
+rewa,DistrictCode,424
+rewari,DistrictCode,072
+ri bhoi,DistrictCode,276
+ri-bhoi,DistrictCode,276
+rohtak,DistrictCode,073
+rohtas,DistrictCode,215
+rudra prayag,DistrictCode,054
+rudraprayag,DistrictCode,054
+rupnagar,DistrictCode,042
+s.a.s nagar,DistrictCode,608
+sabar kantha,DistrictCode,458
+sabarkantha,DistrictCode,458
+sagar,DistrictCode,425
+saharanpur,DistrictCode,177
+saharsa,DistrictCode,216
+sahebganj,DistrictCode,340
+saiha,DistrictCode,267
+saitual,DistrictCode,727
+salem,DistrictCode,584
+samastipur,DistrictCode,217
+samba,DistrictCode,624
+sambalpur,DistrictCode,371
+sambhal,DistrictCode,659
+sangareddy,DistrictCode,691
+sangli,DistrictCode,493
+sangrur,DistrictCode,043
+sant kabeer nagar,DistrictCode,178
+sant kabir nagar,DistrictCode,178
+saraikela kharsawan,DistrictCode,341
+saran,DistrictCode,218
+satara,DistrictCode,494
+satna,DistrictCode,426
+sawai madhopur,DistrictCode,113
+sehore,DistrictCode,427
+senapati,DistrictCode,257
+seoni,DistrictCode,428
+sepahijala,DistrictCode,653
+seraikela kharsawan,DistrictCode,341
+serchhip,DistrictCode,268
+shahdara,DistrictCode,671
+shahdol,DistrictCode,429
+shahid bhagat singh nagar,DistrictCode,040
+shahjahanpur,DistrictCode,180
+shajapur,DistrictCode,430
+shamli,DistrictCode,660
+sheikhpura,DistrictCode,219
+sheohar,DistrictCode,220
+sheopur,DistrictCode,431
+shi yomi,DistrictCode,725
+shimla,DistrictCode,023
+shimoga,DistrictCode,547
+shivamogga,DistrictCode,547
+shivpuri,DistrictCode,432
+shopian,DistrictCode,625
+shravasti,DistrictCode,181
+shrawasti,DistrictCode,181
+siang,DistrictCode,679
+siddharth nagar,DistrictCode,182
+siddharthnagar,DistrictCode,182
+siddipet,DistrictCode,692
+sidhi,DistrictCode,433
+sikar,DistrictCode,114
+simdega,DistrictCode,342
+sindhudurg,DistrictCode,495
+singrauli,DistrictCode,638
+sirmaur,DistrictCode,024
+sirohi,DistrictCode,115
+sirsa,DistrictCode,074
+sitamarhi,DistrictCode,221
+sitapur,DistrictCode,183
+sivaganga,DistrictCode,585
+sivasagar,DistrictCode,300
+siwan,DistrictCode,222
+solan,DistrictCode,025
+solapur,DistrictCode,496
+sonbhadra,DistrictCode,184
+sonepur,DistrictCode,372
+sonipat,DistrictCode,075
+sonitpur,DistrictCode,301
+soreng,DistrictCode,742
+south,DistrictCode,083
+south 24 parganas,DistrictCode,304
+south andaman,DistrictCode,602
+south andamans,DistrictCode,602
+south delhi,DistrictCode,083
+south district,DistrictCode,227
+south east,DistrictCode,670
+south east delhi,DistrictCode,670
+south garo hills,DistrictCode,277
+south goa,DistrictCode,552
+south salmara mancachar,DistrictCode,707
+south salmara-mankachar,DistrictCode,707
+south sikkim,DistrictCode,227
+south tripura,DistrictCode,271
+south west,DistrictCode,084
+south west delhi,DistrictCode,084
+south west garo hills,DistrictCode,663
+south west khasi hills,DistrictCode,658
+spsr nellore,DistrictCode,515
+sri ganganagar,DistrictCode,100
+sri muktsar sahib,DistrictCode,039
+sri potti sri ramulu nellore,DistrictCode,515
+sri sathya sai,DistrictCode,754
+srikakulam,DistrictCode,519
+srinagar,DistrictCode,013
+subarnapur,DistrictCode,372
+sukma,DistrictCode,642
+sultanpur,DistrictCode,185
+sundargarh,DistrictCode,373
+supaul,DistrictCode,223
+surajpur,DistrictCode,648
+surat,DistrictCode,459
+surendranagar,DistrictCode,460
+surguja,DistrictCode,389
+suryapet,DistrictCode,696
+tamenglong,DistrictCode,258
+tamulpur,DistrictCode,756
+tapi,DistrictCode,641
+tarn taran,DistrictCode,609
+tawang,DistrictCode,238
+tehri garhwal,DistrictCode,055
+tengnoupal,DistrictCode,716
+tenkasi,DistrictCode,733
+thane,DistrictCode,497
+thanjavur,DistrictCode,586
+the nilgiris,DistrictCode,587
+theni,DistrictCode,588
+thiruvallur,DistrictCode,589
+thiruvananthapuram,DistrictCode,565
+thiruvarur,DistrictCode,590
+thoothukudi,DistrictCode,594
+thoubal,DistrictCode,259
+thrissur,DistrictCode,566
+tikamgarh,DistrictCode,434
+tinsukia,DistrictCode,302
+tirap,DistrictCode,239
+tiruchirappalli,DistrictCode,591
+tirunelveli,DistrictCode,592
+tirupathur,DistrictCode,732
+tirupati,DistrictCode,752
+tirupattur,DistrictCode,732
+tiruppur,DistrictCode,634
+tiruvallur,DistrictCode,589
+tiruvannamalai,DistrictCode,593
+tiruvarur,DistrictCode,590
+tonk,DistrictCode,116
+tseminyu,DistrictCode,757
+tuensang,DistrictCode,249
+tumakuru,DistrictCode,548
+tuticorin,DistrictCode,594
+udaipur,DistrictCode,117
+udalguri,DistrictCode,617
+udam singh nagar,DistrictCode,056
+udham singh nagar,DistrictCode,056
+udhampur,DistrictCode,014
+udupi,DistrictCode,549
+ujjain,DistrictCode,435
+ukhrul,DistrictCode,260
+umaria,DistrictCode,436
+una,DistrictCode,026
+unakoti,DistrictCode,655
+unnao,DistrictCode,186
+upper siang,DistrictCode,240
+upper subansiri,DistrictCode,241
+uttar dinajpur,DistrictCode,311
+uttar kashi,DistrictCode,057
+uttara kannada,DistrictCode,550
+uttarkashi,DistrictCode,057
+vadodara,DistrictCode,461
+vaishali,DistrictCode,224
+valsad,DistrictCode,462
+varanasi,DistrictCode,187
+vellore,DistrictCode,595
+vidisha,DistrictCode,437
+vijayanagar,DistrictCode,738
+vijayanagara,DistrictCode,738
+vijayapura,DistrictCode,530
+vijaypura,DistrictCode,530
+vikarabad,DistrictCode,698
+villupuram,DistrictCode,596
+viluppuram,DistrictCode,596
+virudhunagar,DistrictCode,597
+visakhapatanam,DistrictCode,520
+visakhapatnam,DistrictCode,520
+vizianagaram,DistrictCode,521
+wanaparthy,DistrictCode,693
+warangal,DistrictCode,522
+warangal rural,DistrictCode,36
+warangal urban,DistrictCode,686
+wardha,DistrictCode,498
+washim,DistrictCode,499
+wayanad,DistrictCode,567
+west,DistrictCode,085
+west champaran,DistrictCode,211
+west delhi,DistrictCode,085
+west district,DistrictCode,228
+west garo hills,DistrictCode,278
+west godavari,DistrictCode,523
+west jaintia hills,DistrictCode,275
+west kameng,DistrictCode,242
+west karbi anglong,DistrictCode,710
+west khasi hills,DistrictCode,279
+west nimar,DistrictCode,414
+west siang,DistrictCode,243
+west sikkim,DistrictCode,228
+west singhbhum,DistrictCode,343
+west tripura,DistrictCode,272
+wokha,DistrictCode,250
+y.s.r.,DistrictCode,504
+yadadri bhuvanagiri,DistrictCode,697
+yadgir,DistrictCode,635
+yamunanagar,DistrictCode,076
+yanam,DistrictCode,601
+yavatmal,DistrictCode,500
+ysr,DistrictCode,504
+zunheboto,DistrictCode,251

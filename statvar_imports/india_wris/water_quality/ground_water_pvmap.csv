@@ -1,0 +1,36 @@
+#key,property-1,value-1,property-2,value-2,property-3,value-3,property-4,value-4,property-5,value-5,property-6,value-6,property-7,value-7
+# Station and district metadata columns
+station name,#Eval,"StationClean='Koderma' if Data.strip() == 'Kodarma' else re.sub('[^A-Za-z0-9_]+', '', Data)"
+karnataka,BijapurCode,530
+chhattisgarh,BijapurCode,636
+date collection,observationDate,{Data}
+DEFAULT_PV,observationAbout,indiaWris/{DistrictCode}_{StationClean},observationPeriod,P1Y,measurementMethod,IndiaWRIS
+# Solute concentration parameters
+arsenic mg l,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,Arsenic,unit,MicrogramsPerLitre,value,{NumVal},#Regex,"^(?P<NumVal>-?[0-9]+(?:[.][0-9]+)?(?:[eE][+-]?[0-9]+)?)$"
+carbonate mg l,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,Carbonate,unit,MilligramsPerLitre,value,{NumVal},#Regex,"^(?P<NumVal>-?[0-9]+(?:[.][0-9]+)?(?:[eE][+-]?[0-9]+)?)$"
+calcium mg l,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,Calcium,unit,MilligramsPerLitre,value,{NumVal},#Regex,"^(?P<NumVal>-?[0-9]+(?:[.][0-9]+)?(?:[eE][+-]?[0-9]+)?)$"
+chloride mg l,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,Chloride,unit,MilligramsPerLitre,value,{NumVal},#Regex,"^(?P<NumVal>-?[0-9]+(?:[.][0-9]+)?(?:[eE][+-]?[0-9]+)?)$"
+iron mg l,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,Iron,unit,MilligramsPerLitre,value,{NumVal},#Regex,"^(?P<NumVal>-?[0-9]+(?:[.][0-9]+)?(?:[eE][+-]?[0-9]+)?)$"
+potassium mg l,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,Potassium,unit,MilligramsPerLitre,value,{NumVal},#Regex,"^(?P<NumVal>-?[0-9]+(?:[.][0-9]+)?(?:[eE][+-]?[0-9]+)?)$"
+magnesium mg l,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,Magnesium,unit,MilligramsPerLitre,value,{NumVal},#Regex,"^(?P<NumVal>-?[0-9]+(?:[.][0-9]+)?(?:[eE][+-]?[0-9]+)?)$"
+nitrate mg l,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,Nitrate,unit,MilligramsPerLitre,value,{NumVal},#Regex,"^(?P<NumVal>-?[0-9]+(?:[.][0-9]+)?(?:[eE][+-]?[0-9]+)?)$"
+sodium mg l,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,Sodium,unit,MilligramsPerLitre,value,{NumVal},#Regex,"^(?P<NumVal>-?[0-9]+(?:[.][0-9]+)?(?:[eE][+-]?[0-9]+)?)$"
+sulphate mg l,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,Sulfate,unit,MilligramsPerLitre,value,{NumVal},#Regex,"^(?P<NumVal>-?[0-9]+(?:[.][0-9]+)?(?:[eE][+-]?[0-9]+)?)$"
+boron mg l,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,Boron,unit,MilligramsPerLitre,value,{NumVal},#Regex,"^(?P<NumVal>-?[0-9]+(?:[.][0-9]+)?(?:[eE][+-]?[0-9]+)?)$"
+cadmium mg l,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,Cadmium,unit,MilligramsPerLitre,value,{NumVal},#Regex,"^(?P<NumVal>-?[0-9]+(?:[.][0-9]+)?(?:[eE][+-]?[0-9]+)?)$"
+chromium mg l,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,Chromium,unit,MilligramsPerLitre,value,{NumVal},#Regex,"^(?P<NumVal>-?[0-9]+(?:[.][0-9]+)?(?:[eE][+-]?[0-9]+)?)$"
+mercury mg l,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,Mercury,unit,MilligramsPerLitre,value,{NumVal},#Regex,"^(?P<NumVal>-?[0-9]+(?:[.][0-9]+)?(?:[eE][+-]?[0-9]+)?)$"
+manganese mg l,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,Manganese,unit,MilligramsPerLitre,value,{NumVal},#Regex,"^(?P<NumVal>-?[0-9]+(?:[.][0-9]+)?(?:[eE][+-]?[0-9]+)?)$"
+lead mg l,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,Lead,unit,MilligramsPerLitre,value,{NumVal},#Regex,"^(?P<NumVal>-?[0-9]+(?:[.][0-9]+)?(?:[eE][+-]?[0-9]+)?)$"
+nickel mg l,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,Nickel,unit,MilligramsPerLitre,value,{NumVal},#Regex,"^(?P<NumVal>-?[0-9]+(?:[.][0-9]+)?(?:[eE][+-]?[0-9]+)?)$"
+zinc mg l,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,ZincElement,unit,MilligramsPerLitre,value,{NumVal},#Regex,"^(?P<NumVal>-?[0-9]+(?:[.][0-9]+)?(?:[eE][+-]?[0-9]+)?)$"
+copper,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,Copper,value,{NumVal},#Regex,"^(?P<NumVal>-?[0-9]+(?:[.][0-9]+)?(?:[eE][+-]?[0-9]+)?)$"
+uranium,populationType,BodyOfWater,measuredProperty,concentration,contaminatedThing,GroundWater,contaminant,Uranium,value,{NumVal},#Regex,"^(?P<NumVal>-?[0-9]+(?:[.][0-9]+)?(?:[eE][+-]?[0-9]+)?)$"
+# Chemical property parameters
+electrical conductivity field,populationType,BodyOfWater,waterSource,GroundWater,measuredProperty,electricalConductivity,value,{NumVal},#Regex,"^(?P<NumVal>-?[0-9]+(?:[.][0-9]+)?(?:[eE][+-]?[0-9]+)?)$"
+residual sodium carbonate,populationType,BodyOfWater,waterSource,GroundWater,measuredProperty,residualSodiumCarbonate,value,{NumVal},#Regex,"^(?P<NumVal>-?[0-9]+(?:[.][0-9]+)?(?:[eE][+-]?[0-9]+)?)$"
+sodium absorption ratio,populationType,BodyOfWater,waterSource,GroundWater,measuredProperty,sodiumAdsorptionRatio,value,{NumVal},#Regex,"^(?P<NumVal>-?[0-9]+(?:[.][0-9]+)?(?:[eE][+-]?[0-9]+)?)$"
+total hardness mg l,populationType,BodyOfWater,waterSource,GroundWater,measuredProperty,waterHardness,unit,MilligramsCaCO3PerLitre,value,{NumVal},#Regex,"^(?P<NumVal>-?[0-9]+(?:[.][0-9]+)?(?:[eE][+-]?[0-9]+)?)$"
+total alkalinity mg l,populationType,BodyOfWater,waterSource,GroundWater,measuredProperty,waterAlkalinity,unit,MilligramsCaCO3PerLitre,value,{NumVal},#Regex,"^(?P<NumVal>-?[0-9]+(?:[.][0-9]+)?(?:[eE][+-]?[0-9]+)?)$"
+total dissolved solids mg l,populationType,BodyOfWater,waterSource,GroundWater,measuredProperty,totalDissolvedSolids,unit,MilligramsPerLitre,value,{NumVal},#Regex,"^(?P<NumVal>-?[0-9]+(?:[.][0-9]+)?(?:[eE][+-]?[0-9]+)?)$"
+dissolved oxygen1 mg l,populationType,BodyOfWater,waterSource,GroundWater,measuredProperty,dissolvedOxygen,unit,MilligramsPerLitre,value,{NumVal},#Regex,"^(?P<NumVal>-?[0-9]+(?:[.][0-9]+)?(?:[eE][+-]?[0-9]+)?)$"

@@ -1,0 +1,51 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "IndiaWRISWaterQuality",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://indiawris.gov.in/wris",
+            "provenance_description": "Ground Water Quality and Surface Water Quality monitoring station observations across India from the India Water Resources Information System (WRIS).",
+            "scripts": [
+                "download.py",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/groundWater.csv --pv_map='District Name:india_wris_districts_pvmap.csv,ground_water_pvmap.csv' --config_file=ground_water_statvar_processor_config.json --statvar_dcid_remap_csv=statvar_remap.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/ground/india_wris_ground --output_counters=counters/india_wris_ground_counters.csv",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/India_WRIS_Ground_Prod_Retained.csv --pv_map=ground_water_retained_pvmap.csv --config_file=ground_water_retained_statvar_processor_config.json --statvar_dcid_remap_csv=statvar_remap.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/retained/india_wris_ground_retained --output_counters=counters/india_wris_ground_retained_counters.csv",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/surfaceWater.csv --pv_map=DistrictName:india_wris_districts_pvmap.csv,surface_water_pvmap.csv --config_file=surface_water_statvar_processor_config.json --statvar_dcid_remap_csv=statvar_remap.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/surface/india_wris_surface --output_counters=counters/india_wris_surface_counters.csv"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output/ground/india_wris_ground.tmcf",
+                    "cleaned_csv": "output/ground/india_wris_ground.csv",
+                    "node_mcf": "output/ground/*.mcf"
+                },
+                {
+                    "template_mcf": "output/retained/india_wris_ground_retained.tmcf",
+                    "cleaned_csv": "output/retained/india_wris_ground_retained.csv",
+                    "node_mcf": "output/retained/*.mcf"
+                },
+                {
+                    "template_mcf": "output/surface/india_wris_surface.tmcf",
+                    "cleaned_csv": "output/surface/india_wris_surface.csv",
+                    "node_mcf": "output/surface/*.mcf"
+                }
+            ],
+            "source_files": [
+                "input_files/*.csv",
+                "counters/*.csv",
+                "*_pvmap.csv",
+                "*_statvar_processor_config.*",
+                "statvar_remap.csv",
+                "validation_config.json",
+                "manifest.json"
+            ],
+            "cron_schedule": "0 4 * * 1",
+            "validation_config_file": "validation_config.json",
+            "resource_limits": {
+                "cpu": 8,
+                "memory": 32,
+                "disk": 50
+            }
+        }
+    ]
+}
