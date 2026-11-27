@@ -1,0 +1,15 @@
+REF_DATE,GEO,DGUID,Grade,Sex,UOM,UOM_ID,SCALAR_FACTOR,SCALAR_ID,VECTOR,COORDINATE,VALUE,STATUS,SYMBOL,TERMINATED,DECIMALS
+2010/2011,Canada,2021A000011124,"Total, grade","Total, sex",Number,223,units,0,v65926338,1.1.1,4746624,,,,0
+2010/2011,Canada,2021A000011124,"Total, grade",Male,Number,223,units,0,v65926339,1.1.2,2438961,,,,0
+2010/2011,Canada,2021A000011124,Junior Kindergarten  ,"Total, sex",Number,223,units,0,v65926341,1.2.1,142827,,,,0
+2010/2011,Canada,2021A000011124,Junior Kindergarten  ,Male,Number,223,units,0,v65926342,1.2.2,72789,,,,0
+2010/2011,Canada,2021A000011124,Grade 1,"Total, sex",Number,223,units,0,v65926347,1.4.1,333357,,,,0
+2010/2011,Canada,2021A000011124,Grade 1,Male,Number,223,units,0,v65926348,1.4.2,171372,,,,0
+2010/2011,Canada,2021A000011124,Grade 13,"Total, sex",Number,223,units,0,v65926020,1.16.1,24,,,,0
+2010/2011,Canada,2021A000011124,Grade 13,Male,Number,223,units,0,v65926021,1.16.2,12,,,,0
+2010/2011,Canada,2021A000011124,Grade not reported,"Total, sex",Number,223,units,0,v65926023,1.17.1,13065,,,,0
+2010/2011,Canada,2021A000011124,Grade not reported,Male,Number,223,units,0,v65926024,1.17.2,5946,,,,0
+2010/2011,Ontario,2021A000235,"Total, grade","Total, sex",Number,223,units,0,v65926500,7.1.1,2051865,,,,0
+2010/2011,Ontario,2021A000235,"Total, grade",Male,Number,223,units,0,v65926501,7.1.2,1057083,,,,0
+2010/2011,Ontario,2021A000235,Junior Kindergarten  ,"Total, sex",Number,223,units,0,v65926503,7.2.1,121899,,,,0
+2010/2011,Ontario,2021A000235,Junior Kindergarten  ,Male,Number,223,units,0,v65926504,7.2.2,62046,,,,0

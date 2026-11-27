@@ -1,0 +1,8 @@
+REF_DATE,GEO,DGUID,Labour force characteristics,Gender,Age group,UOM,UOM_ID,SCALAR_FACTOR,SCALAR_ID,VECTOR,COORDINATE,VALUE,STATUS,SYMBOL,TERMINATED,DECIMALS
+1976,Canada,2021A000011124,Unemployment rate,Total - Gender,15 years and over,Percent,239,units,0,v1063541804,1.8.1.1,7.1,,,,1
+2025,Canada,2021A000011124,Unemployment rate,Total - Gender,15 years and over,Percent,239,units,0,v1063541804,1.8.1.1,6.8,,,,1
+1976,Ontario,2021A000235,Unemployment rate,Total - Gender,15 years and over,Percent,239,units,0,v1063546556,7.8.1.1,6.1,,,,1
+2025,Ontario,2021A000235,Unemployment rate,Total - Gender,15 years and over,Percent,239,units,0,v1063546556,7.8.1.1,7.7,,,,1
+2025,Ontario,2021A000235,Employment,Total - Gender,15 years and over,Persons in thousands,428,units,0,v1063546226,7.3.1.1,8227.0,,,,1
+2025,Ontario,2021A000235,Unemployment rate,Men+,15 years and over,Percent,239,units,0,v1063546578,7.8.2.1,7.9,,,,1
+2025,Ontario,2021A000235,Unemployment rate,Total - Gender,15 to 24 years,Percent,239,units,0,v1063546557,7.8.1.2,16.0,,,,1

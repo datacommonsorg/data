@@ -1,0 +1,11 @@
+REF_DATE,GEO,DGUID,Type of grain,UOM,UOM_ID,SCALAR_FACTOR,SCALAR_ID,VECTOR,COORDINATE,VALUE,STATUS,SYMBOL,TERMINATED,DECIMALS
+2026-09,Canada,2016A000011124,"All grains, total",Tonnes,288,units,0,v32861680,7.1,8051044,,,,0
+2026-09,Canada,2016A000011124,"Wheat, total",Tonnes,288,units,0,v32861681,7.2,4115082,,,,0
+2026-09,Canada,2016A000011124,Oats,Tonnes,288,units,0,v32861684,7.5,274835,,,,0
+2026-09,Canada,2016A000011124,Canola (rapeseed),Tonnes,288,units,0,v32861687,7.9,2750711,,,,0
+2026-09,Western Canada,,"All grains, total",Tonnes,288,units,0,v40086,3.1,7617460,,,,0
+2026-09,Western Canada,,"Wheat, total",Tonnes,288,units,0,v40087,3.2,3758959,,,,0
+2026-09,Western Canada,,Oats,Tonnes,288,units,0,v40090,3.5,223031,,,,0
+2026-09,Western Canada,,Canola (rapeseed),Tonnes,288,units,0,v40094,3.9,2740933,,,,0
+2026-09,Saskatchewan,2016A000247,"All grains, total",Tonnes,288,units,0,v40104,5.1,3759826,,,,0
+2026-09,Saskatchewan,2016A000247,"Wheat, total",Tonnes,288,units,0,v40105,5.2,1729587,,,,0

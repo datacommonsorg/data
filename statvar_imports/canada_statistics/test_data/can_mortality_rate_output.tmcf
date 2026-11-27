@@ -1,0 +1,9 @@
+Node: E:can_mortality_rate_output->E0
+observationAbout: C:can_mortality_rate_output->observationAbout
+observationDate: C:can_mortality_rate_output->observationDate
+value: C:can_mortality_rate_output->value
+variableMeasured: C:can_mortality_rate_output->variableMeasured
+unit: C:can_mortality_rate_output->unit
+scalingFactor: C:can_mortality_rate_output->scalingFactor
+observationPeriod: C:can_mortality_rate_output->observationPeriod
+typeOf: dcs:StatVarObservation

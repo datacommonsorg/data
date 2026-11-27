@@ -1,0 +1,1193 @@
+#Key,Property1,Value1
+Canada,observationAbout,country/CAN
+"Canada, place of residence",observationAbout,country/CAN
+Alberta,observationAbout,wikidataId/Q1951
+"Alberta, place of residence",observationAbout,wikidataId/Q1951
+British Columbia,observationAbout,wikidataId/Q1974
+"British Columbia, place of residence",observationAbout,wikidataId/Q1974
+Manitoba,observationAbout,wikidataId/Q1948
+"Manitoba, place of residence",observationAbout,wikidataId/Q1948
+New Brunswick,observationAbout,wikidataId/Q1965
+"New Brunswick, place of residence",observationAbout,wikidataId/Q1965
+Newfoundland and Labrador,observationAbout,wikidataId/Q2003
+"Newfoundland and Labrador, place of residence",observationAbout,wikidataId/Q2003
+Northwest Territories,observationAbout,wikidataId/Q2007
+"Northwest Territories, place of residence",observationAbout,wikidataId/Q2007
+Nova Scotia,observationAbout,wikidataId/Q1952
+"Nova Scotia, place of residence",observationAbout,wikidataId/Q1952
+Nunavut,observationAbout,wikidataId/Q2023
+"Nunavut, place of residence",observationAbout,wikidataId/Q2023
+Ontario,observationAbout,wikidataId/Q1904
+"Ontario, place of residence",observationAbout,wikidataId/Q1904
+Prince Edward Island,observationAbout,wikidataId/Q1979
+"Prince Edward Island, place of residence",observationAbout,wikidataId/Q1979
+Quebec,observationAbout,wikidataId/Q176
+"Quebec, place of residence",observationAbout,wikidataId/Q176
+Saskatchewan,observationAbout,wikidataId/Q1989
+"Saskatchewan, place of residence",observationAbout,wikidataId/Q1989
+Yukon,observationAbout,wikidataId/Q2009
+"Yukon, place of residence",observationAbout,wikidataId/Q2009
+Abbotsford (5909052) CY,observationAbout,wikidataId/Q271730
+"Abbotsford - Mission (CMA), B.C.",#IgnoreRow,True
+Aberdeen (4715019) T,#IgnoreRow,True
+Aberdeen No. 373 (4715018) RM,#IgnoreRow,True
+Addington (1314012) P,observationAbout,wikidataId/Q3365753
+Adelaide-Metcalfe (3539047) TP,#IgnoreRow,True
+Ahahswinis 1 (5923801) IRI,#IgnoreRow,True
+Airdrie (4806021) CY,observationAbout,wikidataId/Q408537
+Aitchelitch 9 (5909835) IRI,#IgnoreRow,True
+Ajax (3518005) T,observationAbout,wikidataId/Q386567
+Alberni 2 (5923802) IRI,#IgnoreRow,True
+Alberni-Clayoquot D (5923035) RDA,#IgnoreRow,True
+Alberni-Clayoquot E (5923037) RDA,#IgnoreRow,True
+Alberni-Clayoquot F (5923039) RDA,#IgnoreRow,True
+Albertville (4715085) VL,#IgnoreRow,True
+Alexander 134 (4811805) IRI,observationAbout,wikidataId/Q4718161
+Alexandria (5941882) IRI,#IgnoreRow,True
+Alkali Lake 1 (5941801) IRI,#IgnoreRow,True
+Alkali Lake 4A (5941873) IRI,#IgnoreRow,True
+Allan (4711072) T,#IgnoreRow,True
+Allison Bay 219 (4816850) IRI,observationAbout,wikidataId/Q4732730
+Alma (2493042) V,observationAbout,wikidataId/Q141973
+"Alma (CA), Que.",#IgnoreRow,True
+Amherstburg (3537028) T,observationAbout,wikidataId/Q385335
+Amos (2488055) V,observationAbout,wikidataId/Q141705
+"Amos (CA), Que.",#IgnoreRow,True
+Anmore (5915038) VL,observationAbout,wikidataId/Q557967
+Appleton (1006011) T,observationAbout,wikidataId/Q2858750
+Arnprior (3547002) T,observationAbout,wikidataId/Q543997
+Ascot Corner (2441055) MÉ,observationAbout,wikidataId/Q2866424
+Asquith (4712059) T,#IgnoreRow,True
+Atholville (1314013) VL,observationAbout,wikidataId/Q2869265
+Aurora (3519046) T,observationAbout,wikidataId/Q266438
+Baezaeko River 27 (5941881) IRI,#IgnoreRow,True
+Baie-Comeau (2496020) V,observationAbout,wikidataId/Q139654
+"Baie-Comeau (CA), Que.",#IgnoreRow,True
+Baie-D'Urfé (2466112) V,observationAbout,wikidataId/Q139503
+Balgonie (4706032) T,#IgnoreRow,True
+Barnston Island 3 (5915809) IRI,#IgnoreRow,True
+Barons (4802016) VL,observationAbout,wikidataId/Q2111715
+Barrie (3543042) CY,observationAbout,wikidataId/Q34183
+"Barrie (CMA), Ont.",#IgnoreRow,True
+Bathurst (1315008) P,observationAbout,wikidataId/Q3365777
+Bathurst (1315011) C,observationAbout,wikidataId/Q810807
+"Bathurst (CA), N.B.",#IgnoreRow,True
+Battle River No. 438 (4712078) RM,#IgnoreRow,True
+Battleford (4712079) T,observationAbout,wikidataId/Q619597
+Bauline (1001512) T,observationAbout,wikidataId/Q2892028
+Bay Bulls (1001557) T,observationAbout,wikidataId/Q2892158
+Beaconsfield (2466107) V,observationAbout,wikidataId/Q142035
+Beauharnois (2470022) V,observationAbout,wikidataId/Q139109
+Beaumont (2419105) MÉ,observationAbout,wikidataId/Q2893240
+Beaumont (4811013) CY,observationAbout,wikidataId/Q253903
+Beaver Lake 17 (1209037) IRI,#IgnoreRow,True
+Becher Bay 1 (5917809) IRI,#IgnoreRow,True
+Beckwith (3509024) TP,#IgnoreRow,True
+Beiseker (4806024) VL,observationAbout,wikidataId/Q814861
+Belcarra (5915036) VL,observationAbout,wikidataId/Q815312
+Belle Plaine (4706022) VL,observationAbout,wikidataId/Q1999097
+Belleville (3512005) CY,observationAbout,wikidataId/Q34227
+"Belleville - Quinte West (CMA), Ont.",#IgnoreRow,True
+Beloeil (2457040) V,observationAbout,wikidataId/Q138841
+Beresford (1315012) P,observationAbout,wikidataId/Q13107388
+Beresford (1315015) TV,observationAbout,wikidataId/Q1994373
+Berry (2488070) MÉ,observationAbout,wikidataId/Q2899149
+Betula Beach (4811039) SV,observationAbout,wikidataId/Q4899042
+Bienfait (4701021) T,observationAbout,wikidataId/Q1909440
+Big Hole Tract 8 (North Half) (1309033) IRI,#IgnoreRow,True
+Big Hole Tract 8 (South Half) (1309034) IRI,#IgnoreRow,True
+Blainville (2473015) V,observationAbout,wikidataId/Q139568
+Blucher No. 343 (4711069) RM,#IgnoreRow,True
+Bois-des-Filion (2473030) V,observationAbout,wikidataId/Q139019
+Boisbriand (2473005) V,observationAbout,wikidataId/Q139474
+Boischatel (2421045) MÉ,observationAbout,wikidataId/Q2909084
+Bon Accord (4811066) T,observationAbout,wikidataId/Q3323039
+Bonfield (3548027) TP,observationAbout,wikidataId/Q4941782
+Boucherville (2458033) V,observationAbout,wikidataId/Q141924
+Bowen Island (5915062) IM,observationAbout,wikidataId/Q895413
+Bowman (2480145) MÉ,observationAbout,wikidataId/Q2922715
+Brackley (1102055) RM,#IgnoreRow,True
+Bradford West Gwillimbury (3543014) T,observationAbout,wikidataId/Q3492517
+Bradwell (4711071) VL,#IgnoreRow,True
+Brampton (3521010) CY,observationAbout,wikidataId/Q44198
+Brandon (4607062) CY,#IgnoreRow,True
+"Brandon (CA), Man.",#IgnoreRow,True
+Brant (3529005) CY,observationAbout,wikidataId/Q384944
+Brantford (3529006) CY,observationAbout,wikidataId/Q34180
+"Brantford (CMA), Ont.",#IgnoreRow,True
+Bright (1310026) P,observationAbout,wikidataId/Q3365789
+Britannia No. 502 (4717028) RM,observationAbout,wikidataId/Q4969289
+Brockville (3507015) CY,observationAbout,wikidataId/Q34047
+"Brockville (CA), Ont.",#IgnoreRow,True
+Brokenhead 4 (4613062) IRI,#IgnoreRow,True
+Bromont (2446078) V,observationAbout,wikidataId/Q141983
+Brooks (4802034) CY,observationAbout,wikidataId/Q1055838
+"Brooks (CA), Alta.",#IgnoreRow,True
+Brossard (2458007) V,observationAbout,wikidataId/Q139104
+Bruderheim (4810066) T,observationAbout,wikidataId/Q2493627
+Buckland No. 491 (4715094) RM,#IgnoreRow,True
+Buena Vista (4706055) VL,#IgnoreRow,True
+Burlington (3524002) CY,observationAbout,wikidataId/Q34218
+Burnaby (5915025) CY,observationAbout,wikidataId/Q244025
+Burrard Inlet 3 (5915806) IRI,#IgnoreRow,True
+Bécancour (2438010) V,observationAbout,wikidataId/Q141542
+Bégin (2494250) MÉ,observationAbout,wikidataId/Q2929753
+Cacouna (2412057) MÉ,observationAbout,wikidataId/Q2932587
+Caledon (3521024) T,observationAbout,wikidataId/Q424659
+Calgary (4806016) CY,observationAbout,wikidataId/Q36312
+"Calgary (CMA), Alta.",#IgnoreRow,True
+Callander (3549066) MU,observationAbout,wikidataId/Q2118501
+Calmar (4811019) T,observationAbout,wikidataId/Q2593164
+Cambridge (3530010) CY,#IgnoreRow,True
+Campbell River (5924034) CY,#IgnoreRow,True
+"Campbell River (CA), B.C.",#IgnoreRow,True
+Campbell River 11 (5924804) IRI,#IgnoreRow,True
+Campbellton (1314014) C,observationAbout,wikidataId/Q1030568
+"Campbellton (CA), N.B./Que.",#IgnoreRow,True
+Camrose (4810011) CY,observationAbout,wikidataId/Q775610
+"Camrose (CA), Alta.",#IgnoreRow,True
+Candiac (2467020) V,observationAbout,wikidataId/Q142076
+Canmore (4815023) T,observationAbout,wikidataId/Q991515
+"Canmore (CA), Alta.",#IgnoreRow,True
+Cantley (2482020) MÉ,observationAbout,wikidataId/Q2936630
+Cape Breton (1217030) RGM,#IgnoreRow,True
+"Cape Breton (CA), N.S.",#IgnoreRow,True
+Capilano 5 (5915808) IRI,#IgnoreRow,True
+Cariboo A (5941019) RDA,#IgnoreRow,True
+Cariboo B (5941021) RDA,#IgnoreRow,True
+Cariboo C (5941026) RDA,#IgnoreRow,True
+Cariboo D (5941010) RDA,#IgnoreRow,True
+Cariboo E (5941012) RDA,#IgnoreRow,True
+Cariboo F (5941014) RDA,#IgnoreRow,True
+Cariboo I (5941027) RDA,#IgnoreRow,True
+Carignan (2457010) V,observationAbout,wikidataId/Q142391
+Carleton Place (3509028) T,#IgnoreRow,True
+Cassimayooks (Mayook) 5 (5901805) IRI,#IgnoreRow,True
+Cavan Monaghan (3515013) TP,#IgnoreRow,True
+Central Elgin (3534020) MU,#IgnoreRow,True
+Central Kootenay E (5903041) RDA,#IgnoreRow,True
+Central Kootenay F (5903043) RDA,#IgnoreRow,True
+Central Okanagan (5935012) RDA,#IgnoreRow,True
+Central Okanagan West (5935020) RDA,#IgnoreRow,True
+Central Saanich (5917015) DM,observationAbout,wikidataId/Q1053984
+Centre Wellington (3523025) TP,#IgnoreRow,True
+"Centre Wellington (CA), Ont.",#IgnoreRow,True
+Chambly (2457005) V,observationAbout,wikidataId/Q142069
+Champlain (2437220) MÉ,observationAbout,wikidataId/Q2955899
+Charlemagne (2460005) V,observationAbout,wikidataId/Q142017
+Charlottetown (1102075) CY,observationAbout,wikidataId/Q2127
+"Charlottetown (CA), P.E.I.",#IgnoreRow,True
+Chase (5933054) VL,#IgnoreRow,True
+Chatham (1309006) P,observationAbout,wikidataId/Q3365797
+Chatham-Kent (3536020) MU,observationAbout,wikidataId/Q113464
+"Chatham-Kent (CA), Ont.",#IgnoreRow,True
+Cheam 1 (5909837) IRI,#IgnoreRow,True
+Chelsea (2482025) MÉ,observationAbout,wikidataId/Q2962228
+Chemainus 13 (5919804) IRI,#IgnoreRow,True
+Chestermere (4806017) CY,observationAbout,wikidataId/Q999303
+Chesterville (2439030) MÉ,observationAbout,wikidataId/Q2962871
+Chilliwack (5909020) CY,#IgnoreRow,True
+"Chilliwack (CMA), B.C.",#IgnoreRow,True
+Chippewas of Georgina Island First Nation (3519076) IRI,observationAbout,wikidataId/Q5101689
+Chisholm (3548031) TP,observationAbout,wikidataId/Q5102087
+Chute-aux-Outardes (2496035) VL,observationAbout,wikidataId/Q2967703
+Château-Richer (2421035) V,observationAbout,wikidataId/Q142001
+Châteauguay (2467050) V,observationAbout,wikidataId/Q141522
+Clarence-Rockland (3502036) C,observationAbout,wikidataId/Q2364972
+Clarington (3518017) MU,observationAbout,wikidataId/Q4438
+Clavet (4711077) VL,#IgnoreRow,True
+Clyde River (1102037) RM,observationAbout,wikidataId/Q2980431
+Coaldale (4802019) T,observationAbout,wikidataId/Q2651028
+Coalhurst (4802013) T,observationAbout,wikidataId/Q501627
+Cobourg (3514021) T,#IgnoreRow,True
+"Cobourg (CA), Ont.",#IgnoreRow,True
+Cochrane (4806019) T,observationAbout,wikidataId/Q1105163
+Coglistiko River 29 (5941835) IRI,#IgnoreRow,True
+"Colchester, Subd. B (1210008) SC",#IgnoreRow,True
+"Colchester, Subd. C (1210001) SC",#IgnoreRow,True
+Coldstream (5937010) DM,#IgnoreRow,True
+Cole Bay 3 (5917801) IRI,#IgnoreRow,True
+Cole Harbour 30 (1209019) IRI,#IgnoreRow,True
+Collingwood (3543031) T,#IgnoreRow,True
+"Collingwood (CA), Ont.",#IgnoreRow,True
+Colonsay (4711079) T,#IgnoreRow,True
+Colonsay No. 342 (4711076) RM,#IgnoreRow,True
+Colwood (5917041) CY,observationAbout,wikidataId/Q1113057
+Comox (5926005) T,#IgnoreRow,True
+Comox 1 (5926801) IRI,#IgnoreRow,True
+Comox Valley A (5926021) RDA,#IgnoreRow,True
+Comox Valley B (Lazo North) (5926022) RDA,#IgnoreRow,True
+Compton (2444071) MÉ,observationAbout,wikidataId/Q2990879
+Conception Bay South (1001485) T,observationAbout,wikidataId/Q1123842
+Conmee (3558019) TP,observationAbout,wikidataId/Q5161253
+Coquitlam (5915034) CY,observationAbout,wikidataId/Q643215
+Coquitlam 1 (5915805) IRI,#IgnoreRow,True
+Coquitlam 2 (5915804) IRI,#IgnoreRow,True
+Corman Park No. 344 (4711065) RM,#IgnoreRow,True
+Corner Brook (1005018) CY,observationAbout,wikidataId/Q991363
+"Corner Brook (CA), N.L.",#IgnoreRow,True
+Cornwall (1102085) T,observationAbout,wikidataId/Q1018959
+Cornwall (3501012) CY,observationAbout,wikidataId/Q956690
+"Cornwall (CA), Ont.",#IgnoreRow,True
+Coteau-du-Lac (2471040) V,observationAbout,wikidataId/Q141571
+Courtenay (5926010) CY,observationAbout,wikidataId/Q1017477
+"Courtenay (CA), B.C.",#IgnoreRow,True
+Coverdale (1306014) P,observationAbout,wikidataId/Q280281
+Cowansville (2446080) V,observationAbout,wikidataId/Q142107
+"Cowansville (CA), Que.",#IgnoreRow,True
+Cowichan (5919822) IRI,#IgnoreRow,True
+Cowichan Valley D (5919013) RDA,#IgnoreRow,True
+Cowichan Valley E (5919051) RDA,#IgnoreRow,True
+Cowichan Valley G (5919015) RDA,#IgnoreRow,True
+Cowichan Valley H (5919017) RDA,#IgnoreRow,True
+Cranbrook (5901022) CY,#IgnoreRow,True
+"Cranbrook (CA), B.C.",#IgnoreRow,True
+Craven (4706078) VL,#IgnoreRow,True
+Crossfield (4806026) T,observationAbout,wikidataId/Q2306577
+Crossroads (1102010) FD,#IgnoreRow,True
+Cumberland (5926014) VL,#IgnoreRow,True
+Curve Lake First Nation 35 (3515019) IRI,observationAbout,wikidataId/Q5196062
+Cypress County (4801003) MD,observationAbout,wikidataId/Q5200316
+Côte-Saint-Luc (2466058) V,observationAbout,wikidataId/Q139588
+Dalmeny (4711073) T,#IgnoreRow,True
+Dawson Creek (5955014) CY,#IgnoreRow,True
+"Dawson Creek (CA), B.C.",#IgnoreRow,True
+Deep Creek 2 (5941805) IRI,#IgnoreRow,True
+Delisle (4712056) T,#IgnoreRow,True
+Delson (2467025) V,observationAbout,wikidataId/Q142180
+Delta (5915011) CY,observationAbout,wikidataId/Q851838
+Denholm (2483005) MÉ,observationAbout,wikidataId/Q3022462
+Derby (1309011) P,observationAbout,wikidataId/Q3365808
+Deux-Montagnes (2472010) V,observationAbout,wikidataId/Q141943
+Devon (4811018) T,observationAbout,wikidataId/Q2105198
+Devon 30 (1310034) IRI,#IgnoreRow,True
+Dieppe (1307045) C,observationAbout,wikidataId/Q264075
+Disley (4706054) VL,#IgnoreRow,True
+"Division No.  5, Subd. F (1005010) SNO",#IgnoreRow,True
+"Division No.  6, Subd. E (1006008) SNO",#IgnoreRow,True
+Dog Creek 1 (5941806) IRI,#IgnoreRow,True
+Dog Creek 2 (5941807) IRI,#IgnoreRow,True
+Dog Head 218 (4816852) IRI,observationAbout,wikidataId/Q5288188
+Dolbeau-Mistassini (2492022) V,observationAbout,wikidataId/Q141393
+"Dolbeau-Mistassini (CA), Que.",#IgnoreRow,True
+Dollard-Des Ormeaux (2466142) V,observationAbout,wikidataId/Q141998
+Dorchester (1307011) P,observationAbout,wikidataId/Q3365806
+Dorchester (1307012) VL,observationAbout,wikidataId/Q3036985
+Dorval (2466087) V,observationAbout,wikidataId/Q141963
+Douglas (1310028) P,observationAbout,wikidataId/Q3365810
+Douro-Dummer (3515023) TP,#IgnoreRow,True
+Dragon Lake 3 (5941886) IRI,#IgnoreRow,True
+Drummondville (2449058) V,observationAbout,wikidataId/Q141940
+"Drummondville (CMA), Que.",#IgnoreRow,True
+Duck Lake 7 (5935801) IRI,#IgnoreRow,True
+Duncan (5919012) CY,#IgnoreRow,True
+"Duncan (CA), B.C.",#IgnoreRow,True
+Dundurn (4711063) T,#IgnoreRow,True
+Dundurn No. 314 (4711061) RM,#IgnoreRow,True
+East Ferris (3548034) MU,#IgnoreRow,True
+East Gwillimbury (3519054) T,observationAbout,wikidataId/Q483424
+East Hants (1208008) MD,#IgnoreRow,True
+East Kootenay C (5901035) RDA,#IgnoreRow,True
+"East River, Part 1 (1102064) FD",#IgnoreRow,True
+"East River, Part 2 (1101052) FD",#IgnoreRow,True
+East Saanich 2 (5917803) IRI,#IgnoreRow,True
+East St. Paul (4613032) RM,observationAbout,wikidataId/Q1659481
+Ebenezer (4709014) VL,#IgnoreRow,True
+Edenwold (4706033) VL,#IgnoreRow,True
+Edenwold No. 158 (4706029) RM,#IgnoreRow,True
+Edmonton (4811061) CY,observationAbout,wikidataId/Q2096
+"Edmonton (CMA), Alta.",#IgnoreRow,True
+Edmundston (1313027) C,observationAbout,wikidataId/Q991257
+"Edmundston (CA), N.B.",#IgnoreRow,True
+Eel Ground 2 (1309035) IRI,#IgnoreRow,True
+Elgin (1306008) P,observationAbout,wikidataId/Q5360046
+Elizabethtown-Kitley (3507014) TP,observationAbout,wikidataId/Q937758
+Elliot Lake (3557041) CY,#IgnoreRow,True
+"Elliot Lake (CA), Ont.",#IgnoreRow,True
+Elton (4607071) RM,#IgnoreRow,True
+Enoch Cree Nation (4811804) IRI,observationAbout,wikidataId/Q7619585
+Eskasoni 3 (1217020) IRI,#IgnoreRow,True
+Esquimalt (5917040) DM,observationAbout,wikidataId/Q14944797
+Esquimalt (5917811) IRI,#IgnoreRow,True
+Essa (3543021) TP,#IgnoreRow,True
+"Essa (CA), Ont.",#IgnoreRow,True
+Essex (3537016) T,observationAbout,wikidataId/Q559147
+Estevan (4701024) CY,#IgnoreRow,True
+"Estevan (CA), Sask.",#IgnoreRow,True
+Estevan No. 5 (4701022) RM,#IgnoreRow,True
+Euchinico Creek 17 (5941866) IRI,#IgnoreRow,True
+Ferland-et-Boilleau (2494220) MÉ,observationAbout,wikidataId/Q3068817
+Fisher's Grant 24 (1212019) IRI,#IgnoreRow,True
+Flatrock (1001507) T,observationAbout,wikidataId/Q5457956
+Fort Erie (3526003) T,observationAbout,wikidataId/Q268103
+Fort Folly 1 (1307014) IRI,#IgnoreRow,True
+Fort George 2 (5953801) IRI,#IgnoreRow,True
+Fort Mckay 174 (4816810) IRI,#IgnoreRow,True
+Fort Saskatchewan (4811056) CY,observationAbout,wikidataId/Q1007407
+Fort St. John (5955034) CY,observationAbout,wikidataId/Q23021
+"Fort St. John (CA), B.C.",#IgnoreRow,True
+Fort William 52 (3558003) IRI,observationAbout,wikidataId/Q5472337
+Fossambault-sur-le-Lac (2422010) V,observationAbout,wikidataId/Q142211
+Fraser Valley D (5909034) RDA,#IgnoreRow,True
+Fraser Valley E (5909036) RDA,#IgnoreRow,True
+Fraser Valley H (5909035) RDA,#IgnoreRow,True
+Fraser-Fort George A (5953038) RDA,#IgnoreRow,True
+Fraser-Fort George C (5953042) RDA,#IgnoreRow,True
+Fraser-Fort George D (5953044) RDA,#IgnoreRow,True
+Fraser-Fort George F (5953048) RDA,#IgnoreRow,True
+Fredericton (1310032) C,observationAbout,wikidataId/Q2138
+"Fredericton (CMA), N.B.",#IgnoreRow,True
+Frontenac Islands (3510005) TP,observationAbout,wikidataId/Q5505937
+Fruitvale (5905005) VL,#IgnoreRow,True
+Gander (1006009) T,observationAbout,wikidataId/Q745257
+"Gander (CA), N.L.",#IgnoreRow,True
+Garden River 14 (3557074) IRI,observationAbout,wikidataId/Q5522296
+Garden River No. 490 (4715079) RM,#IgnoreRow,True
+Gatineau (2481017) V,observationAbout,wikidataId/Q141844
+Georgian Bluffs (3542053) TP,#IgnoreRow,True
+Georgina (3519070) T,observationAbout,wikidataId/Q483498
+Gibbons (4811064) T,observationAbout,wikidataId/Q2650984
+Gillies (3558012) TP,observationAbout,wikidataId/Q9268089
+Gladstone (1303004) P,observationAbout,wikidataId/Q5566340
+Glenelg (1309004) P,observationAbout,wikidataId/Q5568476
+Glenwood (1006012) T,#IgnoreRow,True
+Golden Days (4811023) SV,observationAbout,wikidataId/Q5579317
+Gore (2476025) CT,observationAbout,wikidataId/Q3110947
+Granby (2447017) V,observationAbout,wikidataId/Q141881
+"Granby (CA), Que.",#IgnoreRow,True
+Grand Bay-Westfield (1305015) TV,observationAbout,wikidataId/Q2002394
+Grand Coulee (4706028) T,observationAbout,wikidataId/Q2003716
+Grand Falls-Windsor (1006017) T,observationAbout,wikidataId/Q1542592
+"Grand Falls-Windsor (CA), N.L.",#IgnoreRow,True
+Grande Prairie (4819012) CY,observationAbout,wikidataId/Q642900
+"Grande Prairie (CA), Alta.",#IgnoreRow,True
+"Greater Sudbury (CMA), Ont.",#IgnoreRow,True
+Greater Sudbury / Grand Sudbury (3553005) CV,observationAbout,wikidataId/Q383434
+Greenwich (1305038) P,observationAbout,wikidataId/Q3365828
+Gregoire Lake 176 (4816821) IRI,observationAbout,wikidataId/Q5606624
+Gregoire Lake 176A (4816822) IRI,observationAbout,wikidataId/Q22439049
+Grenville (2476055) VL,observationAbout,wikidataId/Q3116515
+Grimsby (3526065) T,observationAbout,wikidataId/Q424901
+Guelph (3523008) CY,observationAbout,wikidataId/Q504114
+"Guelph (CMA), Ont.",#IgnoreRow,True
+Guelph/Eramosa (3523009) TP,#IgnoreRow,True
+Halalt 2 (5919801) IRI,#IgnoreRow,True
+Halifax (1209034) RGM,observationAbout,wikidataId/Q2141
+"Halifax (CMA), N.S.",#IgnoreRow,True
+Halton Hills (3524015) T,#IgnoreRow,True
+Hamilton (3525005) C,observationAbout,wikidataId/Q133116
+"Hamilton (CMA), Ont.",#IgnoreRow,True
+Hampstead (2466062) V,observationAbout,wikidataId/Q139101
+Hampton (1305006) P,observationAbout,wikidataId/Q3365759
+Hampton (1305007) TV,observationAbout,wikidataId/Q928252
+Hanwell (1310017) RCR,#IgnoreRow,True
+Harrison Hot Springs (5909027) VL,observationAbout,wikidataId/Q1586275
+Harvey (1310005) VL,observationAbout,wikidataId/Q1409290
+Hatley (2445055) CT,observationAbout,wikidataId/Q3128317
+Hawkesbury (3502008) T,observationAbout,wikidataId/Q2573770
+"Hawkesbury (CA), Ont./Que.",#IgnoreRow,True
+Headingley (4611042) RM,#IgnoreRow,True
+Hiawatha First Nation (3515008) IRI,observationAbout,wikidataId/Q5750568
+High River (4806006) T,observationAbout,wikidataId/Q1743705
+"High River (CA), Alta.",#IgnoreRow,True
+Highlands (5917049) DM,observationAbout,wikidataId/Q5759321
+Hillsborough (1306011) P,observationAbout,wikidataId/Q3365768
+Hillsborough (1306025) VL,#IgnoreRow,True
+Holyrood (1001472) T,observationAbout,wikidataId/Q5887108
+Homalco 9 (5924840) IRI,#IgnoreRow,True
+Hopewell (1306001) P,observationAbout,wikidataId/Q3365770
+Hudson (2471100) V,observationAbout,wikidataId/Q141445
+Hughes Brook (1005028) T,#IgnoreRow,True
+Humber Arm South (1005020) T,observationAbout,wikidataId/Q5939776
+Hunter River (1102043) RM,observationAbout,wikidataId/Q3143359
+Ibex Valley (6001055) HAM,#IgnoreRow,True
+Indian Brook 14 (1208014) IRI,observationAbout,wikidataId/Q14875690
+Ingersoll (3532018) T,observationAbout,wikidataId/Q594706
+"Ingersoll (CA), Ont.",#IgnoreRow,True
+Innisfil (3543017) T,#IgnoreRow,True
+Irishtown-Summerside (1005030) T,#IgnoreRow,True
+Irricana (4806022) T,observationAbout,wikidataId/Q2003126
+Isidore's Ranch 4 (5901802) IRI,#IgnoreRow,True
+Itaska Beach (4811022) SV,observationAbout,wikidataId/Q14874825
+Janvier 194 (4816817) IRI,observationAbout,wikidataId/Q6156180
+Jarvis Bay (4808005) SV,observationAbout,wikidataId/Q6161210
+Johnstons River (1102015) FD,#IgnoreRow,True
+Johny Sticks 2 (5941811) IRI,#IgnoreRow,True
+Joliette (2461025) V,observationAbout,wikidataId/Q141760
+"Joliette (CA), Que.",#IgnoreRow,True
+Juan de Fuca (Part 1) (5917054) RDA,#IgnoreRow,True
+Kahnawake (2467802) IRI,observationAbout,wikidataId/Q1014394
+Kamloops (5933042) CY,observationAbout,wikidataId/Q473209
+"Kamloops (CMA), B.C.",#IgnoreRow,True
+Kamloops 1 (5933880) IRI,#IgnoreRow,True
+Kanesatake (2472802) S-É,observationAbout,wikidataId/Q3192630
+Kapasiwin (4811044) SV,observationAbout,wikidataId/Q6366493
+Katzie 1 (5915830) IRI,#IgnoreRow,True
+Katzie 2 (5915813) IRI,#IgnoreRow,True
+Kawartha Lakes (3516010) CY,observationAbout,wikidataId/Q384755
+"Kawartha Lakes (CA), Ont.",#IgnoreRow,True
+Kelowna (5935010) CY,observationAbout,wikidataId/Q232226
+"Kelowna (CMA), B.C.",#IgnoreRow,True
+Kenora (3560010) CY,observationAbout,wikidataId/Q993714
+"Kenora (CA), Ont.",#IgnoreRow,True
+Kent (5909032) DM,#IgnoreRow,True
+Kentville (1207012) T,observationAbout,wikidataId/Q992432
+"Kentville (CA), N.S.",#IgnoreRow,True
+Kil-pah-las 3 (5919808) IRI,#IgnoreRow,True
+King (3519049) TP,observationAbout,wikidataId/Q483483
+"Kings, Subd. B (1207016) SC",#IgnoreRow,True
+"Kings, Subd. C (1207011) SC",#IgnoreRow,True
+Kingsclear (1310018) P,observationAbout,wikidataId/Q3365833
+Kingsclear 6 (1310019) IRI,#IgnoreRow,True
+Kingston (1102022) RM,#IgnoreRow,True
+Kingston (1305014) P,observationAbout,wikidataId/Q6413572
+Kingston (3510010) CY,observationAbout,wikidataId/Q202973
+"Kingston (CMA), Ont.",#IgnoreRow,True
+Kingsville (3537013) T,observationAbout,wikidataId/Q3085326
+Kirkland (2466102) V,observationAbout,wikidataId/Q142117
+Kitchener (3530013) CY,observationAbout,wikidataId/Q200166
+"Kitchener - Cambridge - Waterloo (CMA), Ont.",#IgnoreRow,True
+Kitimat-Stikine C (Part 1) (5949013) RDA,#IgnoreRow,True
+Kitimat-Stikine E (5949018) RDA,#IgnoreRow,True
+Kitselas 1 (5949844) IRI,#IgnoreRow,True
+Kitsumkaylum 1 (5949804) IRI,#IgnoreRow,True
+Klehkoot 2 (5923822) IRI,#IgnoreRow,True
+Kluskus 1 (5941833) IRI,#IgnoreRow,True
+Kootenay Boundary A (5905026) RDA,#IgnoreRow,True
+Kowtain 17 (5931802) IRI,#IgnoreRow,True
+Kshish 4 (5949805) IRI,#IgnoreRow,True
+Kulspai 6 (5949807) IRI,#IgnoreRow,True
+Kwawkwawapilt 6 (5909821) IRI,#IgnoreRow,True
+L'Ancienne-Lorette (2423057) V,observationAbout,wikidataId/Q142218
+L'Ange-Gardien (2421040) MÉ,observationAbout,wikidataId/Q3201973
+L'Ange-Gardien (2482005) MÉ,observationAbout,wikidataId/Q3201975
+L'Assomption (2460028) V,observationAbout,wikidataId/Q141754
+L'Avenir (2449025) MÉ,observationAbout,wikidataId/Q3202686
+L'Épiphanie (2460037) V,#IgnoreRow,True
+L'Île-Cadieux (2471095) V,observationAbout,wikidataId/Q141399
+L'Île-Dorval (2466092) V,observationAbout,wikidataId/Q141957
+L'Île-Perrot (2471060) V,observationAbout,wikidataId/Q141590
+La Prairie (2467015) V,observationAbout,wikidataId/Q142092
+La Pêche (2482035) MÉ,observationAbout,wikidataId/Q673116
+LaSalle (3537034) T,observationAbout,wikidataId/Q1435042
+Lac Simon (2489804) IRI,observationAbout,wikidataId/Q2812254
+Lac-Beauport (2422040) MÉ,observationAbout,wikidataId/Q3214587
+Lac-Delage (2422030) V,observationAbout,wikidataId/Q142255
+Lac-Saint-Joseph (2422015) V,observationAbout,wikidataId/Q141426
+Lachute (2476020) V,observationAbout,wikidataId/Q142250
+"Lachute (CA), Que.",#IgnoreRow,True
+Lacombe (4808031) CY,observationAbout,wikidataId/Q1743833
+"Lacombe (CA), Alta.",#IgnoreRow,True
+Ladysmith (5919021) T,#IgnoreRow,True
+"Ladysmith (CA), B.C.",#IgnoreRow,True
+Laird (3557011) TP,observationAbout,wikidataId/Q11752629
+Lajord No. 128 (4706011) RM,#IgnoreRow,True
+Lake Country (5935016) DM,#IgnoreRow,True
+Lake Laberge 1 (6001010) SG,#IgnoreRow,True
+Lakeshore (3537064) T,observationAbout,wikidataId/Q1801144
+Lakeview (4811042) SV,observationAbout,wikidataId/Q14874840
+Langford (5917044) CY,observationAbout,wikidataId/Q115788
+Langham (4711067) T,#IgnoreRow,True
+Langley (5915001) DM,observationAbout,wikidataId/Q1805330
+Langley (5915002) CY,observationAbout,wikidataId/Q923243
+Langley 2 (5909856) IRI,#IgnoreRow,True
+Lantzville (5921008) DM,#IgnoreRow,True
+Larouche (2494265) MÉ,observationAbout,wikidataId/Q259690
+Lashburn (4717024) T,#IgnoreRow,True
+Laurentian Valley (3547075) TP,observationAbout,wikidataId/Q4116605
+Laval (2465005) V,observationAbout,wikidataId/Q141810
+Lavaltrie (2452007) V,observationAbout,wikidataId/Q141403
+Lax Kw'alaams 1 (5947809) IRI,#IgnoreRow,True
+Leamington (3537003) MU,observationAbout,wikidataId/Q2566566
+Leduc (4811016) CY,observationAbout,wikidataId/Q1207513
+Leduc County (4811012) MD,observationAbout,wikidataId/Q6512776
+Lefebvre (2449020) MÉ,observationAbout,wikidataId/Q3229005
+Legal (4811069) T,observationAbout,wikidataId/Q2210557
+Lepreau (1302008) P,#IgnoreRow,True
+Les Coteaux (2471033) MÉ,observationAbout,wikidataId/Q3231806
+Les Cèdres (2471050) MÉ,observationAbout,wikidataId/Q3231881
+Lethbridge (4802012) CY,observationAbout,wikidataId/Q270887
+"Lethbridge (CMA), Alta.",#IgnoreRow,True
+Lethbridge County (4802011) MD,observationAbout,wikidataId/Q6533301
+Lincoln (1303008) P,observationAbout,wikidataId/Q6550896
+Lincoln (3526057) T,observationAbout,wikidataId/Q448259
+Linkletter (1103023) RM,#IgnoreRow,True
+Lions Bay (5915065) VL,observationAbout,wikidataId/Q1827312
+Listuguj (2406804) IRI,observationAbout,wikidataId/Q644468
+Little Springs (5941885) IRI,#IgnoreRow,True
+"Lloydminster (CA), Alta./Sask.",#IgnoreRow,True
+Lloydminster (Part) (4717029) CY,#IgnoreRow,True
+Lloydminster (Part) (4810039) CY,#IgnoreRow,True
+Lochaber (2480055) CT,observationAbout,wikidataId/Q3257723
+Lochaber-Partie-Ouest (2480060) CT,observationAbout,wikidataId/Q3257720
+Logan Lake (5933035) DM,#IgnoreRow,True
+Logy Bay-Middle Cove-Outer Cove (1001511) T,observationAbout,wikidataId/Q6667902
+London (3539036) CY,observationAbout,wikidataId/Q92561
+"London (CMA), Ont.",#IgnoreRow,True
+Longueuil (2458227) V,observationAbout,wikidataId/Q139398
+Lorraine (2473025) V,observationAbout,wikidataId/Q142162
+Loyalist (3511005) TP,#IgnoreRow,True
+Lumsden (4706056) T,#IgnoreRow,True
+Lumsden Beach (4706057) RV,#IgnoreRow,True
+Lumsden No. 189 (4706053) RM,#IgnoreRow,True
+Lyacksun 3 (5919813) IRI,#IgnoreRow,True
+Léry (2467055) V,observationAbout,wikidataId/Q141406
+Lévis (2425213) V,observationAbout,wikidataId/Q139208
+Macdonald (4610035) RM,#IgnoreRow,True
+"Macdonald, Meredith and Aberdeen Additional (3557051) TP",observationAbout,wikidataId/Q11765201
+Macpherson-Grizzly Valley (6001059) NO,#IgnoreRow,True
+Magog (2445072) V,observationAbout,wikidataId/Q142004
+Maliotenam (2497804) IRI,observationAbout,wikidataId/Q3282131
+Manners Sutton (1310004) P,observationAbout,wikidataId/Q3365844
+Maple Ridge (5915075) CY,observationAbout,wikidataId/Q16740
+Markham (3519036) CY,observationAbout,wikidataId/Q44016
+Markstay-Warren (3552013) MU,observationAbout,wikidataId/Q4859943
+Marsh Lake (6001058) NO,#IgnoreRow,True
+Marshall (4717026) T,#IgnoreRow,True
+Martensville (4711070) CY,observationAbout,wikidataId/Q1904137
+Mascouche (2464015) V,observationAbout,wikidataId/Q141748
+Massey Drive (1005017) T,#IgnoreRow,True
+Matane (2408053) V,observationAbout,wikidataId/Q142029
+"Matane (CA), Que.",#IgnoreRow,True
+Matsqui 4 (5915825) IRI,#IgnoreRow,True
+Matsqui Main 2 (5909878) IRI,#IgnoreRow,True
+Maugerville (1303016) P,observationAbout,wikidataId/Q6792357
+Mayo (2480065) MÉ,observationAbout,wikidataId/Q3302996
+McMasterville (2457025) MÉ,observationAbout,wikidataId/Q3303708
+McMillan Island 6 (5915816) IRI,#IgnoreRow,True
+McNab/Braeside (3547003) TP,#IgnoreRow,True
+McTaggart (4702048) VL,#IgnoreRow,True
+Meacham (4711078) VL,#IgnoreRow,True
+Meadows (1005025) T,#IgnoreRow,True
+Meath Park (4715092) VL,#IgnoreRow,True
+Medicine Hat (4801006) CY,observationAbout,wikidataId/Q368241
+"Medicine Hat (CA), Alta.",#IgnoreRow,True
+Membertou 28B (1217008) IRI,#IgnoreRow,True
+Memramcook (1307013) VL,#IgnoreRow,True
+Mercier (2467045) V,observationAbout,wikidataId/Q142192
+Merigomish Harbour 31 (1212023) IRI,#IgnoreRow,True
+Metchosin (5917042) DM,observationAbout,wikidataId/Q6823363
+Metro Vancouver A (5915020) RDA,observationAbout,wikidataId/Q1544444
+Middlesex Centre (3539033) MU,observationAbout,wikidataId/Q4116626
+Midland (3543074) T,observationAbout,wikidataId/Q1931996
+"Midland (CA), Ont.",#IgnoreRow,True
+Millbrook 27 (1210003) IRI,#IgnoreRow,True
+Milton (3524009) T,observationAbout,wikidataId/Q425057
+Miltonvale Park (1102040) RM,#IgnoreRow,True
+Mirabel (2474005) V,observationAbout,wikidataId/Q141921
+Miramichi (1309050) C,observationAbout,wikidataId/Q1348913
+"Miramichi (CA), N.B.",#IgnoreRow,True
+Miscouche (1103024) RM,observationAbout,wikidataId/Q3316236
+Miscouche (1103040) FD,#IgnoreRow,True
+Mission (5909056) DM,#IgnoreRow,True
+Mission 1 (5915807) IRI,#IgnoreRow,True
+Mississauga (3521005) CY,observationAbout,wikidataId/Q50816
+Mississippi Mills (3509030) T,observationAbout,wikidataId/Q2981802
+Moncton (1307019) P,observationAbout,wikidataId/Q3365851
+Moncton (1307022) C,observationAbout,wikidataId/Q457334
+"Moncton (CMA), N.B.",#IgnoreRow,True
+Mono (3522012) T,#IgnoreRow,True
+Mont-Royal (2466072) V,observationAbout,wikidataId/Q139088
+Mont-Saint-Hilaire (2457035) V,observationAbout,wikidataId/Q139406
+Montrose (5905009) VL,#IgnoreRow,True
+Montréal (2466023) V,observationAbout,wikidataId/Q340
+"Montréal (CMA), Que.",#IgnoreRow,True
+Montréal-Est (2466007) V,observationAbout,wikidataId/Q139040
+Montréal-Ouest (2466047) V,observationAbout,wikidataId/Q138997
+Moose Jaw (4707039) CY,observationAbout,wikidataId/Q1019496
+"Moose Jaw (CA), Sask.",#IgnoreRow,True
+Moose Jaw No. 161 (4707038) RM,#IgnoreRow,True
+Moravian 47 (3536029) IRI,observationAbout,wikidataId/Q6909334
+Morden (4603053) CY,#IgnoreRow,True
+Morinville (4811068) T,observationAbout,wikidataId/Q1746026
+Mount Moriah (1005033) T,#IgnoreRow,True
+Mount Pearl (1001542) CY,observationAbout,wikidataId/Q1950648
+Mount Stewart (1102059) RM,observationAbout,wikidataId/Q3326040
+Mt. Lorne (6001044) HAM,#IgnoreRow,True
+Mulgrave-et-Derry (2480085) MÉ,observationAbout,wikidataId/Q3327597
+Musquash (1301016) P,observationAbout,wikidataId/Q3365852
+Musqueam 2 (5915803) IRI,#IgnoreRow,True
+Musqueam 4 (5915810) IRI,#IgnoreRow,True
+Nanaimo (5921007) CY,#IgnoreRow,True
+"Nanaimo (CMA), B.C.",#IgnoreRow,True
+Nanaimo A (5921010) RDA,#IgnoreRow,True
+Nanaimo C (5921016) RDA,#IgnoreRow,True
+Nanaimo G (5921034) RDA,#IgnoreRow,True
+Nanaimo River (5921807) IRI,#IgnoreRow,True
+Nanaimo Town 1 (5921804) IRI,#IgnoreRow,True
+Nanoose (5921805) IRI,#IgnoreRow,True
+Nazco 20 (5941837) IRI,#IgnoreRow,True
+Neebing (3558001) MU,observationAbout,wikidataId/Q4859501
+Nelson (1309014) P,observationAbout,wikidataId/Q3365853
+Nelson (5903015) CY,observationAbout,wikidataId/Q1779015
+"Nelson (CA), B.C.",#IgnoreRow,True
+Nenagwas 12 (5924843) IRI,#IgnoreRow,True
+Neuville (2434007) V,observationAbout,wikidataId/Q142490
+New Glasgow (1102017) FD,#IgnoreRow,True
+New Glasgow (1212014) T,observationAbout,wikidataId/Q286048
+"New Glasgow (CA), N.S.",#IgnoreRow,True
+New Maryland (1310001) P,observationAbout,wikidataId/Q3365856
+New Maryland (1310002) VL,observationAbout,wikidataId/Q1383701
+New Songhees 1A (5917812) IRI,#IgnoreRow,True
+New Tecumseth (3543007) T,#IgnoreRow,True
+New Westminster (5915029) CY,observationAbout,wikidataId/Q876122
+Newcastle (1309031) P,observationAbout,wikidataId/Q3365857
+Newmarket (3519048) T,observationAbout,wikidataId/Q52999
+Niagara Falls (3526043) CY,observationAbout,wikidataId/Q274120
+Niagara-on-the-Lake (3526047) T,observationAbout,wikidataId/Q448372
+Nigadoo (1315037) VL,observationAbout,wikidataId/Q3341338
+Nipissing (3549071) TP,observationAbout,wikidataId/Q7039509
+"Nipissing, Unorganized, North Part (3548094) NO",observationAbout,wikidataId/Q7897250
+Niverville (4602046) T,observationAbout,wikidataId/Q277461
+Nobleford (4802014) T,observationAbout,wikidataId/Q7045829
+"Norfolk (CA), Ont.",#IgnoreRow,True
+Norfolk County (3528052) CY,observationAbout,wikidataId/Q385229
+Norglenwold (4808013) SV,observationAbout,wikidataId/Q7051187
+North Battleford (4716027) CN,#IgnoreRow,True
+North Battleford (4716029) CY,observationAbout,wikidataId/Q999654
+"North Battleford (CA), Sask.",#IgnoreRow,True
+North Bay (3548044) CY,observationAbout,wikidataId/Q912253
+"North Bay (CA), Ont.",#IgnoreRow,True
+North Coast A (5947016) RDA,observationAbout,wikidataId/Q277291
+North Cowichan (5919008) DM,#IgnoreRow,True
+North Dumfries (3530004) TP,observationAbout,wikidataId/Q252504
+North Grenville (3507065) MU,observationAbout,wikidataId/Q3492577
+North Hatley (2445050) VL,observationAbout,wikidataId/Q3344131
+North Okanagan B (5937017) RDA,#IgnoreRow,True
+North Okanagan C (5937021) RDA,#IgnoreRow,True
+North Saanich (5917005) DM,observationAbout,wikidataId/Q2000769
+North Shore (1102067) RM,#IgnoreRow,True
+North Shore (1102073) FD,#IgnoreRow,True
+North Vancouver (5915046) DM,observationAbout,wikidataId/Q2000891
+North Vancouver (5915051) CY,observationAbout,wikidataId/Q1001626
+Northesk (1309028) P,observationAbout,wikidataId/Q3365863
+Norton (1305016) P,observationAbout,wikidataId/Q199321
+Notre-Dame-de-l'Île-Perrot (2471065) V,observationAbout,wikidataId/Q141389
+Notre-Dame-de-la-Salette (2482010) MÉ,observationAbout,wikidataId/Q3344617
+Notre-Dame-des-Anges (2423015) PE,observationAbout,wikidataId/Q3344620
+Notre-Dame-des-Prairies (2461030) V,observationAbout,wikidataId/Q142475
+Notre-Dame-du-Bon-Conseil (2449075) VL,observationAbout,wikidataId/Q3344651
+Notre-Dame-du-Bon-Conseil (2449080) PE,observationAbout,wikidataId/Q3344650
+Notre-Dame-du-Portage (2412080) MÉ,observationAbout,wikidataId/Q3344656
+O'Connor (3558016) TP,observationAbout,wikidataId/Q7071727
+Oak Bay (5917030) DM,observationAbout,wikidataId/Q7073424
+Oakville (3524001) T,observationAbout,wikidataId/Q424984
+Oka (2472032) MÉ,observationAbout,wikidataId/Q729382
+Okanagan (Part) 1 (5937801) IRI,#IgnoreRow,True
+Okanagan-Similkameen D (5907047) RDA,#IgnoreRow,True
+Okanagan-Similkameen F (5907051) RDA,#IgnoreRow,True
+Okanagan-Similkameen I (5907048) RDA,#IgnoreRow,True
+Okotoks (4806012) T,observationAbout,wikidataId/Q1363726
+"Okotoks (CA), Alta.",#IgnoreRow,True
+Old Fort 217 (4816849) IRI,observationAbout,wikidataId/Q14874884
+Oliver Paipoonge (3558011) MU,observationAbout,wikidataId/Q4859916
+Orangeville (3522014) T,observationAbout,wikidataId/Q2470087
+Orford (2445115) CT,observationAbout,wikidataId/Q3355910
+Orillia (3543052) CY,#IgnoreRow,True
+"Orillia (CA), Ont.",#IgnoreRow,True
+Orkney No. 244 (4709011) RM,#IgnoreRow,True
+Oshawa (3518013) CY,observationAbout,wikidataId/Q211867
+"Oshawa (CMA), Ont.",#IgnoreRow,True
+Osler (4711075) T,#IgnoreRow,True
+Otonabee-South Monaghan (3515005) TP,#IgnoreRow,True
+Ottawa (3506008) CV,observationAbout,wikidataId/Q1930
+"Ottawa - Gatineau (CMA), Ont./Que.",#IgnoreRow,True
+Otterburn Park (2457030) V,observationAbout,wikidataId/Q141623
+Owen Sound (3542059) CY,observationAbout,wikidataId/Q1017735
+"Owen Sound (CA), Ont.",#IgnoreRow,True
+Oyster Bay 12 (5919816) IRI,#IgnoreRow,True
+Pabineau 11 (1315010) IRI,#IgnoreRow,True
+Paradise (1001517) T,observationAbout,wikidataId/Q7134185
+Parkland County (4811034) MD,observationAbout,wikidataId/Q7138563
+Parksville (5921018) CY,observationAbout,wikidataId/Q1438931
+"Parksville (CA), B.C.",#IgnoreRow,True
+Pasadena (1005012) T,observationAbout,wikidataId/Q3367223
+Peace River C (5955042) RDA,#IgnoreRow,True
+Peace River D (5955021) RDA,#IgnoreRow,True
+Peachland (5935018) DM,observationAbout,wikidataId/Q1718869
+Pelham (3526028) T,observationAbout,wikidataId/Q448041
+Pembroke (3547064) CY,#IgnoreRow,True
+"Pembroke (CA), Ont.",#IgnoreRow,True
+Penelakut Island 7 (5919809) IRI,#IgnoreRow,True
+Penetanguishene (3543072) T,#IgnoreRow,True
+Pense (4706023) T,#IgnoreRow,True
+Pense No. 160 (4706021) RM,#IgnoreRow,True
+Penticton (5907041) CY,observationAbout,wikidataId/Q935519
+"Penticton (CA), B.C.",#IgnoreRow,True
+Penticton 1 (5907803) IRI,#IgnoreRow,True
+Petawawa (3547076) T,observationAbout,wikidataId/Q1455440
+"Petawawa (CA), Ont.",#IgnoreRow,True
+Peterborough (3515014) CY,observationAbout,wikidataId/Q776930
+"Peterborough (CMA), Ont.",#IgnoreRow,True
+Petersville (1304001) P,observationAbout,wikidataId/Q3365871
+Petit-Rocher (1315014) VL,observationAbout,wikidataId/Q3377053
+Petty Harbour-Maddox Cove (1001551) T,observationAbout,wikidataId/Q3377717
+Pickering (3518001) CY,observationAbout,wikidataId/Q386626
+"Pictou, Subd. B (1212006) SC",#IgnoreRow,True
+"Pictou, Subd. C (1212011) SC",#IgnoreRow,True
+Picture Butte (4802018) T,observationAbout,wikidataId/Q4464252
+Pikogan (2488802) IRI,observationAbout,wikidataId/Q2855336
+Pilot Butte (4706031) T,#IgnoreRow,True
+Pincourt (2471070) V,observationAbout,wikidataId/Q141551
+Pitt Meadows (5915070) CY,#IgnoreRow,True
+Plympton-Wyoming (3538035) T,observationAbout,wikidataId/Q3267294
+Point Alison (4811041) SV,observationAbout,wikidataId/Q7207933
+Point Edward (3538031) VL,observationAbout,wikidataId/Q4859882
+Pointe-Calumet (2472020) MÉ,observationAbout,wikidataId/Q509329
+Pointe-Claire (2466097) V,observationAbout,wikidataId/Q142271
+Pointe-Lebel (2496025) VL,observationAbout,wikidataId/Q3393500
+Pointe-Verte (1315013) VL,observationAbout,wikidataId/Q3393507
+Pointe-aux-Outardes (2496030) VL,observationAbout,wikidataId/Q3393511
+Pointe-des-Cascades (2471055) VL,observationAbout,wikidataId/Q3393522
+Pointe-à-la-Croix (2406030) MÉ,observationAbout,wikidataId/Q3393534
+Pontiac (2482030) MÉ,observationAbout,wikidataId/Q3397733
+Popkum 1 (5909844) IRI,#IgnoreRow,True
+Port Alberni (5923008) CY,observationAbout,wikidataId/Q1022127
+"Port Alberni (CA), B.C.",#IgnoreRow,True
+Port Colborne (3526011) CY,observationAbout,wikidataId/Q424704
+Port Coquitlam (5915039) CY,observationAbout,wikidataId/Q643326
+Port Edward (5947007) DM,#IgnoreRow,True
+Port Hope (3514020) MU,observationAbout,wikidataId/Q613870
+"Port Hope (CA), Ont.",#IgnoreRow,True
+Port Moody (5915043) CY,observationAbout,wikidataId/Q776261
+Portage la Prairie (4609029) CY,observationAbout,wikidataId/Q1017624
+"Portage la Prairie (CA), Man.",#IgnoreRow,True
+Portier Pass 5 (5919817) IRI,#IgnoreRow,True
+Portugal Cove-St. Philip's (1001504) T,observationAbout,wikidataId/Q7232537
+Pouce Coupe (5955005) VL,#IgnoreRow,True
+Pouch Cove (1001505) T,observationAbout,wikidataId/Q3400169
+Poundmaker 114-18B (4712870) IRI,#IgnoreRow,True
+Powassan (3549060) MU,observationAbout,wikidataId/Q280702
+Powell River (5927008) CY,#IgnoreRow,True
+"Powell River (CA), B.C.",#IgnoreRow,True
+Priest's Valley 6 (5937803) IRI,#IgnoreRow,True
+Prince (3557066) TP,observationAbout,wikidataId/Q590786
+Prince Albert (4715066) CY,observationAbout,wikidataId/Q671431
+"Prince Albert (CA), Sask.",#IgnoreRow,True
+Prince Albert No. 461 (4715064) RM,#IgnoreRow,True
+Prince George (5953023) CY,observationAbout,wikidataId/Q590205
+"Prince George (CA), B.C.",#IgnoreRow,True
+Prince Rupert (5947012) CY,observationAbout,wikidataId/Q1015639
+"Prince Rupert (CA), B.C.",#IgnoreRow,True
+Prince William (1310016) P,observationAbout,wikidataId/Q3365874
+Puslinch (3523001) TP,#IgnoreRow,True
+Qualicum Beach (5921023) T,#IgnoreRow,True
+Queensbury (1310021) P,observationAbout,wikidataId/Q3365876
+Quesnel (5941013) CY,observationAbout,wikidataId/Q2067514
+"Quesnel (CA), B.C.",#IgnoreRow,True
+Quesnel 1 (5941809) IRI,#IgnoreRow,True
+Quinsam 12 (5924812) IRI,#IgnoreRow,True
+Quinte West (3512015) CY,observationAbout,wikidataId/Q3276918
+Quispamsis (1305057) TV,observationAbout,wikidataId/Q964313
+Québec (2423027) V,observationAbout,wikidataId/Q2145
+"Québec (CMA), Que.",#IgnoreRow,True
+Ragueneau (2496040) PE,observationAbout,wikidataId/Q3417536
+Rankin Location 15D (3557075) IRI,observationAbout,wikidataId/Q7293266
+Red Bank 4 (1309023) IRI,#IgnoreRow,True
+Red Deer (4808011) CY,observationAbout,wikidataId/Q23025
+"Red Deer (CMA), Alta.",#IgnoreRow,True
+Redcliff (4801018) T,observationAbout,wikidataId/Q1013015
+Redwater (4811065) T,observationAbout,wikidataId/Q6593705
+Regina (4706027) CY,observationAbout,wikidataId/Q2123
+"Regina (CMA), Sask.",#IgnoreRow,True
+Regina Beach (4706058) T,#IgnoreRow,True
+Repentigny (2460013) V,observationAbout,wikidataId/Q139427
+Rhein (4709009) VL,observationAbout,wikidataId/Q2147542
+Richelieu (2455057) V,observationAbout,wikidataId/Q142306
+Richmond (5915015) CY,#IgnoreRow,True
+Richmond Hill (3519038) T,observationAbout,wikidataId/Q52998
+Rimouski (2410043) V,observationAbout,wikidataId/Q1336
+"Rimouski (CA), Que.",#IgnoreRow,True
+Ritchot (4602075) RM,observationAbout,wikidataId/Q1661040
+Riverview (1306020) TV,observationAbout,wikidataId/Q2532991
+Rivière-Verte (1313014) VL,observationAbout,wikidataId/Q3433593
+Rivière-Verte (1313015) P,observationAbout,wikidataId/Q3365882
+Rivière-du-Loup (2412072) V,observationAbout,wikidataId/Q142024
+"Rivière-du-Loup (CA), Que.",#IgnoreRow,True
+Rocky Point 3 (1102030) IRI,observationAbout,wikidataId/Q3438032
+Rocky View County (4806014) MD,observationAbout,wikidataId/Q7356039
+Rosemère (2473020) V,observationAbout,wikidataId/Q142196
+Rosser (4614015) RM,#IgnoreRow,True
+Rothesay (1305008) P,observationAbout,wikidataId/Q3365880
+Rothesay (1305045) TV,observationAbout,wikidataId/Q240864
+Rouyn-Noranda (2486042) V,observationAbout,wikidataId/Q141804
+"Rouyn-Noranda (CA), Que.",#IgnoreRow,True
+Roxton Pond (2447047) MÉ,observationAbout,wikidataId/Q3445717
+Russell (3502048) TP,observationAbout,wikidataId/Q2981843
+S1/2 Tsimpsean 2 (5947810) IRI,#IgnoreRow,True
+Saanich (5917021) DM,observationAbout,wikidataId/Q179553
+Saguenay (2494068) V,observationAbout,wikidataId/Q139229
+"Saguenay (CMA), Que.",#IgnoreRow,True
+Sahhaltkum 4 (5933884) IRI,#IgnoreRow,True
+Saint John (1301006) C,observationAbout,wikidataId/Q203403
+"Saint John (CMA), N.B.",#IgnoreRow,True
+Saint Martins (1301001) P,observationAbout,wikidataId/Q3365907
+Saint Marys (1310031) P,observationAbout,wikidataId/Q3365737
+Saint-Adelme (2408030) PE,observationAbout,wikidataId/Q3461666
+Saint-Adrien-d'Irlande (2431095) MÉ,observationAbout,wikidataId/Q3461672
+Saint-Alphonse-de-Granby (2447010) MÉ,observationAbout,wikidataId/Q530545
+Saint-Amable (2459015) V,observationAbout,wikidataId/Q3461735
+Saint-Anaclet-de-Lessard (2410030) PE,observationAbout,wikidataId/Q3461751
+Saint-Antoine-de-Tilly (2433095) MÉ,observationAbout,wikidataId/Q932023
+Saint-Antonin (2412015) MÉ,observationAbout,wikidataId/Q528471
+Saint-Apollinaire (2433090) MÉ,observationAbout,wikidataId/Q3461800
+Saint-Arsène (2412065) PE,observationAbout,wikidataId/Q3461807
+Saint-Augustin-de-Desmaures (2423072) V,observationAbout,wikidataId/Q142102
+Saint-Basile (1313018) P,#IgnoreRow,True
+Saint-Basile-le-Grand (2457020) V,observationAbout,wikidataId/Q142170
+Saint-Bonaventure (2449125) MÉ,observationAbout,wikidataId/Q3461897
+Saint-Bruno-de-Montarville (2458037) V,observationAbout,wikidataId/Q142333
+Saint-Charles-Borromée (2461035) V,observationAbout,wikidataId/Q2642428
+Saint-Charles-de-Bourget (2494260) MÉ,observationAbout,wikidataId/Q3461951
+Saint-Christophe-d'Arthabaska (2439060) PE,observationAbout,wikidataId/Q3461962
+Saint-Colomban (2475005) V,observationAbout,wikidataId/Q141584
+Saint-Constant (2467035) V,observationAbout,wikidataId/Q142064
+Saint-Cyrille-de-Wendover (2449070) MÉ,observationAbout,wikidataId/Q3462025
+Saint-David-de-Falardeau (2494245) MÉ,observationAbout,wikidataId/Q3462046
+Saint-Denis-de-Brompton (2442025) MÉ,observationAbout,wikidataId/Q280393
+Saint-Dominique (2454060) MÉ,observationAbout,wikidataId/Q3462095
+Saint-Dominique-du-Rosaire (2488065) MÉ,observationAbout,wikidataId/Q3462096
+Saint-Edmond-de-Grantham (2449100) PE,observationAbout,wikidataId/Q3462103
+Saint-Eugène-d'Argentenay (2492065) MÉ,observationAbout,wikidataId/Q3462125
+Saint-Eustache (2472005) V,observationAbout,wikidataId/Q141505
+Saint-François-de-l'Île-d'Orléans (2420005) MÉ,observationAbout,wikidataId/Q3462178
+Saint-Fulgence (2494235) MÉ,observationAbout,wikidataId/Q3462193
+Saint-Félix-d'Otis (2494225) MÉ,observationAbout,wikidataId/Q3462197
+Saint-Félix-de-Dalquier (2488060) MÉ,observationAbout,wikidataId/Q3462198
+Saint-Gabriel-de-Valcartier (2422025) MÉ,observationAbout,wikidataId/Q3462213
+Saint-Georges (2429073) V,observationAbout,wikidataId/Q143227
+"Saint-Georges (CA), Que.",#IgnoreRow,True
+Saint-Germain-de-Grantham (2449048) MÉ,observationAbout,wikidataId/Q3462266
+Saint-Henri (2419068) MÉ,observationAbout,wikidataId/Q3462390
+Saint-Honoré (2494240) V,observationAbout,wikidataId/Q3462423
+Saint-Hyacinthe (2454048) V,observationAbout,wikidataId/Q141873
+"Saint-Hyacinthe (CA), Que.",#IgnoreRow,True
+Saint-Isidore (2467040) PE,observationAbout,wikidataId/Q3462465
+Saint-Jacques (1313024) P,#IgnoreRow,True
+Saint-Jean-de-l'Île-d'Orléans (2420015) MÉ,observationAbout,wikidataId/Q3462540
+Saint-Jean-sur-Richelieu (2456083) V,observationAbout,wikidataId/Q141977
+Saint-Joseph (1313022) P,#IgnoreRow,True
+Saint-Joseph-de-Coleraine (2431045) MÉ,observationAbout,wikidataId/Q3462601
+Saint-Joseph-de-Sorel (2453050) V,observationAbout,wikidataId/Q142456
+Saint-Joseph-du-Lac (2472025) MÉ,observationAbout,wikidataId/Q3462609
+Saint-Jérôme (2475017) V,observationAbout,wikidataId/Q141724
+Saint-Lambert (2458012) V,observationAbout,wikidataId/Q139437
+Saint-Lambert-de-Lauzon (2426070) MÉ,observationAbout,wikidataId/Q3462681
+Saint-Laurent-de-l'Île-d'Orléans (2420020) MÉ,observationAbout,wikidataId/Q3462701
+Saint-Lazare (2471105) V,observationAbout,wikidataId/Q142426
+Saint-Lin--Laurentides (2463048) V,observationAbout,wikidataId/Q142072
+Saint-Luc-de-Vincennes (2437225) MÉ,observationAbout,wikidataId/Q3462795
+Saint-Lucien (2449030) MÉ,observationAbout,wikidataId/Q3462798
+Saint-Léandre (2408065) PE,observationAbout,wikidataId/Q3462803
+Saint-Majorique-de-Grantham (2449095) PE,observationAbout,wikidataId/Q3462847
+Saint-Marc-de-Figuery (2488040) PE,observationAbout,wikidataId/Q3462855
+Saint-Mathias-sur-Richelieu (2455065) MÉ,observationAbout,wikidataId/Q3462939
+Saint-Mathieu (2467005) MÉ,observationAbout,wikidataId/Q3462944
+Saint-Mathieu-d'Harricana (2488050) MÉ,observationAbout,wikidataId/Q3462940
+Saint-Mathieu-de-Beloeil (2457045) MÉ,observationAbout,wikidataId/Q3462941
+Saint-Maurice (2437230) PE,observationAbout,wikidataId/Q3462962
+Saint-Modeste (2412020) MÉ,observationAbout,wikidataId/Q3463017
+Saint-Narcisse-de-Rimouski (2410015) PE,observationAbout,wikidataId/Q3463035
+Saint-Paul (1308008) P,observationAbout,wikidataId/Q7400773
+Saint-Paul (2461005) MÉ,observationAbout,wikidataId/Q516388
+Saint-Paul-d'Abbotsford (2455015) MÉ,observationAbout,wikidataId/Q3463104
+Saint-Philibert (2429065) MÉ,observationAbout,wikidataId/Q3463142
+Saint-Philippe (2467010) V,observationAbout,wikidataId/Q3463156
+Saint-Pierre-de-l'Île-d'Orléans (2420025) MÉ,observationAbout,wikidataId/Q3463183
+Saint-Placide (2472043) MÉ,observationAbout,wikidataId/Q3463215
+Saint-René (2429050) PE,observationAbout,wikidataId/Q3463269
+Saint-René-de-Matane (2408035) MÉ,observationAbout,wikidataId/Q3463270
+Saint-Roch-de-l'Achigan (2463035) MÉ,observationAbout,wikidataId/Q3463283
+Saint-Simon-les-Mines (2429125) MÉ,observationAbout,wikidataId/Q3463377
+Saint-Sulpice (2460020) PE,observationAbout,wikidataId/Q3463407
+Saint-Ulric (2408073) MÉ,observationAbout,wikidataId/Q3463458
+Saint-Valère (2439135) MÉ,observationAbout,wikidataId/Q3463473
+Saint-Valérien (2410060) PE,observationAbout,wikidataId/Q3463479
+Saint-Zotique (2471025) MÉ,observationAbout,wikidataId/Q3463534
+Sainte-Agathe-des-Monts (2478032) V,observationAbout,wikidataId/Q141738
+"Sainte-Agathe-des-Monts (CA), Que.",#IgnoreRow,True
+Sainte-Anne-de-Bellevue (2466117) V,observationAbout,wikidataId/Q141500
+Sainte-Anne-de-Sorel (2453065) MÉ,observationAbout,wikidataId/Q540163
+Sainte-Anne-des-Plaines (2473035) V,observationAbout,wikidataId/Q141492
+Sainte-Brigitte-de-Laval (2422045) V,observationAbout,wikidataId/Q3464192
+Sainte-Catherine (2467030) V,observationAbout,wikidataId/Q142190
+Sainte-Catherine-de-la-Jacques-Cartier (2422005) V,observationAbout,wikidataId/Q141565
+Sainte-Famille-de-l'Île-d'Orléans (2420010) MÉ,observationAbout,wikidataId/Q3464255
+Sainte-Félicité (2408023) MÉ,observationAbout,wikidataId/Q3464274
+Sainte-Gertrude-Manneville (2488085) MÉ,observationAbout,wikidataId/Q3464288
+Sainte-Jeanne-d'Arc (2492015) VL,observationAbout,wikidataId/Q3464311
+Sainte-Julie (2459010) V,observationAbout,wikidataId/Q142156
+Sainte-Marie (2426030) V,observationAbout,wikidataId/Q141652
+"Sainte-Marie (CA), Que.",#IgnoreRow,True
+Sainte-Marthe-sur-le-Lac (2472015) V,observationAbout,wikidataId/Q142436
+Sainte-Pétronille (2420030) VL,observationAbout,wikidataId/Q3464399
+Sainte-Rose-du-Nord (2494230) PE,observationAbout,wikidataId/Q3464409
+Sainte-Thérèse (2473010) V,observationAbout,wikidataId/Q142087
+Sainte-Victoire-de-Sorel (2453025) MÉ,observationAbout,wikidataId/Q785145
+Salaberry-de-Valleyfield (2470052) V,observationAbout,wikidataId/Q142039
+"Salaberry-de-Valleyfield (CA), Que.",#IgnoreRow,True
+Salisbury (1307028) VL,observationAbout,wikidataId/Q3469820
+Salmon Arm (5939032) CY,observationAbout,wikidataId/Q3010939
+"Salmon Arm (CA), B.C.",#IgnoreRow,True
+Sandy Harry 4 (5941868) IRI,#IgnoreRow,True
+Sarnia (3538030) CY,observationAbout,wikidataId/Q34106
+"Sarnia (CA), Ont.",#IgnoreRow,True
+Sarnia 45 (3538025) IRI,#IgnoreRow,True
+Saskatoon (4711066) CY,observationAbout,wikidataId/Q10566
+"Saskatoon (CMA), Sask.",#IgnoreRow,True
+Sault Ste. Marie (3557061) CY,observationAbout,wikidataId/Q463165
+"Sault Ste. Marie (CA), Ont.",#IgnoreRow,True
+Schelowat 1 (5909838) IRI,#IgnoreRow,True
+Scotchfort 4 (1102057) IRI,observationAbout,wikidataId/Q3476138
+Scowlitz 1 (5909833) IRI,#IgnoreRow,True
+Seabird Island (5909832) IRI,#IgnoreRow,True
+Seaichem 16 (5931806) IRI,#IgnoreRow,True
+Seba Beach (4811038) SV,observationAbout,wikidataId/Q7442315
+Sechelt (Part) (5927806) IGD,#IgnoreRow,True
+Selwyn (3515015) TP,#IgnoreRow,True
+Semiahmoo (5915801) IRI,#IgnoreRow,True
+Senneville (2466127) VL,observationAbout,wikidataId/Q1001672
+Sept-Îles (2497007) V,observationAbout,wikidataId/Q141699
+"Sept-Îles (CA), Que.",#IgnoreRow,True
+Seymour Creek 2 (5915811) IRI,#IgnoreRow,True
+Shannon (2422020) V,observationAbout,wikidataId/Q3481424
+Shawinigan (2436033) V,observationAbout,wikidataId/Q141980
+"Shawinigan (CA), Que.",#IgnoreRow,True
+Sheet Harbour 36 (1209038) IRI,#IgnoreRow,True
+Sherbrooke (2443027) V,observationAbout,wikidataId/Q139473
+"Sherbrooke (CMA), Que.",#IgnoreRow,True
+Sherwood No. 159 (4706026) RM,#IgnoreRow,True
+Shields (4711064) RV,#IgnoreRow,True
+Shingle Point 4 (5919811) IRI,#IgnoreRow,True
+Shuniah (3558028) MU,observationAbout,wikidataId/Q11835858
+Sidney (5917010) T,observationAbout,wikidataId/Q390530
+Simonds (1301004) P,observationAbout,wikidataId/Q7520238
+Six Nations (Part) 40 (3529020) IRI,#IgnoreRow,True
+Skowkale (5909884) IRI,#IgnoreRow,True
+Skwah 4 (5909824) IRI,#IgnoreRow,True
+Skwali 3 (5909825) IRI,#IgnoreRow,True
+Skway 5 (5909826) IRI,#IgnoreRow,True
+Soda Creek 1 (5941810) IRI,#IgnoreRow,True
+Sooke (5917052) DM,observationAbout,wikidataId/Q993727
+Soowahlie 14 (5909827) IRI,#IgnoreRow,True
+Sorel-Tracy (2453052) V,observationAbout,wikidataId/Q142010
+"Sorel-Tracy (CA), Que.",#IgnoreRow,True
+South Frontenac (3510020) TP,observationAbout,wikidataId/Q4116649
+South Saanich 1 (5917804) IRI,#IgnoreRow,True
+South Stormont (3501011) TP,#IgnoreRow,True
+Southesk (1309026) P,observationAbout,wikidataId/Q3365932
+Southwold (3534024) TP,observationAbout,wikidataId/Q7571481
+Spring Lake (4811046) VL,observationAbout,wikidataId/Q7580608
+Springfield (4612047) RM,#IgnoreRow,True
+Springside (4709016) T,#IgnoreRow,True
+Springwater (3543009) TP,observationAbout,wikidataId/Q4116624
+Spruce Grove (4811049) CY,observationAbout,wikidataId/Q1013456
+Squamish (5931006) DM,observationAbout,wikidataId/Q1342280
+"Squamish (CA), B.C.",#IgnoreRow,True
+Squaw-Hay-One 11 (5919802) IRI,#IgnoreRow,True
+Squiaala (5909885) IRI,#IgnoreRow,True
+St. Albert (4811062) CY,observationAbout,wikidataId/Q939127
+St. Basile 10 (1313020) IRI,#IgnoreRow,True
+St. Catharines (3526053) CY,observationAbout,wikidataId/Q126805
+"St. Catharines - Niagara (CMA), Ont.",#IgnoreRow,True
+St. Clair (3538003) TP,#IgnoreRow,True
+St. Clements (4613056) RM,#IgnoreRow,True
+St. François Xavier (4610052) RM,observationAbout,wikidataId/Q615044
+St. John's (1001519) CY,observationAbout,wikidataId/Q2082
+"St. John's (CMA), N.L.",#IgnoreRow,True
+St. Martins (1301002) VL,observationAbout,wikidataId/Q3462936
+St. Thomas (3534021) CY,observationAbout,wikidataId/Q2078072
+St.-Charles (3552004) MU,#IgnoreRow,True
+Stanley (4603047) RM,#IgnoreRow,True
+Stawamus 24 (5931807) IRI,observationAbout,wikidataId/Q17022091
+Steady Brook (1005011) T,#IgnoreRow,True
+Steinbach (4602044) CY,observationAbout,wikidataId/Q1026567
+"Steinbach (CA), Man.",#IgnoreRow,True
+Stellarton (1212009) T,observationAbout,wikidataId/Q3498168
+Stirling-Rawdon (3512020) TP,#IgnoreRow,True
+Stoke (2442005) MÉ,observationAbout,wikidataId/Q3499627
+Stoneham-et-Tewkesbury (2422035) CU,observationAbout,wikidataId/Q142131
+Stony Plain (4811048) T,observationAbout,wikidataId/Q1744021
+Stratford (1102080) T,observationAbout,wikidataId/Q1004103
+Stratford (3531011) CY,#IgnoreRow,True
+"Stratford (CA), Ont.",#IgnoreRow,True
+Strathcona County (4811052) SM,observationAbout,wikidataId/Q1768240
+Strathcona D (Oyster Bay - Buttle Lake) (5924042) RDA,#IgnoreRow,True
+Strathmore (4805018) T,observationAbout,wikidataId/Q1018325
+"Strathmore (CA), Alta.",#IgnoreRow,True
+Strathroy-Caradoc (3539015) MU,observationAbout,wikidataId/Q3500105
+Sturgeon County (4811059) MD,observationAbout,wikidataId/Q7628998
+Summerside (1103025) CY,observationAbout,wikidataId/Q863058
+"Summerside (CA), P.E.I.",#IgnoreRow,True
+Sun Peaks Mountain (5933045) VL,#IgnoreRow,True
+Sundance Beach (4811020) SV,observationAbout,wikidataId/Q7639157
+Sundayman's Meadow 3 (5941864) IRI,#IgnoreRow,True
+Surrey (5915004) CY,observationAbout,wikidataId/Q390583
+Swan Lake 3 (5941872) IRI,#IgnoreRow,True
+Sweet Grass 113-M16 (4712837) IRI,#IgnoreRow,True
+Swift Current (4708004) CY,observationAbout,wikidataId/Q619937
+"Swift Current (CA), Sask.",#IgnoreRow,True
+Swift Current No. 137 (4708001) RM,#IgnoreRow,True
+Switsemalph (5939811) IRI,#IgnoreRow,True
+Switsemalph 3 (5939808) IRI,#IgnoreRow,True
+Sylvan Lake (4808012) T,observationAbout,wikidataId/Q2046751
+"Sylvan Lake (CA), Alta.",#IgnoreRow,True
+T'Sou-ke (5917819) IRI,#IgnoreRow,True
+Taché (4602069) RM,observationAbout,wikidataId/Q1661655
+Taylor (5955030) DM,observationAbout,wikidataId/Q7689822
+Tecumseh (3537048) T,observationAbout,wikidataId/Q3089334
+Terrace (5949011) CY,observationAbout,wikidataId/Q1021037
+"Terrace (CA), B.C.",#IgnoreRow,True
+Terrasse-Vaudreuil (2471075) MÉ,observationAbout,wikidataId/Q3518578
+Terrebonne (2464008) V,observationAbout,wikidataId/Q139190
+Thabacha Náre 196A (4816861) IRI,observationAbout,wikidataId/Q85810930
+Thames Centre (3539027) MU,observationAbout,wikidataId/Q3492505
+Theik 2 (5919818) IRI,#IgnoreRow,True
+Thetford Mines (2431084) V,observationAbout,wikidataId/Q141995
+"Thetford Mines (CA), Que.",#IgnoreRow,True
+Thode (4711060) RV,#IgnoreRow,True
+Thompson (4622026) CY,observationAbout,wikidataId/Q991295
+"Thompson (CA), Man.",#IgnoreRow,True
+Thompson-Nicola J (Copper Desert Country) (5933039) RDA,#IgnoreRow,True
+Thompson-Nicola P (Rivers and the Peaks) (5933044) RDA,#IgnoreRow,True
+Thorold (3526037) CY,observationAbout,wikidataId/Q448120
+Thorsby (4811021) T,observationAbout,wikidataId/Q7796736
+Thunder Bay (3558004) CY,observationAbout,wikidataId/Q34116
+"Thunder Bay (CMA), Ont.",#IgnoreRow,True
+Thurso (2480050) V,observationAbout,wikidataId/Q142370
+Tide Head (1314015) VL,observationAbout,wikidataId/Q3528181
+Tillsonburg (3532004) T,observationAbout,wikidataId/Q2415848
+"Tillsonburg (CA), Ont.",#IgnoreRow,True
+Timmins (3556027) CY,observationAbout,wikidataId/Q991310
+"Timmins (CA), Ont.",#IgnoreRow,True
+Torbay (1001509) T,observationAbout,wikidataId/Q7825435
+Toronto (3520005) C,observationAbout,wikidataId/Q172
+"Toronto (CMA), Ont.",#IgnoreRow,True
+Tracy (1303005) VL,#IgnoreRow,True
+Trail (5905014) CY,observationAbout,wikidataId/Q1808502
+"Trail (CA), B.C.",#IgnoreRow,True
+Trenton (1212016) T,observationAbout,wikidataId/Q3538507
+Trois-Rivières (2437067) V,observationAbout,wikidataId/Q44012
+"Trois-Rivières (CMA), Que.",#IgnoreRow,True
+Trout Lake Alec 16 (5941852) IRI,#IgnoreRow,True
+Truro (1210006) T,observationAbout,wikidataId/Q283064
+"Truro (CA), N.S.",#IgnoreRow,True
+Trécesson (2488075) CT,observationAbout,wikidataId/Q3541277
+Tsahaheh 1 (5923816) IRI,#IgnoreRow,True
+Tsawwassen (5915802) TWL,observationAbout,wikidataId/Q595958
+Tseatah 2 (5909834) IRI,#IgnoreRow,True
+Tsinstikeptum 10 (5935803) IRI,#IgnoreRow,True
+Tsinstikeptum 9 (5935802) IRI,#IgnoreRow,True
+Tsussie 6 (5919803) IRI,#IgnoreRow,True
+Tsuu T'ina Nation 145 (4806804) IRI,observationAbout,wikidataId/Q7850354
+Tyendinaga (3512001) TP,#IgnoreRow,True
+Tzart-Lam 5 (5919821) IRI,#IgnoreRow,True
+Tzeachten 13 (5909830) IRI,#IgnoreRow,True
+Uashat 27 (2497802) IRI,observationAbout,wikidataId/Q3547598
+Union Bay 4 (5917802) IRI,#IgnoreRow,True
+Union Road (1102050) RM,#IgnoreRow,True
+Upham (1305004) P,observationAbout,wikidataId/Q7898296
+Upper Sumas 6 (5909877) IRI,#IgnoreRow,True
+Uxbridge (3518029) TP,observationAbout,wikidataId/Q386959
+Val-David (2478010) VL,observationAbout,wikidataId/Q3553367
+Val-Joli (2442095) MÉ,observationAbout,wikidataId/Q3553366
+Val-Morin (2478005) MÉ,observationAbout,wikidataId/Q1667428
+Val-d'Or (2489008) V,observationAbout,wikidataId/Q141937
+"Val-d'Or (CA), Que.",#IgnoreRow,True
+Val-des-Bois (2480140) MÉ,observationAbout,wikidataId/Q3553381
+Val-des-Monts (2482015) MÉ,observationAbout,wikidataId/Q3553385
+Vancouver (5915022) CY,observationAbout,wikidataId/Q24639
+"Vancouver (CMA), B.C.",#IgnoreRow,True
+Vanscoy (4712058) VL,#IgnoreRow,True
+Vanscoy No. 345 (4712054) RM,#IgnoreRow,True
+Varennes (2459020) V,observationAbout,wikidataId/Q142014
+Vaudreuil-Dorion (2471083) V,observationAbout,wikidataId/Q141711
+Vaudreuil-sur-le-Lac (2471090) VL,observationAbout,wikidataId/Q3555064
+Vaughan (3519028) CY,observationAbout,wikidataId/Q44013
+Verchères (2459025) MÉ,observationAbout,wikidataId/Q2514459
+Vernon (5937014) CY,observationAbout,wikidataId/Q985671
+"Vernon (CA), B.C.",#IgnoreRow,True
+Victoria (5917034) CY,observationAbout,wikidataId/Q2132
+"Victoria (CMA), B.C.",#IgnoreRow,True
+Victoriaville (2439062) V,observationAbout,wikidataId/Q141731
+"Victoriaville (CA), Que.",#IgnoreRow,True
+View Royal (5917047) T,observationAbout,wikidataId/Q2484356
+Wabamun 133A (4811806) IRI,observationAbout,wikidataId/Q7958595
+Wabamun 133B (4811807) IRI,observationAbout,wikidataId/Q7958596
+Wahnapitei 11 (3553040) IRI,observationAbout,wikidataId/Q7959821
+Wahpaton 94A (4715848) IRI,#IgnoreRow,True
+Wainfleet (3526014) TP,observationAbout,wikidataId/Q424870
+Waiwakum 14 (5931808) IRI,#IgnoreRow,True
+Wallace Hills 14A (1209800) IRI,#IgnoreRow,True
+Wallace No. 243 (4709006) RM,#IgnoreRow,True
+Warburg (4811024) VL,observationAbout,wikidataId/Q981
+Warfield (5905018) VL,#IgnoreRow,True
+Warman (4711068) CY,observationAbout,wikidataId/Q1904521
+Warren Grove (1102070) RM,observationAbout,wikidataId/Q3566385
+Wasaga Beach (3543064) T,observationAbout,wikidataId/Q3047234
+"Wasaga Beach (CA), Ont.",#IgnoreRow,True
+Waterloo (3530016) CY,observationAbout,wikidataId/Q639408
+Waterville (2444080) V,observationAbout,wikidataId/Q142421
+Waywayseecappo Highway 10 (4607072) IRI,#IgnoreRow,True
+Welland (3526032) CY,observationAbout,wikidataId/Q424773
+Wells (5941025) DM,#IgnoreRow,True
+Wendake (2423802) IRI,observationAbout,wikidataId/Q3567224
+West Kelowna (5935029) CY,observationAbout,wikidataId/Q5958093
+West River (1102068) RM,#IgnoreRow,True
+West St. Paul (4613037) RM,#IgnoreRow,True
+West Vancouver (5915055) DM,observationAbout,wikidataId/Q991329
+Westfield (1305011) P,observationAbout,wikidataId/Q3365944
+Westmount (2466032) V,observationAbout,wikidataId/Q139497
+Westville (1212008) T,observationAbout,wikidataId/Q3567557
+Wetaskiwin (4811002) CY,observationAbout,wikidataId/Q950050
+"Wetaskiwin (CA), Alta.",#IgnoreRow,True
+Weyburn (4702047) CY,observationAbout,wikidataId/Q1904554
+"Weyburn (CA), Sask.",#IgnoreRow,True
+Weyburn No. 67 (4702044) RM,#IgnoreRow,True
+Whispering Pines 4 (5933877) IRI,#IgnoreRow,True
+Whitby (3518009) T,observationAbout,wikidataId/Q386338
+Whitchurch-Stouffville (3519044) T,observationAbout,wikidataId/Q483334
+White City (4706030) T,#IgnoreRow,True
+White Rock (5915007) CY,observationAbout,wikidataId/Q629056
+Whitecap (4711828) IRI,#IgnoreRow,True
+Whitefish Lake 6 (3552051) IRI,observationAbout,wikidataId/Q4815786
+Whitehead (4607057) RM,observationAbout,wikidataId/Q1661941
+Whitehorse (6001009) CY,observationAbout,wikidataId/Q2058
+"Whitehorse (CA), Y.T.",#IgnoreRow,True
+"Whitehorse, Unorganized (6001060) NO",#IgnoreRow,True
+Whonnock 1 (5915840) IRI,#IgnoreRow,True
+Wickham (2449040) MÉ,observationAbout,wikidataId/Q3567912
+Williams Lake (5941009) CY,observationAbout,wikidataId/Q2039207
+"Williams Lake (CA), B.C.",#IgnoreRow,True
+Williams Lake 1 (5941812) IRI,#IgnoreRow,True
+Wilmot (3530020) TP,#IgnoreRow,True
+Wilton No. 472 (4717022) RM,#IgnoreRow,True
+Windsor (3537039) CY,observationAbout,wikidataId/Q182625
+"Windsor (CMA), Ont.",#IgnoreRow,True
+Winkler (4603050) CY,observationAbout,wikidataId/Q1019402
+"Winkler (CA), Man.",#IgnoreRow,True
+Winnipeg (4611040) CY,observationAbout,wikidataId/Q2135
+"Winnipeg (CMA), Man.",#IgnoreRow,True
+Winsloe North (1102069) FD,#IgnoreRow,True
+Witless Bay (1001559) T,observationAbout,wikidataId/Q8028355
+Wood Buffalo (4816037) SM,observationAbout,wikidataId/Q1263195
+"Wood Buffalo (CA), Alta.",#IgnoreRow,True
+Woodstock (3532042) CY,observationAbout,wikidataId/Q1642364
+"Woodstock (CA), Ont.",#IgnoreRow,True
+Woolwich (3530035) TP,#IgnoreRow,True
+Wôlinak (2438802) IRI,observationAbout,wikidataId/Q1611606
+Yakweakwioose 12 (5909831) IRI,#IgnoreRow,True
+Yamachiche (2451020) MÉ,observationAbout,wikidataId/Q3571405
+Yekwaupsum 18 (5931809) IRI,#IgnoreRow,True
+Yellowknife (6106023) CY,observationAbout,wikidataId/Q2061
+"Yellowknife (CA), N.W.T.",#IgnoreRow,True
+York (1102061) RM,#IgnoreRow,True
+Yorkton (4709012) CY,observationAbout,wikidataId/Q1639696
+"Yorkton (CA), Sask.",#IgnoreRow,True
+qathet B (5927012) RDA,#IgnoreRow,True
+qathet C (5927016) RDA,#IgnoreRow,True
+Eastern Canada,#IgnoreRow,True
+Prairie provinces,#IgnoreRow,True
+Western Canada,#IgnoreRow,True
+"Northwest Territories including Nunavut, place of residence",#IgnoreRow,True
+Unknown province or territory of residence,#IgnoreRow,True

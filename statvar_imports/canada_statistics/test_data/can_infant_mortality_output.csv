@@ -1,0 +1,13 @@
+observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,observationPeriod
+country/CAN,2020,1622,dcid:Count_Death_0To1Years,,,
+country/CAN,2020,4.5,dcid:Count_Death_0To1Years_AsAFractionOf_Count_BirthEvent_LiveBirth,,1000,
+country/CAN,2020,1241,dcid:Count_Death_0To27Day,,,
+country/CAN,2020,3.5,dcid:Count_Death_0To27Day_AsAFractionOf_Count_BirthEvent_LiveBirth,,1000,
+country/CAN,2020,381,dcid:Count_Death_1To11Month,,,
+country/CAN,2020,1.1,dcid:Count_Death_1To11Month_AsAFractionOf_Count_BirthEvent_LiveBirth,,1000,
+wikidataId/Q1904,2020,575,dcid:Count_Death_0To1Years,,,
+wikidataId/Q1904,2020,4.2,dcid:Count_Death_0To1Years_AsAFractionOf_Count_BirthEvent_LiveBirth,,1000,
+wikidataId/Q1904,2020,442,dcid:Count_Death_0To27Day,,,
+wikidataId/Q1904,2020,3.2,dcid:Count_Death_0To27Day_AsAFractionOf_Count_BirthEvent_LiveBirth,,1000,
+wikidataId/Q1904,2020,133,dcid:Count_Death_1To11Month,,,
+wikidataId/Q1904,2020,1,dcid:Count_Death_1To11Month_AsAFractionOf_Count_BirthEvent_LiveBirth,,1000,

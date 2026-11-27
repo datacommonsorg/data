@@ -1,0 +1,17 @@
+REF_DATE,GEO,DGUID,Age at time of death,Sex,Characteristics,UOM,UOM_ID,SCALAR_FACTOR,SCALAR_ID,VECTOR,COORDINATE,VALUE,STATUS,SYMBOL,TERMINATED,DECIMALS
+2018,"Canada, place of residence",2021A000011124,"Age at time of death, all ages",Both sexes,Number of deaths,Number,223,units,0,v21222026,1.1.1.1,283706,,,t,0
+2018,"Canada, place of residence",2021A000011124,"Age at time of death, all ages",Both sexes,"Mortality rate per 1,000 population","Rates per 1,000 population",267,units,0,v21222027,1.1.1.2,7.7,,,,1
+2018,"Canada, place of residence",2021A000011124,"Age at time of death, all ages",Females,Number of deaths,Number,223,units,0,v21222030,1.1.3.1,139223,,,t,0
+2018,"Canada, place of residence",2021A000011124,"Age at time of death, all ages",Females,"Mortality rate per 1,000 population","Rates per 1,000 population",267,units,0,v21222031,1.1.3.2,7.5,,,,1
+2018,"Canada, place of residence",2021A000011124,"Age at time of death, under 1 year",Both sexes,Number of deaths,Number,223,units,0,v21222032,1.2.1.1,1750,,,t,0
+2018,"Canada, place of residence",2021A000011124,"Age at time of death, under 1 year",Both sexes,"Mortality rate per 1,000 population","Rates per 1,000 population",267,units,0,v21222033,1.2.1.2,4.8,,,,1
+2018,"Canada, place of residence",2021A000011124,"Age at time of death, under 1 year",Females,Number of deaths,Number,223,units,0,v21222036,1.2.3.1,797,,,t,0
+2018,"Canada, place of residence",2021A000011124,"Age at time of death, under 1 year",Females,"Mortality rate per 1,000 population","Rates per 1,000 population",267,units,0,v21222037,1.2.3.2,4.4,,,,1
+2018,"Canada, place of residence",2021A000011124,"Age at time of death, 85 to 89 years",Both sexes,Number of deaths,Number,223,units,0,v21222140,1.20.1.1,46123,,,t,0
+2018,"Canada, place of residence",2021A000011124,"Age at time of death, 85 to 89 years",Both sexes,"Mortality rate per 1,000 population","Rates per 1,000 population",267,units,0,v21222141,1.20.1.2,92.3,,,,1
+2018,"Canada, place of residence",2021A000011124,"Age at time of death, 85 to 89 years",Females,Number of deaths,Number,223,units,0,v21222144,1.20.3.1,24386,,,t,0
+2018,"Canada, place of residence",2021A000011124,"Age at time of death, 85 to 89 years",Females,"Mortality rate per 1,000 population","Rates per 1,000 population",267,units,0,v21222145,1.20.3.2,80.4,,,,1
+2018,"Canada, place of residence",2021A000011124,"Age at time of death, 90 years and over",Both sexes,Number of deaths,Number,223,units,0,v21222146,1.21.1.1,60402,,,t,0
+2018,"Canada, place of residence",2021A000011124,"Age at time of death, 90 years and over",Both sexes,"Mortality rate per 1,000 population","Rates per 1,000 population",267,units,0,v21222147,1.21.1.2,196.1,,,,1
+2018,"Canada, place of residence",2021A000011124,"Age at time of death, 90 years and over",Females,Number of deaths,Number,223,units,0,v21222150,1.21.3.1,40151,,,t,0
+2018,"Canada, place of residence",2021A000011124,"Age at time of death, 90 years and over",Females,"Mortality rate per 1,000 population","Rates per 1,000 population",267,units,0,v21222151,1.21.3.2,185.8,,,,1

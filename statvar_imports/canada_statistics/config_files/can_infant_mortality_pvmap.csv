@@ -1,0 +1,15 @@
+#Key,Property1,Value1,Property2,Value2,Property3,Value3,Property4,Value4,Property5,Value5
+REF_DATE,observationDate,{Number},,,,,,,,
+GEO,observationAbout,{Data},,,,,,,,
+Characteristics:Number of deaths,populationType,MortalityEvent,measuredProperty,count,statType,measuredValue,,,,
+"Characteristics:Mortality rate per 1,000 live births",measuredProperty,count,populationType,MortalityEvent,statType,measuredValue,measurementDenominator,Count_BirthEvent_LiveBirth,scalingFactor,1000
+"Total infant deaths, age at time of death, under 1 year",age,[0 1 Years],,,,,,,,
+"Neonatal, age at time of death, 0 to 27 days",age,[0 27 Day],,,,,,,,
+"Neonatal, age at time of death, under 1 day",age,[0 1 Day],,,,,,,,
+"Neonatal, age at time of death, 1 to 6 days",age,[1 6 Day],,,,,,,,
+"Neonatal, age at time of death, 7 to 27 days",age,[7 27 Day],,,,,,,,
+"Post-neonatal, age at time of death, 1 to 11 months",age,[1 11 Month],,,,,,,,
+"Post-neonatal, age at time of death, 1 to 2 months",age,[1 2 Month],,,,,,,,
+"Post-neonatal, age at time of death, 3 to 5 months",age,[3 5 Month],,,,,,,,
+"Post-neonatal, age at time of death, 6 to 11 months",age,[6 11 Month],,,,,,,,
+VALUE,value,{Number},,,,,,,,
