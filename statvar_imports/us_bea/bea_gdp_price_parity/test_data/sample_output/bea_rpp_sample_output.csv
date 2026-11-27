@@ -1,0 +1,11 @@
+observationDate,observationAbout,value,variableMeasured
+2023,dcid:geoId/C10180,94.8,dcid:RegionalPriceParity_Product_BEAServicesUtilities
+2024,dcid:geoId/C10180,95.2,dcid:RegionalPriceParity_Product_BEAServicesUtilities
+2023,dcid:geoId/C10180,96.1,dcid:RegionalPriceParity_Product_BEAServicesOthers
+2024,dcid:geoId/C10180,96.4,dcid:RegionalPriceParity_Product_BEAServicesOthers
+2023,dcid:country/USA,100,dcid:RegionalPriceParity_Product_BEAAllItems
+2024,dcid:country/USA,100,dcid:RegionalPriceParity_Product_BEAAllItems
+2023,dcid:geoId/01,94.2,dcid:RegionalPriceParity_Product_BEAGoods
+2024,dcid:geoId/01,94.6,dcid:RegionalPriceParity_Product_BEAGoods
+2023,dcid:geoId/01,80.8,dcid:RegionalPriceParity_Product_BEAServicesHousing
+2024,dcid:geoId/01,81.5,dcid:RegionalPriceParity_Product_BEAServicesHousing

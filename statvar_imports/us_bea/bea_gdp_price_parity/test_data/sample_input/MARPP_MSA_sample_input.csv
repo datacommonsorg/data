@@ -1,0 +1,4 @@
+GeoFIPS,GeoName,Region,TableName,LineCode,IndustryClassification,Description,Unit,2023,2024
+ "00999","United States (Nonmetropolitan Portion)", ,MARPP,1,"...","RPPs: All items ","Index",90.7,91.0
+ "10180","Abilene, TX (Metropolitan Statistical Area)", ,MARPP,4,"...","RPPs: Services: Utilities ","Index",94.8,95.2
+ "10180","Abilene, TX (Metropolitan Statistical Area)", ,MARPP,5,"...","RPPs: Services: Other ","Index",96.1,96.4

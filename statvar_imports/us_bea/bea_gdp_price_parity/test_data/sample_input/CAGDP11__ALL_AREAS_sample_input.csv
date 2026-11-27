@@ -1,0 +1,5 @@
+GeoFIPS,GeoName,Region,TableName,LineCode,IndustryClassification,Description,Unit,2023,2024
+ "00000","United States *", ,CAGDP11,1,"...","  All industry total ","Percent change",2.9,2.8
+ "01001","Autauga, AL",5,CAGDP11,1,"...","  All industry total ","Percent change",1.3,-7.8
+ "01001","Autauga, AL",5,CAGDP11,2,"...","Private industries ","Percentage points",1.12,-7.95
+ "02063","Chugach Census Area, AK",8,CAGDP11,1,"...","  All industry total ","Percent change",(NA),3.4

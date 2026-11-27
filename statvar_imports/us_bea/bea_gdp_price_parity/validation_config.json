@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "check_rpp_max_date_consistent",
+      "description": "Verifies all Regional Price Parity StatVars share a uniform latest observation year.",
+      "validator": "MAX_DATE_CONSISTENT",
+      "scope": {
+        "variables": {
+          "contains_all": [
+            "RegionalPriceParity"
+          ]
+        }
+      }
+    },
+    {
+      "rule_id": "check_freshness_and_future_dates",
+      "description": "Verifies active BEA RPP and County GDP series advance with future releases (within 3-year BEA publication lag) and fail closed on unexpected StatVars.",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT StatVar, MinDate, MaxDate FROM stats",
+        "condition": "(CASE WHEN StatVar LIKE '%RegionalPriceParity%' THEN CAST(MinDate AS INTEGER) = 2008 AND CAST(MaxDate AS INTEGER) >= 2024 AND CAST(MaxDate AS INTEGER) BETWEEN (EXTRACT(YEAR FROM CURRENT_DATE) - 3) AND EXTRACT(YEAR FROM CURRENT_DATE) WHEN StatVar = 'grossDomesticProduct' THEN CAST(MinDate AS INTEGER) = 2001 AND CAST(MaxDate AS INTEGER) >= 2024 AND CAST(MaxDate AS INTEGER) BETWEEN (EXTRACT(YEAR FROM CURRENT_DATE) - 3) AND EXTRACT(YEAR FROM CURRENT_DATE) WHEN StatVar = 'dc/p9w3tzjzyqrr' THEN CAST(MinDate AS INTEGER) = 2002 AND CAST(MaxDate AS INTEGER) >= 2024 AND CAST(MaxDate AS INTEGER) BETWEEN (EXTRACT(YEAR FROM CURRENT_DATE) - 3) AND EXTRACT(YEAR FROM CURRENT_DATE) ELSE FALSE END)"
+      }
+    },
+    {
+      "rule_id": "check_min_observations_and_places",
+      "description": "Verifies each active BEA StatVar meets minimum place, observation, and date-coverage thresholds.",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT StatVar, NumPlaces, NumObservations, NumObservationsDates FROM stats",
+        "condition": "NumPlaces >= 400 AND NumObservations >= 7000 AND NumObservationsDates >= 15"
+      }
+    },
+    {
+      "rule_id": "check_rpp_value_bounds",
+      "description": "Verifies Regional Price Parity index values remain within valid positive bounds (0, 500).",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT StatVar, MinValue, MaxValue FROM stats WHERE StatVar LIKE '%RegionalPriceParity%'",
+        "condition": "MinValue > 0 AND MaxValue < 500"
+      }
+    }
+  ]
+}

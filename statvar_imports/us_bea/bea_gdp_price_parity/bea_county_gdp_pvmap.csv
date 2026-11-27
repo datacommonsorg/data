@@ -1,0 +1,9 @@
+#Key,p1,v1,p2,v2,p3,v3
+GeoFIPS,GeoRaw,{Data}
+Quantity index,#IgnoreRow,True
+Thousands of dollars,#IgnoreRow,True
+Percentage points,#IgnoreRow,True
+TableName,#Eval,"observationAbout = 'dcid:geoId/' + re.sub('[^0-9]', '', GeoRaw) if len(re.sub('[^0-9]', '', GeoRaw)) == 5 and not re.sub('[^0-9]', '', GeoRaw).endswith('000') and 1 <= int(re.sub('[^0-9]', '', GeoRaw)[:2]) <= 56 else ''"
+CAGDP1,#Multiply,1000,unit,dcs:USDollar,VarId,dcid:grossDomesticProduct
+CAGDP11,VarId,dcid:dc/p9w3tzjzyqrr
+LineCode:1,variableMeasured,{VarId},measurementMethod,dcs:BEASurvey,#Filter,bool(observationAbout)

@@ -1,0 +1,49 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "BEAGDPPriceParity",
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
+      "provenance_url": "https://www.bea.gov/data/prices-inflation/regional-price-parities-state-and-metro-area",
+      "provenance_description": "Regional price parities by state and metro area and county/metro GDP summary provided by the US Bureau of Economic Analysis.",
+      "scripts": [
+        "download.py",
+        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/raw/SARPP_STATE_*.csv,input_files/raw/MARPP_MSA_*.csv --pv_map=bea_rpp_pvmap.csv,bea_years_pvmap.csv --config_file=bea_rpp_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/bea_rpp_output --output_counters=counters/bea_rpp_counters.csv",
+        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/raw/CAGDP1__ALL_AREAS_*.csv --pv_map=bea_county_gdp_pvmap.csv,bea_years_pvmap.csv --config_file=bea_county_gdp_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/bea_county_gdp_output --output_counters=counters/bea_county_gdp_counters.csv",
+        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/raw/CAGDP11__ALL_AREAS_*.csv --pv_map=bea_county_gdp_pvmap.csv,bea_years_pvmap.csv --config_file=bea_county_gdp_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/bea_county_gdp_growth_output --output_counters=counters/bea_county_gdp_growth_counters.csv"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "output_files/bea_rpp_output.tmcf",
+          "cleaned_csv": "output_files/bea_rpp_output.csv",
+          "node_mcf": "output_files/bea_rpp_output_stat_var[s].mcf"
+        },
+        {
+          "template_mcf": "output_files/bea_county_gdp_output.tmcf",
+          "cleaned_csv": "output_files/bea_county_gdp_output.csv",
+          "node_mcf": "output_files/bea_county_gdp_output_stat_var[s].mcf"
+        },
+        {
+          "template_mcf": "output_files/bea_county_gdp_growth_output.tmcf",
+          "cleaned_csv": "output_files/bea_county_gdp_growth_output.csv",
+          "node_mcf": "output_files/bea_county_gdp_growth_output_stat_var[s].mcf"
+        }
+      ],
+      "source_files": [
+        "input_files/raw/*",
+        "*_pvmap.csv",
+        "*_metadata.csv",
+        "counters/*.csv",
+        "validation_config.json"
+      ],
+      "cron_schedule": "0 6 * * 1",
+      "validation_config_file": "validation_config.json",
+      "resource_limits": {
+        "cpu": 4,
+        "memory": 16,
+        "disk": 50
+      }
+    }
+  ]
+}

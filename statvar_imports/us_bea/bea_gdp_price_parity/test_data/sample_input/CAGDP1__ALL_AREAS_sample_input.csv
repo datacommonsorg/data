@@ -1,0 +1,7 @@
+GeoFIPS,GeoName,Region,TableName,LineCode,IndustryClassification,Description,Unit,2023,2024
+ "00000","United States", ,CAGDP1,1,"...","Real GDP (thousands of chained 2017 dollars) ","Thousands of chained 2017 dollars",22723719000,23358435000
+ "01000","Alabama",5,CAGDP1,1,"...","Real GDP (thousands of chained 2017 dollars) ","Thousands of chained 2017 dollars",248313684,255629447
+ "01001","Autauga, AL",5,CAGDP1,1,"...","Real GDP (thousands of chained 2017 dollars) ","Thousands of chained 2017 dollars",1907174,1758017
+ "01001","Autauga, AL",5,CAGDP1,2,"...","Chain-type quantity indexes for real GDP ","Quantity index",108.205,99.742
+ "01001","Autauga, AL",5,CAGDP1,3,"...","Current-dollar GDP (thousands of current dollars) ","Thousands of dollars",2389100,2250400
+ "01003","Baldwin, AL",5,CAGDP1,1,"...","Real GDP (thousands of chained 2022 dollars) ","Thousands of chained 2022 dollars",9210500,9540200
