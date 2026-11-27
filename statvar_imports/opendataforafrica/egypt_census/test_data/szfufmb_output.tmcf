@@ -1,0 +1,9 @@
+Node: E:szfufmb_output->E0
+observationAbout: C:szfufmb_output->observationAbout
+observationDate: C:szfufmb_output->observationDate
+variableMeasured: C:szfufmb_output->variableMeasured
+value: C:szfufmb_output->value
+unit: C:szfufmb_output->unit
+scalingFactor: C:szfufmb_output->scalingFactor
+observationPeriod: C:szfufmb_output->observationPeriod
+typeOf: dcs:StatVarObservation

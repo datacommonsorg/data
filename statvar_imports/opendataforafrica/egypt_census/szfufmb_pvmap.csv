@@ -1,0 +1,37 @@
+key,prop,val,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6,p7,v7
+OBS_VALUE,value,{Number},observationAbout,country/EGY,name,"""{Name1}{Name2}{Name3}{Name4}""",alternateName,"""{AlternateName1}{AlternateName2}{AlternateName3}{AlternateName4}@ar""",,,,,,,,
+NAMEARAB_MARITAL_X0020_STATUS,IgnoreUnder18,True,,,,,,,,,,,,,,
+إجمالى الجمهورية,#ignore,ignore,,,,,,,,,,,,,,
+اقل من السن,#ignore,ignore,,,,,,,,,,,,,,
+إجمالى الحالات الزواجية,#ignore,ignore,,,,,,,,,,,,,,
+# CAPMAS 2017 Census tabulates لم يتزوج (MARITAL_STATUS=5; NeverMarried) strictly for legal marriage age 18+ (unmarried minors <18 are in MARITAL_STATUS=3 اقل من السن); suppress the 36 <18 zero rows and map its age-total row to [18 - Years].
+لم يتزوج,populationType,Person,maritalStatus,NeverMarried,Name1,Number of never-married persons,AlternateName1,لم يتزوج,IgnoreUnder18,True,TotalAge,[18 - Years],TotalAgeName,"{Comma} 18 years or older",TotalAgeAltName,{Comma}18 سنة فأكثر
+عقد قران,populationType,Person,maritalStatus,ContractMarriage,Name1,Number of persons in contract marriage,AlternateName1,عقد قران,IgnoreUnder18,False,TotalAge,"""""",TotalAgeName,"""""",TotalAgeAltName,""""""
+متزوج,populationType,Person,maritalStatus,Married,Name1,Number of married persons,AlternateName1,متزوج,IgnoreUnder18,False,TotalAge,"""""",TotalAgeName,"""""",TotalAgeAltName,""""""
+مطلق,populationType,Person,maritalStatus,Divorced,Name1,Number of divorced persons,AlternateName1,مطلق,IgnoreUnder18,False,TotalAge,"""""",TotalAgeName,"""""",TotalAgeAltName,""""""
+ارمل,populationType,Person,maritalStatus,Widowed,Name1,Number of widowed persons,AlternateName1,ارمل,IgnoreUnder18,False,TotalAge,"""""",TotalAgeName,"""""",TotalAgeAltName,""""""
+حضر,placeOfResidenceClassification,Urban,Name2,"{Comma} urban",AlternateName2,{Comma}حضر,,,,,,,,,,
+ريف,placeOfResidenceClassification,Rural,Name2,"{Comma} rural",AlternateName2,{Comma}ريف,,,,,,,,,,
+NAMEARAB_REGION:جملة,Name2,"""""",AlternateName2,"""""",,,,,,,,,,,,
+NAMEARAB_GENDER:جملة,Name3,"""""",AlternateName3,"""""",,,,,,,,,,,,
+ذكور,gender,Male,Name3,"{Comma} male",AlternateName3,{Comma}ذكور,,,,,,,,,,
+اناث,gender,Female,Name3,"{Comma} female",AlternateName3,{Comma}اناث,,,,,,,,,,
+أقل من 15 سنة,#IgnoreRow,{@IgnoreUnder18},age,[- 15 Years],Name4,"{Comma} under 15 years old",AlternateName4,{Comma}أقل من 15 سنة,,,,,,,,
+15 سنة,#IgnoreRow,{@IgnoreUnder18},age,[15 Years],Name4,"{Comma} 15 years old",AlternateName4,{Comma}15 سنة,,,,,,,,
+16 سنة,#IgnoreRow,{@IgnoreUnder18},age,[16 Years],Name4,"{Comma} 16 years old",AlternateName4,{Comma}16 سنة,,,,,,,,
+17 سنة,#IgnoreRow,{@IgnoreUnder18},age,[17 Years],Name4,"{Comma} 17 years old",AlternateName4,{Comma}17 سنة,,,,,,,,
+18 سنة,age,[18 Years],Name4,"{Comma} 18 years old",AlternateName4,{Comma}18 سنة,,,,,,,,,,
+19 سنة,age,[19 Years],Name4,"{Comma} 19 years old",AlternateName4,{Comma}19 سنة,,,,,,,,,,
+من 20 الى اقل من 25 سنة,age,[20 24 Years],Name4,"{Comma} 20 to 24 years old",AlternateName4,{Comma}20 24 سنة,,,,,,,,,,
+من 25 الى اقل من 30 سنة,age,[25 29 Years],Name4,"{Comma} 25 to 29 years old",AlternateName4,{Comma}25 29 سنة,,,,,,,,,,
+من 30 الى اقل من 35 سنة,age,[30 34 Years],Name4,"{Comma} 30 to 34 years old",AlternateName4,{Comma}30 34 سنة,,,,,,,,,,
+من 35 الى اقل من 40 سنة,age,[35 39 Years],Name4,"{Comma} 35 to 39 years old",AlternateName4,{Comma}35 39 سنة,,,,,,,,,,
+من 40 الى اقل من 45 سنة,age,[40 44 Years],Name4,"{Comma} 40 to 44 years old",AlternateName4,{Comma}40 44 سنة,,,,,,,,,,
+من 45 الى اقل من 50 سنة,age,[45 49 Years],Name4,"{Comma} 45 to 49 years old",AlternateName4,{Comma}45 49 سنة,,,,,,,,,,
+من 50 الى اقل من 55 سنة,age,[50 54 Years],Name4,"{Comma} 50 to 54 years old",AlternateName4,{Comma}50 54 سنة,,,,,,,,,,
+من 55 الى اقل من 60 سنة,age,[55 59 Years],Name4,"{Comma} 55 to 59 years old",AlternateName4,{Comma}55 59 سنة,,,,,,,,,,
+من 60 الى اقل من 65 سنة,age,[60 64 Years],Name4,"{Comma} 60 to 64 years old",AlternateName4,{Comma}60 64 سنة,,,,,,,,,,
+من 65 الى اقل من 70 سنة,age,[65 69 Years],Name4,"{Comma} 65 to 69 years old",AlternateName4,{Comma}65 69 سنة,,,,,,,,,,
+من 70 الى اقل من 75 سنة,age,[70 74 Years],Name4,"{Comma} 70 to 74 years old",AlternateName4,{Comma}70 74 سنة,,,,,,,,,,
+75سنة فأكثر,age,[75 - Years],Name4,"{Comma} 75 years or older",AlternateName4,{Comma}أكثر من 75 سنة,,,,,,,,,,
+اجمالى:  فئـــــــات الســــــن,age,{@TotalAge},Name4,{@TotalAgeName},AlternateName4,{@TotalAgeAltName},,,,,,,,,,

@@ -1,0 +1,11 @@
+key,prop,val,p1,v1,p2,v2,p3,v3,p4,v4
+OBS_VALUE,value,{Number},observationAbout,country/EGY,populationType,Student,name,"""{Name1}{Name2}""",alternateName,"""{AlternateName1}{AlternateName2}@ar"""
+الجامعات الحكومية والازهر,enrollmentStatus,EnrolledInEducationOrTraining,institutionType,AlAzharUniversity__PublicUniversity,Name1,Number of enrolled students in public and Al-Azhar universities,AlternateName1,الجامعات الحكومية والازهر,,
+الجامعات الخاصة,enrollmentStatus,EnrolledInEducationOrTraining,institutionType,PrivateUniversity,Name1,Number of enrolled students in private universities,AlternateName1,الجامعات الخاصة,,
+المعاهد العليا الخاصة,enrollmentStatus,EnrolledInEducationOrTraining,institutionType,PrivateHigherInstitute,Name1,Number of enrolled students in private higher institutes,AlternateName1,المعاهد العليا الخاصة,,
+الاكاديميات,enrollmentStatus,EnrolledInEducationOrTraining,institutionType,Academy,Name1,Number of enrolled students in academies,AlternateName1,الاكاديميات,,
+المعاهد الفنية فوق المتوسطة,enrollmentStatus,EnrolledInEducationOrTraining,institutionType,UpperMediumTechnicalInstitute,Name1,Number of enrolled students in upper-medium technical institutes,AlternateName1,المعاهد الفنية فوق المتوسطة,,
+المعاهد المتنوعة,enrollmentStatus,EnrolledInEducationOrTraining,institutionType,OtherInstitute,Name1,Number of enrolled students in other institutes,AlternateName1,المعاهد المتنوعة,,
+ذكور,gender,Male,Name2,"{Comma} male",AlternateName2,{Comma}ذكور,,,,
+اناث,gender,Female,Name2,"{Comma} female",AlternateName2,{Comma}اناث,,,,
+الاجمالى,Name2,"""""",AlternateName2,"""""",,,,,,

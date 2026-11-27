@@ -1,0 +1,7 @@
+observationAbout,observationDate,variableMeasured,value,unit,scalingFactor,observationPeriod
+country/EGY,2006,dcid:LifeExpectancy_Person_Female,69.1,Year,,P1Y
+country/EGY,2017,dcid:LifeExpectancy_Person_Female,73.6,Year,,P1Y
+country/EGY,2018,dcid:LifeExpectancy_Person_Female,74,Year,,P1Y
+country/EGY,2006,dcid:LifeExpectancy_Person_Male,66.5,Year,,P1Y
+country/EGY,2017,dcid:LifeExpectancy_Person_Male,70.8,Year,,P1Y
+country/EGY,2018,dcid:LifeExpectancy_Person_Male,71.2,Year,,P1Y

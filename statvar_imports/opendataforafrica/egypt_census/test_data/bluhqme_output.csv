@@ -1,0 +1,7 @@
+observationAbout,observationDate,variableMeasured,value,unit,scalingFactor,observationPeriod
+dcid:wikidataId/Q29943,2017,dcid:Count_Person_15OrMoreYears_EconomicActivity_Employed,1421800,,,P1Y
+dcid:wikidataId/Q29943,2017,dcid:Count_Person_15OrMoreYears_EconomicActivity_Employed_Male,1185500,,,P1Y
+dcid:wikidataId/Q29943,2017,dcid:Count_Person_15OrMoreYears_EconomicActivity_Employed_Female,236300,,,P1Y
+dcid:wikidataId/Q31074,2017,dcid:Count_Person_15OrMoreYears_EconomicActivity_Employed,1972700,,,P1Y
+dcid:wikidataId/Q31074,2017,dcid:Count_Person_15OrMoreYears_EconomicActivity_Employed_Male,1541600,,,P1Y
+dcid:wikidataId/Q31074,2017,dcid:Count_Person_15OrMoreYears_EconomicActivity_Employed_Female,431100,,,P1Y

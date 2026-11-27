@@ -1,0 +1,7 @@
+GOVERNORATES,ID_GOVERNORATES,NAMEARAB_GOVERNORATES,REGIONID_GOVERNORATES,ECONOMIC_ACTIVITY,ID_ECONOMIC_X0020_ACTIVITY,NAMEARAB_ECONOMIC_X0020_ACTIVITY,SEX,ID_SEX,NAMEARAB_SEX,FREQ,TIME_PERIOD,OBS_VALUE
+3,3,الأسكندرية,EG-ALX,1,1,جملة للنشاط االقتصادى,1,1,جملة,A,2017,14218
+3,3,الأسكندرية,EG-ALX,1,1,جملة للنشاط االقتصادى,2,2,ذكور,A,2017,11855
+3,3,الأسكندرية,EG-ALX,1,1,جملة للنشاط االقتصادى,3,3,إناث,A,2017,2363
+8,8,الشرقية,EG-SHR,1,1,جملة للنشاط االقتصادى,1,1,جملة,A,2017,19727
+8,8,الشرقية,EG-SHR,1,1,جملة للنشاط االقتصادى,2,2,ذكور,A,2017,15416
+8,8,الشرقية,EG-SHR,1,1,جملة للنشاط االقتصادى,3,3,إناث,A,2017,4311

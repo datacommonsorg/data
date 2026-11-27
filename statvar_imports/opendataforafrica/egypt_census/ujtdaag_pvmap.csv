@@ -1,0 +1,6 @@
+key,prop,val,p1,v1,p2,v2,p3,v3
+OBS_VALUE,value,{Number},observationAbout,country/EGY,name,"""{Name1}{Name2}""",,
+SEX:1,gender,Female,Name2,"{Comma} Female",,,,
+SEX:2,gender,Male,Name2,"{Comma} Male",,,,
+INDICATORS:1,populationType,Person,measuredProperty,lifeExpectancy,unit,Year,Name1,Life Expectancy at Birth
+INDICATORS:2,#ignore,ignore,,,,,,

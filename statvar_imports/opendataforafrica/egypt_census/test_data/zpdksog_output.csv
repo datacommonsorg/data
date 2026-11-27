@@ -1,0 +1,13 @@
+observationAbout,observationDate,variableMeasured,value,unit,scalingFactor,observationPeriod
+dcid:wikidataId/Q29965,2017,dcid:Count_MortalityEvent_Infant_AsAFractionOf_Count_BirthEvent_LiveBirth,22.58638,Per1000LiveBirths,1000,P1Y
+dcid:wikidataId/Q29965,2017,dcid:Count_MortalityEvent_Infant,3330,,,P1Y
+dcid:wikidataId/Q29965,2017,dcid:Count_MortalityEvent_Infant_Urban_AsAFractionOf_Count_BirthEvent_LiveBirth_Urban,22.58638,Per1000LiveBirths,1000,P1Y
+dcid:wikidataId/Q29965,2017,dcid:Count_MortalityEvent_Infant_Urban,2162,,,P1Y
+dcid:wikidataId/Q29965,2017,dcid:Count_MortalityEvent_Infant_Rural_AsAFractionOf_Count_BirthEvent_LiveBirth_Rural,13.35452,Per1000LiveBirths,1000,P1Y
+dcid:wikidataId/Q29965,2017,dcid:Count_MortalityEvent_Infant_Rural,1168,,,P1Y
+dcid:wikidataId/Q29937,2017,dcid:Count_MortalityEvent_Infant_AsAFractionOf_Count_BirthEvent_LiveBirth,9.93053,Per1000LiveBirths,1000,P1Y
+dcid:wikidataId/Q29937,2017,dcid:Count_MortalityEvent_Infant,436,,,P1Y
+dcid:wikidataId/Q29937,2017,dcid:Count_MortalityEvent_Infant_Urban_AsAFractionOf_Count_BirthEvent_LiveBirth_Urban,9.93053,Per1000LiveBirths,1000,P1Y
+dcid:wikidataId/Q29937,2017,dcid:Count_MortalityEvent_Infant_Urban,264,,,P1Y
+dcid:wikidataId/Q29937,2017,dcid:Count_MortalityEvent_Infant_Rural_AsAFractionOf_Count_BirthEvent_LiveBirth_Rural,10.15288,Per1000LiveBirths,1000,P1Y
+dcid:wikidataId/Q29937,2017,dcid:Count_MortalityEvent_Infant_Rural,172,,,P1Y

@@ -1,0 +1,9 @@
+Node: E:xovpotd_output->E0
+observationAbout: C:xovpotd_output->observationAbout
+observationDate: C:xovpotd_output->observationDate
+variableMeasured: C:xovpotd_output->variableMeasured
+value: C:xovpotd_output->value
+unit: C:xovpotd_output->unit
+scalingFactor: C:xovpotd_output->scalingFactor
+observationPeriod: C:xovpotd_output->observationPeriod
+typeOf: dcs:StatVarObservation

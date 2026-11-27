@@ -1,0 +1,9 @@
+Node: E:behvqtc_output->E0
+observationAbout: C:behvqtc_output->observationAbout
+observationDate: C:behvqtc_output->observationDate
+variableMeasured: C:behvqtc_output->variableMeasured
+value: C:behvqtc_output->value
+unit: C:behvqtc_output->unit
+scalingFactor: C:behvqtc_output->scalingFactor
+observationPeriod: C:behvqtc_output->observationPeriod
+typeOf: dcs:StatVarObservation

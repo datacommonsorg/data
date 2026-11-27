@@ -1,0 +1,9 @@
+Node: E:wtxyghf_output->E0
+observationAbout: C:wtxyghf_output->observationAbout
+observationDate: C:wtxyghf_output->observationDate
+variableMeasured: C:wtxyghf_output->variableMeasured
+value: C:wtxyghf_output->value
+unit: C:wtxyghf_output->unit
+scalingFactor: C:wtxyghf_output->scalingFactor
+observationPeriod: C:wtxyghf_output->observationPeriod
+typeOf: dcs:StatVarObservation

@@ -1,0 +1,7 @@
+key,prop,val,p1,v1,p2,v2,p3,v3
+OBS_VALUE,value,{Number},populationType,Person,,,,
+NAMEARAB_GOVERNORATES,observationAbout,{Data},,,,,,
+Percentage distribution %,#ignore,geographic share of national employment,,,,,,
+التوزيع النســبى %,#ignore,geographic share of national employment,,,,,,
+Estimation of employees (15 years and over),employmentStatus,Employed,age,[15 - Years],#Multiply,100,name,"""Number of Employed Persons (15+ Years)"""
+تقدير المشتغـــــلين (15 سنة فاكثر),employmentStatus,Employed,age,[15 - Years],#Multiply,100,name,"""Number of Employed Persons (15+ Years)"""

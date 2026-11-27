@@ -1,0 +1,10 @@
+key,prop,val,p1,v1,p2,v2,p3,v3,p4,v4
+OBS_VALUE,value,{Number},observationAbout,country/EGY,populationType,Person,name,"""{Name1}{Name2}""",alternateName,"""{AlternateName1}{AlternateName2}@ar"""
+الجامعات الحكومية والازهر,educationalAttainment,Graduate,institutionType,AlAzharUniversity__PublicUniversity,Name1,Number of graduates from public and Al-Azhar universities,AlternateName1,الجامعات الحكومية والازهر,,
+الجامعات الخاصة,educationalAttainment,Graduate,institutionType,PrivateUniversity,Name1,Number of graduates from private universities,AlternateName1,الجامعات الخاصة,,
+المعاهد العليا الخاصة,educationalAttainment,Graduate,institutionType,PrivateHigherInstitute,Name1,Number of graduates from private higher institutes,AlternateName1,المعاهد العليا الخاصة,,
+الاكاديميات,educationalAttainment,Graduate,institutionType,Academy,Name1,Number of graduates from academies,AlternateName1,الاكاديميات,,
+المعاهد الفنية فوق المتوسطة,educationalAttainment,Graduate,institutionType,UpperMediumTechnicalInstitute,Name1,Number of graduates from upper-medium technical institutes,AlternateName1,المعاهد الفنية فوق المتوسطة,,
+ذكور,gender,Male,Name2,"{Comma} male",#Format,AlternateName2= ذكور,,,,
+اناث,gender,Female,Name2,"{Comma} female",#Format,AlternateName2= اناث,,,,
+NAMEARAB_GENDER:الاجمالى,Name2,"""""",AlternateName2,"""""",,,,,,
