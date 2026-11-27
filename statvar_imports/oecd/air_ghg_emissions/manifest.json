@@ -1,0 +1,33 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "OECD_Air_GHG_emissions",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://data-explorer.oecd.org/",
+            "provenance_description": "Air pollutant and greenhouse gas emissions statistics from the Organisation for Economic Co-operation and Development (OECD).",
+            "scripts": [
+                "download.py",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/oecd_air_ghg_emissions_input.csv --pv_map=oecd_air_ghg_emissions_pvmap.csv --config_file=oecd_air_ghg_emissions_metadata.csv --places_resolved_csv=oecd_air_ghg_emissions_places_resolved.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/oecd_air_ghg_emissions --output_counters=counters/oecd_air_ghg_emissions_counters.csv"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output_files/oecd_air_ghg_emissions.tmcf",
+                    "cleaned_csv": "output_files/oecd_air_ghg_emissions.csv",
+                    "node_mcf": "output_files/*.mcf"
+                }
+            ],
+            "source_files": [
+                "input_files/*.csv",
+                "counters/*.csv",
+                "oecd_air_ghg_emissions_pvmap.csv",
+                "oecd_air_ghg_emissions_metadata.csv",
+                "oecd_air_ghg_emissions_places_resolved.csv",
+                "validation_config.json"
+            ],
+            "cron_schedule": "30 6 * * 2",
+            "validation_config_file": "validation_config.json"
+        }
+    ]
+}
