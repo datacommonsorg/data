@@ -81,6 +81,8 @@ class BigQueryDifferTest(unittest.TestCase):
         self.assertIn("JSON_VALUE(properties, '$.value')", sql)
         self.assertIn('SAFE_CAST(c.value AS BIGNUMERIC)', sql)
         self.assertIn('SAFE_CAST(c.value AS FLOAT64)', sql)
+        self.assertIn('SAFE_CAST(c.value AS BIGNUMERIC) IS NULL', sql)
+        self.assertIn('NOT IS_INF(SAFE_CAST(c.value AS FLOAT64))', sql)
         self.assertIn("WHERE diff_type != 'UNMODIFIED'", sql)
 
     def test_build_schema_diff_sql_uses_to_json_string_and_distinct(self):

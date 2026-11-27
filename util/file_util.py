@@ -430,7 +430,7 @@ def file_get_matching(filepat: Union[str, list]) -> list:
                             if ch in file_pat)
                         prefix = file_pat[:wildcard_pos]
                         for blob in bucket.list_blobs(prefix=prefix):
-                            if fnmatch.fnmatch(blob.name, file_pat):
+                            if fnmatch.fnmatchcase(blob.name, file_pat):
                                 f = f'gs://{bucket.name}/{blob.name}'
                                 files.add(f)
                     else:
@@ -502,7 +502,7 @@ def file_list_with_sizes(filepat: Union[str, list]) -> list[tuple[str, int]]:
                     prefix = file_pat[:wildcard_pos]
                     gcs_matches = []
                     for blob in bucket.list_blobs(prefix=prefix):
-                        if fnmatch.fnmatch(blob.name, file_pat):
+                        if fnmatch.fnmatchcase(blob.name, file_pat):
                             uri = f'gs://{bucket.name}/{blob.name}'
                             gcs_matches.append((uri, int(blob.size or 0)))
                     pattern_matches.extend(

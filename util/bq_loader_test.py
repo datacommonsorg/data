@@ -278,6 +278,18 @@ class BqLoaderTest(unittest.TestCase):
             mock_client.update_table.assert_called_once()
             self.assertEqual(os.listdir(stage_dir), [])
 
+    def test_chained_local_file_reader_truncated_segment_returns_empty(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            seg = os.path.join(tmpdir, 'part.jsonl')
+            with open(seg, 'wb') as f:
+                f.write(b'{"a":1}\n')
+            with bq_loader._ChainedLocalFileReader(
+                [seg], skip_subsequent_headers=False) as reader:
+                # Truncate file after reader computed segment size.
+                with open(seg, 'wb'):
+                    pass
+                self.assertEqual(reader.read(), b'')
+
     def test_ensure_bq_dataset_creates_when_missing(self):
         mock_client = mock.MagicMock()
         mock_client.get_dataset.side_effect = gcp_exceptions.NotFound('missing')

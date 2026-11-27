@@ -273,7 +273,10 @@ class FileUtilsTest(unittest.TestCase):
         blob3 = mock.MagicMock()
         blob3.name = 'dir/c.mcf'
         blob3.size = 250
-        mock_bucket.list_blobs.return_value = [blob3, blob2, blob1]
+        blob4 = mock.MagicMock()
+        blob4.name = 'dir/D.MCF'
+        blob4.size = 300
+        mock_bucket.list_blobs.return_value = [blob4, blob3, blob2, blob1]
         mock_get_bucket.return_value = mock_bucket
 
         items = file_util.file_list_with_sizes('gs://my-bucket/dir/*.mcf')
@@ -285,6 +288,12 @@ class FileUtilsTest(unittest.TestCase):
             items,
         )
         mock_bucket.list_blobs.assert_called_once_with(prefix='dir/')
+
+        matches = file_util.file_get_matching('gs://my-bucket/dir/*.mcf')
+        self.assertEqual(
+            ['gs://my-bucket/dir/a.mcf', 'gs://my-bucket/dir/c.mcf'],
+            matches,
+        )
 
     @mock.patch('file_util.file_get_gcs_blob')
     def test_file_remove_gcs_ignores_not_found(self, mock_get_blob):

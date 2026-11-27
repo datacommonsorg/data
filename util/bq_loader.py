@@ -352,6 +352,8 @@ class _ChainedLocalFileReader(io.RawIOBase):
             read_len = len(data)
             self._pos += read_len
             remaining -= read_len
+        if not chunks:
+            return b''
         return chunks[0] if len(chunks) == 1 else b''.join(chunks)
 
     def close(self) -> None:

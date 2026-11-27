@@ -164,7 +164,8 @@ def _build_obs_diff_sql(curr_table: str, prev_table: str) -> str:
     Observations join on the 7 normalized identity properties extracted from the
     `properties` JSON column (not on `dcid`, since observation DCIDs hash
     `value`). Values are compared numerically when both parse as finite numbers
-    (using `BIGNUMERIC` alongside `FLOAT64`), preserving raw value text for
+    (using `BIGNUMERIC` alongside `FLOAT64`, with a finite `FLOAT64` fallback
+    when both values overflow `BIGNUMERIC`), preserving raw value text for
     emitted diff MCF files. Only changed rows are returned.
     """
     return f"""
@@ -216,6 +217,11 @@ def _build_obs_diff_sql(curr_table: str, prev_table: str) -> str:
           WHEN c.value IS DISTINCT FROM p.value
             AND NOT COALESCE(
               SAFE_CAST(c.value AS BIGNUMERIC) = SAFE_CAST(p.value AS BIGNUMERIC)
+              AND SAFE_CAST(c.value AS FLOAT64) = SAFE_CAST(p.value AS FLOAT64),
+              SAFE_CAST(c.value AS BIGNUMERIC) IS NULL
+              AND SAFE_CAST(p.value AS BIGNUMERIC) IS NULL
+              AND NOT IS_INF(SAFE_CAST(c.value AS FLOAT64))
+              AND NOT IS_INF(SAFE_CAST(p.value AS FLOAT64))
               AND SAFE_CAST(c.value AS FLOAT64) = SAFE_CAST(p.value AS FLOAT64),
               FALSE) THEN 'MODIFIED'
           ELSE 'UNMODIFIED'
