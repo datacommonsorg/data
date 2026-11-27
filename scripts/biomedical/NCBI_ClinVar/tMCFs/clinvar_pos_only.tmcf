@@ -1,0 +1,14 @@
+Node: E:clinvar_pos_only->E1
+typeOf: dcs:GenomicPosition
+dcid: C:clinvar_pos_only->dcid_pos
+name: C:clinvar_pos_only->name_pos
+chrom: C:clinvar_pos_only->chrom
+inGenomeAssembly: dcs:bio/hg19
+position:  C:clinvar_pos_only->position
+
+Node: E:clinvar_pos_only->E2
+typeOf: dcs:GeneticVariant
+dcid: C:clinvar_pos_only->dcid
+name: C:clinvar_pos_only->name
+rsID: C:clinvar_pos_only->rsID
+hg19GenomicPosition: E:clinvar_pos_only->E1
