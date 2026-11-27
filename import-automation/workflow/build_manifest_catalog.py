@@ -28,7 +28,18 @@ import glob
 import json
 import os
 import re
+import sys
 from typing import Any
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+if current_dir not in sys.path:
+    sys.path.insert(0, current_dir)
+executor_dir = os.path.abspath(
+    os.path.join(current_dir, "..", "executor", "app", "executor"))
+if os.path.isdir(executor_dir) and executor_dir not in sys.path:
+    sys.path.append(executor_dir)
+
+from cloud_batch import normalize_batch_resources
 
 
 def strip_leading_scripts(path_str: str) -> str:
@@ -73,6 +84,13 @@ def build_catalog(
             if not import_name:
                 continue
 
+            config_override = spec.get("config_override", {})
+            if isinstance(config_override, dict):
+                raw_exclude = config_override.get("exclude_import_workflow",
+                                                  False)
+                if raw_exclude is True or str(raw_exclude).lower() == "true":
+                    continue
+
             dag_id = import_name
             if allowlist_set and (dag_id not in allowlist_set and
                                   import_name not in allowlist_set):
@@ -86,6 +104,13 @@ def build_catalog(
                     "Each import specification must have a globally unique import_name / DAG ID."
                 )
             seen_dag_ids[dag_id] = manifest_path
+
+            resource_limits = spec.get("resource_limits", {})
+            if resource_limits:
+                normalize_batch_resources(
+                    resource_limits,
+                    context=f"'{import_name}' in '{manifest_path}'",
+                )
 
             subpath = strip_leading_scripts(rel_dir)
             category = subpath.split("/")[0] if subpath else "general"
@@ -110,7 +135,7 @@ def build_catalog(
                 "config_override":
                     spec.get("config_override", {}),
                 "resource_limits":
-                    spec.get("resource_limits", {}),
+                    resource_limits,
                 "category":
                     category,
             }
