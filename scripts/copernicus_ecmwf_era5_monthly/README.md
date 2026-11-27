@@ -160,16 +160,16 @@ From the repository root:
 
 ```bash
 # 1. Fetch and convert ERA5-Land monthly CSVs (2020-07..latest) into input_files/
-python3 scripts/earthengine/copernicus_ecmwf_era5_monthly/download_and_process.py \
+python3 scripts/copernicus_ecmwf_era5_monthly/download_and_process.py \
   --strict_ee=true \
   --ee_project=<PROJECT_ID>
 
 # 2. Convert CSVs to resolved MCF via Data Commons import tool
 dc-import genmcf \
-  scripts/earthengine/copernicus_ecmwf_era5_monthly/era5_monthly.tmcf \
-  scripts/earthengine/copernicus_ecmwf_era5_monthly/input_files/*.celsius.csv \
-  -o=scripts/earthengine/copernicus_ecmwf_era5_monthly/output
+  scripts/copernicus_ecmwf_era5_monthly/era5_monthly.tmcf \
+  scripts/copernicus_ecmwf_era5_monthly/input_files/*.celsius.csv \
+  -o=scripts/copernicus_ecmwf_era5_monthly/output
 
 # 3. Run unit tests
-./run_tests.sh -p scripts/earthengine/copernicus_ecmwf_era5_monthly
+./run_tests.sh -p scripts/copernicus_ecmwf_era5_monthly
 ```
