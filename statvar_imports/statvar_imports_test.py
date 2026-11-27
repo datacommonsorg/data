@@ -272,6 +272,9 @@ def get_failure_message(test_config: str, result: dict, root_dir: str) -> str:
         lines.append(f'  test: {test_name}:'
                      f' statvar processor exit code:'
                      f' {test_status.get("returncode")}')
+        if test_status.get('error_counters'):
+            lines.append('    error counters:'
+                         f' {test_status["error_counters"]}')
         output_status = test_status.get('output_status', {})
         for output_name, diff in output_status.items():
             if isinstance(diff, dict):

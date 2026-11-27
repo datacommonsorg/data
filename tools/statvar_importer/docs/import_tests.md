@@ -165,6 +165,7 @@ Each entry has these keys:
 | `statvar_processor_args`    | Yes      | Command line flags of the processor; see [Processor arguments](#processor-arguments).                                 |
 | `statvar_processor_outputs` | Yes      | Output files to compare; see [Outputs](#outputs).                                                                     |
 | `statvar_processor_config`  | No       | Processor settings that replace the test defaults; see [Processor settings for tests](#processor-settings-for-tests). |
+| `expected_error_counters`   | No       | Error counters that the test allows; see [Error counters](#error-counters).                                           |
 | `env_file`                  | No       | File with environment variables for the processor.                                                                    |
 
 ### Processor arguments
@@ -226,6 +227,21 @@ The result of a comparison has one of these statuses, or several joined with
 
 A test passes only when every output is `MATCHED`.
 
+### Error counters
+
+The processor counts problems that it continues past in counters named
+`error-*`, such as `error-unresolved-place`. A test fails when a run has an
+error counter above 0, even if every output matches. The result lists the
+counters in `error_counters`.
+
+Fix the PV map or the config to remove the error. If the import produces the
+error on purpose, list the counter in `expected_error_counters` of the entry,
+without the stage prefix that the counters file adds:
+
+```json
+"expected_error_counters": ["error-unresolved-place"]
+```
+
 ### Processor settings for tests
 
 A test runs the processor without lookups in the Data Commons API, so that the
@@ -273,9 +289,10 @@ with Git LFS, and nobody has checked that the CI checkout fetches them.
   `statvar_imports/`.
 - **Expected files.** No command rewrites the expected files. Repeat steps 3 to
   5 of [Add a test](#add-a-test).
-- **Counters.** A test checks the output files and the processor's exit code.
-  It doesn't check the counters, so read `statvar_counters.json` in the
-  temporary folder when you review the output.
+- **Counters.** A test fails on an error counter; see
+  [Error counters](#error-counters). It doesn't check other counters, such as
+  `dropped-*` and `warning-*`, so read `statvar_counters.csv` in the temporary
+  folder when you review the output.
 - **Existing StatVars.** Without `existing_statvar_mcf`, the test output may
   have generated dcids for StatVars that the production run reuses.
 - **API lookups.** The settings in

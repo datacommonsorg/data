@@ -29,6 +29,9 @@ settings with each invocation as a dictionary with the following sections:
     arguments, these override the configs in the import's config_file. They
     also override the default configs for tests in
     _DEFAULT_TEST_PROCESSOR_CONFIG.
+  expected_error_counters: (optional) list of error counters of the statvar
+    processor that are expected for the test, such as 'error-unresolved-place'.
+    A test fails if the statvar processor has any other error counter.
   expected_outputs:
     A dictionary of expected output files mapped to output files.
 
@@ -73,6 +76,7 @@ Example:
 """
 
 import ast
+import csv
 import json
 import os
 import pprint
@@ -229,6 +233,8 @@ class StatVarProcessorTestRunner:
                 logging.info(
                     f'Running statvar processor test: {index}:{test_name}')
                 test_status = self.run_statvar_processor(test_config)
+                if test_status.get('error_counters'):
+                    return_status['status'] = 'FAIL'
                 if test_status.get('returncode', 1) != 0:
                     logging.error(
                         f'statvar processor test failed for {test_name}: {test_status}'
@@ -294,8 +300,8 @@ class StatVarProcessorTestRunner:
                 args_dict['output_counters'] = os.path.join(
                     test_dir, counters_val)
         else:
-            args_dict['output_counters'] = os.path.join(
-                output_dir, 'statvar_counters.json')
+            args_dict['output_counters'] = os.path.join(output_dir,
+                                                        'statvar_counters.csv')
 
         # Save intermediate files such as csv for xls inputs and the http
         # cache in the temp dir instead of the import folder.
@@ -332,6 +338,14 @@ class StatVarProcessorTestRunner:
         )
         script_status['output_dir'] = output_dir
         script_status['test_dir'] = test_dir
+        # Check for errors counted by the statvar processor, such as
+        # 'error-unresolved-place', that don't fail the statvar processor.
+        error_counters = get_error_counters(
+            args_dict['output_counters'], config.get('expected_error_counters'))
+        if error_counters:
+            logging.error(
+                f'Got error counters for test {test_name}: {error_counters}')
+            script_status['error_counters'] = error_counters
         return script_status
 
     def _write_processor_config(self, config_file: str, test_config: dict,
@@ -479,6 +493,47 @@ class StatVarProcessorTestRunner:
         logging.info(
             f'Verify outputs: {return_status.get("status")} for {outputs}')
         return return_status
+
+
+def get_error_counters(counters_file: str,
+                       expected_counters: list = None) -> dict:
+    """Returns the error counters from a statvar processor counters file.
+
+  The statvar processor counts errors, such as 'error-unresolved-place', in
+  counters with a name that starts with 'error-' after an optional prefix for
+  the processing stage, such as '1:process_input_error-unresolved-place'.
+
+  Args:
+    counters_file: csv file with the counters saved by the statvar processor
+      with the columns: key, value.
+    expected_counters: list of error counters to be ignored, without the
+      prefix for the processing stage, such as 'error-unresolved-place'.
+
+  Returns:
+    dictionary of error counter name to value for counters with a value
+    greater than 0 that are not expected.
+  """
+    error_counters = {}
+    counters_files = file_util.file_get_matching(counters_file)
+    if not counters_files:
+        # The statvar processor failed before it saved the counters.
+        return error_counters
+    expected = set(get_value_list(expected_counters or []))
+    with file_util.FileIO(counters_files[0]) as csv_file:
+        for row in csv.DictReader(csv_file):
+            name = row.get('key') or ''
+            error_pos = name.find('error-')
+            if error_pos < 0 or (error_pos > 0 and name[error_pos - 1] != '_'):
+                continue
+            if name[error_pos:] in expected:
+                continue
+            try:
+                value = float(row.get('value') or 0)
+            except ValueError:
+                continue
+            if value > 0:
+                error_counters[name] = value
+    return error_counters
 
 
 def get_env_dict(filename: str) -> dict:

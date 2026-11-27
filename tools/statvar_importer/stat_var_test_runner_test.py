@@ -283,6 +283,70 @@ class StatVarTestRunnerTest(unittest.TestCase):
         # Configs in the test override the defaults.
         self.assertIs(processor_config['recon_lookup_api'], True)
 
+    def test_get_error_counters(self):
+        counters_file = self._write_file(
+            'counters.csv',
+            '"key","value"\n'
+            '"1:process_input_error-unresolved-place",3\n'
+            '"1:process_input_input-rows-processed",141\n'
+            '"2:prepare_output_error-duplicate-statvars",0\n'
+            '"error-svobs-missing-property",2\n'
+            '"warning-missing-property-key",48792\n'
+            '"dropped-svobs-unresolved-place",5\n',
+        )
+        self.assertEqual(
+            stat_var_test_runner.get_error_counters(counters_file), {
+                '1:process_input_error-unresolved-place': 3,
+                'error-svobs-missing-property': 2,
+            })
+        # Expected error counters are ignored.
+        self.assertEqual(
+            stat_var_test_runner.get_error_counters(counters_file,
+                                                    ['error-unresolved-place']),
+            {'error-svobs-missing-property': 2})
+        # A counters file that doesn't exist has no error counters.
+        self.assertEqual(
+            stat_var_test_runner.get_error_counters(
+                os.path.join(self._test_dir, 'no_counters.csv')), {})
+
+    def test_run_tests_fails_on_error_counters(self):
+        test_config = {
+            'test_name': 'error_test',
+            'statvar_processor_args': {
+                'output_path': 'output/res',
+            },
+        }
+
+        def fake_run_script(**kwargs):
+            # Save counters with an error as the statvar processor does.
+            counters_arg = [
+                a for a in kwargs['args'] if a.startswith('--output_counters=')
+            ][0]
+            counters_file = counters_arg.split('=', 1)[1]
+            os.makedirs(os.path.dirname(counters_file), exist_ok=True)
+            with open(counters_file, 'w') as f:
+                f.write('"key","value"\n'
+                        '"1:process_input_error-unresolved-place",3\n')
+            return {'returncode': 0}
+
+        with mock.patch.object(stat_var_test_runner,
+                               'run_script',
+                               side_effect=fake_run_script):
+            runner = stat_var_test_runner.StatVarProcessorTestRunner(
+                test_config=dict(test_config))
+            result = runner.run_tests()
+            self.assertEqual(result['status'], 'FAIL')
+            self.assertEqual(result['error_test']['error_counters'],
+                             {'1:process_input_error-unresolved-place': 3})
+
+            # The test passes if the error counter is expected.
+            test_config['expected_error_counters'] = ['error-unresolved-place']
+            runner = stat_var_test_runner.StatVarProcessorTestRunner(
+                test_config=dict(test_config))
+            result = runner.run_tests()
+            self.assertEqual(result['status'], 'PASS')
+            self.assertNotIn('error_counters', result['error_test'])
+
     def test_strip_api_keys_off_keeps_api_keys(self):
         runner = stat_var_test_runner.StatVarProcessorTestRunner(
             test_config={'test_name': 'keys_test'}, strip_api_keys=False)
