@@ -38,8 +38,11 @@ Follow these steps. Each step ends with a check that tells you it is done:
 1. **Write the test config.** Create `<import-dir>/statvar_test_config.json`
    with one entry for each `stat_var_processor.py` command in the import's
    `manifest.json` or run script. Copy the flags of the command, with the
-   changes in [Processor arguments](#processor-arguments). *Done when* every PV
-   map and config file that the import passes to the processor is in an entry.
+   changes in [Processor arguments](#processor-arguments). If a command has
+   `--existing_statvar_mcf`, create a local file of existing StatVars for the
+   test; see [Existing StatVars](#existing-statvars). *Done when* every PV map
+   and config file that the import passes to the processor is in an entry, and
+   no entry has a `gs://` path.
 
 1. **Generate the expected output.** Run the test and keep its output:
 
@@ -180,13 +183,56 @@ changes:
 - **`output_path`.** Keep the relative value of the import's command, such as
   `output/<output>`. The test writes the output to a temporary folder. It uses
   an absolute path or a `gs://` path as given, so keep the path relative.
-- **`existing_statvar_mcf`.** Leave out a `gs://` path. A test reads only
+- **`existing_statvar_mcf`.** Replace a `gs://` path with a local file in
+  `test_data/`; see [Existing StatVars](#existing-statvars). A test reads only
   files in the repository.
 - **`output_counters`.** Leave it out. The test saves the counters in the
   temporary folder.
 
 Keep every other flag, such as `pv_map`, `config_file`, `places_resolved_csv`,
 and `statvar_dcid_remap_csv`.
+
+### Existing StatVars
+
+An import that runs with `--existing_statvar_mcf` reuses the dcids of StatVars
+in that file. The file in `gs://unresolved_mcf` has every existing StatVar, and
+a test can't read it. Give the test a local file with only the StatVars that
+the test input produces:
+
+1. From the import folder, run the import's command on the test input. Keep
+   the `gs://` path, and add `--output_only_new_statvars=false`, so that the
+   processor writes every StatVar of the test input, with its existing dcid,
+   to the StatVar MCF:
+
+   ```bash
+   python3 ../../tools/statvar_importer/stat_var_processor.py \
+     --input_data=test_data/<name>_input.csv \
+     --pv_map=<import>_pvmap.csv \
+     --config_file=<import>_statvar_processor_config.csv \
+     --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+     --output_only_new_statvars=false \
+     --output_path=/tmp/<output>_existing/<output> \
+     --output_counters=/tmp/<output>_existing/counters.csv
+   ```
+
+   The run needs read access to the bucket. Without access, it fails with
+   `403 Forbidden`.
+
+1. Copy the StatVar MCF into `test_data/`:
+
+   ```bash
+   cp /tmp/<output>_existing/<output>_stat_vars.mcf \
+     test_data/existing_stat_vars.mcf
+   ```
+
+1. Set the file in `statvar_processor_args` of the test config:
+
+   ```json
+   "existing_statvar_mcf": "test_data/existing_stat_vars.mcf"
+   ```
+
+Repeat these steps when the test input or the PV map changes the StatVars of
+the test.
 
 ### Outputs
 
@@ -300,8 +346,10 @@ with Git LFS, and nobody has checked that the CI checkout fetches them.
   [Error counters](#error-counters). It doesn't check other counters, such as
   `dropped-*` and `warning-*`, so read `statvar_counters.csv` in the temporary
   folder when you review the output.
-- **Existing StatVars.** Without `existing_statvar_mcf`, the test output may
-  have generated dcids for StatVars that the production run reuses.
+- **Existing StatVars.** The local file from
+  [Existing StatVars](#existing-statvars) is a copy made when the test was
+  created. A test doesn't show a StatVar that Data Commons added or renamed
+  later.
 - **API lookups.** The settings in
   [Processor settings for tests](#processor-settings-for-tests) were checked on
   one import. If a test fails with `429 Too Many Requests` or a network error,
