@@ -187,7 +187,50 @@ class TestMCFFileUtil(unittest.TestCase):
                 separator_chars=' ',
             ))
         self.assertEqual(None, mcf_file_util.get_numeric_value('not number'))
-        self.assertEqual(None, mcf_file_util.get_numeric_value('10e5'))
+        # Scientific notation (e and E)
+        self.assertEqual(1000000, mcf_file_util.get_numeric_value('10e5'))
+        self.assertEqual(1000000, mcf_file_util.get_numeric_value('10E5'))
+        self.assertEqual(0.000123, mcf_file_util.get_numeric_value(' 1.23e-4 '))
+        self.assertEqual(-0.000123,
+                         mcf_file_util.get_numeric_value(' -1.23E-4 '))
+        self.assertEqual(100000, mcf_file_util.get_numeric_value('1e+5'))
+        self.assertEqual(100000, mcf_file_util.get_numeric_value('1E+5'))
+        self.assertEqual(-1000000, mcf_file_util.get_numeric_value('-10E5'))
+        self.assertEqual(150, mcf_file_util.get_numeric_value('+1.5E2'))
+        self.assertEqual(0, mcf_file_util.get_numeric_value('0e5'))
+        # Extra whitespace, empty, and negative numbers
+        self.assertEqual(-42, mcf_file_util.get_numeric_value('  -42  '))
+        self.assertEqual(-1.23, mcf_file_util.get_numeric_value('\t -1.23 \n'))
+        # Parse '$' prefix or suffix
+        self.assertEqual(100, mcf_file_util.get_numeric_value('$100'))
+        self.assertEqual(-100, mcf_file_util.get_numeric_value('-$100'))
+        self.assertEqual(100, mcf_file_util.get_numeric_value('100$'))
+
+        self.assertIsNone(mcf_file_util.get_numeric_value(''))
+        self.assertIsNone(mcf_file_util.get_numeric_value('   '))
+        self.assertIsNone(mcf_file_util.get_numeric_value('\t\n'))
+        self.assertIsNone(mcf_file_util.get_numeric_value('-'))
+        self.assertIsNone(mcf_file_util.get_numeric_value(' - '))
+        # Do not parse '_' into numbers
+        self.assertIsNone(mcf_file_util.get_numeric_value('1_000'))
+        self.assertIsNone(mcf_file_util.get_numeric_value('2020_01'))
+        self.assertIsNone(mcf_file_util.get_numeric_value('1_000.5'))
+        self.assertIsNone(mcf_file_util.get_numeric_value('1_0e5'))
+        # Skip hex, bool, and non-finite strings/nan
+        self.assertIsNone(mcf_file_util.get_numeric_value('0xabc'))
+        self.assertIsNone(mcf_file_util.get_numeric_value('0X10'))
+        self.assertIsNone(mcf_file_util.get_numeric_value('0x1e'))
+        self.assertIsNone(mcf_file_util.get_numeric_value('-0x10'))
+        self.assertIsNone(mcf_file_util.get_numeric_value(True))
+        self.assertIsNone(mcf_file_util.get_numeric_value(False))
+        self.assertIsNone(mcf_file_util.get_numeric_value('inf'))
+        self.assertIsNone(mcf_file_util.get_numeric_value('nan'))
+        self.assertIsNone(mcf_file_util.get_numeric_value(float('nan')))
+        # Overflow logs an error and returns None
+        for overflow_val in ['1e400', '-1E400', float('inf'), float('-inf')]:
+            with self.assertLogs(level='ERROR') as cm:
+                self.assertIsNone(mcf_file_util.get_numeric_value(overflow_val))
+            self.assertTrue(any('overflow' in msg.lower() for msg in cm.output))
 
     def test_check_nodes_can_merge(self):
         node1 = {
@@ -269,6 +312,47 @@ class TestMCFFileUtil(unittest.TestCase):
         self.assertFalse(mcf_file_util.is_number('1.1.1'))
         self.assertTrue(mcf_file_util.is_number(1.1))
         self.assertTrue(mcf_file_util.is_number(1))
+        # Negative numbers, signs, and extra whitespace
+        self.assertTrue(mcf_file_util.is_number('-1'))
+        self.assertTrue(mcf_file_util.is_number('-1.23'))
+        self.assertTrue(mcf_file_util.is_number('+1.5'))
+        self.assertTrue(mcf_file_util.is_number('  -42  '))
+        self.assertTrue(mcf_file_util.is_number('\t 3.14 \n'))
+        self.assertTrue(mcf_file_util.is_number('-.5'))
+        self.assertTrue(mcf_file_util.is_number('5.'))
+        # Scientific notation (e and E)
+        self.assertTrue(mcf_file_util.is_number('10e5'))
+        self.assertTrue(mcf_file_util.is_number('10E5'))
+        self.assertTrue(mcf_file_util.is_number(' 1.23e-4 '))
+        self.assertTrue(mcf_file_util.is_number(' -1.23E+4 '))
+        # Empty / whitespace-only
+        self.assertIs(mcf_file_util.is_number(''), False)
+        self.assertIs(mcf_file_util.is_number('   '), False)
+        self.assertIs(mcf_file_util.is_number('\t\n'), False)
+        self.assertIs(mcf_file_util.is_number('-'), False)
+        self.assertIs(mcf_file_util.is_number(None), False)
+        # Do not parse '$' or '_' into numbers
+        self.assertFalse(mcf_file_util.is_number('$100'))
+        self.assertFalse(mcf_file_util.is_number('-$100'))
+        self.assertFalse(mcf_file_util.is_number('100$'))
+        self.assertFalse(mcf_file_util.is_number('1_000'))
+        self.assertFalse(mcf_file_util.is_number('2020_01'))
+        self.assertFalse(mcf_file_util.is_number('1_0e5'))
+        # Skip hex, bool, and non-finite strings/nan
+        self.assertFalse(mcf_file_util.is_number('0xabc'))
+        self.assertFalse(mcf_file_util.is_number('0X10'))
+        self.assertFalse(mcf_file_util.is_number('0x1e'))
+        self.assertFalse(mcf_file_util.is_number('-0x10'))
+        self.assertFalse(mcf_file_util.is_number(True))
+        self.assertFalse(mcf_file_util.is_number(False))
+        self.assertFalse(mcf_file_util.is_number('inf'))
+        self.assertFalse(mcf_file_util.is_number('nan'))
+        self.assertFalse(mcf_file_util.is_number(float('nan')))
+        # Overflow logs an error and returns False
+        for overflow_val in ['1e400', '-1E400', float('inf'), float('-inf')]:
+            with self.assertLogs(level='ERROR') as cm:
+                self.assertFalse(mcf_file_util.is_number(overflow_val))
+            self.assertTrue(any('overflow' in msg.lower() for msg in cm.output))
 
 
 class TestAddPVToNode(unittest.TestCase):

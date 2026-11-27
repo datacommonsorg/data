@@ -1,9 +1,7 @@
 observationAbout,observationDate,value,variableMeasured
-dcid:country/MNG,2025,99483,dcid:Count_Student_Male_UniversityEducation
-dcid:country/MNG,2024,92261,dcid:Count_Student_Male_UniversityEducation
-dcid:NA,2025,8589,dcid:Count_Student_Male_UniversityEducation
-dcid:NA,2024,594,dcid:Count_Student_Male_UniversityEducation
-dcid:wikidataId/Q207809,2025,2872,dcid:Count_Student_Male_UniversityEducation
-dcid:wikidataId/Q207809,2024,533,dcid:Count_Student_Male_UniversityEducation
-dcid:wikidataId/Q276200,2025,2357,dcid:Count_Student_Male_UniversityEducation
-dcid:wikidataId/Q276200,2024,61,dcid:Count_Student_Male_UniversityEducation
+dcid:country/MNG,2025,62408,dcid:Count_Student_Male_UniversityEducation
+dcid:country/MNG,2024,58021,dcid:Count_Student_Male_UniversityEducation
+dcid:wikidataId/Q207809,2025,1539,dcid:Count_Student_Male_UniversityEducation
+dcid:wikidataId/Q207809,2024,1414,dcid:Count_Student_Male_UniversityEducation
+dcid:wikidataId/Q244788,2025,2028,dcid:Count_Student_Male_UniversityEducation
+dcid:wikidataId/Q244788,2024,1872,dcid:Count_Student_Male_UniversityEducation

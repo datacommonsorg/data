@@ -471,7 +471,7 @@ def generate_schema_and_tmcf_from_file(input_data_dictionary,
     dd = dd.reset_index()
 
     extracted_properties = []
-    for index, row in dd.iterrows():
+    for _index, row in dd.iterrows():
 
         should_skip_component = any([
             eal_comp in row["Field Alias"]

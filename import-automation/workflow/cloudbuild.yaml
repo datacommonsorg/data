@@ -55,6 +55,7 @@ steps:
     args:
       - '-c'
       - |
+        python -m py_compile import-automation/executor/app/executor/cloud_batch.py
         python -m py_compile import-automation/workflow/import_automation_workflow.py
         python -m py_compile import-automation/workflow/golden_verification.py
         python -m py_compile import-automation/workflow/import_dags_factory.py
@@ -99,6 +100,7 @@ steps:
         fi
 
         echo "Deploying Airflow DAGs to: $${TARGET_GCS}"
+        gcloud storage cp import-automation/executor/app/executor/cloud_batch.py "$${TARGET_GCS}/cloud_batch.py"
         gcloud storage cp import-automation/workflow/import_automation_workflow.py "$${TARGET_GCS}/import_automation_workflow.py"
         gcloud storage cp import-automation/workflow/golden_verification.py "$${TARGET_GCS}/golden_verification.py"
         gcloud storage cp import-automation/workflow/import_dags_factory.py "$${TARGET_GCS}/import_dags_factory.py"
