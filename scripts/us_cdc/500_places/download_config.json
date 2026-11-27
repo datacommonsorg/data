@@ -66,6 +66,11 @@
                 "URL": "https://data.cdc.gov/api/views/ai6z-tcin/rows.csv?accessType=DOWNLOAD",
                 "FILE_TYPE": "CensusTract",
                 "FILE_NAME": "censustract_raw_data_2024.csv"
+            },
+            {
+                "URL": "https://data.cdc.gov/api/views/4r2x-hcfq/rows.csv?accessType=DOWNLOAD",
+                "FILE_TYPE": "ZipCode",
+                "FILE_NAME": "zipcode_raw_data_2024.csv"
             }
         ]
     },
