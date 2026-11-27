@@ -22,6 +22,7 @@ import json
 import os
 import re
 import shutil
+import tempfile
 import time
 from typing import Any
 
@@ -1256,14 +1257,33 @@ def write_education_csv(
     value_columns: tuple[str, ...] = ORDERED_VALUE_COLUMNS,
 ) -> None:
     """Writes the combined Indonesia Education CSV compatible with stat_var_processor.py."""
-    with open(output_path, 'w', newline='', encoding='utf-8') as fp:
-        writer = csv.writer(fp)
-        writer.writerow(['Provinsi', 'observationDate'] + list(value_columns))
-        for (place, year_str), col_values in sorted(table_data.items()):
-            row = [place, year_str]
-            for col in value_columns:
-                row.append(col_values.get(col, ''))
-            writer.writerow(row)
+    output_dir = os.path.dirname(os.path.abspath(output_path))
+    os.makedirs(output_dir, exist_ok=True)
+    tmp_path: str | None = None
+    try:
+        with tempfile.NamedTemporaryFile(
+                mode='w',
+                newline='',
+                encoding='utf-8',
+                dir=output_dir,
+                prefix='.indonesia_education_',
+                suffix='.tmp',
+                delete=False,
+        ) as fp:
+            tmp_path = fp.name
+            writer = csv.writer(fp)
+            writer.writerow(['Provinsi', 'observationDate'] +
+                            list(value_columns))
+            for (place, year_str), col_values in sorted(table_data.items()):
+                row = [place, year_str]
+                for col in value_columns:
+                    row.append(col_values.get(col, ''))
+                writer.writerow(row)
+        os.replace(tmp_path, output_path)
+    except Exception:
+        if tmp_path and os.path.exists(tmp_path):
+            os.unlink(tmp_path)
+        raise
     logging.info(
         'Wrote %d (place, year) rows across %d columns to %s',
         len(table_data),

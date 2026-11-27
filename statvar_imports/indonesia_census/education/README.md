@@ -89,7 +89,7 @@ Comparison against the legacy production Education (`gs://unresolved_mcf/country
 - `manifest.json`: Import automation specification for `Indonesia_Census_Education` (restricting `node_mcf` to `output_files/*_stat_vars.mcf`; provisional enum schema is defined in `Provisional_Indonesia_Census_Education_Schema.mcf` in the companion schema CL).
 - `requirements.txt`: Per-import dependency (`pymupdf`) for the BPS yearbook PDF fallback.
 - `validation_config.json`: Validation rules using built-in validators (`MAX_DATE_CONSISTENT` scoped separately for Susenas literacy vs. SIMDASI school StatVars, `MIN_VALUE_CHECK >= 0`, `MAX_VALUE_CHECK <= 100` for literacy, `NUM_PLACES_COUNT >= 35` and `NUM_OBSERVATIONS_CHECK >= 250` for school StatVars) plus single-purpose `SQL_VALIDATOR` rules for January-safe annual freshness (`>= YEAR(CURRENT_DATE) - 2`) and StatVar/observation counts (`78` StatVars, `>= 24,000` obs).
-- `test_data/`: Sample input (`indonesia_education_input.csv`) and expected processor output (`indonesia_education_output.csv`).
+- `test_data/`: Sample input (`indonesia_education_input.csv`) and expected processor outputs (`indonesia_education_output.csv`, `indonesia_education_output.tmcf`).
 
 ### Running Locally
 
