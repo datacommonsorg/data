@@ -8,12 +8,12 @@
       "params": {}
     },
     {
-      "rule_id": "check_min_date_historical",
-      "description": "Checks that historical baseline observations from 1979-01 are included.",
+      "rule_id": "check_min_date_ee_start",
+      "description": "Checks that ERA5-Land monthly observations start at 2020-07 (earlier 1979-01..2020-06 data is ingested via GCS historic/).",
       "validator": "SQL_VALIDATOR",
       "params": {
         "query": "SELECT StatVar, MinDate FROM stats",
-        "condition": "MinDate <= '1979-01'"
+        "condition": "MinDate <= '2020-07'"
       }
     },
     {
@@ -27,7 +27,7 @@
     },
     {
       "rule_id": "check_num_places_consistent",
-      "description": "Checks that all 7 ERA5 monthly StatVars cover >= 14350 places and differ by at most 1 historical coastal place.",
+      "description": "Checks that all 7 ERA5 monthly StatVars cover >= 14350 places uniformly.",
       "validator": "SQL_VALIDATOR",
       "params": {
         "query": "SELECT COUNT(*) AS num_statvars, MIN(NumPlaces) AS min_places, MAX(NumPlaces) AS max_places FROM stats",

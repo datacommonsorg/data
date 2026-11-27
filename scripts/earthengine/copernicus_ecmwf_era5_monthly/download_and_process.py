@@ -11,20 +11,14 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Downloads and preprocesses Copernicus ECMWF ERA5 Monthly data.
+"""Downloads and preprocesses Copernicus ECMWF ERA5-Land Monthly data from Earth Engine.
 
-Pipeline stages:
-1. Syncs historical baseline `.celsius.csv` files (`1979-01..2020-06`) from GCS
-   (`gs://datacommons_public/unresolved_mcf/copernicus_ecmwf/era5_monthly/`)
-   into a separate `history_files/` directory using shared utilities from
-   `util/download_util_script.py` and `util/file_util.py`.
-2. Fetches monthly observations for `2020-07..latest` from Google Earth Engine
-   (`ECMWF/ERA5_LAND/MONTHLY_AGGR`), mapping ERA5-Land band names to canonical
-   ERA5 column names, and converts Kelvin temperature columns to Celsius
-   matching `kelvin2celsius.sh` (`%.6g` formatting) into `input_files/`.
-3. `manifest.json` then executes `tools/statvar_importer/stat_var_processor.py`
-   over `history_files/*.celsius.csv,input_files/*.celsius.csv` to emit
-   `output/era5_monthly.csv` and `output/era5_monthly.tmcf`.
+Fetches monthly observations for `2020-07..latest` from Google Earth Engine
+(`ECMWF/ERA5_LAND/MONTHLY_AGGR`) over AdministrativeArea1 and AdministrativeArea2
+boundary assets, renames ERA5-Land band names to canonical column names matching
+`era5_monthly.tmcf`, and converts Kelvin temperature columns to Celsius (`%.6g`)
+into `input_files/*.celsius.csv`. Earlier `1979-01..2020-06` observations are
+carried via import automation's GCS `historic/` folder.
 """
 
 from collections import OrderedDict
@@ -35,7 +29,6 @@ import datetime
 import glob
 import math
 import os
-import sys
 import tempfile
 import threading
 import time
@@ -44,7 +37,6 @@ from typing import Dict, List, Optional, Set, Tuple
 from absl import app
 from absl import flags
 from absl import logging
-import requests
 
 try:
     import ee
@@ -52,14 +44,6 @@ except ImportError:
     ee = None
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-_REPO_ROOT = os.path.abspath(os.path.join(_SCRIPT_DIR, '..', '..'))
-_UTIL_DIR = os.path.join(_REPO_ROOT, 'util')
-for _path in (_REPO_ROOT, _UTIL_DIR):
-    if _path not in sys.path:
-        sys.path.insert(0, _path)
-
-import download_util_script
-import file_util
 
 FLAGS = flags.FLAGS
 
@@ -77,16 +61,6 @@ _DEFAULT_EE_PLACE_ASSETS = [
 def _define_flags() -> None:
     """Registers CLI flags when running as a script."""
     flags.DEFINE_string(
-        'gcs_baseline_prefix',
-        'gs://datacommons_public/unresolved_mcf/copernicus_ecmwf/era5_monthly/',
-        'GCS URI prefix containing cached historical .celsius.csv files.',
-    )
-    flags.DEFINE_string(
-        'history_dir',
-        os.path.join(_SCRIPT_DIR, 'history_files'),
-        'Directory containing historical baseline .celsius.csv files (1979-01..2020-06).',
-    )
-    flags.DEFINE_string(
         'raw_dir',
         os.path.join(_SCRIPT_DIR, 'raw_files'),
         'Directory containing raw Kelvin CSV files from Earth Engine.',
@@ -94,7 +68,7 @@ def _define_flags() -> None:
     flags.DEFINE_string(
         'input_dir',
         os.path.join(_SCRIPT_DIR, 'input_files'),
-        'Directory containing newly fetched Kelvin-to-Celsius converted .celsius.csv files.',
+        'Directory containing Kelvin-to-Celsius converted .celsius.csv files.',
     )
     flags.DEFINE_string(
         'ee_dataset',
@@ -129,11 +103,6 @@ def _define_flags() -> None:
         'Scale in meters for ee.Image.reduceRegion().',
     )
     flags.DEFINE_bool(
-        'skip_gcs_baseline',
-        False,
-        'If True, skip syncing baseline .celsius.csv files (1979-01..2020-06) from GCS.',
-    )
-    flags.DEFINE_bool(
         'skip_ee_fetch',
         False,
         'If True, skip fetching new months from Earth Engine.',
@@ -145,19 +114,12 @@ def _define_flags() -> None:
         'extraction returns empty.',
     )
     flags.DEFINE_integer(
-        'parallelism',
-        min(16,
-            os.cpu_count() or 4),
-        'Number of parallel worker threads for baseline download.',
-    )
-    flags.DEFINE_integer(
         'ee_parallelism',
         8,
         'Number of parallel worker threads for Earth Engine monthly fetches.',
     )
 
 
-# Kelvin to Celsius offset matching kelvin2celsius.sh
 KELVIN_OFFSET = 273.15
 
 # Maximum number of pixels to consider while reducing each region in Earth Engine.
@@ -176,8 +138,8 @@ EE_COMPUTE_FEATURES_PAGE_SIZE = 200
 ADAPTIVE_SCALE_AREA_THRESHOLD = 1e8
 ADAPTIVE_LARGE_REGION_SCALE = 10000
 
-# Mapping from ECMWF/ERA5_LAND/MONTHLY_AGGR band names to canonical
-# ECMWF/ERA5/MONTHLY column names used in the PVMap and baseline CSVs.
+# Mapping from ECMWF/ERA5_LAND/MONTHLY_AGGR band names to canonical columns
+# expected by era5_monthly.tmcf.
 ERA5_LAND_BAND_MAP: Dict[str, str] = OrderedDict([
     ('dewpoint_temperature_2m', 'dewpoint_2m_temperature'),
     ('temperature_2m_max', 'maximum_2m_air_temperature'),
@@ -228,17 +190,7 @@ def map_era5_land_columns(columns: List[str]) -> List[str]:
 
 
 def convert_kelvin_to_celsius_value(value_str: str) -> str:
-    """Converts a single Kelvin numeric string to Celsius matching awk's %.6g.
-
-    Matches `kelvin2celsius.sh`: only positive numeric values (`$i > 0`) are
-    decremented by 273.15 and formatted with 6 significant digits (`%.6g`).
-
-    Args:
-        value_str: Raw string value from a temperature column.
-
-    Returns:
-        Converted Celsius string if `value_str` is a float > 0, else `value_str`.
-    """
+    """Converts a positive finite Kelvin string to Celsius (`%.6g`)."""
     if not value_str:
         return value_str
     stripped = value_str.strip()
@@ -257,15 +209,8 @@ def convert_kelvin_to_celsius_csv(in_csv_path: str, out_csv_path: str) -> str:
     """Converts temperature columns in `in_csv_path` from Kelvin to Celsius.
 
     Also normalizes any `ECMWF/ERA5_LAND/MONTHLY_AGGR` band names in the header
-    to canonical `ECMWF/ERA5/MONTHLY` column names. Writes atomically via a
-    temporary file in the target directory.
-
-    Args:
-        in_csv_path: Path to input CSV file with Kelvin temperatures.
-        out_csv_path: Destination path for converted `.celsius.csv` file.
-
-    Returns:
-        The `out_csv_path` written.
+    to canonical column names expected by `era5_monthly.tmcf`. Writes
+    atomically via a temporary file in the target directory.
     """
     out_dir = os.path.dirname(os.path.abspath(out_csv_path))
     os.makedirs(out_dir, exist_ok=True)
@@ -321,128 +266,6 @@ def convert_directory_kelvin_to_celsius(in_dir: str, out_dir: str) -> List[str]:
         convert_kelvin_to_celsius_csv(in_path, out_path)
         converted_files.append(out_path)
     return converted_files
-
-
-def _parse_gcs_uri(gcs_uri: str) -> Tuple[str, str]:
-    """Splits `gs://bucket/prefix` into `(bucket_name, blob_prefix)`."""
-    if not gcs_uri.startswith('gs://'):
-        raise ValueError(
-            f'Invalid GCS URI (must start with gs://): {gcs_uri!r}')
-    without_scheme = gcs_uri[len('gs://'):]
-    parts = without_scheme.split('/', 1)
-    bucket_name = parts[0]
-    prefix = parts[1] if len(parts) > 1 else ''
-    if not bucket_name:
-        raise ValueError(f'Missing bucket name in GCS URI: {gcs_uri!r}')
-    return bucket_name, prefix
-
-
-def _gcs_uri_to_https_url(gcs_uri: str) -> str:
-    """Converts `gs://bucket/path` to `https://storage.googleapis.com/bucket/path`."""
-    bucket_name, blob_path = _parse_gcs_uri(gcs_uri)
-    return f'https://storage.googleapis.com/{bucket_name}/{blob_path}'
-
-
-def _download_gcs_file_via_util(
-    gcs_uri: str,
-    dest_dir: str,
-    session: Optional[requests.Session] = None,
-    tries: int = 3,
-    delay: int = 1,
-    backoff: int = 2,
-) -> str:
-    """Downloads a single GCS URI into `dest_dir` using shared `util/` helpers."""
-    os.makedirs(dest_dir, exist_ok=True)
-    dest_path = os.path.join(dest_dir, os.path.basename(gcs_uri))
-    if os.path.exists(dest_path) and os.path.getsize(dest_path) > 0:
-        return dest_path
-    https_url = _gcs_uri_to_https_url(gcs_uri)
-    if download_util_script.download_file(
-            url=https_url,
-            output_folder=dest_dir,
-            unzip=False,
-            tries=tries,
-            delay=delay,
-            backoff=backoff,
-            session=session,
-    ) and os.path.exists(dest_path):
-        return dest_path
-
-    # Fallback to file_util.file_copy for authenticated GCS buckets.
-    file_util.file_copy(gcs_uri, dest_path)
-    if not os.path.exists(dest_path):
-        raise RuntimeError(f'Failed to download {gcs_uri} into {dest_dir}')
-    return dest_path
-
-
-def sync_baseline_from_gcs(
-    gcs_prefix: str,
-    dest_dir: str,
-    max_workers: int = 16,
-) -> List[str]:
-    """Syncs cached `.celsius.csv` baseline files from GCS into `dest_dir`.
-
-    Uses `file_util.file_get_matching` to discover `.celsius.csv` blobs and
-    `download_util_script.download_file` (with `file_util.file_copy` fallback)
-    to download them into `dest_dir` (`history_files/`).
-    """
-    _parse_gcs_uri(gcs_prefix)
-    os.makedirs(dest_dir, exist_ok=True)
-    gcs_pattern = f"{gcs_prefix.rstrip('/')}/*.celsius.csv"
-    logging.info('Listing baseline .celsius.csv files matching %s', gcs_pattern)
-    celsius_uris = [
-        uri for uri in file_util.file_get_matching(gcs_pattern)
-        if uri.endswith('.celsius.csv')
-    ]
-    if not celsius_uris:
-        raise RuntimeError(
-            f'No .celsius.csv baseline files found under {gcs_prefix}')
-
-    logging.info('Found %d baseline .celsius.csv files in GCS; syncing to %s',
-                 len(celsius_uris), dest_dir)
-    downloaded_paths: List[str] = []
-    thread_local = threading.local()
-    sessions: List[requests.Session] = []
-    sessions_lock = threading.Lock()
-
-    def _get_worker_session() -> requests.Session:
-        session = getattr(thread_local, 'session', None)
-        if session is None:
-            session = requests.Session()
-            adapter = requests.adapters.HTTPAdapter(
-                pool_connections=4,
-                pool_maxsize=4,
-            )
-            session.mount('https://', adapter)
-            session.mount('http://', adapter)
-            thread_local.session = session
-            with sessions_lock:
-                sessions.append(session)
-        return session
-
-    def _download_worker(gcs_uri: str) -> str:
-        return _download_gcs_file_via_util(
-            gcs_uri,
-            dest_dir,
-            _get_worker_session(),
-        )
-
-    try:
-        with ThreadPoolExecutor(max_workers=max_workers) as executor:
-            future_to_uri = {
-                executor.submit(_download_worker, gcs_uri): gcs_uri
-                for gcs_uri in celsius_uris
-            }
-            for future in as_completed(future_to_uri):
-                downloaded_paths.append(future.result())
-    finally:
-        for session in sessions:
-            session.close()
-
-    downloaded_paths.sort()
-    logging.info('Synced %d baseline .celsius.csv files to %s',
-                 len(downloaded_paths), dest_dir)
-    return downloaded_paths
 
 
 def generate_year_months(start_ym: str, end_ym: str) -> List[str]:
@@ -780,7 +603,7 @@ def _fetch_single_ee_month(
             logging.warning(
                 'Earth Engine permission/authentication error for project %r '
                 '(asset=%s month=%s): %s; skipping remaining Earth Engine '
-                'fetches and continuing with cached/existing files.',
+                'fetches.',
                 ee_project,
                 place_asset,
                 ym,
@@ -842,7 +665,7 @@ def fetch_era5_land_from_ee(
             )
             if strict:
                 raise RuntimeError(msg) from exc
-            logging.warning('%s; continuing with cached/existing files.', msg)
+            logging.warning('%s; skipping live fetch.', msg)
             return []
 
     os.makedirs(raw_dir, exist_ok=True)
@@ -960,8 +783,6 @@ def fetch_era5_land_from_ee(
 
 
 def run_pipeline(
-    gcs_baseline_prefix: str,
-    history_dir: str,
     raw_dir: str,
     input_dir: str,
     ee_dataset: str,
@@ -970,26 +791,12 @@ def run_pipeline(
     ee_end_date: str,
     ee_project: str,
     reduce_region_scale: int,
-    skip_gcs_baseline: bool,
     skip_ee_fetch: bool,
     strict_ee: bool,
-    parallelism: int,
-    ee_parallelism: int = 12,
-) -> Tuple[List[str], List[str]]:
-    """Runs baseline download into `history_dir` and EE fetch/conversion into `input_dir`.
-
-    Returns:
-        Tuple of `(history_celsius_files, input_celsius_files)`.
-    """
-    os.makedirs(history_dir, exist_ok=True)
+    ee_parallelism: int = 8,
+) -> List[str]:
+    """Fetches/converts ERA5-Land monthly CSVs into `input_dir`."""
     os.makedirs(input_dir, exist_ok=True)
-
-    if not skip_gcs_baseline:
-        sync_baseline_from_gcs(
-            gcs_prefix=gcs_baseline_prefix,
-            dest_dir=history_dir,
-            max_workers=max(4, parallelism),
-        )
 
     # Convert any pre-staged raw Kelvin CSVs in raw_dir into input_dir.
     if os.path.isdir(raw_dir):
@@ -1009,21 +816,13 @@ def run_pipeline(
             ee_parallelism=ee_parallelism,
         )
 
-    history_files = sorted(glob.glob(os.path.join(history_dir,
-                                                  '*.celsius.csv')))
     input_files = sorted(glob.glob(os.path.join(input_dir, '*.celsius.csv')))
-    if not history_files and not input_files:
-        raise RuntimeError(
-            f'No .celsius.csv files found in {history_dir} or {input_dir}')
+    if not input_files:
+        raise RuntimeError(f'No .celsius.csv files found in {input_dir}')
 
-    logging.info(
-        'Prepared %d historical .celsius.csv files in %s and %d new .celsius.csv files in %s',
-        len(history_files),
-        history_dir,
-        len(input_files),
-        input_dir,
-    )
-    return history_files, input_files
+    logging.info('Prepared %d .celsius.csv files in %s', len(input_files),
+                 input_dir)
+    return input_files
 
 
 def main(_):
@@ -1035,8 +834,6 @@ def main(_):
             f'projects/{FLAGS.ee_project}/assets/all_administrativearea2',
         ]
     run_pipeline(
-        gcs_baseline_prefix=FLAGS.gcs_baseline_prefix,
-        history_dir=FLAGS.history_dir,
         raw_dir=FLAGS.raw_dir,
         input_dir=FLAGS.input_dir,
         ee_dataset=FLAGS.ee_dataset,
@@ -1045,10 +842,8 @@ def main(_):
         ee_end_date=FLAGS.ee_end_date,
         ee_project=FLAGS.ee_project,
         reduce_region_scale=FLAGS.reduce_region_scale,
-        skip_gcs_baseline=FLAGS.skip_gcs_baseline,
         skip_ee_fetch=FLAGS.skip_ee_fetch,
         strict_ee=FLAGS.strict_ee,
-        parallelism=FLAGS.parallelism,
         ee_parallelism=FLAGS.ee_parallelism,
     )
 

@@ -11,17 +11,21 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Unit and end-to-end tests for download_and_process.py."""
+"""Unit tests for download_and_process.py and era5_monthly.tmcf."""
 
 import csv
 import datetime
+import json
 import os
+import re
 import shutil
 import sys
 import tempfile
 import unittest
 from unittest.mock import MagicMock
 from unittest.mock import patch
+
+from absl import flags
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 if _SCRIPT_DIR not in sys.path:
@@ -35,15 +39,15 @@ class DownloadAndProcessTest(unittest.TestCase):
     def setUp(self):
         self.test_data_dir = os.path.join(_SCRIPT_DIR, 'test_data')
         self.temp_dir = tempfile.mkdtemp()
-        self.pv_map_path = os.path.join(
-            _SCRIPT_DIR, 'copernicus_ecmwf_era5_monthly_pvmap.csv')
+        self.tmcf_path = os.path.join(_SCRIPT_DIR, 'era5_monthly.tmcf')
+        self.manifest_path = os.path.join(_SCRIPT_DIR, 'manifest.json')
 
     def tearDown(self):
         if os.path.exists(self.temp_dir):
             shutil.rmtree(self.temp_dir)
 
     def test_kelvin_to_celsius_matches_expected_csv(self):
-        """Verifies exact parity with kelvin2celsius.sh on historical test data."""
+        """Verifies Kelvin-to-Celsius conversion parity on test CSV fixture."""
         in_csv = os.path.join(self.test_data_dir,
                               'all_administrativearea2_2020-06.ee.csv')
         expected_csv = os.path.join(
@@ -173,88 +177,8 @@ class DownloadAndProcessTest(unittest.TestCase):
             [],
         )
 
-    def test_sync_baseline_from_gcs_via_util(self):
-        """Tests GCS baseline download into history_files using util helpers."""
-        gcs_uri = (
-            'gs://datacommons_public/unresolved_mcf/copernicus_ecmwf/'
-            'era5_monthly/all_administrativearea2_2020-06.ee.celsius.csv')
-        history_dir = os.path.join(self.temp_dir, 'history_files')
-
-        def fake_download_file(url, output_folder, unzip=False, **kwargs):
-            del unzip, kwargs
-            self.assertEqual(
-                url,
-                'https://storage.googleapis.com/datacommons_public/'
-                'unresolved_mcf/copernicus_ecmwf/era5_monthly/'
-                'all_administrativearea2_2020-06.ee.celsius.csv',
-            )
-            os.makedirs(output_folder, exist_ok=True)
-            out_path = os.path.join(
-                output_folder, 'all_administrativearea2_2020-06.ee.celsius.csv')
-            with open(out_path, 'w', encoding='utf-8') as f:
-                f.write('date,dcid\n2020-06,geoId/06\n')
-            return True
-
-        with patch.object(
-                download_and_process.file_util,
-                'file_get_matching',
-                return_value=[gcs_uri],
-        ) as mock_get_matching, patch.object(
-                download_and_process.download_util_script,
-                'download_file',
-                side_effect=fake_download_file,
-        ) as mock_download_file:
-            downloaded = download_and_process.sync_baseline_from_gcs(
-                'gs://datacommons_public/unresolved_mcf/copernicus_ecmwf/era5_monthly/',
-                history_dir,
-                max_workers=2,
-            )
-
-        mock_get_matching.assert_called_once()
-        mock_download_file.assert_called_once()
-        self.assertEqual(len(downloaded), 1)
-        self.assertTrue(os.path.exists(downloaded[0]))
-
-    def test_sync_baseline_from_gcs_fallback_to_file_copy(self):
-        """Tests fallback to file_util.file_copy when download_file returns False."""
-        gcs_uri = (
-            'gs://datacommons_public/unresolved_mcf/copernicus_ecmwf/'
-            'era5_monthly/all_administrativearea2_2020-06.ee.celsius.csv')
-        history_dir = os.path.join(self.temp_dir, 'history_files_fallback')
-
-        def fake_file_copy(src, dst):
-            self.assertEqual(src, gcs_uri)
-            os.makedirs(os.path.dirname(dst), exist_ok=True)
-            with open(dst, 'w', encoding='utf-8') as f:
-                f.write('date,dcid\n2020-06,geoId/06\n')
-            return dst
-
-        with patch.object(
-                download_and_process.file_util,
-                'file_get_matching',
-                return_value=[gcs_uri],
-        ), patch.object(
-                download_and_process.download_util_script,
-                'download_file',
-                return_value=False,
-        ), patch.object(
-                download_and_process.file_util,
-                'file_copy',
-                side_effect=fake_file_copy,
-        ) as mock_file_copy:
-            downloaded = download_and_process.sync_baseline_from_gcs(
-                'gs://datacommons_public/unresolved_mcf/copernicus_ecmwf/era5_monthly/',
-                history_dir,
-                max_workers=2,
-            )
-
-        mock_file_copy.assert_called_once()
-        self.assertEqual(len(downloaded), 1)
-        self.assertTrue(os.path.exists(downloaded[0]))
-
-    def test_run_pipeline_converts_raw_fixture_matching_expected_celsius(self):
-        """Tests run_pipeline conversion parity and fixture/PVMap alignment."""
-        history_dir = os.path.join(self.temp_dir, 'history_files')
+    def test_run_pipeline_converts_raw_fixture_matching_tmcf_columns(self):
+        """Tests run_pipeline conversion parity and TMCF/manifest alignment."""
         raw_dir = os.path.join(self.temp_dir, 'raw_files')
         input_dir = os.path.join(self.temp_dir, 'input_files')
         os.makedirs(raw_dir, exist_ok=True)
@@ -265,10 +189,7 @@ class DownloadAndProcessTest(unittest.TestCase):
             os.path.join(raw_dir, 'all_administrativearea2_2020-06.ee.csv'),
         )
 
-        history_files, input_files = download_and_process.run_pipeline(
-            gcs_baseline_prefix=
-            'gs://datacommons_public/unresolved_mcf/copernicus_ecmwf/era5_monthly/',
-            history_dir=history_dir,
+        input_files = download_and_process.run_pipeline(
             raw_dir=raw_dir,
             input_dir=input_dir,
             ee_dataset='ECMWF/ERA5_LAND/MONTHLY_AGGR',
@@ -277,13 +198,10 @@ class DownloadAndProcessTest(unittest.TestCase):
             ee_end_date='2020-07',
             ee_project='datcom-earth-engine',
             reduce_region_scale=1000,
-            skip_gcs_baseline=True,
             skip_ee_fetch=True,
             strict_ee=False,
-            parallelism=2,
         )
 
-        self.assertEqual(history_files, [])
         self.assertEqual(len(input_files), 1)
         expected_celsius = os.path.join(
             self.test_data_dir,
@@ -296,98 +214,36 @@ class DownloadAndProcessTest(unittest.TestCase):
             self.assertEqual(got_content, want_f.read())
 
         csv_header = next(csv.reader([got_content.splitlines()[0]]))
-        with open(self.pv_map_path, mode='r', encoding='utf-8') as pv_f:
-            pv_keys = [row['key'] for row in csv.DictReader(pv_f)]
-        self.assertTrue(all(key in csv_header for key in pv_keys))
-
-        with open(os.path.join(self.test_data_dir, 'era5_monthly.csv'),
-                  mode='r',
-                  encoding='utf-8') as f:
-            self.assertEqual(len(f.read().splitlines()), 36)
-        with open(os.path.join(self.test_data_dir, 'era5_monthly.tmcf'),
-                  mode='r',
-                  encoding='utf-8') as f:
-            self.assertIn('measurementMethod: dcAggregate/ERA5Monthly',
-                          f.read())
-
-    def test_run_pipeline_returns_history_and_input_files(self):
-        """Tests that run_pipeline returns both history_files and input_files."""
-        history_dir = os.path.join(self.temp_dir, 'history_files')
-        raw_dir = os.path.join(self.temp_dir, 'raw_files_merged')
-        input_dir = os.path.join(self.temp_dir, 'input_files_merged')
-        gcs_uri = (
-            'gs://datacommons_public/unresolved_mcf/copernicus_ecmwf/'
-            'era5_monthly/all_administrativearea2_2020-06.ee.celsius.csv')
-        fixture_celsius = os.path.join(
-            self.test_data_dir,
-            'all_administrativearea2_2020-06.ee.celsius.csv')
-
-        def fake_download(url, output_folder, unzip=False, **kwargs):
-            del url, unzip, kwargs
-            os.makedirs(output_folder, exist_ok=True)
-            shutil.copyfile(
-                fixture_celsius,
-                os.path.join(output_folder,
-                             'all_administrativearea2_2020-06.ee.celsius.csv'),
-            )
-            return True
-
-        mock_ee = MagicMock()
-        mock_ee.ImageCollection.return_value.filterDate.return_value.first.return_value.getInfo.return_value = {
-            'id': '202007'
-        }
-        mock_ee.FeatureCollection.return_value.first.return_value.getInfo.return_value = {
-            'id': 'p1'
-        }
-        mock_ee.data.computeFeatures.return_value = {
-            'type':
-                'FeatureCollection',
-            'features': [{
-                'id': 'idx_202007',
-                'properties': {
-                    'date': '2020-07',
-                    'dcid': 'wikidataId/Q29036',
-                    'temperature_2m': 302.15,
-                },
-            }],
-        }
-
-        with patch.object(
-                download_and_process.file_util,
-                'file_get_matching',
-                return_value=[gcs_uri],
-        ), patch.object(
-                download_and_process.download_util_script,
-                'download_file',
-                side_effect=fake_download,
-        ), patch.object(download_and_process, 'ee', mock_ee):
-            history_files, input_files = download_and_process.run_pipeline(
-                gcs_baseline_prefix=
-                'gs://datacommons_public/unresolved_mcf/copernicus_ecmwf/era5_monthly/',
-                history_dir=history_dir,
-                raw_dir=raw_dir,
-                input_dir=input_dir,
-                ee_dataset='ECMWF/ERA5_LAND/MONTHLY_AGGR',
-                ee_place_assets=[
-                    'projects/datcom-earth-engine/assets/all_administrativearea2'
-                ],
-                ee_start_date='2020-07',
-                ee_end_date='2020-07',
-                ee_project='datcom-earth-engine',
-                reduce_region_scale=1000,
-                skip_gcs_baseline=False,
-                skip_ee_fetch=False,
-                strict_ee=True,
-                parallelism=2,
-            )
-
+        with open(self.tmcf_path, mode='r', encoding='utf-8') as f:
+            tmcf_text = f.read()
+        tmcf_cols = set(re.findall(r'C:Weather->([A-Za-z0-9_]+)', tmcf_text))
         self.assertEqual(
-            [os.path.basename(p) for p in history_files],
-            ['all_administrativearea2_2020-06.ee.celsius.csv'],
+            tmcf_cols,
+            {
+                'date',
+                'dcid',
+                'minimum_2m_air_temperature',
+                'maximum_2m_air_temperature',
+                'mean_2m_air_temperature',
+                'dewpoint_2m_temperature',
+                'surface_pressure',
+                'u_component_of_wind_10m',
+                'v_component_of_wind_10m',
+            },
         )
+        self.assertTrue(all(col in csv_header for col in tmcf_cols))
+        self.assertIn('measurementMethod: dcid:dcAggregate/ERA5Monthly',
+                      tmcf_text)
+        self.assertEqual(tmcf_text.count('Node: E:Weather->'), 7)
+
+        with open(self.manifest_path, mode='r', encoding='utf-8') as f:
+            spec = json.load(f)['import_specifications'][0]
         self.assertEqual(
-            [os.path.basename(p) for p in input_files],
-            ['all_administrativearea2_2020-07.ee.celsius.csv'],
+            spec['import_inputs'],
+            [{
+                'template_mcf': 'era5_monthly.tmcf',
+                'cleaned_csv': 'input_files/*.celsius.csv',
+            }],
         )
 
     def test_fetch_ee_feature_collection_pagination_and_retry(self):
@@ -471,7 +327,6 @@ class DownloadAndProcessTest(unittest.TestCase):
 
         self.assertEqual(len(generated), 1)
         self.assertEqual(calls['count'], 3)
-        # Once per _compute_ee_monthly_features attempt (2 attempts due to retry).
         self.assertEqual(mock_place.geometry.call_count, 2)
         mock_ee.Reducer.mean.return_value.unweighted.assert_called()
         self.assertEqual(
@@ -546,10 +401,12 @@ class DownloadAndProcessTest(unittest.TestCase):
         )
 
     def test_fetch_era5_land_from_ee_strict_raises_on_init_failure(self):
-        """Verifies strict=True propagates Earth Engine initialization failures."""
+        """Verifies strict=True propagates EE init errors hermetically."""
         mock_ee = MagicMock()
         mock_ee.Initialize.side_effect = RuntimeError('Auth error')
-        with patch.object(download_and_process, 'ee', mock_ee):
+        with patch.object(download_and_process, 'ee',
+                          mock_ee), patch('google.auth.default',
+                                          side_effect=RuntimeError('No ADC')):
             with self.assertRaises(RuntimeError):
                 download_and_process.fetch_era5_land_from_ee(
                     dataset_asset='ECMWF/ERA5_LAND/MONTHLY_AGGR',
@@ -658,7 +515,6 @@ class DownloadAndProcessTest(unittest.TestCase):
 
             self.assertEqual(generated, [prior_csv])
 
-            # Still fails if zero months are fetched overall (even in trailing window).
             with self.assertRaises(RuntimeError):
                 download_and_process.fetch_era5_land_from_ee(
                     dataset_asset='ECMWF/ERA5_LAND/MONTHLY_AGGR',
@@ -820,7 +676,7 @@ class DownloadAndProcessTest(unittest.TestCase):
             res = download_and_process._compute_ee_monthly_features_with_retry(
                 dataset_asset='ECMWF/ERA5_LAND/MONTHLY_AGGR',
                 geo_locations_asset=
-                'projects/datcom-infosys-dev/assets/all_administrativearea2',
+                'projects/example-project/assets/all_administrativearea2',
                 year_month='2026-03',
                 reduce_region_scale=1000,
             )
@@ -828,6 +684,36 @@ class DownloadAndProcessTest(unittest.TestCase):
         self.assertEqual(len(res['features']), 2)
         self.assertEqual(calls, [None, 'page_2', 'page_2'])
         self.assertEqual(mock_place.geometry.call_count, 1)
+
+    def test_define_flags_and_main_resolves_default_assets(self):
+        """Tests _define_flags() and main() default EE asset derivation."""
+        fv = flags.FlagValues()
+        with patch.object(
+                download_and_process, 'flags',
+                MagicMock(
+                    DEFINE_string=lambda *a, **kw: flags.DEFINE_string(
+                        *a, flag_values=fv, **kw),
+                    DEFINE_list=lambda *a, **kw: flags.DEFINE_list(
+                        *a, flag_values=fv, **kw),
+                    DEFINE_integer=lambda *a, **kw: flags.DEFINE_integer(
+                        *a, flag_values=fv, **kw),
+                    DEFINE_bool=lambda *a, **kw: flags.DEFINE_bool(
+                        *a, flag_values=fv, **kw),
+                )):
+            download_and_process._define_flags()
+        fv(['prog', '--ee_project=custom-proj', '--skip_ee_fetch=true'])
+        with patch.object(download_and_process, 'FLAGS',
+                          fv), patch.object(download_and_process,
+                                            'run_pipeline') as mock_run:
+            download_and_process.main(None)
+        mock_run.assert_called_once()
+        self.assertEqual(
+            mock_run.call_args.kwargs['ee_place_assets'],
+            [
+                'projects/custom-proj/assets/all_administrativearea1',
+                'projects/custom-proj/assets/all_administrativearea2',
+            ],
+        )
 
 
 if __name__ == '__main__':
