@@ -74,7 +74,7 @@ commuteType: dcs:WorkCommute
 commuteMode: dcs:USC_CarTruckOrVanCarpooled
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_Years16Onwards_2Person_CarTruckOrVanCarpooled_WorkCommute_Employed
+Node: dcid:Count_Person_Years16Onwards_CarpoolOccupancy2Person_CarTruckOrVanCarpooled_WorkCommute_Employed
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
@@ -85,7 +85,7 @@ commuteMode: dcs:USC_CarTruckOrVanCarpooled
 carpoolOccupancy: [2 Person]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_Years16Onwards_2Person_CarTruckOrVanCarpooled_WorkCommute_Employed
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_CarpoolOccupancy2Person_CarTruckOrVanCarpooled_WorkCommute_Employed
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
@@ -96,7 +96,7 @@ commuteMode: dcs:USC_CarTruckOrVanCarpooled
 carpoolOccupancy: [2 Person]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_Years16Onwards_3Person_CarTruckOrVanCarpooled_WorkCommute_Employed
+Node: dcid:Count_Person_Years16Onwards_CarpoolOccupancy3Person_CarTruckOrVanCarpooled_WorkCommute_Employed
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
@@ -107,7 +107,7 @@ commuteMode: dcs:USC_CarTruckOrVanCarpooled
 carpoolOccupancy: [3 Person]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_Years16Onwards_3Person_CarTruckOrVanCarpooled_WorkCommute_Employed
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_CarpoolOccupancy3Person_CarTruckOrVanCarpooled_WorkCommute_Employed
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
@@ -118,7 +118,7 @@ commuteMode: dcs:USC_CarTruckOrVanCarpooled
 carpoolOccupancy: [3 Person]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_Years16Onwards_4OrMorePerson_CarTruckOrVanCarpooled_WorkCommute_Employed
+Node: dcid:Count_Person_Years16Onwards_CarpoolOccupancy4OrMorePerson_CarTruckOrVanCarpooled_WorkCommute_Employed
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
@@ -129,7 +129,7 @@ commuteMode: dcs:USC_CarTruckOrVanCarpooled
 carpoolOccupancy: [4 - Person]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_Years16Onwards_4OrMorePerson_CarTruckOrVanCarpooled_WorkCommute_Employed
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_CarpoolOccupancy4OrMorePerson_CarTruckOrVanCarpooled_WorkCommute_Employed
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
@@ -422,7 +422,7 @@ employmentStatus: dcs:Employed
 placeOfWork: dcs:WorkedOutsideOfHome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_Years16Onwards_Hour0000To0459_WorkCommute_Employed_WorkedOutsideOfHome
+Node: dcid:Count_Person_Years16Onwards_StartTimeHour0000To0459_WorkCommute_Employed_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
@@ -433,7 +433,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0000To0459
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_Years16Onwards_Hour0000To0459_WorkCommute_Employed_WorkedOutsideOfHome
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0000To0459_WorkCommute_Employed_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
@@ -444,7 +444,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0000To0459
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_Years16Onwards_Hour0500To0529_WorkCommute_Employed_WorkedOutsideOfHome
+Node: dcid:Count_Person_Years16Onwards_StartTimeHour0500To0529_WorkCommute_Employed_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
@@ -455,7 +455,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0500To0529
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_Years16Onwards_Hour0500To0529_WorkCommute_Employed_WorkedOutsideOfHome
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0500To0529_WorkCommute_Employed_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
@@ -466,7 +466,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0500To0529
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_Years16Onwards_Hour0530To0559_WorkCommute_Employed_WorkedOutsideOfHome
+Node: dcid:Count_Person_Years16Onwards_StartTimeHour0530To0559_WorkCommute_Employed_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
@@ -477,7 +477,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0530To0559
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_Years16Onwards_Hour0530To0559_WorkCommute_Employed_WorkedOutsideOfHome
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0530To0559_WorkCommute_Employed_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
@@ -488,7 +488,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0530To0559
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_Years16Onwards_Hour0600To0629_WorkCommute_Employed_WorkedOutsideOfHome
+Node: dcid:Count_Person_Years16Onwards_StartTimeHour0600To0629_WorkCommute_Employed_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
@@ -499,7 +499,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0600To0629
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_Years16Onwards_Hour0600To0629_WorkCommute_Employed_WorkedOutsideOfHome
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0600To0629_WorkCommute_Employed_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
@@ -510,7 +510,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0600To0629
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_Years16Onwards_Hour0630To0659_WorkCommute_Employed_WorkedOutsideOfHome
+Node: dcid:Count_Person_Years16Onwards_StartTimeHour0630To0659_WorkCommute_Employed_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
@@ -521,7 +521,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0630To0659
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_Years16Onwards_Hour0630To0659_WorkCommute_Employed_WorkedOutsideOfHome
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0630To0659_WorkCommute_Employed_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
@@ -532,7 +532,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0630To0659
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_Years16Onwards_Hour0700To0729_WorkCommute_Employed_WorkedOutsideOfHome
+Node: dcid:Count_Person_Years16Onwards_StartTimeHour0700To0729_WorkCommute_Employed_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
@@ -543,7 +543,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0700To0729
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_Years16Onwards_Hour0700To0729_WorkCommute_Employed_WorkedOutsideOfHome
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0700To0729_WorkCommute_Employed_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
@@ -554,7 +554,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0700To0729
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_Years16Onwards_Hour0730To0759_WorkCommute_Employed_WorkedOutsideOfHome
+Node: dcid:Count_Person_Years16Onwards_StartTimeHour0730To0759_WorkCommute_Employed_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
@@ -565,7 +565,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0730To0759
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_Years16Onwards_Hour0730To0759_WorkCommute_Employed_WorkedOutsideOfHome
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0730To0759_WorkCommute_Employed_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
@@ -576,7 +576,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0730To0759
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_Years16Onwards_Hour0800To0829_WorkCommute_Employed_WorkedOutsideOfHome
+Node: dcid:Count_Person_Years16Onwards_StartTimeHour0800To0829_WorkCommute_Employed_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
@@ -587,7 +587,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0800To0829
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_Years16Onwards_Hour0800To0829_WorkCommute_Employed_WorkedOutsideOfHome
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0800To0829_WorkCommute_Employed_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
@@ -598,7 +598,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0800To0829
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_Years16Onwards_Hour0830To0859_WorkCommute_Employed_WorkedOutsideOfHome
+Node: dcid:Count_Person_Years16Onwards_StartTimeHour0830To0859_WorkCommute_Employed_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
@@ -609,7 +609,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0830To0859
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_Years16Onwards_Hour0830To0859_WorkCommute_Employed_WorkedOutsideOfHome
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0830To0859_WorkCommute_Employed_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
@@ -620,7 +620,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0830To0859
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_Years16Onwards_Hour0900To2359_WorkCommute_Employed_WorkedOutsideOfHome
+Node: dcid:Count_Person_Years16Onwards_StartTimeHour0900To2359_WorkCommute_Employed_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
@@ -631,7 +631,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0900To2359
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_Years16Onwards_Hour0900To2359_WorkCommute_Employed_WorkedOutsideOfHome
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0900To2359_WorkCommute_Employed_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
@@ -1042,7 +1042,7 @@ commuteType: dcs:WorkCommute
 commuteMode: dcs:USC_CarTruckOrVanCarpooled
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_Years16Onwards_2Person_CarTruckOrVanCarpooled_WorkCommute_Employed_Male
+Node: dcid:Count_Person_Years16Onwards_CarpoolOccupancy2Person_CarTruckOrVanCarpooled_WorkCommute_Employed_Male
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
@@ -1054,7 +1054,7 @@ commuteMode: dcs:USC_CarTruckOrVanCarpooled
 carpoolOccupancy: [2 Person]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_Years16Onwards_2Person_CarTruckOrVanCarpooled_WorkCommute_Employed_Male
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_CarpoolOccupancy2Person_CarTruckOrVanCarpooled_WorkCommute_Employed_Male
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
@@ -1066,7 +1066,7 @@ commuteMode: dcs:USC_CarTruckOrVanCarpooled
 carpoolOccupancy: [2 Person]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_Years16Onwards_3Person_CarTruckOrVanCarpooled_WorkCommute_Employed_Male
+Node: dcid:Count_Person_Years16Onwards_CarpoolOccupancy3Person_CarTruckOrVanCarpooled_WorkCommute_Employed_Male
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
@@ -1078,7 +1078,7 @@ commuteMode: dcs:USC_CarTruckOrVanCarpooled
 carpoolOccupancy: [3 Person]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_Years16Onwards_3Person_CarTruckOrVanCarpooled_WorkCommute_Employed_Male
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_CarpoolOccupancy3Person_CarTruckOrVanCarpooled_WorkCommute_Employed_Male
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
@@ -1090,7 +1090,7 @@ commuteMode: dcs:USC_CarTruckOrVanCarpooled
 carpoolOccupancy: [3 Person]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_Years16Onwards_4OrMorePerson_CarTruckOrVanCarpooled_WorkCommute_Employed_Male
+Node: dcid:Count_Person_Years16Onwards_CarpoolOccupancy4OrMorePerson_CarTruckOrVanCarpooled_WorkCommute_Employed_Male
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
@@ -1102,7 +1102,7 @@ commuteMode: dcs:USC_CarTruckOrVanCarpooled
 carpoolOccupancy: [4 - Person]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_Years16Onwards_4OrMorePerson_CarTruckOrVanCarpooled_WorkCommute_Employed_Male
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_CarpoolOccupancy4OrMorePerson_CarTruckOrVanCarpooled_WorkCommute_Employed_Male
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
@@ -1426,7 +1426,7 @@ employmentStatus: dcs:Employed
 placeOfWork: dcs:WorkedOutsideOfHome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_Years16Onwards_Hour0000To0459_WorkCommute_Employed_Male_WorkedOutsideOfHome
+Node: dcid:Count_Person_Years16Onwards_StartTimeHour0000To0459_WorkCommute_Employed_Male_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
@@ -1438,7 +1438,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0000To0459
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_Years16Onwards_Hour0000To0459_WorkCommute_Employed_Male_WorkedOutsideOfHome
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0000To0459_WorkCommute_Employed_Male_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
@@ -1450,7 +1450,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0000To0459
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_Years16Onwards_Hour0500To0529_WorkCommute_Employed_Male_WorkedOutsideOfHome
+Node: dcid:Count_Person_Years16Onwards_StartTimeHour0500To0529_WorkCommute_Employed_Male_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
@@ -1462,7 +1462,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0500To0529
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_Years16Onwards_Hour0500To0529_WorkCommute_Employed_Male_WorkedOutsideOfHome
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0500To0529_WorkCommute_Employed_Male_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
@@ -1474,7 +1474,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0500To0529
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_Years16Onwards_Hour0530To0559_WorkCommute_Employed_Male_WorkedOutsideOfHome
+Node: dcid:Count_Person_Years16Onwards_StartTimeHour0530To0559_WorkCommute_Employed_Male_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
@@ -1486,7 +1486,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0530To0559
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_Years16Onwards_Hour0530To0559_WorkCommute_Employed_Male_WorkedOutsideOfHome
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0530To0559_WorkCommute_Employed_Male_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
@@ -1498,7 +1498,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0530To0559
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_Years16Onwards_Hour0600To0629_WorkCommute_Employed_Male_WorkedOutsideOfHome
+Node: dcid:Count_Person_Years16Onwards_StartTimeHour0600To0629_WorkCommute_Employed_Male_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
@@ -1510,7 +1510,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0600To0629
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_Years16Onwards_Hour0600To0629_WorkCommute_Employed_Male_WorkedOutsideOfHome
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0600To0629_WorkCommute_Employed_Male_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
@@ -1522,7 +1522,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0600To0629
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_Years16Onwards_Hour0630To0659_WorkCommute_Employed_Male_WorkedOutsideOfHome
+Node: dcid:Count_Person_Years16Onwards_StartTimeHour0630To0659_WorkCommute_Employed_Male_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
@@ -1534,7 +1534,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0630To0659
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_Years16Onwards_Hour0630To0659_WorkCommute_Employed_Male_WorkedOutsideOfHome
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0630To0659_WorkCommute_Employed_Male_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
@@ -1546,7 +1546,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0630To0659
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_Years16Onwards_Hour0700To0729_WorkCommute_Employed_Male_WorkedOutsideOfHome
+Node: dcid:Count_Person_Years16Onwards_StartTimeHour0700To0729_WorkCommute_Employed_Male_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
@@ -1558,7 +1558,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0700To0729
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_Years16Onwards_Hour0700To0729_WorkCommute_Employed_Male_WorkedOutsideOfHome
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0700To0729_WorkCommute_Employed_Male_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
@@ -1570,7 +1570,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0700To0729
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_Years16Onwards_Hour0730To0759_WorkCommute_Employed_Male_WorkedOutsideOfHome
+Node: dcid:Count_Person_Years16Onwards_StartTimeHour0730To0759_WorkCommute_Employed_Male_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
@@ -1582,7 +1582,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0730To0759
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_Years16Onwards_Hour0730To0759_WorkCommute_Employed_Male_WorkedOutsideOfHome
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0730To0759_WorkCommute_Employed_Male_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
@@ -1594,7 +1594,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0730To0759
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_Years16Onwards_Hour0800To0829_WorkCommute_Employed_Male_WorkedOutsideOfHome
+Node: dcid:Count_Person_Years16Onwards_StartTimeHour0800To0829_WorkCommute_Employed_Male_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
@@ -1606,7 +1606,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0800To0829
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_Years16Onwards_Hour0800To0829_WorkCommute_Employed_Male_WorkedOutsideOfHome
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0800To0829_WorkCommute_Employed_Male_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
@@ -1618,7 +1618,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0800To0829
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_Years16Onwards_Hour0830To0859_WorkCommute_Employed_Male_WorkedOutsideOfHome
+Node: dcid:Count_Person_Years16Onwards_StartTimeHour0830To0859_WorkCommute_Employed_Male_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
@@ -1630,7 +1630,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0830To0859
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_Years16Onwards_Hour0830To0859_WorkCommute_Employed_Male_WorkedOutsideOfHome
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0830To0859_WorkCommute_Employed_Male_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
@@ -1642,7 +1642,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0830To0859
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_Years16Onwards_Hour0900To2359_WorkCommute_Employed_Male_WorkedOutsideOfHome
+Node: dcid:Count_Person_Years16Onwards_StartTimeHour0900To2359_WorkCommute_Employed_Male_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
@@ -1654,7 +1654,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0900To2359
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_Years16Onwards_Hour0900To2359_WorkCommute_Employed_Male_WorkedOutsideOfHome
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0900To2359_WorkCommute_Employed_Male_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
@@ -2096,7 +2096,7 @@ commuteType: dcs:WorkCommute
 commuteMode: dcs:USC_CarTruckOrVanCarpooled
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_Years16Onwards_2Person_CarTruckOrVanCarpooled_WorkCommute_Employed_Female
+Node: dcid:Count_Person_Years16Onwards_CarpoolOccupancy2Person_CarTruckOrVanCarpooled_WorkCommute_Employed_Female
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
@@ -2108,7 +2108,7 @@ commuteMode: dcs:USC_CarTruckOrVanCarpooled
 carpoolOccupancy: [2 Person]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_Years16Onwards_2Person_CarTruckOrVanCarpooled_WorkCommute_Employed_Female
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_CarpoolOccupancy2Person_CarTruckOrVanCarpooled_WorkCommute_Employed_Female
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
@@ -2120,7 +2120,7 @@ commuteMode: dcs:USC_CarTruckOrVanCarpooled
 carpoolOccupancy: [2 Person]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_Years16Onwards_3Person_CarTruckOrVanCarpooled_WorkCommute_Employed_Female
+Node: dcid:Count_Person_Years16Onwards_CarpoolOccupancy3Person_CarTruckOrVanCarpooled_WorkCommute_Employed_Female
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
@@ -2132,7 +2132,7 @@ commuteMode: dcs:USC_CarTruckOrVanCarpooled
 carpoolOccupancy: [3 Person]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_Years16Onwards_3Person_CarTruckOrVanCarpooled_WorkCommute_Employed_Female
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_CarpoolOccupancy3Person_CarTruckOrVanCarpooled_WorkCommute_Employed_Female
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
@@ -2144,7 +2144,7 @@ commuteMode: dcs:USC_CarTruckOrVanCarpooled
 carpoolOccupancy: [3 Person]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_Years16Onwards_4OrMorePerson_CarTruckOrVanCarpooled_WorkCommute_Employed_Female
+Node: dcid:Count_Person_Years16Onwards_CarpoolOccupancy4OrMorePerson_CarTruckOrVanCarpooled_WorkCommute_Employed_Female
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
@@ -2156,7 +2156,7 @@ commuteMode: dcs:USC_CarTruckOrVanCarpooled
 carpoolOccupancy: [4 - Person]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_Years16Onwards_4OrMorePerson_CarTruckOrVanCarpooled_WorkCommute_Employed_Female
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_CarpoolOccupancy4OrMorePerson_CarTruckOrVanCarpooled_WorkCommute_Employed_Female
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
@@ -2480,7 +2480,7 @@ employmentStatus: dcs:Employed
 placeOfWork: dcs:WorkedOutsideOfHome
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_Years16Onwards_Hour0000To0459_WorkCommute_Employed_Female_WorkedOutsideOfHome
+Node: dcid:Count_Person_Years16Onwards_StartTimeHour0000To0459_WorkCommute_Employed_Female_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
@@ -2492,7 +2492,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0000To0459
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_Years16Onwards_Hour0000To0459_WorkCommute_Employed_Female_WorkedOutsideOfHome
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0000To0459_WorkCommute_Employed_Female_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
@@ -2504,7 +2504,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0000To0459
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_Years16Onwards_Hour0500To0529_WorkCommute_Employed_Female_WorkedOutsideOfHome
+Node: dcid:Count_Person_Years16Onwards_StartTimeHour0500To0529_WorkCommute_Employed_Female_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
@@ -2516,7 +2516,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0500To0529
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_Years16Onwards_Hour0500To0529_WorkCommute_Employed_Female_WorkedOutsideOfHome
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0500To0529_WorkCommute_Employed_Female_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
@@ -2528,7 +2528,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0500To0529
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_Years16Onwards_Hour0530To0559_WorkCommute_Employed_Female_WorkedOutsideOfHome
+Node: dcid:Count_Person_Years16Onwards_StartTimeHour0530To0559_WorkCommute_Employed_Female_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
@@ -2540,7 +2540,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0530To0559
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_Years16Onwards_Hour0530To0559_WorkCommute_Employed_Female_WorkedOutsideOfHome
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0530To0559_WorkCommute_Employed_Female_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
@@ -2552,7 +2552,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0530To0559
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_Years16Onwards_Hour0600To0629_WorkCommute_Employed_Female_WorkedOutsideOfHome
+Node: dcid:Count_Person_Years16Onwards_StartTimeHour0600To0629_WorkCommute_Employed_Female_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
@@ -2564,7 +2564,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0600To0629
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_Years16Onwards_Hour0600To0629_WorkCommute_Employed_Female_WorkedOutsideOfHome
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0600To0629_WorkCommute_Employed_Female_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
@@ -2576,7 +2576,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0600To0629
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_Years16Onwards_Hour0630To0659_WorkCommute_Employed_Female_WorkedOutsideOfHome
+Node: dcid:Count_Person_Years16Onwards_StartTimeHour0630To0659_WorkCommute_Employed_Female_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
@@ -2588,7 +2588,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0630To0659
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_Years16Onwards_Hour0630To0659_WorkCommute_Employed_Female_WorkedOutsideOfHome
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0630To0659_WorkCommute_Employed_Female_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
@@ -2600,7 +2600,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0630To0659
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_Years16Onwards_Hour0700To0729_WorkCommute_Employed_Female_WorkedOutsideOfHome
+Node: dcid:Count_Person_Years16Onwards_StartTimeHour0700To0729_WorkCommute_Employed_Female_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
@@ -2612,7 +2612,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0700To0729
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_Years16Onwards_Hour0700To0729_WorkCommute_Employed_Female_WorkedOutsideOfHome
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0700To0729_WorkCommute_Employed_Female_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
@@ -2624,7 +2624,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0700To0729
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_Years16Onwards_Hour0730To0759_WorkCommute_Employed_Female_WorkedOutsideOfHome
+Node: dcid:Count_Person_Years16Onwards_StartTimeHour0730To0759_WorkCommute_Employed_Female_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
@@ -2636,7 +2636,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0730To0759
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_Years16Onwards_Hour0730To0759_WorkCommute_Employed_Female_WorkedOutsideOfHome
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0730To0759_WorkCommute_Employed_Female_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
@@ -2648,7 +2648,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0730To0759
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_Years16Onwards_Hour0800To0829_WorkCommute_Employed_Female_WorkedOutsideOfHome
+Node: dcid:Count_Person_Years16Onwards_StartTimeHour0800To0829_WorkCommute_Employed_Female_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
@@ -2660,7 +2660,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0800To0829
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_Years16Onwards_Hour0800To0829_WorkCommute_Employed_Female_WorkedOutsideOfHome
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0800To0829_WorkCommute_Employed_Female_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
@@ -2672,7 +2672,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0800To0829
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_Years16Onwards_Hour0830To0859_WorkCommute_Employed_Female_WorkedOutsideOfHome
+Node: dcid:Count_Person_Years16Onwards_StartTimeHour0830To0859_WorkCommute_Employed_Female_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
@@ -2684,7 +2684,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0830To0859
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_Years16Onwards_Hour0830To0859_WorkCommute_Employed_Female_WorkedOutsideOfHome
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0830To0859_WorkCommute_Employed_Female_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
@@ -2696,7 +2696,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0830To0859
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_Years16Onwards_Hour0900To2359_WorkCommute_Employed_Female_WorkedOutsideOfHome
+Node: dcid:Count_Person_Years16Onwards_StartTimeHour0900To2359_WorkCommute_Employed_Female_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 populationType: dcs:Person
@@ -2708,7 +2708,7 @@ commuteType: dcs:WorkCommute
 commuteStartTime: dcs:Hour0900To2359
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_Years16Onwards_Hour0900To2359_WorkCommute_Employed_Female_WorkedOutsideOfHome
+Node: dcid:MarginOfError_Count_Person_Years16Onwards_StartTimeHour0900To2359_WorkCommute_Employed_Female_WorkedOutsideOfHome
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
