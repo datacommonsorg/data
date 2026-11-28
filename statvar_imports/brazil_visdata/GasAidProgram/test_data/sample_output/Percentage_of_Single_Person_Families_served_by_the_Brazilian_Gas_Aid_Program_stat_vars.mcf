@@ -1,0 +1,43 @@
+
+Node: dcid:Count_Household_GasAidProgram_ReceivedPaymentPreviousMonth
+typeOf: dcid:StatisticalVariable
+name: "The total number families benefiting from gas aid program in the previous payment month"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "O número total de famílias beneficiadas pelo programa de auxílio gás no mês de pagamento anterior @pt"
+benefitProgram: dcid:GasAidProgram
+governmentPaymentStatus: dcid:ReceivedPaymentPreviousMonth
+
+Node: dcid:Count_Household_GasAidProgram_ReceivedPaymentPreviousMonth_SinglePerson
+typeOf: dcid:StatisticalVariable
+name: "The total number of single person families benefiting in the previous payment month with a gas aid program"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "O número total de famílias solteiras beneficiadas no mês de pagamento anterior com programa de auxílio gás @pt"
+benefitProgram: dcid:GasAidProgram
+governmentPaymentStatus: dcid:ReceivedPaymentPreviousMonth
+householdType: dcid:SinglePerson
+
+Node: dcid:Count_Household_GasAidProgram_SinglePerson
+typeOf: dcid:StatisticalVariable
+name: "The total percentage of single person families get benefited from gas aid programs."
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "A porcentagem total de famílias solteiras é beneficiada por programas de ajuda ao gás. @pt"
+benefitProgram: dcid:GasAidProgram
+householdType: dcid:SinglePerson
+
+Node: dcid:Count_Place_GasAidProgram_16OrMorePercentHouseholds_SinglePerson
+typeOf: dcid:StatisticalVariable
+name: "The municipalities with 16% or more single-person beneficiary families from gas aid programs"
+populationType: dcid:Place
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Os municípios com 16% ou mais de famílias unipessoais beneficiárias dos programas de auxílio gás @pt"
+benefitProgram: dcid:GasAidProgram
+benefitsStatus: dcid:16OrMorePercentHouseholds
+householdType: dcid:SinglePerson
+
