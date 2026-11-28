@@ -1,0 +1,27 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "FeedingAmerica_FoodInsecurity",
+      "curator_emails": ["support@datacommons.org"],
+      "provenance_url": "https://map.feedingamerica.org/",
+      "provenance_description": "Estimates of food insecurity by Feeding America at state, county, and congressional district level (Map the Meal Gap).",
+      "scripts": [
+        "download.py",
+        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/feedingamerica_foodinsecurity_input.csv --pv_map=feedingamerica_foodinsecurity_pvmap.csv --config_file=feedingamerica_foodinsecurity_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/feedingamerica_foodinsecurity_output --output_counters=counters/feedingamerica_foodinsecurity_counters.csv"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "output/feedingamerica_foodinsecurity_output.tmcf",
+          "cleaned_csv": "output/feedingamerica_foodinsecurity_output.csv",
+          "node_mcf": "output/*.mcf"
+        }
+      ],
+      "source_files": [
+        "input_files/*.csv",
+        "counters/*.csv"
+      ],
+      "cron_schedule": "0 09 1 * *",
+      "validation_config_file": "validation_config.json"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "rules": [
+    {
+      "rule_id": "check_min_value",
+      "validator": "MIN_VALUE_CHECK",
+      "params": {
+        "minimum": 0
+      }
+    },
+    {
+      "rule_id": "check_percent_max_value",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT StatVar, MaxValue, Units FROM stats WHERE Units LIKE '%Percent%'",
+        "condition": "MaxValue <= 100",
+        "failure_message": "Percent StatVars in FeedingAmerica_FoodInsecurity must not exceed 100."
+      }
+    },
+    {
+      "rule_id": "check_active_statvars_freshness",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT StatVar, NumPlaces, NumObservations, CAST(MaxDate AS INTEGER) AS LatestDate FROM stats WHERE StatVar NOT IN ('Count_Person_FoodInsecure_HouseholdIncomeAboveStateLowThresholdAndBelowOrEqualStateHighThreshold_AsAFractionOf_Count_Person_FoodInsecure', 'Count_Person_FoodInsecure_HouseholdIncomeAboveStateHighThreshold_AsAFractionOf_Count_Person_FoodInsecure')",
+        "condition": "NumPlaces >= 2000 AND NumObservations >= 10000 AND LatestDate >= EXTRACT(YEAR FROM CURRENT_DATE - INTERVAL 6 MONTHS) - 2",
+        "failure_message": "Active FeedingAmerica_FoodInsecurity StatVars failed place count, observation count, or freshness check."
+      }
+    },
+    {
+      "rule_id": "check_historical_snap_high_threshold_statvars",
+      "validator": "SQL_VALIDATOR",
+      "params": {
+        "query": "SELECT StatVar, NumPlaces, NumObservations, CAST(MaxDate AS INTEGER) AS LatestDate FROM stats WHERE StatVar IN ('Count_Person_FoodInsecure_HouseholdIncomeAboveStateLowThresholdAndBelowOrEqualStateHighThreshold_AsAFractionOf_Count_Person_FoodInsecure', 'Count_Person_FoodInsecure_HouseholdIncomeAboveStateHighThreshold_AsAFractionOf_Count_Person_FoodInsecure')",
+        "condition": "NumPlaces >= 2200 AND NumObservations >= 4500 AND LatestDate >= 2020",
+        "failure_message": "Historical 2019-2020 SNAP high-threshold StatVars failed validation."
+      }
+    }
+  ]
+}
