@@ -1,0 +1,43 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "IndiaWRISWaterQuality",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://indiawris.gov.in/wris",
+            "provenance_description": "Ground Water Quality and Surface Water Quality monitoring station observations across India from the India Water Resources Information System (WRIS).",
+            "scripts": [
+                "download.sh",
+                "India_WRIS_Ground/preprocess.py --input_csv=input_files/groundWater.csv --retained_input_csv=input_files/India_WRIS_Ground_Prod_Retained.csv --output_dir=output",
+                "India_WRIS_Surface/preprocess.py --input_csv=input_files/surfaceWater.csv --output_dir=output"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output/India_WRIS_Ground.tmcf",
+                    "cleaned_csv": "output/India_WRIS_Ground.csv"
+                },
+                {
+                    "template_mcf": "output/India_WRIS_Ground_Prod_Retained.tmcf",
+                    "cleaned_csv": "output/India_WRIS_Ground_Prod_Retained.csv"
+                },
+                {
+                    "template_mcf": "output/India_WRIS_Surface.tmcf",
+                    "cleaned_csv": "output/India_WRIS_Surface.csv"
+                }
+            ],
+            "source_files": [
+                "input_files/*",
+                "manifest.json",
+                "validation_config.json"
+            ],
+            "cron_schedule": "0 4 * * 1",
+            "validation_config_file": "validation_config.json",
+            "resource_limits": {
+                "cpu": 4,
+                "memory": 16,
+                "disk": 50
+            }
+        }
+    ]
+}
