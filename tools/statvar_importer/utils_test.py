@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import os
+import tempfile
 import unittest
 from unittest.mock import patch
 
@@ -362,6 +363,19 @@ class TestConvertXlsToCsv(unittest.TestCase):
     def test_empty_files(self):
         files = convert_xls_to_csv([], [])
         self.assertEqual(files, [])
+
+    @patch('utils.pd.ExcelFile')
+    @patch('utils.pd.read_excel')
+    def test_convert_xls_to_csv_output_dir(self, mock_read_excel,
+                                           mock_excel_file):
+        mock_excel_file.return_value.sheet_names = ['Sheet 1']
+        mock_read_excel.return_value = pd.DataFrame({'col1': ['a', 'b']})
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            output_dir = os.path.join(tmp_dir, 'csv')
+            files = convert_xls_to_csv(['test_data/test.xlsx'], [], output_dir)
+            self.assertEqual(
+                files, [os.path.join(output_dir, 'test_data_test_Sheet_1.csv')])
+            self.assertTrue(os.path.exists(files[0]))
 
 
 class TestPrepareInputData(unittest.TestCase):

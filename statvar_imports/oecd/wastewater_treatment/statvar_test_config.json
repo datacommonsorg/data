@@ -1,0 +1,33 @@
+[
+  {
+    "test_name": "Test_OECD_Waste_Water_Treatment",
+    "statvar_processor_args": {
+      "pv_map": "oecd_wastewatertreatment_pvmap.csv",
+      "config_file": "oecd_wastewatertreatment_metadata.csv",
+      "places_resolved_csv": "oecd_wastewatertreatment_places_resolved.csv",
+      "existing_statvar_mcf": "test_data/existing_stat_vars.mcf",
+      "input_data": "test_data/oecd_wastewater_treatment_input.csv",
+      "output_path": "output/oecd_wastewater_treatment_output"
+    },
+    "statvar_processor_outputs": [
+      {
+        "output_name": "OECD_Waste_Water_Treatment_output_csv",
+        "output_file": "output/oecd_wastewater_treatment_output.csv",
+        "expected_output_file": "test_data/oecd_wastewater_treatment_output.csv",
+        "diff_config": {
+          "fingerprint_dcid": 1
+        }
+      },
+      {
+        "output_name": "OECD_Waste_Water_Treatment_output_tmcf",
+        "output_file": "output/oecd_wastewater_treatment_output.tmcf",
+        "expected_output_file": "test_data/oecd_wastewater_treatment_output.tmcf"
+      },
+      {
+        "output_name": "OECD_Waste_Water_Treatment_output_stat_vars",
+        "output_file": "output/oecd_wastewater_treatment_output_stat_vars.mcf",
+        "expected_output_file": "test_data/oecd_wastewater_treatment_output_stat_vars.mcf"
+      }
+    ]
+  }
+]

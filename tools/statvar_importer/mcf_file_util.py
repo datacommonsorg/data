@@ -546,10 +546,13 @@ def load_mcf_nodes(
         num_props = 0
         if file.endswith('.csv'):
             # Load nodes from CSV
-            file_nodes = file_util.file_load_csv_dict(file)
+            file_nodes = file_util.file_load_csv_dict(file, key_index=True)
             for key, pvs in file_nodes.items():
                 if 'Node' not in pvs:
-                    pvs['Node'] = key
+                    dcid = get_node_dcid(pvs)
+                    if not dcid:
+                        dcid = key
+                    pvs['Node'] = dcid
                 num_props += len(pvs)
                 if not add_mcf_node(pvs, nodes, strip_namespaces, append_values,
                                     normalize, counters):

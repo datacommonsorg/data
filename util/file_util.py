@@ -619,7 +619,7 @@ def file_load_csv_dict(
                 # Get the key for the row.
                 key = None
                 if key_index:
-                    key = len(csv_dict)
+                    key = str(len(csv_dict))
                 elif key_column in row:
                     key = row.pop(key_column)
                 # Get the value for the key

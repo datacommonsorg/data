@@ -44,6 +44,7 @@ from absl import app
 from absl import flags
 from absl import logging
 import process_http_server
+import requests_cache
 
 # uncomment to run pprof
 # os.environ['PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION'] = 'python'
@@ -2442,7 +2443,9 @@ class StatVarDataProcessor:
 
     def process_stat_var_obs(self, pvs: dict) -> bool:
         """Process PV for a statvar obs."""
-        self.resolve_svobs_place(pvs)
+        if not self.should_ignore_stat_var_obs_pvs(pvs):
+            # Don't count an unresolved place as an error for ignored PVs.
+            self.resolve_svobs_place(pvs)
         svobs_pvs_list = self.preprocess_stat_var_obs_pvs(pvs)
         if not svobs_pvs_list:
             logging.level_debug() and logging.log_every_n(
@@ -2951,6 +2954,15 @@ def process(
     logging.info(
         f'Processing data {input_data} into {output_path} using config:'
         f' {config_dict}...')
+    intermediate_dir = config_dict.get('intermediate_dir', '')
+    if intermediate_dir:
+        # Save the http request cache in the folder for intermediate files
+        # instead of the current folder.
+        os.makedirs(intermediate_dir, exist_ok=True)
+        if not requests_cache.is_installed():
+            requests_cache.install_cache(cache_name=os.path.join(
+                intermediate_dir, 'http_cache'),
+                                         expires_after=3600)
     input_data = prepare_input_data(config_dict)
     input_files = file_util.file_get_matching(input_data)
     if file_util.file_is_local(output_path):

@@ -433,7 +433,8 @@ def shard_csv_data(
 
 
 def convert_xls_to_csv(filenames: List[str],
-                       sheets: Optional[List[str]] = None) -> List[str]:
+                       sheets: Optional[List[str]] = None,
+                       output_dir: Optional[str] = None) -> List[str]:
     """Converts specified sheets from Excel files (.xls, .xlsx) into CSV files.
 
     For each file in `filenames`, if it has an Excel extension, this function
@@ -449,6 +450,8 @@ def convert_xls_to_csv(filenames: List[str],
         filenames: A list of file paths, which can include Excel and other file types.
         sheets: An optional list of sheet names to convert. If None, all sheets
                 in the Excel files are converted.
+        output_dir: An optional folder for the CSV files. If not set, CSV files
+                are saved relative to the current folder.
 
     Returns:
         A list of file paths, including the newly created CSV files and any
@@ -459,6 +462,8 @@ def convert_xls_to_csv(filenames: List[str],
         ['my_data_Sheet1.csv', 'my_data_Sheet2.csv']
         >>> convert_xls_to_csv(['my_data.xlsx'], sheets=['Sheet1'])
         ['my_data_Sheet1.csv']
+        >>> convert_xls_to_csv(['my_data.xlsx'], ['Sheet1'], '/tmp/csv')
+        ['/tmp/csv/my_data_Sheet1.csv']
         >>> convert_xls_to_csv([])
         []
     """
@@ -475,6 +480,9 @@ def convert_xls_to_csv(filenames: List[str],
                     df = pd.read_excel(xls, sheet_name=sheet, dtype=str)
                     csv_filename = re.sub('[^A-Za-z0-9_.-]+', '_',
                                           f'{filename}_{sheet}.csv')
+                    if output_dir:
+                        os.makedirs(output_dir, exist_ok=True)
+                        csv_filename = os.path.join(output_dir, csv_filename)
                     df.to_csv(csv_filename, index=False)
                     logging.info(
                         f'Converted {file}:{sheet} into csv {csv_filename}')
@@ -499,6 +507,8 @@ def prepare_input_data(config: Dict) -> List[str]:
                 - `input_data` (str): Path to the input data file(s).
                 - `data_url` (str): URL to download data from if `input_data` is not found.
                 - `input_xls` (list): A list of sheets to convert from Excel files.
+                - `intermediate_dir` (str): Folder for CSV files converted from
+                  Excel files. Uses the current folder if not set.
                 - `shard_input_by_column` (str): The column to shard by.
                 - `parallelism` (int): The number of parallel processes to use.
 
@@ -548,7 +558,13 @@ def prepare_input_data(config: Dict) -> List[str]:
         if not data_url:
             raise RuntimeError('Provide data with --data_url or --input_data.')
         input_files = download_csv_from_url(data_url, input_data)
-    input_files = convert_xls_to_csv(input_files, config.get('input_xls', []))
+    sheets = config.get('input_xls', [])
+    intermediate_dir = config.get('intermediate_dir', '')
+    if intermediate_dir:
+        # Save csv files for xls input in the folder for intermediate files.
+        input_files = convert_xls_to_csv(input_files, sheets, intermediate_dir)
+    else:
+        input_files = convert_xls_to_csv(input_files, sheets)
     shard_column = config.get('shard_input_by_column', '')
     if config.get('parallelism', 0) > 0 and shard_column:
         return shard_csv_data(

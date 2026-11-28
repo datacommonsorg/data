@@ -12,7 +12,8 @@ StatisticalVariables and observations, ready for the Data Commons import tool.
   [Write PV maps that survive auto-refresh](#write-pv-maps-that-survive-auto-refresh)
   · [Map places](#map-places) ·
   [Add the processor to an import](#add-the-processor-to-an-import) ·
-  [Create test data](#create-test-data)
+  [Create test data](#create-test-data) ·
+  [Add an import test](docs/import_tests.md)
 - **Check and fix:** [Check the results](#check-the-results) ·
   [Common problems](#common-problems)
 - **More:** [Related tools and docs](#related-tools-and-docs), including the
@@ -258,7 +259,8 @@ dates with `#Eval`; see [Parse dates](docs/advanced_processing.md#parse-dates).
 
 Drop a whole row by mapping a label in the row to `#ignore` with a reason, for
 example `tot,#ignore,total is computed in Data Commons`. Write `#ignore` in
-lowercase.
+lowercase. For places that the import leaves out, see
+[Ignore places and source text](#ignore-places-and-source-text).
 
 A column without a `value` mapping produces no observations, so a value column
 you don't map is skipped.
@@ -377,9 +379,36 @@ The rows follow these rules:
 - Map place names with one lowercase row per name.
 - For an ambiguous name, keep the best candidate as the active row and list the
   other candidates as commented rows, with a short note on the choice.
+- Map a place or other source text that the import leaves out to `#ignore` with
+  a reason, as in [Ignore places and source text](#ignore-places-and-source-text).
 
 To resolve many place names automatically, see the
 [place tools](place/README.md).
+
+### Ignore places and source text
+
+The processor drops an observation when it can't resolve the place, and counts
+it in `error-unresolved-place` or `dropped-svobs-unresolved-place`. An
+[import test](docs/import_tests.md) fails on either counter, so that a new
+place in the source isn't dropped unnoticed.
+
+For each place or other text in the source that the import leaves out on
+purpose, add a row to the PV map that maps it to `#ignore`, with the reason as
+the value:
+
+```csv
+#key,property-1,value-1
+total,#ignore,total is computed in Data Commons
+unknown county,#ignore,source has no county for these rows
+atlantis,#ignore,not a place in Data Commons
+```
+
+The processor then skips every value in a row that has the text, counts it in
+`ignored-svobs-pvs`, and counts no error. Quote a reason that has a comma, such
+as `total,#ignore,"total, computed in Data Commons"`.
+
+Use `#ignore` only for text you checked and chose to leave out. For a place
+that should be in the output, add a row that maps it to its dcid.
 
 ## Add the processor to an import
 
@@ -441,9 +470,11 @@ and still works.
 
 Keep a small input and its expected output in the import's `test_data/` folder.
 Reviewers and later refreshes use them to check that the PV map and config still
-produce the same output. Name the files after the import's output:
+produce the same output. Name the files with `_input` and `_output` suffixes so
+inputs and expected outputs are easy to tell apart:
 
-- `test_data/<name>_input.csv`: a few rows in the same format as the source.
+- `test_data/<name>_input.<ext>`: a few rows in the same format as the source
+  (such as `<name>_input.csv` or `<name>_input.xlsx`).
 - `test_data/<name>_output.csv`, `<name>_output.tmcf`, and
   `<name>_output_stat_vars.mcf`: the processor's output for that input, plus
   `<name>_output_stat_vars_schema.mcf` if the run writes it.
@@ -451,6 +482,13 @@ produce the same output. Name the files after the import's output:
 For example, `statvar_imports/zurich/bev_3903_all/test_data/` has
 `bev_3903_wiki_input.csv` and `zurich_population_bev_3903_wiki_output.csv`, with
 the matching TMCF and MCF files.
+
+For an import under `statvar_imports/`, add an import test that runs the
+processor on the test input and compares the output with the expected files in
+the repository's unit tests. Follow [Import tests](docs/import_tests.md) to add
+a test to a new import, or to update a test when a change to the PV map, the
+config, or the processor changes the output. The rest of this section is for an
+import without a test.
 
 To create the test data, follow these steps:
 
@@ -486,8 +524,8 @@ NOTE: If the test files have more than about 1,000 lines, store them with Git
 LFS. Run `git lfs track "<import-dir>/test_data/*.csv"` from the repository
 root, and commit the updated `.gitattributes`.
 
-To check that the test data is current, write a new output to a temporary folder
-and compare it with the committed files:
+To check that the test data of an import without a test is current, write a new
+output to a temporary folder and compare it with the committed files:
 
 ```bash
 python3 ../../tools/statvar_importer/stat_var_processor.py \
@@ -607,6 +645,7 @@ For more, see [Troubleshooting](docs/troubleshooting.md).
 | Resolve many place names                                    | [Place tools](place/README.md)                                                                  |
 | Find existing schema, draft PV maps, generate StatVar names | [Schema tools](schema/README.md)                                                                |
 | Make a test sample with every indicator and place           | [Data sampler](docs/data_sampler.md)                                                            |
+| Add or update an import's regression test                   | [Import tests](docs/import_tests.md)                                                            |
 | Compare or merge MCF                                        | [Tools](docs/tools.md)                                                                          |
 | Generate a PV map automatically                             | [tools/agentic_import](https://github.com/datacommonsorg/data/tree/master/tools/agentic_import) |
 | Review an import change before a pull request               | [dc-import-code-review skill](../../agents/skills/dc-import-code-review/SKILL.md)               |

@@ -19,6 +19,9 @@ import sys
 import tempfile
 import unittest
 
+from absl import flags
+from absl.testing import flagsaver
+
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
 sys.path.append(os.path.dirname(_SCRIPT_DIR))
@@ -111,6 +114,51 @@ class InitConfigTest(unittest.TestCase):
         self.assertIs(config.get('check_url'), False)
         self.assertIs(config.get('use_place_names'), False)
         self.assertIs(config.get('output_nodes_with_additions'), True)
+
+
+class LookupFlagsTest(unittest.TestCase):
+    """Tests for settings for lookups that are also command line flags."""
+
+    _LOOKUP_FLAG_DEFAULTS = {
+        'reconcile_nodes': True,
+        'recon_lookup_api': True,
+        'resolve_places': False,
+        'check_url': True,
+        'output_only_new_statvars': True,
+        'generate_schema_mcf': True,
+    }
+
+    def setUp(self):
+        self._tmp_dir = tempfile.mkdtemp()
+        self._saved_flags = flagsaver.save_flag_values()
+
+    def tearDown(self):
+        flagsaver.restore_flag_values(self._saved_flags)
+        shutil.rmtree(self._tmp_dir)
+
+    def test_flag_defaults(self):
+        config = config_flags.init_config_from_flags({})
+        for param, default in self._LOOKUP_FLAG_DEFAULTS.items():
+            self.assertIs(config.get(param), default, param)
+
+    def test_flags_set_config(self):
+        for param, default in self._LOOKUP_FLAG_DEFAULTS.items():
+            setattr(flags.FLAGS, param, not default)
+        config = config_flags.init_config_from_flags({})
+        for param, default in self._LOOKUP_FLAG_DEFAULTS.items():
+            self.assertIs(config.get(param), not default, param)
+
+    def test_config_file_overrides_flags(self):
+        flags.FLAGS.reconcile_nodes = False
+        flags.FLAGS.resolve_places = True
+        config_file = os.path.join(self._tmp_dir, 'config.csv')
+        with open(config_file, 'w') as f:
+            f.write('parameter,value\n'
+                    'reconcile_nodes,1\n'
+                    'resolve_places,False\n')
+        config = config_flags.init_config_from_flags(config_file)
+        self.assertIs(config.get('reconcile_nodes'), True)
+        self.assertIs(config.get('resolve_places'), False)
 
 
 if __name__ == '__main__':

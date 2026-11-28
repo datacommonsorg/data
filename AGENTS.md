@@ -17,8 +17,8 @@ Read a folder's README before working in it.
   data to MCF or TMCF + CSV.
 - [`simple_imports/`](simple_imports/README.md): config-only imports for the
   Simple Stats Importer.
-- `statvar_imports/`: per-source imports built with the StatVar Processor (PV
-  maps and configs).
+- [`statvar_imports/`](statvar_imports/README.md): per-source imports built with
+  the StatVar Processor (PV maps and configs).
 - [`tools/`](tools/README.md): shared import tools: StatVar Processor, place
   resolution, validation, differ.
 - [`util/`](util/README.md): Python and Go libraries for writing MCF and testing
