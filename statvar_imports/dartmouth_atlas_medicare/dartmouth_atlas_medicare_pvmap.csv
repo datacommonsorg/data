@@ -1,0 +1,14 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6
+year,observationDate,{Number},,,,,,,,,,
+place,observationAbout,dcid:{Data},,,,,,,,,,
+value,value,{Number},,,,,,,,,,
+MedicareEnrollee_Count,populationType,MedicareEnrollee,measuredProperty,count,statType,measuredValue,observationPeriod,P1Y,,,,
+MedicareEnrollee_MeanPrice,populationType,MedicareEnrollee,measuredProperty,price,statType,meanValue,observationPeriod,P1Y,,,,
+MedicareEnrollee_MedicareA,populationType,MedicareEnrollee,measuredProperty,count,statType,measuredValue,medicareType,MedicareA,observationPeriod,P1Y,,
+MedicareEnrollee_MedicareA_Black,populationType,MedicareEnrollee,measuredProperty,count,statType,measuredValue,medicareType,MedicareA,race,DAD_Black,observationPeriod,P1Y
+MedicareEnrollee_MedicareA_NonBlack,populationType,MedicareEnrollee,measuredProperty,count,statType,measuredValue,medicareType,MedicareA,race,DAD_NonBlack,observationPeriod,P1Y
+MedicareEnrollee_MedicareB,populationType,MedicareEnrollee,measuredProperty,count,statType,measuredValue,medicareType,MedicareB,observationPeriod,P1Y,,
+MedicareEnrollee_MedicareB_Black,populationType,MedicareEnrollee,measuredProperty,count,statType,measuredValue,medicareType,MedicareB,race,DAD_Black,observationPeriod,P1Y
+MedicareEnrollee_MedicareB_NonBlack,populationType,MedicareEnrollee,measuredProperty,count,statType,measuredValue,medicareType,MedicareB,race,DAD_NonBlack,observationPeriod,P1Y
+MedicareEnrollee_Diabetic_Black,populationType,MedicareEnrollee,measuredProperty,count,statType,measuredValue,medicalCondition,Diabetic,race,DAD_Black,observationPeriod,P1Y
+MedicareEnrollee_Diabetic_NonBlack,populationType,MedicareEnrollee,measuredProperty,count,statType,measuredValue,medicalCondition,Diabetic,race,DAD_NonBlack,observationPeriod,P1Y

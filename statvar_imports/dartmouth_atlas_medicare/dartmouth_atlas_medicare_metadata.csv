@@ -1,0 +1,9 @@
+parameter,value
+url,https://data.dartmouthatlas.org/
+description,"Medicare expenditures, utilization, and mortality rates from the Dartmouth Atlas Data."
+header_rows,1
+mapped_rows,1
+mapped_columns,3
+input_encoding,utf-8-sig
+word_delimiter,
+output_columns,"observationDate,observationAbout,variableMeasured,value,observationPeriod"

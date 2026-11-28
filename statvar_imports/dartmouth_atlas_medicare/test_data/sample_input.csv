@@ -1,0 +1,12 @@
+year,place,stat_var_key,value
+2019,country/USA,MedicareEnrollee_Count,51303426
+2019,geoId/01001,MedicareEnrollee_Count,3774
+2019,geoId/01001,MedicareEnrollee_MeanPrice,11377.4
+2014,geoId/06083,MedicareEnrollee_MedicareA,3500
+2014,geoId/06083,MedicareEnrollee_MedicareA_Black,130
+2014,geoId/06083,MedicareEnrollee_MedicareA_NonBlack,3370
+2019,geoId/06083,MedicareEnrollee_MedicareB,3162
+2019,geoId/06083,MedicareEnrollee_MedicareB_Black,120
+2019,geoId/06083,MedicareEnrollee_MedicareB_NonBlack,3042
+2019,geoId/06083,MedicareEnrollee_Diabetic_Black,450
+2019,geoId/06083,MedicareEnrollee_Diabetic_NonBlack,2700

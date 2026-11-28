@@ -1,0 +1,43 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "Dartmouth_Atlas_Medicare",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://data.dartmouthatlas.org/",
+            "provenance_description": "Medicare expenditures, utilization, and mortality rates from the Dartmouth Atlas Data.",
+            "scripts": [
+                "download.py --output_dir=input_files --historical_output_dir=output_files",
+                "../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/cleaned/*.csv --pv_map=dartmouth_atlas_medicare_pvmap.csv --config_file=dartmouth_atlas_medicare_metadata.csv --statvar_dcid_remap_csv=dartmouth_statvar_remap.csv --output_path=output_files/dartmouth_atlas_medicare_output --output_counters=counters/dartmouth_atlas_medicare_counters.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output_files/common_tmcf.tmcf",
+                    "cleaned_csv": [
+                        "output_files/dartmouth_atlas_medicare_historical_1999_2016.csv",
+                        "output_files/dartmouth_atlas_medicare_output.csv"
+                    ],
+                    "node_mcf": "output_files/*.mcf"
+                }
+            ],
+            "source_files": [
+                "input_files/raw/*",
+                "input_files/cleaned/*.csv",
+                "dartmouth_atlas_medicare_pvmap.csv",
+                "dartmouth_atlas_medicare_metadata.csv",
+                "dartmouth_statvar_remap.csv",
+                "dartmouth_hsa_places.csv",
+                "counters/*.csv",
+                "validation_config.json"
+            ],
+            "validation_config_file": "validation_config.json",
+            "cron_schedule": "0 5 * * 1",
+            "resource_limits": {
+                "cpu": 8,
+                "memory": 32,
+                "disk": 100
+            }
+        }
+    ]
+}
