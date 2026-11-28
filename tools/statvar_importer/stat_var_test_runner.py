@@ -373,16 +373,8 @@ class StatVarProcessorTestRunner:
         """
         merged_config = {}
         if config_file:
-            config_file = str(config_file)
-            local_dir = self.get_local_dir()
-            config_files = file_util.file_get_matching([
-                file if not file_util.file_is_local(file) or os.path.isabs(file)
-                else os.path.join(local_dir, file)
-                for file in config_file.split(',')
-            ])
-            if config_files:
-                merged_config.update(file_util.file_load_py_dict(config_files))
-            else:
+            config_file = str(config_file).strip()
+            if config_file.startswith('{') and config_file.endswith('}'):
                 # Config is a dictionary instead of a file.
                 try:
                     dict_config = ast.literal_eval(config_file)
@@ -390,6 +382,18 @@ class StatVarProcessorTestRunner:
                     dict_config = None
                 if isinstance(dict_config, dict):
                     merged_config.update(dict_config)
+                else:
+                    logging.warning(f'Invalid config dictionary: {config_file}')
+            else:
+                local_dir = self.get_local_dir()
+                config_files = file_util.file_get_matching([
+                    file if not file_util.file_is_local(file) or
+                    os.path.isabs(file) else os.path.join(local_dir, file)
+                    for file in config_file.split(',')
+                ])
+                if config_files:
+                    merged_config.update(
+                        file_util.file_load_py_dict(config_files))
                 else:
                     logging.warning(
                         f'Ignoring config file not found: {config_file}')

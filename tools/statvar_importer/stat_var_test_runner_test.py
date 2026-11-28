@@ -283,6 +283,22 @@ class StatVarTestRunnerTest(unittest.TestCase):
         # Configs in the test override the defaults.
         self.assertIs(processor_config['recon_lookup_api'], True)
 
+    def test_write_processor_config_parses_dict_string(self):
+        runner = stat_var_test_runner.StatVarProcessorTestRunner(
+            test_config={'test_name': 'dict_config_test'})
+        with mock.patch.object(stat_var_test_runner.file_util,
+                               'file_get_matching') as mock_matching:
+            out_file = runner._write_processor_config(
+                " {'header_rows': 2, 'reconcile_nodes': True} ",
+                {'reconcile_nodes': False},
+                self._test_dir,
+            )
+            mock_matching.assert_not_called()
+        with open(out_file) as f:
+            processor_config = ast.literal_eval(f.read())
+        self.assertEqual(processor_config['header_rows'], 2)
+        self.assertIs(processor_config['reconcile_nodes'], False)
+
     def test_get_error_counters(self):
         counters_file = self._write_file(
             'counters.csv',
