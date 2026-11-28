@@ -1,0 +1,14 @@
+Node: E:reactions->E1
+typeOf: dcs:MetabolicReaction
+dcid: C:reactions->dcid
+humanGEMID: C:reactions->id
+isReactionReversible: C:reactions->reversible
+isReactionFast: C:reactions->fast
+metabolicFluxRange: C:reactions->fluxRange
+enzymeCommissionNumber: C:reactions->ec
+keggReactionID: C:reactions->kegg
+biggID: C:reactions->bigg
+metaNetXID: C:reactions->metanetx
+reactomeID: C:reactions->reactome
+transportClassificationDatabaseID: C:reactions->tcdb
+
